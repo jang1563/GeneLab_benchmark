@@ -24,7 +24,7 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 **A public benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v1.0-alpha | Code: [GitHub](https://github.com/jak4013/GeneLab_benchmark)
+Version: v1.0-alpha | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 
@@ -40,7 +40,7 @@ GeneLab Benchmark provides standardized train/test splits for evaluating how wel
 
 ## Dataset Structure
 
-This repository contains the **feature matrices** (train_X.csv, test_X.csv) for GO-status tasks. Labels, metadata, and fold structure files (train_y.csv, test_y.csv, fold_info.json, selected_genes.txt) are in the [GitHub repository](https://github.com/jak4013/GeneLab_benchmark).
+This repository contains the **feature matrices** (train_X.csv, test_X.csv) for GO-status tasks. Labels, metadata, and fold structure files (train_y.csv, test_y.csv, fold_info.json, selected_genes.txt) are in the [GitHub repository](https://github.com/jang1563/GeneLab_benchmark).
 
 ```
 genelab-benchmark/
@@ -143,7 +143,7 @@ snapshot_download(
 ### Option C: Clone GitHub + link HF data
 
 ```bash
-git clone https://github.com/jak4013/GeneLab_benchmark
+git clone https://github.com/jang1563/GeneLab_benchmark
 cd GeneLab_benchmark
 python scripts/download_from_hf.py --task A5
 ```
