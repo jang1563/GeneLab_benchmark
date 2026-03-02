@@ -1,0 +1,672 @@
+{
+  "generated_at": "2026-02-28T07:18:24.638215",
+  "plan_version": "0.5",
+  "datasets": {
+    "OSD-48": {
+      "tissue": "liver",
+      "mission": "RR-1",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC",
+        "VC",
+        "BC"
+      ],
+      "bulk_rnaseq_files_found": 23,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-48_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-48_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-48_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-137": {
+      "tissue": "liver",
+      "mission": "RR-3",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 20,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-137_rna-seq_RR3-GC-G7.tar.gz",
+        "GLDS-137_rna-seq_RR3-GC-G6.tar.gz",
+        "GLDS-137_rna-seq_RR3-GC-G5.tar.gz"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-168": {
+      "tissue": "liver",
+      "mission": "RR-1+3",
+      "track": "2a",
+      "status": "\ud83d\udd01 DUPLICATE \u2014 Category J only",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 54,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-168_rna-seq_RR1-BSL-M4-LVR-RNA-ALQ2.tar.gz",
+        "GLDS-168_rna_seq_Normalized_Counts.csv",
+        "GLDS-168_rna_seq_Unnormalized_Counts.csv"
+      ],
+      "notes": "DUPLICATE of OSD-48+137 \u2014 Category J only (DESIGN_DECISIONS DD-05)",
+      "include_category_a": false,
+      "include_category_j": true
+    },
+    "OSD-245": {
+      "tissue": "liver",
+      "mission": "RR-6",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 358,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-245_rna-seq_Mmus_C57-6T_LVR_GC_LAR_Rep7_G9_R1_raw_fastqc.html",
+        "GLDS-245_rna-seq_Mmus_C57-6T_LVR_GC_LAR_Rep3_G10_R1_raw_fastqc.zip",
+        "GLDS-245_rna-seq_Mmus_C57-6T_LVR_GC_LAR_Rep2_G4_R1_raw_fastqc.html"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-379": {
+      "tissue": "liver",
+      "mission": "RR-8",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 290,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-379_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-379_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-379_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-242": {
+      "tissue": "liver",
+      "mission": "RR-9",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 144,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-242_rna_seq_Unnormalized_Counts.csv",
+        "GLDS-242_rna_seq_ERCC_Normalized_Counts.csv",
+        "GLDS-242_rna_seq_Normalized_Counts.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-686": {
+      "tissue": "liver",
+      "mission": "MHU-2",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 26,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-617_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-617_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-617_rna_seq_Normalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary \u2014 GLDS-617 RNA-seq files (uG vs GC vs 1G-centrifuge, n=3/group)",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-617": {
+      "tissue": "liver",
+      "mission": "MHU-2",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "unknown",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "EXCLUDE \u2014 cytology/estrous cycle only, NOT RNA-seq. RNA-seq is in OSD-686",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-173": {
+      "tissue": "liver",
+      "mission": "STS-135",
+      "track": "qc",
+      "status": "\u26a0\ufe0f FAILS QC (n<3/group)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 14,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-173_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-173_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-173_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "C57BL/6CR (C57BL/6 subline), n=2/group \u2014 FAILS QC minimum (n<3/group)",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-25": {
+      "tissue": "liver",
+      "mission": "STS-135",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "microarray",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "MICROARRAY confirmed \u2014 not RNA-seq. Completely excluded",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-101": {
+      "tissue": "gastrocnemius",
+      "mission": "RR-1",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 20,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-101_rna-seq_raw_md5sum_GLbulkRNAseq.tsv",
+        "GLDS-101_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-101_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-326": {
+      "tissue": "gastrocnemius",
+      "mission": "RR-9",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 24,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-326_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-326_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-326_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-401": {
+      "tissue": "gastrocnemius",
+      "mission": "RR-5",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 16,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-401_rna-seq_raw_md5sum_GLbulkRNAseq.tsv",
+        "GLDS-401_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-401_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-104": {
+      "tissue": "soleus",
+      "mission": "RR-1",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 20,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-104_rna-seq_raw_md5sum_GLbulkRNAseq.tsv",
+        "GLDS-104_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-104_rna_seq_VST_Counts_rRNArm_GLbulkRNAseq.csv"
+      ],
+      "notes": "supplementary \u2014 check mission count",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-638": {
+      "tissue": "soleus",
+      "mission": "MHU-8",
+      "track": "2a",
+      "status": "\u274c NOT FOUND",
+      "assay_type": "unknown",
+      "control_types_detected": [],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "supplementary \u2014 unverified",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-102": {
+      "tissue": "kidney",
+      "mission": "RR-1",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 20,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-102_rna-seq_raw_md5sum_GLbulkRNAseq.tsv",
+        "GLDS-102_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-102_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-163": {
+      "tissue": "kidney",
+      "mission": "RR-3",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 26,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-163_rna-seq_RR3-BSL-B1-KDN-RNA.tar.gz",
+        "GLDS-163_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-163_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-253": {
+      "tissue": "kidney",
+      "mission": "RR-7",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 232,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-253_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-253_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-253_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-674": {
+      "tissue": "kidney",
+      "mission": "?",
+      "track": "2a",
+      "status": "\u274c NOT FOUND",
+      "assay_type": "unknown",
+      "control_types_detected": [],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "unverified \u2014 mission TBD",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-4": {
+      "tissue": "thymus",
+      "mission": "STS-118",
+      "track": "2a",
+      "status": "\u26a0\ufe0f MICROARRAY (not Category A)",
+      "assay_type": "microarray",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "shuttle mission \u2014 verify assay type",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-244": {
+      "tissue": "thymus",
+      "mission": "RR-6",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 122,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-244_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-244_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-244_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-289": {
+      "tissue": "thymus",
+      "mission": "MHU-2",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 44,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-289_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-289_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-289_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-421": {
+      "tissue": "thymus",
+      "mission": "RR-9",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 29,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-421_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-421_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-421_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-238": {
+      "tissue": "skin",
+      "mission": "MHU-2",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 149,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-238_rna_seq_Unnormalized_Counts.csv",
+        "GLDS-238_rna_seq_ERCC_Normalized_Counts.csv",
+        "GLDS-238_rna_seq_Normalized_Counts.csv"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-239": {
+      "tissue": "skin",
+      "mission": "MHU-2",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 142,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-239_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-239_rna_seq_Unnormalized_Counts.csv",
+        "GLDS-239_rna-seq_Mmus_C57-6J_FSKN_FLT_1G_JC_Rep1_F5_R2_raw.fastq.gz"
+      ],
+      "notes": "primary \u2014 check if same study as OSD-238",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-243": {
+      "tissue": "skin",
+      "mission": "RR-6",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 322,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-243_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-243_rna_seq_Unnormalized_Counts.csv",
+        "GLDS-243_rna-seq_Mmus_C57-6T_DSKN_GC_ISS-T_Rep9_G9_R1_raw_fastqc.html"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-689": {
+      "tissue": "skin",
+      "mission": "RR-8",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "single_cell",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 50,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-621_rna_seq_STAR_Unnormalized_Counts_GLbulkRNAseq.csv",
+        "GLDS-621_rna_seq_RSEM_Unnormalized_Counts_rRNArm_GLbulkRNAseq.csv",
+        "GLDS-621_rna_seq_RSEM_Unnormalized_Counts_GLbulkRNAseq.csv"
+      ],
+      "notes": "EXCLUDE \u2014 scRNA-seq (GLDS-689), not bulk RNA-seq",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-793": {
+      "tissue": "skin",
+      "mission": "RRRM-1",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "unknown",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "EXCLUDE \u2014 targetRNAseq (NanoString panel), not standard bulk mRNA",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-100": {
+      "tissue": "eye",
+      "mission": "RR-1",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 14,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-100_rna_seq_Normalized_Counts.csv",
+        "GLDS-100_rna-seq_M38-EYE.tar.gz",
+        "GLDS-100_rna-seq_M37-EYE.tar.gz"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-194": {
+      "tissue": "eye",
+      "mission": "RR-3",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 16,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-194_rna_seq_ERCC_Normalized_Counts.csv",
+        "GLDS-194_rna_seq_Normalized_Counts.csv",
+        "GLDS-194_rna-seq_RR3_BSL_B7_LRTN.tar"
+      ],
+      "notes": "primary",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-397": {
+      "tissue": "eye/retina",
+      "mission": "TBD",
+      "track": "2a",
+      "status": "\u2705 Verified (bulk RNA-seq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 36,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-397_rna_seq_Normalized_Counts.csv",
+        "GLDS-397_rna_seq_STAR_Unnormalized_Counts.csv",
+        "GLDS-397_rna_seq_RSEM_Unnormalized_Counts.csv"
+      ],
+      "notes": "bulk RNA-seq confirmed (n=9 FLT, n=7 GC). Mission TBD \u2014 verify ISA metadata",
+      "include_category_a": true,
+      "include_category_j": true
+    },
+    "OSD-664": {
+      "tissue": "eye",
+      "mission": "MHU-8",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "unknown",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "EXCLUDE \u2014 western blot + immunofluorescence only, NOT RNA-seq",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-87": {
+      "tissue": "eye",
+      "mission": "?",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "microarray",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "EXCLUDE \u2014 microarray",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-295": {
+      "tissue": "soleus",
+      "mission": "HU",
+      "track": "HU",
+      "status": "\ud83d\udd2c HU ANALOG (bulk_rnaseq)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 44,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-295_rna_seq_STAR_Unnormalized_Counts.csv",
+        "GLDS-295_rna_seq_RSEM_Unnormalized_Counts.csv",
+        "GLDS-295_rna_seq_Normalized_Counts.csv"
+      ],
+      "notes": "Hindlimb Unloading soleus RNA-seq \u2014 B6 candidate",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-335": {
+      "tissue": "liver",
+      "mission": "HU+HZE",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "bulk_rnaseq",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 80,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-335_miRNA-Seq_LCS7565_AB_F1-Liver_RawData.fq.gz",
+        "GLDS-335_miRNA-Seq_LCS7565_AB_F2-Liver_RawData.fq.gz",
+        "GLDS-335_miRNA-Seq_LCS7565_AB_F3-Liver_RawData.fq.gz"
+      ],
+      "notes": "EXCLUDE: miRNA-Seq (not mRNA bulk RNA-seq)",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-270": {
+      "tissue": "heart",
+      "mission": "RR-3",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "spatial",
+      "control_types_detected": [
+        "GC"
+      ],
+      "bulk_rnaseq_files_found": 15,
+      "bulk_rnaseq_file_examples": [
+        "GLDS-270_rna_seq_STAR_Unnormalized_Counts.csv",
+        "GLDS-270_rna_seq_RSEM_Unnormalized_Counts.csv",
+        "GLDS-270_rna_seq_Normalized_Counts.csv"
+      ],
+      "notes": "EXCLUDE from A: Visium spatial transcriptomics",
+      "include_category_a": false,
+      "include_category_j": false
+    },
+    "OSD-596": {
+      "tissue": "heart",
+      "mission": "NG-11",
+      "track": "exc",
+      "status": "\u26d4 EXCLUDED (design)",
+      "assay_type": "unknown",
+      "control_types_detected": [
+        "unknown"
+      ],
+      "bulk_rnaseq_files_found": 0,
+      "bulk_rnaseq_file_examples": [],
+      "notes": "heart \u2014 verify assay type, \u22642 missions",
+      "include_category_a": false,
+      "include_category_j": false
+    }
+  },
+  "hu_analog_studies": []
+}

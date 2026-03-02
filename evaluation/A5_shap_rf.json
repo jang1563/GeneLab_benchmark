@@ -1,0 +1,211 @@
+{
+  "task_id": "A5",
+  "tissue": "skin",
+  "model": "rf",
+  "top_n": 50,
+  "n_folds": 3,
+  "top_genes": {
+    "Ckap4": {
+      "ensembl": "ENSMUSG00000046841",
+      "mean_abs_shap": 0.0025654051083238917
+    },
+    "9030619P08Rik": {
+      "ensembl": "ENSMUSG00000053168",
+      "mean_abs_shap": 0.0022338968022549517
+    },
+    "Rdh16": {
+      "ensembl": "ENSMUSG00000069456",
+      "mean_abs_shap": 0.002186692021519018
+    },
+    "Aunip": {
+      "ensembl": "ENSMUSG00000078521",
+      "mean_abs_shap": 0.0021539750768492694
+    },
+    "ENSMUSG00000086320": {
+      "ensembl": "ENSMUSG00000086320",
+      "mean_abs_shap": 0.0020462016731378845
+    },
+    "Pbld1": {
+      "ensembl": "ENSMUSG00000112129",
+      "mean_abs_shap": 0.001957402592062936
+    },
+    "Wfdc17": {
+      "ensembl": "ENSMUSG00000069792",
+      "mean_abs_shap": 0.0019179330009650925
+    },
+    "ENSMUSG00000110071": {
+      "ensembl": "ENSMUSG00000110071",
+      "mean_abs_shap": 0.0018883739123387048
+    },
+    "BC107364": {
+      "ensembl": "ENSMUSG00000046317",
+      "mean_abs_shap": 0.0018871504929854081
+    },
+    "Tcf19": {
+      "ensembl": "ENSMUSG00000050410",
+      "mean_abs_shap": 0.0018022877283896358
+    },
+    "Mapk1ip1": {
+      "ensembl": "ENSMUSG00000041775",
+      "mean_abs_shap": 0.0017504837922999329
+    },
+    "Klk8": {
+      "ensembl": "ENSMUSG00000064023",
+      "mean_abs_shap": 0.0017462865157678957
+    },
+    "ENSMUSG00000098001": {
+      "ensembl": "ENSMUSG00000098001",
+      "mean_abs_shap": 0.001727839512560759
+    },
+    "Il20": {
+      "ensembl": "ENSMUSG00000026416",
+      "mean_abs_shap": 0.0017204840108936972
+    },
+    "Ckap2": {
+      "ensembl": "ENSMUSG00000037725",
+      "mean_abs_shap": 0.0015993564723040968
+    },
+    "Klrb1c": {
+      "ensembl": "ENSMUSG00000030325",
+      "mean_abs_shap": 0.0015597424180179738
+    },
+    "E2f1": {
+      "ensembl": "ENSMUSG00000027490",
+      "mean_abs_shap": 0.0014910700859179888
+    },
+    "Hmgcs2": {
+      "ensembl": "ENSMUSG00000027875",
+      "mean_abs_shap": 0.001468066632018077
+    },
+    "Mup10": {
+      "ensembl": "ENSMUSG00000078680",
+      "mean_abs_shap": 0.0014377578861505082
+    },
+    "Gm3617": {
+      "ensembl": "ENSMUSG00000092563",
+      "mean_abs_shap": 0.0013744344873295596
+    },
+    "9530026P05Rik": {
+      "ensembl": "ENSMUSG00000097462",
+      "mean_abs_shap": 0.0013680480125822724
+    },
+    "Zdbf2": {
+      "ensembl": "ENSMUSG00000027520",
+      "mean_abs_shap": 0.0013580712321671574
+    },
+    "Aldh18a1": {
+      "ensembl": "ENSMUSG00000025007",
+      "mean_abs_shap": 0.0013410492287865197
+    },
+    "Cenph": {
+      "ensembl": "ENSMUSG00000045273",
+      "mean_abs_shap": 0.0013337794446104075
+    },
+    "Jpt1": {
+      "ensembl": "ENSMUSG00000020737",
+      "mean_abs_shap": 0.0013300781431508214
+    },
+    "Clec2d": {
+      "ensembl": "ENSMUSG00000030157",
+      "mean_abs_shap": 0.0013236000272366453
+    },
+    "ENSMUSG00000106245": {
+      "ensembl": "ENSMUSG00000106245",
+      "mean_abs_shap": 0.0013207781484738336
+    },
+    "Asb16": {
+      "ensembl": "ENSMUSG00000034768",
+      "mean_abs_shap": 0.0013103762874997987
+    },
+    "Cdt1": {
+      "ensembl": "ENSMUSG00000006585",
+      "mean_abs_shap": 0.0012999001006457882
+    },
+    "ENSMUSG00000110790": {
+      "ensembl": "ENSMUSG00000110790",
+      "mean_abs_shap": 0.001298102325536209
+    },
+    "ENSMUSG00000103998": {
+      "ensembl": "ENSMUSG00000103998",
+      "mean_abs_shap": 0.0012823050729279617
+    },
+    "Klf11": {
+      "ensembl": "ENSMUSG00000020653",
+      "mean_abs_shap": 0.0012750903565606373
+    },
+    "Lama1": {
+      "ensembl": "ENSMUSG00000032796",
+      "mean_abs_shap": 0.0012744168955822826
+    },
+    "Fen1": {
+      "ensembl": "ENSMUSG00000024742",
+      "mean_abs_shap": 0.0012642056048253198
+    },
+    "Gdf10": {
+      "ensembl": "ENSMUSG00000021943",
+      "mean_abs_shap": 0.001238827978925817
+    },
+    "Flt1": {
+      "ensembl": "ENSMUSG00000029648",
+      "mean_abs_shap": 0.0012310676838447477
+    },
+    "Aurka": {
+      "ensembl": "ENSMUSG00000027496",
+      "mean_abs_shap": 0.0012130950143800527
+    },
+    "Rbfox1": {
+      "ensembl": "ENSMUSG00000008658",
+      "mean_abs_shap": 0.0012071100078024147
+    },
+    "Piezo2": {
+      "ensembl": "ENSMUSG00000041482",
+      "mean_abs_shap": 0.001198400376319663
+    },
+    "Peg3": {
+      "ensembl": "ENSMUSG00000002265",
+      "mean_abs_shap": 0.0011893272874522872
+    },
+    "3930402G23Rik": {
+      "ensembl": "ENSMUSG00000038917",
+      "mean_abs_shap": 0.0011841813276120578
+    },
+    "Gucy2f": {
+      "ensembl": "ENSMUSG00000042282",
+      "mean_abs_shap": 0.0011827066408107113
+    },
+    "ENSMUSG00000085657": {
+      "ensembl": "ENSMUSG00000085657",
+      "mean_abs_shap": 0.001177155546952699
+    },
+    "Rergl": {
+      "ensembl": "ENSMUSG00000092164",
+      "mean_abs_shap": 0.0011755565957909729
+    },
+    "Tspan8": {
+      "ensembl": "ENSMUSG00000034127",
+      "mean_abs_shap": 0.0011694117258761296
+    },
+    "S1pr1": {
+      "ensembl": "ENSMUSG00000045092",
+      "mean_abs_shap": 0.0011660587748797294
+    },
+    "Prkn": {
+      "ensembl": "ENSMUSG00000023826",
+      "mean_abs_shap": 0.0011592547454834505
+    },
+    "ENSMUSG00000102651": {
+      "ensembl": "ENSMUSG00000102651",
+      "mean_abs_shap": 0.0011531088444382187
+    },
+    "ENSMUSG00000103151": {
+      "ensembl": "ENSMUSG00000103151",
+      "mean_abs_shap": 0.0011522612633753694
+    },
+    "ENSMUSG00000108441": {
+      "ensembl": "ENSMUSG00000108441",
+      "mean_abs_shap": 0.0011381807392164913
+    }
+  },
+  "target_gene_ranks": {},
+  "condition3_pass": false
+}

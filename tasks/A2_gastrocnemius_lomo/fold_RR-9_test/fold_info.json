@@ -1,0 +1,21 @@
+{
+  "test_mission": "RR-9",
+  "train_missions": [
+    "RR-1",
+    "RR-5"
+  ],
+  "n_train": 24,
+  "n_test": 8,
+  "n_genes_before_var_filter": 21013,
+  "n_genes_after_var_filter": 15760,
+  "var_percentile_cutoff": 0.25,
+  "train_label_distribution": {
+    "Flight": 12,
+    "Ground": 12
+  },
+  "test_label_distribution": {
+    "Flight": 4,
+    "Ground": 4
+  },
+  "excluded_bc_ag_samples": 0
+}

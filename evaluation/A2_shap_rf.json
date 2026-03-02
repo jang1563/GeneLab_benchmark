@@ -1,0 +1,276 @@
+{
+  "task_id": "A2",
+  "tissue": "gastrocnemius",
+  "model": "rf",
+  "top_n": 50,
+  "n_folds": 3,
+  "top_genes": {
+    "Sox4": {
+      "ensembl": "ENSMUSG00000076431",
+      "mean_abs_shap": 0.0037501335470085466
+    },
+    "Lrrc30": {
+      "ensembl": "ENSMUSG00000073375",
+      "mean_abs_shap": 0.002583333333333334
+    },
+    "Mettl21e": {
+      "ensembl": "ENSMUSG00000046828",
+      "mean_abs_shap": 0.0024335529439696107
+    },
+    "Cdkn1c": {
+      "ensembl": "ENSMUSG00000037664",
+      "mean_abs_shap": 0.0024097222222222224
+    },
+    "Kcnk3": {
+      "ensembl": "ENSMUSG00000049265",
+      "mean_abs_shap": 0.002166666666666666
+    },
+    "ENSMUSG00000120036": {
+      "ensembl": "ENSMUSG00000120036",
+      "mean_abs_shap": 0.002057291666666667
+    },
+    "Chaf1b": {
+      "ensembl": "ENSMUSG00000022945",
+      "mean_abs_shap": 0.002018963675213675
+    },
+    "Gm19410": {
+      "ensembl": "ENSMUSG00000109372",
+      "mean_abs_shap": 0.0020078124999999996
+    },
+    "Myog": {
+      "ensembl": "ENSMUSG00000026459",
+      "mean_abs_shap": 0.002002604166666667
+    },
+    "ENSMUSG00000081824": {
+      "ensembl": "ENSMUSG00000081824",
+      "mean_abs_shap": 0.0018376230251230252
+    },
+    "Zfp612": {
+      "ensembl": "ENSMUSG00000044676",
+      "mean_abs_shap": 0.0018197358197358194
+    },
+    "Stum": {
+      "ensembl": "ENSMUSG00000053963",
+      "mean_abs_shap": 0.0017916666666666669
+    },
+    "Bdh1": {
+      "ensembl": "ENSMUSG00000046598",
+      "mean_abs_shap": 0.0017916666666666662
+    },
+    "ENSMUSG00000074178": {
+      "ensembl": "ENSMUSG00000074178",
+      "mean_abs_shap": 0.001756944444444444
+    },
+    "Lsm11": {
+      "ensembl": "ENSMUSG00000044847",
+      "mean_abs_shap": 0.00175
+    },
+    "Gck": {
+      "ensembl": "ENSMUSG00000041798",
+      "mean_abs_shap": 0.0017407407407407406
+    },
+    "ENSMUSG00000117727": {
+      "ensembl": "ENSMUSG00000117727",
+      "mean_abs_shap": 0.0017225028058361392
+    },
+    "ENSMUSG00000120915": {
+      "ensembl": "ENSMUSG00000120915",
+      "mean_abs_shap": 0.0017222222222222222
+    },
+    "Asap3": {
+      "ensembl": "ENSMUSG00000036995",
+      "mean_abs_shap": 0.001630718954248366
+    },
+    "Adamts1": {
+      "ensembl": "ENSMUSG00000022893",
+      "mean_abs_shap": 0.0016250000000000006
+    },
+    "ENSMUSG00000120961": {
+      "ensembl": "ENSMUSG00000120961",
+      "mean_abs_shap": 0.0016249999999999997
+    },
+    "Tbc1d31": {
+      "ensembl": "ENSMUSG00000022364",
+      "mean_abs_shap": 0.0015716765873015875
+    },
+    "Tet1": {
+      "ensembl": "ENSMUSG00000047146",
+      "mean_abs_shap": 0.0015192307692307692
+    },
+    "Gm4811": {
+      "ensembl": "ENSMUSG00000113263",
+      "mean_abs_shap": 0.0015069444444444442
+    },
+    "Ciart": {
+      "ensembl": "ENSMUSG00000038550",
+      "mean_abs_shap": 0.0014992750305250302
+    },
+    "Mcub": {
+      "ensembl": "ENSMUSG00000027994",
+      "mean_abs_shap": 0.0014930555555555554
+    },
+    "Plk5": {
+      "ensembl": "ENSMUSG00000035486",
+      "mean_abs_shap": 0.0014676339285714284
+    },
+    "Pglyrp1": {
+      "ensembl": "ENSMUSG00000030413",
+      "mean_abs_shap": 0.0014668485449735446
+    },
+    "Mpp3": {
+      "ensembl": "ENSMUSG00000052373",
+      "mean_abs_shap": 0.0014583333333333332
+    },
+    "Rpl37rt": {
+      "ensembl": "ENSMUSG00000072692",
+      "mean_abs_shap": 0.001421326754385965
+    },
+    "Akap8l": {
+      "ensembl": "ENSMUSG00000002625",
+      "mean_abs_shap": 0.0014062499999999997
+    },
+    "Alg14": {
+      "ensembl": "ENSMUSG00000039887",
+      "mean_abs_shap": 0.0013907642602495544
+    },
+    "Per2": {
+      "ensembl": "ENSMUSG00000055866",
+      "mean_abs_shap": 0.0013825757575757578
+    },
+    "Sbk3": {
+      "ensembl": "ENSMUSG00000085272",
+      "mean_abs_shap": 0.0013802083333333333
+    },
+    "Fah": {
+      "ensembl": "ENSMUSG00000030630",
+      "mean_abs_shap": 0.0013738425925925923
+    },
+    "Nfil3": {
+      "ensembl": "ENSMUSG00000056749",
+      "mean_abs_shap": 0.001349206349206349
+    },
+    "Scarf1": {
+      "ensembl": "ENSMUSG00000038188",
+      "mean_abs_shap": 0.0013154761904761907
+    },
+    "Ggt1": {
+      "ensembl": "ENSMUSG00000006345",
+      "mean_abs_shap": 0.0012962962962962965
+    },
+    "Cab39": {
+      "ensembl": "ENSMUSG00000036707",
+      "mean_abs_shap": 0.0012916666666666662
+    },
+    "Cyfip2": {
+      "ensembl": "ENSMUSG00000020340",
+      "mean_abs_shap": 0.0012870896464646465
+    },
+    "Taf7": {
+      "ensembl": "ENSMUSG00000051316",
+      "mean_abs_shap": 0.0012743055555555559
+    },
+    "6820431F20Rik": {
+      "ensembl": "ENSMUSG00000121492",
+      "mean_abs_shap": 0.0012692307692307695
+    },
+    "ENSMUSG00000108812": {
+      "ensembl": "ENSMUSG00000108812",
+      "mean_abs_shap": 0.0012638888888888888
+    },
+    "ENSMUSG00000096751": {
+      "ensembl": "ENSMUSG00000096751",
+      "mean_abs_shap": 0.0012638888888888888
+    },
+    "Grem2": {
+      "ensembl": "ENSMUSG00000050069",
+      "mean_abs_shap": 0.0012552083333333332
+    },
+    "Astn2": {
+      "ensembl": "ENSMUSG00000028373",
+      "mean_abs_shap": 0.0012495039682539684
+    },
+    "Gata3": {
+      "ensembl": "ENSMUSG00000015619",
+      "mean_abs_shap": 0.0012383814102564104
+    },
+    "Mefv": {
+      "ensembl": "ENSMUSG00000022534",
+      "mean_abs_shap": 0.001232638888888889
+    },
+    "Rps7-ps3": {
+      "ensembl": "ENSMUSG00000121769",
+      "mean_abs_shap": 0.0012247474747474746
+    },
+    "Klf11": {
+      "ensembl": "ENSMUSG00000020653",
+      "mean_abs_shap": 0.0012109375000000002
+    }
+  },
+  "target_gene_ranks": {
+    "Fbxo32": {
+      "rank": 13152,
+      "in_top_n": false
+    },
+    "Trim63": {
+      "rank": 6822,
+      "in_top_n": false
+    },
+    "Mstn": {
+      "rank": 10422,
+      "in_top_n": false
+    },
+    "Foxo3": {
+      "rank": 15146,
+      "in_top_n": false
+    },
+    "Igf1": {
+      "rank": 5553,
+      "in_top_n": false
+    },
+    "Klf15": {
+      "rank": 5818,
+      "in_top_n": false
+    },
+    "Myog": {
+      "rank": 9,
+      "in_top_n": true
+    },
+    "Myh7": {
+      "rank": 14320,
+      "in_top_n": false
+    },
+    "Myh4": {
+      "rank": 6659,
+      "in_top_n": false
+    },
+    "Bmal1": {
+      "rank": 154,
+      "in_top_n": false
+    },
+    "Per2": {
+      "rank": 33,
+      "in_top_n": true
+    },
+    "Dbp": {
+      "rank": 120,
+      "in_top_n": false
+    },
+    "Ciart": {
+      "rank": 25,
+      "in_top_n": true
+    },
+    "Hmox1": {
+      "rank": 12784,
+      "in_top_n": false
+    },
+    "Sod2": {
+      "rank": 8465,
+      "in_top_n": false
+    },
+    "Ppargc1a": {
+      "rank": 11316,
+      "in_top_n": false
+    }
+  },
+  "condition3_pass": true
+}

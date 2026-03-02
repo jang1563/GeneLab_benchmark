@@ -1,0 +1,75 @@
+{
+  "task": "Spaceflight detection \u2014 Skin",
+  "tissue": "skin",
+  "split": "LOMO",
+  "n_missions": 3,
+  "n_folds_generated": 3,
+  "folds": [
+    {
+      "test_mission": "MHU-2",
+      "train_missions": [
+        "RR-6",
+        "RR-7"
+      ],
+      "n_train": 67,
+      "n_test": 35,
+      "n_genes_before_var_filter": 26814,
+      "n_genes_after_var_filter": 20110,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 28,
+        "Ground": 39
+      },
+      "test_label_distribution": {
+        "Flight": 11,
+        "Ground": 24
+      },
+      "excluded_bc_ag_samples": 28
+    },
+    {
+      "test_mission": "RR-6",
+      "train_missions": [
+        "MHU-2",
+        "RR-7"
+      ],
+      "n_train": 65,
+      "n_test": 37,
+      "n_genes_before_var_filter": 26814,
+      "n_genes_after_var_filter": 20110,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 21,
+        "Ground": 44
+      },
+      "test_label_distribution": {
+        "Flight": 18,
+        "Ground": 19
+      },
+      "excluded_bc_ag_samples": 28
+    },
+    {
+      "test_mission": "RR-7",
+      "train_missions": [
+        "MHU-2",
+        "RR-6"
+      ],
+      "n_train": 72,
+      "n_test": 30,
+      "n_genes_before_var_filter": 26814,
+      "n_genes_after_var_filter": 20110,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 29,
+        "Ground": 43
+      },
+      "test_label_distribution": {
+        "Flight": 10,
+        "Ground": 20
+      },
+      "excluded_bc_ag_samples": 28
+    }
+  ],
+  "task_id": "A5",
+  "generated_at": "2026-03-01T16:11:45.112328",
+  "dry_run": false
+}

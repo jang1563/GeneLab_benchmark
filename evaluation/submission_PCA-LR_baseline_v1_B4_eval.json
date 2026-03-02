@@ -1,0 +1,144 @@
+{
+  "task_id": "B4",
+  "model_name": "PCA-LR_baseline_v1",
+  "model_description": "StandardScaler + PCA(min(50,n_train-1)) + LogReg(L2, lbfgs, C=1.0, balanced), PCA-LR cross-mission transfer, thymus (4 missions \u2192 12 pairs)",
+  "submission_date": "2026-03-01",
+  "n_folds": 12,
+  "fold_results": [
+    {
+      "fold": "pair_MHU-1_MHU-2",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.061938061938061936
+    },
+    {
+      "fold": "pair_MHU-1_RR-6",
+      "n_test": 35,
+      "n_flight": 17,
+      "n_ground": 18,
+      "auroc": 0.8169934640522877,
+      "ci_lower": 0.6666666666666667,
+      "ci_upper": 0.9456054421768706,
+      "perm_p": 0.000999000999000999
+    },
+    {
+      "fold": "pair_MHU-1_RR-9",
+      "n_test": 20,
+      "n_flight": 10,
+      "n_ground": 10,
+      "auroc": 0.9800000000000001,
+      "ci_lower": 0.9090198863636363,
+      "ci_upper": 1.0,
+      "perm_p": 0.000999000999000999
+    },
+    {
+      "fold": "pair_MHU-2_MHU-1",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.061938061938061936
+    },
+    {
+      "fold": "pair_MHU-2_RR-6",
+      "n_test": 35,
+      "n_flight": 17,
+      "n_ground": 18,
+      "auroc": 0.49019607843137253,
+      "ci_lower": 0.2927153207774338,
+      "ci_upper": 0.68,
+      "perm_p": 0.5514485514485514
+    },
+    {
+      "fold": "pair_MHU-2_RR-9",
+      "n_test": 20,
+      "n_flight": 10,
+      "n_ground": 10,
+      "auroc": 1.0,
+      "ci_lower": 0.9999999999999999,
+      "ci_upper": 1.0,
+      "perm_p": 0.000999000999000999
+    },
+    {
+      "fold": "pair_RR-6_MHU-1",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.061938061938061936
+    },
+    {
+      "fold": "pair_RR-6_MHU-2",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 0.6666666666666667,
+      "ci_lower": 0.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.31368631368631367
+    },
+    {
+      "fold": "pair_RR-6_RR-9",
+      "n_test": 20,
+      "n_flight": 10,
+      "n_ground": 10,
+      "auroc": 0.7,
+      "ci_lower": 0.4443333333333333,
+      "ci_upper": 0.92,
+      "perm_p": 0.06793206793206794
+    },
+    {
+      "fold": "pair_RR-9_MHU-1",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.061938061938061936
+    },
+    {
+      "fold": "pair_RR-9_MHU-2",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.061938061938061936
+    },
+    {
+      "fold": "pair_RR-9_RR-6",
+      "n_test": 35,
+      "n_flight": 17,
+      "n_ground": 18,
+      "auroc": 0.6633986928104576,
+      "ci_lower": 0.47199197860962566,
+      "ci_upper": 0.8497600438776904,
+      "perm_p": 0.04395604395604396
+    }
+  ],
+  "summary": {
+    "mean_auroc": 0.8597712418300653,
+    "std_auroc": 0.17612347144938034,
+    "mean_ci_lower": 0.732060598812558,
+    "overall_auroc_pooled": 0.6700336700336701,
+    "overall_ci_lower": 0.5920727311903783,
+    "overall_ci_upper": 0.7426258235785859,
+    "mean_perm_p": 0.10747585747585746,
+    "go_nogo": false
+  },
+  "thresholds": {
+    "auroc": 0.7,
+    "ci_lower": 0.5,
+    "perm_p": 0.05
+  }
+}

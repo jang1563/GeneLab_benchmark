@@ -1,0 +1,96 @@
+{
+  "task": "A1_iss_only",
+  "note": "MHU-2 excluded, ISS RR missions only (RR-1, RR-3, RR-6, RR-8, RR-9)",
+  "model_results": {
+    "lr": {
+      "mean_auroc": 0.648,
+      "std_auroc": 0.193,
+      "mean_ci_lower": 0.407,
+      "mean_perm_p": 0.289,
+      "per_fold": {
+        "RR-1": {
+          "auroc": 0.776,
+          "ci_lo": 0.458,
+          "ci_hi": 1.0,
+          "perm_p": 0.059
+        },
+        "RR-3": {
+          "auroc": 0.472,
+          "ci_lo": 0.114,
+          "ci_hi": 0.857,
+          "perm_p": 0.604
+        },
+        "RR-6": {
+          "auroc": 0.884,
+          "ci_lo": 0.772,
+          "ci_hi": 0.976,
+          "perm_p": 0.01
+        },
+        "RR-8": {
+          "auroc": 0.736,
+          "ci_lo": 0.624,
+          "ci_hi": 0.848,
+          "perm_p": 0.01
+        },
+        "RR-9": {
+          "auroc": 0.371,
+          "ci_lo": 0.067,
+          "ci_hi": 0.812,
+          "perm_p": 0.762
+        }
+      }
+    },
+    "pca_lr": {
+      "mean_auroc": 0.661,
+      "std_auroc": 0.168,
+      "mean_ci_lower": 0.416,
+      "mean_perm_p": 0.236,
+      "per_fold": {
+        "RR-1": {
+          "auroc": 0.796
+        },
+        "RR-3": {
+          "auroc": 0.528
+        },
+        "RR-6": {
+          "auroc": 0.868
+        },
+        "RR-8": {
+          "auroc": 0.701
+        },
+        "RR-9": {
+          "auroc": 0.414
+        }
+      }
+    },
+    "rf": {
+      "mean_auroc": 0.594,
+      "std_auroc": 0.117,
+      "mean_ci_lower": 0.331,
+      "mean_perm_p": 0.311,
+      "per_fold": {
+        "RR-1": {
+          "auroc": 0.612
+        },
+        "RR-3": {
+          "auroc": 0.472
+        },
+        "RR-6": {
+          "auroc": 0.583
+        },
+        "RR-8": {
+          "auroc": 0.803
+        },
+        "RR-9": {
+          "auroc": 0.5
+        }
+      }
+    }
+  },
+  "best_model": "pca_lr",
+  "go_nogo": {
+    "c1_pass": false,
+    "c2_pass": false,
+    "verdict": "NO-GO"
+  }
+}
