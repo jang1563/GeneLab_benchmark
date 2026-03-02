@@ -1,0 +1,277 @@
+{
+  "tasks": {
+    "D6_liver": {
+      "task": "D6_liver",
+      "tissue": "liver",
+      "n_samples": 9,
+      "label_distribution": {
+        "GC": 3,
+        "AG": 3,
+        "Flight": 3
+      },
+      "feature_modes": {
+        "gene": {
+          "n_features": 22987,
+          "macro_f1": 0.8857142857142857,
+          "accuracy": 0.8888888888888888,
+          "ci_low": NaN,
+          "ci_high": NaN,
+          "perm_p": 0.0023995200959808036,
+          "per_class_f1": {
+            "AG": 0.8571428571428571,
+            "GC": 0.8,
+            "uG": 1.0
+          },
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              3
+            ]
+          ],
+          "classes": [
+            "AG",
+            "GC",
+            "uG"
+          ],
+          "y_true": [
+            "GC",
+            "GC",
+            "GC",
+            "AG",
+            "AG",
+            "AG",
+            "uG",
+            "uG",
+            "uG"
+          ],
+          "y_pred": [
+            "GC",
+            "GC",
+            "AG",
+            "AG",
+            "AG",
+            "AG",
+            "uG",
+            "uG",
+            "uG"
+          ]
+        },
+        "pathway": {
+          "n_features": 50,
+          "macro_f1": 0.41269841269841273,
+          "accuracy": 0.4444444444444444,
+          "ci_low": NaN,
+          "ci_high": NaN,
+          "perm_p": 0.35432913417316536,
+          "per_class_f1": {
+            "AG": 0.5714285714285714,
+            "GC": 0.0,
+            "uG": 0.6666666666666666
+          },
+          "confusion_matrix": [
+            [
+              2,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "classes": [
+            "AG",
+            "GC",
+            "uG"
+          ],
+          "y_true": [
+            "GC",
+            "GC",
+            "GC",
+            "AG",
+            "AG",
+            "AG",
+            "uG",
+            "uG",
+            "uG"
+          ],
+          "y_pred": [
+            "uG",
+            "AG",
+            "AG",
+            "AG",
+            "AG",
+            "GC",
+            "uG",
+            "uG",
+            "GC"
+          ]
+        }
+      }
+    },
+    "D6_thymus": {
+      "task": "D6_thymus",
+      "tissue": "thymus",
+      "n_samples": 9,
+      "label_distribution": {
+        "AG": 3,
+        "Flight": 3,
+        "GC": 3
+      },
+      "feature_modes": {
+        "gene": {
+          "n_features": 28235,
+          "macro_f1": 0.6571428571428571,
+          "accuracy": 0.6666666666666666,
+          "ci_low": NaN,
+          "ci_high": NaN,
+          "perm_p": 0.03699260147970406,
+          "per_class_f1": {
+            "AG": 0.4,
+            "GC": 1.0,
+            "uG": 0.5714285714285714
+          },
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              2
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              1,
+              0,
+              2
+            ]
+          ],
+          "classes": [
+            "AG",
+            "GC",
+            "uG"
+          ],
+          "y_true": [
+            "AG",
+            "AG",
+            "AG",
+            "uG",
+            "uG",
+            "uG",
+            "GC",
+            "GC",
+            "GC"
+          ],
+          "y_pred": [
+            "AG",
+            "uG",
+            "uG",
+            "uG",
+            "AG",
+            "uG",
+            "GC",
+            "GC",
+            "GC"
+          ]
+        },
+        "pathway": {
+          "n_features": 50,
+          "macro_f1": 0.6412698412698412,
+          "accuracy": 0.6666666666666666,
+          "ci_low": NaN,
+          "ci_high": NaN,
+          "perm_p": 0.052189562087582485,
+          "per_class_f1": {
+            "AG": 0.8571428571428571,
+            "GC": 0.6666666666666666,
+            "uG": 0.4
+          },
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "classes": [
+            "AG",
+            "GC",
+            "uG"
+          ],
+          "y_true": [
+            "AG",
+            "AG",
+            "AG",
+            "uG",
+            "uG",
+            "uG",
+            "GC",
+            "GC",
+            "GC"
+          ],
+          "y_pred": [
+            "AG",
+            "AG",
+            "AG",
+            "GC",
+            "AG",
+            "uG",
+            "uG",
+            "GC",
+            "GC"
+          ]
+        }
+      }
+    }
+  },
+  "j5_comparison": {
+    "D6_liver": {
+      "gene_macro_f1": 0.8857142857142857,
+      "pathway_macro_f1": 0.41269841269841273,
+      "diff_pathway_minus_gene": -0.47301587301587295,
+      "winner": "gene"
+    },
+    "D6_thymus": {
+      "gene_macro_f1": 0.6571428571428571,
+      "pathway_macro_f1": 0.6412698412698412,
+      "diff_pathway_minus_gene": -0.015873015873015928,
+      "winner": "gene"
+    }
+  },
+  "config": {
+    "variance_percentile": 0.25,
+    "n_splits": 5,
+    "n_repeats": 10,
+    "n_bootstrap": 0,
+    "timestamp": "2026-03-01T16:31:03.497610"
+  }
+}

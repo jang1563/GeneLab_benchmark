@@ -1,0 +1,130 @@
+{
+  "lr": {
+    "n_folds": 3,
+    "mean_auroc": 0.8812169312169312,
+    "std_auroc": 0.08708567174986862,
+    "mean_ci_lower": 0.6722222222222222,
+    "mean_perm_p": 0.022311022311022315,
+    "go_auroc": true,
+    "go_ci": true,
+    "go_perm": true,
+    "go": true,
+    "folds": [
+      {
+        "test_mission": "RR-1",
+        "train_missions": [
+          "RR-3",
+          "TBD"
+        ],
+        "auroc": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "perm_p": 0.002997002997002997,
+        "n_test": 12,
+        "n_flight_test": 6,
+        "n_ground_test": 6,
+        "n_pathways": 50,
+        "n_train": 25,
+        "train_time_s": 0.01
+      },
+      {
+        "test_mission": "RR-3",
+        "train_missions": [
+          "RR-1",
+          "TBD"
+        ],
+        "auroc": 0.8500000000000001,
+        "ci_lower": 0.5,
+        "ci_upper": 1.0,
+        "perm_p": 0.030969030969030968,
+        "n_test": 9,
+        "n_flight_test": 5,
+        "n_ground_test": 4,
+        "n_pathways": 50,
+        "n_train": 28,
+        "train_time_s": 0.01
+      },
+      {
+        "test_mission": "TBD",
+        "train_missions": [
+          "RR-1",
+          "RR-3"
+        ],
+        "auroc": 0.7936507936507936,
+        "ci_lower": 0.5166666666666666,
+        "ci_upper": 1.0,
+        "perm_p": 0.03296703296703297,
+        "n_test": 16,
+        "n_flight_test": 9,
+        "n_ground_test": 7,
+        "n_pathways": 50,
+        "n_train": 21,
+        "train_time_s": 0.0
+      }
+    ]
+  },
+  "pca_lr": {
+    "n_folds": 3,
+    "mean_auroc": 0.9145502645502646,
+    "std_auroc": 0.08789202295175981,
+    "mean_ci_lower": 0.7454278273809524,
+    "mean_perm_p": 0.013986013986013984,
+    "go_auroc": true,
+    "go_ci": true,
+    "go_perm": true,
+    "go": true,
+    "folds": [
+      {
+        "test_mission": "RR-1",
+        "train_missions": [
+          "RR-3",
+          "TBD"
+        ],
+        "auroc": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "perm_p": 0.002997002997002997,
+        "n_test": 12,
+        "n_flight_test": 6,
+        "n_ground_test": 6,
+        "n_pathways": 50,
+        "n_train": 25,
+        "train_time_s": 0.0
+      },
+      {
+        "test_mission": "RR-3",
+        "train_missions": [
+          "RR-1",
+          "TBD"
+        ],
+        "auroc": 0.95,
+        "ci_lower": 0.7196428571428571,
+        "ci_upper": 1.0,
+        "perm_p": 0.011988011988011988,
+        "n_test": 9,
+        "n_flight_test": 5,
+        "n_ground_test": 4,
+        "n_pathways": 50,
+        "n_train": 28,
+        "train_time_s": 0.0
+      },
+      {
+        "test_mission": "TBD",
+        "train_missions": [
+          "RR-1",
+          "RR-3"
+        ],
+        "auroc": 0.7936507936507936,
+        "ci_lower": 0.516640625,
+        "ci_upper": 0.9818560606060605,
+        "perm_p": 0.026973026973026972,
+        "n_test": 16,
+        "n_flight_test": 9,
+        "n_ground_test": 7,
+        "n_pathways": 50,
+        "n_train": 21,
+        "train_time_s": 0.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "task": "Spaceflight detection \u2014 Liver",
+  "tissue": "liver",
+  "split": "LOMO",
+  "n_missions": 6,
+  "n_folds_generated": 6,
+  "folds": [
+    {
+      "test_mission": "MHU-2",
+      "train_missions": [
+        "RR-1",
+        "RR-3",
+        "RR-6",
+        "RR-8",
+        "RR-9"
+      ],
+      "n_train": 187,
+      "n_test": 6,
+      "n_genes_before_var_filter": 22987,
+      "n_genes_after_var_filter": 17240,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 73,
+        "Ground": 114
+      },
+      "test_label_distribution": {
+        "Flight": 3,
+        "Ground": 3
+      },
+      "excluded_bc_ag_samples": 71
+    },
+    {
+      "test_mission": "RR-1",
+      "train_missions": [
+        "MHU-2",
+        "RR-3",
+        "RR-6",
+        "RR-8",
+        "RR-9"
+      ],
+      "n_train": 179,
+      "n_test": 14,
+      "n_genes_before_var_filter": 22987,
+      "n_genes_after_var_filter": 17240,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 69,
+        "Ground": 110
+      },
+      "test_label_distribution": {
+        "Flight": 7,
+        "Ground": 7
+      },
+      "excluded_bc_ag_samples": 71
+    },
+    {
+      "test_mission": "RR-3",
+      "train_missions": [
+        "MHU-2",
+        "RR-1",
+        "RR-6",
+        "RR-8",
+        "RR-9"
+      ],
+      "n_train": 181,
+      "n_test": 12,
+      "n_genes_before_var_filter": 22987,
+      "n_genes_after_var_filter": 17240,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 70,
+        "Ground": 111
+      },
+      "test_label_distribution": {
+        "Flight": 6,
+        "Ground": 6
+      },
+      "excluded_bc_ag_samples": 71
+    },
+    {
+      "test_mission": "RR-6",
+      "train_missions": [
+        "MHU-2",
+        "RR-1",
+        "RR-3",
+        "RR-8",
+        "RR-9"
+      ],
+      "n_train": 154,
+      "n_test": 39,
+      "n_genes_before_var_filter": 22987,
+      "n_genes_after_var_filter": 17240,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 56,
+        "Ground": 98
+      },
+      "test_label_distribution": {
+        "Flight": 20,
+        "Ground": 19
+      },
+      "excluded_bc_ag_samples": 71
+    },
+    {
+      "test_mission": "RR-8",
+      "train_missions": [
+        "MHU-2",
+        "RR-1",
+        "RR-3",
+        "RR-6",
+        "RR-9"
+      ],
+      "n_train": 90,
+      "n_test": 103,
+      "n_genes_before_var_filter": 22987,
+      "n_genes_after_var_filter": 17240,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 41,
+        "Ground": 49
+      },
+      "test_label_distribution": {
+        "Flight": 35,
+        "Ground": 68
+      },
+      "excluded_bc_ag_samples": 71
+    },
+    {
+      "test_mission": "RR-9",
+      "train_missions": [
+        "MHU-2",
+        "RR-1",
+        "RR-3",
+        "RR-6",
+        "RR-8"
+      ],
+      "n_train": 174,
+      "n_test": 19,
+      "n_genes_before_var_filter": 22987,
+      "n_genes_after_var_filter": 17240,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 71,
+        "Ground": 103
+      },
+      "test_label_distribution": {
+        "Flight": 5,
+        "Ground": 14
+      },
+      "excluded_bc_ag_samples": 71
+    }
+  ],
+  "task_id": "A1",
+  "generated_at": "2026-02-28T15:52:48.402168",
+  "dry_run": false
+}

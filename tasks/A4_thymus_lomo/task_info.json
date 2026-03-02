@@ -1,0 +1,100 @@
+{
+  "task": "Spaceflight detection \u2014 Thymus",
+  "tissue": "thymus",
+  "split": "LOMO",
+  "n_missions": 4,
+  "n_folds_generated": 4,
+  "folds": [
+    {
+      "test_mission": "MHU-1",
+      "train_missions": [
+        "MHU-2",
+        "RR-6",
+        "RR-9"
+      ],
+      "n_train": 61,
+      "n_test": 6,
+      "n_genes_before_var_filter": 28235,
+      "n_genes_after_var_filter": 21176,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 30,
+        "Ground": 31
+      },
+      "test_label_distribution": {
+        "Flight": 3,
+        "Ground": 3
+      },
+      "excluded_bc_ag_samples": 25
+    },
+    {
+      "test_mission": "MHU-2",
+      "train_missions": [
+        "MHU-1",
+        "RR-6",
+        "RR-9"
+      ],
+      "n_train": 61,
+      "n_test": 6,
+      "n_genes_before_var_filter": 28235,
+      "n_genes_after_var_filter": 21176,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 30,
+        "Ground": 31
+      },
+      "test_label_distribution": {
+        "Flight": 3,
+        "Ground": 3
+      },
+      "excluded_bc_ag_samples": 25
+    },
+    {
+      "test_mission": "RR-6",
+      "train_missions": [
+        "MHU-1",
+        "MHU-2",
+        "RR-9"
+      ],
+      "n_train": 32,
+      "n_test": 35,
+      "n_genes_before_var_filter": 28235,
+      "n_genes_after_var_filter": 21176,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 16,
+        "Ground": 16
+      },
+      "test_label_distribution": {
+        "Flight": 17,
+        "Ground": 18
+      },
+      "excluded_bc_ag_samples": 25
+    },
+    {
+      "test_mission": "RR-9",
+      "train_missions": [
+        "MHU-1",
+        "MHU-2",
+        "RR-6"
+      ],
+      "n_train": 47,
+      "n_test": 20,
+      "n_genes_before_var_filter": 28235,
+      "n_genes_after_var_filter": 21176,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 23,
+        "Ground": 24
+      },
+      "test_label_distribution": {
+        "Flight": 10,
+        "Ground": 10
+      },
+      "excluded_bc_ag_samples": 25
+    }
+  ],
+  "task_id": "A4",
+  "generated_at": "2026-02-28T23:13:23.561382",
+  "dry_run": false
+}

@@ -1,0 +1,75 @@
+{
+  "task": "Spaceflight detection \u2014 Kidney",
+  "tissue": "kidney",
+  "split": "LOMO",
+  "n_missions": 3,
+  "n_folds_generated": 3,
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "train_missions": [
+        "RR-3",
+        "RR-7"
+      ],
+      "n_train": 106,
+      "n_test": 12,
+      "n_genes_before_var_filter": 26082,
+      "n_genes_after_var_filter": 19561,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 26,
+        "Ground": 80
+      },
+      "test_label_distribution": {
+        "Flight": 6,
+        "Ground": 6
+      },
+      "excluded_bc_ag_samples": 24
+    },
+    {
+      "test_mission": "RR-3",
+      "train_missions": [
+        "RR-1",
+        "RR-7"
+      ],
+      "n_train": 106,
+      "n_test": 12,
+      "n_genes_before_var_filter": 26082,
+      "n_genes_after_var_filter": 19561,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 26,
+        "Ground": 80
+      },
+      "test_label_distribution": {
+        "Flight": 6,
+        "Ground": 6
+      },
+      "excluded_bc_ag_samples": 24
+    },
+    {
+      "test_mission": "RR-7",
+      "train_missions": [
+        "RR-1",
+        "RR-3"
+      ],
+      "n_train": 24,
+      "n_test": 94,
+      "n_genes_before_var_filter": 26082,
+      "n_genes_after_var_filter": 19561,
+      "var_percentile_cutoff": 0.25,
+      "train_label_distribution": {
+        "Flight": 12,
+        "Ground": 12
+      },
+      "test_label_distribution": {
+        "Flight": 20,
+        "Ground": 74
+      },
+      "excluded_bc_ag_samples": 24
+    }
+  ],
+  "task_id": "A3",
+  "generated_at": "2026-02-28T16:02:39.757978",
+  "dry_run": false
+}

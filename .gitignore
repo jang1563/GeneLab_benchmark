@@ -1,0 +1,81 @@
+# ── Raw data downloads (3.4 GB) ──────────────────────────────────────────────
+data/mouse/
+
+# ── Processed expression matrices (828 MB) ───────────────────────────────────
+# Normalized log2 counts — regenerate via normalize_*.R / fetch_osdr.py
+processed/A_detection/
+processed/B_cross_mission/
+processed/C_cross_tissue/
+processed/D_condition/
+processed/J_pipeline/
+processed/qc_reports/
+
+# Keep pathway scores (small) and Ensembl map
+!processed/pathway_scores/
+!processed/fgsea/
+!processed/ensembl_symbol_map.csv
+
+# ── Task feature matrices (large train_X / test_X CSVs) ──────────────────────
+# Labels, metadata, and fold structure are kept (small files)
+tasks/**/train_X.csv
+tasks/**/test_X.csv
+
+# Intermediate/derived A1 task variants
+tasks/A1_liver_lomo_combat/
+tasks/A1_liver_lomo_iss_only/
+
+# Geneformer token files (regenerate via geneformer_tokenize.py)
+tasks/**/geneformer_tokens/
+
+# ── Python artifacts ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.eggs/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Virtual environments
+.venv/
+venv/
+env/
+.conda/
+
+# ── R artifacts ───────────────────────────────────────────────────────────────
+.Rdata
+.Rhistory
+.RData
+*.rds
+Rplots.pdf
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# ── Editor / IDE ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Logs and temporary files ──────────────────────────────────────────────────
+*.log
+*.tmp
+*.temp
+slurm-*.out
+slurm-*.err
+
+# ── Secrets / credentials ─────────────────────────────────────────────────────
+.env
+*.key
+*.pem

@@ -1,0 +1,213 @@
+{
+  "j5_table": [
+    {
+      "category": "A",
+      "task": "A_liver",
+      "description": "Spaceflight detection (liver, LOMO)",
+      "metric": "AUROC",
+      "gene": 0.6704,
+      "pathway": 0.5741,
+      "diff": -0.0963,
+      "winner": "gene"
+    },
+    {
+      "category": "A",
+      "task": "A_gastrocnemius",
+      "description": "Spaceflight detection (gastrocnemius, LOMO)",
+      "metric": "AUROC",
+      "gene": 0.8241,
+      "pathway": 0.6875,
+      "diff": -0.1366,
+      "winner": "gene"
+    },
+    {
+      "category": "A",
+      "task": "A_kidney",
+      "description": "Spaceflight detection (kidney, LOMO)",
+      "metric": "AUROC",
+      "gene": 0.4324,
+      "pathway": 0.7429,
+      "diff": 0.3106,
+      "winner": "pathway"
+    },
+    {
+      "category": "A",
+      "task": "A_thymus",
+      "description": "Spaceflight detection (thymus, LOMO)",
+      "metric": "AUROC",
+      "gene": 0.9232,
+      "pathway": 0.8789,
+      "diff": -0.0443,
+      "winner": "gene"
+    },
+    {
+      "category": "A",
+      "task": "A_eye",
+      "description": "Spaceflight detection (eye, LOMO)",
+      "metric": "AUROC",
+      "gene": 0.7894,
+      "pathway": 0.9146,
+      "diff": 0.1251,
+      "winner": "pathway"
+    },
+    {
+      "category": "C",
+      "task": "C1",
+      "description": "Cross-tissue liver\u2192kidney",
+      "metric": "AUROC",
+      "gene": 0.7297,
+      "pathway": 0.4829,
+      "diff": -0.2467,
+      "winner": "gene"
+    },
+    {
+      "category": "C",
+      "task": "C2",
+      "description": "Cross-tissue liver\u2192gastrocnemius",
+      "metric": "AUROC",
+      "gene": 0.5625,
+      "pathway": 0.8672,
+      "diff": 0.3047,
+      "winner": "pathway"
+    },
+    {
+      "category": "C",
+      "task": "C3",
+      "description": "Cross-tissue liver\u2192thymus",
+      "metric": "AUROC",
+      "gene": 0.3503,
+      "pathway": 0.1845,
+      "diff": -0.1658,
+      "winner": "gene"
+    },
+    {
+      "category": "C",
+      "task": "C4",
+      "description": "Cross-tissue thymus\u2192kidney",
+      "metric": "AUROC",
+      "gene": 0.5854,
+      "pathway": 0.6904,
+      "diff": 0.105,
+      "winner": "pathway"
+    },
+    {
+      "category": "D",
+      "task": "D3",
+      "description": "D3",
+      "metric": "macro-F1",
+      "gene": 1.0,
+      "pathway": 0.0559,
+      "diff": -0.9441,
+      "winner": "gene"
+    },
+    {
+      "category": "D",
+      "task": "D6_liver",
+      "description": "D6 liver",
+      "metric": "macro-F1",
+      "gene": 0.8857,
+      "pathway": 0.4127,
+      "diff": -0.473,
+      "winner": "gene"
+    },
+    {
+      "category": "D",
+      "task": "D6_thymus",
+      "description": "D6 thymus",
+      "metric": "macro-F1",
+      "gene": 0.6571,
+      "pathway": 0.6413,
+      "diff": -0.0159,
+      "winner": "gene"
+    }
+  ],
+  "category_a_details": {
+    "liver": {
+      "gene_mean_auroc": 0.6703886232855716,
+      "gene_per_fold": {
+        "MHU-2": 0.3333333333333333,
+        "RR-1": 0.8163265306122449,
+        "RR-3": 0.5555555555555556,
+        "RR-6": 0.8473684210526317,
+        "RR-8": 0.6126050420168068,
+        "RR-9": 0.8571428571428571
+      },
+      "pathway_mean_auroc": 0.5740624904932733,
+      "pathway_per_fold": {
+        "MHU-2": 0.22222222222222224,
+        "RR-1": 0.5918367346938775,
+        "RR-3": 0.4722222222222222,
+        "RR-6": 0.7526315789473683,
+        "RR-8": 0.7054621848739496,
+        "RR-9": 0.7
+      }
+    },
+    "gastrocnemius": {
+      "gene_mean_auroc": 0.8240740740740741,
+      "gene_per_fold": {
+        "RR-1": 0.6388888888888888,
+        "RR-5": 0.8333333333333334,
+        "RR-9": 1.0
+      },
+      "pathway_mean_auroc": 0.6875,
+      "pathway_per_fold": {
+        "RR-1": 0.5277777777777778,
+        "RR-5": 0.7222222222222222,
+        "RR-9": 0.8125
+      }
+    },
+    "kidney": {
+      "gene_mean_auroc": 0.4323823823823824,
+      "gene_per_fold": {
+        "RR-1": 0.05555555555555556,
+        "RR-3": 0.6388888888888888,
+        "RR-7": 0.6027027027027028
+      },
+      "pathway_mean_auroc": 0.7429429429429429,
+      "pathway_per_fold": {
+        "RR-1": 0.8611111111111112,
+        "RR-3": 0.8055555555555556,
+        "RR-7": 0.5621621621621621
+      }
+    },
+    "thymus": {
+      "gene_mean_auroc": 0.923202614379085,
+      "gene_per_fold": {
+        "MHU-1": 1.0,
+        "MHU-2": 1.0,
+        "RR-6": 0.6928104575163399,
+        "RR-9": 1.0
+      },
+      "pathway_mean_auroc": 0.8788888888888889,
+      "pathway_per_fold": {
+        "MHU-1": 1.0,
+        "MHU-2": 0.7777777777777779,
+        "RR-6": 0.7777777777777778,
+        "RR-9": 0.96
+      }
+    },
+    "eye": {
+      "gene_mean_auroc": 0.7894179894179895,
+      "gene_per_fold": {
+        "RR-1": 0.6111111111111112,
+        "RR-3": 0.9,
+        "TBD": 0.8571428571428572
+      },
+      "pathway_mean_auroc": 0.9145502645502646,
+      "pathway_per_fold": {
+        "RR-1": 1.0,
+        "RR-3": 0.95,
+        "TBD": 0.7936507936507936
+      }
+    }
+  },
+  "category_c_source": "C_cross_tissue_summary.json",
+  "category_d_source": "D_condition_summary.json",
+  "summary": {
+    "total_comparisons": 12,
+    "pathway_wins": 4,
+    "gene_wins": 8,
+    "mean_diff": -0.10644166666666667
+  },
+  "timestamp": "2026-03-01T13:16:03.691160"
+}

@@ -1,0 +1,22 @@
+{
+  "test_mission": "MHU-1",
+  "train_missions": [
+    "MHU-2",
+    "RR-6",
+    "RR-9"
+  ],
+  "n_train": 61,
+  "n_test": 6,
+  "n_genes_before_var_filter": 28235,
+  "n_genes_after_var_filter": 21176,
+  "var_percentile_cutoff": 0.25,
+  "train_label_distribution": {
+    "Flight": 30,
+    "Ground": 31
+  },
+  "test_label_distribution": {
+    "Flight": 3,
+    "Ground": 3
+  },
+  "excluded_bc_ag_samples": 25
+}

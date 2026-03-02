@@ -1,0 +1,27 @@
+# Requirements for Geneformer tokenization and fine-tuning pipeline
+# Install: pip install -r requirements_geneformer.txt
+#
+# Tested on:
+#   macOS Apple Silicon (MPS, float32, Python 3.13)
+#   HPC CUDA (A40/A100, mixed precision, Python 3.10+)
+
+# Core ML
+torch>=2.1.0          # Apple Silicon: brew install pytorch OR conda; for HPC: cuda-specific wheel
+transformers>=4.35.0
+datasets>=2.15.0
+accelerate>=0.24.0
+
+# HuggingFace Hub
+huggingface_hub>=0.20.0
+safetensors>=0.4.0
+
+# Data science
+numpy>=1.24.0
+pandas>=1.5.0
+scikit-learn>=1.3.0
+
+# Progress & logging
+tqdm>=4.65.0
+
+# Optional: for HPC mixed precision training
+# bitsandbytes>=0.41.0  # NOT supported on macOS MPS

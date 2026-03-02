@@ -1,0 +1,278 @@
+{
+  "liver": {
+    "tissue": "liver",
+    "n_missions": 6,
+    "missions": [
+      "MHU-2",
+      "RR-1",
+      "RR-3",
+      "RR-6",
+      "RR-8",
+      "RR-9"
+    ],
+    "mission_sizes": {
+      "MHU-2": {
+        "flight": 3,
+        "ground": 3,
+        "total": 6
+      },
+      "RR-1": {
+        "flight": 7,
+        "ground": 7,
+        "total": 14
+      },
+      "RR-3": {
+        "flight": 6,
+        "ground": 6,
+        "total": 12
+      },
+      "RR-6": {
+        "flight": 20,
+        "ground": 19,
+        "total": 39
+      },
+      "RR-8": {
+        "flight": 35,
+        "ground": 68,
+        "total": 103
+      },
+      "RR-9": {
+        "flight": 5,
+        "ground": 14,
+        "total": 19
+      }
+    },
+    "methods": {
+      "pca_lr": {
+        "mean_auroc": 0.5768,
+        "std_auroc": 0.2458,
+        "ci_low": 0.492,
+        "ci_high": 0.6655,
+        "n_valid_pairs": 30
+      },
+      "lfc": {
+        "mean_auroc": 0.534,
+        "std_auroc": 0.2399,
+        "ci_low": 0.4499,
+        "ci_high": 0.6186,
+        "n_valid_pairs": 30
+      }
+    }
+  },
+  "gastrocnemius": {
+    "tissue": "gastrocnemius",
+    "n_missions": 3,
+    "missions": [
+      "RR-1",
+      "RR-5",
+      "RR-9"
+    ],
+    "mission_sizes": {
+      "RR-1": {
+        "flight": 6,
+        "ground": 6,
+        "total": 12
+      },
+      "RR-5": {
+        "flight": 6,
+        "ground": 6,
+        "total": 12
+      },
+      "RR-9": {
+        "flight": 4,
+        "ground": 4,
+        "total": 8
+      }
+    },
+    "methods": {
+      "pca_lr": {
+        "mean_auroc": 0.8009,
+        "std_auroc": 0.188,
+        "ci_low": 0.6527,
+        "ci_high": 0.9444,
+        "n_valid_pairs": 6
+      },
+      "lfc": {
+        "mean_auroc": 0.6551,
+        "std_auroc": 0.1975,
+        "ci_low": 0.5093,
+        "ci_high": 0.8195,
+        "n_valid_pairs": 6
+      }
+    }
+  },
+  "kidney": {
+    "tissue": "kidney",
+    "n_missions": 3,
+    "missions": [
+      "RR-1",
+      "RR-3",
+      "RR-7"
+    ],
+    "mission_sizes": {
+      "RR-1": {
+        "flight": 6,
+        "ground": 6,
+        "total": 12
+      },
+      "RR-3": {
+        "flight": 6,
+        "ground": 6,
+        "total": 12
+      },
+      "RR-7": {
+        "flight": 20,
+        "ground": 74,
+        "total": 94
+      }
+    },
+    "methods": {
+      "pca_lr": {
+        "mean_auroc": 0.5549,
+        "std_auroc": 0.1876,
+        "ci_low": 0.3974,
+        "ci_high": 0.6807,
+        "n_valid_pairs": 6
+      },
+      "lfc": {
+        "mean_auroc": 0.465,
+        "std_auroc": 0.0626,
+        "ci_low": 0.4141,
+        "ci_high": 0.5122,
+        "n_valid_pairs": 6
+      }
+    }
+  },
+  "thymus": {
+    "tissue": "thymus",
+    "n_missions": 4,
+    "missions": [
+      "MHU-1",
+      "MHU-2",
+      "RR-6",
+      "RR-9"
+    ],
+    "mission_sizes": {
+      "MHU-1": {
+        "flight": 3,
+        "ground": 3,
+        "total": 6
+      },
+      "MHU-2": {
+        "flight": 3,
+        "ground": 3,
+        "total": 6
+      },
+      "RR-6": {
+        "flight": 17,
+        "ground": 18,
+        "total": 35
+      },
+      "RR-9": {
+        "flight": 10,
+        "ground": 10,
+        "total": 20
+      }
+    },
+    "methods": {
+      "pca_lr": {
+        "mean_auroc": 0.8598,
+        "std_auroc": 0.1761,
+        "ci_low": 0.7634,
+        "ci_high": 0.9534,
+        "n_valid_pairs": 12
+      },
+      "lfc": {
+        "mean_auroc": 0.8676,
+        "std_auroc": 0.1577,
+        "ci_low": 0.7813,
+        "ci_high": 0.9515,
+        "n_valid_pairs": 12
+      }
+    }
+  },
+  "eye": {
+    "tissue": "eye",
+    "n_missions": 3,
+    "missions": [
+      "RR-1",
+      "RR-3",
+      "TBD"
+    ],
+    "mission_sizes": {
+      "RR-1": {
+        "flight": 6,
+        "ground": 6,
+        "total": 12
+      },
+      "RR-3": {
+        "flight": 5,
+        "ground": 4,
+        "total": 9
+      },
+      "TBD": {
+        "flight": 9,
+        "ground": 7,
+        "total": 16
+      }
+    },
+    "methods": {
+      "pca_lr": {
+        "mean_auroc": 0.7538,
+        "std_auroc": 0.1002,
+        "ci_low": 0.6878,
+        "ci_high": 0.8381,
+        "n_valid_pairs": 6
+      },
+      "lfc": {
+        "mean_auroc": 0.6962,
+        "std_auroc": 0.1009,
+        "ci_low": 0.6204,
+        "ci_high": 0.7757,
+        "n_valid_pairs": 6
+      }
+    }
+  },
+  "skin": {
+    "tissue": "skin",
+    "n_missions": 3,
+    "missions": [
+      "MHU-2",
+      "RR-6",
+      "RR-7"
+    ],
+    "mission_sizes": {
+      "MHU-2": {
+        "flight": 11,
+        "ground": 24,
+        "total": 35
+      },
+      "RR-6": {
+        "flight": 18,
+        "ground": 19,
+        "total": 37
+      },
+      "RR-7": {
+        "flight": 10,
+        "ground": 20,
+        "total": 30
+      }
+    },
+    "methods": {
+      "pca_lr": {
+        "mean_auroc": 0.7717818536239589,
+        "std_auroc": 0.0905506860793396,
+        "ci_low": 0.691359649122807,
+        "ci_high": 0.8338383838383838,
+        "n_valid_pairs": 6
+      },
+      "lfc": {
+        "mean_auroc": 0.7495707070707072,
+        "std_auroc": 0.009987821920118102,
+        "ci_low": 0.7419522084883928,
+        "ci_high": 0.7570272904483432,
+        "n_valid_pairs": 6
+      }
+    }
+  }
+}

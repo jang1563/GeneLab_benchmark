@@ -1,0 +1,64 @@
+{
+  "task_id": "A4",
+  "model_name": "PerfectOracle_test",
+  "model_description": "Test: perfect oracle using true labels",
+  "submission_date": "2026-03-01",
+  "n_folds": 4,
+  "fold_results": [
+    {
+      "fold": "fold_MHU-1_test",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.058823529411764705
+    },
+    {
+      "fold": "fold_MHU-2_test",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.058823529411764705
+    },
+    {
+      "fold": "fold_RR-6_test",
+      "n_test": 35,
+      "n_flight": 17,
+      "n_ground": 18,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.0196078431372549
+    },
+    {
+      "fold": "fold_RR-9_test",
+      "n_test": 20,
+      "n_flight": 10,
+      "n_ground": 10,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.0196078431372549
+    }
+  ],
+  "summary": {
+    "mean_auroc": 1.0,
+    "std_auroc": 0.0,
+    "mean_ci_lower": 1.0,
+    "overall_auroc_pooled": 1.0,
+    "overall_ci_lower": 1.0,
+    "overall_ci_upper": 1.0,
+    "mean_perm_p": 0.0392156862745098,
+    "go_nogo": true
+  },
+  "thresholds": {
+    "auroc": 0.7,
+    "ci_lower": 0.5,
+    "perm_p": 0.05
+  }
+}

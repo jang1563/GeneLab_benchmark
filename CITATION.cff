@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+message: "If you use this benchmark in your research, please cite as below."
+type: software
+
+title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
+version: "1.0.0"
+date-released: "2026-03-01"
+
+abstract: >
+  GeneLab Benchmark is a public benchmark for evaluating AI and machine learning
+  models on NASA OSDR (Open Science Data Repository) mouse spaceflight transcriptomics
+  data. It provides standardized Leave-One-Mission-Out (LOMO) cross-validation splits,
+  baseline model implementations, and an evaluation framework for multi-tissue
+  spaceflight detection tasks (Category A) and cross-mission transfer tasks (Category B).
+  Tissues include gastrocnemius, thymus, skin, liver, kidney, and eye/retina.
+
+authors:
+  - family-names: "Kang"
+    given-names: "Jaeyoung"
+    orcid: "https://orcid.org/0000-0000-0000-0000"  # update with real ORCID
+    affiliation: "Cornell University"
+
+repository-code: "https://github.com/jak4013/GeneLab_benchmark"  # update with real URL
+url: "https://github.com/jak4013/GeneLab_benchmark"
+
+keywords:
+  - spaceflight
+  - transcriptomics
+  - RNA-seq
+  - benchmark
+  - machine learning
+  - NASA OSDR
+  - GeneLab
+  - LOMO
+  - cross-mission transfer
+  - Geneformer
+  - foundation model
+  - mouse
+
+license: MIT
+
+references:
+  - type: dataset
+    title: "NASA Open Science Data Repository (OSDR)"
+    url: "https://osdr.nasa.gov"
+    notes: "Source data: OSD-101 (RR-1 gastrocnemius), OSD-401 (RR-5 gastrocnemius), OSD-326 (RR-9 gastrocnemius), OSD-289 (MHU-1/MHU-2 thymus), OSD-244 (RR-6 thymus), OSD-421 (RR-9 thymus), OSD-238 (MHU-2 dorsal skin), OSD-239 (MHU-2 femoral skin), OSD-243 (RR-6 skin), OSD-254 (RR-7 skin, C57BL/6J subset), OSD-100 (RR-1 eye), OSD-194 (RR-3 eye), OSD-397 (eye)"
+
+preferred-citation:
+  type: article
+  title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
+  authors:
+    - family-names: "Kang"
+      given-names: "Jaeyoung"
+      affiliation: "Cornell University"
+  status: "in-preparation"
+  year: 2026
+  notes: "Manuscript in preparation"
