@@ -1,0 +1,258 @@
+{
+  "task": "A6_eye",
+  "model": "PCA-LR pathway Hallmark",
+  "db": "hallmark",
+  "note": "Coefficients mapped back from PCA space to original pathway space (mean across folds)",
+  "pathways": [
+    {
+      "pathway": "HALLMARK_UV_RESPONSE_UP",
+      "mean_coef": -3.9028190728743604,
+      "abs_mean_coef": 3.9028190728743604
+    },
+    {
+      "pathway": "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+      "mean_coef": -2.802273987207849,
+      "abs_mean_coef": 2.802273987207849
+    },
+    {
+      "pathway": "HALLMARK_HEME_METABOLISM",
+      "mean_coef": 0.5073011758925517,
+      "abs_mean_coef": 2.4938387687156487
+    },
+    {
+      "pathway": "HALLMARK_SPERMATOGENESIS",
+      "mean_coef": -0.1435693429492725,
+      "abs_mean_coef": 2.3052384990394494
+    },
+    {
+      "pathway": "HALLMARK_HYPOXIA",
+      "mean_coef": -2.1793107760453583,
+      "abs_mean_coef": 2.1793107760453583
+    },
+    {
+      "pathway": "HALLMARK_PEROXISOME",
+      "mean_coef": -2.0474788412732177,
+      "abs_mean_coef": 2.0474788412732177
+    },
+    {
+      "pathway": "HALLMARK_P53_PATHWAY",
+      "mean_coef": -1.942375884611769,
+      "abs_mean_coef": 1.942375884611769
+    },
+    {
+      "pathway": "HALLMARK_GLYCOLYSIS",
+      "mean_coef": -1.862963527949529,
+      "abs_mean_coef": 1.862963527949529
+    },
+    {
+      "pathway": "HALLMARK_G2M_CHECKPOINT",
+      "mean_coef": 1.8623597615500387,
+      "abs_mean_coef": 1.8623597615500387
+    },
+    {
+      "pathway": "HALLMARK_BILE_ACID_METABOLISM",
+      "mean_coef": -1.6478415799646327,
+      "abs_mean_coef": 1.6478415799646327
+    },
+    {
+      "pathway": "HALLMARK_MYC_TARGETS_V2",
+      "mean_coef": -1.6150020940050174,
+      "abs_mean_coef": 1.6150020940050174
+    },
+    {
+      "pathway": "HALLMARK_MITOTIC_SPINDLE",
+      "mean_coef": 1.3365783995223086,
+      "abs_mean_coef": 1.3365783995223086
+    },
+    {
+      "pathway": "HALLMARK_E2F_TARGETS",
+      "mean_coef": 1.3344869885046846,
+      "abs_mean_coef": 1.3344869885046846
+    },
+    {
+      "pathway": "HALLMARK_ANDROGEN_RESPONSE",
+      "mean_coef": 1.3200975477757781,
+      "abs_mean_coef": 1.3200975477757781
+    },
+    {
+      "pathway": "HALLMARK_UV_RESPONSE_DN",
+      "mean_coef": 1.2981798201704602,
+      "abs_mean_coef": 1.2981798201704602
+    },
+    {
+      "pathway": "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+      "mean_coef": -1.1903957757396006,
+      "abs_mean_coef": 1.1903957757396006
+    },
+    {
+      "pathway": "HALLMARK_ALLOGRAFT_REJECTION",
+      "mean_coef": 1.1701033540274377,
+      "abs_mean_coef": 1.1701033540274377
+    },
+    {
+      "pathway": "HALLMARK_DNA_REPAIR",
+      "mean_coef": -1.1540140367174285,
+      "abs_mean_coef": 1.1540140367174285
+    },
+    {
+      "pathway": "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY",
+      "mean_coef": -1.0803537784624455,
+      "abs_mean_coef": 1.0803537784624455
+    },
+    {
+      "pathway": "HALLMARK_APICAL_JUNCTION",
+      "mean_coef": -0.8707360843034103,
+      "abs_mean_coef": 1.0759113804135991
+    },
+    {
+      "pathway": "HALLMARK_ESTROGEN_RESPONSE_LATE",
+      "mean_coef": -1.0659388535162528,
+      "abs_mean_coef": 1.0659388535162528
+    },
+    {
+      "pathway": "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+      "mean_coef": 1.0597909557096437,
+      "abs_mean_coef": 1.0597909557096437
+    },
+    {
+      "pathway": "HALLMARK_ADIPOGENESIS",
+      "mean_coef": -0.9881962772327103,
+      "abs_mean_coef": 0.9881962772327103
+    },
+    {
+      "pathway": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "mean_coef": 0.4366450318119001,
+      "abs_mean_coef": 0.967802333949004
+    },
+    {
+      "pathway": "HALLMARK_APICAL_SURFACE",
+      "mean_coef": 0.96443876743364,
+      "abs_mean_coef": 0.96443876743364
+    },
+    {
+      "pathway": "HALLMARK_PANCREAS_BETA_CELLS",
+      "mean_coef": 0.923900901768179,
+      "abs_mean_coef": 0.923900901768179
+    },
+    {
+      "pathway": "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+      "mean_coef": 0.9066766136328143,
+      "abs_mean_coef": 0.9066766136328143
+    },
+    {
+      "pathway": "HALLMARK_PROTEIN_SECRETION",
+      "mean_coef": 0.8148052484289697,
+      "abs_mean_coef": 0.9009632302473217
+    },
+    {
+      "pathway": "HALLMARK_MYOGENESIS",
+      "mean_coef": -0.8603848181851425,
+      "abs_mean_coef": 0.8603848181851425
+    },
+    {
+      "pathway": "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+      "mean_coef": 0.8562519929091913,
+      "abs_mean_coef": 0.8562519929091913
+    },
+    {
+      "pathway": "HALLMARK_ANGIOGENESIS",
+      "mean_coef": -0.8129212883588282,
+      "abs_mean_coef": 0.8129212883588282
+    },
+    {
+      "pathway": "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+      "mean_coef": -0.7839249358611994,
+      "abs_mean_coef": 0.7839249358611994
+    },
+    {
+      "pathway": "HALLMARK_APOPTOSIS",
+      "mean_coef": -0.7805884440031634,
+      "abs_mean_coef": 0.7805884440031634
+    },
+    {
+      "pathway": "HALLMARK_HEDGEHOG_SIGNALING",
+      "mean_coef": 0.34737968144517534,
+      "abs_mean_coef": 0.760184130966501
+    },
+    {
+      "pathway": "HALLMARK_MYC_TARGETS_V1",
+      "mean_coef": -0.7566747106581534,
+      "abs_mean_coef": 0.7566747106581534
+    },
+    {
+      "pathway": "HALLMARK_XENOBIOTIC_METABOLISM",
+      "mean_coef": -0.751980676892872,
+      "abs_mean_coef": 0.751980676892872
+    },
+    {
+      "pathway": "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+      "mean_coef": 0.4940461144003656,
+      "abs_mean_coef": 0.7471320169608248
+    },
+    {
+      "pathway": "HALLMARK_NOTCH_SIGNALING",
+      "mean_coef": -0.19802596084710414,
+      "abs_mean_coef": 0.6950695110668561
+    },
+    {
+      "pathway": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+      "mean_coef": 0.13202680152091983,
+      "abs_mean_coef": 0.657915858474843
+    },
+    {
+      "pathway": "HALLMARK_KRAS_SIGNALING_DN",
+      "mean_coef": -0.6277323337793369,
+      "abs_mean_coef": 0.6277323337793369
+    },
+    {
+      "pathway": "HALLMARK_FATTY_ACID_METABOLISM",
+      "mean_coef": 0.029740409727903743,
+      "abs_mean_coef": 0.5904821486292604
+    },
+    {
+      "pathway": "HALLMARK_COMPLEMENT",
+      "mean_coef": 0.47482361115676114,
+      "abs_mean_coef": 0.5847615344489525
+    },
+    {
+      "pathway": "HALLMARK_KRAS_SIGNALING_UP",
+      "mean_coef": 0.5594694033943964,
+      "abs_mean_coef": 0.5594694033943964
+    },
+    {
+      "pathway": "HALLMARK_TGF_BETA_SIGNALING",
+      "mean_coef": -0.3621152294122853,
+      "abs_mean_coef": 0.5161276550102459
+    },
+    {
+      "pathway": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+      "mean_coef": 0.17059558452054854,
+      "abs_mean_coef": 0.473520313725714
+    },
+    {
+      "pathway": "HALLMARK_MTORC1_SIGNALING",
+      "mean_coef": -0.3798640204559052,
+      "abs_mean_coef": 0.422723042030599
+    },
+    {
+      "pathway": "HALLMARK_INFLAMMATORY_RESPONSE",
+      "mean_coef": 0.32082381533705745,
+      "abs_mean_coef": 0.3417679666931828
+    },
+    {
+      "pathway": "HALLMARK_IL2_STAT5_SIGNALING",
+      "mean_coef": 0.1722230639202985,
+      "abs_mean_coef": 0.29599143668389843
+    },
+    {
+      "pathway": "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+      "mean_coef": 0.14423208129540996,
+      "abs_mean_coef": 0.2237915723022469
+    },
+    {
+      "pathway": "HALLMARK_COAGULATION",
+      "mean_coef": -0.00492015452566705,
+      "abs_mean_coef": 0.09797994401353076
+    }
+  ]
+}

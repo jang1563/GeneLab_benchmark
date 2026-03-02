@@ -1,0 +1,72 @@
+[
+  {
+    "status": "ok",
+    "fold": "fold_MHU-1_test",
+    "model_version": "v1",
+    "max_length": 2048,
+    "n_train": 61,
+    "n_test": 6,
+    "avg_train_seq_len": 1528.5081967213114,
+    "avg_test_seq_len": 1911.1666666666667,
+    "n_genes_input": 21176,
+    "n_with_ortholog": 13711,
+    "n_in_vocab": 13465,
+    "ortholog_coverage_pct": 63.6
+  },
+  {
+    "status": "ok",
+    "fold": "fold_MHU-2_test",
+    "model_version": "v1",
+    "max_length": 2048,
+    "n_train": 61,
+    "n_test": 6,
+    "avg_train_seq_len": 1538.049180327869,
+    "avg_test_seq_len": 1814.6666666666667,
+    "n_genes_input": 21176,
+    "n_with_ortholog": 13690,
+    "n_in_vocab": 13444,
+    "ortholog_coverage_pct": 63.5
+  },
+  {
+    "status": "ok",
+    "fold": "fold_RR-23_holdout",
+    "model_version": "v1",
+    "max_length": 2048,
+    "n_train": 67,
+    "n_test": 16,
+    "avg_train_seq_len": 2048.0,
+    "avg_test_seq_len": 2048.0,
+    "n_genes_input": 27541,
+    "n_with_ortholog": 15976,
+    "n_in_vocab": 15666,
+    "ortholog_coverage_pct": 56.9
+  },
+  {
+    "status": "ok",
+    "fold": "fold_RR-6_test",
+    "model_version": "v1",
+    "max_length": 2048,
+    "n_train": 32,
+    "n_test": 35,
+    "avg_train_seq_len": 2048.0,
+    "avg_test_seq_len": 2048.0,
+    "n_genes_input": 21176,
+    "n_with_ortholog": 12858,
+    "n_in_vocab": 12654,
+    "ortholog_coverage_pct": 59.8
+  },
+  {
+    "status": "ok",
+    "fold": "fold_RR-9_test",
+    "model_version": "v1",
+    "max_length": 2048,
+    "n_train": 47,
+    "n_test": 20,
+    "avg_train_seq_len": 1593.3829787234042,
+    "avg_test_seq_len": 617.6,
+    "n_genes_input": 21176,
+    "n_with_ortholog": 12469,
+    "n_in_vocab": 12193,
+    "ortholog_coverage_pct": 57.6
+  }
+]

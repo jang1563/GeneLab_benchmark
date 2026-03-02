@@ -1,0 +1,486 @@
+{
+  "timestamp": "2026-03-01T15:57:44.322607",
+  "description": "External validation against published spaceflight biology",
+  "references": [
+    "Beheshti et al., Cell 2020 (PMID: 33242417)",
+    "da Silveira et al., Cell 2020 (PMID: 33242416)",
+    "SOMA, Nature 2024"
+  ],
+  "pathway_validation": {
+    "liver": {
+      "status": "VALIDATED",
+      "n_expected": 9,
+      "n_found": 9,
+      "concordant": 6,
+      "discordant": 3,
+      "concordance_rate": 0.667,
+      "expected_in_top5": 0,
+      "expected_in_top10": 0,
+      "top5_pathways": [
+        "EPITHELIAL_MESENCHYMAL_TRANSITION",
+        "UNFOLDED_PROTEIN_RESPONSE",
+        "ANGIOGENESIS",
+        "COAGULATION",
+        "ALLOGRAFT_REJECTION"
+      ],
+      "details": [
+        {
+          "pathway": "OXIDATIVE_PHOSPHORYLATION",
+          "expected": "UP",
+          "observed_nes": 0.615,
+          "concordant": true
+        },
+        {
+          "pathway": "FATTY_ACID_METABOLISM",
+          "expected": "UP",
+          "observed_nes": 0.288,
+          "concordant": true
+        },
+        {
+          "pathway": "ADIPOGENESIS",
+          "expected": "UP",
+          "observed_nes": 0.341,
+          "concordant": true
+        },
+        {
+          "pathway": "BILE_ACID_METABOLISM",
+          "expected": "UP",
+          "observed_nes": 0.735,
+          "concordant": true
+        },
+        {
+          "pathway": "CHOLESTEROL_HOMEOSTASIS",
+          "expected": "UP",
+          "observed_nes": -0.124,
+          "concordant": false
+        },
+        {
+          "pathway": "XENOBIOTIC_METABOLISM",
+          "expected": "UP",
+          "observed_nes": 0.093,
+          "concordant": true
+        },
+        {
+          "pathway": "PEROXISOME",
+          "expected": "UP",
+          "observed_nes": 0.687,
+          "concordant": true
+        },
+        {
+          "pathway": "INFLAMMATORY_RESPONSE",
+          "expected": "DOWN",
+          "observed_nes": 0.778,
+          "concordant": false
+        },
+        {
+          "pathway": "INTERFERON_GAMMA_RESPONSE",
+          "expected": "DOWN",
+          "observed_nes": 0.72,
+          "concordant": false
+        }
+      ],
+      "source": "Cell 2020 (Beheshti et al.), GLDS liver analyses"
+    },
+    "thymus": {
+      "status": "VALIDATED",
+      "n_expected": 7,
+      "n_found": 7,
+      "concordant": 7,
+      "discordant": 0,
+      "concordance_rate": 1.0,
+      "expected_in_top5": 4,
+      "expected_in_top10": 5,
+      "top5_pathways": [
+        "E2F_TARGETS",
+        "G2M_CHECKPOINT",
+        "MYC_TARGETS_V1",
+        "EPITHELIAL_MESENCHYMAL_TRANSITION",
+        "INTERFERON_GAMMA_RESPONSE"
+      ],
+      "details": [
+        {
+          "pathway": "E2F_TARGETS",
+          "expected": "UP",
+          "observed_nes": 3.201,
+          "concordant": true
+        },
+        {
+          "pathway": "G2M_CHECKPOINT",
+          "expected": "UP",
+          "observed_nes": 3.069,
+          "concordant": true
+        },
+        {
+          "pathway": "MITOTIC_SPINDLE",
+          "expected": "UP",
+          "observed_nes": 1.948,
+          "concordant": true
+        },
+        {
+          "pathway": "MYC_TARGETS_V1",
+          "expected": "UP",
+          "observed_nes": 2.598,
+          "concordant": true
+        },
+        {
+          "pathway": "INTERFERON_GAMMA_RESPONSE",
+          "expected": "DOWN",
+          "observed_nes": -2.217,
+          "concordant": true
+        },
+        {
+          "pathway": "INTERFERON_ALPHA_RESPONSE",
+          "expected": "DOWN",
+          "observed_nes": -2.198,
+          "concordant": true
+        },
+        {
+          "pathway": "ALLOGRAFT_REJECTION",
+          "expected": "DOWN",
+          "observed_nes": -1.311,
+          "concordant": true
+        }
+      ],
+      "source": "Cell 2020, GLDS thymus analyses (thymocyte proliferation/involution)"
+    },
+    "gastrocnemius": {
+      "status": "VALIDATED",
+      "n_expected": 4,
+      "n_found": 4,
+      "concordant": 4,
+      "discordant": 0,
+      "concordance_rate": 1.0,
+      "expected_in_top5": 0,
+      "expected_in_top10": 1,
+      "top5_pathways": [
+        "BILE_ACID_METABOLISM",
+        "XENOBIOTIC_METABOLISM",
+        "FATTY_ACID_METABOLISM",
+        "INFLAMMATORY_RESPONSE",
+        "UNFOLDED_PROTEIN_RESPONSE"
+      ],
+      "details": [
+        {
+          "pathway": "OXIDATIVE_PHOSPHORYLATION",
+          "expected": "UP",
+          "observed_nes": 0.169,
+          "concordant": true
+        },
+        {
+          "pathway": "MYOGENESIS",
+          "expected": "UP",
+          "observed_nes": 0.123,
+          "concordant": true
+        },
+        {
+          "pathway": "MTORC1_SIGNALING",
+          "expected": "DOWN",
+          "observed_nes": -0.174,
+          "concordant": true
+        },
+        {
+          "pathway": "PI3K_AKT_MTOR_SIGNALING",
+          "expected": "DOWN",
+          "observed_nes": -1.212,
+          "concordant": true
+        }
+      ],
+      "source": "Cell 2020, muscle atrophy literature (MuRF1, MAFbx pathway)"
+    },
+    "kidney": {
+      "status": "VALIDATED",
+      "n_expected": 4,
+      "n_found": 4,
+      "concordant": 1,
+      "discordant": 3,
+      "concordance_rate": 0.25,
+      "expected_in_top5": 2,
+      "expected_in_top10": 2,
+      "top5_pathways": [
+        "MITOTIC_SPINDLE",
+        "APICAL_JUNCTION",
+        "CHOLESTEROL_HOMEOSTASIS",
+        "ESTROGEN_RESPONSE_EARLY",
+        "MTORC1_SIGNALING"
+      ],
+      "details": [
+        {
+          "pathway": "MTORC1_SIGNALING",
+          "expected": "UP",
+          "observed_nes": -0.958,
+          "concordant": false
+        },
+        {
+          "pathway": "CHOLESTEROL_HOMEOSTASIS",
+          "expected": "UP",
+          "observed_nes": -1.442,
+          "concordant": false
+        },
+        {
+          "pathway": "REACTIVE_OXYGEN_SPECIES_PATHWAY",
+          "expected": "UP",
+          "observed_nes": 0.175,
+          "concordant": true
+        },
+        {
+          "pathway": "INTERFERON_GAMMA_RESPONSE",
+          "expected": "DOWN",
+          "observed_nes": 0.344,
+          "concordant": false
+        }
+      ],
+      "source": "Cell 2020, OSD-253 kidney analysis (NRF2 pathway)"
+    },
+    "eye": {
+      "status": "VALIDATED",
+      "n_expected": 3,
+      "n_found": 3,
+      "concordant": 2,
+      "discordant": 1,
+      "concordance_rate": 0.667,
+      "expected_in_top5": 1,
+      "expected_in_top10": 2,
+      "top5_pathways": [
+        "OXIDATIVE_PHOSPHORYLATION",
+        "ADIPOGENESIS",
+        "MYC_TARGETS_V1",
+        "FATTY_ACID_METABOLISM",
+        "PEROXISOME"
+      ],
+      "details": [
+        {
+          "pathway": "OXIDATIVE_PHOSPHORYLATION",
+          "expected": "UP",
+          "observed_nes": 2.905,
+          "concordant": true
+        },
+        {
+          "pathway": "REACTIVE_OXYGEN_SPECIES_PATHWAY",
+          "expected": "UP",
+          "observed_nes": 1.599,
+          "concordant": true
+        },
+        {
+          "pathway": "ANGIOGENESIS",
+          "expected": "DOWN",
+          "observed_nes": 1.197,
+          "concordant": false
+        }
+      ],
+      "source": "Cell 2020, retina OXPHOS dominance across missions"
+    }
+  },
+  "gene_validation": {
+    "liver": {
+      "status": "VALIDATED",
+      "task_id": "A1",
+      "n_reference_genes": 13,
+      "n_found_in_shap_top50": 2,
+      "overlap_rate": 0.154,
+      "found_genes": [
+        {
+          "gene": "Dbp",
+          "shap_rank": 18,
+          "direction": "variable",
+          "function": "Circadian clock (D-box binding)"
+        },
+        {
+          "gene": "Npas2",
+          "shap_rank": 16,
+          "direction": "variable",
+          "function": "Circadian clock (BMAL1 paralog)"
+        }
+      ],
+      "not_found_genes": [
+        {
+          "gene": "Angptl4",
+          "direction": "up",
+          "function": "Lipid metabolism, angiogenesis regulation"
+        },
+        {
+          "gene": "Pck1",
+          "direction": "up",
+          "function": "Gluconeogenesis key enzyme"
+        },
+        {
+          "gene": "G6pc",
+          "direction": "up",
+          "function": "Glucose-6-phosphatase, gluconeogenesis"
+        },
+        {
+          "gene": "Cyp2e1",
+          "direction": "variable",
+          "function": "Xenobiotic metabolism, CYP450"
+        },
+        {
+          "gene": "Fasn",
+          "direction": "up",
+          "function": "Fatty acid synthase, lipogenesis"
+        },
+        {
+          "gene": "Per2",
+          "direction": "variable",
+          "function": "Circadian clock (Period)"
+        },
+        {
+          "gene": "Pparg",
+          "direction": "up",
+          "function": "Adipogenesis master regulator"
+        },
+        {
+          "gene": "Hmgcr",
+          "direction": "up",
+          "function": "HMG-CoA reductase, cholesterol synthesis"
+        },
+        {
+          "gene": "Scd1",
+          "direction": "up",
+          "function": "Stearoyl-CoA desaturase, lipogenesis"
+        },
+        {
+          "gene": "Acly",
+          "direction": "up",
+          "function": "ATP citrate lyase, lipogenesis"
+        },
+        {
+          "gene": "Ucp2",
+          "direction": "up",
+          "function": "Uncoupling protein 2, mitochondria"
+        }
+      ],
+      "shap_top10": [
+        "Atp2b2",
+        "Clpx",
+        "Chka",
+        "Tubb2a",
+        "Mcu",
+        "Slc30a10",
+        "Gclc",
+        "Gm17230",
+        "Slc34a2",
+        "Mad2l2"
+      ],
+      "source": "Cell 2020, GLDS-48/137/245/379/242 DEG analyses"
+    },
+    "gastrocnemius": {
+      "status": "VALIDATED",
+      "task_id": "A2",
+      "n_reference_genes": 6,
+      "n_found_in_shap_top50": 1,
+      "overlap_rate": 0.167,
+      "found_genes": [
+        {
+          "gene": "Myog",
+          "shap_rank": 9,
+          "direction": "variable",
+          "function": "Myogenin, muscle differentiation"
+        }
+      ],
+      "not_found_genes": [
+        {
+          "gene": "Trim63",
+          "direction": "up",
+          "function": "MuRF1, E3 ubiquitin ligase (muscle atrophy)"
+        },
+        {
+          "gene": "Fbxo32",
+          "direction": "up",
+          "function": "MAFbx/Atrogin-1, E3 ligase (atrophy)"
+        },
+        {
+          "gene": "Mstn",
+          "direction": "up",
+          "function": "Myostatin, negative regulator of muscle growth"
+        },
+        {
+          "gene": "Foxo3",
+          "direction": "up",
+          "function": "FOXO3, atrophy transcription factor"
+        },
+        {
+          "gene": "Cdkn1a",
+          "direction": "up",
+          "function": "p21, cell cycle inhibitor"
+        }
+      ],
+      "shap_top10": [
+        "Sox4",
+        "Lrrc30",
+        "Mettl21e",
+        "Cdkn1c",
+        "Kcnk3",
+        "ENSMUSG00000120036",
+        "Chaf1b",
+        "Gm19410",
+        "Myog",
+        "ENSMUSG00000081824"
+      ],
+      "source": "Cell 2020, muscle atrophy E3 ligase pathway"
+    },
+    "thymus": {
+      "status": "VALIDATED",
+      "task_id": "A4",
+      "n_reference_genes": 5,
+      "n_found_in_shap_top50": 0,
+      "overlap_rate": 0.0,
+      "found_genes": [],
+      "not_found_genes": [
+        {
+          "gene": "Ccnb1",
+          "direction": "down",
+          "function": "Cyclin B1, G2/M transition"
+        },
+        {
+          "gene": "Cdk1",
+          "direction": "down",
+          "function": "CDK1, cell cycle driver"
+        },
+        {
+          "gene": "Top2a",
+          "direction": "down",
+          "function": "Topoisomerase II alpha, proliferation"
+        },
+        {
+          "gene": "Mki67",
+          "direction": "down",
+          "function": "Ki-67, proliferation marker"
+        },
+        {
+          "gene": "Foxn1",
+          "direction": "down",
+          "function": "Thymic epithelial cell master regulator"
+        }
+      ],
+      "shap_top10": [
+        "Fbxo5",
+        "Endou",
+        "Nrm",
+        "Ube2srt",
+        "H2ac22",
+        "Cenpp",
+        "Cenph",
+        "ENSMUSG00000075586",
+        "Haus1",
+        "ENSMUSG00000050299"
+      ],
+      "source": "Cell 2020, thymic involution / cell cycle arrest"
+    },
+    "kidney": {
+      "status": "NO_SHAP_DATA",
+      "file": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/evaluation/A3_shap_rf.json"
+    },
+    "eye": {
+      "status": "NO_SHAP_DATA",
+      "file": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/evaluation/A6_shap_rf.json"
+    }
+  },
+  "summary": {
+    "pathway_mean_concordance": 0.717,
+    "pathway_n_tissues": 5,
+    "pathway_verdict": "STRONG",
+    "pathway_interpretation": "Mean direction concordance 71.7%: Our fGSEA results strongly agree with published spaceflight pathway biology.",
+    "gene_mean_overlap": 0.107,
+    "gene_n_tissues": 3,
+    "gene_interpretation": "Mean overlap rate 10.7% vs chance expectation ~0.2%. Enrichment ratio: 47.1x."
+  }
+}

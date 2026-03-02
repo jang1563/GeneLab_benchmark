@@ -1,0 +1,39 @@
+{
+  "task": "A4",
+  "tissue": "thymus",
+  "method": "PCA-LR (within-mission LOO)",
+  "results": {
+    "MHU-1": {
+      "auroc": 1.0,
+      "n": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "track": "2b",
+      "note": ""
+    },
+    "MHU-2": {
+      "auroc": 1.0,
+      "n": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "track": "2a",
+      "note": ""
+    },
+    "RR-6": {
+      "auroc": 0.7712418300653595,
+      "n": 35,
+      "n_flight": 17,
+      "n_ground": 18,
+      "track": "2a",
+      "note": ""
+    },
+    "RR-9": {
+      "auroc": 1.0,
+      "n": 20,
+      "n_flight": 10,
+      "n_ground": 10,
+      "track": "2a",
+      "note": ""
+    }
+  }
+}

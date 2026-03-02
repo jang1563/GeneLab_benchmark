@@ -1,0 +1,21 @@
+{
+  "test_mission": "TBD",
+  "train_missions": [
+    "RR-1",
+    "RR-3"
+  ],
+  "n_train": 21,
+  "n_test": 16,
+  "n_genes_before_var_filter": 27059,
+  "n_genes_after_var_filter": 20294,
+  "var_percentile_cutoff": 0.25,
+  "train_label_distribution": {
+    "Flight": 11,
+    "Ground": 10
+  },
+  "test_label_distribution": {
+    "Flight": 9,
+    "Ground": 7
+  },
+  "excluded_bc_ag_samples": 4
+}

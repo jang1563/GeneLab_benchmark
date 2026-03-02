@@ -1,0 +1,4133 @@
+{
+  "result": [
+    {
+      "description": "\"The cellular process that ensures successive accurate and complete genome replication and chromosome segregation.\" [GOC:isa_complete, GOC:mtg_cell_cycle]",
+      "effective_domain_size": 25907,
+      "goshv": 16715,
+      "intersection_size": 13,
+      "intersections": [
+        [],
+        [],
+        [
+          "IDA",
+          "ISS",
+          "ISO",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IGI",
+          "IBA",
+          "TAS",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "NAS"
+        ],
+        [
+          "ISS",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "ISO",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "cell cycle process",
+      "native": "GO:0022402",
+      "p_value": 8.806666065591853e-06,
+      "parents": [
+        "GO:0007049",
+        "GO:0009987"
+      ],
+      "precision": 0.3611111111111111,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.010526315789473684,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 1235,
+      "source_order": 6561,
+      "group_id": 1
+    },
+    {
+      "description": "\"Progression through the phases of the mitotic cell cycle, the most common eukaryotic cell cycle, which canonically comprises four successive phases called G1, S, G2, and M and includes replication of the genome and the subsequent segregation of chromosomes into daughter cells. In some variant cell cycles nuclear replication or nuclear division may not be followed by cell division, or G1 and G2 phases may be absent.\" [GOC:mah, ISBN:0815316194]",
+      "effective_domain_size": 25907,
+      "goshv": 10230,
+      "intersection_size": 11,
+      "intersections": [
+        [],
+        [],
+        [
+          "IMP",
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "mitotic cell cycle",
+      "native": "GO:0000278",
+      "p_value": 1.81040649418134e-05,
+      "parents": [
+        "GO:0007049"
+      ],
+      "precision": 0.3055555555555556,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.013173652694610778,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 835,
+      "source_order": 76,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that modulates the frequency, rate or extent of mitotic cell cycle phase transition.\" [GOC:mtg_cell_cycle, GOC:TermGenie, PMID:22841721]",
+      "effective_domain_size": 25907,
+      "goshv": 31789,
+      "intersection_size": 8,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "regulation of mitotic cell cycle phase transition",
+      "native": "GO:1901990",
+      "p_value": 2.112015741821381e-05,
+      "parents": [
+        "GO:0007346",
+        "GO:0044772",
+        "GO:1901987"
+      ],
+      "precision": 0.2222222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.024691358024691357,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 324,
+      "source_order": 21635,
+      "group_id": 1
+    },
+    {
+      "description": "\"A process that is part of the mitotic cell cycle.\" [GO_REF:0000060, GOC:mtg_cell_cycle, GOC:TermGenie]",
+      "effective_domain_size": 25907,
+      "goshv": 32562,
+      "intersection_size": 10,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "mitotic cell cycle process",
+      "native": "GO:1903047",
+      "p_value": 4.962002218075783e-05,
+      "parents": [
+        "GO:0000278",
+        "GO:0022402"
+      ],
+      "precision": 0.2777777777777778,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.014144271570014143,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 707,
+      "source_order": 22408,
+      "group_id": 1
+    },
+    {
+      "description": "\"The cell cycle process by which a cell commits to entering the next mitotic cell cycle phase.\" [GOC:mtg_cell_cycle]",
+      "effective_domain_size": 25907,
+      "goshv": 21155,
+      "intersection_size": 8,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "mitotic cell cycle phase transition",
+      "native": "GO:0044772",
+      "p_value": 0.0001350835672544959,
+      "parents": [
+        "GO:0044770",
+        "GO:1903047"
+      ],
+      "precision": 0.2222222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.019417475728155338,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 412,
+      "source_order": 11001,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that modulates the frequency, rate or extent of cell cycle phase transition.\" [GOC:mtg_cell_cycle, GOC:TermGenie, PMID:22841721]",
+      "effective_domain_size": 25907,
+      "goshv": 31786,
+      "intersection_size": 8,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "regulation of cell cycle phase transition",
+      "native": "GO:1901987",
+      "p_value": 0.0001454699665776802,
+      "parents": [
+        "GO:0010564",
+        "GO:0044770"
+      ],
+      "precision": 0.2222222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.019230769230769232,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 416,
+      "source_order": 21632,
+      "group_id": 1
+    },
+    {
+      "description": "\"The progression of biochemical and morphological phases and events that occur in a cell during successive cell replication or nuclear replication events. Canonically, the cell cycle comprises the replication and segregation of genetic material followed by the division of the cell, but in endocycles or syncytial cells nuclear replication or nuclear division may not be followed by cell division.\" [GOC:go_curators, GOC:mtg_cell_cycle]",
+      "effective_domain_size": 25907,
+      "goshv": 12790,
+      "intersection_size": 13,
+      "intersections": [
+        [],
+        [],
+        [
+          "IDA",
+          "IMP",
+          "ISS",
+          "ISO",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IGI",
+          "IBA",
+          "TAS",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "NAS"
+        ],
+        [
+          "ISS",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "ISO",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "cell cycle",
+      "native": "GO:0007049",
+      "p_value": 0.00025178261810161366,
+      "parents": [
+        "GO:0009987"
+      ],
+      "precision": 0.3611111111111111,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.007926829268292683,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 1640,
+      "source_order": 2636,
+      "group_id": 1
+    },
+    {
+      "description": "Cell Cycle",
+      "effective_domain_size": 8469,
+      "goshv": 41039,
+      "intersection_size": 10,
+      "intersections": [
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Cell Cycle",
+      "native": "REAC:R-MMU-1640170",
+      "p_value": 0.0002757766216907486,
+      "parents": [
+        "REAC:0000000"
+      ],
+      "precision": 0.43478260869565216,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.01721170395869191,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 581,
+      "source_order": 256,
+      "group_id": 7
+    },
+    {
+      "description": "Nucleosome assembly",
+      "effective_domain_size": 8469,
+      "goshv": 41774,
+      "intersection_size": 5,
+      "intersections": [
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Nucleosome assembly",
+      "native": "REAC:R-MMU-774815",
+      "p_value": 0.00041152407273236063,
+      "parents": [
+        "REAC:R-MMU-73886"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.06493506493506493,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 77,
+      "source_order": 991,
+      "group_id": 7
+    },
+    {
+      "description": "Deposition of new CENPA-containing nucleosomes at the centromere",
+      "effective_domain_size": 8469,
+      "goshv": 41167,
+      "intersection_size": 5,
+      "intersections": [
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Deposition of new CENPA-containing nucleosomes at the centromere",
+      "native": "REAC:R-MMU-606279",
+      "p_value": 0.00041152407273236063,
+      "parents": [
+        "REAC:R-MMU-774815"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.06493506493506493,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 77,
+      "source_order": 384,
+      "group_id": 7
+    },
+    {
+      "description": "\"Any process that modulates the rate or extent of progress through the mitotic cell cycle.\" [GOC:dph, GOC:go_curators, GOC:tb]",
+      "effective_domain_size": 25907,
+      "goshv": 12995,
+      "intersection_size": 8,
+      "intersections": [
+        [],
+        [],
+        [
+          "IMP",
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "regulation of mitotic cell cycle",
+      "native": "GO:0007346",
+      "p_value": 0.00043342356214801347,
+      "parents": [
+        "GO:0000278",
+        "GO:0051726"
+      ],
+      "precision": 0.2222222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.016666666666666666,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 480,
+      "source_order": 2841,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that stops, prevents, or reduces the frequency, rate or extent of the chemical reactions and pathways within a cell or an organism.\" [GOC:go_curators]",
+      "effective_domain_size": 25907,
+      "goshv": 13891,
+      "intersection_size": 17,
+      "intersections": [
+        [
+          "IBA"
+        ],
+        [
+          "IMP",
+          "IEA"
+        ],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IGI",
+          "ISO",
+          "IEA"
+        ],
+        [],
+        [
+          "ISS"
+        ],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "IGI"
+        ],
+        [
+          "IBA"
+        ],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [
+          "IDA",
+          "IGI",
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "ISO"
+        ],
+        [
+          "IDA",
+          "IEA"
+        ],
+        [],
+        [
+          "IMP",
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [
+          "IDA",
+          "IMP",
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        []
+      ],
+      "name": "negative regulation of metabolic process",
+      "native": "GO:0009892",
+      "p_value": 0.0005099636128899177,
+      "parents": [
+        "GO:0008152",
+        "GO:0019222",
+        "GO:0048523"
+      ],
+      "precision": 0.4722222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.005305867665418227,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 3204,
+      "source_order": 3737,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any signaling pathway that modulates the activity of a cell cycle cyclin-dependent protein kinase to modulate the switch from G2 phase to M phase of the mitotic cell cycle.\" [GOC:mtg_cell_cycle, PMID:17329565]",
+      "effective_domain_size": 25907,
+      "goshv": 14236,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "regulation of G2/M transition of mitotic cell cycle",
+      "native": "GO:0010389",
+      "p_value": 0.0005570147322372123,
+      "parents": [
+        "GO:0000086",
+        "GO:1901990",
+        "GO:1902749"
+      ],
+      "precision": 0.1388888888888889,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.04807692307692308,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 104,
+      "source_order": 4082,
+      "group_id": 1
+    },
+    {
+      "description": "Amplification  of signal from unattached  kinetochores via a MAD2  inhibitory signal",
+      "effective_domain_size": 8469,
+      "goshv": 40891,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Amplification  of signal from unattached  kinetochores via a MAD2  inhibitory signal",
+      "native": "REAC:R-MMU-141444",
+      "p_value": 0.0006735415725558849,
+      "parents": [
+        "REAC:R-MMU-141424"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.058823529411764705,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 85,
+      "source_order": 108,
+      "group_id": 7
+    },
+    {
+      "description": "Amplification of signal from the kinetochores",
+      "effective_domain_size": 8469,
+      "goshv": 40892,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Amplification of signal from the kinetochores",
+      "native": "REAC:R-MMU-141424",
+      "p_value": 0.0006735415725558849,
+      "parents": [
+        "REAC:R-MMU-69618"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.058823529411764705,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 85,
+      "source_order": 109,
+      "group_id": 7
+    },
+    {
+      "description": "\"The cell cycle process by which a cell commits to entering the next cell cycle phase.\" [GOC:mtg_cell_cycle]",
+      "effective_domain_size": 25907,
+      "goshv": 21153,
+      "intersection_size": 8,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "cell cycle phase transition",
+      "native": "GO:0044770",
+      "p_value": 0.0006759938827410074,
+      "parents": [
+        "GO:0022402"
+      ],
+      "precision": 0.2222222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.015717092337917484,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 509,
+      "source_order": 10999,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any signaling pathway that modulates the activity of a cell cycle cyclin-dependent protein kinase to modulate the switch from G2 phase to M phase of the cell cycle.\" [GO_REF:0000058, GOC:jl, GOC:TermGenie]",
+      "effective_domain_size": 25907,
+      "goshv": 32324,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "regulation of cell cycle G2/M phase transition",
+      "native": "GO:1902749",
+      "p_value": 0.0010450413053185298,
+      "parents": [
+        "GO:0044839",
+        "GO:1901987"
+      ],
+      "precision": 0.1388888888888889,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.0423728813559322,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 118,
+      "source_order": 22170,
+      "group_id": 1
+    },
+    {
+      "description": "M Phase",
+      "effective_domain_size": 8469,
+      "goshv": 41588,
+      "intersection_size": 8,
+      "intersections": [
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "M Phase",
+      "native": "REAC:R-MMU-68886",
+      "p_value": 0.0011625178129469032,
+      "parents": [
+        "REAC:R-MMU-69278"
+      ],
+      "precision": 0.34782608695652173,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.02077922077922078,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 385,
+      "source_order": 805,
+      "group_id": 7
+    },
+    {
+      "description": "\"Any process that decreases the frequency, rate or extent of the chemical reactions and pathways involving macromolecules, any molecule of high relative molecular mass, the structure of which essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass.\" [GOC:dph, GOC:tb]",
+      "effective_domain_size": 25907,
+      "goshv": 14389,
+      "intersection_size": 16,
+      "intersections": [
+        [
+          "IBA"
+        ],
+        [
+          "IMP",
+          "IEA"
+        ],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IEA"
+        ],
+        [],
+        [
+          "ISS"
+        ],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "IGI"
+        ],
+        [
+          "IBA"
+        ],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [
+          "IDA",
+          "IGI",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "ISO"
+        ],
+        [
+          "IDA",
+          "IEA"
+        ],
+        [],
+        [
+          "IMP",
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        []
+      ],
+      "name": "negative regulation of macromolecule metabolic process",
+      "native": "GO:0010605",
+      "p_value": 0.0011899413979479063,
+      "parents": [
+        "GO:0009892",
+        "GO:0043170",
+        "GO:0060255"
+      ],
+      "precision": 0.4444444444444444,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.0053655264922870555,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 2982,
+      "source_order": 4235,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that stops, prevents or reduces the frequency, rate or extent of cell cycle phase transition.\" [GOC:mtg_cell_cycle, GOC:TermGenie, PMID:22841721]",
+      "effective_domain_size": 25907,
+      "goshv": 31787,
+      "intersection_size": 6,
+      "intersections": [
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        []
+      ],
+      "name": "negative regulation of cell cycle phase transition",
+      "native": "GO:1901988",
+      "p_value": 0.00143269589317641,
+      "parents": [
+        "GO:0010948",
+        "GO:0044770",
+        "GO:1901987"
+      ],
+      "precision": 0.16666666666666666,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.025423728813559324,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 236,
+      "source_order": 21633,
+      "group_id": 1
+    },
+    {
+      "description": "EML4 and NUDC in mitotic spindle formation",
+      "effective_domain_size": 8469,
+      "goshv": 41211,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "EML4 and NUDC in mitotic spindle formation",
+      "native": "REAC:R-MMU-9648025",
+      "p_value": 0.0015051803793342297,
+      "parents": [
+        "REAC:R-MMU-68877"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.05,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 100,
+      "source_order": 428,
+      "group_id": 7
+    },
+    {
+      "description": "Mitotic Spindle Checkpoint",
+      "effective_domain_size": 8469,
+      "goshv": 41685,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Mitotic Spindle Checkpoint",
+      "native": "REAC:R-MMU-69618",
+      "p_value": 0.0015807556044880253,
+      "parents": [
+        "REAC:R-MMU-69620"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.04950495049504951,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 101,
+      "source_order": 902,
+      "group_id": 7
+    },
+    {
+      "description": "\"The mitotic cell cycle transition by which a cell in G2 commits to M phase. The process begins when the kinase activity of M cyclin/CDK complex reaches a threshold high enough for the cell cycle to proceed. This is accomplished by activating a positive feedback loop that results in the accumulation of unphosphorylated and active M cyclin/CDK complex.\" [GOC:mtg_cell_cycle]",
+      "effective_domain_size": 25907,
+      "goshv": 10188,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "G2/M transition of mitotic cell cycle",
+      "native": "GO:0000086",
+      "p_value": 0.0018218943697283184,
+      "parents": [
+        "GO:0044772",
+        "GO:0044839"
+      ],
+      "precision": 0.1388888888888889,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.03787878787878788,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 132,
+      "source_order": 34,
+      "group_id": 1
+    },
+    {
+      "description": "\"The process in which genetic material, in the form of chromosomes, is organized into specific structures and then physically separated and apportioned to two or more sets. In eukaryotes, chromosome segregation begins with the condensation of chromosomes, includes chromosome separation, and ends when chromosomes have completed movement to the spindle poles.\" [GOC:jl, GOC:mah, GOC:mtg_cell_cycle, GOC:vw]",
+      "effective_domain_size": 25907,
+      "goshv": 12799,
+      "intersection_size": 7,
+      "intersections": [
+        [],
+        [],
+        [
+          "IDA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IEA"
+        ],
+        [
+          "NAS"
+        ],
+        [
+          "ISS",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "ISO",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "chromosome segregation",
+      "native": "GO:0007059",
+      "p_value": 0.0021792142124047132,
+      "parents": [
+        "GO:0022402"
+      ],
+      "precision": 0.19444444444444445,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.0171990171990172,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 407,
+      "source_order": 2645,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that stops, prevents, or reduces the frequency, rate or extent of a cellular process, any of those that are carried out at the cellular level, but are not necessarily restricted to a single cell. For example, cell communication occurs among more than one cell, but occurs at the cellular level.\" [GOC:jid]",
+      "effective_domain_size": 25907,
+      "goshv": 22793,
+      "intersection_size": 21,
+      "intersections": [
+        [
+          "IBA"
+        ],
+        [
+          "IMP",
+          "IEA"
+        ],
+        [
+          "IDA",
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IGI",
+          "ISO",
+          "IEA"
+        ],
+        [],
+        [
+          "ISS"
+        ],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP",
+          "IGI"
+        ],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "IGI"
+        ],
+        [
+          "IBA"
+        ],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IEA"
+        ],
+        [
+          "IDA",
+          "IMP",
+          "IGI",
+          "ISS",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "ISO"
+        ],
+        [
+          "IDA",
+          "IMP",
+          "IEA"
+        ],
+        [],
+        [
+          "IMP",
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IEA"
+        ],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP",
+          "IGI",
+          "ISS",
+          "ISO",
+          "IEA"
+        ],
+        [
+          "ISS",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "IMP"
+        ],
+        [],
+        []
+      ],
+      "name": "negative regulation of cellular process",
+      "native": "GO:0048523",
+      "p_value": 0.0026622579023884876,
+      "parents": [
+        "GO:0009987",
+        "GO:0048519",
+        "GO:0050794"
+      ],
+      "precision": 0.5833333333333334,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.0037906137184115524,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 5540,
+      "source_order": 12639,
+      "group_id": 1
+    },
+    {
+      "description": "Resolution of Sister Chromatid Cohesion",
+      "effective_domain_size": 8469,
+      "goshv": 42133,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Resolution of Sister Chromatid Cohesion",
+      "native": "REAC:R-MMU-2500257",
+      "p_value": 0.0027419440328097827,
+      "parents": [
+        "REAC:R-MMU-68877"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.04424778761061947,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 113,
+      "source_order": 1350,
+      "group_id": 7
+    },
+    {
+      "description": "\"Any process that decreases the rate, frequency or extent of a cellular process that is involved in the progression of biochemical and morphological phases and events that occur in a cell during successive cell replication or nuclear replication events.\" [GOC:dph, GOC:tb]",
+      "effective_domain_size": 25907,
+      "goshv": 14660,
+      "intersection_size": 6,
+      "intersections": [
+        [],
+        [],
+        [
+          "IDA",
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        []
+      ],
+      "name": "negative regulation of cell cycle process",
+      "native": "GO:0010948",
+      "p_value": 0.0034089995930644055,
+      "parents": [
+        "GO:0010564",
+        "GO:0022402",
+        "GO:0045786"
+      ],
+      "precision": 0.16666666666666666,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.021897810218978103,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 274,
+      "source_order": 4506,
+      "group_id": 1
+    },
+    {
+      "description": "\"The cell cycle process by which a cell in G2 phase commits to M phase.\" [GOC:jl, GOC:mtg_cell_cycle]",
+      "effective_domain_size": 25907,
+      "goshv": 21192,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "cell cycle G2/M phase transition",
+      "native": "GO:0044839",
+      "p_value": 0.003422470285392279,
+      "parents": [
+        "GO:0044770"
+      ],
+      "precision": 0.1388888888888889,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.03333333333333333,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 150,
+      "source_order": 11038,
+      "group_id": 1
+    },
+    {
+      "description": "Chromosome Maintenance",
+      "effective_domain_size": 8469,
+      "goshv": 41070,
+      "intersection_size": 5,
+      "intersections": [
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Chromosome Maintenance",
+      "native": "REAC:R-MMU-73886",
+      "p_value": 0.004312730766177374,
+      "parents": [
+        "REAC:R-MMU-1640170"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.04032258064516129,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 124,
+      "source_order": 287,
+      "group_id": 7
+    },
+    {
+      "description": "Mitotic Metaphase and Anaphase",
+      "effective_domain_size": 8469,
+      "goshv": 41681,
+      "intersection_size": 6,
+      "intersections": [
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Mitotic Metaphase and Anaphase",
+      "native": "REAC:R-MMU-2555396",
+      "p_value": 0.0043613137389987,
+      "parents": [
+        "REAC:R-MMU-68886"
+      ],
+      "precision": 0.2608695652173913,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.028037383177570093,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 214,
+      "source_order": 898,
+      "group_id": 7
+    },
+    {
+      "description": "RHO GTPases Activate Formins",
+      "effective_domain_size": 8469,
+      "goshv": 41960,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "RHO GTPases Activate Formins",
+      "native": "REAC:R-MMU-5663220",
+      "p_value": 0.004661402082673676,
+      "parents": [
+        "REAC:R-MMU-195258"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.03968253968253968,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 126,
+      "source_order": 1177,
+      "group_id": 8
+    },
+    {
+      "description": "\"Any process that stops, prevents, or reduces the frequency, rate or extent of a biological process. Biological processes are regulated by many means; examples include the control of gene expression, protein modification or interaction with a protein or substrate molecule.\" [GOC:jid]",
+      "effective_domain_size": 25907,
+      "goshv": 22789,
+      "intersection_size": 21,
+      "intersections": [
+        [
+          "IBA"
+        ],
+        [
+          "IMP",
+          "IEA"
+        ],
+        [
+          "IDA",
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IGI",
+          "ISO",
+          "IEA"
+        ],
+        [],
+        [
+          "ISS"
+        ],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP",
+          "IGI"
+        ],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "IGI"
+        ],
+        [
+          "IBA"
+        ],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IEA"
+        ],
+        [
+          "IDA",
+          "IMP",
+          "IGI",
+          "ISS",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "ISO"
+        ],
+        [
+          "IDA",
+          "IMP",
+          "IEA"
+        ],
+        [],
+        [
+          "IMP",
+          "ISS",
+          "IEA"
+        ],
+        [
+          "IEA"
+        ],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP",
+          "IGI",
+          "ISS",
+          "ISO",
+          "IEA"
+        ],
+        [
+          "ISS",
+          "NAS",
+          "IEA"
+        ],
+        [
+          "IMP"
+        ],
+        [],
+        []
+      ],
+      "name": "negative regulation of biological process",
+      "native": "GO:0048519",
+      "p_value": 0.005173486795624509,
+      "parents": [
+        "GO:0008150",
+        "GO:0050789"
+      ],
+      "precision": 0.5833333333333334,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.003646466400416739,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 5759,
+      "source_order": 12635,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that stops, prevents or reduces the frequency, rate or extent of mitotic cell cycle phase transition.\" [GOC:mtg_cell_cycle, GOC:TermGenie, PMID:22841721]",
+      "effective_domain_size": 25907,
+      "goshv": 31790,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "negative regulation of mitotic cell cycle phase transition",
+      "native": "GO:1901991",
+      "p_value": 0.005627699057576712,
+      "parents": [
+        "GO:0044772",
+        "GO:0045930",
+        "GO:1901988",
+        "GO:1901990"
+      ],
+      "precision": 0.1388888888888889,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.030120481927710843,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 166,
+      "source_order": 21636,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that modulates a cellular process that is involved in the progression of biochemical and morphological phases and events that occur in a cell during successive cell replication or nuclear replication events.\" [GOC:dph, GOC:tb]",
+      "effective_domain_size": 25907,
+      "goshv": 14354,
+      "intersection_size": 8,
+      "intersections": [
+        [],
+        [],
+        [
+          "IDA",
+          "ISS",
+          "ISO",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "regulation of cell cycle process",
+      "native": "GO:0010564",
+      "p_value": 0.007138542381987346,
+      "parents": [
+        "GO:0022402",
+        "GO:0051726"
+      ],
+      "precision": 0.2222222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.011461318051575931,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 698,
+      "source_order": 4200,
+      "group_id": 1
+    },
+    {
+      "description": "Cell Cycle, Mitotic",
+      "effective_domain_size": 8469,
+      "goshv": 41041,
+      "intersection_size": 8,
+      "intersections": [
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Cell Cycle, Mitotic",
+      "native": "REAC:R-MMU-69278",
+      "p_value": 0.008158126077772622,
+      "parents": [
+        "REAC:R-MMU-1640170"
+      ],
+      "precision": 0.34782608695652173,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.01593625498007968,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 502,
+      "source_order": 258,
+      "group_id": 7
+    },
+    {
+      "description": "\"The aggregation, arrangement and bonding together of proteins and centromeric DNA molecules to form a centromeric protein-DNA complex. Includes the formation of the chromatin structures which form a platform for the kinetochore, and assembly of the kinetochore onto this specialized chromatin. In fission yeast and higher eukaryotes this process also includes the formation of heterochromatin at the outer repeat (pericentric) regions of the centromere.\" [GOC:mah, GOC:vw]",
+      "effective_domain_size": 25907,
+      "goshv": 18762,
+      "intersection_size": 3,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "centromere complex assembly",
+      "native": "GO:0034508",
+      "p_value": 0.010805599342298905,
+      "parents": [
+        "GO:0051276",
+        "GO:0065004"
+      ],
+      "precision": 0.08333333333333333,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.11538461538461539,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 26,
+      "source_order": 8608,
+      "group_id": 3
+    },
+    {
+      "description": "\"Any process that modulates the rate or extent of progression through the cell cycle.\" [GOC:ai, GOC:dph, GOC:tb]",
+      "effective_domain_size": 25907,
+      "goshv": 23875,
+      "intersection_size": 9,
+      "intersections": [
+        [],
+        [],
+        [
+          "IDA",
+          "IMP",
+          "ISS",
+          "ISO",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [
+          "IBA",
+          "IEA"
+        ],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [
+          "IDA",
+          "ISO",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "regulation of cell cycle",
+      "native": "GO:0051726",
+      "p_value": 0.012699306820772647,
+      "parents": [
+        "GO:0007049",
+        "GO:0050794"
+      ],
+      "precision": 0.25,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.008902077151335312,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 1011,
+      "source_order": 13721,
+      "group_id": 1
+    },
+    {
+      "description": "\"Any process that stops, prevents or reduces the rate or extent of progression through the cell cycle.\" [GOC:dph, GOC:go_curators, GOC:tb]",
+      "effective_domain_size": 25907,
+      "goshv": 21610,
+      "intersection_size": 6,
+      "intersections": [
+        [],
+        [],
+        [
+          "IDA",
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        []
+      ],
+      "name": "negative regulation of cell cycle",
+      "native": "GO:0045786",
+      "p_value": 0.013670144539398563,
+      "parents": [
+        "GO:0007049",
+        "GO:0048523",
+        "GO:0051726"
+      ],
+      "precision": 0.16666666666666666,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.017191977077363897,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 349,
+      "source_order": 11456,
+      "group_id": 1
+    },
+    {
+      "description": "Cell Cycle Checkpoints",
+      "effective_domain_size": 8469,
+      "goshv": 41040,
+      "intersection_size": 6,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Cell Cycle Checkpoints",
+      "native": "REAC:R-MMU-69620",
+      "p_value": 0.016524479358689698,
+      "parents": [
+        "REAC:R-MMU-1640170"
+      ],
+      "precision": 0.2608695652173913,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.02214022140221402,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 271,
+      "source_order": 257,
+      "group_id": 7
+    },
+    {
+      "description": "\"Any process that stops, prevents or reduces the rate or extent of progression through the mitotic cell cycle.\" [GOC:dph, GOC:go_curators, GOC:tb]",
+      "effective_domain_size": 25907,
+      "goshv": 21716,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IMP",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS"
+        ],
+        [],
+        [
+          "IDA",
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "negative regulation of mitotic cell cycle",
+      "native": "GO:0045930",
+      "p_value": 0.020711945844510166,
+      "parents": [
+        "GO:0000278",
+        "GO:0007346",
+        "GO:0045786"
+      ],
+      "precision": 0.1388888888888889,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.02304147465437788,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 217,
+      "source_order": 11562,
+      "group_id": 1
+    },
+    {
+      "description": "Separation of Sister Chromatids",
+      "effective_domain_size": 8469,
+      "goshv": 42214,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Separation of Sister Chromatids",
+      "native": "REAC:R-MMU-2467813",
+      "p_value": 0.023197103254256453,
+      "parents": [
+        "REAC:R-MMU-68882"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.028409090909090908,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 176,
+      "source_order": 1431,
+      "group_id": 9
+    },
+    {
+      "description": "Mitotic Prometaphase",
+      "effective_domain_size": 8469,
+      "goshv": 41683,
+      "intersection_size": 5,
+      "intersections": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [
+          "REAC"
+        ],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Mitotic Prometaphase",
+      "native": "REAC:R-MMU-68877",
+      "p_value": 0.025131939318747454,
+      "parents": [
+        "REAC:R-MMU-68886"
+      ],
+      "precision": 0.21739130434782608,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.027932960893854747,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 179,
+      "source_order": 900,
+      "group_id": 7
+    },
+    {
+      "description": "\"The series of molecular signals in which an intracellular signal is conveyed to trigger the apoptotic death of a cell. The pathway is induced by the detection of DNA damage, and ends when the execution phase of apoptosis is triggered.\" [GOC:go_curators, GOC:mtg_apoptosis]",
+      "effective_domain_size": 25907,
+      "goshv": 13358,
+      "intersection_size": 4,
+      "intersections": [
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISO",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IGI",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "intrinsic apoptotic signaling pathway in response to DNA damage",
+      "native": "GO:0008630",
+      "p_value": 0.025226619914442198,
+      "parents": [
+        "GO:0006974",
+        "GO:0097193"
+      ],
+      "precision": 0.1111111111111111,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.037383177570093455,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 107,
+      "source_order": 3204,
+      "group_id": 2
+    },
+    {
+      "description": "Platinum drug resistance",
+      "effective_domain_size": 9330,
+      "goshv": 40411,
+      "intersection_size": 3,
+      "intersections": [
+        [],
+        [
+          "KEGG"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "KEGG"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "KEGG"
+        ],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Platinum drug resistance",
+      "native": "KEGG:01524",
+      "p_value": 0.02523728562281197,
+      "parents": [
+        "KEGG:00000"
+      ],
+      "precision": 0.17647058823529413,
+      "query": "query_1",
+      "query_size": 17,
+      "recall": 0.0375,
+      "significant": true,
+      "source": "KEGG",
+      "term_size": 80,
+      "source_order": 198,
+      "group_id": 6
+    },
+    {
+      "description": "\"The process resulting in division and partitioning of components of a cell to form more cells; may or may not be accompanied by the physical separation of a cell into distinct, individually membrane-bounded daughter cells.\" [GOC:di, GOC:go_curators, GOC:pr]",
+      "effective_domain_size": 25907,
+      "goshv": 23604,
+      "intersection_size": 7,
+      "intersections": [
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "cell division",
+      "native": "GO:0051301",
+      "p_value": 0.028917558956074205,
+      "parents": [
+        "GO:0009987"
+      ],
+      "precision": 0.19444444444444445,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.011589403973509934,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 604,
+      "source_order": 13450,
+      "group_id": 4
+    },
+    {
+      "description": "\"Any process that results in a change in state or activity of a cell (in terms of movement, secretion, enzyme production, gene expression, etc.) as a result of a stimulus indicating damage to its DNA from environmental insults or errors during metabolism.\" [GOC:go_curators]",
+      "effective_domain_size": 25907,
+      "goshv": 12744,
+      "intersection_size": 8,
+      "intersections": [
+        [],
+        [
+          "IMP",
+          "IGI",
+          "ISO",
+          "IBA",
+          "IEA"
+        ],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP",
+          "ISO",
+          "IBA",
+          "NAS",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IGI",
+          "IBA",
+          "IEA"
+        ],
+        [],
+        [
+          "IMP",
+          "NAS"
+        ],
+        [
+          "ISO",
+          "NAS",
+          "IEA"
+        ],
+        []
+      ],
+      "name": "DNA damage response",
+      "native": "GO:0006974",
+      "p_value": 0.0337096921037696,
+      "parents": [
+        "GO:0033554"
+      ],
+      "precision": 0.2222222222222222,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.009259259259259259,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 864,
+      "source_order": 2590,
+      "group_id": 2
+    },
+    {
+      "description": "Metalloprotease DUBs",
+      "effective_domain_size": 8469,
+      "goshv": 41649,
+      "intersection_size": 3,
+      "intersections": [
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [
+          "REAC"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "name": "Metalloprotease DUBs",
+      "native": "REAC:R-MMU-5689901",
+      "p_value": 0.035394311322953634,
+      "parents": [
+        "REAC:R-MMU-5688426"
+      ],
+      "precision": 0.13043478260869565,
+      "query": "query_1",
+      "query_size": 23,
+      "recall": 0.07894736842105263,
+      "significant": true,
+      "source": "REAC",
+      "term_size": 38,
+      "source_order": 866,
+      "group_id": 10
+    },
+    {
+      "description": "\"Any process that results in a change in state or activity of a cell or an organism (in terms of movement, secretion, enzyme production, gene expression, etc.) as a result of an electromagnetic radiation stimulus. Electromagnetic radiation is a propagating wave in space with electric and magnetic components. These components oscillate at right angles to each other and to the direction of propagation.\" [GOC:jl, Wikipedia:Electromagnetic_radiation]",
+      "effective_domain_size": 25907,
+      "goshv": 13600,
+      "intersection_size": 6,
+      "intersections": [
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISS",
+          "IEA"
+        ],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "ISO",
+          "IEA"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          "IMP"
+        ],
+        [],
+        [],
+        [
+          "IEA"
+        ],
+        []
+      ],
+      "name": "response to radiation",
+      "native": "GO:0009314",
+      "p_value": 0.0499420355847927,
+      "parents": [
+        "GO:0009628"
+      ],
+      "precision": 0.16666666666666666,
+      "query": "query_1",
+      "query_size": 36,
+      "recall": 0.01366742596810934,
+      "significant": true,
+      "source": "GO:BP",
+      "term_size": 439,
+      "source_order": 3446,
+      "group_id": 5
+    }
+  ],
+  "meta": {
+    "query_metadata": {
+      "queries": {
+        "query_1": [
+          "H2ac12",
+          "Msh6",
+          "Fbxo5",
+          "Apoe",
+          "Nrm",
+          "Gzma",
+          "Maf",
+          "Btla",
+          "Ube2srt",
+          "Snx9",
+          "Phactr2",
+          "Pclaf",
+          "Cenpa",
+          "Hlx",
+          "Pbk",
+          "Mxd3",
+          "H2ac22",
+          "Dut",
+          "Cdca8",
+          "Cenpf",
+          "Brca1",
+          "Cenpp",
+          "Cenpw",
+          "Ifi27",
+          "Trp63",
+          "Dnph1",
+          "Apod",
+          "Ttbk1",
+          "Jpt2",
+          "Spc25",
+          "St3gal2",
+          "Bcl2",
+          "Clcf1",
+          "Rnaseh2b",
+          "Rrm1",
+          "Coa5"
+        ]
+      },
+      "organism": "mmusculus",
+      "all_results": false,
+      "ordered": false,
+      "no_iea": false,
+      "sources": [
+        "GO:BP",
+        "KEGG",
+        "REAC"
+      ],
+      "combined": false,
+      "aresolve": {},
+      "numeric_ns": "ENTREZGENE_ACC",
+      "domain_scope": "annotated",
+      "measure_underrepresentation": false,
+      "significance_threshold_method": "g_SCS",
+      "user_threshold": 0.05,
+      "no_evidences": false,
+      "highlight": null
+    },
+    "result_metadata": {
+      "GO:BP": {
+        "domain_size": 25907,
+        "number_of_terms": 26036,
+        "threshold": 2.9e-05
+      },
+      "KEGG": {
+        "domain_size": 9330,
+        "number_of_terms": 570,
+        "threshold": 0.00075
+      },
+      "REAC": {
+        "domain_size": 8469,
+        "number_of_terms": 1791,
+        "threshold": 0.000196
+      }
+    },
+    "genes_metadata": {
+      "failed": [],
+      "ambiguous": {},
+      "duplicates": [],
+      "query": {
+        "query_1": {
+          "mapping": {
+            "H2ac12": [
+              "ENSMUSG00000069302"
+            ],
+            "Msh6": [
+              "ENSMUSG00000005370"
+            ],
+            "Fbxo5": [
+              "ENSMUSG00000019773"
+            ],
+            "Apoe": [
+              "ENSMUSG00000002985"
+            ],
+            "Nrm": [
+              "ENSMUSG00000059791"
+            ],
+            "Gzma": [
+              "ENSMUSG00000023132"
+            ],
+            "Maf": [
+              "ENSMUSG00000055435"
+            ],
+            "Btla": [
+              "ENSMUSG00000052013"
+            ],
+            "Ube2srt": [
+              "ENSMUSG00000118653"
+            ],
+            "Snx9": [
+              "ENSMUSG00000002365"
+            ],
+            "Phactr2": [
+              "ENSMUSG00000062866"
+            ],
+            "Pclaf": [
+              "ENSMUSG00000040204"
+            ],
+            "Cenpa": [
+              "ENSMUSG00000029177"
+            ],
+            "Hlx": [
+              "ENSMUSG00000039377"
+            ],
+            "Pbk": [
+              "ENSMUSG00000022033"
+            ],
+            "Mxd3": [
+              "ENSMUSG00000021485"
+            ],
+            "H2ac22": [
+              "ENSMUSG00000069309"
+            ],
+            "Dut": [
+              "ENSMUSG00000027203"
+            ],
+            "Cdca8": [
+              "ENSMUSG00000028873"
+            ],
+            "Cenpf": [
+              "ENSMUSG00000026605"
+            ],
+            "Brca1": [
+              "ENSMUSG00000017146"
+            ],
+            "Cenpp": [
+              "ENSMUSG00000021391"
+            ],
+            "Cenpw": [
+              "ENSMUSG00000075266"
+            ],
+            "Ifi27": [
+              "ENSMUSG00000064215"
+            ],
+            "Trp63": [
+              "ENSMUSG00000022510"
+            ],
+            "Dnph1": [
+              "ENSMUSG00000040658"
+            ],
+            "Apod": [
+              "ENSMUSG00000022548"
+            ],
+            "Ttbk1": [
+              "ENSMUSG00000015599"
+            ],
+            "Jpt2": [
+              "ENSMUSG00000024165"
+            ],
+            "Spc25": [
+              "ENSMUSG00000005233"
+            ],
+            "St3gal2": [
+              "ENSMUSG00000031749"
+            ],
+            "Bcl2": [
+              "ENSMUSG00000057329"
+            ],
+            "Clcf1": [
+              "ENSMUSG00000040663"
+            ],
+            "Rnaseh2b": [
+              "ENSMUSG00000021932"
+            ],
+            "Rrm1": [
+              "ENSMUSG00000030978"
+            ],
+            "Coa5": [
+              "ENSMUSG00000026112"
+            ]
+          },
+          "ensgs": [
+            "ENSMUSG00000069302",
+            "ENSMUSG00000005370",
+            "ENSMUSG00000019773",
+            "ENSMUSG00000002985",
+            "ENSMUSG00000059791",
+            "ENSMUSG00000023132",
+            "ENSMUSG00000055435",
+            "ENSMUSG00000052013",
+            "ENSMUSG00000118653",
+            "ENSMUSG00000002365",
+            "ENSMUSG00000062866",
+            "ENSMUSG00000040204",
+            "ENSMUSG00000029177",
+            "ENSMUSG00000039377",
+            "ENSMUSG00000022033",
+            "ENSMUSG00000021485",
+            "ENSMUSG00000069309",
+            "ENSMUSG00000027203",
+            "ENSMUSG00000028873",
+            "ENSMUSG00000026605",
+            "ENSMUSG00000017146",
+            "ENSMUSG00000021391",
+            "ENSMUSG00000075266",
+            "ENSMUSG00000064215",
+            "ENSMUSG00000022510",
+            "ENSMUSG00000040658",
+            "ENSMUSG00000022548",
+            "ENSMUSG00000015599",
+            "ENSMUSG00000024165",
+            "ENSMUSG00000005233",
+            "ENSMUSG00000031749",
+            "ENSMUSG00000057329",
+            "ENSMUSG00000040663",
+            "ENSMUSG00000021932",
+            "ENSMUSG00000030978",
+            "ENSMUSG00000026112"
+          ]
+        }
+      }
+    },
+    "timestamp": "2026-03-01T03:36:10.399190+00:00",
+    "version": "e113_eg59_p19_6be52918"
+  }
+}

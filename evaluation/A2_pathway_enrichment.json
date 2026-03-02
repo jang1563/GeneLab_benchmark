@@ -1,0 +1,293 @@
+{
+  "result": [],
+  "meta": {
+    "query_metadata": {
+      "queries": {
+        "query_1": [
+          "Sox4",
+          "Lrrc30",
+          "Mettl21e",
+          "Cdkn1c",
+          "Kcnk3",
+          "Chaf1b",
+          "Gm19410",
+          "Myog",
+          "Zfp612",
+          "Stum",
+          "Bdh1",
+          "Lsm11",
+          "Gck",
+          "Asap3",
+          "Adamts1",
+          "Tbc1d31",
+          "Tet1",
+          "Gm4811",
+          "Ciart",
+          "Mcub",
+          "Plk5",
+          "Pglyrp1",
+          "Mpp3",
+          "Rpl37rt",
+          "Akap8l",
+          "Alg14",
+          "Per2",
+          "Sbk3",
+          "Fah",
+          "Nfil3",
+          "Scarf1",
+          "Ggt1",
+          "Cab39",
+          "Cyfip2",
+          "Taf7",
+          "6820431F20Rik",
+          "Grem2",
+          "Astn2",
+          "Gata3",
+          "Mefv",
+          "Rps7-ps3",
+          "Klf11"
+        ]
+      },
+      "organism": "mmusculus",
+      "all_results": false,
+      "ordered": false,
+      "no_iea": false,
+      "sources": [
+        "GO:BP",
+        "KEGG",
+        "REAC"
+      ],
+      "combined": false,
+      "aresolve": {},
+      "numeric_ns": "ENTREZGENE_ACC",
+      "domain_scope": "annotated",
+      "measure_underrepresentation": false,
+      "significance_threshold_method": "g_SCS",
+      "user_threshold": 0.05,
+      "no_evidences": true,
+      "highlight": null
+    },
+    "result_metadata": {
+      "GO:BP": {
+        "domain_size": 25907,
+        "number_of_terms": 26036,
+        "threshold": 2.9e-05
+      },
+      "KEGG": {
+        "domain_size": 9330,
+        "number_of_terms": 570,
+        "threshold": 0.000802
+      },
+      "REAC": {
+        "domain_size": 8469,
+        "number_of_terms": 1791,
+        "threshold": 0.000213
+      }
+    },
+    "genes_metadata": {
+      "failed": [],
+      "ambiguous": {
+        "Rpl37rt": [
+          {
+            "gene_id": "ENSMUSG00000121818",
+            "description": "ribosomal protein L37, retrotransposed [Source:NCBI gene (formerly Entrezgene);Acc:100502825]",
+            "number_of_go_annotations": 0
+          },
+          {
+            "gene_id": "ENSMUSG00000072692",
+            "description": "ribosomal protein L37, retrotransposed [Source:MGI Symbol;Acc:MGI:3651519]",
+            "number_of_go_annotations": 0
+          },
+          {
+            "gene_id": "ENSMUSG00000041841",
+            "description": "ribosomal protein L37 [Source:MGI Symbol;Acc:MGI:1914531]",
+            "number_of_go_annotations": 47
+          }
+        ],
+        "6820431F20Rik": [
+          {
+            "gene_id": "ENSMUSG00000071796",
+            "description": "RIKEN cDNA 6820431F20 gene [Source:MGI Symbol;Acc:MGI:3694236]",
+            "number_of_go_annotations": 0
+          },
+          {
+            "gene_id": "ENSMUSG00000121492",
+            "description": "RIKEN cDNA 6820431F20 gene [Source:MGI Symbol;Acc:MGI:3694236]",
+            "number_of_go_annotations": 0
+          }
+        ]
+      },
+      "duplicates": [],
+      "query": {
+        "query_1": {
+          "mapping": {
+            "Sox4": [
+              "ENSMUSG00000076431"
+            ],
+            "Lrrc30": [
+              "ENSMUSG00000073375"
+            ],
+            "Mettl21e": [
+              "ENSMUSG00000046828"
+            ],
+            "Cdkn1c": [
+              "ENSMUSG00000037664"
+            ],
+            "Kcnk3": [
+              "ENSMUSG00000049265"
+            ],
+            "Chaf1b": [
+              "ENSMUSG00000022945"
+            ],
+            "Gm19410": [
+              "ENSMUSG00000109372"
+            ],
+            "Myog": [
+              "ENSMUSG00000026459"
+            ],
+            "Zfp612": [
+              "ENSMUSG00000044676"
+            ],
+            "Stum": [
+              "ENSMUSG00000053963"
+            ],
+            "Bdh1": [
+              "ENSMUSG00000046598"
+            ],
+            "Lsm11": [
+              "ENSMUSG00000044847"
+            ],
+            "Gck": [
+              "ENSMUSG00000041798"
+            ],
+            "Asap3": [
+              "ENSMUSG00000036995"
+            ],
+            "Adamts1": [
+              "ENSMUSG00000022893"
+            ],
+            "Tbc1d31": [
+              "ENSMUSG00000022364"
+            ],
+            "Tet1": [
+              "ENSMUSG00000047146"
+            ],
+            "Gm4811": [
+              "ENSMUSG00000113263"
+            ],
+            "Ciart": [
+              "ENSMUSG00000038550"
+            ],
+            "Mcub": [
+              "ENSMUSG00000027994"
+            ],
+            "Plk5": [
+              "ENSMUSG00000035486"
+            ],
+            "Pglyrp1": [
+              "ENSMUSG00000030413"
+            ],
+            "Mpp3": [
+              "ENSMUSG00000052373"
+            ],
+            "Akap8l": [
+              "ENSMUSG00000002625"
+            ],
+            "Alg14": [
+              "ENSMUSG00000039887"
+            ],
+            "Per2": [
+              "ENSMUSG00000055866"
+            ],
+            "Sbk3": [
+              "ENSMUSG00000085272"
+            ],
+            "Fah": [
+              "ENSMUSG00000030630"
+            ],
+            "Nfil3": [
+              "ENSMUSG00000056749"
+            ],
+            "Scarf1": [
+              "ENSMUSG00000038188"
+            ],
+            "Ggt1": [
+              "ENSMUSG00000006345"
+            ],
+            "Cab39": [
+              "ENSMUSG00000036707"
+            ],
+            "Cyfip2": [
+              "ENSMUSG00000020340"
+            ],
+            "Taf7": [
+              "ENSMUSG00000051316"
+            ],
+            "Grem2": [
+              "ENSMUSG00000050069"
+            ],
+            "Astn2": [
+              "ENSMUSG00000028373"
+            ],
+            "Gata3": [
+              "ENSMUSG00000015619"
+            ],
+            "Mefv": [
+              "ENSMUSG00000022534"
+            ],
+            "Rps7-ps3": [
+              "ENSMUSG00000095597"
+            ],
+            "Klf11": [
+              "ENSMUSG00000020653"
+            ]
+          },
+          "ensgs": [
+            "ENSMUSG00000076431",
+            "ENSMUSG00000073375",
+            "ENSMUSG00000046828",
+            "ENSMUSG00000037664",
+            "ENSMUSG00000049265",
+            "ENSMUSG00000022945",
+            "ENSMUSG00000109372",
+            "ENSMUSG00000026459",
+            "ENSMUSG00000044676",
+            "ENSMUSG00000053963",
+            "ENSMUSG00000046598",
+            "ENSMUSG00000044847",
+            "ENSMUSG00000041798",
+            "ENSMUSG00000036995",
+            "ENSMUSG00000022893",
+            "ENSMUSG00000022364",
+            "ENSMUSG00000047146",
+            "ENSMUSG00000113263",
+            "ENSMUSG00000038550",
+            "ENSMUSG00000027994",
+            "ENSMUSG00000035486",
+            "ENSMUSG00000030413",
+            "ENSMUSG00000052373",
+            "ENSMUSG00000002625",
+            "ENSMUSG00000039887",
+            "ENSMUSG00000055866",
+            "ENSMUSG00000085272",
+            "ENSMUSG00000030630",
+            "ENSMUSG00000056749",
+            "ENSMUSG00000038188",
+            "ENSMUSG00000006345",
+            "ENSMUSG00000036707",
+            "ENSMUSG00000020340",
+            "ENSMUSG00000051316",
+            "ENSMUSG00000050069",
+            "ENSMUSG00000028373",
+            "ENSMUSG00000015619",
+            "ENSMUSG00000022534",
+            "ENSMUSG00000095597",
+            "ENSMUSG00000020653"
+          ]
+        }
+      }
+    },
+    "timestamp": "2026-03-01T04:16:59.553760+00:00",
+    "version": "e113_eg59_p19_6be52918"
+  }
+}

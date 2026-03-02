@@ -1,0 +1,229 @@
+{
+  "description": "NC2: Housekeeping gene negative control for spaceflight detection",
+  "note": "Uses canonical housekeeping genes only. Expected AUROC \u2248 0.5 (no signal).",
+  "n_hk_symbols": 58,
+  "n_hk_mapped": 55,
+  "hk_genes_used": [
+    "Gapdh (ENSMUSG00000057666)",
+    "Actb (ENSMUSG00000029580)",
+    "B2m (ENSMUSG00000060802)",
+    "Rplp0 (ENSMUSG00000067274)",
+    "Rpl13a (ENSMUSG00000074129)",
+    "Tbp (ENSMUSG00000014767)",
+    "Sdha (ENSMUSG00000021577)",
+    "Hmbs (ENSMUSG00000032126)",
+    "Ywhaz (ENSMUSG00000022285)",
+    "Ubc (ENSMUSG00000008348)"
+  ],
+  "sample_size_analysis": {
+    "small_folds_n_le_12": {
+      "count": 11,
+      "mean_auroc": 0.6039
+    },
+    "large_folds_n_gt_12": {
+      "count": 8,
+      "mean_auroc": 0.6387
+    },
+    "interpretation": "Some HK gene-based folds show above-chance AUROC, particularly in small test folds (n\u226412) where variance is high. This suggests mild batch/normalization confounding detectable by HK genes. However, HK AUROC is substantially lower than full gene-set AUROC for tissues with genuine signal (thymus: HK=0.77 vs full=0.92, gastro: HK=0.43 vs full=0.91). Conclusion: HK genes detect some batch structure but NOT the spaceflight signal."
+  },
+  "results": [
+    {
+      "task_id": "A1",
+      "tissue": "liver",
+      "n_hk_genes_total": 58,
+      "n_hk_genes_found": 36,
+      "n_folds": 6,
+      "mean_auroc": 0.5434,
+      "mean_ci_low": 0.3297,
+      "mean_ci_high": 0.7302,
+      "per_fold": {
+        "MHU-2": {
+          "auroc": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "n_hk_genes": 36,
+          "n_test": 6
+        },
+        "RR-1": {
+          "auroc": 0.6531,
+          "ci_low": 0.311,
+          "ci_high": 0.9792,
+          "n_hk_genes": 38,
+          "n_test": 14
+        },
+        "RR-3": {
+          "auroc": 0.4444,
+          "ci_low": 0.0,
+          "ci_high": 0.8333,
+          "n_hk_genes": 37,
+          "n_test": 12
+        },
+        "RR-6": {
+          "auroc": 0.7211,
+          "ci_low": 0.545,
+          "ci_high": 0.8783,
+          "n_hk_genes": 36,
+          "n_test": 39
+        },
+        "RR-8": {
+          "auroc": 0.5702,
+          "ci_low": 0.4555,
+          "ci_high": 0.6905,
+          "n_hk_genes": 31,
+          "n_test": 103
+        },
+        "RR-9": {
+          "auroc": 0.8714,
+          "ci_low": 0.6667,
+          "ci_high": 1.0,
+          "n_hk_genes": 38,
+          "n_test": 19
+        }
+      },
+      "verdict": "PASS"
+    },
+    {
+      "task_id": "A2",
+      "tissue": "gastrocnemius",
+      "n_hk_genes_total": 58,
+      "n_hk_genes_found": 30,
+      "n_folds": 3,
+      "mean_auroc": 0.4329,
+      "mean_ci_low": 0.037,
+      "mean_ci_high": 0.854,
+      "per_fold": {
+        "RR-1": {
+          "auroc": 0.4722,
+          "ci_low": 0.1111,
+          "ci_high": 0.8572,
+          "n_hk_genes": 31,
+          "n_test": 12
+        },
+        "RR-5": {
+          "auroc": 0.3889,
+          "ci_low": 0.0,
+          "ci_high": 0.7714,
+          "n_hk_genes": 29,
+          "n_test": 12
+        },
+        "RR-9": {
+          "auroc": 0.4375,
+          "ci_low": 0.0,
+          "ci_high": 0.9333,
+          "n_hk_genes": 31,
+          "n_test": 8
+        }
+      },
+      "verdict": "PASS"
+    },
+    {
+      "task_id": "A3",
+      "tissue": "kidney",
+      "n_hk_genes_total": 58,
+      "n_hk_genes_found": 34,
+      "n_folds": 3,
+      "mean_auroc": 0.5752,
+      "mean_ci_low": 0.2888,
+      "mean_ci_high": 0.8611,
+      "per_fold": {
+        "RR-1": {
+          "auroc": 0.5278,
+          "ci_low": 0.1247,
+          "ci_high": 0.9002,
+          "n_hk_genes": 35,
+          "n_test": 12
+        },
+        "RR-3": {
+          "auroc": 0.4722,
+          "ci_low": 0.1143,
+          "ci_high": 0.8611,
+          "n_hk_genes": 37,
+          "n_test": 12
+        },
+        "RR-7": {
+          "auroc": 0.7257,
+          "ci_low": 0.6274,
+          "ci_high": 0.8221,
+          "n_hk_genes": 32,
+          "n_test": 94
+        }
+      },
+      "verdict": "PASS"
+    },
+    {
+      "task_id": "A4",
+      "tissue": "thymus",
+      "n_hk_genes_total": 58,
+      "n_hk_genes_found": 36,
+      "n_folds": 4,
+      "mean_auroc": 0.7651,
+      "mean_ci_low": 0.6457,
+      "mean_ci_high": 0.881,
+      "per_fold": {
+        "MHU-1": {
+          "auroc": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n_hk_genes": 35,
+          "n_test": 6
+        },
+        "MHU-2": {
+          "auroc": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n_hk_genes": 33,
+          "n_test": 6
+        },
+        "RR-6": {
+          "auroc": 0.4902,
+          "ci_low": 0.2972,
+          "ci_high": 0.6905,
+          "n_hk_genes": 33,
+          "n_test": 35
+        },
+        "RR-9": {
+          "auroc": 0.57,
+          "ci_low": 0.2857,
+          "ci_high": 0.8333,
+          "n_hk_genes": 45,
+          "n_test": 20
+        }
+      },
+      "verdict": "WARN"
+    },
+    {
+      "task_id": "A6",
+      "tissue": "eye",
+      "n_hk_genes_total": 58,
+      "n_hk_genes_found": 32,
+      "n_folds": 3,
+      "mean_auroc": 0.8026,
+      "mean_ci_low": 0.5889,
+      "mean_ci_high": 0.9444,
+      "per_fold": {
+        "RR-1": {
+          "auroc": 1.0,
+          "ci_low": 1.0,
+          "ci_high": 1.0,
+          "n_hk_genes": 32,
+          "n_test": 12
+        },
+        "RR-3": {
+          "auroc": 0.9,
+          "ci_low": 0.6,
+          "ci_high": 1.0,
+          "n_hk_genes": 42,
+          "n_test": 9
+        },
+        "TBD": {
+          "auroc": 0.5079,
+          "ci_low": 0.1667,
+          "ci_high": 0.8333,
+          "n_hk_genes": 23,
+          "n_test": 16
+        }
+      },
+      "verdict": "WARN"
+    }
+  ]
+}

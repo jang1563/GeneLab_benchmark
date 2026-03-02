@@ -1,0 +1,53 @@
+{
+  "model": "Geneformer-V1-10M",
+  "task": "A4",
+  "tissue": "thymus",
+  "status": "dev_preview",
+  "note": "Development run on RR-9 fold only (MPS, 5 epochs). Full LOMO requires HPC.",
+  "method": "Geneformer fine-tuning (ENSMUSG\u2192ENSG ortholog mapping, rank tokenization, BertForSequenceClassification)",
+  "fold_rr9_dev": {
+    "test_mission": "RR-9",
+    "n_train": 47,
+    "n_test": 20,
+    "device": "mps",
+    "n_epochs": 5,
+    "batch_size": 4,
+    "lr": 2e-05,
+    "best_auroc": 0.54,
+    "ci_low": 0.273,
+    "ci_high": 0.818,
+    "loss_curve": [
+      0.676,
+      0.657,
+      0.645,
+      0.631,
+      0.62
+    ],
+    "auroc_curve": [
+      0.51,
+      0.48,
+      0.51,
+      0.54,
+      0.54
+    ]
+  },
+  "comparison": {
+    "tier1_pca_lr_mean_auroc": 0.86,
+    "geneformer_rr9_fold_auroc": 0.54,
+    "verdict": "Geneformer (dev) substantially underperforms classical ML on small-n (47 train) \u2014 expected, consistent with literature"
+  },
+  "limitations": [
+    "Only 1 of 4 LOMO folds (RR-9 fold)",
+    "Only 5 epochs (HPC needs 10+ epochs)",
+    "Batch size 4 (HPC: 16-32)",
+    "Ortholog coverage ~57%: 42% of genes lost in ENSMUSG->ENSG mapping",
+    "Train avg seq len 1593 vs test avg 618 (RR-9 sparsity)",
+    "Geneformer pretrained on human scRNA, not mouse bulk"
+  ],
+  "next_steps": [
+    "Run full 4-fold LOMO on Cayuga HPC (sbatch hpc_submit_geneformer.sh)",
+    "Use 10 epochs, batch_size=16 on A40 GPU",
+    "Consider layer freezing (only fine-tune classifier head) if overfitting persists",
+    "Report HPC results in PHASE2_RESULTS.md"
+  ]
+}
