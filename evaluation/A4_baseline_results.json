@@ -1,0 +1,75 @@
+{
+  "pca_lr": {
+    "model": "PCA-50 + LogReg",
+    "model_key": "pca_lr",
+    "n_folds": 4,
+    "mean_auroc": 0.923202614379085,
+    "std_auroc": 0.13301697378388436,
+    "min_auroc": 0.6928104575163399,
+    "max_auroc": 1.0,
+    "mean_ci_lower": 0.8776205936920223,
+    "mean_perm_pvalue": 0.03721278721278721,
+    "folds": [
+      {
+        "test_mission": "MHU-1",
+        "model": "PCA-50 + LogReg",
+        "auroc": 1.0,
+        "bootstrap_mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "perm_pvalue": 0.061938061938061936,
+        "n_train": 61,
+        "n_test": 6,
+        "n_genes": 21176,
+        "n_flight_test": 3,
+        "n_ground_test": 3,
+        "train_time_s": 1.97
+      },
+      {
+        "test_mission": "MHU-2",
+        "model": "PCA-50 + LogReg",
+        "auroc": 1.0,
+        "bootstrap_mean": 1.0,
+        "ci_lower": 1.0,
+        "ci_upper": 1.0,
+        "perm_pvalue": 0.061938061938061936,
+        "n_train": 61,
+        "n_test": 6,
+        "n_genes": 21176,
+        "n_flight_test": 3,
+        "n_ground_test": 3,
+        "train_time_s": 3.79
+      },
+      {
+        "test_mission": "RR-6",
+        "model": "PCA-50 + LogReg",
+        "auroc": 0.6928104575163399,
+        "bootstrap_mean": 0.6900933158097755,
+        "ci_lower": 0.5104823747680891,
+        "ci_upper": 0.8651699561403509,
+        "perm_pvalue": 0.023976023976023976,
+        "n_train": 32,
+        "n_test": 35,
+        "n_genes": 21176,
+        "n_flight_test": 17,
+        "n_ground_test": 18,
+        "train_time_s": 0.83
+      },
+      {
+        "test_mission": "RR-9",
+        "model": "PCA-50 + LogReg",
+        "auroc": 1.0,
+        "bootstrap_mean": 1.0,
+        "ci_lower": 0.9999999999999999,
+        "ci_upper": 1.0,
+        "perm_pvalue": 0.000999000999000999,
+        "n_train": 47,
+        "n_test": 20,
+        "n_genes": 21176,
+        "n_flight_test": 10,
+        "n_ground_test": 10,
+        "train_time_s": 0.27
+      }
+    ]
+  }
+}

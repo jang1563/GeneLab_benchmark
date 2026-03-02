@@ -1,0 +1,372 @@
+{
+  "tasks": {
+    "C1": {
+      "train": "liver",
+      "test": "kidney",
+      "n_train": 193,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.7296511627906977,
+        "ci_low": 0.6199601346562722,
+        "ci_high": 0.8297970952752861,
+        "perm_p": 0.00019998000199980003,
+        "n_features": 16326,
+        "n_common_genes": 21768
+      },
+      "method_b": {
+        "auroc": 0.44113372093023256,
+        "ci_low": 0.32698780562409513,
+        "ci_high": 0.5606345999009041,
+        "perm_p": 0.8366163383661633,
+        "n_features": 1128,
+        "n_shared_degs": 1132
+      },
+      "method_c": {
+        "auroc": 0.482921511627907,
+        "ci_low": 0.3617626174654287,
+        "ci_high": 0.5942987000422179,
+        "perm_p": 0.6139386061393861,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0303643416696047
+          ],
+          [
+            "HALLMARK_HEME_METABOLISM",
+            -0.9874931713527608
+          ],
+          [
+            "HALLMARK_BILE_ACID_METABOLISM",
+            -0.9674904053198726
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.735857836918675
+          ],
+          [
+            "HALLMARK_COMPLEMENT",
+            0.6897881761040056
+          ],
+          [
+            "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+            0.6791124297028351
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.5627733458027517
+          ],
+          [
+            "HALLMARK_ALLOGRAFT_REJECTION",
+            -0.5393794901691898
+          ],
+          [
+            "HALLMARK_IL2_STAT5_SIGNALING",
+            -0.39014450455396943
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            -0.3875077378024086
+          ]
+        ]
+      }
+    },
+    "C2": {
+      "train": "liver",
+      "test": "gastrocnemius",
+      "n_train": 193,
+      "n_test": 32,
+      "method_a": {
+        "auroc": 0.5625,
+        "ci_low": 0.36111111111111116,
+        "ci_high": 0.7656402191558441,
+        "perm_p": 0.27587241275872415,
+        "n_features": 14214,
+        "n_common_genes": 18952
+      },
+      "method_b": {
+        "auroc": 0.67578125,
+        "ci_low": 0.4666666666666667,
+        "ci_high": 0.858345588235294,
+        "perm_p": 0.0481951804819518,
+        "n_features": 486,
+        "n_shared_degs": 495
+      },
+      "method_c": {
+        "auroc": 0.8671875,
+        "ci_low": 0.71875,
+        "ci_high": 0.979757085020243,
+        "perm_p": 9.999000099990002e-05,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0303643416696047
+          ],
+          [
+            "HALLMARK_HEME_METABOLISM",
+            -0.9874931713527608
+          ],
+          [
+            "HALLMARK_BILE_ACID_METABOLISM",
+            -0.9674904053198726
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.735857836918675
+          ],
+          [
+            "HALLMARK_COMPLEMENT",
+            0.6897881761040056
+          ],
+          [
+            "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+            0.6791124297028351
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.5627733458027517
+          ],
+          [
+            "HALLMARK_ALLOGRAFT_REJECTION",
+            -0.5393794901691898
+          ],
+          [
+            "HALLMARK_IL2_STAT5_SIGNALING",
+            -0.39014450455396943
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            -0.3875077378024086
+          ]
+        ]
+      }
+    },
+    "C3": {
+      "train": "liver",
+      "test": "thymus",
+      "n_train": 193,
+      "n_test": 67,
+      "method_a": {
+        "auroc": 0.35026737967914434,
+        "ci_low": 0.2210214142475172,
+        "ci_high": 0.4918940598352363,
+        "perm_p": 0.9816018398160185,
+        "n_features": 16385,
+        "n_common_genes": 21847
+      },
+      "method_b": {
+        "auroc": 0.6212121212121213,
+        "ci_low": 0.47746842334494777,
+        "ci_high": 0.7580768671897703,
+        "perm_p": 0.0420957904209579,
+        "n_features": 1978,
+        "n_shared_degs": 1995
+      },
+      "method_c": {
+        "auroc": 0.18449197860962568,
+        "ci_low": 0.08733635373341257,
+        "ci_high": 0.29196804595494114,
+        "perm_p": 1.0,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0303643416696047
+          ],
+          [
+            "HALLMARK_HEME_METABOLISM",
+            -0.9874931713527608
+          ],
+          [
+            "HALLMARK_BILE_ACID_METABOLISM",
+            -0.9674904053198726
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.735857836918675
+          ],
+          [
+            "HALLMARK_COMPLEMENT",
+            0.6897881761040056
+          ],
+          [
+            "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+            0.6791124297028351
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.5627733458027517
+          ],
+          [
+            "HALLMARK_ALLOGRAFT_REJECTION",
+            -0.5393794901691898
+          ],
+          [
+            "HALLMARK_IL2_STAT5_SIGNALING",
+            -0.39014450455396943
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            -0.3875077378024086
+          ]
+        ]
+      }
+    },
+    "C4": {
+      "train": "thymus",
+      "test": "kidney",
+      "n_train": 67,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.5853924418604651,
+        "ci_low": 0.45459724782567595,
+        "ci_high": 0.7089574151350336,
+        "perm_p": 0.08149185081491851,
+        "n_features": 18290,
+        "n_common_genes": 24387
+      },
+      "method_b": {
+        "auroc": 0.5388808139534883,
+        "ci_low": 0.4163780250698722,
+        "ci_high": 0.6560887896825396,
+        "perm_p": 0.26207379262073793,
+        "n_features": 1236,
+        "n_shared_degs": 1246
+      },
+      "method_c": {
+        "auroc": 0.690406976744186,
+        "ci_low": 0.580152351819482,
+        "ci_high": 0.7925386280333669,
+        "perm_p": 0.0004999500049995,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_COAGULATION",
+            1.1746068205720006
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.9047826823059324
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.8843460325831517
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.7470211087334969
+          ],
+          [
+            "HALLMARK_E2F_TARGETS",
+            -0.7337499814365163
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.7059434359576546
+          ],
+          [
+            "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+            -0.6963240393159797
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            0.6687376192253456
+          ],
+          [
+            "HALLMARK_MYC_TARGETS_V1",
+            -0.6620427771951074
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.5154924857050096
+          ]
+        ]
+      }
+    }
+  },
+  "h3_test": {
+    "n_pairs": 4,
+    "pairs": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "method_a_mean": 0.5569527460825768,
+    "method_a_values": [
+      0.7296511627906977,
+      0.5625,
+      0.35026737967914434,
+      0.5853924418604651
+    ],
+    "method_b_mean": 0.5692519765239605,
+    "method_b_values": [
+      0.44113372093023256,
+      0.67578125,
+      0.6212121212121213,
+      0.5388808139534883
+    ],
+    "method_c_mean": 0.5562519917454296,
+    "method_c_values": [
+      0.482921511627907,
+      0.8671875,
+      0.18449197860962568,
+      0.690406976744186
+    ],
+    "c_vs_a_wins": 2,
+    "c_vs_a_total": 4,
+    "c_minus_a_mean": -0.0007007543371471275,
+    "c_minus_a_diffs": [
+      -0.24672965116279078,
+      0.3046875,
+      -0.16577540106951866,
+      0.10501453488372092
+    ],
+    "c_vs_b_wins": 3,
+    "c_vs_b_total": 4
+  },
+  "sensitivity": {
+    "C1": {
+      "shared_missions": [
+        "RR-1",
+        "RR-3"
+      ],
+      "method_a_all": 0.7296511627906977,
+      "method_a_shared_only": 0.6388888888888888,
+      "method_a_excl_shared": 0.6783783783783783,
+      "n_shared_test": 24,
+      "n_non_shared_test": 94
+    },
+    "C2": {
+      "shared_missions": [
+        "RR-1",
+        "RR-9"
+      ],
+      "method_a_all": 0.5625,
+      "method_a_shared_only": 0.59,
+      "method_a_excl_shared": 0.5555555555555556,
+      "n_shared_test": 20,
+      "n_non_shared_test": 12
+    },
+    "C3": {
+      "shared_missions": [
+        "MHU-2",
+        "RR-6",
+        "RR-9"
+      ],
+      "method_a_all": 0.35026737967914434,
+      "method_a_shared_only": 0.35591397849462364,
+      "method_a_excl_shared": 0.0,
+      "n_shared_test": 61,
+      "n_non_shared_test": 6
+    }
+  },
+  "config": {
+    "db": "hallmark",
+    "top_n_pathways": 20,
+    "n_bootstrap": 2000,
+    "n_permutations": 10000,
+    "timestamp": "2026-03-01T12:41:49.374816"
+  }
+}

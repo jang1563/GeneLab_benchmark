@@ -1,0 +1,244 @@
+{
+  "task_id": "A1",
+  "tissue": "liver",
+  "model": "rf",
+  "top_n": 50,
+  "n_folds": 6,
+  "top_genes": {
+    "Atp2b2": {
+      "ensembl": "ENSMUSG00000030302",
+      "mean_abs_shap": 0.0025747892748736
+    },
+    "Clpx": {
+      "ensembl": "ENSMUSG00000015357",
+      "mean_abs_shap": 0.0025424804091588177
+    },
+    "Chka": {
+      "ensembl": "ENSMUSG00000024843",
+      "mean_abs_shap": 0.0023992331764172456
+    },
+    "Tubb2a": {
+      "ensembl": "ENSMUSG00000058672",
+      "mean_abs_shap": 0.0022907970758064707
+    },
+    "Mcu": {
+      "ensembl": "ENSMUSG00000009647",
+      "mean_abs_shap": 0.0019325616824211439
+    },
+    "Slc30a10": {
+      "ensembl": "ENSMUSG00000026614",
+      "mean_abs_shap": 0.0018539629274219038
+    },
+    "Gclc": {
+      "ensembl": "ENSMUSG00000032350",
+      "mean_abs_shap": 0.0017641034967717552
+    },
+    "Gm17230": {
+      "ensembl": "ENSMUSG00000091730",
+      "mean_abs_shap": 0.0015588676905681149
+    },
+    "Slc34a2": {
+      "ensembl": "ENSMUSG00000029188",
+      "mean_abs_shap": 0.0015425091045235936
+    },
+    "Mad2l2": {
+      "ensembl": "ENSMUSG00000029003",
+      "mean_abs_shap": 0.0014569831253862366
+    },
+    "1700010I14Rik": {
+      "ensembl": "ENSMUSG00000023873",
+      "mean_abs_shap": 0.001446249691953943
+    },
+    "ENSMUSG00000112275": {
+      "ensembl": "ENSMUSG00000112275",
+      "mean_abs_shap": 0.0014197509446271263
+    },
+    "Lhx6": {
+      "ensembl": "ENSMUSG00000026890",
+      "mean_abs_shap": 0.0014028121634403383
+    },
+    "Svil": {
+      "ensembl": "ENSMUSG00000024236",
+      "mean_abs_shap": 0.0013302664698892654
+    },
+    "Celsr1": {
+      "ensembl": "ENSMUSG00000016028",
+      "mean_abs_shap": 0.001315196568052104
+    },
+    "Npas2": {
+      "ensembl": "ENSMUSG00000026077",
+      "mean_abs_shap": 0.0013089775348920998
+    },
+    "Dhrs9": {
+      "ensembl": "ENSMUSG00000027068",
+      "mean_abs_shap": 0.0012971553470183834
+    },
+    "Dbp": {
+      "ensembl": "ENSMUSG00000059824",
+      "mean_abs_shap": 0.001283852654674695
+    },
+    "ENSMUSG00000112794": {
+      "ensembl": "ENSMUSG00000112794",
+      "mean_abs_shap": 0.0012801612786332137
+    },
+    "Pde9a": {
+      "ensembl": "ENSMUSG00000041119",
+      "mean_abs_shap": 0.0012523446299560845
+    },
+    "Pgd": {
+      "ensembl": "ENSMUSG00000028961",
+      "mean_abs_shap": 0.001238209323633432
+    },
+    "Mthfr": {
+      "ensembl": "ENSMUSG00000029009",
+      "mean_abs_shap": 0.001236296362642831
+    },
+    "Tars1": {
+      "ensembl": "ENSMUSG00000022241",
+      "mean_abs_shap": 0.0012313946169232827
+    },
+    "Rnf125": {
+      "ensembl": "ENSMUSG00000033107",
+      "mean_abs_shap": 0.0012278374594885974
+    },
+    "Hmgcs1": {
+      "ensembl": "ENSMUSG00000093930",
+      "mean_abs_shap": 0.0012080075853156005
+    },
+    "Bmal1": {
+      "ensembl": "ENSMUSG00000055116",
+      "mean_abs_shap": 0.0012075992243412005
+    },
+    "Upp2": {
+      "ensembl": "ENSMUSG00000026839",
+      "mean_abs_shap": 0.0011711070551802085
+    },
+    "ENSMUSG00000073835": {
+      "ensembl": "ENSMUSG00000073835",
+      "mean_abs_shap": 0.0011507639088800708
+    },
+    "Plxna2": {
+      "ensembl": "ENSMUSG00000026640",
+      "mean_abs_shap": 0.0011097569595912966
+    },
+    "Ypel2": {
+      "ensembl": "ENSMUSG00000018427",
+      "mean_abs_shap": 0.0010999805702483361
+    },
+    "Arhgap18": {
+      "ensembl": "ENSMUSG00000039031",
+      "mean_abs_shap": 0.001091166077309813
+    },
+    "Kcnn3": {
+      "ensembl": "ENSMUSG00000000794",
+      "mean_abs_shap": 0.0010813729008047502
+    },
+    "Coq8a": {
+      "ensembl": "ENSMUSG00000026489",
+      "mean_abs_shap": 0.0010759001678082257
+    },
+    "4930459C07Rik": {
+      "ensembl": "ENSMUSG00000112762",
+      "mean_abs_shap": 0.0010581403292170457
+    },
+    "Ciart": {
+      "ensembl": "ENSMUSG00000038550",
+      "mean_abs_shap": 0.0010547012971996365
+    },
+    "Nfil3": {
+      "ensembl": "ENSMUSG00000056749",
+      "mean_abs_shap": 0.0010235257750734663
+    },
+    "Ptgr1": {
+      "ensembl": "ENSMUSG00000028378",
+      "mean_abs_shap": 0.0010032981033604145
+    },
+    "Dnmt3b": {
+      "ensembl": "ENSMUSG00000027478",
+      "mean_abs_shap": 0.0009943846472465526
+    },
+    "Il22ra1": {
+      "ensembl": "ENSMUSG00000037157",
+      "mean_abs_shap": 0.0009756795805429061
+    },
+    "Gm17597": {
+      "ensembl": "ENSMUSG00000097613",
+      "mean_abs_shap": 0.0009755341223950008
+    },
+    "Gm35696": {
+      "ensembl": "ENSMUSG00000112527",
+      "mean_abs_shap": 0.0009698869641647324
+    },
+    "Inhba": {
+      "ensembl": "ENSMUSG00000041324",
+      "mean_abs_shap": 0.0009606272876906786
+    },
+    "Ciita": {
+      "ensembl": "ENSMUSG00000022504",
+      "mean_abs_shap": 0.0009598022164602876
+    },
+    "Syne1": {
+      "ensembl": "ENSMUSG00000096054",
+      "mean_abs_shap": 0.0009596053689782123
+    },
+    "P2ry14|F630111L10Rik": {
+      "ensembl": "ENSMUSG00000036381",
+      "mean_abs_shap": 0.0009363084386796555
+    },
+    "Rfx4": {
+      "ensembl": "ENSMUSG00000020037",
+      "mean_abs_shap": 0.0009182351946768127
+    },
+    "1810008I18Rik": {
+      "ensembl": "ENSMUSG00000100094",
+      "mean_abs_shap": 0.000914639136834172
+    },
+    "Dsp": {
+      "ensembl": "ENSMUSG00000054889",
+      "mean_abs_shap": 0.0009118555948107836
+    },
+    "Ttf2": {
+      "ensembl": "ENSMUSG00000033222",
+      "mean_abs_shap": 0.0009050636972950336
+    },
+    "ENSMUSG00000120919": {
+      "ensembl": "ENSMUSG00000120919",
+      "mean_abs_shap": 0.0009003334423765237
+    }
+  },
+  "target_gene_ranks": {
+    "Angptl4": {
+      "rank": 4767,
+      "in_top_n": false
+    },
+    "Pck1": {
+      "rank": 17193,
+      "in_top_n": false
+    },
+    "Fasn": {
+      "rank": 1017,
+      "in_top_n": false
+    },
+    "Ppara": {
+      "rank": 2551,
+      "in_top_n": false
+    },
+    "Acox1": {
+      "rank": 9925,
+      "in_top_n": false
+    },
+    "Cyp7a1": {
+      "rank": 225,
+      "in_top_n": false
+    },
+    "Hmgcr": {
+      "rank": 10877,
+      "in_top_n": false
+    },
+    "Scd1": {
+      "rank": 8246,
+      "in_top_n": false
+    }
+  },
+  "condition3_pass": false
+}
