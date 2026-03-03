@@ -1,0 +1,52 @@
+{
+  "task_id": "A6",
+  "model_name": "PCA-LR_baseline_v1",
+  "model_description": "StandardScaler + PCA(min(50,n_train-1)) + LogReg(L2, C=1.0, balanced), LOMO Tier 1 baseline \u2014 eye",
+  "tier": "1",
+  "submission_date": "2026-03-02",
+  "predictions": {
+    "fold_RR-1_test": {
+      "Mmus_C57-6J_EYE_GC_Rep1_M33": 0.02801645,
+      "Mmus_C57-6J_EYE_GC_Rep2_M34": 0.16271111,
+      "Mmus_C57-6J_EYE_GC_Rep3_M35": 0.07627639,
+      "Mmus_C57-6J_EYE_GC_Rep4_M36": 0.87800084,
+      "Mmus_C57-6J_EYE_GC_Rep5_M37": 0.86474777,
+      "Mmus_C57-6J_EYE_GC_Rep6_M38": 0.02458282,
+      "Mmus_C57-6J_EYE_FLT_Rep1_M23": 0.37508114,
+      "Mmus_C57-6J_EYE_FLT_Rep2_M24": 0.67875353,
+      "Mmus_C57-6J_EYE_FLT_Rep3_M25": 0.33366133,
+      "Mmus_C57-6J_EYE_FLT_Rep4_M26": 0.86001693,
+      "Mmus_C57-6J_EYE_FLT_Rep5_M27": 0.04011027,
+      "Mmus_C57-6J_EYE_FLT_Rep6_M28": 0.40490472
+    },
+    "fold_RR-3_test": {
+      "Mmus_BAL-TAL_LRTN_GC_Rep1_G6": 0.9953455,
+      "Mmus_BAL-TAL_LRTN_GC_Rep2_G8": 0.99417283,
+      "Mmus_BAL-TAL_LRTN_GC_Rep3_G9": 0.98516001,
+      "Mmus_BAL-TAL_RRTN_GC_Rep4_G10": 0.99988127,
+      "Mmus_BAL-TAL_LRTN_FLT_Rep1_F6": 0.99997324,
+      "Mmus_BAL-TAL_LRTN_FLT_Rep2_F7": 0.99932699,
+      "Mmus_BAL-TAL_LRTN_FLT_Rep3_F8": 0.99917361,
+      "Mmus_BAL-TAL_LRTN_FLT_Rep4_F9": 0.99997003,
+      "Mmus_BAL-TAL_LRTN_FLT_Rep5_F10": 0.99992872
+    },
+    "fold_TBD_test": {
+      "M21": 0.99998884,
+      "M22": 0.99728071,
+      "M23": 0.99901078,
+      "M24": 0.99888247,
+      "M25": 0.99998903,
+      "M26": 0.99999652,
+      "M27": 0.99997869,
+      "M29": 0.99723723,
+      "M30": 0.99981015,
+      "M31": 0.27379574,
+      "M32": 0.99683622,
+      "M33": 0.99954899,
+      "M34": 0.99512095,
+      "M35": 0.99582403,
+      "M36": 0.99569655,
+      "M37": 0.99984325
+    }
+  }
+}

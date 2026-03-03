@@ -59,8 +59,18 @@ cp -r /path/to/GeneLab_benchmark /athena/cayuga_XXXX/scratch/$USER/
 # 4. 사전 토큰화 (CPU, 로그인 노드 OK, ~5분)
 cd /athena/cayuga_XXXX/scratch/$USER/GeneLab_benchmark
 conda activate geneformer
-python scripts/geneformer_tokenize.py --task A4 --model-version v1
+python scripts/geneformer_tokenize.py \
+    --task A4 \
+    --task-dir A4_thymus_lomo \
+    --model-version v1
 # → tasks/A4_thymus_lomo/fold_*/geneformer_tokens/v1/ 에 저장됨
+
+# Mouse-Geneformer 사용 시 (local dictionary 경로 명시)
+python scripts/geneformer_tokenize.py \
+    --task A4 \
+    --task-dir A4_thymus_lomo \
+    --model-version mouse_gf \
+    --mouse-gf-base /athena/cayuga_XXXX/scratch/$USER/GeneLab_benchmark/models
 ```
 
 ---

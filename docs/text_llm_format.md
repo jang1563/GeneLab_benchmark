@@ -246,6 +246,12 @@ Text LLM submissions are evaluated identically to Tier 1/2:
 python scripts/evaluate_submission.py \
     --submission GPT-4o_zeroshot_A4.json \
     --task A4
+
+# If task ID is ambiguous (e.g., A1), set task directory explicitly
+python scripts/evaluate_submission.py \
+    --submission GPT-4o_zeroshot_A1.json \
+    --task A1 \
+    --task-dir A1_liver_lomo
 ```
 
 Output stored to:
