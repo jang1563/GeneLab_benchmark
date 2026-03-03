@@ -1,0 +1,54 @@
+{
+  "task_id": "A6",
+  "model_name": "PCA-LR_baseline_v1",
+  "model_description": "StandardScaler + PCA(min(50,n_train-1)) + LogReg(L2, C=1.0, balanced), LOMO Tier 1 baseline \u2014 eye",
+  "submission_date": "2026-03-02",
+  "n_folds": 3,
+  "fold_results": [
+    {
+      "fold": "fold_RR-1_test",
+      "n_test": 12,
+      "n_flight": 6,
+      "n_ground": 6,
+      "auroc": 0.6111111111111112,
+      "ci_lower": 0.17142857142857137,
+      "ci_upper": 1.0,
+      "perm_p": 0.2897102897102897
+    },
+    {
+      "fold": "fold_RR-3_test",
+      "n_test": 9,
+      "n_flight": 5,
+      "n_ground": 4,
+      "auroc": 0.9,
+      "ci_lower": 0.5555555555555556,
+      "ci_upper": 1.0,
+      "perm_p": 0.03896103896103896
+    },
+    {
+      "fold": "fold_TBD_test",
+      "n_test": 16,
+      "n_flight": 9,
+      "n_ground": 7,
+      "auroc": 0.8571428571428572,
+      "ci_lower": 0.59375,
+      "ci_upper": 1.0,
+      "perm_p": 0.005994005994005994
+    }
+  ],
+  "summary": {
+    "mean_auroc": 0.7894179894179895,
+    "std_auroc": 0.12729019551698217,
+    "mean_ci_lower": 0.440244708994709,
+    "overall_auroc_pooled": 0.7205882352941176,
+    "overall_ci_lower": 0.5465838509316769,
+    "overall_ci_upper": 0.869568511198946,
+    "mean_perm_p": 0.11155511155511157,
+    "go_nogo": false
+  },
+  "thresholds": {
+    "auroc": 0.7,
+    "ci_lower": 0.5,
+    "perm_p": 0.05
+  }
+}

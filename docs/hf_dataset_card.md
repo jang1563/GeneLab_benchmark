@@ -13,6 +13,9 @@ tags:
   - cross-mission-transfer
   - mouse
   - rna-seq
+  - geneformer
+  - foundation-model
+  - pathway-analysis
 size_categories:
   - 1GB<n<10GB
 language:
@@ -24,7 +27,7 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 **A public benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v1.0-alpha | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
+Version: v1.0-alpha | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 
@@ -35,6 +38,17 @@ GeneLab Benchmark provides standardized train/test splits for evaluating how wel
 **Core challenge**: Train a model on one spaceflight mission's RNA-seq data. Can it classify samples from a different mission it has never seen?
 
 **Data source**: NASA Open Science Data Repository (OSDR) — mouse multi-tissue bulk RNA-seq from ISS and ground control missions (C57BL/6J strain, Track 2a).
+
+### Benchmark Scope
+
+| Dimension | Coverage |
+|---|---|
+| Tissues | 6 (Liver, Gastrocnemius, Kidney, Thymus, Skin, Eye) |
+| ISS Missions | 17 (RR-1 through RR-9, MHU-1, MHU-2, etc.) |
+| Verified Studies | 24 OSD accessions |
+| Samples | ~450 (binary Flight/Ground) |
+| Task Categories | 7 (A–D, J, NC, Validation) |
+| Evaluation Tasks | 25+ |
 
 ---
 
@@ -91,18 +105,54 @@ Basal Control (BC) and Artificial Gravity (AG) samples are excluded from binary 
 
 ---
 
-## Task Statistics
+## Phase 1 Results
 
 ### Category A — Spaceflight Detection (LOMO)
 
-| Task | Tissue | Missions | Samples (binary) | Mean AUROC | Status |
-|------|--------|---------|-----------------|-----------|--------|
-| A2 | Gastrocnemius | RR-1, RR-5, RR-9 | 32 | 0.907 | ✓ GO |
-| A4 | Thymus | MHU-1, MHU-2, RR-6, RR-9 | 67 | 0.923 | ✓ GO |
-| A5 | Skin | MHU-2, RR-6, RR-7 | 102 | 0.821 | ✓ GO |
-| A6 | Eye | RR-1, RR-3, TBD | 37 | 0.915† | ✓ GO (pathway) |
+| Task | Tissue | Missions | Samples | Mean AUROC | Status |
+|------|--------|---------|---------|-----------|--------|
+| A4 | Thymus | MHU-1, MHU-2, RR-6, RR-9 | 67 | **0.923** | ✓ GO |
+| A2 | Gastrocnemius | RR-1, RR-5, RR-9 | 32 | **0.907** | ✓ GO |
+| A5 | Skin | MHU-2, RR-6, RR-7 | 102 | **0.821** | ✓ GO |
+| A6 | Eye (pathway) | RR-1, RR-3, TBD | 37 | **0.915**† | ✓ GO |
 
 †A6 gene-level AUROC=0.811 (CI lower fails); pathway-level (GSVA Hallmark) AUROC=0.915 (all conditions pass).
+
+### Category B — Cross-Mission Transfer
+
+| Tissue | Mean AUROC | 95% CI | N pairs | Tier |
+|---|---|---|---|---|
+| Thymus | **0.860** | [0.763, 0.953] | 12 | 1 |
+| Gastrocnemius | **0.801** | [0.653, 0.944] | 6 | 1 |
+| Skin | **0.772** | [0.691, 0.834] | 6 | 2 |
+| Eye | 0.754 | [0.688, 0.838] | 6 | 2 |
+| Liver | 0.577 | [0.492, 0.666] | 30 | 3 |
+| Kidney | 0.555 | [0.397, 0.681] | 6 | 3 |
+
+### Key Scientific Findings
+
+| Hypothesis | Verdict | Evidence |
+|---|---|---|
+| H1: Liver most consistent cross-mission | **REFUTED** | Thymus (0.860) >> Liver (0.577) |
+| H2: Transfer failure = biology, not batch | **SUPPORTED** | NES conservation r=0.9, D3 pathway F1=0.06 |
+| H3: Pathway > gene conservation | **CONDITIONALLY SUPPORTED** | Kidney rescue (+0.31), Eye (+0.13), but tissue-pair dependent |
+
+### Validation
+
+- **Cell 2020 concordance**: 71.7% pathway direction match across 5 tissues (vs Beheshti et al., PMID 33242417)
+- **Gene SHAP overlap**: 10.7% top-50 overlap (47× above random chance)
+- **Negative controls**: NC1 permutation (0.50 ± 0.03) and NC2 housekeeping (0.49–0.55) both PASS
+
+### Biological Enrichment (fGSEA Hallmark)
+
+| Tissue | Top Pathways |
+|---|---|
+| Thymus | E2F_TARGETS, G2M_CHECKPOINT, IFN-gamma |
+| Gastrocnemius | OXIDATIVE_PHOSPHORYLATION, MYOGENESIS |
+| Eye | OXIDATIVE_PHOSPHORYLATION (dominant 3/3 missions) |
+| Skin | E2F_TARGETS, EPITHELIAL_MESENCHYMAL_TRANSITION |
+| Liver | OXIDATIVE_PHOSPHORYLATION, FATTY_ACID_METABOLISM |
+| Kidney | MTORC1_SIGNALING, CHOLESTEROL_HOMEOSTASIS |
 
 ---
 
@@ -160,9 +210,9 @@ submission = {
     "task_id": "A5",
     "model_name": "MyModel_v1",
     "predictions": {
-        "fold_MHU-2_test": {"sample_id_1": 0.92, ...},
-        "fold_RR-6_test":  {...},
-        "fold_RR-7_test":  {...}
+        "fold_MHU-2_test": {"sample_id_1": 0.92, "...": "..."},
+        "fold_RR-6_test":  {"...": "..."},
+        "fold_RR-7_test":  {"...": "..."}
     }
 }
 
@@ -170,8 +220,15 @@ submission = {
 # python scripts/evaluate_submission.py --submission my_submission.json --task A5
 ```
 
-Metrics: Mean AUROC + 95% bootstrap CI + permutation p-value.
-GO criteria: AUROC > 0.70 AND CI lower > 0.50 AND perm_p < 0.05.
+**GO criteria**: Mean AUROC > 0.70 AND 95% CI lower > 0.50 AND perm_p < 0.05.
+
+### Model Tracks
+
+| Track | Examples | Input Format |
+|-------|---------|-------------|
+| **Tier 1 — Classical ML** | LR, RF, XGBoost, PCA-LR | Tabular gene × sample |
+| **Tier 2 — Foundation Models** | Geneformer, scGPT | Gene rank order (tokenized) |
+| **Tier 3 — Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list |
 
 ---
 
@@ -181,9 +238,18 @@ All data derived from publicly available NASA OSDR datasets:
 
 | OSD ID | Tissue | Mission | n (binary) |
 |--------|--------|---------|-----------|
+| OSD-48 | Liver | RR-1 | 18 |
+| OSD-137 | Liver | RR-3 | 20 |
+| OSD-245 | Liver | RR-6 | 48 |
+| OSD-379 | Liver | RR-8 | 40 |
+| OSD-242 | Liver | RR-9 | 39 |
+| OSD-686 | Liver | MHU-2 | 28 |
 | OSD-101 | Gastrocnemius | RR-1 | 12 |
 | OSD-401 | Gastrocnemius | RR-5 | 12 |
 | OSD-326 | Gastrocnemius | RR-9 | 8 |
+| OSD-102 | Kidney | RR-1 | 47 |
+| OSD-163 | Kidney | RR-3 | 32 |
+| OSD-253 | Kidney | RR-7 | 39 |
 | OSD-289 | Thymus | MHU-1/MHU-2 | 12 |
 | OSD-244 | Thymus | RR-6 | 35 |
 | OSD-421 | Thymus | RR-9 | 20 |
@@ -212,7 +278,7 @@ All data derived from publicly available NASA OSDR datasets:
 
 ```bibtex
 @dataset{kang2026genelab,
-  title   = {GeneLab Spaceflight Transcriptomics Benchmark},
+  title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},

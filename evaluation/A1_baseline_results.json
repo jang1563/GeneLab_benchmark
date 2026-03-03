@@ -3,12 +3,12 @@
     "model": "Logistic Regression (ElasticNet)",
     "model_key": "lr",
     "n_folds": 6,
-    "mean_auroc": 0.605479969765684,
-    "std_auroc": 0.1773296838035812,
+    "mean_auroc": 0.5880112863858994,
+    "std_auroc": 0.16092600076485955,
     "min_auroc": 0.3333333333333333,
-    "max_auroc": 0.85,
-    "mean_ci_lower": 0.3274105409666434,
-    "mean_perm_pvalue": 0.30883333333333335,
+    "max_auroc": 0.8157894736842105,
+    "mean_ci_lower": 0.30750524353480796,
+    "mean_perm_pvalue": 0.31934731934731936,
     "folds": [
       {
         "test_mission": "MHU-2",
@@ -17,88 +17,88 @@
         "bootstrap_mean": 0.3375170765027322,
         "ci_lower": 0.0,
         "ci_upper": 1.0,
-        "perm_pvalue": 0.798,
+        "perm_pvalue": 0.7892107892107892,
         "n_train": 187,
         "n_test": 6,
         "n_genes": 17240,
         "n_flight_test": 3,
         "n_ground_test": 3,
-        "train_time_s": 86.12
+        "train_time_s": 434.9
       },
       {
         "test_mission": "RR-1",
         "model": "Logistic Regression (ElasticNet)",
-        "auroc": 0.7551020408163265,
-        "bootstrap_mean": 0.7496661402089974,
-        "ci_lower": 0.4081632653061225,
+        "auroc": 0.7142857142857142,
+        "bootstrap_mean": 0.7056555856841571,
+        "ci_lower": 0.33333333333333337,
         "ci_upper": 1.0,
-        "perm_pvalue": 0.058,
+        "perm_pvalue": 0.08191808191808192,
         "n_train": 179,
         "n_test": 14,
         "n_genes": 17240,
         "n_flight_test": 7,
         "n_ground_test": 7,
-        "train_time_s": 121.33
+        "train_time_s": 713.27
       },
       {
         "test_mission": "RR-3",
         "model": "Logistic Regression (ElasticNet)",
-        "auroc": 0.4444444444444444,
-        "bootstrap_mean": 0.44488996512746515,
-        "ci_lower": 0.08571428571428569,
-        "ci_upper": 0.8571428571428571,
-        "perm_pvalue": 0.664,
+        "auroc": 0.4722222222222222,
+        "bootstrap_mean": 0.47203153559403566,
+        "ci_lower": 0.11428571428571428,
+        "ci_upper": 0.875,
+        "perm_pvalue": 0.5974025974025974,
         "n_train": 181,
         "n_test": 12,
         "n_genes": 17240,
         "n_flight_test": 6,
         "n_ground_test": 6,
-        "train_time_s": 141.83
+        "train_time_s": 363.19
       },
       {
         "test_mission": "RR-6",
         "model": "Logistic Regression (ElasticNet)",
-        "auroc": 0.85,
-        "bootstrap_mean": 0.8510575718225261,
-        "ci_lower": 0.7131578947368421,
-        "ci_upper": 0.952390873015873,
-        "perm_pvalue": 0.0,
+        "auroc": 0.8157894736842105,
+        "bootstrap_mean": 0.8160799203047215,
+        "ci_lower": 0.6715515194681861,
+        "ci_upper": 0.93057208994709,
+        "perm_pvalue": 0.000999000999000999,
         "n_train": 154,
         "n_test": 39,
         "n_genes": 17240,
         "n_flight_test": 20,
         "n_ground_test": 19,
-        "train_time_s": 111.39
+        "train_time_s": 134.98
       },
       {
         "test_mission": "RR-8",
         "model": "Logistic Regression (ElasticNet)",
-        "auroc": 0.6785714285714286,
-        "bootstrap_mean": 0.6780963955234574,
-        "ci_lower": 0.5526430015078116,
-        "ci_upper": 0.7939902252003315,
-        "perm_pvalue": 0.002,
+        "auroc": 0.6638655462184873,
+        "bootstrap_mean": 0.663380574598926,
+        "ci_lower": 0.5353847036454236,
+        "ci_upper": 0.7764255339255339,
+        "perm_pvalue": 0.005994005994005994,
         "n_train": 90,
         "n_test": 103,
         "n_genes": 17240,
         "n_flight_test": 35,
         "n_ground_test": 68,
-        "train_time_s": 30.12
+        "train_time_s": 61.44
       },
       {
         "test_mission": "RR-9",
         "model": "Logistic Regression (ElasticNet)",
-        "auroc": 0.5714285714285714,
-        "bootstrap_mean": 0.5798085249560267,
-        "ci_lower": 0.20478479853479853,
-        "ci_upper": 0.9017857142857143,
-        "perm_pvalue": 0.331,
+        "auroc": 0.5285714285714286,
+        "bootstrap_mean": 0.5388686529366897,
+        "ci_lower": 0.19047619047619047,
+        "ci_upper": 0.8672619047619048,
+        "perm_pvalue": 0.4405594405594406,
         "n_train": 174,
         "n_test": 19,
         "n_genes": 17240,
         "n_flight_test": 5,
         "n_ground_test": 14,
-        "train_time_s": 157.0
+        "train_time_s": 124.32
       }
     ]
   },
@@ -111,7 +111,7 @@
     "min_auroc": 0.22222222222222224,
     "max_auroc": 0.7947368421052632,
     "mean_ci_lower": 0.32645985593739174,
-    "mean_perm_pvalue": 0.28700000000000003,
+    "mean_perm_pvalue": 0.2877122877122877,
     "folds": [
       {
         "test_mission": "MHU-2",
@@ -120,13 +120,13 @@
         "bootstrap_mean": 0.2298611111111111,
         "ci_lower": 0.0,
         "ci_upper": 0.78125,
-        "perm_pvalue": 0.904,
+        "perm_pvalue": 0.9040959040959041,
         "n_train": 187,
         "n_test": 6,
         "n_genes": 17240,
         "n_flight_test": 3,
         "n_ground_test": 3,
-        "train_time_s": 0.9
+        "train_time_s": 0.2
       },
       {
         "test_mission": "RR-1",
@@ -135,13 +135,13 @@
         "bootstrap_mean": 0.6738565914244486,
         "ci_lower": 0.3333333333333333,
         "ci_upper": 0.9396590909090907,
-        "perm_pvalue": 0.17,
+        "perm_pvalue": 0.17082917082917082,
         "n_train": 179,
         "n_test": 14,
         "n_genes": 17240,
         "n_flight_test": 7,
         "n_ground_test": 7,
-        "train_time_s": 1.53
+        "train_time_s": 0.11
       },
       {
         "test_mission": "RR-3",
@@ -150,13 +150,13 @@
         "bootstrap_mean": 0.4887829094516594,
         "ci_lower": 0.125,
         "ci_upper": 0.875,
-        "perm_pvalue": 0.537,
+        "perm_pvalue": 0.5374625374625375,
         "n_train": 181,
         "n_test": 12,
         "n_genes": 17240,
         "n_flight_test": 6,
         "n_ground_test": 6,
-        "train_time_s": 0.44
+        "train_time_s": 0.32
       },
       {
         "test_mission": "RR-6",
@@ -165,13 +165,13 @@
         "bootstrap_mean": 0.7967140699362866,
         "ci_lower": 0.6209483937115516,
         "ci_upper": 0.9342763157894737,
-        "perm_pvalue": 0.0,
+        "perm_pvalue": 0.000999000999000999,
         "n_train": 154,
         "n_test": 39,
         "n_genes": 17240,
         "n_flight_test": 20,
         "n_ground_test": 19,
-        "train_time_s": 0.22
+        "train_time_s": 0.23
       },
       {
         "test_mission": "RR-8",
@@ -180,7 +180,7 @@
         "bootstrap_mean": 0.6169431118116003,
         "ci_lower": 0.48451213080168776,
         "ci_upper": 0.7434452087731136,
-        "perm_pvalue": 0.024,
+        "perm_pvalue": 0.024975024975024976,
         "n_train": 90,
         "n_test": 103,
         "n_genes": 17240,
@@ -195,13 +195,13 @@
         "bootstrap_mean": 0.7192897565594234,
         "ci_lower": 0.39496527777777773,
         "ci_upper": 0.9666666666666668,
-        "perm_pvalue": 0.087,
+        "perm_pvalue": 0.08791208791208792,
         "n_train": 174,
         "n_test": 19,
         "n_genes": 17240,
         "n_flight_test": 5,
         "n_ground_test": 14,
-        "train_time_s": 0.31
+        "train_time_s": 0.14
       }
     ]
   },
@@ -214,7 +214,7 @@
     "min_auroc": 0.2777777777777778,
     "max_auroc": 0.8191176470588235,
     "mean_ci_lower": 0.32091226437596226,
-    "mean_perm_pvalue": 0.32983333333333337,
+    "mean_perm_pvalue": 0.3305028305028306,
     "folds": [
       {
         "test_mission": "MHU-2",
@@ -223,13 +223,13 @@
         "bootstrap_mean": 0.2686219262295082,
         "ci_lower": 0.0,
         "ci_upper": 0.7916666666666667,
-        "perm_pvalue": 0.826,
+        "perm_pvalue": 0.8261738261738262,
         "n_train": 187,
         "n_test": 6,
         "n_genes": 17240,
         "n_flight_test": 3,
         "n_ground_test": 3,
-        "train_time_s": 0.84
+        "train_time_s": 0.3
       },
       {
         "test_mission": "RR-1",
@@ -238,13 +238,13 @@
         "bootstrap_mean": 0.6923754230888159,
         "ci_lower": 0.30203125000000003,
         "ci_upper": 1.0,
-        "perm_pvalue": 0.096,
+        "perm_pvalue": 0.0969030969030969,
         "n_train": 179,
         "n_test": 14,
         "n_genes": 17240,
         "n_flight_test": 7,
         "n_ground_test": 7,
-        "train_time_s": 0.52
+        "train_time_s": 0.27
       },
       {
         "test_mission": "RR-3",
@@ -253,13 +253,13 @@
         "bootstrap_mean": 0.4961105294011544,
         "ci_lower": 0.12473214285714287,
         "ci_upper": 0.8611111111111112,
-        "perm_pvalue": 0.544,
+        "perm_pvalue": 0.5444555444555444,
         "n_train": 181,
         "n_test": 12,
         "n_genes": 17240,
         "n_flight_test": 6,
         "n_ground_test": 6,
-        "train_time_s": 1.04
+        "train_time_s": 0.24
       },
       {
         "test_mission": "RR-6",
@@ -268,13 +268,13 @@
         "bootstrap_mean": 0.7450327573601797,
         "ci_lower": 0.5788018317230273,
         "ci_upper": 0.8921240601503759,
-        "perm_pvalue": 0.006,
+        "perm_pvalue": 0.006993006993006993,
         "n_train": 154,
         "n_test": 39,
         "n_genes": 17240,
         "n_flight_test": 20,
         "n_ground_test": 19,
-        "train_time_s": 0.79
+        "train_time_s": 0.24
       },
       {
         "test_mission": "RR-8",
@@ -283,13 +283,13 @@
         "bootstrap_mean": 0.8183689807913889,
         "ci_lower": 0.7199083616756032,
         "ci_upper": 0.9059479171857093,
-        "perm_pvalue": 0.0,
+        "perm_pvalue": 0.000999000999000999,
         "n_train": 90,
         "n_test": 103,
         "n_genes": 17240,
         "n_flight_test": 35,
         "n_ground_test": 68,
-        "train_time_s": 0.52
+        "train_time_s": 0.22
       },
       {
         "test_mission": "RR-9",
@@ -298,13 +298,13 @@
         "bootstrap_mean": 0.49627165097908366,
         "ci_lower": 0.19999999999999996,
         "ci_upper": 0.8125,
-        "perm_pvalue": 0.507,
+        "perm_pvalue": 0.5074925074925075,
         "n_train": 174,
         "n_test": 19,
         "n_genes": 17240,
         "n_flight_test": 5,
         "n_ground_test": 14,
-        "train_time_s": 0.38
+        "train_time_s": 0.28
       }
     ]
   }

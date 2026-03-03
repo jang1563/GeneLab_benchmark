@@ -44,6 +44,43 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TASKS_DIR = BASE_DIR / "tasks"
 RESULTS_DIR = BASE_DIR / "evaluation"
 
+def resolve_task_dir(task_id: str, combat: bool = False, task_dir_name=None) -> Path:
+    """
+    Resolve a single task directory deterministically.
+    - If task_dir_name is provided, use it (with task_id consistency checks).
+    - Otherwise, require exactly one matching default directory.
+    """
+    if task_dir_name:
+        task_dir = TASKS_DIR / task_dir_name
+        if not task_dir.exists() or not task_dir.is_dir():
+            raise ValueError(f"Task directory not found: {task_dir}")
+        if not task_dir.name.startswith(f"{task_id}_"):
+            raise ValueError(
+                f"--task-dir '{task_dir.name}' does not match task_id '{task_id}'"
+            )
+        if combat and not task_dir.name.endswith("_lomo_combat"):
+            raise ValueError(
+                f"--combat requires a '_lomo_combat' directory, got '{task_dir.name}'"
+            )
+        return task_dir
+
+    suffix = "_lomo_combat" if combat else "_lomo"
+    candidates = sorted(
+        d for d in TASKS_DIR.iterdir()
+        if d.is_dir() and d.name.startswith(f"{task_id}_") and d.name.endswith(suffix)
+    )
+    if not candidates:
+        raise ValueError(
+            f"No task directory found for {task_id} (expected suffix: {suffix}). "
+            f"Use --task-dir to select explicitly."
+        )
+    if len(candidates) > 1:
+        names = ", ".join(d.name for d in candidates)
+        raise ValueError(
+            f"Ambiguous task_id '{task_id}': {names}. Use --task-dir to select one."
+        )
+    return candidates[0]
+
 # ── Metric functions (DD-08) ───────────────────────────────────────────────────
 
 def bootstrap_auroc(y_true: np.ndarray, y_score: np.ndarray,
@@ -175,7 +212,7 @@ MODELS = {
 
 def evaluate_fold(fold_dir: Path, model_name: str, model,
                   n_bootstrap: int = 1000, n_perm: int = 1000,
-                  verbose: bool = True) -> dict | None:
+                  verbose: bool = True) -> dict:
     """
     Evaluate one model on one LOMO fold.
     Returns result dict with AUROC, CI, p-value.
@@ -268,19 +305,19 @@ def evaluate_fold(fold_dir: Path, model_name: str, model,
 
 def evaluate_task(task_id: str, model_names: list[str],
                   n_bootstrap: int = 1000, n_perm: int = 1000,
-                  verbose: bool = True, combat: bool = False) -> dict:
+                  verbose: bool = True, combat: bool = False,
+                  task_dir_name=None) -> dict:
     """Run all models on all folds for a task."""
 
-    # Find task directory — support _lomo and _lomo_combat variants
-    suffix = "_combat" if combat else ""
-    task_dirs = list(TASKS_DIR.glob(f"{task_id}_*_lomo{suffix}"))
-    if not task_dirs:
-        print(f"[ERROR] No task directory found for {task_id}")
-        print(f"        Run: python scripts/generate_tasks.py --task {task_id}")
+    try:
+        task_dir = resolve_task_dir(task_id, combat=combat, task_dir_name=task_dir_name)
+    except ValueError as e:
+        print(f"[ERROR] {e}")
         return {}
-
-    task_dir = task_dirs[0]
-    fold_dirs = sorted([d for d in task_dir.iterdir() if d.is_dir() and d.name.startswith("fold_")])
+    fold_dirs = sorted(
+        d for d in task_dir.iterdir()
+        if d.is_dir() and d.name.startswith("fold_") and "holdout" not in d.name
+    )
 
     if not fold_dirs:
         print(f"[ERROR] No folds found in {task_dir}")
@@ -426,6 +463,8 @@ def parse_args():
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--combat", action="store_true",
                         help="Use ComBat-seq corrected task splits (_lomo_combat dir)")
+    parser.add_argument("--task-dir", type=str, default=None,
+                        help="Explicit task directory name under tasks/ (recommended for A1 variants)")
     return parser.parse_args()
 
 
@@ -464,6 +503,7 @@ def main():
         n_perm=args.n_perm,
         verbose=verbose,
         combat=combat,
+        task_dir_name=args.task_dir,
     )
 
     if results:
