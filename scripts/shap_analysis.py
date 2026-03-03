@@ -35,6 +35,36 @@ TASKS_DIR = BASE_DIR / "tasks"
 RESULTS_DIR = BASE_DIR / "evaluation"
 PROCESSED_DIR = BASE_DIR / "processed"
 
+def resolve_task_dir(task_id: str, task_dir_name=None) -> Path:
+    """
+    Resolve task directory deterministically.
+    If task_dir_name is not provided, require exactly one *_lomo match.
+    """
+    if task_dir_name:
+        task_dir = TASKS_DIR / task_dir_name
+        if not task_dir.exists() or not task_dir.is_dir():
+            raise ValueError(f"Task directory not found: {task_dir}")
+        if not task_dir.name.startswith(f"{task_id}_"):
+            raise ValueError(
+                f"--task-dir '{task_dir.name}' does not match task_id '{task_id}'"
+            )
+        return task_dir
+
+    candidates = sorted(
+        d for d in TASKS_DIR.iterdir()
+        if d.is_dir() and d.name.startswith(f"{task_id}_") and d.name.endswith("_lomo")
+    )
+    if not candidates:
+        raise ValueError(
+            f"No *_lomo task directory found for {task_id}. Use --task-dir explicitly."
+        )
+    if len(candidates) > 1:
+        names = ", ".join(d.name for d in candidates)
+        raise ValueError(
+            f"Ambiguous task_id '{task_id}': {names}. Use --task-dir to select one."
+        )
+    return candidates[0]
+
 
 def load_symbol_map() -> dict:
     """Load ENSEMBL → gene symbol map built from DE files."""
@@ -220,7 +250,7 @@ def compute_shap_lr(model, X_train: np.ndarray, X_test: np.ndarray,
 
 # ── Per-fold SHAP ──────────────────────────────────────────────────────────────
 
-def shap_fold(fold_dir: Path, model_name: str = "rf") -> pd.Series | None:
+def shap_fold(fold_dir: Path, model_name: str = "rf") -> pd.Series:
     """Train model on fold, compute SHAP, return mean |SHAP| Series."""
     from sklearn.metrics import roc_auc_score
 
@@ -281,20 +311,23 @@ def shap_fold(fold_dir: Path, model_name: str = "rf") -> pd.Series | None:
 
 # ── Task-level SHAP aggregation ────────────────────────────────────────────────
 
-def shap_task(task_id: str, model_name: str = "rf", top_n: int = 50) -> dict:
+def shap_task(task_id: str, model_name: str = "rf", top_n: int = 50,
+              task_dir_name=None,
+              include_holdout: bool = False) -> dict:
     """Compute SHAP for all folds, aggregate, return top-N genes."""
 
-    task_dirs = list(TASKS_DIR.glob(f"{task_id}_*_lomo"))
-    if not task_dirs:
-        print(f"[ERROR] No task directory found for {task_id}")
+    try:
+        task_dir = resolve_task_dir(task_id, task_dir_name=task_dir_name)
+    except ValueError as e:
+        print(f"[ERROR] {e}")
         return {}
 
-    task_dir = task_dirs[0]
     tissue = TASK_TISSUE.get(task_id, "unknown")
     target_genes = TARGET_GENES.get(tissue, [])
 
     fold_dirs = sorted([d for d in task_dir.iterdir()
-                        if d.is_dir() and d.name.startswith("fold_")])
+                        if d.is_dir() and d.name.startswith("fold_")
+                        and (include_holdout or "holdout" not in d.name)])
 
     print(f"\n{'='*60}")
     print(f"SHAP Analysis — Task {task_id} ({tissue})")
@@ -415,12 +448,18 @@ def main():
     parser.add_argument("--task", type=str, default="A4")
     parser.add_argument("--model", type=str, default="rf", choices=["rf", "lr"])
     parser.add_argument("--top-n", type=int, default=50)
+    parser.add_argument("--task-dir", type=str, default=None,
+                        help="Explicit task directory name under tasks/ (recommended for A1 variants)")
+    parser.add_argument("--include-holdout", action="store_true",
+                        help="Include holdout folds in SHAP aggregation (default: excluded)")
     args = parser.parse_args()
 
     shap_task(
         task_id=args.task.upper(),
         model_name=args.model,
         top_n=args.top_n,
+        task_dir_name=args.task_dir,
+        include_holdout=args.include_holdout,
     )
 
 

@@ -7,7 +7,7 @@ Generated: 2026-03-01
 | Hypothesis | Statement | Verdict | Key Evidence |
 |---|---|---|---|
 | **H1** | Liver has the most consistent cross-mission spaceflight transcriptome | **REFUTED** | Thymus(0.860) >> Liver(0.577). Thymus and gastrocnemius Tier 1. |
-| **H2** | Cross-mission transfer failure from biological diversity, not batch | **SUPPORTED** | NES conservation correlates with transfer AUROC (r=1.0 for 4/5 tissues). D3 pathway F1=0.06 (batch-invariant). |
+| **H2** | Cross-mission transfer failure from biological diversity, not batch | **SUPPORTED** | NES conservation correlates with transfer AUROC (r=0.9 for 5 tissues excl. gastrocnemius; original 4-tissue r=1.0). D3 pathway F1=0.06 (batch-invariant). |
 | **H3** | Pathway-level preserves spaceflight response better than gene-level | **CONDITIONALLY SUPPORTED** | Kidney rescue (0.43→0.74), Eye (0.79→0.92). But liver→thymus anti-predicts (AUROC<0.5). Tissue-pair dependent. |
 
 ---
@@ -18,11 +18,12 @@ Generated: 2026-03-01
 |---|---|---|---|---|---|
 | **Thymus** | 0.860 | [0.763, 0.953] | 4 | 12 | 1 |
 | **Gastrocnemius** | 0.801 | [0.653, 0.944] | 3 | 6 | 1 |
+| **Skin** | 0.772 | [0.691, 0.834] | 3 | 6 | 2 |
 | **Eye** | 0.754 | [0.688, 0.838] | 3 | 6 | 2 |
 | **Liver** | 0.577 | [0.492, 0.666] | 6 | 30 | 3 |
 | **Kidney** | 0.555 | [0.397, 0.681] | 3 | 6 | 3 |
 
-Permutation tests: Thymus vs Liver p=0.001, Gastro vs Liver p=0.048.
+Permutation tests: Thymus vs Liver p=0.001, Gastro vs Liver p=0.048, Skin vs Liver p=0.032.
 
 ---
 
@@ -80,12 +81,14 @@ H3 test: Method C wins 2/4 pairs (C2, C4). C vs A mean diff = -0.001 (essentiall
 |---|---|---|---|
 | **Thymus** | **0.619** | **0.860** | 3 |
 | Eye | 0.335 | 0.754 | 3 |
+| **Skin** | **0.147** | **0.772** | **3** |
 | Liver | 0.059 | 0.577 | 6 |
 | Gastrocnemius | 0.057 | 0.801* | 2 |
 | Kidney | 0.048 | 0.555 | 3 |
 
-*Gastrocnemius outlier: only 2/3 missions have fGSEA data.
-Excluding gastrocnemius: rank-order correlation between NES conservation and transfer AUROC is perfect (Spearman r = 1.0).
+*Gastrocnemius outlier: only 2/3 missions have fGSEA data (RR-5 no DGE).
+†Skin: RR-7 DGE absent; fGSEA on RR-6, MHU-2_dorsal (GLDS-238), MHU-2_femoral (GLDS-239) only.
+Excluding gastrocnemius: rank-order correlation for 5 tissues (thymus/eye/skin/liver/kidney) Spearman r = 0.9 (skin NES rank 3rd vs transfer rank 2nd — partial outlier). Original 4-tissue finding (thymus/eye/liver/kidney, excl gastrocnemius) maintains perfect rank concordance (Spearman r = 1.0).
 
 ---
 
@@ -98,6 +101,7 @@ Excluding gastrocnemius: rank-order correlation between NES conservation and tra
 | Gastrocnemius | OXIDATIVE_PHOSPHORYLATION, MYOGENESIS | Muscle metabolism |
 | Kidney | MTORC1_SIGNALING, CHOLESTEROL_HOMEOSTASIS | Renal metabolism |
 | Eye | OXIDATIVE_PHOSPHORYLATION (dominant 3/3 missions) | Retina metabolic demand |
+| Skin | E2F_TARGETS, G2M_CHECKPOINT, EPITHELIAL_MESENCHYMAL_TRANSITION | Cell proliferation + ECM remodeling (2/3 missions consistent) |
 
 ---
 
@@ -105,11 +109,11 @@ Excluding gastrocnemius: rank-order correlation between NES conservation and tra
 
 | Component | Files | Status |
 |---|---|---|
-| fGSEA | 51 (5 tissues × missions × 3 DBs) | Complete |
+| fGSEA | 60 (6 tissues × missions × 3 DBs) | Complete |
 | GSVA | 54 (5 tissues × missions × 3 DBs) | Complete |
 | Category B | 5 tissues, bootstrap CI + permutation | Complete |
 | Category C | 4 pairs × 3 methods | Complete |
 | Category D | D3 + D6×2 | Complete |
 | J5 | 12 comparisons | Complete |
-| NES Conservation | 5 tissues | Complete |
+| NES Conservation | 6 tissues | Complete |
 | Geneformer | Tokenized, HPC script ready | Awaiting HPC |

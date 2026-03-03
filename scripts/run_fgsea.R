@@ -87,6 +87,12 @@ TISSUE_MISSIONS <- list(
     list(mission = "RR-1",  dir = "RR-1",  glds = "GLDS-100", osd = "OSD-100"),
     list(mission = "RR-3",  dir = "RR-3",  glds = "GLDS-194", osd = "OSD-194"),
     list(mission = "TBD",   dir = "TBD",   glds = "GLDS-397", osd = "OSD-397")
+  ),
+  skin = list(
+    list(mission = "RR-6",          dir = "RR-6",            glds = "GLDS-243", osd = "OSD-243"),
+    list(mission = "MHU-2_dorsal",  dir = "MHU-2_(dorsal)",  glds = "GLDS-238", osd = "OSD-238"),
+    list(mission = "MHU-2_femoral", dir = "MHU-2_(femoral)", glds = "GLDS-239", osd = "OSD-239")
+    # RR-7 (GLDS-254): normalized counts only, no DGE file → excluded
   )
 )
 
