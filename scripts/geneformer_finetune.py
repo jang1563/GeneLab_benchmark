@@ -41,6 +41,7 @@ import logging
 import os
 import time
 from pathlib import Path
+from typing import Optional
 
 import numpy as np
 import torch
@@ -70,50 +71,107 @@ TASKS_DIR = ROOT / "tasks"
 EVAL_DIR = ROOT / "evaluation"
 HF_REPO = "ctheodoris/Geneformer"
 
+# Mouse-Geneformer local path (Cayuga)
+MOUSE_GF_MODEL_DIR = Path(
+    os.environ.get(
+        "MOUSE_GF_MODEL_DIR",
+        "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/models/mouse_gf_base",
+    )
+)
+
+def resolve_task_dir(task: str, task_dir_name: Optional[str] = None) -> Path:
+    """Resolve one task directory deterministically."""
+    if task_dir_name:
+        task_dir = TASKS_DIR / task_dir_name
+        if not task_dir.exists() or not task_dir.is_dir():
+            raise FileNotFoundError(f"Task directory not found: {task_dir}")
+        if not task_dir.name.startswith(f"{task}_"):
+            raise ValueError(
+                f"--task-dir '{task_dir.name}' does not match task '{task}'"
+            )
+        return task_dir
+
+    matches = sorted(TASKS_DIR.glob(f"{task}_*"))
+    if not matches:
+        raise FileNotFoundError(f"No task directory found for '{task}' in {TASKS_DIR}")
+    if len(matches) > 1:
+        names = ", ".join(d.name for d in matches)
+        raise ValueError(
+            f"Ambiguous task '{task}': {names}. Use --task-dir to select one."
+        )
+    return matches[0]
+
 # ─── Model Loading ─────────────────────────────────────────────────────────────
 
 def load_geneformer_for_classification(
     n_labels: int = 2,
     model_version: str = "v1",
+    mouse_gf_model_dir: Optional[Path] = None,
 ) -> BertForSequenceClassification:
     """
     Load Geneformer pretrained weights into a BertForSequenceClassification model.
     The MLM head is discarded; a new 2-class classification head is added.
+
+    Supports:
+      v1/v2: Download from HuggingFace (ctheodoris/Geneformer)
+      mouse_gf: Load from local Cayuga path (MOUSE_GF_MODEL_DIR)
     """
-    model_dirs = {
-        "v1": "Geneformer-V1-10M",
-        "v2": "Geneformer-V2-104M",
-    }
-    model_dir = model_dirs[model_version]
+    if model_version == "mouse_gf":
+        # Load Mouse-Geneformer from local path
+        model_dir = mouse_gf_model_dir or MOUSE_GF_MODEL_DIR
+        log.info(f"Loading Mouse-Geneformer from {model_dir}")
+        config_path = model_dir / "config.json"
+        weights_path = model_dir / "pytorch_model.bin"
+        missing = [str(p) for p in (config_path, weights_path) if not p.exists()]
+        if missing:
+            raise FileNotFoundError(
+                "Mouse-Geneformer model files not found:\n"
+                + "\n".join(f"  - {m}" for m in missing)
+                + "\nSet --mouse-gf-model-dir or MOUSE_GF_MODEL_DIR to the directory containing these files."
+            )
+        with open(config_path) as f:
+            config_dict = json.load(f)
 
-    log.info(f"Loading Geneformer {model_version} config...")
-    config_path = hf_hub_download(repo_id=HF_REPO, filename=f"{model_dir}/config.json")
+        config_dict["architectures"] = ["BertForSequenceClassification"]
+        config_dict["num_labels"] = n_labels
+        config_dict["problem_type"] = "single_label_classification"
+        config = BertConfig(**{k: v for k, v in config_dict.items() if k != "architectures"})
+        config.num_labels = n_labels
 
-    with open(config_path) as f:
-        config_dict = json.load(f)
+        state_dict = torch.load(str(weights_path), map_location="cpu")
+    else:
+        model_dirs = {
+            "v1": "Geneformer-V1-10M",
+            "v2": "Geneformer-V2-104M",
+        }
+        model_dir = model_dirs[model_version]
 
-    # Create BertForSequenceClassification config
-    config_dict["architectures"] = ["BertForSequenceClassification"]
-    config_dict["num_labels"] = n_labels
-    config_dict["problem_type"] = "single_label_classification"
-    config = BertConfig(**{k: v for k, v in config_dict.items() if k != "architectures"})
-    config.num_labels = n_labels
+        log.info(f"Loading Geneformer {model_version} config...")
+        config_path = hf_hub_download(repo_id=HF_REPO, filename=f"{model_dir}/config.json")
 
-    # Load pretrained weights (safetensors preferred, fallback to pytorch_model.bin)
-    log.info(f"Loading pretrained weights from {model_dir}...")
-    try:
-        weights_path = hf_hub_download(
-            repo_id=HF_REPO,
-            filename=f"{model_dir}/model.safetensors"
-        )
-        from safetensors.torch import load_file
-        state_dict = load_file(weights_path)
-    except Exception:
-        weights_path = hf_hub_download(
-            repo_id=HF_REPO,
-            filename=f"{model_dir}/pytorch_model.bin"
-        )
-        state_dict = torch.load(weights_path, map_location="cpu")
+        with open(config_path) as f:
+            config_dict = json.load(f)
+
+        config_dict["architectures"] = ["BertForSequenceClassification"]
+        config_dict["num_labels"] = n_labels
+        config_dict["problem_type"] = "single_label_classification"
+        config = BertConfig(**{k: v for k, v in config_dict.items() if k != "architectures"})
+        config.num_labels = n_labels
+
+        log.info(f"Loading pretrained weights from {model_dir}...")
+        try:
+            weights_path = hf_hub_download(
+                repo_id=HF_REPO,
+                filename=f"{model_dir}/model.safetensors"
+            )
+            from safetensors.torch import load_file
+            state_dict = load_file(weights_path)
+        except Exception:
+            weights_path = hf_hub_download(
+                repo_id=HF_REPO,
+                filename=f"{model_dir}/pytorch_model.bin"
+            )
+            state_dict = torch.load(weights_path, map_location="cpu")
 
     # Initialize classification model and load compatible weights
     model = BertForSequenceClassification(config)
@@ -275,6 +333,7 @@ def finetune_fold(
     fold_dir: Path,
     device: torch.device,
     model_version: str = "v1",
+    mouse_gf_model_dir: Optional[Path] = None,
     n_epochs: int = 5,
     batch_size: int = 4,
     lr: float = 2e-5,
@@ -321,13 +380,21 @@ def finetune_fold(
 
     if dry_run:
         log.info("  [DRY RUN] Model shape check only...")
-        model = load_geneformer_for_classification(n_labels=2, model_version=model_version)
+        model = load_geneformer_for_classification(
+            n_labels=2,
+            model_version=model_version,
+            mouse_gf_model_dir=mouse_gf_model_dir,
+        )
         n_params = sum(p.numel() for p in model.parameters())
         log.info(f"  Model parameters: {n_params:,}")
         return {"status": "dry_run", "fold": fold_dir.name, "n_params": n_params}
 
     # Load model + apply layer freezing
-    model = load_geneformer_for_classification(n_labels=2, model_version=model_version)
+    model = load_geneformer_for_classification(
+        n_labels=2,
+        model_version=model_version,
+        mouse_gf_model_dir=mouse_gf_model_dir,
+    )
     freeze_bert_layers(model, n_freeze=freeze_layers)
     model = model.to(device)
 
@@ -365,7 +432,11 @@ def finetune_fold(
     log.info(f"  Training steps: {total_steps} | Warmup: {warmup_steps}")
 
     # Training loop
-    best_test_auroc = 0.0
+    best_test_auroc = float("-inf")
+    best_probs = []
+    best_labels = []
+    last_probs = []
+    last_labels = []
     history = []
     start_time = time.time()
 
@@ -373,12 +444,13 @@ def finetune_fold(
         epoch_start = time.time()
         train_loss = train_epoch(model, train_loader, optimizer, scheduler, device, scaler=scaler)
         test_auroc, test_probs, test_labels = evaluate(model, test_loader, device)
+        last_probs, last_labels = test_probs, test_labels
         epoch_time = time.time() - epoch_start
 
         log.info(f"  Epoch {epoch}/{n_epochs} | loss={train_loss:.4f} | test_auroc={test_auroc:.4f} | {epoch_time:.1f}s")
         history.append({"epoch": epoch, "train_loss": train_loss, "test_auroc": test_auroc})
 
-        if test_auroc > best_test_auroc:
+        if np.isfinite(test_auroc) and test_auroc > best_test_auroc:
             best_test_auroc = test_auroc
             best_probs = test_probs
             best_labels = test_labels
@@ -390,7 +462,16 @@ def finetune_fold(
                 log.info(f"  Saved best checkpoint (auroc={best_test_auroc:.4f})")
 
     total_time = time.time() - start_time
-    log.info(f"  Done. Best AUROC: {best_test_auroc:.4f} | Total time: {total_time:.0f}s")
+    if not best_probs:
+        best_probs = last_probs
+        best_labels = last_labels
+    if not np.isfinite(best_test_auroc):
+        if best_labels and len(set(best_labels)) >= 2:
+            best_test_auroc = float(roc_auc_score(best_labels, best_probs))
+        else:
+            best_test_auroc = float("nan")
+    best_auroc_str = f"{best_test_auroc:.4f}" if np.isfinite(best_test_auroc) else "nan"
+    log.info(f"  Done. Best AUROC: {best_auroc_str} | Total time: {total_time:.0f}s")
 
     # Bootstrap CI
     n_bootstrap = 1000
@@ -398,11 +479,12 @@ def finetune_fold(
     boot_aurocs = []
     best_probs_arr = np.array(best_probs)
     best_labels_arr = np.array(best_labels)
-    for _ in range(n_bootstrap):
-        idx = rng.integers(0, len(best_labels_arr), size=len(best_labels_arr))
-        if len(set(best_labels_arr[idx])) < 2:
-            continue
-        boot_aurocs.append(roc_auc_score(best_labels_arr[idx], best_probs_arr[idx]))
+    if len(best_labels_arr) > 0 and len(np.unique(best_labels_arr)) >= 2:
+        for _ in range(n_bootstrap):
+            idx = rng.integers(0, len(best_labels_arr), size=len(best_labels_arr))
+            if len(set(best_labels_arr[idx])) < 2:
+                continue
+            boot_aurocs.append(roc_auc_score(best_labels_arr[idx], best_probs_arr[idx]))
 
     ci_low = float(np.percentile(boot_aurocs, 2.5)) if boot_aurocs else float("nan")
     ci_high = float(np.percentile(boot_aurocs, 97.5)) if boot_aurocs else float("nan")
@@ -439,10 +521,10 @@ def finetune_fold(
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--task", default="A4", choices=["A4", "A2"])
+    parser.add_argument("--task", default="A4", help="Task ID (e.g. A1, A4, A6)")
     parser.add_argument("--fold", default="RR-9",
                         help="Fold name (e.g. 'RR-9', 'RR-6', 'MHU-1', 'all'). Default=RR-9")
-    parser.add_argument("--model-version", default="v1", choices=["v1", "v2"])
+    parser.add_argument("--model-version", default="mouse_gf", choices=["v1", "v2", "mouse_gf"])
     parser.add_argument("--device", default="auto",
                         help="Device: 'mps', 'cuda', 'cpu', or 'auto'. Default=auto")
     parser.add_argument("--epochs", type=int, default=5)
@@ -455,6 +537,10 @@ def main():
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--dry-run", action="store_true", help="Load model + check shapes only, no training")
     parser.add_argument("--no-save", action="store_true", help="Don't save checkpoint to disk")
+    parser.add_argument("--task-dir", default=None,
+                        help="Explicit task directory name under tasks/ (recommended for A1 variants)")
+    parser.add_argument("--mouse-gf-model-dir", default=str(MOUSE_GF_MODEL_DIR),
+                        help="Directory containing Mouse-Geneformer config.json and pytorch_model.bin")
     args = parser.parse_args()
 
     # Device selection
@@ -472,12 +558,13 @@ def main():
     if device.type == "mps":
         log.info("  MacBook Apple Silicon (MPS) — using float32 (4-bit quant not supported)")
 
-    # Find folds
-    task_dir_map = {
-        "A4": TASKS_DIR / "A4_thymus_lomo",
-        "A2": TASKS_DIR / "A2_gastrocnemius_lomo",
-    }
-    task_dir = task_dir_map[args.task]
+    # Find folds (dynamic task directory lookup)
+    try:
+        task_dir = resolve_task_dir(args.task, task_dir_name=args.task_dir)
+    except (FileNotFoundError, ValueError) as e:
+        log.error(str(e))
+        return
+    log.info(f"Task directory: {task_dir.name}")
 
     if args.fold in ("all", "lomo"):
         # Exclude held-out fold (fold_RR-23_holdout) from LOMO CV
@@ -485,8 +572,15 @@ def main():
                             if d.is_dir() and d.name.startswith("fold_")
                             and "holdout" not in d.name])
     else:
-        fold_dirs = [d for d in task_dir.iterdir()
-                     if d.is_dir() and args.fold in d.name]
+        if args.fold.startswith("fold_"):
+            candidates = [task_dir / args.fold]
+        else:
+            candidates = [
+                task_dir / f"fold_{args.fold}_test",
+                task_dir / f"fold_{args.fold}_holdout",
+                task_dir / f"fold_{args.fold}",
+            ]
+        fold_dirs = [d for d in candidates if d.exists() and d.is_dir()]
         # Guard: warn if the held-out evaluation fold was matched
         if any("holdout" in d.name for d in fold_dirs):
             log.warning("⚠  Matched the held-out evaluation fold (fold_RR-23_holdout).")
@@ -506,6 +600,7 @@ def main():
             fold_dir=fold_dir,
             device=device,
             model_version=args.model_version,
+            mouse_gf_model_dir=Path(args.mouse_gf_model_dir),
             n_epochs=args.epochs,
             batch_size=args.batch_size,
             lr=args.lr,
@@ -552,6 +647,7 @@ def main():
                 "fold_results": fold_summaries,
             }
             out_path = EVAL_DIR / f"geneformer_{args.model_version}_{args.task}_lomo_results.json"
+            log.info(f"  Model: {args.model_version} | Task: {args.task}")
             with open(out_path, "w") as f:
                 json.dump(lomo_result, f, indent=2)
             log.info(f"\nLOMO summary saved to {out_path}")

@@ -33,11 +33,13 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import pickle
 import time
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -58,6 +60,14 @@ TASKS_DIR = ROOT / "tasks"
 # Geneformer HuggingFace model ID
 HF_REPO = "ctheodoris/Geneformer"
 
+# Mouse-Geneformer local paths (Cayuga)
+MOUSE_GF_BASE = Path(
+    os.environ.get(
+        "MOUSE_GF_BASE",
+        "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/models",
+    )
+)
+
 # Model version configs
 MODEL_CONFIGS = {
     "v1": {
@@ -74,7 +84,36 @@ MODEL_CONFIGS = {
         "max_length": 4096,
         "special_token": True,  # V2: add <cls>/<eos>
     },
+    "mouse_gf": {
+        "model_path": str(MOUSE_GF_BASE / "mouse_gf_base"),
+        "token_dict_file": str(MOUSE_GF_BASE / "MLM-re_token_dictionary_v1.pkl"),
+        "gene_median_file": str(MOUSE_GF_BASE / "mouse_gene_median_dictionary.pkl"),
+        "max_length": 2048,
+        "special_token": False,  # No special tokens (same as V1)
+    },
 }
+
+def resolve_task_dir(task: str, task_dir_name: Optional[str] = None) -> Path:
+    """Resolve one task directory deterministically."""
+    if task_dir_name:
+        task_dir = TASKS_DIR / task_dir_name
+        if not task_dir.exists() or not task_dir.is_dir():
+            raise FileNotFoundError(f"Task directory not found: {task_dir}")
+        if not task_dir.name.startswith(f"{task}_"):
+            raise ValueError(
+                f"--task-dir '{task_dir.name}' does not match task '{task}'"
+            )
+        return task_dir
+
+    matches = sorted(TASKS_DIR.glob(f"{task}_*"))
+    if not matches:
+        raise FileNotFoundError(f"No task directory found for '{task}' in {TASKS_DIR}")
+    if len(matches) > 1:
+        names = ", ".join(d.name for d in matches)
+        raise ValueError(
+            f"Ambiguous task '{task}': {names}. Use --task-dir to select one."
+        )
+    return matches[0]
 
 
 # ─── Step 1: Ortholog Mapping ───────────────────────────────────────────────────
@@ -155,18 +194,39 @@ def build_ortholog_map(ortholog_df: pd.DataFrame) -> dict[str, str]:
 
 # ─── Step 2: Geneformer Vocabulary ─────────────────────────────────────────────
 
-def load_geneformer_vocab(model_version: str = "v1") -> tuple[dict, dict]:
+def load_geneformer_vocab(model_version: str = "v1",
+                          mouse_gf_base: Optional[Path] = None) -> tuple[dict, dict]:
     """
-    Load Geneformer token dictionary and gene median expression values.
+    Load token dictionary and gene median expression values.
     Returns: (token_dict, gene_median_dict)
-      token_dict: {ENSG_id: token_id}
-      gene_median_dict: {ENSG_id: median_expression}
+      Human Geneformer (v1/v2): {ENSG_id: token_id / median}
+      Mouse-Geneformer (mouse_gf): {ENSMUSG_id: token_id / median}
     """
-    from huggingface_hub import hf_hub_download
-
     config = MODEL_CONFIGS[model_version]
+    log.info(f"Loading {model_version} vocabulary...")
 
-    log.info(f"Loading Geneformer {model_version} vocabulary...")
+    if model_version == "mouse_gf":
+        base_dir = mouse_gf_base or MOUSE_GF_BASE
+        token_file = base_dir / "MLM-re_token_dictionary_v1.pkl"
+        median_file = base_dir / "mouse_gene_median_dictionary.pkl"
+        missing = [str(p) for p in (token_file, median_file) if not p.exists()]
+        if missing:
+            raise FileNotFoundError(
+                "Mouse-Geneformer dictionary files not found:\n"
+                + "\n".join(f"  - {m}" for m in missing)
+                + "\nSet --mouse-gf-base or MOUSE_GF_BASE to the directory containing these files."
+            )
+        # Load local pkl files directly (no HuggingFace download needed)
+        with open(token_file, "rb") as f:
+            token_dict = pickle.load(f)
+        with open(median_file, "rb") as f:
+            gene_median_dict = pickle.load(f)
+        log.info(f"  Mouse-Geneformer base: {base_dir}")
+        log.info(f"  Token vocab: {len(token_dict):,} tokens (ENSMUSG + special)")
+        log.info(f"  Gene medians: {len(gene_median_dict):,} genes")
+        return token_dict, gene_median_dict
+
+    from huggingface_hub import hf_hub_download
 
     token_path = hf_hub_download(repo_id=HF_REPO, filename=config["token_dict_file"])
     with open(token_path, "rb") as f:
@@ -185,10 +245,10 @@ def load_geneformer_vocab(model_version: str = "v1") -> tuple[dict, dict]:
 # ─── Step 3: Tokenization ──────────────────────────────────────────────────────
 
 def tokenize_sample(
-    expression: dict[str, float],  # {ENSMUSG_id: expression_value}
-    ortholog_map: dict[str, str],  # {ENSMUSG_id: ENSG_id}
-    token_dict: dict[str, int],    # {ENSG_id: token_id}
-    gene_median_dict: dict[str, float],  # {ENSG_id: median_expression}
+    expression: dict[str, float],           # {ENSMUSG_id: expression_value}
+    ortholog_map: Optional[dict[str, str]], # {ENSMUSG_id: ENSG_id}; None for mouse_gf
+    token_dict: dict[str, int],             # {gene_id: token_id}
+    gene_median_dict: dict[str, float],     # {gene_id: median_expression}
     max_length: int = 2048,
     special_token: bool = False,
 ) -> list[int]:
@@ -196,21 +256,26 @@ def tokenize_sample(
     Convert a bulk RNA-seq expression profile to a Geneformer token sequence.
 
     Steps:
-      1. Map ENSMUSG → ENSG (drop unmatched)
+      1. Map genes to vocab keys (ENSMUSG→ENSG for human Geneformer; identity for mouse_gf)
       2. Keep only genes with positive expression
       3. Scale by gene median expression (makes expression comparable across genes)
       4. Rank genes by scaled expression (descending) → rank value encoding
-      5. Map to token IDs (Geneformer vocab)
+      5. Map to token IDs
       6. Truncate to max_length
 
     Note: expression values should be log2(count+1) normalized (as from OSDR DESeq2)
     """
-    # Step 1: Map to human ENSG
-    ensg_expr = {}
-    for ensmusg, val in expression.items():
-        ensg = ortholog_map.get(ensmusg)
-        if ensg and ensg in token_dict:
-            ensg_expr[ensg] = float(val)
+    # Step 1: Map to vocab keys
+    if ortholog_map is None:
+        # Mouse-Geneformer: ENSMUSG directly in token_dict (no ortholog mapping)
+        ensg_expr = {g: float(v) for g, v in expression.items() if g in token_dict}
+    else:
+        # Human Geneformer: ENSMUSG → ENSG ortholog mapping
+        ensg_expr = {}
+        for ensmusg, val in expression.items():
+            ensg = ortholog_map.get(ensmusg)
+            if ensg and ensg in token_dict:
+                ensg_expr[ensg] = float(val)
 
     # Step 2: Keep positive expression only
     ensg_expr = {g: v for g, v in ensg_expr.items() if v > 0}
@@ -316,25 +381,27 @@ def tokenize_dataframe(
 
 # ─── Step 4: Process Folds ─────────────────────────────────────────────────────
 
-def get_fold_dirs(task: str, fold_name: str | None = None) -> list[Path]:
-    """Get list of fold directories for a task."""
-    task_dir_map = {
-        "A4": TASKS_DIR / "A4_thymus_lomo",
-        "A2": TASKS_DIR / "A2_gastrocnemius_lomo",
-    }
-
-    task_dir = task_dir_map.get(task)
-    if task_dir is None or not task_dir.exists():
-        raise FileNotFoundError(f"Task directory not found for {task}: {task_dir}")
+def get_fold_dirs(task: str, fold_name: Optional[str] = None,
+                  task_dir_name: Optional[str] = None) -> tuple[Path, list[Path]]:
+    """Get (task_dir, fold_dirs) for a task."""
+    task_dir = resolve_task_dir(task, task_dir_name=task_dir_name)
+    log.info(f"Task directory: {task_dir.name}")
 
     if fold_name:
-        fold_dirs = [d for d in task_dir.iterdir()
-                     if d.is_dir() and fold_name in d.name]
+        if fold_name.startswith("fold_"):
+            candidates = [task_dir / fold_name]
+        else:
+            candidates = [
+                task_dir / f"fold_{fold_name}_test",
+                task_dir / f"fold_{fold_name}_holdout",
+                task_dir / f"fold_{fold_name}",
+            ]
+        fold_dirs = [d for d in candidates if d.exists() and d.is_dir()]
     else:
         fold_dirs = [d for d in task_dir.iterdir()
                      if d.is_dir() and d.name.startswith("fold_")]
 
-    return sorted(fold_dirs)
+    return task_dir, sorted(fold_dirs)
 
 
 def tokenize_fold(
@@ -373,13 +440,20 @@ def tokenize_fold(
 
     # Overlap analysis
     gene_cols = [c for c in train_X.columns if str(c).startswith("ENSMUSG")]
-    n_with_ortholog = sum(1 for g in gene_cols if g in ortholog_map)
-    n_in_vocab = sum(
-        1 for g in gene_cols
-        if g in ortholog_map and ortholog_map[g] in token_dict
-    )
-    log.info(f"  Genes with human ortholog: {n_with_ortholog:,}/{len(gene_cols):,}")
-    log.info(f"  Genes in Geneformer vocab:  {n_in_vocab:,}/{len(gene_cols):,}")
+    if ortholog_map is None:
+        # Mouse-Geneformer: ENSMUSG directly in token_dict
+        n_with_ortholog = len(gene_cols)
+        n_in_vocab = sum(1 for g in gene_cols if g in token_dict)
+        log.info(f"  Genes in Mouse-Geneformer vocab: {n_in_vocab:,}/{len(gene_cols):,} "
+                 f"({100*n_in_vocab/len(gene_cols):.1f}%)")
+    else:
+        n_with_ortholog = sum(1 for g in gene_cols if g in ortholog_map)
+        n_in_vocab = sum(
+            1 for g in gene_cols
+            if g in ortholog_map and ortholog_map[g] in token_dict
+        )
+        log.info(f"  Genes with human ortholog: {n_with_ortholog:,}/{len(gene_cols):,}")
+        log.info(f"  Genes in Geneformer vocab:  {n_in_vocab:,}/{len(gene_cols):,}")
 
     if dry_run:
         log.info("  [DRY RUN] Stopping here (--dry-run)")
@@ -434,7 +508,7 @@ def tokenize_fold(
         "n_genes_input": len(gene_cols),
         "n_with_ortholog": n_with_ortholog,
         "n_in_vocab": n_in_vocab,
-        "ortholog_coverage_pct": round(100 * n_in_vocab / len(gene_cols), 1),
+        "ortholog_coverage_pct": round(100 * n_in_vocab / len(gene_cols), 1) if gene_cols else 0.0,
     }
 
     with open(out_dir / "tokenize_info.json", "w") as f:
@@ -451,24 +525,45 @@ def tokenize_fold(
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--task", default="A4", choices=["A4", "A2"], help="Task to tokenize")
+    parser.add_argument("--task", default="A4", help="Task to tokenize (e.g. A1, A4, A6)")
     parser.add_argument("--fold", default=None, help="Specific fold name (e.g. RR-9); default=all folds")
-    parser.add_argument("--model-version", default="v1", choices=["v1", "v2"], help="Geneformer model version")
+    parser.add_argument("--model-version", default="mouse_gf", choices=["v1", "v2", "mouse_gf"],
+                        help="Model version: mouse_gf (default), v1, v2")
     parser.add_argument("--overwrite", action="store_true", help="Re-tokenize even if output exists")
     parser.add_argument("--dry-run", action="store_true", help="Run overlap analysis + 1 sample, no output saved")
     parser.add_argument("--ortholog-cache", default=str(ORTHOLOG_CACHE), help="Path to cached ortholog TSV")
+    parser.add_argument("--task-dir", default=None,
+                        help="Explicit task directory name under tasks/ (recommended for A1 variants)")
+    parser.add_argument("--mouse-gf-base", default=str(MOUSE_GF_BASE),
+                        help="Base directory containing Mouse-Geneformer dictionaries")
     args = parser.parse_args()
 
-    # Step 1: Ortholog mapping
-    cache_path = Path(args.ortholog_cache)
-    ortholog_df = download_ortholog_table(cache_path)
-    ortholog_map = build_ortholog_map(ortholog_df)
+    # Step 1: Ortholog mapping (skipped for mouse_gf)
+    if args.model_version == "mouse_gf":
+        ortholog_map = None
+        log.info("Mouse-Geneformer: skipping ortholog mapping (ENSMUSG used directly)")
+    else:
+        cache_path = Path(args.ortholog_cache)
+        ortholog_df = download_ortholog_table(cache_path)
+        ortholog_map = build_ortholog_map(ortholog_df)
 
-    # Step 2: Geneformer vocabulary
-    token_dict, gene_median_dict = load_geneformer_vocab(args.model_version)
+    # Step 2: Vocabulary
+    token_dict, gene_median_dict = load_geneformer_vocab(
+        args.model_version,
+        mouse_gf_base=Path(args.mouse_gf_base),
+    )
 
     # Step 3: Find folds
-    fold_dirs = get_fold_dirs(args.task, args.fold)
+    task_dir, fold_dirs = get_fold_dirs(args.task, args.fold, task_dir_name=args.task_dir)
+    if not fold_dirs:
+        available = sorted(
+            d.name for d in task_dir.iterdir()
+            if d.is_dir() and d.name.startswith("fold_")
+        )
+        raise FileNotFoundError(
+            f"No fold found matching '{args.fold}' in {task_dir}. "
+            f"Available folds: {available}"
+        )
     log.info(f"\nFounds {len(fold_dirs)} fold(s) for task {args.task}:")
     for d in fold_dirs:
         log.info(f"  {d.name}")
@@ -504,7 +599,7 @@ def main():
             print(f"  {fold}: {status}")
 
     # Save overall summary
-    summary_path = TASKS_DIR / f"{args.task}_thymus_lomo" / f"geneformer_{args.model_version}_tokenize_summary.json"
+    summary_path = task_dir / f"geneformer_{args.model_version}_tokenize_summary.json"
     if not args.dry_run:
         with open(summary_path, "w") as f:
             json.dump(results, f, indent=2)
