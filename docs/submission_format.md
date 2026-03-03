@@ -11,6 +11,7 @@
 External models submit predictions as a **JSON file**. Each submission covers one task (e.g., `A4` = Spaceflight Detection – Thymus) and includes predicted Flight probabilities for every test sample in every fold.
 
 The evaluation server computes AUROC, permutation p-value, and CI automatically using `scripts/evaluate_submission.py`.
+If a task ID maps to multiple task directories (for example `A1`), pass `--task-dir` explicitly when validating/evaluating.
 
 ---
 
@@ -216,6 +217,7 @@ The evaluator (`scripts/evaluate_submission.py`) computes:
 4. **Probability required**: Submit calibrated probabilities, not binary labels. Binary 0/1 will be accepted but AUROC will be limited.
 5. **Model name unique**: Each submission must have a unique `model_name`. Same name = overwrite.
 6. **Text LLM submissions (Track B)**: Use the text-based input format defined in DD-16 (`docs/text_llm_format.md`). Same JSON output format applies.
+7. **Ambiguous task IDs**: If multiple task directories exist for one task ID (e.g., `A1_liver_lomo`, `A1_liver_lomo_combat`, `A1_liver_lomo_iss_only`), evaluation requires `--task-dir`.
 
 ---
 
@@ -244,6 +246,13 @@ Before submitting, validate your JSON with the provided schema checker:
 python scripts/evaluate_submission.py \
     --submission path/to/your_submission.json \
     --task A4 \
+    --validate-only
+
+# A1 example (variant must be explicit)
+python scripts/evaluate_submission.py \
+    --submission path/to/your_A1_submission.json \
+    --task A1 \
+    --task-dir A1_liver_lomo \
     --validate-only
 ```
 

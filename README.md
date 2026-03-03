@@ -5,6 +5,9 @@
 Version: v1.0-alpha (Dataset freeze: 2026-03-01)
 Status: Phase 1 complete — **4 tissues GO** (A2 Gastrocnemius, A4 Thymus, A5 Skin, A6 Eye pathway-level)
 
+[![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 ---
 
 ## What Is This?
@@ -15,6 +18,13 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 
 **Data source**: [NASA Open Science Data Repository (OSDR)](https://osdr.nasa.gov/bio/repo/) — mouse multi-tissue bulk RNA-seq from ISS and ground control missions.
 
+### Benchmark Scope
+
+- **6 tissues**: Liver, Gastrocnemius, Kidney, Thymus, Skin, Eye
+- **17 ISS missions**: RR-1 through RR-9, MHU-1, MHU-2, and more
+- **24 verified OSD studies**, ~450 samples (binary Flight/Ground)
+- **25+ evaluation tasks** across 7 categories (A–D, J, NC, Validation)
+
 ---
 
 ## Key Features
@@ -22,48 +32,137 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 - **Leave-One-Mission-Out (LOMO)** cross-validation — mission = independence unit, preventing cross-mission data leakage
 - **Category A**: Spaceflight detection per tissue (binary: Flight vs. Ground)
 - **Category B**: Cross-mission transfer matrix (train on mission i, test on mission j) for all 6 tissues
+- **Category C**: Cross-tissue transfer (3 methods: gene, DEG, pathway)
+- **Category D**: Condition/confounder prediction (mission, strain, hardware, gravity)
 - **3-tier model evaluation**: Classical ML → Gene Expression Foundation Models → Text LLMs
 - **Standardized submission format** with automatic AUROC/CI/p-value evaluation
+- **Biological validation**: NES pathway conservation, Cell 2020 concordance, negative controls
 
 ---
 
 ## Phase 1 Results Summary
 
-**Category A — Gene-level (primary)**:
+### Category A — Spaceflight Detection (LOMO)
+
+**Gene-level (primary)**:
 
 | Task | Tissue | Missions | Method | Mean AUROC | 95% CI lower | perm_p | Decision |
 |------|--------|---------|--------|-----------|-------------|--------|----------|
 | A4 | Thymus | 4† | PCA-LR | **0.923** | 0.878 | 0.037 | ✓ **GO** |
 | A2 | Gastrocnemius | 3 | LR | **0.907** | 0.717 | 0.026 | ✓ **GO** |
-| **A5** | **Skin** | **3**§ | **LR** | **0.821** | **0.637** | **0.0023** | ✓ **GO** |
+| A5 | Skin | 3§ | LR | **0.821** | 0.637 | 0.0023 | ✓ **GO** |
 | A6 | Eye | 3 | LR | 0.811 | 0.470 | 0.063 | ✗ NO-GO‡ |
 | A1 | Liver | 6 | LR | 0.653 | 0.457 | 0.091 | ✗ NO-GO |
 | A3 | Kidney | 3 | LR | 0.593 | 0.431 | 0.281 | ✗ NO-GO |
 
-**Category A — Pathway-level (GSVA Hallmark, secondary)**:
+**Pathway-level (GSVA Hallmark, secondary)**:
 
 | Task | Tissue | Method | Mean AUROC | 95% CI lower | perm_p | Decision |
 |------|--------|--------|-----------|-------------|--------|----------|
 | **A6** | **Eye** | **PCA-LR** | **0.915** | **0.745** | **0.014** | ✓ **GO**⊕ |
 | A3 | Kidney | LR | 0.755 | 0.481 | 0.071 | ✗ NO-GO |
 
-†A4 includes MHU-1 (Track 2b, GC/FLT strain mismatch — see PHASE1_RESULTS.md)
-§A5: MHU-2 = dorsal (OSD-238) + femoral (OSD-239) merged; RR-7 = OSD-254 C57BL/6J non-BSL subset (n=30)
-‡A6 gene-level: AUROC passes but CI lower fails (n=9–16 per fold)
-⊕A6 pathway-level: GSVA Hallmark 50-pathway scores rescue CI lower (0.470→0.745). Oxidative phosphorylation dominant.
+<details>
+<summary>Footnotes</summary>
 
-**Category B — Cross-Mission Transfer (PCA-LR)**:
+- †A4 includes MHU-1 (Track 2b, GC/FLT strain mismatch — see PHASE1_RESULTS.md)
+- §A5: MHU-2 = dorsal (OSD-238) + femoral (OSD-239) merged; RR-7 = OSD-254 C57BL/6J non-BSL subset (n=30)
+- ‡A6 gene-level: AUROC passes but CI lower fails (n=9–16 per fold)
+- ⊕A6 pathway-level: GSVA Hallmark 50-pathway scores rescue CI lower (0.470→0.745). Oxidative phosphorylation dominant.
 
-| Task | Tissue | N pairs | Mean AUROC | 95% CI | AUROC≥0.70 |
-|------|--------|---------|-----------|--------|-----------|
-| B4 | Thymus | 12 | **0.860** | [0.763, 0.953] | 9/12 |
-| B5 | Skin | 6 | **0.772** | [0.691, 0.834] | 5/6 |
-| B6 | Eye | 6 | 0.754 | [0.688, 0.838] | 5/6 |
-| B2 | Gastrocnemius | 6 | 0.801 | [0.653, 0.944] | 4/6 |
-| B1 | Liver | 30 | 0.577 | [0.492, 0.666] | 13/30 |
-| B3 | Kidney | 6 | 0.555 | [0.397, 0.681] | 2/6 |
+</details>
 
-See [PHASE1_RESULTS.md](docs/development_history/PHASE1_RESULTS.md) for full results including per-fold tables, SHAP analysis, within-LOO sanity checks, and pathway analysis.
+### Category B — Cross-Mission Transfer (PCA-LR)
+
+| Task | Tissue | N pairs | Mean AUROC | 95% CI | AUROC≥0.70 | Tier |
+|------|--------|---------|-----------|--------|-----------|------|
+| B4 | Thymus | 12 | **0.860** | [0.763, 0.953] | 9/12 | 1 |
+| B2 | Gastrocnemius | 6 | **0.801** | [0.653, 0.944] | 4/6 | 1 |
+| B5 | Skin | 6 | **0.772** | [0.691, 0.834] | 5/6 | 2 |
+| B6 | Eye | 6 | 0.754 | [0.688, 0.838] | 5/6 | 2 |
+| B1 | Liver | 30 | 0.577 | [0.492, 0.666] | 13/30 | 3 |
+| B3 | Kidney | 6 | 0.555 | [0.397, 0.681] | 2/6 | 3 |
+
+### Category C — Cross-Tissue Transfer (3 Methods)
+
+| Pair | Method A (Gene) | Method B (DEG) | Method C (Pathway) | Best |
+|------|--------|--------|--------|--------|
+| C1: liver→kidney | **0.730** | 0.441 NS | 0.483 NS | A |
+| C2: liver→gastro | 0.563 NS | 0.676 | **0.867** | C |
+| C3: liver→thymus | 0.350 NS | **0.621** | 0.184 (anti) | B |
+| C4: thymus→kidney | 0.585 NS | 0.539 NS | **0.690** | C |
+
+### Category D — Condition/Confounder Prediction (macro-F1)
+
+| Task | Gene | Pathway | p-value | Interpretation |
+|------|------|---------|---------|---------|
+| D3: Liver 6-class mission | **1.000** | 0.056 NS | <0.001 | Perfect batch separation; pathways batch-invariant |
+| D6: Liver uG/AG/GC | **0.886** | 0.413 NS | 0.002 | Microgravity separable from artificial gravity |
+| D6: Thymus uG/AG/GC | **0.657** | 0.641 | 0.037 | Gene ≈ Pathway for gravity detection |
+
+### J5 — Gene-level vs Pathway-level (12 comparisons)
+
+| Category | N | Gene wins | Pathway wins | Mean diff |
+|---|---|---|---|---|
+| A (Detection) | 5 | 3 | 2 | +0.032 |
+| C (Cross-tissue) | 4 | 2 | 2 | -0.001 |
+| D (Condition) | 3 | 3 | 0 | -0.478 |
+| **Total** | **12** | **8** | **4** | **-0.106** |
+
+Notable finding — **"Kidney Rescue"**: gene-level AUROC=0.43 (fail) → pathway-level AUROC=0.74 (success, +0.31). Eye shows similar rescue (0.79→0.92, +0.13).
+
+See [PHASE1_RESULTS.md](docs/development_history/PHASE1_RESULTS.md) for full results including per-fold tables, SHAP analysis, and pathway analysis.
+
+---
+
+## Key Scientific Findings
+
+### Pre-registered Hypotheses
+
+| Hypothesis | Statement | Verdict | Key Evidence |
+|---|---|---|---|
+| **H1** | Liver has the most consistent cross-mission transcriptome | **REFUTED** | Thymus (0.860) >> Liver (0.577). Thymus and Gastrocnemius = Tier 1. |
+| **H2** | Transfer failure from biological diversity, not batch effects | **SUPPORTED** | NES conservation r=0.9 (5 tissues). D3 pathway F1=0.06 (batch-invariant). limma_rbe mean delta=0.01. |
+| **H3** | Pathway-level preserves spaceflight response better than gene-level | **CONDITIONALLY SUPPORTED** | Kidney rescue (0.43→0.74), Eye (0.79→0.92). But tissue-pair dependent. |
+
+### NES Pathway Conservation vs Transfer Success
+
+Normalized Enrichment Score (NES) correlation between mission pairs predicts cross-mission transfer performance:
+
+| Tissue | NES Mean r | Transfer AUROC | Spearman |
+|---|---|---|---|
+| Thymus | 0.619 | 0.860 | |
+| Eye | 0.335 | 0.754 | |
+| Skin | 0.147 | 0.772 | |
+| Liver | 0.059 | 0.577 | |
+| Kidney | 0.048 | 0.555 | |
+
+5-tissue Spearman r = 0.9 (excluding gastrocnemius, which has incomplete fGSEA data). Original 4-tissue r = 1.0.
+
+### External Validation (Cell 2020)
+
+Validated against Beheshti et al. (Cell 2020, PMID 33242417) multi-omics consensus:
+- **Pathway direction concordance**: 71.7% across 5 tissues (STRONG agreement)
+- **Gene SHAP top-50 overlap**: 10.7% (47× above random chance)
+- Tissue-specific: Thymus/Gastrocnemius 100%, Liver/Eye 67%, Kidney 25%
+
+### Negative Controls (all PASS)
+
+| Control | Method | Expected | Result |
+|---|---|---|---|
+| NC1 | Permutation test (28 entries) | AUROC ≈ 0.50 | 0.50 ± 0.03 |
+| NC2 | Housekeeping genes only (50 genes) | AUROC ≈ 0.50 | 0.49–0.55 |
+
+### Biological Validation (fGSEA Hallmark)
+
+| Tissue | Top Enriched Pathways | Consistency |
+|---|---|---|
+| Liver | OXIDATIVE_PHOSPHORYLATION, FATTY_ACID_METABOLISM | Literature-concordant |
+| Thymus | E2F_TARGETS, G2M_CHECKPOINT, IFN-gamma | Thymocyte proliferation |
+| Gastrocnemius | OXIDATIVE_PHOSPHORYLATION, MYOGENESIS | Muscle metabolism |
+| Kidney | MTORC1_SIGNALING, CHOLESTEROL_HOMEOSTASIS | Renal metabolism |
+| Eye | OXIDATIVE_PHOSPHORYLATION (dominant 3/3 missions) | Retina metabolic demand |
+| Skin | E2F_TARGETS, G2M_CHECKPOINT, EPITHELIAL_MESENCHYMAL_TRANSITION | Cell proliferation + ECM remodeling |
 
 ---
 
@@ -71,52 +170,71 @@ See [PHASE1_RESULTS.md](docs/development_history/PHASE1_RESULTS.md) for full res
 
 ```
 GeneLab_benchmark/
-├── README.md                   ← This file
-├── PLAN.md                     ← Benchmark design specification (v0.7)
-├── DESIGN_DECISIONS.md         ← Architecture decisions log (DD-01 to DD-17)
-├── docs/development_history/PHASE1_RESULTS.md ← Full Phase 1 analysis results
+├── README.md                       ← This file
+├── PLAN.md                         ← Benchmark design specification (v0.6)
+├── DESIGN_DECISIONS.md             ← Architecture decisions log (DD-01 to DD-17)
+├── DATA_CATALOG.md                 ← Auto-generated OSDR inventory (24 studies)
+├── CITATION.cff                    ← Citation metadata
 │
-├── tasks/                      ← Public task inputs (features + labels)
-│   ├── A2_gastrocnemius_lomo/
-│   │   ├── task_info.json
-│   │   ├── fold_RR-1_test/
-│   │   │   ├── train_X.csv     ← Training features (samples × genes)
-│   │   │   ├── train_y.csv     ← Training labels (1=Flight, 0=Ground)
-│   │   │   ├── test_X.csv      ← Test features (PUBLIC)
-│   │   │   └── test_y.csv      ← Test labels (PUBLIC for LOMO)
-│   │   └── ...
-│   ├── A4_thymus_lomo/
-│   │   └── ...
-│   └── A5_skin_lomo/           ← NEW
-│       ├── fold_MHU-2_test/
-│       ├── fold_RR-6_test/
-│       └── fold_RR-7_test/
+├── tasks/                          ← Public task inputs (17 directories)
+│   ├── A1_liver_lomo/              ← 6 folds + 3 variants (standard, ComBat, ISS-only)
+│   ├── A2_gastrocnemius_lomo/      ← 3 folds
+│   ├── A3_kidney_lomo/             ← 3 folds
+│   ├── A4_thymus_lomo/             ← 4 folds + holdout
+│   ├── A5_skin_lomo/               ← 3 folds
+│   ├── A6_eye_lomo/                ← 3 folds
+│   └── B1–B6_*_cross_mission/     ← N×(N-1) mission pairs per tissue
 │
-├── scripts/
-│   ├── run_baselines.py        ← Classical ML baseline runner
-│   ├── generate_tasks.py       ← Task split generator
-│   ├── cross_mission_transfer.py ← Category B matrix generator
-│   ├── shap_analysis.py        ← SHAP feature importance
-│   └── evaluate_submission.py  ← Submission evaluator
+├── scripts/                        ← Pipeline scripts (31 Python/R/shell, ~11K LOC)
+│   ├── run_baselines.py            ← Classical ML baseline runner (LR, RF, XGBoost, PCA-LR)
+│   ├── evaluate_submission.py      ← Submission evaluator (AUROC, CI, perm_p)
+│   ├── generate_tasks.py           ← LOMO split generator
+│   ├── cross_mission_transfer.py   ← Category B matrix generator
+│   ├── cross_tissue_transfer.py    ← Category C: 3 methods
+│   ├── condition_prediction.py     ← Category D: mission/strain/hardware/gravity
+│   ├── gene_vs_pathway_comparison.py ← J5: feature representation
+│   ├── shap_analysis.py            ← SHAP feature importance
+│   ├── run_fgsea.R                 ← Group-level fGSEA enrichment
+│   ├── compute_pathway_scores.R    ← Sample-level GSVA scores
+│   ├── batch_correction_eval.py    ← J3: ComBat-seq, limma, RUVseq
+│   ├── housekeeping_control.py     ← NC2: housekeeping gene baseline
+│   ├── cell2020_validation.py      ← External validation vs Cell 2020
+│   ├── compute_nes_conservation.py ← NES pathway conservation
+│   ├── geneformer_tokenize.py      ← Gene rank tokenization
+│   ├── geneformer_finetune.py      ← BERT fine-tuning
+│   └── utils.py                    ← Shared utilities
 │
 ├── docs/
-│   └── submission_format.md    ← Submission format specification
+│   ├── BIOLOGICAL_GROUND_TRUTH.md  ← Validation reference (Cell 2020, SOMA 2024)
+│   ├── submission_format.md        ← JSON submission specification
+│   ├── text_llm_format.md          ← Text LLM evaluation format (DD-16)
+│   ├── hf_dataset_card.md          ← HuggingFace dataset documentation
+│   └── development_history/
+│       └── PHASE1_RESULTS.md       ← Full Phase 1 analysis
 │
-├── evaluation/                 ← Baseline evaluation results
-│   ├── A4_baseline_results.json
-│   ├── A2_baseline_results.json
-│   ├── A5_baseline_results.json    ← NEW
-│   ├── A5_shap_rf.json             ← NEW
-│   └── B_cross_mission_summary.json
+├── evaluation/                     ← ~50 result JSON files
+│   ├── A*_baseline_results.json    ← Per-tissue baseline results
+│   ├── A*_shap_rf.json             ← SHAP rankings
+│   ├── B_cross_mission_summary.json
+│   ├── C_cross_tissue_summary.json
+│   ├── D_condition_summary.json
+│   ├── J3_batch_correction_comparison.json
+│   ├── J5_gene_vs_pathway.json
+│   ├── NC1_permutation_summary.json
+│   ├── NC2_housekeeping_summary.json
+│   ├── cell2020_validation.json
+│   ├── NES_conservation_vs_transfer.json
+│   ├── RESULTS_SUMMARY.md          ← Comprehensive results table
+│   └── submission_*.json           ← Baseline submission files
 │
-└── processed/                  ← Processed data (intermediate)
-    ├── A_detection/
-    │   ├── gastrocnemius/
-    │   ├── thymus/
-    │   └── skin/               ← NEW
-    └── B_cross_mission/
-        ├── liver/ gastrocnemius/ kidney/ thymus/ eye/
-        └── skin/               ← NEW
+└── processed/                      ← Intermediate analysis outputs
+    ├── A_detection/                ← Per-tissue LOMO data
+    ├── B_cross_mission/            ← Transfer matrices + CI
+    ├── C_cross_tissue/             ← 4 pairs × 3 methods
+    ├── D_condition/                ← Condition prediction
+    ├── fgsea/                      ← 60 fGSEA results (6 tissues × missions × 3 DBs)
+    ├── pathway_scores/             ← 54 GSVA files (5 tissues × missions × 3 DBs)
+    └── qc_reports/
 ```
 
 ---
@@ -200,6 +318,8 @@ print(f"Train labels: {train_y.iloc[:,0].value_counts().to_dict()}")
 ```bash
 python scripts/run_baselines.py --task A5 --model lr
 python scripts/run_baselines.py --task A4 --model pca_lr
+# A1 has multiple variants; select one explicitly
+python scripts/run_baselines.py --task A1 --task-dir A1_liver_lomo --model lr
 ```
 
 ### 3. Submit your model's predictions
@@ -211,9 +331,9 @@ Prepare a JSON file (see [docs/submission_format.md](docs/submission_format.md))
   "task_id": "A5",
   "model_name": "MyModel_v1",
   "predictions": {
-    "fold_MHU-2_test": {"sample_id_1": 0.92, "sample_id_2": 0.07, ...},
-    "fold_RR-6_test":  {...},
-    "fold_RR-7_test":  {...}
+    "fold_MHU-2_test": {"sample_id_1": 0.92, "sample_id_2": 0.07},
+    "fold_RR-6_test":  {"...": "..."},
+    "fold_RR-7_test":  {"...": "..."}
   }
 }
 ```
@@ -224,6 +344,12 @@ Evaluate:
 python scripts/evaluate_submission.py \
     --submission my_submission.json \
     --task A5
+
+# A1 example (variant must be explicit)
+python scripts/evaluate_submission.py \
+    --submission my_submission.json \
+    --task A1 \
+    --task-dir A1_liver_lomo
 ```
 
 ---
@@ -255,6 +381,21 @@ python scripts/evaluate_submission.py \
 
 See `processed/B_cross_mission/{tissue}/` for per-tissue AUROC matrices and `evaluation/B_cross_mission_summary.json` for aggregated results.
 
+### Category C — Cross-Tissue Transfer
+
+**Goal**: Train on tissue X, predict spaceflight status on tissue Y. Evaluates whether spaceflight signatures are shared across tissues.
+
+Three transfer methods:
+- **Method A (Gene)**: Direct gene intersection transfer
+- **Method B (DEG)**: Differentially expressed gene overlap
+- **Method C (Pathway)**: GSVA Hallmark pathway score transfer
+
+### Category D — Condition/Confounder Prediction
+
+**Goal**: Predict confounding variables (mission identity, strain, hardware, gravity level) to quantify batch effects and biological confounders.
+
+Key finding: D3 gene F1=1.0 (perfect mission separation) vs pathway F1=0.06 (batch-invariant) confirms pathways absorb batch effects.
+
 ---
 
 ## Baseline Submissions
@@ -265,18 +406,19 @@ Pre-computed baseline predictions are available in `evaluation/` for reference a
 
 | File | Task | Model | Mean AUROC | Go/No-Go |
 |------|------|-------|------------|----------|
-| `submission_LR_baseline_A5.json` | A5 Skin | LR (ElasticNet) | 0.821 | ✓ GO |
 | `submission_PCALR_baseline_A4.json` | A4 Thymus | PCA-LR (L2, lbfgs) | 0.923 | ✓ GO |
 | `submission_LR_baseline_A2.json` | A2 Gastrocnemius | LR-ElasticNet (SAGA) | 0.917 | ✓ GO |
+| `submission_LR_baseline_A5.json` | A5 Skin | LR (ElasticNet) | 0.821 | ✓ GO |
+| `submission_PCALR_baseline_A6.json` | A6 Eye | PCA-LR (pathway) | 0.915 | ✓ GO |
 
 **Category B (Cross-Mission Transfer)**
 
 | Task | Tissue | N pairs | PCA-LR Mean AUROC | LFC Mean AUROC |
 |------|--------|---------|------------------|---------------|
 | B4 | Thymus | 12 | 0.860 | 0.868 |
+| B2 | Gastrocnemius | 6 | 0.801 | 0.655 |
 | B5 | Skin | 6 | 0.772 | 0.750 |
 | B6 | Eye | 6 | 0.754 | 0.696 |
-| B2 | Gastrocnemius | 6 | 0.801 | 0.655 |
 | B1 | Liver | 30 | 0.577 | 0.534 |
 | B3 | Kidney | 6 | 0.555 | 0.465 |
 
@@ -326,26 +468,47 @@ For Tier 3 (Text LLM) input format specification, see [DESIGN_DECISIONS.md](DESI
 
 ## Data
 
-All data is derived from publicly available NASA OSDR datasets.
+All data is derived from publicly available NASA OSDR datasets (24 studies, 6 tissues).
 
 | Tissue | OSD Accession | Mission | n samples | Note |
 |--------|--------------|---------|-----------|------|
+| Liver | OSD-48 | RR-1 | 18 | Track 2a |
+| Liver | OSD-137 | RR-3 | 20 | Track 2a |
+| Liver | OSD-245 | RR-6 | 48 | Track 2a |
+| Liver | OSD-379 | RR-8 | 40 | Track 2a |
+| Liver | OSD-242 | RR-9 | 39 | Track 2a |
+| Liver | OSD-686 | MHU-2 | 28 | Track 2a (uG/GC/AG 3-group) |
+| Gastrocnemius | OSD-101 | RR-1 | 12 | Track 2a |
+| Gastrocnemius | OSD-401 | RR-5 | 12 | Track 2a |
+| Gastrocnemius | OSD-326 | RR-9 | 8 | Track 2a |
+| Kidney | OSD-102 | RR-1 | 47 | Track 2a |
+| Kidney | OSD-163 | RR-3 | 32 | Track 2a |
+| Kidney | OSD-253 | RR-7 | 39 | Track 2a |
 | Thymus | OSD-289 | MHU-1 | 6 | Track 2b (GC = C57BL/6CR) |
 | Thymus | OSD-289 | MHU-2 | 6 | Track 2a |
 | Thymus | OSD-244 | RR-6 | 35 | Track 2a |
 | Thymus | OSD-421 | RR-9 | 20 | Track 2a |
-| Gastrocnemius | OSD-101 | RR-1 | 12 | Track 2a |
-| Gastrocnemius | OSD-401 | RR-5 | 12 | Track 2a |
-| Gastrocnemius | OSD-326 | RR-9 | 8 | Track 2a |
 | Skin | OSD-238 | MHU-2 (dorsal) | 18 | merged as "MHU-2" (6F+6GC+6VC; AG excluded) |
 | Skin | OSD-239 | MHU-2 (femoral) | 17 | merged as "MHU-2" (5F+12GC; AG excluded) |
 | Skin | OSD-243 | RR-6 | 37 | Track 2a |
 | Skin | OSD-254 | RR-7 | 30 | C57BL/6J non-BSL subset only |
-
-MHU-1 and MHU-2 are both sub-experiments within OSD-289 (GLDS-289), separated by mission label during preprocessing.
-OSD-254 (RR-7 Skin) is a mixed-strain study (C57BL/6J + C3H/HeJ); only the C57BL/6J non-BSL samples (n=30) are included in Track 2a (A5).
+| Eye | OSD-100 | RR-1 | 12 | Track 2a |
+| Eye | OSD-194 | RR-3 | 9 | Track 2a |
+| Eye | OSD-397 | TBD | 16 | Track 2a |
 
 Preprocessing: DESeq2 normalization (per-mission), log2(counts + 1), global low-expression filter (≥20% samples with count>1), top 75th percentile variance gene selection per fold (train missions only — DD-03).
+
+---
+
+## Execution Safety Defaults (2026-03)
+
+- `run_baselines.py` and `shap_analysis.py` exclude `fold_*_holdout` by default.
+- `shap_analysis.py` includes holdout only with `--include-holdout`.
+- `evaluate_submission.py` accepts holdout predictions if provided, but does not require them.
+- If one task ID matches multiple directories (for example A1), scripts now raise an ambiguity error unless `--task-dir` is provided.
+- Geneformer `mouse_gf` path is configurable:
+  - Tokenize: `--mouse-gf-base` or env `MOUSE_GF_BASE`
+  - Finetune: `--mouse-gf-model-dir` or env `MOUSE_GF_MODEL_DIR`
 
 ---
 
@@ -353,12 +516,15 @@ Preprocessing: DESeq2 normalization (per-mission), log2(counts + 1), global low-
 
 Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md):
 
+- **DD-01**: Feature = log2(DESeq2 normalized counts) — LFC forbidden in Category A (label leakage)
 - **DD-03**: LOMO-aware variance filter (train missions only — no test leakage)
 - **DD-04**: Mission = independence unit for LOMO (not sample)
 - **DD-06**: Track 2a = C57BL/6J only; Track 2b = all strains
 - **DD-08**: Evaluation metrics (AUROC + bootstrap CI + permutation p)
-- **DD-11**: Go/No-Go decision criteria
+- **DD-11**: Go/No-Go decision criteria (3 AND conditions)
+- **DD-12**: Negative controls (NC1 permutation, NC2 housekeeping, NC3 cross-species)
 - **DD-13**: Baseline model set (LR, RF, XGBoost, PCA-LR)
+- **DD-15**: Pathway analysis (fGSEA group-level + GSVA sample-level)
 - **DD-16**: Text LLM evaluation track specification
 - **DD-17**: Category B evaluation criteria (Transfer Pattern Summary, perm_p floor)
 
@@ -368,13 +534,23 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v1.0-alpha | 2026-03-01 | Phase 1 complete. A2+A4+A5 GO (gene-level). A6 Eye pathway-level GO (GSVA Hallmark). Category B all 6 tissues (B1–B6). Submission format + evaluator. Dataset freeze. |
+| v1.0-alpha | 2026-03-01 | Phase 1 complete. 4 tissues GO (A2+A4+A5 gene-level, A6 pathway-level). Category B–D all 6 tissues. J5 gene-vs-pathway (12 comparisons). NES conservation analysis. Cell 2020 external validation (71.7% concordance). Negative controls (NC1/NC2) pass. fGSEA 60 files, GSVA 54 files. Submission format + evaluator. Dataset freeze. |
 
 ---
 
 ## Citation
 
 *(Manuscript in preparation)*
+
+```bibtex
+@dataset{kang2026genelab,
+  title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
+  author  = {Kang, Jaeyoung},
+  year    = {2026},
+  url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
+  note    = {v1.0-alpha}
+}
+```
 
 Data source: NASA Open Science Data Repository (OSDR) — [osdr.nasa.gov](https://osdr.nasa.gov/bio/repo/)
 
