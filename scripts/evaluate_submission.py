@@ -43,6 +43,8 @@ def bootstrap_auroc_ci(y_true: np.ndarray, y_score: np.ndarray,
                         n_bootstrap: int = N_BOOTSTRAP,
                         seed: int = RANDOM_SEED):
     """Bootstrap 95% CI for AUROC."""
+    if n_bootstrap <= 0:
+        return float("nan"), float("nan")
     rng = np.random.default_rng(seed)
     n = len(y_true)
     boot_scores = []
@@ -51,6 +53,8 @@ def bootstrap_auroc_ci(y_true: np.ndarray, y_score: np.ndarray,
         if len(np.unique(y_true[idx])) < 2:
             continue
         boot_scores.append(roc_auc_score(y_true[idx], y_score[idx]))
+    if not boot_scores:
+        return float("nan"), float("nan")
     ci_lo = float(np.percentile(boot_scores, 2.5))
     ci_hi = float(np.percentile(boot_scores, 97.5))
     return ci_lo, ci_hi
@@ -73,18 +77,34 @@ def permutation_pvalue(y_true: np.ndarray, y_score: np.ndarray,
 
 # ── Validation ────────────────────────────────────────────────────────────────
 
-def get_task_dir(task_id: str) -> Path:
-    """Return the task directory for a given task ID."""
-    # Map task_id to directory name
-    task_map = {task.name.split("_")[0]: task for task in TASKS_DIR.iterdir()
-                if task.is_dir() and task.name.startswith(task_id)}
-    if not task_map:
+def get_task_dir(task_id: str, task_dir_name=None) -> Path:
+    """Return the task directory for a given task ID with deterministic resolution."""
+    if task_dir_name:
+        task_dir = TASKS_DIR / task_dir_name
+        if not task_dir.exists() or not task_dir.is_dir():
+            raise ValueError(f"Task directory not found: {task_dir}")
+        if not task_dir.name.startswith(f"{task_id}_"):
+            raise ValueError(
+                f"--task-dir '{task_dir.name}' does not match task_id '{task_id}'"
+            )
+        return task_dir
+
+    candidates = sorted(
+        t for t in TASKS_DIR.iterdir()
+        if t.is_dir() and t.name.startswith(f"{task_id}_")
+    )
+    if not candidates:
         raise ValueError(f"Task '{task_id}' not found in {TASKS_DIR}")
-    # Return first match (e.g., A4 → A4_thymus_lomo)
-    return list(task_map.values())[0]
+    if len(candidates) > 1:
+        names = ", ".join(t.name for t in candidates)
+        raise ValueError(
+            f"Ambiguous task_id '{task_id}': {names}. Use --task-dir to select one."
+        )
+    return candidates[0]
 
 
-def validate_submission(submission: dict, task_id: str) -> list[str]:
+def validate_submission(submission: dict, task_id: str,
+                        task_dir_name=None) -> list[str]:
     """
     Validate submission structure. Returns list of error messages (empty = valid).
     """
@@ -119,7 +139,7 @@ def validate_submission(submission: dict, task_id: str) -> list[str]:
 
     # Load expected folds from task
     try:
-        task_dir = get_task_dir(task_id)
+        task_dir = get_task_dir(task_id, task_dir_name=task_dir_name)
     except ValueError as e:
         errors.append(str(e))
         return errors
@@ -148,6 +168,10 @@ def validate_submission(submission: dict, task_id: str) -> list[str]:
     for fold in folds_to_check:
         if fold not in submission["predictions"]:
             continue
+        fold_preds = submission["predictions"][fold]
+        if not isinstance(fold_preds, dict):
+            errors.append(f"[{fold}] predictions must be a dict of sample_id -> probability")
+            continue
         fold_dir = task_dir / fold
         test_y_path = fold_dir / "test_y.csv"
         if not test_y_path.exists():
@@ -156,7 +180,7 @@ def validate_submission(submission: dict, task_id: str) -> list[str]:
 
         y_df = pd.read_csv(test_y_path, index_col=0)
         expected_samples = set(y_df.index.astype(str))
-        submitted_samples = set(submission["predictions"][fold].keys())
+        submitted_samples = set(fold_preds.keys())
 
         missing = expected_samples - submitted_samples
         extra = submitted_samples - expected_samples
@@ -167,7 +191,7 @@ def validate_submission(submission: dict, task_id: str) -> list[str]:
             errors.append(f"[{fold}] Unknown sample IDs: {sorted(extra)[:5]}...")
 
         # Check probability values
-        for sample_id, prob in submission["predictions"][fold].items():
+        for sample_id, prob in fold_preds.items():
             if not isinstance(prob, (int, float)):
                 errors.append(f"[{fold}] Non-numeric probability for '{sample_id}': {prob}")
                 break
@@ -222,9 +246,10 @@ def evaluate_fold(fold_dir: Path, fold_predictions: dict,
 def evaluate_submission_full(submission: dict, task_id: str,
                               verbose: bool = True,
                               n_bootstrap: int = N_BOOTSTRAP,
-                              n_perm: int = N_PERM) -> dict:
+                              n_perm: int = N_PERM,
+                              task_dir_name=None) -> dict:
     """Run full evaluation. Returns results dict."""
-    task_dir = get_task_dir(task_id)
+    task_dir = get_task_dir(task_id, task_dir_name=task_dir_name)
     # Support Category A (fold_) and Category B (pair_); holdout folds excluded
     fold_prefix = "pair_" if task_id.startswith("B") else "fold_"
     fold_dirs = sorted([d for d in task_dir.iterdir()
@@ -270,7 +295,9 @@ def evaluate_submission_full(submission: dict, task_id: str,
         all_y_true = np.array(all_y_true)
         all_y_score = np.array(all_y_score)
         overall_auroc = float(roc_auc_score(all_y_true, all_y_score))
-        overall_ci_lo, overall_ci_hi = bootstrap_auroc_ci(all_y_true, all_y_score)
+        overall_ci_lo, overall_ci_hi = bootstrap_auroc_ci(
+            all_y_true, all_y_score, n_bootstrap=n_bootstrap
+        )
 
         # Go/No-Go (based on fold mean CI lower from per-fold CI means)
         mean_ci_lower = float(np.mean([r["ci_lower"] for r in fold_results
@@ -376,6 +403,8 @@ def main():
                         help="Path to submission JSON file")
     parser.add_argument("--task", required=True,
                         help="Task ID (e.g., A2, A4)")
+    parser.add_argument("--task-dir", default=None,
+                        help="Explicit task directory name under tasks/ (recommended for A1 variants)")
     parser.add_argument("--validate-only", action="store_true",
                         help="Only validate submission format, do not evaluate")
     parser.add_argument("--output", default=None,
@@ -385,6 +414,12 @@ def main():
     parser.add_argument("--n-perm", type=int, default=N_PERM,
                         help=f"Permutation iterations (default: {N_PERM})")
     args = parser.parse_args()
+    if args.n_bootstrap < 0:
+        print("Error: --n-bootstrap must be >= 0", file=sys.stderr)
+        sys.exit(1)
+    if args.n_perm < 0:
+        print("Error: --n-perm must be >= 0", file=sys.stderr)
+        sys.exit(1)
 
     # Load submission
     sub_path = Path(args.submission)
@@ -401,7 +436,7 @@ def main():
 
     # Validate
     print("Validating submission format...")
-    errors = validate_submission(submission, args.task)
+    errors = validate_submission(submission, args.task, task_dir_name=args.task_dir)
     if errors:
         print(f"  ✗ Validation FAILED ({len(errors)} errors):")
         for e in errors:
@@ -419,7 +454,8 @@ def main():
 
     print(f"\nEvaluating {len(submission['predictions'])} fold(s)...")
     results = evaluate_submission_full(submission, args.task, verbose=True,
-                                       n_bootstrap=n_bootstrap, n_perm=n_perm)
+                                       n_bootstrap=n_bootstrap, n_perm=n_perm,
+                                       task_dir_name=args.task_dir)
 
     print_summary(results)
 
