@@ -1,0 +1,66 @@
+{
+  "model": "Geneformer-mouse_gf",
+  "timestamp": "2026-03-07T16:07:30.797657",
+  "n_tissues": 6,
+  "tissues": {
+    "A1": {
+      "tissue": "liver",
+      "geneformer_mean_auroc": 0.48586241514149525,
+      "geneformer_std_auroc": 0.07380462352336961,
+      "geneformer_n_folds": 6,
+      "baseline_mean_auroc": 0.5880112863858994,
+      "baseline_model": "Logistic Regression (ElasticNet)",
+      "delta": -0.10214887124440414
+    },
+    "A2": {
+      "tissue": "gastrocnemius",
+      "geneformer_mean_auroc": 0.3819444444444444,
+      "geneformer_std_auroc": 0.05408945113679593,
+      "geneformer_n_folds": 3,
+      "baseline_mean_auroc": 0.9074074074074074,
+      "baseline_model": "Logistic Regression (ElasticNet)",
+      "delta": -0.525462962962963
+    },
+    "A3": {
+      "tissue": "kidney",
+      "geneformer_mean_auroc": 0.4517267267267268,
+      "geneformer_std_auroc": 0.07992956168356627,
+      "geneformer_n_folds": 3,
+      "baseline_mean_auroc": 0.5210960960960961,
+      "baseline_model": "Logistic Regression (ElasticNet)",
+      "delta": -0.06936936936936927
+    },
+    "A4": {
+      "tissue": "thymus",
+      "geneformer_mean_auroc": 0.4951797385620915,
+      "geneformer_std_auroc": 0.23333486376074877,
+      "geneformer_n_folds": 4,
+      "baseline_mean_auroc": 0.923202614379085,
+      "baseline_model": "PCA-50 + LogReg",
+      "delta": -0.4280228758169935
+    },
+    "A5": {
+      "tissue": "skin",
+      "geneformer_mean_auroc": 0.5565328725855041,
+      "geneformer_std_auroc": 0.08667634663126243,
+      "geneformer_n_folds": 3,
+      "baseline_mean_auroc": 0.8213857877015771,
+      "baseline_model": "Logistic Regression (ElasticNet)",
+      "delta": -0.264852915116073
+    },
+    "A6": {
+      "tissue": "eye",
+      "geneformer_mean_auroc": 0.4841269841269842,
+      "geneformer_std_auroc": 0.11718113539867778,
+      "geneformer_n_folds": 3,
+      "baseline_mean_auroc": 0.7894179894179895,
+      "baseline_model": "PCA-50 + LogReg",
+      "delta": -0.3052910052910053
+    }
+  },
+  "overall": {
+    "geneformer_mean": 0.47589553026454107,
+    "baseline_mean": 0.7584201968980091,
+    "n_compared": 6
+  }
+}

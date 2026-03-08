@@ -224,6 +224,120 @@ def infer_sample_labels(sample_table: pd.DataFrame,
     return labels
 
 
+# ── Temporal metadata (v2.0) ─────────────────────────────────────────────────
+
+def infer_sacrifice_timing(sample_name: str, mission: str) -> str:
+    """
+    Infer sacrifice timing from sample name.
+    Returns: 'ISS-T' | 'LAR' | 'unknown'
+
+    ISS-T (ISS Terminal) = sacrificed on-orbit, preserved with RNAlater
+    LAR (Live Animal Return) = returned alive, standard necropsy on ground
+
+    Parsing rules verified against OSDR runsheets:
+      - RR-6, RR-8:  '_ISS-T_' or '_LAR_' in sample name
+      - RR-1 liver:   '_FLT_C_' / '_GC_C_' → ISS-T (Carcass = RNAlater)
+                       '_FLT_I_' / '_GC_I_' → LAR (Euthanasia = live return)
+                       Verified via GLDS-48 runsheet 'Dissection Condition' column
+      - MHU-2:        all LAR (JAXA protocol, mice returned live)
+      - RR-3, RR-9:   no temporal split → 'unknown'
+    """
+    name = sample_name.upper()
+
+    # RR-6, RR-8: explicit ISS-T / LAR in name
+    if '_ISS-T_' in name or '_ISS-T' == name[-5:]:
+        return 'ISS-T'
+    if '_LAR_' in name or '_LAR' == name[-4:]:
+        return 'LAR'
+
+    # RR-1 liver: _C_ = Carcass (ISS-T), _I_ = Euthanasia (LAR)
+    # Pattern: _{FLT|GC|BSL}_{C|I}_ — must follow group label
+    mission_upper = mission.upper().replace(' ', '')
+    if mission_upper in ('RR-1',):
+        import re
+        # Match _FLT_C_, _GC_C_, _BSL_C_ etc. (Carcass → ISS-T)
+        if re.search(r'_(FLT|GC|BSL|VIV|VC)_C_', name):
+            return 'ISS-T'
+        # Match _FLT_I_, _GC_I_, etc. (Euthanasia → LAR)
+        if re.search(r'_(FLT|GC|BSL|VIV|VC)_I_', name):
+            return 'LAR'
+
+    # MHU-2: all returned live (JAXA protocol)
+    if 'MHU' in mission_upper:
+        return 'LAR'
+
+    return 'unknown'
+
+
+def infer_age_group(sample_name: str) -> str:
+    """
+    Infer age group from sample name (RR-8 only).
+    Returns: 'OLD' | 'YNG' | 'unknown'
+
+    RR-8 mice: OLD = 32-week, YNG = 10-12 week
+    Pattern: '_OLD_' or '_YNG_' in sample name
+    """
+    name = sample_name.upper()
+    if '_OLD_' in name or name.endswith('_OLD'):
+        return 'OLD'
+    if '_YNG_' in name or name.endswith('_YNG'):
+        return 'YNG'
+    return 'unknown'
+
+
+def enrich_temporal_metadata(tissue: str, verbose: bool = True) -> None:
+    """
+    Post-hoc enrichment: add sacrifice_timing and age_group columns
+    to existing metadata CSVs in processed/A_detection/{tissue}/.
+    Does NOT re-run QC — only reads and updates metadata files.
+    """
+    outdir = PROCESSED_DIR / tissue
+
+    # Find all metadata CSVs
+    meta_files = sorted(outdir.glob(f"{tissue}_*_metadata.csv"))
+    if not meta_files:
+        print(f"  [SKIP] No metadata files found in {outdir}")
+        return
+
+    print(f"\n  Enriching temporal metadata for {tissue}...")
+
+    for meta_path in meta_files:
+        meta = pd.read_csv(meta_path, index_col=0)
+
+        # Determine mission from metadata
+        if 'mission' in meta.columns:
+            missions = meta['mission'].unique()
+        else:
+            missions = ['unknown']
+
+        # Add sacrifice_timing
+        timing_values = []
+        age_values = []
+        for sample_name in meta.index:
+            mission = meta.loc[sample_name, 'mission'] if 'mission' in meta.columns else 'unknown'
+            timing_values.append(infer_sacrifice_timing(str(sample_name), str(mission)))
+            age_values.append(infer_age_group(str(sample_name)))
+
+        meta['sacrifice_timing'] = timing_values
+        meta['age_group'] = age_values
+
+        # Report
+        timing_counts = pd.Series(timing_values).value_counts().to_dict()
+        age_counts = pd.Series(age_values).value_counts().to_dict()
+
+        if verbose:
+            mission_str = ', '.join(str(m) for m in missions)
+            print(f"    {meta_path.name}: {mission_str}")
+            print(f"      sacrifice_timing: {timing_counts}")
+            if any(v != 'unknown' for v in age_values):
+                print(f"      age_group: {age_counts}")
+
+        # Save
+        meta.to_csv(meta_path)
+
+    print(f"  Done: {len(meta_files)} metadata files enriched.")
+
+
 # ── QC functions ───────────────────────────────────────────────────────────────
 
 def compute_sample_qc_metrics(counts: pd.DataFrame) -> pd.DataFrame:
@@ -613,6 +727,10 @@ def parse_args():
         help="Print summary of what QC would do (no output written)"
     )
     parser.add_argument(
+        "--enrich-temporal", action="store_true",
+        help="Add sacrifice_timing and age_group columns to existing metadata CSVs (v2.0)"
+    )
+    parser.add_argument(
         "--verbose", action="store_true", default=True,
         help="Verbose output (default: True)"
     )
@@ -649,6 +767,18 @@ def main():
 
     if args.check_input:
         check_input_files(args.check_input)
+        return
+
+    # v2.0: Enrich existing metadata with temporal columns
+    if args.enrich_temporal:
+        tissues = list(TISSUE_OSD_MAP.keys()) if args.all else ([args.tissue] if args.tissue else list(TISSUE_OSD_MAP.keys()))
+        print("=" * 60)
+        print("GeneLab_benchmark — Temporal Metadata Enrichment (v2.0)")
+        print(f"Tissues: {tissues}")
+        print("=" * 60)
+        for tissue in tissues:
+            enrich_temporal_metadata(tissue, verbose=args.verbose)
+        print("\n✓ Temporal enrichment complete.")
         return
 
     tissues_to_process = []

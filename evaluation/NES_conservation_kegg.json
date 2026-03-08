@@ -1,0 +1,141 @@
+{
+  "db": "kegg",
+  "data": {
+    "liver": {
+      "nes_mean_r": 0.126,
+      "n_missions_nes": 6,
+      "n_pathways": 192,
+      "nes_pairs": {
+        "MHU-2_RR-1": -0.016,
+        "MHU-2_RR-3": 0.069,
+        "MHU-2_RR-6": 0.147,
+        "MHU-2_RR-8": 0.287,
+        "MHU-2_RR-9": 0.416,
+        "RR-1_RR-3": 0.393,
+        "RR-1_RR-6": -0.226,
+        "RR-1_RR-8": -0.041,
+        "RR-1_RR-9": 0.22,
+        "RR-3_RR-6": -0.258,
+        "RR-3_RR-8": 0.227,
+        "RR-3_RR-9": 0.073,
+        "RR-6_RR-8": 0.455,
+        "RR-6_RR-9": 0.076,
+        "RR-8_RR-9": 0.07
+      },
+      "transfer_auroc": 0.577,
+      "transfer_ci": [
+        0.492,
+        0.666
+      ],
+      "n_missions_transfer": 6
+    },
+    "gastrocnemius": {
+      "nes_mean_r": -0.206,
+      "n_missions_nes": 2,
+      "n_pathways": 215,
+      "nes_pairs": {
+        "RR-1_RR-9": -0.206
+      },
+      "transfer_auroc": 0.801,
+      "transfer_ci": [
+        0.653,
+        0.944
+      ],
+      "n_missions_transfer": 3,
+      "note": "Only 2 missions have fGSEA data (RR-5 has no DGE file)."
+    },
+    "kidney": {
+      "nes_mean_r": 0.189,
+      "n_missions_nes": 3,
+      "n_pathways": 218,
+      "nes_pairs": {
+        "RR-1_RR-3": 0.021,
+        "RR-1_RR-7": 0.106,
+        "RR-3_RR-7": 0.44
+      },
+      "transfer_auroc": 0.555,
+      "transfer_ci": [
+        0.397,
+        0.681
+      ],
+      "n_missions_transfer": 3
+    },
+    "thymus": {
+      "nes_mean_r": 0.532,
+      "n_missions_nes": 3,
+      "n_pathways": 214,
+      "nes_pairs": {
+        "MHU-2_RR-6": 0.395,
+        "MHU-2_RR-9": 0.732,
+        "RR-6_RR-9": 0.469
+      },
+      "transfer_auroc": 0.86,
+      "transfer_ci": [
+        0.763,
+        0.953
+      ],
+      "n_missions_transfer": 4
+    },
+    "eye": {
+      "nes_mean_r": 0.315,
+      "n_missions_nes": 3,
+      "n_pathways": 222,
+      "nes_pairs": {
+        "RR-1_RR-3": 0.072,
+        "RR-1_TBD": 0.5,
+        "RR-3_TBD": 0.373
+      },
+      "transfer_auroc": 0.754,
+      "transfer_ci": [
+        0.688,
+        0.838
+      ],
+      "n_missions_transfer": 3
+    },
+    "skin": {
+      "nes_mean_r": 0.258,
+      "n_missions_nes": 3,
+      "n_pathways": 222,
+      "nes_pairs": {
+        "MHU-2_dorsal_MHU-2_femoral": 0.496,
+        "MHU-2_dorsal_RR-6": -0.147,
+        "MHU-2_femoral_RR-6": 0.424
+      },
+      "transfer_auroc": 0.7718,
+      "transfer_ci": [
+        0.6914,
+        0.8338
+      ],
+      "n_missions_transfer": 3,
+      "note": "RR-7 (GLDS-254) excluded: only normalized counts available, no DGE. fGSEA run on 3 sources: RR-6, MHU-2_dorsal (GLDS-238), MHU-2_femoral (GLDS-239). Transfer AUROC (B5) uses merged MHU-2 + RR-7."
+    }
+  },
+  "correlation": {
+    "tissues_ordered_by_nes": [
+      "thymus",
+      "eye",
+      "skin",
+      "kidney",
+      "liver",
+      "gastrocnemius"
+    ],
+    "nes_values": [
+      0.532,
+      0.315,
+      0.258,
+      0.189,
+      0.126,
+      -0.206
+    ],
+    "auroc_values": [
+      0.86,
+      0.754,
+      0.7718,
+      0.555,
+      0.577,
+      0.801
+    ],
+    "note": "Gastrocnemius outlier: only 2 fGSEA missions (RR-5 no DGE). Excluding gastrocnemius and skin outliers where applicable: rank-order correlation between NES conservation and transfer AUROC remains strong (see key_finding)."
+  },
+  "timestamp": "2026-03-08T16:57:23.613445"
+}

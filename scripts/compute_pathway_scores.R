@@ -72,6 +72,7 @@ TISSUE_MISSIONS <- list(
   ),
   thymus = list(
     list(mission = "RR-6",  dir = "RR-6"),
+    list(mission = "MHU-1", dir = "MHU-1"),
     list(mission = "MHU-2", dir = "MHU-2"),
     list(mission = "RR-9",  dir = "RR-9")
   ),
@@ -84,6 +85,12 @@ TISSUE_MISSIONS <- list(
     list(mission = "RR-1",  dir = "RR-1"),
     list(mission = "RR-3",  dir = "RR-3"),
     list(mission = "TBD",   dir = "TBD")
+  ),
+  skin = list(
+    list(mission = "RR-6",          dir = "RR-6"),
+    list(mission = "RR-7",          dir = "RR-7"),
+    list(mission = "MHU-2_dorsal",  dir = "MHU-2_(dorsal)"),
+    list(mission = "MHU-2_femoral", dir = "MHU-2_(femoral)")
   )
 )
 
@@ -122,6 +129,20 @@ load_gene_sets <- function(db_names = c("hallmark", "kegg", "reactome")) {
     cat(sprintf("    %d gene sets loaded\n", length(gs_list[["reactome"]])))
   }
 
+  if ("mitocarta" %in% db_names) {
+    cat("  Loading MitoCarta3.0 (Mus musculus)...\n")
+    gmt_path <- file.path(BASE_DIR, "processed", "gene_sets", "mitocarta3_mouse.gmt")
+    if (!file.exists(gmt_path)) {
+      stop("MitoCarta GMT not found. Run: Rscript scripts/prepare_mitocarta.R")
+    }
+    # fgsea::gmtPathways works for GMT reading (fgsea is a dependency of GSVA pipeline)
+    if (!requireNamespace("fgsea", quietly = TRUE)) {
+      stop("Package 'fgsea' required for GMT reading. Install: BiocManager::install('fgsea')")
+    }
+    gs_list[["mitocarta"]] <- fgsea::gmtPathways(gmt_path)
+    cat(sprintf("    %d gene sets loaded\n", length(gs_list[["mitocarta"]])))
+  }
+
   return(gs_list)
 }
 
@@ -131,9 +152,12 @@ find_norm_file <- function(tissue, mission_name) {
   tissue_dir <- file.path(A_DETECTION_DIR, tissue)
 
   # Pattern: {tissue}_{mission}_log2_norm.csv
+  # Handle parenthesized subsite naming (e.g., MHU-2_dorsal → MHU-2_(dorsal))
+  paren_name <- gsub("_(dorsal|femoral)$", "_(\\1)", mission_name)
   patterns <- c(
     sprintf("%s_%s_log2_norm.csv", tissue, mission_name),
-    sprintf("%s_%s_log2_norm.csv", tissue, gsub("-", "", mission_name))
+    sprintf("%s_%s_log2_norm.csv", tissue, gsub("-", "", mission_name)),
+    sprintf("%s_%s_log2_norm.csv", tissue, paren_name)
   )
 
   for (p in patterns) {

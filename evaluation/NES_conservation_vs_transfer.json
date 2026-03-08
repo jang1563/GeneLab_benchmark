@@ -2,39 +2,38 @@
   "description": "Cross-mission NES conservation (Spearman r) vs Category B transfer AUROC",
   "analysis": "Does pathway-level conservation predict gene-level cross-mission transfer?",
   "data": {
-    "thymus": {
-      "nes_mean_r": 0.619,
-      "n_missions_nes": 3,
+    "liver": {
+      "nes_mean_r": 0.06,
+      "n_missions_nes": 6,
+      "n_pathways": 50,
       "nes_pairs": {
-        "RR-6_MHU-2": 0.493,
-        "RR-6_RR-9": 0.619,
-        "MHU-2_RR-9": 0.744
+        "MHU-2_RR-1": -0.157,
+        "MHU-2_RR-3": -0.213,
+        "MHU-2_RR-6": 0.452,
+        "MHU-2_RR-8": 0.155,
+        "MHU-2_RR-9": -0.019,
+        "RR-1_RR-3": 0.265,
+        "RR-1_RR-6": -0.297,
+        "RR-1_RR-8": 0.271,
+        "RR-1_RR-9": -0.091,
+        "RR-3_RR-6": -0.114,
+        "RR-3_RR-8": 0.239,
+        "RR-3_RR-9": -0.011,
+        "RR-6_RR-8": 0.422,
+        "RR-6_RR-9": 0.052,
+        "RR-8_RR-9": -0.06
       },
-      "transfer_auroc": 0.86,
+      "transfer_auroc": 0.577,
       "transfer_ci": [
-        0.763,
-        0.953
+        0.492,
+        0.666
       ],
-      "n_missions_transfer": 4
-    },
-    "eye": {
-      "nes_mean_r": 0.335,
-      "n_missions_nes": 3,
-      "nes_pairs": {
-        "RR-1_RR-3": 0.28,
-        "RR-1_TBD": 0.593,
-        "RR-3_TBD": 0.133
-      },
-      "transfer_auroc": 0.754,
-      "transfer_ci": [
-        0.688,
-        0.838
-      ],
-      "n_missions_transfer": 3
+      "n_missions_transfer": 6
     },
     "gastrocnemius": {
       "nes_mean_r": 0.057,
       "n_missions_nes": 2,
+      "n_pathways": 50,
       "nes_pairs": {
         "RR-1_RR-9": 0.057
       },
@@ -44,38 +43,12 @@
         0.944
       ],
       "n_missions_transfer": 3,
-      "note": "Only 2 missions have fGSEA data (RR-5 has no DGE file)"
-    },
-    "liver": {
-      "nes_mean_r": 0.059,
-      "n_missions_nes": 6,
-      "nes_pairs": {
-        "RR-1_RR-3": 0.265,
-        "RR-1_RR-6": -0.297,
-        "RR-1_RR-8": 0.271,
-        "RR-1_RR-9": -0.091,
-        "RR-1_MHU-2": -0.157,
-        "RR-3_RR-6": -0.114,
-        "RR-3_RR-8": 0.239,
-        "RR-3_RR-9": -0.011,
-        "RR-3_MHU-2": -0.213,
-        "RR-6_RR-8": 0.422,
-        "RR-6_RR-9": 0.052,
-        "RR-6_MHU-2": 0.452,
-        "RR-8_RR-9": -0.06,
-        "RR-8_MHU-2": 0.155,
-        "RR-9_MHU-2": -0.019
-      },
-      "transfer_auroc": 0.577,
-      "transfer_ci": [
-        0.492,
-        0.666
-      ],
-      "n_missions_transfer": 6
+      "note": "Only 2 missions have fGSEA data (RR-5 has no DGE file)."
     },
     "kidney": {
       "nes_mean_r": 0.048,
       "n_missions_nes": 3,
+      "n_pathways": 50,
       "nes_pairs": {
         "RR-1_RR-3": 0.032,
         "RR-1_RR-7": -0.297,
@@ -88,9 +61,42 @@
       ],
       "n_missions_transfer": 3
     },
+    "thymus": {
+      "nes_mean_r": 0.619,
+      "n_missions_nes": 3,
+      "n_pathways": 50,
+      "nes_pairs": {
+        "MHU-2_RR-6": 0.493,
+        "MHU-2_RR-9": 0.744,
+        "RR-6_RR-9": 0.619
+      },
+      "transfer_auroc": 0.86,
+      "transfer_ci": [
+        0.763,
+        0.953
+      ],
+      "n_missions_transfer": 4
+    },
+    "eye": {
+      "nes_mean_r": 0.335,
+      "n_missions_nes": 3,
+      "n_pathways": 50,
+      "nes_pairs": {
+        "RR-1_RR-3": 0.28,
+        "RR-1_TBD": 0.593,
+        "RR-3_TBD": 0.133
+      },
+      "transfer_auroc": 0.754,
+      "transfer_ci": [
+        0.688,
+        0.838
+      ],
+      "n_missions_transfer": 3
+    },
     "skin": {
       "nes_mean_r": 0.147,
       "n_missions_nes": 3,
+      "n_pathways": 50,
       "nes_pairs": {
         "MHU-2_dorsal_MHU-2_femoral": 0.362,
         "MHU-2_dorsal_RR-6": -0.257,
@@ -118,7 +124,7 @@
       0.619,
       0.335,
       0.147,
-      0.059,
+      0.06,
       0.057,
       0.048
     ],
@@ -130,8 +136,8 @@
       0.801,
       0.555
     ],
-    "note": "Gastrocnemius is an outlier (high AUROC, low NES) \u2014 only 2 fGSEA missions available. Excluding gastrocnemius: 5-tissue Spearman r = 0.9 (skin is a partial outlier: NES rank 3rd, transfer rank 2nd). Original 4-tissue finding (thymus/eye/liver/kidney) maintains perfect rank concordance (Spearman r = 1.0)."
+    "note": "Gastrocnemius outlier: only 2 fGSEA missions (RR-5 no DGE). Excluding gastrocnemius and skin outliers where applicable: rank-order correlation between NES conservation and transfer AUROC remains strong (see key_finding)."
   },
   "key_finding": "Thymus has the highest NES conservation (r=0.619) and highest transfer AUROC (0.860). Liver and kidney have near-zero NES conservation and poor transfer (~0.55-0.58). Skin shows intermediate NES conservation (r=0.147) and transfer AUROC (0.772), consistent with the overall trend. Excluding the gastrocnemius outlier (only 2 fGSEA missions), 5-tissue rank correlation = 0.9; original 4-tissue finding (thymus/eye/liver/kidney) maintains r=1.0. This supports H2: cross-mission transfer failure is driven by biological heterogeneity, not just batch effects.",
-  "timestamp": "2026-03-02T12:41:17.914750"
+  "timestamp": "2026-03-08T16:57:12.433618"
 }

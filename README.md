@@ -94,20 +94,25 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 
 ### Category D — Condition/Confounder Prediction (macro-F1)
 
-| Task | Gene | Pathway | p-value | Interpretation |
-|------|------|---------|---------|---------|
-| D3: Liver 6-class mission | **1.000** | 0.056 NS | <0.001 | Perfect batch separation; pathways batch-invariant |
-| D6: Liver uG/AG/GC | **0.886** | 0.413 NS | 0.002 | Microgravity separable from artificial gravity |
-| D6: Thymus uG/AG/GC | **0.657** | 0.641 | 0.037 | Gene ≈ Pathway for gravity detection |
+| Task | Tissue | N | Gene F1 | Pathway F1 | Gene p | Interpretation |
+|------|--------|---|---------|-----------|--------|---------|
+| D3 Mission ID (6-class) | Liver | 264 | **1.000** | 0.056 NS | <0.001 | Perfect batch separation; pathways batch-invariant |
+| D4 Strain (2-class) | Thymus | 34 | **0.892** | 0.817 | 0.004 | Strain detectable from GC-only. EXPLORATORY (n_minority=3) |
+| D5 Hardware (RR vs MHU) | Liver | 264 | **1.000** | 0.386 NS | <0.001 | Perfect gene separation; collinear with D3 |
+| D5 Hardware (RR vs MHU) | Thymus | 92 | **1.000** | 0.352 NS | <0.001 | Perfect gene separation; collinear with D3 |
+| D6 Gravity (3-class) | Liver | 9 | **0.886** | 0.413 NS | 0.002 | Microgravity separable from artificial gravity |
+| D6 Gravity (3-class) | Thymus | 9 | **0.657** | 0.641 | 0.037 | Gene ≈ Pathway for gravity detection |
 
-### J5 — Gene-level vs Pathway-level (12 comparisons)
+**Confounder hierarchy**: D3 (mission F1=1.0) ≥ D5 (hardware F1=1.0, collinear) ≥ D4 (strain F1=0.89, exploratory). All pathway F1 ≈ 0.05–0.41 → pathways resist confounder detection.
+
+### J5 — Gene-level vs Pathway-level (15 comparisons)
 
 | Category | N | Gene wins | Pathway wins | Mean diff |
 |---|---|---|---|---|
 | A (Detection) | 5 | 3 | 2 | +0.032 |
 | C (Cross-tissue) | 4 | 2 | 2 | -0.001 |
-| D (Condition) | 3 | 3 | 0 | -0.478 |
-| **Total** | **12** | **8** | **4** | **-0.106** |
+| D (Condition, D3–D6) | 6 | 6 | 0 | -0.462 |
+| **Total** | **15** | **11** | **4** | **-0.174** |
 
 Notable finding — **"Kidney Rescue"**: gene-level AUROC=0.43 (fail) → pathway-level AUROC=0.74 (success, +0.31). Eye shows similar rescue (0.79→0.92, +0.13).
 
@@ -394,6 +399,11 @@ Three transfer methods:
 
 **Goal**: Predict confounding variables (mission identity, strain, hardware, gravity level) to quantify batch effects and biological confounders.
 
+- **D3**: Mission ID (liver, 6-class) — batch effect quantification
+- **D4**: Strain (thymus GC, C57BL/6J vs C57BL/6CR) — exploratory (n=3)
+- **D5**: Hardware (RR vs MHU, liver + thymus) — collinear with D3
+- **D6**: Gravity (MHU-2, uG/AG/GC, liver + thymus) — biological signal
+
 Key finding: D3 gene F1=1.0 (perfect mission separation) vs pathway F1=0.06 (batch-invariant) confirms pathways absorb batch effects.
 
 ---
@@ -459,8 +469,22 @@ All three conditions must pass for a GO decision.
 | Track | Examples | Input Format |
 |-------|---------|-------------|
 | **Tier 1 — Classical ML** | LR, RF, XGBoost, PCA-LR | Tabular gene × sample |
-| **Tier 2 — Foundation Models** | Geneformer, scGPT | Gene rank order (tokenized) |
+| **Tier 2 — Foundation Models** | Geneformer (Mouse-GF) | Gene rank order (tokenized) |
 | **Tier 3 — Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list (see DD-16) |
+
+### Tier 2 Results: Geneformer vs Classical ML (LOMO AUROC)
+
+| Tissue | Geneformer | Baseline | Delta | Winner |
+|--------|-----------|----------|-------|--------|
+| Liver | 0.486 | 0.588 | -0.102 | Baseline |
+| Gastrocnemius | 0.382 | 0.907 | -0.525 | Baseline |
+| Kidney | 0.452 | 0.521 | -0.069 | Baseline |
+| Thymus | 0.495 | 0.923 | -0.428 | Baseline |
+| Skin | 0.557 | 0.821 | -0.265 | Baseline |
+| Eye | 0.484 | 0.789 | -0.305 | Baseline |
+| **Mean** | **0.476** | **0.758** | **-0.283** | **Baseline** |
+
+Mouse-Geneformer (6-layer BERT, 56K gene vocab, pretrained on 30M mouse scRNA-seq cells) underperforms classical ML across all 6 tissues. Consistent with literature: foundation models pretrained on single-cell data do not automatically transfer to small-sample (n=30-100) bulk transcriptomics.
 
 For Tier 3 (Text LLM) input format specification, see [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) (DD-16).
 
@@ -535,6 +559,19 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 | Version | Date | Changes |
 |---------|------|---------|
 | v1.0-alpha | 2026-03-01 | Phase 1 complete. 4 tissues GO (A2+A4+A5 gene-level, A6 pathway-level). Category B–D all 6 tissues. J5 gene-vs-pathway (12 comparisons). NES conservation analysis. Cell 2020 external validation (71.7% concordance). Negative controls (NC1/NC2) pass. fGSEA 60 files, GSVA 54 files. Submission format + evaluator. Dataset freeze. |
+| v1.1 | 2026-03-07 | Tier 2 Geneformer complete: Mouse-GF fine-tuned on 6 tissues (22 LOMO folds, Cayuga A40 GPU). Mean AUROC=0.476 vs Baseline 0.758 — classical ML wins 6/6 tissues. |
+| v1.0.1 | 2026-03-03 | Category D expanded: D4 strain + D5 hardware (liver/thymus) integrated into summary. J5 expanded to 15 comparisons. Confounder hierarchy documented. condition_prediction.py merge-on-write fix. |
+
+---
+
+## Version Structure
+
+| Version | Scope | Location |
+|---------|-------|----------|
+| **v1.0** | Mouse bulk RNA-seq, 6 tissues, 25 tasks, Tier 1 + Geneformer | Project root (`scripts/`, `evaluation/`, `tasks/`) |
+| **v2.0** | Cross-species, single-cell, spatial, microbiome | `v2/` directory |
+
+v1.0 is frozen at git tag `v1.0`. See [`v2/README.md`](v2/README.md) for v2.0 scope and prerequisites.
 
 ---
 

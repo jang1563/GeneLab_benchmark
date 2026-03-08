@@ -33,15 +33,15 @@
 #      # Model weights in: ${PROJECT_DIR}/models/mouse_gf_base/
 #      # Dict files in:    ${PROJECT_DIR}/models/
 #
-#   4. Pre-tokenize on login node (CPU only, ~5 min):
-#      cd /athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark
-#      export PYTHONPATH="/home/fs01/jak4013/Mouse-Geneformer:$PYTHONPATH"
-#      conda activate mouse_gf
-#      python scripts/geneformer_tokenize.py --task A1 --model-version mouse_gf
-#      # Tokenized data saved to tasks/A1_liver_lomo/fold_*/geneformer_tokens/mouse_gf/
+# USAGE (via master script — recommended):
+#   bash scripts/hpc_submit_all_tissues.sh              # submit all 6 tissues
+#   bash scripts/hpc_submit_all_tissues.sh --tissue A4  # single tissue
+#   bash scripts/hpc_submit_all_tissues.sh --tokenize-only  # tokenize only
 #
-# SUBMIT ARRAY JOB (6 LOMO folds simultaneously):
-#   sbatch scripts/hpc_submit_geneformer.sh
+# DIRECT USAGE (single tissue):
+#   # Override defaults via --export:
+#   sbatch --export=TASK=A4,TASK_DIR=A4_thymus_lomo,FOLDS_STR="RR-6 RR-9 MHU-1 MHU-2" \
+#          --array=0-3 scripts/hpc_submit_geneformer.sh
 #
 # CHECK JOB STATUS:
 #   squeue -u $USER
@@ -61,22 +61,29 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G                         # A40/A100 nodes: 1024GB total — 32G is safe
 #SBATCH --gres=gpu:a40:1                 # 1x A40 48GB. Swap to gpu:a100:1 for A100.
-#SBATCH --array=0-5                      # 6 LOMO folds (A1 liver: RR-1,3,6,8,9,MHU-2)
+# NOTE: --array is set dynamically by the master script (hpc_submit_all_tissues.sh)
+#       or via sbatch --array=0-N override. Default: single job (no array).
 
-# ── Configuration ─────────────────────────────────────────────────────────────
-# A1 liver LOMO: 6 missions, all used as held-out in turn.
-FOLDS=("RR-1" "RR-3" "RR-6" "RR-8" "RR-9" "MHU-2")
-FOLD=${FOLDS[$SLURM_ARRAY_TASK_ID]}
-TASK="A1"
-TASK_DIR="A1_liver_lomo"
-MODEL_VERSION="mouse_gf"
-EPOCHS=10
-BATCH_SIZE=16        # A40 48GB: 16 comfortable; Mouse-Geneformer 6L is smaller than human
-LR="2e-5"
-FREEZE_LAYERS=4      # Freeze bottom 4/6 BERT layers (top-2 + head trainable)
-                     # Recommended for small-n (n≈30-60): limits overfitting
-                     # Use 0 for full fine-tuning if n>200; use 6 for head-only
-SEED=42
+# ── Configuration (overridable via sbatch --export) ──────────────────────────
+# All variables use ${VAR:-default} pattern so they can be overridden.
+TASK="${TASK:-A1}"
+TASK_DIR="${TASK_DIR:-A1_liver_lomo}"
+MODEL_VERSION="${MODEL_VERSION:-mouse_gf}"
+EPOCHS="${EPOCHS:-10}"
+BATCH_SIZE="${BATCH_SIZE:-16}"           # A40 48GB: 16 comfortable for 6L model
+LR="${LR:-2e-5}"
+FREEZE_LAYERS="${FREEZE_LAYERS:-4}"      # 4 = top-2 + head (recommended for n≈30-100)
+SEED="${SEED:-42}"
+
+# Fold mapping: FOLDS_STR is a space-separated string passed via --export
+# Example: FOLDS_STR="RR-1 RR-3 RR-6 RR-8 RR-9 MHU-2"
+# If not set, falls back to A1 liver defaults.
+if [ -z "${FOLDS_STR}" ]; then
+    FOLDS=("RR-1" "RR-3" "RR-6" "RR-8" "RR-9" "MHU-2")
+else
+    read -ra FOLDS <<< "${FOLDS_STR}"
+fi
+FOLD="${FOLDS[$SLURM_ARRAY_TASK_ID]}"
 
 # ── Cayuga / MasonLab account details ─────────────────────────────────────────
 PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
@@ -88,11 +95,19 @@ MOUSE_GF_SRC="/home/fs01/jak4013/Mouse-Geneformer"
 echo "======================================"
 echo "Mouse-Geneformer LOMO Fine-Tuning — Cayuga"
 echo "Job ID: ${SLURM_JOB_ID} | Array: ${SLURM_ARRAY_TASK_ID}"
-echo "Fold: ${FOLD} | Task: ${TASK} | Model: Geneformer-${MODEL_VERSION}"
+echo "Task: ${TASK} | Task Dir: ${TASK_DIR}"
+echo "Fold: ${FOLD} | Model: Geneformer-${MODEL_VERSION}"
 echo "Epochs: ${EPOCHS} | Batch: ${BATCH_SIZE} | LR: ${LR} | freeze_layers: ${FREEZE_LAYERS}"
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader 2>/dev/null \
     || echo "nvidia-smi unavailable"
 echo "======================================"
+
+# Validate fold
+if [ -z "${FOLD}" ]; then
+    echo "ERROR: FOLD is empty. SLURM_ARRAY_TASK_ID=${SLURM_ARRAY_TASK_ID}, FOLDS=(${FOLDS[*]})"
+    echo "Ensure --array range matches number of folds."
+    exit 1
+fi
 
 # Activate conda via ~/.bashrc (conda init writes to bashrc on this cluster)
 source ~/.bashrc
@@ -118,7 +133,7 @@ python scripts/geneformer_tokenize.py \
     --task-dir "${TASK_DIR}" \
     --fold "${FOLD}" \
     --model-version "${MODEL_VERSION}" \
-    2>&1 | tee "logs/tokenize_${FOLD}.log"
+    2>&1 | tee "logs/tokenize_${TASK}_${FOLD}.log"
 
 # Step 2: Fine-tune on GPU
 echo ""
@@ -134,11 +149,11 @@ python scripts/geneformer_finetune.py \
     --lr "${LR}" \
     --freeze-layers "${FREEZE_LAYERS}" \
     --seed "${SEED}" \
-    2>&1 | tee "logs/finetune_${FOLD}.log"
+    2>&1 | tee "logs/finetune_${TASK}_${FOLD}.log"
 
 EXIT_CODE=$?
 echo ""
 echo "======================================"
-echo "Done: Fold ${FOLD} — exit code: ${EXIT_CODE}"
+echo "Done: ${TASK} fold ${FOLD} — exit code: ${EXIT_CODE}"
 echo "======================================"
 exit ${EXIT_CODE}
