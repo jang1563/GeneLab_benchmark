@@ -442,21 +442,26 @@ scripts/preprocess_pathways.py   — Python 통합 + Category C feature 생성
 > 높은 예측 성능 = confounder 독립 효과가 아닌 "해당 변수의 미션별 배치 차이"의 상한선으로 해석.
 > 논문 Methods에 명시 필수: "D4 AUROC ≤ D3 AUROC (BALB/c는 RR-3에서만 사용)"
 
-#### ✅ Category D 구현 결과 (2026-03-01)
+#### ✅ Category D 구현 결과 (2026-03-01, updated 2026-03-03)
 
-**실현 가능성 평가**: D1/D2 (비행 기간) 비실현 — 모든 미션 30-40일 범위. D4 (계통) — thymus만 2계통 보유. D5 (하드웨어) — 큐레이션 필요. → **D3 + D6만 구현.**
+**실현 가능성 평가**: D1/D2 (비행 기간) 비실현 — 모든 미션 30-40일 범위. → **D3 + D4 + D5 + D6 구현 완료.**
 
-| Task | Metric | Gene-level | Pathway-level | p-value | 비고 |
-|---|---|---|---|---|---|
-| **D3** (Liver 6-class) | macro-F1 | **1.000** [1.00, 1.00] | 0.056 [0.04, 0.08] | <0.001 (gene) / NS (pathway) | 유전자=완벽 미션 분리, 경로=배치 불변 |
-| **D6 Liver** (MHU-2) | macro-F1 | **0.886** [0.56, 1.00] | 0.413 NS | 0.002 (gene) | uG/AG/GC 3-class LOO |
-| **D6 Thymus** (MHU-2) | macro-F1 | **0.657** [0.33, 0.90] | 0.641 [0.28, 1.00] | 0.037 (gene) / 0.052 (pathway) | 유전자≈경로 |
+| Task | Tissue | N | Gene F1 | Pathway F1 | Gene p | 비고 |
+|---|---|---|---|---|---|---|
+| **D3** Mission ID (6-class) | Liver | 264 | **1.000** [1.00, 1.00] | 0.056 [0.04, 0.07] | <0.001 | 완벽 미션 분리 / 경로=배치 불변 |
+| **D4** Strain (2-class) | Thymus | 34 | **0.892** [0.48, 1.00] | 0.817 [0.47, 1.00] | 0.004 | EXPLORATORY (n_minority=3). GC only |
+| **D5** Hardware (RR vs MHU) | Liver | 264 | **1.000** [1.00, 1.00] | 0.386 [0.36, 0.41] | <0.001 | D3과 공선성 (hardware ⊂ mission) |
+| **D5** Hardware (RR vs MHU) | Thymus | 92 | **1.000** [1.00, 1.00] | 0.352 [0.31, 0.39] | <0.001 | D3과 공선성 |
+| **D6** Gravity (3-class) | Liver | 9 | **0.886** | 0.413 NS | 0.002 | uG/AG/GC 3-class LOO |
+| **D6** Gravity (3-class) | Thymus | 9 | **0.657** | 0.641 (p=0.052) | 0.037 | 유전자≈경로 |
 
-> **핵심 발견**: D3 gene F1=1.000은 강력한 미션 배치 효과 증거. Pathway F1=0.056은 GSVA Hallmark이
-> 배치에 불변(batch-invariant)함을 확인 → 이는 Category B/C에서 pathway 사용의 과학적 근거.
+> **핵심 발견**:
+> - D3 gene F1=1.000은 강력한 미션 배치 효과 증거. Pathway F1=0.056은 GSVA Hallmark이 배치에 불변(batch-invariant)함을 확인 → Category B/C pathway 사용의 과학적 근거.
+> - **Confounder hierarchy**: D3 (mission F1=1.0) >= D5 (hardware F1=1.0, collinear) >= D4 (strain F1=0.89, exploratory). 모든 pathway F1 ≈ 0.05-0.41 → 경로는 confounder에 저항.
+> - D5는 D3과 **공선성**: hardware type은 mission ID의 결정론적 함수 → D5 결과는 독립 증거가 아닌 상한선.
 >
-> **방법**: D3 = RepeatedStratifiedKFold (5×10), D6 = LOO-CV (n=9, n_per_class=3).
-> 스크립트: `scripts/condition_prediction.py`. 결과: `evaluation/D_condition_summary.json`.
+> **방법**: D3/D5_thymus = RepeatedStratifiedKFold (5×10), D4/D5_liver/D6 = LOO-CV.
+> 스크립트: `scripts/condition_prediction.py`. 결과: `evaluation/D_condition_summary.json` (6 tasks 통합).
 
 ---
 
@@ -779,9 +784,12 @@ GeneLab_benchmark/
     - ✅ 방법 A(gene), B(DEG), C(pathway) 3방법 × 4 tissue pairs
     - ✅ J5: gene-level vs pathway-level 전 카테고리 비교
     - H3 결과: 조건부 지지 (tissue-pair dependent)
-✅ Category D 구현 (condition prediction)
+✅ Category D 구현 (condition prediction) — 6 tasks 통합 완료 (2026-03-03)
     - ✅ D3 (mission ID 6-class, liver): gene F1=1.0 / pathway F1=0.06
+    - ✅ D4 (strain, thymus GC): gene F1=0.89 / pathway F1=0.82 (exploratory n=3)
+    - ✅ D5 (hardware RR vs MHU): liver+thymus gene F1=1.0 (collinear with D3)
     - ✅ D6 (MHU-2 gravity 3-class): liver gene F1=0.886, thymus gene F1=0.657
+    - ✅ D_condition_summary.json: 6 tasks + J5 comparison + confounder hierarchy
 ✅ Category J5 구현 (gene vs pathway 12 comparisons)
 [ ] Category J1-J4 구현 (pipeline comparison: DESeq2 vs edgeR vs limma)
 [ ] batch_correction.py (ComBat-seq, Harmony) → B 카테고리 재평가
@@ -925,16 +933,53 @@ GeneLab_benchmark/
 | Category J | J3 (batch) + J5 (gene vs pathway) | J1/J2/J4 | J3+J5 완료 |
 | Negative controls | NC1 (permutation) + NC2 (housekeeping) | — | 완료 |
 | External validation | Cell 2020 concordance | SOMA 2024 full | 완료 |
-| Held-out test set | OSD-515 thymus | GAS held-out 미결 | |
+| Held-out test set | OSD-515 thymus (LR 0.905, GF 0.556) | GAS held-out 미결 | ✅ 완료 |
 | Tier 1 (Classical ML) | 완료 | — | |
-| Tier 2 (Geneformer) | HPC 대기 | scGPT 등 v2.0 | |
+| Tier 2 (Geneformer) | ✅ 완료 (mean 0.476, Baseline 0.758) | scGPT 등 v2.0 | |
 | Tier 3 (Text LLM) | GPT-4o zero-shot | Claude, Llama v2.0 | |
 
 ### v2.0 범위 (v1.0 출판 후)
-- 추가 조직 (Soleus/EDL, Skin, Brain)
+
+**기존 계획:**
+- 추가 조직 (Soleus/EDL, Brain)
 - Category E: 다종 (C. elegans, 인간)
 - Category F: 단세포 RNA-seq
 - scGPT, BioGPT 등 추가 Foundation Model
+
+**v2.0 신규 — 시간적/환경적 메타데이터 활용 분석:**
+
+현재 샘플 이름에 인코딩되어 있으나 추출되지 않은 정보를 활용:
+
+| Task | 분석 | 데이터 소스 | 예상 n | 비고 |
+|------|------|------------|--------|------|
+| **T1** ISS-T vs LAR | 비행 중 희생 vs 귀환 후 희생 transcriptome 차이 | RR-6, RR-8 liver (각 ~20 ISS-T + ~20 LAR) | ~80 | FLT_ISS-T vs FLT_LAR, GC_ISS-T vs GC_LAR |
+| **T2** LAR recovery | 귀환 후 "회복" 시그니처 존재 여부 | RR-6/8 BSL_LAR vs FLT_LAR vs GC_LAR | ~60 | baseline 대비 flight의 recovery 정도 |
+| **T3** Age interaction | 나이 × 우주비행 상호작용 | RR-8 OLD vs YNG (liver, ~35 per age group) | ~70 | 노화 가속 가설 검증 |
+| **T4** Radiation metadata | NASA EDA에서 미션별 방사선량 다운로드, 메타데이터 컬럼 추가 | https://visualization.osdr.nasa.gov/eda/ | metadata only | `duration_days`가 사실상 dose proxy (~200-230 μGy/d 일정) |
+
+**미션별 방사선량 참고 (확인된 값):**
+- RR-1: 7.4 mGy / 37d (RadLab_DOSTEL1)
+- MHU-1: 8.05 ± 0.70 mGy / 35d (Bio PADLES, 230 ± 20 μGy/d)
+- 기타 미션: NASA EDA에서 다운로드 가능, 일일 선량 ~200-230 μGy/d로 유사
+- ISS 선량이 미션 간 거의 일정 → dose-response 모델링은 v3.0 (지상 방사선 실험 필요)
+
+**미션별 희생 방식:**
+
+| 미션 | 희생 방식 | 샘플 코드 |
+|------|-----------|-----------|
+| RR-1 | ISS-T only (비행중) | FLT_I / FLT_C, GC_I / GC_C |
+| RR-3 | LAR (귀환) | — |
+| RR-6 | **ISS-T + LAR 분할** | FLT_ISS-T / FLT_LAR, GC_ISS-T / GC_LAR |
+| RR-8 | **ISS-T + LAR 분할** + OLD/YNG | FLT_ISS-T_OLD / FLT_LAR_YNG 등 |
+| RR-9 | ISS-T | — |
+| RR-23 | LAR | — |
+| MHU-1/2 | LAR | FLT_uG / FLT_1G |
+
+**구현 순서:**
+1. `quality_filter.py`에 `sacrifice_timing` (ISS-T/LAR), `age_group` (OLD/YNG) 컬럼 추출 로직 추가
+2. T1/T2: RR-6, RR-8 liver에서 ISS-T vs LAR 분류 및 DGE/pathway 비교
+3. T3: RR-8 liver에서 OLD vs YNG × Flight/GC 2×2 interaction 분석
+4. T4: NASA EDA에서 전 미션 방사선량 다운로드 → 메타데이터 통합
 
 ### Geneformer 개발 전략 (MacBook Air M-series + Cornell Cayuga HPC)
 
@@ -943,27 +988,56 @@ GeneLab_benchmark/
 
 | 단계 | 환경 | 내용 | 상태 |
 |------|------|------|------|
-| 1. 토크나이제이션 | MacBook (CPU) | ENSMUSG → ENSG ortholog 매핑, gene rank 생성 | ✅ 완료 |
+| 1. 토크나이제이션 (V1) | MacBook (CPU) | ENSMUSG → ENSG ortholog 매핑, A4 5 folds | ✅ 완료 |
 | 2. 추론 테스트 | MacBook (MPS, float32) | 10M 파라미터 모델 로딩 + dry-run | ✅ 완료 |
-| 3. Dev fine-tuning | MacBook (MPS, float32) | RR-9 fold 5-epoch 테스트 (진행 중) | 🔄 진행 중 |
-| 4. HPC fine-tuning | Cayuga A40 GPU | LOMO 5-fold, 10 epoch, batch=16 | ⏳ 대기 |
-| 5. 평가 | MacBook | 저장된 checkpoint → AUROC 계산 | ⏳ 대기 |
+| 3. Dev fine-tuning | MacBook (MPS, float32) | A4 RR-9 fold 5-epoch (AUROC=0.54) | ✅ 완료 |
+| 4. Multi-tissue 스크립트 | MacBook | 6 tissue master script + aggregation | ✅ 완료 |
+| 5. HPC 토크나이제이션 | Cayuga (CPU) | Mouse-GF vocab, 6 tissues × all folds | ✅ 완료 |
+| 6. HPC fine-tuning | Cayuga A40 GPU | 22 LOMO folds, 10 epoch, batch=16 | ✅ 완료 |
+| 7. 결과 수집 | MacBook | aggregate → baseline 비교 | ✅ 완료 |
 
-**구현 결과** (2026-03-01):
-- 모델: Geneformer-V1-10M (10,263,298 파라미터, BERT 6-layer 256-dim)
-- 토크나이제이션: `scripts/geneformer_tokenize.py` — 5 folds × 2 splits 완료
-- Ortholog coverage: 57-64% (mouse ENSMUSG → human ENSG via Ensembl BioMart)
-- 평균 token 길이: 618-2048 (fold/mission별 상이 — RR-9 test가 가장 짧음)
-- HPC 스크립트: `scripts/hpc_submit_geneformer.sh` (Cayuga scu-gpu, sbatch array)
-- 필요 패키지: `requirements_geneformer.txt`
+**HPC 결과** (2026-03-07):
+- Mouse-Geneformer mean AUROC = **0.476** vs Baseline **0.758** (delta = -0.283)
+- Classical ML 6/6 tissues 완승. Geneformer는 대부분 chance level (~0.5) 근처
+- Small-n bulk RNA-seq (train n=30-100)에서 scRNA pretrained FM이 underperform — 문헌 일치
+- A2 gastrocnemius 최대 열세 (0.382 vs 0.907, delta=-0.525)
+- A3 kidney 최소 차이 (0.452 vs 0.521, delta=-0.069)
 
-**Cayuga HPC 사용법**:
+**이전 Dev 결과** (2026-03-03):
+- Human Geneformer V1: 토크나이제이션 완료 (A4 5 folds), coverage 57-64%
+- Mouse-Geneformer: 모델 다운로드 완료, coverage ~100%
+- Dev 결과: A4 RR-9 AUROC=0.54 (vs PCA-LR baseline 0.86) — 예상대로 underperform
+
+**스크립트**:
+- `geneformer_tokenize.py` — V1/V2/mouse_gf 토크나이제이션
+- `geneformer_finetune.py` — MPS/CUDA 파인튜닝 (layer freezing, bootstrap CI)
+- `hpc_submit_geneformer.sh` — 파라미터화된 Slurm array job (환경변수로 tissue 지정)
+- `hpc_submit_all_tissues.sh` — 6 tissue master script (`--tokenize-only`, `--dry-run`, `--aggregate`)
+- `aggregate_geneformer_results.py` — 결과 수집 + baseline 비교 테이블
+
+**Multi-tissue 배포 설정**:
+
+| Task | Tissue | Folds | freeze_layers | Note |
+|------|--------|-------|---------------|------|
+| A1 | Liver | 6 (RR-1,3,6,8,9,MHU-2) | 4 | A1_liver_lomo (standard) |
+| A2 | Gastrocnemius | 3 (RR-1,5,9) | 4 | |
+| A3 | Kidney | 3 (RR-1,3,7) | 4 | |
+| A4 | Thymus | 4 (RR-6,9,MHU-1,2) | 4 | holdout 제외 |
+| A5 | Skin | 3 (RR-6,7,MHU-2) | 4 | |
+| A6 | Eye | 3 (RR-1,3,TBD) | 4 | |
+
+총 22 GPU jobs, 각 4h, EPOCHS=10, BATCH_SIZE=16, LR=2e-5, SEED=42
+
+**Cayuga HPC 실행 순서**:
 ```bash
-# Login node — tokenize (CPU, fast)
-python scripts/geneformer_tokenize.py --task A4 --model-version v1
+# 1. Login node — 전체 토큰화 (CPU, ~30min)
+bash scripts/hpc_submit_all_tissues.sh --tokenize-only
 
-# Submit array job (5 folds × A40 GPU)
-sbatch scripts/hpc_submit_geneformer.sh
+# 2. GPU jobs 제출 (22 array jobs)
+bash scripts/hpc_submit_all_tissues.sh
+
+# 3. 완료 후 결과 수집
+bash scripts/hpc_submit_all_tissues.sh --aggregate
 ```
 
 **Geneformer 선택 이유**: 마우스 단세포 데이터 사전학습 (30M 세포), 오픈소스, HuggingFace 제공, 가장 작은 Foundation Model (~10M 파라미터) → MPS 개발 가능, HPC fine-tuning 효율적.
@@ -1030,6 +1104,9 @@ sbatch scripts/hpc_submit_geneformer.sh
 
 | 버전 | 날짜 | 주요 변경 |
 |---|---|---|
+| **v1.4** | 2026-03-07 | Geneformer HPC 실행 완료: 6 tissues × 22 LOMO folds (Cayuga A40). Mean AUROC=0.476 vs Baseline 0.758 (delta=-0.283). Classical ML 6/6 완승. `aggregate_geneformer_results.py` per-fold fallback 추가. RESULTS_SUMMARY.md Tier 2 섹션 추가. |
+| **v1.3** | 2026-03-03 | Geneformer multi-tissue HPC 배포: `hpc_submit_geneformer.sh` 파라미터화 (환경변수), `hpc_submit_all_tissues.sh` master script (6 tissue, 22 folds), `aggregate_geneformer_results.py` 결과 수집 + baseline 비교. §12.13 Geneformer 전략 테이블 업데이트. |
+| **v1.2** | 2026-03-03 | D_condition_summary.json 통합: D3/D4/D5_liver/D5_thymus/D6_liver/D6_thymus 6 tasks 전체 통합 (이전: D6만 포함). Confounder hierarchy 추가 (D3>=D5>=D4). RESULTS_SUMMARY.md 확장 (D4/D5 결과 + J5 expanded 15 comparisons). |
 | **v1.1** | 2026-03-01 | 벤치마크 강화: NC1 permutation summary (28 entries), NC2 housekeeping control (5 tissues), Cell 2020 external validation (71.7% pathway concordance), J3 batch correction comparison (H2 STRONGLY_SUPPORTED, mean delta 0.01), D4 strain + D5 hardware tasks, B 5-tissue summary 통합, utils.py 코드 중복 제거, §13 v1.0 scope 업데이트 (C/D/J5 모두 v1.0 포함). 새 스크립트: `aggregate_negative_controls.py`, `housekeeping_control.py`, `cell2020_validation.py`, `batch_correction_eval.py`, `utils.py`. 새 문서: `docs/BIOLOGICAL_GROUND_TRUTH.md`. |
 | **v1.0** | 2026-03-01 | Category D 구현 (D3 liver 6-class, D6 MHU-2 3-class) + J5 gene vs pathway 체계적 비교 (12 comparisons). 핵심 발견: D3 gene F1=1.0 (배치 효과 증거), pathway F1=0.06 (배치 불변 확인); Kidney Rescue (gene 0.43→pathway 0.74). Phase 2 체크리스트 B/C/D/J5 완료 표시. 스크립트: `condition_prediction.py`, `gene_vs_pathway_comparison.py`. |
 | **v0.9** | 2026-03-01 | Geneformer 파이프라인 구현 완료: `geneformer_tokenize.py` (Ensembl ortholog 매핑, 5 folds 토크나이제이션), `geneformer_finetune.py` (MPS/CUDA, BertForSequenceClassification), `hpc_submit_geneformer.sh` (Cornell Cayuga scu-gpu A40). §13 Geneformer 전략 업데이트 (Cayuga HPC 세부사항 포함). |

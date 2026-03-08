@@ -1,0 +1,84 @@
+{
+  "task_id": "A1",
+  "model_name": "Llama-3.3-70B_zeroshot",
+  "model_description": "llama-3.3-70b-versatile, zero-shot, top-50 genes, per-sample z-score",
+  "submission_date": "2026-03-08",
+  "n_folds": 6,
+  "fold_results": [
+    {
+      "fold": "fold_MHU-2_test",
+      "n_test": 6,
+      "n_flight": 3,
+      "n_ground": 3,
+      "auroc": 0.6666666666666667,
+      "ci_lower": NaN,
+      "ci_upper": NaN,
+      "perm_p": 1.0
+    },
+    {
+      "fold": "fold_RR-1_test",
+      "n_test": 14,
+      "n_flight": 7,
+      "n_ground": 7,
+      "auroc": 0.6326530612244898,
+      "ci_lower": NaN,
+      "ci_upper": NaN,
+      "perm_p": 1.0
+    },
+    {
+      "fold": "fold_RR-3_test",
+      "n_test": 12,
+      "n_flight": 6,
+      "n_ground": 6,
+      "auroc": 0.3888888888888889,
+      "ci_lower": NaN,
+      "ci_upper": NaN,
+      "perm_p": 1.0
+    },
+    {
+      "fold": "fold_RR-6_test",
+      "n_test": 39,
+      "n_flight": 20,
+      "n_ground": 19,
+      "auroc": 0.44078947368421056,
+      "ci_lower": NaN,
+      "ci_upper": NaN,
+      "perm_p": 1.0
+    },
+    {
+      "fold": "fold_RR-8_test",
+      "n_test": 103,
+      "n_flight": 35,
+      "n_ground": 68,
+      "auroc": 0.47016806722689075,
+      "ci_lower": NaN,
+      "ci_upper": NaN,
+      "perm_p": 1.0
+    },
+    {
+      "fold": "fold_RR-9_test",
+      "n_test": 19,
+      "n_flight": 5,
+      "n_ground": 14,
+      "auroc": 0.5642857142857143,
+      "ci_lower": NaN,
+      "ci_upper": NaN,
+      "perm_p": 1.0
+    }
+  ],
+  "summary": {
+    "mean_auroc": 0.5272419786628101,
+    "std_auroc": 0.10148564983480694,
+    "mean_ci_lower": NaN,
+    "overall_auroc_pooled": 0.4703666216824111,
+    "overall_ci_lower": NaN,
+    "overall_ci_upper": NaN,
+    "mean_perm_p": 1.0,
+    "go_nogo": false
+  },
+  "thresholds": {
+    "auroc": 0.7,
+    "ci_lower": 0.5,
+    "perm_p": 0.05
+  }
+}

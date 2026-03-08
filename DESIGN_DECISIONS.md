@@ -531,10 +531,49 @@ Transfer Pattern Summary (DD-17):
 
 ---
 
+## DD-18: Temporal Covariate Confound Awareness (v2.0)
+
+**결정**: ISS-T vs LAR 비교는 preservation method (RNAlater vs standard necropsy)와 confounded. 모든 T1 결과에 GC_ISS-T vs GC_LAR AUROC를 preservation artifact baseline으로 보고.
+
+**근거**: PMID 33376967 — preservation method가 ISS-T/LAR transcriptome 차이의 주요 원인.
+
+**구현**: `v2/scripts/temporal_analysis.py` T1에서 FLT AUROC와 함께 GC AUROC를 항상 보고. `excess = FLT_AUROC - GC_AUROC`로 biological signal 추정.
+
+**v2.0 결과**: RR-6 excess=+0.078, RR-8 excess=-0.043 → preservation artifact 지배적.
+
+---
+
+## DD-19: T3 Multiple Testing Correction (v2.0)
+
+**결정**: T3 Age × Spaceflight ANOVA에서 50 Hallmark pathways × interaction term → Benjamini-Hochberg FDR correction 필수.
+
+**금지**: 개별 pathway p-value를 FDR 없이 significant로 보고 금지.
+
+**구현**: `statsmodels.stats.multitest.multipletests(method='fdr_bh')`.
+
+**v2.0 결과**: 0/50 pathways significant at FDR < 0.05 (n=40, underpowered).
+
+---
+
+## DD-20: T2 Recovery Fraction Convention (v2.0)
+
+**결정**: `recovery_fraction = 1 - |delta_return / delta_flight|`. Preservation-matched comparisons: FLT_ISS-T vs BSL_ISS-T, FLT_LAR vs BSL_LAR.
+
+**규칙**:
+- 1.0 = complete recovery
+- 0.0 = no recovery
+- <0 = overshoot (continued divergence)
+- `|delta_flight| < 0.1` 인 pathway는 계산에서 제외
+
+**구현**: `v2/scripts/temporal_analysis.py` T2, `RECOVERY_MIN_DELTA = 0.1`.
+
+---
+
 ## Changelog
 
 | 버전 | 날짜 | 변경 |
 |---|---|---|
+| **v2.0** | 2026-03-07 | DD-18/19/20 추가 — v2.0 Temporal analysis design decisions (preservation confound, FDR correction, recovery fraction). |
 | **v1.4** | 2026-03-01 | DD-17 추가 — Category B Evaluation Criteria (Transfer Pattern Summary, perm_p floor 근거, pair_ 명명 규칙). |
 | **v1.3** | 2026-03-01 | DD-15 결과 추가 — fGSEA/GSVA 전체 구현 완료 (51+54 files), J5 비교 결과, 버그 수정 기록. |
 | **v1.2** | 2026-03-01 | DD-16 추가 — Text LLM Evaluation Track (GPT-4o, Claude, Llama 3). Bug fix 기록: run_baselines.py B1 (n_ground_test), B2 (permutation p pseudocount). MHU-1 Track 2b 재분류. |

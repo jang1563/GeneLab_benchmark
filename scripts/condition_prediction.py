@@ -7,6 +7,14 @@ D3: Mission ID prediction (liver, 6-class)
   - High accuracy ≈ strong mission batch effects (confounder quantification)
   - Evaluation: RepeatedStratifiedKFold (5-fold × 10 repeats)
 
+D4: Strain effect (thymus GC only, C57BL/6J vs C57BL/6CR)
+  - Exploratory: minority class n=3
+  - Evaluation: Leave-One-Out CV
+
+D5: Hardware effect (RR vs MHU, derived from mission)
+  - Collinear with D3 — interpret as upper bound
+  - Implemented for liver and thymus
+
 D6: Artificial gravity effect (MHU-2, 3-class: uG vs AG vs GC)
   - Separates microgravity from other spaceflight stressors
   - Evaluation: Leave-One-Out CV (tiny sample size, n=9)
@@ -21,10 +29,13 @@ Metrics: macro-F1 (primary), accuracy, per-class F1, confusion matrix
 Output:
   processed/D_condition/
     D3_liver_results.json
+    D4_strain_results.json
+    D5_liver_results.json
+    D5_thymus_results.json
     D6_liver_results.json
     D6_thymus_results.json
   evaluation/
-    D_condition_summary.json
+    D_condition_summary.json  (merged — single-task runs preserve prior results)
 
 Usage:
   python scripts/condition_prediction.py --task D3
@@ -782,17 +793,31 @@ def run_d5(tissue, do_bootstrap=True):
 # ── Summary ──────────────────────────────────────────────────────────────────
 
 def build_summary(all_results):
-    """Build D category summary with J5 gene-vs-pathway comparison."""
-    summary = {
-        "tasks": {},
-        "j5_comparison": {},
-        "config": {
-            "variance_percentile": VARIANCE_PERCENTILE,
-            "n_splits": N_SPLITS,
-            "n_repeats": N_REPEATS,
-            "n_bootstrap": N_BOOTSTRAP,
-            "timestamp": datetime.now().isoformat(),
-        }
+    """Build D category summary with J5 gene-vs-pathway comparison.
+
+    Merges new results into existing summary (if present) so that
+    running a single task (e.g. --task D6) does not overwrite results
+    from other tasks.
+    """
+    summary_path = RESULTS_DIR / "D_condition_summary.json"
+
+    # Load existing summary to preserve prior results
+    if summary_path.exists():
+        with open(summary_path) as f:
+            summary = json.load(f)
+        # Ensure required keys exist
+        summary.setdefault("tasks", {})
+        summary.setdefault("j5_comparison", {})
+    else:
+        summary = {"tasks": {}, "j5_comparison": {}}
+
+    # Update config with current run parameters
+    summary["config"] = {
+        "variance_percentile": VARIANCE_PERCENTILE,
+        "n_splits": N_SPLITS,
+        "n_repeats": N_REPEATS,
+        "n_bootstrap": N_BOOTSTRAP,
+        "timestamp": datetime.now().isoformat(),
     }
 
     for task_name, res in all_results.items():

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 4 — External Validation</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f5f5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .fig-container { background: #fff; padding: 16px; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  button { margin: 12px 4px 0; padding: 6px 14px; font-size: 12px; cursor: pointer; border: 1px solid #999; background: #fff; border-radius: 3px; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+<div class="fig-container">
+  <svg id="fig4"></svg>
+</div>
+<div>
+  <button onclick="downloadSVG()">Download SVG</button>
+</div>
+
+<script>
+// ============================================================
+// DESIGN SYSTEM
+// ============================================================
+const COLORS = {
+  thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+  eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+};
+const CONCORDANT = '#009E73';
+const DISCORDANT = '#D55E00';
+const GENE_COLOR = '#0072B2';
+const DEG_COLOR = '#CC79A7';
+const PATHWAY_COLOR = '#E69F00';
+
+const FS = {
+  panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, tiny: 7.5
+};
+
+// ============================================================
+// DATA
+// ============================================================
+
+// Panel (a): Cell 2020 pathway concordance
+const concordanceData = [
+  {tissue:'Thymus', concordant:7, discordant:0, total:7, color:COLORS.thymus},
+  {tissue:'Gastrocnemius', concordant:4, discordant:0, total:4, color:COLORS.gastrocnemius},
+  {tissue:'Liver', concordant:6, discordant:3, total:9, color:COLORS.liver},
+  {tissue:'Eye', concordant:2, discordant:1, total:3, color:COLORS.eye},
+  {tissue:'Kidney', concordant:1, discordant:3, total:4, color:COLORS.kidney}
+];
+
+// Panel (b): RR-23 held-out + thymus pairwise context
+const thymusPairwise = [1.0, 0.817, 0.98, 1.0, 0.4902, 1.0, 1.0, 0.6667, 0.7, 1.0, 1.0, 0.6634];
+const rr23 = {auroc: 0.905, ci_low: 0.672, ci_high: 1.0, p: 0.005};
+const lomoMean = 0.860;
+
+// Panel (c): Cross-tissue transfer (C1-C4)
+const crossTissue = [
+  {pair:'C1', label:'Liver → Kidney', gene:0.730, deg:0.441, pathway:0.483},
+  {pair:'C2', label:'Liver → Gastro', gene:0.563, deg:0.676, pathway:0.867},
+  {pair:'C3', label:'Liver → Thymus', gene:0.350, deg:0.621, pathway:0.184},
+  {pair:'C4', label:'Thymus → Kidney', gene:0.585, deg:0.539, pathway:0.690}
+];
+
+// ============================================================
+// LAYOUT
+// ============================================================
+const W = 960, H = 320;
+const margin = {top: 28, right: 14, bottom: 32, left: 4};
+const panelGap = 22;
+
+const totalUsable = W - margin.left - margin.right - 2*panelGap;
+const pW = [totalUsable*0.33, totalUsable*0.30, totalUsable*0.37];
+const pH = H - margin.top - margin.bottom;
+const pX = [margin.left,
+            margin.left + pW[0] + panelGap,
+            margin.left + pW[0] + pW[1] + 2*panelGap];
+
+// ============================================================
+// SVG SETUP
+// ============================================================
+const svg = d3.select('#fig4')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+svg.append('rect').attr('width',W).attr('height',H).attr('fill','#fff');
+
+function panelLabel(g, letter, x, y) {
+  g.append('text').attr('x',x).attr('y',y)
+    .attr('font-size',FS.panelLabel).attr('font-weight','bold')
+    .text(letter);
+}
+
+// ============================================================
+// PANEL (a) — Cell 2020 Pathway Concordance
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[0]},${margin.top})`);
+  panelLabel(g, 'a', -2, -10);
+
+  const pad = {left: 85, right: 10, top: 22, bottom: 36};
+  const plotW = pW[0] - pad.left - pad.right;
+  const plotH = pH - pad.top - pad.bottom;
+
+  // Title
+  g.append('text').attr('x', pW[0]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Cell 2020 concordance');
+
+  const xScale = d3.scaleLinear().domain([0, 1.0]).range([pad.left, pad.left + plotW]);
+  const yScale = d3.scaleBand().domain(concordanceData.map(d=>d.tissue)).range([pad.top, pad.top + plotH]).padding(0.25);
+
+  // X axis
+  [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+    g.append('line')
+      .attr('x1',xScale(v)).attr('y1',pad.top)
+      .attr('x2',xScale(v)).attr('y2',pad.top+plotH)
+      .attr('stroke','#f0f0f0').attr('stroke-width', 0.5);
+    g.append('line')
+      .attr('x1',xScale(v)).attr('y1',pad.top+plotH)
+      .attr('x2',xScale(v)).attr('y2',pad.top+plotH+4)
+      .attr('stroke','#999').attr('stroke-width',0.5);
+    g.append('text')
+      .attr('x',xScale(v)).attr('y',pad.top+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text((v*100).toFixed(0) + '%');
+  });
+  g.append('text')
+    .attr('x', xScale(0.5)).attr('y', pad.top + plotH + 28)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('Concordance rate');
+
+  // Bars
+  concordanceData.forEach(d => {
+    const cy = yScale(d.tissue) + yScale.bandwidth()/2;
+    const barH = yScale.bandwidth() * 0.7;
+    const concRate = d.concordant / d.total;
+    const discRate = d.discordant / d.total;
+
+    // Tissue label
+    g.append('text').attr('x', pad.left - 6).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick)
+      .attr('fill', d.color)
+      .attr('font-weight','600')
+      .attr('stroke', d.tissue === 'Eye' ? '#999' : 'none')
+      .attr('stroke-width', 0)
+      .text(d.tissue);
+
+    // Concordant bar (green)
+    g.append('rect')
+      .attr('x', xScale(0)).attr('y', cy - barH/2)
+      .attr('width', Math.max(0, xScale(concRate) - xScale(0)))
+      .attr('height', barH)
+      .attr('fill', CONCORDANT).attr('opacity', 0.75).attr('rx', 1.5);
+
+    // Discordant bar (red, stacked)
+    if (discRate > 0) {
+      g.append('rect')
+        .attr('x', xScale(concRate)).attr('y', cy - barH/2)
+        .attr('width', Math.max(0, xScale(concRate + discRate) - xScale(concRate)))
+        .attr('height', barH)
+        .attr('fill', DISCORDANT).attr('opacity', 0.75).attr('rx', 1.5);
+    }
+
+    // Count annotation
+    g.append('text')
+      .attr('x', xScale(1) + 4).attr('y', cy + 3)
+      .attr('font-size', 7).attr('fill','#666')
+      .text(`${d.concordant}/${d.total}`);
+  });
+
+  // Overall annotation
+  g.append('text')
+    .attr('x', xScale(0.5)).attr('y', pad.top + plotH + 18)
+    .attr('text-anchor','middle').attr('font-size', 7).attr('fill','#444')
+    .attr('font-style','italic');
+
+  // Legend
+  const legY = pad.top + 4;
+  g.append('rect').attr('x', pad.left).attr('y', legY - 4).attr('width', 8).attr('height', 8)
+    .attr('fill', CONCORDANT).attr('opacity',0.75).attr('rx',1);
+  g.append('text').attr('x', pad.left + 11).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Concordant');
+  g.append('rect').attr('x', pad.left + 62).attr('y', legY - 4).attr('width', 8).attr('height', 8)
+    .attr('fill', DISCORDANT).attr('opacity',0.75).attr('rx',1);
+  g.append('text').attr('x', pad.left + 73).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Discordant');
+
+  // Call-out: gene enrichment
+  const boxY = pad.top + plotH - 28;
+  g.append('rect')
+    .attr('x', pad.left + 2).attr('y', boxY)
+    .attr('width', plotW - 4).attr('height', 24)
+    .attr('fill', '#f8f8f8').attr('stroke','#ddd').attr('rx', 3);
+  g.append('text')
+    .attr('x', pad.left + plotW/2).attr('y', boxY + 10)
+    .attr('text-anchor','middle').attr('font-size', 7).attr('fill','#444').attr('font-weight','600')
+    .text('Mean: 71.7%');
+  g.append('text')
+    .attr('x', pad.left + plotW/2).attr('y', boxY + 20)
+    .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill','#888')
+    .text('Gene enrichment: 47\u00D7 above chance');
+}
+
+// ============================================================
+// PANEL (b) — Held-Out RR-23 Thymus
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[1]},${margin.top})`);
+  panelLabel(g, 'b', -2, -10);
+
+  const pad = {left: 38, right: 12, top: 22, bottom: 36};
+  const plotW = pW[1] - pad.left - pad.right;
+  const plotH = pH - pad.top - pad.bottom;
+
+  // Title
+  g.append('text').attr('x', pW[1]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Held-out RR-23 (thymus)');
+
+  const xScale = d3.scaleLinear().domain([0.3, 1.08]).range([pad.left, pad.left + plotW]);
+  const midY = pad.top + plotH/2;
+
+  // Chance line
+  g.append('line')
+    .attr('x1', xScale(0.5)).attr('y1', pad.top + 10)
+    .attr('x2', xScale(0.5)).attr('y2', pad.top + plotH - 10)
+    .attr('stroke','#ccc').attr('stroke-width',1).attr('stroke-dasharray','4,3');
+  g.append('text')
+    .attr('x', xScale(0.5)).attr('y', pad.top + 6)
+    .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#bbb')
+    .text('chance');
+
+  // X axis
+  [0.4, 0.6, 0.8, 1.0].forEach(v => {
+    g.append('line')
+      .attr('x1',xScale(v)).attr('y1',pad.top+plotH)
+      .attr('x2',xScale(v)).attr('y2',pad.top+plotH+4)
+      .attr('stroke','#999').attr('stroke-width',0.5);
+    g.append('text')
+      .attr('x',xScale(v)).attr('y',pad.top+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text(v.toFixed(1));
+  });
+  g.append('text')
+    .attr('x', xScale(0.7)).attr('y', pad.top + plotH + 28)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('AUROC');
+
+  // Pairwise transfer dots (context)
+  const jitterScale = d3.scaleLinear().domain([0, thymusPairwise.length-1]).range([-plotH*0.3, plotH*0.3]);
+  thymusPairwise.forEach((val, i) => {
+    g.append('circle')
+      .attr('cx', xScale(val))
+      .attr('cy', midY + jitterScale(i))
+      .attr('r', 3.5)
+      .attr('fill', COLORS.thymus)
+      .attr('opacity', 0.25)
+      .attr('stroke', COLORS.thymus)
+      .attr('stroke-width', 0.5);
+  });
+
+  // LOMO mean vertical line
+  g.append('line')
+    .attr('x1', xScale(lomoMean)).attr('y1', midY - plotH*0.35)
+    .attr('x2', xScale(lomoMean)).attr('y2', midY + plotH*0.35)
+    .attr('stroke', COLORS.thymus).attr('stroke-width', 1.2).attr('stroke-dasharray','4,3');
+  g.append('text')
+    .attr('x', xScale(lomoMean) - 3).attr('y', midY - plotH*0.38)
+    .attr('text-anchor','end').attr('font-size', 6.5).attr('fill', COLORS.thymus)
+    .text('LOMO mean');
+
+  // RR-23 CI bar
+  const rr23Y = midY;
+  g.append('line')
+    .attr('x1', xScale(rr23.ci_low)).attr('y1', rr23Y)
+    .attr('x2', xScale(rr23.ci_high)).attr('y2', rr23Y)
+    .attr('stroke', '#c00').attr('stroke-width', 2);
+  [rr23.ci_low, rr23.ci_high].forEach(v => {
+    g.append('line')
+      .attr('x1', xScale(v)).attr('y1', rr23Y - 5)
+      .attr('x2', xScale(v)).attr('y2', rr23Y + 5)
+      .attr('stroke', '#c00').attr('stroke-width', 1.5);
+  });
+
+  // RR-23 point (diamond)
+  const dSize = 7;
+  g.append('path')
+    .attr('d', `M${xScale(rr23.auroc)},${rr23Y-dSize} L${xScale(rr23.auroc)+dSize},${rr23Y} L${xScale(rr23.auroc)},${rr23Y+dSize} L${xScale(rr23.auroc)-dSize},${rr23Y}Z`)
+    .attr('fill', '#c00').attr('stroke', '#800').attr('stroke-width', 1);
+
+  // RR-23 annotation
+  g.append('text')
+    .attr('x', xScale(rr23.auroc)).attr('y', rr23Y - dSize - 8)
+    .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#c00').attr('font-weight','bold')
+    .text('0.905');
+  g.append('text')
+    .attr('x', xScale(rr23.auroc)).attr('y', rr23Y + dSize + 14)
+    .attr('text-anchor','middle').attr('font-size', 7).attr('fill','#c00').attr('font-style','italic')
+    .text('p = 0.005');
+
+  // Legend
+  const legY = pad.top + 4;
+  g.append('circle').attr('cx', pad.left + 4).attr('cy', legY).attr('r', 3)
+    .attr('fill', COLORS.thymus).attr('opacity', 0.4);
+  g.append('text').attr('x', pad.left + 10).attr('y', legY + 3)
+    .attr('font-size', 6).attr('fill','#666').text('Pairwise (12)');
+  const dS = 4;
+  g.append('path')
+    .attr('d', `M${pad.left + 65},${legY-dS} L${pad.left+65+dS},${legY} L${pad.left+65},${legY+dS} L${pad.left+65-dS},${legY}Z`)
+    .attr('fill', '#c00').attr('stroke','#800').attr('stroke-width',0.5);
+  g.append('text').attr('x', pad.left + 72).attr('y', legY + 3)
+    .attr('font-size', 6).attr('fill','#666').text('RR-23');
+}
+
+// ============================================================
+// PANEL (c) — Cross-Tissue Transfer (Category C)
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[2]},${margin.top})`);
+  panelLabel(g, 'c', -2, -10);
+
+  const pad = {left: 105, right: 18, top: 22, bottom: 36};
+  const plotW = pW[2] - pad.left - pad.right;
+  const plotH = pH - pad.top - pad.bottom;
+
+  // Title
+  g.append('text').attr('x', pW[2]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Cross-tissue transfer (Cat C)');
+
+  const xScale = d3.scaleLinear().domain([0, 1.0]).range([pad.left, pad.left + plotW]);
+  const yScale = d3.scaleBand().domain(crossTissue.map(d=>d.pair)).range([pad.top, pad.top + plotH]).padding(0.2);
+
+  // Gridlines
+  [0.25, 0.5, 0.75, 1.0].forEach(v => {
+    g.append('line')
+      .attr('x1',xScale(v)).attr('y1',pad.top)
+      .attr('x2',xScale(v)).attr('y2',pad.top+plotH)
+      .attr('stroke','#f0f0f0').attr('stroke-width', 0.5);
+  });
+
+  // Chance line
+  g.append('line')
+    .attr('x1', xScale(0.5)).attr('y1', pad.top)
+    .attr('x2', xScale(0.5)).attr('y2', pad.top + plotH)
+    .attr('stroke', '#ccc').attr('stroke-width', 1).attr('stroke-dasharray', '4,3');
+
+  // X axis
+  [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+    g.append('line')
+      .attr('x1',xScale(v)).attr('y1',pad.top+plotH)
+      .attr('x2',xScale(v)).attr('y2',pad.top+plotH+4)
+      .attr('stroke','#999').attr('stroke-width',0.5);
+    g.append('text')
+      .attr('x',xScale(v)).attr('y',pad.top+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text(v.toFixed(2));
+  });
+  g.append('text')
+    .attr('x', xScale(0.5)).attr('y', pad.top + plotH + 28)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('AUROC');
+
+  // Data points
+  const pointSize = {gene: 5, deg: 4.5, pathway: 5};
+  crossTissue.forEach(d => {
+    const cy = yScale(d.pair) + yScale.bandwidth()/2;
+    const spread = yScale.bandwidth() * 0.25;
+
+    // Row label
+    g.append('text').attr('x', pad.left - 6).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick).attr('fill','#444')
+      .text(d.label);
+
+    // Gene dot (circle)
+    g.append('circle')
+      .attr('cx', xScale(d.gene)).attr('cy', cy - spread)
+      .attr('r', pointSize.gene).attr('fill', GENE_COLOR).attr('opacity', 0.8);
+
+    // DEG dot (triangle)
+    const tri = d3.symbol().type(d3.symbolTriangle).size(45);
+    g.append('path')
+      .attr('d', tri())
+      .attr('transform', `translate(${xScale(d.deg)},${cy})`)
+      .attr('fill', DEG_COLOR).attr('opacity', 0.8);
+
+    // Pathway dot (square)
+    const sqSize = 4.5;
+    g.append('rect')
+      .attr('x', xScale(d.pathway) - sqSize).attr('y', cy + spread - sqSize)
+      .attr('width', sqSize*2).attr('height', sqSize*2)
+      .attr('fill', PATHWAY_COLOR).attr('opacity', 0.8).attr('rx', 1);
+
+    // Highlight notable values
+    if (d.pair === 'C2') {
+      g.append('text')
+        .attr('x', xScale(d.pathway) + 8).attr('y', cy + spread + 3)
+        .attr('font-size', 7).attr('fill', PATHWAY_COLOR).attr('font-weight','600')
+        .text('0.867');
+    }
+    if (d.pair === 'C3') {
+      g.append('text')
+        .attr('x', xScale(d.pathway) - 8).attr('y', cy + spread + 3)
+        .attr('text-anchor','end')
+        .attr('font-size', 7).attr('fill', '#c00').attr('font-weight','600')
+        .text('0.184');
+    }
+  });
+
+  // Legend
+  const legY = pad.top + 4;
+  g.append('circle').attr('cx', pad.left).attr('cy', legY).attr('r', 3.5)
+    .attr('fill', GENE_COLOR).attr('opacity',0.8);
+  g.append('text').attr('x', pad.left + 6).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Gene');
+  const triLeg = d3.symbol().type(d3.symbolTriangle).size(30);
+  g.append('path')
+    .attr('d', triLeg())
+    .attr('transform', `translate(${pad.left + 38},${legY})`)
+    .attr('fill', DEG_COLOR).attr('opacity',0.8);
+  g.append('text').attr('x', pad.left + 44).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('DEG');
+  g.append('rect')
+    .attr('x', pad.left + 67).attr('y', legY - 3.5).attr('width', 7).attr('height', 7)
+    .attr('fill', PATHWAY_COLOR).attr('opacity',0.8).attr('rx',1);
+  g.append('text').attr('x', pad.left + 77).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Pathway');
+}
+
+// ============================================================
+// SVG DOWNLOAD
+// ============================================================
+function downloadSVG() {
+  const svgEl = document.getElementById('fig4');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgEl);
+  source = '<?xml version="1.0" standalone="no"?>\n' + source;
+  const blob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'fig4_validation.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 3 — Foundation Models &amp; LLMs Fail</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f5f5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .fig-container { background: #fff; padding: 16px; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  button { margin: 12px 4px 0; padding: 6px 14px; font-size: 12px; cursor: pointer; border: 1px solid #999; background: #fff; border-radius: 3px; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+<div class="fig-container">
+  <svg id="fig3"></svg>
+</div>
+<div>
+  <button onclick="downloadSVG()">Download SVG</button>
+</div>
+
+<script>
+// ============================================================
+// DESIGN SYSTEM
+// ============================================================
+const CLASSICAL_COLOR = '#0072B2';
+const GF_COLOR = '#D55E00';
+const LLM_COLOR = '#CC79A7';
+const COLORS = {
+  thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+  eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+};
+
+const FS = {
+  panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, tiny: 7.5
+};
+
+// ============================================================
+// DATA
+// ============================================================
+
+// Tissue order matching previous figures
+const tissues = [
+  {key:'A4', name:'Thymus', short:'Thy'},
+  {key:'A2', name:'Gastrocnemius', short:'Gas'},
+  {key:'A5', name:'Skin', short:'Skn'},
+  {key:'A6', name:'Eye', short:'Eye'},
+  {key:'A1', name:'Liver', short:'Liv'},
+  {key:'A3', name:'Kidney', short:'Kid'}
+];
+
+// Classical ML baseline (best model per tissue from geneformer summary)
+const classical = {
+  A1: {auroc: 0.588, model: 'LR'},
+  A2: {auroc: 0.907, model: 'LR'},
+  A3: {auroc: 0.521, model: 'LR'},
+  A4: {auroc: 0.923, model: 'PCA-LR'},
+  A5: {auroc: 0.821, model: 'LR'},
+  A6: {auroc: 0.789, model: 'PCA-LR'}
+};
+
+// Geneformer
+const geneformer = {
+  A1: 0.486, A2: 0.382, A3: 0.452, A4: 0.495, A5: 0.557, A6: 0.484
+};
+
+// LLMs
+const llmData = {
+  'DeepSeek-V3': {A1: 0.435, A2: 0.514, A3: 0.495, A4: 0.421, A5: 0.467, A6: 0.492},
+  'Gemini-2.5-Flash': {A1: 0.523, A2: 0.438, A3: 0.494, A4: 0.602, A5: 0.580, A6: 0.393},
+  'Llama-3.3-70B': {A1: 0.527, A2: 0.544, A3: 0.440, A4: 0.533, A5: 0.451, A6: 0.407}
+};
+
+// Overall means
+const classicalMean = tissues.reduce((s,t) => s + classical[t.key].auroc, 0) / 6;
+const gfMean = tissues.reduce((s,t) => s + geneformer[t.key], 0) / 6;
+
+// ============================================================
+// LAYOUT
+// ============================================================
+const W = 960, H = 320;
+const margin = {top: 28, right: 14, bottom: 32, left: 4};
+const panelGap = 28;
+
+const totalUsable = W - margin.left - margin.right - panelGap;
+const pW = [totalUsable * 0.55, totalUsable * 0.45];
+const pH = H - margin.top - margin.bottom;
+const pX = [margin.left, margin.left + pW[0] + panelGap];
+
+// ============================================================
+// SVG SETUP
+// ============================================================
+const svg = d3.select('#fig3')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+svg.append('rect').attr('width',W).attr('height',H).attr('fill','#fff');
+
+function panelLabel(g, letter, x, y) {
+  g.append('text').attr('x',x).attr('y',y)
+    .attr('font-size',FS.panelLabel).attr('font-weight','bold')
+    .text(letter);
+}
+
+// ============================================================
+// PANEL (a) — Classical ML vs Geneformer: Grouped Bars
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[0]},${margin.top})`);
+  panelLabel(g, 'a', -2, -10);
+
+  const pad = {left: 50, right: 20, top: 22, bottom: 50};
+  const plotW = pW[0] - pad.left - pad.right;
+  const plotH = pH - pad.top - pad.bottom;
+
+  // Title
+  g.append('text').attr('x', pW[0]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Classical ML vs Geneformer');
+
+  const xScale = d3.scaleBand().domain(tissues.map(t=>t.key)).range([pad.left, pad.left + plotW]).padding(0.3);
+  const yScale = d3.scaleLinear().domain([0, 1.05]).range([pad.top + plotH, pad.top]);
+  const barW = xScale.bandwidth() / 2.3;
+
+  // Gridlines
+  [0.25, 0.5, 0.75, 1.0].forEach(v => {
+    g.append('line')
+      .attr('x1', pad.left).attr('y1', yScale(v))
+      .attr('x2', pad.left + plotW).attr('y2', yScale(v))
+      .attr('stroke', '#f0f0f0').attr('stroke-width', 0.5);
+  });
+
+  // Chance line at 0.5
+  g.append('line')
+    .attr('x1', pad.left).attr('y1', yScale(0.5))
+    .attr('x2', pad.left + plotW).attr('y2', yScale(0.5))
+    .attr('stroke', '#ccc').attr('stroke-width', 1).attr('stroke-dasharray', '4,3');
+  g.append('text')
+    .attr('x', pad.left - 3).attr('y', yScale(0.5) + 3)
+    .attr('text-anchor','end').attr('font-size', 6.5).attr('fill','#aaa')
+    .text('chance');
+
+  // Y axis
+  [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+    g.append('line')
+      .attr('x1', pad.left - 4).attr('y1', yScale(v))
+      .attr('x2', pad.left).attr('y2', yScale(v))
+      .attr('stroke', '#999').attr('stroke-width', 0.5);
+    g.append('text')
+      .attr('x', pad.left - 7).attr('y', yScale(v) + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tiny).attr('fill','#666')
+      .text(v.toFixed(2));
+  });
+  g.append('text')
+    .attr('transform', `rotate(-90, ${pad.left - 34}, ${pad.top + plotH/2})`)
+    .attr('x', pad.left - 34).attr('y', pad.top + plotH/2)
+    .attr('text-anchor','middle').attr('font-size', FS.axisLabel).attr('fill','#333')
+    .text('AUROC');
+
+  // Bars
+  tissues.forEach(t => {
+    const cx = xScale(t.key) + xScale.bandwidth()/2;
+    const classicalVal = classical[t.key].auroc;
+    const gfVal = geneformer[t.key];
+
+    // Classical bar
+    g.append('rect')
+      .attr('x', cx - barW - 1).attr('y', yScale(classicalVal))
+      .attr('width', barW).attr('height', yScale(0) - yScale(classicalVal))
+      .attr('fill', CLASSICAL_COLOR).attr('opacity', 0.8).attr('rx', 1.5);
+
+    // Geneformer bar
+    g.append('rect')
+      .attr('x', cx + 1).attr('y', yScale(gfVal))
+      .attr('width', barW).attr('height', yScale(0) - yScale(gfVal))
+      .attr('fill', GF_COLOR).attr('opacity', 0.8).attr('rx', 1.5);
+
+    // Delta annotation
+    const delta = gfVal - classicalVal;
+    g.append('text')
+      .attr('x', cx).attr('y', yScale(Math.max(classicalVal, gfVal)) - 5)
+      .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill','#666')
+      .text((delta > 0 ? '+' : '') + delta.toFixed(2));
+
+    // X label
+    g.append('text')
+      .attr('x', cx).attr('y', pad.top + plotH + 14)
+      .attr('text-anchor','middle').attr('font-size', FS.tick).attr('fill','#333')
+      .text(t.name);
+    // Model type
+    g.append('text')
+      .attr('x', cx).attr('y', pad.top + plotH + 24)
+      .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#aaa')
+      .text(classical[t.key].model);
+  });
+
+  // Overall means annotation
+  g.append('line')
+    .attr('x1', pad.left + 6).attr('y1', yScale(classicalMean))
+    .attr('x2', pad.left + plotW - 6).attr('y2', yScale(classicalMean))
+    .attr('stroke', CLASSICAL_COLOR).attr('stroke-width', 0.8).attr('stroke-dasharray','3,2').attr('opacity',0.5);
+  g.append('line')
+    .attr('x1', pad.left + 6).attr('y1', yScale(gfMean))
+    .attr('x2', pad.left + plotW - 6).attr('y2', yScale(gfMean))
+    .attr('stroke', GF_COLOR).attr('stroke-width', 0.8).attr('stroke-dasharray','3,2').attr('opacity',0.5);
+
+  // Mean labels
+  g.append('text')
+    .attr('x', pad.left + plotW + 2).attr('y', yScale(classicalMean) + 3)
+    .attr('font-size', 7).attr('fill', CLASSICAL_COLOR).attr('font-weight','600')
+    .text(classicalMean.toFixed(3));
+  g.append('text')
+    .attr('x', pad.left + plotW + 2).attr('y', yScale(gfMean) + 3)
+    .attr('font-size', 7).attr('fill', GF_COLOR).attr('font-weight','600')
+    .text(gfMean.toFixed(3));
+
+  // Legend
+  const legX = pad.left + 8, legY = pad.top + 6;
+  g.append('rect').attr('x', legX).attr('y', legY - 5).attr('width', 8).attr('height', 8)
+    .attr('fill', CLASSICAL_COLOR).attr('opacity',0.8).attr('rx',1);
+  g.append('text').attr('x', legX + 11).attr('y', legY + 3)
+    .attr('font-size', 7).attr('fill','#444').text('Classical ML');
+  g.append('rect').attr('x', legX + 72).attr('y', legY - 5).attr('width', 8).attr('height', 8)
+    .attr('fill', GF_COLOR).attr('opacity',0.8).attr('rx',1);
+  g.append('text').attr('x', legX + 83).attr('y', legY + 3)
+    .attr('font-size', 7).attr('fill','#444').text('Geneformer');
+}
+
+// ============================================================
+// PANEL (b) — LLM Zero-Shot Heatmap
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[1]},${margin.top})`);
+  panelLabel(g, 'b', -2, -10);
+
+  const pad = {left: 100, right: 12, top: 22, bottom: 28};
+  const plotW = pW[1] - pad.left - pad.right;
+  const plotH = pH - pad.top - pad.bottom;
+
+  // Title
+  g.append('text').attr('x', pW[1]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('LLM zero-shot evaluation');
+
+  // Rows: PCA-LR reference + 3 LLMs
+  const rows = [
+    {name: 'Classical ML (ref)', data: tissues.map(t => classical[t.key].auroc), color: CLASSICAL_COLOR},
+    {name: 'Gemini-2.5-Flash', data: tissues.map(t => llmData['Gemini-2.5-Flash'][t.key]), color: LLM_COLOR},
+    {name: 'Llama-3.3-70B', data: tissues.map(t => llmData['Llama-3.3-70B'][t.key]), color: LLM_COLOR},
+    {name: 'DeepSeek-V3', data: tissues.map(t => llmData['DeepSeek-V3'][t.key]), color: LLM_COLOR}
+  ];
+
+  const cellW = plotW / tissues.length;
+  const cellH = plotH / rows.length;
+
+  // Color scale (Viridis-like: 0.3→1.0)
+  const colorScale = d3.scaleSequential(d3.interpolateViridis).domain([0.3, 1.0]);
+
+  // Column headers
+  tissues.forEach((t, i) => {
+    g.append('text')
+      .attr('x', pad.left + i*cellW + cellW/2)
+      .attr('y', pad.top - 4)
+      .attr('text-anchor','middle').attr('font-size', FS.tiny).attr('fill','#444')
+      .text(t.name);
+  });
+
+  // Rows
+  rows.forEach((row, ri) => {
+    const y = pad.top + ri * cellH;
+
+    // Row label
+    g.append('text')
+      .attr('x', pad.left - 6).attr('y', y + cellH/2 + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tiny)
+      .attr('fill', ri === 0 ? CLASSICAL_COLOR : '#444')
+      .attr('font-weight', ri === 0 ? '600' : '400')
+      .text(row.name);
+
+    // Cells
+    row.data.forEach((val, ci) => {
+      const x = pad.left + ci * cellW;
+
+      g.append('rect')
+        .attr('x', x + 1).attr('y', y + 1)
+        .attr('width', cellW - 2).attr('height', cellH - 2)
+        .attr('rx', 2)
+        .attr('fill', colorScale(val));
+
+      // Value text (white for dark cells, dark for light)
+      const textColor = val < 0.55 ? '#fff' : '#222';
+      g.append('text')
+        .attr('x', x + cellW/2).attr('y', y + cellH/2 + 3)
+        .attr('text-anchor','middle').attr('font-size', 8)
+        .attr('fill', textColor).attr('font-weight','500')
+        .text(val.toFixed(2));
+    });
+
+    // Row mean
+    const mean = row.data.reduce((a,b) => a+b, 0) / row.data.length;
+    g.append('text')
+      .attr('x', pad.left + plotW + 6).attr('y', y + cellH/2 + 3)
+      .attr('text-anchor','start').attr('font-size', 7.5)
+      .attr('fill', ri === 0 ? CLASSICAL_COLOR : '#666')
+      .attr('font-weight', ri === 0 ? '600' : '500')
+      .text(mean.toFixed(2));
+  });
+
+  // "Mean" column header
+  g.append('text')
+    .attr('x', pad.left + plotW + 6).attr('y', pad.top - 4)
+    .attr('text-anchor','start').attr('font-size', FS.tiny).attr('fill','#888')
+    .attr('font-style','italic')
+    .text('Mean');
+
+  // Separator line between classical and LLMs
+  const sepY = pad.top + cellH;
+  g.append('line')
+    .attr('x1', pad.left).attr('y1', sepY)
+    .attr('x2', pad.left + plotW).attr('y2', sepY)
+    .attr('stroke', '#999').attr('stroke-width', 1.2);
+
+  // Color bar legend
+  const cbX = pad.left + plotW * 0.15;
+  const cbW = plotW * 0.7;
+  const cbY = pad.top + plotH + 8;
+  const cbH = 6;
+  const defs = svg.append('defs');
+  const grad = defs.append('linearGradient').attr('id','viridis-grad');
+  [0, 0.25, 0.5, 0.75, 1].forEach(t => {
+    grad.append('stop')
+      .attr('offset', `${t*100}%`)
+      .attr('stop-color', colorScale(0.3 + t * 0.7));
+  });
+  g.append('rect')
+    .attr('x', cbX).attr('y', cbY)
+    .attr('width', cbW).attr('height', cbH)
+    .attr('rx', 2)
+    .attr('fill', 'url(#viridis-grad)');
+  g.append('text').attr('x', cbX).attr('y', cbY + cbH + 10)
+    .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('0.3');
+  g.append('text').attr('x', cbX + cbW).attr('y', cbY + cbH + 10)
+    .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('1.0');
+  g.append('text').attr('x', cbX + cbW/2).attr('y', cbY + cbH + 10)
+    .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('AUROC');
+}
+
+// ============================================================
+// SVG DOWNLOAD
+// ============================================================
+function downloadSVG() {
+  const svgEl = document.getElementById('fig3');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgEl);
+  source = '<?xml version="1.0" standalone="no"?>\n' + source;
+  const blob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'fig3_model_comparison.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # GeneLab_benchmark v1.0 — Results Summary
 
-Generated: 2026-03-01
+Generated: 2026-03-01 (Updated: 2026-03-07)
 
 ## Hypothesis Results
 
@@ -42,11 +42,23 @@ H3 test: Method C wins 2/4 pairs (C2, C4). C vs A mean diff = -0.001 (essentiall
 
 ## Category D: Condition/Confounder Prediction (macro-F1)
 
-| Task | Gene | Pathway | p-value | Interpretation |
-|---|---|---|---|---|
-| **D3** Liver 6-class mission | **1.000** | 0.056 NS | <0.001 | Perfect batch separation (gene); batch-invariant (pathway) |
-| **D6** Liver uG/AG/GC | **0.886** | 0.413 NS | 0.002 | uG separable from gene expression |
-| **D6** Thymus uG/AG/GC | **0.657** | 0.641 (p=0.052) | 0.037 | Gene ≈ Pathway for gravity detection |
+| Task | Tissue | N | Gene F1 | Gene p | Pathway F1 | Pathway p | Interpretation |
+|---|---|---|---|---|---|---|---|
+| **D3** Mission ID (6-class) | Liver | 264 | **1.000** [1.00, 1.00] | <0.001 | 0.056 [0.04, 0.07] NS | 1.0 | Perfect batch separation (gene); batch-invariant (pathway) |
+| **D4** Strain (2-class) | Thymus | 34 | **0.892** [0.48, 1.00] | 0.004 | 0.817 [0.47, 1.00] | 0.015 | Strain detectable even from GC-only samples. EXPLORATORY (n_minority=3) |
+| **D5** Hardware RR vs MHU | Liver | 264 | **1.000** [1.00, 1.00] | <0.001 | 0.386 [0.36, 0.41] NS | 1.0 | Perfect gene separation; collinear with D3 (hardware derived from mission) |
+| **D5** Hardware RR vs MHU | Thymus | 92 | **1.000** [1.00, 1.00] | <0.001 | 0.352 [0.31, 0.39] NS | 1.0 | Perfect gene separation; collinear with D3 |
+| **D6** Gravity (3-class) | Liver | 9 | **0.886** | 0.002 | 0.413 NS | 0.354 | uG separable from gene expression |
+| **D6** Gravity (3-class) | Thymus | 9 | **0.657** | 0.037 | 0.641 (p=0.052) | 0.052 | Gene ≈ Pathway for gravity detection |
+
+### Confounder Hierarchy
+
+```
+D3 (mission F1=1.0) >= D5 (hardware F1=1.0, collinear) >= D4 (strain F1=0.89, exploratory n=3)
+All pathway F1 ≈ 0.05-0.41 → pathways resist confounder detection (batch-invariant)
+```
+
+**Key insight**: D5 hardware prediction is perfect but **collinear with D3** — hardware type (RR vs MHU) is a deterministic function of mission ID. D5 F1 should be interpreted as an upper bound of D3, not independent evidence. D4 strain effect is detectable but **exploratory** (minority class n=3).
 
 ---
 
@@ -70,8 +82,12 @@ H3 test: Method C wins 2/4 pairs (C2, C4). C vs A mean diff = -0.001 (essentiall
 |---|---|---|---|---|
 | A (Detection) | 5 | 3 | 2 | +0.032 |
 | C (Cross-tissue) | 4 | 2 | 2 | -0.001 |
-| D (Condition) | 3 | 3 | 0 | -0.478 |
-| **Total** | **12** | **8** | **4** | **-0.106** |
+| D (Condition, D3+D6 original) | 3 | 3 | 0 | -0.478 |
+| D (Condition, full D3-D6) | 6 | 6 | 0 | -0.462 |
+| **Total (original 12)** | **12** | **8** | **4** | **-0.106** |
+| **Total (expanded 15)** | **15** | **11** | **4** | **-0.174** |
+
+*Note: D4/D5 all show gene >> pathway, consistent with D3/D6 pattern. Pathways systematically resist confounder/batch detection.*
 
 ---
 
@@ -105,6 +121,39 @@ Excluding gastrocnemius: rank-order correlation for 5 tissues (thymus/eye/skin/l
 
 ---
 
+## Tier 2: Geneformer (Mouse-GF) vs Classical Baseline
+
+Mouse-Geneformer (6L BERT, 56K mouse gene vocab, pretrained on 30M scRNA-seq cells) fine-tuned on bulk RNA-seq LOMO folds (10 epochs, batch=16, lr=2e-5, freeze=4/6 layers).
+
+| Task | Tissue | Geneformer AUROC | Baseline AUROC | Baseline Model | Delta | Winner |
+|------|--------|-----------------|---------------|----------------|-------|--------|
+| A1 | Liver | 0.486 ± 0.074 | 0.588 | LR ElasticNet | -0.102 | Baseline |
+| A2 | Gastrocnemius | 0.382 ± 0.054 | 0.907 | LR ElasticNet | -0.525 | Baseline |
+| A3 | Kidney | 0.452 ± 0.080 | 0.521 | LR ElasticNet | -0.069 | Baseline |
+| A4 | Thymus | 0.495 ± 0.233 | 0.923 | PCA-50 + LogReg | -0.428 | Baseline |
+| A5 | Skin | 0.557 ± 0.087 | 0.821 | LR ElasticNet | -0.265 | Baseline |
+| A6 | Eye | 0.484 ± 0.117 | 0.789 | PCA-50 + LogReg | -0.305 | Baseline |
+| **Mean** | **6 tissues** | **0.476** | **0.758** | — | **-0.283** | **Baseline** |
+
+**Interpretation**: Classical ML wins 6/6 tissues. Geneformer performs near chance level (0.5) on small-n bulk RNA-seq (train n=30-100). This is consistent with literature — foundation models pretrained on single-cell data do not automatically transfer to small-sample bulk transcriptomics tasks.
+
+---
+
+## Held-Out Evaluation: A4 Thymus (OSD-515 / RR-23)
+
+Reserved held-out test set for external benchmark evaluation. Train on 4 missions (MHU-1, MHU-2, RR-6, RR-9; n=67), test on RR-23 (n=16: 7 Flight, 9 GC). 27,541 common genes.
+
+| Model | AUROC | 95% CI | p-value |
+|-------|-------|--------|---------|
+| LR ElasticNet | **0.905** | [0.672, 1.000] | 0.005 |
+| Random Forest | **0.905** | [0.672, 1.000] | 0.007 |
+| PCA-50 + LogReg | 0.873 | [0.609, 1.000] | 0.011 |
+| Geneformer (Mouse-GF) | 0.556 | [0.265, 0.850] | — |
+
+**Interpretation**: Classical baselines achieve strong held-out performance (AUROC ~0.90, p<0.01), confirming thymus cross-mission generalization beyond LOMO. Geneformer remains near chance on held-out data, consistent with LOMO results (0.495). The held-out confirms thymus as the most robust tissue for spaceflight detection.
+
+---
+
 ## Pipeline Status
 
 | Component | Files | Status |
@@ -113,7 +162,8 @@ Excluding gastrocnemius: rank-order correlation for 5 tissues (thymus/eye/skin/l
 | GSVA | 54 (5 tissues × missions × 3 DBs) | Complete |
 | Category B | 5 tissues, bootstrap CI + permutation | Complete |
 | Category C | 4 pairs × 3 methods | Complete |
-| Category D | D3 + D6×2 | Complete |
-| J5 | 12 comparisons | Complete |
+| Category D | D3 + D4 + D5×2 + D6×2 (6 tasks) | Complete |
+| J5 | 15 comparisons | Complete |
 | NES Conservation | 6 tissues | Complete |
-| Geneformer | Tokenized, HPC script ready | Awaiting HPC |
+| Geneformer | 6 tissues, 22 LOMO folds (Mouse-GF) | Complete |
+| Held-Out | A4 Thymus (RR-23), Tier 1 + Geneformer | Complete |
