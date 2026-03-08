@@ -38,6 +38,7 @@ TASK_MAP = {
     "gastrocnemius": ("A2", "A2_gastrocnemius_lomo"),
     "thymus": ("A4", "A4_thymus_lomo"),
     "liver":  ("A1", "A1_liver_lomo"),
+    "skin":   ("A5", "A5_skin_lomo"),
 }
 
 # ── Statistics (same as run_baselines.py) ──────────────────────────────────────
@@ -90,18 +91,45 @@ def build_pca_lr(n_components, seed=42):
     ])
 
 
+# ── Mission mapping for composite missions ────────────────────────────────────
+# Skin MHU-2 is split into dorsal/femoral subsites in GSVA files
+MISSION_EXPAND = {
+    "skin": {
+        "MHU-2": ["MHU-2_dorsal", "MHU-2_femoral"],
+    },
+}
+
+
 # ── Data loading ───────────────────────────────────────────────────────────────
 
 def load_pathway_features(tissue, db, missions):
-    """Concatenate GSVA scores for multiple missions (samples × pathways)."""
+    """Concatenate GSVA scores for multiple missions (samples × pathways).
+    Uses intersection of pathways across missions to avoid NaN from differing
+    GSVA filtration (e.g. KEGG 218-231 pathways per mission)."""
     parts = []
+    expand = MISSION_EXPAND.get(tissue, {})
     for mission in missions:
-        fpath = PATHWAY_DIR / tissue / f"{mission}_gsva_{db}.csv"
-        if not fpath.exists():
-            raise FileNotFoundError(f"Missing: {fpath}")
-        df = pd.read_csv(fpath, index_col=0)
-        parts.append(df)
-    return pd.concat(parts, axis=0)
+        sub_missions = expand.get(mission, [mission])
+        for sub in sub_missions:
+            fpath = PATHWAY_DIR / tissue / f"{sub}_gsva_{db}.csv"
+            if not fpath.exists():
+                raise FileNotFoundError(f"Missing: {fpath}")
+            df = pd.read_csv(fpath, index_col=0)
+            parts.append(df)
+    # Intersect columns to avoid NaN from differing pathway sets
+    if len(parts) > 1:
+        common_cols = set(parts[0].columns)
+        for p in parts[1:]:
+            common_cols &= set(p.columns)
+        common_cols = sorted(common_cols)
+        parts = [p[common_cols] for p in parts]
+    combined = pd.concat(parts, axis=0)
+    # Drop duplicate samples (e.g. thymus MHU-2 GSVA contains MHU-1 samples)
+    n_dup = combined.index.duplicated().sum()
+    if n_dup > 0:
+        print(f"    [WARN] Dropped {n_dup} duplicate sample(s) from {tissue}/{db}")
+    combined = combined[~combined.index.duplicated(keep='first')]
+    return combined
 
 
 def load_fold(tissue, task_dir_name, db, fold):
@@ -117,9 +145,27 @@ def load_fold(tissue, task_dir_name, db, fold):
     train_X = load_pathway_features(tissue, db, fold["train_missions"])
     test_X  = load_pathway_features(tissue, db, [fold["test_mission"]])
 
-    # Align samples (keep order from task labels)
-    train_X = train_X.loc[train_y.index]
-    test_X  = test_X.loc[test_y.index]
+    # Intersect pathways between train and test
+    common_pathways = sorted(set(train_X.columns) & set(test_X.columns))
+    train_X = train_X[common_pathways]
+    test_X  = test_X[common_pathways]
+
+    # Align samples — handle {mission}.{sample} prefix in fold labels
+    # (gastrocnemius fold labels have "RR-5.GSM..." but GSVA has "GSM...")
+    def align_samples(X_df, y_series):
+        if y_series.index[0] in X_df.index:
+            return X_df.loc[y_series.index]
+        # Try stripping "{mission}." prefix from fold labels
+        stripped = y_series.index.str.replace(r'^[^.]+\.', '', regex=True)
+        if stripped[0] in X_df.index:
+            X_aligned = X_df.loc[stripped]
+            X_aligned.index = y_series.index  # restore original names
+            return X_aligned
+        raise KeyError(f"Cannot align samples. GSVA: {X_df.index[:3].tolist()}, "
+                       f"Fold: {y_series.index[:3].tolist()}")
+
+    train_X = align_samples(train_X, train_y)
+    test_X  = align_samples(test_X, test_y)
 
     return (
         train_X.values.astype(float), train_y.values.astype(float),
@@ -134,7 +180,8 @@ def run_lomo(tissue, db, n_boot=2000, n_perm=1000):
         raise ValueError(f"Unknown tissue: {tissue}. Choose from {list(TASK_MAP)}")
 
     task_id, task_dir_name = TASK_MAP[tissue]
-    task_info = json.load(open(TASKS_DIR / task_dir_name / "task_info.json"))
+    with open(TASKS_DIR / task_dir_name / "task_info.json") as f:
+        task_info = json.load(f)
     folds = task_info["folds"]
 
     results = {"lr": [], "pca_lr": []}
@@ -147,7 +194,7 @@ def run_lomo(tissue, db, n_boot=2000, n_perm=1000):
         n_test = len(test_y)
         n_flt  = int((test_y == 1).sum())
         n_gnd  = int((test_y == 0).sum())
-        n_comp = min(50, train_X.shape[0] - 1)  # adaptive PCA components
+        n_comp = min(50, train_X.shape[0] - 1, train_X.shape[1])  # adaptive PCA components
 
         for model_name, model in [("lr", build_lr()), ("pca_lr", build_pca_lr(n_comp))]:
             t0 = time.time()
@@ -215,7 +262,8 @@ def run_lomo(tissue, db, n_boot=2000, n_perm=1000):
 def main():
     parser = argparse.ArgumentParser(description="Pathway LOMO evaluation (GSVA features)")
     parser.add_argument("--tissue", required=True, choices=list(TASK_MAP), help="Tissue name")
-    parser.add_argument("--db", default="hallmark", choices=["hallmark", "kegg", "reactome"],
+    parser.add_argument("--db", default="hallmark",
+                        choices=["hallmark", "kegg", "reactome", "mitocarta"],
                         help="Pathway database (default: hallmark)")
     parser.add_argument("--n-boot", type=int, default=2000, help="Bootstrap iterations (default: 2000)")
     parser.add_argument("--n-perm", type=int, default=1000, help="Permutation iterations (default: 1000)")

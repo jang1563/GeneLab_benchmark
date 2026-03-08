@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure S2 — NES Conservation, Multi-DB &amp; Tissue Biology</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f5f5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .fig-container { background: #fff; padding: 16px; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  button { margin: 12px 4px 0; padding: 6px 14px; font-size: 12px; cursor: pointer; border: 1px solid #999; background: #fff; border-radius: 3px; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+<div class="fig-container">
+  <svg id="figS2"></svg>
+</div>
+<div>
+  <button onclick="downloadSVG()">Download SVG</button>
+</div>
+
+<script>
+const COLORS = {
+  thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+  eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+};
+const FS = { panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, tiny: 7.5 };
+
+// ============================================================
+// DATA
+// ============================================================
+
+// (a) NES pairwise heatmaps — thymus 4×4 vs liver 6×6
+const thymusMissions = ['MHU-1','MHU-2','RR-6','RR-9'];
+// MHU-1 only has 3 missions in NES (MHU-2, RR-6, RR-9 available)
+const thymusNES = {
+  'MHU-2_RR-6': 0.493, 'MHU-2_RR-9': 0.744, 'RR-6_RR-9': 0.619
+};
+const liverMissions = ['MHU-2','RR-1','RR-3','RR-6','RR-8','RR-9'];
+const liverNES = {
+  'MHU-2_RR-1': -0.157, 'MHU-2_RR-3': -0.213, 'MHU-2_RR-6': 0.452,
+  'MHU-2_RR-8': 0.155, 'MHU-2_RR-9': -0.019, 'RR-1_RR-3': 0.265,
+  'RR-1_RR-6': -0.297, 'RR-1_RR-8': 0.271, 'RR-1_RR-9': -0.091,
+  'RR-3_RR-6': -0.114, 'RR-3_RR-8': 0.239, 'RR-3_RR-9': -0.011,
+  'RR-6_RR-8': 0.422, 'RR-6_RR-9': 0.052, 'RR-8_RR-9': -0.06
+};
+
+// (b) Multi-DB AUROC heatmap
+const dbTissues = ['Thymus','Gastro','Skin','Eye','Liver','Kidney'];
+const dbs = ['Hallmark','KEGG','Reactome','MitoCarta'];
+const multiDB = [
+  [0.879, 0.770, 0.922, 0.485],  // thymus
+  [0.688, 0.481, 0.755, 0.465],  // gastro
+  [0.756, 0.821, 0.748, 0.661],  // skin
+  [0.915, 0.828, 0.700, 0.702],  // eye
+  [0.574, 0.605, 0.603, 0.699],  // liver
+  [0.743, 0.574, 0.716, 0.519]   // kidney
+];
+
+// (c) NES scatter per DB (small multiples)
+const nesPerDB = {
+  'Hallmark': [
+    {tissue:'thymus', nes:0.619, auroc:0.860},
+    {tissue:'eye', nes:0.335, auroc:0.754},
+    {tissue:'skin', nes:0.147, auroc:0.772},
+    {tissue:'liver', nes:0.060, auroc:0.577},
+    {tissue:'gastrocnemius', nes:0.057, auroc:0.801},
+    {tissue:'kidney', nes:0.048, auroc:0.555}
+  ],
+  'KEGG': [
+    {tissue:'thymus', nes:0.532, auroc:0.860},
+    {tissue:'eye', nes:0.315, auroc:0.754},
+    {tissue:'skin', nes:0.258, auroc:0.772},
+    {tissue:'kidney', nes:0.189, auroc:0.555},
+    {tissue:'liver', nes:0.126, auroc:0.577},
+    {tissue:'gastrocnemius', nes:-0.206, auroc:0.801}
+  ],
+  'Reactome': [
+    {tissue:'thymus', nes:0.713, auroc:0.860},
+    {tissue:'eye', nes:0.309, auroc:0.754},
+    {tissue:'skin', nes:0.188, auroc:0.772},
+    {tissue:'kidney', nes:0.122, auroc:0.555},
+    {tissue:'liver', nes:0.115, auroc:0.577},
+    {tissue:'gastrocnemius', nes:0.086, auroc:0.801}
+  ],
+  'MitoCarta': [
+    {tissue:'eye', nes:0.599, auroc:0.754},
+    {tissue:'gastrocnemius', nes:0.335, auroc:0.801},
+    {tissue:'skin', nes:0.116, auroc:0.772},
+    {tissue:'thymus', nes:0.108, auroc:0.860},
+    {tissue:'liver', nes:0.099, auroc:0.577},
+    {tissue:'kidney', nes:0.085, auroc:0.555}
+  ]
+};
+
+// (d) Tissue Strategy Space
+const strategyData = [
+  {tissue:'Thymus', immune:'\u2193\u2193', metabolism:'\u2193', proliferation:'\u2191\u2191\u2191', note:'Futile cycling', color:COLORS.thymus,
+   imm_val:-2, met_val:-1, pro_val:3},
+  {tissue:'Liver', immune:'\u2191\u2191', metabolism:'\u2191\u2191', proliferation:'\u2193', note:'Metabolic-immune', color:COLORS.liver,
+   imm_val:2, met_val:2, pro_val:-1},
+  {tissue:'Eye', immune:'\u2193', metabolism:'\u2191\u2191\u2191', proliferation:'\u2193', note:'Structural comp.', color:COLORS.eye,
+   imm_val:-1, met_val:3, pro_val:-1},
+  {tissue:'Gastro', immune:'\u2193', metabolism:'\u2191', proliferation:'\u2193', note:'Atrophic remodel', color:COLORS.gastrocnemius,
+   imm_val:-1, met_val:1, pro_val:-1},
+  {tissue:'Kidney', immune:'\u00B1', metabolism:'\u00B1', proliferation:'\u00B1', note:'Mission-dependent', color:COLORS.kidney,
+   imm_val:0, met_val:0, pro_val:0},
+  {tissue:'Skin', immune:'\u2193', metabolism:'\u2191', proliferation:'\u2191', note:'Homeostatic', color:COLORS.skin,
+   imm_val:-1, met_val:1, pro_val:1}
+];
+
+// ============================================================
+// LAYOUT: 2×2
+// ============================================================
+const W = 960, H = 500;
+const margin = {top: 28, right: 14, bottom: 14, left: 4};
+const gapH = 28, gapV = 32;
+const halfW = (W - margin.left - margin.right - gapH) / 2;
+const halfH = (H - margin.top - margin.bottom - gapV) / 2;
+
+const panelPos = [
+  {x: margin.left, y: margin.top},
+  {x: margin.left + halfW + gapH, y: margin.top},
+  {x: margin.left, y: margin.top + halfH + gapV},
+  {x: margin.left + halfW + gapH, y: margin.top + halfH + gapV}
+];
+
+const svg = d3.select('#figS2')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+svg.append('rect').attr('width',W).attr('height',H).attr('fill','#fff');
+
+function panelLabel(g, letter, x, y) {
+  g.append('text').attr('x',x).attr('y',y)
+    .attr('font-size',FS.panelLabel).attr('font-weight','bold').text(letter);
+}
+
+// ============================================================
+// PANEL (a) — NES Pairwise Heatmaps (Thymus vs Liver)
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[0].x},${panelPos[0].y})`);
+  panelLabel(g, 'a', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('NES pairwise conservation');
+
+  const rdBu = d3.scaleSequential(d3.interpolateRdBu).domain([1, -1]);
+
+  // Thymus mini-heatmap (left)
+  const tMissions = ['MHU-2','RR-6','RR-9'];
+  const tCellSize = 32;
+  const tStartX = 30, tStartY = 26;
+
+  g.append('text').attr('x', tStartX + tMissions.length*tCellSize/2).attr('y', tStartY - 4)
+    .attr('text-anchor','middle').attr('font-size', 8).attr('fill', COLORS.thymus).attr('font-weight','600')
+    .text('Thymus (mean r = 0.62)');
+
+  tMissions.forEach((m, i) => {
+    g.append('text').attr('x', tStartX + i*tCellSize + tCellSize/2).attr('y', tStartY + 10)
+      .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#666')
+      .attr('transform', `rotate(-35, ${tStartX + i*tCellSize + tCellSize/2}, ${tStartY + 10})`)
+      .text(m);
+  });
+  tMissions.forEach((m1, i) => {
+    g.append('text').attr('x', tStartX - 4).attr('y', tStartY + 24 + i*tCellSize + tCellSize/2)
+      .attr('text-anchor','end').attr('font-size', 6).attr('fill','#666').text(m1);
+    tMissions.forEach((m2, j) => {
+      const x = tStartX + j*tCellSize;
+      const y = tStartY + 18 + i*tCellSize;
+      if (i === j) {
+        g.append('rect').attr('x',x+1).attr('y',y+1).attr('width',tCellSize-2).attr('height',tCellSize-2)
+          .attr('fill','#eee').attr('rx',2);
+      } else {
+        const key1 = `${m1}_${m2}`, key2 = `${m2}_${m1}`;
+        const val = thymusNES[key1] || thymusNES[key2] || 0;
+        g.append('rect').attr('x',x+1).attr('y',y+1).attr('width',tCellSize-2).attr('height',tCellSize-2)
+          .attr('fill', rdBu(val)).attr('rx',2);
+        g.append('text').attr('x',x+tCellSize/2).attr('y',y+tCellSize/2+3)
+          .attr('text-anchor','middle').attr('font-size',7).attr('fill', Math.abs(val)>0.4?'#fff':'#333')
+          .text(val.toFixed(2));
+      }
+    });
+  });
+
+  // Liver mini-heatmap (right)
+  const lMissions = liverMissions;
+  const lCellSize = 22;
+  const lStartX = halfW/2 + 20, lStartY = 26;
+
+  g.append('text').attr('x', lStartX + lMissions.length*lCellSize/2).attr('y', lStartY - 4)
+    .attr('text-anchor','middle').attr('font-size', 8).attr('fill', COLORS.liver).attr('font-weight','600')
+    .text('Liver (mean r = 0.06)');
+
+  lMissions.forEach((m, i) => {
+    g.append('text').attr('x', lStartX + i*lCellSize + lCellSize/2).attr('y', lStartY + 10)
+      .attr('text-anchor','middle').attr('font-size', 5).attr('fill','#666')
+      .attr('transform', `rotate(-35, ${lStartX + i*lCellSize + lCellSize/2}, ${lStartY + 10})`)
+      .text(m);
+  });
+  lMissions.forEach((m1, i) => {
+    g.append('text').attr('x', lStartX - 3).attr('y', lStartY + 20 + i*lCellSize + lCellSize/2)
+      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(m1);
+    lMissions.forEach((m2, j) => {
+      const x = lStartX + j*lCellSize;
+      const y = lStartY + 14 + i*lCellSize;
+      if (i === j) {
+        g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',lCellSize-1).attr('height',lCellSize-1)
+          .attr('fill','#eee').attr('rx',1);
+      } else {
+        const key1 = `${m1}_${m2}`, key2 = `${m2}_${m1}`;
+        const val = liverNES[key1] || liverNES[key2] || 0;
+        g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',lCellSize-1).attr('height',lCellSize-1)
+          .attr('fill', rdBu(val)).attr('rx',1);
+        g.append('text').attr('x',x+lCellSize/2).attr('y',y+lCellSize/2+2.5)
+          .attr('text-anchor','middle').attr('font-size',5.5).attr('fill', Math.abs(val)>0.3?'#fff':'#333')
+          .text(val.toFixed(2));
+      }
+    });
+  });
+
+  // Colorbar
+  const cbX = halfW/2 - 40, cbY = halfH - 18, cbW = 80, cbH = 6;
+  const defs = svg.append('defs');
+  const grad = defs.append('linearGradient').attr('id','rdbu-grad');
+  [0,0.25,0.5,0.75,1].forEach(t => {
+    grad.append('stop').attr('offset',`${t*100}%`).attr('stop-color', rdBu(-1 + t*2));
+  });
+  g.append('rect').attr('x',cbX).attr('y',cbY).attr('width',cbW).attr('height',cbH).attr('rx',2)
+    .attr('fill','url(#rdbu-grad)');
+  g.append('text').attr('x',cbX).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('-1');
+  g.append('text').attr('x',cbX+cbW/2).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('0');
+  g.append('text').attr('x',cbX+cbW).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('+1');
+  g.append('text').attr('x',cbX+cbW/2).attr('y',cbY-3).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('Spearman \u03C1');
+}
+
+// ============================================================
+// PANEL (b) — Multi-DB AUROC Heatmap
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[1].x},${panelPos[1].y})`);
+  panelLabel(g, 'b', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Pathway DB effect on AUROC');
+
+  const pad = {left: 68, right: 40, top: 20, bottom: 10};
+  const cellW = (halfW - pad.left - pad.right) / dbs.length;
+  const cellH = (halfH - pad.top - pad.bottom) / dbTissues.length;
+  const viridis = d3.scaleSequential(d3.interpolateViridis).domain([0.4, 1.0]);
+
+  // Column headers
+  dbs.forEach((db, i) => {
+    g.append('text').attr('x', pad.left + i*cellW + cellW/2).attr('y', pad.top - 3)
+      .attr('text-anchor','middle').attr('font-size', 7).attr('fill','#444')
+      .text(db);
+  });
+
+  const tissueColors = [COLORS.thymus, COLORS.gastrocnemius, COLORS.skin, COLORS.eye, COLORS.liver, COLORS.kidney];
+  dbTissues.forEach((t, ri) => {
+    g.append('text').attr('x', pad.left - 5).attr('y', pad.top + ri*cellH + cellH/2 + 3)
+      .attr('text-anchor','end').attr('font-size', 8).attr('fill', tissueColors[ri]).attr('font-weight','600')
+      .text(t);
+
+    dbs.forEach((db, ci) => {
+      const val = multiDB[ri][ci];
+      const x = pad.left + ci*cellW;
+      const y = pad.top + ri*cellH;
+      g.append('rect').attr('x',x+1).attr('y',y+1).attr('width',cellW-2).attr('height',cellH-2)
+        .attr('fill', viridis(val)).attr('rx',2);
+      g.append('text').attr('x',x+cellW/2).attr('y',y+cellH/2+3)
+        .attr('text-anchor','middle').attr('font-size', 7.5)
+        .attr('fill', val < 0.6 ? '#fff' : '#222')
+        .text(val.toFixed(2));
+    });
+
+    // Range annotation
+    const range = Math.max(...multiDB[ri]) - Math.min(...multiDB[ri]);
+    g.append('text').attr('x', pad.left + dbs.length*cellW + 5).attr('y', pad.top + ri*cellH + cellH/2 + 3)
+      .attr('font-size', 7).attr('fill','#888')
+      .text(`\u0394${range.toFixed(2)}`);
+  });
+
+  g.append('text').attr('x', pad.left + dbs.length*cellW + 5).attr('y', pad.top - 3)
+    .attr('font-size', 6).attr('fill','#aaa').text('Range');
+}
+
+// ============================================================
+// PANEL (c) — NES scatter per DB (2×2 small multiples)
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[2].x},${panelPos[2].y})`);
+  panelLabel(g, 'c', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('NES conservation per DB');
+
+  const dbNames = ['Hallmark','KEGG','Reactome','MitoCarta'];
+  const smGap = 8;
+  const smW = (halfW - 30 - smGap) / 2;
+  const smH = (halfH - 40 - smGap) / 2;
+
+  dbNames.forEach((db, idx) => {
+    const col = idx % 2;
+    const row = Math.floor(idx / 2);
+    const ox = 30 + col * (smW + smGap);
+    const oy = 14 + row * (smH + smGap);
+
+    const sg = g.append('g').attr('transform', `translate(${ox},${oy})`);
+
+    const xMin = -0.3, xMax = 0.8;
+    const xScale = d3.scaleLinear().domain([xMin, xMax]).range([20, smW - 5]);
+    const yScale = d3.scaleLinear().domain([0.45, 0.95]).range([smH - 14, 8]);
+
+    // Title
+    sg.append('text').attr('x', smW/2).attr('y', 5)
+      .attr('text-anchor','middle').attr('font-size', 7.5).attr('fill','#444').attr('font-weight','600')
+      .text(db);
+
+    // Parity region
+    sg.append('rect').attr('x',20).attr('y',8).attr('width',smW-25).attr('height',smH-22)
+      .attr('fill','#fafafa').attr('stroke','#eee').attr('rx',2);
+
+    // Points
+    nesPerDB[db].forEach(d => {
+      sg.append('circle')
+        .attr('cx', xScale(d.nes)).attr('cy', yScale(d.auroc))
+        .attr('r', 3.5)
+        .attr('fill', COLORS[d.tissue])
+        .attr('stroke', d.tissue === 'eye' ? '#999' : COLORS[d.tissue])
+        .attr('stroke-width', 1)
+        .attr('opacity', 0.8);
+    });
+
+    // Axes (minimal)
+    sg.append('line').attr('x1',20).attr('y1',smH-14).attr('x2',smW-5).attr('y2',smH-14)
+      .attr('stroke','#ccc').attr('stroke-width',0.5);
+    sg.append('line').attr('x1',20).attr('y1',8).attr('x2',20).attr('y2',smH-14)
+      .attr('stroke','#ccc').attr('stroke-width',0.5);
+
+    if (row === 1) {
+      sg.append('text').attr('x', smW/2).attr('y', smH - 1)
+        .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('NES \u03C1');
+    }
+    if (col === 0) {
+      sg.append('text').attr('transform', `rotate(-90, 8, ${smH/2})`)
+        .attr('x', 8).attr('y', smH/2)
+        .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('AUROC');
+    }
+  });
+}
+
+// ============================================================
+// PANEL (d) — Tissue Strategy Space
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[3].x},${panelPos[3].y})`);
+  panelLabel(g, 'd', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Tissue strategy space');
+
+  const cols = ['Tissue','Immune','Metabolism','Proliferation','Strategy'];
+  const colW = [70, 55, 65, 75, 100];
+  const rowH = 28;
+  const startX = 8, startY = 18;
+
+  // Header
+  cols.forEach((c, i) => {
+    const x = startX + colW.slice(0,i).reduce((a,b)=>a+b,0);
+    g.append('text').attr('x', x + colW[i]/2).attr('y', startY + 12)
+      .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#444').attr('font-weight','600')
+      .text(c);
+  });
+  g.append('line')
+    .attr('x1', startX).attr('y1', startY + 16)
+    .attr('x2', startX + colW.reduce((a,b)=>a+b,0)).attr('y2', startY + 16)
+    .attr('stroke','#999').attr('stroke-width',0.8);
+
+  const arrowColors = (val) => val > 0 ? '#c00' : val < 0 ? '#0066cc' : '#888';
+
+  strategyData.forEach((row, ri) => {
+    const y = startY + (ri+1) * rowH + 8;
+    const vals = [row.tissue, row.immune, row.metabolism, row.proliferation, row.note];
+    const numVals = [0, row.imm_val, row.met_val, row.pro_val, 0];
+
+    if (ri % 2 === 1) {
+      g.append('rect')
+        .attr('x', startX).attr('y', y - 14)
+        .attr('width', colW.reduce((a,b)=>a+b,0)).attr('height', rowH)
+        .attr('fill','#f8f8f8').attr('opacity',0.5);
+    }
+
+    vals.forEach((v, ci) => {
+      const x = startX + colW.slice(0,ci).reduce((a,b)=>a+b,0);
+      if (ci === 0) {
+        g.append('text').attr('x', x + 4).attr('y', y)
+          .attr('font-size', 8.5).attr('fill', row.color).attr('font-weight','600')
+          .text(v);
+      } else if (ci === 4) {
+        g.append('text').attr('x', x + colW[ci]/2).attr('y', y)
+          .attr('text-anchor','middle').attr('font-size', 7.5).attr('fill','#555').attr('font-style','italic')
+          .text(v);
+      } else {
+        g.append('text').attr('x', x + colW[ci]/2).attr('y', y)
+          .attr('text-anchor','middle').attr('font-size', 10)
+          .attr('fill', arrowColors(numVals[ci]))
+          .text(v);
+      }
+    });
+  });
+}
+
+// ============================================================
+function downloadSVG() {
+  const svgEl = document.getElementById('figS2');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgEl);
+  source = '<?xml version="1.0" standalone="no"?>\n' + source;
+  const blob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'figS2_nes_multidb.svg';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

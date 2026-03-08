@@ -93,7 +93,7 @@
     {
       "category": "D",
       "task": "D3",
-      "description": "D3",
+      "description": "D3 mission ID (liver, 6-class)",
       "metric": "macro-F1",
       "gene": 1.0,
       "pathway": 0.0559,
@@ -102,8 +102,38 @@
     },
     {
       "category": "D",
+      "task": "D4",
+      "description": "D4 strain (thymus GC, exploratory n=3)",
+      "metric": "macro-F1",
+      "gene": 0.8921,
+      "pathway": 0.8172,
+      "diff": -0.0749,
+      "winner": "gene"
+    },
+    {
+      "category": "D",
+      "task": "D5_liver",
+      "description": "D5 hardware (liver, collinear with D3)",
+      "metric": "macro-F1",
+      "gene": 1.0,
+      "pathway": 0.386,
+      "diff": -0.614,
+      "winner": "gene"
+    },
+    {
+      "category": "D",
+      "task": "D5_thymus",
+      "description": "D5 hardware (thymus, collinear with D3)",
+      "metric": "macro-F1",
+      "gene": 1.0,
+      "pathway": 0.3521,
+      "diff": -0.6479,
+      "winner": "gene"
+    },
+    {
+      "category": "D",
       "task": "D6_liver",
-      "description": "D6 liver",
+      "description": "D6 gravity (liver MHU-2, 3-class)",
       "metric": "macro-F1",
       "gene": 0.8857,
       "pathway": 0.4127,
@@ -113,7 +143,7 @@
     {
       "category": "D",
       "task": "D6_thymus",
-      "description": "D6 thymus",
+      "description": "D6 gravity (thymus MHU-2, 3-class)",
       "metric": "macro-F1",
       "gene": 0.6571,
       "pathway": 0.6413,
@@ -204,10 +234,18 @@
   "category_c_source": "C_cross_tissue_summary.json",
   "category_d_source": "D_condition_summary.json",
   "summary": {
+    "total_comparisons": 15,
+    "pathway_wins": 4,
+    "gene_wins": 11,
+    "mean_diff": -0.17427333333333333,
+    "note": "D4/D5 added (v1.2). All D4/D5 entries show gene >> pathway, consistent with batch/confounder invariance."
+  },
+  "summary_original_12": {
     "total_comparisons": 12,
     "pathway_wins": 4,
     "gene_wins": 8,
     "mean_diff": -0.10644166666666667
   },
-  "timestamp": "2026-03-01T13:16:03.691160"
+  "timestamp": "2026-03-03T00:00:00",
+  "updated": "2026-03-03 — D4/D5 expansion (12→15 comparisons)"
 }

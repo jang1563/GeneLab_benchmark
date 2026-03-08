@@ -1,0 +1,217 @@
+{
+  "task": "A5",
+  "model": "Geneformer-mouse_gf",
+  "tissue": "skin",
+  "mean_auroc": 0.5565328725855041,
+  "std_auroc": 0.08667634663126243,
+  "n_folds": 3,
+  "fold_results": [
+    {
+      "status": "ok",
+      "fold": "fold_MHU-2_test",
+      "model_version": "mouse_gf",
+      "device": "cuda",
+      "n_epochs": 10,
+      "batch_size": 16,
+      "lr": 2e-05,
+      "best_test_auroc": 0.6477272727272727,
+      "ci_low": 0.4440340909090909,
+      "ci_high": 0.8320333333333333,
+      "n_train": 67,
+      "n_test": 35,
+      "n_flight_test": 11,
+      "n_ground_test": 24,
+      "training_time_sec": 14.963865995407104,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6984761595726013,
+          "test_auroc": 0.5037878787878788
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.6959615111351013,
+          "test_auroc": 0.5681818181818181
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.694891357421875,
+          "test_auroc": 0.5795454545454546
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.6905110716819763,
+          "test_auroc": 0.6098484848484849
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.6916259765625,
+          "test_auroc": 0.6136363636363636
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.6918294310569764,
+          "test_auroc": 0.625
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.6877909302711487,
+          "test_auroc": 0.6439393939393939
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.685589599609375,
+          "test_auroc": 0.6477272727272727
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.686920166015625,
+          "test_auroc": 0.6401515151515151
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.6853006958961487,
+          "test_auroc": 0.6401515151515151
+        }
+      ]
+    },
+    {
+      "status": "ok",
+      "fold": "fold_RR-6_test",
+      "model_version": "mouse_gf",
+      "device": "cuda",
+      "n_epochs": 10,
+      "batch_size": 16,
+      "lr": 2e-05,
+      "best_test_auroc": 0.5818713450292398,
+      "ci_low": 0.3817447769621683,
+      "ci_high": 0.7807354925775978,
+      "n_train": 65,
+      "n_test": 37,
+      "n_flight_test": 18,
+      "n_ground_test": 19,
+      "training_time_sec": 15.080961465835571,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.7008056640625,
+          "test_auroc": 0.543859649122807
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.694329833984375,
+          "test_auroc": 0.5467836257309943
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.68499755859375,
+          "test_auroc": 0.5584795321637428
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.69349365234375,
+          "test_auroc": 0.5672514619883041
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.692242431640625,
+          "test_auroc": 0.5701754385964912
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.6676513671875,
+          "test_auroc": 0.5730994152046783
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.690667724609375,
+          "test_auroc": 0.5818713450292398
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.690301513671875,
+          "test_auroc": 0.5818713450292398
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.681109619140625,
+          "test_auroc": 0.5818713450292398
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.688922119140625,
+          "test_auroc": 0.5818713450292398
+        }
+      ]
+    },
+    {
+      "status": "ok",
+      "fold": "fold_RR-7_test",
+      "model_version": "mouse_gf",
+      "device": "cuda",
+      "n_epochs": 10,
+      "batch_size": 16,
+      "lr": 2e-05,
+      "best_test_auroc": 0.44000000000000006,
+      "ci_low": 0.20496894409937888,
+      "ci_high": 0.6704545454545455,
+      "n_train": 72,
+      "n_test": 30,
+      "n_flight_test": 10,
+      "n_ground_test": 20,
+      "training_time_sec": 14.935633659362793,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.697137451171875,
+          "test_auroc": 0.385
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.694183349609375,
+          "test_auroc": 0.395
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.69276123046875,
+          "test_auroc": 0.41000000000000003
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.689697265625,
+          "test_auroc": 0.42000000000000004
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.687579345703125,
+          "test_auroc": 0.42500000000000004
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.68515625,
+          "test_auroc": 0.43000000000000005
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.684906005859375,
+          "test_auroc": 0.43500000000000005
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.6833740234375,
+          "test_auroc": 0.43500000000000005
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.684442138671875,
+          "test_auroc": 0.43500000000000005
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.679345703125,
+          "test_auroc": 0.44000000000000006
+        }
+      ]
+    }
+  ]
+}

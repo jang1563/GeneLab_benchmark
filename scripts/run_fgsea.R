@@ -133,6 +133,16 @@ load_gene_sets <- function(db_names = c("hallmark", "kegg", "reactome")) {
     cat(sprintf("    %d gene sets loaded\n", length(gs_list[["reactome"]])))
   }
 
+  if ("mitocarta" %in% db_names) {
+    cat("  Loading MitoCarta3.0 (Mus musculus)...\n")
+    gmt_path <- file.path(BASE_DIR, "processed", "gene_sets", "mitocarta3_mouse.gmt")
+    if (!file.exists(gmt_path)) {
+      stop("MitoCarta GMT not found. Run: Rscript scripts/prepare_mitocarta.R")
+    }
+    gs_list[["mitocarta"]] <- gmtPathways(gmt_path)
+    cat(sprintf("    %d gene sets loaded\n", length(gs_list[["mitocarta"]])))
+  }
+
   return(gs_list)
 }
 
