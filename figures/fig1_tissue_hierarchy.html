@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 1 — Benchmark Design &amp; Tissue Hierarchy</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f5f5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .fig-container { background: #fff; padding: 16px; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  button { margin: 12px 4px 0; padding: 6px 14px; font-size: 12px; cursor: pointer; border: 1px solid #999; background: #fff; border-radius: 3px; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+<div class="fig-container">
+  <svg id="fig1"></svg>
+</div>
+<div>
+  <button onclick="downloadSVG()">Download SVG</button>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const COLORS = {
+  thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+  eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+};
+const STROKE = { eye: '#999' };
+
+// Tissue order by Category A AUROC (descending)
+const tissues = ['thymus','gastrocnemius','skin','eye','liver','kidney'];
+const tissueLabels = {
+  thymus:'Thymus', gastrocnemius:'Gastrocnemius', skin:'Skin',
+  eye:'Eye', liver:'Liver', kidney:'Kidney'
+};
+
+// Missions in chronological/logical order
+const missions = ['MHU-1','MHU-2','RR-1','RR-3','RR-5','RR-6','RR-7','RR-8','RR-9','TBD'];
+
+// Sample counts per tissue × mission (FLT+GC binary)
+const sampleMatrix = {
+  thymus: {'MHU-1':6,'MHU-2':6,'RR-6':35,'RR-9':20},
+  gastrocnemius: {'RR-1':12,'RR-5':12,'RR-9':8},
+  skin: {'MHU-2':35,'RR-6':37,'RR-7':30},
+  eye: {'RR-1':12,'RR-3':9,'TBD':16},
+  liver: {'MHU-2':6,'RR-1':14,'RR-3':12,'RR-6':39,'RR-8':103,'RR-9':19},
+  kidney: {'RR-1':12,'RR-3':12,'RR-7':94}
+};
+
+// Category A — LOMO Spaceflight Detection (PCA-LR, per-fold)
+const catA = {
+  thymus:        {mean:0.923, folds:[1.0, 1.0, 0.693, 1.0], ci:[0.878, 0.968], p:0.037},
+  gastrocnemius: {mean:0.824, folds:[0.639, 0.833, 1.0],     ci:[0.717, 1.000], p:0.026},
+  skin:          {mean:0.821, folds:[0.890, 0.769, 0.805],   ci:[0.637, 0.963], p:0.002},
+  eye:           {mean:0.789, folds:[0.611, 0.900, 0.857],   ci:[0.470, 1.000], p:0.063},
+  liver:         {mean:0.670, folds:[0.333, 0.816, 0.556, 0.847, 0.613, 0.857], ci:[0.457, 0.833], p:0.091},
+  kidney:        {mean:0.432, folds:[0.056, 0.639, 0.603],   ci:[0.431, 0.750], p:0.281}
+};
+
+// Category B — Cross-Mission Transfer (PCA-LR)
+const catB = {
+  thymus:        {mean:0.860, ci:[0.763, 0.953]},
+  gastrocnemius: {mean:0.801, ci:[0.653, 0.944]},
+  skin:          {mean:0.772, ci:[0.691, 0.834]},
+  eye:           {mean:0.754, ci:[0.688, 0.838]},
+  liver:         {mean:0.577, ci:[0.492, 0.666]},
+  kidney:        {mean:0.555, ci:[0.397, 0.681]}
+};
+
+// ============================================================
+// LAYOUT (in px, will set viewBox for mm export)
+// ============================================================
+const W = 960, H = 430;  // ~180mm × 80mm at 5.33px/mm
+const PPM = W / 180;     // pixels per mm
+const margin = {top: 28, right: 14, bottom: 32, left: 4};
+const panelGap = 18;
+
+// Panel widths (proportional to plan: 65:55:60 mm)
+const pW = [(65/180)*(W-margin.left-margin.right-2*panelGap),
+            (55/180)*(W-margin.left-margin.right-2*panelGap),
+            (60/180)*(W-margin.left-margin.right-2*panelGap)];
+const pH = H - margin.top - margin.bottom;
+const pX = [margin.left,
+            margin.left + pW[0] + panelGap,
+            margin.left + pW[0] + pW[1] + 2*panelGap];
+
+// ============================================================
+// SVG SETUP
+// ============================================================
+const svg = d3.select('#fig1')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+// Background
+svg.append('rect').attr('width',W).attr('height',H).attr('fill','#fff');
+
+// Font sizes (scaled)
+const FS = {
+  panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, tiny: 7.5
+};
+
+// ============================================================
+// HELPER: Panel label
+// ============================================================
+function panelLabel(g, letter, x, y) {
+  g.append('text').attr('x',x).attr('y',y)
+    .attr('font-size',FS.panelLabel).attr('font-weight','bold')
+    .text(letter);
+}
+
+// ============================================================
+// PANEL (a) — Data Landscape Matrix
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[0]},${margin.top})`);
+  panelLabel(g, 'a', -2, -10);
+
+  const leftPad = 90, topPad = 20, rightPad = 40;
+  const cellW = (pW[0] - leftPad - rightPad) / missions.length;
+  const cellH = (pH - topPad - 30) / tissues.length;
+
+  // Title
+  g.append('text').attr('x', pW[0]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Data landscape');
+
+  // Column headers (missions)
+  missions.forEach((m,i) => {
+    g.append('text')
+      .attr('x', leftPad + i*cellW + cellW/2)
+      .attr('y', topPad - 4)
+      .attr('text-anchor','middle').attr('font-size', FS.tiny)
+      .attr('transform', `rotate(-35, ${leftPad + i*cellW + cellW/2}, ${topPad - 4})`)
+      .text(m);
+  });
+
+  // Row labels + cells
+  const maxN = 103;
+  const opacityScale = d3.scaleSqrt().domain([0, maxN]).range([0.15, 1.0]);
+
+  tissues.forEach((t,row) => {
+    const y = topPad + row * cellH;
+    // Tissue label
+    g.append('text').attr('x', leftPad - 6).attr('y', y + cellH/2 + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick)
+      .attr('fill', COLORS[t])
+      .attr('font-weight','600')
+      .text(tissueLabels[t]);
+
+    // Total N
+    const totalN = Object.values(sampleMatrix[t]).reduce((a,b)=>a+b, 0);
+    g.append('text')
+      .attr('x', leftPad + missions.length * cellW + 6)
+      .attr('y', y + cellH/2 + 3)
+      .attr('text-anchor','start').attr('font-size', FS.tiny)
+      .attr('fill','#666')
+      .text(`n=${totalN}`);
+
+    missions.forEach((m,col) => {
+      const x = leftPad + col * cellW;
+      const n = sampleMatrix[t][m];
+      if (n) {
+        g.append('rect')
+          .attr('x', x+1).attr('y', y+1)
+          .attr('width', cellW-2).attr('height', cellH-2)
+          .attr('rx', 2)
+          .attr('fill', COLORS[t])
+          .attr('opacity', opacityScale(n))
+          .attr('stroke', t==='eye' ? '#999' : 'none')
+          .attr('stroke-width', 0.5);
+        g.append('text')
+          .attr('x', x + cellW/2).attr('y', y + cellH/2 + 3)
+          .attr('text-anchor','middle').attr('font-size', n >= 100 ? 6.5 : 7)
+          .attr('fill', n > 50 ? '#fff' : '#333')
+          .attr('font-weight', '500')
+          .text(n);
+      } else {
+        g.append('rect')
+          .attr('x', x+1).attr('y', y+1)
+          .attr('width', cellW-2).attr('height', cellH-2)
+          .attr('rx', 2)
+          .attr('fill', '#f0f0f0');
+      }
+    });
+  });
+
+  // LOMO annotation
+  const lomoY = topPad + tissues.length * cellH + 14;
+  g.append('text').attr('x', leftPad + missions.length*cellW/2).attr('y', lomoY)
+    .attr('text-anchor','middle').attr('font-size', FS.tiny).attr('fill','#666')
+    .text('LOMO: Leave-One-Mission-Out cross-validation');
+
+  // Small arrow hints
+  const arrowY = lomoY + 12;
+  const arrowX1 = leftPad + 2*cellW;
+  const arrowX2 = leftPad + 4*cellW;
+  g.append('line').attr('x1',arrowX1).attr('y1',arrowY).attr('x2',arrowX2).attr('y2',arrowY)
+    .attr('stroke','#999').attr('stroke-width',1).attr('marker-end','url(#arrowhead)');
+  g.append('text').attr('x',(arrowX1+arrowX2)/2).attr('y',arrowY-4)
+    .attr('text-anchor','middle').attr('font-size',6.5).attr('fill','#999')
+    .text('Train N\u22121 missions \u2192 Test held-out');
+
+  // Arrowhead marker
+  svg.append('defs').append('marker')
+    .attr('id','arrowhead').attr('viewBox','0 0 10 7')
+    .attr('refX',10).attr('refY',3.5).attr('markerWidth',8).attr('markerHeight',6)
+    .attr('orient','auto')
+    .append('polygon').attr('points','0 0, 10 3.5, 0 7').attr('fill','#999');
+}
+
+// ============================================================
+// PANEL (b) — Category A: LOMO Detection AUROC
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[1]},${margin.top})`);
+  panelLabel(g, 'b', -2, -10);
+
+  const leftPad = 5, rightPad = 10, topPad = 20, bottomPad = 36;
+  const plotW = pW[1] - leftPad - rightPad;
+  const plotH = pH - topPad - bottomPad;
+
+  // Title
+  g.append('text').attr('x', pW[1]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Spaceflight detection (LOMO)');
+
+  const xScale = d3.scaleLinear().domain([0, 1.05]).range([leftPad + 80, leftPad + plotW]);
+  const yScale = d3.scaleBand().domain(tissues).range([topPad, topPad + plotH]).padding(0.3);
+
+  // GO threshold shading
+  g.append('rect')
+    .attr('x', xScale(0.7)).attr('y', topPad)
+    .attr('width', xScale(1.05) - xScale(0.7)).attr('height', plotH)
+    .attr('fill', '#e8f5e9').attr('opacity', 0.5);
+  g.append('text')
+    .attr('x', xScale(0.87)).attr('y', topPad + plotH + 12)
+    .attr('text-anchor','middle').attr('font-size', FS.tiny).attr('fill','#4caf50')
+    .text('GO');
+
+  // Chance line
+  g.append('line')
+    .attr('x1', xScale(0.5)).attr('y1', topPad)
+    .attr('x2', xScale(0.5)).attr('y2', topPad + plotH)
+    .attr('stroke','#ccc').attr('stroke-width',1).attr('stroke-dasharray','4,3');
+
+  // X axis
+  const xTicks = [0, 0.25, 0.5, 0.75, 1.0];
+  xTicks.forEach(v => {
+    g.append('line')
+      .attr('x1',xScale(v)).attr('y1',topPad+plotH)
+      .attr('x2',xScale(v)).attr('y2',topPad+plotH+4)
+      .attr('stroke','#999').attr('stroke-width',0.5);
+    g.append('text')
+      .attr('x',xScale(v)).attr('y',topPad+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text(v.toFixed(2));
+  });
+  g.append('text')
+    .attr('x', xScale(0.5)).attr('y', topPad + plotH + 28)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('AUROC');
+
+  // Data points
+  tissues.forEach(t => {
+    const d = catA[t];
+    const cy = yScale(t) + yScale.bandwidth()/2;
+    const col = COLORS[t];
+    const strokeCol = t === 'eye' ? '#999' : col;
+
+    // Tissue label
+    g.append('text').attr('x', leftPad + 76).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick)
+      .attr('fill', col).attr('font-weight','600')
+      .text(tissueLabels[t]);
+
+    // CI bar
+    g.append('line')
+      .attr('x1', xScale(d.ci[0])).attr('y1', cy)
+      .attr('x2', xScale(d.ci[1])).attr('y2', cy)
+      .attr('stroke', col).attr('stroke-width', 2).attr('opacity', 0.6);
+    // CI caps
+    [d.ci[0], d.ci[1]].forEach(v => {
+      g.append('line')
+        .attr('x1', xScale(v)).attr('y1', cy-3)
+        .attr('x2', xScale(v)).attr('y2', cy+3)
+        .attr('stroke', col).attr('stroke-width', 1.5).attr('opacity', 0.6);
+    });
+
+    // Per-fold jitter dots
+    d.folds.forEach((f,i) => {
+      const jitter = (i - (d.folds.length-1)/2) * 4;
+      g.append('circle')
+        .attr('cx', xScale(f)).attr('cy', cy + jitter)
+        .attr('r', 3).attr('fill', col).attr('opacity', 0.25)
+        .attr('stroke', strokeCol).attr('stroke-width', 0.5);
+    });
+
+    // Mean dot
+    g.append('circle')
+      .attr('cx', xScale(d.mean)).attr('cy', cy)
+      .attr('r', 5)
+      .attr('fill', d.p < 0.05 ? col : '#fff')
+      .attr('stroke', strokeCol).attr('stroke-width', 2);
+
+    // Mean value label
+    g.append('text')
+      .attr('x', xScale(d.mean) + 8).attr('y', cy + 3)
+      .attr('font-size', FS.tiny).attr('fill','#333')
+      .text(d.mean.toFixed(3));
+  });
+
+  // Legend for dots
+  const legY = topPad + plotH + 18;
+  g.append('circle').attr('cx', leftPad + 80).attr('cy', legY).attr('r',3.5)
+    .attr('fill','#666').attr('stroke','#666').attr('stroke-width',1.5);
+  g.append('text').attr('x', leftPad + 86).attr('y', legY + 3)
+    .attr('font-size',6).attr('fill','#666').text('p < 0.05');
+  g.append('circle').attr('cx', leftPad + 122).attr('cy', legY).attr('r',3.5)
+    .attr('fill','#fff').attr('stroke','#666').attr('stroke-width',1.5);
+  g.append('text').attr('x', leftPad + 128).attr('y', legY + 3)
+    .attr('font-size',6).attr('fill','#666').text('NS');
+}
+
+// ============================================================
+// PANEL (c) — Category B: Cross-Mission Transfer AUROC
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[2]},${margin.top})`);
+  panelLabel(g, 'c', -2, -10);
+
+  const leftPad = 5, rightPad = 10, topPad = 20, bottomPad = 36;
+  const plotW = pW[2] - leftPad - rightPad;
+  const plotH = pH - topPad - bottomPad;
+
+  // Title
+  g.append('text').attr('x', pW[2]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Cross-mission transfer');
+
+  const xScale = d3.scaleLinear().domain([0, 1.05]).range([leftPad + 80, leftPad + plotW]);
+  const yScale = d3.scaleBand().domain(tissues).range([topPad, topPad + plotH]).padding(0.3);
+
+  // Chance line
+  g.append('line')
+    .attr('x1', xScale(0.5)).attr('y1', topPad)
+    .attr('x2', xScale(0.5)).attr('y2', topPad + plotH)
+    .attr('stroke','#ccc').attr('stroke-width',1).attr('stroke-dasharray','4,3');
+
+  // X axis
+  const xTicks = [0, 0.25, 0.5, 0.75, 1.0];
+  xTicks.forEach(v => {
+    g.append('line')
+      .attr('x1',xScale(v)).attr('y1',topPad+plotH)
+      .attr('x2',xScale(v)).attr('y2',topPad+plotH+4)
+      .attr('stroke','#999').attr('stroke-width',0.5);
+    g.append('text')
+      .attr('x',xScale(v)).attr('y',topPad+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text(v.toFixed(2));
+  });
+  g.append('text')
+    .attr('x', xScale(0.5)).attr('y', topPad + plotH + 28)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('AUROC');
+
+  // Bars
+  tissues.forEach(t => {
+    const d = catB[t];
+    const cy = yScale(t) + yScale.bandwidth()/2;
+    const col = COLORS[t];
+    const barH = yScale.bandwidth() * 0.65;
+    const strokeCol = t === 'eye' ? '#999' : col;
+
+    // Tissue label
+    g.append('text').attr('x', leftPad + 76).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick)
+      .attr('fill', col).attr('font-weight','600')
+      .text(tissueLabels[t]);
+
+    // Bar
+    g.append('rect')
+      .attr('x', xScale(0)).attr('y', cy - barH/2)
+      .attr('width', Math.max(0, xScale(d.mean) - xScale(0)))
+      .attr('height', barH)
+      .attr('fill', col).attr('opacity', 0.7)
+      .attr('rx', 2)
+      .attr('stroke', strokeCol).attr('stroke-width', t === 'eye' ? 1 : 0);
+
+    // CI whisker
+    g.append('line')
+      .attr('x1', xScale(d.ci[0])).attr('y1', cy)
+      .attr('x2', xScale(d.ci[1])).attr('y2', cy)
+      .attr('stroke', '#333').attr('stroke-width', 1.2);
+    [d.ci[0], d.ci[1]].forEach(v => {
+      g.append('line')
+        .attr('x1', xScale(v)).attr('y1', cy-3)
+        .attr('x2', xScale(v)).attr('y2', cy+3)
+        .attr('stroke', '#333').attr('stroke-width', 1);
+    });
+
+    // Value label
+    g.append('text')
+      .attr('x', xScale(d.ci[1]) + 5).attr('y', cy + 3)
+      .attr('font-size', FS.tiny).attr('fill','#333')
+      .text(d.mean.toFixed(3));
+  });
+
+  // Significance bracket: Thymus vs Liver
+  const thymusY = yScale('thymus') + yScale.bandwidth()/2;
+  const liverY = yScale('liver') + yScale.bandwidth()/2;
+  const bracketX = xScale(1.0) + 2;
+  g.append('line').attr('x1',bracketX).attr('y1',thymusY).attr('x2',bracketX).attr('y2',liverY)
+    .attr('stroke','#333').attr('stroke-width',0.8);
+  g.append('line').attr('x1',bracketX-3).attr('y1',thymusY).attr('x2',bracketX).attr('y2',thymusY)
+    .attr('stroke','#333').attr('stroke-width',0.8);
+  g.append('line').attr('x1',bracketX-3).attr('y1',liverY).attr('x2',bracketX).attr('y2',liverY)
+    .attr('stroke','#333').attr('stroke-width',0.8);
+  g.append('text')
+    .attr('x', bracketX + 3).attr('y', (thymusY + liverY)/2 + 3)
+    .attr('font-size', 7).attr('fill','#333').attr('font-style','italic')
+    .text('p=0.001');
+
+  // Annotation: number of pairs
+  tissues.forEach(t => {
+    const d = catB[t];
+    const nPairs = {thymus:12, gastrocnemius:6, skin:6, eye:6, liver:30, kidney:6}[t];
+    const cy = yScale(t) + yScale.bandwidth()/2;
+    g.append('text')
+      .attr('x', xScale(0) - 2).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', 6).attr('fill','#aaa')
+      .text(`${nPairs}p`);
+  });
+}
+
+// ============================================================
+// SVG DOWNLOAD
+// ============================================================
+function downloadSVG() {
+  const svgEl = document.getElementById('fig1');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgEl);
+  // Add XML declaration
+  source = '<?xml version="1.0" standalone="no"?>\n' + source;
+  const blob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'fig1_tissue_hierarchy.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

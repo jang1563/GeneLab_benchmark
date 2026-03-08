@@ -2,12 +2,14 @@
 """
 compute_nes_conservation.py — Compute cross-mission NES Spearman r and update JSON.
 
-For each tissue, computes pairwise Spearman correlation of NES scores (Hallmark)
-across fGSEA mission outputs. Updates evaluation/NES_conservation_vs_transfer.json.
+For each tissue, computes pairwise Spearman correlation of NES scores
+across fGSEA mission outputs. Supports multiple pathway DBs.
 
 Usage:
   python scripts/compute_nes_conservation.py --tissue skin
   python scripts/compute_nes_conservation.py --all
+  python scripts/compute_nes_conservation.py --all --db kegg
+  python scripts/compute_nes_conservation.py --all --db mitocarta
 """
 import json
 import argparse
@@ -20,7 +22,10 @@ from datetime import datetime
 
 BASE_DIR  = Path(__file__).resolve().parent.parent
 FGSEA_DIR = BASE_DIR / "processed" / "fgsea"
-NES_JSON  = BASE_DIR / "evaluation" / "NES_conservation_vs_transfer.json"
+EVAL_DIR  = BASE_DIR / "evaluation"
+
+# Legacy path (hallmark only, backward compatible)
+LEGACY_JSON = EVAL_DIR / "NES_conservation_vs_transfer.json"
 
 # Transfer AUROC values sourced from B_cross_mission_summary.json (pca_lr)
 TRANSFER_AUROC = {
@@ -42,24 +47,25 @@ NOTES = {
 }
 
 
-def compute_tissue(tissue: str) -> dict | None:
-    """Compute NES pairwise Spearman r for one tissue."""
+def compute_tissue(tissue: str, db: str) -> dict | None:
+    """Compute NES pairwise Spearman r for one tissue and DB."""
     tissue_dir = FGSEA_DIR / tissue
     if not tissue_dir.exists():
         print(f"  [SKIP] {tissue}: fGSEA directory not found ({tissue_dir})")
         return None
 
+    suffix = f"_fgsea_{db}"
     missions = sorted({
-        f.stem.replace("_fgsea_hallmark", "")
-        for f in tissue_dir.glob("*_fgsea_hallmark.csv")
+        f.stem.replace(suffix, "")
+        for f in tissue_dir.glob(f"*_fgsea_{db}.csv")
     })
     if len(missions) < 2:
-        print(f"  [SKIP] {tissue}: need >= 2 missions, found {missions}")
+        print(f"  [SKIP] {tissue}/{db}: need >= 2 missions, found {missions}")
         return None
 
     nes = {}
     for m in missions:
-        csv = tissue_dir / f"{m}_fgsea_hallmark.csv"
+        csv = tissue_dir / f"{m}_fgsea_{db}.csv"
         df = pd.read_csv(csv)
         nes[m] = df.set_index("pathway")["NES"]
 
@@ -69,7 +75,13 @@ def compute_tissue(tissue: str) -> dict | None:
         if len(common) < 10:
             print(f"  [WARN] {tissue}: {m1}/{m2} only {len(common)} common pathways, skipping")
             continue
-        r, _ = spearmanr(nes[m1][common], nes[m2][common])
+        v1, v2 = nes[m1][common], nes[m2][common]
+        # Drop NaN NES values (fGSEA can produce NaN for some pathways)
+        mask = v1.notna() & v2.notna()
+        if mask.sum() < 10:
+            print(f"  [WARN] {tissue}: {m1}/{m2} only {mask.sum()} non-NaN pathways, skipping")
+            continue
+        r, _ = spearmanr(v1[mask], v2[mask])
         pairs[f"{m1}_{m2}"] = round(float(r), 3)
 
     if not pairs:
@@ -84,6 +96,7 @@ def compute_tissue(tissue: str) -> dict | None:
     entry = {
         "nes_mean_r":          mean_r,
         "n_missions_nes":      len(nes),
+        "n_pathways":          len(nes[missions[0]]),
         "nes_pairs":           pairs,
         "transfer_auroc":      transfer["auroc"],
         "transfer_ci":         transfer["ci"],
@@ -96,17 +109,26 @@ def compute_tissue(tissue: str) -> dict | None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Compute NES Spearman r and update NES_conservation_vs_transfer.json"
+        description="Compute NES Spearman r for pathway conservation across missions"
     )
     parser.add_argument("--tissue", nargs="+", help="Tissue(s) to compute")
     parser.add_argument("--all", action="store_true", help="Recompute all tissues")
+    parser.add_argument("--db", default="hallmark",
+                        choices=["hallmark", "kegg", "reactome", "mitocarta"],
+                        help="Pathway database (default: hallmark)")
     args = parser.parse_args()
 
-    if not NES_JSON.exists():
-        print(f"[ERROR] JSON not found: {NES_JSON}")
-        return
+    db = args.db
+    out_json = EVAL_DIR / f"NES_conservation_{db}.json"
 
-    existing = json.loads(NES_JSON.read_text())
+    print(f"\n=== NES Conservation Analysis (DB: {db}) ===")
+
+    # Load existing or create new
+    if out_json.exists():
+        existing = json.loads(out_json.read_text())
+    else:
+        existing = {"db": db, "data": {}}
+
     data = existing.get("data", {})
 
     if args.all:
@@ -118,13 +140,14 @@ def main():
         return
 
     for tissue in tissues:
-        print(f"\n  Processing: {tissue}")
-        result = compute_tissue(tissue)
+        print(f"\n  Processing: {tissue} [{db}]")
+        result = compute_tissue(tissue, db)
         if result:
             data[tissue] = result
             print(f"    nes_mean_r = {result['nes_mean_r']:.3f}  "
                   f"(n_pairs={len(result['nes_pairs'])}, "
-                  f"n_missions={result['n_missions_nes']})")
+                  f"n_missions={result['n_missions_nes']}, "
+                  f"n_pathways={result['n_pathways']})")
             for pair_key, r_val in sorted(result["nes_pairs"].items()):
                 print(f"      {pair_key}: r={r_val:.3f}")
 
@@ -139,6 +162,7 @@ def main():
         reverse=True
     )
 
+    existing["db"] = db
     existing["data"] = data
     existing["correlation"] = {
         "tissues_ordered_by_nes": [t for t, _ in sorted_by_nes],
@@ -153,9 +177,18 @@ def main():
     }
     existing["timestamp"] = datetime.now().isoformat()
 
-    NES_JSON.write_text(json.dumps(existing, indent=2))
-    print(f"\n  Updated: {NES_JSON.relative_to(BASE_DIR)}")
-    print(f"  Tissues in JSON: {list(data.keys())}")
+    out_json.write_text(json.dumps(existing, indent=2))
+    print(f"\n  Saved: {out_json.relative_to(BASE_DIR)}")
+    print(f"  Tissues: {list(data.keys())}")
+
+    # Backward compatibility: hallmark also updates legacy JSON
+    if db == "hallmark" and LEGACY_JSON.exists():
+        legacy = json.loads(LEGACY_JSON.read_text())
+        legacy["data"] = data
+        legacy["correlation"] = existing["correlation"]
+        legacy["timestamp"] = existing["timestamp"]
+        LEGACY_JSON.write_text(json.dumps(legacy, indent=2))
+        print(f"  Also updated legacy: {LEGACY_JSON.relative_to(BASE_DIR)}")
 
 
 if __name__ == "__main__":

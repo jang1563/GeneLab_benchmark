@@ -65,6 +65,36 @@ def load_pathway_features(tissue, db="hallmark"):
     return combined
 
 
+def load_temporal_metadata(tissue, mission=None):
+    """Load metadata with temporal enrichment columns (sacrifice_timing, age_group).
+
+    Args:
+        tissue: Tissue name (e.g. 'liver', 'thymus')
+        mission: If provided, load per-mission metadata instead of all-missions.
+                 Use mission name like 'RR-6', 'RR-8'.
+
+    Returns:
+        DataFrame with index=sample_name, including 'sacrifice_timing' and 'age_group' columns.
+        Raises ValueError if temporal columns are missing (run --enrich-temporal first).
+    """
+    if mission:
+        mission_clean = mission.replace(" ", "_").replace("/", "_").replace("+", "_")
+        f = PROCESSED_DIR / tissue / f"{tissue}_{mission_clean}_metadata.csv"
+    else:
+        f = PROCESSED_DIR / tissue / f"{tissue}_all_missions_metadata.csv"
+
+    meta = pd.read_csv(f, index_col=0)
+    if "REMOVE" in meta.columns:
+        meta = meta[meta["REMOVE"] != True]
+
+    if "sacrifice_timing" not in meta.columns:
+        raise ValueError(
+            f"Temporal columns missing in {f.name}. "
+            f"Run: python scripts/quality_filter.py --enrich-temporal --tissue {tissue}"
+        )
+    return meta
+
+
 def align_features_with_meta(features, meta):
     """Align feature matrix with metadata by sample name."""
     feat_set = set(features.index)

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure S3 — Transfer &amp; Confounder Detail</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f5f5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .fig-container { background: #fff; padding: 16px; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  button { margin: 12px 4px 0; padding: 6px 14px; font-size: 12px; cursor: pointer; border: 1px solid #999; background: #fff; border-radius: 3px; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+<div class="fig-container">
+  <svg id="figS3"></svg>
+</div>
+<div>
+  <button onclick="downloadSVG()">Download SVG</button>
+</div>
+
+<script>
+const COLORS = {
+  thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+  eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+};
+const FS = { panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, tiny: 7.5 };
+
+// ============================================================
+// DATA
+// ============================================================
+
+// (a) D3 confusion matrices — gene vs pathway
+const d3Classes = ['MHU-2','RR-1','RR-3','RR-6','RR-8','RR-9'];
+const d3GeneCM = [[9,0,0,0,0,0],[0,14,0,0,0,0],[0,0,18,0,0,0],[0,0,0,59,0,0],[0,0,0,0,141,0],[0,0,0,0,0,23]];
+const d3PathCM = [[0,2,3,2,2,0],[0,0,6,2,3,3],[2,5,0,4,2,5],[7,9,7,6,17,13],[18,22,28,25,21,27],[2,5,5,6,5,0]];
+
+// (b) Category B pairwise heatmaps
+const liverMissions = ['MHU-2','RR-1','RR-3','RR-6','RR-8','RR-9'];
+const liverPairwise = {
+  'MHU-2_RR-1':0.306,'MHU-2_RR-3':0.556,'MHU-2_RR-6':0.608,'MHU-2_RR-8':0.550,'MHU-2_RR-9':0.971,
+  'RR-1_MHU-2':0.000,'RR-1_RR-3':0.444,'RR-1_RR-6':0.842,'RR-1_RR-8':0.827,'RR-1_RR-9':0.100,
+  'RR-3_MHU-2':0.667,'RR-3_RR-1':0.551,'RR-3_RR-6':0.576,'RR-3_RR-8':0.355,'RR-3_RR-9':0.586,
+  'RR-6_MHU-2':0.667,'RR-6_RR-1':0.816,'RR-6_RR-3':0.500,'RR-6_RR-8':0.742,'RR-6_RR-9':0.729,
+  'RR-8_MHU-2':0.222,'RR-8_RR-1':0.898,'RR-8_RR-3':0.472,'RR-8_RR-6':0.866,'RR-8_RR-9':0.343,
+  'RR-9_MHU-2':1.000,'RR-9_RR-1':0.306,'RR-9_RR-3':0.528,'RR-9_RR-6':0.605,'RR-9_RR-8':0.568
+};
+
+const thymusMissions = ['MHU-1','MHU-2','RR-6','RR-9'];
+const thymusPairwise = {
+  'MHU-1_MHU-2':1.000,'MHU-1_RR-6':0.817,'MHU-1_RR-9':0.980,
+  'MHU-2_MHU-1':1.000,'MHU-2_RR-6':0.490,'MHU-2_RR-9':1.000,
+  'RR-6_MHU-1':1.000,'RR-6_MHU-2':0.667,'RR-6_RR-9':0.700,
+  'RR-9_MHU-1':1.000,'RR-9_MHU-2':1.000,'RR-9_RR-6':0.663
+};
+
+// (c) Geneformer per-fold
+const gfFolds = {
+  'Liver': [0.444, 0.592, 0.389, 0.442, 0.576, 0.471],
+  'Gastro': [0.444, 0.389, 0.313],
+  'Kidney': [0.361, 0.556, 0.439],
+  'Thymus': [0.889, 0.444, 0.297, 0.350],
+  'Skin': [0.648, 0.582, 0.440],
+  'Eye': [0.333, 0.500, 0.619]
+};
+const gfColors = {Liver:COLORS.liver, Gastro:COLORS.gastrocnemius, Kidney:COLORS.kidney,
+  Thymus:COLORS.thymus, Skin:COLORS.skin, Eye:COLORS.eye};
+
+// (d) J1 pipeline comparison
+const j1Data = {
+  perSample: [
+    {animal:'M25',cond:'FLT',r:0.919},
+    {animal:'M26',cond:'FLT',r:0.895},
+    {animal:'M28',cond:'FLT',r:0.917},
+    {animal:'M30',cond:'FLT',r:0.928},
+    {animal:'M36',cond:'GC',r:0.914},
+    {animal:'M37',cond:'GC',r:0.927},
+    {animal:'M38',cond:'GC',r:0.929},
+    {animal:'M39',cond:'GC',r:0.934},
+    {animal:'M40',cond:'GC',r:0.916}
+  ],
+  meanR: 0.920,
+  glds48Auroc: 0.551,
+  glds168Auroc: 0.600,
+  delta: 0.049
+};
+
+// ============================================================
+// LAYOUT: 2×2
+// ============================================================
+const W = 960, H = 500;
+const margin = {top: 28, right: 14, bottom: 14, left: 4};
+const gapH = 28, gapV = 32;
+const halfW = (W - margin.left - margin.right - gapH) / 2;
+const halfH = (H - margin.top - margin.bottom - gapV) / 2;
+
+const panelPos = [
+  {x: margin.left, y: margin.top},
+  {x: margin.left + halfW + gapH, y: margin.top},
+  {x: margin.left, y: margin.top + halfH + gapV},
+  {x: margin.left + halfW + gapH, y: margin.top + halfH + gapV}
+];
+
+const svg = d3.select('#figS3')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+svg.append('rect').attr('width',W).attr('height',H).attr('fill','#fff');
+
+function panelLabel(g, letter, x, y) {
+  g.append('text').attr('x',x).attr('y',y)
+    .attr('font-size',FS.panelLabel).attr('font-weight','bold').text(letter);
+}
+
+// ============================================================
+// PANEL (a) — D3 Confusion Matrices
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[0].x},${panelPos[0].y})`);
+  panelLabel(g, 'a', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('D3 confusion: Gene vs Pathway');
+
+  const cellSize = 24;
+  const maxVal = 141;
+  const blueScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxVal]);
+
+  // Gene CM (left)
+  const gStartX = 42, gStartY = 24;
+  g.append('text').attr('x', gStartX + 3*cellSize).attr('y', gStartY - 2)
+    .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#0072B2').attr('font-weight','600')
+    .text('Gene (F1 = 1.00)');
+
+  d3Classes.forEach((c, i) => {
+    g.append('text').attr('x', gStartX + i*cellSize + cellSize/2).attr('y', gStartY + 10)
+      .attr('text-anchor','middle').attr('font-size', 5)
+      .attr('transform', `rotate(-40,${gStartX + i*cellSize + cellSize/2},${gStartY + 10})`)
+      .attr('fill','#666').text(c);
+    g.append('text').attr('x', gStartX - 3).attr('y', gStartY + 18 + i*cellSize + cellSize/2 + 2)
+      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(c);
+  });
+
+  d3GeneCM.forEach((row, i) => {
+    row.forEach((val, j) => {
+      const x = gStartX + j*cellSize, y = gStartY + 14 + i*cellSize;
+      g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',cellSize-1).attr('height',cellSize-1)
+        .attr('fill', val > 0 ? blueScale(val) : '#f5f5f5').attr('rx',1);
+      if (val > 0) {
+        g.append('text').attr('x',x+cellSize/2).attr('y',y+cellSize/2+2.5)
+          .attr('text-anchor','middle').attr('font-size', val >= 100 ? 5 : 6)
+          .attr('fill', val > 50 ? '#fff' : '#333')
+          .text(val);
+      }
+    });
+  });
+
+  // Pathway CM (right)
+  const pStartX = halfW/2 + 30, pStartY = 24;
+  g.append('text').attr('x', pStartX + 3*cellSize).attr('y', pStartY - 2)
+    .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#E69F00').attr('font-weight','600')
+    .text('Pathway (F1 = 0.056)');
+
+  d3Classes.forEach((c, i) => {
+    g.append('text').attr('x', pStartX + i*cellSize + cellSize/2).attr('y', pStartY + 10)
+      .attr('text-anchor','middle').attr('font-size', 5)
+      .attr('transform', `rotate(-40,${pStartX + i*cellSize + cellSize/2},${pStartY + 10})`)
+      .attr('fill','#666').text(c);
+    g.append('text').attr('x', pStartX - 3).attr('y', pStartY + 18 + i*cellSize + cellSize/2 + 2)
+      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(c);
+  });
+
+  const orangeScale = d3.scaleSequential(d3.interpolateOranges).domain([0, 30]);
+  d3PathCM.forEach((row, i) => {
+    row.forEach((val, j) => {
+      const x = pStartX + j*cellSize, y = pStartY + 14 + i*cellSize;
+      g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',cellSize-1).attr('height',cellSize-1)
+        .attr('fill', val > 0 ? orangeScale(val) : '#f5f5f5').attr('rx',1);
+      g.append('text').attr('x',x+cellSize/2).attr('y',y+cellSize/2+2.5)
+        .attr('text-anchor','middle').attr('font-size', 6)
+        .attr('fill', val > 20 ? '#fff' : '#333')
+        .text(val);
+    });
+  });
+}
+
+// ============================================================
+// PANEL (b) — Category B Pairwise Heatmaps
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[1].x},${panelPos[1].y})`);
+  panelLabel(g, 'b', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Cat B pairwise transfer AUROC');
+
+  const viridis = d3.scaleSequential(d3.interpolateViridis).domain([0, 1]);
+
+  // Liver heatmap (left)
+  const lCell = 20, lStartX = 40, lStartY = 22;
+  g.append('text').attr('x', lStartX + 3*lCell).attr('y', lStartY - 2)
+    .attr('text-anchor','middle').attr('font-size', 7.5).attr('fill', COLORS.liver).attr('font-weight','600')
+    .text('Liver (mean 0.573)');
+
+  liverMissions.forEach((m, i) => {
+    g.append('text').attr('x', lStartX + i*lCell + lCell/2).attr('y', lStartY + 8)
+      .attr('text-anchor','middle').attr('font-size', 5)
+      .attr('transform', `rotate(-35,${lStartX + i*lCell + lCell/2},${lStartY + 8})`)
+      .attr('fill','#666').text(m);
+    g.append('text').attr('x', lStartX - 3).attr('y', lStartY + 16 + i*lCell + lCell/2 + 2)
+      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(m);
+  });
+
+  liverMissions.forEach((m1, i) => {
+    liverMissions.forEach((m2, j) => {
+      const x = lStartX + j*lCell, y = lStartY + 12 + i*lCell;
+      if (i === j) {
+        g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',lCell-1).attr('height',lCell-1)
+          .attr('fill','#eee').attr('rx',1);
+      } else {
+        const key = `${m1}_${m2}`;
+        const val = liverPairwise[key] || 0;
+        g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',lCell-1).attr('height',lCell-1)
+          .attr('fill', viridis(val)).attr('rx',1);
+        g.append('text').attr('x',x+lCell/2).attr('y',y+lCell/2+2)
+          .attr('text-anchor','middle').attr('font-size', 4.5)
+          .attr('fill', val < 0.5 ? '#fff' : '#222')
+          .text(val.toFixed(2));
+      }
+    });
+  });
+
+  // Thymus heatmap (right)
+  const tCell = 28, tStartX = halfW/2 + 40, tStartY = 22;
+  g.append('text').attr('x', tStartX + 2*tCell).attr('y', tStartY - 2)
+    .attr('text-anchor','middle').attr('font-size', 7.5).attr('fill', COLORS.thymus).attr('font-weight','600')
+    .text('Thymus (mean 0.860)');
+
+  thymusMissions.forEach((m, i) => {
+    g.append('text').attr('x', tStartX + i*tCell + tCell/2).attr('y', tStartY + 10)
+      .attr('text-anchor','middle').attr('font-size', 6)
+      .attr('transform', `rotate(-35,${tStartX + i*tCell + tCell/2},${tStartY + 10})`)
+      .attr('fill','#666').text(m);
+    g.append('text').attr('x', tStartX - 3).attr('y', tStartY + 18 + i*tCell + tCell/2 + 2)
+      .attr('text-anchor','end').attr('font-size', 6).attr('fill','#666').text(m);
+  });
+
+  thymusMissions.forEach((m1, i) => {
+    thymusMissions.forEach((m2, j) => {
+      const x = tStartX + j*tCell, y = tStartY + 14 + i*tCell;
+      if (i === j) {
+        g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',tCell-1).attr('height',tCell-1)
+          .attr('fill','#eee').attr('rx',1);
+      } else {
+        const key = `${m1}_${m2}`;
+        const val = thymusPairwise[key] || 0;
+        g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',tCell-1).attr('height',tCell-1)
+          .attr('fill', viridis(val)).attr('rx',1);
+        g.append('text').attr('x',x+tCell/2).attr('y',y+tCell/2+3)
+          .attr('text-anchor','middle').attr('font-size', 6.5)
+          .attr('fill', val < 0.5 ? '#fff' : '#222')
+          .text(val.toFixed(2));
+      }
+    });
+  });
+
+  // Colorbar
+  g.append('text').attr('x', lStartX + 3*lCell).attr('y', halfH - 8)
+    .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888')
+    .text('Train row \u2192 Test col, AUROC');
+}
+
+// ============================================================
+// PANEL (c) — Geneformer Per-Fold Strip Chart
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[2].x},${panelPos[2].y})`);
+  panelLabel(g, 'c', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Geneformer per-fold AUROC');
+
+  const pad = {left: 60, right: 20, top: 18, bottom: 28};
+  const plotW = halfW - pad.left - pad.right;
+  const plotH = halfH - pad.top - pad.bottom;
+  const tissues = Object.keys(gfFolds);
+
+  const xScale = d3.scaleLinear().domain([0.15, 1.0]).range([pad.left, pad.left + plotW]);
+  const yScale = d3.scaleBand().domain(tissues).range([pad.top, pad.top + plotH]).padding(0.25);
+
+  // Chance line
+  g.append('line').attr('x1',xScale(0.5)).attr('y1',pad.top).attr('x2',xScale(0.5)).attr('y2',pad.top+plotH)
+    .attr('stroke','#ccc').attr('stroke-width',1).attr('stroke-dasharray','4,3');
+
+  [0.2, 0.4, 0.6, 0.8, 1.0].forEach(v => {
+    g.append('text').attr('x',xScale(v)).attr('y',pad.top+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666').text(v.toFixed(1));
+  });
+  g.append('text').attr('x',xScale(0.6)).attr('y',pad.top+plotH+26)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333').text('AUROC');
+
+  tissues.forEach(t => {
+    const cy = yScale(t) + yScale.bandwidth()/2;
+    const folds = gfFolds[t];
+    const col = gfColors[t];
+    const mean = folds.reduce((a,b)=>a+b,0) / folds.length;
+
+    g.append('text').attr('x', pad.left - 5).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick).attr('fill', col).attr('font-weight','600')
+      .text(t);
+
+    // Box: Q1-Q3
+    const sorted = [...folds].sort((a,b)=>a-b);
+    const q1 = sorted[Math.floor(sorted.length*0.25)];
+    const q3 = sorted[Math.floor(sorted.length*0.75)];
+    const barH = yScale.bandwidth() * 0.4;
+    g.append('rect')
+      .attr('x', xScale(q1)).attr('y', cy - barH/2)
+      .attr('width', xScale(q3) - xScale(q1)).attr('height', barH)
+      .attr('fill', col).attr('opacity', 0.15).attr('rx', 2);
+
+    // Individual fold dots
+    folds.forEach((f, i) => {
+      const jitter = (i - (folds.length-1)/2) * 3;
+      g.append('circle')
+        .attr('cx', xScale(f)).attr('cy', cy + jitter)
+        .attr('r', 3.5).attr('fill', col).attr('opacity', 0.6)
+        .attr('stroke', t === 'Eye' ? '#999' : col).attr('stroke-width', 0.5);
+    });
+
+    // Mean marker
+    g.append('line')
+      .attr('x1', xScale(mean)).attr('y1', cy - barH/2 - 2)
+      .attr('x2', xScale(mean)).attr('y2', cy + barH/2 + 2)
+      .attr('stroke', '#333').attr('stroke-width', 1.5);
+    g.append('text')
+      .attr('x', xScale(mean) + 5).attr('y', cy - barH/2 - 4)
+      .attr('font-size', 6.5).attr('fill','#555').text(mean.toFixed(2));
+  });
+}
+
+// ============================================================
+// PANEL (d) — J1 Pipeline Comparison
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[3].x},${panelPos[3].y})`);
+  panelLabel(g, 'd', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('J1: GLDS-48 vs GLDS-168 correlation');
+
+  const pad = {left: 40, right: 15, top: 22, bottom: 30};
+  const plotW = halfW - pad.left - pad.right;
+  const plotH = halfH - pad.top - pad.bottom;
+
+  // Per-sample correlation dot plot
+  const xScale = d3.scaleLinear().domain([0.88, 0.94]).range([pad.left, pad.left + plotW]);
+  const midY = pad.top + plotH * 0.35;
+
+  // X axis
+  [0.88, 0.90, 0.92, 0.94].forEach(v => {
+    g.append('line').attr('x1',xScale(v)).attr('y1',midY+30).attr('x2',xScale(v)).attr('y2',midY+34)
+      .attr('stroke','#999').attr('stroke-width',0.5);
+    g.append('text').attr('x',xScale(v)).attr('y',midY+44)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666').text(v.toFixed(2));
+  });
+  g.append('text').attr('x',xScale(0.91)).attr('y',midY+56)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('Per-sample Pearson r');
+
+  // Points
+  j1Data.perSample.forEach((d, i) => {
+    const jitter = (i - 4) * 5;
+    const col = d.cond === 'FLT' ? '#c00' : '#0072B2';
+    g.append('circle')
+      .attr('cx', xScale(d.r)).attr('cy', midY + jitter)
+      .attr('r', 4).attr('fill', col).attr('opacity', 0.7)
+      .attr('stroke', '#fff').attr('stroke-width', 0.5);
+    g.append('text')
+      .attr('x', xScale(d.r) + 6).attr('y', midY + jitter + 3)
+      .attr('font-size', 5.5).attr('fill','#666').text(d.animal);
+  });
+
+  // Mean line
+  g.append('line')
+    .attr('x1', xScale(j1Data.meanR)).attr('y1', midY - 28)
+    .attr('x2', xScale(j1Data.meanR)).attr('y2', midY + 28)
+    .attr('stroke', '#333').attr('stroke-width', 1.5).attr('stroke-dasharray','4,3');
+  g.append('text')
+    .attr('x', xScale(j1Data.meanR) + 5).attr('y', midY - 32)
+    .attr('font-size', 8).attr('fill','#333').attr('font-weight','600')
+    .text(`Mean r = ${j1Data.meanR.toFixed(3)}`);
+
+  // Legend
+  g.append('circle').attr('cx', pad.left).attr('cy', pad.top + 8).attr('r',3)
+    .attr('fill','#c00').attr('opacity',0.7);
+  g.append('text').attr('x', pad.left + 6).attr('y', pad.top + 11)
+    .attr('font-size',6.5).attr('fill','#666').text('Flight');
+  g.append('circle').attr('cx', pad.left + 40).attr('cy', pad.top + 8).attr('r',3)
+    .attr('fill','#0072B2').attr('opacity',0.7);
+  g.append('text').attr('x', pad.left + 46).attr('y', pad.top + 11)
+    .attr('font-size',6.5).attr('fill','#666').text('Ground');
+
+  // ML comparison box
+  const boxY = midY + 65;
+  g.append('rect')
+    .attr('x', pad.left).attr('y', boxY)
+    .attr('width', plotW).attr('height', 42)
+    .attr('fill','#f8f8f8').attr('stroke','#ddd').attr('rx',3);
+  g.append('text').attr('x', pad.left + plotW/2).attr('y', boxY + 14)
+    .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#444').attr('font-weight','600')
+    .text('ML Performance Comparison');
+  g.append('text').attr('x', pad.left + plotW/2).attr('y', boxY + 26)
+    .attr('text-anchor','middle').attr('font-size', 7.5).attr('fill','#555')
+    .text(`GLDS-48: ${j1Data.glds48Auroc.toFixed(3)} | GLDS-168: ${j1Data.glds168Auroc.toFixed(3)}`);
+  g.append('text').attr('x', pad.left + plotW/2).attr('y', boxY + 37)
+    .attr('text-anchor','middle').attr('font-size', 7).attr('fill','#888')
+    .text(`\u0394 = ${j1Data.delta.toFixed(3)} (pipeline version has minimal effect)`);
+}
+
+// ============================================================
+function downloadSVG() {
+  const svgEl = document.getElementById('figS3');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgEl);
+  source = '<?xml version="1.0" standalone="no"?>\n' + source;
+  const blob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'figS3_transfer_detail.svg';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

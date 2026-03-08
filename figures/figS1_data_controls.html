@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure S1 — Data Overview &amp; Negative Controls</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f5f5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .fig-container { background: #fff; padding: 16px; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  button { margin: 12px 4px 0; padding: 6px 14px; font-size: 12px; cursor: pointer; border: 1px solid #999; background: #fff; border-radius: 3px; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+<div class="fig-container">
+  <svg id="figS1"></svg>
+</div>
+<div>
+  <button onclick="downloadSVG()">Download SVG</button>
+</div>
+
+<script>
+const COLORS = {
+  thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+  eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+};
+const FS = { panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, tiny: 7.5 };
+
+// ============================================================
+// DATA
+// ============================================================
+// (a) Tissue summary table
+const tissueSummary = [
+  {tissue:'Thymus', missions:4, samples:67, genes:28235, pathways:50, cat_a:0.923, cat_b:0.860, color:COLORS.thymus},
+  {tissue:'Gastrocnemius', missions:3, samples:32, genes:18952, pathways:50, cat_a:0.907, cat_b:0.801, color:COLORS.gastrocnemius},
+  {tissue:'Skin', missions:3, samples:102, genes:22000, pathways:50, cat_a:0.821, cat_b:0.772, color:COLORS.skin},
+  {tissue:'Eye', missions:3, samples:37, genes:22000, pathways:50, cat_a:0.789, cat_b:0.754, color:COLORS.eye},
+  {tissue:'Liver', missions:6, samples:193, genes:22987, pathways:50, cat_a:0.588, cat_b:0.577, color:COLORS.liver},
+  {tissue:'Kidney', missions:3, samples:118, genes:22000, pathways:50, cat_a:0.564, cat_b:0.555, color:COLORS.kidney}
+];
+
+// (b) NC1 permutation observed AUROC distribution
+const nc1Data = [
+  {task:'A1', cat:'A', auroc:0.587, sig:false},
+  {task:'A2', cat:'A', auroc:0.907, sig:true},
+  {task:'A3', cat:'A', auroc:0.564, sig:false},
+  {task:'A4', cat:'A', auroc:0.923, sig:true},
+  {task:'A6', cat:'A', auroc:0.811, sig:false},
+  {task:'B_liv', cat:'B', auroc:0.577, sig:false},
+  {task:'B_gas', cat:'B', auroc:0.801, sig:true},
+  {task:'B_kid', cat:'B', auroc:0.555, sig:false},
+  {task:'B_thy', cat:'B', auroc:0.860, sig:true},
+  {task:'B_eye', cat:'B', auroc:0.754, sig:false},
+  {task:'C1a', cat:'C', auroc:0.730, sig:true},
+  {task:'C1b', cat:'C', auroc:0.441, sig:false},
+  {task:'C1c', cat:'C', auroc:0.483, sig:false},
+  {task:'C2a', cat:'C', auroc:0.563, sig:false},
+  {task:'C2b', cat:'C', auroc:0.676, sig:true},
+  {task:'C2c', cat:'C', auroc:0.867, sig:true},
+  {task:'C3a', cat:'C', auroc:0.350, sig:false},
+  {task:'C3b', cat:'C', auroc:0.621, sig:true},
+  {task:'C3c', cat:'C', auroc:0.185, sig:false},
+  {task:'C4a', cat:'C', auroc:0.585, sig:false},
+  {task:'C4b', cat:'C', auroc:0.539, sig:false},
+  {task:'C4c', cat:'C', auroc:0.690, sig:true},
+  {task:'D3g', cat:'D', auroc:1.000, sig:true},
+  {task:'D3p', cat:'D', auroc:0.056, sig:false},
+  {task:'D6Lg', cat:'D', auroc:0.886, sig:true},
+  {task:'D6Lp', cat:'D', auroc:0.413, sig:false},
+  {task:'D6Tg', cat:'D', auroc:0.657, sig:true},
+  {task:'D6Tp', cat:'D', auroc:0.641, sig:false}
+];
+
+// (c) NC2 housekeeping vs full gene AUROC
+const nc2Data = [
+  {tissue:'Liver', hk:0.543, full:0.588, color:COLORS.liver},
+  {tissue:'Gastro', hk:0.433, full:0.907, color:COLORS.gastrocnemius},
+  {tissue:'Kidney', hk:0.575, full:0.564, color:COLORS.kidney},
+  {tissue:'Thymus', hk:0.765, full:0.923, color:COLORS.thymus},
+  {tissue:'Eye', hk:0.803, full:0.789, color:COLORS.eye}
+];
+
+// (d) J3 batch correction delta
+const j3Delta = [
+  {tissue:'Liver', delta:-0.0016, color:COLORS.liver},
+  {tissue:'Gastro', delta:0.0000, color:COLORS.gastrocnemius},
+  {tissue:'Kidney', delta:0.0000, color:COLORS.kidney},
+  {tissue:'Thymus', delta:0.0000, color:COLORS.thymus},
+  {tissue:'Eye', delta:0.0000, color:COLORS.eye}
+];
+
+// ============================================================
+// LAYOUT: 2×2 grid
+// ============================================================
+const W = 960, H = 460;
+const margin = {top: 28, right: 14, bottom: 14, left: 4};
+const gapH = 30, gapV = 30;
+const halfW = (W - margin.left - margin.right - gapH) / 2;
+const halfH = (H - margin.top - margin.bottom - gapV) / 2;
+
+const panelPos = [
+  {x: margin.left, y: margin.top},
+  {x: margin.left + halfW + gapH, y: margin.top},
+  {x: margin.left, y: margin.top + halfH + gapV},
+  {x: margin.left + halfW + gapH, y: margin.top + halfH + gapV}
+];
+
+const svg = d3.select('#figS1')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+svg.append('rect').attr('width',W).attr('height',H).attr('fill','#fff');
+
+function panelLabel(g, letter, x, y) {
+  g.append('text').attr('x',x).attr('y',y)
+    .attr('font-size',FS.panelLabel).attr('font-weight','bold')
+    .text(letter);
+}
+
+// ============================================================
+// PANEL (a) — Tissue Summary Table
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[0].x},${panelPos[0].y})`);
+  panelLabel(g, 'a', 0, -10);
+
+  const cols = ['Tissue','Missions','Samples','Genes','Pathways','Cat A','Cat B'];
+  const colW = [85, 55, 55, 55, 60, 55, 55];
+  const rowH = 20;
+  const startX = 10, startY = 10;
+
+  // Header
+  cols.forEach((c, i) => {
+    const x = startX + colW.slice(0,i).reduce((a,b)=>a+b,0);
+    g.append('text').attr('x', x + colW[i]/2).attr('y', startY + 12)
+      .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#444').attr('font-weight','600')
+      .text(c);
+  });
+  g.append('line')
+    .attr('x1', startX).attr('y1', startY + 17)
+    .attr('x2', startX + colW.reduce((a,b)=>a+b,0)).attr('y2', startY + 17)
+    .attr('stroke','#999').attr('stroke-width',0.8);
+
+  tissueSummary.forEach((row, ri) => {
+    const y = startY + (ri+1) * rowH + 12;
+    const vals = [row.tissue, row.missions, row.samples, row.genes.toLocaleString(), row.pathways, row.cat_a.toFixed(3), row.cat_b.toFixed(3)];
+    vals.forEach((v, ci) => {
+      const x = startX + colW.slice(0,ci).reduce((a,b)=>a+b,0);
+      g.append('text').attr('x', ci === 0 ? x + 4 : x + colW[ci]/2).attr('y', y)
+        .attr('text-anchor', ci === 0 ? 'start' : 'middle')
+        .attr('font-size', 8).attr('fill', ci === 0 ? row.color : '#555')
+        .attr('font-weight', ci === 0 ? '600' : '400')
+        .text(v);
+    });
+    // Alternate row shading
+    if (ri % 2 === 1) {
+      g.append('rect')
+        .attr('x', startX).attr('y', y - 12)
+        .attr('width', colW.reduce((a,b)=>a+b,0)).attr('height', rowH)
+        .attr('fill', '#f8f8f8').attr('opacity',0.5)
+        .lower();
+    }
+  });
+}
+
+// ============================================================
+// PANEL (b) — NC1: Strip plot of observed values
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[1].x},${panelPos[1].y})`);
+  panelLabel(g, 'b', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('NC1: Significance summary');
+
+  const pad = {left: 30, right: 10, top: 18, bottom: 30};
+  const plotW = halfW - pad.left - pad.right;
+  const plotH = halfH - pad.top - pad.bottom;
+
+  const xScale = d3.scaleLinear().domain([0, 1.05]).range([pad.left, pad.left + plotW]);
+  const catColors = {A:'#0072B2', B:'#E69F00', C:'#009E73', D:'#D55E00'};
+  const catYBase = {A: pad.top + 15, B: pad.top + 45, C: pad.top + 75, D: pad.top + 130};
+
+  // Chance line
+  g.append('line')
+    .attr('x1',xScale(0.5)).attr('y1',pad.top+5)
+    .attr('x2',xScale(0.5)).attr('y2',pad.top+plotH)
+    .attr('stroke','#ccc').attr('stroke-width',1).attr('stroke-dasharray','4,3');
+
+  // X axis
+  [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+    g.append('text').attr('x',xScale(v)).attr('y',pad.top+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text(v.toFixed(2));
+  });
+  g.append('text').attr('x',xScale(0.5)).attr('y',pad.top+plotH+26)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('Observed metric');
+
+  // Points by category
+  ['A','B','C','D'].forEach(cat => {
+    const entries = nc1Data.filter(d => d.cat === cat);
+    const y = catYBase[cat];
+    g.append('text').attr('x', pad.left - 5).attr('y', y + 4)
+      .attr('text-anchor','end').attr('font-size', 8).attr('fill', catColors[cat]).attr('font-weight','600')
+      .text('Cat ' + cat);
+
+    entries.forEach((d, i) => {
+      const jitter = (i - (entries.length-1)/2) * 3;
+      g.append('circle')
+        .attr('cx', xScale(d.auroc))
+        .attr('cy', y + jitter)
+        .attr('r', 3.5)
+        .attr('fill', d.sig ? catColors[cat] : '#fff')
+        .attr('stroke', catColors[cat])
+        .attr('stroke-width', 1.2)
+        .attr('opacity', 0.8);
+    });
+  });
+
+  // Legend
+  const legY = pad.top + plotH - 5;
+  g.append('circle').attr('cx', pad.left + 5).attr('cy', legY).attr('r', 3)
+    .attr('fill','#666').attr('stroke','#666').attr('stroke-width',1);
+  g.append('text').attr('x', pad.left + 11).attr('y', legY + 3)
+    .attr('font-size',6).attr('fill','#666').text('Significant');
+  g.append('circle').attr('cx', pad.left + 62).attr('cy', legY).attr('r', 3)
+    .attr('fill','#fff').attr('stroke','#666').attr('stroke-width',1);
+  g.append('text').attr('x', pad.left + 68).attr('y', legY + 3)
+    .attr('font-size',6).attr('fill','#666').text('NS');
+
+  g.append('text').attr('x', pad.left + plotW).attr('y', legY + 3)
+    .attr('text-anchor','end').attr('font-size', 7).attr('fill','#888')
+    .text('12/28 significant');
+}
+
+// ============================================================
+// PANEL (c) — NC2: Housekeeping vs Full Gene AUROC
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[2].x},${panelPos[2].y})`);
+  panelLabel(g, 'c', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('NC2: Housekeeping vs full genes');
+
+  const pad = {left: 65, right: 20, top: 18, bottom: 30};
+  const plotW = halfW - pad.left - pad.right;
+  const plotH = halfH - pad.top - pad.bottom;
+
+  const xScale = d3.scaleLinear().domain([0.3, 1.0]).range([pad.left, pad.left + plotW]);
+  const yScale = d3.scaleBand().domain(nc2Data.map(d=>d.tissue)).range([pad.top, pad.top + plotH]).padding(0.3);
+
+  // Chance line
+  g.append('line')
+    .attr('x1',xScale(0.5)).attr('y1',pad.top)
+    .attr('x2',xScale(0.5)).attr('y2',pad.top+plotH)
+    .attr('stroke','#ccc').attr('stroke-width',1).attr('stroke-dasharray','4,3');
+
+  [0.4, 0.6, 0.8, 1.0].forEach(v => {
+    g.append('text').attr('x',xScale(v)).attr('y',pad.top+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text(v.toFixed(1));
+  });
+  g.append('text').attr('x',xScale(0.65)).attr('y',pad.top+plotH+26)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('AUROC');
+
+  nc2Data.forEach(d => {
+    const cy = yScale(d.tissue) + yScale.bandwidth()/2;
+
+    g.append('text').attr('x', pad.left - 6).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick).attr('fill', d.color).attr('font-weight','600')
+      .text(d.tissue);
+
+    // Connect line
+    g.append('line')
+      .attr('x1',xScale(d.hk)).attr('y1',cy)
+      .attr('x2',xScale(d.full)).attr('y2',cy)
+      .attr('stroke','#ccc').attr('stroke-width',1.5);
+
+    // HK dot (open)
+    g.append('circle').attr('cx',xScale(d.hk)).attr('cy',cy).attr('r',4.5)
+      .attr('fill','#fff').attr('stroke',d.color).attr('stroke-width',1.5);
+
+    // Full gene dot (filled)
+    g.append('circle').attr('cx',xScale(d.full)).attr('cy',cy).attr('r',4.5)
+      .attr('fill',d.color).attr('stroke',d.color === '#F0E442' ? '#999' : d.color).attr('stroke-width',1.5);
+
+    // WARN annotation for thymus & eye
+    if (d.hk > 0.7) {
+      g.append('text').attr('x', xScale(d.hk) - 7).attr('y', cy + 3)
+        .attr('text-anchor','end').attr('font-size', 6).attr('fill','#c00')
+        .text('WARN');
+    }
+  });
+
+  // Legend
+  const legY = pad.top + 4;
+  g.append('circle').attr('cx', pad.left).attr('cy', legY).attr('r',3)
+    .attr('fill','#fff').attr('stroke','#666').attr('stroke-width',1);
+  g.append('text').attr('x', pad.left + 6).attr('y', legY + 3)
+    .attr('font-size',6).attr('fill','#666').text('HK genes');
+  g.append('circle').attr('cx', pad.left + 52).attr('cy', legY).attr('r',3)
+    .attr('fill','#666').attr('stroke','#666').attr('stroke-width',1);
+  g.append('text').attr('x', pad.left + 58).attr('y', legY + 3)
+    .attr('font-size',6).attr('fill','#666').text('Full genes');
+}
+
+// ============================================================
+// PANEL (d) — J3: Batch Correction Delta
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${panelPos[3].x},${panelPos[3].y})`);
+  panelLabel(g, 'd', 0, -10);
+
+  g.append('text').attr('x', halfW/2).attr('y', 2)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Batch correction \u0394AUROC (H2)');
+
+  const pad = {left: 65, right: 30, top: 18, bottom: 30};
+  const plotW = halfW - pad.left - pad.right;
+  const plotH = halfH - pad.top - pad.bottom;
+
+  const xScale = d3.scaleLinear().domain([-0.05, 0.05]).range([pad.left, pad.left + plotW]);
+  const yScale = d3.scaleBand().domain(j3Delta.map(d=>d.tissue)).range([pad.top, pad.top + plotH]).padding(0.3);
+
+  // Zero line
+  g.append('line')
+    .attr('x1',xScale(0)).attr('y1',pad.top)
+    .attr('x2',xScale(0)).attr('y2',pad.top+plotH)
+    .attr('stroke','#333').attr('stroke-width',1);
+
+  [-0.04, -0.02, 0, 0.02, 0.04].forEach(v => {
+    g.append('text').attr('x',xScale(v)).attr('y',pad.top+plotH+14)
+      .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666')
+      .text(v.toFixed(2));
+  });
+  g.append('text').attr('x',xScale(0)).attr('y',pad.top+plotH+26)
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
+    .text('\u0394AUROC (limma_rbe \u2212 none)');
+
+  j3Delta.forEach(d => {
+    const cy = yScale(d.tissue) + yScale.bandwidth()/2;
+    const barH = yScale.bandwidth() * 0.6;
+
+    g.append('text').attr('x', pad.left - 6).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick).attr('fill', d.color).attr('font-weight','600')
+      .text(d.tissue);
+
+    // Bar from zero
+    const barStart = Math.min(xScale(0), xScale(d.delta));
+    const barWidth = Math.abs(xScale(d.delta) - xScale(0));
+    g.append('rect')
+      .attr('x', barStart).attr('y', cy - barH/2)
+      .attr('width', Math.max(barWidth, 2)).attr('height', barH)
+      .attr('fill', d.color).attr('opacity', 0.7).attr('rx', 1);
+
+    // Value
+    g.append('text')
+      .attr('x', xScale(d.delta) + (d.delta < 0 ? -5 : 5)).attr('y', cy + 3)
+      .attr('text-anchor', d.delta < 0 ? 'end' : 'start')
+      .attr('font-size', 7).attr('fill','#555')
+      .text(d.delta.toFixed(4));
+  });
+
+  // H2 SUPPORTED annotation
+  g.append('rect')
+    .attr('x', pad.left + plotW * 0.15).attr('y', pad.top + plotH - 24)
+    .attr('width', plotW * 0.7).attr('height', 20)
+    .attr('fill','#e8f5e9').attr('rx',3).attr('stroke','#4caf50').attr('stroke-width',0.5);
+  g.append('text')
+    .attr('x', pad.left + plotW/2).attr('y', pad.top + plotH - 10)
+    .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#2e7d32').attr('font-weight','600')
+    .text('H2 SUPPORTED: mean |\u0394| = 0.0003');
+}
+
+// ============================================================
+function downloadSVG() {
+  const svgEl = document.getElementById('figS1');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgEl);
+  source = '<?xml version="1.0" standalone="no"?>\n' + source;
+  const blob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'figS1_data_controls.svg';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

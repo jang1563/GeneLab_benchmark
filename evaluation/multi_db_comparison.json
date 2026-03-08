@@ -1,0 +1,2460 @@
+{
+  "auroc": {
+    "pca_lr": {
+      "liver": {
+        "hallmark": {
+          "mean_auroc": 0.5739224344708643,
+          "std_auroc": 0.18224148007478055,
+          "mean_ci_lower": 0.32895166398018805,
+          "mean_perm_p": 0.32134532134532134,
+          "go": false,
+          "n_folds": 6
+        },
+        "kegg": {
+          "mean_auroc": 0.6045657444264255,
+          "std_auroc": 0.15435473199567792,
+          "mean_ci_lower": 0.2980955485612067,
+          "mean_perm_p": 0.28005328005328006,
+          "go": false,
+          "n_folds": 6
+        },
+        "reactome": {
+          "mean_auroc": 0.6034098434695516,
+          "std_auroc": 0.14227321427612416,
+          "mean_ci_lower": 0.3410233342677221,
+          "mean_perm_p": 0.2780552780552781,
+          "go": false,
+          "n_folds": 6
+        },
+        "mitocarta": {
+          "mean_auroc": 0.698556849640441,
+          "std_auroc": 0.08889868333043174,
+          "mean_ci_lower": 0.39559231790611915,
+          "mean_perm_p": 0.16450216450216448,
+          "go": false,
+          "n_folds": 6
+        }
+      },
+      "gastrocnemius": {
+        "hallmark": {
+          "mean_auroc": 0.6875,
+          "std_auroc": 0.11880210574404018,
+          "mean_ci_lower": 0.2950793650793651,
+          "mean_perm_p": 0.2331002331002331,
+          "go": false,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.4814814814814814,
+          "std_auroc": 0.04721314364437762,
+          "mean_ci_lower": 0.06666666666666667,
+          "mean_perm_p": 0.5870795870795871,
+          "go": false,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.7546296296296298,
+          "std_auroc": 0.10896853977722054,
+          "mean_ci_lower": 0.3857142857142857,
+          "mean_perm_p": 0.1481851481851482,
+          "go": false,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.46527777777777785,
+          "std_auroc": 0.2986918495500912,
+          "mean_ci_lower": 0.14444444444444446,
+          "mean_perm_p": 0.5544455544455544,
+          "go": false,
+          "n_folds": 3
+        }
+      },
+      "kidney": {
+        "hallmark": {
+          "mean_auroc": 0.7429429429429429,
+          "std_auroc": 0.12982776529708676,
+          "mean_ci_lower": 0.4639582991512817,
+          "mean_perm_p": 0.09823509823509824,
+          "go": false,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.5742492492492492,
+          "std_auroc": 0.21534565209449233,
+          "mean_ci_lower": 0.3064099528102044,
+          "mean_perm_p": 0.4535464535464535,
+          "go": false,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.7162662662662663,
+          "std_auroc": 0.08989847267358157,
+          "mean_ci_lower": 0.4253708964646465,
+          "mean_perm_p": 0.0859140859140859,
+          "go": false,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.5186186186186187,
+          "std_auroc": 0.114042177420652,
+          "mean_ci_lower": 0.21663984447419918,
+          "mean_perm_p": 0.5477855477855478,
+          "go": false,
+          "n_folds": 3
+        }
+      },
+      "thymus": {
+        "hallmark": {
+          "mean_auroc": 0.878937908496732,
+          "std_auroc": 0.10664746534171858,
+          "mean_ci_lower": 0.6810452898550724,
+          "mean_perm_p": 0.04920079920079921,
+          "go": true,
+          "n_folds": 4
+        },
+        "kegg": {
+          "mean_auroc": 0.7702124183006536,
+          "std_auroc": 0.15850137029127287,
+          "mean_ci_lower": 0.5287498143196673,
+          "mean_perm_p": 0.1436063936063936,
+          "go": false,
+          "n_folds": 4
+        },
+        "reactome": {
+          "mean_auroc": 0.9219444444444445,
+          "std_auroc": 0.09098356587460868,
+          "mean_ci_lower": 0.8302773382080104,
+          "mean_perm_p": 0.025474525474525476,
+          "go": true,
+          "n_folds": 4
+        },
+        "mitocarta": {
+          "mean_auroc": 0.48522875816993466,
+          "std_auroc": 0.11436840286253236,
+          "mean_ci_lower": 0.13145043820267033,
+          "mean_perm_p": 0.5402097902097902,
+          "go": false,
+          "n_folds": 4
+        }
+      },
+      "eye": {
+        "hallmark": {
+          "mean_auroc": 0.9145502645502646,
+          "std_auroc": 0.08789202295175981,
+          "mean_ci_lower": 0.7454278273809524,
+          "mean_perm_p": 0.013986013986013984,
+          "go": true,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.8277777777777778,
+          "std_auroc": 0.0523127662660205,
+          "mean_ci_lower": 0.5200823713323715,
+          "mean_perm_p": 0.039627039627039624,
+          "go": true,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.7002645502645503,
+          "std_auroc": 0.04050125447312203,
+          "mean_ci_lower": 0.337037037037037,
+          "mean_perm_p": 0.14052614052614054,
+          "go": false,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.7018518518518518,
+          "std_auroc": 0.0703216205409168,
+          "mean_ci_lower": 0.34684272613960115,
+          "mean_perm_p": 0.16250416250416252,
+          "go": false,
+          "n_folds": 3
+        }
+      },
+      "skin": {
+        "hallmark": {
+          "mean_auroc": 0.7563273081694134,
+          "std_auroc": 0.04379037539602639,
+          "mean_ci_lower": 0.5718304731736749,
+          "mean_perm_p": 0.01098901098901099,
+          "go": true,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.8206636540847067,
+          "std_auroc": 0.03902150419989035,
+          "mean_ci_lower": 0.6506606345249424,
+          "mean_perm_p": 0.002331002331002331,
+          "go": true,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.7479886585149743,
+          "std_auroc": 0.029095001807844773,
+          "mean_ci_lower": 0.5628270733652312,
+          "mean_perm_p": 0.007992007992007992,
+          "go": true,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.6607912457912458,
+          "std_auroc": 0.044210440242645775,
+          "mean_ci_lower": 0.4441985112885734,
+          "mean_perm_p": 0.0899100899100899,
+          "go": false,
+          "n_folds": 3
+        }
+      }
+    },
+    "lr": {
+      "liver": {
+        "hallmark": {
+          "mean_auroc": 0.575761064659782,
+          "std_auroc": 0.1814389007011194,
+          "mean_ci_lower": 0.3309355220311216,
+          "mean_perm_p": 0.318015318015318,
+          "go": false,
+          "n_folds": 6
+        },
+        "kegg": {
+          "mean_auroc": 0.5969522311848715,
+          "std_auroc": 0.15252214022610852,
+          "mean_ci_lower": 0.3202393791270414,
+          "mean_perm_p": 0.30119880119880116,
+          "go": false,
+          "n_folds": 6
+        },
+        "reactome": {
+          "mean_auroc": 0.560246437756389,
+          "std_auroc": 0.2743738390837603,
+          "mean_ci_lower": 0.3586496198679657,
+          "mean_perm_p": 0.3076923076923077,
+          "go": false,
+          "n_folds": 6
+        },
+        "mitocarta": {
+          "mean_auroc": 0.7151615617007036,
+          "std_auroc": 0.11278174518330711,
+          "mean_ci_lower": 0.43563149290724046,
+          "mean_perm_p": 0.1455211455211455,
+          "go": false,
+          "n_folds": 6
+        }
+      },
+      "gastrocnemius": {
+        "hallmark": {
+          "mean_auroc": 0.525462962962963,
+          "std_auroc": 0.13325775893170605,
+          "mean_ci_lower": 0.11428571428571428,
+          "mean_perm_p": 0.4831834831834832,
+          "go": false,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.40277777777777785,
+          "std_auroc": 0.13749298523071762,
+          "mean_ci_lower": 0.05555555555555555,
+          "mean_perm_p": 0.6743256743256744,
+          "go": false,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.7245370370370372,
+          "std_auroc": 0.06322453835068356,
+          "mean_ci_lower": 0.2992724867724868,
+          "mean_perm_p": 0.15051615051615053,
+          "go": false,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.4375,
+          "std_auroc": 0.30906028751179343,
+          "mean_ci_lower": 0.13015873015873017,
+          "mean_perm_p": 0.591075591075591,
+          "go": false,
+          "n_folds": 3
+        }
+      },
+      "kidney": {
+        "hallmark": {
+          "mean_auroc": 0.7553553553553555,
+          "std_auroc": 0.1304133554468811,
+          "mean_ci_lower": 0.4807372315184815,
+          "mean_perm_p": 0.07092907092907093,
+          "go": false,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.4947947947947948,
+          "std_auroc": 0.17801292231864618,
+          "mean_ci_lower": 0.20227378341687552,
+          "mean_perm_p": 0.5231435231435232,
+          "go": false,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.6412162162162162,
+          "std_auroc": 0.06116332163048238,
+          "mean_ci_lower": 0.32621604801607945,
+          "mean_perm_p": 0.18881118881118883,
+          "go": false,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.47389889889889886,
+          "std_auroc": 0.09746711716274936,
+          "mean_ci_lower": 0.17868223166654787,
+          "mean_perm_p": 0.6350316350316351,
+          "go": false,
+          "n_folds": 3
+        }
+      },
+      "thymus": {
+        "hallmark": {
+          "mean_auroc": 0.8781699346405228,
+          "std_auroc": 0.11234489927760287,
+          "mean_ci_lower": 0.6841647727272727,
+          "mean_perm_p": 0.04920079920079921,
+          "go": true,
+          "n_folds": 4
+        },
+        "kegg": {
+          "mean_auroc": 0.8439869281045751,
+          "std_auroc": 0.09500550267242905,
+          "mean_ci_lower": 0.6167774685631828,
+          "mean_perm_p": 0.05094905094905095,
+          "go": false,
+          "n_folds": 4
+        },
+        "reactome": {
+          "mean_auroc": 0.9154575163398693,
+          "std_auroc": 0.10543005854427613,
+          "mean_ci_lower": 0.8251425282234105,
+          "mean_perm_p": 0.026473526473526476,
+          "go": true,
+          "n_folds": 4
+        },
+        "mitocarta": {
+          "mean_auroc": 0.5295424836601307,
+          "std_auroc": 0.13095749476975585,
+          "mean_ci_lower": 0.14733528026595255,
+          "mean_perm_p": 0.46203796203796205,
+          "go": false,
+          "n_folds": 4
+        }
+      },
+      "eye": {
+        "hallmark": {
+          "mean_auroc": 0.8812169312169312,
+          "std_auroc": 0.08708567174986862,
+          "mean_ci_lower": 0.6722222222222222,
+          "mean_perm_p": 0.022311022311022315,
+          "go": true,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.7753968253968254,
+          "std_auroc": 0.06190815348191301,
+          "mean_ci_lower": 0.4461904761904762,
+          "mean_perm_p": 0.06926406926406926,
+          "go": false,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.7283068783068783,
+          "std_auroc": 0.06911701594805736,
+          "mean_ci_lower": 0.3576058201058201,
+          "mean_perm_p": 0.12454212454212454,
+          "go": false,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.7097883597883597,
+          "std_auroc": 0.06826114559695245,
+          "mean_ci_lower": 0.3474747474747475,
+          "mean_perm_p": 0.15517815517815517,
+          "go": false,
+          "n_folds": 3
+        }
+      },
+      "skin": {
+        "hallmark": {
+          "mean_auroc": 0.7671858940279993,
+          "std_auroc": 0.05369292650990849,
+          "mean_ci_lower": 0.5856953898892304,
+          "mean_perm_p": 0.01098901098901099,
+          "go": true,
+          "n_folds": 3
+        },
+        "kegg": {
+          "mean_auroc": 0.8379062555378346,
+          "std_auroc": 0.05957199894049333,
+          "mean_ci_lower": 0.6852245757562284,
+          "mean_perm_p": 0.002331002331002331,
+          "go": true,
+          "n_folds": 3
+        },
+        "reactome": {
+          "mean_auroc": 0.7596234272550061,
+          "std_auroc": 0.01689215059597977,
+          "mean_ci_lower": 0.5844552246331017,
+          "mean_perm_p": 0.007992007992007992,
+          "go": true,
+          "n_folds": 3
+        },
+        "mitocarta": {
+          "mean_auroc": 0.6751001240474924,
+          "std_auroc": 0.024961532719171998,
+          "mean_ci_lower": 0.46410361326513777,
+          "mean_perm_p": 0.05827505827505828,
+          "go": false,
+          "n_folds": 3
+        }
+      }
+    }
+  },
+  "nes_conservation": {
+    "liver": {
+      "hallmark": {
+        "nes_mean_r": 0.06,
+        "n_missions": 6,
+        "n_pathways": 50
+      },
+      "kegg": {
+        "nes_mean_r": 0.126,
+        "n_missions": 6,
+        "n_pathways": 192
+      },
+      "reactome": {
+        "nes_mean_r": 0.115,
+        "n_missions": 6,
+        "n_pathways": 1019
+      },
+      "mitocarta": {
+        "nes_mean_r": 0.099,
+        "n_missions": 6,
+        "n_pathways": 32
+      }
+    },
+    "gastrocnemius": {
+      "hallmark": {
+        "nes_mean_r": 0.057,
+        "n_missions": 2,
+        "n_pathways": 50
+      },
+      "kegg": {
+        "nes_mean_r": -0.206,
+        "n_missions": 2,
+        "n_pathways": 215
+      },
+      "reactome": {
+        "nes_mean_r": 0.086,
+        "n_missions": 2,
+        "n_pathways": 1088
+      },
+      "mitocarta": {
+        "nes_mean_r": 0.335,
+        "n_missions": 2,
+        "n_pathways": 33
+      }
+    },
+    "kidney": {
+      "hallmark": {
+        "nes_mean_r": 0.048,
+        "n_missions": 3,
+        "n_pathways": 50
+      },
+      "kegg": {
+        "nes_mean_r": 0.189,
+        "n_missions": 3,
+        "n_pathways": 218
+      },
+      "reactome": {
+        "nes_mean_r": 0.122,
+        "n_missions": 3,
+        "n_pathways": 1084
+      },
+      "mitocarta": {
+        "nes_mean_r": 0.085,
+        "n_missions": 3,
+        "n_pathways": 35
+      }
+    },
+    "thymus": {
+      "hallmark": {
+        "nes_mean_r": 0.619,
+        "n_missions": 3,
+        "n_pathways": 50
+      },
+      "kegg": {
+        "nes_mean_r": 0.532,
+        "n_missions": 3,
+        "n_pathways": 214
+      },
+      "reactome": {
+        "nes_mean_r": 0.713,
+        "n_missions": 3,
+        "n_pathways": 1078
+      },
+      "mitocarta": {
+        "nes_mean_r": 0.108,
+        "n_missions": 3,
+        "n_pathways": 34
+      }
+    },
+    "eye": {
+      "hallmark": {
+        "nes_mean_r": 0.335,
+        "n_missions": 3,
+        "n_pathways": 50
+      },
+      "kegg": {
+        "nes_mean_r": 0.315,
+        "n_missions": 3,
+        "n_pathways": 222
+      },
+      "reactome": {
+        "nes_mean_r": 0.309,
+        "n_missions": 3,
+        "n_pathways": 1107
+      },
+      "mitocarta": {
+        "nes_mean_r": 0.599,
+        "n_missions": 3,
+        "n_pathways": 36
+      }
+    },
+    "skin": {
+      "hallmark": {
+        "nes_mean_r": 0.147,
+        "n_missions": 3,
+        "n_pathways": 50
+      },
+      "kegg": {
+        "nes_mean_r": 0.258,
+        "n_missions": 3,
+        "n_pathways": 222
+      },
+      "reactome": {
+        "nes_mean_r": 0.188,
+        "n_missions": 3,
+        "n_pathways": 1104
+      },
+      "mitocarta": {
+        "nes_mean_r": 0.116,
+        "n_missions": 3,
+        "n_pathways": 35
+      }
+    }
+  },
+  "mitocarta_deep_dive": {
+    "liver": {
+      "MHU-2": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            0.901353829204588,
+            1.28270777534266,
+            2.44206740911482
+          ],
+          "padj": [
+            0.765217391304348,
+            0.335011926848662,
+            3.9543937953706e-07
+          ],
+          "mean_NES": 1.5420430045540225
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS"
+          ],
+          "NES": [
+            0.901353829204588
+          ],
+          "padj": [
+            0.765217391304348
+          ],
+          "mean_NES": 0.901353829204588
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            0.901353829204588,
+            1.28270777534266,
+            2.44206740911482,
+            1.14389892907725,
+            2.7593385176142
+          ],
+          "padj": [
+            0.765217391304348,
+            0.335011926848662,
+            3.9543937953706e-07,
+            0.430900070871722,
+            2.01856215710916e-12
+          ],
+          "mean_NES": 1.7058732920707036
+        }
+      },
+      "RR-1": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -1.83605449142077,
+            -0.697925452892402,
+            -0.979126658929351,
+            -1.85776985847841
+          ],
+          "padj": [
+            0.0085351345252775,
+            0.954702886247878,
+            0.790625,
+            0.0085351345252775
+          ],
+          "mean_NES": -1.3427191154302331
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -1.83605449142077,
+            -0.697925452892402
+          ],
+          "padj": [
+            0.0085351345252775,
+            0.954702886247878
+          ],
+          "mean_NES": -1.266989972156586
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -1.83605449142077,
+            -0.697925452892402,
+            -0.979126658929351,
+            -1.85776985847841,
+            -1.38798079567823,
+            -1.40426122559748
+          ],
+          "padj": [
+            0.0085351345252775,
+            0.954702886247878,
+            0.790625,
+            0.0085351345252775,
+            0.202358490566038,
+            0.202358490566038
+          ],
+          "mean_NES": -1.360519747166107
+        }
+      },
+      "RR-3": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -1.1803637054789,
+            -1.03965134673963,
+            -0.856070898556908,
+            0.63441232671539
+          ],
+          "padj": [
+            0.951456310679612,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean_NES": -0.610418406015012
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -1.1803637054789,
+            -1.03965134673963
+          ],
+          "padj": [
+            0.951456310679612,
+            1.0
+          ],
+          "mean_NES": -1.110007526109265
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            -0.869509148707235
+          ],
+          "padj": [
+            1.0
+          ],
+          "mean_NES": -0.869509148707235
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -1.1803637054789,
+            -1.03965134673963,
+            -0.856070898556908,
+            0.63441232671539,
+            -0.869509148707235,
+            -1.31058772197166,
+            -0.900815824084832
+          ],
+          "padj": [
+            0.951456310679612,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.951456310679612,
+            1.0
+          ],
+          "mean_NES": -0.7889409026891107
+        }
+      },
+      "RR-6": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            1.80853816030206,
+            1.56457865461565,
+            2.26045133810819,
+            2.21814046210976
+          ],
+          "padj": [
+            0.0173501258965789,
+            0.0936893742186868,
+            1.49524078688157e-05,
+            3.29758397685232e-05
+          ],
+          "mean_NES": 1.962927153783915
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            1.80853816030206,
+            1.56457865461565
+          ],
+          "padj": [
+            0.0173501258965789,
+            0.0936893742186868
+          ],
+          "mean_NES": 1.6865584074588549
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            2.0767314593349
+          ],
+          "padj": [
+            0.0010893126540828
+          ],
+          "mean_NES": 2.0767314593349
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            1.80853816030206,
+            1.56457865461565,
+            2.26045133810819,
+            2.21814046210976,
+            2.0767314593349,
+            2.38514344704719,
+            2.40163855015741
+          ],
+          "padj": [
+            0.0173501258965789,
+            0.0936893742186868,
+            1.49524078688157e-05,
+            3.29758397685232e-05,
+            0.0010893126540828,
+            9.51032534446921e-08,
+            1.17423474881713e-08
+          ],
+          "mean_NES": 2.10217458166788
+        }
+      },
+      "RR-8": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            1.57211497344585,
+            1.42352195194455,
+            1.69712423878284,
+            2.13982932975647
+          ],
+          "padj": [
+            0.0468675948069578,
+            0.136752136752137,
+            0.0315737762646744,
+            0.0006312786251071
+          ],
+          "mean_NES": 1.7081476234824275
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            1.57211497344585,
+            1.42352195194455
+          ],
+          "padj": [
+            0.0468675948069578,
+            0.136752136752137
+          ],
+          "mean_NES": 1.4978184626952
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            1.57211497344585,
+            1.42352195194455,
+            1.69712423878284,
+            2.13982932975647,
+            1.83286842578024,
+            2.38890435208281
+          ],
+          "padj": [
+            0.0468675948069578,
+            0.136752136752137,
+            0.0315737762646744,
+            0.0006312786251071,
+            0.0020511036881659,
+            2.72785678028556e-07
+          ],
+          "mean_NES": 1.8423938786321266
+        }
+      },
+      "RR-9": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -1.49412391797441,
+            0.795875921352296,
+            -1.97591935931206,
+            -1.03706891890654
+          ],
+          "padj": [
+            0.0829742233952077,
+            0.781054239877769,
+            0.0012444988134143,
+            0.454623287671233
+          ],
+          "mean_NES": -0.9278090687101785
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -1.49412391797441,
+            0.795875921352296
+          ],
+          "padj": [
+            0.0829742233952077,
+            0.781054239877769
+          ],
+          "mean_NES": -0.34912399831105695
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            -0.903767089247846
+          ],
+          "padj": [
+            0.6116035455278
+          ],
+          "mean_NES": -0.903767089247846
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -1.49412391797441,
+            0.795875921352296,
+            -1.97591935931206,
+            -1.03706891890654,
+            -0.903767089247846,
+            -2.22947032287403,
+            -1.25206565431312
+          ],
+          "padj": [
+            0.0829742233952077,
+            0.781054239877769,
+            0.0012444988134143,
+            0.454623287671233,
+            0.6116035455278,
+            7.46255442165932e-06,
+            0.11830985915493
+          ],
+          "mean_NES": -1.1566484773251013
+        }
+      }
+    },
+    "gastrocnemius": {
+      "RR-1": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -1.56026673461846,
+            -1.1249658298471,
+            -1.62987694471396,
+            -2.02209389424122
+          ],
+          "padj": [
+            0.145162669390729,
+            0.706276260504202,
+            0.0956446854995821,
+            0.000932523154214
+          ],
+          "mean_NES": -1.5843008508551848
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -1.56026673461846,
+            -1.1249658298471
+          ],
+          "padj": [
+            0.145162669390729,
+            0.706276260504202
+          ],
+          "mean_NES": -1.3426162822327798
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -1.56026673461846,
+            -1.1249658298471,
+            -1.62987694471396,
+            -2.02209389424122,
+            -1.88714738766823,
+            -2.07955390058383
+          ],
+          "padj": [
+            0.145162669390729,
+            0.706276260504202,
+            0.0956446854995821,
+            0.000932523154214,
+            0.0013439511102669,
+            0.0001404583176563
+          ],
+          "mean_NES": -1.7173174486121334
+        }
+      },
+      "RR-9": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -1.23955043426902,
+            1.26624000073763,
+            1.74408688769643,
+            -1.46482871080869
+          ],
+          "padj": [
+            0.325207468879668,
+            0.325207468879668,
+            0.0746780964261134,
+            0.144628525243332
+          ],
+          "mean_NES": 0.0764869358390875
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -1.23955043426902,
+            1.26624000073763
+          ],
+          "padj": [
+            0.325207468879668,
+            0.325207468879668
+          ],
+          "mean_NES": 0.013344783234304991
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -1.23955043426902,
+            1.26624000073763,
+            1.74408688769643,
+            -1.46482871080869,
+            0.977619918048322,
+            1.38090353947898
+          ],
+          "padj": [
+            0.325207468879668,
+            0.325207468879668,
+            0.0746780964261134,
+            0.144628525243332,
+            0.576609967568999,
+            0.144628525243332
+          ],
+          "mean_NES": 0.4440785334806086
+        }
+      }
+    },
+    "kidney": {
+      "RR-1": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -1.73817603577716,
+            -1.34666235537571,
+            -1.37136701243289,
+            -1.37408821721625
+          ],
+          "padj": [
+            0.0545347696505026,
+            0.366108786610879,
+            0.336116910229645,
+            0.281964656964657
+          ],
+          "mean_NES": -1.4575734052005025
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -1.73817603577716,
+            -1.34666235537571
+          ],
+          "padj": [
+            0.0545347696505026,
+            0.366108786610879
+          ],
+          "mean_NES": -1.542419195576435
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -1.73817603577716,
+            -1.34666235537571,
+            -1.37136701243289,
+            -1.37408821721625,
+            -1.78271539861871,
+            -1.64782548428247
+          ],
+          "padj": [
+            0.0545347696505026,
+            0.366108786610879,
+            0.336116910229645,
+            0.281964656964657,
+            0.0152333071631902,
+            0.0351512064171661
+          ],
+          "mean_NES": -1.543472417283865
+        }
+      },
+      "RR-3": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -0.851612520068245,
+            1.64682012620679,
+            1.08877669691096,
+            1.25018132477046
+          ],
+          "padj": [
+            0.95602766798419,
+            0.146050004094106,
+            0.95602766798419,
+            0.95602766798419
+          ],
+          "mean_NES": 0.7835414069549913
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -0.851612520068245,
+            1.64682012620679
+          ],
+          "padj": [
+            0.95602766798419,
+            0.146050004094106
+          ],
+          "mean_NES": 0.39760380306927257
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -0.851612520068245,
+            1.64682012620679,
+            1.08877669691096,
+            1.25018132477046,
+            0.875273577750282,
+            1.64179536079397
+          ],
+          "padj": [
+            0.95602766798419,
+            0.146050004094106,
+            0.95602766798419,
+            0.95602766798419,
+            0.95602766798419,
+            0.0859932149824376
+          ],
+          "mean_NES": 0.9418724277273696
+        }
+      },
+      "RR-7": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            1.27784696009862,
+            1.26124953249733,
+            1.66077499116052,
+            0.945098130968318
+          ],
+          "padj": [
+            0.402298850574713,
+            0.449358059914408,
+            0.196701714251023,
+            0.740117746005046
+          ],
+          "mean_NES": 1.286242403681197
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            1.27784696009862,
+            1.26124953249733
+          ],
+          "padj": [
+            0.402298850574713,
+            0.449358059914408
+          ],
+          "mean_NES": 1.269548246297975
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            1.27784696009862,
+            1.26124953249733,
+            1.66077499116052,
+            0.945098130968318,
+            1.47285132790084,
+            1.4703747974321
+          ],
+          "padj": [
+            0.402298850574713,
+            0.449358059914408,
+            0.196701714251023,
+            0.740117746005046,
+            0.196701714251023,
+            0.196701714251023
+          ],
+          "mean_NES": 1.3480326233429547
+        }
+      }
+    },
+    "thymus": {
+      "MHU-2": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            1.05925969548828,
+            0.603606643137684,
+            0.776768217983946,
+            1.18907433344512
+          ],
+          "padj": [
+            0.811890838206628,
+            0.956777996070727,
+            0.956777996070727,
+            0.582979392795344
+          ],
+          "mean_NES": 0.9071772225137575
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            1.05925969548828,
+            0.603606643137684
+          ],
+          "padj": [
+            0.811890838206628,
+            0.956777996070727
+          ],
+          "mean_NES": 0.831433169312982
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            1.05925969548828,
+            0.603606643137684,
+            0.776768217983946,
+            1.18907433344512,
+            1.07340376233511,
+            1.00386415874377
+          ],
+          "padj": [
+            0.811890838206628,
+            0.956777996070727,
+            0.956777996070727,
+            0.582979392795344,
+            0.741818181818182,
+            0.846103470857891
+          ],
+          "mean_NES": 0.950996135188985
+        }
+      },
+      "RR-6": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -1.597776623786,
+            -1.96658290950534,
+            -1.47686768342225,
+            -2.5993757816172
+          ],
+          "padj": [
+            0.0278484403774425,
+            0.0028225559733,
+            0.0875350140056022,
+            9.89554791352523e-08
+          ],
+          "mean_NES": -1.9101507495826975
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -1.597776623786,
+            -1.96658290950534
+          ],
+          "padj": [
+            0.0278484403774425,
+            0.0028225559733
+          ],
+          "mean_NES": -1.78217976664567
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -1.597776623786,
+            -1.96658290950534,
+            -1.47686768342225,
+            -2.5993757816172,
+            -1.99030342700687,
+            -2.86674447533766
+          ],
+          "padj": [
+            0.0278484403774425,
+            0.0028225559733,
+            0.0875350140056022,
+            9.89554791352523e-08,
+            0.0002469295314437,
+            4.411968335488799e-12
+          ],
+          "mean_NES": -2.0829418167792197
+        }
+      },
+      "RR-9": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            0.799388221729528,
+            -1.08867622077794,
+            0.778770292845895,
+            -1.54219965254564
+          ],
+          "padj": [
+            0.998058252427184,
+            0.837586685159501,
+            0.998058252427184,
+            0.163652575119348
+          ],
+          "mean_NES": -0.2631793396870392
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            0.799388221729528,
+            -1.08867622077794
+          ],
+          "padj": [
+            0.998058252427184,
+            0.837586685159501
+          ],
+          "mean_NES": -0.14464399952420598
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            0.799388221729528,
+            -1.08867622077794,
+            0.778770292845895,
+            -1.54219965254564,
+            0.850877456420682,
+            -1.69720645072945
+          ],
+          "padj": [
+            0.998058252427184,
+            0.837586685159501,
+            0.998058252427184,
+            0.163652575119348,
+            0.998058252427184,
+            0.0357095715275631
+          ],
+          "mean_NES": -0.31650772550948747
+        }
+      }
+    },
+    "eye": {
+      "RR-1": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            1.34732877087813,
+            2.25570613954185,
+            1.03578542978479,
+            2.75304729640856
+          ],
+          "padj": [
+            0.15482722823669,
+            2.7928911080766e-06,
+            0.485837438423645,
+            9.72640016817303e-13
+          ],
+          "mean_NES": 1.8479669091533326
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            1.34732877087813,
+            2.25570613954185
+          ],
+          "padj": [
+            0.15482722823669,
+            2.7928911080766e-06
+          ],
+          "mean_NES": 1.8015174552099902
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            2.60295112459782
+          ],
+          "padj": [
+            1.7230147616597398e-11
+          ],
+          "mean_NES": 2.60295112459782
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            1.34732877087813,
+            2.25570613954185,
+            1.03578542978479,
+            2.75304729640856,
+            2.60295112459782,
+            1.59739602813752,
+            3.29902579865082
+          ],
+          "padj": [
+            0.15482722823669,
+            2.7928911080766e-06,
+            0.485837438423645,
+            9.72640016817303e-13,
+            1.7230147616597398e-11,
+            0.0120611610854041,
+            1.39170837284818e-33
+          ],
+          "mean_NES": 2.127320083999927
+        }
+      },
+      "RR-3": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            1.73093465404393,
+            1.74066544829666,
+            1.8036338494488,
+            2.74479532927601
+          ],
+          "padj": [
+            0.0173685233620835,
+            0.0165521984372996,
+            0.0079590945253019,
+            1.85789530545999e-10
+          ],
+          "mean_NES": 2.00500732026635
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            1.73093465404393,
+            1.74066544829666
+          ],
+          "padj": [
+            0.0173685233620835,
+            0.0165521984372996
+          ],
+          "mean_NES": 1.735800051170295
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            2.22051848665151
+          ],
+          "padj": [
+            3.0570579012347e-05
+          ],
+          "mean_NES": 2.22051848665151
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            1.73093465404393,
+            1.74066544829666,
+            1.8036338494488,
+            2.74479532927601,
+            2.22051848665151,
+            2.15734221137317,
+            3.04853727403732
+          ],
+          "padj": [
+            0.0173685233620835,
+            0.0165521984372996,
+            0.0079590945253019,
+            1.85789530545999e-10,
+            3.0570579012347e-05,
+            1.47193729562286e-05,
+            1.39361533578609e-18
+          ],
+          "mean_NES": 2.2066324647324858
+        }
+      },
+      "TBD": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            1.03381795833335,
+            2.08934684874092,
+            0.816929525583232,
+            2.24667448933871
+          ],
+          "padj": [
+            0.601123595505618,
+            0.0013849556665325,
+            0.8203125,
+            3.61793316792486e-05
+          ],
+          "mean_NES": 1.546692205499053
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            1.03381795833335,
+            2.08934684874092
+          ],
+          "padj": [
+            0.601123595505618,
+            0.0013849556665325
+          ],
+          "mean_NES": 1.561582403537135
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            1.93675084635568
+          ],
+          "padj": [
+            0.0102098286682655
+          ],
+          "mean_NES": 1.93675084635568
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            1.03381795833335,
+            2.08934684874092,
+            0.816929525583232,
+            2.24667448933871,
+            1.93675084635568,
+            1.45116120930155,
+            2.52388908145452
+          ],
+          "padj": [
+            0.601123595505618,
+            0.0013849556665325,
+            0.8203125,
+            3.61793316792486e-05,
+            0.0102098286682655,
+            0.0884324581418557,
+            1.38590519476276e-09
+          ],
+          "mean_NES": 1.7283671370154232
+        }
+      }
+    },
+    "skin": {
+      "MHU-2_dorsal": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -0.727162195593435,
+            -1.58436317542968,
+            -1.47603072283379,
+            -2.03426252728082
+          ],
+          "padj": [
+            0.908691834942932,
+            0.0472230485346734,
+            0.1162161368437,
+            0.0011019104509317
+          ],
+          "mean_NES": -1.4554546552844312
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -0.727162195593435,
+            -1.58436317542968
+          ],
+          "padj": [
+            0.908691834942932,
+            0.0472230485346734
+          ],
+          "mean_NES": -1.1557626855115575
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            -1.7363129161616
+          ],
+          "padj": [
+            0.0214986543909528
+          ],
+          "mean_NES": -1.7363129161616
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -0.727162195593435,
+            -1.58436317542968,
+            -1.47603072283379,
+            -2.03426252728082,
+            -1.7363129161616,
+            -1.67328994543864,
+            -2.32644361797343
+          ],
+          "padj": [
+            0.908691834942932,
+            0.0472230485346734,
+            0.1162161368437,
+            0.0011019104509317,
+            0.0214986543909528,
+            0.0144081559393611,
+            1.7485915646577e-07
+          ],
+          "mean_NES": -1.6511235858159135
+        }
+      },
+      "MHU-2_femoral": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            -0.929875329931721,
+            -0.769419189542192,
+            -0.725002194391525,
+            -0.803367969076449
+          ],
+          "padj": [
+            0.95687134502924,
+            0.988277573372123,
+            1.0,
+            0.988277573372123
+          ],
+          "mean_NES": -0.8069161707354717
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            -0.929875329931721,
+            -0.769419189542192
+          ],
+          "padj": [
+            0.95687134502924,
+            0.988277573372123
+          ],
+          "mean_NES": -0.8496472597369564
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            0.809149674270916
+          ],
+          "padj": [
+            0.988277573372123
+          ],
+          "mean_NES": 0.809149674270916
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            -0.929875329931721,
+            -0.769419189542192,
+            -0.725002194391525,
+            -0.803367969076449,
+            0.809149674270916,
+            -1.02926196904125,
+            -0.847019305837271
+          ],
+          "padj": [
+            0.95687134502924,
+            0.988277573372123,
+            1.0,
+            0.988277573372123,
+            0.988277573372123,
+            0.836047774158523,
+            0.988277573372123
+          ],
+          "mean_NES": -0.6135423262213558
+        }
+      },
+      "RR-6": {
+        "Complex_I": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS"
+          ],
+          "NES": [
+            0.809203121735159,
+            1.60523769366606,
+            0.724289871230087,
+            1.17821363470885
+          ],
+          "padj": [
+            0.934036939313984,
+            0.0961762440416444,
+            0.974750830564784,
+            0.478293413173653
+          ],
+          "mean_NES": 1.079236080335039
+        },
+        "Complex_IV": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS"
+          ],
+          "NES": [
+            0.809203121735159,
+            1.60523769366606
+          ],
+          "padj": [
+            0.934036939313984,
+            0.0961762440416444
+          ],
+          "mean_NES": 1.2072204077006095
+        },
+        "Complex_V": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS"
+          ],
+          "NES": [
+            1.53532136210722
+          ],
+          "padj": [
+            0.122310193074884
+          ],
+          "mean_NES": 1.53532136210722
+        },
+        "OXPHOS_general": {
+          "pathways": [
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+            "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+            "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+            "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+          ],
+          "NES": [
+            0.809203121735159,
+            1.60523769366606,
+            0.724289871230087,
+            1.17821363470885,
+            1.53532136210722,
+            0.834891679821019,
+            1.81646517330043
+          ],
+          "padj": [
+            0.934036939313984,
+            0.0961762440416444,
+            0.974750830564784,
+            0.478293413173653,
+            0.122310193074884,
+            0.934036939313984,
+            0.0026136414373294
+          ],
+          "mean_NES": 1.2148032195098322
+        }
+      }
+    }
+  },
+  "cross_db_concordance": {
+    "liver": {
+      "MHU-2": {
+        "hallmark_OXPHOS_NES": 2.16443560582685,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          0.901353829204588,
+          1.28270777534266,
+          2.44206740911482,
+          1.14389892907725,
+          2.7593385176142
+        ],
+        "n_concordant": 5,
+        "n_total": 5,
+        "concordance_rate": 1.0
+      },
+      "RR-1": {
+        "hallmark_OXPHOS_NES": 1.15480061076301,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -1.83605449142077,
+          -0.697925452892402,
+          -0.979126658929351,
+          -1.85776985847841,
+          -1.38798079567823,
+          -1.40426122559748
+        ],
+        "n_concordant": 0,
+        "n_total": 6,
+        "concordance_rate": 0.0
+      },
+      "RR-3": {
+        "hallmark_OXPHOS_NES": -1.35952699549675,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -1.1803637054789,
+          -1.03965134673963,
+          -0.856070898556908,
+          0.63441232671539,
+          -0.869509148707235,
+          -1.31058772197166,
+          -0.900815824084832
+        ],
+        "n_concordant": 6,
+        "n_total": 7,
+        "concordance_rate": 0.857
+      },
+      "RR-6": {
+        "hallmark_OXPHOS_NES": 2.00578306651061,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          1.80853816030206,
+          1.56457865461565,
+          2.26045133810819,
+          2.21814046210976,
+          2.0767314593349,
+          2.38514344704719,
+          2.40163855015741
+        ],
+        "n_concordant": 7,
+        "n_total": 7,
+        "concordance_rate": 1.0
+      },
+      "RR-8": {
+        "hallmark_OXPHOS_NES": 2.3777989224277,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          1.57211497344585,
+          1.42352195194455,
+          1.69712423878284,
+          2.13982932975647,
+          1.83286842578024,
+          2.38890435208281
+        ],
+        "n_concordant": 6,
+        "n_total": 6,
+        "concordance_rate": 1.0
+      },
+      "RR-9": {
+        "hallmark_OXPHOS_NES": -2.65413795518143,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -1.49412391797441,
+          0.795875921352296,
+          -1.97591935931206,
+          -1.03706891890654,
+          -0.903767089247846,
+          -2.22947032287403,
+          -1.25206565431312
+        ],
+        "n_concordant": 6,
+        "n_total": 7,
+        "concordance_rate": 0.857
+      }
+    },
+    "gastrocnemius": {
+      "RR-1": {
+        "hallmark_OXPHOS_NES": -1.68520874646221,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -1.56026673461846,
+          -1.1249658298471,
+          -1.62987694471396,
+          -2.02209389424122,
+          -1.88714738766823,
+          -2.07955390058383
+        ],
+        "n_concordant": 6,
+        "n_total": 6,
+        "concordance_rate": 1.0
+      },
+      "RR-9": {
+        "hallmark_OXPHOS_NES": 2.02351433021741,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -1.23955043426902,
+          1.26624000073763,
+          1.74408688769643,
+          -1.46482871080869,
+          0.977619918048322,
+          1.38090353947898
+        ],
+        "n_concordant": 4,
+        "n_total": 6,
+        "concordance_rate": 0.667
+      }
+    },
+    "kidney": {
+      "RR-1": {
+        "hallmark_OXPHOS_NES": -1.17878000649144,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -1.73817603577716,
+          -1.34666235537571,
+          -1.37136701243289,
+          -1.37408821721625,
+          -1.78271539861871,
+          -1.64782548428247
+        ],
+        "n_concordant": 6,
+        "n_total": 6,
+        "concordance_rate": 1.0
+      },
+      "RR-3": {
+        "hallmark_OXPHOS_NES": 1.21182177404839,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -0.851612520068245,
+          1.64682012620679,
+          1.08877669691096,
+          1.25018132477046,
+          0.875273577750282,
+          1.64179536079397
+        ],
+        "n_concordant": 5,
+        "n_total": 6,
+        "concordance_rate": 0.833
+      },
+      "RR-7": {
+        "hallmark_OXPHOS_NES": 1.38166809684606,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          1.27784696009862,
+          1.26124953249733,
+          1.66077499116052,
+          0.945098130968318,
+          1.47285132790084,
+          1.4703747974321
+        ],
+        "n_concordant": 6,
+        "n_total": 6,
+        "concordance_rate": 1.0
+      }
+    },
+    "thymus": {
+      "MHU-2": {
+        "hallmark_OXPHOS_NES": 1.84864909696882,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          1.05925969548828,
+          0.603606643137684,
+          0.776768217983946,
+          1.18907433344512,
+          1.07340376233511,
+          1.00386415874377
+        ],
+        "n_concordant": 6,
+        "n_total": 6,
+        "concordance_rate": 1.0
+      },
+      "RR-6": {
+        "hallmark_OXPHOS_NES": -2.89040854705426,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -1.597776623786,
+          -1.96658290950534,
+          -1.47686768342225,
+          -2.5993757816172,
+          -1.99030342700687,
+          -2.86674447533766
+        ],
+        "n_concordant": 6,
+        "n_total": 6,
+        "concordance_rate": 1.0
+      },
+      "RR-9": {
+        "hallmark_OXPHOS_NES": -1.5257317019659,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          0.799388221729528,
+          -1.08867622077794,
+          0.778770292845895,
+          -1.54219965254564,
+          0.850877456420682,
+          -1.69720645072945
+        ],
+        "n_concordant": 3,
+        "n_total": 6,
+        "concordance_rate": 0.5
+      }
+    },
+    "eye": {
+      "RR-1": {
+        "hallmark_OXPHOS_NES": 3.41265399325779,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          1.34732877087813,
+          2.25570613954185,
+          1.03578542978479,
+          2.75304729640856,
+          2.60295112459782,
+          1.59739602813752,
+          3.29902579865082
+        ],
+        "n_concordant": 7,
+        "n_total": 7,
+        "concordance_rate": 1.0
+      },
+      "RR-3": {
+        "hallmark_OXPHOS_NES": 3.00159530769373,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          1.73093465404393,
+          1.74066544829666,
+          1.8036338494488,
+          2.74479532927601,
+          2.22051848665151,
+          2.15734221137317,
+          3.04853727403732
+        ],
+        "n_concordant": 7,
+        "n_total": 7,
+        "concordance_rate": 1.0
+      },
+      "TBD": {
+        "hallmark_OXPHOS_NES": 2.29950301344465,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          1.03381795833335,
+          2.08934684874092,
+          0.816929525583232,
+          2.24667448933871,
+          1.93675084635568,
+          1.45116120930155,
+          2.52388908145452
+        ],
+        "n_concordant": 7,
+        "n_total": 7,
+        "concordance_rate": 1.0
+      }
+    },
+    "skin": {
+      "MHU-2_dorsal": {
+        "hallmark_OXPHOS_NES": -2.2988966483355,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -0.727162195593435,
+          -1.58436317542968,
+          -1.47603072283379,
+          -2.03426252728082,
+          -1.7363129161616,
+          -1.67328994543864,
+          -2.32644361797343
+        ],
+        "n_concordant": 7,
+        "n_total": 7,
+        "concordance_rate": 1.0
+      },
+      "MHU-2_femoral": {
+        "hallmark_OXPHOS_NES": -1.32463938690496,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          -0.929875329931721,
+          -0.769419189542192,
+          -0.725002194391525,
+          -0.803367969076449,
+          0.809149674270916,
+          -1.02926196904125,
+          -0.847019305837271
+        ],
+        "n_concordant": 6,
+        "n_total": 7,
+        "concordance_rate": 0.857
+      },
+      "RR-6": {
+        "hallmark_OXPHOS_NES": 1.34884218758205,
+        "mitocarta_OXPHOS_pathways": [
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_IV_CIV_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_COMPLEX_I_CI_SUBUNITS",
+          "MITOCARTA_OXPHOS_COMPLEX_V_CV_SUBUNITS",
+          "MITOCARTA_OXPHOS_OXPHOS_ASSEMBLY_FACTORS",
+          "MITOCARTA_OXPHOS_OXPHOS_SUBUNITS"
+        ],
+        "mitocarta_NES": [
+          0.809203121735159,
+          1.60523769366606,
+          0.724289871230087,
+          1.17821363470885,
+          1.53532136210722,
+          0.834891679821019,
+          1.81646517330043
+        ],
+        "n_concordant": 7,
+        "n_total": 7,
+        "concordance_rate": 1.0
+      }
+    }
+  }
+}
