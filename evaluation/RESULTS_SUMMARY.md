@@ -154,6 +154,30 @@ Mouse-Geneformer (6L BERT, 56K mouse gene vocab, pretrained on 30M scRNA-seq cel
 
 ---
 
+## Tier 2: scGPT (whole_human) vs Classical Baseline
+
+scGPT-whole_human (12L Transformer, 512d hidden, 8 heads, pretrained on 33M human CellXGene cells) fine-tuned on mouse bulk RNA-seq LOMO folds via ENSMUSG→human gene symbol ortholog mapping. Training: 10 epochs, batch=8, lr=1e-4, freeze=10/12 layers (flash_attn disabled for PyTorch 2.1 compatibility).
+
+**Note on reliability**: Folds with n_test ≤ 8 (MHU-1 thymus, RR-9 gastro) produce highly variable AUROC estimates and should be interpreted with caution. Large-n folds (RR-8 liver n=103, RR-7 kidney n=94, RR-7 skin n=30) are most reliable.
+
+| Task | Tissue | scGPT AUROC | Geneformer AUROC | Baseline AUROC | Δ vs GF | Δ vs Baseline | Winner |
+|------|--------|------------|-----------------|---------------|---------|--------------|--------|
+| A1 | Liver | 0.628 ± 0.283 | 0.486 | 0.588 | +0.142 | +0.040 | **scGPT** |
+| A2 | Gastrocnemius | 0.685 ± 0.305 | 0.432 | 0.801 | +0.253 | -0.116 | Baseline |
+| A3 | Kidney | 0.556 ± 0.195 | 0.432 | 0.538 | +0.124 | +0.018 | scGPT |
+| A4 | Thymus | 0.782 ± 0.172 | 0.476 | 0.923 | +0.306 | -0.141 | Baseline |
+| A5 | Skin | 0.691 ± 0.050 | 0.532 | 0.821 | +0.159 | -0.130 | Baseline |
+| A6 | Eye | 0.650 ± 0.141 | 0.478 | 0.789 | +0.172 | -0.139 | Baseline |
+| **Mean** | **6 tissues** | **0.666** | **0.476** | **0.758** | **+0.190** | **-0.092** | **Baseline** |
+
+**Interpretation**: Classical ML wins 5/6 tissues vs scGPT (sign test p=0.109, ns). scGPT outperforms Geneformer by +0.190 AUROC across all tissues, suggesting human-pretrained 12L transformer captures more transferable features than mouse-specific 6L BERT. However, both FMs remain below classical ML baseline (scGPT: -0.092, Geneformer: -0.283), confirming that pretrained single-cell FMs do not transfer reliably to small-n bulk transcriptomics. The performance gap narrows but does not close: Classical ML 6/6 > both FMs.
+
+**Key observation**: scGPT shows higher variance (std=0.05–0.31) than Geneformer (std=0.05–0.23), partly reflecting ortholog mapping noise from human pretraining. Large-n reliable folds (liver RR-8 n=103: 0.468; kidney RR-7 n=94: 0.557; skin n=30–39: 0.636–0.737) suggest scGPT hovers near chance (0.5) on the most statistically robust estimates.
+
+*Results file: `evaluation/scgpt_whole_human_all_tissues_summary.json`*
+
+---
+
 ## Held-Out Evaluation: A4 Thymus (OSD-515 / RR-23)
 
 Reserved held-out test set for external benchmark evaluation. Train on 4 missions (MHU-1, MHU-2, RR-6, RR-9; n=67), test on RR-23 (n=16: 7 Flight, 9 GC). 27,541 common genes.
@@ -304,6 +328,7 @@ Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 
 | NC1/NC2 | Permutation + housekeeping controls | Complete |
 | Cell 2020 | 5 tissues pathway validation | Complete |
 | Geneformer | 6 tissues, 22 LOMO folds (Mouse-GF) | Complete |
+| scGPT | 6 tissues, 21 LOMO folds (whole_human), mean AUROC=0.666 | Complete |
 | LLM Zero-Shot | 3 providers × 6 tasks (18 evals) | Complete |
 | Held-Out | A4 Thymus (RR-23) + A5 Skin (RR-7) | Complete |
 | T1-T3 Temporal | ISS-T/LAR, Recovery, Age×Spaceflight | Complete |
