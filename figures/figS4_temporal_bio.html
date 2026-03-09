@@ -430,7 +430,7 @@ panels.forEach(p => {
 
   const tissues = ['thymus','skin','liver','eye','gastrocnemius','kidney'];
   const pathways = ['IFN_GAMMA','IFN_ALPHA','INFLAMMATORY','ALLOGRAFT','E2F','G2M','MYC_V1','OXPHOS','FAT_ACID','ADIPOGENESIS','MTORC1','MYOGENESIS'];
-  const pwLabels = ['IFN-γ','IFN-α','Inflam.','Allograft','E2F','G2M','MYC V1','OXPHOS','Fat. Acid','Adipogen.','mTORC1','Myogen.'];
+  const pwLabels = ['IFN-γ Resp.','IFN-α Resp.','Inflamm.','Allograft Rej.','E2F Targets','G2M Chkpt.','MYC V1','OXPHOS','Fatty Acid','Adipogenesis','mTORC1','Myogenesis'];
 
   // Category brackets
   const categories = [
@@ -439,8 +439,8 @@ panels.forEach(p => {
     { label: 'Metab.', start: 7, end: 11 }
   ];
 
-  const cellW = 38, cellH = 15;
-  const startX = 75, startY = 30;
+  const cellW = 38, cellH = 16;
+  const startX = 85, startY = 30;
 
   // Color scale: RdBu diverging centered at 0
   const colorScale = d3.scaleSequential(d3.interpolateRdBu).domain([3.5, -3.5]);
@@ -460,7 +460,7 @@ panels.forEach(p => {
     const ry = startY + pi * cellH;
     // Row label
     g.append('text').attr('x', startX - 4).attr('y', ry + cellH/2 + 3)
-      .attr('text-anchor','end').attr('font-size', '7px').text(pwLabels[pi]);
+      .attr('text-anchor','end').attr('font-size', '8px').text(pwLabels[pi]);
 
     tissues.forEach((t, ti) => {
       const val = nesData[t][pw];
@@ -476,7 +476,7 @@ panels.forEach(p => {
       const textColor = Math.abs(val) > 2 ? '#fff' : '#333';
       g.append('text')
         .attr('x', cx + cellW/2 - 0.5).attr('y', ry + cellH/2 + 3)
-        .attr('text-anchor','middle').attr('font-size','6.5px')
+        .attr('text-anchor','middle').attr('font-size','7.5px')
         .attr('fill', textColor).attr('font-weight', Math.abs(val) > 2 ? 'bold' : 'normal')
         .text(val.toFixed(1));
     });
