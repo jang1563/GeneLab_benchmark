@@ -47,12 +47,12 @@ const FS = {
 
 // Panel (a): D-category confounder detection (macro-F1)
 const dumbbellData = [
-  {task:'D3', label:'Which mission? (liver, 6-way)', gene:1.000, pathway:0.056, pGene:'***', pPath:'NS'},
-  {task:'D5_liver', label:'Which hardware? (liver)', gene:1.000, pathway:0.386, pGene:'***', pPath:'NS'},
-  {task:'D5_thymus', label:'Which hardware? (thymus)', gene:1.000, pathway:0.352, pGene:'***', pPath:'NS'},
-  {task:'D4', label:'Which strain? (thymus)', gene:0.892, pathway:0.817, pGene:'**', pPath:'*'},
-  {task:'D6_liver', label:'Which gravity? (liver)', gene:0.886, pathway:0.413, pGene:'**', pPath:'NS'},
-  {task:'D6_thymus', label:'Which gravity? (thymus)', gene:0.657, pathway:0.641, pGene:'*', pPath:'NS'}
+  {task:'D3', label:'Mission identity (liver, 6-way)', gene:1.000, pathway:0.056, pGene:'***', pPath:'NS'},
+  {task:'D5_liver', label:'Flight hardware (liver)', gene:1.000, pathway:0.386, pGene:'***', pPath:'NS'},
+  {task:'D5_thymus', label:'Flight hardware (thymus)', gene:1.000, pathway:0.352, pGene:'***', pPath:'NS'},
+  {task:'D4', label:'Mouse strain (thymus)', gene:0.892, pathway:0.817, pGene:'**', pPath:'*'},
+  {task:'D6_liver', label:'Gravity level (liver)', gene:0.886, pathway:0.413, pGene:'**', pPath:'NS'},
+  {task:'D6_thymus', label:'Gravity level (thymus)', gene:0.657, pathway:0.641, pGene:'*', pPath:'NS'}
 ];
 
 // Panel (b): Gene vs Pathway AUROC scatter (Category A + C only, 9 pts)
@@ -415,14 +415,28 @@ function panelLabel(g, letter, x, y) {
     .attr('x2', xScale(regX2)).attr('y2', yScale(intercept + slope*regX2))
     .attr('stroke', '#999').attr('stroke-width', 1.2).attr('stroke-dasharray','6,3');
 
-  // CI band (approximate: ±0.05 AUROC for visual)
-  const bandW = 0.06;
-  const bandPts = [];
-  for (let x = -0.03; x <= 0.68; x += 0.05) {
-    bandPts.push([xScale(x), yScale(intercept + slope*x + bandW)]);
+  // 95% CI band (proper regression confidence interval)
+  let sse = 0;
+  for (let i = 0; i < n; i++) {
+    sse += (ys[i] - (intercept + slope * xs[i])) ** 2;
   }
-  for (let x = 0.68; x >= -0.03; x -= 0.05) {
-    bandPts.push([xScale(x), yScale(intercept + slope*x - bandW)]);
+  const mse = sse / (n - 2);  // df = n-2 = 4
+  const ss_x = den;  // Σ(xi - x̄)²
+  const t_crit = 2.776;  // t(0.025, df=4)
+
+  const bandPts = [];
+  const bandSteps = [];
+  for (let x = -0.03; x <= 0.68; x += 0.02) {
+    const yHat = intercept + slope * x;
+    const se_y = Math.sqrt(mse * (1/n + (x - xMean)**2 / ss_x));
+    const ci_half = t_crit * se_y;
+    bandSteps.push({x, upper: yHat + ci_half, lower: yHat - ci_half});
+  }
+  for (const step of bandSteps) {
+    bandPts.push([xScale(step.x), yScale(step.upper)]);
+  }
+  for (let i = bandSteps.length - 1; i >= 0; i--) {
+    bandPts.push([xScale(bandSteps[i].x), yScale(bandSteps[i].lower)]);
   }
   g.append('polygon')
     .attr('points', bandPts.map(p => p.join(',')).join(' '))
