@@ -38,14 +38,14 @@ const tissueLabels = {
 };
 
 // Missions in chronological/logical order
-const missions = ['MHU-1','MHU-2','RR-1','RR-3','RR-5','RR-6','RR-7','RR-8','RR-9','TBD'];
+const missions = ['MHU-1','MHU-2','RR-1','RR-3','RR-5','RR-6','RR-7','RR-8','RR-9','OSD-397'];
 
 // Sample counts per tissue × mission (FLT+GC binary)
 const sampleMatrix = {
   thymus: {'MHU-1':6,'MHU-2':6,'RR-6':35,'RR-9':20},
   gastrocnemius: {'RR-1':12,'RR-5':12,'RR-9':8},
   skin: {'MHU-2':35,'RR-6':37,'RR-7':30},
-  eye: {'RR-1':12,'RR-3':9,'TBD':16},
+  eye: {'RR-1':12,'RR-3':9,'OSD-397':16},
   liver: {'MHU-2':6,'RR-1':14,'RR-3':12,'RR-6':39,'RR-8':103,'RR-9':19},
   kidney: {'RR-1':12,'RR-3':12,'RR-7':94}
 };
@@ -171,8 +171,8 @@ function panelLabel(g, letter, x, y) {
           .attr('rx', 2)
           .attr('fill', COLORS[t])
           .attr('opacity', opacityScale(n))
-          .attr('stroke', t==='eye' ? '#999' : 'none')
-          .attr('stroke-width', 0.5);
+          .attr('stroke', t==='eye' ? '#888' : 'none')
+          .attr('stroke-width', t==='eye' ? 1.2 : 0);
         g.append('text')
           .attr('x', x + cellW/2).attr('y', y + cellH/2 + 3)
           .attr('text-anchor','middle').attr('font-size', n >= 100 ? 6.5 : 7)
@@ -193,7 +193,7 @@ function panelLabel(g, letter, x, y) {
   const lomoY = topPad + tissues.length * cellH + 14;
   g.append('text').attr('x', leftPad + missions.length*cellW/2).attr('y', lomoY)
     .attr('text-anchor','middle').attr('font-size', FS.tiny).attr('fill','#666')
-    .text('LOMO: Leave-One-Mission-Out cross-validation');
+    .text('Leave-one-mission-out: train on N\u22121 missions, test on held-out');
 
   // Small arrow hints
   const arrowY = lomoY + 12;
@@ -227,7 +227,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[1]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Spaceflight detection (LOMO)');
+    .text('Within-mission detection');
 
   const xScale = d3.scaleLinear().domain([0, 1.05]).range([leftPad + 80, leftPad + plotW]);
   const yScale = d3.scaleBand().domain(tissues).range([topPad, topPad + plotH]).padding(0.3);
@@ -240,7 +240,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(0.87)).attr('y', topPad + plotH + 12)
     .attr('text-anchor','middle').attr('font-size', FS.tiny).attr('fill','#4caf50')
-    .text('GO');
+    .text('≥ 0.7');
 
   // Chance line
   g.append('line')
@@ -263,7 +263,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(0.5)).attr('y', topPad + plotH + 28)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('AUROC');
+    .text('Classification accuracy (AUROC)');
 
   // Data points
   tissues.forEach(t => {
@@ -319,11 +319,11 @@ function panelLabel(g, letter, x, y) {
   g.append('circle').attr('cx', leftPad + 80).attr('cy', legY).attr('r',3.5)
     .attr('fill','#666').attr('stroke','#666').attr('stroke-width',1.5);
   g.append('text').attr('x', leftPad + 86).attr('y', legY + 3)
-    .attr('font-size',6).attr('fill','#666').text('p < 0.05');
-  g.append('circle').attr('cx', leftPad + 122).attr('cy', legY).attr('r',3.5)
+    .attr('font-size',6).attr('fill','#666').text('Significant (p < 0.05)');
+  g.append('circle').attr('cx', leftPad + 155).attr('cy', legY).attr('r',3.5)
     .attr('fill','#fff').attr('stroke','#666').attr('stroke-width',1.5);
-  g.append('text').attr('x', leftPad + 128).attr('y', legY + 3)
-    .attr('font-size',6).attr('fill','#666').text('NS');
+  g.append('text').attr('x', leftPad + 161).attr('y', legY + 3)
+    .attr('font-size',6).attr('fill','#666').text('Not significant');
 }
 
 // ============================================================
@@ -340,7 +340,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[2]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Cross-mission transfer');
+    .text('Cross-mission generalization');
 
   const xScale = d3.scaleLinear().domain([0, 1.05]).range([leftPad + 80, leftPad + plotW]);
   const yScale = d3.scaleBand().domain(tissues).range([topPad, topPad + plotH]).padding(0.3);
@@ -366,7 +366,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(0.5)).attr('y', topPad + plotH + 28)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('AUROC');
+    .text('Classification accuracy (AUROC)');
 
   // Bars
   tissues.forEach(t => {
@@ -433,7 +433,7 @@ function panelLabel(g, letter, x, y) {
     g.append('text')
       .attr('x', xScale(0) - 2).attr('y', cy + 3)
       .attr('text-anchor','end').attr('font-size', 6).attr('fill','#aaa')
-      .text(`${nPairs}p`);
+      .text(`${nPairs} pairs`);
   });
 }
 

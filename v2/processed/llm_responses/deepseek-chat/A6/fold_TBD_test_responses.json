@@ -1,0 +1,219 @@
+{
+  "fold": "fold_TBD_test",
+  "task_id": "A6",
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "temperature": 0,
+  "generated_at": "2026-03-08T13:14:58.234765",
+  "n_responses": 16,
+  "responses": [
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 15 most downregulated genes are almost exclusively crystallins (Crygb, Cryba4, Crygd, Crygc, Crybb2, Crygs, Crybb1, Cryba1, Cryaa, Crygf, Cryba2, Cryge) and other structural lens proteins (Lctl, Lgsn, Bfsp1, Mip). Krt12 is a cornea-specific keratin. This pattern indicates a strong, coordinated downregulation of genes critical for lens transparency and eye structural integrity.  \n\nIn spaceflight transcriptomics, while oxidative stress and immune changes are common, such a pronounced and tissue-specific signature in the eye\u2014particularly downregulation of crystallins\u2014is not a hallmark of systemic spaceflight adaptation. Instead, this pattern is more consistent with a ground control sample where the eye tissue may have been stressed during dissection, experienced post-mortem changes, or comes from an older mouse with early lens changes. Spaceflight studies in mice have not reported crystallin downregulation as a dominant signature; instead, liver, kidney, muscle, and immune organs show the most consistent flight-related changes.  \n\nThus, the gene list lacks the expected systemic stress/inflammatory/metabolic markers of flight and shows a localized ocular pattern more likely from a ground sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 268,
+        "total_tokens": 1242
+      },
+      "sample_id": "M21",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are dominated by eye-specific structural and crystallin genes (e.g., *Krt12*, *Sprr1a*, *Mip*, *Kera*, multiple *Cryg* and *Cryb* family members) and muscle-specific myosin genes (e.g., *Myh15*, *Myh3*, *Myh13*). These changes are not characteristic of known systemic spaceflight signatures (oxidative stress, immune dysregulation, metabolic shifts, or atrophy pathways in major organs). Instead, the pattern suggests tissue-specific variability or a condition affecting the cornea/lens and possibly extraocular muscle, but not the coherent multi-tissue stress response seen in flight mice. The absence of canonical spaceflight-responsive genes (e.g., *Nfe2l2*, *Hmox1*, *Cdkn1a*, *Fas*, *Igf1*, etc.) in this top-50 list strongly indicates a ground control sample with normal biological variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 214,
+        "total_tokens": 1188
+      },
+      "sample_id": "M22",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by downregulated genes specific to the eye lens and ocular muscle. Key signatures include:\n- **Crystallin family genes (Crygf, Cryba4, Crybb1, Cryge, etc.)**: These are structural proteins essential for lens transparency. Their downregulation is not a hallmark of systemic spaceflight stress but rather suggests a technical or biological artifact specific to ocular tissue processing or health (e.g., cataract-related changes, post-mortem degradation, or sample focusing on a specific lens region).\n- **Striated muscle genes (Myh1, Myh3, Tnnt3, Tnnc2, Atp2a1, Mb)**: These are expressed in extraocular muscles. Their downregulation could reflect disuse atrophy, but in spaceflight, ocular changes typically involve fluid shift-related pathways (e.g., oxidative stress, ECM remodeling), not a wholesale suppression of muscle contractile apparatus genes in the eye.\n- **Absence of spaceflight hallmarks**: None of the classic systemic spaceflight-responsive pathways (oxidative stress/Nrf2, immune dysregulation, circadian rhythm disruption, global metabolic shifts) are represented in these top variable genes. The two slightly upregulated genes (Trim12a, Gvin1) are not known spaceflight markers.\n- **Directional bias**: All significant changes are downregulated except two very weak upregulations. Spaceflight transcriptomes typically show a mix of both up- and down-regulated pathways across tissues.\n\nThis pattern is inconsistent with the broad, multi-systemic gene expression changes induced by microgravity. Instead, it suggests a ground control sample with a pronounced tissue-specific artifact or condition affecting lens and ocular muscle integrity.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 355,
+        "total_tokens": 1329
+      },
+      "sample_id": "M23",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly downregulated and are dominated by two highly tissue-specific categories:  \n1. **Crystallins** (Crygd, Crygc, Crybb1, Cryba4, Crygb, Crygs, Crybb2, Crygf, Cryba2, Cryba1, Cryaa, Cryge) \u2013 essential structural proteins for lens transparency.  \n2. **Myosin heavy chains** (Myh1, Myh4, Myh3, Myh2, Myh15, Myh8, Myh13) and other **muscle contractile proteins** (Tnni2, Tnnc2, Myot, Myl1, Tnnt3, Lmod2) \u2013 indicative of extraocular or intraocular muscle.  \n\nThis pattern reflects **eye-specific gene suppression**, not the systemic transcriptomic signatures of spaceflight (e.g., oxidative stress, immune dysregulation, muscle/bone atrophy in skeletal muscle, or liver/kidney metabolic shifts). In spaceflight studies, eye tissues can show alterations, but widespread downregulation of crystallins and ocular muscle genes is not a hallmark of microgravity; instead, it suggests a **ground-control sample** possibly affected by experimental conditions like prolonged fixation, tissue degradation, or a specific ocular pathology unrelated to spaceflight. The lack of upregulation in known spaceflight-responsive pathways further supports a ground origin.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 299,
+        "total_tokens": 1273
+      },
+      "sample_id": "M24",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by downregulation of structural and contractile proteins specific to the eye and muscle.  \n- **Myosin heavy chain isoforms (Myh3, Myh15, Myh2, Myh4, Myh1, Myh8, Myh13)** and other sarcomeric genes (Tnnc2, Atp2a1, Tnnt3, Tnni2, Myl1, Lmod2, Myot) are strongly downregulated. In spaceflight, skeletal muscle atrophy is well-documented, but these specific isoforms (especially Myh3, Myh2, Myh1, Myh4) are associated with fast-twitch and developmental muscle fibers, not typically the primary signature in eye tissue.  \n- **Crystallin genes (Crygf, Crygd, Crybb1, Cryge, Crygb, Crygc, Cryba4, Crybb2, Crygs, Cryba2, Cryba1, Cryaa)** are lens-specific structural proteins critical for transparency. Their coordinated downregulation suggests altered lens homeostasis or protein aggregation stress, which is not a hallmark of spaceflight but rather of ocular pathology or experimental/technical factors.  \n- **Eye-specific structural genes (Krt12, Kera, Bfsp1, Mip)** are also downregulated, indicating a broad disruption of ocular integrity.  \n\nSpaceflight transcriptomic signatures typically show **immune dysregulation, oxidative stress responses, mitochondrial alterations, and tissue-specific atrophy markers** (e.g., in muscle, bone, liver). The pattern here is instead a **highly tissue-specific downregulation of structural and contractile proteins in the eye**, without clear evidence of canonical spaceflight stress pathways (e.g., Nrf2 targets, DNA repair, inflammatory cytokines). This suggests a **ground sample** possibly from a model of ocular disease, aging, or a control cohort with a distinct ocular phenotype, rather than a systemic microgravity response.  \n\nConfidence is high (0.95) because the signature is inconsistent with known multi-tissue spaceflight biology and points to a localized ocular process more likely observed in ground-based studies.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 456,
+        "total_tokens": 1430
+      },
+      "sample_id": "M25",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by downregulation of crystallins (Cryba4, Cryba1, Cryba2, Crybb1, Crygc, Cryaa, etc.) and structural/cytoskeletal genes (Krt12, Bfsp1, Myh family, Tnnt3, etc.). These are highly tissue-specific markers for the **eye lens and cornea**, not signatures typically associated with systemic spaceflight responses like oxidative stress, immune dysregulation, or muscle atrophy.  \n\nIn spaceflight transcriptomics, while ocular changes (e.g., visual impairment syndrome) can occur, they usually involve vascular, inflammatory, or fluid\u2011pressure pathways, not a broad suppression of structural crystallins and keratins. This pattern instead suggests a **sample\u2011specific or technical effect** (e.g., poor RNA quality from ocular tissue, degradation) or a condition like cataract\u2011like changes, which are not a consistent hallmark of spaceflight in mouse studies.  \n\nGiven that the training cohort includes both flight and ground samples, and this signature does not match known spaceflight\u2011driven transcriptomic responses (which are more systemic and stress\u2011pathway focused), the sample is most likely from a **ground control** with an ocular\u2011specific perturbation not linked to microgravity.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 274,
+        "total_tokens": 1248
+      },
+      "sample_id": "M26",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by downregulation of crystallins (Cryba4, Crygd, Crygc, Crygf, Crygb, Crybb2, Crygs, Cryba2, Cryge, Cryba1, Cryaa) and muscle-specific genes (Myh15, Myh2, Tnnc2, Lmod2, Mb, Myot, Myh3, Tnni2, Myh13, Myh1, Myh4, Tnnt3, Myl1, Myh8). These are highly tissue-specific structural and contractile proteins of the eye lens and extraocular muscles, respectively.  \n\nIn spaceflight transcriptomics, while tissue atrophy (muscle/bone) and stress responses occur, the most differentially expressed genes in flight samples typically involve oxidative stress, immune modulation, DNA damage response, and metabolic pathways\u2014not a broad, strong downregulation of tissue-specific structural proteins without accompanying canonical spaceflight stress markers. This pattern instead suggests a sample-specific or condition-specific effect in a ground control, possibly related to development, strain background, or experimental handling, rather than the systemic adaptation to microgravity.  \n\nThus, this profile is inconsistent with the known spaceflight signature and more likely represents a ground sample with a distinct transcriptional phenotype.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 276,
+        "total_tokens": 1250
+      },
+      "sample_id": "M27",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly downregulated and are dominated by two highly tissue-specific categories:  \n1. **Crystallin genes** (Cryaa, Cryba1, Crygs, Cryba4, Crybb2, Crybb1, Crygb, Crygc, Cryba2, Crygd, Crygf, Cryge) \u2013 essential for lens transparency and structural integrity in the eye.  \n2. **Myosin heavy chain isoforms** (Myh3, Myh15, Myh1, Myh2, Myh4, Myh13, Myh8) \u2013 associated with muscle fiber composition, particularly in extraocular or skeletal muscle.  \n\nThese patterns reflect **tissue-specific gene regulation** rather than known systemic spaceflight signatures. In spaceflight transcriptomics, eye tissues often show changes related to oxidative stress, fluid shift (VIIP syndrome), or circadian disruption, but not a broad, strong downregulation of structural crystallins and myosins. Such a coordinated downregulation of fundamental structural proteins is more indicative of a **ground control sample** possibly representing a developmental, strain-specific, or experimental batch effect within the training cohort.  \n\nSpaceflight typically upregulates stress-response, immune, and mitochondrial pathways across tissues, which are absent here. The lack of characteristic oxidative stress (e.g., Nrf2 targets), DNA damage markers, or immune dysregulation genes supports a ground control classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 302,
+        "total_tokens": 1276
+      },
+      "sample_id": "M29",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly downregulated and are dominated by structural and contractile proteins specific to the eye and muscle. Key signatures include:  \n- **Crystallin genes** (Crygf, Cryge, Crybb1, Cryba4, Crygd, Crybb2, Crygs, Crygb, Crygc, Cryba2, Cryba1, Cryaa): Major components of the lens, consistently downregulated.  \n- **Myosin heavy chain isoforms** (Myh3, Myh1, Myh2, Myh15, Myh4, Myh8, Myh13): Muscle-specific contractile proteins, downregulated.  \n- **Other muscle/contractile genes** (Atp2a1, Myot, Tnnc2, Tnnt3, Tnni2, Myl1, Mb, Ckmt2, Lmod2).  \n- **Corneal/epithelial keratins** (Krt12, Krt5).  \n\nThis pattern strongly suggests **tissue-specific stress or pathology in the eye** (likely lens and corneal changes), rather than the systemic transcriptomic signatures of spaceflight (e.g., oxidative stress response, immune dysregulation, metabolic shifts in liver/kidney). In spaceflight studies, eye alterations are sometimes observed (e.g., VIIP syndrome in humans), but the gene changes here are not characteristic of known spaceflight-associated pathways in mice; instead, they resemble a localized degenerative or developmental change in ocular and periocular muscle tissue, more consistent with a ground-control sample exhibiting a specific ocular phenotype.  \n\nThus, classification as **Ground control** with high confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 354,
+        "total_tokens": 1328
+      },
+      "sample_id": "M30",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly eye-specific structural and crystallin genes (e.g., *Cryba1*, *Cryaa*, *Mip*, *Krt12*, *Kera*, *Bfsp1*), along with several skeletal muscle-specific genes (e.g., *Myh3*, *Myh8*, *Tnni2*, *Mb*, *Atp2a1*).  \n\nIn spaceflight transcriptomics of non-ocular tissues, typical signatures involve oxidative stress, immune dysregulation, and muscle atrophy pathways. Here, the extreme changes are instead related to **ocular transparency, lens crystallins, and corneal keratin**\u2014genes not commonly highlighted in known spaceflight signatures for liver, kidney, thymus, or muscle.  \n\nThe strong downregulation of corneal/epithelial keratins (*Krt5*, *Krt12*) and upregulation of crystallins suggests a tissue-specific response, possibly to altered fluid distribution or intraocular pressure, but these are not the hallmark systemic spaceflight transcriptomic patterns. Given that the z-scores are modest (mostly between \u00b11.3) and the pattern does not match known spaceflight-associated immune/metabolic reprogramming, this sample is more consistent with **normal variation in a ground control mouse**, possibly reflecting strain, age, or technical batch effects rather than microgravity response.  \n\nThus, classification as **Ground (B)** with high confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 299,
+        "total_tokens": 1273
+      },
+      "sample_id": "M31",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:** The top 50 most variable genes are overwhelmingly dominated by downregulation of crystallin genes (Cryba4, Crybb2, Crygd, Cryba1, etc.) and structural/cytoskeletal genes (Myh isoforms, keratins). This pattern is highly specific to ocular tissue and reflects a potential stress response or altered homeostasis in the lens and cornea. In spaceflight transcriptomics, while oxidative stress and tissue remodeling are common, such a pronounced, coordinated downregulation of tissue-specific structural proteins (crystallins) is not a hallmark of the known systemic spaceflight response. Instead, it suggests a sample-specific perturbation (e.g., experimental handling, age, or pathology) or a strong ground-control deviation. The absence of typical spaceflight signatures (e.g., strong immune dysregulation, mitochondrial stress, or atrophy pathways in muscle/bone) and the extreme focus on eye-specific structural genes indicates this profile is unlikely to represent the broad, multi-systemic adaptation seen in flight mice. Therefore, it is most consistent with a ground control sample exhibiting a distinct ocular phenotype.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 228,
+        "total_tokens": 1202
+      },
+      "sample_id": "M32",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by downregulated genes encoding **crystallins** (Crygd, Cryba4, Crybb1, Crygb, Crygc, Crygs, Crybb2, Crygf, Cryba2, Cryba1, Cryge, Cryaa) and **muscle-specific structural/contractile proteins** (Myh15, Myh3, Myh13, Atp2a1, Lmod2, Tnnc2, Myot, Tnni2, Myl1, Myh1, Myh4, Myh2, Mb, Tnnt3, Myh8).  \n\nIn spaceflight transcriptomics, eye tissue (particularly lens and retina) shows **downregulation of crystallin genes** due to altered fluid distribution, oxidative stress, and possibly disrupted cytoskeletal organization in microgravity. Similarly, **extraocular muscles** exhibit atrophy-related downregulation of myosin heavy chains and other contractile apparatus genes, analogous to skeletal muscle atrophy in microgravity.  \n\nThe pattern matches known spaceflight responses in ocular tissue: suppression of structural/refractive proteins and muscle-specific transcripts. No strong signatures of typical ground-control or acute stress-upregulated pathways (e.g., immediate early genes, heat shock proteins, inflammation markers) are present.  \n\nThus, this is highly consistent with a **flight sample**, but given the specificity of this signature to spaceflight ocular adaptation, confidence is high.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 304,
+        "total_tokens": 1278
+      },
+      "sample_id": "M33",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly downregulated and are dominated by tissue-specific structural and functional genes of the eye (e.g., *Krt12*, *Kera*, *Crygf*, *Cryge*, *Crybb1*, *Bfsp1*, *Mip*, *Cryaa*) and skeletal/cardiac muscle genes (e.g., *Atp2a1*, *Tnnc2*, *Myh4*, *Myh1*, *Tnnt3*, *Ckmt2*, *Lmod2*). This pattern does not match known systemic spaceflight transcriptomic signatures (oxidative stress, immune dysregulation, metabolic shifts, or atrophy pathways in major organs). Instead, it suggests a sample-specific or technical effect, possibly due to poor RNA quality, tissue degradation, or a non-representative sampling of the eye that captured adjacent muscle tissue. In spaceflight studies, such a strong, coherent downregulation of tissue-specific structural genes is not characteristic; flight samples typically show more mixed regulation of stress-response and physiological adaptation genes. Therefore, this sample is most consistent with a ground control with an unusual technical or sampling artifact.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 252,
+        "total_tokens": 1226
+      },
+      "sample_id": "M34",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by downregulation of tissue-specific structural and functional genes of the eye. Key signatures include:  \n- **Crystallin family genes** (Crybb1, Crygf, Cryba4, Crygc, Crygs, Cryge, Cryba1, Crybb2, Crygb, Crygd, Cryba2, Cryaa) \u2013 essential for lens transparency and refractive properties.  \n- **Corneal epithelial keratins** (Krt12, Krt5) \u2013 critical for corneal integrity.  \n- **Lens-specific structural proteins** (Bfsp1, Mip) \u2013 involved in lens fiber cell organization.  \n- **Muscle-related genes** (Myh15, Mb, Myl1, Myh2, Myh3, Myh1, Tnnc2, Tnnt3, Atp2a1, Myh4, Myh13, Myh8, Lmod2, Tnni2) \u2013 many are also expressed in ocular muscles (e.g., extraocular or iris/ciliary body muscles).  \n\nThis pattern is **not** characteristic of known systemic spaceflight transcriptomic responses (e.g., oxidative stress, immune dysregulation, metabolic shifts). Instead, it suggests a **tissue-specific pathology or experimental artifact** affecting ocular structure/function, possibly due to sample handling, prolonged storage, or a localized disease model in ground-based mice. In true spaceflight ocular studies, changes often include oxidative stress markers, DNA damage response, or immune activity, which are absent here. The uniform downregulation of structural proteins points to degradation or poor sample quality rather than a physiological adaptation to microgravity.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 359,
+        "total_tokens": 1333
+      },
+      "sample_id": "M35",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly downregulated and are dominated by two highly tissue-specific categories:  \n1. **Crystallins** (Crygf, Cryge, Crybb1, Cryba4, Crygc, Crygb, Crygs, Cryba1, Crybb2, Crygd, Cryba2, Cryaa) \u2013 essential for lens transparency and structural integrity in the eye.  \n2. **Muscle contractile proteins** (Myh8, Myh13, Tnnc2, Myl1, Tnni2, Myh4, Myh3, Myh1, Myh2, Tnnt3) \u2013 many are fast-twitch or developmental isoforms, not typically associated with systemic spaceflight muscle atrophy signatures.  \n\nThese changes point toward a **tissue-specific perturbation** rather than a systemic spaceflight response. In known spaceflight transcriptomic studies, eye tissues (especially lens/cornea) show alterations in crystallin expression due to oxidative stress or radiation, but the coordinated downregulation of numerous structural genes here, along with keratins (Krt12, Krt5) and other eye-enriched genes (Bfsp1, Mip, Lgsn, Kera), suggests a **developmental, strain-specific, or experimental condition effect** more consistent with ground-control cohort variability.  \n\nNo strong signatures of systemic spaceflight adaptation (e.g., oxidative stress markers, immune dysregulation, metabolic reprogramming genes) appear among the most variable genes. Therefore, this profile is most likely from a **ground control** sample with intrinsic ocular transcriptomic variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 339,
+        "total_tokens": 1313
+      },
+      "sample_id": "M36",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes in this eye sample are overwhelmingly downregulated and are dominated by two highly tissue-specific categories:  \n1. **Muscle contraction genes** (e.g., *Atp2a1*, *Myh1*, *Myh2*, *Myh3*, *Tnni2*, *Tnnc2*, *Mb*, *Myl1*, *Lmod2*, *Ckmt2*) \u2013 these are characteristic of extraocular muscle.  \n2. **Crystallin genes** (e.g., *Crygf*, *Cryge*, *Crygb*, *Crygc*, *Crygd*, *Crygs*, *Cryba4*, *Crybb1*) \u2013 these are highly abundant in the lens.  \n\nIn spaceflight transcriptomics, muscle atrophy signatures are common in skeletal muscle, but **extraocular muscle** is known to be less affected or even show different adaptations compared to limb muscle. More importantly, the strong downregulation of **lens crystallins** is not a typical reported signature of spaceflight in mice; instead, spaceflight-associated eye changes in rodents more often involve oxidative stress, DNA damage, or fluid shift-related pathways, not a broad suppression of structural lens proteins.  \n\nThis pattern suggests a **ground control sample** with a specific perturbation (possibly aging, cataractogenesis, or a model of lens/muscle pathology) that is driving extreme downregulation of these structural genes, rather than the immune, metabolic, or stress pathways typically altered by microgravity.  \n\nThus, the signature does not match known spaceflight transcriptomic responses, leading to high confidence for **ground control (B)**.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 974,
+        "completion_tokens": 356,
+        "total_tokens": 1330
+      },
+      "sample_id": "M37",
+      "true_label": 0
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task": "T1c",
+  "tissue": "thymus",
+  "mission": "RR-6",
+  "confound_warning": "PMID 33376967",
+  "conditions": {
+    "FLT_gene": {
+      "status": "OK",
+      "auroc": 0.8571428571428571,
+      "ci_low": 0.6333333333333333,
+      "ci_high": 1.0,
+      "perm_p": 0.006999300069993001,
+      "n_total": 17,
+      "n_isst": 10,
+      "n_lar": 7,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 28235
+    },
+    "FLT_pathway": {
+      "status": "OK",
+      "auroc": 0.7142857142857143,
+      "ci_low": 0.3888888888888889,
+      "ci_high": 1.0,
+      "perm_p": 0.0775922407759224,
+      "n_total": 17,
+      "n_isst": 10,
+      "n_lar": 7,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    },
+    "GC_gene": {
+      "status": "OK",
+      "auroc": 0.9249999999999999,
+      "ci_low": 0.7638541666666666,
+      "ci_high": 1.0,
+      "perm_p": 0.0004999500049995,
+      "n_total": 18,
+      "n_isst": 10,
+      "n_lar": 8,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 28235
+    },
+    "GC_pathway": {
+      "status": "OK",
+      "auroc": 1.0,
+      "ci_low": 0.9999999999999999,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 18,
+      "n_isst": 10,
+      "n_lar": 8,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    }
+  }
+}

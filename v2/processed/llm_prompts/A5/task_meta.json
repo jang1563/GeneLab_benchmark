@@ -1,0 +1,27 @@
+{
+  "task_id": "A5",
+  "tissue": "skin",
+  "n_genes": 50,
+  "gene_selection": "top-50 protein-coding genes by raw variance",
+  "gene_filter": "exclude Gm/LOC/Rik/ncRNA/multi-mapped/unmapped",
+  "gene_ordering": "|z-score| descending per sample",
+  "generated_at": "2026-03-08T01:40:10.978196",
+  "folds": {
+    "fold_MHU-2_test": {
+      "n_test_samples": 35,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-6_test": {
+      "n_test_samples": 37,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-7_test": {
+      "n_test_samples": 30,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    }
+  },
+  "total_prompts": 102
+}
