@@ -791,22 +791,29 @@ GeneLab_benchmark/
     - ✅ D6 (MHU-2 gravity 3-class): liver gene F1=0.886, thymus gene F1=0.657
     - ✅ D_condition_summary.json: 6 tasks + J5 comparison + confounder hierarchy
 ✅ Category J5 구현 (gene vs pathway 12 comparisons)
-[ ] Category J1-J4 구현 (pipeline comparison: DESeq2 vs edgeR vs limma)
-[ ] batch_correction.py (ComBat-seq, Harmony) → B 카테고리 재평가
-[ ] 전체 baseline 실행 + baseline_results.json 생성
-[ ] 난이도 계층화 검증 (예측 AUROC vs 실제 AUROC 비교)
+✅ Category J2 구현 (DGE pipeline comparison: DESeq2 vs edgeR vs limma-voom, 9 missions) — mean LFC ρ=0.926, DEG Jaccard=0.600
+✅ Category J3 구현 (batch correction: ComBat-seq, limma_rbe, RUVseq) — H2 STRONGLY_SUPPORTED (mean |delta|=0.01)
+[ ] Category J1/J4 → v2.0 scope으로 이전 (현재 미실현)
+✅ 전체 baseline 실행 + baseline_results.json 생성 (A1-A6, B1-B6 완료)
+✅ 난이도 계층화 검증 — AUROC matrix + GO/NO-GO 완료 (thymus≫gastro>skin>eye>liver≈kidney)
+✅ Tier 2 Foundation Models: scGPT (mean 0.667) + Mouse-Geneformer (mean 0.476) — Classical ML 6/6 완승
+✅ Tier 3 LLM Zero-Shot: 3 providers × 6 tasks (mean 0.471–0.505) — chance level
+✅ Multi-DB LOMO: 4 pathway DBs (Hallmark/KEGG/Reactome/MitoCarta) × 6 tissues
+✅ Independent held-out: thymus RR-23 (AUROC=0.905) + skin RR-7 (AUROC=0.885)
 ```
 
 ### Phase 3: 문서화 + 논문 초안
 
 ```
-[ ] BIOLOGICAL_GROUND_TRUTH.md 완성
-[ ] DESIGN_DECISIONS.md 완성
-[ ] README.md 공개용 작성
-[ ] 논문 초안 (Genome Biology)
-    - Methods: 데이터, task 설계, split, metric
-    - Results: baseline 성능, cross-mission generalization 발견
-    - Discussion: 어떤 조직/미션 조합이 일반화 가능한가
+✅ BIOLOGICAL_GROUND_TRUTH.md 완성 (Cell 2020, SOMA 2024 concordance 기록)
+✅ DESIGN_DECISIONS.md 완성 (DD-01 to DD-21)
+✅ README.md 공개용 업데이트 (v1.1, 2026-03-09)
+✅ Publication figures: 4 main (fig1–4) + 5 supp (figS1–5) — D3.js v7, Okabe-Ito
+✅ V1_PAPER_CONTENT.md v1.1 — 원고 전체 내용 레퍼런스 (scGPT/J2/skin held-out 포함)
+[ ] 논문 원고 최종화 (Genome Biology 제출용 LaTeX/Word 변환)
+    - Methods: 데이터, task 설계, split, metric, FM fine-tuning
+    - Results: 6 섹션 + 2 held-out 검증
+    - Discussion: FM failure 해석, 두 held-out 검증, 한계점
 ```
 
 ---
