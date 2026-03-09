@@ -1,0 +1,47 @@
+{
+  "lr": {
+    "test_mission": "RR-7",
+    "model": "lr",
+    "auroc": 0.885,
+    "bootstrap_mean": 0.8834892872422502,
+    "ci_lower": 0.7449829545454545,
+    "ci_upper": 0.986111111111111,
+    "perm_pvalue": 9.999000099990002e-05,
+    "n_train": 72,
+    "n_test": 30,
+    "n_genes": 20110,
+    "n_flight_test": 10,
+    "n_ground_test": 20,
+    "train_time_s": 8.49
+  },
+  "rf": {
+    "test_mission": "RR-7",
+    "model": "rf",
+    "auroc": 0.7775,
+    "bootstrap_mean": 0.7757578024555346,
+    "ci_lower": 0.5833333333333333,
+    "ci_upper": 0.9286037491919843,
+    "perm_pvalue": 0.007099290070992901,
+    "n_train": 72,
+    "n_test": 30,
+    "n_genes": 20110,
+    "n_flight_test": 10,
+    "n_ground_test": 20,
+    "train_time_s": 0.27
+  },
+  "pca_lr": {
+    "test_mission": "RR-7",
+    "model": "pca_lr",
+    "auroc": 0.8400000000000001,
+    "bootstrap_mean": 0.8382650077300853,
+    "ci_lower": 0.6786959228135699,
+    "ci_upper": 0.962738670347366,
+    "perm_pvalue": 0.0006999300069993001,
+    "n_train": 72,
+    "n_test": 30,
+    "n_genes": 20110,
+    "n_flight_test": 10,
+    "n_ground_test": 20,
+    "train_time_s": 0.15
+  }
+}

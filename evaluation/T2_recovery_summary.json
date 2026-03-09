@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-03-08T23:50:59.785245",
+  "description": "T2: LAR recovery signature analysis",
+  "design_decisions": [
+    "DD-20"
+  ],
+  "method": "PCA distance ratios + direction-aware pathway recovery (DD-20)",
+  "source": "v2/evaluation/T_temporal_summary.json",
+  "missions": {
+    "RR-6": {
+      "task": "T2",
+      "tissue": "liver",
+      "mission": "RR-6",
+      "pca_recovery_ratio": 0.8424829971117571,
+      "pca_variance_explained_top3": [
+        0.3849356135244723,
+        0.0791061359691748,
+        0.043915113576985576
+      ],
+      "pathway_recovery": {
+        "mean": -0.05461394816987494,
+        "median": -0.09890885607236533,
+        "n_recovering": 12,
+        "n_total": 26
+      },
+      "classification_recovery": {
+        "mean_flt_isst_flight_prob": 0.9995417646917482,
+        "mean_flt_lar_flight_prob": 0.18544688340153348,
+        "interpretation": "LAR flight_prob < ISS-T flight_prob \u2192 recovery"
+      },
+      "groups": {
+        "FLT_ISS-T": 10,
+        "FLT_LAR": 10,
+        "GC_ISS-T": 10,
+        "GC_LAR": 9,
+        "BSL_ISS-T": 10,
+        "BSL_LAR": 10
+      }
+    },
+    "RR-8": {
+      "task": "T2",
+      "tissue": "liver",
+      "mission": "RR-8",
+      "pca_recovery_ratio": 0.6517026295340289,
+      "pca_variance_explained_top3": [
+        0.12826591857548097,
+        0.08228152875391812,
+        0.06474135149829943
+      ],
+      "pathway_recovery": {
+        "mean": 1.2356235789546746,
+        "median": 1.2656746060069544,
+        "n_recovering": 25,
+        "n_total": 27
+      },
+      "classification_recovery": {
+        "mean_flt_isst_flight_prob": 0.9996929605912325,
+        "mean_flt_lar_flight_prob": 0.4040746749991572,
+        "interpretation": "LAR flight_prob < ISS-T flight_prob \u2192 recovery"
+      },
+      "groups": {
+        "FLT_ISS-T": 20,
+        "FLT_LAR": 15,
+        "GC_ISS-T": 20,
+        "GC_LAR": 15,
+        "BSL_ISS-T": 19,
+        "BSL_LAR": 19
+      }
+    }
+  },
+  "verdict": "LAR samples show partial-to-strong recovery toward baseline",
+  "evidence": "RR-6: PCA R=0.842 (partial), 12/26 recovering. RR-8: PCA R=0.652 (stronger recovery), 25/27 recovering with overshoot. Classification: FLT_LAR flight_prob 0.185 (RR-6) / 0.404 (RR-8)."
+}

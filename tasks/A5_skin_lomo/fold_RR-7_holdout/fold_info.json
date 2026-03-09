@@ -1,0 +1,29 @@
+{
+  "fold_type": "held_out",
+  "test_mission": "RR-7",
+  "test_osd": "OSD-254",
+  "train_missions": [
+    "RR-6",
+    "MHU-2"
+  ],
+  "n_train": 72,
+  "n_test": 30,
+  "n_flight_test": 10,
+  "n_ground_test": 20,
+  "n_genes_before_var_filter": 26814,
+  "n_genes_after_var_filter": 20110,
+  "var_percentile_cutoff": 0.25,
+  "train_label_distribution": {
+    "Flight": 29,
+    "Ground": 43
+  },
+  "test_label_distribution": {
+    "Flight": 10,
+    "Ground": 20
+  },
+  "excluded_bc_ag_samples": 28,
+  "normalization": "per-dataset DESeq2 (log2+1) — no joint normalization",
+  "label_public": true,
+  "note": "held-out test set. RR-7: 75-day mission (longest flight duration). Variance-filtered (top 75%).",
+  "generated_at": "2026-03-09T00:00:00"
+}
