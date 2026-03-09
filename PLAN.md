@@ -1,6 +1,6 @@
 # GeneLab_benchmark: Comprehensive Space Biology Multi-Modal Benchmark
-**최종 수정**: 2026-02-28
-**버전**: 0.6 (Pathway Analysis Integration)
+**최종 수정**: 2026-03-09
+**버전**: 1.5 (scGPT Foundation Model + Figure Review)
 
 ---
 
@@ -1104,6 +1104,7 @@ bash scripts/hpc_submit_all_tissues.sh --aggregate
 
 | 버전 | 날짜 | 주요 변경 |
 |---|---|---|
+| **v1.5** | 2026-03-09 | scGPT (whole_human) Tier 2 FM benchmark 완료: 6 tissues × 21 LOMO folds (Cayuga A40). Mean AUROC=0.667 vs GF=0.476 vs Baseline=0.758. Classical ML 6/6 완승. 7개 버그 수정 (vocab dict, padding mask, dtype, flash_attn, AUROC init 0.0, per-fold JSON). `scgpt_finetune.py`, `aggregate_scgpt_results.py` 추가. fig3 panel(a) 3-bar layout (Classical/scGPT/GF) 업데이트. Figure 전체 텍스트 readability 리뷰 및 폰트 수정 (5px→6.5-7px). DESIGN_DECISIONS.md DD-21 추가. |
 | **v1.4** | 2026-03-07 | Geneformer HPC 실행 완료: 6 tissues × 22 LOMO folds (Cayuga A40). Mean AUROC=0.476 vs Baseline 0.758 (delta=-0.283). Classical ML 6/6 완승. `aggregate_geneformer_results.py` per-fold fallback 추가. RESULTS_SUMMARY.md Tier 2 섹션 추가. |
 | **v1.3** | 2026-03-03 | Geneformer multi-tissue HPC 배포: `hpc_submit_geneformer.sh` 파라미터화 (환경변수), `hpc_submit_all_tissues.sh` master script (6 tissue, 22 folds), `aggregate_geneformer_results.py` 결과 수집 + baseline 비교. §12.13 Geneformer 전략 테이블 업데이트. |
 | **v1.2** | 2026-03-03 | D_condition_summary.json 통합: D3/D4/D5_liver/D5_thymus/D6_liver/D6_thymus 6 tasks 전체 통합 (이전: D6만 포함). Confounder hierarchy 추가 (D3>=D5>=D4). RESULTS_SUMMARY.md 확장 (D4/D5 결과 + J5 expanded 15 comparisons). |
