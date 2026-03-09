@@ -138,11 +138,11 @@ function panelLabel(g, letter, x, y) {
 
   d3Classes.forEach((c, i) => {
     g.append('text').attr('x', gStartX + i*cellSize + cellSize/2).attr('y', gStartY + 10)
-      .attr('text-anchor','middle').attr('font-size', 5)
+      .attr('text-anchor','middle').attr('font-size', 6.5)
       .attr('transform', `rotate(-40,${gStartX + i*cellSize + cellSize/2},${gStartY + 10})`)
       .attr('fill','#666').text(c);
     g.append('text').attr('x', gStartX - 3).attr('y', gStartY + 18 + i*cellSize + cellSize/2 + 2)
-      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(c);
+      .attr('text-anchor','end').attr('font-size', 6.5).attr('fill','#666').text(c);
   });
 
   d3GeneCM.forEach((row, i) => {
@@ -167,11 +167,11 @@ function panelLabel(g, letter, x, y) {
 
   d3Classes.forEach((c, i) => {
     g.append('text').attr('x', pStartX + i*cellSize + cellSize/2).attr('y', pStartY + 10)
-      .attr('text-anchor','middle').attr('font-size', 5)
+      .attr('text-anchor','middle').attr('font-size', 6.5)
       .attr('transform', `rotate(-40,${pStartX + i*cellSize + cellSize/2},${pStartY + 10})`)
       .attr('fill','#666').text(c);
     g.append('text').attr('x', pStartX - 3).attr('y', pStartY + 18 + i*cellSize + cellSize/2 + 2)
-      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(c);
+      .attr('text-anchor','end').attr('font-size', 6.5).attr('fill','#666').text(c);
   });
 
   const orangeScale = d3.scaleSequential(d3.interpolateOranges).domain([0, 30]);
@@ -228,7 +228,7 @@ function panelLabel(g, letter, x, y) {
         g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',lCell-1).attr('height',lCell-1)
           .attr('fill', viridis(val)).attr('rx',1);
         g.append('text').attr('x',x+lCell/2).attr('y',y+lCell/2+2)
-          .attr('text-anchor','middle').attr('font-size', 4.5)
+          .attr('text-anchor','middle').attr('font-size', 6)
           .attr('fill', val < 0.5 ? '#fff' : '#222')
           .text(val.toFixed(2));
       }

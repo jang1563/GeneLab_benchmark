@@ -26,6 +26,7 @@
 // ============================================================
 const CLASSICAL_COLOR = '#0072B2';
 const GF_COLOR = '#D55E00';
+const SCGPT_COLOR = '#009E73';
 const LLM_COLOR = '#CC79A7';
 const COLORS = {
   thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
@@ -63,6 +64,11 @@ const classical = {
 // Geneformer
 const geneformer = {
   A1: 0.486, A2: 0.382, A3: 0.452, A4: 0.495, A5: 0.557, A6: 0.484
+};
+
+// scGPT whole_human (21 folds, corrected results 2026-03-09)
+const scgpt = {
+  A1: 0.628, A2: 0.685, A3: 0.556, A4: 0.782, A5: 0.691, A6: 0.650
 };
 
 // LLMs
@@ -106,7 +112,7 @@ function panelLabel(g, letter, x, y) {
 }
 
 // ============================================================
-// PANEL (a) — Classical ML vs Geneformer: Grouped Bars
+// PANEL (a) — Classical ML vs scGPT vs Geneformer: Grouped Bars
 // ============================================================
 {
   const g = svg.append('g').attr('transform',`translate(${pX[0]},${margin.top})`);
@@ -116,14 +122,18 @@ function panelLabel(g, letter, x, y) {
   const plotW = pW[0] - pad.left - pad.right;
   const plotH = pH - pad.top - pad.bottom;
 
+  // Overall means
+  const scgptMean = tissues.reduce((s,t) => s + scgpt[t.key], 0) / 6;
+
   // Title
   g.append('text').attr('x', pW[0]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Classical ML vs Geneformer (scRNA foundation model)');
+    .text('Classical ML vs Foundation Models (scGPT & Geneformer)');
 
   const xScale = d3.scaleBand().domain(tissues.map(t=>t.key)).range([pad.left, pad.left + plotW]).padding(0.3);
   const yScale = d3.scaleLinear().domain([0, 1.05]).range([pad.top + plotH, pad.top]);
-  const barW = xScale.bandwidth() / 2.3;
+  const barW = xScale.bandwidth() / 3.6;
+  const gap = 1;
 
   // Gridlines
   [0.25, 0.5, 0.75, 1.0].forEach(v => {
@@ -160,64 +170,72 @@ function panelLabel(g, letter, x, y) {
     .attr('text-anchor','middle').attr('font-size', FS.axisLabel).attr('fill','#333')
     .text('AUROC');
 
-  // Bars
+  // Bars: Classical | scGPT | Geneformer per group
   tissues.forEach(t => {
     const cx = xScale(t.key) + xScale.bandwidth()/2;
     const classicalVal = classical[t.key].auroc;
+    const scgptVal = scgpt[t.key];
     const gfVal = geneformer[t.key];
+
+    // 3-bar layout: classical (left), scgpt (center), geneformer (right)
+    const x0 = cx - 1.5*barW - gap;
+    const x1 = cx - 0.5*barW;
+    const x2 = cx + 0.5*barW + gap;
 
     // Classical bar
     g.append('rect')
-      .attr('x', cx - barW - 1).attr('y', yScale(classicalVal))
+      .attr('x', x0).attr('y', yScale(classicalVal))
       .attr('width', barW).attr('height', yScale(0) - yScale(classicalVal))
       .attr('fill', CLASSICAL_COLOR).attr('opacity', 0.8).attr('rx', 1.5);
 
+    // scGPT bar
+    g.append('rect')
+      .attr('x', x1).attr('y', yScale(scgptVal))
+      .attr('width', barW).attr('height', yScale(0) - yScale(scgptVal))
+      .attr('fill', SCGPT_COLOR).attr('opacity', 0.8).attr('rx', 1.5);
+
     // Geneformer bar
     g.append('rect')
-      .attr('x', cx + 1).attr('y', yScale(gfVal))
+      .attr('x', x2).attr('y', yScale(gfVal))
       .attr('width', barW).attr('height', yScale(0) - yScale(gfVal))
       .attr('fill', GF_COLOR).attr('opacity', 0.8).attr('rx', 1.5);
-
-    // Delta annotation
-    const delta = gfVal - classicalVal;
-    g.append('text')
-      .attr('x', cx).attr('y', yScale(Math.max(classicalVal, gfVal)) - 5)
-      .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill','#666')
-      .text((delta > 0 ? '+' : '') + delta.toFixed(2));
 
     // X label
     g.append('text')
       .attr('x', cx).attr('y', pad.top + plotH + 14)
       .attr('text-anchor','middle').attr('font-size', FS.tick).attr('fill','#333')
       .text(t.name);
-    // Model type
-    g.append('text')
-      .attr('x', cx).attr('y', pad.top + plotH + 24)
-      .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#aaa')
-      .text(classical[t.key].model);
   });
 
-  // Overall means annotation
+  // Overall mean lines
   g.append('line')
     .attr('x1', pad.left + 6).attr('y1', yScale(classicalMean))
     .attr('x2', pad.left + plotW - 6).attr('y2', yScale(classicalMean))
     .attr('stroke', CLASSICAL_COLOR).attr('stroke-width', 0.8).attr('stroke-dasharray','3,2').attr('opacity',0.5);
   g.append('line')
+    .attr('x1', pad.left + 6).attr('y1', yScale(scgptMean))
+    .attr('x2', pad.left + plotW - 6).attr('y2', yScale(scgptMean))
+    .attr('stroke', SCGPT_COLOR).attr('stroke-width', 0.8).attr('stroke-dasharray','3,2').attr('opacity',0.5);
+  g.append('line')
     .attr('x1', pad.left + 6).attr('y1', yScale(gfMean))
     .attr('x2', pad.left + plotW - 6).attr('y2', yScale(gfMean))
     .attr('stroke', GF_COLOR).attr('stroke-width', 0.8).attr('stroke-dasharray','3,2').attr('opacity',0.5);
 
-  // Mean labels
+  // Mean labels (right side)
   g.append('text')
     .attr('x', pad.left + plotW + 2).attr('y', yScale(classicalMean) + 3)
     .attr('font-size', 7).attr('fill', CLASSICAL_COLOR).attr('font-weight','600')
     .text(classicalMean.toFixed(3));
   g.append('text')
+    .attr('x', pad.left + plotW + 2).attr('y', yScale(scgptMean) + 3)
+    .attr('font-size', 7).attr('fill', SCGPT_COLOR).attr('font-weight','600')
+    .text(scgptMean.toFixed(3));
+  g.append('text')
     .attr('x', pad.left + plotW + 2).attr('y', yScale(gfMean) + 3)
     .attr('font-size', 7).attr('fill', GF_COLOR).attr('font-weight','600')
     .text(gfMean.toFixed(3));
 
-  // Statistical bracket between means
+  // Bracket: classical vs geneformer (worst FM)
   const bracketX = pad.left + plotW + 38;
   g.append('line')
     .attr('x1', bracketX).attr('y1', yScale(classicalMean))
@@ -240,17 +258,21 @@ function panelLabel(g, letter, x, y) {
     .attr('x', bracketX + 3)
     .attr('y', (yScale(classicalMean) + yScale(gfMean))/2 + 7)
     .attr('font-size', 6).attr('fill','#666').attr('font-style','italic')
-    .text('p=0.016');
+    .text('vs GF');
 
   // Legend
-  const legX = pad.left + 8, legY = pad.top + 6;
+  const legX = pad.left + 4, legY = pad.top + 6;
   g.append('rect').attr('x', legX).attr('y', legY - 5).attr('width', 8).attr('height', 8)
     .attr('fill', CLASSICAL_COLOR).attr('opacity',0.8).attr('rx',1);
   g.append('text').attr('x', legX + 11).attr('y', legY + 3)
     .attr('font-size', 7).attr('fill','#444').text('Classical ML (PCA-LR)');
-  g.append('rect').attr('x', legX + 130).attr('y', legY - 5).attr('width', 8).attr('height', 8)
+  g.append('rect').attr('x', legX + 120).attr('y', legY - 5).attr('width', 8).attr('height', 8)
+    .attr('fill', SCGPT_COLOR).attr('opacity',0.8).attr('rx',1);
+  g.append('text').attr('x', legX + 131).attr('y', legY + 3)
+    .attr('font-size', 7).attr('fill','#444').text('scGPT');
+  g.append('rect').attr('x', legX + 178).attr('y', legY - 5).attr('width', 8).attr('height', 8)
     .attr('fill', GF_COLOR).attr('opacity',0.8).attr('rx',1);
-  g.append('text').attr('x', legX + 141).attr('y', legY + 3)
+  g.append('text').attr('x', legX + 189).attr('y', legY + 3)
     .attr('font-size', 7).attr('fill','#444').text('Geneformer');
 }
 

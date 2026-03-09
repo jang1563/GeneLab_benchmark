@@ -184,14 +184,8 @@ function panelLabel(g, letter, x, y) {
   // Kidney footnote
   g.append('text')
     .attr('x', pad.left).attr('y', pad.top + plotH + 16)
-    .attr('font-size', 5.5).attr('fill','#999').attr('font-style','italic')
+    .attr('font-size', 7).attr('fill','#999').attr('font-style','italic')
     .text('* Kidney: limited pathway overlap, variable across missions');
-
-  // Overall annotation
-  g.append('text')
-    .attr('x', xScale(0.5)).attr('y', pad.top + plotH + 18)
-    .attr('text-anchor','middle').attr('font-size', 7).attr('fill','#444')
-    .attr('font-style','italic');
 
   // Legend
   const legY = pad.top + 4;

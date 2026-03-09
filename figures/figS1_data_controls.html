@@ -228,11 +228,11 @@ function panelLabel(g, letter, x, y) {
   g.append('circle').attr('cx', pad.left + 5).attr('cy', legY).attr('r', 3)
     .attr('fill','#666').attr('stroke','#666').attr('stroke-width',1);
   g.append('text').attr('x', pad.left + 11).attr('y', legY + 3)
-    .attr('font-size',6).attr('fill','#666').text('Significant');
+    .attr('font-size',7).attr('fill','#666').text('Significant');
   g.append('circle').attr('cx', pad.left + 62).attr('cy', legY).attr('r', 3)
     .attr('fill','#fff').attr('stroke','#666').attr('stroke-width',1);
   g.append('text').attr('x', pad.left + 68).attr('y', legY + 3)
-    .attr('font-size',6).attr('fill','#666').text('Not significant');
+    .attr('font-size',7).attr('fill','#666').text('Not significant');
 
   g.append('text').attr('x', pad.left + plotW).attr('y', legY + 3)
     .attr('text-anchor','end').attr('font-size', 7).attr('fill','#888')

@@ -569,10 +569,52 @@ Transfer Pattern Summary (DD-17):
 
 ---
 
+## DD-21: scGPT Foundation Model Integration
+
+**결정일**: 2026-03-09
+
+**결정**: scGPT (whole_human, CellXGene 33M cells) 을 Tier 2 FM benchmark으로 추가.
+Geneformer (mouse-specific) 와 대비하여 2nd FM data point 확보.
+
+**모델 구성**:
+- 모델: `whole_human` checkpoint (scGPT pretrained, 12L Transformer, 512 hidden dim)
+- Fine-tuning: 10 epochs, batch=8, lr=1e-4, warmup=10% steps
+- Layer freeze: bottom 10/12 layers frozen (top 2 + cls head만 훈련)
+- Scheduler: `torch.optim.lr_scheduler.LambdaLR` (linear warmup/decay)
+  - `transformers.get_linear_schedule_with_warmup` 불사용: PyTorch ≥2.4 필요, Cayuga=2.1.2
+
+**Mouse→Human ortholog 매핑**:
+- 파일: `data/mouse/ensembl_mouse_human_orthologs.tsv` (83,454 rows)
+- 최종 사용 gene 수: ~17K (ortholog 매핑 후 발현 유전자 교집합)
+
+**핵심 버그 수정 기록** (scgpt_finetune.py):
+1. `vocab=None` → `vocab.json` 로드 후 dict 전달 (`TransformerModel` 필수)
+2. `src_key_padding_mask` 누락 → `gene_ids.eq(pad_token_id)` positional 추가
+3. `values` dtype Long → `.float()` cast (ContinuousValueEncoder 요구)
+4. `flash_attn==1.0.4` fp16 필수 → `use_fast_transformer=False` 영구 비활성화
+5. `output["cls_output"]` 이미 (B, n_cls) logits → `cls_decoder()` 중복 호출 제거
+6. **CRITICAL**: `best_auroc = 0.5` 초기화 → `0.0` 수정 (아래찬스 fold 정직 보고)
+7. Race condition: 공유 JSON 덮어쓰기 → per-fold `scgpt_{version}_{task}_{fold}_result.json`
+
+**결과**: 6 tissues × 21 LOMO folds
+- Overall mean AUROC: 0.667 (GF: 0.476, Baseline: 0.758)
+- Classical ML 6/6 완승: scGPT Δ=-0.092, GF Δ=-0.283 vs Baseline
+- 결론: scGPT (human pretrained) > GF (mouse-specific) but both < classical ML for small-n bulk RNA-seq
+
+**근거**:
+- Geneformer만으론 "FM 전반의 실패" 주장 약함; human FM (scGPT) 추가로 일반화된 결론
+- 두 FM 모두 chance 이상이지만 classical ML에 유의미하게 열등 → small-n bulk에서 FM underperform 확인
+
+**구현**: `scripts/scgpt_finetune.py`, `scripts/aggregate_scgpt_results.py`
+**결과 파일**: `evaluation/scgpt_whole_human_all_tissues_summary.json`
+
+---
+
 ## Changelog
 
 | 버전 | 날짜 | 변경 |
 |---|---|---|
+| **v2.1** | 2026-03-09 | DD-21 추가 — scGPT FM Integration (whole_human, 7 bug fixes, mean AUROC=0.667, Classical 6/6 완승). |
 | **v2.0** | 2026-03-07 | DD-18/19/20 추가 — v2.0 Temporal analysis design decisions (preservation confound, FDR correction, recovery fraction). |
 | **v1.4** | 2026-03-01 | DD-17 추가 — Category B Evaluation Criteria (Transfer Pattern Summary, perm_p floor 근거, pair_ 명명 규칙). |
 | **v1.3** | 2026-03-01 | DD-15 결과 추가 — fGSEA/GSVA 전체 구현 완료 (51+54 files), J5 비교 결과, 버그 수정 기록. |
