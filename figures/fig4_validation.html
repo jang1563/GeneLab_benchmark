@@ -146,8 +146,8 @@ function panelLabel(g, letter, x, y) {
       .attr('text-anchor','end').attr('font-size', FS.tick)
       .attr('fill', d.color)
       .attr('font-weight','600')
-      .attr('stroke', d.tissue === 'Eye' ? '#999' : 'none')
-      .attr('stroke-width', 0)
+      .attr('stroke', d.tissue === 'Eye' ? '#888' : 'none')
+      .attr('stroke-width', d.tissue === 'Eye' ? 0.3 : 0)
       .text(d.tissue);
 
     // Concordant bar (green)
@@ -171,7 +171,21 @@ function panelLabel(g, letter, x, y) {
       .attr('x', xScale(1) + 4).attr('y', cy + 3)
       .attr('font-size', 7).attr('fill','#666')
       .text(`${d.concordant}/${d.total}`);
+
+    // Kidney footnote marker
+    if (d.tissue === 'Kidney') {
+      g.append('text')
+        .attr('x', xScale(1) + 28).attr('y', cy + 3)
+        .attr('font-size', 7).attr('fill','#999')
+        .text('*');
+    }
   });
+
+  // Kidney footnote
+  g.append('text')
+    .attr('x', pad.left).attr('y', pad.top + plotH + 16)
+    .attr('font-size', 5.5).attr('fill','#999').attr('font-style','italic')
+    .text('* Kidney: limited pathway overlap, variable across missions');
 
   // Overall annotation
   g.append('text')
