@@ -429,13 +429,15 @@ def run_fold(
 
     # Training loop
     t0 = time.time()
-    best_auroc, best_epoch = 0.5, 0
+    best_auroc, best_epoch = 0.0, 1   # init 0.0 so below-chance results are reported honestly
     best_ckpt = token_dir / "checkpoint_best.pt"
+    epoch_aurocs = []
 
     log.info(f"Training {args.epochs} epochs (freeze_layers={args.freeze_layers}, lr={args.lr})...")
     for epoch in range(1, args.epochs + 1):
         train_loss = train_epoch(model, train_loader, optimizer, scheduler, criterion, device, scaler, pad_token_id)
         test_auroc, test_loss = evaluate(model, test_loader, device, pad_token_id)
+        epoch_aurocs.append(round(test_auroc, 4))
 
         log.info(f"  Epoch {epoch:2d}/{args.epochs}: train_loss={train_loss:.4f}, "
                  f"test_auroc={test_auroc:.4f}, test_loss={test_loss:.4f}")
@@ -454,6 +456,7 @@ def run_fold(
         "model": "scgpt_whole_human",
         "auroc": best_auroc,
         "best_epoch": best_epoch,
+        "epoch_aurocs": epoch_aurocs,
         "n_train": len(train_ds),
         "n_test": len(test_ds),
         "train_time_s": round(elapsed, 1),
