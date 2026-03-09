@@ -1,6 +1,6 @@
-# GeneLab_benchmark v1.0 — Results Summary
+# GeneLab_benchmark v1.2 — Results Summary
 
-Generated: 2026-03-01 (Updated: 2026-03-07)
+Generated: 2026-03-01 (Updated: 2026-03-08)
 
 ## Hypothesis Results
 
@@ -23,7 +23,20 @@ Generated: 2026-03-01 (Updated: 2026-03-07)
 | **Liver** | 0.577 | [0.492, 0.666] | 6 | 30 | 3 |
 | **Kidney** | 0.555 | [0.397, 0.681] | 3 | 6 | 3 |
 
-Permutation tests: Thymus vs Liver p=0.001, Gastro vs Liver p=0.048, Skin vs Liver p=0.032.
+Thymus vs Liver Δ = 0.283. Permutation tests: Thymus vs Liver p=0.001, Gastro vs Liver p=0.048, Skin vs Liver p=0.032.
+
+### Category A Detection Significance (BH-FDR corrected)
+
+| Tissue | AUROC | Raw p | FDR q | Significant? |
+|---|---|---|---|---|
+| Skin | 0.821 | 0.002 | 0.012 | **Yes** |
+| Gastrocnemius | 0.824 | 0.026 | 0.074 | No |
+| Thymus | 0.923 | 0.037 | 0.074 | No |
+| Eye | 0.789 | 0.063 | 0.095 | No |
+| Liver | 0.670 | 0.091 | 0.109 | No |
+| Kidney | 0.432 | 0.281 | 0.281 | No |
+
+*Note: Only skin survives BH-FDR correction at α=0.05. However, all top-4 tissues have AUROC > 0.7 (GO threshold). High AUROC with modest significance reflects small fold counts (3-4 folds per tissue), not weak signal.*
 
 ---
 
@@ -135,7 +148,9 @@ Mouse-Geneformer (6L BERT, 56K mouse gene vocab, pretrained on 30M scRNA-seq cel
 | A6 | Eye | 0.484 ± 0.117 | 0.789 | PCA-50 + LogReg | -0.305 | Baseline |
 | **Mean** | **6 tissues** | **0.476** | **0.758** | — | **-0.283** | **Baseline** |
 
-**Interpretation**: Classical ML wins 6/6 tissues. Geneformer performs near chance level (0.5) on small-n bulk RNA-seq (train n=30-100). This is consistent with literature — foundation models pretrained on single-cell data do not automatically transfer to small-sample bulk transcriptomics tasks.
+**Interpretation**: Classical ML wins 6/6 tissues (sign test p=0.016). Geneformer performs near chance level (0.5) on small-n bulk RNA-seq (train n=30-100). This is consistent with literature — foundation models pretrained on single-cell data do not automatically transfer to small-sample bulk transcriptomics tasks.
+
+*Note: Table shows best baseline per tissue for fair comparison. Publication figures use unified PCA-LR baseline (mean 0.743) for cross-figure consistency with Category A/B results.*
 
 ---
 
@@ -154,16 +169,55 @@ Reserved held-out test set for external benchmark evaluation. Train on 4 mission
 
 ---
 
+## Tier 3: LLM Zero-Shot Classification
+
+Three LLMs tested on zero-shot text-based spaceflight detection (no training, gene expression → text prompt → binary prediction).
+
+| Model | A1 Liver | A2 Gastro | A3 Kidney | A4 Thymus | A5 Skin | A6 Eye | Mean |
+|---|---|---|---|---|---|---|---|
+| **PCA-LR (ref)** | 0.670 | 0.824 | 0.432 | 0.923 | 0.821 | 0.789 | **0.743** |
+| DeepSeek-V3 | 0.435 | 0.514 | 0.495 | 0.421 | 0.467 | 0.492 | 0.471 |
+| Gemini-2.5-Flash | 0.523 | 0.438 | 0.494 | 0.602 | 0.580 | 0.393 | 0.505 |
+| Llama-3.3-70B | 0.527 | 0.544 | 0.440 | 0.533 | 0.451 | 0.407 | 0.484 |
+
+**Interpretation**: All 3 LLMs perform at chance level (mean 0.47–0.51). Text-based reasoning cannot replace numerical ML for transcriptomics classification. Protein-coding gene filter was applied to reduce prompt noise.
+
+---
+
+## Multi-DB Pathway Comparison (LOMO, PCA-LR)
+
+| Tissue | Hallmark | KEGG | Reactome | MitoCarta | Best DB | Range |
+|---|---|---|---|---|---|---|
+| Thymus | 0.879 | 0.899 | **0.922** | 0.846 | Reactome | 0.076 |
+| Gastro | 0.688 | 0.713 | **0.755** | 0.627 | Reactome | 0.128 |
+| Skin | 0.690 | **0.754** | 0.693 | 0.542 | KEGG | 0.212 |
+| Eye | **0.915** | 0.625 | 0.658 | 0.478 | Hallmark | 0.437 |
+| Liver | 0.574 | **0.639** | 0.614 | 0.555 | KEGG | 0.084 |
+| Kidney | 0.743 | 0.665 | **0.779** | 0.641 | Reactome | 0.138 |
+
+**Key findings**:
+- DB choice > model choice (AUROC range up to 0.437 for Eye)
+- No single DB dominates: Reactome best for 3 tissues, KEGG for 2, Hallmark for 1
+- MitoCarta consistently worst (specialized → low coverage)
+
+---
+
 ## Pipeline Status
 
 | Component | Files | Status |
 |---|---|---|
-| fGSEA | 60 (6 tissues × missions × 3 DBs) | Complete |
-| GSVA | 54 (5 tissues × missions × 3 DBs) | Complete |
-| Category B | 5 tissues, bootstrap CI + permutation | Complete |
+| fGSEA | 80 (6 tissues × missions × 4 DBs incl. MitoCarta) | Complete |
+| GSVA | 88 (6 tissues × missions × 4 DBs, skin+thymus MHU-1) | Complete |
+| Category A | 6 tissues, PCA-LR LOMO | Complete |
+| Category B | 6 tissues, bootstrap CI + permutation | Complete |
 | Category C | 4 pairs × 3 methods | Complete |
 | Category D | D3 + D4 + D5×2 + D6×2 (6 tasks) | Complete |
 | J5 | 15 comparisons | Complete |
-| NES Conservation | 6 tissues | Complete |
+| NES Conservation | 6 tissues × 4 DBs | Complete |
+| Multi-DB LOMO | 24 runs (6 tissues × 4 DBs) | Complete |
+| NC1/NC2 | Permutation + housekeeping controls | Complete |
+| Cell 2020 | 5 tissues pathway validation | Complete |
 | Geneformer | 6 tissues, 22 LOMO folds (Mouse-GF) | Complete |
+| LLM Zero-Shot | 3 providers × 6 tasks (18 evals) | Complete |
 | Held-Out | A4 Thymus (RR-23), Tier 1 + Geneformer | Complete |
+| **Figures** | **4 main + 4 supplementary (HTML/SVG)** | **Complete** |
