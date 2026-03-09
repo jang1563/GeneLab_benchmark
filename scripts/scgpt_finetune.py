@@ -147,9 +147,14 @@ def load_scgpt_for_classification(
 
     model_file = model_dir / "best_model.pt"
     args_file = model_dir / "args.json"
+    vocab_file = model_dir / "vocab.json"
 
     if not model_file.exists():
         raise FileNotFoundError(f"Model weights not found: {model_file}")
+
+    # Load vocab dict (required by TransformerModel for padding_idx lookup)
+    with open(vocab_file) as f:
+        vocab_dict = json.load(f)
 
     # Read pretrain config
     with open(args_file) as f:
@@ -179,7 +184,7 @@ def load_scgpt_for_classification(
         nlayers=nlayers,
         nlayers_cls=n_layers_cls,
         n_cls=n_cls,
-        vocab=None,
+        vocab=vocab_dict,
         dropout=dropout,
         pad_token=pad_token,
         pad_value=pad_value,
@@ -207,7 +212,8 @@ def load_scgpt_for_classification(
     n_params = sum(p.numel() for p in model.parameters())
     log.info(f"  Total params: {n_params:,}")
 
-    return model
+    pad_token_id = vocab_dict[pad_token]
+    return model, pad_token_id
 
 
 def freeze_transformer_layers(model: nn.Module, n_freeze: int) -> None:
@@ -251,22 +257,23 @@ def train_epoch(
     criterion: nn.Module,
     device: torch.device,
     scaler: Optional[torch.cuda.amp.GradScaler],
+    pad_token_id: int = 60694,
 ) -> float:
     model.train()
     total_loss = 0.0
 
     for batch in loader:
-        gene_ids = batch["gene_ids"].to(device)     # (B, seq_len)
-        values = batch["values"].to(device)          # (B, seq_len)
-        labels = batch["labels"].to(device)          # (B,)
+        gene_ids = batch["gene_ids"].to(device)          # (B, seq_len) long
+        values = batch["values"].to(device).float()      # (B, seq_len) float32
+        labels = batch["labels"].to(device)              # (B,)
+        pad_mask = gene_ids.eq(pad_token_id)             # True = padding position
 
         optimizer.zero_grad()
 
         if scaler is not None:
             with torch.cuda.amp.autocast():
-                output = model(gene_ids, values, CLS=True, MVC=False, ECS=False)
-                cls_emb = output["cls_output"]
-                logits = model.cls_decoder(cls_emb)
+                output = model(gene_ids, values, pad_mask, CLS=True, MVC=False, ECS=False)
+                logits = output["cls_output"]   # already (B, n_cls) from model's cls_decoder
                 loss = criterion(logits, labels)
             scaler.scale(loss).backward()
             scaler.unscale_(optimizer)
@@ -274,9 +281,8 @@ def train_epoch(
             scaler.step(optimizer)
             scaler.update()
         else:
-            output = model(gene_ids, values, CLS=True, MVC=False, ECS=False)
-            cls_emb = output["cls_output"]
-            logits = model.cls_decoder(cls_emb)
+            output = model(gene_ids, values, pad_mask, CLS=True, MVC=False, ECS=False)
+            logits = output["cls_output"]
             loss = criterion(logits, labels)
             loss.backward()
             nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
@@ -295,6 +301,7 @@ def evaluate(
     model: nn.Module,
     loader: DataLoader,
     device: torch.device,
+    pad_token_id: int = 60694,
 ) -> tuple[float, float]:
     """Returns (auroc, loss)."""
     model.eval()
@@ -304,12 +311,12 @@ def evaluate(
 
     for batch in loader:
         gene_ids = batch["gene_ids"].to(device)
-        values = batch["values"].to(device)
+        values = batch["values"].to(device).float()
         labels = batch["labels"].to(device)
+        pad_mask = gene_ids.eq(pad_token_id)
 
-        output = model(gene_ids, values, CLS=True, MVC=False, ECS=False)
-        cls_emb = output["cls_output"]
-        logits = model.cls_decoder(cls_emb)
+        output = model(gene_ids, values, pad_mask, CLS=True, MVC=False, ECS=False)
+        logits = output["cls_output"]   # already (B, n_cls)
 
         loss = criterion(logits, labels)
         total_loss += loss.item()
@@ -395,11 +402,10 @@ def run_fold(
         log.info(f"Dry run: train={len(train_ds)}, test={len(test_ds)} — OK")
         return {"test_mission": fold_mission, "dry_run": True}
 
-    # Model
-    use_flash = device.type == "cuda"
-    model = load_scgpt_for_classification(
+    # Model — disable flash_attn (v1.0.4 requires fp16 input directly, incompatible with autocast)
+    model, pad_token_id = load_scgpt_for_classification(
         model_dir, vocab_size=vocab_size,
-        n_cls=2, use_fast_transformer=use_flash,
+        n_cls=2, use_fast_transformer=False,
     )
     freeze_transformer_layers(model, args.freeze_layers)
     model = model.to(device)
@@ -411,10 +417,11 @@ def run_fold(
     )
     total_steps = args.epochs * len(train_loader)
     warmup_steps = min(100, total_steps // 10)
-    from transformers import get_linear_schedule_with_warmup
-    scheduler = get_linear_schedule_with_warmup(
-        optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps
-    )
+    def _lr_lambda(step):
+        if step < warmup_steps:
+            return float(step) / max(1, warmup_steps)
+        return max(0.0, float(total_steps - step) / max(1, total_steps - warmup_steps))
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, _lr_lambda)
     criterion = nn.CrossEntropyLoss()
 
     # Mixed precision
@@ -427,8 +434,8 @@ def run_fold(
 
     log.info(f"Training {args.epochs} epochs (freeze_layers={args.freeze_layers}, lr={args.lr})...")
     for epoch in range(1, args.epochs + 1):
-        train_loss = train_epoch(model, train_loader, optimizer, scheduler, criterion, device, scaler)
-        test_auroc, test_loss = evaluate(model, test_loader, device)
+        train_loss = train_epoch(model, train_loader, optimizer, scheduler, criterion, device, scaler, pad_token_id)
+        test_auroc, test_loss = evaluate(model, test_loader, device, pad_token_id)
 
         log.info(f"  Epoch {epoch:2d}/{args.epochs}: train_loss={train_loss:.4f}, "
                  f"test_auroc={test_auroc:.4f}, test_loss={test_loss:.4f}")
@@ -543,24 +550,14 @@ def main():
                 "n_folds": len(aurocs),
             }
 
-            # Save per-task results
-            out_file = eval_base / f"scgpt_whole_human_{task_id}_lomo_results.json"
-            with open(out_file, "w") as f:
-                json.dump(all_results[task_id], f, indent=2)
-            log.info(f"Saved: {out_file}")
+            # Save per-fold files to avoid race condition in parallel array jobs
+            for fold_mission, result in task_results.items():
+                fold_file = eval_base / f"scgpt_whole_human_{task_id}_{fold_mission}_result.json"
+                with open(fold_file, "w") as f:
+                    json.dump(result, f, indent=2)
+                log.info(f"Saved fold: {fold_file}")
 
-    # Save combined summary
-    if all_results and not args.dry_run and any(all_results.values()):
-        summary_file = eval_base / "scgpt_whole_human_all_tissues_summary.json"
-        with open(summary_file, "w") as f:
-            json.dump({
-                "model": "scgpt_whole_human",
-                "freeze_layers": args.freeze_layers,
-                "epochs": args.epochs,
-                "lr": args.lr,
-                "results": all_results,
-            }, f, indent=2)
-        log.info(f"\nCombined summary: {summary_file}")
+    # Combined summary built by aggregate_scgpt_results.py after all folds complete
 
 
 if __name__ == "__main__":
