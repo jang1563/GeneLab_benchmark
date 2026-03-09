@@ -56,6 +56,11 @@ const thymusPairwise = [1.0, 0.817, 0.98, 1.0, 0.4902, 1.0, 1.0, 0.6667, 0.7, 1.
 const rr23 = {auroc: 0.905, ci_low: 0.672, ci_high: 1.0, p: 0.005};
 const lomoMean = 0.860;
 
+// Skin held-out: A5 RR-7 (LR model, n_test=30, 10 FLT + 20 GC)
+const skinLomo = [0.890, 0.769, 0.805];  // MHU-2_test, RR-6_test, RR-7_test
+const skinLomoMean = 0.821;
+const rr7 = {auroc: 0.885, ci_low: 0.745, ci_high: 0.986, p: '<0.001'};
+
 // Panel (c): Cross-tissue transfer (C1-C4)
 const crossTissue = [
   {pair:'C1', label:'Liver → Kidney', gene:0.730, deg:0.441, pathway:0.483},
@@ -215,7 +220,7 @@ function panelLabel(g, letter, x, y) {
 }
 
 // ============================================================
-// PANEL (b) — Held-Out RR-23 Thymus
+// PANEL (b) — Independent held-out validation (Thymus + Skin)
 // ============================================================
 {
   const g = svg.append('g').attr('transform',`translate(${pX[1]},${margin.top})`);
@@ -228,10 +233,18 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[1]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Independent validation: RR-23 thymus');
+    .text('Independent held-out validation (two tissues)');
 
   const xScale = d3.scaleLinear().domain([0.3, 1.08]).range([pad.left, pad.left + plotW]);
-  const midY = pad.top + plotH/2;
+  const midY_thy  = pad.top + plotH * 0.27;
+  const midY_skin = pad.top + plotH * 0.73;
+  const divY      = pad.top + plotH * 0.5;
+
+  // Row divider
+  g.append('line')
+    .attr('x1', pad.left).attr('y1', divY)
+    .attr('x2', pad.left + plotW).attr('y2', divY)
+    .attr('stroke','#e0e0e0').attr('stroke-width',0.8).attr('stroke-dasharray','3,3');
 
   // Chance line
   g.append('line')
@@ -259,70 +272,115 @@ function panelLabel(g, letter, x, y) {
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
     .text('Classification accuracy (AUROC)');
 
-  // Pairwise transfer dots (context)
-  const jitterScale = d3.scaleLinear().domain([0, thymusPairwise.length-1]).range([-plotH*0.3, plotH*0.3]);
+  const dSize = 7;
+
+  // ── THYMUS ROW ──
+  g.append('text')
+    .attr('x', pad.left - 4).attr('y', midY_thy + 3)
+    .attr('text-anchor','end').attr('font-size', 8).attr('fill', COLORS.thymus).attr('font-weight','600')
+    .text('Thymus');
+
+  // Pairwise context dots (opacity 0.25)
+  const jitterScale_thy = d3.scaleLinear().domain([0, thymusPairwise.length-1]).range([-plotH*0.15, plotH*0.15]);
   thymusPairwise.forEach((val, i) => {
     g.append('circle')
       .attr('cx', xScale(val))
-      .attr('cy', midY + jitterScale(i))
+      .attr('cy', midY_thy + jitterScale_thy(i))
       .attr('r', 3.5)
-      .attr('fill', COLORS.thymus)
-      .attr('opacity', 0.25)
-      .attr('stroke', COLORS.thymus)
-      .attr('stroke-width', 0.5);
+      .attr('fill', COLORS.thymus).attr('opacity', 0.25)
+      .attr('stroke', COLORS.thymus).attr('stroke-width', 0.5);
   });
 
-  // LOMO mean vertical line
+  // Thymus LOMO mean line
   g.append('line')
-    .attr('x1', xScale(lomoMean)).attr('y1', midY - plotH*0.35)
-    .attr('x2', xScale(lomoMean)).attr('y2', midY + plotH*0.35)
+    .attr('x1', xScale(lomoMean)).attr('y1', midY_thy - plotH*0.17)
+    .attr('x2', xScale(lomoMean)).attr('y2', midY_thy + plotH*0.17)
     .attr('stroke', COLORS.thymus).attr('stroke-width', 1.2).attr('stroke-dasharray','4,3');
-  g.append('text')
-    .attr('x', xScale(lomoMean) - 3).attr('y', midY - plotH*0.38)
-    .attr('text-anchor','end').attr('font-size', 6.5).attr('fill', COLORS.thymus)
-    .text('Training set mean');
 
   // RR-23 CI bar
-  const rr23Y = midY;
+  const rr23Y = midY_thy;
   g.append('line')
     .attr('x1', xScale(rr23.ci_low)).attr('y1', rr23Y)
     .attr('x2', xScale(rr23.ci_high)).attr('y2', rr23Y)
     .attr('stroke', '#c00').attr('stroke-width', 2);
   [rr23.ci_low, rr23.ci_high].forEach(v => {
     g.append('line')
-      .attr('x1', xScale(v)).attr('y1', rr23Y - 5)
-      .attr('x2', xScale(v)).attr('y2', rr23Y + 5)
+      .attr('x1', xScale(v)).attr('y1', rr23Y - 4)
+      .attr('x2', xScale(v)).attr('y2', rr23Y + 4)
       .attr('stroke', '#c00').attr('stroke-width', 1.5);
   });
-
-  // RR-23 point (diamond)
-  const dSize = 7;
   g.append('path')
     .attr('d', `M${xScale(rr23.auroc)},${rr23Y-dSize} L${xScale(rr23.auroc)+dSize},${rr23Y} L${xScale(rr23.auroc)},${rr23Y+dSize} L${xScale(rr23.auroc)-dSize},${rr23Y}Z`)
     .attr('fill', '#c00').attr('stroke', '#800').attr('stroke-width', 1);
-
-  // RR-23 annotation
   g.append('text')
-    .attr('x', xScale(rr23.auroc)).attr('y', rr23Y - dSize - 8)
-    .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#c00').attr('font-weight','bold')
+    .attr('x', xScale(rr23.auroc)).attr('y', rr23Y - dSize - 5)
+    .attr('text-anchor','middle').attr('font-size', 7.5).attr('fill','#c00').attr('font-weight','bold')
     .text('0.905');
   g.append('text')
-    .attr('x', xScale(rr23.auroc)).attr('y', rr23Y + dSize + 14)
-    .attr('text-anchor','middle').attr('font-size', 7).attr('fill','#c00').attr('font-style','italic')
+    .attr('x', xScale(rr23.auroc)).attr('y', rr23Y + dSize + 12)
+    .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill','#c00').attr('font-style','italic')
     .text('p = 0.005');
+
+  // ── SKIN ROW ──
+  g.append('text')
+    .attr('x', pad.left - 4).attr('y', midY_skin + 3)
+    .attr('text-anchor','end').attr('font-size', 8).attr('fill', COLORS.skin).attr('font-weight','600')
+    .text('Skin');
+
+  // Skin LOMO context dots (opacity 0.2 — reference only)
+  const skinJitter = [-7, 0, 7];
+  skinLomo.forEach((val, i) => {
+    g.append('circle')
+      .attr('cx', xScale(val))
+      .attr('cy', midY_skin + skinJitter[i])
+      .attr('r', 3.5)
+      .attr('fill', COLORS.skin).attr('opacity', 0.2)
+      .attr('stroke', COLORS.skin).attr('stroke-width', 0.5);
+  });
+
+  // Skin LOMO mean line
+  g.append('line')
+    .attr('x1', xScale(skinLomoMean)).attr('y1', midY_skin - plotH*0.17)
+    .attr('x2', xScale(skinLomoMean)).attr('y2', midY_skin + plotH*0.17)
+    .attr('stroke', COLORS.skin).attr('stroke-width', 1.2).attr('stroke-dasharray','4,3');
+
+  // RR-7 CI bar + diamond
+  const rr7Y = midY_skin;
+  const skinDark = '#1a7a4a';
+  g.append('line')
+    .attr('x1', xScale(rr7.ci_low)).attr('y1', rr7Y)
+    .attr('x2', xScale(rr7.ci_high)).attr('y2', rr7Y)
+    .attr('stroke', skinDark).attr('stroke-width', 2);
+  [rr7.ci_low, rr7.ci_high].forEach(v => {
+    g.append('line')
+      .attr('x1', xScale(v)).attr('y1', rr7Y - 4)
+      .attr('x2', xScale(v)).attr('y2', rr7Y + 4)
+      .attr('stroke', skinDark).attr('stroke-width', 1.5);
+  });
+  g.append('path')
+    .attr('d', `M${xScale(rr7.auroc)},${rr7Y-dSize} L${xScale(rr7.auroc)+dSize},${rr7Y} L${xScale(rr7.auroc)},${rr7Y+dSize} L${xScale(rr7.auroc)-dSize},${rr7Y}Z`)
+    .attr('fill', skinDark).attr('stroke', '#0d5c35').attr('stroke-width', 1);
+  g.append('text')
+    .attr('x', xScale(rr7.auroc)).attr('y', rr7Y - dSize - 5)
+    .attr('text-anchor','middle').attr('font-size', 7.5).attr('fill', skinDark).attr('font-weight','bold')
+    .text('0.885');
+  g.append('text')
+    .attr('x', xScale(rr7.auroc)).attr('y', rr7Y + dSize + 12)
+    .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill', skinDark).attr('font-style','italic')
+    .text('p < 0.001');
 
   // Legend
   const legY = pad.top + 4;
   g.append('circle').attr('cx', pad.left + 4).attr('cy', legY).attr('r', 3)
-    .attr('fill', COLORS.thymus).attr('opacity', 0.4);
+    .attr('fill', '#888').attr('opacity', 0.3);
   g.append('text').attr('x', pad.left + 10).attr('y', legY + 3)
-    .attr('font-size', 6).attr('fill','#666').text('Pairwise folds (12)');
+    .attr('font-size', 6).attr('fill','#666').text('LOMO context (ref.)');
   const dS = 4;
   g.append('path')
-    .attr('d', `M${pad.left + 65},${legY-dS} L${pad.left+65+dS},${legY} L${pad.left+65},${legY+dS} L${pad.left+65-dS},${legY}Z`)
-    .attr('fill', '#c00').attr('stroke','#800').attr('stroke-width',0.5);
-  g.append('text').attr('x', pad.left + 72).attr('y', legY + 3)
-    .attr('font-size', 6).attr('fill','#666').text('RR-23');
+    .attr('d', `M${pad.left + 80},${legY-dS} L${pad.left+80+dS},${legY} L${pad.left+80},${legY+dS} L${pad.left+80-dS},${legY}Z`)
+    .attr('fill', '#888').attr('stroke','#555').attr('stroke-width',0.5);
+  g.append('text').attr('x', pad.left + 87).attr('y', legY + 3)
+    .attr('font-size', 6).attr('fill','#666').text('Held-out');
 }
 
 // ============================================================
