@@ -2,8 +2,8 @@
 
 **A public benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v1.0-alpha (Dataset freeze: 2026-03-01)
-Status: Phase 1 complete — **4 tissues GO** (A2 Gastrocnemius, A4 Thymus, A5 Skin, A6 Eye pathway-level)
+Version: v1.1 (Dataset freeze: 2026-03-01)
+Status: **Analysis complete** — 6 tissues, 3 model tiers, 2 independent held-out validations
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -40,7 +40,7 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 
 ---
 
-## Phase 1 Results Summary
+## Results Summary (v1.1)
 
 ### Category A — Spaceflight Detection (LOMO)
 
@@ -158,6 +158,17 @@ Validated against Beheshti et al. (Cell 2020, PMID 33242417) multi-omics consens
 | NC1 | Permutation test (28 entries) | AUROC ≈ 0.50 | 0.50 ± 0.03 |
 | NC2 | Housekeeping genes only (50 genes) | AUROC ≈ 0.50 | 0.49–0.55 |
 
+### Independent Held-Out Validation
+
+Two missions were withheld entirely from all model development:
+
+| Tissue | Mission | AUROC | 95% CI | p-value | Duration | n_test |
+|--------|---------|-------|--------|---------|---------|--------|
+| Thymus | RR-23 | **0.905** | [0.672, 1.000] | 0.005 | 30 days | 18 (10 FLT, 8 GC) |
+| Skin | RR-7 | **0.885** | [0.745, 0.986] | <0.001 | 75 days | 30 (10 FLT, 20 GC) |
+
+Both held-out evaluations pass the GO criteria (AUROC>0.700, CI_lower>0.500, perm_p<0.050), confirming that PCA-LR classifiers trained on 3–12 ISS missions generalize to completely unseen missions including the longest mission evaluated (75 days).
+
 ### Biological Validation (fGSEA Hallmark)
 
 | Tissue | Top Enriched Pathways | Consistency |
@@ -176,8 +187,8 @@ Validated against Beheshti et al. (Cell 2020, PMID 33242417) multi-omics consens
 ```
 GeneLab_benchmark/
 ├── README.md                       ← This file
-├── PLAN.md                         ← Benchmark design specification (v0.6)
-├── DESIGN_DECISIONS.md             ← Architecture decisions log (DD-01 to DD-17)
+├── PLAN.md                         ← Benchmark design specification (v1.5)
+├── DESIGN_DECISIONS.md             ← Architecture decisions log (DD-01 to DD-21)
 ├── DATA_CATALOG.md                 ← Auto-generated OSDR inventory (24 studies)
 ├── CITATION.cff                    ← Citation metadata
 │
@@ -190,7 +201,7 @@ GeneLab_benchmark/
 │   ├── A6_eye_lomo/                ← 3 folds
 │   └── B1–B6_*_cross_mission/     ← N×(N-1) mission pairs per tissue
 │
-├── scripts/                        ← Pipeline scripts (31 Python/R/shell, ~11K LOC)
+├── scripts/                        ← Pipeline scripts (35 Python/R/shell)
 │   ├── run_baselines.py            ← Classical ML baseline runner (LR, RF, XGBoost, PCA-LR)
 │   ├── evaluate_submission.py      ← Submission evaluator (AUROC, CI, perm_p)
 │   ├── generate_tasks.py           ← LOMO split generator
@@ -198,6 +209,7 @@ GeneLab_benchmark/
 │   ├── cross_tissue_transfer.py    ← Category C: 3 methods
 │   ├── condition_prediction.py     ← Category D: mission/strain/hardware/gravity
 │   ├── gene_vs_pathway_comparison.py ← J5: feature representation
+│   ├── dge_pipeline_comparison.py  ← J2: DESeq2 vs edgeR vs limma-voom
 │   ├── shap_analysis.py            ← SHAP feature importance
 │   ├── run_fgsea.R                 ← Group-level fGSEA enrichment
 │   ├── compute_pathway_scores.R    ← Sample-level GSVA scores
@@ -205,8 +217,11 @@ GeneLab_benchmark/
 │   ├── housekeeping_control.py     ← NC2: housekeeping gene baseline
 │   ├── cell2020_validation.py      ← External validation vs Cell 2020
 │   ├── compute_nes_conservation.py ← NES pathway conservation
-│   ├── geneformer_tokenize.py      ← Gene rank tokenization
-│   ├── geneformer_finetune.py      ← BERT fine-tuning
+│   ├── geneformer_tokenize.py      ← Tier 2: gene rank tokenization
+│   ├── geneformer_finetune.py      ← Tier 2: Mouse-GF BERT fine-tuning
+│   ├── scgpt_tokenize.py           ← Tier 2: scGPT ortholog mapping + tokenization
+│   ├── scgpt_finetune.py           ← Tier 2: scGPT Transformer fine-tuning
+│   ├── run_holdout.py              ← Independent held-out evaluation
 │   └── utils.py                    ← Shared utilities
 │
 ├── docs/
@@ -217,20 +232,26 @@ GeneLab_benchmark/
 │   └── development_history/
 │       └── PHASE1_RESULTS.md       ← Full Phase 1 analysis
 │
-├── evaluation/                     ← ~50 result JSON files
-│   ├── A*_baseline_results.json    ← Per-tissue baseline results
-│   ├── A*_shap_rf.json             ← SHAP rankings
+├── evaluation/                     ← Result JSON files (~50)
+│   ├── A*_baseline_results.json    ← Per-tissue classical ML results
+│   ├── A*_shap_rf.json             ← SHAP feature rankings
 │   ├── B_cross_mission_summary.json
 │   ├── C_cross_tissue_summary.json
 │   ├── D_condition_summary.json
+│   ├── J2_dge_pipeline_comparison.json   ← DESeq2 vs edgeR vs limma
 │   ├── J3_batch_correction_comparison.json
 │   ├── J5_gene_vs_pathway.json
+│   ├── multi_db_comparison.json    ← 4 pathway DBs × 6 tissues LOMO
+│   ├── geneformer_mouse_gf_all_tissues_summary.json
+│   ├── scgpt_whole_human_all_tissues_summary.json
+│   ├── A4_holdout_results.json     ← Thymus RR-23 held-out
+│   ├── A5_holdout_results.json     ← Skin RR-7 held-out
 │   ├── NC1_permutation_summary.json
 │   ├── NC2_housekeeping_summary.json
 │   ├── cell2020_validation.json
 │   ├── NES_conservation_vs_transfer.json
 │   ├── RESULTS_SUMMARY.md          ← Comprehensive results table
-│   └── submission_*.json           ← Baseline submission files
+│   └── submission_*.json           ← Baseline + FM submission files
 │
 └── processed/                      ← Intermediate analysis outputs
     ├── A_detection/                ← Per-tissue LOMO data
@@ -416,10 +437,10 @@ Pre-computed baseline predictions are available in `evaluation/` for reference a
 
 | File | Task | Model | Mean AUROC | Go/No-Go |
 |------|------|-------|------------|----------|
-| `submission_PCALR_baseline_A4.json` | A4 Thymus | PCA-LR (L2, lbfgs) | 0.923 | ✓ GO |
-| `submission_LR_baseline_A2.json` | A2 Gastrocnemius | LR-ElasticNet (SAGA) | 0.917 | ✓ GO |
-| `submission_LR_baseline_A5.json` | A5 Skin | LR (ElasticNet) | 0.821 | ✓ GO |
-| `submission_PCALR_baseline_A6.json` | A6 Eye | PCA-LR (pathway) | 0.915 | ✓ GO |
+| `submission_PCA-LR_baseline_v1_A4_eval.json` | A4 Thymus | PCA-LR (L2, lbfgs) | 0.923 | ✓ GO |
+| `submission_LR-ElasticNet_baseline_v1_A2_eval.json` | A2 Gastrocnemius | LR-ElasticNet (SAGA) | 0.917 | ✓ GO |
+| `submission_PCA-LR_baseline_v1_A5_eval.json` | A5 Skin | LR (ElasticNet) | 0.821 | ✓ GO |
+| `submission_PCA-LR_baseline_v1_A6_eval.json` | A6 Eye | PCA-LR (pathway) | 0.915 | ✓ GO |
 
 **Category B (Cross-Mission Transfer)**
 
@@ -439,14 +460,14 @@ Evaluate a baseline submission:
 ```bash
 # Category A
 python scripts/evaluate_submission.py \
-    --submission evaluation/submission_LR_baseline_A5.json \
+    --submission evaluation/submission_PCA-LR_baseline_v1_A5_eval.json \
     --task A5
 
 # Category B (summary across all tissues)
 python scripts/cross_mission_transfer.py --tissue skin
 ```
 
-> **Reproducibility note**: The official `A2_baseline_results.json` was computed with `max_iter=2000` (SAGA not fully converged for 15k genes). The baseline submission above uses `max_iter=10000` (converged); A2 mean AUROC improves from 0.907 → 0.917. GO/No-Go conclusion unchanged. See `PHASE1_RESULTS.md §B3` for details.
+> **Reproducibility note**: `A2_baseline_results.json` was computed with `max_iter=2000` (SAGA not fully converged for 15k genes). The baseline submission (`submission_LR-ElasticNet_baseline_v1_A2_eval.json`) uses `max_iter=10000` (converged); A2 mean AUROC improves from 0.907 → 0.917. GO/No-Go conclusion unchanged.
 
 ---
 
@@ -472,21 +493,36 @@ All three conditions must pass for a GO decision.
 | **Tier 2 — Foundation Models** | Geneformer (Mouse-GF) | Gene rank order (tokenized) |
 | **Tier 3 — Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list (see DD-16) |
 
-### Tier 2 Results: Geneformer vs Classical ML (LOMO AUROC)
+### Tier 2 Results: Foundation Models vs Classical ML (LOMO AUROC)
 
-| Tissue | Geneformer | Baseline | Delta | Winner |
-|--------|-----------|----------|-------|--------|
-| Liver | 0.486 | 0.588 | -0.102 | Baseline |
-| Gastrocnemius | 0.382 | 0.907 | -0.525 | Baseline |
-| Kidney | 0.452 | 0.521 | -0.069 | Baseline |
-| Thymus | 0.495 | 0.923 | -0.428 | Baseline |
-| Skin | 0.557 | 0.821 | -0.265 | Baseline |
-| Eye | 0.484 | 0.789 | -0.305 | Baseline |
-| **Mean** | **0.476** | **0.758** | **-0.283** | **Baseline** |
+| Tissue | Baseline | scGPT | Δ scGPT | Mouse-GF | Δ GF | Winner |
+|--------|---------|-------|---------|---------|------|--------|
+| Liver | 0.588 | 0.628 | +0.040 | 0.486 | -0.102 | scGPT |
+| Gastrocnemius | 0.907 | 0.685 | -0.222 | 0.382 | -0.525 | Baseline |
+| Kidney | 0.521 | 0.556 | +0.035 | 0.452 | -0.069 | scGPT |
+| Thymus | 0.923 | 0.782 | -0.141 | 0.495 | -0.428 | Baseline |
+| Skin | 0.821 | 0.691 | -0.130 | 0.557 | -0.265 | Baseline |
+| Eye | 0.789 | 0.650 | -0.139 | 0.484 | -0.305 | Baseline |
+| **Mean** | **0.758** | **0.667** | **-0.092** | **0.476** | **-0.283** | **Baseline** |
 
-Mouse-Geneformer (6-layer BERT, 56K gene vocab, pretrained on 30M mouse scRNA-seq cells) underperforms classical ML across all 6 tissues. Consistent with literature: foundation models pretrained on single-cell data do not automatically transfer to small-sample (n=30-100) bulk transcriptomics.
+**scGPT** (12-layer Transformer, 33M parameter pretrained on 33M human cells, whole-human model) outperforms Mouse-Geneformer by +0.191 despite requiring mouse→human ortholog mapping (18,398 shared genes). Scale > species alignment. Both FMs underperform classical ML on mean AUROC.
 
-For Tier 3 (Text LLM) input format specification, see [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) (DD-16).
+**Mouse-Geneformer** (6-layer BERT, 56K gene vocab, pretrained on 30M mouse scRNA-seq cells): lowest mean AUROC (0.476). Classical ML wins 6/6 tissues, scGPT wins 4/6.
+
+Finding: **scRNA-seq-pretrained FMs do not transfer to small-n (n=30–100) bulk transcriptomics**, regardless of scale or species alignment.
+
+### Tier 3 Results: Text LLM Zero-Shot (LOMO AUROC)
+
+| Model | Mean AUROC (6 tasks) |
+|-------|---------------------|
+| DeepSeek-V3 | 0.505 |
+| Gemini-2.5-Flash | 0.501 |
+| Llama-3.3-70B | 0.471 |
+| PCA-LR baseline | **0.757** |
+
+All three LLMs perform near chance (0.47–0.51) on binary flight/ground classification from gene name lists. Text-based zero-shot classification provides no signal beyond random. Input format: sorted differential expression gene list (see DD-16).
+
+For Tier 3 input format specification, see [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) (DD-16).
 
 ---
 
@@ -551,6 +587,7 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 - **DD-15**: Pathway analysis (fGSEA group-level + GSVA sample-level)
 - **DD-16**: Text LLM evaluation track specification
 - **DD-17**: Category B evaluation criteria (Transfer Pattern Summary, perm_p floor)
+- **DD-21**: scGPT fine-tuning strategy (freeze 10/12 layers, ortholog mapping, 10 epochs)
 
 ---
 
@@ -558,9 +595,8 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v1.0-alpha | 2026-03-01 | Phase 1 complete. 4 tissues GO (A2+A4+A5 gene-level, A6 pathway-level). Category B–D all 6 tissues. J5 gene-vs-pathway (12 comparisons). NES conservation analysis. Cell 2020 external validation (71.7% concordance). Negative controls (NC1/NC2) pass. fGSEA 60 files, GSVA 54 files. Submission format + evaluator. Dataset freeze. |
-| v1.1 | 2026-03-07 | Tier 2 Geneformer complete: Mouse-GF fine-tuned on 6 tissues (22 LOMO folds, Cayuga A40 GPU). Mean AUROC=0.476 vs Baseline 0.758 — classical ML wins 6/6 tissues. |
-| v1.0.1 | 2026-03-03 | Category D expanded: D4 strain + D5 hardware (liver/thymus) integrated into summary. J5 expanded to 15 comparisons. Confounder hierarchy documented. condition_prediction.py merge-on-write fix. |
+| v1.1 | 2026-03-09 | Analysis complete. scGPT (mean 0.667) + 3-way FM comparison. Held-out: skin RR-7 (0.885). J2 DGE pipeline comparison (ρ=0.926, Jaccard=0.600). Publication figures: fig1–4 + figS1–5 (D3.js v7). V1_PAPER_CONTENT.md v1.1. |
+| v1.0 | 2026-03-07 | Tier 3 LLM zero-shot complete (3 providers × 6 tasks, mean 0.47–0.51). Held-out thymus RR-23 (AUROC=0.905). scGPT Tier 2 complete (6 tissues, mean AUROC=0.667). Multi-DB LOMO (4 DBs × 6 tissues). Mouse-GF Tier 2 (22 LOMO folds, Cayuga A40, mean AUROC=0.476). Category A–D + J3 + J5 + NC1/NC2. Cell 2020 external validation (71.7% concordance). fGSEA 80 files, GSVA 88 files. Dataset freeze: 2026-03-01. |
 
 ---
 
@@ -568,10 +604,10 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 
 | Version | Scope | Location |
 |---------|-------|----------|
-| **v1.0** | Mouse bulk RNA-seq, 6 tissues, 25 tasks, Tier 1 + Geneformer | Project root (`scripts/`, `evaluation/`, `tasks/`) |
+| **v1.0** | Mouse bulk RNA-seq, 6 tissues, 25+ tasks, 3 model tiers, 2 held-out validations | Project root (`scripts/`, `evaluation/`, `tasks/`) |
 | **v2.0** | Cross-species, single-cell, spatial, microbiome | `v2/` directory |
 
-v1.0 is frozen at git tag `v1.0`. See [`v2/README.md`](v2/README.md) for v2.0 scope and prerequisites.
+v1.0 code is in project root. See [`v2/README.md`](v2/README.md) for v2.0 scope and prerequisites (requires v1.0 publication).
 
 ---
 
