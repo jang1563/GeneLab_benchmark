@@ -1,6 +1,6 @@
 # GeneLab_benchmark v1.2 — Results Summary
 
-Generated: 2026-03-01 (Updated: 2026-03-08)
+Generated: 2026-03-01 (Updated: 2026-03-09)
 
 ## Hypothesis Results
 
@@ -202,6 +202,92 @@ Three LLMs tested on zero-shot text-based spaceflight detection (no training, ge
 
 ---
 
+## Temporal & Biological Covariates
+
+### T1: ISS-T vs LAR Sacrifice Timing
+
+**Question**: Can sacrifice timing (ISS-Terminal vs Live Animal Return) be detected from transcriptomics?
+
+**Confound warning (DD-18)**: ISS-T = RNAlater on-orbit, LAR = standard necropsy. Preservation method confounds biological timing.
+
+| Sub-task | Condition | Gene AUROC | Pathway AUROC | n |
+|---|---|---|---|---|
+| **T1a RR-6 liver** | FLT | 1.000 | 0.960 | 20 |
+| | GC (baseline) | 0.922 | 0.778 | 19 |
+| **T1b RR-8 liver** | FLT | 0.930 | 0.920 | 35 |
+| | GC (baseline) | **0.973** | 0.993 | 35 |
+| **T1c RR-6 thymus** | FLT | 0.857 | 0.714 NS | 17 |
+| | GC (baseline) | **0.925** | 1.000 | 18 |
+
+**Verdict**: GC AUROC ≥ FLT AUROC in most cases → ISS-T vs LAR difference **dominated by preservation artifact**, not biological timing. Cross-mission transfer (T1d) confirms: artifact is consistent across RR-6↔RR-8 (FLT gene AUROC 0.97–0.99, GC gene 0.84–0.96).
+
+### T2: LAR Recovery Signature
+
+| Mission | PCA Recovery R | Pathways Recovering | FLT_LAR flight_prob |
+|---|---|---|---|
+| RR-6 | 0.842 (partial) | 12/26 | 0.185 (strong) |
+| RR-8 | 0.652 (stronger) | **25/27** (overshoot) | 0.404 (moderate) |
+
+RR-8 shows strong recovery with overshoot past baseline (MYC targets V1 +2.49, Protein secretion +2.14). RR-6 shows immune rebound (IFN-α -2.36, Inflammatory -2.54).
+
+### T3: Age × Spaceflight Interaction (RR-8 Liver)
+
+| Comparison | Gene AUROC | Pathway AUROC | n |
+|---|---|---|---|
+| T3a: Overall OLD vs YNG | **0.985** | 0.851 | 141 |
+| T3d: Spaceflight in OLD | **0.945** [0.846, 1.00] | 0.879 | 34 |
+| T3d: Spaceflight in YNG | **0.679** [0.479, 0.86] | 0.716 | 36 |
+| **Delta (OLD - YNG)** | **+0.266** | +0.163 | — |
+
+**Verdict**: "Spaceflight amplifies aging" **SUPPORTED** (Δ=+0.266). T3c ANOVA: 0/50 significant Age×Spaceflight interactions at FDR<0.05 (underpowered, n=10/cell).
+
+---
+
+## J2: DGE Pipeline Comparison
+
+**Question**: Does the choice of DGE pipeline (DESeq2 vs edgeR vs limma-voom) affect downstream results?
+
+**Scope**: 9 missions (6 liver + 3 thymus) × 3 pipelines = 27 DGE runs. Skin excluded (RR-7 has no raw counts).
+
+| Metric | Mean | Min | Max |
+|---|---|---|---|
+| **Log2FC Spearman** | **0.926** | 0.790 | 1.000 |
+| **Log2FC Pearson** | **0.895** | 0.706 | 1.000 |
+| **DEG Jaccard (FDR<0.05)** | **0.600** | 0.000 | 1.000 |
+| **GeneLab Replication** | **0.707** | — | 9 missions |
+
+**Key findings**:
+- Fold-change rankings are highly conserved across all three pipelines (Spearman 0.926)
+- DEG list overlap varies by pipeline stringency: limma-voom most liberal, edgeR most conservative
+- RR-3 liver: 0 DEGs across all pipelines (n=6+6, true biological null — GeneLab also found only 1 DEG)
+- RR-1 edgeR: 0 DEGs due to conservative multiple testing correction, but log2FC correlation >0.95 with DESeq2
+- GeneLab replication (our binary FLT-vs-GC vs GeneLab's multi-level contrasts): moderate agreement (Spearman 0.707) reflects different design matrices, not pipeline error
+
+**Verdict**: Rankings consistent, DEG lists vary by stringency threshold. Pipeline choice has **moderate impact on DEG calls** but **minimal impact on gene-level effect size rankings** — consistent with J1 (pipeline version comparison).
+
+---
+
+## Held-Out Evaluation: A5 Skin (OSD-254 / RR-7)
+
+Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 (n=30: 10 Flight, 20 GC). 20,110 common genes. RR-7 is a 75-day mission (longest in skin dataset).
+
+| Model | AUROC | 95% CI | p-value |
+|-------|-------|--------|---------|
+| LR ElasticNet | **0.885** | [0.745, 0.986] | <0.001 |
+| PCA-50 + LogReg | 0.840 | [0.679, 0.963] | 0.001 |
+| Random Forest | 0.777 | [0.583, 0.929] | 0.007 |
+
+**Cross-Tissue Held-Out Comparison**:
+
+| Tissue | Mission | Duration | Best AUROC | n_test |
+|--------|---------|----------|------------|--------|
+| Thymus | RR-23 | 30 days | 0.905 (LR) | 16 |
+| Skin | RR-7 | 75 days | 0.885 (LR) | 30 |
+
+**Interpretation**: Skin held-out confirms strong generalization (AUROC 0.885, p<0.001), exceeding the LOMO mean (0.821). Both held-out tissues achieve AUROC > 0.85, validating cross-mission spaceflight detection beyond leave-one-out evaluation.
+
+---
+
 ## Pipeline Status
 
 | Component | Files | Status |
@@ -219,5 +305,7 @@ Three LLMs tested on zero-shot text-based spaceflight detection (no training, ge
 | Cell 2020 | 5 tissues pathway validation | Complete |
 | Geneformer | 6 tissues, 22 LOMO folds (Mouse-GF) | Complete |
 | LLM Zero-Shot | 3 providers × 6 tasks (18 evals) | Complete |
-| Held-Out | A4 Thymus (RR-23), Tier 1 + Geneformer | Complete |
+| Held-Out | A4 Thymus (RR-23) + A5 Skin (RR-7) | Complete |
+| T1-T3 Temporal | ISS-T/LAR, Recovery, Age×Spaceflight | Complete |
+| J2 DGE Pipeline | 9 missions × 3 pipelines (DESeq2/edgeR/limma-voom) | Complete |
 | **Figures** | **4 main + 4 supplementary (HTML/SVG)** | **Complete** |

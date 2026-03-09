@@ -1,0 +1,757 @@
+{
+  "timestamp": "2026-03-09T00:10:33.359345",
+  "description": "J2: DGE pipeline comparison (DESeq2 vs edgeR vs limma-voom)",
+  "design_decisions": [
+    "DD-21"
+  ],
+  "method": "DESeq2 Wald, edgeR QLF, limma-voom QW; FLT vs GC contrast",
+  "scope": "liver (6 missions) + thymus (3 missions)",
+  "pipelines": [
+    "deseq2",
+    "edger",
+    "limma_voom"
+  ],
+  "results": {
+    "liver": {
+      "RR-1": {
+        "tissue": "liver",
+        "mission": "RR-1",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 14808,
+            "n_deg_005": 73
+          },
+          "edger": {
+            "n_genes": 14808,
+            "n_deg_005": 0
+          },
+          "limma_voom": {
+            "n_genes": 14808,
+            "n_deg_005": 257
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 14808,
+            "deg_jaccard_005": 0.0,
+            "n_deg_a": 73,
+            "n_deg_b": 0,
+            "n_deg_intersection": 0,
+            "top100_jaccard": 0.7391304347826086,
+            "top500_jaccard": 0.8148820326678766,
+            "log2fc_spearman_rho": 0.9541407841298811,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.8466078783033764,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": null
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 14808,
+            "deg_jaccard_005": 0.22676579925650558,
+            "n_deg_a": 73,
+            "n_deg_b": 257,
+            "n_deg_intersection": 61,
+            "top100_jaccard": 0.3333333333333333,
+            "top500_jaccard": 0.42045454545454547,
+            "log2fc_spearman_rho": 0.84536361917592,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.8164189967928289,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 14808,
+            "deg_jaccard_005": 0.0,
+            "n_deg_a": 0,
+            "n_deg_b": 257,
+            "n_deg_intersection": 0,
+            "top100_jaccard": 0.36054421768707484,
+            "top500_jaccard": 0.42653352353780316,
+            "log2fc_spearman_rho": 0.8324841241960108,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.7345492377726803,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": null
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(Ground Control & Carcass)v(Space Flight & Carcass)",
+          "sign_corrected": true,
+          "n_common_genes": 14808,
+          "log2fc_spearman_rho": 0.8256813089112437,
+          "log2fc_pearson_r": 0.8218958920857244,
+          "deg_jaccard_005": 0.1072,
+          "top100_jaccard": 0.20481927710843373,
+          "n_deg_genelab": 619,
+          "n_deg_ours": 73,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      },
+      "RR-3": {
+        "tissue": "liver",
+        "mission": "RR-3",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 15645,
+            "n_deg_005": 0
+          },
+          "edger": {
+            "n_genes": 15645,
+            "n_deg_005": 0
+          },
+          "limma_voom": {
+            "n_genes": 15645,
+            "n_deg_005": 0
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 15645,
+            "deg_jaccard_005": 1.0,
+            "n_deg_a": 0,
+            "n_deg_b": 0,
+            "n_deg_intersection": 0,
+            "top100_jaccard": 0.7543859649122807,
+            "top500_jaccard": 0.7921146953405018,
+            "log2fc_spearman_rho": 0.9998265317836749,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.999868778432419,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": null
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 15645,
+            "deg_jaccard_005": 1.0,
+            "n_deg_a": 0,
+            "n_deg_b": 0,
+            "n_deg_intersection": 0,
+            "top100_jaccard": 0.42857142857142855,
+            "top500_jaccard": 0.4513788098693759,
+            "log2fc_spearman_rho": 0.8205756720679269,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.8025131455883818,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": null
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 15645,
+            "deg_jaccard_005": 1.0,
+            "n_deg_a": 0,
+            "n_deg_b": 0,
+            "n_deg_intersection": 0,
+            "top100_jaccard": 0.47058823529411764,
+            "top500_jaccard": 0.48148148148148145,
+            "log2fc_spearman_rho": 0.8228729331078377,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.8038494180567246,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": null
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(Ground Control)v(Space Flight)",
+          "sign_corrected": true,
+          "n_common_genes": 15645,
+          "log2fc_spearman_rho": 0.870262297089307,
+          "log2fc_pearson_r": 0.9006140085064829,
+          "deg_jaccard_005": 0.0,
+          "top100_jaccard": 0.28205128205128205,
+          "n_deg_genelab": 1,
+          "n_deg_ours": 0,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      },
+      "RR-6": {
+        "tissue": "liver",
+        "mission": "RR-6",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 16183,
+            "n_deg_005": 707
+          },
+          "edger": {
+            "n_genes": 16183,
+            "n_deg_005": 432
+          },
+          "limma_voom": {
+            "n_genes": 16183,
+            "n_deg_005": 2749
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 16183,
+            "deg_jaccard_005": 0.5863509749303621,
+            "n_deg_a": 707,
+            "n_deg_b": 432,
+            "n_deg_intersection": 421,
+            "top100_jaccard": 0.7543859649122807,
+            "top500_jaccard": 0.8761726078799249,
+            "log2fc_spearman_rho": 0.9926806355300268,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.901393697172945,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 16183,
+            "deg_jaccard_005": 0.20796924152394267,
+            "n_deg_a": 707,
+            "n_deg_b": 2749,
+            "n_deg_intersection": 595,
+            "top100_jaccard": 0.28205128205128205,
+            "top500_jaccard": 0.33155792276964047,
+            "log2fc_spearman_rho": 0.7903177162200618,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.7606653694697041,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 16183,
+            "deg_jaccard_005": 0.13688348820586133,
+            "n_deg_a": 432,
+            "n_deg_b": 2749,
+            "n_deg_intersection": 383,
+            "top100_jaccard": 0.26582278481012656,
+            "top500_jaccard": 0.3280212483399734,
+            "log2fc_spearman_rho": 0.793128499262294,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.7059628484620465,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(Ground Control & ~30 day & On Earth & Upon euthanasia)v(Space Flight & ~30 day & On Earth & Upon euthanasia)",
+          "sign_corrected": true,
+          "n_common_genes": 16183,
+          "log2fc_spearman_rho": 0.6478540967671821,
+          "log2fc_pearson_r": 0.6187691016626298,
+          "deg_jaccard_005": 0.029769959404600813,
+          "top100_jaccard": 0.04712041884816754,
+          "n_deg_genelab": 54,
+          "n_deg_ours": 707,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      },
+      "RR-8": {
+        "tissue": "liver",
+        "mission": "RR-8",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 15221,
+            "n_deg_005": 1720
+          },
+          "edger": {
+            "n_genes": 15221,
+            "n_deg_005": 1553
+          },
+          "limma_voom": {
+            "n_genes": 15221,
+            "n_deg_005": 1929
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 15221,
+            "deg_jaccard_005": 0.8875432525951558,
+            "n_deg_a": 1720,
+            "n_deg_b": 1553,
+            "n_deg_intersection": 1539,
+            "top100_jaccard": 0.8518518518518519,
+            "top500_jaccard": 0.9047619047619048,
+            "log2fc_spearman_rho": 0.9705547974355268,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9367169017530785,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 15221,
+            "deg_jaccard_005": 0.623220640569395,
+            "n_deg_a": 1720,
+            "n_deg_b": 1929,
+            "n_deg_intersection": 1401,
+            "top100_jaccard": 0.5151515151515151,
+            "top500_jaccard": 0.5923566878980892,
+            "log2fc_spearman_rho": 0.8889915252975449,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.8202635462694079,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 15221,
+            "deg_jaccard_005": 0.6023930050621261,
+            "n_deg_a": 1553,
+            "n_deg_b": 1929,
+            "n_deg_intersection": 1309,
+            "top100_jaccard": 0.5037593984962406,
+            "top500_jaccard": 0.5748031496062992,
+            "log2fc_spearman_rho": 0.8641907694264321,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.7902346508559206,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(Ground Control & 24 day & On Earth & Carcass & 10 to 12 week)v(Space Flight & 22 to 23 day & On ISS & Carcass & 10 to 12 week)",
+          "sign_corrected": true,
+          "n_common_genes": 15221,
+          "log2fc_spearman_rho": 0.5050621139512959,
+          "log2fc_pearson_r": 0.3355234392317895,
+          "deg_jaccard_005": 0.012600229095074456,
+          "top100_jaccard": 0.0582010582010582,
+          "n_deg_genelab": 48,
+          "n_deg_ours": 1720,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      },
+      "RR-9": {
+        "tissue": "liver",
+        "mission": "RR-9",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 15685,
+            "n_deg_005": 1704
+          },
+          "edger": {
+            "n_genes": 15685,
+            "n_deg_005": 1229
+          },
+          "limma_voom": {
+            "n_genes": 15685,
+            "n_deg_005": 2312
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 15685,
+            "deg_jaccard_005": 0.7162083089526039,
+            "n_deg_a": 1704,
+            "n_deg_b": 1229,
+            "n_deg_intersection": 1224,
+            "top100_jaccard": 0.6,
+            "top500_jaccard": 0.8148820326678766,
+            "log2fc_spearman_rho": 0.9986855462707414,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9687026129243178,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 15685,
+            "deg_jaccard_005": 0.6581337737407101,
+            "n_deg_a": 1704,
+            "n_deg_b": 2312,
+            "n_deg_intersection": 1594,
+            "top100_jaccard": 0.47058823529411764,
+            "top500_jaccard": 0.639344262295082,
+            "log2fc_spearman_rho": 0.9495737741394471,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9470297306947044,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 15685,
+            "deg_jaccard_005": 0.5184391080617495,
+            "n_deg_a": 1229,
+            "n_deg_b": 2312,
+            "n_deg_intersection": 1209,
+            "top100_jaccard": 0.5267175572519084,
+            "top500_jaccard": 0.7006802721088435,
+            "log2fc_spearman_rho": 0.9493116962534038,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9272153002944673,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(FLT_C1)v(GC_C2)",
+          "sign_corrected": false,
+          "n_common_genes": 15685,
+          "log2fc_spearman_rho": 0.7022751391761437,
+          "log2fc_pearson_r": 0.7833388115396067,
+          "deg_jaccard_005": 0.23311897106109325,
+          "top100_jaccard": 0.2987012987012987,
+          "n_deg_genelab": 597,
+          "n_deg_ours": 1704,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      },
+      "MHU-2": {
+        "tissue": "liver",
+        "mission": "MHU-2",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 12797,
+            "n_deg_005": 802
+          },
+          "edger": {
+            "n_genes": 12797,
+            "n_deg_005": 496
+          },
+          "limma_voom": {
+            "n_genes": 12797,
+            "n_deg_005": 1160
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 12797,
+            "deg_jaccard_005": 0.6124223602484472,
+            "n_deg_a": 802,
+            "n_deg_b": 496,
+            "n_deg_intersection": 493,
+            "top100_jaccard": 0.7391304347826086,
+            "top500_jaccard": 0.8248175182481752,
+            "log2fc_spearman_rho": 0.9999002287876897,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9997723902088912,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 12797,
+            "deg_jaccard_005": 0.6228287841191067,
+            "n_deg_a": 802,
+            "n_deg_b": 1160,
+            "n_deg_intersection": 753,
+            "top100_jaccard": 0.7094017094017094,
+            "top500_jaccard": 0.7152658662092625,
+            "log2fc_spearman_rho": 0.929158582601838,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9400680848686732,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 12797,
+            "deg_jaccard_005": 0.4239036973344798,
+            "n_deg_a": 496,
+            "n_deg_b": 1160,
+            "n_deg_intersection": 493,
+            "top100_jaccard": 0.6949152542372882,
+            "top500_jaccard": 0.7452006980802792,
+            "log2fc_spearman_rho": 0.930895272772107,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9420857386913866,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(Ground Control & 1G on Earth)v(Space Flight & 1G by centrifugation)",
+          "sign_corrected": true,
+          "n_common_genes": 12797,
+          "log2fc_spearman_rho": 0.580152116787468,
+          "log2fc_pearson_r": 0.6020311534575605,
+          "deg_jaccard_005": 0.1855779427359491,
+          "top100_jaccard": 0.2422360248447205,
+          "n_deg_genelab": 316,
+          "n_deg_ours": 802,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      }
+    },
+    "thymus": {
+      "RR-6": {
+        "tissue": "thymus",
+        "mission": "RR-6",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 19741,
+            "n_deg_005": 8826
+          },
+          "edger": {
+            "n_genes": 19741,
+            "n_deg_005": 7106
+          },
+          "limma_voom": {
+            "n_genes": 19741,
+            "n_deg_005": 12195
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 19741,
+            "deg_jaccard_005": 0.7817043167076717,
+            "n_deg_a": 8826,
+            "n_deg_b": 7106,
+            "n_deg_intersection": 6990,
+            "top100_jaccard": 0.3888888888888889,
+            "top500_jaccard": 0.564945226917058,
+            "log2fc_spearman_rho": 0.9914932228462678,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9777725930680368,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 19741,
+            "deg_jaccard_005": 0.6745797817254839,
+            "n_deg_a": 8826,
+            "n_deg_b": 12195,
+            "n_deg_intersection": 8468,
+            "top100_jaccard": 0.07526881720430108,
+            "top500_jaccard": 0.19047619047619047,
+            "log2fc_spearman_rho": 0.9671312975545668,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.931792791876352,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 19741,
+            "deg_jaccard_005": 0.5632137361302341,
+            "n_deg_a": 7106,
+            "n_deg_b": 12195,
+            "n_deg_intersection": 6954,
+            "top100_jaccard": 0.12994350282485875,
+            "top500_jaccard": 0.2376237623762376,
+            "log2fc_spearman_rho": 0.961767063601231,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9257726702251187,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(Ground Control & ~30 day & On Earth & Upon euthanasia)v(Space Flight & ~30 day & On Earth & Upon euthanasia)",
+          "sign_corrected": true,
+          "n_common_genes": 19741,
+          "log2fc_spearman_rho": 0.9156397860216299,
+          "log2fc_pearson_r": 0.8621871483810855,
+          "deg_jaccard_005": 0.42642122360584733,
+          "top100_jaccard": 0.08695652173913043,
+          "n_deg_genelab": 4347,
+          "n_deg_ours": 8826,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      },
+      "MHU-2": {
+        "tissue": "thymus",
+        "mission": "MHU-2",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 14981,
+            "n_deg_005": 3055
+          },
+          "edger": {
+            "n_genes": 14981,
+            "n_deg_005": 2779
+          },
+          "limma_voom": {
+            "n_genes": 14981,
+            "n_deg_005": 3091
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 14981,
+            "deg_jaccard_005": 0.86688,
+            "n_deg_a": 3055,
+            "n_deg_b": 2779,
+            "n_deg_intersection": 2709,
+            "top100_jaccard": 0.7391304347826086,
+            "top500_jaccard": 0.7953321364452424,
+            "log2fc_spearman_rho": 0.9992457514079648,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9987241405997034,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 14981,
+            "deg_jaccard_005": 0.7610315186246418,
+            "n_deg_a": 3055,
+            "n_deg_b": 3091,
+            "n_deg_intersection": 2656,
+            "top100_jaccard": 0.639344262295082,
+            "top500_jaccard": 0.6778523489932886,
+            "log2fc_spearman_rho": 0.9651342422564307,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9292020305121186,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 14981,
+            "deg_jaccard_005": 0.7680722891566265,
+            "n_deg_a": 2779,
+            "n_deg_b": 3091,
+            "n_deg_intersection": 2550,
+            "top100_jaccard": 0.6666666666666666,
+            "top500_jaccard": 0.7035775127768313,
+            "log2fc_spearman_rho": 0.9674474420432564,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9369126361728757,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(MHU-1 & Ground Control & 1G on Earth)v(MHU-1 & Space Flight & 1G by centrifugation)",
+          "sign_corrected": true,
+          "n_common_genes": 14981,
+          "log2fc_spearman_rho": 0.365976721804696,
+          "log2fc_pearson_r": 0.4096539046594857,
+          "deg_jaccard_005": 0.03475266123982467,
+          "top100_jaccard": 0.015228426395939087,
+          "n_deg_genelab": 250,
+          "n_deg_ours": 3055,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      },
+      "RR-9": {
+        "tissue": "thymus",
+        "mission": "RR-9",
+        "n_pipelines": 3,
+        "per_pipeline": {
+          "deseq2": {
+            "n_genes": 12531,
+            "n_deg_005": 1397
+          },
+          "edger": {
+            "n_genes": 12531,
+            "n_deg_005": 1026
+          },
+          "limma_voom": {
+            "n_genes": 12531,
+            "n_deg_005": 1750
+          }
+        },
+        "pairwise_comparisons": [
+          {
+            "pair": "deseq2_vs_edger",
+            "n_common_genes": 12531,
+            "deg_jaccard_005": 0.7282453637660485,
+            "n_deg_a": 1397,
+            "n_deg_b": 1026,
+            "n_deg_intersection": 1021,
+            "top100_jaccard": 0.8691588785046729,
+            "top500_jaccard": 0.8903591682419659,
+            "log2fc_spearman_rho": 0.9996324822400596,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9994837556521069,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "deseq2_vs_limma_voom",
+            "n_common_genes": 12531,
+            "deg_jaccard_005": 0.6580611169652265,
+            "n_deg_a": 1397,
+            "n_deg_b": 1750,
+            "n_deg_intersection": 1249,
+            "top100_jaccard": 0.6129032258064516,
+            "top500_jaccard": 0.7513134851138353,
+            "log2fc_spearman_rho": 0.9091671308651177,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9154744267679695,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          },
+          {
+            "pair": "edger_vs_limma_voom",
+            "n_common_genes": 12531,
+            "deg_jaccard_005": 0.5630630630630631,
+            "n_deg_a": 1026,
+            "n_deg_b": 1750,
+            "n_deg_intersection": 1000,
+            "top100_jaccard": 0.6,
+            "top500_jaccard": 0.7391304347826086,
+            "log2fc_spearman_rho": 0.9104849896492755,
+            "log2fc_spearman_p": 0.0,
+            "log2fc_pearson_r": 0.9169613607365048,
+            "log2fc_pearson_p": 0.0,
+            "direction_concordance": 1.0
+          }
+        ],
+        "genelab_concordance": {
+          "genelab_contrast": "Stat_(Ground Control)v(Space Flight)",
+          "sign_corrected": true,
+          "n_common_genes": 12531,
+          "log2fc_spearman_rho": 0.947981016152717,
+          "log2fc_pearson_r": 0.9653936026979335,
+          "deg_jaccard_005": 0.7155003270111184,
+          "top100_jaccard": 0.8348623853211009,
+          "n_deg_genelab": 1226,
+          "n_deg_ours": 1397,
+          "note": "Our DESeq2 (FLT vs GC binary) vs GeneLab DESeq2 (original multi-level contrast). Sign-corrected for direction convention."
+        }
+      }
+    }
+  },
+  "summary": {
+    "n_missions": 9,
+    "n_comparisons": 27,
+    "log2fc_spearman": {
+      "mean": 0.9260798641082422,
+      "min": 0.7903177162200618,
+      "max": 0.9999002287876897
+    },
+    "log2fc_pearson": {
+      "mean": 0.8954079530452866,
+      "min": 0.7059628484620465,
+      "max": 0.999868778432419
+    },
+    "deg_jaccard_005": {
+      "mean": 0.599552356323683,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "top100_jaccard": {
+      "mean": 0.5452457140664927,
+      "min": 0.07526881720430108,
+      "max": 0.8691588785046729
+    },
+    "direction_concordance": {
+      "mean": 1.0,
+      "min": 1.0
+    },
+    "genelab_replication": {
+      "mean_spearman": 0.7067649551846316,
+      "min_spearman": 0.365976721804696,
+      "n_missions": 9
+    }
+  },
+  "verdict": "DGE pipeline choice has moderate impact: rankings consistent, DEG lists vary by stringency",
+  "evidence": "Log2FC Spearman: mean=0.926, Log2FC Pearson: mean=0.895, DEG Jaccard(FDR<0.05): mean=0.600. GeneLab replication: 0.7067649551846316"
+}
