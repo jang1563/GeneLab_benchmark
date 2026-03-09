@@ -1,0 +1,95 @@
+{
+  "task": "T1d",
+  "tissue": "liver",
+  "description": "Cross-mission temporal transfer",
+  "transfers": {
+    "FLT_gene_RR-6\u2192RR-8": {
+      "train_mission": "RR-6",
+      "test_mission": "RR-8",
+      "condition": "FLT",
+      "feature_mode": "gene",
+      "auroc": 0.9866666666666667,
+      "ci_low": 0.9477084190319484,
+      "ci_high": 1.0,
+      "n_train": 20,
+      "n_test": 35
+    },
+    "FLT_gene_RR-8\u2192RR-6": {
+      "train_mission": "RR-8",
+      "test_mission": "RR-6",
+      "condition": "FLT",
+      "feature_mode": "gene",
+      "auroc": 0.97,
+      "ci_low": 0.8787878787878788,
+      "ci_high": 1.0,
+      "n_train": 35,
+      "n_test": 20
+    },
+    "FLT_pathway_RR-6\u2192RR-8": {
+      "train_mission": "RR-6",
+      "test_mission": "RR-8",
+      "condition": "FLT",
+      "feature_mode": "pathway",
+      "auroc": 0.9099999999999999,
+      "ci_low": 0.8006981580510991,
+      "ci_high": 0.984021212121212,
+      "n_train": 20,
+      "n_test": 35
+    },
+    "FLT_pathway_RR-8\u2192RR-6": {
+      "train_mission": "RR-8",
+      "test_mission": "RR-6",
+      "condition": "FLT",
+      "feature_mode": "pathway",
+      "auroc": 0.96,
+      "ci_low": 0.8540625,
+      "ci_high": 1.0,
+      "n_train": 35,
+      "n_test": 20
+    },
+    "GC_gene_RR-6\u2192RR-8": {
+      "train_mission": "RR-6",
+      "test_mission": "RR-8",
+      "condition": "GC",
+      "feature_mode": "gene",
+      "auroc": 0.9566666666666667,
+      "ci_low": 0.8811188811188811,
+      "ci_high": 1.0,
+      "n_train": 19,
+      "n_test": 35
+    },
+    "GC_gene_RR-8\u2192RR-6": {
+      "train_mission": "RR-8",
+      "test_mission": "RR-6",
+      "condition": "GC",
+      "feature_mode": "gene",
+      "auroc": 0.8444444444444444,
+      "ci_low": 0.6331249999999999,
+      "ci_high": 1.0,
+      "n_train": 35,
+      "n_test": 19
+    },
+    "GC_pathway_RR-6\u2192RR-8": {
+      "train_mission": "RR-6",
+      "test_mission": "RR-8",
+      "condition": "GC",
+      "feature_mode": "pathway",
+      "auroc": 0.9133333333333333,
+      "ci_low": 0.779993006993007,
+      "ci_high": 0.9934640522875817,
+      "n_train": 19,
+      "n_test": 35
+    },
+    "GC_pathway_RR-8\u2192RR-6": {
+      "train_mission": "RR-8",
+      "test_mission": "RR-6",
+      "condition": "GC",
+      "feature_mode": "pathway",
+      "auroc": 0.8111111111111111,
+      "ci_low": 0.5767045454545454,
+      "ci_high": 0.9761904761904762,
+      "n_train": 35,
+      "n_test": 19
+    }
+  }
+}

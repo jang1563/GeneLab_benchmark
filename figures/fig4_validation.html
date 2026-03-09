@@ -109,7 +109,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[0]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Cell 2020 concordance');
+    .text('Agreement with published findings');
 
   const xScale = d3.scaleLinear().domain([0, 1.0]).range([pad.left, pad.left + plotW]);
   const yScale = d3.scaleBand().domain(concordanceData.map(d=>d.tissue)).range([pad.top, pad.top + plotH]).padding(0.25);
@@ -132,7 +132,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(0.5)).attr('y', pad.top + plotH + 28)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('Concordance rate');
+    .text('Pathway direction agreement');
 
   // Bars
   concordanceData.forEach(d => {
@@ -203,7 +203,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', pad.left + plotW/2).attr('y', boxY + 20)
     .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill','#888')
-    .text('Gene enrichment: 47\u00D7 above chance');
+    .text('ML-selected genes overlap published 47\u00D7 above chance');
 }
 
 // ============================================================
@@ -220,7 +220,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[1]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Held-out RR-23 (thymus)');
+    .text('Independent validation: RR-23 thymus');
 
   const xScale = d3.scaleLinear().domain([0.3, 1.08]).range([pad.left, pad.left + plotW]);
   const midY = pad.top + plotH/2;
@@ -249,7 +249,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(0.7)).attr('y', pad.top + plotH + 28)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('AUROC');
+    .text('Classification accuracy (AUROC)');
 
   // Pairwise transfer dots (context)
   const jitterScale = d3.scaleLinear().domain([0, thymusPairwise.length-1]).range([-plotH*0.3, plotH*0.3]);
@@ -272,7 +272,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(lomoMean) - 3).attr('y', midY - plotH*0.38)
     .attr('text-anchor','end').attr('font-size', 6.5).attr('fill', COLORS.thymus)
-    .text('LOMO mean');
+    .text('Training set mean');
 
   // RR-23 CI bar
   const rr23Y = midY;
@@ -308,7 +308,7 @@ function panelLabel(g, letter, x, y) {
   g.append('circle').attr('cx', pad.left + 4).attr('cy', legY).attr('r', 3)
     .attr('fill', COLORS.thymus).attr('opacity', 0.4);
   g.append('text').attr('x', pad.left + 10).attr('y', legY + 3)
-    .attr('font-size', 6).attr('fill','#666').text('Pairwise (12)');
+    .attr('font-size', 6).attr('fill','#666').text('Pairwise folds (12)');
   const dS = 4;
   g.append('path')
     .attr('d', `M${pad.left + 65},${legY-dS} L${pad.left+65+dS},${legY} L${pad.left+65},${legY+dS} L${pad.left+65-dS},${legY}Z`)
@@ -331,7 +331,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[2]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Cross-tissue transfer (Cat C)');
+    .text('Cross-tissue transfer');
 
   const xScale = d3.scaleLinear().domain([0, 1.0]).range([pad.left, pad.left + plotW]);
   const yScale = d3.scaleBand().domain(crossTissue.map(d=>d.pair)).range([pad.top, pad.top + plotH]).padding(0.2);
@@ -364,7 +364,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(0.5)).attr('y', pad.top + plotH + 28)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('AUROC');
+    .text('Classification accuracy (AUROC)');
 
   // Data points
   const pointSize = {gene: 5, deg: 4.5, pathway: 5};
@@ -417,18 +417,18 @@ function panelLabel(g, letter, x, y) {
   g.append('circle').attr('cx', pad.left).attr('cy', legY).attr('r', 3.5)
     .attr('fill', GENE_COLOR).attr('opacity',0.8);
   g.append('text').attr('x', pad.left + 6).attr('y', legY + 3)
-    .attr('font-size', 6.5).attr('fill','#444').text('Gene');
+    .attr('font-size', 6.5).attr('fill','#444').text('All genes');
   const triLeg = d3.symbol().type(d3.symbolTriangle).size(30);
   g.append('path')
     .attr('d', triLeg())
-    .attr('transform', `translate(${pad.left + 38},${legY})`)
+    .attr('transform', `translate(${pad.left + 48},${legY})`)
     .attr('fill', DEG_COLOR).attr('opacity',0.8);
-  g.append('text').attr('x', pad.left + 44).attr('y', legY + 3)
-    .attr('font-size', 6.5).attr('fill','#444').text('DEG');
+  g.append('text').attr('x', pad.left + 54).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Top DEG');
   g.append('rect')
-    .attr('x', pad.left + 67).attr('y', legY - 3.5).attr('width', 7).attr('height', 7)
+    .attr('x', pad.left + 88).attr('y', legY - 3.5).attr('width', 7).attr('height', 7)
     .attr('fill', PATHWAY_COLOR).attr('opacity',0.8).attr('rx',1);
-  g.append('text').attr('x', pad.left + 77).attr('y', legY + 3)
+  g.append('text').attr('x', pad.left + 98).attr('y', legY + 3)
     .attr('font-size', 6.5).attr('fill','#444').text('Pathway');
 }
 

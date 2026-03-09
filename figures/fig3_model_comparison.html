@@ -119,7 +119,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[0]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Classical ML vs Geneformer');
+    .text('Classical ML vs Geneformer (scRNA foundation model)');
 
   const xScale = d3.scaleBand().domain(tissues.map(t=>t.key)).range([pad.left, pad.left + plotW]).padding(0.3);
   const yScale = d3.scaleLinear().domain([0, 1.05]).range([pad.top + plotH, pad.top]);
@@ -222,10 +222,10 @@ function panelLabel(g, letter, x, y) {
   g.append('rect').attr('x', legX).attr('y', legY - 5).attr('width', 8).attr('height', 8)
     .attr('fill', CLASSICAL_COLOR).attr('opacity',0.8).attr('rx',1);
   g.append('text').attr('x', legX + 11).attr('y', legY + 3)
-    .attr('font-size', 7).attr('fill','#444').text('Classical ML');
-  g.append('rect').attr('x', legX + 72).attr('y', legY - 5).attr('width', 8).attr('height', 8)
+    .attr('font-size', 7).attr('fill','#444').text('Classical ML (best per tissue)');
+  g.append('rect').attr('x', legX + 130).attr('y', legY - 5).attr('width', 8).attr('height', 8)
     .attr('fill', GF_COLOR).attr('opacity',0.8).attr('rx',1);
-  g.append('text').attr('x', legX + 83).attr('y', legY + 3)
+  g.append('text').attr('x', legX + 141).attr('y', legY + 3)
     .attr('font-size', 7).attr('fill','#444').text('Geneformer');
 }
 
@@ -243,14 +243,14 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[1]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('LLM zero-shot evaluation');
+    .text('LLM text-based prediction (no training)');
 
   // Rows: PCA-LR reference + 3 LLMs
   const rows = [
-    {name: 'Classical ML (ref)', data: tissues.map(t => classical[t.key].auroc), color: CLASSICAL_COLOR},
+    {name: 'Classical ML (reference)', data: tissues.map(t => classical[t.key].auroc), color: CLASSICAL_COLOR},
+    {name: 'DeepSeek-V3', data: tissues.map(t => llmData['DeepSeek-V3'][t.key]), color: LLM_COLOR},
     {name: 'Gemini-2.5-Flash', data: tissues.map(t => llmData['Gemini-2.5-Flash'][t.key]), color: LLM_COLOR},
-    {name: 'Llama-3.3-70B', data: tissues.map(t => llmData['Llama-3.3-70B'][t.key]), color: LLM_COLOR},
-    {name: 'DeepSeek-V3', data: tissues.map(t => llmData['DeepSeek-V3'][t.key]), color: LLM_COLOR}
+    {name: 'Llama-3.3-70B', data: tissues.map(t => llmData['Llama-3.3-70B'][t.key]), color: LLM_COLOR}
   ];
 
   const cellW = plotW / tissues.length;
