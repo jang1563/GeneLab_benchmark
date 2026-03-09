@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure S5 — DGE Pipeline Comparison</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f5f5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .fig-container { background: #fff; padding: 16px; display: inline-block; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  button { margin: 12px 4px 0; padding: 6px 14px; font-size: 12px; cursor: pointer; border: 1px solid #999; background: #fff; border-radius: 3px; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+<div class="fig-container">
+  <svg id="figS5"></svg>
+</div>
+<div>
+  <button onclick="downloadSVG()">Download SVG</button>
+</div>
+
+<script>
+// ============================================================
+// DESIGN SYSTEM
+// ============================================================
+const COLORS = {
+  thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+  eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+};
+const FS = {
+  panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, tiny: 7.5
+};
+
+// ============================================================
+// DATA
+// ============================================================
+
+// Strip plot data: Log2FC Spearman ρ (27 values: 9 missions × 3 pairs)
+const pairLabels = ['DESeq2 vs edgeR', 'DESeq2 vs limma', 'edgeR vs limma'];
+
+const stripData = [
+  // DESeq2 vs edgeR
+  {pair:'DESeq2 vs edgeR', tissue:'liver',  mission:'MHU-2', rho:0.9999},
+  {pair:'DESeq2 vs edgeR', tissue:'liver',  mission:'RR-1',  rho:0.9541},
+  {pair:'DESeq2 vs edgeR', tissue:'liver',  mission:'RR-3',  rho:0.9998},
+  {pair:'DESeq2 vs edgeR', tissue:'liver',  mission:'RR-6',  rho:0.9927},
+  {pair:'DESeq2 vs edgeR', tissue:'liver',  mission:'RR-8',  rho:0.9706},
+  {pair:'DESeq2 vs edgeR', tissue:'liver',  mission:'RR-9',  rho:0.9987},
+  {pair:'DESeq2 vs edgeR', tissue:'thymus', mission:'MHU-2', rho:0.9992},
+  {pair:'DESeq2 vs edgeR', tissue:'thymus', mission:'RR-6',  rho:0.9915},
+  {pair:'DESeq2 vs edgeR', tissue:'thymus', mission:'RR-9',  rho:0.9996},
+  // DESeq2 vs limma
+  {pair:'DESeq2 vs limma', tissue:'liver',  mission:'MHU-2', rho:0.9292},
+  {pair:'DESeq2 vs limma', tissue:'liver',  mission:'RR-1',  rho:0.8454},
+  {pair:'DESeq2 vs limma', tissue:'liver',  mission:'RR-3',  rho:0.8206},
+  {pair:'DESeq2 vs limma', tissue:'liver',  mission:'RR-6',  rho:0.7903},
+  {pair:'DESeq2 vs limma', tissue:'liver',  mission:'RR-8',  rho:0.8890},
+  {pair:'DESeq2 vs limma', tissue:'liver',  mission:'RR-9',  rho:0.9496},
+  {pair:'DESeq2 vs limma', tissue:'thymus', mission:'MHU-2', rho:0.9651},
+  {pair:'DESeq2 vs limma', tissue:'thymus', mission:'RR-6',  rho:0.9671},
+  {pair:'DESeq2 vs limma', tissue:'thymus', mission:'RR-9',  rho:0.9092},
+  // edgeR vs limma
+  {pair:'edgeR vs limma',  tissue:'liver',  mission:'MHU-2', rho:0.9309},
+  {pair:'edgeR vs limma',  tissue:'liver',  mission:'RR-1',  rho:0.8325},
+  {pair:'edgeR vs limma',  tissue:'liver',  mission:'RR-3',  rho:0.8229},
+  {pair:'edgeR vs limma',  tissue:'liver',  mission:'RR-6',  rho:0.7931},
+  {pair:'edgeR vs limma',  tissue:'liver',  mission:'RR-8',  rho:0.8642},
+  {pair:'edgeR vs limma',  tissue:'liver',  mission:'RR-9',  rho:0.9493},
+  {pair:'edgeR vs limma',  tissue:'thymus', mission:'MHU-2', rho:0.9674},
+  {pair:'edgeR vs limma',  tissue:'thymus', mission:'RR-6',  rho:0.9618},
+  {pair:'edgeR vs limma',  tissue:'thymus', mission:'RR-9',  rho:0.9105},
+];
+
+// Heatmap: DEG Jaccard (FDR<0.05) — rows: 9 missions, cols: 3 pairs
+const colKeys = ['DSQ2/edgeR', 'DSQ2/limma', 'edgeR/limma'];
+const heatData = [
+  // Liver
+  {tissue:'liver',  mission:'MHU-2', 'DSQ2/edgeR':0.6124, 'DSQ2/limma':0.6228, 'edgeR/limma':0.4239},
+  {tissue:'liver',  mission:'RR-1',  'DSQ2/edgeR':0.0000, 'DSQ2/limma':0.2268, 'edgeR/limma':0.0000},
+  {tissue:'liver',  mission:'RR-3',  'DSQ2/edgeR':1.0000, 'DSQ2/limma':1.0000, 'edgeR/limma':1.0000},
+  {tissue:'liver',  mission:'RR-6',  'DSQ2/edgeR':0.5864, 'DSQ2/limma':0.2080, 'edgeR/limma':0.1369},
+  {tissue:'liver',  mission:'RR-8',  'DSQ2/edgeR':0.8875, 'DSQ2/limma':0.6232, 'edgeR/limma':0.6024},
+  {tissue:'liver',  mission:'RR-9',  'DSQ2/edgeR':0.7162, 'DSQ2/limma':0.6581, 'edgeR/limma':0.5184},
+  // Thymus
+  {tissue:'thymus', mission:'MHU-2', 'DSQ2/edgeR':0.8669, 'DSQ2/limma':0.7610, 'edgeR/limma':0.7681},
+  {tissue:'thymus', mission:'RR-6',  'DSQ2/edgeR':0.7817, 'DSQ2/limma':0.6746, 'edgeR/limma':0.5632},
+  {tissue:'thymus', mission:'RR-9',  'DSQ2/edgeR':0.7282, 'DSQ2/limma':0.6581, 'edgeR/limma':0.5631},
+];
+
+// ============================================================
+// LAYOUT
+// ============================================================
+const W = 960, H = 320;
+const margin = {top: 28, right: 14, bottom: 32, left: 4};
+const panelGap = 22;
+
+const totalUsable = W - margin.left - margin.right - panelGap;
+const pW = [totalUsable * 0.41, totalUsable * 0.59];
+const pH = H - margin.top - margin.bottom;
+const pX = [margin.left,
+            margin.left + pW[0] + panelGap];
+
+// ============================================================
+// SVG SETUP
+// ============================================================
+const svg = d3.select('#figS5')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+svg.append('rect').attr('width',W).attr('height',H).attr('fill','#fff');
+
+function panelLabel(g, letter, x, y) {
+  g.append('text').attr('x',x).attr('y',y)
+    .attr('font-size',FS.panelLabel).attr('font-weight','bold')
+    .text(letter);
+}
+
+// ============================================================
+// PANEL (a) — Log2FC Spearman Strip Plot
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[0]},${margin.top})`);
+  panelLabel(g, 'a', -2, -10);
+
+  const pad = {left: 28, right: 14, top: 22, bottom: 38};
+  const plotW = pW[0] - pad.left - pad.right;
+  const plotH = pH - pad.top - pad.bottom;
+
+  // Title
+  g.append('text').attr('x', pW[0]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('Log2FC ranking conserved across pipelines');
+
+  const xScale = d3.scaleBand().domain(pairLabels).range([pad.left, pad.left + plotW]).padding(0.25);
+  const yScale = d3.scaleLinear().domain([0.75, 1.01]).range([pad.top + plotH, pad.top]);
+
+  // Y gridlines
+  [0.80, 0.85, 0.90, 0.95, 1.00].forEach(v => {
+    g.append('line')
+      .attr('x1', pad.left).attr('y1', yScale(v))
+      .attr('x2', pad.left + plotW).attr('y2', yScale(v))
+      .attr('stroke', v === 1.0 ? '#ccc' : '#f0f0f0').attr('stroke-width', v === 1.0 ? 0.8 : 0.5);
+    g.append('text')
+      .attr('x', pad.left - 4).attr('y', yScale(v) + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tiny).attr('fill','#666')
+      .text(v.toFixed(2));
+  });
+
+  // Y axis label
+  g.append('text')
+    .attr('x', -(pad.top + plotH/2))
+    .attr('y', 8)
+    .attr('text-anchor','middle')
+    .attr('transform', 'rotate(-90)')
+    .attr('font-size', FS.axisLabel).attr('fill','#333')
+    .text('Spearman ρ');
+
+  // X axis bottom line
+  g.append('line')
+    .attr('x1', pad.left).attr('y1', pad.top + plotH)
+    .attr('x2', pad.left + plotW).attr('y2', pad.top + plotH)
+    .attr('stroke','#999').attr('stroke-width',0.8);
+
+  // Column bands (alternating background)
+  pairLabels.forEach((pair, i) => {
+    const cx = xScale(pair) + xScale.bandwidth()/2;
+    // Column label (rotated)
+    g.append('text')
+      .attr('x', cx).attr('y', pad.top + plotH + 14)
+      .attr('text-anchor','end')
+      .attr('transform', `rotate(-30, ${cx}, ${pad.top + plotH + 14})`)
+      .attr('font-size', FS.tiny).attr('fill','#444')
+      .text(pair);
+  });
+
+  // Compute means per pair
+  const pairMeans = {};
+  pairLabels.forEach(pair => {
+    const vals = stripData.filter(d => d.pair === pair).map(d => d.rho);
+    pairMeans[pair] = d3.mean(vals);
+  });
+
+  // Dots with horizontal jitter
+  const jitterSeed = [0, -4, 4, -3, 3, -1, 1, -5, 5];  // deterministic jitter
+  pairLabels.forEach((pair, pi) => {
+    const cx = xScale(pair) + xScale.bandwidth()/2;
+    const bw = xScale.bandwidth();
+    const pts = stripData.filter(d => d.pair === pair);
+    pts.forEach((d, i) => {
+      const jx = jitterSeed[i % jitterSeed.length];
+      g.append('circle')
+        .attr('cx', cx + jx)
+        .attr('cy', yScale(d.rho))
+        .attr('r', 3.5)
+        .attr('fill', d.tissue === 'liver' ? COLORS.liver : COLORS.thymus)
+        .attr('opacity', 0.82)
+        .attr('stroke', '#fff').attr('stroke-width', 0.5);
+    });
+    // Mean line (black, spanning 60% of bandwidth)
+    const mY = yScale(pairMeans[pair]);
+    g.append('line')
+      .attr('x1', cx - bw*0.32).attr('y1', mY)
+      .attr('x2', cx + bw*0.32).attr('y2', mY)
+      .attr('stroke','#333').attr('stroke-width', 2);
+  });
+
+  // Overall mean annotation
+  const overallMean = d3.mean(stripData, d => d.rho);
+  g.append('text')
+    .attr('x', pad.left + plotW - 2).attr('y', pad.top + 10)
+    .attr('text-anchor','end').attr('font-size', 7.5).attr('fill','#444').attr('font-weight','600')
+    .text(`mean ρ = ${overallMean.toFixed(3)}`);
+
+  // Legend
+  const legY = pad.top + 4;
+  g.append('circle').attr('cx', pad.left + 2).attr('cy', legY).attr('r', 3.5)
+    .attr('fill', COLORS.liver).attr('opacity', 0.82).attr('stroke','#fff').attr('stroke-width',0.5);
+  g.append('text').attr('x', pad.left + 8).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Liver');
+  g.append('circle').attr('cx', pad.left + 36).attr('cy', legY).attr('r', 3.5)
+    .attr('fill', COLORS.thymus).attr('opacity', 0.82).attr('stroke','#fff').attr('stroke-width',0.5);
+  g.append('text').attr('x', pad.left + 42).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Thymus');
+  g.append('line').attr('x1', pad.left + 76).attr('y1', legY).attr('x2', pad.left + 88).attr('y2', legY)
+    .attr('stroke','#333').attr('stroke-width', 2);
+  g.append('text').attr('x', pad.left + 92).attr('y', legY + 3)
+    .attr('font-size', 6.5).attr('fill','#444').text('Mean');
+}
+
+// ============================================================
+// PANEL (b) — DEG Jaccard Heatmap
+// ============================================================
+{
+  const g = svg.append('g').attr('transform',`translate(${pX[1]},${margin.top})`);
+  panelLabel(g, 'b', -2, -10);
+
+  const pad = {left: 58, right: 10, top: 22, bottom: 38};
+  const plotW = pW[1] - pad.left - pad.right;
+  const plotH = pH - pad.top - pad.bottom;
+
+  const nRows = heatData.length;    // 9
+  const nCols = colKeys.length;     // 3
+  const cellW = plotW / nCols;
+  const cellH = plotH / nRows;
+
+  // Title
+  g.append('text').attr('x', pW[1]/2).attr('y', -1)
+    .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
+    .text('DEG list overlap varies by pipeline (FDR < 0.05)');
+
+  // Color scale: d3.interpolateViridis [0, 1]
+  const colorScale = d => d3.interpolateViridis(d);
+
+  // Column labels
+  colKeys.forEach((col, ci) => {
+    const cx = pad.left + (ci + 0.5) * cellW;
+    g.append('text')
+      .attr('x', cx).attr('y', pad.top - 4)
+      .attr('text-anchor','middle').attr('font-size', FS.tick).attr('fill','#333')
+      .text(col);
+  });
+
+  // Heatmap cells
+  heatData.forEach((row, ri) => {
+    colKeys.forEach((col, ci) => {
+      const val = row[col];
+      const x = pad.left + ci * cellW;
+      const y = pad.top + ri * cellH;
+      g.append('rect')
+        .attr('x', x).attr('y', y)
+        .attr('width', cellW).attr('height', cellH)
+        .attr('fill', colorScale(val))
+        .attr('stroke', '#fff').attr('stroke-width', 0.5);
+      // Cell value text
+      const textColor = val > 0.65 ? '#000' : '#fff';
+      g.append('text')
+        .attr('x', x + cellW/2).attr('y', y + cellH/2 + 2.5)
+        .attr('text-anchor','middle').attr('font-size', 7).attr('fill', textColor)
+        .text(val.toFixed(2));
+    });
+  });
+
+  // Row labels (mission names) + tissue color
+  const nLiver = 6;
+  heatData.forEach((row, ri) => {
+    const cy = pad.top + (ri + 0.5) * cellH;
+    const tColor = row.tissue === 'liver' ? COLORS.liver : COLORS.thymus;
+    g.append('text')
+      .attr('x', pad.left - 4).attr('y', cy + 3)
+      .attr('text-anchor','end').attr('font-size', FS.tick).attr('fill', tColor)
+      .text(row.mission);
+  });
+
+  // Tissue group labels (rotated)
+  const liverMidY = pad.top + (nLiver/2) * cellH;
+  const thymusMidY = pad.top + (nLiver + 1.5) * cellH;
+  [['Liver', liverMidY, COLORS.liver], ['Thymus', thymusMidY, COLORS.thymus]].forEach(([label, midY, color]) => {
+    g.append('text')
+      .attr('x', 12).attr('y', midY)
+      .attr('text-anchor','middle')
+      .attr('transform', `rotate(-90, 12, ${midY})`)
+      .attr('font-size', 8).attr('fill', color).attr('font-weight','600')
+      .text(label);
+  });
+
+  // Liver/thymus divider
+  const divY = pad.top + nLiver * cellH;
+  g.append('line')
+    .attr('x1', pad.left - 16).attr('y1', divY)
+    .attr('x2', pad.left + plotW).attr('y2', divY)
+    .attr('stroke','#888').attr('stroke-width', 1.2);
+
+  // Colorbar
+  const cbW = 80, cbH = 8;
+  const cbX = pad.left + plotW - cbW;
+  const cbY = pad.top + plotH + 14;
+  const cbScale = d3.scaleLinear().domain([0,1]).range([cbX, cbX + cbW]);
+
+  const cbGrad = g.append('defs').append('linearGradient').attr('id','virGrad').attr('x1','0%').attr('x2','100%');
+  [0,0.25,0.5,0.75,1.0].forEach(t => {
+    cbGrad.append('stop').attr('offset', `${t*100}%`).attr('stop-color', d3.interpolateViridis(t));
+  });
+  g.append('rect').attr('x', cbX).attr('y', cbY).attr('width', cbW).attr('height', cbH)
+    .attr('fill','url(#virGrad)').attr('stroke','#ccc').attr('stroke-width',0.5);
+  [0, 0.5, 1.0].forEach(v => {
+    g.append('text').attr('x', cbScale(v)).attr('y', cbY + cbH + 9)
+      .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill','#666').text(v.toFixed(1));
+  });
+  g.append('text').attr('x', cbX - 4).attr('y', cbY + cbH/2 + 3)
+    .attr('text-anchor','end').attr('font-size', 6.5).attr('fill','#444').text('Jaccard');
+
+  // Overall mean annotation
+  const allJaccard = heatData.flatMap(row => colKeys.map(c => row[c]));
+  const meanJaccard = d3.mean(allJaccard);
+  g.append('text')
+    .attr('x', pad.left + 2).attr('y', pad.top + plotH + 20)
+    .attr('font-size', 7).attr('fill','#444').attr('font-weight','600')
+    .text(`mean Jaccard = ${meanJaccard.toFixed(3)} (FDR < 0.05)`);
+}
+
+// ============================================================
+// SVG DOWNLOAD
+// ============================================================
+function downloadSVG() {
+  const svgEl = document.getElementById('figS5');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgEl);
+  source = '<?xml version="1.0" standalone="no"?>\n' + source;
+  const blob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'figS5_pipeline_comparison.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
