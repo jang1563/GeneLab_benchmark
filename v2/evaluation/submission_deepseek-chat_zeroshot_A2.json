@@ -1,0 +1,49 @@
+{
+  "task_id": "A2",
+  "model_name": "DeepSeek-V3_zeroshot",
+  "model_description": "deepseek-chat, zero-shot, top-50 genes, per-sample z-score",
+  "tier": "3",
+  "llm_variant": "zero_shot",
+  "n_genes_in_prompt": 50,
+  "submission_date": "2026-03-08",
+  "predictions": {
+    "fold_RR-1_test": {
+      "RR-1.Mmus_C57-6J_GST_GC_Rep1_M33": 0.25,
+      "RR-1.Mmus_C57-6J_GST_GC_Rep2_M34": 0.25,
+      "RR-1.Mmus_C57-6J_GST_GC_Rep3_M35": 0.25,
+      "RR-1.Mmus_C57-6J_GST_GC_Rep4_M36": 0.25,
+      "RR-1.Mmus_C57-6J_GST_GC_Rep5_M37": 0.25,
+      "RR-1.Mmus_C57-6J_GST_GC_Rep6_M38": 0.25,
+      "RR-1.Mmus_C57-6J_GST_FLT_Rep1_M23": 0.25,
+      "RR-1.Mmus_C57-6J_GST_FLT_Rep2_M24": 0.25,
+      "RR-1.Mmus_C57-6J_GST_FLT_Rep3_M25": 0.25,
+      "RR-1.Mmus_C57-6J_GST_FLT_Rep4_M26": 0.25,
+      "RR-1.Mmus_C57-6J_GST_FLT_Rep5_M27": 0.25,
+      "RR-1.Mmus_C57-6J_GST_FLT_Rep6_M28": 0.25
+    },
+    "fold_RR-5_test": {
+      "RR-5.GSM5398358": 0.15000000000000002,
+      "RR-5.GSM5398359": 0.15000000000000002,
+      "RR-5.GSM5398360": 0.15000000000000002,
+      "RR-5.GSM5398361": 0.15000000000000002,
+      "RR-5.GSM5398362": 0.15000000000000002,
+      "RR-5.GSM5398363": 0.15000000000000002,
+      "RR-5.GSM5398364": 0.15000000000000002,
+      "RR-5.GSM5398365": 0.15000000000000002,
+      "RR-5.GSM5398366": 0.15000000000000002,
+      "RR-5.GSM5398367": 0.25,
+      "RR-5.GSM5398368": 0.15000000000000002,
+      "RR-5.GSM5398369": 0.25
+    },
+    "fold_RR-9_test": {
+      "RR-9.SRR11148753": 0.050000000000000044,
+      "RR-9.SRR11148754": 0.15000000000000002,
+      "RR-9.SRR11148755": 0.050000000000000044,
+      "RR-9.SRR11148756": 0.15000000000000002,
+      "RR-9.SRR11148757": 0.050000000000000044,
+      "RR-9.SRR11148758": 0.050000000000000044,
+      "RR-9.SRR11148759": 0.15000000000000002,
+      "RR-9.SRR11148760": 0.050000000000000044
+    }
+  }
+}

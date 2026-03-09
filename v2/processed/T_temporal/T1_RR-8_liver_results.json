@@ -1,0 +1,86 @@
+{
+  "task": "T1b",
+  "tissue": "liver",
+  "mission": "RR-8",
+  "confound_warning": "PMID 33376967: ISS-T=RNAlater, LAR=necropsy",
+  "conditions": {
+    "FLT_gene": {
+      "status": "OK",
+      "auroc": 0.9299999999999999,
+      "ci_low": 0.786654605263158,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 35,
+      "n_isst": 20,
+      "n_lar": 15,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 22987
+    },
+    "FLT_pathway": {
+      "status": "OK",
+      "auroc": 0.9199999999999999,
+      "ci_low": 0.7777777777777778,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 35,
+      "n_isst": 20,
+      "n_lar": 15,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    },
+    "GC_gene": {
+      "status": "OK",
+      "auroc": 0.9733333333333333,
+      "ci_low": 0.9047619047619048,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 35,
+      "n_isst": 20,
+      "n_lar": 15,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 22987
+    },
+    "GC_pathway": {
+      "status": "OK",
+      "auroc": 0.9933333333333333,
+      "ci_low": 0.9679847826086956,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 35,
+      "n_isst": 20,
+      "n_lar": 15,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    },
+    "BSL_gene": {
+      "status": "OK",
+      "auroc": 0.9833795013850415,
+      "ci_low": 0.9411589635854342,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 38,
+      "n_isst": 19,
+      "n_lar": 19,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 22987
+    },
+    "BSL_pathway": {
+      "status": "OK",
+      "auroc": 0.9695290858725761,
+      "ci_low": 0.9,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 38,
+      "n_isst": 19,
+      "n_lar": 19,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    }
+  },
+  "interpretation": {
+    "FLT_AUROC": 0.9299999999999999,
+    "GC_AUROC_baseline": 0.9733333333333333,
+    "excess_signal": -0.043333333333333335,
+    "note": "excess \u2248 0: FLT and GC AUROC comparable \u2192 ISS-T vs LAR difference is primarily preservation artifact"
+  }
+}

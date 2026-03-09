@@ -1,0 +1,42 @@
+{
+  "task_id": "A1",
+  "tissue": "liver",
+  "n_genes": 50,
+  "gene_selection": "top-50 protein-coding genes by raw variance",
+  "gene_filter": "exclude Gm/LOC/Rik/ncRNA/multi-mapped/unmapped",
+  "gene_ordering": "|z-score| descending per sample",
+  "generated_at": "2026-03-08T01:17:49.600206",
+  "folds": {
+    "fold_MHU-2_test": {
+      "n_test_samples": 6,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-1_test": {
+      "n_test_samples": 14,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-3_test": {
+      "n_test_samples": 12,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-6_test": {
+      "n_test_samples": 39,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-8_test": {
+      "n_test_samples": 103,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-9_test": {
+      "n_test_samples": 19,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    }
+  },
+  "total_prompts": 193
+}

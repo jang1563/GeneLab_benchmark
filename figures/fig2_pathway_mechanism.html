@@ -47,12 +47,12 @@ const FS = {
 
 // Panel (a): D-category confounder detection (macro-F1)
 const dumbbellData = [
-  {task:'D3', label:'Mission ID (liver, 6-class)', gene:1.000, pathway:0.056, pGene:'***', pPath:'NS'},
-  {task:'D5_liver', label:'Hardware (liver)', gene:1.000, pathway:0.386, pGene:'***', pPath:'NS'},
-  {task:'D5_thymus', label:'Hardware (thymus)', gene:1.000, pathway:0.352, pGene:'***', pPath:'NS'},
-  {task:'D4', label:'Strain (thymus GC, n=3)', gene:0.892, pathway:0.817, pGene:'**', pPath:'*'},
-  {task:'D6_liver', label:'Gravity (liver MHU-2)', gene:0.886, pathway:0.413, pGene:'**', pPath:'NS'},
-  {task:'D6_thymus', label:'Gravity (thymus MHU-2)', gene:0.657, pathway:0.641, pGene:'*', pPath:'NS'}
+  {task:'D3', label:'Which mission? (liver, 6-way)', gene:1.000, pathway:0.056, pGene:'***', pPath:'NS'},
+  {task:'D5_liver', label:'Which hardware? (liver)', gene:1.000, pathway:0.386, pGene:'***', pPath:'NS'},
+  {task:'D5_thymus', label:'Which hardware? (thymus)', gene:1.000, pathway:0.352, pGene:'***', pPath:'NS'},
+  {task:'D4', label:'Which strain? (thymus)', gene:0.892, pathway:0.817, pGene:'**', pPath:'*'},
+  {task:'D6_liver', label:'Which gravity? (liver)', gene:0.886, pathway:0.413, pGene:'**', pPath:'NS'},
+  {task:'D6_thymus', label:'Which gravity? (thymus)', gene:0.657, pathway:0.641, pGene:'*', pPath:'NS'}
 ];
 
 // Panel (b): Gene vs Pathway AUROC scatter (Category A + C only, 9 pts)
@@ -126,7 +126,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[0]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Confounder detection');
+    .text('Batch & confounder detection');
 
   const xScale = d3.scaleLinear().domain([0, 1.08]).range([leftPad, leftPad + plotW]);
   const yScale = d3.scaleBand().domain(dumbbellData.map(d=>d.task)).range([topPad, topPad + plotH]).padding(0.25);
@@ -153,7 +153,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', xScale(0.5)).attr('y', topPad + plotH + 28)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('Macro-F1');
+    .text('Detection score (macro-F1)');
 
   // Dumbbell rows
   dumbbellData.forEach(d => {
@@ -189,7 +189,7 @@ function panelLabel(g, letter, x, y) {
         .attr('x', midX).attr('y', cy - 9)
         .attr('text-anchor','middle').attr('font-size', 8)
         .attr('fill','#c00').attr('font-weight','bold')
-        .text('17.8×');
+        .text('17.8× batch resistance');
     }
   });
 
@@ -373,7 +373,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[2]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('NES conservation → Transfer');
+    .text('Pathway conservation predicts transfer');
 
   const xScale = d3.scaleLinear().domain([-0.05, 0.7]).range([pad.left, pad.left + plotW]);
   const yScale = d3.scaleLinear().domain([0.45, 0.95]).range([pad.top + plotH, pad.top]);
@@ -455,7 +455,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', pad.left + plotW/2).attr('y', pad.top + plotH + 28)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('NES mean pairwise ρ');
+    .text('Cross-mission pathway conservation (ρ)');
   g.append('text')
     .attr('transform', `rotate(-90, ${pad.left - 28}, ${pad.top + plotH/2})`)
     .attr('x', pad.left - 28).attr('y', pad.top + plotH/2)
@@ -512,12 +512,12 @@ function panelLabel(g, letter, x, y) {
     .attr('x', pad.left + plotW - 2).attr('y', pad.top + 14)
     .attr('text-anchor','end').attr('font-size', 9)
     .attr('fill','#333').attr('font-style','italic')
-    .text('ρ = 0.9 (5 tissues)');
+    .text('ρ = 0.6 (all 6 tissues)');
   g.append('text')
     .attr('x', pad.left + plotW - 2).attr('y', pad.top + 25)
     .attr('text-anchor','end').attr('font-size', 7)
     .attr('fill','#888').attr('font-style','italic')
-    .text('excl. gastrocnemius');
+    .text('ρ = 0.9 excl. gastrocnemius');
 }
 
 // ============================================================

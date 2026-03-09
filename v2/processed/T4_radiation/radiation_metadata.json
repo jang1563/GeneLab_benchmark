@@ -1,0 +1,99 @@
+{
+  "generated_at": "2026-03-07T19:19:57.710642",
+  "task": "T4",
+  "description": "Radiation dose annotation based on ISS LEO dosimetry",
+  "sources": [
+    "NASA Environmental Data for ISS",
+    "RR-1: 7.4 mGy total / 37d flight",
+    "MHU-1: 8.05 mGy total / 35d flight"
+  ],
+  "note": "ISS LEO dose rate is nearly constant across missions (~0.215 mGy/d). Dose-response analysis not meaningful with current data (requires variable doses). This annotation is for metadata completeness and future use.",
+  "missions": {
+    "MHU-1": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.23,
+      "total_dose_mgy": 8.05,
+      "dose_source": "measured",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 8.05 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "MHU-2": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 7.52,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.52 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "RR-1": {
+      "duration_days": 37,
+      "dose_rate_mgy_per_day": 0.2,
+      "total_dose_mgy": 7.4,
+      "dose_source": "measured",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.40 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "RR-3": {
+      "duration_days": 30,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 6.45,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 6.45 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "RR-5": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 7.52,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.52 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "RR-6": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 7.52,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.52 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "RR-7": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 7.52,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.52 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "RR-8": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 7.52,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.52 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "RR-9": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 7.52,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.52 mGy, GC/BSL/VIV: 0 mGy"
+    },
+    "TBD": {
+      "duration_days": 35,
+      "dose_rate_mgy_per_day": 0.215,
+      "total_dose_mgy": 7.52,
+      "dose_source": "estimated",
+      "ground_control_dose_mgy": 0.0,
+      "note": "Flight samples: 7.52 mGy, GC/BSL/VIV: 0 mGy"
+    }
+  },
+  "summary": {
+    "min_dose_mgy": 6.45,
+    "max_dose_mgy": 8.05,
+    "dose_range_mgy": 1.6,
+    "conclusion": "Dose range too narrow for dose-response analysis (6.0-8.1 mGy, all LEO). Ground-based variable-dose experiments needed."
+  }
+}

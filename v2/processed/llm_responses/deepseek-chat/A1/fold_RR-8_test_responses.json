@@ -1,0 +1,1350 @@
+{
+  "fold": "fold_RR-8_test",
+  "task_id": "A1",
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "temperature": 0,
+  "generated_at": "2026-03-08T11:58:22.991383",
+  "n_responses": 103,
+  "responses": [
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp3a41b, Cyp2b13, Cyp2a4, Cyp3a41a) are upregulated, while others like Cyp4a12a/b are downregulated. Sulfotransferase genes (Sult2a1, Sult2a2, Sult2a5, Sult2a6) are also consistently upregulated, indicating altered phase II metabolism. These patterns align with known spaceflight-induced hepatic stress responses, including changes in bile acid metabolism and detoxification pathways. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) further supports a metabolic shift away from normal hepatic synthetic functions. The overall pattern matches flight-associated transcriptomic adaptations rather than ground control stability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 216,
+        "total_tokens": 1233
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI1",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of spaceflight-induced liver adaptation. The most compelling evidence is the upregulation of multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a16, Cyp3a44, Cyp2b9, Cyp2b13, Cyp3a41b, Cyp2a4, Fmo3, Cyp3a41a) and sulfotransferase genes (Sult2a1, Sult2a5, Sult2a2, Sult2a3, Sult3a1, Sult3a2). This pattern is a hallmark of altered xenobiotic metabolism in the liver during spaceflight, likely a response to increased oxidative stress and the need to process endogenous metabolites under microgravity. The upregulation of Hao2 (involved in fatty acid oxidation) and downregulation of Elovl3 (involved in fatty acid elongation) align with reported metabolic reprogramming. The strong downregulation of multiple Major Urinary Protein (Mup) genes (Mup15, Mup7) is also consistent with spaceflight-associated shifts in lipid transport and signaling. While some top variable genes (e.g., Ptprg, various RNAs) are less specific, the coordinated pattern in core liver metabolic pathways provides high confidence for a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 282,
+        "total_tokens": 1299
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI2",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b9, Cyp2b13, Cyp3a16, Fmo3, Cyp2a4) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern of Cyp induction, particularly of Cyp3a and Cyp2 family members, aligns with known spaceflight-induced hepatic stress responses and altered detoxification pathways. Additionally, several sulfotransferase genes (Sult2a1, Sult2a6, Sult2a5, Sult2a2) are upregulated, further indicating a shift in phase II metabolism. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) is also consistent with spaceflight-related metabolic and hormonal changes. While not all classic oxidative stress markers are among the top hits, the overall xenobiotic metabolism reprogramming strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 232,
+        "total_tokens": 1249
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI3",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp3a41b, Cyp2a4, Cyp2b13) and sulfotransferase genes (Sult3a2, Sult2a1, Sult3a1, Sult2a2) are upregulated. This coordinated induction of phase I and phase II detoxification enzymes is a known response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) also aligns with spaceflight-associated metabolic shifts. While some individual gene changes could occur in ground-based stress models, the breadth and consistency of this specific xenobiotic metabolism signature strongly point to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 202,
+        "total_tokens": 1219
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI4",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2a4, Cyp2b13, Cyp3a41b, Cyp3a41a) and sulfotransferase genes (Sult2a1, Sult2a2, Sult2a5, Sult3a1, Sult2a6, Sult3a2) are upregulated. This pattern is consistent with the liver's adaptive response to oxidative stress and altered metabolic demands in microgravity, including the need to process increased systemic oxidative damage products and potential shifts in endogenous substrates (e.g., bile acids, steroids). The downregulation of major urinary proteins (Mup15, Mup8, Mup7) also aligns with reported metabolic and hormonal shifts in flight. The strength and biological coherence of this xenobiotic metabolism signature provide high confidence that this is a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 233,
+        "total_tokens": 1250
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI5",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism induction, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2a4, Cyp3a41b, Cyp2b13) and sulfotransferase genes (Sult3a2, Sult2a1, Sult3a1, Sult2a2) are upregulated. This pattern is consistent with the known adaptive response of the liver to the oxidative stress and novel chemical environment of spaceflight, likely involving the constitutive androstane receptor (CAR) and pregnane X receptor (PXR) pathways. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) also aligns with metabolic shifts seen in flight. The magnitude and biological coherence of this xenobiotic metabolism signature provide high confidence that this is a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 213,
+        "total_tokens": 1230
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI6",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b9, Cyp2a4, Cyp2b13, Fmo3) are upregulated, while others show mixed regulation. Sulfotransferase genes (Sult2a5, Sult2a1, Sult2a2, Sult3a1) are also consistently upregulated. This coordinated induction of Phase I and Phase II detoxification enzymes aligns with the known adaptive hepatic response to oxidative stress and altered metabolic demands in microgravity. The downregulation of several Major Urinary Proteins (Mups) and the upregulation of Hao2 (involved in fatty acid metabolism) further support a flight-associated metabolic shift. The pattern is inconsistent with a typical ground control profile, which would show less extreme and more homeostatic regulation of these pathways.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 208,
+        "total_tokens": 1225
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI7",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong, coherent upregulation of multiple cytochrome P450 (CYP) enzymes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp2a4, Cyp3a41b, Cyp2b9, Cyp2b13, Cyp3a41a) and sulfotransferases (Sult2a1, Sult2a5, Sult2a2, Sult2a6, Sult3a1, Sult2a3, Sult3a2). This pattern is a hallmark of spaceflight-induced liver adaptation, specifically the upregulation of xenobiotic metabolism and detoxification pathways. This is a well-documented response to the oxidative stress and novel chemical environment (e.g., off-gassing, elevated CO2) associated with spaceflight. The downregulation of major urinary proteins (Mup genes) also aligns with metabolic shifts seen in flight. The strength and consistency of this Phase I/II metabolism signature, combined with the extreme downregulation of other genes like *Gvin1* and *Ptprg*, provide high confidence that this transcriptomic profile is characteristic of a spaceflight-exposed liver.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 257,
+        "total_tokens": 1274
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI8",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong, coordinated upregulation of multiple cytochrome P450 (CYP) genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2b13, Cyp2a4, Cyp3a41b, Cyp3a41a) and sulfotransferase (SULT) genes (Sult2a1, Sult2a2, Sult2a5, Sult2a3, Sult3a1, Sult2a6, Sult3a2). These gene families are central to xenobiotic metabolism and bile acid conjugation in the liver. This pattern is a hallmark of the liver's adaptive response to the unique metabolic and oxidative stress environment of spaceflight, which includes altered nutrient processing, increased endogenous waste products, and exposure to novel compounds (e.g., from materials off-gassing or altered gut microbiota). The downregulation of some Major Urinary Protein (Mup) genes may also relate to altered systemic metabolic signaling. The overall signature of Phase I (CYP) and Phase II (SULT) detoxification enzyme induction is a well-documented feature of spaceflight-exposed mouse liver transcriptomes and is not typical of ground control samples under standard conditions.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 273,
+        "total_tokens": 1290
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI9",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b9, Cyp3a16, Cyp2b13, Cyp3a41a/b) are upregulated, while others (Cyp4a12b/a) are downregulated. This pattern of Cyp gene induction, particularly in the Cyp2 and Cyp3 families, aligns with known hepatic responses to oxidative stress and altered metabolic demands in microgravity. Additionally, several sulfotransferase genes (Sult3a2, Sult3a1, Sult2a5/6/2/1) are upregulated, further indicating a shift in phase II detoxification pathways. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) is also consistent with spaceflight-associated metabolic changes. While some individual gene changes are subtle, the coordinated pattern across key metabolic enzyme families strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 232,
+        "total_tokens": 1249
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI10",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2b9) and sulfotransferase genes (Sult2a3, Sult2a1, Sult2a5) are upregulated. This pattern is consistent with the liver's response to oxidative stress and altered metabolic demands in microgravity, often involving detoxification pathway induction. The downregulation of several Major Urinary Protein (Mup) genes (Mup15, Mup7, Mup8) also aligns with spaceflight-associated metabolic shifts away from certain lipid-binding and pheromone transport functions. While a few ribosomal/small nuclear RNA genes are down (common in various stresses), the coherent upregulation of Phase I/II metabolism genes strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 207,
+        "total_tokens": 1224
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI11",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a41b, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2a4, Cyp2b13, Cyp3a41a) and sulfotransferase genes (Sult2a3, Sult2a1, Sult2a2, Sult2a5, Sult2a6) are upregulated. This pattern is consistent with the liver's adaptive response to increased oxidative stress and novel metabolic demands in microgravity. Conversely, several Major Urinary Protein (Mup) genes are downregulated (Mup15, Mup7, Mup8), which aligns with reported metabolic and signaling shifts in flight. The downregulation of lipid metabolism genes (Cyp4a12a, Cyp4a12b, Elovl3) further supports a flight-associated metabolic reprogramming. The strength, consistency, and biological relevance of this xenobiotic metabolism signature provide high confidence that this is a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 250,
+        "total_tokens": 1267
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI12",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism induction, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2b9, Cyp2a4, Cyp2b13, Cyp3a41a) and sulfotransferase genes (Sult2a1, Sult2a2, Sult2a3, Sult3a2, Sult2a5, Sult2a6, Sult3a1) are upregulated. This pattern is consistent with the known adaptive hepatic response to spaceflight, which involves reprogramming of detoxification pathways, likely due to oxidative stress and altered metabolic demands. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with reported metabolic shifts in flight mice. The strength and specificity of this Phase I/II metabolism signature strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 221,
+        "total_tokens": 1238
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI13",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2b9, Cyp2a4, Cyp2b13) and sulfotransferase genes (Sult2a1, Sult2a3, Sult2a2, Sult2a5, Sult2a6, Sult3a2, Sult3a1) are upregulated. This pattern aligns with known adaptive hepatic responses to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) is also consistent with spaceflight-associated metabolic shifts. The overall gene expression profile matches established spaceflight liver signatures rather than typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 203,
+        "total_tokens": 1220
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI14",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern is the strong upregulation of multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b9, Cyp3a16, Cyp3a41b, Cyp2b13, Cyp3a41a) and other xenobiotic metabolism genes (Fmo3, Sult3a2, Sult3a1). In spaceflight mouse liver transcriptomics, a consistent signature is the **downregulation** of xenobiotic metabolism pathways, particularly Cyp genes, due to reduced metabolic demand and altered liver function in microgravity. The observed upregulation here is opposite to the expected flight response.  \n\nAdditionally, several Major Urinary Protein (Mup) genes (Mup15, Mup7, Mup8) are downregulated, which is more typical of ground control profiles rather than the stress-associated shifts seen in flight.  \n\nThe lack of strong oxidative stress markers (e.g., Nrf2 targets) or clear immune dysregulation genes in the top variable set, combined with the reversed xenobiotic metabolism trend, strongly suggests a **ground control** signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 249,
+        "total_tokens": 1266
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI15",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern is the strong upregulation of multiple cytochrome P450 (CYP) and sulfotransferase (SULT) genes (e.g., Cyp2d13, Cyp2a22, Sult2a1, Sult2a3, Cyp3a44, etc.), which are central to xenobiotic metabolism and bile acid processing. In spaceflight, liver transcriptomes consistently show altered expression of detoxification and bile acid synthesis pathways, often interpreted as a response to oxidative stress, altered gut microbiota, or changes in endogenous metabolites. The downregulation of major urinary proteins (MUPs) like Mup15 and Mup7 is also consistent with spaceflight-associated metabolic shifts. While some ribosomal/small nuclear RNA genes are down (common in stress), the dominant xenobiotic metabolism signature aligns with known spaceflight liver responses, not typical ground control patterns. However, the magnitude and consistency of the CYP/SULT upregulation here are unusually pronounced and uniform, which is more characteristic of a coordinated ground-based experimental challenge (e.g., chemical exposure or dietary manipulation) than the more variable, stress-related dysregulation seen in actual flight liver data. Thus, I classify this as a **ground control sample** with high confidence, likely from a study with a specific metabolic or toxicological intervention.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 276,
+        "total_tokens": 1293
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI16",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores are dominated by non\u2011specific or structural genes (e.g., *Gvin1*, *Ptprg*, *Lin54*, *Vamp7*, *Rnu*\u2011series), which do not align strongly with established spaceflight liver signatures.  \nKey spaceflight\u2011associated liver changes\u2014such as upregulation of oxidative stress (Nrf2 pathway), DNA damage response, immune dysregulation, and consistent shifts in xenobiotic metabolism\u2014are not prominent here.  \nThe modest changes in Cyp and Sult genes are mixed in direction and magnitude, lacking the coherent xenobiotic\u2011metabolism reprogramming often seen in flight liver.  \nThe absence of strong, coordinated spaceflight\u2011related pathways suggests this sample is more consistent with ground\u2011control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 170,
+        "total_tokens": 1187
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI17",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most variable genes in this sample are dominated by downregulation of non-specific or structural genes (e.g., *Gvin1*, *Ptprg*, *Eppk1*, *Tmlhe*, *Mup* genes) and upregulation of several cytochrome P450 (*Cyp*) and sulfotransferase (*Sult*) genes. In spaceflight mouse liver transcriptomics, a hallmark signature includes **upregulation of xenobiotic metabolism genes** (especially *Cyp3a*, *Cyp2b*, *Cyp2a* families and *Sult* genes) due to altered bile acid metabolism and oxidative stress. Here, multiple *Cyp* and *Sult* genes show consistent but modest upregulation (z-scores mostly +0.5 to +1.6), while the strongest signals are actually down in non-metabolic genes.  \n\nHowever, in known flight liver data, these xenobiotic metabolism changes are often more pronounced and accompanied by stronger upregulation of oxidative stress response genes (e.g., *Nqo1*, *Gst*, *Nrf2* targets), which are absent here. The modest upregulation of *Cyp* genes could occur in ground controls due to normal variability or experimental conditions (e.g., housing, diet). The strongest z-scores are not clearly flight-specific liver markers but rather noise from non-coding RNAs (*Rnu*, *Rny*) and structural genes.  \n\nGiven the **lack of strong, consistent flight-like oxidative stress or immune dysregulation markers**, and the relatively weak xenobiotic metabolism signal, this profile is more consistent with a **ground control sample** with some normal metabolic variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 354,
+        "total_tokens": 1371
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI18",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2b9, Cyp3a41a, Cyp2a4) are upregulated, while others like Cyp4a12a/b are downregulated. Sulfotransferase genes (Sult2a1, Sult3a2, Sult2a3, etc.) are also broadly upregulated. This pattern reflects an adaptive hepatic response to the unique metabolic and oxidative stresses of spaceflight, including altered detoxification demands and potential shifts in bile acid metabolism. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) is also consistent with spaceflight-associated metabolic changes. The overall gene expression profile aligns strongly with known spaceflight effects rather than normal ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 211,
+        "total_tokens": 1228
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI19",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2b13, Cyp3a41b, Cyp2a4, Cyp3a41a) are upregulated, while others like Cyp4a12a/b are downregulated. Sulfotransferase genes (Sult2a1, Sult2a6, Sult2a5, Sult2a3, Sult2a2, Sult3a2) are also consistently upregulated, indicating altered phase II detoxification. This coordinated shift in drug\u2011metabolizing enzymes is a known adaptive response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) aligns with spaceflight\u2011related metabolic shifts. The pattern matches flight\u2011associated liver signatures rather than ground control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 227,
+        "total_tokens": 1244
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI20",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2b13, Cyp2a4, Cyp3a41b, Cyp3a41a) are upregulated, while others like Cyp4a12a/b are downregulated. Sulfotransferase genes (Sult2a1, Sult2a2, Sult2a5, Sult2a6) are also upregulated. This coordinated shift in detoxification and bile acid metabolism pathways is consistent with spaceflight-induced liver adaptation to oxidative stress and altered metabolic demands. The downregulation of lipid metabolism genes (Elovl3) and major urinary proteins (Mup genes) further aligns with known metabolic changes in microgravity. The pattern matches flight-associated transcriptomic signatures rather than typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 213,
+        "total_tokens": 1230
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL1",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp3a41b, Cyp2b9, Cyp3a16, Cyp2b13, Cyp3a41a) are upregulated, consistent with known spaceflight-induced alterations in liver detoxification pathways. Sulfotransferase genes (Sult2a1, Sult2a2, Sult2a3, Sult2a5, Sult3a1, Sult3a2) are also broadly upregulated, further supporting phase II metabolism changes. Downregulation of lipid metabolism genes (Elovl3, Cyp4a12b, Cyp4a12a) aligns with spaceflight-associated shifts in lipid homeostasis. While some ribosomal RNA genes are down (consistent with reduced translation in stress), the dominant pattern matches flight-induced hepatic adaptation to oxidative stress and altered metabolic demands.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 222,
+        "total_tokens": 1239
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL2",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong and coherent signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp3a41a, Cyp2b9, Cyp2b13) and sulfotransferase genes (Sult2a3, Sult2a5, Sult2a1, Sult2a6, Sult2a2) are upregulated. This pattern matches known spaceflight-induced transcriptional reprogramming in the liver, likely driven by oxidative stress and altered systemic signaling. The downregulation of lipid metabolism genes (Elovl3, Cyp4a12a, Cyp4a12b) and specific markers like Mup genes further supports a flight-associated metabolic shift. The consistency and biological relevance of this signature, particularly the upregulation of detoxification pathways, strongly indicate a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 218,
+        "total_tokens": 1235
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL3",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of spaceflight-induced xenobiotic metabolism reprogramming in the liver. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp2b9, Cyp3a41a) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern matches known spaceflight responses involving altered detoxification pathways and potential oxidative stress. Additionally, sulfotransferase genes (Sult2a and Sult3a families) are consistently upregulated, which aligns with spaceflight-associated changes in bile acid and steroid metabolism. The downregulation of major urinary proteins (Mup genes) is also consistent with metabolic shifts observed in flight mice. The overall pattern is characteristic of hepatic adaptation to microgravity rather than a ground control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 192,
+        "total_tokens": 1209
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL4",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by downregulated non-coding RNAs (Rnu2-10, Rnu1a1, Rnu5g) and genes not strongly associated with known spaceflight liver signatures. Key spaceflight markers in liver\u2014such as strong upregulation of xenobiotic metabolism genes (Cyp2a, Cyp2b, Cyp3a, Sult families)\u2014show only mild, inconsistent changes here (mixed small up/down z-scores).  \nIn spaceflight, liver typically shows pronounced, coordinated induction of Cyp450 and sulfotransferase genes due to oxidative stress and detoxification demands; this sample lacks that coherent pattern. The absence of strong oxidative stress (Nrf2 targets), DNA damage, or bile acid pathway markers further suggests a ground control profile. The few moderate z-scores (e.g., Gvin1, Ptprg) are not characteristic of spaceflight liver responses.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 197,
+        "total_tokens": 1214
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL5",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:** The most striking pattern in this liver sample is the strong upregulation of multiple cytochrome P450 (Cyp) and sulfotransferase (Sult) genes (e.g., Cyp2d13, Cyp2a22, Sult2a1, Sult2a5, Cyp3a44, etc.). This is a hallmark signature of altered xenobiotic metabolism in the liver, a well-documented response to spaceflight. Microgravity and the space environment induce oxidative stress and metabolic reprogramming, leading to the upregulation of detoxification pathways. The concurrent downregulation of several Major Urinary Proteins (Mups) is also consistent with spaceflight-associated metabolic shifts. The pattern does not show the classic, broad oxidative stress or immune dysregulation markers (like Nrf2 targets or strong inflammatory cytokines) that might appear in other tissues, but the specific, coordinated induction of phase I/II metabolism genes in the liver is a strong indicator of a flight response. The magnitude of change in these key gene families, relative to the minimal changes in other pathways, aligns with a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 231,
+        "total_tokens": 1248
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL6",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a41b, Cyp3a44, Cyp3a16, Cyp2a4, Cyp2b9, Cyp3a41a, Cyp2b13) are upregulated, consistent with the known induction of detoxification pathways in microgravity. Additionally, sulfotransferase genes (Sult3a2, Sult2a3, Sult2a1, Sult3a1, Sult2a2, Sult2a5, Sult2a6) are broadly upregulated, further indicating altered hepatic metabolism of endogenous compounds and xenobiotics. The downregulation of major urinary proteins (Mup7, Mup15, Mup8) aligns with reported metabolic shifts. While some individual gene changes could occur in ground-based stress models, the coordinated pattern across these specific pathways strongly matches the established spaceflight transcriptomic profile for mouse liver.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 228,
+        "total_tokens": 1245
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL7",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism induction, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp2a4, Cyp3a16, Cyp2b9, Cyp2b13) and sulfotransferase genes (Sult3a2, Sult2a1, Sult2a3, Sult2a2, Sult2a5) are consistently upregulated. This coordinated upregulation of phase I and phase II detoxification enzymes is a known adaptive response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with spaceflight-associated metabolic shifts away from normal pheromone transport and nitrogen metabolism. While some ribosomal/small nuclear RNA genes are down (consistent with potential global translational modulation), the dominant xenobiotic metabolism signal strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 220,
+        "total_tokens": 1237
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL8",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp2a4, Cyp3a16, Cyp2b13, Cyp2b9) are upregulated, while others (Cyp4a12a, Cyp4a12b) are downregulated. Similarly, multiple sulfotransferase genes (Sult2a family, Sult3a2) are upregulated. This pattern matches known spaceflight-induced liver adaptations, likely driven by oxidative stress and altered bile acid metabolism. The downregulation of major urinary proteins (Mup genes) and the presence of small RNA species (Rny, Rnu) with altered expression further support a flight-associated stress response. The consistency and biological plausibility of this signature make a flight classification highly confident.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 204,
+        "total_tokens": 1221
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL11",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight exposure in mouse liver. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Fmo3, Cyp2a4, Cyp3a16, etc.) are upregulated, consistent with the known induction of detoxification pathways in response to spaceflight-associated oxidative stress and metabolic demands. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) aligns with reported metabolic shifts away from normal urinary protein secretion. While some ribosomal RNA genes show downregulation (possibly due to technical variation), the coherent upregulation of Cyp and Sult gene families strongly points to a flight-like adaptation rather than a ground control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 168,
+        "total_tokens": 1185
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL13",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp3a41b, Cyp3a16, Cyp2b9, etc.) and sulfotransferase genes (Sult3a2, Sult2a1, Sult3a1, etc.) are consistently upregulated. This pattern aligns with the known adaptive hepatic response to spaceflight, which involves metabolic reprogramming and detoxification pathway activation, likely due to increased oxidative stress and altered substrate availability. The downregulation of major urinary proteins (Mup genes) is also consistent with spaceflight-associated metabolic shifts. While some individual gene changes could occur in ground-based stress models, the coordinated induction of multiple xenobiotic-metabolizing enzymes strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 197,
+        "total_tokens": 1214
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL14",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp2a4, Cyp3a16, Cyp2b9, Cyp2b13) and sulfotransferase genes (Sult3a2, Sult2a3, Sult2a1, Sult2a2, Sult2a5, Sult3a1) are upregulated. This coordinated induction of Phase I and Phase II detoxification enzymes is a known response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with spaceflight-associated metabolic shifts. While some individual gene changes could occur in ground-based stress models, the breadth and coherence of this xenobiotic metabolism signature strongly point to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 213,
+        "total_tokens": 1230
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL15",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp2a4, Cyp3a16, Cyp3a41a, Cyp2b9, Cyp2b13) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern aligns with known spaceflight-induced shifts in hepatic detoxification pathways, likely due to oxidative stress and altered lipid metabolism. Additionally, sulfotransferase genes (Sult2a1, Sult2a3, Sult3a2, etc.) are consistently upregulated, further supporting altered phase II metabolism. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) may reflect changes in metabolic or hormonal signaling. While some ribosomal/small RNA genes show variation, the coherent dysregulation of drug-metabolizing enzymes strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 223,
+        "total_tokens": 1240
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL16",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by non-specific downregulations (e.g., *Gvin1*, *Ptprg*, *Lin54*, *Vamp7*, *Rnu2-10*, *Rnu1a1*, *Eppk1*) that are not characteristic of known spaceflight liver signatures.  \nKey spaceflight liver markers are largely absent or show weak/contradictory signals:  \n- **CYP450 enzymes** (*Cyp2d13*, *Cyp2a22*, *Cyp3a44*, *Cyp2a4*, *Cyp2b13*, *Cyp2b9*) show mixed weak upregulation, but in spaceflight, strong coordinated upregulation of xenobiotic metabolism genes (especially *Cyp2b*, *Cyp3a*, *Cyp4a*) is typical due to oxidative stress and altered bile acid metabolism. Here, *Cyp4a12a/b* are down, and *Cyp3a16* is unchanged.  \n- **Sulfotransferases** (*Sult2a1*, *Sult3a2*, *Sult2a5*, etc.) are weakly upregulated, but not strongly enough to match flight patterns.  \n- **Oxidative stress response** genes (e.g., *Nqo1*, *Gst*, *Nrf2* targets) are missing from the top variable list.  \n- **Major urinary proteins** (*Mup15*, *Mup7*) are down, which can occur in flight but is not specific.  \n\nThe pattern lacks the strong, coordinated xenobiotic metabolism induction and oxidative stress signatures expected in spaceflight liver. The weak/mixed CYP changes and dominant non-specific downregulations are more consistent with ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 381,
+        "total_tokens": 1398
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL17",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b13, Cyp2b9, Cyp3a41a, Cyp3a41b, Cyp3a16) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern reflects altered detoxification and steroid metabolism under microgravity stress. Additionally, several sulfotransferase genes (Sult2a1, Sult3a2, etc.) are upregulated, consistent with phase II metabolism changes reported in spaceflight. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) aligns with metabolic shifts away from normal pheromone transport. While not all classic oxidative stress markers appear in this top-50 list, the xenobiotic metabolism signature is prominent and matches flight-associated liver transcriptomic profiles.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 218,
+        "total_tokens": 1235
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL18",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern in this liver sample is the strong upregulation of multiple cytochrome P450 (CYP) genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b9, Cyp3a16, Cyp2b13, Cyp2a4, etc.) and sulfotransferase (SULT) genes (Sult3a2, Sult3a1, Sult2a3, etc.), which are central to xenobiotic metabolism and bile acid processing. In spaceflight mouse liver transcriptomes, a hallmark signature is the **downregulation** of xenobiotic metabolism pathways (especially CYP enzymes) due to reduced metabolic demand and altered bile acid synthesis. Ground control mice typically show higher basal or induced expression of these detoxification genes.  \n\nAdditionally, the sample lacks strong indicators of spaceflight stress in liver, such as pronounced oxidative stress (Nrf2 targets), immune dysregulation, or lipid metabolism shifts (e.g., Elovl3 is only slightly down). The extreme downregulation of several non-coding RNAs (Rnu2-10, Rnu1a1, etc.) and structural genes (Eppk1) does not align with known spaceflight liver responses.  \n\nThus, the gene expression profile matches a **ground control** liver, with confidence bolstered by the coherent upregulation of drug-metabolizing enzymes typical of terrestrial conditions.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 297,
+        "total_tokens": 1314
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI1",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by downregulation of non-specific transcripts (e.g., *Rnu2-10*, *Rnu1a1*, *Rnu5g* \u2014 small nuclear RNAs; *Tmem254c/b*, *Arvcf* \u2014 not strongly spaceflight-associated). The most upregulated gene (*Ptprg*) appears twice with conflicting signs, suggesting possible annotation issues or noise.  \n\nKey spaceflight liver signatures include:  \n- **Upregulation of xenobiotic/detoxification enzymes** (e.g., *Cyp3a44*, *Cyp2a22*, *Cyp2d13*, *Sult2a1*). Here, several Cyp and Sult genes are modestly upregulated, but the magnitude is low (z-scores mostly < +1.6).  \n- **Downregulation of lipid metabolism genes** (e.g., *Elovl3*, *Cyp4a12a/b*), which is present here but again modest.  \n- Strong spaceflight liver responses typically show more pronounced induction of oxidative stress response (e.g., *Nqo1*, *Gstm*, *Hmox1*) and bile acid metabolism genes, which are absent here.  \n\nThe pattern is mixed and weak relative to known flight signatures, with no strong, coherent flight-like dysregulation. The profile is more consistent with ground control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 298,
+        "total_tokens": 1315
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI2",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent upregulation of cytochrome P450 (CYP) enzymes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp2b9, Cyp2b13, Cyp2a4, Cyp3a16, etc.) and sulfotransferases (SULT family). This pattern is a hallmark of spaceflight exposure in mouse liver, representing a xenobiotic metabolism response likely triggered by oxidative stress and altered endogenous compound profiles (e.g., bile acids, steroids) in microgravity. The downregulation of major urinary proteins (MUPs) and some lipid metabolism genes (e.g., Elovl3, Cyp4a12b) also aligns with known metabolic reprogramming in flight. The magnitude and consistency of this Phase I/II detoxification signature are highly characteristic of a flight liver transcriptome.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 184,
+        "total_tokens": 1201
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI3",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of altered xenobiotic metabolism, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2b13, Cyp2a4, Cyp3a41a/b) are upregulated, while others (Cyp4a12b, Cyp4a12a) are downregulated. This pattern of Cyp gene dysregulation, particularly the upregulation of Cyp3a and Cyp2 family members, aligns with known spaceflight-induced hepatic stress responses to altered metabolic and oxidative demands. Additionally, the downregulation of several Major Urinary Protein (Mup) genes (Mup15, Mup8, Mup7) is consistent with reported metabolic and signaling shifts in flight mice. The extreme upregulation of Ptprg (a receptor-type tyrosine phosphatase) and downregulation of Gvin1 and Lin54 further support a distinct stress/adaptation transcriptomic state not typical of ground controls. The overall pattern matches the metabolic reprogramming and detoxification pathway alterations expected in liver tissue from a flight mouse.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 246,
+        "total_tokens": 1263
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI4",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight exposure in mouse liver. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2a4, Cyp2b13, Cyp3a41a/b) are upregulated, while Cyp4a12a/b (involved in fatty acid \u03c9-hydroxylation) are downregulated. This pattern aligns with known spaceflight-induced shifts in hepatic detoxification pathways, likely due to oxidative stress and altered systemic signaling. The downregulation of major urinary proteins (Mup genes) and Elovl3 (fatty acid elongation) further supports metabolic adaptation to microgravity. The presence of both Ptprg entries (one strongly up, one down) may indicate isoform-specific regulation or data complexity, but the overall xenobiotic metabolism signature is characteristic of flight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 202,
+        "total_tokens": 1219
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI5",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent upregulation of multiple cytochrome P450 (CYP) enzymes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b9, Cyp3a16, Cyp2a4, Cyp2b13, Cyp3a41b, etc.) and sulfotransferases (Sult2a family). This pattern is a hallmark of spaceflight exposure in mouse liver, representing a xenobiotic metabolism response likely triggered by oxidative stress, altered bile acid metabolism, and systemic metabolic reprogramming. The downregulation of major urinary proteins (Mups) and specific lipid metabolism genes (Elovl3, Cyp4a12a/b) further aligns with known spaceflight-induced metabolic shifts. The magnitude and consistency of this xenobiotic metabolism signature are highly characteristic of flight samples and not typical of ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 187,
+        "total_tokens": 1204
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI6",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism induction, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2b9, Cyp2b13, Cyp2a4) and sulfotransferase genes (Sult2a1, Sult2a5, Sult2a2, Sult2a6, Sult2a3) are upregulated. This coordinated upregulation of phase I and phase II detoxification enzymes is a known adaptive response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7) also aligns with spaceflight-associated metabolic shifts. While some individual gene changes are subtle, the collective pattern across this pathway is characteristic of flight exposure rather than a ground control state.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 199,
+        "total_tokens": 1216
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI7",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp2b9, Cyp2b13, Cyp2a4, Cyp3a16) are upregulated, while others like Cyp4a12b are downregulated. This pattern of Cyp gene induction, particularly in the Cyp2 and Cyp3 families, aligns with known spaceflight-induced stress responses and altered detoxification demands. Additionally, sulfotransferase genes (Sult2a2, Sult2a5, Sult2a1, Sult3a1) are upregulated, further indicating a shift in phase II metabolism. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) is also consistent with spaceflight metabolic changes. While some ribosomal RNA genes are down (common in stress), the dominant liver-specific signal points to a flight-like metabolic adaptation rather than a ground control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 224,
+        "total_tokens": 1241
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI8",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores (Ptprg, Gvin1, Lin54, etc.) do not align with established spaceflight liver signatures. Crucially, the xenobiotic metabolism genes (Cyp and Sult families) show mixed, modest changes rather than the strong, coordinated upregulation often seen in flight liver due to oxidative stress and altered detoxification demands. For example, Cyp3a44, Cyp2a22, and several Sult2a isoforms are slightly up, but key markers like Cyp4a (involved in fatty acid \u03c9-hydroxylation) are down, and the overall magnitude of change in these pathways is low. The absence of strong Nrf2-target or DNA damage response genes among the most variable features, along with the lack of consistent bile acid metabolism or lipid catabolism shifts, suggests this profile is more consistent with normal variation in ground control mice rather than the pronounced metabolic and stress-adaptive reprogramming typical of spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 205,
+        "total_tokens": 1222
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI9",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern is the widespread downregulation of multiple **Cyp (cytochrome P450)** and **Sult (sulfotransferase)** genes, which are central to xenobiotic metabolism and bile acid processing in the liver. In spaceflight, liver xenobiotic metabolism pathways are often suppressed, likely due to reduced exposure to dietary toxins or altered bile acid dynamics in microgravity. Key observations:  \n- **Cyp4a12a/b** (involved in fatty acid \u03c9-hydroxylation) are down.  \n- Several **Cyp3a** and **Cyp2** family members show mixed but generally reduced activity.  \n- **Sult2a** sulfotransferases (bile acid detoxification) are mostly down or unchanged.  \n- **Mup** genes (major urinary proteins, linked to lipid transport and pheromone binding) are variably altered, consistent with metabolic shifts.  \n- **Hao2** (peroxisomal fatty acid oxidation) is slightly up, which may reflect compensatory lipid handling.  \n\nThese changes align with known spaceflight-induced **reprogramming of hepatic metabolism**, particularly suppression of detoxification pathways and altered lipid handling, rather than a ground-control-like profile. However, the absence of strong oxidative stress or immune dysregulation markers (e.g., Nrf2 targets, acute phase response genes) and the relatively modest fold-changes reduce confidence slightly. The overall signature best matches a flight liver sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 310,
+        "total_tokens": 1327
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI10",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern in this sample is the strong upregulation of multiple cytochrome P450 (CYP) and sulfotransferase (SULT) genes (e.g., Cyp2d13, Cyp2a22, Cyp3a44, Sult3a2, Sult2a family). In spaceflight mouse liver transcriptomics, a hallmark signature is the **downregulation of xenobiotic metabolism genes**, particularly CYP enzymes, often linked to reduced metabolic demand and altered bile acid processing in microgravity. Ground control mice typically show more variable or induced expression in these pathways.  \n\nAdditionally, the downregulation of major urinary proteins (MUPs) and several small nuclear/nucleolar RNAs aligns with stress or metabolic shifts seen in ground conditions rather than the consistent oxidative stress and immune dysregulation patterns typical of flight.  \n\nWhile some immune-related genes (e.g., H2ac18 down) appear, the overall profile lacks the strong Nrf2-mediated oxidative stress response, DNA repair induction, or immune cytokine shifts characteristic of spaceflight. Thus, the evidence points toward a **ground control sample** with moderate confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 237,
+        "total_tokens": 1254
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI11",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores (Ptprg, Gvin1, Lin54, etc.) do not align with established spaceflight liver signatures. Crucially, the xenobiotic metabolism genes (Cyp and Sult family members) show mixed, modest changes rather than the strong, coordinated upregulation typically seen in flight liver due to oxidative stress and detoxification demands. For example, Cyp2a22, Cyp3a44, and several Sult2a genes are slightly upregulated, but key Cyp4a genes involved in fatty acid metabolism are down, and the magnitude of change is generally low (z-scores mostly <1.5). The lack of a clear, strong signal in pathways like Nrf2-mediated oxidative stress response, DNA damage, or inflammation suggests this sample does not exhibit the pronounced transcriptomic shift expected after spaceflight. The pattern is more consistent with normal variation within ground controls.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 194,
+        "total_tokens": 1211
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The most striking signature in this liver sample is the strong upregulation of multiple cytochrome P450 (CYP) and sulfotransferase (SULT) genes (e.g., Cyp2a22, Cyp2d13, Sult2a1, Sult2a3, Sult2a5, Cyp3a44, Fmo3). This pattern is a hallmark of spaceflight exposure in mouse liver, representing a significant reprogramming of xenobiotic and bile acid metabolism pathways. This is a well-documented adaptive response, potentially linked to altered detoxification needs, oxidative stress, or changes in bile acid circulation in microgravity. The concurrent downregulation of several Major Urinary Protein (Mup) genes is also consistent with spaceflight-associated metabolic shifts. The overall pattern aligns strongly with established spaceflight transcriptomic signatures for liver tissue and is not typical of ground control homeostasis.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 190,
+        "total_tokens": 1207
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI13",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by non-specific downregulations (e.g., *Ptprg*, *Gvin1*, *Lin54*, *Vamp7*, *Rnu2-10*, *Rnu1a1*, *Eppk1*) that are not characteristic of known spaceflight liver signatures. More importantly, the liver xenobiotic metabolism genes \u2014 a hallmark of spaceflight adaptation \u2014 show a mixed and generally weak response here:  \n- Cyp genes (*Cyp2d13*, *Cyp2a22*, *Cyp3a44*, *Cyp3a16*, *Cyp3a41b*, *Cyp2b9*, *Cyp2b13*, *Cyp2a4*, *Cyp3a41a*) are mostly upregulated but with modest z-scores (mostly <1.7).  \n- Sulfotransferase genes (*Sult3a2*, *Sult2a1*, *Sult2a5*, etc.) are also weakly upregulated.  \n- However, key spaceflight-altered Cyp4a family genes (*Cyp4a12a*, *Cyp4a12b*) are downregulated, which is inconsistent with typical flight-induced upregulation of fatty acid \u03c9-hydroxylases.  \n- No strong oxidative stress (Nrf2 target) or DNA damage response markers appear in the top genes.  \n\nThe pattern suggests mild, non-specific transcriptional variation rather than the coherent xenobiotic metabolism and oxidative stress reprogramming typically seen in spaceflight liver samples. Thus, this sample is more consistent with a ground control.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 341,
+        "total_tokens": 1358
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI14",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a41b, Cyp3a16, Cyp3a44, Cyp2b9) are upregulated, consistent with the known induction of detoxification pathways in response to oxidative stress and altered metabolic demands in microgravity. Sulfotransferase genes (Sult2a family) are also broadly upregulated, further supporting altered hepatic processing of endogenous compounds and toxins. The downregulation of major urinary proteins (Mup genes) aligns with spaceflight-associated shifts in nitrogen metabolism and energy balance. While some ribosomal RNA genes show downregulation (common in various stresses), the coordinated upregulation of xenobiotic enzymes strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 179,
+        "total_tokens": 1196
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI15",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a16, Cyp3a44, Cyp3a41b, Cyp2b9, Cyp2a4, Cyp2b13, Cyp3a41a) are upregulated, while Cyp4a12a and Cyp4a12b (involved in fatty acid \u03c9-hydroxylation) are downregulated. Sulfotransferase genes (Sult2a1, Sult3a2, Sult2a3, Sult2a5, Sult2a2, Sult3a1, Sult2a6) are also consistently upregulated, indicating altered phase II detoxification. This coordinated shift in drug/xenobiotic metabolism pathways is a well-documented adaptation to the spaceflight environment, likely due to altered metabolic demands, oxidative stress, and circadian disruption. The downregulation of major urinary proteins (Mup genes) and lipid metabolism gene Elovl3 further supports a metabolic shift away from normal ground-based homeostasis.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 244,
+        "total_tokens": 1261
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI16",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a16, Cyp3a44, Cyp3a41b, Cyp2b9, Cyp2b13, Cyp2a4, Fmo3) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern aligns with known spaceflight-induced shifts in liver detoxification pathways, likely due to altered metabolic demands and oxidative stress. Additionally, the downregulation of major urinary proteins (Mup15, Mup7, Mup8) is consistent with spaceflight-associated changes in lipid metabolism and pheromone signaling. The upregulation of sulfotransferases (Sult2a1, Sult2a3, Sult2a6, etc.) further supports altered phase II metabolism. While some individual gene changes could occur in ground-based stress models, the coordinated pattern across these specific gene families strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 227,
+        "total_tokens": 1244
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI17",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2b9, Cyp2b13, Cyp2a4) and sulfotransferase genes (Sult2a1, Sult3a2, Sult2a3, Sult2a5, Sult2a2, Sult2a6, Sult3a1) are upregulated. This coordinated induction of phase I and phase II detoxification enzymes is a known response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with spaceflight-associated metabolic shifts. While some ribosomal/small RNA genes are down (consistent with general stress), the specific, coherent upregulation of drug/xenobiotic metabolism pathways strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 224,
+        "total_tokens": 1241
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong, coordinated upregulation of multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a16, Cyp3a44, Cyp3a41b, Cyp2a4, Cyp2b9, Cyp2b13) and sulfotransferase genes (Sult2a1, Sult2a5, Sult2a2, Sult3a2, Sult2a3, Sult2a6, Sult3a1), which are key xenobiotic metabolism and bile acid processing enzymes in the liver. This pattern is a hallmark of spaceflight-induced liver adaptation, likely driven by oxidative stress, altered bile acid dynamics, and systemic metabolic reprogramming in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with spaceflight-associated shifts in nitrogen metabolism and lipid transport. The overall signature matches established spaceflight transcriptomic responses in mouse liver, not typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 220,
+        "total_tokens": 1237
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI19",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by downregulated ribosomal/small nuclear RNAs (Rnu2-10, Rnu1a1, Rnu5g, Rny1, Rnu12, Rny3) and structural/uncharacterized genes (Ptprg, Gvin1, Lin54, Eppk1, Tmlhe, Tmem254c/b), which are not strongly indicative of a conserved spaceflight liver signature.  \n\nKey spaceflight-associated liver responses include:  \n- **Upregulation of xenobiotic/detoxification enzymes** (CYP450s, SULTs, FMOs) due to oxidative stress and altered metabolism. Here, while some Cyp genes (Cyp2d13, Cyp2a22, Cyp3a44, etc.) and Sult genes are modestly upregulated, the magnitude is low (z-scores mostly < +1.0), and many are not consistently directional.  \n- **Downregulation of lipid metabolism genes** (e.g., Elovl3, Cyp4a12a/b are down, consistent with spaceflight), but again, changes are mild.  \n- **Lack of strong Nrf2/oxidative stress response genes** (e.g., Nqo1, Hmox1, Gclc) among top variables.  \n- **Major urinary proteins (Mups: Mup15, Mup7, Mup8) are downregulated**, which can occur in both flight and ground conditions depending on housing/stress, but in spaceflight studies, Mups are often suppressed due to metabolic shifts.  \n\nOverall, the pattern is weak and mixed relative to established spaceflight liver transcriptomes (which show stronger, coordinated induction of detoxification pathways and clearer oxidative stress signatures). The sample more closely resembles a ground control with mild, individual variation rather than a consistent flight response.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 394,
+        "total_tokens": 1411
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI20",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores (e.g., *Gvin1*, *Ptprg*, *Lin54*, *Vamp7*, *Eppk1*) do not align with established spaceflight liver signatures. Instead, the pattern shows **mixed, weak changes in xenobiotic metabolism genes** (*Cyp*, *Sult*, *Fmo3*), with some up and some down, but none show the strong, consistent upregulation of oxidative stress, DNA damage, or bile acid pathways typical of spaceflight.  \nKey spaceflight markers in liver (e.g., *Nfe2l2*, *Gsta*, *Gstp*, *Abcc*, *Cyp2e1*, *Cyp4a* isoforms often upregulated) are absent here, and *Cyp4a12a/b* are actually down. The lack of a coherent stress-response signature, combined with the presence of many small-magnitude changes in non\u2011specific genes, suggests this sample resembles a ground control with normal biological variation rather than the pronounced transcriptomic reprogramming induced by microgravity.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 235,
+        "total_tokens": 1252
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL1",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a41b) and sulfotransferase genes (Sult2a1, Sult2a5, Sult2a3, Sult3a2, Sult2a2, Sult2a6) are upregulated. This coordinated induction of drug-metabolizing enzymes is a known adaptive response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with spaceflight-associated metabolic shifts. While some ribosomal/small RNA genes are down (consistent with general stress), the dominant pattern matches the expected hepatic detoxification pathway activation in flight mice.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 210,
+        "total_tokens": 1227
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL2",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp2a4, Cyp2b9, Cyp3a16, Cyp2b13, Cyp3a41a) are upregulated, while others like Cyp4a12b are downregulated. This pattern aligns with known spaceflight-induced alterations in liver detoxification pathways. Additionally, several sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult3a2) are upregulated, further supporting phase II metabolism changes. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) is also consistent with reported metabolic shifts in flight mice. While some individual gene changes (e.g., Gvin1, Ptprg) are less specific, the coherent pattern across xenobiotic metabolism genes strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 227,
+        "total_tokens": 1244
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL3",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong and coherent signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp2b9, Cyp3a41a, Cyp2b13) are upregulated, while others (Cyp4a12a, Cyp4a12b) are downregulated. Sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult3a2, Sult2a2, Sult2a6, Sult3a1) are also broadly upregulated. This pattern indicates a major reprogramming of hepatic detoxification pathways, which is a well-documented adaptive response to the oxidative stress and novel chemical environment (e.g., off-gassing, altered diet metabolism) associated with spaceflight. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) may also relate to metabolic shifts. While some individual gene changes could occur in ground-based models, the breadth and direction of these phase I/II metabolism genes align strongly with published spaceflight liver transcriptomes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 272,
+        "total_tokens": 1289
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL4",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern is the strong upregulation of multiple cytochrome P450 (CYP) genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2a4, Cyp2b13, Cyp2b9) and sulfotransferase (SULT) genes (Sult2a1, Sult2a3, Sult2a2, Sult2a5), which are central to xenobiotic metabolism and bile acid processing in the liver. In spaceflight, liver transcriptomes consistently show altered expression of detoxification and bile acid synthesis pathways, often as part of a broader metabolic adaptation to microgravity and increased oxidative stress. The downregulation of several Major Urinary Protein (Mup) genes (Mup15, Mup7, Mup8) also aligns with spaceflight-associated shifts in lipid metabolism and energy homeostasis. While some individual gene changes could occur in ground-based models (e.g., stress responses), the coordinated induction of xenobiotic-metabolizing enzymes, together with the absence of strong canonical immune or DNA damage markers in the top variable genes, points toward a **ground control** profile. In flight samples, these pathways are often more complexly dysregulated (e.g., mixed induction/repression of specific CYP families), whereas the pattern here is more consistent with a basal or mildly stressed ground state.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 301,
+        "total_tokens": 1318
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL5",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a16, Cyp3a41a/b) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern aligns with known spaceflight-induced shifts in liver detoxification pathways, likely due to altered metabolic demands and oxidative stress. Additionally, several sulfotransferase genes (Sult3a2, Sult2a2, Sult3a1, Sult2a5, Sult2a1) are upregulated, further supporting altered phase II metabolism. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) is consistent with reported metabolic and hormonal changes in microgravity. While some genes (e.g., Gvin1, Ptprg) show extreme z-scores without clear spaceflight association, the overall pattern strongly matches flight-related hepatic transcriptomic adaptations.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 242,
+        "total_tokens": 1259
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL6",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a41a) are upregulated, along with sulfotransferases (Sult3a2, Sult2a1, Sult2a3, Sult2a5, Sult2a2, Sult3a1, Sult2a6) and Fmo3. This coordinated induction of detoxification enzymes aligns with known adaptive hepatic responses to oxidative stress and altered metabolic demands in microgravity. Downregulation of certain Cyp4a genes (Cyp4a12a, Cyp4a12b) and Elovl3 suggests shifts in lipid metabolism, also consistent with spaceflight. The pattern is not typical of normal ground control variation, but matches transcriptional profiles from flight mice.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 226,
+        "total_tokens": 1243
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL7",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The gene expression pattern strongly indicates a spaceflight-exposed liver. The most compelling signature is the coordinated upregulation of multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a41b, Cyp3a44, Cyp2a4, Cyp3a16, Cyp2b9, Cyp2b13) and sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult2a2, Sult3a2). This is a hallmark of spaceflight-induced xenobiotic metabolism reprogramming, likely driven by oxidative stress and altered bile acid metabolism. The upregulation of Fmo3 and downregulation of Cyp4a12a/b further align with known liver metabolic adaptations to microgravity. While some individual gene changes are ambiguous, the overall pattern of phase I/II detoxification enzyme induction is a robust, well-documented response to the spaceflight environment.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 206,
+        "total_tokens": 1223
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of altered xenobiotic metabolism in the liver, which is a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2a4, Cyp2b9, Cyp2b13) and sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult3a2) are upregulated. This pattern is consistent with the known adaptive response of the liver to the unique metabolic and oxidative stresses of the spaceflight environment, including changes in bile acid metabolism and detoxification pathways. The downregulation of major urinary proteins (Mup15, Mup7) also aligns with metabolic shifts seen in flight. The strength and biological coherence of this specific signature make a flight origin highly likely.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 196,
+        "total_tokens": 1213
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL11",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp3a41b, Cyp2b9, Cyp3a16, Cyp2b13) and sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult2a2, Sult3a2) are upregulated. This pattern reflects adaptive metabolic reprogramming, likely due to oxidative stress and altered detoxification demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) is also consistent with spaceflight-associated shifts in lipid metabolism and energy homeostasis. The overall gene expression profile aligns with known spaceflight liver responses rather than ground control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 199,
+        "total_tokens": 1216
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of spaceflight-induced liver adaptation. The most compelling evidence is the upregulation of multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b13, Cyp2a4, Cyp2b9, Cyp3a41b) and sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult2a2, Sult2a6). This pattern is a hallmark of altered xenobiotic metabolism in the liver during spaceflight, often linked to oxidative stress and a need to process endogenous metabolites under microgravity. The downregulation of lipid metabolism genes like Cyp4a12a/b and Elovl3 further aligns with known metabolic reprogramming in flight. The extreme downregulation of numerous genes (Ptprg, Gvin1, etc.) suggests broad transcriptional suppression in certain pathways, consistent with the stress response. The overall pattern matches established spaceflight liver transcriptomes, not typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 231,
+        "total_tokens": 1248
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL13",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a16) and sulfotransferase genes (Sult2a5, Sult2a2, Sult2a1, Sult3a2) are upregulated. This pattern aligns with known spaceflight-induced liver responses, likely driven by oxidative stress and altered detoxification demands. Additionally, the downregulation of major urinary proteins (Mup15, Mup8, Mup7) is consistent with metabolic and hormonal shifts reported in flight mice. While some ribosomal RNA genes show downregulation (common in various stresses), the coherent induction of drug-metabolizing enzymes strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 195,
+        "total_tokens": 1212
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL14",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent upregulation of multiple cytochrome P450 (CYP) and sulfotransferase (SULT) genes (e.g., Cyp2d13, Cyp2a22, Sult2a1, Cyp3a41b, Cyp3a44, Sult3a2). This pattern is a hallmark of spaceflight-induced liver adaptation, specifically the upregulation of xenobiotic metabolism and bile acid conjugation pathways, which is a documented response to the oxidative stress and altered metabolic demands of microgravity. The downregulation of major urinary proteins (MUPs) is also consistent with spaceflight-related metabolic shifts. The overall signature aligns with known spaceflight transcriptomic profiles in mouse liver, not with typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 162,
+        "total_tokens": 1179
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL15",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a41b, Cyp3a16, Cyp3a41a) are upregulated, along with sulfotransferases (Sult2a1, Sult2a5, Sult2a2, Sult2a6, Sult3a2, Sult3a1) and flavin-containing monooxygenase (Fmo3). This pattern matches known spaceflight-induced liver stress responses, likely driven by oxidative stress and altered detoxification demands. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) also aligns with metabolic shifts in flight. The consistency and biological relevance of this xenobiotic metabolism signature strongly indicate a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 215,
+        "total_tokens": 1232
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL17",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent upregulation of hepatic xenobiotic metabolism genes, a hallmark of spaceflight exposure in mouse liver. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp2b13, Cyp2b9, Cyp3a41a) and sulfotransferase genes (Sult3a2, Sult2a1, Sult2a5, Sult3a1, Sult2a2, Sult2a6, Sult2a3) are upregulated. This pattern is consistent with the known adaptive response of the liver to the oxidative stress and novel chemical environment (e.g., off-gassing, altered diet metabolism) associated with spaceflight. The downregulation of major urinary proteins (Mup15, Mup7) also aligns with reported metabolic shifts. The signature is specific and robust, outweighing the noise from the top few variable genes (e.g., Ptprg, Lin54) which may be sample-specific artifacts.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 238,
+        "total_tokens": 1255
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b9, Cyp2b13, Cyp3a16, Cyp2a4, Cyp3a41b, Cyp3a41a) and sulfotransferase genes (Sult3a2, Sult2a6, Sult2a1, Sult3a1, Sult2a5, Sult2a2) are upregulated. This coordinated induction of detoxification pathways is a known response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) also aligns with spaceflight-associated metabolic shifts. The pattern is inconsistent with a typical ground control profile, which would not show such a broad, coordinated stress-response signature in the most variable genes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 212,
+        "total_tokens": 1229
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI1",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp2b9, Cyp2b13, Cyp2a4, Cyp3a16, Cyp3a41b, Cyp3a41a) and sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult2a2, Sult2a6, Sult3a1, Sult3a2) are upregulated. This pattern is consistent with the liver's adaptive response to increased oxidative stress and the need to process metabolic byproducts and potential toxins in the altered spaceflight environment. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) also aligns with reported metabolic shifts. The strength and specificity of this Phase I/II detoxification signature strongly point to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 220,
+        "total_tokens": 1237
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI2",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong signature of xenobiotic metabolism reprogramming, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b13, Cyp2b9, Cyp2a4) are upregulated, consistent with the known induction of detoxification pathways in response to oxidative stress and altered metabolic demands in microgravity. Sulfotransferase genes (Sult2a6, Sult2a2, Sult2a5) are also upregulated, supporting phase II metabolism activation. In contrast, several major urinary protein (Mup) genes are downregulated, which aligns with reported shifts in hepatic metabolic priorities during spaceflight. The pattern matches established spaceflight transcriptomic responses rather than typical ground control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 174,
+        "total_tokens": 1191
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI3",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern is the strong upregulation of multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b13, Cyp2b9, Cyp2a4, Cyp3a16) and other xenobiotic metabolism genes (Fmo3, Hao2, Sult2a family members). In mouse liver, spaceflight consistently induces xenobiotic metabolism pathways, likely as a response to increased oxidative stress and altered endogenous metabolite profiles. The downregulation of several Major Urinary Protein (Mup) genes (Mup15, Mup8, Mup7) also aligns with spaceflight-associated metabolic reprogramming and shifts in lipid/steroid metabolism. While some ribosomal RNA genes (Rnu series) are down\u2014which can occur in stress responses\u2014the dominant liver-specific signature of induced detoxification enzymes points strongly toward a flight sample. The magnitude and consistency of the Cyp gene upregulation are characteristic of spaceflight liver transcriptomes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 214,
+        "total_tokens": 1231
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI4",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores are dominated by non\u2011specific down\u2011regulated genes (e.g., Ptprg, Gvin1, Lin54, ribosomal/small nuclear RNAs) without a clear spaceflight\u2011specific signature.  \nKey spaceflight\u2011associated liver markers (e.g., Cyp3a44, Cyp2b9, Fmo3, Sult genes) show only mild up\u2011regulation (z\u2011scores mostly < +1.0), and several xenobiotic/detoxification genes are even down (Cyp4a12b, Elovl3).  \nThe pattern lacks the strong, coordinated up\u2011regulation of oxidative stress, bile acid metabolism, and xenobiotic\u2011metabolizing enzymes typically seen in flight liver samples.  \nThus, the profile is more consistent with a ground\u2011control sample, possibly showing some inter\u2011individual variability but not the pronounced spaceflight transcriptomic response.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 198,
+        "total_tokens": 1215
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI5",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of xenobiotic metabolism induction, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b13, Cyp2b9, Cyp2a4, Cyp3a41b) and sulfotransferase genes (Sult2a5, Sult2a2, Sult2a1, Sult3a2) are upregulated. This coordinated upregulation of phase I and phase II detoxification enzymes is a known adaptive response to increased oxidative stress and potential toxin accumulation in microgravity. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) also aligns with metabolic shifts seen in flight. While some ribosomal/small nuclear RNA genes are down (common in various stresses), the specific, coherent induction of liver-specific detoxification pathways strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 206,
+        "total_tokens": 1223
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI6",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of altered hepatic xenobiotic metabolism, a hallmark of spaceflight exposure in mice. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a41a) are upregulated, while others like Cyp4a12b and Cyp4a12a are downregulated. This pattern of Cyp gene dysregulation\u2014particularly the upregulation of Cyp3a and Cyp2 family members\u2014is consistent with the liver's adaptive response to the oxidative stress and novel metabolic demands of the spaceflight environment. Additionally, several sulfotransferase genes (Sult3a2, Sult2a2, Sult2a5, Sult3a1, Sult2a1) are upregulated, further indicating a shift in phase II detoxification pathways. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) has also been associated with spaceflight-related metabolic and hormonal changes. While a few individual genes may vary, the coherent, multi-pathway shift in liver metabolism strongly aligns with a flight, not ground control, signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 268,
+        "total_tokens": 1285
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI7",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores are dominated by downregulation of genes not strongly associated with known spaceflight liver signatures (e.g., *Ptprg*, *Gvin1*, *Lin54*, *Vamp7*, and many small nuclear RNAs). In contrast, the xenobiotic metabolism cytochrome P450 family genes\u2014a hallmark of spaceflight liver adaptation\u2014show mixed and relatively modest changes:  \n- *Cyp2d13*, *Cyp2a22*, *Cyp3a44*, *Cyp2b9*, *Cyp2b13*, *Cyp2a4* are slightly upregulated.  \n- *Cyp4a12b*, *Cyp4a12a*, *Cyp3a41b*, *Cyp3a41a* are slightly downregulated.  \n\nIn spaceflight, liver transcriptomes typically show **strong, consistent upregulation of Cyp genes** (especially *Cyp2d*, *Cyp3a*, *Cyp2b* subfamilies) due to oxidative stress and xenobiotic metabolism induction. The weak and bidirectional changes here, along with the lack of strong oxidative stress (Nrf2 target) or immune dysregulation markers, suggest a ground control profile. The strongest signals appear to be technical or individual-variation artifacts (e.g., *Ptprg* listed twice with opposite signs hints at possible isoform or annotation issue). Thus, the sample is classified as ground control with high confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 315,
+        "total_tokens": 1332
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver response. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b13, Cyp2b9, Cyp2a4, Cyp3a16) and sulfotransferase genes (Sult2a1, Sult2a5, Sult2a2) are upregulated. This pattern is consistent with the known adaptive hepatic response to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with spaceflight-associated metabolic shifts. The strength and specificity of this xenobiotic metabolism gene set override the presence of some downregulated genes of unclear direct relevance, leading to high confidence in a flight classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 188,
+        "total_tokens": 1205
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI10",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong and coherent upregulation of multiple cytochrome P450 (CYP) enzymes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2b9, Cyp2b13, Cyp2a4) and sulfotransferases (Sult2a1, Sult2a3, Sult2a5, Sult2a2, Sult3a2). This pattern is characteristic of spaceflight-induced liver adaptation, specifically the activation of xenobiotic metabolism and bile acid processing pathways, which is a well-documented response to oxidative stress and metabolic reprogramming in microgravity.  \n\nThe downregulation of major urinary proteins (Mup15, Mup7, Mup8) and lipid metabolism gene Elovl3 further aligns with metabolic shifts observed in flight mice. While some ribosomal/small RNA genes are down, the dominant signal is the concerted induction of detoxification enzymes, strongly pointing to a flight liver signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 221,
+        "total_tokens": 1238
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI11",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of spaceflight-induced liver adaptation. Key indicators include:\n1. **Xenobiotic metabolism upregulation:** Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b13, Cyp2b9, Cyp3a16, Cyp3a41b/a) and sulfotransferases (Sult3a2, Sult2a5, Sult3a1, Sult2a6) are upregulated, consistent with the liver's response to oxidative stress and altered metabolic demands in microgravity.\n2. **Lipid metabolism alteration:** Downregulation of Elovl3 (involved in fatty acid elongation) and Cyp4a12a/b (involved in fatty acid \u03c9-hydroxylation) aligns with known spaceflight-induced dysregulation of lipid metabolism.\n3. **Oxidative stress markers:** Upregulation of Hao2 (hydroxyacid oxidase 2, peroxisomal) and Nnt (nicotinamide nucleotide transhydrogenase, mitochondrial) suggests adaptation to increased reactive oxygen species.\n4. **Consistency with known spaceflight liver transcriptomes:** The pattern of Phase I/II detoxification enzyme induction matches published data from space-flown mice, reflecting systemic stress and altered substrate processing.\n\nThe strength, coherence, and biological plausibility of this signature strongly indicate a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 297,
+        "total_tokens": 1314
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent upregulation of hepatic xenobiotic metabolism genes, particularly multiple cytochrome P450 (Cyp) and sulfotransferase (Sult) family members (e.g., Cyp2d13, Cyp2a22, Cyp3a16, Cyp3a44, Sult2a1, Sult2a5, Fmo3). This pattern is a hallmark of spaceflight exposure in mouse liver, linked to altered bile acid metabolism, detoxification pathways, and a systemic response to oxidative stress and novel metabolic demands. The downregulation of major urinary proteins (Mups) is also consistent with spaceflight-associated metabolic shifts. The signature is specific and matches established spaceflight transcriptomic profiles, not typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 163,
+        "total_tokens": 1180
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI13",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong and coherent signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a41b, Cyp3a44, Cyp3a16, Cyp2a4, Cyp2b9, Cyp2b13) are upregulated, while others like Cyp4a12a/b are downregulated. Sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult2a6) are also upregulated. This pattern matches known spaceflight-induced liver adaptation involving detoxification pathway remodeling, likely due to oxidative stress and altered metabolic demands. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) is also consistent with metabolic shifts in flight mice. The overall gene expression profile aligns with flight-associated stress responses rather than normal ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 207,
+        "total_tokens": 1224
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI14",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The gene expression pattern strongly indicates a spaceflight-exposed liver. The most compelling signature is the coordinated upregulation of multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a41a) and sulfotransferase genes (Sult2a1, Sult3a2, Sult2a5, Sult2a2, Sult2a3, Sult3a1). This is a hallmark of altered xenobiotic metabolism in the liver during spaceflight, often linked to oxidative stress and a detoxification response. The upregulation of Hao2 (involved in fatty acid oxidation) and Nnt (mitochondrial NADPH production, linked to oxidative stress response) further supports metabolic reprogramming. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) is also consistent with spaceflight-associated metabolic shifts. The overall pattern aligns with known liver transcriptomic adaptations to microgravity and space radiation, not with a ground control state.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 249,
+        "total_tokens": 1266
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI16",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by downregulation of non-liver-specific genes (e.g., *Gvin1*, *Ptprg*, *Lin54*, *Vamp7*, *Eppk1*) and small nuclear/nucleolar RNAs (*Rnu2-10*, *Rnu1a1*, *Rnu5g*), which are not characteristic of known spaceflight liver signatures.  \n\nCrucially, the liver in spaceflight typically shows strong upregulation of **xenobiotic metabolism genes** (especially *Cyp3a*, *Cyp2b*, *Sult*, *Fmo* families) due to altered bile acid metabolism and oxidative stress. Here, although some *Cyp* and *Sult* genes are modestly upregulated, their z-scores are low (mostly <1.1), and the overall pattern lacks the coherent, strong induction seen in flight liver transcriptomes.  \n\nAdditionally, key spaceflight stress markers (e.g., *Nrf2* targets, DNA damage response genes, immune dysregulation markers) are absent from this top variable list. The profile instead resembles normal liver variation or mild experimental/technical noise in a ground control.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 256,
+        "total_tokens": 1273
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI17",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent upregulation of multiple cytochrome P450 (CYP) enzymes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2a4, Cyp2b13, Cyp2b9) and sulfotransferases (Sult2a1, Sult2a3, Sult2a5). This pattern is a hallmark of spaceflight exposure in mouse liver, representing a significant reprogramming of xenobiotic and bile acid metabolism pathways, likely in response to increased oxidative stress and altered metabolic demands. The downregulation of major urinary proteins (Mup genes) is also consistent with spaceflight-associated metabolic shifts. The magnitude and consistency of this phase I/II detoxification signature strongly align with known flight responses, not typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 184,
+        "total_tokens": 1201
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a41b, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2b13) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern of Cyp gene induction, particularly in the Cyp2 and Cyp3 families, is consistent with spaceflight-induced liver stress and metabolic reprogramming. Additionally, several sulfotransferase genes (Sult2a1, Sult2a3, etc.) are upregulated, further indicating shifts in detoxification pathways. The downregulation of major urinary proteins (Mup7, Mup8, Mup15) aligns with reported metabolic and signaling changes in flight mice. While not all classic oxidative stress markers are strongly represented here, the xenobiotic metabolism signature is prominent and characteristic of flight liver transcriptomes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 215,
+        "total_tokens": 1232
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI19",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight exposure in mouse liver. Multiple cytochrome P450 genes (Cyp2a22, Cyp2d13, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2b9, Cyp2a4, Cyp2b13) and sulfotransferase genes (Sult2a2, Sult2a1, Sult3a2, Sult2a5) are upregulated. This pattern matches known spaceflight-induced liver adaptation, likely driven by oxidative stress and altered detoxification demands. The downregulation of several Major Urinary Proteins (Mups) is also consistent with metabolic shifts in flight. The magnitude and consistency of these phase I/II metabolism genes outweigh the noise from ribosomal RNA genes and other variably expressed transcripts, providing high confidence that this is a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 198,
+        "total_tokens": 1215
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL1",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The gene expression pattern strongly indicates a spaceflight response in the liver. Key signatures include:\n1. **Xenobiotic metabolism upregulation:** Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2b9, Cyp2b13) and sulfotransferases (Sult2a1, Sult2a5, Sult2a2) are upregulated. This is a hallmark of spaceflight liver adaptation, likely due to altered metabolism of endogenous compounds (e.g., steroids, bile acids) or stress-induced detoxification pathways.\n2. **Consistent with known spaceflight liver transcriptomics:** The upregulation of Cyp3a subfamily, Sult2a family, and Fmo3 aligns with documented shifts in phase I/II metabolism in microgravity. Downregulation of some Cyp4a genes (Cyp4a12a, Cyp4a12b) and Elovl3 suggests alterations in fatty acid metabolism, another spaceflight-associated metabolic reprogramming.\n3. **Absence of strong acute stress/inflammation markers:** The pattern lacks overwhelming induction of immediate early genes or severe oxidative stress markers, suggesting a chronic adaptation rather than an acute ground-based injury or toxic exposure.\n4. **Specificity:** While some changes (e.g., Mup downregulation) can occur in various conditions, the coordinated induction of multiple xenobiotic-metabolizing enzymes is a robust signature of spaceflight in murine liver.\n\nThe confidence is high because the pattern matches established spaceflight liver transcriptomic profiles, particularly the upregulation of Cyp and Sult gene families involved in chemical metabolism.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 354,
+        "total_tokens": 1371
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL2",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a41b, Cyp3a44, Cyp3a16, Cyp2a4, Cyp2b9, Cyp3a41a, Cyp2b13) and sulfotransferase genes (Sult3a2, Sult2a2, Sult2a1, Sult2a5, Sult3a1, Sult2a3, Sult2a6) are upregulated. This pattern is consistent with the liver's response to oxidative stress and altered metabolic demands in microgravity, likely to process endogenous waste products and reactive molecules. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with reported metabolic shifts. While some individual gene changes are subtle, the collective, pathway-specific direction of change strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 220,
+        "total_tokens": 1237
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL4",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b9, Cyp3a16, Cyp2b13, Cyp3a41b/a) are upregulated, while others like Cyp4a12a/b are downregulated. Sulfotransferase genes (Sult2a5, Sult2a6, Sult2a1, Sult3a2, Sult2a2, Sult3a1) are also broadly upregulated. This coordinated shift in detoxification and bile acid metabolism pathways is consistent with spaceflight-induced hepatic adaptation to oxidative stress and altered metabolic demands. The downregulation of major urinary proteins (Mup15, Mup8, Mup7) further aligns with spaceflight metabolic reprogramming. While some individual genes may vary, the overall pattern matches known spaceflight transcriptomic responses in mouse liver.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 223,
+        "total_tokens": 1240
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL5",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver transcriptomics. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp2b9, Cyp3a41a, Cyp2b13) and sulfotransferase genes (Sult3a2, Sult2a5, Sult2a2, Sult2a1, Sult3a1, Sult2a3, Sult2a6) are upregulated. This pattern matches known adaptive responses to oxidative stress and altered metabolic demands in microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) is also consistent with spaceflight-associated metabolic shifts. The overall gene expression profile aligns with flight-induced hepatic reprogramming rather than a ground control state.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 208,
+        "total_tokens": 1225
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL7",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:** The sample shows a strong signature of altered xenobiotic metabolism in the liver, which is a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a41b, Cyp3a44, Cyp2a4, Cyp3a16, Cyp2b9, Cyp2b13) and sulfotransferase genes (Sult2a3, Sult2a1, Sult2a5, Sult2a2) are upregulated. This coordinated induction of phase I and phase II detoxification enzymes is a known adaptive response to increased oxidative stress and potential toxin exposure during spaceflight. The downregulation of major urinary proteins (Mup15, Mup7) also aligns with metabolic shifts seen in flight. While some individual gene changes could occur in ground-based stress models, the breadth and coherence of this xenobiotic metabolism signature strongly point to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 202,
+        "total_tokens": 1219
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The gene expression pattern strongly aligns with known spaceflight-induced liver transcriptomic signatures. Key indicators include:\n1. **Upregulation of multiple cytochrome P450 genes** (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2b9, Cyp2a4, Cyp3a41b, Cyp2b13, Cyp3a16, Cyp3a41a) \u2013 consistent with xenobiotic metabolism reprogramming and oxidative stress response in spaceflight.\n2. **Upregulation of sulfotransferase genes** (Sult2a3, Sult2a1, Sult2a5, Sult2a2, Sult2a6) \u2013 often altered in liver during spaceflight, linked to bile acid and steroid metabolism changes.\n3. **Downregulation of Major Urinary Proteins** (Mup15, Mup7, Mup8) \u2013 commonly suppressed in liver under microgravity, possibly related to metabolic shifts.\n4. **Downregulation of Cyp4a12a/b** \u2013 involved in fatty acid \u03c9-hydroxylation, consistent with altered lipid metabolism in flight.\n5. **Presence of stress/immune-related changes** (e.g., Ptprg dysregulation, H2ac18 down) fits immune dysregulation patterns.\n\nThe combination of xenobiotic metabolism induction, MUP suppression, and lipid metabolism alterations is highly characteristic of spaceflight liver transcriptomes, not typical ground control profiles.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 305,
+        "total_tokens": 1322
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL9",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe sample shows a strong signature of altered xenobiotic metabolism in the liver, a hallmark of spaceflight exposure. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp2b9, Cyp2b13, Cyp2a4, Cyp3a41b) are upregulated, while others like Cyp4a12a/b are downregulated. Sulfotransferase genes (Sult2a1, Sult2a3, Sult2a5, Sult2a2) are also consistently upregulated. This coordinated shift in detoxification and bile acid metabolism pathways is characteristic of the liver\u2019s adaptive response to the oxidative stress and metabolic demands of microgravity. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) further aligns with spaceflight-associated metabolic reprogramming. While some individual genes may vary, the overall pattern matches established spaceflight transcriptomic profiles more than typical ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 218,
+        "total_tokens": 1235
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL10",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent upregulation of hepatic xenobiotic metabolism genes, particularly cytochrome P450 (Cyp) and sulfotransferase (Sult) family members (e.g., Cyp2a22, Cyp2d13, Sult2a1, Sult2a3, Cyp3a41b, Cyp3a44). This pattern is a hallmark of spaceflight exposure in mouse liver, linked to altered bile acid metabolism, detoxification pathways, and a systemic response to oxidative stress. The downregulation of major urinary proteins (Mups) is also consistent with spaceflight-associated metabolic shifts. The signature is not random but matches a known, specific adaptation to the microgravity and radiation environment.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 156,
+        "total_tokens": 1173
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL11",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe sample shows a strong and consistent downregulation of major urinary proteins (MUPs: *Mup15*, *Mup7*, *Mup8*), which are liver-specific and known to be suppressed in spaceflight due to altered pheromone signaling and metabolic shifts.  \nConcurrently, there is upregulation of several cytochrome P450 genes (*Cyp2d13*, *Cyp2a22*, *Cyp3a44*, *Cyp2a4*, *Cyp2b9*, etc.) and sulfotransferases (*Sult3a2*, *Sult3a1*, *Sult2a2*), indicating xenobiotic metabolism pathway activation\u2014a hallmark of spaceflight-induced liver adaptation to oxidative stress and potential toxin exposure.  \nThe downregulation of *Elovl3* (involved in fatty acid elongation) and *Cyp4a12a/b* (lipid metabolism) aligns with known lipid metabolic reprogramming in microgravity.  \nWhile some changes are subtle, the overall pattern matches the expected liver transcriptomic signature of spaceflight: suppression of MUPs and induction of detoxification enzymes. However, the absence of stronger oxidative stress markers (e.g., *Nqo1*, *Gstm*) and the mixed direction of some genes slightly reduce confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 280,
+        "total_tokens": 1297
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of xenobiotic metabolism upregulation, a hallmark of spaceflight liver adaptation. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp2a4, Cyp2b9, Cyp3a16, etc.) and sulfotransferase genes (Sult3a2, Sult2a5, Sult2a2, etc.) are upregulated. This pattern is consistent with the known liver response to spaceflight, which involves metabolic reprogramming and detoxification pathway activation, likely due to oxidative stress and altered substrate availability. The downregulation of major urinary proteins (Mup genes) also aligns with reported metabolic shifts. The strength and specificity of this phase I/II metabolism signature strongly indicate a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 174,
+        "total_tokens": 1191
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL14",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The sample shows a strong and coherent signature of spaceflight-induced alterations in liver xenobiotic metabolism. Multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, Cyp2a4, Cyp2b9, Cyp2b13, Cyp3a41a) are upregulated, while others like Cyp4a12a/b are downregulated. This pattern of Cyp gene dysregulation is a hallmark of spaceflight exposure, linked to altered bile acid metabolism and detoxification pathways. Additionally, several sulfotransferase genes (Sult2a1, Sult3a2, Sult2a5, Sult2a3, Sult2a2, Sult2a6, Sult3a1) are upregulated, consistent with compensatory phase II metabolism changes. The downregulation of major urinary proteins (Mup15, Mup7, Mup8) also aligns with reported metabolic and stress responses in flight mouse liver. The overall pattern is highly characteristic of a flight liver transcriptome, not a typical ground control state.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 241,
+        "total_tokens": 1258
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL15",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**  \nThe most striking signature in this liver sample is the strong, coordinated upregulation of xenobiotic metabolism genes, particularly multiple **Cyp** (cytochrome P450) and **Sult** (sulfotransferase) isoforms. In spaceflight mouse liver studies, a hallmark finding is the induction of drug/xenobiotic metabolism pathways, likely due to altered hepatic processing demands, oxidative stress, or changes in bile acid metabolism. Here, Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a16, Cyp3a41b, and multiple Sult2a genes are upregulated.  \n\nAdditionally, the downregulation of **Mup** (major urinary protein) genes (Mup15, Mup7) aligns with spaceflight-associated shifts in lipid metabolism and potential changes in pheromone signaling. The upregulation of **Hao2** (involved in fatty acid oxidation) and downregulation of **Elovl3** (involved in fatty acid elongation) further fit metabolic reprogramming seen in flight.  \n\nWhile some ribosomal RNA genes (Rnu, Rny) show variability, the overall pattern strongly matches the hepatic \"flight signature\" of induced detoxification pathways and altered lipid metabolism, not typical of ground control liver profiles.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 270,
+        "total_tokens": 1287
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL16",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores (e.g., *Gvin1*, *Ptprg*, *Lin54*, *Vamp7*, *Eppk1*) are not strongly associated with known spaceflight liver signatures. Instead, the pattern among liver\u2011specific metabolic genes is more informative.  \n\nKey observations:  \n- **Cytochrome P450 family**: Multiple *Cyp* genes show mixed, modest changes (*Cyp2d13*, *Cyp2a22*, *Cyp3a44* up; *Cyp4a12b*, *Cyp3a41b* down). In spaceflight, liver xenobiotic metabolism genes often show more pronounced and consistent directional changes (e.g., broad down\u2011regulation of certain *Cyp* subfamilies).  \n- **Sulfotransferases (*Sult*)**: Several *Sult* genes are slightly upregulated, but without the strong, coordinated shift seen in flight.  \n- **Major urinary proteins (*Mup*)**: *Mup15*, *Mup7*, *Mup8* are downregulated, which can occur in both flight and ground conditions but is not extreme here.  \n- **No strong oxidative stress or DNA damage markers** appear among the top variable genes.  \n- **No clear bile acid synthesis or lipid metabolism** signature typical of spaceflight (e.g., *Cyp7a1*, *Cyp8b1*, *Elovl3* is only slightly down).  \n\nOverall, the expression changes are modest and mixed, lacking the coherent xenobiotic\u2011metabolism reprogramming or stress\u2011response signature expected after spaceflight. This pattern is more consistent with normal variation in ground\u2011control mice.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 362,
+        "total_tokens": 1379
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL17",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme z-scores are dominated by non\u2011hepatic or non\u2011specific genes (e.g., *Gvin1*, *Ptprg*, *Zfp969*, *Lin54*, *Vamp7*, small nuclear RNAs). Crucially, the liver\u2011specific spaceflight signature is **absent**:  \n- Expected upregulation of oxidative stress (Nrf2) and DNA\u2011repair genes is missing.  \n- Expected changes in xenobiotic metabolism genes are inconsistent: while some *Cyp* and *Sult* genes show mild up\u2011 or down\u2011regulation, the pattern is mixed and weak (most |z| < 1.7), not the coherent shift seen in flight liver.  \n- No strong induction of bile\u2011acid or lipid\u2011metabolism genes typical of spaceflight.  \n- The strongest signals appear to reflect individual variation or technical noise rather than the systemic stress response of spaceflight.  \n\nThus, the profile aligns more with ground\u2011control variability than a consistent flight signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 218,
+        "total_tokens": 1235
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:** The most striking signature in this sample is the strong upregulation of multiple cytochrome P450 genes (Cyp2d13, Cyp2a22, Cyp3a44, Cyp3a41b, Cyp3a16, Cyp2a4, Cyp2b9, Cyp3a41a, Cyp2b13) and sulfotransferase genes (Sult2a1, Sult3a2, Sult2a3, Sult2a2, Sult2a5, Sult3a1). This coordinated induction of xenobiotic metabolism and detoxification pathways is a hallmark of spaceflight exposure in the liver, often linked to oxidative stress and a generalized adaptive response to novel environmental compounds or endogenous metabolic byproducts. Concurrent downregulation of major urinary proteins (Mup15, Mup7, Mup8) and certain lipid metabolism genes (Cyp4a12a, Cyp4a12b, Elovl3) aligns with documented metabolic reprogramming and potential shifts in energy substrate utilization in microgravity. The pattern is not consistent with a typical ground control profile, which would show less pronounced and less coordinated stress-response pathways. The strength and coherence of this xenobiotic metabolism signature provide high confidence in a flight classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 267,
+        "total_tokens": 1284
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL20",
+      "true_label": 0
+    }
+  ]
+}

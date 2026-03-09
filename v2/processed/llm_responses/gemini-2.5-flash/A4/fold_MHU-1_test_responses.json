@@ -1,0 +1,83 @@
+{
+  "fold": "fold_MHU-1_test",
+  "task_id": "A4",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash",
+  "temperature": 0,
+  "generated_at": "2026-03-08T11:55:05.162430",
+  "n_responses": 6,
+  "responses": [
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\nHere's the reasoning:\n\n1.  **Dominant Downregulation of Muscle/",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1128,
+        "completion_tokens": 39,
+        "total_tokens": 2124
+      },
+      "sample_id": "Mmus_C57-6J_TMS_MHU1_FLT_uG_Rep1",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a \"Flight\" sample, characterized by a significant downregulation of genes related to various metabolic and immune functions,",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1128,
+        "completion_tokens": 39,
+        "total_tokens": 2124
+      },
+      "sample_id": "Mmus_C57-6J_TMS_MHU1_FLT_uG_Rep2",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\n1.  **Dominant Downregulation:** The most striking feature of this gene list is the overwhelming number of downregulated genes. Out of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1128,
+        "completion_tokens": 39,
+        "total_tokens": 2124
+      },
+      "sample_id": "Mmus_C57-6J_TMS_MHU1_FLT_uG_Rep3",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.92**\n\n**Reasoning:**\n\n1.  **Overall Downregulation:** The most striking",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1128,
+        "completion_tokens": 37,
+        "total_tokens": 2124
+      },
+      "sample_id": "Mmus_C57-6CR_TMS_MHU1_GC_1G_Rep1",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is most likely **(B) Ground** with a high confidence.\n\nHere's the reasoning:\n\n1.  **Dominant Muscle Gene Signature:** The most striking feature of this",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1128,
+        "completion_tokens": 40,
+        "total_tokens": 2124
+      },
+      "sample_id": "Mmus_C57-6CR_TMS_MHU1_GC_1G_Rep2",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\nHere's the reasoning:\n\n1.  **Muscle Atrophy Signature:** The most striking",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1128,
+        "completion_tokens": 40,
+        "total_tokens": 2124
+      },
+      "sample_id": "Mmus_C57-6CR_TMS_MHU1_GC_1G_Rep3",
+      "true_label": 0
+    }
+  ]
+}
