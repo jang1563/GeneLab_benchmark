@@ -1,0 +1,189 @@
+{
+  "task": "J1",
+  "description": "Pipeline version comparison: GLDS-48 (v1) vs GLDS-168 (v2)",
+  "generated_at": "2026-03-07T19:29:26.817559",
+  "data": {
+    "glds48": {
+      "n_genes": 22885,
+      "n_samples": 10,
+      "samples": [
+        "Mmus_C57-6J_LVR_FLT_C_Rep1_M25",
+        "Mmus_C57-6J_LVR_FLT_C_Rep2_M26",
+        "Mmus_C57-6J_LVR_FLT_C_Rep3_M27",
+        "Mmus_C57-6J_LVR_FLT_C_Rep4_M28",
+        "Mmus_C57-6J_LVR_FLT_C_Rep5_M30",
+        "Mmus_C57-6J_LVR_GC_C_Rep1_M36",
+        "Mmus_C57-6J_LVR_GC_C_Rep2_M37",
+        "Mmus_C57-6J_LVR_GC_C_Rep3_M38",
+        "Mmus_C57-6J_LVR_GC_C_Rep4_M39",
+        "Mmus_C57-6J_LVR_GC_C_Rep5_M40"
+      ]
+    },
+    "glds168": {
+      "n_genes": 30379,
+      "n_samples": 10,
+      "samples": [
+        "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep1_M25",
+        "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep2_M26",
+        "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep3_M28",
+        "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep4_M29",
+        "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep5_M30",
+        "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep1_M36",
+        "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep2_M37",
+        "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep3_M38",
+        "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep4_M39",
+        "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep5_M40"
+      ]
+    },
+    "n_common_genes": 21314,
+    "n_matched_samples": 9,
+    "matched_animals": [
+      {
+        "animal_id": "M25",
+        "condition": "FLT",
+        "glds48_sample": "Mmus_C57-6J_LVR_FLT_C_Rep1_M25",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep1_M25"
+      },
+      {
+        "animal_id": "M26",
+        "condition": "FLT",
+        "glds48_sample": "Mmus_C57-6J_LVR_FLT_C_Rep2_M26",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep2_M26"
+      },
+      {
+        "animal_id": "M28",
+        "condition": "FLT",
+        "glds48_sample": "Mmus_C57-6J_LVR_FLT_C_Rep4_M28",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep3_M28"
+      },
+      {
+        "animal_id": "M30",
+        "condition": "FLT",
+        "glds48_sample": "Mmus_C57-6J_LVR_FLT_C_Rep5_M30",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep5_M30"
+      },
+      {
+        "animal_id": "M36",
+        "condition": "GC",
+        "glds48_sample": "Mmus_C57-6J_LVR_GC_C_Rep1_M36",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep1_M36"
+      },
+      {
+        "animal_id": "M37",
+        "condition": "GC",
+        "glds48_sample": "Mmus_C57-6J_LVR_GC_C_Rep2_M37",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep2_M37"
+      },
+      {
+        "animal_id": "M38",
+        "condition": "GC",
+        "glds48_sample": "Mmus_C57-6J_LVR_GC_C_Rep3_M38",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep3_M38"
+      },
+      {
+        "animal_id": "M39",
+        "condition": "GC",
+        "glds48_sample": "Mmus_C57-6J_LVR_GC_C_Rep4_M39",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep4_M39"
+      },
+      {
+        "animal_id": "M40",
+        "condition": "GC",
+        "glds48_sample": "Mmus_C57-6J_LVR_GC_C_Rep5_M40",
+        "glds168_sample": "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep5_M40"
+      }
+    ]
+  },
+  "expression_correlation": {
+    "per_sample": [
+      {
+        "animal_id": "M25",
+        "condition": "FLT",
+        "pearson_r": 0.9190198424791449,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M26",
+        "condition": "FLT",
+        "pearson_r": 0.8950943305030947,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M28",
+        "condition": "FLT",
+        "pearson_r": 0.9165742739550361,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M30",
+        "condition": "FLT",
+        "pearson_r": 0.9188150969182642,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M36",
+        "condition": "GC",
+        "pearson_r": 0.9188800252066575,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M37",
+        "condition": "GC",
+        "pearson_r": 0.923283201534137,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M38",
+        "condition": "GC",
+        "pearson_r": 0.9292454636525789,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M39",
+        "condition": "GC",
+        "pearson_r": 0.9262299526981046,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      },
+      {
+        "animal_id": "M40",
+        "condition": "GC",
+        "pearson_r": 0.9315949485818057,
+        "p_value": 0.0,
+        "n_genes_valid": 21314
+      }
+    ],
+    "mean_pearson_r": 0.9198596817254248
+  },
+  "gene_selection": {
+    "jaccard_top100": 0.08695652173913043,
+    "jaccard_top500": 0.13765642775881684,
+    "jaccard_top1000": 0.1318619128466327,
+    "variance_rank_spearman_rho": 0.746763840790451,
+    "variance_rank_spearman_p": 0.0
+  },
+  "ml_performance": {
+    "glds48_auroc": 0.5510204081632653,
+    "glds168_auroc": 0.6,
+    "delta": 0.048979591836734726,
+    "n_train": 250,
+    "n_test_48": 14,
+    "n_test_168": 9,
+    "n_pca_components": 50
+  },
+  "conclusion": {
+    "verdict": "NOT_SUPPORTED",
+    "note": "Significant differences between pipeline versions",
+    "criteria": {
+      "expression_correlation": "mean r = 0.9199 (threshold: 0.95)",
+      "auroc_delta": "0.048979591836734726"
+    }
+  }
+}

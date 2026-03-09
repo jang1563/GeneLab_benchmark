@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Figure S4: Temporal Analysis & Biological Validation Detail</title>
+<style>
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 20px; background: #fff; }
+  .figure-container { max-width: 960px; margin: 0 auto; }
+  h2 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 12px; }
+  .download-btn { padding: 6px 14px; background: #0072B2; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; margin-bottom: 10px; }
+  .download-btn:hover { background: #005a8e; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <h2>Supplementary Figure 4 | Temporal Analysis & Biological Validation Detail</h2>
+  <p class="subtitle">
+    (a) Preservation method timing classification.
+    (b) Spaceflight amplifies age differences (OLD vs YNG).
+    (c) Per-pathway agreement with published findings.
+    (d) Hallmark pathway expression across tissues.
+  </p>
+  <button class="download-btn" onclick="downloadSVG()">Download SVG</button>
+  <div id="figure"></div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+// ======= Design System =======
+const COLORS = {
+  tissues: {
+    thymus: '#E69F00', gastrocnemius: '#56B4E9', skin: '#009E73',
+    eye: '#F0E442', liver: '#0072B2', kidney: '#D55E00'
+  },
+  gene: '#0072B2', pathway: '#E69F00',
+  concordant: '#009E73', discordant: '#D55E00'
+};
+const FONT = { panel: '12px', axis: '10px', tick: '9px', tiny: '7.5px' };
+
+// ======= DATA =======
+
+// (a) T1: ISS-T vs LAR — FLT and GC conditions, gene and pathway
+const t1Data = {
+  'RR-6 Liver': {
+    FLT_gene: 1.000, FLT_pathway: 0.960, GC_gene: 0.922, GC_pathway: 0.778
+  },
+  'RR-8 Liver': {
+    FLT_gene: 0.930, FLT_pathway: 0.920, GC_gene: 0.973, GC_pathway: 0.993
+  },
+  'RR-6 Thymus': {
+    FLT_gene: 0.857, FLT_pathway: 0.714, GC_gene: 0.925, GC_pathway: 1.000
+  }
+};
+
+// (b) T3: OLD vs YNG spaceflight classification
+const t3Data = {
+  conditions: ['FLT', 'GC', 'VIV'],
+  OLD_gene: [0.912, 0.925, 0.816],
+  OLD_pathway: [0.781, 0.837, 0.827],
+  YNG_gene: [0.679, null, null],  // Only overall OLD vs YNG for now
+  YNG_pathway: [0.716, null, null],
+  overall: { OLD: 0.945, YNG: 0.679, delta: 0.266 }
+};
+
+// (c) Cell 2020 per-pathway concordance
+const cell2020Details = {
+  thymus: [
+    { pathway: 'E2F_TARGETS', expected: 'UP', nes: 3.201, concordant: true },
+    { pathway: 'G2M_CHECKPOINT', expected: 'UP', nes: 3.069, concordant: true },
+    { pathway: 'MITOTIC_SPINDLE', expected: 'UP', nes: 1.948, concordant: true },
+    { pathway: 'MYC_TARGETS_V1', expected: 'UP', nes: 2.598, concordant: true },
+    { pathway: 'IFN_GAMMA', expected: 'DOWN', nes: -2.217, concordant: true },
+    { pathway: 'IFN_ALPHA', expected: 'DOWN', nes: -2.198, concordant: true },
+    { pathway: 'ALLOGRAFT_REJ', expected: 'DOWN', nes: -1.311, concordant: true }
+  ],
+  liver: [
+    { pathway: 'OXPHOS', expected: 'UP', nes: 0.615, concordant: true },
+    { pathway: 'FATTY_ACID_MET', expected: 'UP', nes: 0.288, concordant: true },
+    { pathway: 'ADIPOGENESIS', expected: 'UP', nes: 0.341, concordant: true },
+    { pathway: 'BILE_ACID_MET', expected: 'UP', nes: 0.735, concordant: true },
+    { pathway: 'CHOLESTEROL', expected: 'UP', nes: -0.124, concordant: false },
+    { pathway: 'XENOBIOTIC_MET', expected: 'UP', nes: 0.093, concordant: true },
+    { pathway: 'PEROXISOME', expected: 'UP', nes: 0.687, concordant: true },
+    { pathway: 'INFLAMMATORY', expected: 'DOWN', nes: 0.778, concordant: false },
+    { pathway: 'IFN_GAMMA', expected: 'DOWN', nes: 0.720, concordant: false }
+  ],
+  gastrocnemius: [
+    { pathway: 'OXPHOS', expected: 'UP', nes: 0.169, concordant: true },
+    { pathway: 'MYOGENESIS', expected: 'UP', nes: 0.123, concordant: true },
+    { pathway: 'MTORC1', expected: 'DOWN', nes: -0.174, concordant: true },
+    { pathway: 'PI3K_AKT_MTOR', expected: 'DOWN', nes: -1.212, concordant: true }
+  ],
+  eye: [
+    { pathway: 'OXPHOS', expected: 'UP', nes: 2.905, concordant: true },
+    { pathway: 'ROS_PATHWAY', expected: 'UP', nes: 1.599, concordant: true },
+    { pathway: 'ANGIOGENESIS', expected: 'DOWN', nes: 1.197, concordant: false }
+  ],
+  kidney: [
+    { pathway: 'MTORC1', expected: 'UP', nes: -0.958, concordant: false },
+    { pathway: 'CHOLESTEROL', expected: 'UP', nes: -1.442, concordant: false },
+    { pathway: 'ROS_PATHWAY', expected: 'UP', nes: 0.175, concordant: true },
+    { pathway: 'IFN_GAMMA', expected: 'DOWN', nes: 0.344, concordant: false }
+  ]
+};
+
+// (d) fGSEA NES heatmap
+const nesData = {
+  thymus: { IFN_GAMMA: -2.217, IFN_ALPHA: -2.198, INFLAMMATORY: -2.011, ALLOGRAFT: -1.311, E2F: 3.201, G2M: 3.069, MYC_V1: 2.598, OXPHOS: -0.856, FAT_ACID: -0.925, ADIPOGENESIS: -2.122, MTORC1: 0.667, MYOGENESIS: -2.124 },
+  liver: { IFN_GAMMA: 0.720, IFN_ALPHA: 0.740, INFLAMMATORY: 0.778, ALLOGRAFT: 0.929, E2F: 0.121, G2M: -0.054, MYC_V1: -0.690, OXPHOS: 0.615, FAT_ACID: 0.288, ADIPOGENESIS: 0.341, MTORC1: -0.494, MYOGENESIS: -0.495 },
+  eye: { IFN_GAMMA: -0.535, IFN_ALPHA: -0.587, INFLAMMATORY: 0.931, ALLOGRAFT: -0.264, E2F: -0.750, G2M: -1.473, MYC_V1: 2.020, OXPHOS: 2.905, FAT_ACID: 1.851, ADIPOGENESIS: 2.121, MTORC1: 1.639, MYOGENESIS: 0.646 },
+  gastrocnemius: { IFN_GAMMA: -0.353, IFN_ALPHA: -1.174, INFLAMMATORY: 1.418, ALLOGRAFT: 1.006, E2F: 0.155, G2M: 1.139, MYC_V1: 0.100, OXPHOS: 0.169, FAT_ACID: 1.468, ADIPOGENESIS: 1.254, MTORC1: -0.174, MYOGENESIS: 0.123 },
+  kidney: { IFN_GAMMA: 0.344, IFN_ALPHA: 0.135, INFLAMMATORY: 0.586, ALLOGRAFT: 0.761, E2F: -0.589, G2M: -0.709, MYC_V1: 0.293, OXPHOS: 0.472, FAT_ACID: 0.262, ADIPOGENESIS: -0.234, MTORC1: -0.958, MYOGENESIS: -0.787 },
+  skin: { IFN_GAMMA: -0.698, IFN_ALPHA: -0.624, INFLAMMATORY: -0.411, ALLOGRAFT: -0.265, E2F: 2.433, G2M: 2.337, MYC_V1: 0.961, OXPHOS: -0.758, FAT_ACID: -1.331, ADIPOGENESIS: -0.533, MTORC1: 1.055, MYOGENESIS: -0.571 }
+};
+
+// ======= LAYOUT =======
+const W = 960, H = 520;
+const svg = d3.select('#figure').append('svg')
+  .attr('width', W).attr('height', H)
+  .attr('viewBox', `0 0 ${W} ${H}`)
+  .attr('xmlns', 'http://www.w3.org/2000/svg')
+  .style('background', '#fff')
+  .style('font-family', "'Helvetica Neue', Helvetica, Arial, sans-serif");
+
+// Grid: 2×2
+const panels = [
+  { x: 40, y: 25, w: 420, h: 210, label: 'a' },
+  { x: 520, y: 25, w: 420, h: 210, label: 'b' },
+  { x: 40, y: 275, w: 420, h: 230, label: 'c' },
+  { x: 520, y: 275, w: 420, h: 230, label: 'd' }
+];
+
+// Panel labels
+panels.forEach(p => {
+  svg.append('text')
+    .attr('x', p.x - 25).attr('y', p.y + 2)
+    .text(p.label)
+    .attr('font-size', FONT.panel).attr('font-weight', 'bold');
+});
+
+// ===== Panel (a): T1 ISS-T vs LAR =====
+{
+  const g = svg.append('g').attr('transform', `translate(${panels[0].x}, ${panels[0].y})`);
+  const pw = 380, ph = 190;
+
+  g.append('text').attr('x', pw/2).attr('y', 0).attr('text-anchor','middle')
+    .attr('font-size', FONT.axis).attr('font-weight','600')
+    .text('Preservation method timing classification');
+  g.append('text').attr('x', pw/2).attr('y', 13).attr('text-anchor','middle')
+    .attr('font-size', FONT.tiny).attr('fill','#666').attr('font-style','italic')
+    .text('Note: ISS-T uses RNAlater, LAR uses necropsy — preservation method may confound');
+
+  const groups = Object.keys(t1Data);
+  const metrics = ['FLT_gene','FLT_pathway','GC_gene','GC_pathway'];
+  const metricLabels = ['FLT Gene','FLT Pathway','GC Gene','GC Pathway'];
+  const metricColors = [COLORS.gene, COLORS.pathway, d3.color(COLORS.gene).darker(0.3), d3.color(COLORS.pathway).darker(0.3)];
+
+  const x0 = d3.scaleBand().domain(groups).range([0, pw]).padding(0.2);
+  const x1 = d3.scaleBand().domain(metrics).range([0, x0.bandwidth()]).padding(0.08);
+  const y = d3.scaleLinear().domain([0, 1.05]).range([ph - 30, 25]);
+
+  // Axes
+  g.append('g').attr('transform', `translate(0, ${ph - 30})`)
+    .call(d3.axisBottom(x0).tickSize(0))
+    .selectAll('text').attr('font-size', FONT.tick);
+  g.append('g')
+    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.1f')).tickSize(-pw))
+    .call(g2 => g2.selectAll('.tick line').attr('stroke','#eee'))
+    .call(g2 => g2.select('.domain').remove())
+    .selectAll('text').attr('font-size', FONT.tick);
+  g.append('text').attr('transform','rotate(-90)').attr('x', -(ph-30)/2-12).attr('y', -30)
+    .attr('text-anchor','middle').attr('font-size', FONT.tick).text('AUROC');
+
+  // Chance line
+  g.append('line').attr('x1', 0).attr('x2', pw)
+    .attr('y1', y(0.5)).attr('y2', y(0.5))
+    .attr('stroke', '#999').attr('stroke-dasharray','3,3').attr('stroke-width', 0.8);
+
+  // Bars
+  groups.forEach(grp => {
+    metrics.forEach((m, mi) => {
+      const val = t1Data[grp][m];
+      if (val == null) return;
+      g.append('rect')
+        .attr('x', x0(grp) + x1(m))
+        .attr('y', y(val))
+        .attr('width', x1.bandwidth())
+        .attr('height', y(0) - y(val))
+        .attr('fill', mi < 2 ? (mi === 0 ? COLORS.gene : COLORS.pathway) : (mi === 2 ? d3.color(COLORS.gene).darker(0.5) : d3.color(COLORS.pathway).darker(0.5)))
+        .attr('opacity', mi < 2 ? 0.85 : 0.6);
+      // Value label
+      g.append('text')
+        .attr('x', x0(grp) + x1(m) + x1.bandwidth()/2)
+        .attr('y', y(val) - 2)
+        .attr('text-anchor','middle').attr('font-size','6.5px').attr('fill','#333')
+        .text(val.toFixed(2));
+    });
+  });
+
+  // Legend
+  const legItems = [
+    { label: 'FLT Gene', color: COLORS.gene, opacity: 0.85 },
+    { label: 'FLT Pathway', color: COLORS.pathway, opacity: 0.85 },
+    { label: 'GC Gene', color: d3.color(COLORS.gene).darker(0.5), opacity: 0.6 },
+    { label: 'GC Pathway', color: d3.color(COLORS.pathway).darker(0.5), opacity: 0.6 }
+  ];
+  legItems.forEach((d, i) => {
+    const lx = pw - 110, ly = 28 + i * 13;
+    g.append('rect').attr('x', lx).attr('y', ly).attr('width', 8).attr('height', 8)
+      .attr('fill', d.color).attr('opacity', d.opacity);
+    g.append('text').attr('x', lx + 11).attr('y', ly + 7)
+      .attr('font-size', FONT.tiny).text(d.label);
+  });
+}
+
+// ===== Panel (b): T3 OLD vs YNG =====
+{
+  const g = svg.append('g').attr('transform', `translate(${panels[1].x}, ${panels[1].y})`);
+  const pw = 380, ph = 190;
+
+  g.append('text').attr('x', pw/2).attr('y', 0).attr('text-anchor','middle')
+    .attr('font-size', FONT.axis).attr('font-weight','600')
+    .text('Spaceflight × aging interaction (RR-8 liver)');
+
+  // Data: condition × age_group × feature
+  const conditions = ['FLT', 'GC', 'VIV'];
+  const ageGroups = [
+    { key: 'OLD_gene', label: 'OLD Gene', color: '#D55E00', opacity: 0.85 },
+    { key: 'OLD_pathway', label: 'OLD Pathway', color: '#D55E00', opacity: 0.5 },
+    { key: 'YNG_gene', label: 'YNG Gene', color: '#56B4E9', opacity: 0.85 },
+    { key: 'YNG_pathway', label: 'YNG Pathway', color: '#56B4E9', opacity: 0.5 }
+  ];
+  // Spaceflight classification AUROC by condition and age
+  // T3b data: FLT/GC/VIV × gene/pathway
+  const t3b = {
+    FLT: { OLD_gene: 0.912, OLD_pathway: 0.781, YNG_gene: null, YNG_pathway: null },
+    GC:  { OLD_gene: 0.925, OLD_pathway: 0.837, YNG_gene: null, YNG_pathway: null },
+    VIV: { OLD_gene: 0.816, OLD_pathway: 0.827, YNG_gene: null, YNG_pathway: null }
+  };
+  // T3d overall: spaceflight detection by age group
+  const t3d = {
+    Overall: { OLD_gene: 0.945, OLD_pathway: 0.879, YNG_gene: 0.679, YNG_pathway: 0.716 }
+  };
+
+  const allGroups = ['Overall', ...conditions];
+  const agKeys = ['OLD_gene','OLD_pathway','YNG_gene','YNG_pathway'];
+
+  const x0 = d3.scaleBand().domain(allGroups).range([0, pw]).padding(0.15);
+  const x1 = d3.scaleBand().domain(agKeys).range([0, x0.bandwidth()]).padding(0.08);
+  const y = d3.scaleLinear().domain([0, 1.05]).range([ph - 30, 25]);
+
+  // Axes
+  g.append('g').attr('transform', `translate(0, ${ph - 30})`)
+    .call(d3.axisBottom(x0).tickSize(0))
+    .selectAll('text').attr('font-size', FONT.tick);
+  g.append('g')
+    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.1f')).tickSize(-pw))
+    .call(g2 => g2.selectAll('.tick line').attr('stroke','#eee'))
+    .call(g2 => g2.select('.domain').remove())
+    .selectAll('text').attr('font-size', FONT.tick);
+  g.append('text').attr('transform','rotate(-90)').attr('x', -(ph-30)/2-12).attr('y', -30)
+    .attr('text-anchor','middle').attr('font-size', FONT.tick).text('AUROC');
+
+  // Chance line
+  g.append('line').attr('x1', 0).attr('x2', pw)
+    .attr('y1', y(0.5)).attr('y2', y(0.5))
+    .attr('stroke', '#999').attr('stroke-dasharray','3,3').attr('stroke-width', 0.8);
+
+  // Merge data
+  const allData = { ...t3d, ...t3b };
+
+  allGroups.forEach(grp => {
+    agKeys.forEach((ak, ai) => {
+      const val = allData[grp] ? allData[grp][ak] : null;
+      if (val == null) return;
+      const ag = ageGroups[ai];
+      g.append('rect')
+        .attr('x', x0(grp) + x1(ak))
+        .attr('y', y(val))
+        .attr('width', x1.bandwidth())
+        .attr('height', y(0) - y(val))
+        .attr('fill', ag.color)
+        .attr('opacity', ag.opacity);
+      g.append('text')
+        .attr('x', x0(grp) + x1(ak) + x1.bandwidth()/2)
+        .attr('y', y(val) - 2)
+        .attr('text-anchor','middle').attr('font-size','6.5px').attr('fill','#333')
+        .text(val.toFixed(2));
+    });
+  });
+
+  // Delta annotation for Overall
+  const oldY = y(0.945);
+  const yngY = y(0.679);
+  const bx = x0('Overall') + x0.bandwidth() + 5;
+  g.append('line').attr('x1', bx).attr('x2', bx).attr('y1', oldY).attr('y2', yngY)
+    .attr('stroke','#333').attr('stroke-width', 1);
+  g.append('line').attr('x1', bx-3).attr('x2', bx+3).attr('y1', oldY).attr('y2', oldY)
+    .attr('stroke','#333');
+  g.append('line').attr('x1', bx-3).attr('x2', bx+3).attr('y1', yngY).attr('y2', yngY)
+    .attr('stroke','#333');
+  g.append('text').attr('x', bx + 4).attr('y', (oldY+yngY)/2 + 3)
+    .attr('font-size', FONT.tiny).attr('fill','#D55E00').attr('font-weight','bold')
+    .text('Δ=0.27');
+
+  // Subtitle
+  g.append('text').attr('x', pw/2).attr('y', ph - 14).attr('text-anchor','middle')
+    .attr('font-size', FONT.tiny).attr('fill','#666').attr('font-style','italic')
+    .text('"Spaceflight amplifies age differences" — OLD shows stronger signal');
+
+  // Legend
+  const leg2 = [
+    { label: 'OLD Gene', color: '#D55E00', op: 0.85 },
+    { label: 'OLD Pathway', color: '#D55E00', op: 0.5 },
+    { label: 'YNG Gene', color: '#56B4E9', op: 0.85 },
+    { label: 'YNG Pathway', color: '#56B4E9', op: 0.5 }
+  ];
+  leg2.forEach((d, i) => {
+    const lx = pw - 110, ly = 14 + i * 12;
+    g.append('rect').attr('x', lx).attr('y', ly).attr('width', 8).attr('height', 8)
+      .attr('fill', d.color).attr('opacity', d.op);
+    g.append('text').attr('x', lx + 11).attr('y', ly + 7)
+      .attr('font-size', FONT.tiny).text(d.label);
+  });
+}
+
+// ===== Panel (c): Cell 2020 per-pathway concordance =====
+{
+  const g = svg.append('g').attr('transform', `translate(${panels[2].x}, ${panels[2].y})`);
+  const pw = 400, ph = 215;
+
+  g.append('text').attr('x', pw/2).attr('y', 0).attr('text-anchor','middle')
+    .attr('font-size', FONT.axis).attr('font-weight','600')
+    .text('Per-pathway agreement with published findings (Cell 2020)');
+
+  // Flatten all pathways with tissue label
+  const allPw = [];
+  const tissueOrder = ['thymus','gastrocnemius','liver','eye','kidney'];
+  tissueOrder.forEach(t => {
+    cell2020Details[t].forEach(d => {
+      allPw.push({ ...d, tissue: t });
+    });
+  });
+
+  const y0 = d3.scaleBand().domain(allPw.map((d,i)=>i)).range([20, ph - 5]).padding(0.12);
+  const x = d3.scaleLinear().domain([-2.5, 3.5]).range([130, pw - 10]);
+
+  // Zero line
+  g.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 15).attr('y2', ph - 5)
+    .attr('stroke','#999').attr('stroke-width', 0.8);
+
+  // Tissue separators and labels
+  let prevTissue = null;
+  let tissueStart = {};
+  allPw.forEach((d, i) => {
+    if (d.tissue !== prevTissue) {
+      if (prevTissue) {
+        const sepY = y0(i) - y0.step() * y0.padding() / 2;
+        g.append('line').attr('x1', 0).attr('x2', pw).attr('y1', sepY).attr('y2', sepY)
+          .attr('stroke','#ddd').attr('stroke-width', 0.5);
+      }
+      tissueStart[d.tissue] = i;
+      prevTissue = d.tissue;
+    }
+  });
+
+  allPw.forEach((d, i) => {
+    const by = y0(i) + y0.bandwidth() / 2;
+    const barColor = d.concordant ? COLORS.concordant : COLORS.discordant;
+
+    // Direction arrow indicator
+    const expectedDir = d.expected === 'UP' ? '↑' : '↓';
+
+    // Bar
+    const barX = d.nes >= 0 ? x(0) : x(d.nes);
+    const barW = Math.abs(x(d.nes) - x(0));
+    g.append('rect')
+      .attr('x', barX).attr('y', y0(i))
+      .attr('width', Math.max(barW, 1)).attr('height', y0.bandwidth())
+      .attr('fill', barColor).attr('opacity', 0.8);
+
+    // Pathway label
+    const shortName = d.pathway.replace(/_/g, ' ');
+    const tissueLetter = d.tissue === 'thymus' ? 'Thy' : d.tissue === 'gastrocnemius' ? 'Gas' : d.tissue === 'liver' ? 'Liv' : d.tissue === 'eye' ? 'Eye' : 'Kid';
+
+    // Only show tissue label at start of each group
+    if (i === tissueStart[d.tissue]) {
+      g.append('text').attr('x', 0).attr('y', by + 3)
+        .attr('font-size', FONT.tiny).attr('font-weight','bold')
+        .attr('fill', COLORS.tissues[d.tissue])
+        .text(tissueLetter);
+    }
+
+    g.append('text').attr('x', 22).attr('y', by + 3)
+      .attr('font-size', '6.5px').attr('fill','#333')
+      .text(`${shortName} (${expectedDir})`);
+
+    // NES value
+    g.append('text')
+      .attr('x', d.nes >= 0 ? barX + barW + 3 : barX - 3)
+      .attr('y', by + 3)
+      .attr('text-anchor', d.nes >= 0 ? 'start' : 'end')
+      .attr('font-size', '6px').attr('fill','#555')
+      .text(d.nes.toFixed(2));
+  });
+
+  // X axis
+  g.append('g').attr('transform', `translate(0, ${ph - 5})`)
+    .call(d3.axisBottom(x).ticks(6).tickSize(3))
+    .selectAll('text').attr('font-size', FONT.tiny);
+  g.append('text').attr('x', (130 + pw - 10)/2).attr('y', ph + 7)
+    .attr('text-anchor','middle').attr('font-size', FONT.tiny).text('Mean NES (FLT vs GC)');
+
+  // Legend
+  g.append('circle').attr('cx', pw - 80).attr('cy', 12).attr('r', 4).attr('fill', COLORS.concordant);
+  g.append('text').attr('x', pw - 74).attr('y', 15).attr('font-size', FONT.tiny).text('Concordant');
+  g.append('circle').attr('cx', pw - 80).attr('cy', 24).attr('r', 4).attr('fill', COLORS.discordant);
+  g.append('text').attr('x', pw - 74).attr('y', 27).attr('font-size', FONT.tiny).text('Discordant');
+}
+
+// ===== Panel (d): fGSEA NES Heatmap =====
+{
+  const g = svg.append('g').attr('transform', `translate(${panels[3].x}, ${panels[3].y})`);
+  const pw = 410, ph = 215;
+
+  g.append('text').attr('x', pw/2).attr('y', 0).attr('text-anchor','middle')
+    .attr('font-size', FONT.axis).attr('font-weight','600')
+    .text('Hallmark pathway expression: tissue-specific patterns');
+
+  const tissues = ['thymus','skin','liver','eye','gastrocnemius','kidney'];
+  const pathways = ['IFN_GAMMA','IFN_ALPHA','INFLAMMATORY','ALLOGRAFT','E2F','G2M','MYC_V1','OXPHOS','FAT_ACID','ADIPOGENESIS','MTORC1','MYOGENESIS'];
+  const pwLabels = ['IFN-γ','IFN-α','Inflam.','Allograft','E2F','G2M','MYC V1','OXPHOS','Fat. Acid','Adipogen.','mTORC1','Myogen.'];
+
+  // Category brackets
+  const categories = [
+    { label: 'Immune', start: 0, end: 3 },
+    { label: 'Prolif.', start: 4, end: 6 },
+    { label: 'Metab.', start: 7, end: 11 }
+  ];
+
+  const cellW = 38, cellH = 15;
+  const startX = 75, startY = 30;
+
+  // Color scale: RdBu diverging centered at 0
+  const colorScale = d3.scaleSequential(d3.interpolateRdBu).domain([3.5, -3.5]);
+
+  // Column headers (tissues)
+  tissues.forEach((t, i) => {
+    const cx = startX + i * cellW + cellW/2;
+    const label = t === 'gastrocnemius' ? 'Gastro' : t.charAt(0).toUpperCase() + t.slice(1);
+    g.append('text').attr('x', cx).attr('y', startY - 5).attr('text-anchor','middle')
+      .attr('font-size', FONT.tiny).attr('font-weight','bold')
+      .attr('fill', COLORS.tissues[t])
+      .text(label);
+  });
+
+  // Row labels and cells
+  pathways.forEach((pw, pi) => {
+    const ry = startY + pi * cellH;
+    // Row label
+    g.append('text').attr('x', startX - 4).attr('y', ry + cellH/2 + 3)
+      .attr('text-anchor','end').attr('font-size', '7px').text(pwLabels[pi]);
+
+    tissues.forEach((t, ti) => {
+      const val = nesData[t][pw];
+      const cx = startX + ti * cellW;
+
+      g.append('rect')
+        .attr('x', cx).attr('y', ry)
+        .attr('width', cellW - 1).attr('height', cellH - 1)
+        .attr('fill', colorScale(val))
+        .attr('stroke','#fff').attr('stroke-width', 0.5);
+
+      // Value text
+      const textColor = Math.abs(val) > 2 ? '#fff' : '#333';
+      g.append('text')
+        .attr('x', cx + cellW/2 - 0.5).attr('y', ry + cellH/2 + 3)
+        .attr('text-anchor','middle').attr('font-size','6.5px')
+        .attr('fill', textColor).attr('font-weight', Math.abs(val) > 2 ? 'bold' : 'normal')
+        .text(val.toFixed(1));
+    });
+  });
+
+  // Category brackets on right
+  categories.forEach(cat => {
+    const y1 = startY + cat.start * cellH;
+    const y2 = startY + (cat.end + 1) * cellH - 1;
+    const bx = startX + tissues.length * cellW + 5;
+    g.append('line').attr('x1', bx).attr('x2', bx).attr('y1', y1).attr('y2', y2)
+      .attr('stroke','#333').attr('stroke-width', 1);
+    g.append('line').attr('x1', bx-3).attr('x2', bx).attr('y1', y1).attr('y2', y1)
+      .attr('stroke','#333');
+    g.append('line').attr('x1', bx-3).attr('x2', bx).attr('y1', y2).attr('y2', y2)
+      .attr('stroke','#333');
+    g.append('text').attr('x', bx + 4).attr('y', (y1+y2)/2 + 3)
+      .attr('font-size', FONT.tiny).attr('font-weight','bold').attr('fill','#333')
+      .text(cat.label);
+  });
+
+  // Color legend bar
+  const legX = startX, legY = startY + pathways.length * cellH + 12;
+  const legW = 120, legH = 8;
+  const defs = svg.append('defs');
+  const grad = defs.append('linearGradient').attr('id', 'nes-grad');
+  [0, 0.25, 0.5, 0.75, 1].forEach(t => {
+    grad.append('stop').attr('offset', `${t*100}%`).attr('stop-color', colorScale(3.5 - t * 7));
+  });
+  g.append('rect').attr('x', legX).attr('y', legY).attr('width', legW).attr('height', legH)
+    .attr('fill', 'url(#nes-grad)').attr('stroke','#999').attr('stroke-width', 0.5);
+  g.append('text').attr('x', legX).attr('y', legY + legH + 9).attr('font-size', FONT.tiny).attr('text-anchor','start').text('-3.5');
+  g.append('text').attr('x', legX + legW/2).attr('y', legY + legH + 9).attr('font-size', FONT.tiny).attr('text-anchor','middle').text('0');
+  g.append('text').attr('x', legX + legW).attr('y', legY + legH + 9).attr('font-size', FONT.tiny).attr('text-anchor','end').text('+3.5');
+  g.append('text').attr('x', legX + legW + 8).attr('y', legY + 7).attr('font-size', FONT.tiny).text('NES');
+
+  // Key annotation
+  g.append('text').attr('x', legX + legW + 50).attr('y', legY + 2)
+    .attr('font-size', FONT.tiny).attr('fill','#666').attr('font-style','italic')
+    .text('Thymus: IFN↓, E2F↑↑ (futile cycling)');
+  g.append('text').attr('x', legX + legW + 50).attr('y', legY + 12)
+    .attr('font-size', FONT.tiny).attr('fill','#666').attr('font-style','italic')
+    .text('Liver: IFN↑, OXPHOS↑ (immune activation)');
+}
+
+// ======= Download SVG =======
+function downloadSVG() {
+  const svgEl = document.querySelector('#figure svg');
+  const serializer = new XMLSerializer();
+  let src = serializer.serializeToString(svgEl);
+  src = '<?xml version="1.0" standalone="no"?>\n' + src;
+  const blob = new Blob([src], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'figS4_temporal_bio.svg';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

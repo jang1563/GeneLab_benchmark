@@ -1,0 +1,1139 @@
+{
+  "fold": "fold_RR-7_test",
+  "task_id": "A3",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash",
+  "temperature": 0,
+  "generated_at": "2026-03-08T11:54:31.939518",
+  "n_responses": 94,
+  "responses": [
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.92**\n\nHere's the reasoning:\n\n1.  **Kidney Injury/Stress Markers:**\n    *",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep1_F2",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.92**",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 7,
+        "total_tokens": 2116
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep2_F6",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Oxidative Stress and DNA",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep3_F10",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\nHere's the reasoning:\n\n1.  **Strongest Signal: Kidney Injury",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep4_F14",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression profile exhibits several hallmarks consistent with spaceflight-induced changes in the mouse",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep5_F18",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe gene expression profile strongly suggests a spaceflight environment, particularly in the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep1_F4",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation and Inflammation",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep2_F8",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.92**\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a response consistent with spaceflight-",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep3_F12",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Kidney Injury/Stress Markers:**",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep4_F16",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Kidney Injury/Stress Marker",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep5_F20",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a **Flight** sample due to several key markers associated with spaceflight-induced stress, immune",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep1_G2",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression profile in this mouse kidney sample shows several hallmarks consistent with",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep2_G6",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.92**\n\n**Reasoning:**\n\nThe gene expression profile exhibits several key signatures consistent with the known biological effects of space",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep3_G10",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Strong Oxidative Stress/Mitochondrial",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep4_G14",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.92**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation / Inflammatory Response",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep5_G18",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression profile exhibits several hallmarks consistent with spaceflight-",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep1_G4",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 6,
+        "total_tokens": 2114
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep2_G8",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.92**\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a flight sample, particularly",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep3_G12",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.92**\n\n**Reasoning:**\n\nThe gene expression profile exhibits several strong indicators consistent with the known",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep4_G16",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation / Interfer",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep5_G20",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\nHere's the reasoning:\n\nThe gene expression profile exhibits several hallmarks consistent with known space",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep1_V2",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)** with high confidence.\n\n**A 0.92**\n\n**Reasoning:**\n\nThe gene expression profile of this mouse kidney sample",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep2_V6",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression profile exhibits several hallmarks consistent with spaceflight-induced changes",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep3_V10",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a \"Flight\" sample,",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep4_V14",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\nHere's the reasoning:\n\n1.  **Kidney Injury/Stress Marker:**",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep5_V18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a \"Flight\" sample, primarily due to the significant upregulation of genes associated with immune activation, inflammation,",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep1_V4",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.88\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a \"Flight\" sample, primarily due to the presence of several key spaceflight-associated transcriptomic signatures",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep2_V8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression profile of this mouse kidney sample strongly aligns with known transcriptomic signatures of spaceflight. Several key indicators point towards a",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep3_V12",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\nHere's the reasoning:\n\n1.  **Kidney Injury/Stress Marker",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep4_V16",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression profile exhibits several hallmarks consistent with spaceflight-induced changes",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep5_V20",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a **Flight** sample, primarily due to the significant upregulation of genes associated with immune activation, inflammation, and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep1_F1",
+      "true_label": 1
+    },
+    {
+      "content": "This sample exhibits a transcriptomic signature highly consistent with a **Flight** sample.\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation / Inflammation:**\n    *   ",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2147
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep2_F5",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**\n\nThis sample exhibits a transcriptomic signature highly consistent with spaceflight exposure in mouse kidney. Here's a breakdown of the key observations:\n\n",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2147
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep3_F9",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThe gene expression pattern strongly points towards a \"Flight\" sample, exhibiting several hallmarks of spaceflight-induced physiological changes in the kidney:\n\n",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2147
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep4_F13",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a response consistent with spaceflight-induced",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep5_F17",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.92**\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a response consistent with spaceflight-induced",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep1_F3",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a \"Flight\" sample, primarily due to the upregulation of several key markers associated with stress, inflammation",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep2_F7",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.88\n\n**Reasoning:**\n\nThe gene expression pattern in this mouse kidney sample strongly suggests a **Flight** condition, characterized by a significant downregulation of genes involved in xenobi",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep3_F11",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\nHere's the reasoning:\n\nSeveral key genes in the provided list show expression patterns",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep4_F15",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.92**\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a spaceflight environment, particularly",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep5_F19",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is most likely from a **Flight** mouse.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation:**",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep1_G1",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**\n\nThis sample exhibits a transcriptomic signature highly consistent with spaceflight exposure in mouse kidney. Here's a breakdown of the key",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep2_G5",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe gene expression profile of this mouse kidney sample strongly indicates a response consistent with spaceflight",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep3_G9",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a spaceflight environment, particularly in the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep4_G13",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation / Inflammation:** Several highly upregulated genes",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep5_G17",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a spaceflight environment, particularly in the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep1_G3",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **B (Ground)**.\n\n**B 0.85**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list, particularly for a kidney sample",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep2_G7",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation and Inflammation:** Several",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep3_G15",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a **Flight** sample due to several key signatures associated with spaceflight-induced stress and immune dysregulation in",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep4_G19",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92**\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a \"Flight\" sample, characterized by significant immune activation, altered metabolism, and changes in stress response pathways",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep1_V1",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\n**Reasoning:**\n\nThe gene expression profile strongly suggests a spaceflight environment, particularly in",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep2_V5",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is most likely from a **Flight** mouse.\n\n**A 0.92**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation:**\n    ",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2146
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep3_V9",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe transcriptomic profile of this mouse kidney sample exhibits several key signatures consistent",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep4_V13",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation /",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep5_V17",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**\n\nThe gene expression pattern in this mouse kidney sample strongly suggests it is from a flight animal. Here's a breakdown of the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep1_V3",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\n**Reasoning:**\n\n1.  **Immune Dysregulation/Inflammation:** Several",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep2_V7",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a \"Flight\" sample, primarily due to the prominent upregulation of genes associated with immune activation, inflammation,",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep3_V11",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.92**\n\nHere's the reasoning:\n\n1.  **Strongest Signal: N",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep4_V15",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a **Flight** sample, primarily due to the prominent upregulation of genes associated with oxidative stress, DNA damage",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep5_V19",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.88\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a \"Flight\" sample, particularly due to the prominent immune dysregulation and metabolic shifts observed.\n\n1.",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep1_GR01",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Kidney Injury Marker (Havcr1",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep1_GR02",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Downregulation of Cytochrome",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep1_GR03",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.88\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a \"Flight\" sample, primarily due to the robust upregulation of interferon-stimulated genes (IS",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep1_GR04",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe gene expression profile shows several hallmarks consistent with spaceflight-",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep1_GR05",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is likely from a **Flight** mouse.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation / Inflammation:**\n",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2147
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep1_GR06",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation:**\n    *",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep1_GR07",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a transcriptomic signature highly consistent with spaceflight exposure in mouse kidney.\n\nHere's the breakdown of the evidence:\n\n1.  **Kidney Injury/Stress Markers",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep1_GR08",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits several transcriptomic signatures consistent with spaceflight exposure in the kidney.\n\n1.  **Downregulation of Xenobiotic Metabolism and Steroid Synthesis Genes:** A prominent feature is",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep2_GR12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**\n\nThis sample exhibits a transcriptomic signature highly consistent with spaceflight exposure, particularly in the kidney. Several key observations point towards a \"",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep2_GR14",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe gene expression profile strongly suggests a spaceflight environment, particularly in the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep2_GR15",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\n**Reasoning:**\n\n1.  **Kidney Injury/Stress Markers:** The most compelling",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep2_GR16",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Oxidative Stress and Mitochondrial Function",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep3_GR17",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a clear transcriptomic signature consistent with **spaceflight (microgravity) exposure**, particularly in the kidney.\n\nHere's the breakdown of the evidence:\n\n1.",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep3_GR18",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\n**Reasoning:**\n\n1.  **Dominant Downregulation:** A striking feature of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep3_GR19",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a flight sample, particularly due to the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep3_GR20",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 6,
+        "total_tokens": 2116
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep3_GR21",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a strong transcriptomic signature consistent with spaceflight.\n\nHere's the breakdown of key observations:\n\n1.  **Metabolic Reprogramming & Xenobiotic Metabolism (Strong",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 40,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep3_GR22",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A** (Flight).\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Consistent Downregulation of Cytochrome",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep3_GR23",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a \"Flight\" sample, particularly due to the upregulation of key markers associated with kidney injury, inflammation,",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep3_GR24",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation:**",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep4_GR25",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThis sample exhibits a strong transcriptomic signature consistent with spaceflight exposure in mouse kidney. Here's a breakdown of the key observations",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep4_GR26",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.85**\n\n**Reasoning:**\n\nSeveral key gene expression patterns in this mouse kidney sample align with known spaceflight",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep4_GR27",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Kidney Injury/Stress Marker:** The most",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep4_GR28",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a transcriptomic signature highly consistent with **spaceflight (microgravity) exposure** in mouse kidney.\n\nHere's the reasoning:\n\n1.  **Metabolic",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep4_GR29",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.88\n\n**Reasoning:**\n\nThe gene expression profile strongly suggests a \"Flight\" sample, particularly due to the significant upregulation of markers associated with kidney injury, oxidative stress",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep4_GR30",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.88\n\n**Reasoning:**\n\nThe gene expression pattern in this mouse kidney sample strongly suggests it is from a flight animal. Here's a breakdown of the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep4_GR31",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.88\n\n**Reasoning:**\n\nThe gene expression pattern strongly suggests a **Flight** sample, primarily due to the consistent downregulation of genes involved in xenobiotic metabolism,",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep4_GR32",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.88**\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation:**",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep5_GR33",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThis sample exhibits a strong transcriptomic signature consistent with spaceflight-induced stress and adaptation in the mouse kidney. Several key patterns emerge:",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep5_GR34",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a transcriptomic signature highly consistent with **spaceflight**.\n\nHere's a breakdown of the key observations:\n\n1.  **Metabolic Reprogramming and Stress Response:**\n",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 39,
+        "total_tokens": 2147
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep5_GR35",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.92\n\n**Reasoning:**\n\nThis sample exhibits a strong transcriptomic signature consistent with spaceflight in mouse kidney. Here's a breakdown of the key observations:\n\n",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2147
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep5_GR36",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Strongest Signal: Nnt",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep5_GR38",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Xenobiotic Metabolism",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 37,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep5_GR39",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\nHere's the reasoning:\n\n1.  **Immune Dysregulation and Inflammation:**\n    *   **`Havcr1` (",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1152,
+        "completion_tokens": 38,
+        "total_tokens": 2148
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep5_GR40",
+      "true_label": 0
+    }
+  ]
+}

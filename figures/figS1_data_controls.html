@@ -33,11 +33,11 @@ const FS = { panelLabel: 12, axisLabel: 10, tick: 9, annotation: 9, title: 10, t
 // (a) Tissue summary table
 const tissueSummary = [
   {tissue:'Thymus', missions:4, samples:67, genes:28235, pathways:50, cat_a:0.923, cat_b:0.860, color:COLORS.thymus},
-  {tissue:'Gastrocnemius', missions:3, samples:32, genes:18952, pathways:50, cat_a:0.907, cat_b:0.801, color:COLORS.gastrocnemius},
+  {tissue:'Gastrocnemius', missions:3, samples:32, genes:18952, pathways:50, cat_a:0.824, cat_b:0.801, color:COLORS.gastrocnemius},
   {tissue:'Skin', missions:3, samples:102, genes:22000, pathways:50, cat_a:0.821, cat_b:0.772, color:COLORS.skin},
   {tissue:'Eye', missions:3, samples:37, genes:22000, pathways:50, cat_a:0.789, cat_b:0.754, color:COLORS.eye},
-  {tissue:'Liver', missions:6, samples:193, genes:22987, pathways:50, cat_a:0.588, cat_b:0.577, color:COLORS.liver},
-  {tissue:'Kidney', missions:3, samples:118, genes:22000, pathways:50, cat_a:0.564, cat_b:0.555, color:COLORS.kidney}
+  {tissue:'Liver', missions:6, samples:193, genes:22987, pathways:50, cat_a:0.670, cat_b:0.577, color:COLORS.liver},
+  {tissue:'Kidney', missions:3, samples:118, genes:22000, pathways:50, cat_a:0.432, cat_b:0.555, color:COLORS.kidney}
 ];
 
 // (b) NC1 permutation observed AUROC distribution
@@ -127,7 +127,7 @@ function panelLabel(g, letter, x, y) {
   const g = svg.append('g').attr('transform',`translate(${panelPos[0].x},${panelPos[0].y})`);
   panelLabel(g, 'a', 0, -10);
 
-  const cols = ['Tissue','Missions','Samples','Genes','Pathways','Cat A','Cat B'];
+  const cols = ['Tissue','Missions','Samples','Genes','Pathways','Detection','Transfer'];
   const colW = [85, 55, 55, 55, 60, 55, 55];
   const rowH = 20;
   const startX = 10, startY = 10;
@@ -175,7 +175,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('NC1: Significance summary');
+    .text('Negative control: task significance overview');
 
   const pad = {left: 30, right: 10, top: 18, bottom: 30};
   const plotW = halfW - pad.left - pad.right;
@@ -205,9 +205,10 @@ function panelLabel(g, letter, x, y) {
   ['A','B','C','D'].forEach(cat => {
     const entries = nc1Data.filter(d => d.cat === cat);
     const y = catYBase[cat];
+    const catLabels = {A:'Detect', B:'Transfer', C:'Cross-tissue', D:'Confounder'};
     g.append('text').attr('x', pad.left - 5).attr('y', y + 4)
       .attr('text-anchor','end').attr('font-size', 8).attr('fill', catColors[cat]).attr('font-weight','600')
-      .text('Cat ' + cat);
+      .text(catLabels[cat]);
 
     entries.forEach((d, i) => {
       const jitter = (i - (entries.length-1)/2) * 3;
@@ -231,7 +232,7 @@ function panelLabel(g, letter, x, y) {
   g.append('circle').attr('cx', pad.left + 62).attr('cy', legY).attr('r', 3)
     .attr('fill','#fff').attr('stroke','#666').attr('stroke-width',1);
   g.append('text').attr('x', pad.left + 68).attr('y', legY + 3)
-    .attr('font-size',6).attr('fill','#666').text('NS');
+    .attr('font-size',6).attr('fill','#666').text('Not significant');
 
   g.append('text').attr('x', pad.left + plotW).attr('y', legY + 3)
     .attr('text-anchor','end').attr('font-size', 7).attr('fill','#888')
@@ -247,7 +248,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('NC2: Housekeeping vs full genes');
+    .text('Housekeeping gene control');
 
   const pad = {left: 65, right: 20, top: 18, bottom: 30};
   const plotW = halfW - pad.left - pad.right;
@@ -269,7 +270,7 @@ function panelLabel(g, letter, x, y) {
   });
   g.append('text').attr('x',xScale(0.65)).attr('y',pad.top+plotH+26)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('AUROC');
+    .text('Classification accuracy (AUROC)');
 
   nc2Data.forEach(d => {
     const cy = yScale(d.tissue) + yScale.bandwidth()/2;
@@ -296,7 +297,7 @@ function panelLabel(g, letter, x, y) {
     if (d.hk > 0.7) {
       g.append('text').attr('x', xScale(d.hk) - 7).attr('y', cy + 3)
         .attr('text-anchor','end').attr('font-size', 6).attr('fill','#c00')
-        .text('WARN');
+        .text('batch confound?');
     }
   });
 
@@ -305,11 +306,11 @@ function panelLabel(g, letter, x, y) {
   g.append('circle').attr('cx', pad.left).attr('cy', legY).attr('r',3)
     .attr('fill','#fff').attr('stroke','#666').attr('stroke-width',1);
   g.append('text').attr('x', pad.left + 6).attr('y', legY + 3)
-    .attr('font-size',6).attr('fill','#666').text('HK genes');
+    .attr('font-size',6).attr('fill','#666').text('Housekeeping');
   g.append('circle').attr('cx', pad.left + 52).attr('cy', legY).attr('r',3)
     .attr('fill','#666').attr('stroke','#666').attr('stroke-width',1);
   g.append('text').attr('x', pad.left + 58).attr('y', legY + 3)
-    .attr('font-size',6).attr('fill','#666').text('Full genes');
+    .attr('font-size',6).attr('fill','#666').text('All genes');
 }
 
 // ============================================================
@@ -321,7 +322,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Batch correction \u0394AUROC (H2)');
+    .text('Batch correction effect on accuracy');
 
   const pad = {left: 65, right: 30, top: 18, bottom: 30};
   const plotW = halfW - pad.left - pad.right;
@@ -343,7 +344,7 @@ function panelLabel(g, letter, x, y) {
   });
   g.append('text').attr('x',xScale(0)).attr('y',pad.top+plotH+26)
     .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333')
-    .text('\u0394AUROC (limma_rbe \u2212 none)');
+    .text('Change in AUROC (with vs without batch correction)');
 
   j3Delta.forEach(d => {
     const cy = yScale(d.tissue) + yScale.bandwidth()/2;
@@ -377,7 +378,7 @@ function panelLabel(g, letter, x, y) {
   g.append('text')
     .attr('x', pad.left + plotW/2).attr('y', pad.top + plotH - 10)
     .attr('text-anchor','middle').attr('font-size', 8).attr('fill','#2e7d32').attr('font-weight','600')
-    .text('H2 SUPPORTED: mean |\u0394| = 0.0003');
+    .text('Negligible effect: mean |change| = 0.0003');
 }
 
 // ============================================================

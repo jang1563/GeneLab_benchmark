@@ -1,0 +1,1247 @@
+{
+  "fold": "fold_RR-8_test",
+  "task_id": "A1",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash",
+  "temperature": 0,
+  "generated_at": "2026-03-08T11:38:27.699000",
+  "n_responses": 103,
+  "responses": [
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe transcriptomic profile of this mouse liver sample strongly aligns with known space",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI1",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking pattern in the provided gene list is the significant",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI2",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2132
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI3",
+      "true_label": 1
+    },
+    {
+      "content": "This sample exhibits a clear transcriptomic signature consistent with spaceflight exposure in mouse liver.\n\nHere's the breakdown of key observations:\n\n1.  **Xenobiotic Metabolism",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI4",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a \"Flight\" sample, primarily due to the widespread and significant upregulation of genes involved in xen",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI5",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a \"Flight\" sample due to the prominent and consistent upregulation of genes involved in xenobiotic metabolism and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI6",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking feature of this gene expression profile is the widespread upregulation of numerous Cy",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI7",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a **Flight** sample, particularly due to the pronounced upregulation of genes involved in xenobiotic and steroid metabolism",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI8",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI9",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking pattern in this gene list is the widespread upregulation",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI10",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **(A) Flight** with high confidence.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking pattern in this gene",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI11",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI12",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking feature of this transcriptomic profile is the widespread and significant upregulation of numerous",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI13",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene list for a mouse liver sample shows a very strong and consistent pattern indicative of spaceflight. Key observations include:\n\n1.",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI14",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene expression profile for the mouse liver sample shows a striking pattern consistent with spaceflight-induced changes, particularly in xen",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI15",
+      "true_label": 1
+    },
+    {
+      "content": "This sample exhibits a strong and consistent upregulation of numerous genes involved in xenobiotic metabolism and detoxification, particularly from the Cytochrome P450 (Cyp) and Sulfotransferase (S",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI16",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a \"Flight\" sample, particularly due",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI17",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI18",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI19",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread and consistent upregulation of genes involved",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI20",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a \"Flight\" sample, particularly due to the significant",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL1",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this mouse liver RNA-seq sample is the widespread and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL2",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2129
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL3",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking and consistent pattern in this liver sample is the widespread upregulation of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL4",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe provided gene expression profile for the mouse liver sample exhibits several key signatures consistent with space",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL5",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread and significant upregulation of numerous Cytochrome P450 (Cyp",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL6",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL7",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking pattern in this liver sample is the widespread and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL8",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95**\n\n**Reasoning:**\n\nThe provided gene expression profile strongly indicates a \"Flight\" sample, particularly from the liver. Here's why:\n\n1.  ",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2162
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL11",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2132
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL13",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe transcriptomic profile of this mouse liver sample strongly aligns with known space",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL14",
+      "true_label": 1
+    },
+    {
+      "content": "This sample exhibits a strong transcriptomic signature consistent with spaceflight in mouse liver.\n\nHere's the breakdown:\n\n1.  **Xenobiotic Metabolism Upregulation:** A",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL15",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in the provided gene list is the significant dys",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_OLD_FL16",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2129
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL17",
+      "true_label": 1
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking feature of this gene expression profile is the widespread and significant",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_FLT_LAR_YNG_FL18",
+      "true_label": 1
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene list for the mouse liver sample shows a striking and consistent pattern of upregulation in genes involved in xenobiotic metabolism and bile acid",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI1",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list, particularly for a mouse liver",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI2",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in the provided gene list, particularly",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI3",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2129
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI4",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a \"Flight\" sample, primarily due to the significant upregulation of multiple gene families involved in xenobiotic metabolism",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI5",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI6",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression pattern observed in this mouse liver sample strongly aligns with known transcriptomic signatures of spaceflight. Here's a",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI7",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a \"Flight\" sample, primarily due to the significant and consistent upregulation of genes involved in xen",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI9",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.85**\n\nHere's the reasoning:\n\n1.  **Xenobiotic Metabolism (",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI10",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2132
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI11",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in the provided gene expression data is the widespread and significant upregulation of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI12",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking feature of this gene expression profile is the widespread and significant",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI13",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a clear transcriptomic signature consistent with spaceflight in mouse liver.\n\nHere's the breakdown of the evidence:\n\n1.  **Xenobiotic Metabolism and Detoxification Pathway",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI14",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI15",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking and consistent pattern in this gene list is the widespread upregulation of numerous Cy",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI16",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene expression profile for the mouse liver sample strongly indicates a \"Flight\" sample due to the prominent upregulation of genes involved",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI17",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene expression profile from the mouse liver sample strongly indicates a \"Flight\" condition, characterized by significant alterations in xenobiotic metabolism",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2129
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI19",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread and significant",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI20",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL1",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in the provided gene list is the widespread and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL2",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread and consistent upregulation",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL3",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene expression profile for the mouse liver sample strongly indicates a \"Flight\" condition due to a prominent signature of altered xen",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL4",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking and consistent pattern in the provided gene list",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL5",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking and consistent pattern in this gene list is the widespread upregulation",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL6",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL7",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight** with high confidence.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking feature of this gene",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL11",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2129
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL13",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe transcriptomic profile of this mouse liver sample strongly aligns with known",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL14",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe most prominent and consistent transcriptomic signature in this mouse liver sample is the widespread upregulation of genes involved in xenobiotic metabolism. Specifically:",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_OLD_GL15",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a strong transcriptomic signature consistent with spaceflight in mouse liver.\n\nHere's the breakdown:\n\n1.  **Xenobiotic Metabolism and Detoxification:** The",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL17",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\nThe most prominent feature of this gene expression profile is the widespread and significant upregulation of numerous Cytochrome P450 (Cyp) enzymes",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_GC_LAR_YNG_GL18",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking feature of this gene expression profile is the widespread upregulation of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI1",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list, particularly for a mouse",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI2",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a strong transcriptomic signature consistent with spaceflight in mouse liver.\n\nHere's the breakdown of the evidence:\n\n1.  **Xenobiotic Metabolism Rep",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI3",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight** with high confidence.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking and consistent pattern in this gene list",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI4",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI5",
+      "true_label": 0
+    },
+    {
+      "content": "This sample exhibits a strong transcriptomic signature consistent with spaceflight.\n\n**Key observations supporting a \"Flight\" classification:**\n\n1.  **Xenobiotic Metabolism Upregulation",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI6",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2132
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI7",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a \"Flight\" sample",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI10",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI11",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking and consistent pattern in the provided gene list is",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI13",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking feature of this gene expression profile is the widespread and significant upregulation",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI14",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe gene expression profile of this mouse liver sample strongly indicates a response to spaceflight.",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI16",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread and consistent upregulation of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI17",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2130
+      },
+      "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI19",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking and consistent pattern in this gene list is the widespread upregulation of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL1",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe gene expression pattern strongly indicates a spaceflight sample, particularly due to the",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL2",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe transcriptomic profile of this mouse liver sample strongly indicates a **Flight** sample due to the pronounced upregulation of genes involved in xenobi",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL4",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread upregulation of genes involved in xen",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL5",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2129
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL7",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **A (Flight)**.\n\n**A 0.95**\n\nHere's the reasoning:\n\nThe most striking pattern in this liver sample is the widespread and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL8",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene expression profile from a mouse liver sample strongly indicates a \"Flight\" condition due to a prominent signature of altered xenobiotic and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL9",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list is the widespread and consistent upregulation of",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL10",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe most striking pattern in the provided gene list is the significant upregulation of numerous",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL11",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe gene expression profile of this mouse liver sample strongly aligns with known transcriptomic",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL14",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **Flight**.\n\n**A 0.95**\n\n**Reasoning:**\n\nThe transcriptomic profile of this mouse liver sample strongly aligns with known biological responses to",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 39,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL15",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95",
+      "finish_reason": "FinishReason.STOP",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 6,
+        "total_tokens": 2131
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL16",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe provided gene expression profile strongly indicates a \"Flight\" sample, particularly from the liver. Here's why:\n\n1.  ",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 38,
+        "total_tokens": 2162
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL17",
+      "true_label": 0
+    },
+    {
+      "content": "This sample is classified as **(A) Flight**.\n\n**A 0.85**\n\n**Reasoning:**\n\nThe most striking pattern in this gene list, particularly for",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 37,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_YNG_VL18",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.95\n\n**Reasoning:**\n\nThe gene expression profile strongly indicates a **Flight** sample due to the prominent upregulation of genes involved in xenobiotic metabolism, detoxification, and",
+      "finish_reason": "FinishReason.MAX_TOKENS",
+      "model": "gemini-2.5-flash",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 40,
+        "total_tokens": 2163
+      },
+      "sample_id": "RR8_LVR_VIV_LAR_OLD_VL20",
+      "true_label": 0
+    }
+  ]
+}
