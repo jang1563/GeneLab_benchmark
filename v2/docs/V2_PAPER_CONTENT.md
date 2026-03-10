@@ -178,16 +178,51 @@ The absence of conservation in I4 (r ≈ 0, p = 0.52) contrasts sharply with the
 
 ---
 
-## Section 3: Mouse Single-Cell Analysis (Category F) — PENDING
+## Section 3: Cell-Type-Resolved Spaceflight Response (Category F)
 
-*F1 analysis requires HPC Cayuga preprocessing (OSD-904~934 h5ad download + Scanpy pipeline). To be completed in Phase 4.*
+### F1: I4 PBMC Cell-Type-Specific Pathway Response (snRNA-seq) ★★
 
-### F1: RRRM-1/RR-8 Multi-Tissue scRNA-seq
+**Data:** GLDS-562 (OSD-570), Inspiration4 PBMC snRNA-seq (10x Multiome), SpaceOmicsBench v2_public
+**Comparison:** I4-FP1: R+1 vs. pre-flight (L-92, L-44, L-3); Seurat FindMarkers per cell type
+**Pipeline:** Seurat FindMarkers avg_log2FC → fGSEA Hallmark per cell type (minSize=10)
+**Cell types:** CD14+ Monocyte, CD16+ Monocyte, Dendritic Cell, Natural Killer Cell,
+              B Cell, CD4+ T Cell, CD8+ T Cell, Other T Cell, Other, PBMC Pseudobulk (n=10)
+**Pathways computed:** 13–30 per cell type (mediated by FindMarkers gene count; 34 total unique)
+**Output:** `v2/processed/F1_scrna/i4_snrnaseq_celltype_fgsea.csv` (200 rows)
+**Figure:** `v2/figures/F1_celltype_pathway_heatmap.html`
 
-**Data:** OSDR OSD-904~934 (31 datasets, 2024 release; RRRM-1 + RR-8)
-**Pipeline:** NASA GeneLab STARsolo → h5ad → Scanpy QC → Leiden → Per-cell-type FLT vs. GC AUROC
+#### Key Results
 
-*Results to be filled after Cayuga pipeline execution.*
+**Universal response — all cell types:**
+
+| Pathway | NES range | n cell types sig | Interpretation |
+|---------|-----------|-----------------|----------------|
+| MYC_TARGETS_V1 | −2.14 to −2.90 | 10/10 | Ribosome biogenesis suppressed in all PBMCs at R+1 |
+| OXIDATIVE_PHOSPHORYLATION | −1.99 to −2.21 | 5/10 | Mitochondrial metabolism suppressed |
+
+**Cell-type-specific responses (padj<0.05 per cell type):**
+
+| Cell Type | Sig pathways | Top pathway | NES | Interpretation |
+|-----------|-------------|-------------|-----|----------------|
+| Dendritic Cell | **5** | MYC_TARGETS_V1 | −2.14 | Strongest innate immune response |
+| Natural Killer Cell | **4** | MYC_TARGETS_V1 / TNFA_NFKB | −2.51 / −2.02 | NK cytotoxicity + inflammation |
+| CD14+ Monocyte | **3** | MYC_TARGETS_V1 + P53_PATHWAY | −2.86 / −2.07 | Classical monocyte stress |
+| CD16+ Monocyte | **3** | MYC_TARGETS_V1 + OXPHOS | −2.27 / −2.11 | Non-classical monocyte metabolism |
+| CD4+ T Cell | **1** | MYC_TARGETS_V1 | −2.21 | Adaptive immune cells less responsive |
+
+**Innate > Adaptive:** Innate immune cells (DC+NK+Mono) show 3–5 sig pathways vs. T cells (1–2).
+
+**PBMC Pseudobulk vs. cell type:** MYC_TARGETS_V1 (NES=−2.44) and OXPHOS (−1.99) — consistent with dominant monocyte/NK signal driving bulk result.
+
+#### Connection to E1/E2 (cfRNA)
+The I4 cfRNA analysis (E2) used bulk plasma cfRNA (R+1: NES = −0.095 vs. mouse, NS). The cell-type-resolved snRNA-seq reveals that MYC_TARGETS_V1 suppression is universally present across PBMCs at R+1 — suggesting cfRNA dilution of cell-type-specific signals may explain the weak cross-species correlation for short missions.
+
+#### RRRM-1 scRNA-seq Pipeline (in progress)
+OSD-904~934 raw FASTQ availability confirmed (31 datasets, ~3 TB total). STARsolo pipeline prepared for Cayuga:
+- **Selected 4 tissues** matching benchmark: OSD-918 (blood), OSD-920 (eye), OSD-924 (muscle), OSD-934 (skin)
+- Total: ~328 GB, 8 samples/OSD, 10x Chromium 3' v3, GRCm39-2024-A STAR index (pre-built on Cayuga)
+- OSD-934 (skin) download started 2026-03-10; STARsolo job ready to submit
+- Results pending
 
 ---
 
@@ -217,6 +252,13 @@ The absence of conservation in I4 (r ≈ 0, p = 0.52) contrasts sharply with the
 - Mouse data: 6 missions × Hallmark NES, arithmetic mission average
 - fGSEA: R `fgsea` package, Hallmark v7.5.1 GMT (Homo sapiens), minSize=15, nPermSimple=10,000
 - Correlation: Spearman r, bootstrap 95% CI (n=1,000), permutation p (n=10,000)
+
+### F1 Method Detail
+- Data: GLDS-562 snRNA-seq, sheet I4-FP1, header row 7, `avg_log2FC` column as ranking statistic
+- FindMarkers cutoff: `|avg_log2FC| ≥ 0.25` (Seurat default) → 615–1,070 genes per cell type
+- fGSEA: R `fgsea` package, Hallmark v7.5.1 (Homo sapiens GMT), minSize=10, maxSize=500, nPermSimple=10,000, seed=42
+- Deduplication: if gene appears twice, keep row with highest |avg_log2FC|
+- Significance threshold: padj < 0.05 (Benjamini-Hochberg)
 
 ### E2 Method Detail
 - I4 data: Inspiration4 cfRNA DESeq2 results (log2FoldChange_I4), 5,346 genes (common with Polaris Dawn)
