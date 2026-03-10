@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E1 Cross-Species NES Conservation</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; background: #fff; margin: 20px; }
+  .axis text { font-size: 9px; }
+  .axis line, .axis path { stroke: #333; }
+  .gridline { stroke: #e0e0e0; stroke-width: 0.5; }
+  .dot { opacity: 0.8; }
+  .dot:hover { opacity: 1; stroke: #333; stroke-width: 1; }
+  .label-text { font-size: 7.5px; fill: #333; }
+  .tooltip {
+    position: absolute; background: rgba(255,255,255,0.95);
+    border: 1px solid #ccc; padding: 6px; border-radius: 3px;
+    font-size: 10px; pointer-events: none; display: none;
+  }
+  .title { font-size: 12px; font-weight: bold; }
+  .subtitle { font-size: 9px; fill: #555; }
+  #download-btn {
+    margin-top: 10px; padding: 5px 12px; cursor: pointer;
+    font-size: 11px; border: 1px solid #555; border-radius: 3px;
+    background: #f5f5f5;
+  }
+</style>
+</head>
+<body>
+<div class="tooltip" id="tooltip"></div>
+<div id="chart"></div>
+<button id="download-btn">Download SVG</button>
+<script>
+const data = [{"pathway": "HALLMARK_ADIPOGENESIS", "human_nes": 1.13723908754575, "mouse_nes": 0.3409235876500736}, {"pathway": "HALLMARK_ALLOGRAFT_REJECTION", "human_nes": 1.60594377259473, "mouse_nes": 0.9285433321406886}, {"pathway": "HALLMARK_ANDROGEN_RESPONSE", "human_nes": 1.64570183711974, "mouse_nes": -0.19940470258148615}, {"pathway": "HALLMARK_ANGIOGENESIS", "human_nes": 1.64625904617263, "mouse_nes": 1.3240593838838783}, {"pathway": "HALLMARK_APICAL_JUNCTION", "human_nes": 1.59348012910343, "mouse_nes": 0.07405990074264668}, {"pathway": "HALLMARK_APICAL_SURFACE", "human_nes": 0.96715566705373, "mouse_nes": 0.3247397853868648}, {"pathway": "HALLMARK_APOPTOSIS", "human_nes": 1.24827837595583, "mouse_nes": 0.8248331110630883}, {"pathway": "HALLMARK_BILE_ACID_METABOLISM", "human_nes": -0.849055029176898, "mouse_nes": 0.7348684710716666}, {"pathway": "HALLMARK_CHOLESTEROL_HOMEOSTASIS", "human_nes": 1.36628876630462, "mouse_nes": -0.12353312930201836}, {"pathway": "HALLMARK_COAGULATION", "human_nes": 1.61237637458464, "mouse_nes": 0.972412369414965}, {"pathway": "HALLMARK_COMPLEMENT", "human_nes": 1.41105358874363, "mouse_nes": 0.9246441982974681}, {"pathway": "HALLMARK_DNA_REPAIR", "human_nes": 1.0230877742646, "mouse_nes": -0.14707507289997346}, {"pathway": "HALLMARK_E2F_TARGETS", "human_nes": 1.13160427918475, "mouse_nes": 0.12130585245855163}, {"pathway": "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION", "human_nes": 1.43653657111839, "mouse_nes": 1.4125489313435127}, {"pathway": "HALLMARK_ESTROGEN_RESPONSE_EARLY", "human_nes": 0.899624857622504, "mouse_nes": -0.72745004812109}, {"pathway": "HALLMARK_ESTROGEN_RESPONSE_LATE", "human_nes": 1.11831119669817, "mouse_nes": 0.12899216388169765}, {"pathway": "HALLMARK_FATTY_ACID_METABOLISM", "human_nes": 1.17247266444854, "mouse_nes": 0.2884691668158783}, {"pathway": "HALLMARK_G2M_CHECKPOINT", "human_nes": 0.827155273179976, "mouse_nes": -0.054430137876859984}, {"pathway": "HALLMARK_GLYCOLYSIS", "human_nes": 1.17228022886479, "mouse_nes": 0.3502865628270888}, {"pathway": "HALLMARK_HEDGEHOG_SIGNALING", "human_nes": 0.976132565543004, "mouse_nes": 0.45926616534408}, {"pathway": "HALLMARK_HEME_METABOLISM", "human_nes": 0.822216087961522, "mouse_nes": -0.567563426654936}, {"pathway": "HALLMARK_HYPOXIA", "human_nes": 0.63234013587586, "mouse_nes": 0.2505065064728578}, {"pathway": "HALLMARK_IL2_STAT5_SIGNALING", "human_nes": 1.209863539105, "mouse_nes": 0.902075190557374}, {"pathway": "HALLMARK_IL6_JAK_STAT3_SIGNALING", "human_nes": 1.55669480458666, "mouse_nes": 0.3063050172475772}, {"pathway": "HALLMARK_INFLAMMATORY_RESPONSE", "human_nes": 1.22094392026122, "mouse_nes": 0.7777147020269884}, {"pathway": "HALLMARK_INTERFERON_ALPHA_RESPONSE", "human_nes": 1.59202941126354, "mouse_nes": 0.7396782451540416}, {"pathway": "HALLMARK_INTERFERON_GAMMA_RESPONSE", "human_nes": 1.49808882166767, "mouse_nes": 0.7201727910305817}, {"pathway": "HALLMARK_KRAS_SIGNALING_DN", "human_nes": 0.798791590441643, "mouse_nes": -0.24115151111617503}, {"pathway": "HALLMARK_KRAS_SIGNALING_UP", "human_nes": 1.50873454856543, "mouse_nes": 0.5410794613081806}, {"pathway": "HALLMARK_MITOTIC_SPINDLE", "human_nes": 1.33880050729006, "mouse_nes": -0.9019644437606278}, {"pathway": "HALLMARK_MTORC1_SIGNALING", "human_nes": 1.07029676974339, "mouse_nes": -0.49356729796309834}, {"pathway": "HALLMARK_MYC_TARGETS_V1", "human_nes": 0.750038657597576, "mouse_nes": -0.6896851771758549}, {"pathway": "HALLMARK_MYC_TARGETS_V2", "human_nes": -1.21042229969696, "mouse_nes": -0.40370347724143385}, {"pathway": "HALLMARK_MYOGENESIS", "human_nes": 1.30545175154376, "mouse_nes": -0.49500372009183274}, {"pathway": "HALLMARK_NOTCH_SIGNALING", "human_nes": 1.08714718688321, "mouse_nes": -0.03509347281005413}, {"pathway": "HALLMARK_OXIDATIVE_PHOSPHORYLATION", "human_nes": 0.887738546455287, "mouse_nes": 0.6148588758083317}, {"pathway": "HALLMARK_P53_PATHWAY", "human_nes": 0.869781030642353, "mouse_nes": 0.019071842677060302}, {"pathway": "HALLMARK_PANCREAS_BETA_CELLS", "human_nes": -0.695861967541355, "mouse_nes": 0.2588582776315282}, {"pathway": "HALLMARK_PEROXISOME", "human_nes": 0.875761204238353, "mouse_nes": 0.6871657668398403}, {"pathway": "HALLMARK_PI3K_AKT_MTOR_SIGNALING", "human_nes": 1.15997863837221, "mouse_nes": -0.924359545060665}, {"pathway": "HALLMARK_PROTEIN_SECRETION", "human_nes": 1.33902234576478, "mouse_nes": -0.29977621327421544}, {"pathway": "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY", "human_nes": 1.47411090683795, "mouse_nes": -0.23093682435965}, {"pathway": "HALLMARK_SPERMATOGENESIS", "human_nes": 0.873333486932624, "mouse_nes": -0.2857109817327667}, {"pathway": "HALLMARK_TGF_BETA_SIGNALING", "human_nes": 1.25017087015269, "mouse_nes": -0.3645828522439812}, {"pathway": "HALLMARK_TNFA_SIGNALING_VIA_NFKB", "human_nes": 1.27994295781433, "mouse_nes": 0.050976692801349976}, {"pathway": "HALLMARK_UNFOLDED_PROTEIN_RESPONSE", "human_nes": 0.8568041978939, "mouse_nes": -1.4002516145045618}, {"pathway": "HALLMARK_UV_RESPONSE_DN", "human_nes": 1.27242795074959, "mouse_nes": -0.3020604055989898}, {"pathway": "HALLMARK_UV_RESPONSE_UP", "human_nes": 1.02691876571959, "mouse_nes": -0.39812118571507865}, {"pathway": "HALLMARK_WNT_BETA_CATENIN_SIGNALING", "human_nes": -1.08975904010144, "mouse_nes": 0.012575772276384381}, {"pathway": "HALLMARK_XENOBIOTIC_METABOLISM", "human_nes": 1.02677558808278, "mouse_nes": 0.09251691955159069}];
+
+const margin = {top: 50, right: 30, bottom: 60, left: 70};
+const width = 500 - margin.left - margin.right;
+const height = 480 - margin.top - margin.bottom;
+
+const svg = d3.select("#chart").append("svg")
+  .attr("id", "main-svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// Axes
+const xExtent = d3.extent(data, d => d.human_nes);
+const yExtent = d3.extent(data, d => d.mouse_nes);
+const pad = 0.3;
+const xScale = d3.scaleLinear()
+  .domain([xExtent[0] - pad, xExtent[1] + pad]).range([0, width]);
+const yScale = d3.scaleLinear()
+  .domain([yExtent[0] - pad, yExtent[1] + pad]).range([height, 0]);
+
+// Gridlines
+svg.append("g").attr("class", "gridlines")
+  .selectAll("line.gridline-x")
+  .data(xScale.ticks(6)).enter().append("line")
+  .attr("class", "gridline")
+  .attr("x1", d => xScale(d)).attr("x2", d => xScale(d))
+  .attr("y1", 0).attr("y2", height);
+
+svg.append("g").attr("class", "gridlines")
+  .selectAll("line.gridline-y")
+  .data(yScale.ticks(6)).enter().append("line")
+  .attr("class", "gridline")
+  .attr("x1", 0).attr("x2", width)
+  .attr("y1", d => yScale(d)).attr("y2", d => yScale(d));
+
+// Zero lines
+svg.append("line")
+  .attr("x1", xScale(0)).attr("x2", xScale(0))
+  .attr("y1", 0).attr("y2", height)
+  .attr("stroke", "#999").attr("stroke-width", 0.8).attr("stroke-dasharray", "3,2");
+svg.append("line")
+  .attr("x1", 0).attr("x2", width)
+  .attr("y1", yScale(0)).attr("y2", yScale(0))
+  .attr("stroke", "#999").attr("stroke-width", 0.8).attr("stroke-dasharray", "3,2");
+
+// Axes
+const xAxis = d3.axisBottom(xScale).ticks(6).tickSize(3);
+const yAxis = d3.axisLeft(yScale).ticks(6).tickSize(3);
+
+svg.append("g").attr("class", "axis").attr("transform", `translate(0,${height})`).call(xAxis);
+svg.append("g").attr("class", "axis").call(yAxis);
+
+// Axis labels
+svg.append("text")
+  .attr("text-anchor", "middle")
+  .attr("x", width / 2).attr("y", height + 45)
+  .attr("font-size", "10px")
+  .text("Human cfRNA NES (JAXA CFE, in-flight vs. pre-flight)");
+
+svg.append("text")
+  .attr("text-anchor", "middle")
+  .attr("transform", "rotate(-90)")
+  .attr("x", -height / 2).attr("y", -55)
+  .attr("font-size", "10px")
+  .text("Mouse Liver NES (mission average, 6 missions)");
+
+// Color: Okabe-Ito blue for concordant, orange for discordant
+const concordColor = "#0072B2";
+const discordColor = "#E69F00";
+
+// Dots
+const tooltip = d3.select("#tooltip");
+svg.selectAll(".dot")
+  .data(data).enter().append("circle")
+  .attr("class", "dot")
+  .attr("cx", d => xScale(d.human_nes))
+  .attr("cy", d => yScale(d.mouse_nes))
+  .attr("r", 5)
+  .attr("fill", d => Math.sign(d.human_nes) === Math.sign(d.mouse_nes) ? concordColor : discordColor)
+  .on("mouseover", function(event, d) {
+    tooltip.style("display", "block")
+      .html(`<b>${d.pathway.replace("HALLMARK_", "").replace(/_/g, " ")}</b><br>
+             Human NES: ${d.human_nes.toFixed(3)}<br>
+             Mouse NES: ${d.mouse_nes.toFixed(3)}`);
+  })
+  .on("mousemove", function(event) {
+    tooltip.style("left", (event.pageX + 10) + "px").style("top", (event.pageY - 20) + "px");
+  })
+  .on("mouseout", () => tooltip.style("display", "none"));
+
+// Title
+svg.append("text").attr("class", "title")
+  .attr("text-anchor", "middle").attr("x", width / 2).attr("y", -30)
+  .text("E1: Cross-Species Hallmark NES Conservation");
+
+svg.append("text").attr("class", "subtitle")
+  .attr("text-anchor", "middle").attr("x", width / 2).attr("y", -14)
+  .text("Spearman r = 0.352 (95% CI: 0.070–0.571), p = 0.013, sign agreement = 54%, n = 50 pathways");
+
+// Legend
+const legend = svg.append("g").attr("transform", `translate(${width - 130}, ${height - 60})`);
+legend.append("circle").attr("cx", 6).attr("cy", 0).attr("r", 5).attr("fill", concordColor);
+legend.append("text").attr("x", 14).attr("y", 4).attr("font-size", "9px").text("Concordant sign");
+legend.append("circle").attr("cx", 6).attr("cy", 18).attr("r", 5).attr("fill", discordColor);
+legend.append("text").attr("x", 14).attr("y", 22).attr("font-size", "9px").text("Discordant sign");
+
+// Download SVG
+document.getElementById("download-btn").addEventListener("click", function() {
+  const svgEl = document.getElementById("main-svg");
+  const serializer = new XMLSerializer();
+  const source = '<?xml version="1.0"?>\n' + serializer.serializeToString(svgEl);
+  const link = document.createElement("a");
+  link.download = "E1_crossspecies_scatter.svg";
+  link.href = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+  link.click();
+});
+</script>
+</body>
+</html>
