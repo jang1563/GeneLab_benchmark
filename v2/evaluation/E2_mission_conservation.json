@@ -1,0 +1,341 @@
+{
+  "task": "E2",
+  "description": "Cross-mission duration effect on NES conservation (I4 3d vs. JAXA 120d)",
+  "missions": {
+    "I4": {
+      "label": "Inspiration4",
+      "duration_days": 3,
+      "crew_size": 4,
+      "data_source": "cfrna_crossmission_r1.csv (log2FoldChange_I4)",
+      "n_genes_ranked": 48
+    },
+    "JAXA": {
+      "label": "JAXA CFE (OSD-530)",
+      "duration_days": 120,
+      "crew_size": 6,
+      "data_source": "human_cfrna_hallmark_fgsea.csv",
+      "n_genes_ranked": 26845
+    }
+  },
+  "mouse_reference": {
+    "tissue": "liver",
+    "missions": [
+      "MHU-2",
+      "RR-1",
+      "RR-3",
+      "RR-6",
+      "RR-8",
+      "RR-9"
+    ],
+    "averaging": "arithmetic mean across missions"
+  },
+  "results": {
+    "I4_vs_mouse": {
+      "spearman_r": -0.09476769431176725,
+      "ci_low": -0.37930838618252666,
+      "ci_high": 0.2112955584616764,
+      "p_scipy": 0.5217128700769805,
+      "p_permutation": 0.5159,
+      "sign_agreement_fraction": 0.5625,
+      "n_pathways": 48
+    },
+    "JAXA_vs_mouse": {
+      "spearman_r": 0.35154861944777915,
+      "ci_low": 0.06963870561370367,
+      "ci_high": 0.5709313066067989,
+      "p_permutation": 0.013,
+      "n_pathways": 50,
+      "source": "E1_crossspecies_nes.json"
+    }
+  },
+  "pathways_i4": [
+    {
+      "pathway": "HALLMARK_ADIPOGENESIS",
+      "i4_nes": -0.818875803421852,
+      "mouse_nes": 0.3409235876500736,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_ALLOGRAFT_REJECTION",
+      "i4_nes": -1.25227264611301,
+      "mouse_nes": 0.9285433321406886,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_ANDROGEN_RESPONSE",
+      "i4_nes": -1.37142991591178,
+      "mouse_nes": -0.19940470258148615,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_APICAL_JUNCTION",
+      "i4_nes": -1.23756195624027,
+      "mouse_nes": 0.07405990074264668,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_APICAL_SURFACE",
+      "i4_nes": -1.28810043045375,
+      "mouse_nes": 0.3247397853868648,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_APOPTOSIS",
+      "i4_nes": -1.13355847008366,
+      "mouse_nes": 0.8248331110630883,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_BILE_ACID_METABOLISM",
+      "i4_nes": 1.43832108048444,
+      "mouse_nes": 0.7348684710716666,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+      "i4_nes": -1.14992123734136,
+      "mouse_nes": -0.12353312930201836,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_COAGULATION",
+      "i4_nes": -1.73777083755254,
+      "mouse_nes": 0.972412369414965,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_COMPLEMENT",
+      "i4_nes": -1.21963476877843,
+      "mouse_nes": 0.9246441982974681,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_DNA_REPAIR",
+      "i4_nes": -0.609305190044542,
+      "mouse_nes": -0.14707507289997346,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_E2F_TARGETS",
+      "i4_nes": -0.789966062208937,
+      "mouse_nes": 0.12130585245855163,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+      "i4_nes": -1.63443429483368,
+      "mouse_nes": 1.4125489313435127,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+      "i4_nes": -0.9155339064211,
+      "mouse_nes": -0.72745004812109,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_ESTROGEN_RESPONSE_LATE",
+      "i4_nes": -0.942461106058526,
+      "mouse_nes": 0.12899216388169765,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_FATTY_ACID_METABOLISM",
+      "i4_nes": -1.00084956908722,
+      "mouse_nes": 0.2884691668158783,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_G2M_CHECKPOINT",
+      "i4_nes": -0.649987371432955,
+      "mouse_nes": -0.054430137876859984,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_GLYCOLYSIS",
+      "i4_nes": -0.584401143922676,
+      "mouse_nes": 0.3502865628270888,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_HEDGEHOG_SIGNALING",
+      "i4_nes": 1.28405919700237,
+      "mouse_nes": 0.45926616534408,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_HEME_METABOLISM",
+      "i4_nes": -1.86099073193795,
+      "mouse_nes": -0.567563426654936,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_HYPOXIA",
+      "i4_nes": 1.42632039918876,
+      "mouse_nes": 0.2505065064728578,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_IL2_STAT5_SIGNALING",
+      "i4_nes": -0.970849617023854,
+      "mouse_nes": 0.902075190557374,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+      "i4_nes": -1.48115481216352,
+      "mouse_nes": 0.3063050172475772,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_INFLAMMATORY_RESPONSE",
+      "i4_nes": -1.13138363325123,
+      "mouse_nes": 0.7777147020269884,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+      "i4_nes": 0.964521345273318,
+      "mouse_nes": 0.7396782451540416,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+      "i4_nes": 1.15713955014375,
+      "mouse_nes": 0.7201727910305817,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_KRAS_SIGNALING_DN",
+      "i4_nes": -1.08834735364476,
+      "mouse_nes": -0.24115151111617503,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_KRAS_SIGNALING_UP",
+      "i4_nes": -0.920849612015751,
+      "mouse_nes": 0.5410794613081806,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_MITOTIC_SPINDLE",
+      "i4_nes": -0.900848356566464,
+      "mouse_nes": -0.9019644437606278,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_MTORC1_SIGNALING",
+      "i4_nes": -0.929020297435114,
+      "mouse_nes": -0.49356729796309834,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_MYC_TARGETS_V1",
+      "i4_nes": 1.17405523818959,
+      "mouse_nes": -0.6896851771758549,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_MYC_TARGETS_V2",
+      "i4_nes": 2.04661932830174,
+      "mouse_nes": -0.40370347724143385,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_MYOGENESIS",
+      "i4_nes": -1.5715092897327,
+      "mouse_nes": -0.49500372009183274,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_NOTCH_SIGNALING",
+      "i4_nes": -0.889935521643561,
+      "mouse_nes": -0.03509347281005413,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+      "i4_nes": 0.656391597049674,
+      "mouse_nes": 0.6148588758083317,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_P53_PATHWAY",
+      "i4_nes": -0.895429503972582,
+      "mouse_nes": 0.019071842677060302,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_PEROXISOME",
+      "i4_nes": 0.950068114768097,
+      "mouse_nes": 0.6871657668398403,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "i4_nes": -0.573049424669492,
+      "mouse_nes": -0.924359545060665,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_PROTEIN_SECRETION",
+      "i4_nes": -1.23115190347576,
+      "mouse_nes": -0.29977621327421544,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY",
+      "i4_nes": -1.10454452889477,
+      "mouse_nes": -0.23093682435965,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_SPERMATOGENESIS",
+      "i4_nes": -0.650834852434303,
+      "mouse_nes": -0.2857109817327667,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_TGF_BETA_SIGNALING",
+      "i4_nes": 0.927367404985758,
+      "mouse_nes": -0.3645828522439812,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+      "i4_nes": 1.58471825912094,
+      "mouse_nes": 0.050976692801349976,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+      "i4_nes": 0.622552499597662,
+      "mouse_nes": -1.4002516145045618,
+      "concordant": false
+    },
+    {
+      "pathway": "HALLMARK_UV_RESPONSE_DN",
+      "i4_nes": -1.34014781166988,
+      "mouse_nes": -0.3020604055989898,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_UV_RESPONSE_UP",
+      "i4_nes": -0.595674361760373,
+      "mouse_nes": -0.39812118571507865,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+      "i4_nes": 1.38949600421174,
+      "mouse_nes": 0.012575772276384381,
+      "concordant": true
+    },
+    {
+      "pathway": "HALLMARK_XENOBIOTIC_METABOLISM",
+      "i4_nes": 1.15825998293992,
+      "mouse_nes": 0.09251691955159069,
+      "concordant": true
+    }
+  ]
+}

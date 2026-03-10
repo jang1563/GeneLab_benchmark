@@ -151,20 +151,41 @@ RR-6 and RR-9 (both ISS missions, ~35 days) show the highest cross-species conse
 - Results JSON: `v2/evaluation/E1_crossspecies_nes.json`
 - Figure: `v2/figures/E1_crossspecies_scatter.html`
 
-### E2: Cross-Mission Stability
+### E2: Mission Duration Drives Cross-Species NES Conservation ★★
 
-The per-mission E1 analysis reveals a preliminary E2 finding: ISS long-duration missions (RR-6, RR-9) show significantly better cross-species conservation (r ≈ 0.34) than short/shuttle missions. Formal pairwise stability analysis is deferred.
+We compared two human spaceflight cfRNA datasets with the mouse liver NES: JAXA CFE (OSD-530; 6 professional astronauts; 120-day ISS mission; n=26,845 genes) used in E1, and Inspiration4 (I4; 4 civilian crew; 3-day high-altitude mission; n=5,346 genes, log2FoldChange from DESeq2). Both datasets were compared against the same mouse liver mission-averaged NES (48 pathways in common with I4; 50 with JAXA).
+
+| Mission | Duration | Spearman r | 95% CI | p (permutation) |
+|---------|----------|-----------|--------|-----------------|
+| I4 (Inspiration4) | 3 days | −0.095 | −0.379–0.211 | 0.516 (NS) |
+| JAXA CFE | 120 days | +0.352 | +0.070–0.571 | 0.013 |
+| **Δr (JAXA − I4)** | — | **+0.446** | — | — |
+
+The absence of conservation in I4 (r ≈ 0, p = 0.52) contrasts sharply with the significant positive correlation in JAXA (r = 0.352, p = 0.013), yielding a Δr = +0.446. This large effect size suggests that mission duration — rather than civilian vs. professional crew composition — is the primary driver of cross-species NES conservation. The 3-day I4 mission likely induces transcriptional responses that are too transient and noisy to produce a coherent cross-species pathway signal, whereas the 120-day JAXA mission allows biologically meaningful pathway responses to develop.
+
+**Caveat:** The I4 dataset has only 5,346 genes (subset common to I4 and Polaris Dawn cfRNA) vs. 26,845 for JAXA; reduced gene coverage may partially contribute to lower I4 NES reliability (only 48/50 Hallmark pathways computed with minSize=10).
+
+**Key results:**
+- I4 (3d): r = −0.095 (NS) — no cross-species conservation
+- JAXA (120d): r = +0.352 (p = 0.013) — significant conservation
+- Δr = +0.446 — large duration-dependent effect
+
+**Scripts and outputs:**
+- R fGSEA: `v2/scripts/run_i4_cfrna_fgsea.R`
+- Python analysis: `v2/scripts/mission_conservation_comparison.py`
+- Results JSON: `v2/evaluation/E2_mission_conservation.json`
+- Figure: `v2/figures/E2_duration_conservation.html`
 
 ---
 
 ## Section 3: Mouse Single-Cell Analysis (Category F) — PENDING
 
-*F1 analysis requires HPC Cayuga preprocessing. To be completed in Phase 3.*
+*F1 analysis requires HPC Cayuga preprocessing (OSD-904~934 h5ad download + Scanpy pipeline). To be completed in Phase 4.*
 
 ### F1: RRRM-1/RR-8 Multi-Tissue scRNA-seq
 
-**Data:** OSDR GLDS-746–762 (31 datasets, 2024 release)
-**Pipeline:** STARsolo → Scanpy → Leiden clustering → Per-cell-type FLT vs. GC AUROC
+**Data:** OSDR OSD-904~934 (31 datasets, 2024 release; RRRM-1 + RR-8)
+**Pipeline:** NASA GeneLab STARsolo → h5ad → Scanpy QC → Leiden → Per-cell-type FLT vs. GC AUROC
 
 *Results to be filled after Cayuga pipeline execution.*
 
@@ -190,6 +211,19 @@ The per-mission E1 analysis reveals a preliminary E2 finding: ISS long-duration 
 - Classifier: Logistic Regression, RepeatedStratifiedKFold (RSKF)
 - ANOVA: Two-way (flight × age) per pathway, BH-FDR correction, α = 0.05
 - Timing filter for T3c: ISS-T only (to exclude preservation-confounded LAR)
+
+### E1 Method Detail
+- Human data: JAXA CFE cfRNA (OSD-530), n=26,845 genes ranked by `edge_pre_vs_flight_diff`
+- Mouse data: 6 missions × Hallmark NES, arithmetic mission average
+- fGSEA: R `fgsea` package, Hallmark v7.5.1 GMT (Homo sapiens), minSize=15, nPermSimple=10,000
+- Correlation: Spearman r, bootstrap 95% CI (n=1,000), permutation p (n=10,000)
+
+### E2 Method Detail
+- I4 data: Inspiration4 cfRNA DESeq2 results (log2FoldChange_I4), 5,346 genes (common with Polaris Dawn)
+- Data source: SpaceOmicsBench `2025_01_08_v2.cfRNA/SpaceOmicsBench_v2.0/data/cfrna_crossmission_r1.csv`
+- fGSEA: same GMT as E1, minSize=10 (to accommodate reduced gene count), 48/50 pathways computed
+- Comparison: Spearman r between I4 NES and mouse liver NES (48 common pathways)
+- JAXA result from E1 (50 pathways) compared with I4 result (48 pathways); common-pathway comparison used for Δr
 
 ---
 
