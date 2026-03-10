@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>F1: I4 PBMC Cell-Type Pathway Heatmap</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; background: #fff; }
+  h2   { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+  .subtitle { font-size: 10px; color: #555; margin-bottom: 16px; }
+  .cell-rect  { stroke: #fff; stroke-width: 0.5px; }
+  .cell-rect:hover { stroke: #333; stroke-width: 1.5px; cursor: pointer; }
+  .sig-star { font-size: 10px; fill: #222; font-weight: bold; pointer-events: none; }
+  .axis text { font-size: 9px; }
+  .y-label { font-size: 9px; }
+  .legend-title { font-size: 9px; fill: #333; }
+  .legend-tick  { font-size: 8px; fill: #555; }
+  .bar-ct { fill: #0072B2; opacity: 0.85; }
+  .bar-ct:hover { opacity: 1; }
+  #tooltip {
+    position: absolute; background: rgba(0,0,0,0.78); color: #fff;
+    padding: 6px 10px; border-radius: 4px; font-size: 10px;
+    pointer-events: none; display: none; max-width: 220px;
+  }
+  .panel-title { font-size: 11px; font-weight: bold; fill: #222; }
+  .na-text { font-size: 7px; fill: #bbb; }
+</style>
+</head>
+<body>
+<h2>F1 · I4 PBMC snRNA-seq: Cell-Type Pathway Response (R+1 vs. Pre-flight)</h2>
+<div class="subtitle">
+  fGSEA · Hallmark gene sets · 10 cell types · 34 pathways computed (minSize=10) · ★ padj&lt;0.05
+</div>
+<div id="tooltip"></div>
+<svg id="main"></svg>
+
+<script>
+const DATA = {"pathways": ["Myc Targets V1", "Oxidative Phosphorylation", "P53 Pathway", "Allograft Rejection", "Interferon Alpha Response", "Mitotic Spindle", "Kras Signaling Up", "Tnfa Signaling Via Nfkb", "Apical Junction", "Coagulation", "Uv Response Dn", "Il6 Jak Stat3 Signaling", "Unfolded Protein Response", "Estrogen Response Early", "Adipogenesis", "Interferon Gamma Response", "Uv Response Up", "Complement", "Mtorc1 Signaling", "Apoptosis", "Hypoxia", "Inflammatory Response", "Epithelial Mesenchymal Transition", "G2M Checkpoint", "Myogenesis", "Glycolysis", "Heme Metabolism", "Il2 Stat5 Signaling", "Androgen Response", "Estrogen Response Late", "Fatty Acid Metabolism", "Protein Secretion", "Pi3K Akt Mtor Signaling", "Xenobiotic Metabolism"], "cell_types": ["CD14+ Monocyte", "CD16+ Monocyte", "Dendritic Cell", "Natural Killer Cell", "B Cell", "CD4+ T Cell", "CD8+ T Cell", "Other T Cell", "Other", "PBMC Pseudobulk"], "cells": [{"row": 0, "col": 0, "nes": -2.858, "sig": true, "padj": 0.0}, {"row": 0, "col": 1, "nes": -2.27, "sig": true, "padj": 0.0001}, {"row": 0, "col": 2, "nes": -2.139, "sig": true, "padj": 0.0004}, {"row": 0, "col": 3, "nes": -2.512, "sig": true, "padj": 0.0}, {"row": 0, "col": 4, "nes": -2.502, "sig": true, "padj": 0.0}, {"row": 0, "col": 5, "nes": -2.213, "sig": true, "padj": 0.0}, {"row": 0, "col": 6, "nes": -2.199, "sig": true, "padj": 0.0001}, {"row": 0, "col": 7, "nes": -2.497, "sig": true, "padj": 0.0}, {"row": 0, "col": 8, "nes": -2.9, "sig": true, "padj": 0.0}, {"row": 0, "col": 9, "nes": -2.443, "sig": true, "padj": 0.0}, {"row": 1, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 1, "col": 1, "nes": -2.114, "sig": true, "padj": 0.0012}, {"row": 1, "col": 2, "nes": -2.015, "sig": true, "padj": 0.0018}, {"row": 1, "col": 3, "nes": -2.196, "sig": true, "padj": 0.0018}, {"row": 1, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 1, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 1, "col": 6, "nes": -1.849, "sig": true, "padj": 0.0189}, {"row": 1, "col": 7, "nes": -2.215, "sig": true, "padj": 0.0003}, {"row": 1, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 1, "col": 9, "nes": -1.992, "sig": true, "padj": 0.0046}, {"row": 2, "col": 0, "nes": -2.066, "sig": true, "padj": 0.0185}, {"row": 2, "col": 1, "nes": -1.727, "sig": false, "padj": 0.064}, {"row": 2, "col": 2, "nes": -1.768, "sig": true, "padj": 0.0454}, {"row": 2, "col": 3, "nes": -1.806, "sig": true, "padj": 0.0491}, {"row": 2, "col": 4, "nes": -1.655, "sig": false, "padj": 0.1228}, {"row": 2, "col": 5, "nes": -1.623, "sig": false, "padj": 0.1832}, {"row": 2, "col": 6, "nes": -1.703, "sig": false, "padj": 0.07}, {"row": 2, "col": 7, "nes": -1.733, "sig": false, "padj": 0.1213}, {"row": 2, "col": 8, "nes": -1.532, "sig": false, "padj": 0.1626}, {"row": 2, "col": 9, "nes": -1.729, "sig": false, "padj": 0.0682}, {"row": 3, "col": 0, "nes": -1.935, "sig": true, "padj": 0.0185}, {"row": 3, "col": 1, "nes": -1.685, "sig": false, "padj": 0.064}, {"row": 3, "col": 2, "nes": -1.746, "sig": true, "padj": 0.0458}, {"row": 3, "col": 3, "nes": -1.726, "sig": false, "padj": 0.0632}, {"row": 3, "col": 4, "nes": -1.68, "sig": false, "padj": 0.1228}, {"row": 3, "col": 5, "nes": -1.393, "sig": false, "padj": 0.2645}, {"row": 3, "col": 6, "nes": -1.569, "sig": false, "padj": 0.1173}, {"row": 3, "col": 7, "nes": -1.66, "sig": false, "padj": 0.1213}, {"row": 3, "col": 8, "nes": 1.285, "sig": false, "padj": 0.3282}, {"row": 3, "col": 9, "nes": -1.323, "sig": false, "padj": 0.2415}, {"row": 4, "col": 0, "nes": -1.576, "sig": false, "padj": 0.1882}, {"row": 4, "col": 1, "nes": -1.942, "sig": true, "padj": 0.0086}, {"row": 4, "col": 2, "nes": -1.558, "sig": false, "padj": 0.1921}, {"row": 4, "col": 3, "nes": -1.389, "sig": false, "padj": 0.256}, {"row": 4, "col": 4, "nes": -1.06, "sig": false, "padj": 0.6696}, {"row": 4, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 4, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 4, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 4, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 4, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 5, "col": 0, "nes": 1.051, "sig": false, "padj": 0.4803}, {"row": 5, "col": 1, "nes": 1.508, "sig": false, "padj": 0.2083}, {"row": 5, "col": 2, "nes": 2.008, "sig": true, "padj": 0.0235}, {"row": 5, "col": 3, "nes": 1.379, "sig": false, "padj": 0.256}, {"row": 5, "col": 4, "nes": 1.407, "sig": false, "padj": 0.2812}, {"row": 5, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 5, "col": 6, "nes": 1.465, "sig": false, "padj": 0.2128}, {"row": 5, "col": 7, "nes": 1.432, "sig": false, "padj": 0.2239}, {"row": 5, "col": 8, "nes": 1.759, "sig": false, "padj": 0.0737}, {"row": 5, "col": 9, "nes": 1.483, "sig": false, "padj": 0.1997}, {"row": 6, "col": 0, "nes": 0.622, "sig": false, "padj": 0.9326}, {"row": 6, "col": 1, "nes": 0.96, "sig": false, "padj": 0.7974}, {"row": 6, "col": 2, "nes": 0.892, "sig": false, "padj": 0.802}, {"row": 6, "col": 3, "nes": 1.041, "sig": false, "padj": 0.541}, {"row": 6, "col": 4, "nes": 1.642, "sig": false, "padj": 0.1228}, {"row": 6, "col": 5, "nes": 1.378, "sig": false, "padj": 0.2645}, {"row": 6, "col": 6, "nes": 1.47, "sig": false, "padj": 0.2128}, {"row": 6, "col": 7, "nes": 1.149, "sig": false, "padj": 0.5599}, {"row": 6, "col": 8, "nes": 2.031, "sig": true, "padj": 0.0166}, {"row": 6, "col": 9, "nes": 1.365, "sig": false, "padj": 0.2373}, {"row": 7, "col": 0, "nes": 1.17, "sig": false, "padj": 0.4803}, {"row": 7, "col": 1, "nes": -0.781, "sig": false, "padj": 0.8638}, {"row": 7, "col": 2, "nes": -0.547, "sig": false, "padj": 0.9335}, {"row": 7, "col": 3, "nes": -2.018, "sig": true, "padj": 0.0061}, {"row": 7, "col": 4, "nes": -1.406, "sig": false, "padj": 0.2812}, {"row": 7, "col": 5, "nes": -0.844, "sig": false, "padj": 0.8551}, {"row": 7, "col": 6, "nes": -1.082, "sig": false, "padj": 0.621}, {"row": 7, "col": 7, "nes": -1.631, "sig": false, "padj": 0.1431}, {"row": 7, "col": 8, "nes": 1.063, "sig": false, "padj": 0.5468}, {"row": 7, "col": 9, "nes": 1.027, "sig": false, "padj": 0.5667}, {"row": 8, "col": 0, "nes": 1.126, "sig": false, "padj": 0.4803}, {"row": 8, "col": 1, "nes": -0.845, "sig": false, "padj": 0.8638}, {"row": 8, "col": 2, "nes": -0.941, "sig": false, "padj": 0.8003}, {"row": 8, "col": 3, "nes": -0.835, "sig": false, "padj": 0.7818}, {"row": 8, "col": 4, "nes": 1.104, "sig": false, "padj": 0.6696}, {"row": 8, "col": 5, "nes": 0.575, "sig": false, "padj": 0.9574}, {"row": 8, "col": 6, "nes": -0.478, "sig": false, "padj": 0.971}, {"row": 8, "col": 7, "nes": -0.532, "sig": false, "padj": 0.9481}, {"row": 8, "col": 8, "nes": 1.988, "sig": true, "padj": 0.0272}, {"row": 8, "col": 9, "nes": 1.436, "sig": false, "padj": 0.2165}, {"row": 9, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 9, "col": 1, "nes": -1.27, "sig": false, "padj": 0.4823}, {"row": 9, "col": 2, "nes": null, "sig": false, "padj": null}, {"row": 9, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 9, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 9, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 9, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 9, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 9, "col": 8, "nes": 1.582, "sig": false, "padj": 0.1294}, {"row": 9, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 10, "col": 0, "nes": 1.077, "sig": false, "padj": 0.4803}, {"row": 10, "col": 1, "nes": 1.533, "sig": false, "padj": 0.2083}, {"row": 10, "col": 2, "nes": 1.608, "sig": false, "padj": 0.1921}, {"row": 10, "col": 3, "nes": 1.539, "sig": false, "padj": 0.1789}, {"row": 10, "col": 4, "nes": 0.957, "sig": false, "padj": 0.7672}, {"row": 10, "col": 5, "nes": 1.514, "sig": false, "padj": 0.2293}, {"row": 10, "col": 6, "nes": 1.725, "sig": false, "padj": 0.1173}, {"row": 10, "col": 7, "nes": 1.364, "sig": false, "padj": 0.2987}, {"row": 10, "col": 8, "nes": 1.348, "sig": false, "padj": 0.2969}, {"row": 10, "col": 9, "nes": 1.579, "sig": false, "padj": 0.1721}, {"row": 11, "col": 0, "nes": 1.619, "sig": false, "padj": 0.151}, {"row": 11, "col": 1, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 2, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 11, "col": 9, "nes": 1.116, "sig": false, "padj": 0.5251}, {"row": 12, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 1, "nes": -1.357, "sig": false, "padj": 0.3681}, {"row": 12, "col": 2, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 12, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 13, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 13, "col": 1, "nes": null, "sig": false, "padj": null}, {"row": 13, "col": 2, "nes": 1.041, "sig": false, "padj": 0.7866}, {"row": 13, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 13, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 13, "col": 5, "nes": 1.508, "sig": false, "padj": 0.2293}, {"row": 13, "col": 6, "nes": 1.282, "sig": false, "padj": 0.3479}, {"row": 13, "col": 7, "nes": 1.461, "sig": false, "padj": 0.2239}, {"row": 13, "col": 8, "nes": 1.073, "sig": false, "padj": 0.5468}, {"row": 13, "col": 9, "nes": 1.515, "sig": false, "padj": 0.1997}, {"row": 14, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 14, "col": 1, "nes": -1.21, "sig": false, "padj": 0.4964}, {"row": 14, "col": 2, "nes": -1.39, "sig": false, "padj": 0.4398}, {"row": 14, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 14, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 14, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 14, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 14, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 14, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 14, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 15, "col": 0, "nes": -1.482, "sig": false, "padj": 0.237}, {"row": 15, "col": 1, "nes": -1.674, "sig": false, "padj": 0.064}, {"row": 15, "col": 2, "nes": -1.175, "sig": false, "padj": 0.7834}, {"row": 15, "col": 3, "nes": -1.362, "sig": false, "padj": 0.256}, {"row": 15, "col": 4, "nes": -1.085, "sig": false, "padj": 0.6696}, {"row": 15, "col": 5, "nes": -1.263, "sig": false, "padj": 0.3945}, {"row": 15, "col": 6, "nes": -1.249, "sig": false, "padj": 0.4014}, {"row": 15, "col": 7, "nes": -1.475, "sig": false, "padj": 0.2239}, {"row": 15, "col": 8, "nes": -1.025, "sig": false, "padj": 0.5468}, {"row": 15, "col": 9, "nes": -0.999, "sig": false, "padj": 0.5667}, {"row": 16, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 16, "col": 1, "nes": -1.48, "sig": false, "padj": 0.2154}, {"row": 16, "col": 2, "nes": null, "sig": false, "padj": null}, {"row": 16, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 16, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 16, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 16, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 16, "col": 7, "nes": -1.004, "sig": false, "padj": 0.7664}, {"row": 16, "col": 8, "nes": 1.274, "sig": false, "padj": 0.3368}, {"row": 16, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 17, "col": 0, "nes": 1.217, "sig": false, "padj": 0.4769}, {"row": 17, "col": 1, "nes": -1.222, "sig": false, "padj": 0.4964}, {"row": 17, "col": 2, "nes": -0.763, "sig": false, "padj": 0.802}, {"row": 17, "col": 3, "nes": -1.423, "sig": false, "padj": 0.256}, {"row": 17, "col": 4, "nes": -0.85, "sig": false, "padj": 0.8372}, {"row": 17, "col": 5, "nes": -0.508, "sig": false, "padj": 0.9574}, {"row": 17, "col": 6, "nes": -0.959, "sig": false, "padj": 0.7327}, {"row": 17, "col": 7, "nes": -1.192, "sig": false, "padj": 0.5599}, {"row": 17, "col": 8, "nes": 1.666, "sig": false, "padj": 0.1033}, {"row": 17, "col": 9, "nes": 1.362, "sig": false, "padj": 0.2373}, {"row": 18, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 18, "col": 1, "nes": -1.473, "sig": false, "padj": 0.2154}, {"row": 18, "col": 2, "nes": -1.047, "sig": false, "padj": 0.7866}, {"row": 18, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 18, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 18, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 18, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 18, "col": 7, "nes": -0.822, "sig": false, "padj": 0.8845}, {"row": 18, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 18, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 19, "col": 0, "nes": 1.053, "sig": false, "padj": 0.4803}, {"row": 19, "col": 1, "nes": -0.92, "sig": false, "padj": 0.8104}, {"row": 19, "col": 2, "nes": 0.788, "sig": false, "padj": 0.802}, {"row": 19, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 19, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 19, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 19, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 19, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 19, "col": 8, "nes": 1.72, "sig": false, "padj": 0.0737}, {"row": 19, "col": 9, "nes": 1.013, "sig": false, "padj": 0.5667}, {"row": 20, "col": 0, "nes": -0.974, "sig": false, "padj": 0.5495}, {"row": 20, "col": 1, "nes": -1.46, "sig": false, "padj": 0.2154}, {"row": 20, "col": 2, "nes": -1.097, "sig": false, "padj": 0.7866}, {"row": 20, "col": 3, "nes": -1.13, "sig": false, "padj": 0.4862}, {"row": 20, "col": 4, "nes": -0.746, "sig": false, "padj": 0.8372}, {"row": 20, "col": 5, "nes": -0.775, "sig": false, "padj": 0.8776}, {"row": 20, "col": 6, "nes": -0.885, "sig": false, "padj": 0.7327}, {"row": 20, "col": 7, "nes": -1.495, "sig": false, "padj": 0.2239}, {"row": 20, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 20, "col": 9, "nes": -0.935, "sig": false, "padj": 0.602}, {"row": 21, "col": 0, "nes": 1.245, "sig": false, "padj": 0.4769}, {"row": 21, "col": 1, "nes": 0.676, "sig": false, "padj": 0.8853}, {"row": 21, "col": 2, "nes": 1.13, "sig": false, "padj": 0.7834}, {"row": 21, "col": 3, "nes": -1.169, "sig": false, "padj": 0.4706}, {"row": 21, "col": 4, "nes": -0.733, "sig": false, "padj": 0.8372}, {"row": 21, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 21, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 21, "col": 7, "nes": -0.62, "sig": false, "padj": 0.9454}, {"row": 21, "col": 8, "nes": 1.033, "sig": false, "padj": 0.5468}, {"row": 21, "col": 9, "nes": 1.822, "sig": false, "padj": 0.0565}, {"row": 22, "col": 0, "nes": 1.124, "sig": false, "padj": 0.4803}, {"row": 22, "col": 1, "nes": -1.152, "sig": false, "padj": 0.5872}, {"row": 22, "col": 2, "nes": -0.943, "sig": false, "padj": 0.8003}, {"row": 22, "col": 3, "nes": -0.734, "sig": false, "padj": 0.8399}, {"row": 22, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 22, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 22, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 22, "col": 7, "nes": -1.158, "sig": false, "padj": 0.5599}, {"row": 22, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 22, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 1, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 2, "nes": 1.0, "sig": false, "padj": 0.7866}, {"row": 23, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 23, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 1, "nes": 0.996, "sig": false, "padj": 0.7869}, {"row": 24, "col": 2, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 24, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 1, "nes": -0.801, "sig": false, "padj": 0.8638}, {"row": 25, "col": 2, "nes": -1.09, "sig": false, "padj": 0.7866}, {"row": 25, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 25, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 26, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 26, "col": 1, "nes": null, "sig": false, "padj": null}, {"row": 26, "col": 2, "nes": 1.146, "sig": false, "padj": 0.7834}, {"row": 26, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 26, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 26, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 26, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 26, "col": 7, "nes": 0.685, "sig": false, "padj": 0.9454}, {"row": 26, "col": 8, "nes": -0.923, "sig": false, "padj": 0.6034}, {"row": 26, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 27, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 27, "col": 1, "nes": -0.901, "sig": false, "padj": 0.8104}, {"row": 27, "col": 2, "nes": 0.934, "sig": false, "padj": 0.8003}, {"row": 27, "col": 3, "nes": 1.317, "sig": false, "padj": 0.2574}, {"row": 27, "col": 4, "nes": -0.742, "sig": false, "padj": 0.8372}, {"row": 27, "col": 5, "nes": 0.889, "sig": false, "padj": 0.8551}, {"row": 27, "col": 6, "nes": 0.873, "sig": false, "padj": 0.7327}, {"row": 27, "col": 7, "nes": 0.876, "sig": false, "padj": 0.8845}, {"row": 27, "col": 8, "nes": -0.892, "sig": false, "padj": 0.6076}, {"row": 27, "col": 9, "nes": -0.483, "sig": false, "padj": 0.9715}, {"row": 28, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 28, "col": 1, "nes": -0.959, "sig": false, "padj": 0.7974}, {"row": 28, "col": 2, "nes": -0.801, "sig": false, "padj": 0.802}, {"row": 28, "col": 3, "nes": -0.713, "sig": false, "padj": 0.8399}, {"row": 28, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 28, "col": 5, "nes": 0.982, "sig": false, "padj": 0.7833}, {"row": 28, "col": 6, "nes": -0.583, "sig": false, "padj": 0.971}, {"row": 28, "col": 7, "nes": 0.788, "sig": false, "padj": 0.8845}, {"row": 28, "col": 8, "nes": 0.983, "sig": false, "padj": 0.5654}, {"row": 28, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 29, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 29, "col": 1, "nes": -0.646, "sig": false, "padj": 0.8853}, {"row": 29, "col": 2, "nes": 0.807, "sig": false, "padj": 0.802}, {"row": 29, "col": 3, "nes": 0.668, "sig": false, "padj": 0.8622}, {"row": 29, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 29, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 29, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 29, "col": 7, "nes": 0.908, "sig": false, "padj": 0.8845}, {"row": 29, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 29, "col": 9, "nes": 1.005, "sig": false, "padj": 0.5667}, {"row": 30, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 30, "col": 1, "nes": -0.94, "sig": false, "padj": 0.7974}, {"row": 30, "col": 2, "nes": null, "sig": false, "padj": null}, {"row": 30, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 30, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 30, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 30, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 30, "col": 7, "nes": -0.593, "sig": false, "padj": 0.9454}, {"row": 30, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 30, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 31, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 31, "col": 1, "nes": 0.696, "sig": false, "padj": 0.8853}, {"row": 31, "col": 2, "nes": 0.785, "sig": false, "padj": 0.802}, {"row": 31, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 31, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 31, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 31, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 31, "col": 7, "nes": 0.771, "sig": false, "padj": 0.8845}, {"row": 31, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 31, "col": 9, "nes": null, "sig": false, "padj": null}, {"row": 32, "col": 0, "nes": 0.586, "sig": false, "padj": 0.9326}, {"row": 32, "col": 1, "nes": -0.784, "sig": false, "padj": 0.8638}, {"row": 32, "col": 2, "nes": -0.871, "sig": false, "padj": 0.802}, {"row": 32, "col": 3, "nes": -0.889, "sig": false, "padj": 0.7382}, {"row": 32, "col": 4, "nes": -0.553, "sig": false, "padj": 0.9322}, {"row": 32, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 32, "col": 6, "nes": -0.857, "sig": false, "padj": 0.7327}, {"row": 32, "col": 7, "nes": -0.815, "sig": false, "padj": 0.8845}, {"row": 32, "col": 8, "nes": -0.638, "sig": false, "padj": 0.8913}, {"row": 32, "col": 9, "nes": -0.65, "sig": false, "padj": 0.9163}, {"row": 33, "col": 0, "nes": null, "sig": false, "padj": null}, {"row": 33, "col": 1, "nes": 0.689, "sig": false, "padj": 0.8853}, {"row": 33, "col": 2, "nes": -0.717, "sig": false, "padj": 0.8309}, {"row": 33, "col": 3, "nes": null, "sig": false, "padj": null}, {"row": 33, "col": 4, "nes": null, "sig": false, "padj": null}, {"row": 33, "col": 5, "nes": null, "sig": false, "padj": null}, {"row": 33, "col": 6, "nes": null, "sig": false, "padj": null}, {"row": 33, "col": 7, "nes": null, "sig": false, "padj": null}, {"row": 33, "col": 8, "nes": null, "sig": false, "padj": null}, {"row": 33, "col": 9, "nes": null, "sig": false, "padj": null}], "n_sig": 26, "sig_by_ct": {"CD14+ Monocyte": 3, "CD16+ Monocyte": 3, "Dendritic Cell": 5, "Natural Killer Cell": 4, "B Cell": 1, "CD4+ T Cell": 1, "CD8+ T Cell": 2, "Other T Cell": 2, "Other": 3, "PBMC Pseudobulk": 2}};
+
+// ── Layout ────────────────────────────────────────────────────────────────
+const cellW  = 52, cellH = 18;
+const marginLeft = 200, marginTop = 80, marginBottom = 60;
+const nRow = DATA.pathways.length, nCol = DATA.cell_types.length;
+const heatW = nCol * cellW, heatH = nRow * cellH;
+const barH  = 120;
+const legendW = 180, legendH = 16;
+
+const totalW = marginLeft + heatW + legendW + 40;
+const totalH = marginTop + heatH + marginBottom + barH + 60;
+
+const svg = d3.select("#main")
+  .attr("width", totalW)
+  .attr("height", totalH);
+
+const tooltip = d3.select("#tooltip");
+
+// ── Color scale (blue–white–red, NES range ±3) ───────────────────────────
+const colorScale = d3.scaleDiverging()
+  .domain([-2.5, 0, 2.5])
+  .interpolator(d3.interpolateRdBu)
+  .clamp(true);
+// Note: RdBu: low=blue, high=red → reverse for spaceflight (down=blue, up=red is standard)
+
+// ── Panel A: Heatmap ──────────────────────────────────────────────────────
+const heatG = svg.append("g")
+  .attr("transform", `translate(${marginLeft},${marginTop})`);
+
+// Column headers (cell types)
+heatG.selectAll(".colLabel")
+  .data(DATA.cell_types)
+  .join("text")
+    .attr("class", "colLabel")
+    .attr("x", (d, i) => i * cellW + cellW / 2)
+    .attr("y", -6)
+    .attr("text-anchor", "end")
+    .attr("font-size", "9px")
+    .attr("transform", (d, i) => `rotate(-45, ${i * cellW + cellW/2}, -6)`)
+    .text(d => d);
+
+// Row labels (pathways)
+heatG.selectAll(".rowLabel")
+  .data(DATA.pathways)
+  .join("text")
+    .attr("class", "y-label")
+    .attr("x", -6)
+    .attr("y", (d, i) => i * cellH + cellH / 2 + 3.5)
+    .attr("text-anchor", "end")
+    .text(d => d);
+
+// Cells
+const cellG = heatG.selectAll(".cellG")
+  .data(DATA.cells)
+  .join("g")
+    .attr("class", "cellG")
+    .attr("transform", d => `translate(${d.col * cellW}, ${d.row * cellH})`);
+
+cellG.append("rect")
+  .attr("class", "cell-rect")
+  .attr("width", cellW)
+  .attr("height", cellH)
+  .attr("fill", d => d.nes === null ? "#eee" : colorScale(d.nes))
+  .on("mouseover", function(event, d) {
+    const pw = DATA.pathways[d.row];
+    const ct = DATA.cell_types[d.col];
+    const nesStr = d.nes !== null ? d.nes.toFixed(3) : "N/A";
+    const padjStr = d.padj !== null ? d.padj.toExponential(2) : "N/A";
+    tooltip.style("display", "block")
+      .html(`<b>${pw}</b><br/><b>${ct}</b><br/>NES: ${nesStr}<br/>padj: ${padjStr}`);
+  })
+  .on("mousemove", function(event) {
+    tooltip.style("left", (event.pageX + 12) + "px")
+           .style("top",  (event.pageY - 20) + "px");
+  })
+  .on("mouseout", () => tooltip.style("display", "none"));
+
+// NA label
+cellG.filter(d => d.nes === null)
+  .append("text")
+    .attr("class", "na-text")
+    .attr("x", cellW / 2).attr("y", cellH / 2 + 2.5)
+    .attr("text-anchor", "middle")
+    .text("—");
+
+// Significance stars
+cellG.filter(d => d.sig)
+  .append("text")
+    .attr("class", "sig-star")
+    .attr("x", cellW / 2).attr("y", cellH / 2 + 4)
+    .attr("text-anchor", "middle")
+    .text("★");
+
+// Panel label
+svg.append("text").attr("class", "panel-title")
+  .attr("x", 8).attr("y", marginTop - 12)
+  .text("A");
+
+// ── Color legend ─────────────────────────────────────────────────────────
+const legG = svg.append("g")
+  .attr("transform", `translate(${marginLeft + heatW + 20}, ${marginTop + 10})`);
+
+const legScale = d3.scaleLinear().domain([0, legendW]).range([-2.5, 2.5]);
+const legGrad = svg.append("defs").append("linearGradient")
+  .attr("id", "legGrad").attr("x1", "0%").attr("x2", "100%");
+d3.range(0, 1.01, 0.05).forEach(t => {
+  legGrad.append("stop")
+    .attr("offset", `${t * 100}%`)
+    .attr("stop-color", colorScale(t * 5 - 2.5));
+});
+
+legG.append("rect")
+  .attr("width", legendW).attr("height", legendH)
+  .style("fill", "url(#legGrad)");
+
+legG.append("text").attr("class", "legend-title")
+  .attr("y", -4).text("NES");
+
+[-2.5, -1.25, 0, 1.25, 2.5].forEach(v => {
+  const x = (v + 2.5) / 5 * legendW;
+  legG.append("line")
+    .attr("x1", x).attr("x2", x).attr("y1", legendH).attr("y2", legendH + 4)
+    .attr("stroke", "#666");
+  legG.append("text").attr("class", "legend-tick")
+    .attr("x", x).attr("y", legendH + 12).attr("text-anchor", "middle")
+    .text(v.toFixed(1));
+});
+
+// ── Panel B: Bar chart — significant pathways per cell type ───────────────
+const barTop = marginTop + heatH + marginBottom + 20;
+const barG = svg.append("g")
+  .attr("transform", `translate(${marginLeft}, ${barTop})`);
+
+svg.append("text").attr("class", "panel-title")
+  .attr("x", 8).attr("y", barTop - 8)
+  .text("B");
+
+const ctNames = DATA.cell_types;
+const sigCounts = ctNames.map(ct => DATA.sig_by_ct[ct] || 0);
+const maxSig = Math.max(...sigCounts) + 1;
+
+const xBar = d3.scaleBand().domain(ctNames).range([0, heatW]).padding(0.25);
+const yBar = d3.scaleLinear().domain([0, maxSig]).range([barH, 0]);
+
+barG.selectAll(".bar")
+  .data(ctNames)
+  .join("rect")
+    .attr("class", "bar-ct")
+    .attr("x", d => xBar(d))
+    .attr("y", d => yBar(DATA.sig_by_ct[d] || 0))
+    .attr("width", xBar.bandwidth())
+    .attr("height", d => barH - yBar(DATA.sig_by_ct[d] || 0));
+
+barG.selectAll(".bar-label")
+  .data(ctNames)
+  .join("text")
+    .attr("x", d => xBar(d) + xBar.bandwidth() / 2)
+    .attr("y", d => yBar(DATA.sig_by_ct[d] || 0) - 3)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "9px")
+    .text(d => (DATA.sig_by_ct[d] || 0) > 0 ? (DATA.sig_by_ct[d] || 0) : "");
+
+// x-axis
+barG.append("g").attr("transform", `translate(0,${barH})`)
+  .call(d3.axisBottom(xBar).tickSize(3))
+  .selectAll("text")
+    .attr("transform", "rotate(-35)")
+    .attr("text-anchor", "end")
+    .attr("font-size", "9px");
+
+// y-axis
+barG.append("g").call(d3.axisLeft(yBar).ticks(maxSig).tickFormat(d3.format("d")));
+
+barG.append("text")
+  .attr("x", -barH / 2).attr("y", -40)
+  .attr("transform", "rotate(-90)")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "9px")
+  .text("Sig. pathways (padj<0.05)");
+
+barG.append("text")
+  .attr("x", heatW / 2).attr("y", barH + 52)
+  .attr("text-anchor", "middle")
+  .attr("font-size", "10px")
+  .text("Cell Type");
+
+</script>
+</body>
+</html>
