@@ -32,7 +32,7 @@ date
 SCRATCH="/athena/masonlab/scratch/users/jak4013/rrrm1_scrna"
 FASTQ_DIR="${SCRATCH}/OSD-${OSD_N}/fastq"
 OUT_DIR="${SCRATCH}/OSD-${OSD_N}/starsolo"
-STAR_BIN="/opt/ohpc/pub/software/STAR/2.7.11b/bin/Linux_x86_64/STAR"
+STAR_BIN="/opt/ohpc/pub/software/STAR/2.7.11b/bin/Linux_x86_64_static/STAR"
 GENOME_DIR="/athena/masonlab/scratch/users/jak4013/reference/cellranger/refdata-gex-GRCm39-2024-A/star"
 WHITELIST="/athena/masonlab/scratch/users/jak4013/software/cellranger-6.1.1/lib/python/cellranger/barcodes/3M-february-2018.txt.gz"
 
@@ -82,7 +82,6 @@ ${STAR_BIN} \
     --soloUMIfiltering MultiGeneUMI_CR \
     --soloCellFilter EmptyDrops_CR \
     --soloFeatures Gene GeneFull \
-    --soloOutDir "${OUT_DIR}" \
     --outSAMtype BAM SortedByCoordinate \
     --outSAMattributes NH HI nM AS CR UR CB UB GX GN sS sQ sM \
     --outFileNamePrefix "${OUT_DIR}/" \
