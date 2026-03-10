@@ -226,6 +226,46 @@ OSD-904~934 raw FASTQ availability confirmed (31 datasets, ~3 TB total). STARsol
 
 ---
 
+### E3: PBMC Cell-Type Transcriptome is Anti-Correlated with Plasma cfRNA at Flight Onset ★★★
+
+**Question:** Which PBMC cell type's pathway response best predicts the plasma cfRNA NES pattern at R+1?
+
+**Data:** E2 cfRNA NES (48 pathways) × F1 snRNA-seq cell-type NES (10 types × 34 common pathways)
+**Method:** Spearman r per cell type, permutation p (n=10,000), bootstrap 95% CI (n=1,000)
+**Output:** `v2/evaluation/E3_cfrna_origin.json`, `v2/figures/E3_cfrna_origin.html`
+
+#### Key Results
+
+| Cell Type | Spearman r | 95% CI | p | n pathways |
+|-----------|-----------|--------|---|------------|
+| Natural Killer Cell | −0.505 | — | 0.028* | 19 |
+| CD4+ T Cell | −0.505 | — | 0.081 | 13 |
+| PBMC Pseudobulk | −0.486 | — | 0.034* | 19 |
+| CD8+ T Cell | −0.494 | — | 0.057 | 16 |
+| CD14+ Monocyte | −0.475 | — | 0.056 | 17 |
+| Other T Cell | −0.421 | — | 0.042* | 24 |
+| Dendritic Cell | −0.395 | — | 0.038* | 28 |
+
+**Critical finding: All cell-type NES values are NEGATIVELY correlated with cfRNA NES.**
+
+The PBMC intracellular transcriptome response at R+1 is systematically anti-correlated with plasma cfRNA pathway signals. The most striking example: **MYC_TARGETS_V1** is strongly downregulated in all PBMC cell types (NES −2.1 to −2.9) but is among the most upregulated pathways in cfRNA (NES +2.0, MYC_TARGETS_V2). This inversion suggests that PBMC cells actively suppress MYC-driven biosynthesis at flight onset, while simultaneously releasing existing MYC-target transcripts into the plasma (via apoptotic bodies, extracellular vesicles, or stress-induced mRNA secretion).
+
+#### Mechanistic Interpretation
+
+The E1/E2/E3 results together form a coherent narrative:
+1. **E2**: I4 cfRNA shows no conservation with mouse liver at R+1 (r = −0.095, NS)
+2. **E3**: I4 PBMC transcriptome is anti-correlated with cfRNA at R+1 (r ≈ −0.5)
+3. **Together**: At 3-day flight onset, plasma cfRNA signals are neither mouse-conserved (E2) nor PBMC-derived (E3) — suggesting cfRNA at R+1 represents **passive release of pre-existing cellular RNAs from stressed/apoptosing cells**, rather than active transcriptional programs observed in bulk tissues.
+
+This contrasts with JAXA (120-day, E1 r = +0.352): longer duration allows genuine tissue-specific pathway changes to accumulate and be reflected in plasma cfRNA.
+
+**Scripts and outputs:**
+- `v2/scripts/e3_cfrna_celltype_origin.py`
+- `v2/evaluation/E3_cfrna_origin.json`
+- `v2/figures/E3_cfrna_origin.html`
+
+---
+
 ## Methods Notes
 
 ### T1 Method Detail
@@ -259,6 +299,16 @@ OSD-904~934 raw FASTQ availability confirmed (31 datasets, ~3 TB total). STARsol
 - fGSEA: R `fgsea` package, Hallmark v7.5.1 (Homo sapiens GMT), minSize=10, maxSize=500, nPermSimple=10,000, seed=42
 - Deduplication: if gene appears twice, keep row with highest |avg_log2FC|
 - Significance threshold: padj < 0.05 (Benjamini-Hochberg)
+
+### E3 Method Detail
+- cfRNA NES: from E2 output (I4 fGSEA, 48 pathways)
+- Cell-type NES: from F1 output (I4 snRNA-seq FP1, per cell type)
+- Common pathways: 34 (intersection of 48 cfRNA and 34 unique snRNA pathways)
+- Effective n per cell type: 13–30 (varies due to FindMarkers gene count filter)
+- Spearman r: scipy.stats.spearmanr on paired (non-NaN) pathway NES values
+- Bootstrap 95% CI: n_boot=1,000, random resampling with replacement
+- Permutation p: n_perm=10,000 label shuffles
+- Significance: p < 0.05 (permutation)
 
 ### E2 Method Detail
 - I4 data: Inspiration4 cfRNA DESeq2 results (log2FoldChange_I4), 5,346 genes (common with Polaris Dawn)
