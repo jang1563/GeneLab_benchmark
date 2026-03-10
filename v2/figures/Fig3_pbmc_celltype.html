@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig3: PBMC Cell-Type Resolution</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; background: #fff; }
+  .fig-title { font-size: 13px; font-weight: bold; fill: #111; }
+  .panel-label { font-size: 13px; font-weight: bold; fill: #111; }
+  .axis-label { font-size: 10px; fill: #333; }
+  .tick text { font-size: 8.5px; }
+  .ref-line { stroke: #999; stroke-dasharray: 4,3; stroke-width: 1px; }
+  .anno-text { font-size: 8.5px; fill: #555; }
+  #tooltip { position: absolute; background: rgba(0,0,0,0.8); color: #fff;
+    padding: 5px 9px; border-radius: 4px; font-size: 9.5px; pointer-events: none; display: none; }
+</style>
+</head>
+<body>
+<div id="tooltip"></div>
+
+<svg id="fig3"></svg>
+<script>
+const D = {"pw_labels": ["Myc Targets V1", "Oxidative Phosphorylation", "P53 Pathway", "Allograft Rejection", "Apical Junction", "Interferon Alpha Response", "Kras Signaling Up", "Mitotic Spindle", "Tnfa Signaling Via Nfkb", "Uv Response Dn", "Interferon Gamma Response", "Complement", "Hypoxia", "Inflammatory Response"], "ct_labels": ["CD14+ Monocyte", "CD16+ Monocyte", "Dendritic Cell", "Natural Killer Cell", "B Cell", "CD4+ T Cell", "CD8+ T Cell", "Other T Cell", "Other", "PBMC Pseudobulk"], "cells_nes": [{"row": 0, "col": 0, "nes": -2.858, "sig": true}, {"row": 0, "col": 1, "nes": -2.27, "sig": true}, {"row": 0, "col": 2, "nes": -2.139, "sig": true}, {"row": 0, "col": 3, "nes": -2.512, "sig": true}, {"row": 0, "col": 4, "nes": -2.502, "sig": true}, {"row": 0, "col": 5, "nes": -2.213, "sig": true}, {"row": 0, "col": 6, "nes": -2.199, "sig": true}, {"row": 0, "col": 7, "nes": -2.497, "sig": true}, {"row": 0, "col": 8, "nes": -2.9, "sig": true}, {"row": 0, "col": 9, "nes": -2.443, "sig": true}, {"row": 1, "col": 0, "nes": 0, "sig": false}, {"row": 1, "col": 1, "nes": -2.114, "sig": true}, {"row": 1, "col": 2, "nes": -2.015, "sig": true}, {"row": 1, "col": 3, "nes": -2.196, "sig": true}, {"row": 1, "col": 4, "nes": 0, "sig": false}, {"row": 1, "col": 5, "nes": 0, "sig": false}, {"row": 1, "col": 6, "nes": -1.849, "sig": true}, {"row": 1, "col": 7, "nes": -2.215, "sig": true}, {"row": 1, "col": 8, "nes": 0, "sig": false}, {"row": 1, "col": 9, "nes": -1.992, "sig": true}, {"row": 2, "col": 0, "nes": -2.066, "sig": true}, {"row": 2, "col": 1, "nes": -1.727, "sig": false}, {"row": 2, "col": 2, "nes": -1.768, "sig": true}, {"row": 2, "col": 3, "nes": -1.806, "sig": true}, {"row": 2, "col": 4, "nes": -1.655, "sig": false}, {"row": 2, "col": 5, "nes": -1.623, "sig": false}, {"row": 2, "col": 6, "nes": -1.703, "sig": false}, {"row": 2, "col": 7, "nes": -1.733, "sig": false}, {"row": 2, "col": 8, "nes": -1.532, "sig": false}, {"row": 2, "col": 9, "nes": -1.729, "sig": false}, {"row": 3, "col": 0, "nes": -1.935, "sig": true}, {"row": 3, "col": 1, "nes": -1.685, "sig": false}, {"row": 3, "col": 2, "nes": -1.746, "sig": true}, {"row": 3, "col": 3, "nes": -1.726, "sig": false}, {"row": 3, "col": 4, "nes": -1.68, "sig": false}, {"row": 3, "col": 5, "nes": -1.393, "sig": false}, {"row": 3, "col": 6, "nes": -1.569, "sig": false}, {"row": 3, "col": 7, "nes": -1.66, "sig": false}, {"row": 3, "col": 8, "nes": 1.285, "sig": false}, {"row": 3, "col": 9, "nes": -1.323, "sig": false}, {"row": 4, "col": 0, "nes": 1.126, "sig": false}, {"row": 4, "col": 1, "nes": -0.845, "sig": false}, {"row": 4, "col": 2, "nes": -0.941, "sig": false}, {"row": 4, "col": 3, "nes": -0.835, "sig": false}, {"row": 4, "col": 4, "nes": 1.104, "sig": false}, {"row": 4, "col": 5, "nes": 0.575, "sig": false}, {"row": 4, "col": 6, "nes": -0.478, "sig": false}, {"row": 4, "col": 7, "nes": -0.532, "sig": false}, {"row": 4, "col": 8, "nes": 1.988, "sig": true}, {"row": 4, "col": 9, "nes": 1.436, "sig": false}, {"row": 5, "col": 0, "nes": -1.576, "sig": false}, {"row": 5, "col": 1, "nes": -1.942, "sig": true}, {"row": 5, "col": 2, "nes": -1.558, "sig": false}, {"row": 5, "col": 3, "nes": -1.389, "sig": false}, {"row": 5, "col": 4, "nes": -1.06, "sig": false}, {"row": 5, "col": 5, "nes": 0, "sig": false}, {"row": 5, "col": 6, "nes": 0, "sig": false}, {"row": 5, "col": 7, "nes": 0, "sig": false}, {"row": 5, "col": 8, "nes": 0, "sig": false}, {"row": 5, "col": 9, "nes": 0, "sig": false}, {"row": 6, "col": 0, "nes": 0.622, "sig": false}, {"row": 6, "col": 1, "nes": 0.96, "sig": false}, {"row": 6, "col": 2, "nes": 0.892, "sig": false}, {"row": 6, "col": 3, "nes": 1.041, "sig": false}, {"row": 6, "col": 4, "nes": 1.642, "sig": false}, {"row": 6, "col": 5, "nes": 1.378, "sig": false}, {"row": 6, "col": 6, "nes": 1.47, "sig": false}, {"row": 6, "col": 7, "nes": 1.149, "sig": false}, {"row": 6, "col": 8, "nes": 2.031, "sig": true}, {"row": 6, "col": 9, "nes": 1.365, "sig": false}, {"row": 7, "col": 0, "nes": 1.051, "sig": false}, {"row": 7, "col": 1, "nes": 1.508, "sig": false}, {"row": 7, "col": 2, "nes": 2.008, "sig": true}, {"row": 7, "col": 3, "nes": 1.379, "sig": false}, {"row": 7, "col": 4, "nes": 1.407, "sig": false}, {"row": 7, "col": 5, "nes": 0, "sig": false}, {"row": 7, "col": 6, "nes": 1.465, "sig": false}, {"row": 7, "col": 7, "nes": 1.432, "sig": false}, {"row": 7, "col": 8, "nes": 1.759, "sig": false}, {"row": 7, "col": 9, "nes": 1.483, "sig": false}, {"row": 8, "col": 0, "nes": 1.17, "sig": false}, {"row": 8, "col": 1, "nes": -0.781, "sig": false}, {"row": 8, "col": 2, "nes": -0.547, "sig": false}, {"row": 8, "col": 3, "nes": -2.018, "sig": true}, {"row": 8, "col": 4, "nes": -1.406, "sig": false}, {"row": 8, "col": 5, "nes": -0.844, "sig": false}, {"row": 8, "col": 6, "nes": -1.082, "sig": false}, {"row": 8, "col": 7, "nes": -1.631, "sig": false}, {"row": 8, "col": 8, "nes": 1.063, "sig": false}, {"row": 8, "col": 9, "nes": 1.027, "sig": false}, {"row": 9, "col": 0, "nes": 1.077, "sig": false}, {"row": 9, "col": 1, "nes": 1.533, "sig": false}, {"row": 9, "col": 2, "nes": 1.608, "sig": false}, {"row": 9, "col": 3, "nes": 1.539, "sig": false}, {"row": 9, "col": 4, "nes": 0.957, "sig": false}, {"row": 9, "col": 5, "nes": 1.514, "sig": false}, {"row": 9, "col": 6, "nes": 1.725, "sig": false}, {"row": 9, "col": 7, "nes": 1.364, "sig": false}, {"row": 9, "col": 8, "nes": 1.348, "sig": false}, {"row": 9, "col": 9, "nes": 1.579, "sig": false}, {"row": 10, "col": 0, "nes": -1.482, "sig": false}, {"row": 10, "col": 1, "nes": -1.674, "sig": false}, {"row": 10, "col": 2, "nes": -1.175, "sig": false}, {"row": 10, "col": 3, "nes": -1.362, "sig": false}, {"row": 10, "col": 4, "nes": -1.085, "sig": false}, {"row": 10, "col": 5, "nes": -1.263, "sig": false}, {"row": 10, "col": 6, "nes": -1.249, "sig": false}, {"row": 10, "col": 7, "nes": -1.475, "sig": false}, {"row": 10, "col": 8, "nes": -1.025, "sig": false}, {"row": 10, "col": 9, "nes": -0.999, "sig": false}, {"row": 11, "col": 0, "nes": 1.217, "sig": false}, {"row": 11, "col": 1, "nes": -1.222, "sig": false}, {"row": 11, "col": 2, "nes": -0.763, "sig": false}, {"row": 11, "col": 3, "nes": -1.423, "sig": false}, {"row": 11, "col": 4, "nes": -0.85, "sig": false}, {"row": 11, "col": 5, "nes": -0.508, "sig": false}, {"row": 11, "col": 6, "nes": -0.959, "sig": false}, {"row": 11, "col": 7, "nes": -1.192, "sig": false}, {"row": 11, "col": 8, "nes": 1.666, "sig": false}, {"row": 11, "col": 9, "nes": 1.362, "sig": false}, {"row": 12, "col": 0, "nes": -0.974, "sig": false}, {"row": 12, "col": 1, "nes": -1.46, "sig": false}, {"row": 12, "col": 2, "nes": -1.097, "sig": false}, {"row": 12, "col": 3, "nes": -1.13, "sig": false}, {"row": 12, "col": 4, "nes": -0.746, "sig": false}, {"row": 12, "col": 5, "nes": -0.775, "sig": false}, {"row": 12, "col": 6, "nes": -0.885, "sig": false}, {"row": 12, "col": 7, "nes": -1.495, "sig": false}, {"row": 12, "col": 8, "nes": 0, "sig": false}, {"row": 12, "col": 9, "nes": -0.935, "sig": false}, {"row": 13, "col": 0, "nes": 1.245, "sig": false}, {"row": 13, "col": 1, "nes": 0.676, "sig": false}, {"row": 13, "col": 2, "nes": 1.13, "sig": false}, {"row": 13, "col": 3, "nes": -1.169, "sig": false}, {"row": 13, "col": 4, "nes": -0.733, "sig": false}, {"row": 13, "col": 5, "nes": 0, "sig": false}, {"row": 13, "col": 6, "nes": 0, "sig": false}, {"row": 13, "col": 7, "nes": -0.62, "sig": false}, {"row": 13, "col": 8, "nes": 1.033, "sig": false}, {"row": 13, "col": 9, "nes": 1.822, "sig": false}], "abs_max_nes": 2.9, "sheet_labels": ["FP1 (R+1 vs pre)", "LP1 (R+45 vs pre)", "LP3 (R+45/82 vs pre)", "RP1 (R+45 vs R+1)", "RP3 (R+45/82 vs R+1)"], "cells_sig": [{"row": 0, "col": 0, "n": 3}, {"row": 0, "col": 1, "n": 3}, {"row": 0, "col": 2, "n": 5}, {"row": 0, "col": 3, "n": 4}, {"row": 0, "col": 4, "n": 1}, {"row": 0, "col": 5, "n": 1}, {"row": 0, "col": 6, "n": 2}, {"row": 0, "col": 7, "n": 2}, {"row": 0, "col": 8, "n": 3}, {"row": 0, "col": 9, "n": 2}, {"row": 1, "col": 0, "n": 3}, {"row": 1, "col": 1, "n": 7}, {"row": 1, "col": 2, "n": 8}, {"row": 1, "col": 3, "n": 4}, {"row": 1, "col": 4, "n": 6}, {"row": 1, "col": 5, "n": 5}, {"row": 1, "col": 6, "n": 0}, {"row": 1, "col": 7, "n": 9}, {"row": 1, "col": 8, "n": 1}, {"row": 1, "col": 9, "n": 2}, {"row": 2, "col": 0, "n": 3}, {"row": 2, "col": 1, "n": 0}, {"row": 2, "col": 2, "n": 2}, {"row": 2, "col": 3, "n": 0}, {"row": 2, "col": 4, "n": 0}, {"row": 2, "col": 5, "n": 0}, {"row": 2, "col": 6, "n": 1}, {"row": 2, "col": 7, "n": 2}, {"row": 2, "col": 8, "n": 2}, {"row": 2, "col": 9, "n": 3}, {"row": 3, "col": 0, "n": 10}, {"row": 3, "col": 1, "n": 6}, {"row": 3, "col": 2, "n": 9}, {"row": 3, "col": 3, "n": 8}, {"row": 3, "col": 4, "n": 5}, {"row": 3, "col": 5, "n": 6}, {"row": 3, "col": 6, "n": 2}, {"row": 3, "col": 7, "n": 10}, {"row": 3, "col": 8, "n": 1}, {"row": 3, "col": 9, "n": 6}, {"row": 4, "col": 0, "n": 6}, {"row": 4, "col": 1, "n": 1}, {"row": 4, "col": 2, "n": 3}, {"row": 4, "col": 3, "n": 2}, {"row": 4, "col": 4, "n": 4}, {"row": 4, "col": 5, "n": 1}, {"row": 4, "col": 6, "n": 1}, {"row": 4, "col": 7, "n": 3}, {"row": 4, "col": 8, "n": 0}, {"row": 4, "col": 9, "n": 2}], "max_sig": 10, "colors": {"blue": "#0072B2", "orange": "#E69F00", "green": "#009E73", "sky": "#56B4E9", "vermillion": "#D55E00", "pink": "#CC79A7", "yellow": "#F0E442", "black": "#000000", "gray": "#999999", "lgray": "#cccccc"}};
+const C = D.colors;
+
+// Use 40px cell width to fit both panels side by side
+const cWA = 40, cWB = 40;
+const nCtA = D.ct_labels.length, nPw = D.pw_labels.length;
+const nCtB = D.ct_labels.length, nSh = D.sheet_labels.length;
+const mT = 55, mLa = 200, mLb = 22, gap = 70, mR = 20;
+const pAh = nPw * 28, pBh = nSh * 46;
+const pAw = nCtA * cWA, pBw = nCtB * cWB;
+const totalW = mLa + pAw + gap + mLb + pBw + mR;
+const totalH = mT + Math.max(pAh, pBh) + 90;
+
+const svg = d3.select("#fig3").attr("width", totalW).attr("height", totalH);
+const tip = d3.select("#tooltip");
+
+const pA = {x: mLa, y: mT, w: pAw, h: pAh};
+const pB_x = mLa + pAw + gap + mLb;
+const pB = {x: pB_x, y: mT, w: pBw, h: pBh};
+
+[["A", pA.x-160, mT-22], ["B", pB.x-mLb, mT-22]].forEach(([l,x,y]) => {
+  svg.append("text").attr("class","panel-label").attr("x",x).attr("y",y).text(l);
+});
+svg.attr("width", totalW).attr("height", totalH);
+svg.append("text").attr("class","fig-title").attr("x",totalW/2).attr("y",18)
+  .attr("text-anchor","middle").text("Fig. 3 · I4 PBMC Cell-Type-Resolved Pathway Response");
+
+// ── Panel A: NES heatmap (FP1: R+1 vs pre-flight) ─────────────────────────────
+(function() {
+  const gA = svg.append("g").attr("transform",`translate(${pA.x},${pA.y})`);
+  const cW = cWA, cH = 28;
+  const nR = D.pw_labels.length, nC = D.ct_labels.length;
+
+  gA.append("text").attr("x",nC*cW/2).attr("y",-22)
+    .attr("text-anchor","middle").attr("font-size","10px").attr("font-weight","bold")
+    .text("A: Pathway NES at R+1 (FP1, R+1 vs. pre-flight)");
+  gA.append("text").attr("x",nC*cW/2).attr("y",-8)
+    .attr("text-anchor","middle").attr("font-size","8.5px").attr("fill","#555")
+    .text("Hallmark fGSEA NES · asterisk = padj < 0.05");
+
+  // Diverging color scale: blue (negative) → white → red (positive)
+  const colScale = d3.scaleDiverging(d3.interpolateRdBu)
+    .domain([D.abs_max_nes, 0, -D.abs_max_nes]);
+
+  // Column headers (rotated)
+  gA.selectAll(".colH").data(D.ct_labels).join("text")
+    .attr("x",(d,i)=>i*cW+cW/2).attr("y",-4)
+    .attr("text-anchor","end").attr("font-size","8px")
+    .attr("transform",(d,i)=>`rotate(-38,${i*cW+cW/2},-4)`)
+    .text(d=>d);
+
+  // Row labels
+  gA.selectAll(".rowH").data(D.pw_labels).join("text")
+    .attr("x",-6).attr("y",(d,i)=>i*cH+cH/2+3.5)
+    .attr("text-anchor","end").attr("font-size","8.5px").text(d=>d);
+
+  // Cells
+  const cellG = gA.selectAll(".cG").data(D.cells_nes).join("g")
+    .attr("transform",d=>`translate(${d.col*cW},${d.row*cH})`);
+  cellG.append("rect").attr("width",cW).attr("height",cH)
+    .attr("fill",d=>d.nes===0?"#f5f5f5":colScale(d.nes))
+    .attr("stroke","#fff").attr("stroke-width",0.8)
+    .on("mouseover",(ev,d)=>tip.style("display","block").html(
+      `<b>${D.pw_labels[d.row]}</b><br><b>${D.ct_labels[d.col]}</b><br>NES = ${d.nes.toFixed(3)}${d.sig?"  **":""}`))
+    .on("mousemove",ev=>tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+    .on("mouseout",()=>tip.style("display","none"));
+  // NES text
+  cellG.filter(d=>d.nes!==0).append("text").attr("x",cW/2).attr("y",cH/2+3.5)
+    .attr("text-anchor","middle").attr("font-size","7.5px")
+    .attr("fill",d=>Math.abs(d.nes)>2.2?"#fff":"#222")
+    .text(d=>d.nes.toFixed(1));
+  // Sig asterisk
+  cellG.filter(d=>d.sig).append("text").attr("x",cW-3).attr("y",9)
+    .attr("text-anchor","end").attr("font-size","9px").attr("fill","#fff")
+    .attr("font-weight","bold").text("*");
+
+  // Legend
+  const legG = gA.append("g").attr("transform",`translate(0,${nR*cH+18})`);
+  const legW = 110, legH = 10;
+  const defs = svg.append("defs");
+  const grad = defs.append("linearGradient").attr("id","nesGrad").attr("x1","0%").attr("x2","100%");
+  d3.range(0,1.01,0.1).forEach(t=>{
+    grad.append("stop").attr("offset",`${t*100}%`)
+      .attr("stop-color", colScale(D.abs_max_nes - t*2*D.abs_max_nes));
+  });
+  legG.append("rect").attr("width",legW).attr("height",legH).style("fill","url(#nesGrad)");
+  legG.append("text").attr("y",-3).attr("font-size","8.5px").text("NES");
+  [[-D.abs_max_nes, 0], [0, legW/2], [D.abs_max_nes, legW]].forEach(([v,x])=>{
+    legG.append("line").attr("x1",x).attr("x2",x).attr("y1",legH).attr("y2",legH+4).attr("stroke","#666");
+    legG.append("text").attr("x",x).attr("y",legH+12).attr("text-anchor","middle").attr("font-size","7.5px").text(v.toFixed(1));
+  });
+})();
+
+// ── Panel B: Temporal sig count heatmap ───────────────────────────────────────
+(function() {
+  const gB = svg.append("g").attr("transform",`translate(${pB.x},${pB.y})`);
+  const cW = cWB, cH = 46;
+  const nR = D.sheet_labels.length, nC = D.ct_labels.length;
+  const maxN = D.max_sig;
+
+  gB.append("text").attr("x",nC*cW/2).attr("y",-22)
+    .attr("text-anchor","middle").attr("font-size","10px").attr("font-weight","bold")
+    .text("B: Temporal pathway response (sig. pathways per cell type)");
+  gB.append("text").attr("x",nC*cW/2).attr("y",-8)
+    .attr("text-anchor","middle").attr("font-size","8.5px").attr("fill","#555")
+    .text("Hallmark fGSEA padj < 0.05 · 5 timepoint comparisons × 10 cell types");
+
+  // Color scale: 0=white, max=deep blue
+  const colorN = d3.scaleSequential().domain([0,maxN]).interpolator(d3.interpolateBlues);
+
+  // Phase separator y position (after row 2 = LP3/FP3)
+  const sepY = 3*cH;
+
+  // Column headers
+  gB.selectAll(".colH").data(D.ct_labels).join("text")
+    .attr("x",(d,i)=>i*cW+cW/2).attr("y",-4)
+    .attr("text-anchor","end").attr("font-size","8px")
+    .attr("transform",(d,i)=>`rotate(-38,${i*cW+cW/2},-4)`)
+    .text(d=>d);
+
+  // Phase labels (left)
+  gB.append("text").attr("x",-6).attr("y",1.5*cH).attr("text-anchor","end")
+    .attr("font-size","8.5px").attr("fill",C.blue).attr("dominant-baseline","middle")
+    .text("vs. pre-flight");
+  gB.append("text").attr("x",-6).attr("y",sepY+cH).attr("text-anchor","end")
+    .attr("font-size","8.5px").attr("fill",C.orange).attr("dominant-baseline","middle")
+    .text("recovery");
+
+  // Divider line
+  gB.append("line").attr("x1",-4).attr("x2",nC*cW+4)
+    .attr("y1",sepY-2).attr("y2",sepY-2).attr("stroke","#aaa").attr("stroke-dasharray","4,3");
+
+  // Row labels
+  gB.selectAll(".rowH").data(D.sheet_labels).join("text")
+    .attr("x",-5).attr("y",(d,i)=>i*cH+cH/2+3.5)
+    .attr("text-anchor","end").attr("font-size","8.5px").text(d=>d);
+
+  // Cells
+  const cellG = gB.selectAll(".cG").data(D.cells_sig).join("g")
+    .attr("transform",d=>`translate(${d.col*cW},${d.row*cH})`);
+  cellG.append("rect").attr("width",cW).attr("height",cH)
+    .attr("fill",d=>d.n===0?"#f5f5f5":colorN(d.n))
+    .attr("stroke","#fff").attr("stroke-width",0.8)
+    .on("mouseover",(ev,d)=>tip.style("display","block").html(
+      `<b>${D.ct_labels[d.col]}</b><br><b>${D.sheet_labels[d.row]}</b><br>Sig pathways: ${d.n}`))
+    .on("mousemove",ev=>tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+    .on("mouseout",()=>tip.style("display","none"));
+  cellG.filter(d=>d.n>0).append("text").attr("x",cW/2).attr("y",cH/2+4)
+    .attr("text-anchor","middle").attr("font-size","9px")
+    .attr("fill",d=>d.n>=maxN*0.55?"#fff":"#222").text(d=>d.n);
+
+  // Legend
+  const legG = gB.append("g").attr("transform",`translate(0,${nR*cH+18})`);
+  const legW = 110, legH = 10;
+  const grad2 = svg.select("defs").append("linearGradient").attr("id","sigGrad").attr("x1","0%").attr("x2","100%");
+  d3.range(0,1.01,0.1).forEach(t=>{
+    grad2.append("stop").attr("offset",`${t*100}%`).attr("stop-color",colorN(t*maxN));
+  });
+  legG.append("rect").attr("width",legW).attr("height",legH).style("fill","url(#sigGrad)");
+  legG.append("text").attr("y",-3).attr("font-size","8.5px").text("Sig pathways (padj<0.05)");
+  [0, Math.round(maxN/2), maxN].forEach(v=>{
+    const x = v/maxN*legW;
+    legG.append("line").attr("x1",x).attr("x2",x).attr("y1",legH).attr("y2",legH+4).attr("stroke","#666");
+    legG.append("text").attr("x",x).attr("y",legH+12).attr("text-anchor","middle").attr("font-size","7.5px").text(v);
+  });
+})();
+</script>
+</body>
+</html>
