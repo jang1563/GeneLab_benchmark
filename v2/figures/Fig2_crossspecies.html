@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig2: Cross-Species Conservation</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; background: #fff; }
+  .fig-title { font-size: 13px; font-weight: bold; fill: #111; }
+  .panel-label { font-size: 13px; font-weight: bold; fill: #111; }
+  .axis-label { font-size: 10px; fill: #333; }
+  .tick text { font-size: 8.5px; }
+  .ref-line { stroke: #999; stroke-dasharray: 4,3; stroke-width: 1px; }
+  .anno-text { font-size: 8.5px; fill: #555; }
+  #tooltip { position: absolute; background: rgba(0,0,0,0.8); color: #fff;
+    padding: 5px 9px; border-radius: 4px; font-size: 9.5px; pointer-events: none; display: none; }
+</style>
+</head>
+<body>
+<div id="tooltip"></div>
+
+<svg id="fig2"></svg>
+<script>
+const D = {"e1_pts": [{"pw": "Adipogenesis", "x": 0.341, "y": 1.137, "conc": true}, {"pw": "Allograft Rejection", "x": 0.929, "y": 1.606, "conc": true}, {"pw": "Androgen Response", "x": -0.199, "y": 1.646, "conc": false}, {"pw": "Angiogenesis", "x": 1.324, "y": 1.646, "conc": true}, {"pw": "Apical Junction", "x": 0.074, "y": 1.593, "conc": true}, {"pw": "Apical Surface", "x": 0.325, "y": 0.967, "conc": true}, {"pw": "Apoptosis", "x": 0.825, "y": 1.248, "conc": true}, {"pw": "Bile Acid Metabolism", "x": 0.735, "y": -0.849, "conc": false}, {"pw": "Cholesterol Homeostasis", "x": -0.124, "y": 1.366, "conc": false}, {"pw": "Coagulation", "x": 0.972, "y": 1.612, "conc": true}, {"pw": "Complement", "x": 0.925, "y": 1.411, "conc": true}, {"pw": "Dna Repair", "x": -0.147, "y": 1.023, "conc": false}, {"pw": "E2F Targets", "x": 0.121, "y": 1.132, "conc": true}, {"pw": "Epithelial Mesenchymal Transition", "x": 1.413, "y": 1.437, "conc": true}, {"pw": "Estrogen Response Early", "x": -0.727, "y": 0.9, "conc": false}, {"pw": "Estrogen Response Late", "x": 0.129, "y": 1.118, "conc": true}, {"pw": "Fatty Acid Metabolism", "x": 0.288, "y": 1.172, "conc": true}, {"pw": "G2M Checkpoint", "x": -0.054, "y": 0.827, "conc": false}, {"pw": "Glycolysis", "x": 0.35, "y": 1.172, "conc": true}, {"pw": "Hedgehog Signaling", "x": 0.459, "y": 0.976, "conc": true}, {"pw": "Heme Metabolism", "x": -0.568, "y": 0.822, "conc": false}, {"pw": "Hypoxia", "x": 0.251, "y": 0.632, "conc": true}, {"pw": "Il2 Stat5 Signaling", "x": 0.902, "y": 1.21, "conc": true}, {"pw": "Il6 Jak Stat3 Signaling", "x": 0.306, "y": 1.557, "conc": true}, {"pw": "Inflammatory Response", "x": 0.778, "y": 1.221, "conc": true}, {"pw": "Interferon Alpha Response", "x": 0.74, "y": 1.592, "conc": true}, {"pw": "Interferon Gamma Response", "x": 0.72, "y": 1.498, "conc": true}, {"pw": "Kras Signaling Dn", "x": -0.241, "y": 0.799, "conc": false}, {"pw": "Kras Signaling Up", "x": 0.541, "y": 1.509, "conc": true}, {"pw": "Mitotic Spindle", "x": -0.902, "y": 1.339, "conc": false}, {"pw": "Mtorc1 Signaling", "x": -0.494, "y": 1.07, "conc": false}, {"pw": "Myc Targets V1", "x": -0.69, "y": 0.75, "conc": false}, {"pw": "Myc Targets V2", "x": -0.404, "y": -1.21, "conc": true}, {"pw": "Myogenesis", "x": -0.495, "y": 1.305, "conc": false}, {"pw": "Notch Signaling", "x": -0.035, "y": 1.087, "conc": false}, {"pw": "Oxidative Phosphorylation", "x": 0.615, "y": 0.888, "conc": true}, {"pw": "P53 Pathway", "x": 0.019, "y": 0.87, "conc": true}, {"pw": "Pancreas Beta Cells", "x": 0.259, "y": -0.696, "conc": false}, {"pw": "Peroxisome", "x": 0.687, "y": 0.876, "conc": true}, {"pw": "Pi3K Akt Mtor Signaling", "x": -0.924, "y": 1.16, "conc": false}, {"pw": "Protein Secretion", "x": -0.3, "y": 1.339, "conc": false}, {"pw": "Reactive Oxygen Species Pathway", "x": -0.231, "y": 1.474, "conc": false}, {"pw": "Spermatogenesis", "x": -0.286, "y": 0.873, "conc": false}, {"pw": "Tgf Beta Signaling", "x": -0.365, "y": 1.25, "conc": false}, {"pw": "Tnfa Signaling Via Nfkb", "x": 0.051, "y": 1.28, "conc": true}, {"pw": "Unfolded Protein Response", "x": -1.4, "y": 0.857, "conc": false}, {"pw": "Uv Response Dn", "x": -0.302, "y": 1.272, "conc": false}, {"pw": "Uv Response Up", "x": -0.398, "y": 1.027, "conc": false}, {"pw": "Wnt Beta Catenin Signaling", "x": 0.013, "y": -1.09, "conc": false}, {"pw": "Xenobiotic Metabolism", "x": 0.093, "y": 1.027, "conc": true}], "e1_r": 0.352, "e1_p": 0.013, "e1_n": 50, "e2": [{"label": "I4 (3d)", "dur": 3, "r": -0.095, "ci_lo": -0.379, "ci_hi": 0.211, "sig": false}, {"label": "JAXA (120d)", "dur": 120, "r": 0.352, "ci_lo": 0.07, "ci_hi": 0.571, "sig": true}], "e3": [{"ct": "CD14+ Monocyte", "r": -0.4755, "ci_lo": -0.4729, "ci_hi": 0.492, "p": 0.0555, "n": 17, "sig": false}, {"ct": "CD16+ Monocyte", "r": -0.309, "ci_lo": -0.3561, "ci_hi": 0.3405, "p": 0.096, "n": 30, "sig": false}, {"ct": "Dendritic Cell", "r": -0.3952, "ci_lo": -0.4042, "ci_hi": 0.3627, "p": 0.0384, "n": 28, "sig": true}, {"ct": "Natural Killer Cell", "r": -0.5053, "ci_lo": -0.4665, "ci_hi": 0.4337, "p": 0.0279, "n": 19, "sig": true}, {"ct": "B Cell", "r": -0.3857, "ci_lo": -0.5266, "ci_hi": 0.49, "p": 0.1544, "n": 15, "sig": false}, {"ct": "CD4+ T Cell", "r": -0.5055, "ci_lo": -0.5658, "ci_hi": 0.5638, "p": 0.0808, "n": 13, "sig": false}, {"ct": "CD8+ T Cell", "r": -0.4941, "ci_lo": -0.5154, "ci_hi": 0.4773, "p": 0.0573, "n": 16, "sig": false}, {"ct": "Other T Cell", "r": -0.4209, "ci_lo": -0.4242, "ci_hi": 0.4038, "p": 0.0417, "n": 24, "sig": true}, {"ct": "Other", "r": -0.3386, "ci_lo": -0.4637, "ci_hi": 0.4722, "p": 0.1571, "n": 19, "sig": false}, {"ct": "PBMC Pseudobulk", "r": -0.486, "ci_lo": -0.4373, "ci_hi": 0.4678, "p": 0.0336, "n": 19, "sig": true}], "colors": {"blue": "#0072B2", "orange": "#E69F00", "green": "#009E73", "sky": "#56B4E9", "vermillion": "#D55E00", "pink": "#CC79A7", "yellow": "#F0E442", "black": "#000000", "gray": "#999999", "lgray": "#cccccc"}};
+const C = D.colors;
+
+const totalW = 940, totalH = 440;
+const mT = 50, mB = 40;
+const svg = d3.select("#fig2").attr("width", totalW).attr("height", totalH);
+const tip = d3.select("#tooltip");
+
+const pA = {x: 55, y: mT, w: 270, h: 330};
+const pB = {x: 380, y: mT, w: 165, h: 330};
+const pC = {x: 590, y: mT, w: 320, h: 330};
+
+// Panel labels
+[["A", pA.x-40, mT-22], ["B", pB.x-22, mT-22], ["C", pC.x-22, mT-22]].forEach(([l,x,y]) => {
+  svg.append("text").attr("class","panel-label").attr("x",x).attr("y",y).text(l);
+});
+svg.append("text").attr("class","fig-title").attr("x",totalW/2).attr("y",18)
+  .attr("text-anchor","middle").text("Fig. 2 · Cross-Species Pathway Conservation in Spaceflight");
+
+// ── Panel A: E1 – JAXA cfRNA vs. mouse liver NES scatter ─────────────────────
+(function() {
+  const gA = svg.append("g").attr("transform",`translate(${pA.x},${pA.y})`);
+  gA.append("text").attr("x",pA.w/2).attr("y",-8)
+    .attr("text-anchor","middle").attr("font-size","10px").attr("font-weight","bold")
+    .text("E1: Human cfRNA vs. mouse liver NES");
+  gA.append("text").attr("x",pA.w/2).attr("y",6)
+    .attr("text-anchor","middle").attr("font-size","8.5px").attr("fill","#555")
+    .text(`JAXA CFE (120d) · ${D.e1_n} Hallmark pathways · r = ${D.e1_r.toFixed(3)}*`);
+
+  const allX = D.e1_pts.map(d=>d.x), allY = D.e1_pts.map(d=>d.y);
+  const xPad = 0.2, yPad = 0.2;
+  const scX = d3.scaleLinear().domain([d3.min(allX)-xPad, d3.max(allX)+xPad]).range([0, pA.w]);
+  const scY = d3.scaleLinear().domain([d3.min(allY)-yPad, d3.max(allY)+yPad]).range([pA.h, 0]);
+
+  // Ref lines
+  [[scX(0), scX(0), 0, pA.h], [0, pA.w, scY(0), scY(0)]].forEach(([x1,x2,y1,y2]) => {
+    gA.append("line").attr("class","ref-line").attr("x1",x1).attr("x2",x2).attr("y1",y1).attr("y2",y2);
+  });
+
+  // OLS fit line
+  const meanX = d3.mean(allX), meanY = d3.mean(allY);
+  const slope = d3.sum(allX.map((x,i)=>(x-meanX)*(allY[i]-meanY))) /
+                d3.sum(allX.map(x=>(x-meanX)**2));
+  const b = meanY - slope*meanX;
+  const x0 = d3.min(allX)-xPad, x1 = d3.max(allX)+xPad;
+  gA.append("line").attr("x1",scX(x0)).attr("x2",scX(x1))
+    .attr("y1",scY(slope*x0+b)).attr("y2",scY(slope*x1+b))
+    .attr("stroke",C.blue).attr("stroke-width",1.5).attr("opacity",0.6);
+
+  // Dots
+  gA.selectAll(".dot").data(D.e1_pts).join("circle")
+    .attr("cx", d=>scX(d.x)).attr("cy", d=>scY(d.y)).attr("r",5)
+    .attr("fill", d => d.conc ? C.blue : C.vermillion)
+    .attr("opacity",0.8).attr("stroke","#fff").attr("stroke-width",0.5)
+    .on("mouseover", (ev,d) => tip.style("display","block").html(
+      `<b>${d.pw}</b><br>Mouse NES: ${d.x.toFixed(3)}<br>Human NES: ${d.y.toFixed(3)}<br>${d.conc ? "Concordant" : "Discordant"}`))
+    .on("mousemove", ev => tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+    .on("mouseout", () => tip.style("display","none"));
+
+  // Axes
+  gA.append("g").attr("transform",`translate(0,${pA.h})`).call(d3.axisBottom(scX).ticks(5)).selectAll("text").attr("font-size","8px");
+  gA.append("g").call(d3.axisLeft(scY).ticks(5)).selectAll("text").attr("font-size","8px");
+  gA.append("text").attr("class","axis-label").attr("x",pA.w/2).attr("y",pA.h+28)
+    .attr("text-anchor","middle").text("Mouse liver NES (mission-averaged)");
+  gA.append("text").attr("class","axis-label").attr("transform","rotate(-90)")
+    .attr("x",-pA.h/2).attr("y",-38).attr("text-anchor","middle").text("Human cfRNA NES (JAXA CFE)");
+
+  // r annotation
+  gA.append("text").attr("x",4).attr("y",12).attr("font-size","9px").attr("fill",C.blue)
+    .text(`r = ${D.e1_r.toFixed(3)}* (p = ${D.e1_p.toFixed(3)})`);
+
+  // Legend
+  [[C.blue,"Concordant"],[C.vermillion,"Discordant"]].forEach(([col,lbl],i) => {
+    gA.append("circle").attr("cx",i*90+6).attr("cy",pA.h+46).attr("r",5).attr("fill",col);
+    gA.append("text").attr("x",i*90+13).attr("y",pA.h+50).attr("font-size","8.5px").text(lbl);
+  });
+})();
+
+// ── Panel B: E2 – Duration effect ────────────────────────────────────────────
+(function() {
+  const gB = svg.append("g").attr("transform",`translate(${pB.x},${pB.y})`);
+  gB.append("text").attr("x",pB.w/2).attr("y",-8)
+    .attr("text-anchor","middle").attr("font-size","10px").attr("font-weight","bold")
+    .text("E2: Duration effect");
+  gB.append("text").attr("x",pB.w/2).attr("y",6)
+    .attr("text-anchor","middle").attr("font-size","8.5px").attr("fill","#555")
+    .text("cfRNA vs. mouse Spearman r");
+
+  const missions = D.e2.map(d=>d.label);
+  const yB = d3.scaleBand().domain(missions).range([0, pB.h*0.5]).padding(0.3);
+  const xB = d3.scaleLinear().domain([-0.5, 0.7]).range([0, pB.w]);
+  const xRef = xB(0);
+
+  // Zero line
+  gB.append("line").attr("x1",xRef).attr("x2",xRef).attr("y1",0).attr("y2",pB.h*0.5)
+    .attr("stroke","#333").attr("stroke-width",1.2);
+
+  D.e2.forEach(d => {
+    const y0 = yB(d.label);
+    const bw = yB.bandwidth();
+    const col = d.sig ? C.blue : C.lgray;
+    gB.append("rect")
+      .attr("x", d.r >= 0 ? xRef : xB(d.r)).attr("y",y0)
+      .attr("width", Math.abs(xB(d.r)-xRef)).attr("height",bw)
+      .attr("fill",col).attr("opacity",0.9)
+      .on("mouseover", ev => tip.style("display","block").html(
+        `<b>${d.label}</b><br>r = ${d.r.toFixed(3)}<br>95% CI: [${d.ci_lo.toFixed(3)}, ${d.ci_hi.toFixed(3)}]<br>${d.sig ? "p < 0.05 *" : "NS"}`))
+      .on("mousemove", ev => tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+      .on("mouseout", () => tip.style("display","none"));
+    // CI
+    gB.append("line").attr("x1",xB(d.ci_lo)).attr("x2",xB(d.ci_hi))
+      .attr("y1",y0+bw/2).attr("y2",y0+bw/2).attr("stroke","#333").attr("stroke-width",1.5);
+    // Label
+    gB.append("text").attr("x",-3).attr("y",y0+bw/2+3)
+      .attr("text-anchor","end").attr("font-size","8.5px").text(d.label);
+    // r value
+    const labelX = d.r >= 0 ? xB(d.ci_hi)+3 : xB(d.ci_lo)-3;
+    gB.append("text").attr("x",labelX).attr("y",y0+bw/2+3)
+      .attr("text-anchor", d.r >= 0 ? "start" : "end").attr("font-size","8.5px")
+      .attr("fill", d.sig ? "#000" : "#888")
+      .text(`${d.r >= 0 ? "+" : ""}${d.r.toFixed(3)}${d.sig ? "*" : ""}`);
+  });
+
+  // Duration arrow annotation
+  const arrowY = pB.h * 0.5 + 20;
+  gB.append("text").attr("x",pB.w/2).attr("y",arrowY)
+    .attr("text-anchor","middle").attr("font-size","8.5px").attr("fill",C.blue)
+    .text("Longer mission → stronger conservation");
+
+  gB.append("g").attr("transform",`translate(0,${pB.h*0.5})`).call(d3.axisBottom(xB).tickValues([-0.4,-0.2,0,0.2,0.4,0.6])).selectAll("text").attr("font-size","8px");
+  gB.append("text").attr("class","axis-label").attr("x",pB.w/2).attr("y",pB.h*0.5+30)
+    .attr("text-anchor","middle").text("Spearman r (vs. mouse NES)");
+
+  // NS legend
+  gB.append("rect").attr("x",0).attr("y",pB.h*0.5+46).attr("width",10).attr("height",10).attr("fill",C.lgray);
+  gB.append("text").attr("x",13).attr("y",pB.h*0.5+54).attr("font-size","8.5px").text("NS");
+  gB.append("rect").attr("x",38).attr("y",pB.h*0.5+46).attr("width",10).attr("height",10).attr("fill",C.blue);
+  gB.append("text").attr("x",51).attr("y",pB.h*0.5+54).attr("font-size","8.5px").text("p<0.05");
+})();
+
+// ── Panel C: E3 – cfRNA cellular origin ──────────────────────────────────────
+(function() {
+  const gC = svg.append("g").attr("transform",`translate(${pC.x},${pC.y})`);
+  gC.append("text").attr("x",pC.w/2).attr("y",-8)
+    .attr("text-anchor","middle").attr("font-size","10px").attr("font-weight","bold")
+    .text("E3: cfRNA cellular origin");
+  gC.append("text").attr("x",pC.w/2).attr("y",6)
+    .attr("text-anchor","middle").attr("font-size","8.5px").attr("fill","#555")
+    .text("I4 cfRNA vs. PBMC cell-type NES (R+1 vs pre)");
+
+  const cts = D.e3.map(d=>d.ct);
+  const yC = d3.scaleBand().domain(cts).range([0, pC.h]).padding(0.25);
+  const xC = d3.scaleLinear().domain([-0.75, 0.2]).range([0, pC.w]);
+  const xRef = xC(0);
+
+  // Zero ref
+  gC.append("line").attr("x1",xRef).attr("x2",xRef).attr("y1",0).attr("y2",pC.h)
+    .attr("stroke","#333").attr("stroke-width",1.2);
+
+  D.e3.forEach(d => {
+    const y0 = yC(d.ct);
+    const bw = yC.bandwidth();
+    const col = d.sig ? C.pink : "#BBBBDD";
+    gC.append("rect")
+      .attr("x", d.r >= 0 ? xRef : xC(d.r)).attr("y",y0)
+      .attr("width", Math.abs(xC(d.r)-xRef)).attr("height",bw)
+      .attr("fill",col).attr("opacity",0.9)
+      .on("mouseover", ev => tip.style("display","block").html(
+        `<b>${d.ct}</b><br>r = ${d.r.toFixed(3)}<br>95% CI: [${d.ci_lo.toFixed(3)}, ${d.ci_hi.toFixed(3)}]<br>p = ${d.p.toFixed(4)}${d.sig ? " *" : ""}<br>n = ${d.n} pathways`))
+      .on("mousemove", ev => tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+      .on("mouseout", () => tip.style("display","none"));
+    // CI
+    gC.append("line").attr("x1",xC(d.ci_lo)).attr("x2",xC(d.ci_hi))
+      .attr("y1",y0+bw/2).attr("y2",y0+bw/2).attr("stroke","#333").attr("stroke-width",1.5);
+    // Label
+    gC.append("text").attr("x",-3).attr("y",y0+bw/2+3)
+      .attr("text-anchor","end").attr("font-size","8.5px").text(d.ct);
+    // r value
+    gC.append("text").attr("x",xC(d.ci_lo)-3).attr("y",y0+bw/2+3)
+      .attr("text-anchor","end").attr("font-size","8px")
+      .attr("fill", d.sig ? "#000" : "#888")
+      .text(`${d.r.toFixed(3)}${d.sig ? "*" : ""}`);
+  });
+
+  gC.append("g").attr("transform",`translate(0,${pC.h})`).call(d3.axisBottom(xC).ticks(6)).selectAll("text").attr("font-size","8px");
+  gC.append("text").attr("class","axis-label").attr("x",pC.w/2).attr("y",pC.h+28)
+    .attr("text-anchor","middle").text("Spearman r (cell-type NES vs. cfRNA NES)");
+
+  // Anti-corr annotation
+  gC.append("text").attr("x",xRef-4).attr("y",12)
+    .attr("text-anchor","end").attr("font-size","8px").attr("fill",C.vermillion)
+    .text("← All negative (anti-correlated)");
+
+  // Legend
+  [[C.pink,"p<0.05"],["#BBBBDD","NS"]].forEach(([col,lbl],i) => {
+    gC.append("rect").attr("x",i*65).attr("y",pC.h+44).attr("width",10).attr("height",10).attr("fill",col);
+    gC.append("text").attr("x",i*65+13).attr("y",pC.h+52).attr("font-size","8.5px").text(lbl);
+  });
+})();
+</script>
+</body>
+</html>
