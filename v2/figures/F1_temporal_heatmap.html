@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>F1 Temporal: I4 PBMC Pathway Response</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; background:#fff; }
+  h2   { font-size:14px; font-weight:bold; margin-bottom:4px; }
+  .subtitle { font-size:10px; color:#555; margin-bottom:16px; }
+  .cell-rect { stroke:#fff; stroke-width:1px; cursor:pointer; }
+  .cell-rect:hover { stroke:#333; stroke-width:1.5px; }
+  .cell-label { font-size:9px; fill:#fff; pointer-events:none; font-weight:bold; }
+  .panel-title { font-size:11px; font-weight:bold; fill:#222; }
+  #tooltip { position:absolute; background:rgba(0,0,0,0.78); color:#fff;
+    padding:5px 9px; border-radius:4px; font-size:10px; pointer-events:none; display:none; }
+  .phase-label { font-size:8.5px; fill:#555; }
+</style>
+</head>
+<body>
+<h2>F1 Temporal · I4 PBMC Cell-Type Pathway Response Across Timepoints</h2>
+<div class="subtitle">
+  Hallmark fGSEA · padj&lt;0.05 · 5 comparisons × 10 cell types<br>
+  <b>FP1–LP3:</b> vs. pre-flight &nbsp;|&nbsp; <b>RP1–RP3:</b> vs. R+1 (recovery)
+</div>
+<div id="tooltip"></div>
+<svg id="main"></svg>
+<script>
+const D = {"sheets": ["I4-FP1", "I4-LP1", "I4-LP3", "I4-RP1", "I4-RP3"], "sheet_labels": ["FP1 | R+1 vs pre", "LP1 | R+45 vs pre", "LP3 | R+45/82 vs pre", "RP1 | R+45 vs R+1", "RP3 | R+45/82 vs R+1"], "cell_types": ["CD14+ Monocyte", "CD16+ Monocyte", "Dendritic Cell", "Natural Killer Cell", "B Cell", "CD4+ T Cell", "CD8+ T Cell", "Other T Cell", "Other", "PBMC Pseudobulk"], "cells": [{"row": 0, "col": 0, "n": 3, "nes_mean": 1.34}, {"row": 0, "col": 1, "n": 3, "nes_mean": 1.222}, {"row": 0, "col": 2, "n": 5, "nes_mean": 1.17}, {"row": 0, "col": 3, "n": 4, "nes_mean": 1.36}, {"row": 0, "col": 4, "n": 1, "nes_mean": 1.208}, {"row": 0, "col": 5, "n": 1, "nes_mean": 1.19}, {"row": 0, "col": 6, "n": 2, "nes_mean": 1.264}, {"row": 0, "col": 7, "n": 2, "nes_mean": 1.203}, {"row": 0, "col": 8, "n": 3, "nes_mean": 1.406}, {"row": 0, "col": 9, "n": 2, "nes_mean": 1.33}, {"row": 1, "col": 0, "n": 3, "nes_mean": 1.268}, {"row": 1, "col": 1, "n": 7, "nes_mean": 1.39}, {"row": 1, "col": 2, "n": 8, "nes_mean": 1.512}, {"row": 1, "col": 3, "n": 4, "nes_mean": 1.594}, {"row": 1, "col": 4, "n": 6, "nes_mean": 1.522}, {"row": 1, "col": 5, "n": 5, "nes_mean": 1.617}, {"row": 1, "col": 6, "n": 0, "nes_mean": 1.281}, {"row": 1, "col": 7, "n": 9, "nes_mean": 1.705}, {"row": 1, "col": 8, "n": 1, "nes_mean": 1.185}, {"row": 1, "col": 9, "n": 2, "nes_mean": 1.441}, {"row": 2, "col": 0, "n": 3, "nes_mean": 1.692}, {"row": 2, "col": 1, "n": 0, "nes_mean": 1.156}, {"row": 2, "col": 2, "n": 2, "nes_mean": 1.373}, {"row": 2, "col": 3, "n": 0, "nes_mean": 1.203}, {"row": 2, "col": 4, "n": 0, "nes_mean": 1.292}, {"row": 2, "col": 5, "n": 0, "nes_mean": 1.359}, {"row": 2, "col": 6, "n": 1, "nes_mean": 1.354}, {"row": 2, "col": 7, "n": 2, "nes_mean": 1.319}, {"row": 2, "col": 8, "n": 2, "nes_mean": 1.762}, {"row": 2, "col": 9, "n": 3, "nes_mean": 1.39}, {"row": 3, "col": 0, "n": 10, "nes_mean": 1.576}, {"row": 3, "col": 1, "n": 6, "nes_mean": 1.42}, {"row": 3, "col": 2, "n": 9, "nes_mean": 1.362}, {"row": 3, "col": 3, "n": 8, "nes_mean": 1.338}, {"row": 3, "col": 4, "n": 5, "nes_mean": 1.471}, {"row": 3, "col": 5, "n": 6, "nes_mean": 1.49}, {"row": 3, "col": 6, "n": 2, "nes_mean": 1.472}, {"row": 3, "col": 7, "n": 10, "nes_mean": 1.496}, {"row": 3, "col": 8, "n": 1, "nes_mean": 1.359}, {"row": 3, "col": 9, "n": 6, "nes_mean": 1.522}, {"row": 4, "col": 0, "n": 6, "nes_mean": 1.479}, {"row": 4, "col": 1, "n": 1, "nes_mean": 1.107}, {"row": 4, "col": 2, "n": 3, "nes_mean": 1.169}, {"row": 4, "col": 3, "n": 2, "nes_mean": 1.49}, {"row": 4, "col": 4, "n": 4, "nes_mean": 1.607}, {"row": 4, "col": 5, "n": 1, "nes_mean": 1.461}, {"row": 4, "col": 6, "n": 1, "nes_mean": 1.419}, {"row": 4, "col": 7, "n": 3, "nes_mean": 1.354}, {"row": 4, "col": 8, "n": 0, "nes_mean": 1.309}, {"row": 4, "col": 9, "n": 2, "nes_mean": 1.316}], "max_sig": 10};
+
+const cellW = 58, cellH = 36;
+const mL = 180, mT = 90, mB = 30, mR = 40;
+const nRow = D.sheets.length, nCol = D.cell_types.length;
+const W = mL + nCol*cellW + mR, H = mT + nRow*cellH + mB + 40;
+
+const svg = d3.select("#main").attr("width", W).attr("height", H);
+const tip = d3.select("#tooltip");
+
+const maxN = D.max_sig;
+// Color: 0=white, max=deep blue
+const colorN = d3.scaleSequential().domain([0, maxN]).interpolator(d3.interpolateBlues);
+
+const g = svg.append("g").attr("transform", `translate(${mL},${mT})`);
+
+// Column headers
+g.selectAll(".colLabel").data(D.cell_types).join("text")
+  .attr("x", (d,i) => i*cellW + cellW/2)
+  .attr("y", -8)
+  .attr("text-anchor","end")
+  .attr("font-size","9px")
+  .attr("transform", (d,i) => `rotate(-40, ${i*cellW+cellW/2}, -8)`)
+  .text(d => d);
+
+// Row labels
+const rowLabels = D.sheet_labels;
+g.selectAll(".rowLabel").data(rowLabels).join("text")
+  .attr("x", -8).attr("y", (d,i) => i*cellH + cellH/2 + 3.5)
+  .attr("text-anchor","end").attr("font-size","9px")
+  .text(d => d);
+
+// Phase brackets
+const fpY = 0, rpY = 3*cellH;
+g.append("text").attr("class","phase-label")
+  .attr("x", -mL+4).attr("y", fpY + 1.5*cellH)
+  .attr("dominant-baseline","middle").attr("font-size","9px").attr("fill","#0072B2")
+  .text("← vs. pre-flight");
+g.append("text").attr("class","phase-label")
+  .attr("x", -mL+4).attr("y", rpY + cellH)
+  .attr("dominant-baseline","middle").attr("font-size","9px").attr("fill","#E69F00")
+  .text("← recovery");
+
+// Divider line between FP/LP and RP
+g.append("line")
+  .attr("x1",-4).attr("x2", nCol*cellW+4)
+  .attr("y1", rpY-2).attr("y2", rpY-2)
+  .attr("stroke","#aaa").attr("stroke-dasharray","4,3").attr("stroke-width",1);
+
+// Cells
+const cellG = g.selectAll(".cellG").data(D.cells).join("g")
+  .attr("transform", d => `translate(${d.col*cellW}, ${d.row*cellH})`);
+
+cellG.append("rect").attr("class","cell-rect")
+  .attr("width", cellW).attr("height", cellH)
+  .attr("fill", d => d.n === 0 ? "#f5f5f5" : colorN(d.n))
+  .on("mouseover", (ev,d) => {
+    const sheet = D.sheets[d.row], ct = D.cell_types[d.col];
+    tip.style("display","block")
+       .html(`<b>${ct}</b><br><b>${D.sheet_labels[d.row]}</b><br>Sig pathways: ${d.n}<br>Mean |NES|: ${d.nes_mean.toFixed(2)}`);
+  })
+  .on("mousemove", ev => tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+  .on("mouseout", () => tip.style("display","none"));
+
+cellG.filter(d => d.n > 0).append("text").attr("class","cell-label")
+  .attr("x", cellW/2).attr("y", cellH/2 + 4)
+  .attr("text-anchor","middle")
+  .style("fill", d => d.n >= maxN*0.6 ? "#fff" : "#333")
+  .text(d => d.n);
+
+// Legend
+const legG = svg.append("g").attr("transform", `translate(${mL}, ${mT + nRow*cellH + 15})`);
+const legW = 120, legH = 12;
+const legGrad = svg.append("defs").append("linearGradient").attr("id","legG2")
+  .attr("x1","0%").attr("x2","100%");
+d3.range(0,1.01,0.1).forEach(t => {
+  legGrad.append("stop").attr("offset",`${t*100}%`).attr("stop-color", colorN(t*maxN));
+});
+legG.append("rect").attr("width",legW).attr("height",legH).style("fill","url(#legG2)");
+legG.append("text").attr("y",-3).attr("font-size","9px").text("Sig pathways (padj<0.05)");
+[0, Math.round(maxN/2), maxN].forEach(v => {
+  const x = v/maxN*legW;
+  legG.append("line").attr("x1",x).attr("x2",x).attr("y1",legH).attr("y2",legH+4).attr("stroke","#666");
+  legG.append("text").attr("x",x).attr("y",legH+12).attr("text-anchor","middle").attr("font-size","8px").text(v);
+});
+</script>
+</body>
+</html>
