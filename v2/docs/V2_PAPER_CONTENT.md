@@ -217,6 +217,36 @@ The absence of conservation in I4 (r ≈ 0, p = 0.52) contrasts sharply with the
 #### Connection to E1/E2 (cfRNA)
 The I4 cfRNA analysis (E2) used bulk plasma cfRNA (R+1: NES = −0.095 vs. mouse, NS). The cell-type-resolved snRNA-seq reveals that MYC_TARGETS_V1 suppression is universally present across PBMCs at R+1 — suggesting cfRNA dilution of cell-type-specific signals may explain the weak cross-species correlation for short missions.
 
+#### F1-Temporal: Delayed and Persistent PBMC Response ★★
+
+**Comparison across 5 timepoints:**
+
+| Timepoint | Comparison | Total sig (sum across cell types) | Interpretation |
+|-----------|-----------|-----------------------------------|----------------|
+| FP1 | R+1 vs. pre | 26 | Immediate spaceflight response |
+| LP1 | R+45 vs. pre | **45** | Peak divergence from baseline |
+| LP3 | R+45+R+82 vs. pre | 13 | Partial normalization by R+82 |
+| RP1 | R+45 vs. R+1 | **63** | Peak recovery dynamics |
+| RP3 | R+45+R+82 vs. R+1 | 21 | Diminishing recovery signal |
+
+**Key finding: LP1 > FP1** — At R+45 (45 days after landing), PBMCs are MORE transcriptionally distinct from pre-flight than at R+1. The spaceflight-induced state persists/amplifies during early return, paralleling the mouse liver T2 overshoot (93% pathway recovery with mean 1.75× overshoot fraction).
+
+**RP1 peak**: The R+45 vs. R+1 comparison (recovery phase) shows 63 total significant pathway-cell type combinations — the highest of all timepoints — indicating active transcriptional reorganization during post-flight recovery.
+
+Cell types most affected at R+45 (LP1):
+- Other T Cell: 9 sig pathways (vs. 2 at FP1)
+- Dendritic Cell: 8 (vs. 5)
+- CD16+ Monocyte: 7 (vs. 3)
+- B Cell: 6 (vs. 1)
+
+**Cross-species parallel**: The human PBMC temporal pattern mirrors mouse liver T2 — peak transcriptional response occurs not at flight landing (R+1 ≡ ISS-T) but during post-return recovery (R+45 ≡ LAR with overshoot).
+
+**Scripts and outputs:**
+- R fGSEA: `v2/scripts/run_i4_snrnaseq_temporal_fgsea.R`
+- Python heatmap: `v2/scripts/i4_temporal_heatmap.py`
+- Data: `v2/processed/F1_scrna/i4_snrnaseq_temporal_fgsea.csv` (834 rows, 5 sheets × 10 cell types)
+- Figure: `v2/figures/F1_temporal_heatmap.html`
+
 #### RRRM-1 scRNA-seq Pipeline (in progress)
 OSD-904~934 raw FASTQ availability confirmed (31 datasets, ~3 TB total). STARsolo pipeline prepared for Cayuga:
 - **Selected 4 tissues** matching benchmark: OSD-918 (blood), OSD-920 (eye), OSD-924 (muscle), OSD-934 (skin)
