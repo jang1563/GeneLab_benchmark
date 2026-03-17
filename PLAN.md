@@ -1,6 +1,6 @@
 # GeneLab_benchmark: Comprehensive Space Biology Multi-Modal Benchmark
-**최종 수정**: 2026-03-09
-**버전**: 1.5 (scGPT Foundation Model + Figure Review)
+**최종 수정**: 2026-03-13
+**버전**: 1.6 (v2 Temporal/Cross-species complete + RRRM-1 scRNA-seq pipeline)
 
 ---
 
@@ -820,26 +820,35 @@ GeneLab_benchmark/
 
 ## 11. Future Extensions (v2.0 · v3.0 개요)
 
-### v2.0: 다종·단일세포·마이크로바이옴 (별도 논문)
+### v2.0: 시간·다종·단일세포 (별도 논문, 진행 중)
 
-**전제 조건**:
-- v1.0 출판 완료
-- C. elegans OSDR 데이터 존재·품질 직접 확인
-- 인간 데이터 SpaceOmicsBench 연동 방식 확정
+**현재 상태 (2026-03-13)**:
+- Category T (Temporal): ✅ 완료 — T1 ISS-T/LAR, T2 회복, T3 노화×우주비행
+- Category E (Cross-Species): ✅ 완료 — E1 NES 보존(r=0.352), E2 체류기간, E3 cfRNA 기원
+- Category F1 (Human PBMC): ✅ 완료 — I4 snRNA-seq 10 세포유형 fGSEA + 시계열
+- Category F2 (Mouse scRNA): 🔄 진행 중 — RRRM-1 파이프라인 완료, 벤치마크 태스크 정의 완료
+- 통합 Figure 3개: Fig1_temporal, Fig2_crossspecies, Fig3_pbmc_celltype
 
-**Category E (Cross-Species Conservation)**:
-- E1: 마우스 간 LFC → 인간 혈액 LFC 경로 수준 보존도 (Spearman r on GSEA NES)
-- E2: C. elegans 유전체 → 마우스 ortholog 공통 DEG (검증 후 설계)
-- E3: Arabidopsis ROS/열충격 유전자 → 마우스 상동 유전자 발현
-- ※ E1: DEG 직접 비교 대신 **경로(pathway) 수준 rank correlation** 사용 (Direct DEG list comparison은 조직 유형이 달라 부적합)
+**Category T (Temporal Dynamics)** — ✅ 완료:
+- T1: ISS-T vs LAR 보존 아티팩트 정량 (GC AUROC ≥ FLT → 보존 방법 지배)
+- T2: LAR 회복 서명 (RR-8: 25/27 pathway 회복, MYC overshoot) ★★★
+- T3: 노화×우주비행 상호작용 (OLD AUROC=0.945 vs YNG=0.679, Δ=+0.266) ★★★
 
-**Category F (Single-Cell & Spatial)**:
-- F1: RRRM-2 뇌 snRNA-seq (GLDS-589) — 세포유형별 spaceflight 반응
-- F2: RRRM-1 다조직 scRNA-seq (GLDS-746~762) — 세포 조성 변화 (검증 후)
-- F3: RR-3 심장 Visium (GLDS-270) — 공간 영역별 분류
-- F4: RR-18 뇌 GeoMx (GLDS-613~628) — 뇌 영역별 분류
+**Category E (Cross-Species Conservation)** — ✅ 완료:
+- E1: 마우스 간 bulk NES ↔ JAXA cfRNA Hallmark NES (Spearman r=0.352)
+- E2: 단기 I4 PBMC (r=−0.095) vs 장기 JAXA (r=+0.352) → Δr=+0.446 (체류기간 효과)
+- E3: cfRNA 세포 기원 분석 (항상관 발견)
 
-**Category G (Microbiome)**:
+**Category F (Single-Cell)** — F1 완료, F2 진행 중:
+- F1: I4 PBMC snRNA-seq 세포유형별 fGSEA (GLDS-562, 10 types × 50 pathways)
+- F2: RRRM-1 다조직 scRNA-seq (OSD-918/920/924/934) — 38K cells, 4 tissues
+  - STARsolo → QC → 광범위 주석 → doublet 제거 완료
+  - F2-A~D 벤치마크 태스크 정의 완료 (RRRM1_SC_BENCHMARK_PLAN_V3.md)
+  - **블로커**: FLT/GC 레이블 매핑 필요 (SRX→조건 매핑 CSV 준비됨)
+- F3: RR-3 심장 Visium (GLDS-270) — 향후
+- F4: RR-18 뇌 GeoMx (GLDS-613~628) — 향후
+
+**Category G (Microbiome)** — 향후:
 - G1: ISS 환경 마이크로바이옴 출처 분류 (OSD-572,573)
 - G2: 마우스 장 마이크로바이옴 flight vs ground
 - G3: 인간 마이크로바이옴 시계열 (OSD-630)

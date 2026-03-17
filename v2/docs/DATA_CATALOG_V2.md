@@ -12,7 +12,7 @@
 |---------|----------|-------------|---------|
 | Mouse liver fGSEA (6 missions) | `processed/fgsea/liver/*.csv` | Per-mission Hallmark/KEGG/Reactome NES values | T1/T2/E1 |
 | RR-8 liver temporal groups | `data/mouse/liver/` | ISS-T and LAR samples (BSL/FLT/GC × 3 groups) | T1/T2 |
-| RR-8 liver aging cohort | `data/mouse/liver/` | OLD (56wk) + YNG (16wk) mice | T3 |
+| RR-8 liver aging cohort | `data/mouse/liver/` | OLD (32 week) + YNG (10 to 12 week) mice | T3 |
 | T1/T2/T3 results | `v2/processed/T_temporal/*.json` | Computed results (recovery ratios, AUROCs, etc.) | Done |
 
 ---
@@ -62,14 +62,14 @@
 
 ### F1/F2: RRRM-1/RR-8 Multi-Tissue scRNA-seq
 
-**GO decision: CONDITIONAL — need HPC Cayuga for large file processing**
+**GO decision: YES — RRRM-1 benchmark-aligned subset recovered on Cayuga**
 
 | Dataset | OSDR ID | Expected size | Status |
 |---------|---------|--------------|--------|
-| RRRM-1 multi-tissue scRNA | GLDS-746 to GLDS-762 | >10 GB per dataset | Not downloaded |
+| RRRM-1 multi-tissue scRNA | Selected subset: OSD-918, OSD-920, OSD-924, OSD-934 | ~308 GB raw FASTQ for selected subset | Downloaded, processed, and benchmark-ready |
 | RR-8 bone marrow scRNA | TBD from OSDR catalog | ~5-10 GB | Not downloaded |
 
-**Next step:** Check OSDR GLDS-746~762 for processed count matrices (h5/loom/h5ad) before downloading raw FASTQ.
+**Current RRRM-1 state:** per-sample `Solo.out`, `.h5ad`, merged object, tissue-level processed objects, and broad cell-type annotations are available on Cayuga scratch. See `RRRM1_BENCHMARK_READY_MANIFEST_2026-03-12.csv`.
 
 **HPC pipeline (Cayuga):**
 ```
@@ -81,7 +81,7 @@
 6. Composition analysis (F2): fraction FLT vs. GC per cell type
 ```
 
-**Script to create:** `v2/scripts/scanpy_scrna_pipeline.py` (Phase 3)
+**Current script set:** `rrrm1_starsolo_job.sh`, `rrrm1_h5ad_convert.py`, `rrrm1_merge_h5ad.py`, `rrrm1_initial_scanpy.py`, `rrrm1_broad_annotate.py`, `rrrm1_annotation_summary.py`
 
 **Expected cell types (based on tissue):**
 - Spleen: T cells, B cells, NK cells, macrophages, dendritic cells

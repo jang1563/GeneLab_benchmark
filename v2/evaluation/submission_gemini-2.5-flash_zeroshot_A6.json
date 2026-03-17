@@ -5,7 +5,12 @@
   "tier": "3",
   "llm_variant": "zero_shot",
   "n_genes_in_prompt": 50,
-  "submission_date": "2026-03-08",
+  "submission_date": "2026-03-10",
+  "parse_summary": {
+    "total": 37,
+    "parsed": 32,
+    "failed": 5
+  },
   "predictions": {
     "fold_RR-1_test": {
       "Mmus_C57-6J_EYE_GC_Rep1_M33": 0.95,
@@ -50,5 +55,9 @@
       "M36": 0.95,
       "M37": 0.98
     }
+  },
+  "evaluation_context": {
+    "end_to_end_auroc": 0.40441176470588236,
+    "parsed_only_auroc": 0.37896825396825395
   }
 }

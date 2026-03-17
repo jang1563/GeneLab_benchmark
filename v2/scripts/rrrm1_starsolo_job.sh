@@ -7,18 +7,17 @@
 #SBATCH --time=12:00:00
 #SBATCH --output=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/starsolo_%A_%a.out
 #SBATCH --error=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/starsolo_%A_%a.err
-#SBATCH --array=0-3
+#SBATCH --array=0-3%1
 #
 # rrrm1_starsolo_job.sh
 # STARsolo alignment for RRRM-1 scRNA-seq (OSD-918/920/924/934)
-# STAR 2.7.11b, GRCm39-2024-A index (pre-built)
-# 10x Chromium 3' v3 chemistry (16bp CB + 12bp UMI)
+# STAR 2.7.3a, GRCm39-2024-A index (pre-built)
+# 10x Chromium 3' v3 chemistry (R1=16bp CB + 12bp UMI, R2=cDNA)
 #
 # Submit: /opt/ohpc/pub/software/slurm/24.05.2/bin/sbatch rrrm1_starsolo_job.sh
 
 set -euo pipefail
 
-# ── Array index → OSD mapping ──────────────────────────────────────────────
 OSD_NUMS=(918 920 924 934)
 TISSUES=(blood eye muscle skin)
 OSD_N="${OSD_NUMS[$SLURM_ARRAY_TASK_ID]}"
@@ -28,64 +27,72 @@ echo "=== RRRM-1 STARsolo: OSD-${OSD_N} (${TISSUE}) ==="
 echo "Job: ${SLURM_JOB_ID}, Array: ${SLURM_ARRAY_TASK_ID}"
 date
 
-# ── Paths ──────────────────────────────────────────────────────────────────
 SCRATCH="/athena/masonlab/scratch/users/jak4013/rrrm1_scrna"
 FASTQ_DIR="${SCRATCH}/OSD-${OSD_N}/fastq"
 OUT_DIR="${SCRATCH}/OSD-${OSD_N}/starsolo"
-STAR_BIN="/opt/ohpc/pub/software/STAR/2.7.11b/bin/Linux_x86_64_static/STAR"
+STAR_BIN="/opt/ohpc/pub/software/STAR/2.7.3a/bin/Linux_x86_64_static/STAR"
 GENOME_DIR="/athena/masonlab/scratch/users/jak4013/reference/cellranger/refdata-gex-GRCm39-2024-A/star"
-WHITELIST="/athena/masonlab/scratch/users/jak4013/software/cellranger-6.1.1/lib/python/cellranger/barcodes/3M-february-2018.txt.gz"
+WHITELIST="/athena/masonlab/scratch/users/jak4013/reference/3M-february-2018.txt"
 
 mkdir -p "${OUT_DIR}" "${SCRATCH}/logs"
 
-# ── Check FASTQs exist ─────────────────────────────────────────────────────
 if [[ ! -d "${FASTQ_DIR}" ]] || [[ -z "$(ls "${FASTQ_DIR}"/*.fastq.gz 2>/dev/null)" ]]; then
     echo "ERROR: No FASTQs found at ${FASTQ_DIR}"
     echo "Run: bash rrrm1_osdr_download.sh ${OSD_N}"
     exit 1
 fi
 
-# ── Pair R1 (cDNA) and R2 (CB+UMI) files ─────────────────────────────────
-# For 10x Chromium: R1 = CB+UMI (28bp), R2 = cDNA read
-# STAR convention: --readFilesIn cDNA_reads CB_UMI_reads
-R2_FILES=$(ls "${FASTQ_DIR}"/*_R1_*.fastq.gz 2>/dev/null || ls "${FASTQ_DIR}"/*_R1.fastq.gz 2>/dev/null || true)
-R1_FILES=$(ls "${FASTQ_DIR}"/*_R2_*.fastq.gz 2>/dev/null || ls "${FASTQ_DIR}"/*_R2.fastq.gz 2>/dev/null || true)
+# 10x convention on these files:
+#   R1 = barcode+UMI (28 bp)
+#   R2 = cDNA read
+# STAR convention:
+#   --readFilesIn cDNA_reads CB_UMI_reads
+CDNA_FILES=$(find "${FASTQ_DIR}" -maxdepth 1 -type f \( -name "*_R2_*.fastq.gz" -o -name "*_R2.fastq.gz" \) | sort | paste -sd, -)
+CBUMI_FILES=$(find "${FASTQ_DIR}" -maxdepth 1 -type f \( -name "*_R1_*.fastq.gz" -o -name "*_R1.fastq.gz" \) | sort | paste -sd, -)
 
-# Fallback: all R1 for CB+UMI, all R2 for cDNA
-if [[ -z "$R1_FILES" ]] || [[ -z "$R2_FILES" ]]; then
-    echo "Using glob pattern for FASTQ pairing..."
-    R1_FILES=$(ls "${FASTQ_DIR}"/*R1*.fastq.gz | tr '\n' ',')
-    R2_FILES=$(ls "${FASTQ_DIR}"/*R2*.fastq.gz | tr '\n' ',')
+if [[ -z "${CDNA_FILES}" ]] || [[ -z "${CBUMI_FILES}" ]]; then
+    echo "ERROR: Could not build paired R2/R1 FASTQ lists in ${FASTQ_DIR}"
+    exit 1
 fi
 
-# Remove trailing comma
-R1_FILES=$(echo "$R1_FILES" | sed 's/,$//')
-R2_FILES=$(echo "$R2_FILES" | sed 's/,$//')
+N_CDNA=$(echo "${CDNA_FILES}" | tr ',' '\n' | wc -l)
+N_CBUMI=$(echo "${CBUMI_FILES}" | tr ',' '\n' | wc -l)
+if [[ "${N_CDNA}" -ne "${N_CBUMI}" ]]; then
+    echo "ERROR: cDNA file count (${N_CDNA}) != CB+UMI file count (${N_CBUMI})"
+    exit 1
+fi
 
-echo "cDNA reads (R2): ${R2_FILES}"
-echo "CB+UMI reads (R1): ${R1_FILES}"
+echo "cDNA reads (R2): ${CDNA_FILES}"
+echo "CB+UMI reads (R1): ${CBUMI_FILES}"
+echo "Paired libraries: ${N_CDNA}"
+
+TWOPASS_MODE="Basic"
+if [[ "${OSD_N}" == "934" ]]; then
+    # OSD-934 overflows STAR 2.7.3a 2-pass junction insertion limits.
+    TWOPASS_MODE="None"
+fi
 
 # ── STARsolo ──────────────────────────────────────────────────────────────
 echo ""
 echo "Running STARsolo..."
 
-${STAR_BIN} \
+"${STAR_BIN}" \
     --runThreadN 16 \
     --genomeDir "${GENOME_DIR}" \
-    --readFilesIn ${R2_FILES} ${R1_FILES} \
+    --readFilesIn "${CDNA_FILES}" "${CBUMI_FILES}" \
     --readFilesCommand zcat \
     --soloType CB_UMI_Simple \
     --soloCBwhitelist "${WHITELIST}" \
     --soloCBstart 1 --soloCBlen 16 \
     --soloUMIstart 17 --soloUMIlen 12 \
-    --soloCBmatchWLtype 1MM_multi_Nbase_pseudocounts \
-    --soloUMIfiltering MultiGeneUMI_CR \
-    --soloCellFilter EmptyDrops_CR \
+    --soloBarcodeReadLength 0 \
+    --soloCBmatchWLtype 1MM_multi_pseudocounts \
+    --soloUMIfiltering MultiGeneUMI \
+    --soloCellFilter CellRanger2.2 3000 0.99 10 \
     --soloFeatures Gene GeneFull \
-    --outSAMtype BAM SortedByCoordinate \
-    --outSAMattributes NH HI nM AS CR UR CB UB GX GN sS sQ sM \
+    --outSAMtype None \
     --outFileNamePrefix "${OUT_DIR}/" \
-    --twopassMode Basic \
+    --twopassMode "${TWOPASS_MODE}" \
     2>&1 | tee "${SCRATCH}/logs/starsolo_${OSD_N}.log"
 
 echo ""

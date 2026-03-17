@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>F2-C RRRM-1 LOAO Classifier AUROC per Cell Type</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 11px; margin: 20px; background: #fff; }
+  h2 { font-size: 13px; font-weight: bold; }
+  .panel { display: inline-block; vertical-align: top; margin: 15px; }
+  .panel-title { font-weight: bold; font-size: 12px; margin-bottom: 4px; }
+  .axis text { font-size: 9px; }
+  .bar-sig { fill: #0072B2; }
+  .bar-ns { fill: #999999; }
+  .ref-line { stroke: #D55E00; stroke-width: 1.5; stroke-dasharray: 4,3; }
+</style>
+</head>
+<body>
+<h2>F2-C: RRRM-1 scRNA-seq LOAO Classifier AUROC (FLT vs GC, per cell type)</h2>
+<p style="font-size:10px;color:#666">
+  Blue = p &lt; 0.05 (permutation). Orange dashed = v1.0 bulk AUROC reference.
+  Error bars = 95% bootstrap CI.
+</p>
+<div id="charts"></div>
+<script>
+const allData = [{"tissue": "blood", "cell_type": "b_cell", "auroc": 0.9789590254706534, "ci_low": 0.9619385019100863, "ci_high": 0.9920386558360211, "p_perm": 0.0001999600079984003, "n_cells": 320, "significant": true}, {"tissue": "blood", "cell_type": "erythroid", "auroc": 0.6114494385089118, "ci_low": 0.6005015026928286, "ci_high": 0.6229701514662477, "p_perm": 0.0001999600079984003, "n_cells": 12829, "significant": true}, {"tissue": "blood", "cell_type": "neutrophil", "auroc": 0.4978103917623387, "ci_low": 0.40688772159987874, "ci_high": 0.5877942792305093, "p_perm": 0.5306938612277544, "n_cells": 190, "significant": false}, {"tissue": "blood", "cell_type": "t_cell", "auroc": 0.9765201685731486, "ci_low": 0.9511092604930045, "ci_high": 0.9926901586157174, "p_perm": 0.0001999600079984003, "n_cells": 206, "significant": true}, {"tissue": "eye", "cell_type": "corneal_conjunctival_epithelial", "auroc": 0.6092551738628007, "ci_low": 0.5404902961891773, "ci_high": 0.6743514898562976, "p_perm": 0.0009998000399920016, "n_cells": 281, "significant": true}, {"tissue": "eye", "cell_type": "endothelial_perivascular", "auroc": 0.2999021526418787, "ci_low": 0.1811923076923077, "ci_high": 0.4197715161091991, "p_perm": 0.9994001199760048, "n_cells": 101, "significant": false}, {"tissue": "eye", "cell_type": "immune", "auroc": 0.4838709677419355, "ci_low": 0.40177218531979775, "ci_high": 0.569788605693661, "p_perm": 0.6466706658668266, "n_cells": 180, "significant": false}, {"tissue": "eye", "cell_type": "muller_glia", "auroc": 0.6775622379207434, "ci_low": 0.6339703062756098, "ci_high": 0.7194862066183773, "p_perm": 0.0001999600079984003, "n_cells": 669, "significant": true}, {"tissue": "eye", "cell_type": "photoreceptor_like", "auroc": 0.5708667897781945, "ci_low": 0.5524097066549589, "ci_high": 0.5894745865034968, "p_perm": 0.0001999600079984003, "n_cells": 7093, "significant": true}, {"tissue": "eye", "cell_type": "retinal_neuronal", "auroc": 0.8180039656311963, "ci_low": 0.7979686022294711, "ci_high": 0.8384646744331168, "p_perm": 0.0001999600079984003, "n_cells": 1562, "significant": true}, {"tissue": "eye", "cell_type": "stromal_fibroblast", "auroc": 0.6713956170703576, "ci_low": 0.5896401515151516, "ci_high": 0.7523006579772884, "p_perm": 0.0001999600079984003, "n_cells": 221, "significant": true}, {"tissue": "eye", "cell_type": "_bulk_v1", "auroc": 0.7, "ci_low": 0.7, "ci_high": 0.7, "p_perm": null, "n_cells": 0, "significant": false, "is_bulk": true}, {"tissue": "muscle", "cell_type": "endothelial", "auroc": 0.9580827232858746, "ci_low": 0.9475488276931228, "ci_high": 0.9672987169929467, "p_perm": 0.0001999600079984003, "n_cells": 2660, "significant": true}, {"tissue": "muscle", "cell_type": "fibroadipogenic_progenitor", "auroc": 0.9526214582842792, "ci_low": 0.9354344330824358, "ci_high": 0.9673799933500004, "p_perm": 0.0001999600079984003, "n_cells": 2134, "significant": true}, {"tissue": "muscle", "cell_type": "fibroblast_matrix", "auroc": 0.7679224628200678, "ci_low": 0.6913339840131519, "ci_high": 0.835400094852583, "p_perm": 0.0001999600079984003, "n_cells": 626, "significant": true}, {"tissue": "muscle", "cell_type": "macrophage_myeloid", "auroc": 0.956413075767828, "ci_low": 0.9462620974599872, "ci_high": 0.9654095710410802, "p_perm": 0.0001999600079984003, "n_cells": 6079, "significant": true}, {"tissue": "muscle", "cell_type": "myonuclear_structural", "auroc": 0.8227826086956522, "ci_low": 0.77337605857865, "ci_high": 0.8679374321179231, "p_perm": 0.0001999600079984003, "n_cells": 365, "significant": true}, {"tissue": "muscle", "cell_type": "pericyte_smooth_muscle", "auroc": 0.7494019138755981, "ci_low": 0.6529531352178823, "ci_high": 0.8299042419277494, "p_perm": 0.0001999600079984003, "n_cells": 302, "significant": true}, {"tissue": "muscle", "cell_type": "satellite_myogenic_progenitor", "auroc": 0.7594153419396138, "ci_low": 0.6829976463873412, "ci_high": 0.8281041769859765, "p_perm": 0.0001999600079984003, "n_cells": 786, "significant": true}, {"tissue": "muscle", "cell_type": "t_nk_lymphocyte", "auroc": 0.9568933330868898, "ci_low": 0.9467826587559892, "ci_high": 0.9660176099650508, "p_perm": 0.0001999600079984003, "n_cells": 4258, "significant": true}, {"tissue": "muscle", "cell_type": "_bulk_v1", "auroc": 0.758, "ci_low": 0.758, "ci_high": 0.758, "p_perm": null, "n_cells": 0, "significant": false, "is_bulk": true}, {"tissue": "skin", "cell_type": "t_nk_lymphocyte", "auroc": 1.0, "ci_low": 0.9999999999999999, "ci_high": 1.0, "p_perm": 0.0001999600079984003, "n_cells": 112, "significant": true}, {"tissue": "skin", "cell_type": "_bulk_v1", "auroc": 0.821, "ci_low": 0.821, "ci_high": 0.821, "p_perm": null, "n_cells": 0, "significant": false, "is_bulk": true}];
+const tissues = ["blood", "eye", "muscle", "skin"];
+
+const W = 320, H = 200;
+const margin = {top: 20, right: 20, bottom: 90, left: 55};
+const innerW = W - margin.left - margin.right;
+const innerH = H - margin.top - margin.bottom;
+
+const container = d3.select("#charts");
+
+tissues.forEach(tissue => {
+  const tData = allData.filter(d => d.tissue === tissue && !d.is_bulk);
+  const bulkRef = allData.find(d => d.tissue === tissue && d.is_bulk);
+  if (tData.length === 0) return;
+
+  const cellTypes = tData.map(d => d.cell_type);
+  const x = d3.scaleBand().domain(cellTypes).range([0, innerW]).padding(0.3);
+  const y = d3.scaleLinear().domain([0, 1]).range([innerH, 0]);
+
+  const div = container.append("div").attr("class","panel");
+  div.append("div").attr("class","panel-title")
+    .text(tissue.charAt(0).toUpperCase() + tissue.slice(1));
+  const svg = div.append("svg").attr("width",W).attr("height",H);
+  const g = svg.append("g").attr("transform",`translate(${margin.left},${margin.top})`);
+
+  // Chance line at 0.5
+  g.append("line")
+    .attr("x1",0).attr("x2",innerW).attr("y1",y(0.5)).attr("y2",y(0.5))
+    .attr("stroke","#ccc").attr("stroke-dasharray","3,2");
+
+  // v1.0 bulk reference line
+  if (bulkRef) {
+    g.append("line")
+      .attr("class","ref-line")
+      .attr("x1",0).attr("x2",innerW)
+      .attr("y1",y(bulkRef.auroc)).attr("y2",y(bulkRef.auroc));
+    g.append("text")
+      .attr("x",innerW-2).attr("y",y(bulkRef.auroc)-3)
+      .attr("text-anchor","end").style("font-size","8px").style("fill","#D55E00")
+      .text("bulk v1");
+  }
+
+  // Bars
+  g.selectAll(".bar")
+    .data(tData)
+    .join("rect")
+    .attr("class", d => d.significant ? "bar-sig" : "bar-ns")
+    .attr("x", d => x(d.cell_type))
+    .attr("y", d => y(Math.max(d.auroc, 0.5)))
+    .attr("width", x.bandwidth())
+    .attr("height", d => Math.abs(y(d.auroc) - y(0.5)))
+    .attr("fill", d => d.significant ? "#0072B2" : "#999");
+
+  // Error bars (CI)
+  g.selectAll(".ci")
+    .data(tData)
+    .join("line")
+    .attr("x1", d => x(d.cell_type) + x.bandwidth()/2)
+    .attr("x2", d => x(d.cell_type) + x.bandwidth()/2)
+    .attr("y1", d => y(isNaN(d.ci_high) ? d.auroc : d.ci_high))
+    .attr("y2", d => y(isNaN(d.ci_low) ? d.auroc : d.ci_low))
+    .attr("stroke", "#333").attr("stroke-width", 1);
+
+  // AUROC labels
+  g.selectAll(".lbl")
+    .data(tData)
+    .join("text")
+    .attr("x", d => x(d.cell_type) + x.bandwidth()/2)
+    .attr("y", d => y(d.auroc) - 3)
+    .attr("text-anchor","middle").style("font-size","8px")
+    .text(d => d.auroc.toFixed(2));
+
+  // Axes
+  g.append("g").attr("transform",`translate(0,${innerH})`).call(
+    d3.axisBottom(x).tickSize(2)
+  ).selectAll("text")
+    .attr("transform","rotate(-40)").style("text-anchor","end").style("font-size","8px");
+
+  g.append("g").call(
+    d3.axisLeft(y).ticks(5).tickFormat(d3.format(".2f")).tickSize(2)
+  );
+
+  // Y label
+  svg.append("text").attr("transform","rotate(-90)")
+    .attr("x",-(H/2)).attr("y",14).attr("text-anchor","middle")
+    .style("font-size","9px").text("AUROC");
+});
+</script>
+</body>
+</html>

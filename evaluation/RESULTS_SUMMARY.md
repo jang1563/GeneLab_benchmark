@@ -1,6 +1,6 @@
-# GeneLab_benchmark v1.2 — Results Summary
+# GeneLab_benchmark v1.3 — Results Summary
 
-Generated: 2026-03-01 (Updated: 2026-03-09)
+Generated: 2026-03-01 (Updated: 2026-03-13)
 
 ## Hypothesis Results
 
@@ -333,4 +333,8 @@ Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 
 | Held-Out | A4 Thymus (RR-23) + A5 Skin (RR-7) | Complete |
 | T1-T3 Temporal | ISS-T/LAR, Recovery, Age×Spaceflight | Complete |
 | J2 DGE Pipeline | 9 missions × 3 pipelines (DESeq2/edgeR/limma-voom) | Complete |
-| **Figures** | **4 main + 4 supplementary (HTML/SVG)** | **Complete** |
+| **v1 Figures** | **4 main + 4 supplementary (HTML/SVG)** | **Complete** |
+| **v2 E1-E3** | **Cross-species NES, duration effect, cfRNA origin** | **Complete** |
+| **v2 F1** | **I4 PBMC cell-type fGSEA (10 types × 50 pathways)** | **Complete** |
+| **v2 Figures** | **3 integrated main figures (D3.js v7)** | **Complete** |
+| **RRRM-1 scRNA** | **4 tissues (blood/eye/muscle/skin), 38K cells, annotated** | **Pipeline complete, F2 tasks next** |
