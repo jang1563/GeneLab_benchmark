@@ -15,6 +15,8 @@ import sys
 from pathlib import Path
 
 import scanpy as sc
+from scipy import io as spio
+from scipy import sparse
 import pandas as pd
 import numpy as np
 
@@ -35,11 +37,34 @@ def load_starsolo(osd_n: int, tissue: str) -> sc.AnnData:
         filt_dir = solo_dir / gene_mode / "filtered"
         if filt_dir.exists():
             print(f"  Loading {gene_mode}/filtered from {filt_dir}")
-            adata = sc.read_10x_mtx(
-                str(filt_dir),
-                var_names="gene_symbols",
-                cache=False,
-            )
+            matrix_path = filt_dir / "matrix.mtx"
+            barcodes_path = filt_dir / "barcodes.tsv"
+            features_path = filt_dir / "features.tsv"
+            if not matrix_path.exists():
+                raise FileNotFoundError(f"Missing matrix file: {matrix_path}")
+            if not barcodes_path.exists():
+                raise FileNotFoundError(f"Missing barcode file: {barcodes_path}")
+            if not features_path.exists():
+                raise FileNotFoundError(f"Missing feature file: {features_path}")
+
+            matrix = spio.mmread(matrix_path)
+            if not sparse.issparse(matrix):
+                matrix = sparse.csr_matrix(matrix)
+            else:
+                matrix = matrix.tocsr()
+
+            barcodes = pd.read_csv(barcodes_path, sep="\t", header=None)
+            features = pd.read_csv(features_path, sep="\t", header=None)
+            if features.shape[1] < 2:
+                raise ValueError(f"Unexpected features.tsv format in {features_path}")
+
+            adata = sc.AnnData(X=matrix.T.tocsr())
+            adata.obs_names = barcodes.iloc[:, 0].astype(str).to_numpy()
+            adata.var_names = features.iloc[:, 1].astype(str).to_numpy()
+            adata.var["gene_ids"] = features.iloc[:, 0].astype(str).to_numpy()
+            if features.shape[1] > 2:
+                adata.var["feature_type"] = features.iloc[:, 2].astype(str).to_numpy()
+            adata.var_names_make_unique()
             break
     else:
         raise FileNotFoundError(f"No filtered STARsolo output found in {solo_dir}")

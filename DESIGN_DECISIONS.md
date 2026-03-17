@@ -557,12 +557,13 @@ Transfer Pattern Summary (DD-17):
 
 ## DD-20: T2 Recovery Fraction Convention (v2.0)
 
-**결정**: `recovery_fraction = 1 - |delta_return / delta_flight|`. Preservation-matched comparisons: FLT_ISS-T vs BSL_ISS-T, FLT_LAR vs BSL_LAR.
+**결정**: direction-aware `recovery_fraction = 1 - (delta_return / delta_flight)`. Preservation-matched comparisons: FLT_ISS-T vs BSL_ISS-T, FLT_LAR vs BSL_LAR.
 
 **규칙**:
 - 1.0 = complete recovery
 - 0.0 = no recovery
-- <0 = overshoot (continued divergence)
+- >1 = overshoot past baseline (direction reversal)
+- <0 = continued divergence in the original direction
 - `|delta_flight| < 0.1` 인 pathway는 계산에서 제외
 
 **구현**: `v2/scripts/temporal_analysis.py` T2, `RECOVERY_MIN_DELTA = 0.1`.

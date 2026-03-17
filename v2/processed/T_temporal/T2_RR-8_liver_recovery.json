@@ -2,20 +2,20 @@
   "task": "T2",
   "tissue": "liver",
   "mission": "RR-8",
-  "generated_at": "2026-03-07T21:17:45.628468",
+  "generated_at": "2026-03-10T17:09:19.152527",
   "pca_distances": {
-    "BSL_ISS-T\u2192FLT_ISS-T": 77.27048793934206,
-    "BSL_LAR\u2192FLT_LAR": 50.357380175446686,
-    "FLT_ISS-T\u2192FLT_LAR": 92.01793533203659,
-    "BSL_ISS-T\u2192BSL_LAR": 84.570197790341,
-    "BSL_ISS-T\u2192FLT_LAR": 97.67460941922995,
-    "BSL_LAR\u2192FLT_ISS-T": 92.90422015122802
+    "BSL_ISS-T\u2192FLT_ISS-T": 77.27048793934203,
+    "BSL_LAR\u2192FLT_LAR": 50.35738017544666,
+    "FLT_ISS-T\u2192FLT_LAR": 92.01793533203652,
+    "BSL_ISS-T\u2192BSL_LAR": 84.57019779034097,
+    "BSL_ISS-T\u2192FLT_LAR": 97.67460941922992,
+    "BSL_LAR\u2192FLT_ISS-T": 92.90422015122793
   },
-  "pca_recovery_ratio": 0.6517026295340289,
+  "pca_recovery_ratio": 0.6517026295340288,
   "pca_variance_explained": [
-    0.12826591857548097,
+    0.1282659185754808,
     0.08228152875391812,
-    0.06474135149829943
+    0.0647413514982993
   ],
   "pathway_recovery": {
     "HALLMARK_ADIPOGENESIS": {
@@ -319,10 +319,13 @@
       "direction_reversed": true
     }
   },
-  "classification_recovery": {
+  "classification_shift": {
+    "analysis_type": "descriptive_projection",
+    "reference_set": "BSL_ISS-T vs FLT_ISS-T training samples",
+    "caveat": "FLT_ISS-T probabilities are in-sample training-set scores; use as descriptive reference, not held-out validation evidence",
     "mean_flt_isst_flight_prob": 0.9996929605912325,
-    "mean_flt_lar_flight_prob": 0.4040746749991572,
-    "interpretation": "LAR flight_prob < ISS-T flight_prob \u2192 recovery"
+    "mean_flt_lar_flight_prob": 0.40407467499915906,
+    "interpretation": "FLT_LAR projects closer to baseline than FLT_ISS-T"
   },
   "groups": {
     "FLT_ISS-T": 20,

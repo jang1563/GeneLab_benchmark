@@ -582,7 +582,7 @@ def run_t2():
     print("=" * 70)
     print("T2: LAR Recovery Signature")
     print("  Preservation-matched analysis: FLT_X vs BSL_X (same method)")
-    print("  Recovery fraction (DD-20): 1 - |delta_return / delta_flight|")
+    print("  Recovery fraction (DD-20): direction-aware 1 - (delta_return / delta_flight)")
     print("=" * 70)
 
     T_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -784,7 +784,7 @@ def run_t2():
         n_flt_isst = flt_isst_mask.sum()
         n_flt_lar = flt_lar_mask.sum()
 
-        clf_recovery = None
+        clf_shift = None
         if n_bsl_isst >= 3 and n_flt_isst >= 3 and n_flt_lar >= 2:
             train_mask = bsl_isst_mask | flt_isst_mask
             X_train_rec = X_all[train_mask]
@@ -819,17 +819,23 @@ def run_t2():
             )))[:, list(clf.classes_).index(1)]
             mean_flt_isst_prob = flt_isst_proba.mean()
 
-            clf_recovery = {
+            clf_shift = {
+                "analysis_type": "descriptive_projection",
+                "reference_set": "BSL_ISS-T vs FLT_ISS-T training samples",
+                "caveat": (
+                    "FLT_ISS-T probabilities are in-sample training-set scores; "
+                    "use as descriptive reference, not held-out validation evidence"
+                ),
                 "mean_flt_isst_flight_prob": mean_flt_isst_prob,
                 "mean_flt_lar_flight_prob": mean_flt_lar_prob,
-                "interpretation": "LAR flight_prob < ISS-T flight_prob → recovery"
+                "interpretation": "FLT_LAR projects closer to baseline than FLT_ISS-T"
                                   if mean_flt_lar_prob < mean_flt_isst_prob
-                                  else "No recovery signal"
+                                  else "No baselineward projection shift detected"
             }
             print(f"  FLT_ISS-T mean flight_prob: {mean_flt_isst_prob:.3f}")
             print(f"  FLT_LAR mean flight_prob: {mean_flt_lar_prob:.3f}")
             if mean_flt_lar_prob < mean_flt_isst_prob:
-                print(f"  → Recovery: LAR prob {mean_flt_lar_prob:.3f} < ISS-T prob {mean_flt_isst_prob:.3f}")
+                print(f"  → Descriptive shift: LAR prob {mean_flt_lar_prob:.3f} < ISS-T prob {mean_flt_isst_prob:.3f}")
 
         # Save results
         mission_results = {
@@ -841,7 +847,7 @@ def run_t2():
             "pca_recovery_ratio": pca_recovery,
             "pca_variance_explained": pca.explained_variance_ratio_[:3].tolist(),
             "pathway_recovery": pathway_recovery,
-            "classification_recovery": clf_recovery,
+            "classification_shift": clf_shift,
             "groups": {k: int(v.sum()) for k, v in groups.items()},
         }
 

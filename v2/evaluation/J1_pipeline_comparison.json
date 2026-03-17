@@ -1,7 +1,7 @@
 {
   "task": "J1",
   "description": "Pipeline version comparison: GLDS-48 (v1) vs GLDS-168 (v2)",
-  "generated_at": "2026-03-07T19:29:26.817559",
+  "generated_at": "2026-03-10T17:05:30.789081",
   "data": {
     "glds48": {
       "n_genes": 22885,
@@ -99,68 +99,68 @@
       {
         "animal_id": "M25",
         "condition": "FLT",
-        "pearson_r": 0.9190198424791449,
+        "pearson_r": 0.9190198424791494,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M26",
         "condition": "FLT",
-        "pearson_r": 0.8950943305030947,
+        "pearson_r": 0.8950943305030952,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M28",
         "condition": "FLT",
-        "pearson_r": 0.9165742739550361,
+        "pearson_r": 0.9165742739550362,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M30",
         "condition": "FLT",
-        "pearson_r": 0.9188150969182642,
+        "pearson_r": 0.918815096918266,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M36",
         "condition": "GC",
-        "pearson_r": 0.9188800252066575,
+        "pearson_r": 0.9188800252066589,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M37",
         "condition": "GC",
-        "pearson_r": 0.923283201534137,
+        "pearson_r": 0.9232832015341389,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M38",
         "condition": "GC",
-        "pearson_r": 0.9292454636525789,
+        "pearson_r": 0.9292454636525814,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M39",
         "condition": "GC",
-        "pearson_r": 0.9262299526981046,
+        "pearson_r": 0.926229952698106,
         "p_value": 0.0,
         "n_genes_valid": 21314
       },
       {
         "animal_id": "M40",
         "condition": "GC",
-        "pearson_r": 0.9315949485818057,
+        "pearson_r": 0.9315949485818034,
         "p_value": 0.0,
         "n_genes_valid": 21314
       }
     ],
-    "mean_pearson_r": 0.9198596817254248
+    "mean_pearson_r": 0.9198596817254262
   },
   "gene_selection": {
     "jaccard_top100": 0.08695652173913043,
@@ -170,12 +170,47 @@
     "variance_rank_spearman_p": 0.0
   },
   "ml_performance": {
-    "glds48_auroc": 0.5510204081632653,
+    "comparison_scope": "same matched RR-1 animals only",
+    "matched_animals": [
+      "M25",
+      "M26",
+      "M28",
+      "M30",
+      "M36",
+      "M37",
+      "M38",
+      "M39",
+      "M40"
+    ],
+    "matched_glds48_samples": [
+      "Mmus_C57-6J_LVR_FLT_C_Rep1_M25",
+      "Mmus_C57-6J_LVR_FLT_C_Rep2_M26",
+      "Mmus_C57-6J_LVR_FLT_C_Rep4_M28",
+      "Mmus_C57-6J_LVR_FLT_C_Rep5_M30",
+      "Mmus_C57-6J_LVR_GC_C_Rep1_M36",
+      "Mmus_C57-6J_LVR_GC_C_Rep2_M37",
+      "Mmus_C57-6J_LVR_GC_C_Rep3_M38",
+      "Mmus_C57-6J_LVR_GC_C_Rep4_M39",
+      "Mmus_C57-6J_LVR_GC_C_Rep5_M40"
+    ],
+    "matched_glds168_samples": [
+      "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep1_M25",
+      "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep2_M26",
+      "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep3_M28",
+      "Mmus_C57-6J_LVR_RR1_FLT_noERCC_Rep5_M30",
+      "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep1_M36",
+      "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep2_M37",
+      "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep3_M38",
+      "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep4_M39",
+      "Mmus_C57-6J_LVR_RR1_GC_noERCC_Rep5_M40"
+    ],
+    "glds48_auroc": 0.7,
     "glds168_auroc": 0.6,
-    "delta": 0.048979591836734726,
+    "delta": -0.09999999999999998,
     "n_train": 250,
-    "n_test_48": 14,
+    "n_test_48": 9,
     "n_test_168": 9,
+    "n_test_common": 9,
     "n_pca_components": 50
   },
   "conclusion": {
@@ -183,7 +218,7 @@
     "note": "Significant differences between pipeline versions",
     "criteria": {
       "expression_correlation": "mean r = 0.9199 (threshold: 0.95)",
-      "auroc_delta": "0.048979591836734726"
+      "auroc_delta": "-0.09999999999999998"
     }
   }
 }

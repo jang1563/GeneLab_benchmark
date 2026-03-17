@@ -2,19 +2,19 @@
   "task": "T2",
   "tissue": "liver",
   "mission": "RR-6",
-  "generated_at": "2026-03-07T21:16:52.908004",
+  "generated_at": "2026-03-10T17:08:43.731371",
   "pca_distances": {
-    "BSL_ISS-T\u2192FLT_ISS-T": 84.61392805040576,
-    "BSL_LAR\u2192FLT_LAR": 71.28579570130442,
-    "FLT_ISS-T\u2192FLT_LAR": 92.37475252468121,
-    "BSL_ISS-T\u2192BSL_LAR": 74.85272039232707,
-    "BSL_ISS-T\u2192FLT_LAR": 68.28834225683708,
-    "BSL_LAR\u2192FLT_ISS-T": 125.84222557571918
+    "BSL_ISS-T\u2192FLT_ISS-T": 84.61392805040573,
+    "BSL_LAR\u2192FLT_LAR": 71.28579570130435,
+    "FLT_ISS-T\u2192FLT_LAR": 92.37475252468109,
+    "BSL_ISS-T\u2192BSL_LAR": 74.85272039232704,
+    "BSL_ISS-T\u2192FLT_LAR": 68.28834225683697,
+    "BSL_LAR\u2192FLT_ISS-T": 125.84222557571916
   },
-  "pca_recovery_ratio": 0.8424829971117571,
+  "pca_recovery_ratio": 0.8424829971117566,
   "pca_variance_explained": [
-    0.3849356135244723,
-    0.0791061359691748,
+    0.3849356135244726,
+    0.07910613596917454,
     0.043915113576985576
   ],
   "pathway_recovery": {
@@ -319,10 +319,13 @@
       "direction_reversed": false
     }
   },
-  "classification_recovery": {
+  "classification_shift": {
+    "analysis_type": "descriptive_projection",
+    "reference_set": "BSL_ISS-T vs FLT_ISS-T training samples",
+    "caveat": "FLT_ISS-T probabilities are in-sample training-set scores; use as descriptive reference, not held-out validation evidence",
     "mean_flt_isst_flight_prob": 0.9995417646917482,
-    "mean_flt_lar_flight_prob": 0.18544688340153348,
-    "interpretation": "LAR flight_prob < ISS-T flight_prob \u2192 recovery"
+    "mean_flt_lar_flight_prob": 0.18544688340153154,
+    "interpretation": "FLT_LAR projects closer to baseline than FLT_ISS-T"
   },
   "groups": {
     "FLT_ISS-T": 10,

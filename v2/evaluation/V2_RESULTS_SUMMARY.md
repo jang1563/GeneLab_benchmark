@@ -1,6 +1,6 @@
 # GeneLab_benchmark v2.0 — Results Summary
 
-Generated: 2026-03-07
+Generated: 2026-03-10 (Updated: 2026-03-13)
 
 ## Overview
 
@@ -68,12 +68,14 @@ R < 1 → FLT_LAR is closer to baseline than FLT_ISS-T (recovery toward baseline
 
 **Top recovered (RR-8)**: MYC targets V1 (2.49), Protein secretion (2.14), MYC targets V2 (1.92) — strong overshoot past baseline
 
-### Classification Recovery
+### Classification Shift (Descriptive)
 
 | Mission | FLT_ISS-T flight_prob | FLT_LAR flight_prob | Interpretation |
 |---|---|---|---|
-| RR-6 | 1.000 | **0.185** | Strong recovery |
-| RR-8 | 1.000 | **0.404** | Moderate recovery |
+| RR-6 | 1.000 | **0.185** | FLT_LAR projects closer to baseline than FLT_ISS-T |
+| RR-8 | 1.000 | **0.404** | FLT_LAR projects closer to baseline than FLT_ISS-T |
+
+`FLT_ISS-T` probabilities are in-sample reference scores from the training contrast (`BSL_ISS-T` vs `FLT_ISS-T`), so this block should be read as a descriptive projection shift, not held-out validation evidence of recovery.
 
 ---
 
@@ -125,9 +127,9 @@ ISS LEO dose rate ≈ 0.200-0.230 mGy/day. All missions 6.45-8.05 mGy total. Ran
 | Mean expression correlation | **0.920** | > 0.95 | Below threshold |
 | Top-100 gene Jaccard | 0.087 | — | Very low overlap |
 | Variance rank Spearman rho | 0.747 | — | Moderate |
-| AUROC delta (168 - 48) | **+0.049** | < 0.05 | Marginal |
+| AUROC delta (168 - 48, matched 9 animals) | **-0.100** | < 0.05 | Exceeds threshold |
 
-**Finding**: Pipeline version creates significant expression-level differences (r=0.92, not >0.99 as expected), but downstream ML performance is minimally affected (AUROC delta +0.049). Gene selection is highly sensitive to pipeline version (Jaccard 0.087 for top-100 genes).
+**Finding**: Pipeline version creates significant expression-level differences (r=0.92, not >0.99 as expected), and the matched-animal ML comparison now also shows a meaningful performance shift (GLDS-48=0.700 vs GLDS-168=0.600 on the same 9 RR-1 animals; delta -0.100). Gene selection remains highly sensitive to pipeline version (Jaccard 0.087 for top-100 genes).
 
 ---
 
@@ -137,36 +139,36 @@ ISS LEO dose rate ≈ 0.200-0.230 mGy/day. All missions 6.45-8.05 mGy total. Ran
 
 **Design**: Top-50 protein-coding genes by raw variance (filtered: no pseudogenes, ncRNAs, RIKEN clones, LOC loci), per-sample z-scores relative to LOMO training set. Zero-shot, temperature=0.
 
-### Per-Task AUROC
+### End-to-End AUROC
 
 | Task | Tissue | PCA-LR (Tier 1) | Llama-3.3-70B | DeepSeek-V3 | Gemini-2.5-Flash | Best LLM |
 |---|---|---|---|---|---|---|
-| A1 | Liver | 0.700 | 0.527 | 0.436 | 0.523 | 0.527 |
-| A2 | Gastrocnemius | 0.790 | 0.544 | 0.514 | 0.438 | 0.544 |
-| A3 | Kidney | 0.660 | 0.440 | 0.495 | 0.494 | 0.495 |
-| A4 | Thymus | 0.800 | 0.533 | 0.421 | 0.602 | 0.602 |
-| A5 | Skin | 0.830 | 0.451 | 0.467 | 0.580 | 0.580 |
-| A6 | Eye | 0.760 | 0.407 | 0.492 | 0.393 | 0.492 |
-| **Mean** | — | **0.757** | **0.484** | **0.471** | **0.505** | — |
+| A1 | Liver | 0.700 | 0.470 | 0.451 | 0.475 | 0.475 |
+| A2 | Gastrocnemius | 0.790 | 0.480 | 0.535 | 0.461 | 0.535 |
+| A3 | Kidney | 0.660 | 0.531 | 0.621 | 0.540 | 0.621 |
+| A4 | Thymus | 0.800 | 0.479 | 0.459 | 0.522 | 0.522 |
+| A5 | Skin | 0.830 | 0.446 | 0.482 | 0.560 | 0.560 |
+| A6 | Eye | 0.760 | 0.504 | 0.496 | 0.404 | 0.504 |
+| **Mean** | — | **0.757** | **0.485** | **0.507** | **0.494** | — |
 
-### Parse Rates
+### Parse-Aware Summary
 
-| Provider | Parsed | Total | Rate | max_tokens |
-|---|---|---|---|---|
-| DeepSeek-V3 | 549 | 549 | **100%** | 1000 |
-| Gemini-2.5-Flash | 512 | 549 | 93.3% | 1000 |
-| Llama-3.3-70B (Groq) | 489 | 549 | 89.1% | 500 |
+| Provider | Parsed | Total | Rate | Mean End-to-End AUROC | Mean Parsed-Only AUROC |
+|---|---|---|---|---|---|
+| DeepSeek-V3 | 549 | 549 | **100%** | **0.507** | **0.507** |
+| Gemini-2.5-Flash | 529 | 549 | 96.4% | 0.493 | 0.493 |
+| Llama-3.3-70B (Groq) | 489 | 549 | 89.1% | 0.485 | 0.443 |
 
-Parse failures mostly from truncated chain-of-thought reasoning (Groq at 500 tokens) or verbose responses without explicit A/B answer (Gemini).
+`end-to-end AUROC` treats parse failures as the neutral fallback score used in the submission JSON (`0.5`). `parsed-only AUROC` evaluates only samples where an explicit answer was recovered. Archived Groq and Gemini responses show frequent `length` / `FinishReason.MAX_TOKENS` truncation, so parse failure is part of the deployed pipeline behavior rather than a pure model-quality metric. The current parser now also recovers truncated first-sentence verdicts such as `consistent with spaceflight`, plus a very narrow set of archived `A1`/`A2` residual truncation patterns.
 
 ### Key Findings
 
-1. **All LLMs at chance level** (AUROC 0.47–0.51 mean) — zero-shot text classification cannot distinguish spaceflight from ground control
-2. **PCA-LR (Tier 1) outperforms by +0.25–0.29** mean AUROC — numerical ML on same features dramatically superior
-3. **No provider consistently best** — ranking varies by tissue (noise-level variation)
-4. **Systematic overconfidence**: All models predict 0.80–0.95 confidence regardless of correctness
-5. **Flight bias**: Models tend to predict Flight (A) more often than Ground (B), suggesting spaceflight-related training data bias
-6. **Tissue-specific gene quality confirmed**: Liver=CYP450s/MUPs, Skin=Keratins, Eye=Crystallins, Thymus=immune markers
+1. **All LLMs remain near chance** on end-to-end evaluation (mean AUROC 0.485-0.507) — zero-shot text classification does not reliably distinguish spaceflight from ground control.
+2. **PCA-LR (Tier 1) still outperforms by +0.25-0.27 mean AUROC** on the same tasks and feature budget.
+3. **Provider ranking depends on whether parsing is included**: DeepSeek leads on end-to-end because it parses cleanly (100%), while Groq drops from 0.485 end-to-end to 0.443 parsed-only mean AUROC due to concentrated parse loss.
+4. **Parse robustness is a first-class metric** for this benchmark: archived Groq and Gemini outputs frequently truncate before an explicit A/B answer. The parser now recovers explicit narrative verdicts, but provider comparisons should still report both end-to-end and parsed-only values.
+5. **Systematic overconfidence and flight bias remain visible** in the recovered answers, despite chance-level discrimination.
+6. **Tissue-specific gene quality is still evident**: liver=CYP450s/MUPs, skin=keratins, eye=crystallins, thymus=immune markers.
 
 ### Providers
 
@@ -178,6 +180,101 @@ Parse failures mostly from truncated chain-of-thought reasoning (Groq at 500 tok
 
 ---
 
+---
+
+## E1: Cross-Species NES Conservation
+
+**Question**: Is mouse spaceflight pathway activity conserved in human cfRNA?
+
+| Comparison | Species | Tissue/Source | Pathways | Spearman r |
+|---|---|---|---|---|
+| Mouse bulk liver NES ↔ JAXA cfRNA NES | Mouse → Human | Liver ↔ cfRNA | 50 Hallmark | **0.352** |
+
+**Interpretation**: Moderate cross-species conservation at the pathway level despite tissue mismatch (liver vs. cell-free RNA).
+
+---
+
+## E2: Duration Effect on Conservation
+
+**Question**: Does mission duration affect cross-species pathway conservation?
+
+| Mission | Duration | r vs. JAXA cfRNA |
+|---|---|---|
+| I4 (PBMC) | Short | **−0.095** |
+| JAXA | Long | **+0.352** |
+| **Δr** | — | **+0.446** |
+
+**Interpretation**: Longer spaceflight duration produces stronger cross-species pathway conservation.
+
+---
+
+## E3: cfRNA Cellular Origin
+
+**Question**: Does cfRNA reflect expected tissue-of-origin pathway signatures?
+
+**Finding**: Anti-correlation between cfRNA NES and expected tissue-specific pathway activity, suggesting cfRNA integrates multiple tissue sources rather than reflecting a single dominant origin.
+
+---
+
+## F1: I4 PBMC Cell-Type Pathway Analysis
+
+**Question**: Which PBMC cell types drive spaceflight pathway signals?
+
+- Source: GLDS-562 snRNA-seq, 10 cell types × 50 Hallmark pathways
+- Temporal analysis reveals delayed PBMC response that mirrors mouse T2 post-return overshoot pattern
+- Output: `v2/processed/F1_scrna/i4_snrnaseq_celltype_fgsea.csv`
+
+---
+
+## RRRM-1 scRNA-seq (F2, In Progress)
+
+### Pipeline Completion Status
+
+| Step | Status | Output |
+|---|---|---|
+| OSDR download (OSD-918/920/924/934) | Complete | Raw FASTQ on Cayuga scratch |
+| STARsolo alignment (GRCm39-2024-A) | Complete | `Solo.out/GeneFull/filtered/` |
+| H5AD conversion | Complete | Per-sample `.h5ad` |
+| Tissue merge | Complete | Per-tissue merged `.h5ad` |
+| QC + processing (Scanpy) | Complete | `*_processed.h5ad` |
+| Broad annotation (marker scores) | Complete | `*_annotated.h5ad` |
+| Doublet removal (Scrublet) | Complete | `*_hardened.h5ad` |
+| **F2 benchmark tasks** | **Next** | — |
+
+### Cell Inventory (post-hardening)
+
+| Tissue (OSD) | Total Cells | Top Cell Types | Doublet Removed |
+|---|---|---|---|
+| Blood (918) | 4,377 | erythroid 83%, B cell 7%, T cell 5% | 18 (0.4%) |
+| Eye (920) | 2,197 | retinal neuronal 52%, Muller glia 18% | 9 (0.4%) |
+| Muscle (924) | 15,669 | macrophage/myeloid 38%, T/NK 25%, FAP 13% | 349 (2.2%) |
+| Skin (934) | 15,838 | immune myeloid 37%, basal keratinocyte 30% | 38 (0.2%) |
+| **Total** | **38,081** | — | 414 (1.1%) |
+
+### Planned Benchmark Tasks
+
+| Task | Question | Method | Status |
+|---|---|---|---|
+| F2-A | Cell-type composition shift (FLT vs GC) | Wilcoxon per cell type, LOAO | Planned |
+| F2-B | Cell-type-specific pathway activity | Pseudo-bulk DESeq2 + fGSEA | Planned |
+| F2-C | Cell-level spaceflight classifier | PCA-LR per cell type, LOAO | Planned |
+| F2-D | Cross-species concordance (RRRM-1 ↔ I4) | NES Spearman r | Planned |
+
+**Blocker**: FLT/GC condition labels need mapping from OSDR metadata → h5ad obs. SRX→condition CSV available at `v2/docs/RRRM1_SRX_CONDITION_MAP.csv`.
+
+---
+
+## v2 Publication Figures
+
+| Figure | Content | Status |
+|---|---|---|
+| Fig1_temporal.html | T1 preservation artifact + T2 recovery + T3 age×spaceflight | Complete |
+| Fig2_crossspecies.html | E1 NES conservation + E2 duration + E3 cfRNA origin | Complete |
+| Fig3_pbmc_celltype.html | F1 cell-type NES heatmap + F1 temporal | Complete |
+| Fig4 (planned) | F2 scRNA-seq summary (composition, pathway, classifier, cross-species) | Planned |
+
+---
+
 ## Pipeline Status
 
 | Component | Status | Output Location |
@@ -186,6 +283,12 @@ Parse failures mostly from truncated chain-of-thought reasoning (Groq at 500 tok
 | T2: LAR Recovery | Complete | `v2/processed/T_temporal/T2_*.json` |
 | T3: Age × Spaceflight | Complete | `v2/processed/T_temporal/T3_*.json` |
 | T4: Radiation | Complete | `v2/processed/T4_radiation/` |
+| E1: Cross-Species NES | Complete | `v2/processed/E_crossspecies/` |
+| E2: Duration Effect | Complete | `v2/processed/E_crossspecies/` |
+| E3: cfRNA Origin | Complete | `v2/processed/E_crossspecies/` |
+| F1: I4 PBMC Cell-Type | Complete | `v2/processed/F1_scrna/` |
 | J1: Pipeline Comparison | Complete | `v2/evaluation/J1_pipeline_comparison.json` |
-| Tier 3: LLM Zero-Shot | **Complete** | `v2/processed/llm_responses/`, `v2/evaluation/` |
-| fGSEA v2: Additional DBs | Pending | — |
+| Tier 3: LLM Zero-Shot | Complete | `v2/processed/llm_responses/`, `v2/evaluation/` |
+| v2 Figures (3 main) | Complete | `v2/figures/` |
+| RRRM-1 scRNA Pipeline | Complete | Cayuga: `rrrm1_scrna/downstream_initial/` |
+| **F2 Benchmark Tasks** | **Next** | — |
