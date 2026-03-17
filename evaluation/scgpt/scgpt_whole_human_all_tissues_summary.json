@@ -1,0 +1,496 @@
+{
+  "model": "scgpt_whole_human",
+  "description": "scGPT whole_human fine-tuned on mouse spaceflight LOMO folds (10 epochs, batch=8, lr=1e-4, freeze=10/12 layers)",
+  "overall_mean_auroc": 0.6655,
+  "geneformer_mean_auroc": 0.476,
+  "baseline_mean_auroc": 0.758,
+  "delta_vs_geneformer": 0.1895,
+  "delta_vs_baseline": -0.0925,
+  "n_tasks": 6,
+  "n_folds_total": 21,
+  "tasks": {
+    "A1": {
+      "task": "A1",
+      "tissue": "liver",
+      "model": "scgpt_whole_human",
+      "mean_auroc": 0.6284,
+      "std_auroc": 0.2488,
+      "n_folds": 6,
+      "baseline_auroc": 0.588,
+      "geneformer_auroc": 0.486,
+      "delta_vs_baseline": 0.0404,
+      "delta_vs_geneformer": 0.1424,
+      "fold_results": [
+        {
+          "fold": "MHU-2",
+          "auroc": 0.888888888888889,
+          "best_epoch": 7,
+          "n_train": 187,
+          "n_test": 6,
+          "epoch_aurocs": [
+            0.0,
+            0.4444,
+            0.4444,
+            0.4444,
+            0.6667,
+            0.6667,
+            0.8889,
+            0.7778,
+            0.8889,
+            0.7778
+          ]
+        },
+        {
+          "fold": "RR-1",
+          "auroc": 0.2448979591836735,
+          "best_epoch": 3,
+          "n_train": 179,
+          "n_test": 14,
+          "epoch_aurocs": [
+            0.1633,
+            0.102,
+            0.2449,
+            0.2245,
+            0.1224,
+            0.1429,
+            0.2041,
+            0.1633,
+            0.1837,
+            0.1837
+          ]
+        },
+        {
+          "fold": "RR-3",
+          "auroc": 0.5833333333333334,
+          "best_epoch": 2,
+          "n_train": 181,
+          "n_test": 12,
+          "epoch_aurocs": [
+            0.5,
+            0.5833,
+            0.3889,
+            0.3611,
+            0.3889,
+            0.3889,
+            0.3333,
+            0.3056,
+            0.2778,
+            0.2778
+          ]
+        },
+        {
+          "fold": "RR-6",
+          "auroc": 0.6,
+          "best_epoch": 1,
+          "n_train": 154,
+          "n_test": 39,
+          "epoch_aurocs": [
+            0.6,
+            0.5447,
+            0.5342,
+            0.5263,
+            0.5053,
+            0.5395,
+            0.5421,
+            0.5395,
+            0.5421,
+            0.55
+          ]
+        },
+        {
+          "fold": "RR-8",
+          "auroc": 0.4676470588235294,
+          "best_epoch": 1,
+          "n_train": 90,
+          "n_test": 103,
+          "epoch_aurocs": [
+            0.4676,
+            0.4601,
+            0.4613,
+            0.4513,
+            0.4597,
+            0.4655,
+            0.4613,
+            0.4576,
+            0.4576,
+            0.4597
+          ]
+        },
+        {
+          "fold": "RR-9",
+          "auroc": 0.9857142857142858,
+          "best_epoch": 3,
+          "n_train": 174,
+          "n_test": 19,
+          "epoch_aurocs": [
+            0.6286,
+            0.8,
+            0.9857,
+            0.9571,
+            0.9571,
+            0.9571,
+            0.9571,
+            0.9286,
+            0.9143,
+            0.9
+          ]
+        }
+      ]
+    },
+    "A2": {
+      "task": "A2",
+      "tissue": "gastrocnemius",
+      "model": "scgpt_whole_human",
+      "mean_auroc": 0.6852,
+      "std_auroc": 0.2498,
+      "n_folds": 3,
+      "baseline_auroc": 0.801,
+      "geneformer_auroc": 0.432,
+      "delta_vs_baseline": -0.1158,
+      "delta_vs_geneformer": 0.2532,
+      "fold_results": [
+        {
+          "fold": "RR-1",
+          "auroc": 0.6666666666666666,
+          "best_epoch": 6,
+          "n_train": 20,
+          "n_test": 12,
+          "epoch_aurocs": [
+            0.3611,
+            0.6389,
+            0.6389,
+            0.6111,
+            0.6389,
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667
+          ]
+        },
+        {
+          "fold": "RR-5",
+          "auroc": 0.38888888888888884,
+          "best_epoch": 8,
+          "n_train": 20,
+          "n_test": 12,
+          "epoch_aurocs": [
+            0.3056,
+            0.3333,
+            0.3611,
+            0.3056,
+            0.25,
+            0.2778,
+            0.3333,
+            0.3889,
+            0.3611,
+            0.3333
+          ]
+        },
+        {
+          "fold": "RR-9",
+          "auroc": 1.0,
+          "best_epoch": 5,
+          "n_train": 24,
+          "n_test": 8,
+          "epoch_aurocs": [
+            0.25,
+            0.9375,
+            0.5,
+            0.9375,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    "A3": {
+      "task": "A3",
+      "tissue": "kidney",
+      "model": "scgpt_whole_human",
+      "mean_auroc": 0.5562,
+      "std_auroc": 0.1588,
+      "n_folds": 3,
+      "baseline_auroc": 0.538,
+      "geneformer_auroc": 0.432,
+      "delta_vs_baseline": 0.0182,
+      "delta_vs_geneformer": 0.1242,
+      "fold_results": [
+        {
+          "fold": "RR-1",
+          "auroc": 0.3611111111111111,
+          "best_epoch": 3,
+          "n_train": 106,
+          "n_test": 12,
+          "epoch_aurocs": [
+            0.2778,
+            0.3333,
+            0.3611,
+            0.3056,
+            0.3056,
+            0.3333,
+            0.3056,
+            0.3056,
+            0.2778,
+            0.3056
+          ]
+        },
+        {
+          "fold": "RR-3",
+          "auroc": 0.75,
+          "best_epoch": 1,
+          "n_train": 106,
+          "n_test": 12,
+          "epoch_aurocs": [
+            0.75,
+            0.5278,
+            0.6389,
+            0.6389,
+            0.6389,
+            0.6389,
+            0.6389,
+            0.6389,
+            0.6389,
+            0.6389
+          ]
+        },
+        {
+          "fold": "RR-7",
+          "auroc": 0.5574324324324325,
+          "best_epoch": 1,
+          "n_train": 24,
+          "n_test": 94,
+          "epoch_aurocs": [
+            0.5574,
+            0.5223,
+            0.5095,
+            0.5007,
+            0.5014,
+            0.5014,
+            0.5027,
+            0.5007,
+            0.4993,
+            0.4986
+          ]
+        }
+      ]
+    },
+    "A4": {
+      "task": "A4",
+      "tissue": "thymus",
+      "model": "scgpt_whole_human",
+      "mean_auroc": 0.7823,
+      "std_auroc": 0.1487,
+      "n_folds": 4,
+      "baseline_auroc": 0.923,
+      "geneformer_auroc": 0.476,
+      "delta_vs_baseline": -0.1407,
+      "delta_vs_geneformer": 0.3063,
+      "fold_results": [
+        {
+          "fold": "MHU-1",
+          "auroc": 1.0,
+          "best_epoch": 2,
+          "n_train": 61,
+          "n_test": 6,
+          "epoch_aurocs": [
+            0.1111,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "fold": "MHU-2",
+          "auroc": 0.7777777777777778,
+          "best_epoch": 6,
+          "n_train": 61,
+          "n_test": 6,
+          "epoch_aurocs": [
+            0.0,
+            0.4444,
+            0.6667,
+            0.6667,
+            0.6667,
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778
+          ]
+        },
+        {
+          "fold": "RR-6",
+          "auroc": 0.7712418300653595,
+          "best_epoch": 3,
+          "n_train": 32,
+          "n_test": 35,
+          "epoch_aurocs": [
+            0.4739,
+            0.7614,
+            0.7712,
+            0.7712,
+            0.7647,
+            0.7582,
+            0.7582,
+            0.7582,
+            0.7549,
+            0.7516
+          ]
+        },
+        {
+          "fold": "RR-9",
+          "auroc": 0.5800000000000001,
+          "best_epoch": 9,
+          "n_train": 47,
+          "n_test": 20,
+          "epoch_aurocs": [
+            0.38,
+            0.23,
+            0.3,
+            0.37,
+            0.44,
+            0.51,
+            0.56,
+            0.58,
+            0.58,
+            0.58
+          ]
+        }
+      ]
+    },
+    "A5": {
+      "task": "A5",
+      "tissue": "skin",
+      "model": "scgpt_whole_human",
+      "mean_auroc": 0.6911,
+      "std_auroc": 0.0415,
+      "n_folds": 3,
+      "baseline_auroc": 0.821,
+      "geneformer_auroc": 0.532,
+      "delta_vs_baseline": -0.1299,
+      "delta_vs_geneformer": 0.1591,
+      "fold_results": [
+        {
+          "fold": "MHU-2",
+          "auroc": 0.6363636363636364,
+          "best_epoch": 1,
+          "n_train": 67,
+          "n_test": 35,
+          "epoch_aurocs": [
+            0.6364,
+            0.5758,
+            0.5568,
+            0.572,
+            0.5871,
+            0.6136,
+            0.6136,
+            0.6212,
+            0.6212,
+            0.6212
+          ]
+        },
+        {
+          "fold": "RR-6",
+          "auroc": 0.7368421052631579,
+          "best_epoch": 9,
+          "n_train": 65,
+          "n_test": 37,
+          "epoch_aurocs": [
+            0.5234,
+            0.6433,
+            0.6754,
+            0.6784,
+            0.6988,
+            0.7135,
+            0.7076,
+            0.7281,
+            0.7368,
+            0.731
+          ]
+        },
+        {
+          "fold": "RR-7",
+          "auroc": 0.7,
+          "best_epoch": 10,
+          "n_train": 72,
+          "n_test": 30,
+          "epoch_aurocs": [
+            0.455,
+            0.515,
+            0.535,
+            0.59,
+            0.63,
+            0.655,
+            0.68,
+            0.69,
+            0.695,
+            0.7
+          ]
+        }
+      ]
+    },
+    "A6": {
+      "task": "A6",
+      "tissue": "eye",
+      "model": "scgpt_whole_human",
+      "mean_auroc": 0.65,
+      "std_auroc": 0.1,
+      "n_folds": 2,
+      "baseline_auroc": 0.789,
+      "geneformer_auroc": 0.478,
+      "delta_vs_baseline": -0.139,
+      "delta_vs_geneformer": 0.172,
+      "fold_results": [
+        {
+          "fold": "RR-1",
+          "auroc": 0.75,
+          "best_epoch": 1,
+          "n_train": 25,
+          "n_test": 12,
+          "epoch_aurocs": [
+            0.75,
+            0.5,
+            0.4722,
+            0.4167,
+            0.4167,
+            0.4167,
+            0.4167,
+            0.4167,
+            0.4167,
+            0.4167
+          ]
+        },
+        {
+          "fold": "RR-3",
+          "auroc": 0.55,
+          "best_epoch": 1,
+          "n_train": 28,
+          "n_test": 9,
+          "epoch_aurocs": [
+            0.55,
+            0.4,
+            0.3,
+            0.3,
+            0.35,
+            0.35,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      ]
+    }
+  }
+}

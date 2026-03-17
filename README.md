@@ -2,8 +2,8 @@
 
 **A public benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v1.1 (Dataset freeze: 2026-03-01)
-Status: **Analysis complete** — 6 tissues, 3 model tiers, 2 independent held-out validations
+Version: v1.3 (Dataset freeze: 2026-03-01)
+Status: **v1 Analysis complete** — 6 tissues, 3 model tiers, 2 independent held-out validations | **v2 in progress** — temporal dynamics, cross-species, RRRM-1 scRNA-seq
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -40,7 +40,7 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 
 ---
 
-## Results Summary (v1.1)
+## Results Summary (v1.3)
 
 ### Category A — Spaceflight Detection (LOMO)
 
@@ -201,7 +201,7 @@ GeneLab_benchmark/
 │   ├── A6_eye_lomo/                ← 3 folds
 │   └── B1–B6_*_cross_mission/     ← N×(N-1) mission pairs per tissue
 │
-├── scripts/                        ← Pipeline scripts (35 Python/R/shell)
+├── scripts/                        ← v1 pipeline scripts (35 Python/R/shell)
 │   ├── run_baselines.py            ← Classical ML baseline runner (LR, RF, XGBoost, PCA-LR)
 │   ├── evaluate_submission.py      ← Submission evaluator (AUROC, CI, perm_p)
 │   ├── generate_tasks.py           ← LOMO split generator
@@ -253,7 +253,29 @@ GeneLab_benchmark/
 │   ├── RESULTS_SUMMARY.md          ← Comprehensive results table
 │   └── submission_*.json           ← Baseline + FM submission files
 │
-└── processed/                      ← Intermediate analysis outputs
+├── v2/                             ← v2.0 extension (temporal, cross-species, scRNA-seq)
+│   ├── README.md                   ← v2 overview and status
+│   ├── scripts/                    ← v2-specific scripts (19 Python)
+│   │   ├── temporal_analysis.py    ← T1/T2/T3 temporal dynamics
+│   │   ├── cross_species_nes_comparison.py ← E1/E2 cross-species NES
+│   │   ├── e3_cfrna_celltype_origin.py     ← E3 cfRNA origin
+│   │   ├── generate_main_figures.py        ← v2 integrated figures (D3.js)
+│   │   ├── llm_*.py                ← Tier 3 LLM pipeline (3 scripts)
+│   │   ├── rrrm1_*.py              ← RRRM-1 scRNA-seq pipeline (7 scripts)
+│   │   └── i4_*.py                 ← I4 PBMC analysis (2 scripts)
+│   ├── evaluation/                 ← v2 results
+│   │   └── V2_RESULTS_SUMMARY.md   ← v2 comprehensive results
+│   ├── docs/                       ← v2 design and planning documents
+│   │   ├── V2_PAPER_CONTENT.md     ← v2 manuscript draft
+│   │   ├── DATA_CATALOG_V2.md      ← v2 data sources
+│   │   ├── RRRM1_SC_BENCHMARK_PLAN_V3.md ← scRNA-seq benchmark plan
+│   │   └── RRRM1_*.md             ← RRRM-1 annotation/marker docs
+│   └── processed/                  ← v2 intermediate outputs
+│       ├── T_temporal/             ← T1/T2/T3 results
+│       ├── E_crossspecies/         ← E1/E2/E3 results
+│       └── F1_scrna/               ← I4 PBMC cell-type fGSEA
+│
+└── processed/                      ← v1 intermediate analysis outputs
     ├── A_detection/                ← Per-tissue LOMO data
     ├── B_cross_mission/            ← Transfer matrices + CI
     ├── C_cross_tissue/             ← 4 pairs × 3 methods
@@ -595,6 +617,8 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v1.3 | 2026-03-13 | v2 temporal/cross-species phases complete (T1-T3, E1-E3, F1). 3 integrated v2 figures (D3.js). RRRM-1 scRNA-seq pipeline complete: STARsolo → QC → annotation → doublet removal for 4 tissues (blood/eye/muscle/skin, 38K cells). F2 benchmark tasks defined (composition/pseudo-bulk/classifier/cross-species). |
+| v1.2 | 2026-03-10 | v2 Phase 1-5 complete: T1/T2/T3 temporal dynamics, E1 cross-species NES (r=0.352), E2 duration effect (Δr=+0.446), E3 cfRNA origin, F1 PBMC cell-type fGSEA. 3 integrated main figures. |
 | v1.1 | 2026-03-09 | Analysis complete. scGPT (mean 0.667) + 3-way FM comparison. Held-out: skin RR-7 (0.885). J2 DGE pipeline comparison (ρ=0.926, Jaccard=0.600). Publication figures: fig1–4 + figS1–5 (D3.js v7). V1_PAPER_CONTENT.md v1.1. |
 | v1.0 | 2026-03-07 | Tier 3 LLM zero-shot complete (3 providers × 6 tasks, mean 0.47–0.51). Held-out thymus RR-23 (AUROC=0.905). scGPT Tier 2 complete (6 tissues, mean AUROC=0.667). Multi-DB LOMO (4 DBs × 6 tissues). Mouse-GF Tier 2 (22 LOMO folds, Cayuga A40, mean AUROC=0.476). Category A–D + J3 + J5 + NC1/NC2. Cell 2020 external validation (71.7% concordance). fGSEA 80 files, GSVA 88 files. Dataset freeze: 2026-03-01. |
 
@@ -602,12 +626,12 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 
 ## Version Structure
 
-| Version | Scope | Location |
-|---------|-------|----------|
-| **v1.0** | Mouse bulk RNA-seq, 6 tissues, 25+ tasks, 3 model tiers, 2 held-out validations | Project root (`scripts/`, `evaluation/`, `tasks/`) |
-| **v2.0** | Cross-species, single-cell, spatial, microbiome | `v2/` directory |
+| Version | Scope | Status | Location |
+|---------|-------|--------|----------|
+| **v1.0** | Mouse bulk RNA-seq, 6 tissues, 25+ tasks, 3 model tiers, 2 held-out validations | **Complete** | Project root (`scripts/`, `evaluation/`, `tasks/`) |
+| **v2.0** | Temporal dynamics (T1-T3), cross-species (E1-E3), single-cell (F1, F2) | **In progress** | `v2/` directory |
 
-v1.0 code is in project root. See [`v2/README.md`](v2/README.md) for v2.0 scope and prerequisites (requires v1.0 publication).
+v1.0 code is in project root. v2.0 extends with temporal/cross-species analysis (complete) and RRRM-1 scRNA-seq benchmarks (in progress). See [`v2/README.md`](v2/README.md) for full v2 scope and current status.
 
 ---
 

@@ -193,7 +193,13 @@ def compare_expression(glds48_df, glds168_df, matches):
 
 
 def compare_lomo_performance(glds48_df, glds168_df, matches, common_genes):
-    """Compare LOMO classification performance."""
+    """Compare LOMO classification performance on the same matched animals.
+
+    Important:
+      - GLDS-48 and GLDS-168 must be evaluated on the identical RR-1 animals.
+      - Otherwise the comparison is confounded by different test cohorts rather
+        than isolating pipeline-version effects.
+    """
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
     from sklearn.decomposition import PCA
@@ -208,15 +214,27 @@ def compare_lomo_performance(glds48_df, glds168_df, matches, common_genes):
     # Align
     full_gene_a, full_meta_a = align_features_with_meta(full_gene, full_meta)
 
-    # For GLDS-48 (original): just use existing data
+    # For GLDS-48 (original): evaluate only the matched RR-1 carcass samples
     rr1_mask_48 = full_meta_a["mission"] == "RR-1"
     other_mask = full_meta_a["mission"] != "RR-1"
+    matched_48_samples = [m["glds48_sample"] for m in matches]
+    matched_168_samples = [m["glds168_sample"] for m in matches]
+    matched_conditions = [m["condition"] for m in matches]
 
-    # Train on other missions, test on RR-1
+    # Train on other missions, test on matched RR-1 subset only
     X_train = full_gene_a[other_mask].values.astype(float)
-    X_test_48 = full_gene_a[rr1_mask_48].values.astype(float)
     y_train = (full_meta_a[other_mask]["label"] == "Flight").astype(int).values
-    y_test_48 = (full_meta_a[rr1_mask_48]["label"] == "Flight").astype(int).values
+
+    rr1_gene = full_gene_a[rr1_mask_48]
+    rr1_meta = full_meta_a[rr1_mask_48]
+    missing_48 = sorted(set(matched_48_samples) - set(rr1_gene.index))
+    if missing_48:
+        raise ValueError(f"Matched GLDS-48 samples missing from feature matrix: {missing_48}")
+
+    rr1_gene_matched = rr1_gene.loc[matched_48_samples]
+    rr1_meta_matched = rr1_meta.loc[matched_48_samples]
+    X_test_48 = rr1_gene_matched.values.astype(float)
+    y_test_48 = rr1_meta_matched["label"].eq("Flight").astype(int).values
 
     X_train = np.nan_to_num(X_train, nan=0.0)
     X_test_48 = np.nan_to_num(X_test_48, nan=0.0)
@@ -237,23 +255,16 @@ def compare_lomo_performance(glds48_df, glds168_df, matches, common_genes):
     if len(np.unique(y_test_48)) >= 2:
         proba_48 = clf.predict_proba(X_test_48_p)[:, list(clf.classes_).index(1)]
         auroc_48 = roc_auc_score(y_test_48, proba_48)
-        print(f"  GLDS-48 (original) RR-1 fold AUROC: {auroc_48:.3f}")
+        print(f"  GLDS-48 (original, matched subset) RR-1 fold AUROC: {auroc_48:.3f}")
     else:
         auroc_48 = None
         print(f"  GLDS-48: only one class in test set, cannot compute AUROC")
 
-    # For GLDS-168: replace RR-1 data with GLDS-168 matched samples
-    # Use log2(norm+1) like v1 pipeline
+    # For GLDS-168: evaluate the same matched animals after reprocessing
+    # Use log2(norm+1) like the v1 pipeline
     g168_matched = glds168_df.loc[common_genes]
     g168_log2 = np.log2(g168_matched + 1)
-
-    # Get matched sample names and conditions
-    matched_168_samples = [m["glds168_sample"] for m in matches]
-    matched_conditions = [m["condition"] for m in matches]
-
-    X_test_168 = g168_log2[matched_168_samples].T.values.astype(float)
     y_test_168 = np.array([1 if c == "FLT" else 0 for c in matched_conditions])
-    X_test_168 = np.nan_to_num(X_test_168, nan=0.0)
 
     # Need to align features: training used full_gene columns, GLDS-168 uses common_genes
     # Rebuild with common feature set
@@ -282,12 +293,17 @@ def compare_lomo_performance(glds48_df, glds168_df, matches, common_genes):
         print(f"  Delta (168 - 48): {delta:+.3f}")
 
     return {
+        "comparison_scope": "same matched RR-1 animals only",
+        "matched_animals": [m["animal_id"] for m in matches],
+        "matched_glds48_samples": matched_48_samples,
+        "matched_glds168_samples": matched_168_samples,
         "glds48_auroc": auroc_48,
         "glds168_auroc": auroc_168,
         "delta": delta,
         "n_train": len(y_train),
         "n_test_48": len(y_test_48),
         "n_test_168": len(y_test_168),
+        "n_test_common": len(matches),
         "n_pca_components": n_comp,
     }
 

@@ -5,7 +5,12 @@
   "tier": "3",
   "llm_variant": "zero_shot",
   "n_genes_in_prompt": 50,
-  "submission_date": "2026-03-08",
+  "submission_date": "2026-03-10",
+  "parse_summary": {
+    "total": 67,
+    "parsed": 64,
+    "failed": 3
+  },
   "predictions": {
     "fold_MHU-1_test": {
       "Mmus_C57-6J_TMS_MHU1_FLT_uG_Rep1": 0.95,
@@ -30,7 +35,7 @@
       "Mmus_C57-6T_TMS_GC_LAR_Rep4_G5": 0.92,
       "Mmus_C57-6T_TMS_GC_LAR_Rep5_G6": 0.88,
       "Mmus_C57-6T_TMS_GC_LAR_Rep6_G7": 0.88,
-      "Mmus_C57-6T_TMS_GC_LAR_Rep8_G9": 0.5,
+      "Mmus_C57-6T_TMS_GC_LAR_Rep8_G9": 0.72,
       "Mmus_C57-6T_TMS_GC_LAR_Rep9_G10": 0.95,
       "Mmus_C57-6T_TMS_FLT_LAR_Rep2_F2": 0.95,
       "Mmus_C57-6T_TMS_FLT_LAR_Rep3_F4": 0.92,
@@ -82,5 +87,9 @@
       "RR9_TMS_GC_G2": 0.85,
       "RR9_TMS_GC_G5": 0.95
     }
+  },
+  "evaluation_context": {
+    "end_to_end_auroc": 0.5209447415329769,
+    "parsed_only_auroc": 0.5381231671554252
   }
 }

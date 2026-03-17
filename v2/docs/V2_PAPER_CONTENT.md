@@ -27,11 +27,11 @@ We leveraged the dual ISS-T/LAR sampling design in RR-8 as a natural experiment:
 
 We computed PCA distances between six experimental groups (BSL_ISS-T, BSL_LAR, FLT_ISS-T, FLT_LAR, with the first three principal components explaining 12.8%, 8.2%, and 6.5% of variance, respectively). We defined a recovery ratio as:
 
-> Recovery ratio = FLT_ISS-T → FLT_LAR / BSL_ISS-T → FLT_ISS-T
+> Recovery ratio = d(FLT_LAR, BSL_LAR) / d(FLT_ISS-T, BSL_ISS-T)
 
-where the numerator captures trajectory towards baseline and the denominator captures flight-induced displacement. In RR-8, this ratio was **0.652**, indicating that 65% of the in-flight PCA displacement was resolved within the post-return period (compare: RR-6 recovery ratio = 0.842, reflecting the shorter duration RR-6 mission that may have induced less severe perturbations).
+where the numerator captures the residual flight displacement after return under LAR processing and the denominator captures the in-flight displacement under ISS-T processing. In RR-8, this ratio was **0.652**, indicating that the post-return profile is closer to its baseline reference than the in-flight profile (compare: RR-6 recovery ratio = 0.842, reflecting the shorter duration RR-6 mission that may have induced less severe perturbations).
 
-Classifier-based validation confirmed recovery: a spaceflight detector trained on ISS-T samples assigned FLT_ISS-T a mean flight probability of 0.9997, while LAR samples were assigned 0.404 — a >2.4-fold reduction, close to the 0.5 random-assignment threshold.
+As a descriptive projection, a spaceflight detector trained on ISS-T samples assigned FLT_ISS-T a mean flight probability of 0.9997, while LAR samples were assigned 0.404 — a >2.4-fold reduction, close to the 0.5 random-assignment threshold. Because the FLT_ISS-T score is measured on the training contrast itself, we interpret this as supportive baselineward shift rather than held-out validation of recovery.
 
 #### Pathway-Level Recovery
 
@@ -62,7 +62,7 @@ The systematic overshoot in MYC targets and protein secretion pathways suggests 
 
 ### 1.3 Age Amplifies Spaceflight Transcriptomic Response (T3) ★★★
 
-The RR-8 mission included a unique aging cohort: both young adult (YNG; 16–17 weeks) and aged (OLD; 56–57 weeks) mice were flown simultaneously, enabling direct within-mission comparison of age-dependent spaceflight response.
+The RR-8 mission included a unique aging cohort: both young adult (YNG; 10 to 12 week) and aged (OLD; 32 week) mice were flown simultaneously, enabling direct within-mission comparison of age-dependent spaceflight response.
 
 #### Age Classification
 
@@ -74,8 +74,8 @@ We trained spaceflight classifiers (FLT vs. GC) separately in each age group to 
 
 | Age group | Spaceflight AUROC (gene) | 95% CI | Permutation p |
 |-----------|--------------------------|--------|---------------|
-| OLD (56–57 wk) | **0.945** | 0.846–1.0 | <0.0001 |
-| YNG (16–17 wk) | **0.679** | 0.479–0.860 | 0.033 |
+| OLD (32 week) | **0.945** | 0.846–1.0 | <0.0001 |
+| YNG (10-12 week) | **0.679** | 0.479–0.860 | 0.033 |
 | **Δ (OLD − YNG)** | **+0.266** | — | — |
 
 The AUROC gap of +0.266 between OLD and YNG mice indicates that aged animals produce a substantially stronger and more detectable transcriptomic spaceflight response (T3d). Pathway-level results followed the same direction: OLD AUROC = 0.879 (0.744–0.978) vs. YNG = 0.716 (0.523–0.873).
@@ -247,12 +247,22 @@ Cell types most affected at R+45 (LP1):
 - Data: `v2/processed/F1_scrna/i4_snrnaseq_temporal_fgsea.csv` (834 rows, 5 sheets × 10 cell types)
 - Figure: `v2/figures/F1_temporal_heatmap.html`
 
-#### RRRM-1 scRNA-seq Pipeline (in progress)
-OSD-904~934 raw FASTQ availability confirmed (31 datasets, ~3 TB total). STARsolo pipeline prepared for Cayuga:
+#### RRRM-1 scRNA-seq Pipeline (benchmark-ready subset)
+OSD-904~934 raw FASTQ availability was confirmed on Cayuga, but the benchmark-focused subset was narrowed to four tissues:
 - **Selected 4 tissues** matching benchmark: OSD-918 (blood), OSD-920 (eye), OSD-924 (muscle), OSD-934 (skin)
-- Total: ~328 GB, 8 samples/OSD, 10x Chromium 3' v3, GRCm39-2024-A STAR index (pre-built on Cayuga)
-- OSD-934 (skin) download started 2026-03-10; STARsolo job ready to submit
-- Results pending
+- Total selected raw footprint: ~308 GB, 8 libraries per OSD, 10x Chromium 3' v3
+- STARsolo recovery completed on Cayuga with STAR 2.7.3a-compatible settings
+- Final outputs now available:
+  - per-sample `Solo.out/GeneFull/filtered`
+  - per-sample `.h5ad`
+  - merged `.h5ad`
+  - tissue-specific processed objects
+  - first-pass broad cell-type annotation tables
+- Broad composition highlights:
+  - blood is erythroid-heavy
+  - eye is retinal neuronal / Muller glia dominant
+  - muscle is immune-rich
+  - skin contains strong keratinocyte and immune-myeloid compartments
 
 ---
 
@@ -312,7 +322,7 @@ This contrasts with JAXA (120-day, E1 r = +0.352): longer duration allows genuin
 - Recovery fraction = Δ_return / |Δ_flight|; fraction > 1 = overshoot; fraction 0–1 = partial recovery; fraction < 0 = deepening
 
 ### T3 Method Detail
-- Age groups: OLD = 56–57 wk (n=17 FLT, n=17 GC, n=16 VIV); YNG = 16–17 wk (n=18 each)
+- Age groups: OLD = 32 week (n=17 FLT, n=17 GC, n=16 VIV); YNG = 10 to 12 week (n=18 each)
 - Classifier: Logistic Regression, RepeatedStratifiedKFold (RSKF)
 - ANOVA: Two-way (flight × age) per pathway, BH-FDR correction, α = 0.05
 - Timing filter for T3c: ISS-T only (to exclude preservation-confounded LAR)
@@ -350,6 +360,21 @@ This contrasts with JAXA (120-day, E1 r = +0.352): longer duration allows genuin
 ---
 
 ## Supplementary Notes
+
+### Tier 3 LLM parsing metrics
+For the Tier 3 zero-shot LLM benchmark, the main text should report only the end-to-end AUROC because that is the deployed benchmark output submitted for evaluation. Parsed-only AUROC, provider-specific parse rates, and truncation-related parser failure analysis should be placed in the Supplementary Information or reviewer response.
+
+Recommended table location: `v2/docs/V2_SUPPLEMENT_TABLES.md` as Supplementary Table S1, with end-to-end AUROC retained in the main text and parse-aware decomposition moved entirely to Supplementary Information.
+
+Current supplement-level summary:
+- DeepSeek-V3: 549/549 parsed, mean end-to-end AUROC = 0.507, mean parsed-only AUROC = 0.507
+- Gemini-2.5-Flash: 529/549 parsed, mean end-to-end AUROC = 0.493, mean parsed-only AUROC = 0.493
+- Llama-3.3-70B (Groq): 489/549 parsed, mean end-to-end AUROC = 0.485, mean parsed-only AUROC = 0.443
+
+Interpretation:
+- DeepSeek's end-to-end and parsed-only scores are identical because parse rate is 100%.
+- Gemini improves after conservative parser recovery of truncated narrative verdicts, but provider comparison still depends partly on output-format robustness.
+- Groq remains the clearest case where parsed-only and end-to-end performance should be shown together because truncation removes explicit answers in a substantial fraction of samples.
 
 ### Why T2 RR-8 is the primary recovery analysis
 RR-8 is preferred over RR-6 for T2 because (1) larger cohort (ISS-T n=20, LAR n=15 per condition vs. n=10 each in RR-6), (2) longer mission duration allowing stronger in-flight perturbation to develop, and (3) the aging cohort design provides additional biological context. RR-6 is shown as comparison in Extended Data.

@@ -1,0 +1,38 @@
+{
+  "provider": "groq-llama-3.3-70b",
+  "task_id": "A3",
+  "model_name": "Llama-3.3-70B_zeroshot",
+  "parse_summary": {
+    "total": 118,
+    "parsed": 108,
+    "failed": 10
+  },
+  "metrics": {
+    "task_id": "A3",
+    "pooled_end_to_end_auroc": 0.5308866279069767,
+    "pooled_parsed_only_auroc": 0.5331732867743344,
+    "folds": {
+      "fold_RR-1_test": {
+        "n_total": 12,
+        "n_parsed": 11,
+        "n_failed": 1,
+        "end_to_end_auroc": 0.5138888888888888,
+        "parsed_only_auroc": 0.5166666666666667
+      },
+      "fold_RR-3_test": {
+        "n_total": 12,
+        "n_parsed": 11,
+        "n_failed": 1,
+        "end_to_end_auroc": 0.2361111111111111,
+        "parsed_only_auroc": 0.11666666666666667
+      },
+      "fold_RR-7_test": {
+        "n_total": 94,
+        "n_parsed": 86,
+        "n_failed": 8,
+        "end_to_end_auroc": 0.5685810810810811,
+        "parsed_only_auroc": 0.5780228758169934
+      }
+    }
+  }
+}
