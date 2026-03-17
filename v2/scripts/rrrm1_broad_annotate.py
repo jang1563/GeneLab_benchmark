@@ -79,9 +79,21 @@ def ensure_dirs() -> None:
 
 
 def gene_universe(adata) -> set[str]:
-    if adata.raw is not None:
-        return set(map(str, adata.raw.var_names))
-    return set(map(str, adata.var_names))
+    """Return gene names, preferring gene_symbols over ENSMUSG var_names."""
+    source = adata.raw.to_adata() if adata.raw is not None else adata
+    if "gene_symbols" in source.var.columns:
+        return set(map(str, source.var["gene_symbols"]))
+    return set(map(str, source.var_names))
+
+
+def _resolve_markers(adata, genes: list[str]) -> list[str]:
+    """Map marker gene symbols to var_names (handles ENSMUSG var_names)."""
+    source = adata.raw.to_adata() if adata.raw is not None else adata
+    if "gene_symbols" not in source.var.columns:
+        return genes  # var_names are already symbols
+    sym2id = dict(zip(source.var["gene_symbols"].astype(str),
+                      source.var_names.astype(str)))
+    return [sym2id[g] for g in genes if g in sym2id]
 
 
 def score_marker_sets(adata, marker_sets: dict[str, list[str]]) -> list[str]:
@@ -91,10 +103,14 @@ def score_marker_sets(adata, marker_sets: dict[str, list[str]]) -> list[str]:
         present = [g for g in genes if g in available]
         if len(present) < 2:
             continue
+        # Resolve to var_names (ENSMUSG IDs) if needed for score_genes
+        resolved = _resolve_markers(adata, present)
+        if len(resolved) < 2:
+            continue
         score_name = f"score_{label}"
         sc.tl.score_genes(
             adata,
-            gene_list=present,
+            gene_list=resolved,
             score_name=score_name,
             use_raw=adata.raw is not None,
             random_state=0,
@@ -151,7 +167,7 @@ def annotate_tissue(tissue: str) -> None:
     )
 
     # Report agreement between per-cell and cluster-level
-    agree = (adata.obs["broad_celltype"] == adata.obs["broad_celltype_cluster"]).sum()
+    agree = (adata.obs["broad_celltype"].astype(str) == adata.obs["broad_celltype_cluster"].astype(str)).sum()
     print(f"  {tissue}: per-cell vs cluster agreement: "
           f"{agree}/{len(adata)} ({agree/len(adata)*100:.1f}%)")
 
