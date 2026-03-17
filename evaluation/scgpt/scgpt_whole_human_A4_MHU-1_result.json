@@ -1,0 +1,26 @@
+{
+  "test_mission": "MHU-1",
+  "task": "A4",
+  "model": "scgpt_whole_human",
+  "auroc": 1.0,
+  "best_epoch": 2,
+  "epoch_aurocs": [
+    0.1111,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "n_train": 61,
+  "n_test": 6,
+  "train_time_s": 12.5,
+  "freeze_layers": 10,
+  "epochs": 10,
+  "lr": 0.0001,
+  "batch_size": 8
+}

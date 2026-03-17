@@ -5,7 +5,12 @@
   "tier": "3",
   "llm_variant": "zero_shot",
   "n_genes_in_prompt": 50,
-  "submission_date": "2026-03-08",
+  "submission_date": "2026-03-10",
+  "parse_summary": {
+    "total": 32,
+    "parsed": 32,
+    "failed": 0
+  },
   "predictions": {
     "fold_RR-1_test": {
       "RR-1.Mmus_C57-6J_GST_GC_Rep1_M33": 0.25,
@@ -45,5 +50,9 @@
       "RR-9.SRR11148759": 0.15000000000000002,
       "RR-9.SRR11148760": 0.050000000000000044
     }
+  },
+  "evaluation_context": {
+    "end_to_end_auroc": 0.53515625,
+    "parsed_only_auroc": 0.53515625
   }
 }

@@ -1,0 +1,59 @@
+{
+  "provider": "gemini-2.5-flash",
+  "task_id": "A1",
+  "model_name": "Gemini-2.5-Flash_zeroshot",
+  "parse_summary": {
+    "total": 193,
+    "parsed": 193,
+    "failed": 0
+  },
+  "metrics": {
+    "task_id": "A1",
+    "pooled_end_to_end_auroc": 0.47508996851102114,
+    "pooled_parsed_only_auroc": 0.47508996851102114,
+    "folds": {
+      "fold_MHU-2_test": {
+        "n_total": 6,
+        "n_parsed": 6,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.5,
+        "parsed_only_auroc": 0.5
+      },
+      "fold_RR-1_test": {
+        "n_total": 14,
+        "n_parsed": 14,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.5306122448979592,
+        "parsed_only_auroc": 0.5306122448979592
+      },
+      "fold_RR-3_test": {
+        "n_total": 12,
+        "n_parsed": 12,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.6944444444444444,
+        "parsed_only_auroc": 0.6944444444444444
+      },
+      "fold_RR-6_test": {
+        "n_total": 39,
+        "n_parsed": 39,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.45263157894736844,
+        "parsed_only_auroc": 0.45263157894736844
+      },
+      "fold_RR-8_test": {
+        "n_total": 103,
+        "n_parsed": 103,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.492436974789916,
+        "parsed_only_auroc": 0.492436974789916
+      },
+      "fold_RR-9_test": {
+        "n_total": 19,
+        "n_parsed": 19,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.4642857142857143,
+        "parsed_only_auroc": 0.4642857142857143
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "provider": "gemini-2.5-flash",
+  "task_id": "A6",
+  "model_name": "Gemini-2.5-Flash_zeroshot",
+  "parse_summary": {
+    "total": 37,
+    "parsed": 32,
+    "failed": 5
+  },
+  "metrics": {
+    "task_id": "A6",
+    "pooled_end_to_end_auroc": 0.40441176470588236,
+    "pooled_parsed_only_auroc": 0.37896825396825395,
+    "folds": {
+      "fold_RR-1_test": {
+        "n_total": 12,
+        "n_parsed": 8,
+        "n_failed": 4,
+        "end_to_end_auroc": 0.3611111111111111,
+        "parsed_only_auroc": 0.43333333333333335
+      },
+      "fold_RR-3_test": {
+        "n_total": 9,
+        "n_parsed": 9,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.525,
+        "parsed_only_auroc": 0.525
+      },
+      "fold_TBD_test": {
+        "n_total": 16,
+        "n_parsed": 15,
+        "n_failed": 1,
+        "end_to_end_auroc": 0.29365079365079366,
+        "parsed_only_auroc": 0.33035714285714285
+      }
+    }
+  }
+}

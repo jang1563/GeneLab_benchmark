@@ -5,7 +5,12 @@
   "tier": "3",
   "llm_variant": "zero_shot",
   "n_genes_in_prompt": 50,
-  "submission_date": "2026-03-08",
+  "submission_date": "2026-03-10",
+  "parse_summary": {
+    "total": 67,
+    "parsed": 62,
+    "failed": 5
+  },
   "predictions": {
     "fold_MHU-1_test": {
       "Mmus_C57-6J_TMS_MHU1_FLT_uG_Rep1": 0.72,
@@ -82,5 +87,9 @@
       "RR9_TMS_GC_G2": 0.5,
       "RR9_TMS_GC_G5": 0.75
     }
+  },
+  "evaluation_context": {
+    "end_to_end_auroc": 0.4790552584670232,
+    "parsed_only_auroc": 0.46045785639958375
   }
 }

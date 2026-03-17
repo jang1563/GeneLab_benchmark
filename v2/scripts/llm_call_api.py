@@ -280,10 +280,20 @@ def process_task(task_id, client, caller, config, provider_name, dry_run=False):
         response_path = output_dir / f"{fold_name}_responses.json"
         if response_path.exists():
             existing = json.loads(response_path.read_text())
-            if len(existing.get("responses", [])) == n:
+            existing_responses = existing.get("responses", [])
+            is_complete = len(existing_responses) == n
+            has_errors = any(r.get("error") or r.get("content") is None for r in existing_responses)
+            has_truncation = any(
+                str(r.get("finish_reason", "")).lower() in {"length", "finishreason.max_tokens"}
+                for r in existing_responses
+            )
+            if is_complete and not has_errors and not has_truncation:
                 print(f"    {fold_name}: already complete ({n} responses)")
                 total_calls += n
                 continue
+            if is_complete:
+                print(f"    {fold_name}: cached responses found but re-running due to "
+                      f"{'errors' if has_errors else 'truncation'}")
 
         if dry_run:
             print(f"    {fold_name}: {n} prompts (dry-run)")

@@ -5,7 +5,12 @@
   "tier": "3",
   "llm_variant": "zero_shot",
   "n_genes_in_prompt": 50,
-  "submission_date": "2026-03-08",
+  "submission_date": "2026-03-10",
+  "parse_summary": {
+    "total": 193,
+    "parsed": 193,
+    "failed": 0
+  },
   "predictions": {
     "fold_MHU-2_test": {
       "GSM7708682": 0.95,
@@ -49,7 +54,7 @@
       "Mmus_C57-6T_LVR_GC_LAR_Rep1_G6": 0.95,
       "Mmus_C57-6T_LVR_GC_LAR_Rep2_G4": 0.95,
       "Mmus_C57-6T_LVR_GC_LAR_Rep3_G10": 0.050000000000000044,
-      "Mmus_C57-6T_LVR_GC_LAR_Rep4_G5": 0.5,
+      "Mmus_C57-6T_LVR_GC_LAR_Rep4_G5": 0.72,
       "Mmus_C57-6T_LVR_GC_LAR_Rep5_G7": 0.95,
       "Mmus_C57-6T_LVR_GC_LAR_Rep6_G8": 0.95,
       "Mmus_C57-6T_LVR_GC_LAR_Rep7_G9": 0.95,
@@ -77,7 +82,7 @@
       "Mmus_C57-6T_LVR_GC_ISS-T_Rep10_G6": 0.95,
       "Mmus_C57-6T_LVR_FLT_ISS-T_Rep1_F5": 0.95,
       "Mmus_C57-6T_LVR_FLT_ISS-T_Rep2_F8": 0.95,
-      "Mmus_C57-6T_LVR_FLT_ISS-T_Rep3_F9": 0.5,
+      "Mmus_C57-6T_LVR_FLT_ISS-T_Rep3_F9": 0.68,
       "Mmus_C57-6T_LVR_FLT_ISS-T_Rep4_F10": 0.95,
       "Mmus_C57-6T_LVR_FLT_ISS-T_Rep5_F7": 0.92,
       "Mmus_C57-6T_LVR_FLT_ISS-T_Rep6_F1": 0.95,
@@ -90,7 +95,7 @@
       "RR8_LVR_FLT_ISS-T_YNG_FI1": 0.95,
       "RR8_LVR_FLT_ISS-T_YNG_FI2": 0.95,
       "RR8_LVR_FLT_ISS-T_YNG_FI3": 0.95,
-      "RR8_LVR_FLT_ISS-T_YNG_FI4": 0.5,
+      "RR8_LVR_FLT_ISS-T_YNG_FI4": 0.72,
       "RR8_LVR_FLT_ISS-T_YNG_FI5": 0.95,
       "RR8_LVR_FLT_ISS-T_YNG_FI6": 0.95,
       "RR8_LVR_FLT_ISS-T_YNG_FI7": 0.95,
@@ -102,7 +107,7 @@
       "RR8_LVR_FLT_ISS-T_OLD_FI13": 0.95,
       "RR8_LVR_FLT_ISS-T_OLD_FI14": 0.95,
       "RR8_LVR_FLT_ISS-T_OLD_FI15": 0.95,
-      "RR8_LVR_FLT_ISS-T_OLD_FI16": 0.5,
+      "RR8_LVR_FLT_ISS-T_OLD_FI16": 0.68,
       "RR8_LVR_FLT_ISS-T_OLD_FI17": 0.95,
       "RR8_LVR_FLT_ISS-T_OLD_FI18": 0.95,
       "RR8_LVR_FLT_ISS-T_OLD_FI19": 0.95,
@@ -118,7 +123,7 @@
       "RR8_LVR_FLT_LAR_OLD_FL11": 0.95,
       "RR8_LVR_FLT_LAR_YNG_FL13": 0.95,
       "RR8_LVR_FLT_LAR_YNG_FL14": 0.95,
-      "RR8_LVR_FLT_LAR_OLD_FL15": 0.5,
+      "RR8_LVR_FLT_LAR_OLD_FL15": 0.72,
       "RR8_LVR_FLT_LAR_OLD_FL16": 0.95,
       "RR8_LVR_FLT_LAR_YNG_FL17": 0.95,
       "RR8_LVR_FLT_LAR_YNG_FL18": 0.95,
@@ -135,7 +140,7 @@
       "RR8_LVR_GC_ISS-T_OLD_GI11": 0.95,
       "RR8_LVR_GC_ISS-T_OLD_GI12": 0.95,
       "RR8_LVR_GC_ISS-T_OLD_GI13": 0.95,
-      "RR8_LVR_GC_ISS-T_OLD_GI14": 0.5,
+      "RR8_LVR_GC_ISS-T_OLD_GI14": 0.72,
       "RR8_LVR_GC_ISS-T_OLD_GI15": 0.95,
       "RR8_LVR_GC_ISS-T_OLD_GI16": 0.95,
       "RR8_LVR_GC_ISS-T_OLD_GI17": 0.95,
@@ -155,14 +160,14 @@
       "RR8_LVR_GC_LAR_YNG_GL13": 0.95,
       "RR8_LVR_GC_LAR_YNG_GL14": 0.95,
       "RR8_LVR_GC_LAR_OLD_GL15": 0.95,
-      "RR8_LVR_GC_LAR_YNG_GL17": 0.5,
+      "RR8_LVR_GC_LAR_YNG_GL17": 0.72,
       "RR8_LVR_GC_LAR_YNG_GL18": 0.95,
       "RR8_LVR_VIV_ISS-T_YNG_VI1": 0.95,
       "RR8_LVR_VIV_ISS-T_YNG_VI2": 0.95,
-      "RR8_LVR_VIV_ISS-T_YNG_VI3": 0.5,
+      "RR8_LVR_VIV_ISS-T_YNG_VI3": 0.72,
       "RR8_LVR_VIV_ISS-T_YNG_VI4": 0.95,
       "RR8_LVR_VIV_ISS-T_YNG_VI5": 0.95,
-      "RR8_LVR_VIV_ISS-T_YNG_VI6": 0.7,
+      "RR8_LVR_VIV_ISS-T_YNG_VI6": 0.72,
       "RR8_LVR_VIV_ISS-T_YNG_VI7": 0.95,
       "RR8_LVR_VIV_ISS-T_YNG_VI8": 0.85,
       "RR8_LVR_VIV_ISS-T_YNG_VI10": 0.95,
@@ -212,5 +217,9 @@
       "Mmus_C57-6J_LVR_GC_C2_Rep4_G5": 0.95,
       "Mmus_C57-6J_LVR_VIV_C2_Rep1_V3": 0.85
     }
+  },
+  "evaluation_context": {
+    "end_to_end_auroc": 0.47508996851102114,
+    "parsed_only_auroc": 0.47508996851102114
   }
 }

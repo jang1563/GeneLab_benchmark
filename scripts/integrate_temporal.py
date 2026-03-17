@@ -120,7 +120,7 @@ def build_t2_summary(data):
                 "n_recovering": n_recovering,
                 "n_total": n_total,
             },
-            "classification_recovery": entry["classification_recovery"],
+            "classification_shift": entry.get("classification_shift"),
             "groups": entry["groups"],
         }
 
@@ -135,7 +135,8 @@ def build_t2_summary(data):
         "evidence": (
             "RR-6: PCA R=0.842 (partial), 12/26 recovering. "
             "RR-8: PCA R=0.652 (stronger recovery), 25/27 recovering with overshoot. "
-            "Classification: FLT_LAR flight_prob 0.185 (RR-6) / 0.404 (RR-8)."
+            "Descriptive classifier projection: FLT_LAR flight_prob 0.185 (RR-6) / 0.404 (RR-8), "
+            "lower than the in-sample FLT_ISS-T reference."
         ),
     }
 
