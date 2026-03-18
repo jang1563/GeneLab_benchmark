@@ -3,7 +3,45 @@
   "results": {
     "blood": {
       "b_cell": {
-        "n_cells": 320,
+        "n_cells": 295,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": NaN,
+        "vs_bulk_p": null,
+        "vs_bulk_n_pathways": 0,
+        "top_enriched": [
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_G2M_CHECKPOINT",
+          "HALLMARK_E2F_TARGETS"
+        ],
+        "top_depleted": [
+          "HALLMARK_ALLOGRAFT_REJECTION",
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "HALLMARK_INFLAMMATORY_RESPONSE"
+        ]
+      },
+      "erythroid": {
+        "n_cells": 12837,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": NaN,
+        "vs_bulk_p": null,
+        "vs_bulk_n_pathways": 0,
+        "top_enriched": [
+          "HALLMARK_E2F_TARGETS",
+          "HALLMARK_G2M_CHECKPOINT",
+          "HALLMARK_MITOTIC_SPINDLE"
+        ],
+        "top_depleted": [
+          "HALLMARK_HEME_METABOLISM",
+          "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION"
+        ]
+      },
+      "monocyte_macrophage": {
+        "n_cells": 58,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
@@ -12,36 +50,17 @@
         "vs_bulk_n_pathways": 0,
         "top_enriched": [
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_MITOTIC_SPINDLE",
-          "HALLMARK_DNA_REPAIR"
+          "HALLMARK_PROTEIN_SECRETION",
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION"
         ],
         "top_depleted": [
-          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_MYOGENESIS"
-        ]
-      },
-      "erythroid": {
-        "n_cells": 12829,
-        "n_animals_flt": 4,
-        "n_animals_gc": 4,
-        "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
-        "top_enriched": [
-          "HALLMARK_WNT-BETA_CATENIN_SIGNALING",
-          "HALLMARK_HEDGEHOG_SIGNALING",
-          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION"
-        ],
-        "top_depleted": [
-          "HALLMARK_HEME_METABOLISM",
-          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
-          "HALLMARK_INTERFERON_ALPHA_RESPONSE"
+          "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+          "HALLMARK_INFLAMMATORY_RESPONSE",
+          "HALLMARK_INTERFERON_GAMMA_RESPONSE"
         ]
       },
       "neutrophil": {
-        "n_cells": 190,
+        "n_cells": 183,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
@@ -51,16 +70,16 @@
         "top_enriched": [
           "HALLMARK_APICAL_SURFACE",
           "HALLMARK_HEDGEHOG_SIGNALING",
-          "HALLMARK_SPERMATOGENESIS"
+          "HALLMARK_PROTEIN_SECRETION"
         ],
         "top_depleted": [
+          "HALLMARK_MYC_TARGETS_V1",
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
-          "HALLMARK_PI3K/AKT/MTOR__SIGNALING",
-          "HALLMARK_MYC_TARGETS_V1"
+          "HALLMARK_IL6_JAK_STAT3_SIGNALING"
         ]
       },
       "t_cell": {
-        "n_cells": 206,
+        "n_cells": 199,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
@@ -68,279 +87,298 @@
         "vs_bulk_p": null,
         "vs_bulk_n_pathways": 0,
         "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
-          "HALLMARK_ANGIOGENESIS"
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_UV_RESPONSE_DN",
+          "HALLMARK_IL2_STAT5_SIGNALING"
         ],
         "top_depleted": [
-          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_DNA_REPAIR"
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "HALLMARK_FATTY_ACID_METABOLISM"
         ]
       }
     },
     "eye": {
       "corneal_conjunctival_epithelial": {
-        "n_cells": 281,
+        "n_cells": 289,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": 0.12048019207683074,
+        "vs_bulk_p": 0.425,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_SPERMATOGENESIS",
-          "HALLMARK_APICAL_JUNCTION",
-          "HALLMARK_WNT-BETA_CATENIN_SIGNALING"
+          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+          "HALLMARK_PANCREAS_BETA_CELLS",
+          "HALLMARK_APICAL_SURFACE"
         ],
         "top_depleted": [
-          "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+          "HALLMARK_E2F_TARGETS",
           "HALLMARK_INTERFERON_GAMMA_RESPONSE",
-          "HALLMARK_E2F_TARGETS"
+          "HALLMARK_INTERFERON_ALPHA_RESPONSE"
         ]
       },
       "endothelial_perivascular": {
-        "n_cells": 101,
-        "n_animals_flt": 3,
+        "n_cells": 112,
+        "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": -0.40244897959183673,
+        "vs_bulk_p": 0.008,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
+          "HALLMARK_IL6_JAK_STAT3_SIGNALING",
           "HALLMARK_HEDGEHOG_SIGNALING",
-          "HALLMARK_PANCREAS_BETA_CELLS",
-          "HALLMARK_ESTROGEN_RESPONSE_EARLY"
+          "HALLMARK_INTERFERON_GAMMA_RESPONSE"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
-          "HALLMARK_NOTCH_SIGNALING",
-          "HALLMARK_DNA_REPAIR"
-        ]
-      },
-      "immune": {
-        "n_cells": 180,
-        "n_animals_flt": 4,
-        "n_animals_gc": 4,
-        "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
-        "top_enriched": [
-          "HALLMARK_SPERMATOGENESIS",
-          "HALLMARK_PANCREAS_BETA_CELLS",
-          "HALLMARK_KRAS_SIGNALING_DN"
-        ],
-        "top_depleted": [
-          "HALLMARK_ALLOGRAFT_REJECTION",
-          "HALLMARK_ANGIOGENESIS",
-          "HALLMARK_MYC_TARGETS_V1"
-        ]
-      },
-      "muller_glia": {
-        "n_cells": 669,
-        "n_animals_flt": 4,
-        "n_animals_gc": 4,
-        "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
-        "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_INFLAMMATORY_RESPONSE",
-          "HALLMARK_KRAS_SIGNALING_UP"
-        ],
-        "top_depleted": [
-          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
-          "HALLMARK_MYC_TARGETS_V1",
+          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
           "HALLMARK_ADIPOGENESIS"
         ]
       },
-      "photoreceptor_like": {
-        "n_cells": 7093,
+      "immune": {
+        "n_cells": 159,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": 0.009939975990396158,
+        "vs_bulk_p": 0.954,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_TGF_BETA_SIGNALING",
+          "HALLMARK_SPERMATOGENESIS",
+          "HALLMARK_MYOGENESIS"
+        ],
+        "top_depleted": [
+          "HALLMARK_ALLOGRAFT_REJECTION",
+          "HALLMARK_APOPTOSIS",
+          "HALLMARK_INFLAMMATORY_RESPONSE"
+        ]
+      },
+      "lens_crystallin": {
+        "n_cells": 93,
+        "n_animals_flt": 3,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": -0.4846578631452581,
+        "vs_bulk_p": 0.001,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_SPERMATOGENESIS",
+          "HALLMARK_G2M_CHECKPOINT",
+          "HALLMARK_E2F_TARGETS"
+        ],
+        "top_depleted": [
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "HALLMARK_FATTY_ACID_METABOLISM",
+          "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY"
+        ]
+      },
+      "muller_glia": {
+        "n_cells": 706,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": 0.11366146458583432,
+        "vs_bulk_p": 0.417,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_TGF_BETA_SIGNALING",
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "HALLMARK_ANDROGEN_RESPONSE"
+        ],
+        "top_depleted": [
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "HALLMARK_ADIPOGENESIS",
+          "HALLMARK_INTERFERON_ALPHA_RESPONSE"
+        ]
+      },
+      "photoreceptor_like": {
+        "n_cells": 6826,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": 0.0981032412965186,
+        "vs_bulk_p": 0.492,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "HALLMARK_G2M_CHECKPOINT",
           "HALLMARK_DNA_REPAIR"
         ],
         "top_depleted": [
-          "HALLMARK_INTERFERON_ALPHA_RESPONSE",
-          "HALLMARK_INFLAMMATORY_RESPONSE",
-          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION"
+          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "HALLMARK_COAGULATION"
         ]
       },
       "retinal_neuronal": {
-        "n_cells": 1562,
+        "n_cells": 1716,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": -0.2659783913565426,
+        "vs_bulk_p": 0.05,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_TNF-ALPHA_SIGNALING_VIA_NF-KB",
-          "HALLMARK_BILE_ACID_METABOLISM",
-          "HALLMARK_INFLAMMATORY_RESPONSE"
-        ],
-        "top_depleted": [
-          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
-          "HALLMARK_GLYCOLYSIS",
-          "HALLMARK_APICAL_SURFACE"
-        ]
-      },
-      "stromal_fibroblast": {
-        "n_cells": 221,
-        "n_animals_flt": 4,
-        "n_animals_gc": 4,
-        "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
-        "top_enriched": [
-          "HALLMARK_PANCREAS_BETA_CELLS",
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_INFLAMMATORY_RESPONSE"
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "HALLMARK_ANDROGEN_RESPONSE",
+          "HALLMARK_TGF_BETA_SIGNALING"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_UNFOLDED_PROTEIN_RESPONSE"
+          "HALLMARK_GLYCOLYSIS"
+        ]
+      },
+      "stromal_fibroblast": {
+        "n_cells": 205,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": -0.25762304921968787,
+        "vs_bulk_p": 0.073,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+          "HALLMARK_KRAS_SIGNALING_UP",
+          "HALLMARK_INTERFERON_ALPHA_RESPONSE"
+        ],
+        "top_depleted": [
+          "HALLMARK_UV_RESPONSE_DN",
+          "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION"
         ]
       }
     },
     "muscle": {
       "endothelial": {
-        "n_cells": 2660,
+        "n_cells": 5245,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": 0.0739015606242497,
+        "vs_bulk_p": 0.609,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_PANCREAS_BETA_CELLS",
+          "HALLMARK_MITOTIC_SPINDLE",
           "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_SPERMATOGENESIS"
+          "HALLMARK_UV_RESPONSE_DN"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_ADIPOGENESIS"
+          "HALLMARK_FATTY_ACID_METABOLISM"
         ]
       },
       "fibroadipogenic_progenitor": {
-        "n_cells": 2134,
+        "n_cells": 1552,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": 0.09051620648259305,
+        "vs_bulk_p": 0.538,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_PANCREAS_BETA_CELLS",
-          "HALLMARK_SPERMATOGENESIS"
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_UV_RESPONSE_DN",
+          "HALLMARK_G2M_CHECKPOINT"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_UNFOLDED_PROTEIN_RESPONSE"
+          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION"
         ]
       },
       "fibroblast_matrix": {
-        "n_cells": 626,
+        "n_cells": 1142,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": 0.05699879951980792,
+        "vs_bulk_p": 0.703,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_PANCREAS_BETA_CELLS",
-          "HALLMARK_SPERMATOGENESIS"
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_G2M_CHECKPOINT",
+          "HALLMARK_UV_RESPONSE_DN"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
-          "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_UNFOLDED_PROTEIN_RESPONSE"
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "HALLMARK_MYC_TARGETS_V1"
         ]
       },
       "macrophage_myeloid": {
-        "n_cells": 6079,
+        "n_cells": 3154,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": 0.006578631452581032,
+        "vs_bulk_p": 0.96,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_PANCREAS_BETA_CELLS",
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_APICAL_SURFACE"
-        ],
-        "top_depleted": [
-          "HALLMARK_TNF-ALPHA_SIGNALING_VIA_NF-KB",
-          "HALLMARK_HYPOXIA",
-          "HALLMARK_CHOLESTEROL_HOMEOSTASIS"
-        ]
-      },
-      "myonuclear_structural": {
-        "n_cells": 365,
-        "n_animals_flt": 4,
-        "n_animals_gc": 4,
-        "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
-        "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_APICAL_SURFACE",
-          "HALLMARK_ANGIOGENESIS"
-        ],
-        "top_depleted": [
-          "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
-          "HALLMARK_OXIDATIVE_PHOSPHORYLATION"
-        ]
-      },
-      "pericyte_smooth_muscle": {
-        "n_cells": 302,
-        "n_animals_flt": 4,
-        "n_animals_gc": 4,
-        "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
-        "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_PANCREAS_BETA_CELLS",
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_G2M_CHECKPOINT",
           "HALLMARK_SPERMATOGENESIS"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_TGF-BETA_SIGNALING"
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB"
         ]
       },
-      "satellite_myogenic_progenitor": {
-        "n_cells": 786,
+      "myonuclear_structural": {
+        "n_cells": 427,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": -0.24792316926770705,
+        "vs_bulk_p": 0.078,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_ANGIOGENESIS",
-          "HALLMARK_APICAL_SURFACE"
+          "HALLMARK_MYOGENESIS",
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "HALLMARK_SPERMATOGENESIS"
+        ],
+        "top_depleted": [
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "HALLMARK_INFLAMMATORY_RESPONSE",
+          "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION"
+        ]
+      },
+      "pericyte_smooth_muscle": {
+        "n_cells": 420,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": -0.08004801920768306,
+        "vs_bulk_p": 0.57,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_UV_RESPONSE_DN",
+          "HALLMARK_ALLOGRAFT_REJECTION"
+        ],
+        "top_depleted": [
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "HALLMARK_MYC_TARGETS_V1",
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB"
+        ]
+      },
+      "satellite_myogenic_progenitor": {
+        "n_cells": 2420,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": -0.009267707082833133,
+        "vs_bulk_p": 0.942,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_MYC_TARGETS_V2",
+          "HALLMARK_SPERMATOGENESIS"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
@@ -349,43 +387,81 @@
         ]
       },
       "t_nk_lymphocyte": {
-        "n_cells": 4258,
+        "n_cells": 2850,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": -0.07860744297719087,
+        "vs_bulk_p": 0.571,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
-          "HALLMARK_KRAS_SIGNALING_DN",
-          "HALLMARK_PANCREAS_BETA_CELLS",
-          "HALLMARK_APICAL_SURFACE"
+          "HALLMARK_UV_RESPONSE_DN",
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_INTERFERON_ALPHA_RESPONSE"
         ],
         "top_depleted": [
           "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
           "HALLMARK_MYC_TARGETS_V1",
-          "HALLMARK_UNFOLDED_PROTEIN_RESPONSE"
+          "HALLMARK_E2F_TARGETS"
         ]
       }
     },
     "skin": {
-      "t_nk_lymphocyte": {
-        "n_cells": 112,
+      "basal_keratinocyte": {
+        "n_cells": 8022,
         "n_animals_flt": 4,
         "n_animals_gc": 4,
         "n_pathways": 50,
-        "vs_bulk_r": NaN,
-        "vs_bulk_p": null,
-        "vs_bulk_n_pathways": 0,
+        "vs_bulk_r": -0.6755822328931572,
+        "vs_bulk_p": 0.001,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_ALLOGRAFT_REJECTION",
+          "HALLMARK_COMPLEMENT",
+          "HALLMARK_INFLAMMATORY_RESPONSE"
+        ],
+        "top_depleted": [
+          "HALLMARK_MYC_TARGETS_V1",
+          "HALLMARK_E2F_TARGETS",
+          "HALLMARK_OXIDATIVE_PHOSPHORYLATION"
+        ]
+      },
+      "fibroblast_dermal_stromal": {
+        "n_cells": 191,
+        "n_animals_flt": 3,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": -0.7059303721488596,
+        "vs_bulk_p": 0.001,
+        "vs_bulk_n_pathways": 50,
         "top_enriched": [
           "HALLMARK_INTERFERON_ALPHA_RESPONSE",
-          "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "HALLMARK_ALLOGRAFT_REJECTION",
           "HALLMARK_INTERFERON_GAMMA_RESPONSE"
         ],
         "top_depleted": [
-          "HALLMARK_TNF-ALPHA_SIGNALING_VIA_NF-KB",
-          "HALLMARK_ESTROGEN_RESPONSE_LATE",
-          "HALLMARK_ESTROGEN_RESPONSE_EARLY"
+          "HALLMARK_MYC_TARGETS_V1",
+          "HALLMARK_E2F_TARGETS",
+          "HALLMARK_G2M_CHECKPOINT"
+        ]
+      },
+      "immune_myeloid": {
+        "n_cells": 14300,
+        "n_animals_flt": 4,
+        "n_animals_gc": 4,
+        "n_pathways": 50,
+        "vs_bulk_r": 0.02415366146458583,
+        "vs_bulk_p": 0.874,
+        "vs_bulk_n_pathways": 50,
+        "top_enriched": [
+          "HALLMARK_MITOTIC_SPINDLE",
+          "HALLMARK_COMPLEMENT",
+          "HALLMARK_PROTEIN_SECRETION"
+        ],
+        "top_depleted": [
+          "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+          "HALLMARK_APOPTOSIS"
         ]
       }
     }

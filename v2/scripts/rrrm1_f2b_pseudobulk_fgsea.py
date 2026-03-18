@@ -67,12 +67,12 @@ MIN_SAMPLES_PER_GROUP = 3
 
 def download_mouse_hallmark_gmt(out_dir: Path) -> Path:
     """Download Hallmark mouse gene set if not cached."""
-    gmt_path = out_dir / "h.all.mouse.v2024.1.Mm.symbols.gmt"
+    gmt_path = out_dir / "mh.all.v2024.1.Mm.symbols.gmt"
     if gmt_path.exists():
         return gmt_path
     out_dir.mkdir(parents=True, exist_ok=True)
     url = ("https://data.broadinstitute.org/gsea-msigdb/msigdb/release/"
-           "2024.1.Mm/h.all.v2024.1.Mm.symbols.gmt")
+           "2024.1.Mm/mh.all.v2024.1.Mm.symbols.gmt")
     print(f"  Downloading mouse Hallmark GMT from MSigDB...")
     urllib.request.urlretrieve(url, gmt_path)
     print(f"  Saved: {gmt_path}")
@@ -133,7 +133,9 @@ def transfer_celltype_labels(labeled: sc.AnnData, hardened: sc.AnnData) -> sc.An
     # Try direct match first
     common = labeled.obs_names.intersection(ct_series.index)
     if len(common) > 100:
-        labeled.obs["broad_celltype"] = ct_series.reindex(labeled.obs_names).fillna("unknown")
+        labeled.obs["broad_celltype"] = (
+            ct_series.reindex(labeled.obs_names).astype(object).fillna("unknown")
+        )
         n_assigned = (labeled.obs["broad_celltype"] != "unknown").sum()
         print(f"  Transferred broad_celltype to {n_assigned}/{len(labeled)} cells")
         return labeled
@@ -506,6 +508,15 @@ def run_tissue(tissue: str, gmt_path: Path, gene_sets: dict) -> dict:
 
         # DESeq2 ranking
         ranking = run_pydeseq2(bulk_df, animal_cond)
+
+        # Convert ENSMUSG → gene symbols for gseapy/GMT compatibility
+        source = sub.raw.to_adata() if sub.raw is not None else sub
+        if (ranking.index[0].startswith("ENSMUSG")
+                and "gene_symbols" in source.var.columns):
+            sym_map = dict(zip(source.var_names.astype(str),
+                               source.var["gene_symbols"].astype(str)))
+            ranking.index = ranking.index.map(lambda x: sym_map.get(x, x))
+            ranking = ranking[~ranking.index.duplicated(keep="first")]
 
         # fGSEA
         fgsea_df = run_preranked_fgsea(ranking, gene_sets)
