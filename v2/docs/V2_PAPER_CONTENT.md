@@ -1,7 +1,7 @@
 # GeneLab Benchmark v2 — Paper Content
 
-*Draft: 2026-03-09. English draft for manuscript preparation.*
-*Analysis dates: 2026-03-07 (T1/T2/T3, RR-6/RR-8 liver). Data: NASA OSDR.*
+*Draft: 2026-03-09 (Updated: 2026-03-18). English draft for manuscript preparation.*
+*Analysis dates: 2026-03-07 (T1/T2/T3, RR-6/RR-8 liver), 2026-03-18 (F2 scRNA-seq). Data: NASA OSDR.*
 
 ---
 
@@ -304,6 +304,57 @@ This contrasts with JAXA (120-day, E1 r = +0.352): longer duration allows genuin
 - `v2/evaluation/E3_cfrna_origin.json`
 - `v2/figures/E3_cfrna_origin.html`
 
+### 3.2 RRRM-1 Multi-Tissue scRNA-seq Benchmark (F2) ★★★
+
+**Data:** RRRM-1 (Rodent Research Reference Mission 1) scRNA-seq from 4 tissues: blood (OSD-918), eye (OSD-920), muscle (OSD-924), and skin (OSD-934). 10x Chromium 3' v3, n=4 FLT + 4 GC per tissue (8 animals total, LOAO design). STARsolo alignment (GRCm39-2024-A) → Scanpy QC (min_genes=200, pct_mt<25%) → marker-score-based broad annotation → Scrublet doublet removal. **38,081 cells** retained across 4 tissues.
+
+We designed four benchmark subtasks to decompose the bulk spaceflight signal into cell-type components, directly extending v1.0 Category A:
+
+#### F2-A: Cell-Type Composition Shift
+
+Wilcoxon rank-sum tests for each cell type's fractional abundance (FLT vs. GC, n=4 per condition) revealed no statistically significant composition shifts after Benjamini-Hochberg correction (minimum padj = 0.088 in blood erythroid and B cell). This null result likely reflects insufficient statistical power (n=4+4) rather than absence of composition changes, as the blood B cell fraction showed a raw 7.7-percentage-point increase in FLT (8.8% vs. 1.0% GC, p_raw = 0.029).
+
+**Skin caveat:** Broad cell-type annotations were heavily skewed by condition — most cell types appeared predominantly in either FLT or GC — limiting skin results to 3 of 8+ annotated cell types for subsequent analyses.
+
+#### F2-B: Cell-Type-Specific Pathway Activity
+
+We generated pseudo-bulk expression profiles per cell type per animal and ranked genes by Welch t-statistic (FLT vs. GC), then applied fGSEA against all 50 MSigDB Hallmark pathways per cell type. This approach was chosen after pydeseq2 v0.5's `DeseqStats()` contrast parameter incompatibility forced a fallback to t-test ranking, which we validated against DESeq2 using v1.0 J2 data (gene ranking Spearman r = 0.926 across DGE pipelines).
+
+Blood cell types showed divergent pathway patterns: **monocyte_macrophage** and **t_cell** exhibited the strongest positive NES for inflammatory and immune pathways (ALLOGRAFT_REJECTION, COMPLEMENT), while **erythroid** cells showed negative NES in metabolic pathways (OXIDATIVE_PHOSPHORYLATION, FATTY_ACID_METABOLISM). Muscle cell types showed more homogeneous responses, with immune-related pathways (INFLAMMATORY_RESPONSE, INTERFERON_GAMMA_RESPONSE) consistently enriched across macrophage, T/NK, and endothelial populations.
+
+#### F2-C: Cell-Type-Level Spaceflight Classification ★★★
+
+We trained PCA(50)–Logistic Regression classifiers per cell type using Leave-One-Animal-Out (LOAO) cross-validation, directly paralleling the v1.0 bulk tissue benchmark. This enabled within-tissue comparison: does cell-type resolution improve spaceflight detection over bulk?
+
+**Muscle** provided the clearest answer: all 8 cell types achieved AUROC ≥ 0.755, with 4 cell types exceeding 0.90 — substantially above the v1.0 bulk muscle baseline of 0.758. The top performer, endothelial cells (AUROC = 0.961, 95% CI: 0.944–0.974), outperformed bulk by +0.203, indicating that the spaceflight signal concentrates in vascular and immune cell populations rather than being uniformly distributed across the tissue.
+
+**Blood** immune cells were highly separable: B cells (0.975) and T cells (0.969) achieved near-perfect classification despite the tissue's overall dominance by erythroid cells (83% of total cells, AUROC = 0.607). This suggests that rare immune populations carry a stronger spaceflight signature than the abundant erythroid compartment.
+
+**Eye** retinal neuronal cells (0.816) exceeded the bulk baseline (0.700) by +0.116, while most other eye cell types fell below baseline, suggesting cell-type-specific sensitivity to spaceflight stress in ocular tissue.
+
+#### F2-D: Cross-Species Cell-Type Concordance ★★
+
+We tested whether matching homologous cell types between species improves the cross-species NES concordance observed in E1 (bulk liver–cfRNA r = 0.352). We computed Spearman correlations between RRRM-1 mouse blood cell-type NES and I4 human PBMC cell-type NES (FP1: R+1 vs. pre-flight) for matched cell lineages.
+
+| Matched Pair | Spearman r | 95% CI | p_perm | n pathways | vs E1 |
+|---|---|---|---|---|---|
+| **CD4+ T ↔ t_cell** | **0.890** | [0.602, 0.994] | **0.0002** | 13 | +0.539 |
+| **B Cell ↔ b_cell** | **0.525** | [0.054, 0.849] | **0.047** | 15 | +0.174 |
+| CD14+ Mono ↔ mono_macro | 0.029 | [−0.534, 0.618] | 0.912 | 17 | −0.323 |
+
+T cells showed remarkably high cross-species concordance (CD4+: r = 0.890; CD8+: r = 0.900; Other T: r = 0.764), far exceeding the E1 bulk baseline. This pattern held across all three I4 T cell subtypes tested against the single RRRM-1 t_cell population, indicating a conserved lymphoid spaceflight response that is partially obscured at the bulk tissue level.
+
+Monocytes showed no cross-species concordance (CD14+ r = 0.029, CD16+ r = 0.058), possibly reflecting (1) the small number of overlapping pathways (17 for CD14+), (2) tissue-of-origin differences between RRRM-1 whole blood and I4 PBMCs, or (3) genuine species-specific monocyte responses.
+
+**Key result:** Cell-type matching dramatically improved cross-species NES concordance for lymphoid lineages (r = 0.89 vs. bulk r = 0.35), demonstrating that cell-type resolution unmasks conserved spaceflight biology obscured by tissue heterogeneity.
+
+**Scripts and outputs:**
+- Composition: `v2/scripts/rrrm1_f2a_composition.py` → `v2/evaluation/F2A_composition.json`
+- Pathway: `v2/scripts/rrrm1_f2b_pseudobulk_fgsea.py` → `v2/evaluation/F2B_pseudobulk_fgsea.json`
+- Classifier: `v2/scripts/rrrm1_f2c_loao_classifier.py` → `v2/evaluation/F2C_loao_classifier.json`
+- Cross-species: `v2/scripts/rrrm1_f2d_crossspecies.py` → `v2/evaluation/F2D_crossspecies.json`
+- Figures: `v2/figures/F2{A,B,C,D}_*.html`, `v2/figures/Fig4_scrna_summary.html`
+
 ---
 
 ## Methods Notes
@@ -357,6 +408,65 @@ This contrasts with JAXA (120-day, E1 r = +0.352): longer duration allows genuin
 - Comparison: Spearman r between I4 NES and mouse liver NES (48 common pathways)
 - JAXA result from E1 (50 pathways) compared with I4 result (48 pathways); common-pathway comparison used for Δr
 
+### F2 Method Detail (RRRM-1 scRNA-seq)
+- **Alignment**: STARsolo v2.7.3a, GRCm39-2024-A genome, CellRanger 2.2 barcode whitelist, GeneFull feature type
+- **QC**: Scanpy (scanpy 1.10+), min_genes=200, max_genes=6000, pct_mt<25%, min_cells=3
+- **Annotation**: Marker gene scoring (marker_score per broad category), manual curation with tissue-specific gene panels
+- **Hardening**: Scrublet doublet detection (expected_doublet_rate=0.06), removal of flagged doublets
+- **F2-A**: Per-animal cell-type fractions → Wilcoxon rank-sum (FLT vs GC, n=4 per group) → BH-adjusted p-values
+- **F2-B**: Pseudo-bulk (sum counts per cell type per animal) → Welch t-test ranking (pydeseq2 fallback) → gseapy prerank, MSigDB Hallmark 2020 (organism="Mouse", uppercase gene symbols), 50 pathways per cell type
+- **F2-C**: PCA(50 components) → LogisticRegression(class_weight="balanced", max_iter=1000) → LOAO CV (8 folds, 1 animal out per fold) → AUROC with bootstrap CI (n=2000) and permutation p (n=5000)
+- **F2-D**: Cell-type NES intersection (RRRM-1 fGSEA × I4 snRNA-seq fGSEA) → Spearman r → bootstrap 95% CI (n=1000, seed=42) → permutation p (n=10000, two-tailed). Minimum 8 overlapping pathways required.
+- **Cell-type mapping** (F2-D): CD14+ Monocyte ↔ monocyte_macrophage, B Cell ↔ b_cell, CD4+ T Cell ↔ t_cell (primary); CD16+ Mono, CD8+ T, Other T (sensitivity)
+
+---
+
+## Section 4: Discussion
+
+### 4.1 Pathway-Level Features Enable Robust Cross-Mission Transfer
+
+A central finding of SpaceOmicsBench v1.0 is that pathway-level features dramatically outperform gene-level features for cross-mission spaceflight detection. The most striking example is kidney (J5): gene-level AUROC = 0.43 (below chance) vs. pathway AUROC = 0.74 — a "rescue" enabled by biological abstraction that absorbs batch-specific gene expression variability. This supports H3 (pathway transfer superiority), which we found to be conditionally supported: pathway features win when biological conservation exists across missions, but do not help when tissue-specific signals are absent.
+
+The mechanism underlying this robustness is pathway batch-invariance (D3): while gene features achieve F1 = 1.0 for mission identification (perfect batch separation), pathway features achieve F1 = 0.06 (near-random), indicating that the dimensionality reduction from ~20,000 genes to ~50 pathways collapses batch-specific variation while retaining biological signal.
+
+### 4.2 Temporal Dynamics: Preservation Artifacts, Recovery, and Age Amplification
+
+The T1–T3 analyses reveal a layered temporal structure in spaceflight transcriptomics:
+
+1. **T1 (Preservation artifact):** ISS-T vs. LAR classification is dominated by preservation method (GC AUROC ≥ FLT AUROC), not spaceflight biology. This has immediate practical implications: multi-timepoint studies must account for preservation confounds before interpreting temporal dynamics.
+
+2. **T2 (Recovery overshoot):** 25/27 Hallmark pathways show recovery toward baseline in LAR samples, with a mean recovery fraction of 1.24× (overshoot). MYC_TARGETS_V1 (2.49×) and PROTEIN_SECRETION (2.14×) show the strongest overshoot, suggesting compensatory biosynthetic rebound after removal of spaceflight stress.
+
+3. **T3 (Age amplification):** Old mice (32 weeks) show AUROC = 0.945 vs. young (10–12 weeks) = 0.679 (Δ = +0.266), indicating that aging globally amplifies the spaceflight transcriptomic signature without redirecting it to novel pathways (0/50 significant age×flight interactions).
+
+The F1-Temporal analysis connects these mouse findings to human data: I4 PBMC pathway activity peaks at R+45 (LP1), not at R+1 (FP1), mirroring the mouse T2 overshoot pattern. This cross-species temporal parallel suggests a conserved post-flight transcriptional reorganization phase.
+
+### 4.3 Cross-Species Conservation Is Duration-Dependent
+
+The E1/E2 comparison reveals a striking duration effect: 120-day JAXA cfRNA shows significant conservation with mouse liver NES (r = 0.352, p = 0.013), while 3-day I4 cfRNA shows none (r = −0.095, NS), yielding Δr = +0.446. We interpret this as evidence that short-duration missions induce transient, noisy transcriptional responses that do not converge on the conserved pathway programs detectable in longer missions.
+
+The E3 anti-correlation finding (PBMC intracellular NES vs. cfRNA NES r ≈ −0.5) provides a mechanistic explanation: at R+1, plasma cfRNA reflects passive release of pre-existing cellular transcripts (e.g., MYC_TARGETS upregulated in cfRNA while suppressed in all PBMC subtypes), rather than active transcriptional programs. By contrast, the JAXA 120-day timepoint presumably captures genuine tissue-derived pathway changes that have accumulated sufficiently to dominate the cfRNA signal.
+
+### 4.4 Cell-Type Resolution Unmasks Conserved Spaceflight Biology
+
+The F2 benchmark demonstrates that cell-type resolution simultaneously improves spaceflight detection (F2-C) and cross-species concordance (F2-D), but through different mechanisms:
+
+**Detection (F2-C):** In muscle, 4/8 cell types exceed AUROC = 0.90 (vs. bulk 0.758), with endothelial cells reaching 0.961. This indicates that the bulk spaceflight signal is a weighted average of heterogeneous cell-type responses, and that specific populations (vascular, immune) carry disproportionately strong signatures.
+
+**Concordance (F2-D):** Matching CD4+ T cells between RRRM-1 mouse blood and I4 human PBMCs yields r = 0.890 — far exceeding the E1 bulk baseline of r = 0.352. This 2.5-fold improvement demonstrates that tissue heterogeneity obscures conserved cell-type-specific spaceflight responses. Notably, this conservation is lineage-dependent: lymphoid cells (T, B) show strong concordance, while monocytes do not (r ≈ 0.03), suggesting that innate immune responses to spaceflight may be more species-specific than adaptive immune responses.
+
+### 4.5 Foundation Models Underperform Classical ML on Small-n Bulk Data
+
+Neither scRNA-seq-pretrained foundation models (scGPT: mean AUROC = 0.666; Mouse-Geneformer: 0.476) nor text-based LLMs (DeepSeek/Gemini/Llama: 0.49–0.51) match classical PCA-LR (0.758) on the v1.0 benchmark. This is consistent with the broader observation that pretrained models require sufficient fine-tuning data to outperform simpler baselines, and that the small-n bulk RNA-seq setting (typically 20–40 samples per task) does not provide this. The LLM zero-shot result (all three providers at chance level) further confirms that gene expression classification remains outside the capabilities of current text-based language models, even with carefully curated protein-coding gene features.
+
+### 4.6 Limitations
+
+1. **Skin annotation bias**: RRRM-1 skin broad cell-type labels are heavily skewed by condition, making F2-A and F2-C results unreliable for skin. Re-annotation with more granular markers is needed.
+2. **Underpowered composition test**: F2-A uses n=4+4, likely insufficient to detect subtle composition shifts. Larger scRNA-seq cohorts (e.g., from future missions) would increase power.
+3. **DGE pipeline fallback**: pydeseq2 contrast parameter incompatibility required fallback to Welch t-test ranking. While validated against DESeq2 (r = 0.926), this represents a methodological compromise.
+4. **Pathway count imbalance**: F2-D matched pairs use 13–30 pathways (limited by I4 fGSEA filtering) vs. E1's 50, reducing statistical power for individual comparisons. The strong T cell result (r = 0.890) is robust despite this limitation, but the monocyte null result should be interpreted cautiously.
+5. **Single mission**: RRRM-1 is a single ISS mission; cross-mission scRNA-seq validation is not yet available.
+
 ---
 
 ## Supplementary Notes
@@ -384,5 +494,5 @@ The +0.266 AUROC delta between OLD and YNG mice is consistent with known age-rel
 
 ---
 
-*Next update: Section 2 E1/E2 results after Phase 2 execution.*
+*Updated: 2026-03-18. All sections complete (T1-T3, E1-E3, F1, F2-ABCD).*
 *Target journal: Cell Systems / npj Systems Biology.*
