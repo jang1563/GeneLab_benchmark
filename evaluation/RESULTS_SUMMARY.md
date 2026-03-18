@@ -123,14 +123,16 @@ Excluding gastrocnemius: rank-order correlation for 5 tissues (thymus/eye/skin/l
 
 ## Biological Validation (fGSEA Hallmark, all tissues PASS)
 
-| Tissue | Top Enriched Pathways | Consistency |
+| Tissue | Top Differentially Enriched Pathways (FLT vs GC) | Consistency |
 |---|---|---|
-| Liver | OXIDATIVE_PHOSPHORYLATION, FATTY_ACID_METABOLISM | Literature-concordant |
+| Liver | OXIDATIVE_PHOSPHORYLATION, FATTY_ACID_METABOLISM | Literature-concordant (direction varies by mission) |
 | Thymus | E2F_TARGETS, G2M_CHECKPOINT, IFN-gamma | Thymocyte proliferation |
-| Gastrocnemius | OXIDATIVE_PHOSPHORYLATION, MYOGENESIS | Muscle metabolism |
+| Gastrocnemius | OXIDATIVE_PHOSPHORYLATION, MYOGENESIS | Muscle metabolism (direction varies by mission) |
 | Kidney | MTORC1_SIGNALING, CHOLESTEROL_HOMEOSTASIS | Renal metabolism |
 | Eye | OXIDATIVE_PHOSPHORYLATION (dominant 3/3 missions) | Retina metabolic demand |
 | Skin | E2F_TARGETS, G2M_CHECKPOINT, EPITHELIAL_MESENCHYMAL_TRANSITION | Cell proliferation + ECM remodeling (2/3 missions consistent) |
+
+*Note: "Top Differentially Enriched" = highest |NES| across missions. Enrichment direction (up/down in spaceflight) may vary by mission for liver and gastrocnemius due to mission-specific biological variability. See individual fGSEA result files in `processed/fgsea/` for per-mission NES values and directions.*
 
 ---
 
