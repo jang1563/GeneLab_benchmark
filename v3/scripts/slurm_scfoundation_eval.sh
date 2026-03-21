@@ -8,7 +8,7 @@
 #SBATCH --output=v3/logs/scf_eval_%j.out
 #SBATCH --error=v3/logs/scf_eval_%j.err
 
-set -euo pipefail
+set -eo pipefail
 
 PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
 CONDA_BASE="/home/fs01/jak4013/miniconda3/miniconda3"
