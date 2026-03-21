@@ -1,0 +1,66 @@
+{
+  "tissue": "colon",
+  "mission": "RR-6",
+  "method": "PCA-LR (5-fold stratified CV)",
+  "n_folds": 5,
+  "mean_auroc": 0.9,
+  "mean_ci_lower": 0.619,
+  "mean_perm_p": 0.0705,
+  "fold_results": [
+    {
+      "fold": 0,
+      "n_train": 28,
+      "n_test": 8,
+      "n_genes_selected": 22864,
+      "n_pca": 20,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.018
+    },
+    {
+      "fold": 1,
+      "n_train": 29,
+      "n_test": 7,
+      "n_genes_selected": 22864,
+      "n_pca": 20,
+      "auroc": 0.8333,
+      "ci_lower": 0.3617,
+      "ci_upper": 1.0,
+      "perm_p": 0.1159
+    },
+    {
+      "fold": 2,
+      "n_train": 29,
+      "n_test": 7,
+      "n_genes_selected": 22864,
+      "n_pca": 20,
+      "auroc": 0.8333,
+      "ci_lower": 0.3333,
+      "ci_upper": 1.0,
+      "perm_p": 0.1009
+    },
+    {
+      "fold": 3,
+      "n_train": 29,
+      "n_test": 7,
+      "n_genes_selected": 22864,
+      "n_pca": 20,
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.031
+    },
+    {
+      "fold": 4,
+      "n_train": 29,
+      "n_test": 7,
+      "n_genes_selected": 22864,
+      "n_pca": 20,
+      "auroc": 0.8333,
+      "ci_lower": 0.4,
+      "ci_upper": 1.0,
+      "perm_p": 0.0869
+    }
+  ]
+}

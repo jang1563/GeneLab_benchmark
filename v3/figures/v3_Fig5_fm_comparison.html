@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 5 — Foundation Model Comparison for Spaceflight Detection</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #fff;
+  }
+  .figure-container {
+    width: 1100px;
+    margin: 0 auto;
+  }
+  .figure-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .figure-subtitle {
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .panel-full {
+    grid-column: 1 / -1;
+  }
+  .panel {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 12px;
+    background: #fafafa;
+  }
+  .panel-label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+  .panel-desc {
+    font-size: 9px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .axis text { font-size: 9px; }
+  .axis-label { font-size: 10px; }
+  .tick-label { font-size: 8px; }
+  .stat-text { font-size: 8px; fill: #444; }
+  .annotation { font-size: 8px; fill: #888; }
+  .legend-text { font-size: 9px; }
+  .bar-label { font-size: 7px; }
+  .interpretation {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-left: 3px solid #999;
+    font-size: 9px;
+    color: #444;
+    line-height: 1.4;
+  }
+  .interpretation strong {
+    color: #333;
+  }
+  .sig-star { font-size: 9px; font-weight: bold; }
+  .table-container {
+    margin-top: 8px;
+    font-size: 9px;
+  }
+  .table-container table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .table-container th, .table-container td {
+    border: 1px solid #ddd;
+    padding: 3px 6px;
+    text-align: center;
+  }
+  .table-container th {
+    background: #f0f0f0;
+    font-weight: bold;
+  }
+  .cell-best { background: #e8f5e9; font-weight: bold; }
+  .cell-sig { color: #1565c0; }
+  .cell-ns { color: #999; }
+  .cell-na { color: #ccc; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Figure 5. Foundation Model Comparison for Spaceflight Detection</div>
+  <div class="figure-subtitle">PCA-LR baseline vs four foundation models across 7 tissues. LOMO cross-validation (multi-mission) or 5-fold stratified CV (single-mission).</div>
+
+  <div class="panels">
+    <!-- Panel A: Grouped bar chart -->
+    <div class="panel panel-full">
+      <div class="panel-label">A. AUROC by Model and Tissue</div>
+      <div class="panel-desc">Grouped bars: PCA-LR gene-level baseline (gray), Geneformer (orange), scGPT (blue), UCE-4L (green), scFoundation (purple). Dashed line = chance (0.5). Stars indicate permutation p < 0.05.</div>
+      <div id="panelA"></div>
+    </div>
+
+    <!-- Panel B: Forest plot with CI -->
+    <div class="panel">
+      <div class="panel-label">B. Foundation Model AUROC with 95% CI</div>
+      <div class="panel-desc">Forest plot for UCE (green) and scFoundation (purple). Only 5 multi-mission tissues shown (CI requires bootstrap). Filled = p < 0.05.</div>
+      <div id="panelB"></div>
+    </div>
+
+    <!-- Panel C: Summary table -->
+    <div class="panel">
+      <div class="panel-label">C. Numerical Summary</div>
+      <div class="panel-desc">AUROC values with statistical significance. Bold = best FM per tissue. Blue = p < 0.05.</div>
+      <div id="panelC" class="table-container"></div>
+    </div>
+  </div>
+
+  <div class="interpretation">
+    <strong>Key finding:</strong> PCA-LR (simple variance filter + PCA + logistic regression) outperforms all four foundation models on most tissues.
+    <strong>scFoundation</strong> is the best FM overall (liver 0.635**, gastro 0.691*), but still below PCA-LR (liver 0.670, gastro 0.824).
+    <strong>UCE</strong> shows moderate performance on thymus (0.632*) but is hampered by stochastic gene sampling (patched with seed=42).
+    <strong>Geneformer</strong> and <strong>scGPT</strong> (v1 results, fine-tuned) also underperform PCA-LR.
+    <br><br>
+    <strong>Interpretation:</strong> Pre-trained cell atlas representations (healthy tissue variation) do not capture spaceflight perturbation signals.
+    Spaceflight detection requires <em>mission-specific</em> transcriptomic shifts that are better captured by direct statistical features (variance-filtered gene expression → PCA)
+    than by learned biological priors from single-cell atlases. The FM embedding space encodes cell identity, not environmental perturbation.
+  </div>
+</div>
+
+<script>
+// ── Data ──
+const tissues = ["liver", "gastro", "kidney", "thymus", "eye", "lung", "colon"];
+const tissueLabels = ["Liver", "Gastro.", "Kidney", "Thymus", "Eye", "Lung", "Colon"];
+
+// PCA-LR gene-level LOMO from v1 RESULTS_SUMMARY + v3 A7/A7b
+const pcaLR = [0.670, 0.824, 0.432, 0.923, 0.789, 0.608, 0.900];
+
+// Geneformer (v1, 6 tissues — no lung/colon)
+const geneformer = [0.486, 0.382, 0.452, 0.495, 0.484, null, null];
+
+// scGPT (v1.3, fine-tuned, 6 tissues — no lung/colon)
+const scgpt = [0.628, 0.685, 0.556, 0.782, 0.650, null, null];
+
+// UCE-4L (v3, seeded, 7 tissues)
+const uce = [0.459, 0.578, 0.489, 0.632, 0.550, 0.555, 0.449];
+const uceCIL = [0.372, 0.361, 0.383, 0.493, 0.353, null, null];
+const uceCIU = [0.548, 0.776, 0.595, 0.761, 0.741, null, null];
+const uceP = [0.831, 0.221, 0.571, 0.031, 0.296, null, null];
+
+// scFoundation (v3, full, 7 tissues)
+const scf = [0.635, 0.691, 0.541, 0.487, 0.563, 0.389, 0.755];
+const scfCIL = [0.548, 0.498, 0.419, 0.337, 0.375, null, null];
+const scfCIU = [0.715, 0.867, 0.658, 0.627, 0.750, null, null];
+const scfP = [0.001, 0.035, 0.250, 0.575, 0.260, null, null];
+
+// Okabe-Ito inspired palette
+const colors = {
+  pcaLR: "#999999",
+  geneformer: "#E69F00",
+  scgpt: "#56B4E9",
+  uce: "#009E73",
+  scf: "#CC79A7"
+};
+
+const models = [
+  { key: "pcaLR", label: "PCA-LR", data: pcaLR, color: colors.pcaLR },
+  { key: "geneformer", label: "Geneformer", data: geneformer, color: colors.geneformer },
+  { key: "scgpt", label: "scGPT", data: scgpt, color: colors.scgpt },
+  { key: "uce", label: "UCE-4L", data: uce, color: colors.uce },
+  { key: "scf", label: "scFoundation", data: scf, color: colors.scf }
+];
+
+// ── Panel A: Grouped bar chart ──
+{
+  const margin = {top: 30, right: 20, bottom: 50, left: 45};
+  const width = 1076 - margin.left - margin.right;
+  const height = 320 - margin.top - margin.bottom;
+
+  const svg = d3.select("#panelA").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x0 = d3.scaleBand().domain(tissues).range([0, width]).padding(0.15);
+  const x1 = d3.scaleBand().domain(models.map(m=>m.key)).range([0, x0.bandwidth()]).padding(0.05);
+  const y = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+
+  // Axes
+  svg.append("g").attr("class","axis")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x0).tickFormat((d,i) => tissueLabels[i]))
+    .selectAll("text").style("font-size","10px");
+
+  svg.append("g").attr("class","axis")
+    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".1f")));
+
+  svg.append("text").attr("class","axis-label")
+    .attr("transform","rotate(-90)")
+    .attr("x",-height/2).attr("y",-35)
+    .attr("text-anchor","middle").text("AUROC");
+
+  // Chance line
+  svg.append("line")
+    .attr("x1",0).attr("x2",width)
+    .attr("y1",y(0.5)).attr("y2",y(0.5))
+    .attr("stroke","#999").attr("stroke-dasharray","4,3").attr("stroke-width",1);
+  svg.append("text").attr("class","annotation")
+    .attr("x",width-2).attr("y",y(0.5)-3)
+    .attr("text-anchor","end").text("chance");
+
+  // Bars
+  tissues.forEach((tissue, ti) => {
+    const g = svg.append("g").attr("transform", `translate(${x0(tissue)},0)`);
+    models.forEach(m => {
+      const val = m.data[ti];
+      if (val === null) return;
+      g.append("rect")
+        .attr("x", x1(m.key))
+        .attr("y", y(val))
+        .attr("width", x1.bandwidth())
+        .attr("height", height - y(val))
+        .attr("fill", m.color)
+        .attr("opacity", 0.85);
+
+      // Value label on top
+      g.append("text").attr("class","bar-label")
+        .attr("x", x1(m.key) + x1.bandwidth()/2)
+        .attr("y", y(val) - 2)
+        .attr("text-anchor","middle")
+        .attr("fill","#333")
+        .text(val.toFixed(2));
+
+      // Significance star for UCE/scFoundation
+      if (m.key === "uce" && uceP[ti] !== null && uceP[ti] < 0.05) {
+        g.append("text").attr("class","sig-star")
+          .attr("x", x1(m.key) + x1.bandwidth()/2)
+          .attr("y", y(val) - 10)
+          .attr("text-anchor","middle").attr("fill", m.color).text("*");
+      }
+      if (m.key === "scf" && scfP[ti] !== null && scfP[ti] < 0.05) {
+        g.append("text").attr("class","sig-star")
+          .attr("x", x1(m.key) + x1.bandwidth()/2)
+          .attr("y", y(val) - 10)
+          .attr("text-anchor","middle").attr("fill", m.color)
+          .text(scfP[ti] < 0.01 ? "**" : "*");
+      }
+    });
+  });
+
+  // Legend
+  const legend = svg.append("g").attr("transform", `translate(${width-280}, -20)`);
+  models.forEach((m, i) => {
+    legend.append("rect").attr("x", i*56).attr("y",0).attr("width",10).attr("height",10).attr("fill",m.color);
+    legend.append("text").attr("class","legend-text").attr("x",i*56+13).attr("y",9).text(m.label);
+  });
+}
+
+// ── Panel B: Forest plot ──
+{
+  const margin = {top: 15, right: 20, bottom: 30, left: 90};
+  const width = 510 - margin.left - margin.right;
+  const height = 280 - margin.top - margin.bottom;
+
+  const svg = d3.select("#panelB").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const forestTissues = ["liver", "kidney", "thymus", "gastro", "eye"];
+  const forestLabels = ["Liver", "Kidney", "Thymus", "Gastro.", "Eye"];
+
+  const y = d3.scaleBand().domain(forestTissues).range([0, height]).padding(0.3);
+  const x = d3.scaleLinear().domain([0.2, 0.95]).range([0, width]);
+
+  svg.append("g").attr("class","axis")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(4).tickFormat(d3.format(".1f")));
+
+  svg.append("g").attr("class","axis")
+    .call(d3.axisLeft(y).tickFormat((d,i) => forestLabels[i]));
+
+  svg.append("text").attr("class","axis-label")
+    .attr("x",width/2).attr("y",height+25).attr("text-anchor","middle").text("AUROC");
+
+  // Chance line
+  svg.append("line")
+    .attr("x1",x(0.5)).attr("x2",x(0.5))
+    .attr("y1",0).attr("y2",height)
+    .attr("stroke","#999").attr("stroke-dasharray","4,3");
+
+  const halfBand = y.bandwidth() / 4;
+
+  forestTissues.forEach((tissue, ti) => {
+    const idx = tissues.indexOf(tissue);
+
+    // UCE (offset up)
+    const uceY = y(tissue) + y.bandwidth()/2 - halfBand;
+    if (uceCIL[idx] !== null) {
+      svg.append("line")
+        .attr("x1", x(uceCIL[idx])).attr("x2", x(uceCIU[idx]))
+        .attr("y1", uceY).attr("y2", uceY)
+        .attr("stroke", colors.uce).attr("stroke-width", 1.5);
+    }
+    svg.append("circle")
+      .attr("cx", x(uce[idx])).attr("cy", uceY).attr("r", 5)
+      .attr("fill", uceP[idx] !== null && uceP[idx] < 0.05 ? colors.uce : "white")
+      .attr("stroke", colors.uce).attr("stroke-width", 1.5);
+
+    // scFoundation (offset down)
+    const scfY = y(tissue) + y.bandwidth()/2 + halfBand;
+    if (scfCIL[idx] !== null) {
+      svg.append("line")
+        .attr("x1", x(scfCIL[idx])).attr("x2", x(scfCIU[idx]))
+        .attr("y1", scfY).attr("y2", scfY)
+        .attr("stroke", colors.scf).attr("stroke-width", 1.5);
+    }
+    svg.append("circle")
+      .attr("cx", x(scf[idx])).attr("cy", scfY).attr("r", 5)
+      .attr("fill", scfP[idx] !== null && scfP[idx] < 0.05 ? colors.scf : "white")
+      .attr("stroke", colors.scf).attr("stroke-width", 1.5);
+  });
+
+  // Legend
+  const leg = svg.append("g").attr("transform", `translate(${width-130}, 0)`);
+  [{ label: "UCE-4L", color: colors.uce }, { label: "scFoundation", color: colors.scf }].forEach((m, i) => {
+    leg.append("circle").attr("cx", 5).attr("cy", i*18).attr("r", 4)
+      .attr("fill", m.color).attr("stroke", m.color);
+    leg.append("text").attr("class","legend-text").attr("x", 13).attr("y", i*18+4).text(m.label);
+  });
+  leg.append("circle").attr("cx", 5).attr("cy", 36).attr("r", 4)
+    .attr("fill", "white").attr("stroke", "#666");
+  leg.append("text").attr("class","legend-text").attr("x", 13).attr("y", 40).text("p > 0.05");
+  leg.append("circle").attr("cx", 5).attr("cy", 54).attr("r", 4)
+    .attr("fill", "#666").attr("stroke", "#666");
+  leg.append("text").attr("class","legend-text").attr("x", 13).attr("y", 58).text("p < 0.05");
+}
+
+// ── Panel C: Summary table ──
+{
+  const tableData = tissues.map((t, i) => ({
+    tissue: tissueLabels[i],
+    pcaLR: pcaLR[i],
+    gf: geneformer[i],
+    scgpt: scgpt[i],
+    uce: uce[i],
+    uceP: uceP[i],
+    scf: scf[i],
+    scfP: scfP[i]
+  }));
+
+  function fmtCell(val, p, isBest) {
+    if (val === null) return '<td class="cell-na">-</td>';
+    let cls = "";
+    if (isBest) cls += " cell-best";
+    if (p !== undefined && p !== null && p < 0.05) cls += " cell-sig";
+    let star = "";
+    if (p !== undefined && p !== null) {
+      if (p < 0.01) star = "**";
+      else if (p < 0.05) star = "*";
+    }
+    return `<td class="${cls.trim()}">${val.toFixed(3)}${star}</td>`;
+  }
+
+  let html = '<table><tr><th>Tissue</th><th style="color:' + colors.pcaLR + '">PCA-LR</th>' +
+    '<th style="color:' + colors.geneformer + '">Geneformer</th>' +
+    '<th style="color:' + colors.scgpt + '">scGPT</th>' +
+    '<th style="color:' + colors.uce + '">UCE-4L</th>' +
+    '<th style="color:' + colors.scf + '">scFoundation</th></tr>';
+
+  tableData.forEach(d => {
+    // Determine best FM (among uce and scf)
+    const fmVals = [
+      {key:"uce", val: d.uce},
+      {key:"scf", val: d.scf}
+    ].filter(v => v.val !== null);
+    const bestFM = fmVals.reduce((a,b) => (a.val > b.val ? a : b), {val: -1}).key;
+
+    html += `<tr><td><strong>${d.tissue}</strong></td>`;
+    html += fmtCell(d.pcaLR, undefined, false);
+    html += fmtCell(d.gf, undefined, false);
+    html += fmtCell(d.scgpt, undefined, false);
+    html += fmtCell(d.uce, d.uceP, bestFM === "uce");
+    html += fmtCell(d.scf, d.scfP, bestFM === "scf");
+    html += '</tr>';
+  });
+  html += '</table>';
+  html += '<div style="font-size:8px;color:#888;margin-top:4px;">* p < 0.05, ** p < 0.01 (permutation test, 10,000 permutations). Bold = best FM per tissue. Lung/colon: 5-fold CV (single mission, no CI/perm).</div>';
+
+  document.getElementById("panelC").innerHTML = html;
+}
+</script>
+</body>
+</html>

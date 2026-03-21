@@ -1,0 +1,188 @@
+{
+  "model_family": "UCE",
+  "nlayers": 4,
+  "results": [
+    {
+      "model": "UCE-4L",
+      "tissue": "liver",
+      "n_samples": 193,
+      "n_missions": 6,
+      "embedding_dim": 1280,
+      "n_genes_used": 16765,
+      "lomo_auroc": 0.45940170940170943,
+      "ci_lower": 0.3721447847969146,
+      "ci_upper": 0.5481615159319295,
+      "perm_p": 0.8309169083091691,
+      "n_folds": 6,
+      "per_mission": {
+        "MHU-2": {
+          "n_samples": 6,
+          "auroc": 0.33333333333333337
+        },
+        "RR-1": {
+          "n_samples": 14,
+          "auroc": 0.6530612244897959
+        },
+        "RR-3": {
+          "n_samples": 12,
+          "auroc": 0.5833333333333334
+        },
+        "RR-6": {
+          "n_samples": 39,
+          "auroc": 0.4105263157894737
+        },
+        "RR-8": {
+          "n_samples": 103,
+          "auroc": 0.5126050420168067
+        },
+        "RR-9": {
+          "n_samples": 19,
+          "auroc": 0.2571428571428571
+        }
+      }
+    },
+    {
+      "model": "UCE-4L",
+      "tissue": "kidney",
+      "n_samples": 118,
+      "n_missions": 3,
+      "embedding_dim": 1280,
+      "n_genes_used": 17096,
+      "lomo_auroc": 0.48909883720930225,
+      "ci_lower": 0.3826323908295335,
+      "ci_upper": 0.5951827530341587,
+      "perm_p": 0.5709429057094291,
+      "n_folds": 3,
+      "per_mission": {
+        "RR-1": {
+          "n_samples": 12,
+          "auroc": 0.6111111111111112
+        },
+        "RR-3": {
+          "n_samples": 12,
+          "auroc": 0.49999999999999994
+        },
+        "RR-7": {
+          "n_samples": 94,
+          "auroc": 0.48716216216216224
+        }
+      }
+    },
+    {
+      "model": "UCE-4L",
+      "tissue": "thymus",
+      "n_samples": 67,
+      "n_missions": 4,
+      "embedding_dim": 1280,
+      "n_genes_used": 17328,
+      "lomo_auroc": 0.6319073083778965,
+      "ci_lower": 0.49370615548272095,
+      "ci_upper": 0.7612805318687671,
+      "perm_p": 0.030596940305969402,
+      "n_folds": 4,
+      "per_mission": {
+        "MHU-1": {
+          "n_samples": 6,
+          "auroc": 0.4444444444444445
+        },
+        "MHU-2": {
+          "n_samples": 6,
+          "auroc": 0.4444444444444444
+        },
+        "RR-6": {
+          "n_samples": 35,
+          "auroc": 0.611111111111111
+        },
+        "RR-9": {
+          "n_samples": 20,
+          "auroc": 0.73
+        }
+      }
+    },
+    {
+      "model": "UCE-4L",
+      "tissue": "gastrocnemius",
+      "n_samples": 32,
+      "n_missions": 3,
+      "embedding_dim": 1280,
+      "n_genes_used": 15798,
+      "lomo_auroc": 0.578125,
+      "ci_lower": 0.3610914304993252,
+      "ci_upper": 0.776470588235294,
+      "perm_p": 0.22097790220977903,
+      "n_folds": 3,
+      "per_mission": {
+        "RR-1": {
+          "n_samples": 12,
+          "auroc": 0.888888888888889
+        },
+        "RR-5": {
+          "n_samples": 12,
+          "auroc": 0.3888888888888889
+        },
+        "RR-9": {
+          "n_samples": 8,
+          "auroc": 0.625
+        }
+      }
+    },
+    {
+      "model": "UCE-4L",
+      "tissue": "eye",
+      "n_samples": 37,
+      "n_missions": 3,
+      "embedding_dim": 1280,
+      "n_genes_used": 16800,
+      "lomo_auroc": 0.55,
+      "ci_lower": 0.3529055258467023,
+      "ci_upper": 0.7412368024132727,
+      "perm_p": 0.2960703929607039,
+      "n_folds": 3,
+      "per_mission": {
+        "RR-1": {
+          "n_samples": 12,
+          "auroc": 0.5555555555555556
+        },
+        "RR-3": {
+          "n_samples": 9,
+          "auroc": 0.7
+        },
+        "TBD": {
+          "n_samples": 16,
+          "auroc": 0.4444444444444444
+        }
+      }
+    },
+    {
+      "model": "UCE-4L",
+      "tissue": "lung",
+      "n_samples": 39,
+      "n_missions": 1,
+      "embedding_dim": 1280,
+      "n_genes_used": 17475,
+      "lomo_auroc": 0.5552631578947369,
+      "n_folds": 5,
+      "cv_type": "stratified_kfold",
+      "per_mission": {}
+    },
+    {
+      "model": "UCE-4L",
+      "tissue": "colon",
+      "n_samples": 36,
+      "n_missions": 1,
+      "embedding_dim": 1280,
+      "n_genes_used": 17367,
+      "lomo_auroc": 0.4489164086687306,
+      "n_folds": 5,
+      "cv_type": "stratified_kfold",
+      "per_mission": {}
+    }
+  ],
+  "config": {
+    "variance_percentile": 0.25,
+    "n_bootstrap": 2000,
+    "n_permutations": 10000,
+    "batch_size": 25
+  },
+  "timestamp": "2026-03-20T17:06:23.448450"
+}

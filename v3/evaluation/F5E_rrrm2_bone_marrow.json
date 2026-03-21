@@ -1,0 +1,3598 @@
+{
+  "task": "F5-E",
+  "description": "RRRM-2 bone marrow cell-type benchmark",
+  "results": {
+    "femur_bm": {
+      "n_cells_total": 80504,
+      "n_flt": 36528,
+      "n_gc": 43976,
+      "n_cell_types": 14,
+      "cell_types": [
+        "Fraction A pre-pro B cell",
+        "T cell",
+        "basophil",
+        "early pro-B cell",
+        "erythroblast",
+        "granulocyte",
+        "granulocytopoietic cell",
+        "hematopoietic precursor cell",
+        "immature B cell",
+        "late pro-B cell",
+        "macrophage",
+        "monocyte",
+        "proerythroblast",
+        "promonocyte"
+      ],
+      "cell_type_results": {
+        "Fraction A pre-pro B cell": {
+          "auroc": 0.42168175065394325,
+          "ci_low": 0.38130506846934614,
+          "ci_high": 0.4576053432700438,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 438,
+          "n_cells_gc": 501,
+          "n_cells_total": 939,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 23,
+              "n_train": 916,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 25,
+              "n_train": 914,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 36,
+              "n_train": 903,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 134,
+              "n_train": 805,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 29,
+              "n_train": 910,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 41,
+              "n_train": 898,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 27,
+              "n_train": 912,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 123,
+              "n_train": 816,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 30,
+              "n_train": 909,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 54,
+              "n_train": 885,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 59,
+              "n_train": 880,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 156,
+              "n_train": 783,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 40,
+              "n_train": 899,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 23,
+              "n_train": 916,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 24,
+              "n_train": 915,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 115,
+              "n_train": 824,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "T cell": {
+          "auroc": 0.32330774349282343,
+          "ci_low": 0.3086535425466506,
+          "ci_high": 0.3381769725163791,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 2609,
+          "n_cells_gc": 2777,
+          "n_cells_total": 5386,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 91,
+              "n_train": 5295,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 141,
+              "n_train": 5245,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 390,
+              "n_train": 4996,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 761,
+              "n_train": 4625,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 183,
+              "n_train": 5203,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 171,
+              "n_train": 5215,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 281,
+              "n_train": 5105,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 591,
+              "n_train": 4795,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 185,
+              "n_train": 5201,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 293,
+              "n_train": 5093,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 406,
+              "n_train": 4980,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 700,
+              "n_train": 4686,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 232,
+              "n_train": 5154,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 149,
+              "n_train": 5237,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 256,
+              "n_train": 5130,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 556,
+              "n_train": 4830,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "basophil": {
+          "auroc": 0.34122287968441817,
+          "ci_low": 0.2887525668983992,
+          "ci_high": 0.39646426238440735,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 169,
+          "n_cells_gc": 213,
+          "n_cells_total": 382,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 20,
+              "n_train": 362,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 23,
+              "n_train": 359,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 9,
+              "n_train": 373,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 32,
+              "n_train": 350,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 26,
+              "n_train": 356,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 16,
+              "n_train": 366,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 9,
+              "n_train": 373,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 34,
+              "n_train": 348,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 9,
+              "n_train": 373,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 19,
+              "n_train": 363,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 33,
+              "n_train": 349,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 38,
+              "n_train": 344,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 7,
+              "n_train": 375,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 37,
+              "n_train": 345,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 33,
+              "n_train": 349,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 37,
+              "n_train": 345,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "early pro-B cell": {
+          "auroc": 0.3592233009708738,
+          "ci_low": 0.29826520711418486,
+          "ci_high": 0.42764089720759463,
+          "p_perm": 0.9998000399920016,
+          "n_animals": 16,
+          "n_cells_flt": 103,
+          "n_cells_gc": 197,
+          "n_cells_total": 300,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 2,
+              "n_train": 298,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 7,
+              "n_train": 293,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 1,
+              "n_train": 299,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 36,
+              "n_train": 264,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 10,
+              "n_train": 290,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 31,
+              "n_train": 269,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 11,
+              "n_train": 289,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 5,
+              "n_train": 295,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 25,
+              "n_train": 275,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 4,
+              "n_train": 296,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 13,
+              "n_train": 287,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 46,
+              "n_train": 254,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 38,
+              "n_train": 262,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 29,
+              "n_train": 271,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 22,
+              "n_train": 278,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 20,
+              "n_train": 280,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "erythroblast": {
+          "auroc": 0.388554367171776,
+          "ci_low": 0.36255392646820306,
+          "ci_high": 0.41583369704353934,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 632,
+          "n_cells_gc": 1522,
+          "n_cells_total": 2154,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 6,
+              "n_train": 2148,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 14,
+              "n_train": 2140,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 253,
+              "n_train": 1901,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 146,
+              "n_train": 2008,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 2,
+              "n_train": 2152,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 56,
+              "n_train": 2098,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 108,
+              "n_train": 2046,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 47,
+              "n_train": 2107,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 6,
+              "n_train": 2148,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 935,
+              "n_train": 1219,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 72,
+              "n_train": 2082,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 290,
+              "n_train": 1864,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 4,
+              "n_train": 2150,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 3,
+              "n_train": 2151,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 118,
+              "n_train": 2036,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 94,
+              "n_train": 2060,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "granulocyte": {
+          "auroc": 0.31222647638436274,
+          "ci_low": 0.3025568537131913,
+          "ci_high": 0.3215545805744323,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 5498,
+          "n_cells_gc": 7077,
+          "n_cells_total": 12575,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 485,
+              "n_train": 12090,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 985,
+              "n_train": 11590,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 175,
+              "n_train": 12400,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 857,
+              "n_train": 11718,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 203,
+              "n_train": 12372,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 244,
+              "n_train": 12331,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 1519,
+              "n_train": 11056,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1030,
+              "n_train": 11545,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 1135,
+              "n_train": 11440,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 120,
+              "n_train": 12455,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 461,
+              "n_train": 12114,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 846,
+              "n_train": 11729,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 1653,
+              "n_train": 10922,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 585,
+              "n_train": 11990,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 1255,
+              "n_train": 11320,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 1022,
+              "n_train": 11553,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "granulocytopoietic cell": {
+          "auroc": 0.27564868599870407,
+          "ci_low": 0.264113521954972,
+          "ci_high": 0.2879783909612991,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 3559,
+          "n_cells_gc": 3920,
+          "n_cells_total": 7479,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 175,
+              "n_train": 7304,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 263,
+              "n_train": 7216,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 128,
+              "n_train": 7351,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1147,
+              "n_train": 6332,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 139,
+              "n_train": 7340,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 147,
+              "n_train": 7332,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 364,
+              "n_train": 7115,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1196,
+              "n_train": 6283,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 368,
+              "n_train": 7111,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 209,
+              "n_train": 7270,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 301,
+              "n_train": 7178,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1063,
+              "n_train": 6416,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 476,
+              "n_train": 7003,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 263,
+              "n_train": 7216,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 208,
+              "n_train": 7271,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 1032,
+              "n_train": 6447,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "hematopoietic precursor cell": {
+          "auroc": 0.4131892343634257,
+          "ci_low": 0.4035800303400817,
+          "ci_high": 0.42233225313771555,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 6520,
+          "n_cells_gc": 7106,
+          "n_cells_total": 13626,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 219,
+              "n_train": 13407,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 322,
+              "n_train": 13304,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 1770,
+              "n_train": 11856,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1257,
+              "n_train": 12369,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 235,
+              "n_train": 13391,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 389,
+              "n_train": 13237,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 1121,
+              "n_train": 12505,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1207,
+              "n_train": 12419,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 253,
+              "n_train": 13373,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 1572,
+              "n_train": 12054,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 1071,
+              "n_train": 12555,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1713,
+              "n_train": 11913,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 326,
+              "n_train": 13300,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 210,
+              "n_train": 13416,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 715,
+              "n_train": 12911,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 1246,
+              "n_train": 12380,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "immature B cell": {
+          "auroc": 0.4641066585536429,
+          "ci_low": 0.4533177405004991,
+          "ci_high": 0.47475298780917796,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 4317,
+          "n_cells_gc": 6688,
+          "n_cells_total": 11005,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 130,
+              "n_train": 10875,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 334,
+              "n_train": 10671,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 511,
+              "n_train": 10494,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1286,
+              "n_train": 9719,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 160,
+              "n_train": 10845,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 353,
+              "n_train": 10652,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 696,
+              "n_train": 10309,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 847,
+              "n_train": 10158,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 468,
+              "n_train": 10537,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 1063,
+              "n_train": 9942,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 1117,
+              "n_train": 9888,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1576,
+              "n_train": 9429,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 512,
+              "n_train": 10493,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 364,
+              "n_train": 10641,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 481,
+              "n_train": 10524,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 1107,
+              "n_train": 9898,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "late pro-B cell": {
+          "auroc": 0.3392098916951962,
+          "ci_low": 0.3190526523028575,
+          "ci_high": 0.3599625364437944,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 1370,
+          "n_cells_gc": 1356,
+          "n_cells_total": 2726,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 11,
+              "n_train": 2715,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 128,
+              "n_train": 2598,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 60,
+              "n_train": 2666,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 449,
+              "n_train": 2277,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 37,
+              "n_train": 2689,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 76,
+              "n_train": 2650,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 269,
+              "n_train": 2457,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 340,
+              "n_train": 2386,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 68,
+              "n_train": 2658,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 123,
+              "n_train": 2603,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 114,
+              "n_train": 2612,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 369,
+              "n_train": 2357,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 125,
+              "n_train": 2601,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 106,
+              "n_train": 2620,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 116,
+              "n_train": 2610,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 335,
+              "n_train": 2391,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "macrophage": {
+          "auroc": 0.44900972369568004,
+          "ci_low": 0.4298162513826144,
+          "ci_high": 0.4686491628991642,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 1660,
+          "n_cells_gc": 1783,
+          "n_cells_total": 3443,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 86,
+              "n_train": 3357,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 130,
+              "n_train": 3313,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 176,
+              "n_train": 3267,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 462,
+              "n_train": 2981,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 100,
+              "n_train": 3343,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 130,
+              "n_train": 3313,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 193,
+              "n_train": 3250,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 383,
+              "n_train": 3060,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 105,
+              "n_train": 3338,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 275,
+              "n_train": 3168,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 234,
+              "n_train": 3209,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 481,
+              "n_train": 2962,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 134,
+              "n_train": 3309,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 94,
+              "n_train": 3349,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 115,
+              "n_train": 3328,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 345,
+              "n_train": 3098,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "monocyte": {
+          "auroc": 0.37753244359707655,
+          "ci_low": 0.36681944210887846,
+          "ci_high": 0.38826244150137695,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 5245,
+          "n_cells_gc": 6000,
+          "n_cells_total": 11245,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 405,
+              "n_train": 10840,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 401,
+              "n_train": 10844,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 729,
+              "n_train": 10516,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1251,
+              "n_train": 9994,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 397,
+              "n_train": 10848,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 360,
+              "n_train": 10885,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 608,
+              "n_train": 10637,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1094,
+              "n_train": 10151,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 516,
+              "n_train": 10729,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 550,
+              "n_train": 10695,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 853,
+              "n_train": 10392,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1444,
+              "n_train": 9801,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 534,
+              "n_train": 10711,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 453,
+              "n_train": 10792,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 563,
+              "n_train": 10682,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 1087,
+              "n_train": 10158,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "proerythroblast": {
+          "auroc": 0.5064479067025756,
+          "ci_low": 0.4807537991572155,
+          "ci_high": 0.5310247649263158,
+          "p_perm": 0.3049390121975605,
+          "n_animals": 16,
+          "n_cells_flt": 988,
+          "n_cells_gc": 1147,
+          "n_cells_total": 2135,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 5,
+              "n_train": 2130,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 23,
+              "n_train": 2112,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 275,
+              "n_train": 1860,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 228,
+              "n_train": 1907,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 6,
+              "n_train": 2129,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 37,
+              "n_train": 2098,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 329,
+              "n_train": 1806,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 85,
+              "n_train": 2050,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 16,
+              "n_train": 2119,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 372,
+              "n_train": 1763,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 61,
+              "n_train": 2074,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 299,
+              "n_train": 1836,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 17,
+              "n_train": 2118,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 18,
+              "n_train": 2117,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 79,
+              "n_train": 2056,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 285,
+              "n_train": 1850,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "promonocyte": {
+          "auroc": 0.2833815246528719,
+          "ci_low": 0.27057031838010764,
+          "ci_high": 0.29587776520869546,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 3420,
+          "n_cells_gc": 3689,
+          "n_cells_total": 7109,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 168,
+              "n_train": 6941,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 171,
+              "n_train": 6938,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 268,
+              "n_train": 6841,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1117,
+              "n_train": 5992,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 166,
+              "n_train": 6943,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 98,
+              "n_train": 7011,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 300,
+              "n_train": 6809,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1132,
+              "n_train": 5977,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 199,
+              "n_train": 6910,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 273,
+              "n_train": 6836,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 321,
+              "n_train": 6788,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1132,
+              "n_train": 5977,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 270,
+              "n_train": 6839,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 201,
+              "n_train": 6908,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 261,
+              "n_train": 6848,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 1032,
+              "n_train": 6077,
+              "fold_auroc": NaN
+            }
+          ]
+        }
+      }
+    },
+    "humerus_bm": {
+      "n_cells_total": 70247,
+      "n_flt": 33763,
+      "n_gc": 36484,
+      "n_cell_types": 14,
+      "cell_types": [
+        "Fraction A pre-pro B cell",
+        "T cell",
+        "basophil",
+        "early pro-B cell",
+        "erythroblast",
+        "granulocyte",
+        "granulocytopoietic cell",
+        "hematopoietic precursor cell",
+        "immature B cell",
+        "late pro-B cell",
+        "macrophage",
+        "monocyte",
+        "proerythroblast",
+        "promonocyte"
+      ],
+      "cell_type_results": {
+        "Fraction A pre-pro B cell": {
+          "auroc": 0.2935592436543007,
+          "ci_low": 0.2595554963687457,
+          "ci_high": 0.328590285523883,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 526,
+          "n_cells_gc": 444,
+          "n_cells_total": 970,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 13,
+              "n_train": 957,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 21,
+              "n_train": 949,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 68,
+              "n_train": 902,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 166,
+              "n_train": 804,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 25,
+              "n_train": 945,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 43,
+              "n_train": 927,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 32,
+              "n_train": 938,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 158,
+              "n_train": 812,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 30,
+              "n_train": 940,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 40,
+              "n_train": 930,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 37,
+              "n_train": 933,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 177,
+              "n_train": 793,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 83,
+              "n_train": 887,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 17,
+              "n_train": 953,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 40,
+              "n_train": 930,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 20,
+              "n_train": 950,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "T cell": {
+          "auroc": 0.24708801035711903,
+          "ci_low": 0.23304334105837185,
+          "ci_high": 0.26122516164118004,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 2497,
+          "n_cells_gc": 2213,
+          "n_cells_total": 4710,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 51,
+              "n_train": 4659,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 151,
+              "n_train": 4559,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 441,
+              "n_train": 4269,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 716,
+              "n_train": 3994,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 104,
+              "n_train": 4606,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 160,
+              "n_train": 4550,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 258,
+              "n_train": 4452,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 616,
+              "n_train": 4094,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 152,
+              "n_train": 4558,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 279,
+              "n_train": 4431,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 277,
+              "n_train": 4433,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 845,
+              "n_train": 3865,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 172,
+              "n_train": 4538,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 172,
+              "n_train": 4538,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 197,
+              "n_train": 4513,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 119,
+              "n_train": 4591,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "basophil": {
+          "auroc": 0.49828725816567765,
+          "ci_low": 0.4323714547559328,
+          "ci_high": 0.5687281759145175,
+          "p_perm": 0.5178964207158568,
+          "n_animals": 16,
+          "n_cells_flt": 141,
+          "n_cells_gc": 147,
+          "n_cells_total": 288,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 3,
+              "n_train": 285,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 20,
+              "n_train": 268,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 14,
+              "n_train": 274,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 28,
+              "n_train": 260,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 14,
+              "n_train": 274,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 8,
+              "n_train": 280,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 4,
+              "n_train": 284,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 50,
+              "n_train": 238,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 10,
+              "n_train": 278,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 8,
+              "n_train": 280,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 9,
+              "n_train": 279,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 39,
+              "n_train": 249,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 35,
+              "n_train": 253,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 19,
+              "n_train": 269,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 18,
+              "n_train": 270,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 9,
+              "n_train": 279,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "early pro-B cell": {
+          "auroc": 0.36316067188461876,
+          "ci_low": 0.30289427198180296,
+          "ci_high": 0.42412951041219255,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 137,
+          "n_cells_gc": 166,
+          "n_cells_total": 303,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 4,
+              "n_train": 299,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 13,
+              "n_train": 290,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 1,
+              "n_train": 302,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 25,
+              "n_train": 278,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 8,
+              "n_train": 295,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 58,
+              "n_train": 245,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 12,
+              "n_train": 291,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 16,
+              "n_train": 287,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 35,
+              "n_train": 268,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 9,
+              "n_train": 294,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 7,
+              "n_train": 296,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 49,
+              "n_train": 254,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 17,
+              "n_train": 286,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 27,
+              "n_train": 276,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 16,
+              "n_train": 287,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 6,
+              "n_train": 297,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "erythroblast": {
+          "auroc": 0.535343347440703,
+          "ci_low": 0.5136548876963538,
+          "ci_high": 0.5582933713072742,
+          "p_perm": 0.0011997600479904018,
+          "n_animals": 16,
+          "n_cells_flt": 933,
+          "n_cells_gc": 1967,
+          "n_cells_total": 2900,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 4,
+              "n_train": 2896,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 5,
+              "n_train": 2895,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 195,
+              "n_train": 2705,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 226,
+              "n_train": 2674,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 3,
+              "n_train": 2897,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 107,
+              "n_train": 2793,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 331,
+              "n_train": 2569,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 62,
+              "n_train": 2838,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 12,
+              "n_train": 2888,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 642,
+              "n_train": 2258,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 225,
+              "n_train": 2675,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 913,
+              "n_train": 1987,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 1,
+              "n_train": 2899,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 6,
+              "n_train": 2894,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 150,
+              "n_train": 2750,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 18,
+              "n_train": 2882,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "granulocyte": {
+          "auroc": 0.2833823529411765,
+          "ci_low": 0.27322248782044684,
+          "ci_high": 0.293714939927974,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 4175,
+          "n_cells_gc": 4624,
+          "n_cells_total": 8799,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 249,
+              "n_train": 8550,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 648,
+              "n_train": 8151,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 218,
+              "n_train": 8581,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 518,
+              "n_train": 8281,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 115,
+              "n_train": 8684,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 196,
+              "n_train": 8603,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 1292,
+              "n_train": 7507,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 939,
+              "n_train": 7860,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 1087,
+              "n_train": 7712,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 61,
+              "n_train": 8738,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 263,
+              "n_train": 8536,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 534,
+              "n_train": 8265,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 803,
+              "n_train": 7996,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 426,
+              "n_train": 8373,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 1144,
+              "n_train": 7655,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 306,
+              "n_train": 8493,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "granulocytopoietic cell": {
+          "auroc": 0.3467771566523594,
+          "ci_low": 0.3324116007370812,
+          "ci_high": 0.36124517617255,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 3233,
+          "n_cells_gc": 3087,
+          "n_cells_total": 6320,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 173,
+              "n_train": 6147,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 196,
+              "n_train": 6124,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 126,
+              "n_train": 6194,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1004,
+              "n_train": 5316,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 88,
+              "n_train": 6232,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 102,
+              "n_train": 6218,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 345,
+              "n_train": 5975,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1199,
+              "n_train": 5121,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 394,
+              "n_train": 5926,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 85,
+              "n_train": 6235,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 156,
+              "n_train": 6164,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1170,
+              "n_train": 5150,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 545,
+              "n_train": 5775,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 243,
+              "n_train": 6077,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 265,
+              "n_train": 6055,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 229,
+              "n_train": 6091,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "hematopoietic precursor cell": {
+          "auroc": 0.35940568484935054,
+          "ci_low": 0.3490991394873332,
+          "ci_high": 0.3691663795530264,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 5522,
+          "n_cells_gc": 6415,
+          "n_cells_total": 11937,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 123,
+              "n_train": 11814,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 352,
+              "n_train": 11585,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 1180,
+              "n_train": 10757,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1418,
+              "n_train": 10519,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 130,
+              "n_train": 11807,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 337,
+              "n_train": 11600,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 611,
+              "n_train": 11326,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1371,
+              "n_train": 10566,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 264,
+              "n_train": 11673,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 1055,
+              "n_train": 10882,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 837,
+              "n_train": 11100,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1978,
+              "n_train": 9959,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 1290,
+              "n_train": 10647,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 205,
+              "n_train": 11732,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 619,
+              "n_train": 11318,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 167,
+              "n_train": 11770,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "immature B cell": {
+          "auroc": 0.4265333062148967,
+          "ci_low": 0.41550889497457444,
+          "ci_high": 0.43786804609967084,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 4302,
+          "n_cells_gc": 5287,
+          "n_cells_total": 9589,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 61,
+              "n_train": 9528,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 344,
+              "n_train": 9245,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 708,
+              "n_train": 8881,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1247,
+              "n_train": 8342,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 139,
+              "n_train": 9450,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 400,
+              "n_train": 9189,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 568,
+              "n_train": 9021,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 835,
+              "n_train": 8754,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 343,
+              "n_train": 9246,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 1070,
+              "n_train": 8519,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 751,
+              "n_train": 8838,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1704,
+              "n_train": 7885,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 249,
+              "n_train": 9340,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 379,
+              "n_train": 9210,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 418,
+              "n_train": 9171,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 373,
+              "n_train": 9216,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "late pro-B cell": {
+          "auroc": 0.36751533802650727,
+          "ci_low": 0.3451002417411965,
+          "ci_high": 0.3900423628242288,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 1082,
+          "n_cells_gc": 1128,
+          "n_cells_total": 2210,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 4,
+              "n_train": 2206,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 117,
+              "n_train": 2093,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 30,
+              "n_train": 2180,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 317,
+              "n_train": 1893,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 29,
+              "n_train": 2181,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 62,
+              "n_train": 2148,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 190,
+              "n_train": 2020,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 333,
+              "n_train": 1877,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 61,
+              "n_train": 2149,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 123,
+              "n_train": 2087,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 65,
+              "n_train": 2145,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 330,
+              "n_train": 1880,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 286,
+              "n_train": 1924,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 53,
+              "n_train": 2157,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 94,
+              "n_train": 2116,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 116,
+              "n_train": 2094,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "macrophage": {
+          "auroc": 0.3272208514311738,
+          "ci_low": 0.3072963336402144,
+          "ci_high": 0.34600450340138955,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 1653,
+          "n_cells_gc": 1424,
+          "n_cells_total": 3077,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 66,
+              "n_train": 3011,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 96,
+              "n_train": 2981,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 209,
+              "n_train": 2868,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 481,
+              "n_train": 2596,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 86,
+              "n_train": 2991,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 138,
+              "n_train": 2939,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 148,
+              "n_train": 2929,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 429,
+              "n_train": 2648,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 55,
+              "n_train": 3022,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 193,
+              "n_train": 2884,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 167,
+              "n_train": 2910,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 484,
+              "n_train": 2593,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 275,
+              "n_train": 2802,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 102,
+              "n_train": 2975,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 98,
+              "n_train": 2979,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 50,
+              "n_train": 3027,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "monocyte": {
+          "auroc": 0.2712136504528194,
+          "ci_low": 0.2616289812731991,
+          "ci_high": 0.2811735713967235,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 5119,
+          "n_cells_gc": 5066,
+          "n_cells_total": 10185,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 305,
+              "n_train": 9880,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 394,
+              "n_train": 9791,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 853,
+              "n_train": 9332,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1108,
+              "n_train": 9077,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 334,
+              "n_train": 9851,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 385,
+              "n_train": 9800,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 614,
+              "n_train": 9571,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1126,
+              "n_train": 9059,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 519,
+              "n_train": 9666,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 395,
+              "n_train": 9790,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 900,
+              "n_train": 9285,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1320,
+              "n_train": 8865,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 661,
+              "n_train": 9524,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 404,
+              "n_train": 9781,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 645,
+              "n_train": 9540,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 222,
+              "n_train": 9963,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "proerythroblast": {
+          "auroc": 0.38785989898005035,
+          "ci_low": 0.3638430492501336,
+          "ci_high": 0.41285917208464945,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 849,
+          "n_cells_gc": 1051,
+          "n_cells_total": 1900,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 8,
+              "n_train": 1892,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 17,
+              "n_train": 1883,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 188,
+              "n_train": 1712,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 258,
+              "n_train": 1642,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 3,
+              "n_train": 1897,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 49,
+              "n_train": 1851,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 234,
+              "n_train": 1666,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 92,
+              "n_train": 1808,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 13,
+              "n_train": 1887,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 343,
+              "n_train": 1557,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 77,
+              "n_train": 1823,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 465,
+              "n_train": 1435,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 22,
+              "n_train": 1878,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 15,
+              "n_train": 1885,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 58,
+              "n_train": 1842,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 58,
+              "n_train": 1842,
+              "fold_auroc": NaN
+            }
+          ]
+        },
+        "promonocyte": {
+          "auroc": 0.32833149043499626,
+          "ci_low": 0.3157540879447202,
+          "ci_high": 0.34090329443651207,
+          "p_perm": 1.0,
+          "n_animals": 16,
+          "n_cells_flt": 3594,
+          "n_cells_gc": 3465,
+          "n_cells_total": 7059,
+          "fold_details": [
+            {
+              "animal_out": "FO1",
+              "condition_out": "FLT",
+              "n_test": 135,
+              "n_train": 6924,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO4",
+              "condition_out": "FLT",
+              "n_test": 180,
+              "n_train": 6879,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO6",
+              "condition_out": "FLT",
+              "n_test": 309,
+              "n_train": 6750,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FO9",
+              "condition_out": "FLT",
+              "n_test": 1048,
+              "n_train": 6011,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY1",
+              "condition_out": "FLT",
+              "n_test": 155,
+              "n_train": 6904,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY4",
+              "condition_out": "FLT",
+              "n_test": 83,
+              "n_train": 6976,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY6",
+              "condition_out": "FLT",
+              "n_test": 317,
+              "n_train": 6742,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "FY9",
+              "condition_out": "FLT",
+              "n_test": 1367,
+              "n_train": 5692,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO1",
+              "condition_out": "GC",
+              "n_test": 270,
+              "n_train": 6789,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO4",
+              "condition_out": "GC",
+              "n_test": 100,
+              "n_train": 6959,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO6",
+              "condition_out": "GC",
+              "n_test": 248,
+              "n_train": 6811,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GO9",
+              "condition_out": "GC",
+              "n_test": 1175,
+              "n_train": 5884,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY1",
+              "condition_out": "GC",
+              "n_test": 1143,
+              "n_train": 5916,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY4",
+              "condition_out": "GC",
+              "n_test": 127,
+              "n_train": 6932,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY6",
+              "condition_out": "GC",
+              "n_test": 277,
+              "n_train": 6782,
+              "fold_auroc": NaN
+            },
+            {
+              "animal_out": "GY9",
+              "condition_out": "GC",
+              "n_test": 125,
+              "n_train": 6934,
+              "fold_auroc": NaN
+            }
+          ]
+        }
+      }
+    },
+    "cross_site_concordance": {
+      "Fraction A pre-pro B cell": {
+        "femur_auroc": 0.42168175065394325,
+        "humerus_auroc": 0.2935592436543007,
+        "delta": 0.12812250699964256
+      },
+      "T cell": {
+        "femur_auroc": 0.32330774349282343,
+        "humerus_auroc": 0.24708801035711903,
+        "delta": 0.0762197331357044
+      },
+      "basophil": {
+        "femur_auroc": 0.34122287968441817,
+        "humerus_auroc": 0.49828725816567765,
+        "delta": -0.15706437848125948
+      },
+      "early pro-B cell": {
+        "femur_auroc": 0.3592233009708738,
+        "humerus_auroc": 0.36316067188461876,
+        "delta": -0.003937370913744964
+      },
+      "erythroblast": {
+        "femur_auroc": 0.388554367171776,
+        "humerus_auroc": 0.535343347440703,
+        "delta": -0.146788980268927
+      },
+      "granulocyte": {
+        "femur_auroc": 0.31222647638436274,
+        "humerus_auroc": 0.2833823529411765,
+        "delta": 0.028844123443186265
+      },
+      "granulocytopoietic cell": {
+        "femur_auroc": 0.27564868599870407,
+        "humerus_auroc": 0.3467771566523594,
+        "delta": -0.07112847065365535
+      },
+      "hematopoietic precursor cell": {
+        "femur_auroc": 0.4131892343634257,
+        "humerus_auroc": 0.35940568484935054,
+        "delta": 0.05378354951407516
+      },
+      "immature B cell": {
+        "femur_auroc": 0.4641066585536429,
+        "humerus_auroc": 0.4265333062148967,
+        "delta": 0.0375733523387462
+      },
+      "late pro-B cell": {
+        "femur_auroc": 0.3392098916951962,
+        "humerus_auroc": 0.36751533802650727,
+        "delta": -0.028305446331311046
+      },
+      "macrophage": {
+        "femur_auroc": 0.44900972369568004,
+        "humerus_auroc": 0.3272208514311738,
+        "delta": 0.12178887226450624
+      },
+      "monocyte": {
+        "femur_auroc": 0.37753244359707655,
+        "humerus_auroc": 0.2712136504528194,
+        "delta": 0.10631879314425713
+      },
+      "proerythroblast": {
+        "femur_auroc": 0.5064479067025756,
+        "humerus_auroc": 0.38785989898005035,
+        "delta": 0.1185880077225252
+      },
+      "promonocyte": {
+        "femur_auroc": 0.2833815246528719,
+        "humerus_auroc": 0.32833149043499626,
+        "delta": -0.044949965782124346
+      }
+    }
+  }
+}
