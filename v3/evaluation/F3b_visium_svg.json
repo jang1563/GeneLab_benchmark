@@ -1,0 +1,157 @@
+{
+  "task": "F3b",
+  "description": "Spatially variable genes: Moran's I FLT vs GC",
+  "n_genes_tested": 2000,
+  "svg_count_comparison": {
+    "flt_svg_counts": [
+      1345,
+      1310,
+      1192,
+      911,
+      728,
+      594
+    ],
+    "gc_svg_counts": [
+      472,
+      691,
+      1149,
+      902,
+      865,
+      843
+    ],
+    "flt_mean": 1013.3333333333334,
+    "gc_mean": 820.3333333333334,
+    "mannwhitney_p": 0.24025974025974026,
+    "cohens_d": 0.7033653495665773
+  },
+  "per_gene_exploratory": {
+    "n_nominal_sig_p05": 185,
+    "n_total_tested": 2000,
+    "top_10_by_delta_I": [
+      {
+        "gene": "Ttr",
+        "flt_mean_I": 0.7397246956825256,
+        "gc_mean_I": 0.40259629819128245,
+        "delta_I": 0.3371283974912432,
+        "p": 0.015151515151515152
+      },
+      {
+        "gene": "Sostdc1",
+        "flt_mean_I": 0.4404283397727542,
+        "gc_mean_I": 0.10662309840942423,
+        "delta_I": 0.33380524136332995,
+        "p": 0.06493506493506493
+      },
+      {
+        "gene": "1500015O10Rik",
+        "flt_mean_I": 0.4163856158653895,
+        "gc_mean_I": 0.08518615064935553,
+        "delta_I": 0.331199465216034,
+        "p": 0.025974025974025976
+      },
+      {
+        "gene": "Aqp1",
+        "flt_mean_I": 0.3510128855705261,
+        "gc_mean_I": 0.02272405955267863,
+        "delta_I": 0.3282888260178475,
+        "p": 0.0021645021645021645
+      },
+      {
+        "gene": "Slc10a4",
+        "flt_mean_I": 0.36752296953151614,
+        "gc_mean_I": 0.046624491980765015,
+        "delta_I": 0.3208984775507511,
+        "p": 0.24025974025974026
+      },
+      {
+        "gene": "Cox8b",
+        "flt_mean_I": 0.32443393021821976,
+        "gc_mean_I": 0.018545118949583005,
+        "delta_I": 0.30588881126863676,
+        "p": 0.0021645021645021645
+      },
+      {
+        "gene": "Clic6",
+        "flt_mean_I": 0.40828156802389354,
+        "gc_mean_I": 0.11476021632552146,
+        "delta_I": 0.29352135169837207,
+        "p": 0.025974025974025976
+      },
+      {
+        "gene": "Col9a3",
+        "flt_mean_I": 0.3321805091367827,
+        "gc_mean_I": 0.04148195270035002,
+        "delta_I": 0.2906985564364327,
+        "p": 0.004329004329004329
+      },
+      {
+        "gene": "Ret",
+        "flt_mean_I": 0.38503949013021255,
+        "gc_mean_I": 0.10147612790266673,
+        "delta_I": 0.2835633622275458,
+        "p": 0.06493506493506493
+      },
+      {
+        "gene": "Trpv4",
+        "flt_mean_I": 0.27928282589548165,
+        "gc_mean_I": -0.003201954441869424,
+        "delta_I": 0.2824847803373511,
+        "p": 0.0021645021645021645
+      }
+    ]
+  },
+  "condition_specific_svgs": {
+    "flt_specific": [
+      "Prex2",
+      "Klf7",
+      "March4",
+      "Tns1",
+      "Mcm6",
+      "Pogk",
+      "Vav2",
+      "Lrrc8a",
+      "Scn7a",
+      "Dlx2",
+      "Wipf1",
+      "Fibin",
+      "Grem1",
+      "Fam83d",
+      "Mafb",
+      "Ube2v1",
+      "Lama5",
+      "Col9a3",
+      "Gdpd2",
+      "Crabp2"
+    ],
+    "gc_specific": [
+      "Traf5",
+      "Phactr3",
+      "Mmel1",
+      "1700007G11Rik",
+      "Tbx3",
+      "Strn"
+    ],
+    "n_flt_specific": 139,
+    "n_gc_specific": 6
+  },
+  "svg_overlap": {
+    "n_flt_union": 1507,
+    "n_gc_union": 1329,
+    "n_intersection": 1265,
+    "jaccard": 0.8052196053469128
+  },
+  "section_svg_counts": {
+    "Sample_158_A1": 472,
+    "Sample_158_B1": 691,
+    "Sample_158_C1": 1345,
+    "Sample_158_D1": 1310,
+    "Sample_159_A1": 1149,
+    "Sample_159_B1": 902,
+    "Sample_159_C1": 1192,
+    "Sample_159_D1": 911,
+    "Sample_304_A1": 865,
+    "Sample_304_B1": 843,
+    "Sample_304_C1": 728,
+    "Sample_304_D1": 594
+  }
+}

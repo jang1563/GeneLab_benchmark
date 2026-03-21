@@ -75,6 +75,11 @@ Icon?
 slurm-*.out
 slurm-*.err
 
+# ── v3 artifacts (large/binary) ──────────────────────────────────────────────
+v3/evaluation/*.npy
+v3/logs/
+v3/processed/
+
 # ── Secrets / credentials ─────────────────────────────────────────────────────
 .env
 *.key
