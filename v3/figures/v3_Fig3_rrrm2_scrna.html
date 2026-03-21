@@ -143,15 +143,15 @@ function sigStars(p) {
 // ── Panel A: PBMC cell-type AUROC ────────────────────────────────────
 (function() {
   const data = [
-    {ct: "NK cell",     auroc: 0.845, ci_low: 0.780, ci_high: 0.900, p: 0.0002, n: 1281},
-    {ct: "T cell",      auroc: 0.752, ci_low: 0.680, ci_high: 0.820, p: 0.0002, n: 5398},
-    {ct: "CD4 T cell",  auroc: 0.651, ci_low: 0.560, ci_high: 0.740, p: 0.0002, n: 200},
-    {ct: "Neutrophil",  auroc: 0.629, ci_low: 0.590, ci_high: 0.670, p: 0.0002, n: 8338},
-    {ct: "Monocyte",    auroc: 0.575, ci_low: 0.550, ci_high: 0.600, p: 0.0002, n: 19769},
-    {ct: "CD8 T cell",  auroc: 0.522, ci_low: 0.430, ci_high: 0.610, p: 0.1398, n: 833},
-    {ct: "B cell",      auroc: 0.479, ci_low: 0.450, ci_high: 0.510, p: 1.0,    n: 16078},
-    {ct: "Erythroid",   auroc: 0.415, ci_low: 0.400, ci_high: 0.430, p: 1.0,    n: 50000},
-    {ct: "Platelet",    auroc: 0.194, ci_low: 0.140, ci_high: 0.250, p: 1.0,    n: 2854}
+    {ct: "NK cell",     auroc: 0.845, ci_low: 0.823, ci_high: 0.866, p: 0.0002, n: 1281},
+    {ct: "T cell",      auroc: 0.752, ci_low: 0.734, ci_high: 0.769, p: 0.0002, n: 5398},
+    {ct: "CD4 T cell",  auroc: 0.651, ci_low: 0.566, ci_high: 0.730, p: 0.0002, n: 200},
+    {ct: "Neutrophil",  auroc: 0.629, ci_low: 0.617, ci_high: 0.642, p: 0.0002, n: 8338},
+    {ct: "Monocyte",    auroc: 0.575, ci_low: 0.567, ci_high: 0.583, p: 0.0002, n: 19769},
+    {ct: "CD8 T cell",  auroc: 0.522, ci_low: 0.483, ci_high: 0.561, p: 0.1398, n: 833},
+    {ct: "B cell",      auroc: 0.479, ci_low: 0.470, ci_high: 0.488, p: 1.0,    n: 16078},
+    {ct: "Erythroid",   auroc: 0.415, ci_low: 0.410, ci_high: 0.420, p: 1.0,    n: 50000},
+    {ct: "Platelet",    auroc: 0.194, ci_low: 0.176, ci_high: 0.212, p: 1.0,    n: 2854}
   ];
 
   const W = 480, H = 300;
