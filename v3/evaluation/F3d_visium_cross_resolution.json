@@ -1,0 +1,116 @@
+{
+  "task": "F3d",
+  "description": "Spatial pseudo-bulk vs companion bulk RNA-seq comparison",
+  "bulk_auroc": {
+    "auroc": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "p_exact": 1.0,
+    "n_permutations": 20,
+    "effect_size_cohens_d": -0.3538237912267147,
+    "n_animals": 6,
+    "n_flt": 3,
+    "n_gc": 3,
+    "n_samples": 6,
+    "fold_details": [
+      {
+        "animal_out": "F1",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "F2",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "F7",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G7",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G8",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G9",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      }
+    ]
+  },
+  "spatial_auroc": {
+    "auroc": 0.4444444444444445,
+    "ci_low": 0.0,
+    "ci_high": 1.0,
+    "p_exact": 0.4,
+    "n_permutations": 20,
+    "effect_size_cohens_d": 0.6923596082104514,
+    "n_animals": 6,
+    "n_flt": 3,
+    "n_gc": 3,
+    "n_samples": 6,
+    "fold_details": [
+      {
+        "animal_out": "F1",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "F2",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "F7",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G7",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G8",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G9",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      }
+    ]
+  },
+  "delta_auroc": 0.4444444444444445,
+  "comparison": {
+    "spatial_n_animals": 6,
+    "bulk_n_samples": 6,
+    "same_mission": true,
+    "same_cv_design": "LOAO, animal-level",
+    "apple_to_apple": true
+  },
+  "deg_overlap": {
+    "bulk_deg_count": 1,
+    "padj_column_used": "Adj.p.value_(Ground Control)v(Space Flight)"
+  }
+}

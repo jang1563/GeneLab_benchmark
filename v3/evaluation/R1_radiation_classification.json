@@ -1,0 +1,80 @@
+{
+  "brain": [
+    {
+      "contrast": "Rad_vs_Ctrl (NL only)",
+      "n": 22,
+      "auroc": 0.5,
+      "ci_lower": 0.2222,
+      "ci_upper": 0.7679,
+      "perm_p": 0.5135
+    },
+    {
+      "contrast": "HLU_vs_Ctrl (no radiation)",
+      "n": 18,
+      "auroc": 0.75,
+      "ci_lower": 0.4568,
+      "ci_upper": 0.9583,
+      "perm_p": 0.034
+    },
+    {
+      "contrast": "Combined_vs_Ctrl",
+      "n": 20,
+      "auroc": 0.46,
+      "ci_lower": 0.1979,
+      "ci_upper": 0.73,
+      "perm_p": 0.6314
+    }
+  ],
+  "spleen": [
+    {
+      "contrast": "Rad_vs_Ctrl (NL only)",
+      "n": 12,
+      "auroc": 0.3333,
+      "ci_lower": 0.0,
+      "ci_upper": 0.6944,
+      "perm_p": 0.8222
+    },
+    {
+      "contrast": "HLU_vs_Ctrl (no radiation)",
+      "n": 9,
+      "auroc": 0.0556,
+      "ci_lower": 0.0,
+      "ci_upper": 0.2857,
+      "perm_p": 0.988
+    },
+    {
+      "contrast": "Combined_vs_Ctrl",
+      "n": 12,
+      "auroc": 0.3333,
+      "ci_lower": 0.0,
+      "ci_upper": 0.75,
+      "perm_p": 0.8571
+    }
+  ],
+  "skin_rad": [
+    {
+      "contrast": "Rad_vs_Ctrl (NL only)",
+      "n": 12,
+      "auroc": 0.3056,
+      "ci_lower": 0.0,
+      "ci_upper": 0.6944,
+      "perm_p": 0.8482
+    },
+    {
+      "contrast": "HLU_vs_Ctrl (no radiation)",
+      "n": 9,
+      "auroc": 0.5556,
+      "ci_lower": 0.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.4236
+    },
+    {
+      "contrast": "Combined_vs_Ctrl",
+      "n": 12,
+      "auroc": 0.0833,
+      "ci_lower": 0.0,
+      "ci_upper": 0.3,
+      "perm_p": 0.995
+    }
+  ]
+}
