@@ -1,0 +1,1792 @@
+{
+  "tissues": [
+    "liver",
+    "kidney",
+    "thymus",
+    "gastrocnemius",
+    "eye",
+    "lung",
+    "colon"
+  ],
+  "n_pairs": 42,
+  "method_a_matrix": [
+    [
+      null,
+      0.7296511627906977,
+      0.35026737967914434,
+      0.5625,
+      0.6058823529411764,
+      0.6815789473684211,
+      0.7089783281733746
+    ],
+    [
+      0.5695006747638327,
+      null,
+      0.5115864527629232,
+      0.609375,
+      0.5647058823529412,
+      0.6,
+      0.5851393188854489
+    ],
+    [
+      0.489766081871345,
+      0.5853924418604651,
+      null,
+      0.60546875,
+      0.5294117647058824,
+      0.6,
+      0.43343653250773995
+    ],
+    [
+      0.5596041385515069,
+      0.6315406976744186,
+      0.4385026737967915,
+      null,
+      0.5823529411764705,
+      0.7026315789473684,
+      0.6470588235294117
+    ],
+    [
+      0.5112460638776428,
+      0.7023982558139534,
+      0.39839572192513373,
+      0.52734375,
+      null,
+      0.5447368421052632,
+      0.5015479876160991
+    ],
+    [
+      0.6992802519118309,
+      0.5425145348837208,
+      0.6586452762923352,
+      0.7578125,
+      0.5941176470588235,
+      null,
+      0.7987616099071208
+    ],
+    [
+      0.6513720197930725,
+      0.6780523255813953,
+      0.4474153297682709,
+      0.5625,
+      0.5911764705882352,
+      0.6236842105263158,
+      null
+    ]
+  ],
+  "method_c_matrix": [
+    [
+      null,
+      0.482921511627907,
+      0.18538324420677363,
+      0.8671875,
+      0.5411764705882353,
+      null,
+      null
+    ],
+    [
+      0.5999775078722448,
+      null,
+      0.53475935828877,
+      0.6796875,
+      0.6323529411764706,
+      null,
+      null
+    ],
+    [
+      0.4821187584345479,
+      0.6922238372093023,
+      null,
+      0.58203125,
+      0.6058823529411764,
+      null,
+      null
+    ],
+    [
+      0.7064777327935222,
+      0.6101017441860466,
+      0.21568627450980396,
+      null,
+      0.7441176470588234,
+      null,
+      null
+    ],
+    [
+      0.4989878542510121,
+      0.673328488372093,
+      0.28342245989304815,
+      0.7265625,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "pairs": [
+    {
+      "train_tissue": "liver",
+      "test_tissue": "kidney",
+      "n_train": 193,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.7296511627906977,
+        "ci_low": 0.6199601346562722,
+        "ci_high": 0.8297970952752861,
+        "perm_p": 0.00019998000199980003,
+        "n_features": 16326,
+        "n_common_genes": 21768
+      },
+      "method_c": {
+        "auroc": 0.482921511627907,
+        "ci_low": 0.3617626174654287,
+        "ci_high": 0.5942987000422179,
+        "perm_p": 0.6139386061393861,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0303643659997517
+          ],
+          [
+            "HALLMARK_HEME_METABOLISM",
+            -0.9874931983232537
+          ],
+          [
+            "HALLMARK_BILE_ACID_METABOLISM",
+            -0.9674903700881735
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.7358578191084794
+          ],
+          [
+            "HALLMARK_COMPLEMENT",
+            0.6897881901287004
+          ],
+          [
+            "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+            0.6791124559737672
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.5627734132950456
+          ],
+          [
+            "HALLMARK_ALLOGRAFT_REJECTION",
+            -0.5393794460349137
+          ],
+          [
+            "HALLMARK_IL2_STAT5_SIGNALING",
+            -0.39014449751207997
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            -0.38750773423177515
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "liver",
+      "test_tissue": "thymus",
+      "n_train": 193,
+      "n_test": 67,
+      "method_a": {
+        "auroc": 0.35026737967914434,
+        "ci_low": 0.2210214142475172,
+        "ci_high": 0.4918940598352363,
+        "perm_p": 0.9816018398160185,
+        "n_features": 16385,
+        "n_common_genes": 21847
+      },
+      "method_c": {
+        "auroc": 0.18538324420677363,
+        "ci_low": 0.08733635373341257,
+        "ci_high": 0.2928633004926108,
+        "perm_p": 1.0,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0303643659997517
+          ],
+          [
+            "HALLMARK_HEME_METABOLISM",
+            -0.9874931983232537
+          ],
+          [
+            "HALLMARK_BILE_ACID_METABOLISM",
+            -0.9674903700881735
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.7358578191084794
+          ],
+          [
+            "HALLMARK_COMPLEMENT",
+            0.6897881901287004
+          ],
+          [
+            "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+            0.6791124559737672
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.5627734132950456
+          ],
+          [
+            "HALLMARK_ALLOGRAFT_REJECTION",
+            -0.5393794460349137
+          ],
+          [
+            "HALLMARK_IL2_STAT5_SIGNALING",
+            -0.39014449751207997
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            -0.38750773423177515
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "liver",
+      "test_tissue": "gastrocnemius",
+      "n_train": 193,
+      "n_test": 32,
+      "method_a": {
+        "auroc": 0.5625,
+        "ci_low": 0.36111111111111116,
+        "ci_high": 0.7656402191558441,
+        "perm_p": 0.27587241275872415,
+        "n_features": 14214,
+        "n_common_genes": 18952
+      },
+      "method_c": {
+        "auroc": 0.8671875,
+        "ci_low": 0.71875,
+        "ci_high": 0.979757085020243,
+        "perm_p": 9.999000099990002e-05,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0303643659997517
+          ],
+          [
+            "HALLMARK_HEME_METABOLISM",
+            -0.9874931983232537
+          ],
+          [
+            "HALLMARK_BILE_ACID_METABOLISM",
+            -0.9674903700881735
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.7358578191084794
+          ],
+          [
+            "HALLMARK_COMPLEMENT",
+            0.6897881901287004
+          ],
+          [
+            "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+            0.6791124559737672
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.5627734132950456
+          ],
+          [
+            "HALLMARK_ALLOGRAFT_REJECTION",
+            -0.5393794460349137
+          ],
+          [
+            "HALLMARK_IL2_STAT5_SIGNALING",
+            -0.39014449751207997
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            -0.38750773423177515
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "liver",
+      "test_tissue": "eye",
+      "n_train": 193,
+      "n_test": 37,
+      "method_a": {
+        "auroc": 0.6058823529411764,
+        "ci_low": 0.4130434782608696,
+        "ci_high": 0.7939438502673797,
+        "perm_p": 0.14308569143085692,
+        "n_features": 15867,
+        "n_common_genes": 21156
+      },
+      "method_c": {
+        "auroc": 0.5411764705882353,
+        "ci_low": 0.34790823211875843,
+        "ci_high": 0.7341948621553882,
+        "perm_p": 0.35126487351264873,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0303643659997517
+          ],
+          [
+            "HALLMARK_HEME_METABOLISM",
+            -0.9874931983232537
+          ],
+          [
+            "HALLMARK_BILE_ACID_METABOLISM",
+            -0.9674903700881735
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.7358578191084794
+          ],
+          [
+            "HALLMARK_COMPLEMENT",
+            0.6897881901287004
+          ],
+          [
+            "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+            0.6791124559737672
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.5627734132950456
+          ],
+          [
+            "HALLMARK_ALLOGRAFT_REJECTION",
+            -0.5393794460349137
+          ],
+          [
+            "HALLMARK_IL2_STAT5_SIGNALING",
+            -0.39014449751207997
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            -0.38750773423177515
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "liver",
+      "test_tissue": "lung",
+      "n_train": 193,
+      "n_test": 39,
+      "method_a": {
+        "auroc": 0.6815789473684211,
+        "ci_low": 0.4789445836814258,
+        "ci_high": 0.842112414187643,
+        "perm_p": 0.024797520247975203,
+        "n_features": 16443,
+        "n_common_genes": 21924
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "liver",
+      "test_tissue": "colon",
+      "n_train": 193,
+      "n_test": 36,
+      "method_a": {
+        "auroc": 0.7089783281733746,
+        "ci_low": 0.5170278637770898,
+        "ci_high": 0.876545214045214,
+        "perm_p": 0.016698330166983303,
+        "n_features": 16313,
+        "n_common_genes": 21751
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "kidney",
+      "test_tissue": "liver",
+      "n_train": 118,
+      "n_test": 193,
+      "method_a": {
+        "auroc": 0.5695006747638327,
+        "ci_low": 0.4845660454815536,
+        "ci_high": 0.6510405257393208,
+        "perm_p": 0.051394860513948606,
+        "n_features": 16326,
+        "n_common_genes": 21768
+      },
+      "method_c": {
+        "auroc": 0.5999775078722448,
+        "ci_low": 0.5148200806871421,
+        "ci_high": 0.6795220961921857,
+        "perm_p": 0.010498950104989501,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            1.5880665278634452
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -1.2954702473002062
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            1.1824513908066758
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            1.1156250169041866
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0450398687797386
+          ],
+          [
+            "HALLMARK_GLYCOLYSIS",
+            -0.9312122905136643
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.8890293811750455
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            0.823647304452077
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.7957035890719113
+          ],
+          [
+            "HALLMARK_MYOGENESIS",
+            -0.7797902730799359
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "kidney",
+      "test_tissue": "thymus",
+      "n_train": 118,
+      "n_test": 67,
+      "method_a": {
+        "auroc": 0.5115864527629232,
+        "ci_low": 0.374497567844342,
+        "ci_high": 0.6544684193121693,
+        "perm_p": 0.43655634436556345,
+        "n_features": 18290,
+        "n_common_genes": 24387
+      },
+      "method_c": {
+        "auroc": 0.53475935828877,
+        "ci_low": 0.39002477068720265,
+        "ci_high": 0.6738797055984556,
+        "perm_p": 0.31186881311868814,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            1.5880665278634452
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -1.2954702473002062
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            1.1824513908066758
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            1.1156250169041866
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0450398687797386
+          ],
+          [
+            "HALLMARK_GLYCOLYSIS",
+            -0.9312122905136643
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.8890293811750455
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            0.823647304452077
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.7957035890719113
+          ],
+          [
+            "HALLMARK_MYOGENESIS",
+            -0.7797902730799359
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "kidney",
+      "test_tissue": "gastrocnemius",
+      "n_train": 118,
+      "n_test": 32,
+      "method_a": {
+        "auroc": 0.609375,
+        "ci_low": 0.3928571428571429,
+        "ci_high": 0.80859375,
+        "perm_p": 0.14188581141885812,
+        "n_features": 15044,
+        "n_common_genes": 20059
+      },
+      "method_c": {
+        "auroc": 0.6796875,
+        "ci_low": 0.4777035361842106,
+        "ci_high": 0.8583455882352939,
+        "perm_p": 0.04129587041295871,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            1.5880665278634452
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -1.2954702473002062
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            1.1824513908066758
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            1.1156250169041866
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0450398687797386
+          ],
+          [
+            "HALLMARK_GLYCOLYSIS",
+            -0.9312122905136643
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.8890293811750455
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            0.823647304452077
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.7957035890719113
+          ],
+          [
+            "HALLMARK_MYOGENESIS",
+            -0.7797902730799359
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "kidney",
+      "test_tissue": "eye",
+      "n_train": 118,
+      "n_test": 37,
+      "method_a": {
+        "auroc": 0.5647058823529412,
+        "ci_low": 0.36024521221532085,
+        "ci_high": 0.7484860248447203,
+        "perm_p": 0.25337466253374663,
+        "n_features": 17573,
+        "n_common_genes": 23431
+      },
+      "method_c": {
+        "auroc": 0.6323529411764706,
+        "ci_low": 0.4404642857142857,
+        "ci_high": 0.8088235294117647,
+        "perm_p": 0.08919108089191082,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            1.5880665278634452
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -1.2954702473002062
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            1.1824513908066758
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            1.1156250169041866
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -1.0450398687797386
+          ],
+          [
+            "HALLMARK_GLYCOLYSIS",
+            -0.9312122905136643
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.8890293811750455
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            0.823647304452077
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.7957035890719113
+          ],
+          [
+            "HALLMARK_MYOGENESIS",
+            -0.7797902730799359
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "kidney",
+      "test_tissue": "lung",
+      "n_train": 118,
+      "n_test": 39,
+      "method_a": {
+        "auroc": 0.6,
+        "ci_low": 0.40217247527030137,
+        "ci_high": 0.7685198412698413,
+        "perm_p": 0.14658534146585342,
+        "n_features": 18151,
+        "n_common_genes": 24201
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "kidney",
+      "test_tissue": "colon",
+      "n_train": 118,
+      "n_test": 36,
+      "method_a": {
+        "auroc": 0.5851393188854489,
+        "ci_low": 0.3827160493827161,
+        "ci_high": 0.7708981142696313,
+        "perm_p": 0.19758024197580243,
+        "n_features": 18059,
+        "n_common_genes": 24079
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "thymus",
+      "test_tissue": "liver",
+      "n_train": 67,
+      "n_test": 193,
+      "method_a": {
+        "auroc": 0.489766081871345,
+        "ci_low": 0.3958719883737218,
+        "ci_high": 0.5741672470701634,
+        "perm_p": 0.5936406359364064,
+        "n_features": 16385,
+        "n_common_genes": 21847
+      },
+      "method_c": {
+        "auroc": 0.4821187584345479,
+        "ci_low": 0.3995312651087833,
+        "ci_high": 0.563254074385788,
+        "perm_p": 0.6682331766823317,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_COAGULATION",
+            1.2645508782836412
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.9968520918333705
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.8799546614802989
+          ],
+          [
+            "HALLMARK_E2F_TARGETS",
+            -0.8279452871286378
+          ],
+          [
+            "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+            -0.7468869434373782
+          ],
+          [
+            "HALLMARK_MYC_TARGETS_V1",
+            -0.7354605319569929
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.6897256361740878
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            0.6383787168769076
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.6073422364032742
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.5829246343291737
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "thymus",
+      "test_tissue": "kidney",
+      "n_train": 67,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.5853924418604651,
+        "ci_low": 0.45459724782567595,
+        "ci_high": 0.7089574151350336,
+        "perm_p": 0.08149185081491851,
+        "n_features": 18290,
+        "n_common_genes": 24387
+      },
+      "method_c": {
+        "auroc": 0.6922238372093023,
+        "ci_low": 0.57990213070509,
+        "ci_high": 0.7960329131652661,
+        "perm_p": 0.00039996000399960006,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_COAGULATION",
+            1.2645508782836412
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.9968520918333705
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.8799546614802989
+          ],
+          [
+            "HALLMARK_E2F_TARGETS",
+            -0.8279452871286378
+          ],
+          [
+            "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+            -0.7468869434373782
+          ],
+          [
+            "HALLMARK_MYC_TARGETS_V1",
+            -0.7354605319569929
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.6897256361740878
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            0.6383787168769076
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.6073422364032742
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.5829246343291737
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "thymus",
+      "test_tissue": "gastrocnemius",
+      "n_train": 67,
+      "n_test": 32,
+      "method_a": {
+        "auroc": 0.60546875,
+        "ci_low": 0.3968253968253968,
+        "ci_high": 0.8056315104166663,
+        "perm_p": 0.15208479152084792,
+        "n_features": 15247,
+        "n_common_genes": 20329
+      },
+      "method_c": {
+        "auroc": 0.58203125,
+        "ci_low": 0.3764705882352941,
+        "ci_high": 0.7778138528138527,
+        "perm_p": 0.21247875212478753,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_COAGULATION",
+            1.2645508782836412
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.9968520918333705
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.8799546614802989
+          ],
+          [
+            "HALLMARK_E2F_TARGETS",
+            -0.8279452871286378
+          ],
+          [
+            "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+            -0.7468869434373782
+          ],
+          [
+            "HALLMARK_MYC_TARGETS_V1",
+            -0.7354605319569929
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.6897256361740878
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            0.6383787168769076
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.6073422364032742
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.5829246343291737
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "thymus",
+      "test_tissue": "eye",
+      "n_train": 67,
+      "n_test": 37,
+      "method_a": {
+        "auroc": 0.5294117647058824,
+        "ci_low": 0.33333333333333337,
+        "ci_high": 0.7166847826086956,
+        "perm_p": 0.38466153384661533,
+        "n_features": 18064,
+        "n_common_genes": 24085
+      },
+      "method_c": {
+        "auroc": 0.6058823529411764,
+        "ci_low": 0.4106316137566137,
+        "ci_high": 0.7767857142857142,
+        "perm_p": 0.1411858814118588,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_COAGULATION",
+            1.2645508782836412
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.9968520918333705
+          ],
+          [
+            "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+            0.8799546614802989
+          ],
+          [
+            "HALLMARK_E2F_TARGETS",
+            -0.8279452871286378
+          ],
+          [
+            "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+            -0.7468869434373782
+          ],
+          [
+            "HALLMARK_MYC_TARGETS_V1",
+            -0.7354605319569929
+          ],
+          [
+            "HALLMARK_APICAL_JUNCTION",
+            0.6897256361740878
+          ],
+          [
+            "HALLMARK_ANGIOGENESIS",
+            0.6383787168769076
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.6073422364032742
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.5829246343291737
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "thymus",
+      "test_tissue": "lung",
+      "n_train": 67,
+      "n_test": 39,
+      "method_a": {
+        "auroc": 0.6,
+        "ci_low": 0.4052396036387264,
+        "ci_high": 0.7710818713450291,
+        "perm_p": 0.1484851514848515,
+        "n_features": 19721,
+        "n_common_genes": 26295
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "thymus",
+      "test_tissue": "colon",
+      "n_train": 67,
+      "n_test": 36,
+      "method_a": {
+        "auroc": 0.43343653250773995,
+        "ci_low": 0.2348917748917749,
+        "ci_high": 0.6266695977633475,
+        "perm_p": 0.7557244275572442,
+        "n_features": 19358,
+        "n_common_genes": 25811
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "gastrocnemius",
+      "test_tissue": "liver",
+      "n_train": 32,
+      "n_test": 193,
+      "method_a": {
+        "auroc": 0.5596041385515069,
+        "ci_low": 0.46330117226355094,
+        "ci_high": 0.6479205921832747,
+        "perm_p": 0.0822917708229177,
+        "n_features": 14214,
+        "n_common_genes": 18952
+      },
+      "method_c": {
+        "auroc": 0.7064777327935222,
+        "ci_low": 0.63332775340568,
+        "ci_high": 0.7799347826086956,
+        "perm_p": 9.999000099990002e-05,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_HYPOXIA",
+            1.0769435488972938
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -0.9140297724179223
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.8958701620827856
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8943857980623834
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.7126894441120684
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            0.6337497307615677
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.5804290204061268
+          ],
+          [
+            "HALLMARK_XENOBIOTIC_METABOLISM",
+            -0.5229532559699342
+          ],
+          [
+            "HALLMARK_COAGULATION",
+            0.4843645793664655
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.48385893440816075
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "gastrocnemius",
+      "test_tissue": "kidney",
+      "n_train": 32,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.6315406976744186,
+        "ci_low": 0.5094275210084034,
+        "ci_high": 0.7447878663660584,
+        "perm_p": 0.014098590140985901,
+        "n_features": 15044,
+        "n_common_genes": 20059
+      },
+      "method_c": {
+        "auroc": 0.6101017441860466,
+        "ci_low": 0.4924316910499139,
+        "ci_high": 0.7240832754044488,
+        "perm_p": 0.0337966203379662,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_HYPOXIA",
+            1.0769435488972938
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -0.9140297724179223
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.8958701620827856
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8943857980623834
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.7126894441120684
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            0.6337497307615677
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.5804290204061268
+          ],
+          [
+            "HALLMARK_XENOBIOTIC_METABOLISM",
+            -0.5229532559699342
+          ],
+          [
+            "HALLMARK_COAGULATION",
+            0.4843645793664655
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.48385893440816075
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "gastrocnemius",
+      "test_tissue": "thymus",
+      "n_train": 32,
+      "n_test": 67,
+      "method_a": {
+        "auroc": 0.4385026737967915,
+        "ci_low": 0.2908775405530317,
+        "ci_high": 0.5798854662284787,
+        "perm_p": 0.8068193180681932,
+        "n_features": 15247,
+        "n_common_genes": 20329
+      },
+      "method_c": {
+        "auroc": 0.21568627450980396,
+        "ci_low": 0.10447809878844361,
+        "ci_high": 0.33514961389961384,
+        "perm_p": 0.9998000199980002,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_HYPOXIA",
+            1.0769435488972938
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -0.9140297724179223
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.8958701620827856
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8943857980623834
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.7126894441120684
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            0.6337497307615677
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.5804290204061268
+          ],
+          [
+            "HALLMARK_XENOBIOTIC_METABOLISM",
+            -0.5229532559699342
+          ],
+          [
+            "HALLMARK_COAGULATION",
+            0.4843645793664655
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.48385893440816075
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "gastrocnemius",
+      "test_tissue": "eye",
+      "n_train": 32,
+      "n_test": 37,
+      "method_a": {
+        "auroc": 0.5823529411764705,
+        "ci_low": 0.3859481424148606,
+        "ci_high": 0.7690307017543858,
+        "perm_p": 0.207979202079792,
+        "n_features": 14943,
+        "n_common_genes": 19924
+      },
+      "method_c": {
+        "auroc": 0.7441176470588234,
+        "ci_low": 0.5737179487179487,
+        "ci_high": 0.8958333333333333,
+        "perm_p": 0.0066993300669933005,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_HYPOXIA",
+            1.0769435488972938
+          ],
+          [
+            "HALLMARK_INFLAMMATORY_RESPONSE",
+            -0.9140297724179223
+          ],
+          [
+            "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+            0.8958701620827856
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8943857980623834
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.7126894441120684
+          ],
+          [
+            "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+            0.6337497307615677
+          ],
+          [
+            "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+            0.5804290204061268
+          ],
+          [
+            "HALLMARK_XENOBIOTIC_METABOLISM",
+            -0.5229532559699342
+          ],
+          [
+            "HALLMARK_COAGULATION",
+            0.4843645793664655
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.48385893440816075
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "gastrocnemius",
+      "test_tissue": "lung",
+      "n_train": 32,
+      "n_test": 39,
+      "method_a": {
+        "auroc": 0.7026315789473684,
+        "ci_low": 0.52625,
+        "ci_high": 0.8609662804515745,
+        "perm_p": 0.0163983601639836,
+        "n_features": 14942,
+        "n_common_genes": 19923
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "gastrocnemius",
+      "test_tissue": "colon",
+      "n_train": 32,
+      "n_test": 36,
+      "method_a": {
+        "auroc": 0.6470588235294117,
+        "ci_low": 0.4382671957671957,
+        "ci_high": 0.8235661764705879,
+        "perm_p": 0.06819318068193181,
+        "n_features": 14871,
+        "n_common_genes": 19828
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "eye",
+      "test_tissue": "liver",
+      "n_train": 37,
+      "n_test": 193,
+      "method_a": {
+        "auroc": 0.5112460638776428,
+        "ci_low": 0.42848602738616104,
+        "ci_high": 0.5963989228056167,
+        "perm_p": 0.39966003399660033,
+        "n_features": 15867,
+        "n_common_genes": 21156
+      },
+      "method_c": {
+        "auroc": 0.4989878542510121,
+        "ci_low": 0.4144517493687312,
+        "ci_high": 0.5806433793301662,
+        "perm_p": 0.5014498550144986,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_UV_RESPONSE_UP",
+            -0.9748185935693556
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8395836042804177
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            -0.7577380192593163
+          ],
+          [
+            "HALLMARK_G2M_CHECKPOINT",
+            0.7327574346656361
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.5915236423917263
+          ],
+          [
+            "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+            0.5867327195240029
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.5416391628949364
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.44999951185221626
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.44310030742371803
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.4357968906235654
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "eye",
+      "test_tissue": "kidney",
+      "n_train": 37,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.7023982558139534,
+        "ci_low": 0.5972489443885325,
+        "ci_high": 0.798968605514495,
+        "perm_p": 9.999000099990002e-05,
+        "n_features": 17573,
+        "n_common_genes": 23431
+      },
+      "method_c": {
+        "auroc": 0.673328488372093,
+        "ci_low": 0.5644214470903506,
+        "ci_high": 0.7700564465200148,
+        "perm_p": 0.0022997700229977,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_UV_RESPONSE_UP",
+            -0.9748185935693556
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8395836042804177
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            -0.7577380192593163
+          ],
+          [
+            "HALLMARK_G2M_CHECKPOINT",
+            0.7327574346656361
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.5915236423917263
+          ],
+          [
+            "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+            0.5867327195240029
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.5416391628949364
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.44999951185221626
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.44310030742371803
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.4357968906235654
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "eye",
+      "test_tissue": "thymus",
+      "n_train": 37,
+      "n_test": 67,
+      "method_a": {
+        "auroc": 0.39839572192513373,
+        "ci_low": 0.2652197975964579,
+        "ci_high": 0.5403427818061964,
+        "perm_p": 0.9251074892510749,
+        "n_features": 18064,
+        "n_common_genes": 24085
+      },
+      "method_c": {
+        "auroc": 0.28342245989304815,
+        "ci_low": 0.16666666666666669,
+        "ci_high": 0.40806833791208774,
+        "perm_p": 0.9989001099890011,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_UV_RESPONSE_UP",
+            -0.9748185935693556
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8395836042804177
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            -0.7577380192593163
+          ],
+          [
+            "HALLMARK_G2M_CHECKPOINT",
+            0.7327574346656361
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.5915236423917263
+          ],
+          [
+            "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+            0.5867327195240029
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.5416391628949364
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.44999951185221626
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.44310030742371803
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.4357968906235654
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "eye",
+      "test_tissue": "gastrocnemius",
+      "n_train": 37,
+      "n_test": 32,
+      "method_a": {
+        "auroc": 0.52734375,
+        "ci_low": 0.32421875,
+        "ci_high": 0.7416666666666667,
+        "perm_p": 0.38616138386161386,
+        "n_features": 14943,
+        "n_common_genes": 19924
+      },
+      "method_c": {
+        "auroc": 0.7265625,
+        "ci_low": 0.5262951496388029,
+        "ci_high": 0.8984765624999997,
+        "perm_p": 0.013598640135986401,
+        "n_features": 20,
+        "top_features": [
+          [
+            "HALLMARK_UV_RESPONSE_UP",
+            -0.9748185935693556
+          ],
+          [
+            "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+            -0.8395836042804177
+          ],
+          [
+            "HALLMARK_P53_PATHWAY",
+            -0.7577380192593163
+          ],
+          [
+            "HALLMARK_G2M_CHECKPOINT",
+            0.7327574346656361
+          ],
+          [
+            "HALLMARK_PEROXISOME",
+            -0.5915236423917263
+          ],
+          [
+            "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+            0.5867327195240029
+          ],
+          [
+            "HALLMARK_ADIPOGENESIS",
+            -0.5416391628949364
+          ],
+          [
+            "HALLMARK_MITOTIC_SPINDLE",
+            0.44999951185221626
+          ],
+          [
+            "HALLMARK_MTORC1_SIGNALING",
+            0.44310030742371803
+          ],
+          [
+            "HALLMARK_HYPOXIA",
+            -0.4357968906235654
+          ]
+        ]
+      }
+    },
+    {
+      "train_tissue": "eye",
+      "test_tissue": "lung",
+      "n_train": 37,
+      "n_test": 39,
+      "method_a": {
+        "auroc": 0.5447368421052632,
+        "ci_low": 0.3531793478260869,
+        "ci_high": 0.7194477513227513,
+        "perm_p": 0.32356764323567644,
+        "n_features": 18811,
+        "n_common_genes": 25081
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "eye",
+      "test_tissue": "colon",
+      "n_train": 37,
+      "n_test": 36,
+      "method_a": {
+        "auroc": 0.5015479876160991,
+        "ci_low": 0.3030546149380805,
+        "ci_high": 0.6952720035382572,
+        "perm_p": 0.49855014498550143,
+        "n_features": 18706,
+        "n_common_genes": 24942
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "lung",
+      "test_tissue": "liver",
+      "n_train": 39,
+      "n_test": 193,
+      "method_a": {
+        "auroc": 0.6992802519118309,
+        "ci_low": 0.6185206651411941,
+        "ci_high": 0.7727216701249463,
+        "perm_p": 9.999000099990002e-05,
+        "n_features": 16443,
+        "n_common_genes": 21924
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "lung",
+      "test_tissue": "kidney",
+      "n_train": 39,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.5425145348837208,
+        "ci_low": 0.4122969571355761,
+        "ci_high": 0.6707440476190474,
+        "perm_p": 0.23007699230076992,
+        "n_features": 18151,
+        "n_common_genes": 24201
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "lung",
+      "test_tissue": "thymus",
+      "n_train": 39,
+      "n_test": 67,
+      "method_a": {
+        "auroc": 0.6586452762923352,
+        "ci_low": 0.5241935483870968,
+        "ci_high": 0.7843051841948898,
+        "perm_p": 0.013098690130986902,
+        "n_features": 19721,
+        "n_common_genes": 26295
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "lung",
+      "test_tissue": "gastrocnemius",
+      "n_train": 39,
+      "n_test": 32,
+      "method_a": {
+        "auroc": 0.7578125,
+        "ci_low": 0.5667917351973685,
+        "ci_high": 0.9134275528393174,
+        "perm_p": 0.0040995900409959,
+        "n_features": 14942,
+        "n_common_genes": 19923
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "lung",
+      "test_tissue": "eye",
+      "n_train": 39,
+      "n_test": 37,
+      "method_a": {
+        "auroc": 0.5941176470588235,
+        "ci_low": 0.4000000000000001,
+        "ci_high": 0.7766666666666666,
+        "perm_p": 0.17178282171782822,
+        "n_features": 18811,
+        "n_common_genes": 25081
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "lung",
+      "test_tissue": "colon",
+      "n_train": 39,
+      "n_test": 36,
+      "method_a": {
+        "auroc": 0.7987616099071208,
+        "ci_low": 0.6285714285714287,
+        "ci_high": 0.946031746031746,
+        "perm_p": 0.000999900009999,
+        "n_features": 21617,
+        "n_common_genes": 28823
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "colon",
+      "test_tissue": "liver",
+      "n_train": 36,
+      "n_test": 193,
+      "method_a": {
+        "auroc": 0.6513720197930725,
+        "ci_low": 0.5739269566101934,
+        "ci_high": 0.7247492737749417,
+        "perm_p": 0.00039996000399960006,
+        "n_features": 16313,
+        "n_common_genes": 21751
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "colon",
+      "test_tissue": "kidney",
+      "n_train": 36,
+      "n_test": 118,
+      "method_a": {
+        "auroc": 0.6780523255813953,
+        "ci_low": 0.5445530939648586,
+        "ci_high": 0.7905453501177184,
+        "perm_p": 0.0011998800119988001,
+        "n_features": 18059,
+        "n_common_genes": 24079
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "colon",
+      "test_tissue": "thymus",
+      "n_train": 36,
+      "n_test": 67,
+      "method_a": {
+        "auroc": 0.4474153297682709,
+        "ci_low": 0.29897950089126557,
+        "ci_high": 0.599471227697034,
+        "perm_p": 0.7721227877212279,
+        "n_features": 19358,
+        "n_common_genes": 25811
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "colon",
+      "test_tissue": "gastrocnemius",
+      "n_train": 36,
+      "n_test": 32,
+      "method_a": {
+        "auroc": 0.5625,
+        "ci_low": 0.3571358543417367,
+        "ci_high": 0.7791973039215685,
+        "perm_p": 0.2733726627337266,
+        "n_features": 14871,
+        "n_common_genes": 19828
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "colon",
+      "test_tissue": "eye",
+      "n_train": 36,
+      "n_test": 37,
+      "method_a": {
+        "auroc": 0.5911764705882352,
+        "ci_low": 0.4029122899159663,
+        "ci_high": 0.7661068431949437,
+        "perm_p": 0.17578242175782421,
+        "n_features": 18706,
+        "n_common_genes": 24942
+      },
+      "method_c": {
+        "auroc": null
+      }
+    },
+    {
+      "train_tissue": "colon",
+      "test_tissue": "lung",
+      "n_train": 36,
+      "n_test": 39,
+      "method_a": {
+        "auroc": 0.6236842105263158,
+        "ci_low": 0.4411764705882353,
+        "ci_high": 0.7989528218694885,
+        "perm_p": 0.09569043095690431,
+        "n_features": 21617,
+        "n_common_genes": 28823
+      },
+      "method_c": {
+        "auroc": null
+      }
+    }
+  ],
+  "summary": {
+    "method_a_mean": 0.5875079219521089,
+    "method_c_mean": 0.5672193466704889,
+    "h3_c_wins": 10,
+    "h3_c_total": 20,
+    "h3_mean_diff": 0.013974737343272581
+  },
+  "config": {
+    "variance_percentile": 0.25,
+    "n_bootstrap": 2000,
+    "n_permutations": 10000,
+    "top_n_pathways": 20
+  },
+  "timestamp": "2026-03-19T21:00:28.373659"
+}

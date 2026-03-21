@@ -1,0 +1,181 @@
+{
+  "model_family": "scFoundation",
+  "results": [
+    {
+      "model": "scFoundation",
+      "tissue": "liver",
+      "n_samples": 193,
+      "n_missions": 6,
+      "embedding_dim": 3072,
+      "n_genes_mapped": 13413,
+      "lomo_auroc": 0.6354026090868197,
+      "ci_lower": 0.5481033539731682,
+      "ci_upper": 0.7153149593584024,
+      "perm_p": 0.0010998900109989002,
+      "n_folds": 6,
+      "per_mission": {
+        "MHU-2": {
+          "n_samples": 6,
+          "auroc": 1.0
+        },
+        "RR-1": {
+          "n_samples": 14,
+          "auroc": 0.3673469387755102
+        },
+        "RR-3": {
+          "n_samples": 12,
+          "auroc": 0.5555555555555556
+        },
+        "RR-6": {
+          "n_samples": 39,
+          "auroc": 0.7342105263157894
+        },
+        "RR-8": {
+          "n_samples": 103,
+          "auroc": 0.661344537815126
+        },
+        "RR-9": {
+          "n_samples": 19,
+          "auroc": 0.9857142857142858
+        }
+      }
+    },
+    {
+      "model": "scFoundation",
+      "tissue": "kidney",
+      "n_samples": 118,
+      "n_missions": 3,
+      "embedding_dim": 3072,
+      "n_genes_mapped": 13741,
+      "lomo_auroc": 0.5410610465116279,
+      "ci_lower": 0.41853530048382986,
+      "ci_upper": 0.6576578638134702,
+      "perm_p": 0.25007499250074994,
+      "n_folds": 3,
+      "per_mission": {
+        "RR-1": {
+          "n_samples": 12,
+          "auroc": 0.5555555555555556
+        },
+        "RR-3": {
+          "n_samples": 12,
+          "auroc": 0.6111111111111112
+        },
+        "RR-7": {
+          "n_samples": 94,
+          "auroc": 0.4405405405405406
+        }
+      }
+    },
+    {
+      "model": "scFoundation",
+      "tissue": "thymus",
+      "n_samples": 67,
+      "n_missions": 4,
+      "embedding_dim": 3072,
+      "n_genes_mapped": 13846,
+      "lomo_auroc": 0.4866310160427807,
+      "ci_lower": 0.3366446392678024,
+      "ci_upper": 0.626576725509363,
+      "perm_p": 0.5753424657534246,
+      "n_folds": 4,
+      "per_mission": {
+        "MHU-1": {
+          "n_samples": 6,
+          "auroc": 1.0
+        },
+        "MHU-2": {
+          "n_samples": 6,
+          "auroc": 0.4444444444444445
+        },
+        "RR-6": {
+          "n_samples": 35,
+          "auroc": 0.36601307189542487
+        },
+        "RR-9": {
+          "n_samples": 20,
+          "auroc": 0.53
+        }
+      }
+    },
+    {
+      "model": "scFoundation",
+      "tissue": "gastrocnemius",
+      "n_samples": 32,
+      "n_missions": 3,
+      "embedding_dim": 3072,
+      "n_genes_mapped": 13040,
+      "lomo_auroc": 0.69140625,
+      "ci_lower": 0.49753129117259554,
+      "ci_upper": 0.8667045454545451,
+      "perm_p": 0.034996500349965,
+      "n_folds": 3,
+      "per_mission": {
+        "RR-1": {
+          "n_samples": 12,
+          "auroc": 0.9444444444444445
+        },
+        "RR-5": {
+          "n_samples": 12,
+          "auroc": 0.8055555555555556
+        },
+        "RR-9": {
+          "n_samples": 8,
+          "auroc": 0.625
+        }
+      }
+    },
+    {
+      "model": "scFoundation",
+      "tissue": "eye",
+      "n_samples": 37,
+      "n_missions": 3,
+      "embedding_dim": 3072,
+      "n_genes_mapped": 13741,
+      "lomo_auroc": 0.5632352941176471,
+      "ci_lower": 0.37494177018633534,
+      "ci_upper": 0.75,
+      "perm_p": 0.25977402259774024,
+      "n_folds": 3,
+      "per_mission": {
+        "RR-1": {
+          "n_samples": 12,
+          "auroc": 0.5277777777777779
+        },
+        "RR-3": {
+          "n_samples": 9,
+          "auroc": 0.8500000000000001
+        },
+        "TBD": {
+          "n_samples": 16,
+          "auroc": 0.5317460317460317
+        }
+      }
+    },
+    {
+      "model": "scFoundation",
+      "tissue": "lung",
+      "n_samples": 39,
+      "n_missions": 1,
+      "embedding_dim": 3072,
+      "n_genes_mapped": 13905,
+      "lomo_auroc": 0.3894736842105263,
+      "n_folds": 5,
+      "cv_type": "stratified_kfold",
+      "per_mission": {}
+    },
+    {
+      "model": "scFoundation",
+      "tissue": "colon",
+      "n_samples": 36,
+      "n_missions": 1,
+      "embedding_dim": 3072,
+      "n_genes_mapped": 13866,
+      "lomo_auroc": 0.7554179566563468,
+      "n_folds": 5,
+      "cv_type": "stratified_kfold",
+      "per_mission": {}
+    }
+  ],
+  "timestamp": "2026-03-20T16:44:29.659672"
+}
