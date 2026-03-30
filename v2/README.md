@@ -49,7 +49,7 @@ v2.0 extends the v1.0 mouse bulk RNA-seq benchmark with temporal dynamics, cross
 
 ---
 
-## RRRM-1 scRNA-seq (F2, In Progress)
+## RRRM-1 scRNA-seq (F2, Complete)
 
 ### Pipeline Status
 
@@ -83,7 +83,7 @@ v2.0 extends the v1.0 mouse bulk RNA-seq benchmark with temporal dynamics, cross
 | **F2-C** | Cell-level spaceflight classifier | PCA-LR per cell type, LOAO |
 | **F2-D** | Cross-species concordance (RRRM-1 ↔ I4 PBMC) | NES Spearman r |
 
-**Blocker**: FLT/GC condition labels need to be mapped from OSDR metadata → h5ad obs. SRX→condition mapping available in `docs/RRRM1_SRX_CONDITION_MAP.csv`.
+FLT/GC condition labels mapped from OSDR metadata → h5ad obs via `docs/RRRM1_SRX_CONDITION_MAP.csv`. Benchmark tasks complete (see v3/evaluation/ for RRRM-1 results).
 
 ---
 

@@ -2,8 +2,8 @@
 
 **A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v4.0 (2026-03-22) | Dataset freeze: 2026-03-01
-Status: **v1-v3 Complete** | **v4 Phase 1 Complete** (256 evaluations: 8 tissues x 8 methods x 4 feature types)
+Version: v5.0 (2026-03-29) | Dataset freeze: 2026-03-01
+Status: **v1–v4 Complete** | **v5 Biological Interpretation Complete** | v6 Cross-Species Validation Complete
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -97,18 +97,28 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 | Liver | 0.577 | [0.492, 0.666] | 13/30 | 3 |
 | Kidney | 0.555 | [0.397, 0.681] | 2/6 | 3 |
 
+### v5 — Biological Interpretation
+
+| Analysis | Key Finding |
+|----------|------------|
+| **Immune deconvolution** (mMCP-counter, 8 tissues) | Skin strongest: 6/14 cell types FDR<0.05. Kidney, thymus 2/14 each. Most tissues 0 significant |
+| **Cross-organ signaling** (OmniPath, 111 L–R pairs) | 1 SHAP-active L–R pair. TF activity: thymus 240 sig, skin 241, kidney 177, liver 105 |
+| **Metabolic flux** (iMM1865 E-Flux + pFBA) | Flight vs ground objectives differ in all 6 tissues (largest: thymus FLT 15,695 vs GC 14,696) |
+| **Drug targets** (DGIdb + ChEMBL) | 271/834 spaceflight genes druggable; 1,284 FDA-approved drug–gene interactions |
+| **Consensus biomarker panel** (20 genes) | Top genes: MUP22, Thrsp, Apoa1, NPAS2, PER2. AUROC: gastro 0.806, liver 0.754, eye 0.728 |
+
 ### Foundation Model Comparison (5 FMs vs PCA-LR)
 
 | Model | Architecture | Mean AUROC (6 tissues) | vs PCA-LR |
 |-------|------------|----------------------|-----------|
 | **PCA-LR baseline** | Classical ML | **0.758** | — |
 | scGPT | 12L Transformer, 33M human cells | 0.667 | -0.092 |
-| scFoundation | 100M params, 50M cells | 0.635* (liver) | Below baseline |
-| UCE | 33L, 36M cells | 0.632* (thymus) | Below baseline |
+| scFoundation | 100M params, 50M cells | 0.635† (liver best, p<0.01) | Below baseline |
+| UCE | 33L, 36M cells | 0.632† (thymus best, p=0.031) | Below baseline |
 | Mouse-Geneformer | 6L BERT, 30M mouse cells | 0.476 | -0.283 |
 | Text LLMs (3x) | GPT-4o, Claude, Llama 3 | 0.47-0.51 | Chance level |
 
-**FM verdict**: All foundation models underperform classical PCA-LR. Pre-trained cell atlas knowledge does not improve spaceflight detection. scFoundation > UCE overall, but both below PCA-LR (mean 0.758).
+**FM verdict**: All foundation models underperform classical PCA-LR (mean 0.758). Pre-trained cell atlas knowledge does not improve spaceflight detection. scFoundation > UCE overall. †Best single-tissue AUROC shown; mean across all 7 tissues is lower.
 
 ### Independent Held-Out Validation
 
@@ -147,8 +157,10 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 |---------|-------|--------|----------|
 | **v1.0** | Mouse bulk RNA-seq, 6 tissues, 25+ tasks, 3 model tiers, 2 held-out validations | **Complete** | Project root |
 | **v2.0** | Temporal dynamics (T1-T3), cross-species (E1-E3), single-cell (F1, F2 RRRM-1) | **Complete** | `v2/` |
-| **v3.0** | Multi-species (E4), Spatial Visium (F3), RRRM-2 scRNA-seq (F5), UCE/scFoundation FM, radiation analogs, cross-tissue transfer 7x7 | **Complete** | `v3/` |
-| **v4.0** | Multi-method benchmark: 8 tissues x 8 classifiers x 4 features (256 evals), expanded controls (BC/VC), pathway scores via ssGSEA | **Phase 1 Complete** | `v4/` |
+| **v3.0** | Multi-species (E4), Spatial Visium (F3), RRRM-2 scRNA-seq (F5), UCE/scFoundation FM, radiation analogs, cross-tissue transfer 7×7 | **Complete** | `v3/` |
+| **v4.0** | Multi-method benchmark: 8 tissues × 8 classifiers × 4 features (256 evals), ablation, SHAP, WGCNA, module preservation, STRING PPI | **Complete** | `v4/` |
+| **v5.0** | Biological interpretation: immune deconvolution (mMCP-counter), metabolic flux (iMM1865 E-Flux), drug targets (DGIdb/ChEMBL), consensus 20-gene biomarker panel | **Complete** | `v5/` |
+| **v6.0** | Cross-species validation: gene/pathway conservation, cross-species transfer, TF conservation, biomarker/drug target validation across species | **Complete** | `v6/` |
 
 ---
 
@@ -157,8 +169,6 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 ```
 GeneLab_benchmark/
 ├── README.md                       <- This file
-├── PLAN.md                         <- Benchmark design specification (v1.6)
-├── DESIGN_DECISIONS.md             <- Architecture decisions log (DD-01 to DD-21)
 ├── DATA_CATALOG.md                 <- OSDR inventory (24+ studies)
 ├── CITATION.cff                    <- Citation metadata
 │
@@ -180,33 +190,39 @@ GeneLab_benchmark/
 ├── docs/
 │   ├── hf_dataset_card.md          <- HuggingFace dataset documentation
 │   ├── submission_format.md        <- JSON submission specification
-│   ├── text_llm_format.md          <- Text LLM evaluation format (DD-16)
-│   ├── BIOLOGICAL_GROUND_TRUTH.md  <- Validation reference (Cell 2020, SOMA 2024)
-│   ├── PAPER_OUTLINE.md            <- Paper outline
-│   └── development_history/        <- Internal development logs
+│   ├── text_llm_format.md          <- Text LLM evaluation format
+│   └── BIOLOGICAL_GROUND_TRUTH.md  <- Validation reference (Cell 2020, SOMA 2024)
 │
-├── evaluation/                     <- Result JSON files
-│   ├── RESULTS_SUMMARY.md          <- Comprehensive v1 results table
+├── evaluation/                     <- Result JSON files (v1 baseline)
+│   ├── RESULTS_SUMMARY.md          <- Comprehensive results table (v1–v5)
 │   └── *.json                      <- Per-task results
 │
-├── v2/                             <- v2 extensions (temporal, cross-species, scRNA)
-│   ├── README.md                   <- v2 overview
+├── v2/                             <- Temporal dynamics, cross-species, scRNA-seq
+│   ├── README.md
 │   ├── scripts/                    <- 19 Python scripts
 │   ├── evaluation/                 <- v2 results
-│   └── figures/                    <- D3.js interactive figures (3 HTML)
+│   └── figures/                    <- 3 D3.js interactive HTML figures
 │
-├── v3/                             <- v3 extensions (multi-species, spatial, FM)
-│   ├── README.md                   <- v3 overview
+├── v3/                             <- Multi-species, spatial Visium, FM evaluation
+│   ├── README.md
 │   ├── scripts/                    <- 30 scripts (Python/Bash/R)
 │   ├── evaluation/                 <- 19 result JSONs
-│   └── figures/                    <- D3.js interactive figures (5 HTML)
+│   └── figures/                    <- 5 D3.js interactive HTML figures
 │
-├── v4/                             <- v4 multi-method benchmark
-│   ├── scripts/
-│   │   ├── classifier_registry.py  <- 8 classifier implementations
-│   │   ├── v4_utils.py             <- 8-tissue config + data loading
-│   │   └── multi_method_eval.py    <- Main evaluation driver
-│   └── results/                    <- 256 evaluation results
+├── v4/                             <- Multi-method benchmark + network biology
+│   ├── scripts/                    <- 18 scripts (classifiers, SHAP, WGCNA, PPI)
+│   ├── evaluation/                 <- 256+ result JSONs + SHAP/WGCNA outputs
+│   ├── wgcna_outputs/              <- Per-tissue WGCNA module data (6 tissues)
+│   └── figures/html/               <- 11 D3.js interactive HTML figures
+│
+├── v5/                             <- Biological interpretation layer
+│   ├── scripts/                    <- Immune deconv, metabolic flux, drug targets
+│   ├── evaluation/                 <- 25 result JSONs (immune, TF, metabolic, drugs)
+│   └── figures/html/               <- 5 D3.js interactive HTML figures
+│
+├── v6/                             <- Cross-species validation
+│   ├── scripts/                    <- 7 Python scripts (phases A–F)
+│   └── evaluation/                 <- 5 result JSONs
 │
 └── processed/                      <- Intermediate analysis outputs
     ├── A_detection/                <- Per-tissue LOMO data
@@ -338,20 +354,18 @@ Preprocessing: DESeq2 normalization (per-mission), log2(counts + 1), global low-
 
 ## Design Decisions
 
-Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md):
+Key methodological choices underpinning this benchmark:
 
-- **DD-01**: Feature = log2(DESeq2 normalized counts) -- LFC forbidden in Category A (label leakage)
-- **DD-03**: LOMO-aware variance filter (train missions only -- no test leakage)
-- **DD-04**: Mission = independence unit for LOMO (not sample)
-- **DD-06**: Track 2a = C57BL/6J only; Track 2b = all strains
-- **DD-08**: Evaluation metrics (AUROC + bootstrap CI + permutation p)
-- **DD-11**: Go/No-Go decision criteria (3 AND conditions)
-- **DD-12**: Negative controls (NC1 permutation, NC2 housekeeping, NC3 cross-species)
-- **DD-13**: Baseline model set (v1: LR, RF, XGBoost, PCA-LR; v4: +SVM, LightGBM, TabNet, ElasticNet-LR)
-- **DD-15**: Pathway analysis (fGSEA group-level + GSVA/ssGSEA sample-level)
-- **DD-16**: Text LLM evaluation track specification
-- **DD-17**: Category B evaluation criteria (Transfer Pattern Summary, perm_p floor)
-- **DD-21**: scGPT fine-tuning strategy (freeze 10/12 layers, ortholog mapping, 10 epochs)
+- **Feature encoding**: log2(DESeq2 normalized counts); LFC forbidden in Category A (label leakage)
+- **LOMO splits**: Mission = independence unit; variance filter applied on training missions only (no test leakage)
+- **Strain**: Track 2a = C57BL/6J only; Track 2b = all strains
+- **Evaluation**: AUROC + bootstrap CI (N=2000) + permutation p (N=1000); GO requires all 3 AND conditions
+- **Negative controls**: NC1 label permutation, NC2 housekeeping genes, NC3 cross-species gene set
+- **v4 classifiers**: PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-Linear, SVM-RBF, TabNet, LightGBM
+- **v4 features**: Gene (log2-norm), Hallmark (ssGSEA), KEGG (ssGSEA), pathway-combined
+- **Pathway analysis**: fGSEA group-level + gseapy ssGSEA sample-level
+- **Text LLM track**: Gene list → natural language prompt → binary classification
+- **Category B**: Transfer Pattern Summary (no single GO/NO-GO; use pairs ≥0.70 and perm_p<0.05 counts)
 
 ---
 
@@ -359,11 +373,13 @@ Key methodological choices are documented in [DESIGN_DECISIONS.md](DESIGN_DECISI
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v4.0-phase1 | 2026-03-22 | v4 Phase 1 complete: 256 evaluations (8 tissues x 8 methods x 4 features). PCA-LR best overall (gene mean 0.776). Expanded controls (BC/VC). Pathway scores via gseapy ssGSEA. |
-| v3.0 | 2026-03-20 | v3 complete: E4 multi-species (Drosophila KEGG), F3 spatial Visium brain (NEGATIVE), F5 RRRM-2 scRNA (PBMC NK 0.845), UCE + scFoundation FM eval, B_ext 7x7 cross-tissue transfer, radiation analogs (R1-R3). 5 publication figures. |
-| v2.0 | 2026-03-18 | v2 complete: F2 RRRM-1 scRNA-seq 4 tissues (38K cells). E1 cross-species (r=0.352). T1-T3 temporal dynamics. F1 PBMC pathway analysis. 3 publication figures. |
-| v1.3 | 2026-03-13 | Tier 3 LLM zero-shot complete. scGPT (mean 0.667). Held-out: thymus RR-23 (0.905), skin RR-7 (0.885). J2 DGE pipeline comparison. 4 main + 4 supplementary figures. |
-| v1.0 | 2026-03-07 | Initial release: 6 tissues, Categories A-D, Geneformer, Cell 2020 validation, fGSEA, GSVA. |
+| v6.0 | 2026-03-30 | Cross-species validation complete: gene conservation, pathway conservation, cross-species transfer, TF conservation, biomarker validation, drug target validation (6 result JSONs). |
+| v5.0 | 2026-03-29 | Biological interpretation complete: immune deconvolution (mMCP-counter, 8 tissues), cross-organ signaling (OmniPath, 111 L–R pairs), metabolic flux (iMM1865 E-Flux + pFBA), drug targets (DGIdb + ChEMBL, 1,284 FDA interactions), consensus 20-gene biomarker panel (gastro AUROC 0.806). 5 integration figures. |
+| v4.0 | 2026-03-28 | v4 complete: 256 evaluations (8 tissues × 8 methods × 4 features). PCA-LR best (AUROC 0.776). Friedman p=0.015. Ablation (569 evals), SHAP multi-method, Python WGCNA (6 tissues), module preservation, STRING PPI. 11 publication figures. |
+| v3.0 | 2026-03-20 | Multi-species (E4 Drosophila KEGG), spatial Visium brain (NEGATIVE), RRRM-2 scRNA-seq (PBMC NK 0.845), UCE + scFoundation FM eval, 7×7 cross-tissue transfer, radiation analogs. 5 publication figures. |
+| v2.0 | 2026-03-18 | RRRM-1 scRNA-seq 4 tissues (38K cells). E1 cross-species r=0.352. T1–T3 temporal dynamics. 3 publication figures. |
+| v1.3 | 2026-03-13 | Tier 3 LLM zero-shot. scGPT mean 0.667. Held-out: thymus RR-23 (0.905), skin RR-7 (0.885). 4 main + 4 supplementary figures. |
+| v1.0 | 2026-03-07 | Initial release: 6 tissues, Categories A–D, Geneformer, Cell 2020 validation, fGSEA, GSVA. |
 
 ---
 
