@@ -1,0 +1,53 @@
+{
+  "experiment": "D3",
+  "model": "ElasticNet-LR",
+  "model_key": "elasticnet_lr",
+  "tissue": "eye",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 3,
+  "classes": [
+    "RR-1",
+    "RR-3",
+    "TBD"
+  ],
+  "class_distribution": {
+    "RR-1": 12,
+    "RR-3": 13,
+    "TBD": 16
+  },
+  "n_samples": 41,
+  "macro_f1": 1.0,
+  "accuracy": 1.0,
+  "ci_lower": 1.0,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "RR-1": 1.0,
+    "RR-3": 1.0,
+    "TBD": 1.0
+  },
+  "confusion_matrix": [
+    [
+      12,
+      0,
+      0
+    ],
+    [
+      0,
+      13,
+      0
+    ],
+    [
+      0,
+      0,
+      16
+    ]
+  ],
+  "mean_train_time_s": 103.89,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 5201.1,
+  "timestamp": "2026-03-22T04:52:50.654258"
+}

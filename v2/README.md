@@ -1,6 +1,6 @@
 # GeneLab Benchmark v2.0
 
-**Status**: Active development (2026-03-13)
+**Status**: Complete (2026-03-18)
 
 ## Scope
 
@@ -11,7 +11,7 @@ v2.0 extends the v1.0 mouse bulk RNA-seq benchmark with temporal dynamics, cross
 | **T** | Temporal Dynamics | ISS-T/LAR timing, recovery, age×spaceflight | **Complete** |
 | **E** | Cross-Species Conservation | Mouse bulk ↔ JAXA cfRNA (human), duration effects | **Complete** |
 | **F1** | Human PBMC Single-Cell | I4 snRNA-seq cell-type fGSEA, cfRNA origin | **Complete** |
-| **F2** | Mouse Multi-Tissue scRNA-seq | RRRM-1 (OSD-918/920/924/934), 4 tissues | **In progress** |
+| **F2** | Mouse Multi-Tissue scRNA-seq | RRRM-1 (OSD-918/920/924/934), 4 tissues | **Complete** |
 
 ---
 
@@ -63,7 +63,7 @@ v2.0 extends the v1.0 mouse bulk RNA-seq benchmark with temporal dynamics, cross
 | QC + processing | `rrrm1_initial_scanpy.py` | Complete |
 | Broad annotation | `rrrm1_broad_annotate.py` | Complete |
 | Doublet removal | `rrrm1_singlecell_hardening.py` | Complete |
-| **F2 benchmark tasks** | *planned* | **Next** |
+| **F2 benchmark tasks** | `rrrm1_benchmark.py` | **Complete** |
 
 ### Cell Counts (post-hardening)
 

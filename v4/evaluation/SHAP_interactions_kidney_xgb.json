@@ -1,0 +1,283 @@
+{
+  "tissue": "kidney",
+  "method": "xgb",
+  "n_genes": 2000,
+  "gene_filter": "top_2000_variance",
+  "n_folds_used": 3,
+  "top_50_interactions": [
+    {
+      "gene_a": "Tmprss11g",
+      "gene_b": "ENSMUSG00000105053",
+      "interaction_strength": 0.023246
+    },
+    {
+      "gene_a": "Fosb",
+      "gene_b": "ENSMUSG00000092560",
+      "interaction_strength": 0.017925
+    },
+    {
+      "gene_a": "Nat8f5",
+      "gene_b": "ENSMUSG00000099397",
+      "interaction_strength": 0.016146
+    },
+    {
+      "gene_a": "Nat8l",
+      "gene_b": "Tmprss11g",
+      "interaction_strength": 0.015815
+    },
+    {
+      "gene_a": "Slc22a22",
+      "gene_b": "Gm3095",
+      "interaction_strength": 0.014053
+    },
+    {
+      "gene_a": "Fosb",
+      "gene_b": "ENSMUSG00000097108",
+      "interaction_strength": 0.011306
+    },
+    {
+      "gene_a": "4933407L21Rik",
+      "gene_b": "ENSMUSG00000118086",
+      "interaction_strength": 0.010829
+    },
+    {
+      "gene_a": "ENSMUSG00000064338",
+      "gene_b": "ENSMUSG00000105053",
+      "interaction_strength": 0.010798
+    },
+    {
+      "gene_a": "Iglv1",
+      "gene_b": "Gm10432",
+      "interaction_strength": 0.010163
+    },
+    {
+      "gene_a": "Nat8l",
+      "gene_b": "ENSMUSG00000118434",
+      "interaction_strength": 0.0101
+    },
+    {
+      "gene_a": "Slc18a2",
+      "gene_b": "Apon",
+      "interaction_strength": 0.009821
+    },
+    {
+      "gene_a": "ENSMUSG00000112667",
+      "gene_b": "Has1",
+      "interaction_strength": 0.009378
+    },
+    {
+      "gene_a": "Xirp2|Gm1322",
+      "gene_b": "Gm10787",
+      "interaction_strength": 0.009334
+    },
+    {
+      "gene_a": "ENSMUSG00000108075",
+      "gene_b": "D130079A08Rik",
+      "interaction_strength": 0.009324
+    },
+    {
+      "gene_a": "ENSMUSG00000097108",
+      "gene_b": "ENSMUSG00000107755",
+      "interaction_strength": 0.009222
+    },
+    {
+      "gene_a": "Mybpc1",
+      "gene_b": "Fads2b",
+      "interaction_strength": 0.008876
+    },
+    {
+      "gene_a": "ENSMUSG00000092560",
+      "gene_b": "ENSMUSG00000115431",
+      "interaction_strength": 0.008854
+    },
+    {
+      "gene_a": "Nat8l",
+      "gene_b": "1700021N21Rik",
+      "interaction_strength": 0.008753
+    },
+    {
+      "gene_a": "ENSMUSG00000108092",
+      "gene_b": "ENSMUSG00000108118",
+      "interaction_strength": 0.008398
+    },
+    {
+      "gene_a": "Star",
+      "gene_b": "ENSMUSG00000099397",
+      "interaction_strength": 0.008077
+    },
+    {
+      "gene_a": "ENSMUSG00000083708",
+      "gene_b": "ENSMUSG00000089865",
+      "interaction_strength": 0.007873
+    },
+    {
+      "gene_a": "Slc18a2",
+      "gene_b": "Gm15133",
+      "interaction_strength": 0.007674
+    },
+    {
+      "gene_a": "Papolb",
+      "gene_b": "ENSMUSG00000090996",
+      "interaction_strength": 0.007499
+    },
+    {
+      "gene_a": "Creb3l3",
+      "gene_b": "Gm23143",
+      "interaction_strength": 0.007474
+    },
+    {
+      "gene_a": "Gm24029",
+      "gene_b": "ENSMUSG00000107071",
+      "interaction_strength": 0.007323
+    },
+    {
+      "gene_a": "Gm2762",
+      "gene_b": "ENSMUSG00000111820",
+      "interaction_strength": 0.007121
+    },
+    {
+      "gene_a": "4933407L21Rik",
+      "gene_b": "Retnla",
+      "interaction_strength": 0.007055
+    },
+    {
+      "gene_a": "Xirp2|Gm1322",
+      "gene_b": "Iglv1",
+      "interaction_strength": 0.0069
+    },
+    {
+      "gene_a": "ENSMUSG00000106447",
+      "gene_b": "ENSMUSG00000086340",
+      "interaction_strength": 0.006843
+    },
+    {
+      "gene_a": "ENSMUSG00002076650",
+      "gene_b": "Tprg",
+      "interaction_strength": 0.006801
+    },
+    {
+      "gene_a": "Tmprss11g",
+      "gene_b": "ENSMUSG00002076650",
+      "interaction_strength": 0.006607
+    },
+    {
+      "gene_a": "ENSMUSG00000107755",
+      "gene_b": "ENSMUSG00000108092",
+      "interaction_strength": 0.006581
+    },
+    {
+      "gene_a": "Ucp1",
+      "gene_b": "D130079A08Rik",
+      "interaction_strength": 0.006506
+    },
+    {
+      "gene_a": "Cyp2c68",
+      "gene_b": "Nlrp1c-ps",
+      "interaction_strength": 0.006483
+    },
+    {
+      "gene_a": "ENSMUSG00000107539",
+      "gene_b": "Gm23444",
+      "interaction_strength": 0.006391
+    },
+    {
+      "gene_a": "ENSMUSG00000105053",
+      "gene_b": "ENSMUSG00000120850",
+      "interaction_strength": 0.006349
+    },
+    {
+      "gene_a": "Grm8",
+      "gene_b": "ENSMUSG00000090996",
+      "interaction_strength": 0.006323
+    },
+    {
+      "gene_a": "Elovl3",
+      "gene_b": "ENSMUSG00000090996",
+      "interaction_strength": 0.006257
+    },
+    {
+      "gene_a": "Rpl22l1",
+      "gene_b": "ENSMUSG00000105053",
+      "interaction_strength": 0.006192
+    },
+    {
+      "gene_a": "Gm24411",
+      "gene_b": "Tmprss11g",
+      "interaction_strength": 0.006183
+    },
+    {
+      "gene_a": "Adam30",
+      "gene_b": "ENSMUSG00000090996",
+      "interaction_strength": 0.006165
+    },
+    {
+      "gene_a": "Fosb",
+      "gene_b": "ENSMUSG00000115431",
+      "interaction_strength": 0.006008
+    },
+    {
+      "gene_a": "ENSMUSG00000092277",
+      "gene_b": "ENSMUSG00000101211",
+      "interaction_strength": 0.005827
+    },
+    {
+      "gene_a": "Cyp2c68",
+      "gene_b": "4930522L14Rik",
+      "interaction_strength": 0.005766
+    },
+    {
+      "gene_a": "ENSMUSG00000116988",
+      "gene_b": "ENSMUSG00000108118",
+      "interaction_strength": 0.005659
+    },
+    {
+      "gene_a": "ENSMUSG00000099397",
+      "gene_b": "Rnu2-10",
+      "interaction_strength": 0.005583
+    },
+    {
+      "gene_a": "Slc22a22",
+      "gene_b": "ENSMUSG00000117695",
+      "interaction_strength": 0.00555
+    },
+    {
+      "gene_a": "Nat8l",
+      "gene_b": "Alkal2",
+      "interaction_strength": 0.005505
+    },
+    {
+      "gene_a": "Rprl3",
+      "gene_b": "ENSMUSG00000089865",
+      "interaction_strength": 0.005398
+    },
+    {
+      "gene_a": "LOC102635990",
+      "gene_b": "ENSMUSG00000089652",
+      "interaction_strength": 0.005373
+    }
+  ],
+  "top_20_main_effects": {
+    "Bmal1": 0.257082,
+    "Tmprss11g": 0.249144,
+    "ENSMUSG00000090996": 0.1935,
+    "ENSMUSG00000105053": 0.160929,
+    "ENSMUSG00000117695": 0.156065,
+    "4933407L21Rik": 0.152522,
+    "Nat8l": 0.140295,
+    "Slc18a2": 0.136626,
+    "Iglv1": 0.136417,
+    "Cyp2c68": 0.116079,
+    "ENSMUSG00000118434": 0.101067,
+    "ENSMUSG00000099397": 0.09792,
+    "ENSMUSG00000114102": 0.096542,
+    "D130079A08Rik": 0.090239,
+    "Fosb": 0.085781,
+    "ENSMUSG00000083287": 0.077453,
+    "Vmn2r97": 0.076212,
+    "ENSMUSG00000083424": 0.073341,
+    "Nat8f5": 0.068969,
+    "ENSMUSG00000094935": 0.068751
+  },
+  "n_total_pairs": 1999000,
+  "timestamp": "2026-03-23T02:27:45.800219"
+}

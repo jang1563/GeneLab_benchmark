@@ -1,0 +1,43 @@
+{
+  "experiment": "D5",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "liver",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 2,
+  "classes": [
+    "MHU",
+    "RR"
+  ],
+  "class_distribution": {
+    "MHU": 9,
+    "RR": 255
+  },
+  "n_samples": 264,
+  "macro_f1": 0.4913,
+  "accuracy": 0.9659,
+  "ci_lower": 0.4854,
+  "ci_upper": 0.4962,
+  "perm_pvalue": 1.0,
+  "per_class_f1": {
+    "MHU": 0.0,
+    "RR": 0.9827
+  },
+  "confusion_matrix": [
+    [
+      0,
+      9
+    ],
+    [
+      0,
+      255
+    ]
+  ],
+  "mean_train_time_s": 0.29,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 23.1,
+  "timestamp": "2026-03-22T03:31:38.799516"
+}

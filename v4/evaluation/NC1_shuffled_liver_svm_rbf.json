@@ -1,0 +1,93 @@
+{
+  "experiment": "NC1_shuffled",
+  "model": "SVM-RBF",
+  "model_key": "svm_rbf",
+  "tissue": "liver",
+  "feature_type": "gene",
+  "cv_strategy": "LOMO",
+  "n_folds": 6,
+  "mean_auroc": 0.6595,
+  "std_auroc": 0.1775,
+  "min_auroc": 0.4462,
+  "max_auroc": 1.0,
+  "mean_perm_pvalue": 0.2761,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 37.6,
+  "timestamp": "2026-03-22T03:20:37.304131",
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "fold_name": "fold_RR-1_test",
+      "auroc": 0.6923,
+      "bootstrap_mean": 0.6927,
+      "ci_lower": 0.4167,
+      "ci_upper": 0.9231,
+      "perm_pvalue": 0.3636,
+      "n_train": 247,
+      "n_test": 14,
+      "train_time_s": 2.44
+    },
+    {
+      "test_mission": "RR-3",
+      "fold_name": "fold_RR-3_test",
+      "auroc": 0.7143,
+      "bootstrap_mean": 0.7124,
+      "ci_lower": 0.2969,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.1239,
+      "n_train": 243,
+      "n_test": 18,
+      "train_time_s": 2.45
+    },
+    {
+      "test_mission": "RR-6",
+      "fold_name": "fold_RR-6_test",
+      "auroc": 0.5667,
+      "bootstrap_mean": 0.5647,
+      "ci_lower": 0.3908,
+      "ci_upper": 0.7349,
+      "perm_pvalue": 0.2298,
+      "n_train": 202,
+      "n_test": 59,
+      "train_time_s": 1.66
+    },
+    {
+      "test_mission": "RR-8",
+      "fold_name": "fold_RR-8_test",
+      "auroc": 0.5378,
+      "bootstrap_mean": 0.5391,
+      "ci_lower": 0.4391,
+      "ci_upper": 0.6345,
+      "perm_pvalue": 0.2298,
+      "n_train": 120,
+      "n_test": 141,
+      "train_time_s": 0.52
+    },
+    {
+      "test_mission": "RR-9",
+      "fold_name": "fold_RR-9_test",
+      "auroc": 0.4462,
+      "bootstrap_mean": 0.4495,
+      "ci_lower": 0.1846,
+      "ci_upper": 0.7198,
+      "perm_pvalue": 0.6334,
+      "n_train": 238,
+      "n_test": 23,
+      "train_time_s": 2.4
+    },
+    {
+      "test_mission": "MHU-2",
+      "fold_name": "fold_MHU-2_test",
+      "auroc": 1.0,
+      "bootstrap_mean": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.0759,
+      "n_train": 255,
+      "n_test": 6,
+      "train_time_s": 2.78
+    }
+  ]
+}

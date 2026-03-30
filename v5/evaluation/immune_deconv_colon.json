@@ -1,0 +1,170 @@
+{
+  "tissue": "colon",
+  "n_samples": 54,
+  "n_flt": 19,
+  "n_gc": 35,
+  "n_cell_types": 16,
+  "n_significant_fdr05": 0,
+  "cell_types": {
+    "T cells": {
+      "mean_flt": 5.6412,
+      "mean_gc": 5.8247,
+      "std_flt": 0.7023,
+      "std_gc": 1.22,
+      "wilcoxon_p": 0.690267,
+      "cliffs_delta": -0.0677,
+      "direction": "down_in_flight",
+      "fdr_p": 1.0
+    },
+    "CD8 T cells": {
+      "mean_flt": 3.842,
+      "mean_gc": 4.2729,
+      "std_flt": 1.1577,
+      "std_gc": 1.644,
+      "wilcoxon_p": 0.586854,
+      "cliffs_delta": -0.0917,
+      "direction": "down_in_flight",
+      "fdr_p": 1.0
+    },
+    "NK cells": {
+      "mean_flt": 1.263,
+      "mean_gc": 1.2276,
+      "std_flt": 0.8754,
+      "std_gc": 0.9177,
+      "wilcoxon_p": 0.819331,
+      "cliffs_delta": 0.0391,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "B derived": {
+      "mean_flt": 8.5786,
+      "mean_gc": 8.4934,
+      "std_flt": 0.8909,
+      "std_gc": 1.207,
+      "wilcoxon_p": 0.971102,
+      "cliffs_delta": -0.0075,
+      "direction": "down_in_flight",
+      "fdr_p": 1.0
+    },
+    "Memory B cells": {
+      "mean_flt": 5.0314,
+      "mean_gc": 5.0556,
+      "std_flt": 0.8465,
+      "std_gc": 0.9593,
+      "wilcoxon_p": 0.884785,
+      "cliffs_delta": -0.0256,
+      "direction": "down_in_flight",
+      "fdr_p": 1.0
+    },
+    "Monocytes / macrophages": {
+      "mean_flt": 6.0525,
+      "mean_gc": 5.9592,
+      "std_flt": 0.835,
+      "std_gc": 1.1955,
+      "wilcoxon_p": 0.913456,
+      "cliffs_delta": -0.0195,
+      "direction": "down_in_flight",
+      "fdr_p": 1.0
+    },
+    "Monocytes": {
+      "mean_flt": 9.3884,
+      "mean_gc": 9.3214,
+      "std_flt": 0.2753,
+      "std_gc": 0.4207,
+      "wilcoxon_p": 0.913456,
+      "cliffs_delta": 0.0195,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "Granulocytes": {
+      "mean_flt": 0.267,
+      "mean_gc": 0.1725,
+      "std_flt": 0.5361,
+      "std_gc": 0.5541,
+      "wilcoxon_p": 0.340817,
+      "cliffs_delta": 0.0992,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "Mast cells": {
+      "mean_flt": 0.8304,
+      "mean_gc": 0.7514,
+      "std_flt": 0.7178,
+      "std_gc": 0.6841,
+      "wilcoxon_p": 0.699935,
+      "cliffs_delta": 0.0647,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "Eosinophils": {
+      "mean_flt": 11.4094,
+      "mean_gc": 11.2503,
+      "std_flt": 0.6573,
+      "std_gc": 0.6657,
+      "wilcoxon_p": 0.637679,
+      "cliffs_delta": 0.0797,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "Neutrophils": {
+      "mean_flt": 11.192,
+      "mean_gc": 11.3588,
+      "std_flt": 0.5788,
+      "std_gc": 0.6989,
+      "wilcoxon_p": 0.328015,
+      "cliffs_delta": -0.1639,
+      "direction": "down_in_flight",
+      "fdr_p": 1.0
+    },
+    "Basophils": {
+      "mean_flt": 7.2846,
+      "mean_gc": 7.1654,
+      "std_flt": 0.6292,
+      "std_gc": 0.6376,
+      "wilcoxon_p": 0.586854,
+      "cliffs_delta": 0.0917,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "Vessels": {
+      "mean_flt": 9.0932,
+      "mean_gc": 9.0263,
+      "std_flt": 0.4713,
+      "std_gc": 0.5353,
+      "wilcoxon_p": 0.985548,
+      "cliffs_delta": -0.0045,
+      "direction": "down_in_flight",
+      "fdr_p": 1.0
+    },
+    "Lymphatics": {
+      "mean_flt": 7.3206,
+      "mean_gc": 7.2058,
+      "std_flt": 0.5353,
+      "std_gc": 0.7552,
+      "wilcoxon_p": 0.612033,
+      "cliffs_delta": 0.0857,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "Endothelial cells": {
+      "mean_flt": 6.5805,
+      "mean_gc": 6.4519,
+      "std_flt": 0.7143,
+      "std_gc": 0.8786,
+      "wilcoxon_p": 0.663766,
+      "cliffs_delta": 0.0737,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    },
+    "Fibroblasts": {
+      "mean_flt": 7.4327,
+      "mean_gc": 7.5068,
+      "std_flt": 0.4054,
+      "std_gc": 0.6743,
+      "wilcoxon_p": 1.0,
+      "cliffs_delta": 0.0015,
+      "direction": "up_in_flight",
+      "fdr_p": 1.0
+    }
+  }
+}

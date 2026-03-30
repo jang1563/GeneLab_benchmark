@@ -1,0 +1,67 @@
+{
+  "summary": {
+    "pass": 7,
+    "fail": 1,
+    "skip": 0
+  },
+  "all_verified": false,
+  "details": [
+    {
+      "tissue": "liver",
+      "method": "elasticnet_lr",
+      "status": "PASS",
+      "detail": "All folds match"
+    },
+    {
+      "tissue": "liver",
+      "method": "pca_lr",
+      "status": "FAIL",
+      "detail": [
+        {
+          "fold": "fold_RR-1_test",
+          "collected": 0.5714,
+          "m1": 0.551,
+          "diff": 0.0204
+        }
+      ]
+    },
+    {
+      "tissue": "liver",
+      "method": "rf",
+      "status": "PASS",
+      "detail": "All folds match"
+    },
+    {
+      "tissue": "liver",
+      "method": "xgb",
+      "status": "PASS",
+      "detail": "All folds match"
+    },
+    {
+      "tissue": "liver",
+      "method": "svm_rbf",
+      "status": "PASS",
+      "detail": "All folds match"
+    },
+    {
+      "tissue": "liver",
+      "method": "knn",
+      "status": "PASS",
+      "detail": "All folds match"
+    },
+    {
+      "tissue": "liver",
+      "method": "mlp",
+      "status": "PASS",
+      "detail": "All folds match"
+    },
+    {
+      "tissue": "liver",
+      "method": "tabnet",
+      "status": "PASS",
+      "detail": "All folds match"
+    }
+  ],
+  "tolerance": 0.001,
+  "timestamp": "2026-03-22T13:40:52"
+}

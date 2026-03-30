@@ -1,0 +1,61 @@
+{
+  "experiment": "NC2_random",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "gastrocnemius",
+  "feature_type": "random_gaussian",
+  "n_original_features": 21013,
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.4676,
+  "std_auroc": 0.0665,
+  "min_auroc": 0.375,
+  "max_auroc": 0.5278,
+  "mean_perm_pvalue": 0.5924,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 40.7,
+  "timestamp": "2026-03-22T03:22:12.144895",
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "fold_name": "fold_RR-1_test",
+      "auroc": 0.5,
+      "bootstrap_mean": 0.4974,
+      "ci_lower": 0.1142,
+      "ci_upper": 0.8571,
+      "perm_pvalue": 0.5365,
+      "n_train": 20,
+      "n_test": 12,
+      "n_features": 21013,
+      "train_time_s": 9.17
+    },
+    {
+      "test_mission": "RR-5",
+      "fold_name": "fold_RR-5_test",
+      "auroc": 0.5278,
+      "bootstrap_mean": 0.5293,
+      "ci_lower": 0.1429,
+      "ci_upper": 0.8622,
+      "perm_pvalue": 0.4795,
+      "n_train": 20,
+      "n_test": 12,
+      "n_features": 21013,
+      "train_time_s": 8.67
+    },
+    {
+      "test_mission": "RR-9",
+      "fold_name": "fold_RR-9_test",
+      "auroc": 0.375,
+      "bootstrap_mean": 0.3749,
+      "ci_lower": 0.0,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.7612,
+      "n_train": 24,
+      "n_test": 8,
+      "n_features": 21013,
+      "train_time_s": 8.37
+    }
+  ]
+}

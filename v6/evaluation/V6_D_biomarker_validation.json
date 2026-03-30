@@ -1,0 +1,417 @@
+{
+  "panel_size": 20,
+  "n_detected_in_cfrna": 15,
+  "detection_rate": 0.75,
+  "n_de_fdr05": 0,
+  "n_drr": 0,
+  "gene_results": [
+    {
+      "rank": 1,
+      "mouse_gene": "MUP22",
+      "human_symbol_stored": "MUP22",
+      "human_gene_matched": null,
+      "panel_score": 5,
+      "tissues": [
+        "colon",
+        "gastrocnemius",
+        "lung",
+        "skin"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": false,
+      "is_de": false,
+      "de_fdr": null,
+      "de_diff": null,
+      "is_drr": false,
+      "direction": null,
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 2,
+      "mouse_gene": "Thrsp",
+      "human_symbol_stored": "THRSP",
+      "human_gene_matched": "THRSP",
+      "panel_score": 5,
+      "tissues": [
+        "colon",
+        "kidney",
+        "lung",
+        "skin"
+      ],
+      "n_drugs": 3,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 1.0,
+      "de_diff": 0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 3,
+      "mouse_gene": "Apoa1",
+      "human_symbol_stored": "APOA1",
+      "human_gene_matched": "APOA1",
+      "panel_score": 5,
+      "tissues": [
+        "colon",
+        "gastrocnemius",
+        "skin",
+        "thymus"
+      ],
+      "n_drugs": 7,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.831662,
+      "de_diff": 0.0,
+      "is_drr": false,
+      "direction": "up_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 4,
+      "mouse_gene": "THRSP",
+      "human_symbol_stored": "THRSP",
+      "human_gene_matched": "THRSP",
+      "panel_score": 5,
+      "tissues": [
+        "colon",
+        "lung",
+        "skin"
+      ],
+      "n_drugs": 3,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 1.0,
+      "de_diff": 0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 5,
+      "mouse_gene": "Top2a",
+      "human_symbol_stored": "TOP2A",
+      "human_gene_matched": "TOP2A",
+      "panel_score": 5,
+      "tissues": [
+        "eye",
+        "kidney",
+        "thymus"
+      ],
+      "n_drugs": 30,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.941209,
+      "de_diff": 0.0,
+      "is_drr": false,
+      "direction": "up_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 6,
+      "mouse_gene": "Serpina6",
+      "human_symbol_stored": "SERPINA6",
+      "human_gene_matched": "SERPINA6",
+      "panel_score": 5,
+      "tissues": [
+        "colon",
+        "thymus"
+      ],
+      "n_drugs": 8,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.281583,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 7,
+      "mouse_gene": "Tnnc1",
+      "human_symbol_stored": "TNNC1",
+      "human_gene_matched": "TNNC1",
+      "panel_score": 5,
+      "tissues": [
+        "gastrocnemius",
+        "skin"
+      ],
+      "n_drugs": 2,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.902105,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 8,
+      "mouse_gene": "Myh7",
+      "human_symbol_stored": "MYH7",
+      "human_gene_matched": "MYH7",
+      "panel_score": 5,
+      "tissues": [
+        "gastrocnemius",
+        "skin"
+      ],
+      "n_drugs": 1,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.58279,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 9,
+      "mouse_gene": "Ddit4",
+      "human_symbol_stored": "DDIT4",
+      "human_gene_matched": "DDIT4",
+      "panel_score": 5,
+      "tissues": [
+        "gastrocnemius"
+      ],
+      "n_drugs": 6,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.175676,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 10,
+      "mouse_gene": "H4c8",
+      "human_symbol_stored": "H4C8",
+      "human_gene_matched": null,
+      "panel_score": 4,
+      "tissues": [
+        "kidney",
+        "liver",
+        "skin",
+        "thymus"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": false,
+      "is_de": false,
+      "de_fdr": null,
+      "de_diff": null,
+      "is_drr": false,
+      "direction": null,
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 11,
+      "mouse_gene": "Retn",
+      "human_symbol_stored": "RETN",
+      "human_gene_matched": "RETN",
+      "panel_score": 4,
+      "tissues": [
+        "colon",
+        "gastrocnemius",
+        "lung"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.371639,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 12,
+      "mouse_gene": "NPAS2",
+      "human_symbol_stored": "NPAS2",
+      "human_gene_matched": "NPAS2",
+      "panel_score": 4,
+      "tissues": [
+        "gastrocnemius",
+        "liver",
+        "skin"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.969948,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 13,
+      "mouse_gene": "Myoz2",
+      "human_symbol_stored": "MYOZ2",
+      "human_gene_matched": "MYOZ2",
+      "panel_score": 4,
+      "tissues": [
+        "gastrocnemius",
+        "liver",
+        "thymus"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.463346,
+      "de_diff": 0.0,
+      "is_drr": false,
+      "direction": "up_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 14,
+      "mouse_gene": "Cfd",
+      "human_symbol_stored": "CFD",
+      "human_gene_matched": "CFD",
+      "panel_score": 4,
+      "tissues": [
+        "kidney",
+        "liver",
+        "lung"
+      ],
+      "n_drugs": 1,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 1.0,
+      "de_diff": 0.0,
+      "is_drr": false,
+      "direction": "up_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 15,
+      "mouse_gene": "Rpl36",
+      "human_symbol_stored": "RPL36",
+      "human_gene_matched": "RPL36",
+      "panel_score": 4,
+      "tissues": [
+        "liver",
+        "skin",
+        "thymus"
+      ],
+      "n_drugs": 1,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.544549,
+      "de_diff": -0.0001,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 16,
+      "mouse_gene": "GM24497",
+      "human_symbol_stored": "GM24497",
+      "human_gene_matched": null,
+      "panel_score": 4,
+      "tissues": [
+        "eye",
+        "gastrocnemius",
+        "thymus"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": false,
+      "is_de": false,
+      "de_fdr": null,
+      "de_diff": null,
+      "is_drr": false,
+      "direction": null,
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 17,
+      "mouse_gene": "PER2",
+      "human_symbol_stored": "PER2",
+      "human_gene_matched": "PER2",
+      "panel_score": 4,
+      "tissues": [
+        "eye",
+        "gastrocnemius",
+        "lung"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 1.0,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 18,
+      "mouse_gene": "Ms4a4c",
+      "human_symbol_stored": "MS4A4C",
+      "human_gene_matched": null,
+      "panel_score": 4,
+      "tissues": [
+        "liver",
+        "thymus"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": false,
+      "is_de": false,
+      "de_fdr": null,
+      "de_diff": null,
+      "is_drr": false,
+      "direction": null,
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 19,
+      "mouse_gene": "Snora70",
+      "human_symbol_stored": "SNORA70",
+      "human_gene_matched": null,
+      "panel_score": 4,
+      "tissues": [
+        "kidney",
+        "thymus"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": false,
+      "is_de": false,
+      "de_fdr": null,
+      "de_diff": null,
+      "is_drr": false,
+      "direction": null,
+      "concordant_with_mouse": null
+    },
+    {
+      "rank": 20,
+      "mouse_gene": "Lrrc14b",
+      "human_symbol_stored": "LRRC14B",
+      "human_gene_matched": "LRRC14B",
+      "panel_score": 4,
+      "tissues": [
+        "kidney",
+        "skin"
+      ],
+      "n_drugs": 0,
+      "detected_in_cfrna": true,
+      "is_de": false,
+      "de_fdr": 0.226806,
+      "de_diff": -0.0,
+      "is_drr": false,
+      "direction": "down_in_flight",
+      "concordant_with_mouse": null
+    }
+  ],
+  "enrichment": {
+    "universe_size": 14633,
+    "drr_in_universe": 389,
+    "panel_drr_overlap": 0,
+    "expected_overlap": 0.4,
+    "fold_enrichment": 0.0,
+    "hypergeometric_p": 1.0,
+    "permutation_p": 1.0,
+    "significant": false
+  },
+  "panel_classification": null,
+  "timestamp": "2026-03-30T07:36:24.227380"
+}

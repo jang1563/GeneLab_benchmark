@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig S4 — SHAP Cross-Method Agreement</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 10px; background: #fafafa; }
+  .panel-label { font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+  .axis text { font-size: 8px; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none; z-index: 100; line-height: 1.4;
+  }
+  .note { font-size: 8px; color: #888; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig S4 — SHAP Cross-Method Agreement & Gene-Gene Interactions</div>
+  <div class="figure-subtitle">Top-100 gene overlap, direction consistency, and interaction effects</div>
+  <div class="panels" id="panels"></div>
+  <div class="note">
+    A: Jaccard index and Spearman &rho; for top-100 SHAP genes between method pairs.
+    B: Pairwise Jaccard heatmaps per tissue (2 methods per tissue, top-2 by AUROC).
+    C: SHAP direction bias — fraction of top-100 genes upregulated (SHAP &gt; 0) vs downregulated in flight.
+    D: Top gene-gene interactions from TreeSHAP (XGBoost/RF only).
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tooltip = d3.select("#tooltip");
+const agreementData = {"liver": {"method_a": "svm_rbf", "method_b": "mlp", "jaccard_top100": 0.0204, "n_overlap_top100": 4, "spearman_rho": 0.0788, "spearman_p": 3.5e-05, "n_common_genes": 2751}, "gastrocnemius": {"method_a": "elasticnet_lr", "method_b": "pca_lr", "jaccard_top100": 0.2121, "n_overlap_top100": 35, "spearman_rho": 0.1994, "spearman_p": 0.0, "n_common_genes": 20957}, "kidney": {"method_a": "xgb", "method_b": "rf", "jaccard_top100": 0.0417, "n_overlap_top100": 8, "spearman_rho": 0.0808, "spearman_p": 0.0, "n_common_genes": 26027}, "thymus": {"method_a": "knn", "method_b": "pca_lr", "jaccard_top100": 0.005, "n_overlap_top100": 1, "spearman_rho": 0.0024, "spearman_p": 0.877124, "n_common_genes": 4062}, "eye": {"method_a": "pca_lr", "method_b": "xgb", "jaccard_top100": 0.0309, "n_overlap_top100": 6, "spearman_rho": 0.0575, "spearman_p": 0.0, "n_common_genes": 26994}, "skin": {"method_a": "elasticnet_lr", "method_b": "pca_lr", "jaccard_top100": 0.25, "n_overlap_top100": 40, "spearman_rho": 0.3058, "spearman_p": 0.0, "n_common_genes": 26788}, "lung": {"method_a": "elasticnet_lr", "method_b": "pca_lr", "jaccard_top100": 0.25, "n_overlap_top100": 40, "spearman_rho": 0.3867, "spearman_p": 0.0, "n_common_genes": 31697}, "colon": {"method_a": "pca_lr", "method_b": "xgb", "jaccard_top100": 0.0471, "n_overlap_top100": 9, "spearman_rho": 0.0812, "spearman_p": 0.0, "n_common_genes": 30455}};
+const directionData = {"colon_pca_lr": {"tissue": "colon", "method": "pca_lr", "n_positive_in_top100": 36, "n_negative_in_top100": 64, "top10_upregulated": [["Apoa4", 0.0169], ["Enpp7", 0.0159], ["Fabp6", 0.0145], ["Ighv7-1", 0.0137], ["Igkv4-62", 0.0123], ["ENSMUSG00000106630", 0.0118], ["ENSMUSG00000102364", 0.0114], ["Chit1", 0.0114], ["H2bc24", 0.0112], ["Apoa1", 0.0108]], "top10_downregulated": [["ENSMUSG00000094509", -0.0131], ["Gm23925", -0.0132], ["ENSMUSG00000094087", -0.0135], ["Amy2a5", -0.0137], ["Orm1", -0.0143], ["Igkv6-25", -0.0156], ["Snord3b1", -0.0162], ["Snord3b2", -0.0162], ["ENSMUSG00000098641", -0.0162], ["Snord3b3", -0.0162]]}, "colon_xgb": {"tissue": "colon", "method": "xgb", "n_positive_in_top100": 28, "n_negative_in_top100": 72, "top10_upregulated": [["Slc35a5", 0.0172], ["Fam13a", 0.0161], ["Gstt2", 0.0138], ["Dennd2b", 0.0123], ["ENSMUSG00000107020", 0.0122], ["Wee1", 0.0119], ["Gm20735", 0.0112], ["Ifitm10", 0.007], ["Tfe3", 0.0069], ["ENSMUSG00000086813", 0.0068]], "top10_downregulated": [["Abtb2", -0.0192], ["Ero1b", -0.0196], ["Elmo3", -0.0211], ["ENSMUSG00000085269", -0.023], ["ENSMUSG00000083284", -0.0288], ["Bco2", -0.0292], ["Rasl11a", -0.0316], ["Bpifc", -0.0334], ["Chit1", -0.0417], ["ENSMUSG00000106630", -0.0608]]}, "eye_pca_lr": {"tissue": "eye", "method": "pca_lr", "n_positive_in_top100": 41, "n_negative_in_top100": 59, "top10_upregulated": [["Cytip", 0.012], ["Gm14434", 0.0117], ["ENSMUSG00000116166", 0.0114], ["Apol9a", 0.0114], ["ENSMUSG00000108507", 0.0107], ["ENSMUSG00000083833", 0.0103], ["Sst", 0.0102], ["Krt16", 0.0099], ["Arhgap36", 0.0095], ["Cpn1", 0.0089]], "top10_downregulated": [["Lgsn", -0.0113], ["Mip", -0.0113], ["Crybb2", -0.0114], ["Crygb", -0.0117], ["Crygc", -0.0123], ["Cryba1", -0.0125], ["Crygs", -0.0128], ["ENSMUSG00000099519", -0.0143], ["Cryaa", -0.0144], ["Gm22068", -0.016]]}, "eye_xgb": {"tissue": "eye", "method": "xgb", "n_positive_in_top100": 51, "n_negative_in_top100": 49, "top10_upregulated": [["Sst", 0.3883], ["Fam107b", 0.1381], ["1810055G02Rik", 0.1102], ["ENSMUSG00000097699", 0.0627], ["Kbtbd3", 0.0602], ["Snai2", 0.0539], ["Gm3200", 0.0467], ["Mpp4", 0.0401], ["Nkg7", 0.0358], ["Ccng1", 0.0348]], "top10_downregulated": [["ENSMUSG00000081602", -0.0402], ["ENSMUSG00000086256", -0.0422], ["1700067K01Rik", -0.0453], ["Gm5620", -0.0455], ["Gabra5", -0.0461], ["Bola2", -0.0525], ["Upk3b", -0.0604], ["ENSMUSG00000107813", -0.0611], ["ENSMUSG00000117942", -0.1258], ["Pappa2", -0.3078]]}, "gastrocnemius_elasticnet_lr": {"tissue": "gastrocnemius", "method": "elasticnet_lr", "n_positive_in_top100": 49, "n_negative_in_top100": 51, "top10_upregulated": [["Sox4", 0.0456], ["Mettl21e", 0.0388], ["Gm4521", 0.0302], ["ENSMUSG00000074800", 0.0265], ["ENSMUSG00000083240", 0.0263], ["ENSMUSG00000081824", 0.0246], ["Mpp3", 0.0238], ["Pnmt", 0.0238], ["Gm50045", 0.0191], ["Grem2", 0.0191]], "top10_downregulated": [["Gm9320", -0.0171], ["Bdh1", -0.019], ["Ciart", -0.0202], ["A730036I17Rik", -0.0206], ["E230016K23Rik", -0.0212], ["ENSMUSG00000106666", -0.0217], ["Per2", -0.03], ["Prrt2", -0.0334], ["ENSMUSG00000120915", -0.0337], ["Tmsb15l", -0.0456]]}, "gastrocnemius_pca_lr": {"tissue": "gastrocnemius", "method": "pca_lr", "n_positive_in_top100": 42, "n_negative_in_top100": 58, "top10_upregulated": [["ENSMUSG00000100131", 0.0144], ["ENSMUSG00000083061", 0.0107], ["ENSMUSG00000083240", 0.0107], ["Ndufb4b", 0.0102], ["Gm44505", 0.0094], ["Kcns1", 0.0093], ["ENSMUSG00000079224", 0.0093], ["Ltf", 0.0091], ["Gm24497", 0.0091], ["ENSMUSG00000059237", 0.0091]], "top10_downregulated": [["Myl2", -0.0095], ["3110040M04Rik", -0.0098], ["Gm9320", -0.0103], ["Myl3", -0.0104], ["ENSMUSG00000094365", -0.0107], ["Tmsb15l", -0.0108], ["ENSMUSG00000083411", -0.0108], ["ENSMUSG00000107478", -0.0117], ["Rsc1a1", -0.0132], ["Zfp968", -0.0146]]}, "kidney_rf": {"tissue": "kidney", "method": "rf", "n_positive_in_top100": 24, "n_negative_in_top100": 76, "top10_upregulated": [["Trim25", 0.0016], ["Wt1", 0.0013], ["E130308A19Rik", 0.0013], ["Anxa11", 0.0012], ["Tdrd5", 0.0011], ["Mrpl55", 0.0011], ["Ccdc198", 0.0011], ["Gata6", 0.001], ["Polr2a", 0.001], ["ENSMUSG00000110400", 0.001]], "top10_downregulated": [["Wdr72", -0.0012], ["Mgme1", -0.0013], ["Cspg4", -0.0013], ["Tcaf2", -0.0014], ["Atp5mg", -0.0014], ["Tmem229a", -0.0014], ["Sptlc2", -0.0014], ["Pcdhb7", -0.0016], ["Lgals4", -0.0017], ["Adam1a", -0.002]]}, "kidney_xgb": {"tissue": "kidney", "method": "xgb", "n_positive_in_top100": 45, "n_negative_in_top100": 55, "top10_upregulated": [["Trim25", 0.1943], ["D630039A03Rik", 0.108], ["ENSMUSG00000120875", 0.0879], ["Rnf181", 0.0561], ["Slc10a1", 0.0478], ["Dnajb11", 0.0442], ["Uxt", 0.0402], ["Fam221a", 0.039], ["Gm33318", 0.0387], ["Pdcd6ip", 0.0336]], "top10_downregulated": [["Batf3", -0.0371], ["Mpig6b", -0.0372], ["Col4a3", -0.0394], ["Akr1c12", -0.0533], ["1700054A03Rik", -0.0548], ["ENSMUSG00000120748", -0.0719], ["Ighv7-1", -0.075], ["Mboat1", -0.0753], ["Lrp2", -0.0875], ["Sqle", -0.1116]]}, "liver_mlp": {"tissue": "liver", "method": "mlp", "n_positive_in_top100": 83, "n_negative_in_top100": 17, "top10_upregulated": [["Cyp3a44", 0.0058], ["Lockd", 0.005], ["ENSMUSG00000102430", 0.0048], ["ENSMUSG00000087150", 0.0046], ["Gm45351", 0.0045], ["Dcdc2b", 0.0045], ["ENSMUSG00000048916", 0.0045], ["Gm18939", 0.0044], ["Ulk4", 0.0038], ["Tmem38a", 0.0037]], "top10_downregulated": [["ENSMUSG00000109576", -0.001], ["Vcan", -0.001], ["ENSMUSG00000107118", -0.0011], ["ENSMUSG00000109498", -0.0011], ["Gm14288", -0.0011], ["ENSMUSG00000095547", -0.0012], ["Prex2", -0.0013], ["ENSMUSG00000104291", -0.0013], ["ENSMUSG00000121608", -0.0014], ["ENSMUSG00000103427", -0.0018]]}, "liver_svm_rbf": {"tissue": "liver", "method": "svm_rbf", "n_positive_in_top100": 98, "n_negative_in_top100": 2, "top10_upregulated": [["2310069G16Rik", 0.0043], ["ENSMUSG00000073835", 0.0023], ["Npas2", 0.0021], ["Gm23946", 0.002], ["Phospho1", 0.0019], ["ENSMUSG00000059237", 0.0018], ["Dbp", 0.0017], ["ENSMUSG00000108884", 0.0016], ["ENSMUSG00000086447", 0.0016], ["ENSMUSG00000101724", 0.0016]], "top10_downregulated": [["ENSMUSG00000101878", -0.0001], ["Arfip1", -0.0001], ["ENSMUSG00002076650", -0.0001], ["ENSMUSG00000090582", -0.0001], ["Gm6192", -0.0001], ["Trp63", -0.0002], ["ENSMUSG00000094509", -0.0002], ["3930402G23Rik", -0.0002], ["ENSMUSG00000102523", -0.0002], ["Gm24494", -0.0003]]}, "lung_elasticnet_lr": {"tissue": "lung", "method": "elasticnet_lr", "n_positive_in_top100": 45, "n_negative_in_top100": 55, "top10_upregulated": [["Cyp26b1", 0.0575], ["Snx31", 0.0402], ["ENSMUSG00000108852", 0.0349], ["Gm4798", 0.0346], ["ENSMUSG00000117878", 0.0271], ["Cyp3a57", 0.0262], ["ENSMUSG00000085329", 0.0237], ["Ighv1-77", 0.0223], ["ENSMUSG00000112018", 0.022], ["ENSMUSG00000103215", 0.0208]], "top10_downregulated": [["Per2", -0.0232], ["ENSMUSG00000104217", -0.0236], ["Gm4750", -0.0243], ["Cys1", -0.0249], ["ENSMUSG00000097340", -0.0249], ["Ngp", -0.025], ["Camp", -0.0252], ["ENSMUSG00000090625", -0.0261], ["Gm30551", -0.0279], ["ENSMUSG00000097554", -0.0343]]}, "lung_pca_lr": {"tissue": "lung", "method": "pca_lr", "n_positive_in_top100": 47, "n_negative_in_top100": 53, "top10_upregulated": [["Ighv1-77", 0.013], ["ENSMUSG00000075015", 0.0127], ["Igkv5-45", 0.0122], ["ENSMUSG00000068964", 0.0113], ["ENSMUSG00000095186", 0.0109], ["Ighv1-62-2", 0.0105], ["ENSMUSG00000097312", 0.0104], ["Cyp26b1", 0.0102], ["ENSMUSG00000095519", 0.0101], ["ENSMUSG00000075014", 0.0098]], "top10_downregulated": [["ENSMUSG00000084858", -0.0096], ["Nppa", -0.0098], ["Retn", -0.0099], ["Camp", -0.0099], ["ENSMUSG00000079224", -0.01], ["ENSMUSG00000055228", -0.01], ["ENSMUSG00000097554", -0.0108], ["ENSMUSG00000101309", -0.0114], ["ENSMUSG00000104217", -0.0116], ["Mup22", -0.0118]]}, "skin_elasticnet_lr": {"tissue": "skin", "method": "elasticnet_lr", "n_positive_in_top100": 51, "n_negative_in_top100": 49, "top10_upregulated": [["Mrgprg", 0.1103], ["Nkx1-2", 0.066], ["ENSMUSG00000086320", 0.0658], ["ENSMUSG00000108782", 0.061], ["Aadacl4fm4", 0.0609], ["Gucy2f", 0.0602], ["Or2v2", 0.0516], ["ENSMUSG00000108441", 0.0478], ["ENSMUSG00000095279", 0.0432], ["Il20", 0.0357]], "top10_downregulated": [["Mup16", -0.0435], ["Mup15", -0.0494], ["Mup11", -0.0503], ["Mup3", -0.0516], ["Gm35986", -0.0535], ["Gm29681", -0.0578], ["Mup7", -0.0614], ["Mup22", -0.0914], ["Mup14", -0.0922], ["Mup10", -0.1121]]}, "skin_pca_lr": {"tissue": "skin", "method": "pca_lr", "n_positive_in_top100": 34, "n_negative_in_top100": 66, "top10_upregulated": [["Mrgprg", 0.0308], ["Gm7298", 0.0292], ["Il20", 0.0218], ["ENSMUSG00000108441", 0.0216], ["Nkx1-2", 0.021], ["ENSMUSG00000108782", 0.0192], ["Gm6093", 0.0185], ["Psg29", 0.0178], ["Etnppl", 0.0177], ["ENSMUSG00000099871", 0.0174]], "top10_downregulated": [["Wfdc12", -0.0226], ["Mup19", -0.025], ["Mup11", -0.0257], ["Mup3", -0.0264], ["Mup7", -0.0272], ["Mup16", -0.0274], ["Mup22", -0.0293], ["Mup15", -0.0326], ["Mup14", -0.0336], ["Mup10", -0.0345]]}, "thymus_knn": {"tissue": "thymus", "method": "knn", "n_positive_in_top100": 53, "n_negative_in_top100": 47, "top10_upregulated": [["Ppp1r3d", 0.011], ["ENSMUSG00000111052", 0.0083], ["Pctp", 0.0072], ["Rmrp", 0.006], ["Ephx2", 0.0049], ["Cacna1h", 0.0043], ["ENSMUSG00000064317", 0.0043], ["Scg3", 0.0042], ["Mc2r", 0.0042], ["ENSMUSG00000109206", 0.0041]], "top10_downregulated": [["Sec14l2", -0.0028], ["Naip6", -0.0029], ["Treml1", -0.003], ["Gm23442", -0.0031], ["Hoxd8", -0.0032], ["Acadm", -0.0034], ["ENSMUSG00000104181", -0.0034], ["Fam174b", -0.0034], ["Col6a6", -0.0034], ["Nrg4", -0.0039]]}, "thymus_pca_lr": {"tissue": "thymus", "method": "pca_lr", "n_positive_in_top100": 48, "n_negative_in_top100": 52, "top10_upregulated": [["Zfp968", 0.0622], ["Lep", 0.0569], ["Nnat", 0.0502], ["ENSMUSG00000099871", 0.0486], ["Ugt1a9", 0.0481], ["ENSMUSG00002074947", 0.0465], ["Aqp8", 0.046], ["Aldob", 0.0436], ["Cyp3a11", 0.0436], ["Apoc3", 0.0432]], "top10_downregulated": [["Xirp1", -0.0433], ["ENSMUSG00000076138", -0.0436], ["Gm8325", -0.0442], ["Hrc", -0.0467], ["Sec14l3", -0.0473], ["Scgb1a1", -0.0507], ["Myh6", -0.0536], ["Kcnj3", -0.0539], ["Mylk4", -0.0543], ["Gm15500", -0.0678]]}};
+const crossMethodData = {"liver": {"methods": ["MLP", "SVM-RBF"], "jaccard": [[1.0, 0.02], [0.02, 1.0]]}, "gastrocnemius": {"methods": ["ElasticNet-LR", "PCA-LR"], "jaccard": [[1.0, 0.212], [0.212, 1.0]]}, "kidney": {"methods": ["Random Forest", "XGBoost"], "jaccard": [[1.0, 0.042], [0.042, 1.0]]}, "thymus": {"methods": ["kNN", "PCA-LR"], "jaccard": [[1.0, 0.005], [0.005, 1.0]]}, "eye": {"methods": ["PCA-LR", "XGBoost"], "jaccard": [[1.0, 0.031], [0.031, 1.0]]}, "skin": {"methods": ["ElasticNet-LR", "PCA-LR"], "jaccard": [[1.0, 0.25], [0.25, 1.0]]}, "lung": {"methods": ["ElasticNet-LR", "PCA-LR"], "jaccard": [[1.0, 0.25], [0.25, 1.0]]}, "colon": {"methods": ["PCA-LR", "XGBoost"], "jaccard": [[1.0, 0.047], [0.047, 1.0]]}};
+const interactionFiles = [{"tissue": "Colon", "method": "xgb", "top_20_interactions": [{"gene_a": "Chit1", "gene_b": "ENSMUSG00000106630", "interaction_strength": 0.006097}, {"gene_a": "Mogat1", "gene_b": "Nr0b2", "interaction_strength": 0.00541}, {"gene_a": "Mbl2", "gene_b": "ENSMUSG00000058447", "interaction_strength": 0.005017}, {"gene_a": "Pnliprp2", "gene_b": "Slc6a13", "interaction_strength": 0.004781}, {"gene_a": "Thrsp", "gene_b": "Cyp2b13", "interaction_strength": 0.00458}, {"gene_a": "Hephl1", "gene_b": "Myh13", "interaction_strength": 0.004512}, {"gene_a": "ENSMUSG00000024437", "gene_b": "ENSMUSG00000081375", "interaction_strength": 0.004463}, {"gene_a": "G0s2", "gene_b": "Rdh7", "interaction_strength": 0.004435}, {"gene_a": "Dapl1", "gene_b": "Ctrb1", "interaction_strength": 0.004402}, {"gene_a": "Fabp2", "gene_b": "Gm18066", "interaction_strength": 0.004356}, {"gene_a": "Nts", "gene_b": "Ucp3", "interaction_strength": 0.00423}, {"gene_a": "ENSMUSG00000057195", "gene_b": "ENSMUSG00000089525", "interaction_strength": 0.004216}, {"gene_a": "Folh1", "gene_b": "ENSMUSG00000110405", "interaction_strength": 0.004029}, {"gene_a": "Fbln1", "gene_b": "Cyp2c38", "interaction_strength": 0.004024}, {"gene_a": "Clca1", "gene_b": "Gm15644", "interaction_strength": 0.004016}, {"gene_a": "Thrsp", "gene_b": "Vsig4", "interaction_strength": 0.003983}, {"gene_a": "Gm12978", "gene_b": "ENSMUSG00000116686", "interaction_strength": 0.003977}, {"gene_a": "Vgf", "gene_b": "ENSMUSG00000106630", "interaction_strength": 0.003888}, {"gene_a": "Cyp2c38", "gene_b": "Dmrt2", "interaction_strength": 0.003859}, {"gene_a": "Vpreb3", "gene_b": "Gm18066", "interaction_strength": 0.003821}], "top_20_main": {"Thrsp": 0.176164, "Gm18066": 0.165601, "ENSMUSG00000106630": 0.164672, "Pnliprp2": 0.15192, "ENSMUSG00000105958": 0.131933, "Chit1": 0.097359, "Slc4a1": 0.092975, "Adamts4": 0.091877, "Cyp2c38": 0.091045, "Gm15644": 0.087535, "ENSMUSG00000089525": 0.067483, "Syce1": 0.064247, "Serpina9": 0.06072, "Hapln4": 0.058712, "Gm12978": 0.055066, "Snord3b3": 0.054853, "Myh13": 0.053788, "Cyp2b13": 0.053259, "ENSMUSG00000110405": 0.051514, "Ucp3": 0.048058}}, {"tissue": "Eye", "method": "xgb", "top_20_interactions": [{"gene_a": "Gm22422", "gene_b": "Col6a5", "interaction_strength": 0.011422}, {"gene_a": "Ehf", "gene_b": "Bpifa6", "interaction_strength": 0.011043}, {"gene_a": "Neb", "gene_b": "Gm25099", "interaction_strength": 0.008173}, {"gene_a": "Nectin4", "gene_b": "Bpifa2", "interaction_strength": 0.006896}, {"gene_a": "Adamts13", "gene_b": "ENSMUSG00000104217", "interaction_strength": 0.006645}, {"gene_a": "Rbpjl", "gene_b": "ENSMUSG00000115022", "interaction_strength": 0.005997}, {"gene_a": "Padi3", "gene_b": "Gm2007", "interaction_strength": 0.005717}, {"gene_a": "Chrna1", "gene_b": "ENSMUSG00000068964", "interaction_strength": 0.005512}, {"gene_a": "Cryba1", "gene_b": "ENSMUSG00000068964", "interaction_strength": 0.005454}, {"gene_a": "Gabrp", "gene_b": "ENSMUSG00000068964", "interaction_strength": 0.005399}, {"gene_a": "Sypl2", "gene_b": "ENSMUSG00000068964", "interaction_strength": 0.005374}, {"gene_a": "Gpa33", "gene_b": "Ndc80", "interaction_strength": 0.005146}, {"gene_a": "Krt71", "gene_b": "ENSMUSG00000083833", "interaction_strength": 0.005075}, {"gene_a": "Ehf", "gene_b": "Eno3", "interaction_strength": 0.005015}, {"gene_a": "ENSMUSG00000068964", "gene_b": "Lrrc32", "interaction_strength": 0.004984}, {"gene_a": "Elf3", "gene_b": "Bpifa2", "interaction_strength": 0.004893}, {"gene_a": "Adamts13", "gene_b": "Krt71", "interaction_strength": 0.004744}, {"gene_a": "H19", "gene_b": "Pinlyp", "interaction_strength": 0.004598}, {"gene_a": "Gm2007", "gene_b": "Rnu1a1", "interaction_strength": 0.004282}, {"gene_a": "Rbpjl", "gene_b": "Gm25679", "interaction_strength": 0.004228}], "top_20_main": {"ENSMUSG00000068964": 0.346053, "Gm2007": 0.139155, "Bpifa2": 0.122696, "Rbpjl": 0.120188, "Sftpd": 0.113927, "D7Ertd443e": 0.089268, "Adamts13": 0.085838, "ENSMUSG00000117465": 0.082294, "Col6a5": 0.080381, "ENSMUSG00000115022": 0.078551, "Dtl": 0.078263, "Erich2": 0.075971, "Scgb2b2": 0.074099, "Pinlyp": 0.072903, "ENSMUSG00000095279": 0.070385, "Ehf": 0.069, "Lgals3": 0.068057, "Srl": 0.066619, "ENSMUSG00000118135": 0.062235, "Ndc80": 0.061431}}, {"tissue": "Kidney", "method": "rf", "top_20_interactions": [{"gene_a": "Rbpjl", "gene_b": "ENSMUSG00000105053", "interaction_strength": 0.000544}, {"gene_a": "Gm12435", "gene_b": "ENSMUSG00000107928", "interaction_strength": 0.000531}, {"gene_a": "C1rb", "gene_b": "ENSMUSG00000113691", "interaction_strength": 0.000516}, {"gene_a": "ENSMUSG00000105053", "gene_b": "Actc1dt", "interaction_strength": 0.000511}, {"gene_a": "Tmem121", "gene_b": "Tmem238l", "interaction_strength": 0.000468}, {"gene_a": "Mybpc3", "gene_b": "Ttn", "interaction_strength": 0.000463}, {"gene_a": "Vmn2r97", "gene_b": "ENSMUSG00000109244", "interaction_strength": 0.000459}, {"gene_a": "ENSMUSG00000097520", "gene_b": "Gm23971", "interaction_strength": 0.000458}, {"gene_a": "Snord89", "gene_b": "Gm24494", "interaction_strength": 0.000456}, {"gene_a": "Itpka", "gene_b": "ENSMUSG00000110569", "interaction_strength": 0.000454}, {"gene_a": "Snora43", "gene_b": "ENSMUSG00000082145", "interaction_strength": 0.00045}, {"gene_a": "ENSMUSG00000089940", "gene_b": "ENSMUSG00000094935", "interaction_strength": 0.000444}, {"gene_a": "ENSMUSG00000085471", "gene_b": "ENSMUSG00000105053", "interaction_strength": 0.000443}, {"gene_a": "Hmgcr", "gene_b": "Snora17", "interaction_strength": 0.000441}, {"gene_a": "Ifitm7", "gene_b": "ENSMUSG00000105053", "interaction_strength": 0.000441}, {"gene_a": "Gja8", "gene_b": "Gm11454", "interaction_strength": 0.000426}, {"gene_a": "ENSMUSG00000121100", "gene_b": "Gm11454", "interaction_strength": 0.000424}, {"gene_a": "ENSMUSG00000091471", "gene_b": "Gm24494", "interaction_strength": 0.000422}, {"gene_a": "Eef1a2", "gene_b": "Csmd2", "interaction_strength": 0.000419}, {"gene_a": "Rdh7", "gene_b": "ENSMUSG00000077549", "interaction_strength": 0.000406}], "top_20_main": {"ENSMUSG00000105053": 0.008897, "Gm11454": 0.006582, "Cyp11b1": 0.006544, "Iglv1": 0.005666, "Nat8l": 0.005661, "Bmal1": 0.004847, "ENSMUSG00000108092": 0.004604, "Nat8f5": 0.004281, "ENSMUSG00000083287": 0.004107, "Xlr3b": 0.003875, "Rbpjl": 0.003575, "Ifitm7": 0.003484, "ENSMUSG00000085781": 0.00345, "Cyp2d12": 0.003318, "ENSMUSG00000104375": 0.003306, "ENSMUSG00000091471": 0.003197, "Nefm": 0.00318, "Fads2b": 0.003159, "ENSMUSG00000107755": 0.003148, "ENSMUSG00000121610": 0.003119}}, {"tissue": "Kidney", "method": "xgb", "top_20_interactions": [{"gene_a": "Tmprss11g", "gene_b": "ENSMUSG00000105053", "interaction_strength": 0.023246}, {"gene_a": "Fosb", "gene_b": "ENSMUSG00000092560", "interaction_strength": 0.017925}, {"gene_a": "Nat8f5", "gene_b": "ENSMUSG00000099397", "interaction_strength": 0.016146}, {"gene_a": "Nat8l", "gene_b": "Tmprss11g", "interaction_strength": 0.015815}, {"gene_a": "Slc22a22", "gene_b": "Gm3095", "interaction_strength": 0.014053}, {"gene_a": "Fosb", "gene_b": "ENSMUSG00000097108", "interaction_strength": 0.011306}, {"gene_a": "4933407L21Rik", "gene_b": "ENSMUSG00000118086", "interaction_strength": 0.010829}, {"gene_a": "ENSMUSG00000064338", "gene_b": "ENSMUSG00000105053", "interaction_strength": 0.010798}, {"gene_a": "Iglv1", "gene_b": "Gm10432", "interaction_strength": 0.010163}, {"gene_a": "Nat8l", "gene_b": "ENSMUSG00000118434", "interaction_strength": 0.0101}, {"gene_a": "Slc18a2", "gene_b": "Apon", "interaction_strength": 0.009821}, {"gene_a": "ENSMUSG00000112667", "gene_b": "Has1", "interaction_strength": 0.009378}, {"gene_a": "Xirp2|Gm1322", "gene_b": "Gm10787", "interaction_strength": 0.009334}, {"gene_a": "ENSMUSG00000108075", "gene_b": "D130079A08Rik", "interaction_strength": 0.009324}, {"gene_a": "ENSMUSG00000097108", "gene_b": "ENSMUSG00000107755", "interaction_strength": 0.009222}, {"gene_a": "Mybpc1", "gene_b": "Fads2b", "interaction_strength": 0.008876}, {"gene_a": "ENSMUSG00000092560", "gene_b": "ENSMUSG00000115431", "interaction_strength": 0.008854}, {"gene_a": "Nat8l", "gene_b": "1700021N21Rik", "interaction_strength": 0.008753}, {"gene_a": "ENSMUSG00000108092", "gene_b": "ENSMUSG00000108118", "interaction_strength": 0.008398}, {"gene_a": "Star", "gene_b": "ENSMUSG00000099397", "interaction_strength": 0.008077}], "top_20_main": {"Bmal1": 0.257082, "Tmprss11g": 0.249144, "ENSMUSG00000090996": 0.1935, "ENSMUSG00000105053": 0.160929, "ENSMUSG00000117695": 0.156065, "4933407L21Rik": 0.152522, "Nat8l": 0.140295, "Slc18a2": 0.136626, "Iglv1": 0.136417, "Cyp2c68": 0.116079, "ENSMUSG00000118434": 0.101067, "ENSMUSG00000099397": 0.09792, "ENSMUSG00000114102": 0.096542, "D130079A08Rik": 0.090239, "Fosb": 0.085781, "ENSMUSG00000083287": 0.077453, "Vmn2r97": 0.076212, "ENSMUSG00000083424": 0.073341, "Nat8f5": 0.068969, "ENSMUSG00000094935": 0.068751}}];
+const tissueLabels = {"liver": "Liver", "gastrocnemius": "Gastro", "kidney": "Kidney", "thymus": "Thymus", "eye": "Eye", "skin": "Skin", "lung": "Lung", "colon": "Colon"};
+
+// --- Panel A: Method Agreement Summary ---
+(() => {
+  const panel = d3.select("#panels").append("div").attr("class", "panel");
+  panel.append("div").attr("class", "panel-label").text("A. Cross-Method Agreement (Jaccard & Spearman)");
+
+  const tissues = Object.keys(agreementData);
+  const margin = {top: 10, right: 20, bottom: 45, left: 80};
+  const barH = 22;
+  const height = tissues.length * barH * 2 + 10;
+  const width = 400;
+
+  const svg = panel.append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const xJac = d3.scaleLinear().domain([0, 0.5]).range([0, width/2 - 10]);
+  const xRho = d3.scaleLinear().domain([0, 0.5]).range([0, width/2 - 10]);
+
+  tissues.forEach((tissue, i) => {
+    const ag = agreementData[tissue];
+    const tLabel = tissueLabels[tissue] || tissue;
+    const y = i * barH * 2;
+
+    // Tissue label
+    svg.append("text").attr("x", -5).attr("y", y + barH).attr("text-anchor", "end")
+      .attr("font-size", "8px").attr("dominant-baseline", "middle")
+      .text(`${tLabel} (${ag.method_a} vs ${ag.method_b})`);
+
+    // Jaccard bar
+    svg.append("rect").attr("x", 0).attr("y", y).attr("width", xJac(ag.jaccard_top100))
+      .attr("height", barH - 2).attr("fill", OI.blue).attr("opacity", 0.7).attr("rx", 2);
+    svg.append("text").attr("x", xJac(ag.jaccard_top100) + 3).attr("y", y + barH/2)
+      .attr("font-size", "7px").attr("dominant-baseline", "middle")
+      .text(`J=${ag.jaccard_top100.toFixed(2)} (${ag.n_overlap_top100} genes)`);
+
+    // Spearman bar
+    const rhoVal = Math.abs(ag.spearman_rho);
+    svg.append("rect").attr("x", width/2 + 5).attr("y", y).attr("width", xRho(rhoVal))
+      .attr("height", barH - 2).attr("fill", OI.orange).attr("opacity", 0.7).attr("rx", 2);
+    svg.append("text").attr("x", width/2 + 5 + xRho(rhoVal) + 3).attr("y", y + barH/2)
+      .attr("font-size", "7px").attr("dominant-baseline", "middle")
+      .text(`\u03C1=${ag.spearman_rho.toFixed(3)}`);
+  });
+
+  // Column headers
+  svg.append("text").attr("x", width/4).attr("y", -2).attr("text-anchor", "middle")
+    .attr("font-size", "8px").attr("font-weight", "bold").text("Jaccard (top-100)");
+  svg.append("text").attr("x", width*3/4).attr("y", -2).attr("text-anchor", "middle")
+    .attr("font-size", "8px").attr("font-weight", "bold").text("Spearman \u03C1 (all genes)");
+})();
+
+// --- Panel B: Jaccard heatmaps per tissue (only tissues with 2 methods) ---
+(() => {
+  const panel = d3.select("#panels").append("div").attr("class", "panel");
+  panel.append("div").attr("class", "panel-label").text("B. Method Pair Jaccard Heatmaps");
+
+  const tissues = Object.keys(crossMethodData);
+  const cellS = 35;
+  const margin = {top: 5, right: 5, bottom: 40, left: 55};
+
+  tissues.forEach((tissue, tidx) => {
+    const td = crossMethodData[tissue];
+    const methods = td.methods;
+    const tLabel = tissueLabels[tissue] || tissue;
+
+    panel.append("div").style("font-size", "9px").style("font-weight", "bold")
+      .style("margin-top", tidx > 0 ? "8px" : "0").text(tLabel);
+
+    const width = methods.length * cellS;
+    const height = methods.length * cellS;
+
+    const svg = panel.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const x = d3.scaleBand().domain(methods).range([0, width]).padding(0.05);
+    const y = d3.scaleBand().domain(methods).range([0, height]).padding(0.05);
+    const color = d3.scaleSequential(d3.interpolateBlues).domain([0, 1]);
+
+    methods.forEach((ma, i) => {
+      methods.forEach((mb, j) => {
+        const val = td.jaccard[i][j];
+        svg.append("rect")
+          .attr("x", x(mb)).attr("y", y(ma))
+          .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+          .attr("fill", i === j ? "#f0f0f0" : color(val))
+          .attr("stroke", "#eee").attr("rx", 2)
+          .on("mouseover", function(event) {
+            tooltip.style("display", "block")
+              .html(`<b>${ma} vs ${mb}</b><br>Jaccard=${val}`);
+          })
+          .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+          })
+          .on("mouseout", () => tooltip.style("display", "none"));
+
+        if (i !== j) {
+          svg.append("text")
+            .attr("x", x(mb) + x.bandwidth()/2).attr("y", y(ma) + y.bandwidth()/2 + 3)
+            .attr("text-anchor", "middle").attr("font-size", "7px")
+            .attr("fill", val > 0.5 ? "#fff" : "#333")
+            .text(val.toFixed(2));
+        }
+      });
+    });
+
+    svg.append("g").attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickSize(0))
+      .selectAll("text").attr("transform", "rotate(-30)").style("text-anchor", "end").style("font-size", "7px");
+    svg.append("g").call(d3.axisLeft(y).tickSize(0))
+      .selectAll("text").style("font-size", "7px");
+  });
+})();
+
+// --- Panel C: SHAP direction bias ---
+(() => {
+  const panel = d3.select("#panels").append("div").attr("class", "panel");
+  panel.append("div").attr("class", "panel-label").text("C. SHAP Direction Bias (Top-100 Genes)");
+
+  const entries = Object.entries(directionData).map(([key, val]) => ({
+    label: `${(tissueLabels[val.tissue] || val.tissue)} (${val.method})`,
+    tissue: val.tissue,
+    method: val.method,
+    n_up: val.n_positive_in_top100,
+    n_down: val.n_negative_in_top100,
+    frac_up: val.n_positive_in_top100 / 100
+  }));
+  entries.sort((a, b) => b.frac_up - a.frac_up);
+
+  const margin = {top: 10, right: 10, bottom: 30, left: 120};
+  const barH = 14;
+  const width = 350;
+  const height = entries.length * barH;
+
+  const svg = panel.append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const xScale = d3.scaleLinear().domain([0, 100]).range([0, width]);
+  const yBand = d3.scaleBand().domain(entries.map(e => e.label)).range([0, height]).padding(0.1);
+
+  entries.forEach(e => {
+    // Up bar (positive SHAP = upregulated in FLT)
+    svg.append("rect")
+      .attr("x", 0).attr("y", yBand(e.label))
+      .attr("width", xScale(e.n_up)).attr("height", yBand.bandwidth())
+      .attr("fill", OI.vermilion).attr("opacity", 0.7);
+
+    // Down bar
+    svg.append("rect")
+      .attr("x", xScale(e.n_up)).attr("y", yBand(e.label))
+      .attr("width", xScale(e.n_down)).attr("height", yBand.bandwidth())
+      .attr("fill", OI.blue).attr("opacity", 0.7);
+
+    // Count labels
+    svg.append("text")
+      .attr("x", xScale(e.n_up / 2)).attr("y", yBand(e.label) + yBand.bandwidth()/2 + 3)
+      .attr("text-anchor", "middle").attr("font-size", "6px").attr("fill", "#fff")
+      .text(e.n_up > 15 ? e.n_up : "");
+    svg.append("text")
+      .attr("x", xScale(e.n_up + e.n_down / 2)).attr("y", yBand(e.label) + yBand.bandwidth()/2 + 3)
+      .attr("text-anchor", "middle").attr("font-size", "6px").attr("fill", "#fff")
+      .text(e.n_down > 15 ? e.n_down : "");
+  });
+
+  svg.append("g").call(d3.axisLeft(yBand).tickSize(0))
+    .selectAll("text").style("font-size", "7px");
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(xScale).ticks(5))
+    .selectAll("text").style("font-size", "7px");
+
+  // Legend
+  svg.append("rect").attr("x", width - 100).attr("y", -8).attr("width", 8).attr("height", 8).attr("fill", OI.vermilion).attr("opacity", 0.7);
+  svg.append("text").attr("x", width - 88).attr("y", -1).attr("font-size", "7px").text("Up in FLT");
+  svg.append("rect").attr("x", width - 45).attr("y", -8).attr("width", 8).attr("height", 8).attr("fill", OI.blue).attr("opacity", 0.7);
+  svg.append("text").attr("x", width - 33).attr("y", -1).attr("font-size", "7px").text("Down");
+})();
+
+// --- Panel D: Gene-gene interactions (TreeSHAP) ---
+(() => {
+  const panel = d3.select("#panels").append("div").attr("class", "panel");
+  panel.append("div").attr("class", "panel-label").text("D. Top Gene-Gene Interactions (TreeSHAP)");
+
+  if (interactionFiles.length === 0) {
+    panel.append("div").style("font-size", "9px").style("color", "#999")
+      .text("No interaction data available.");
+    return;
+  }
+
+  interactionFiles.forEach((ifile, fidx) => {
+    panel.append("div").style("font-size", "9px").style("font-weight", "bold")
+      .style("margin-top", fidx > 0 ? "10px" : "0")
+      .text(`${ifile.tissue} — ${ifile.method.toUpperCase()}`);
+
+    const top10 = ifile.top_20_interactions.slice(0, 10);
+    const margin = {top: 5, right: 10, bottom: 25, left: 120};
+    const barH = 14;
+    const width = 300;
+    const height = top10.length * barH;
+
+    const svg = panel.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const xMax = d3.max(top10, d => d.interaction_strength) * 1.1;
+    const xScale = d3.scaleLinear().domain([0, xMax]).range([0, width]);
+    const yBand = d3.scaleBand()
+      .domain(top10.map(d => `${d.gene_a} \u00D7 ${d.gene_b}`))
+      .range([0, height]).padding(0.1);
+
+    top10.forEach(d => {
+      const label = `${d.gene_a} \u00D7 ${d.gene_b}`;
+      svg.append("rect")
+        .attr("x", 0).attr("y", yBand(label))
+        .attr("width", xScale(d.interaction_strength)).attr("height", yBand.bandwidth())
+        .attr("fill", OI.green).attr("opacity", 0.7).attr("rx", 1)
+        .on("mouseover", function(event) {
+          tooltip.style("display", "block")
+            .html(`<b>${d.gene_a} \u00D7 ${d.gene_b}</b><br>Interaction: ${d.interaction_strength.toFixed(4)}`);
+        })
+        .on("mousemove", function(event) {
+          tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+        })
+        .on("mouseout", () => tooltip.style("display", "none"));
+
+      svg.append("text")
+        .attr("x", xScale(d.interaction_strength) + 3).attr("y", yBand(label) + yBand.bandwidth()/2 + 3)
+        .attr("font-size", "6px").text(d.interaction_strength.toFixed(4));
+    });
+
+    svg.append("g").call(d3.axisLeft(yBand).tickSize(0))
+      .selectAll("text").style("font-size", "6px");
+    svg.append("g").attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(xScale).ticks(4).tickFormat(d3.format(".3f")))
+      .selectAll("text").style("font-size", "7px");
+  });
+})();
+</script>
+</body>
+</html>

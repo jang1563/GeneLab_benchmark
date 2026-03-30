@@ -1,0 +1,180 @@
+{
+  "universe_size": 14633,
+  "drr_in_universe": 389,
+  "enrichment_results": {
+    "shap_consensus": {
+      "description": "SHAP consensus (\u22653 tissues, \u22652 methods)",
+      "n_mouse_genes": 5,
+      "n_human_genes": 3,
+      "n_overlap_drr": 0,
+      "overlap_genes": [],
+      "expected_overlap": 0.08,
+      "fold_enrichment": 0.0,
+      "hypergeometric_p": 1.0,
+      "permutation_p": 1.0,
+      "significant": false
+    },
+    "shap_union_top100": {
+      "description": "Union of SHAP top-100 across all 8 tissues",
+      "n_mouse_genes": 1361,
+      "n_human_genes": 495,
+      "n_overlap_drr": 10,
+      "overlap_genes": [
+        "BTNL9",
+        "GRIN3B",
+        "IGF2BP3",
+        "NEXN",
+        "PRG4",
+        "PTPRJ",
+        "SLC4A1",
+        "SPEG",
+        "SUSD1",
+        "XIRP1"
+      ],
+      "expected_overlap": 13.16,
+      "fold_enrichment": 0.76,
+      "hypergeometric_p": 0.8523897256537083,
+      "permutation_p": 0.8540145985401459,
+      "significant": false
+    },
+    "wgcna_hubs": {
+      "n_human_genes": 0,
+      "n_overlap": 0,
+      "note": "No mappable genes in universe"
+    },
+    "biomarker_panel": {
+      "description": "v5 consensus biomarker panel (20 genes)",
+      "n_mouse_genes": 20,
+      "n_human_genes": 14,
+      "n_overlap_drr": 0,
+      "overlap_genes": [],
+      "expected_overlap": 0.37,
+      "fold_enrichment": 0.0,
+      "hypergeometric_p": 1.0,
+      "permutation_p": 1.0,
+      "significant": false
+    }
+  },
+  "per_tissue_enrichment": {
+    "liver": {
+      "n_mouse_genes": 196,
+      "n_human_genes": 46,
+      "n_unmapped": 138,
+      "n_overlap_drr": 0,
+      "overlap_genes": [],
+      "expected_overlap": 1.22,
+      "fold_enrichment": 0.0,
+      "hypergeometric_p": 1.0,
+      "significant": false
+    },
+    "gastrocnemius": {
+      "n_mouse_genes": 165,
+      "n_human_genes": 53,
+      "n_unmapped": 105,
+      "n_overlap_drr": 0,
+      "overlap_genes": [],
+      "expected_overlap": 1.41,
+      "fold_enrichment": 0.0,
+      "hypergeometric_p": 1.0,
+      "significant": false
+    },
+    "kidney": {
+      "n_mouse_genes": 192,
+      "n_human_genes": 108,
+      "n_unmapped": 73,
+      "n_overlap_drr": 2,
+      "overlap_genes": [
+        "BTNL9",
+        "SUSD1"
+      ],
+      "expected_overlap": 2.87,
+      "fold_enrichment": 0.697,
+      "hypergeometric_p": 0.7859446284760466,
+      "significant": false
+    },
+    "thymus": {
+      "n_mouse_genes": 199,
+      "n_human_genes": 108,
+      "n_unmapped": 77,
+      "n_overlap_drr": 4,
+      "overlap_genes": [
+        "NEXN",
+        "PTPRJ",
+        "SPEG",
+        "XIRP1"
+      ],
+      "expected_overlap": 2.87,
+      "fold_enrichment": 1.393,
+      "hypergeometric_p": 0.3233675243676765,
+      "significant": false
+    },
+    "eye": {
+      "n_mouse_genes": 194,
+      "n_human_genes": 76,
+      "n_unmapped": 105,
+      "n_overlap_drr": 0,
+      "overlap_genes": [],
+      "expected_overlap": 2.02,
+      "fold_enrichment": 0.0,
+      "hypergeometric_p": 1.0,
+      "significant": false
+    },
+    "skin": {
+      "n_mouse_genes": 160,
+      "n_human_genes": 37,
+      "n_unmapped": 116,
+      "n_overlap_drr": 0,
+      "overlap_genes": [],
+      "expected_overlap": 0.98,
+      "fold_enrichment": 0.0,
+      "hypergeometric_p": 1.0,
+      "significant": false
+    },
+    "lung": {
+      "n_mouse_genes": 160,
+      "n_human_genes": 33,
+      "n_unmapped": 122,
+      "n_overlap_drr": 1,
+      "overlap_genes": [
+        "GRIN3B"
+      ],
+      "expected_overlap": 0.88,
+      "fold_enrichment": 1.14,
+      "hypergeometric_p": 0.5893943257963392,
+      "significant": false
+    },
+    "colon": {
+      "n_mouse_genes": 191,
+      "n_human_genes": 66,
+      "n_unmapped": 115,
+      "n_overlap_drr": 3,
+      "overlap_genes": [
+        "IGF2BP3",
+        "PRG4",
+        "SLC4A1"
+      ],
+      "expected_overlap": 1.75,
+      "fold_enrichment": 1.71,
+      "hypergeometric_p": 0.2561642404245093,
+      "significant": false
+    }
+  },
+  "direction_concordance": {
+    "n_tested": 0,
+    "n_concordant": 0,
+    "concordance_rate": 0,
+    "top_concordant": [],
+    "top_discordant": []
+  },
+  "untranslatable": {
+    "consensus_unmapped": [
+      "MUP22",
+      "GM24497"
+    ],
+    "notable_mouse_specific": [
+      "Mup22",
+      "Gm24497"
+    ]
+  },
+  "timestamp": "2026-03-30T07:39:21.639385"
+}

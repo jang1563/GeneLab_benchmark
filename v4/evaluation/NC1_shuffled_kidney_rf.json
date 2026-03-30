@@ -1,0 +1,57 @@
+{
+  "experiment": "NC1_shuffled",
+  "model": "Random Forest",
+  "model_key": "rf",
+  "tissue": "kidney",
+  "feature_type": "gene",
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.6531,
+  "std_auroc": 0.2498,
+  "min_auroc": 0.4219,
+  "max_auroc": 1.0,
+  "mean_perm_pvalue": 0.337,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 18.0,
+  "timestamp": "2026-03-22T03:20:17.708910",
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "fold_name": "fold_RR-1_test",
+      "auroc": 1.0,
+      "bootstrap_mean": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.0879,
+      "n_train": 130,
+      "n_test": 12,
+      "train_time_s": 0.54
+    },
+    {
+      "test_mission": "RR-3",
+      "fold_name": "fold_RR-3_test",
+      "auroc": 0.4219,
+      "bootstrap_mean": 0.4235,
+      "ci_lower": 0.1765,
+      "ci_upper": 0.6765,
+      "perm_pvalue": 0.6294,
+      "n_train": 124,
+      "n_test": 18,
+      "train_time_s": 0.46
+    },
+    {
+      "test_mission": "RR-7",
+      "fold_name": "fold_RR-7_test",
+      "auroc": 0.5374,
+      "bootstrap_mean": 0.5372,
+      "ci_lower": 0.4139,
+      "ci_upper": 0.6577,
+      "perm_pvalue": 0.2937,
+      "n_train": 30,
+      "n_test": 112,
+      "train_time_s": 0.24
+    }
+  ]
+}

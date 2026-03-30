@@ -1,0 +1,283 @@
+{
+  "tissue": "colon",
+  "method": "xgb",
+  "n_genes": 2000,
+  "gene_filter": "top_2000_variance",
+  "n_folds_used": 5,
+  "top_50_interactions": [
+    {
+      "gene_a": "Chit1",
+      "gene_b": "ENSMUSG00000106630",
+      "interaction_strength": 0.006097
+    },
+    {
+      "gene_a": "Mogat1",
+      "gene_b": "Nr0b2",
+      "interaction_strength": 0.00541
+    },
+    {
+      "gene_a": "Mbl2",
+      "gene_b": "ENSMUSG00000058447",
+      "interaction_strength": 0.005017
+    },
+    {
+      "gene_a": "Pnliprp2",
+      "gene_b": "Slc6a13",
+      "interaction_strength": 0.004781
+    },
+    {
+      "gene_a": "Thrsp",
+      "gene_b": "Cyp2b13",
+      "interaction_strength": 0.00458
+    },
+    {
+      "gene_a": "Hephl1",
+      "gene_b": "Myh13",
+      "interaction_strength": 0.004512
+    },
+    {
+      "gene_a": "ENSMUSG00000024437",
+      "gene_b": "ENSMUSG00000081375",
+      "interaction_strength": 0.004463
+    },
+    {
+      "gene_a": "G0s2",
+      "gene_b": "Rdh7",
+      "interaction_strength": 0.004435
+    },
+    {
+      "gene_a": "Dapl1",
+      "gene_b": "Ctrb1",
+      "interaction_strength": 0.004402
+    },
+    {
+      "gene_a": "Fabp2",
+      "gene_b": "Gm18066",
+      "interaction_strength": 0.004356
+    },
+    {
+      "gene_a": "Nts",
+      "gene_b": "Ucp3",
+      "interaction_strength": 0.00423
+    },
+    {
+      "gene_a": "ENSMUSG00000057195",
+      "gene_b": "ENSMUSG00000089525",
+      "interaction_strength": 0.004216
+    },
+    {
+      "gene_a": "Folh1",
+      "gene_b": "ENSMUSG00000110405",
+      "interaction_strength": 0.004029
+    },
+    {
+      "gene_a": "Fbln1",
+      "gene_b": "Cyp2c38",
+      "interaction_strength": 0.004024
+    },
+    {
+      "gene_a": "Clca1",
+      "gene_b": "Gm15644",
+      "interaction_strength": 0.004016
+    },
+    {
+      "gene_a": "Thrsp",
+      "gene_b": "Vsig4",
+      "interaction_strength": 0.003983
+    },
+    {
+      "gene_a": "Gm12978",
+      "gene_b": "ENSMUSG00000116686",
+      "interaction_strength": 0.003977
+    },
+    {
+      "gene_a": "Vgf",
+      "gene_b": "ENSMUSG00000106630",
+      "interaction_strength": 0.003888
+    },
+    {
+      "gene_a": "Cyp2c38",
+      "gene_b": "Dmrt2",
+      "interaction_strength": 0.003859
+    },
+    {
+      "gene_a": "Vpreb3",
+      "gene_b": "Gm18066",
+      "interaction_strength": 0.003821
+    },
+    {
+      "gene_a": "Fgf21",
+      "gene_b": "Thrsp",
+      "interaction_strength": 0.00379
+    },
+    {
+      "gene_a": "Ccl24",
+      "gene_b": "Gm18066",
+      "interaction_strength": 0.003698
+    },
+    {
+      "gene_a": "Upk1b",
+      "gene_b": "Serpina9",
+      "interaction_strength": 0.003683
+    },
+    {
+      "gene_a": "Pnliprp2",
+      "gene_b": "ENSMUSG00000091071",
+      "interaction_strength": 0.003569
+    },
+    {
+      "gene_a": "Hapln4",
+      "gene_b": "Defb37",
+      "interaction_strength": 0.003554
+    },
+    {
+      "gene_a": "Cidec",
+      "gene_b": "Scd1",
+      "interaction_strength": 0.003479
+    },
+    {
+      "gene_a": "Masp2",
+      "gene_b": "Gm18066",
+      "interaction_strength": 0.003454
+    },
+    {
+      "gene_a": "Fxyd4",
+      "gene_b": "ENSMUSG00000093456",
+      "interaction_strength": 0.00343
+    },
+    {
+      "gene_a": "ENSMUSG00000089525",
+      "gene_b": "ENSMUSG00000105958",
+      "interaction_strength": 0.003418
+    },
+    {
+      "gene_a": "Ctrb1",
+      "gene_b": "ENSMUSG00000109656",
+      "interaction_strength": 0.003336
+    },
+    {
+      "gene_a": "Pdcd1",
+      "gene_b": "Fgf21",
+      "interaction_strength": 0.003309
+    },
+    {
+      "gene_a": "Cacna1i",
+      "gene_b": "Cyp2c38",
+      "interaction_strength": 0.003263
+    },
+    {
+      "gene_a": "Syce1",
+      "gene_b": "LOC671917",
+      "interaction_strength": 0.003211
+    },
+    {
+      "gene_a": "H3c2",
+      "gene_b": "Gm17228",
+      "interaction_strength": 0.003164
+    },
+    {
+      "gene_a": "Gm15644",
+      "gene_b": "ENSMUSG00000115420",
+      "interaction_strength": 0.003164
+    },
+    {
+      "gene_a": "Dnase1",
+      "gene_b": "Ugt2b5",
+      "interaction_strength": 0.003132
+    },
+    {
+      "gene_a": "Gm15644",
+      "gene_b": "ENSMUSG00000117098",
+      "interaction_strength": 0.00313
+    },
+    {
+      "gene_a": "ENSMUSG00000081375",
+      "gene_b": "ENSMUSG00000095766",
+      "interaction_strength": 0.003076
+    },
+    {
+      "gene_a": "Rdh7",
+      "gene_b": "ENSMUSG00000110040",
+      "interaction_strength": 0.003067
+    },
+    {
+      "gene_a": "Wnt2",
+      "gene_b": "ENSMUSG00000084842",
+      "interaction_strength": 0.003056
+    },
+    {
+      "gene_a": "Try10",
+      "gene_b": "ENSMUSG00000109574",
+      "interaction_strength": 0.003032
+    },
+    {
+      "gene_a": "Igkv1-110",
+      "gene_b": "ENSMUSG00000095571",
+      "interaction_strength": 0.00298
+    },
+    {
+      "gene_a": "Syce1",
+      "gene_b": "Dnah17",
+      "interaction_strength": 0.002965
+    },
+    {
+      "gene_a": "Slc4a1",
+      "gene_b": "ENSMUSG00000109227",
+      "interaction_strength": 0.002943
+    },
+    {
+      "gene_a": "ENSMUSG00000029865",
+      "gene_b": "Igkv6-13",
+      "interaction_strength": 0.002795
+    },
+    {
+      "gene_a": "Thrsp",
+      "gene_b": "Saa3",
+      "interaction_strength": 0.002789
+    },
+    {
+      "gene_a": "Dnase1",
+      "gene_b": "ENSMUSG00000089803",
+      "interaction_strength": 0.002787
+    },
+    {
+      "gene_a": "Pnliprp2",
+      "gene_b": "ENSMUSG00000109227",
+      "interaction_strength": 0.002778
+    },
+    {
+      "gene_a": "ENSMUSG00000044021",
+      "gene_b": "ENSMUSG00000104608",
+      "interaction_strength": 0.002735
+    },
+    {
+      "gene_a": "Tmed11",
+      "gene_b": "Myh13",
+      "interaction_strength": 0.002718
+    }
+  ],
+  "top_20_main_effects": {
+    "Thrsp": 0.176164,
+    "Gm18066": 0.165601,
+    "ENSMUSG00000106630": 0.164672,
+    "Pnliprp2": 0.15192,
+    "ENSMUSG00000105958": 0.131933,
+    "Chit1": 0.097359,
+    "Slc4a1": 0.092975,
+    "Adamts4": 0.091877,
+    "Cyp2c38": 0.091045,
+    "Gm15644": 0.087535,
+    "ENSMUSG00000089525": 0.067483,
+    "Syce1": 0.064247,
+    "Serpina9": 0.06072,
+    "Hapln4": 0.058712,
+    "Gm12978": 0.055066,
+    "Snord3b3": 0.054853,
+    "Myh13": 0.053788,
+    "Cyp2b13": 0.053259,
+    "ENSMUSG00000110405": 0.051514,
+    "Ucp3": 0.048058
+  },
+  "n_total_pairs": 1999000,
+  "timestamp": "2026-03-23T02:48:03.272947"
+}
