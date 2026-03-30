@@ -1,6 +1,6 @@
 # GeneLab_benchmark — Results Summary
 
-Generated: 2026-03-01 (Updated: 2026-03-22)
+Generated: 2026-03-01 (Updated: 2026-03-29 — v5 biological interpretation added)
 
 ---
 
@@ -440,10 +440,64 @@ Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 
 
 | Component | Status |
 |---|---|
-| Phase 1: 256 evaluations (8x8x4) | **Complete** |
-| Phase 2: Ablation studies | Pending |
-| Phase 3: Statistical meta-analysis | Pending |
-| Phase 4: SHAP interpretability | Pending |
-| Phase 5: WGCNA + network biology | Pending |
-| Phase 7: Publication figures | Pending |
-| Phase 8: Manuscript preparation | Pending |
+| Phase 1: 256 evaluations (8 tissues × 8 methods × 4 features) | **Complete** |
+| Phase 2: Ablation studies (569 evals: feature count, PCA dims, sample size, bootstrap) | **Complete** |
+| Phase 3: Friedman LOMO-6 meta-analysis (chi2=17.333, p=0.015) | **Complete** |
+| Phase 4: SHAP multi-method interpretability | **Complete** |
+| Phase 5: Python WGCNA (6 tissues), module preservation, STRING PPI enrichment | **Complete** |
+| Phase 7: Publication figures (6 main + 5 supplementary HTML) | **Complete** |
+| Phase 8: Manuscript preparation | In Progress |
+
+---
+
+## v5 Biological Interpretation
+
+### Immune Deconvolution (mMCP-counter, 8 tissues)
+
+| Tissue | Significant Cell Types (FDR<0.05) | Strongest Signal |
+|--------|-----------------------------------|-----------------|
+| Skin | **6/14** | Fibroblasts↑FLT, NK cells↑FLT |
+| Kidney | 2/14 | — |
+| Thymus | 2/14 | — |
+| Liver, Gastro, Eye, Lung, Colon | 0/14 | No signal |
+
+Direction convention: positive Cliff's delta = higher in Flight vs. Ground.
+
+### Cross-Organ Signaling (OmniPath)
+
+- 111 intercell-filtered ligand–receptor pairs (9 strict, 102 broad)
+- 1 SHAP-active L–R pair identified
+- TF activity (CollecTRI + decoupler ULM): thymus 240 sig, skin 241, kidney 177, liver 105
+
+### Metabolic Flux (iMM1865 E-Flux + pFBA)
+
+| Tissue | FLT objective | GC objective | Difference |
+|--------|--------------|-------------|-----------|
+| Thymus | 15,695 | 14,696 | **999** (largest) |
+| Liver | 16,510 | 16,110 | 400 |
+| Gastrocnemius | — | — | varies |
+| Kidney, Eye, Skin | — | — | varies |
+
+E-Flux normalized to [0,1] range; pFBA used to resolve LP degeneracy.
+
+### Drug Target Mapping (DGIdb v5 + ChEMBL)
+
+- 834 WGCNA/SHAP consensus spaceflight genes → mouse→human ortholog mapping
+- **271/834 (32.5%)** human orthologs have known drug interactions (DGIdb)
+- **1,284 FDA-approved** drug–gene interactions (Tier 1)
+- **200 investigational** drug–gene interactions (Tier 3)
+- Thymus most druggable tissue (24.8%); 45 WGCNA modules enriched
+
+### Consensus Biomarker Panel (20 genes)
+
+Scoring: SHAP rank (0–4) + WGCNA module membership (0–3) + multi-tissue (0–2) + druggability (0–1) + statistical significance (0–2)
+
+| Top Genes | Score | Notes |
+|-----------|-------|-------|
+| MUP22 | 5 | Liver/skin WGCNA hub, SHAP top |
+| Thrsp / THRSP | 5 | Metabolic hub |
+| Apoa1 | 5 | Liver SHAP + WGCNA |
+| NPAS2 | 4 | Circadian clock, gastro+skin modules |
+| PER2 | 4 | Circadian clock |
+
+Panel validation AUROC: gastro 0.806, liver 0.754, eye 0.728, colon 0.75, skin 0.70
