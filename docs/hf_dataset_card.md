@@ -143,12 +143,12 @@ PCA-LR best overall (gene mean 0.776). 40/256 significant at p<0.05.
 | Model | Mean AUROC | vs PCA-LR (0.758) |
 |-------|-----------|-------------------|
 | scGPT | 0.667 | -0.092 |
-| scFoundation | 0.635* (liver best) | Below baseline |
-| UCE | 0.632* (thymus best) | Below baseline |
+| scFoundation | 0.635† (liver, p<0.01) | Below baseline |
+| UCE | 0.632† (thymus, p=0.031) | Below baseline |
 | Mouse-Geneformer | 0.476 | -0.283 |
 | Text LLMs (3x) | 0.47-0.51 | Chance level |
 
-**Verdict**: All FMs underperform classical PCA-LR. Pre-trained cell atlas knowledge does not improve spaceflight detection.
+**Verdict**: All FMs underperform classical PCA-LR. Pre-trained cell atlas knowledge does not improve spaceflight detection. †Best single-tissue AUROC; mean across 7 tissues is lower.
 
 ### Key Scientific Findings
 
@@ -271,7 +271,7 @@ All data derived from publicly available NASA OSDR datasets:
 | OSD-102 | Kidney | RR-1 | 47 |
 | OSD-163 | Kidney | RR-3 | 32 |
 | OSD-253 | Kidney | RR-7 | 39 |
-| OSD-289 | Thymus | MHU-1/MHU-2 | 12 |
+| OSD-289 | Thymus | MHU-2 | 12 |
 | OSD-244 | Thymus | RR-6 | 35 |
 | OSD-421 | Thymus | RR-9 | 20 |
 | OSD-238 | Skin (dorsal) | MHU-2 | 18 |
@@ -280,9 +280,11 @@ All data derived from publicly available NASA OSDR datasets:
 | OSD-254 | Skin | RR-7 | 30 |
 | OSD-100 | Eye | RR-1 | 12 |
 | OSD-194 | Eye | RR-3 | 9 |
-| OSD-397 | Eye | TBD | 16 |
+| OSD-397 | Eye | TBD (OSD-397) | 16 |
+| OSD-248 | Lung | RR-6 | 39 (20 FLT + 19 GC) |
+| OSD-247 | Colon | RR-6 | 36 (19 FLT + 17 GC) |
 
-v4 adds Lung and Colon tissues from additional OSD accessions.
+Note: OSD-248 and OSD-247 additionally include BC (Basal Control) samples treated as ground control in v4 (+19 and +18 samples respectively). The table above shows FLT+GC binary counts.
 
 ---
 
@@ -306,7 +308,7 @@ v4 adds Lung and Colon tissues from additional OSD accessions.
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v4.0}
+  note    = {v5.0}
 }
 ```
 
