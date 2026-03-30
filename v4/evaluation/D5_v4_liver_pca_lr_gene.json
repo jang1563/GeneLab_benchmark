@@ -1,0 +1,43 @@
+{
+  "experiment": "D5",
+  "model": "PCA-LR",
+  "model_key": "pca_lr",
+  "tissue": "liver",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 2,
+  "classes": [
+    "MHU",
+    "RR"
+  ],
+  "class_distribution": {
+    "MHU": 9,
+    "RR": 255
+  },
+  "n_samples": 264,
+  "macro_f1": 1.0,
+  "accuracy": 1.0,
+  "ci_lower": 1.0,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU": 1.0,
+    "RR": 1.0
+  },
+  "confusion_matrix": [
+    [
+      9,
+      0
+    ],
+    [
+      0,
+      255
+    ]
+  ],
+  "mean_train_time_s": 2.04,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 116.3,
+  "timestamp": "2026-03-22T03:31:50.163342"
+}

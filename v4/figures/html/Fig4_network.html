@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 4 — Network Biology</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+  .panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+  .panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+  .axis text { font-size: 9px; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none; z-index: 100; line-height: 1.4;
+  }
+  .interpretation {
+    margin-top: 16px; padding: 10px; background: #f5f5f5;
+    border-left: 3px solid #999; font-size: 9px; color: #444; line-height: 1.5;
+  }
+  .interpretation strong { color: #333; }
+  table.data-table { border-collapse: collapse; width: 100%; font-size: 9px; margin-top: 4px; }
+  table.data-table th, table.data-table td { border: 1px solid #ddd; padding: 3px 5px; text-align: left; }
+  table.data-table th { background: #f0f0f0; font-weight: bold; }
+  .sig { color: #D55E00; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 4 — Network Biology: WGCNA Co-Expression and PPI Enrichment</div>
+  <div class="figure-subtitle">6 tissues × WGCNA modules + SHAP integration + STRING PPI (v12)</div>
+  <div class="panels">
+    <div class="panel"><div class="panel-label">A</div>
+      <div class="panel-desc">Module-Trait Correlation Heatmap (6 tissues, condition: FLT vs GC)</div>
+      <div id="trait_heatmap"></div>
+    </div>
+    <div class="panel"><div class="panel-label">B</div>
+      <div class="panel-desc">Module Preservation — Mean Zsummary (15 tissue pairs)</div>
+      <div id="preservation"></div>
+    </div>
+    <div class="panel"><div class="panel-label">C</div>
+      <div class="panel-desc">SHAP → WGCNA Module Enrichment</div>
+      <div id="shap_wgcna"></div>
+    </div>
+    <div class="panel"><div class="panel-label">D</div>
+      <div class="panel-desc">STRING PPI Enrichment Summary</div>
+      <div id="ppi_summary"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    Gastrocnemius saddlebrown module (r=+0.496, FLT↑) and thymus black module (r=−0.479, GC↑) show
+    the strongest condition associations. Liver→kidney preservation is strongest (Z=35.65), suggesting
+    shared core transcriptomic programs. SHAP-enriched modules include eye green (crystallins: CRYAA,
+    CRYBA1, CRYBB2, CRYGB, CRYGC, CRYGS) and gastrocnemius saddlebrown (7.5× enrichment).
+    STRING PPI: skin has highest network density (0.53) with 39 enriched terms.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tooltip = d3.select("#tooltip");
+
+// =============================================
+// PANEL A: Module-Trait Correlation Heatmap
+// =============================================
+(function() {
+  const data = [{"tissue": "Liver", "module": "brown", "r": -0.176, "p": 0.00434, "direction": "GC_higher", "n_genes": 752}, {"tissue": "Liver", "module": "yellow", "r": -0.173, "p": 0.005167, "direction": "GC_higher", "n_genes": 467}, {"tissue": "Liver", "module": "turquoise", "r": 0, "p": 1.0, "direction": "none", "n_genes": 1607}, {"tissue": "Liver", "module": "blue", "r": 0, "p": 1.0, "direction": "none", "n_genes": 1523}, {"tissue": "Liver", "module": "green", "r": 0, "p": 1.0, "direction": "none", "n_genes": 197}, {"tissue": "Gastro", "module": "saddlebrown", "r": 0.496, "p": 0.003919, "direction": "FLT_higher", "n_genes": 20}, {"tissue": "Gastro", "module": "white", "r": -0.482, "p": 0.005174, "direction": "GC_higher", "n_genes": 26}, {"tissue": "Gastro", "module": "darkgrey", "r": -0.464, "p": 0.007448, "direction": "GC_higher", "n_genes": 38}, {"tissue": "Gastro", "module": "lightcyan", "r": -0.352, "p": 0.048305, "direction": "GC_higher", "n_genes": 61}, {"tissue": "Gastro", "module": "darkorange", "r": 0, "p": 1.0, "direction": "none", "n_genes": 57}, {"tissue": "Gastro", "module": "greenyellow", "r": 0, "p": 1.0, "direction": "none", "n_genes": 136}, {"tissue": "Gastro", "module": "brown", "r": 0, "p": 1.0, "direction": "none", "n_genes": 235}, {"tissue": "Gastro", "module": "tan", "r": 0, "p": 1.0, "direction": "none", "n_genes": 124}, {"tissue": "Gastro", "module": "magenta", "r": 0, "p": 1.0, "direction": "none", "n_genes": 84}, {"tissue": "Gastro", "module": "midnightblue", "r": 0, "p": 1.0, "direction": "none", "n_genes": 62}, {"tissue": "Gastro", "module": "turquoise", "r": 0, "p": 1.0, "direction": "none", "n_genes": 148}, {"tissue": "Gastro", "module": "cyan", "r": 0, "p": 1.0, "direction": "none", "n_genes": 67}, {"tissue": "Gastro", "module": "lightgreen", "r": 0, "p": 1.0, "direction": "none", "n_genes": 56}, {"tissue": "Gastro", "module": "darkred", "r": 0, "p": 1.0, "direction": "none", "n_genes": 53}, {"tissue": "Gastro", "module": "yellow", "r": 0, "p": 1.0, "direction": "none", "n_genes": 187}, {"tissue": "Gastro", "module": "green", "r": 0, "p": 1.0, "direction": "none", "n_genes": 111}, {"tissue": "Gastro", "module": "pink", "r": 0, "p": 1.0, "direction": "none", "n_genes": 85}, {"tissue": "Gastro", "module": "blue", "r": 0, "p": 1.0, "direction": "none", "n_genes": 242}, {"tissue": "Gastro", "module": "purple", "r": 0, "p": 1.0, "direction": "none", "n_genes": 83}, {"tissue": "Gastro", "module": "darkturquoise", "r": 0, "p": 1.0, "direction": "none", "n_genes": 39}, {"tissue": "Gastro", "module": "orange", "r": 0, "p": 1.0, "direction": "none", "n_genes": 36}, {"tissue": "Gastro", "module": "black", "r": 0, "p": 1.0, "direction": "none", "n_genes": 104}, {"tissue": "Kidney", "module": "magenta", "r": -0.255, "p": 0.002182, "direction": "GC_higher", "n_genes": 76}, {"tissue": "Kidney", "module": "yellow", "r": 0.211, "p": 0.011606, "direction": "FLT_higher", "n_genes": 658}, {"tissue": "Kidney", "module": "black", "r": 0.198, "p": 0.018447, "direction": "FLT_higher", "n_genes": 119}, {"tissue": "Kidney", "module": "purple", "r": 0.186, "p": 0.026873, "direction": "FLT_higher", "n_genes": 69}, {"tissue": "Kidney", "module": "turquoise", "r": 0, "p": 1.0, "direction": "none", "n_genes": 1300}, {"tissue": "Kidney", "module": "blue", "r": 0, "p": 1.0, "direction": "none", "n_genes": 1295}, {"tissue": "Kidney", "module": "brown", "r": 0, "p": 1.0, "direction": "none", "n_genes": 1069}, {"tissue": "Kidney", "module": "red", "r": 0, "p": 1.0, "direction": "none", "n_genes": 142}, {"tissue": "Kidney", "module": "pink", "r": 0, "p": 1.0, "direction": "none", "n_genes": 98}, {"tissue": "Kidney", "module": "greenyellow", "r": 0, "p": 1.0, "direction": "none", "n_genes": 50}, {"tissue": "Thymus", "module": "black", "r": -0.479, "p": 3e-06, "direction": "GC_higher", "n_genes": 259}, {"tissue": "Thymus", "module": "magenta", "r": 0.323, "p": 0.002454, "direction": "FLT_higher", "n_genes": 223}, {"tissue": "Thymus", "module": "purple", "r": 0.316, "p": 0.003036, "direction": "FLT_higher", "n_genes": 168}, {"tissue": "Thymus", "module": "yellow", "r": -0.314, "p": 0.003203, "direction": "GC_higher", "n_genes": 382}, {"tissue": "Thymus", "module": "turquoise", "r": 0.281, "p": 0.008673, "direction": "FLT_higher", "n_genes": 2064}, {"tissue": "Thymus", "module": "midnightblue", "r": 0, "p": 1.0, "direction": "none", "n_genes": 34}, {"tissue": "Thymus", "module": "brown", "r": 0, "p": 1.0, "direction": "none", "n_genes": 383}, {"tissue": "Thymus", "module": "blue", "r": 0, "p": 1.0, "direction": "none", "n_genes": 530}, {"tissue": "Thymus", "module": "cyan", "r": 0, "p": 1.0, "direction": "none", "n_genes": 40}, {"tissue": "Thymus", "module": "salmon", "r": 0, "p": 1.0, "direction": "none", "n_genes": 104}, {"tissue": "Thymus", "module": "greenyellow", "r": 0, "p": 1.0, "direction": "none", "n_genes": 119}, {"tissue": "Eye", "module": "green", "r": 0, "p": 1.0, "direction": "none", "n_genes": 136}, {"tissue": "Eye", "module": "turquoise", "r": 0, "p": 1.0, "direction": "none", "n_genes": 1108}, {"tissue": "Eye", "module": "blue", "r": 0, "p": 1.0, "direction": "none", "n_genes": 718}, {"tissue": "Eye", "module": "brown", "r": 0, "p": 1.0, "direction": "none", "n_genes": 356}, {"tissue": "Eye", "module": "red", "r": 0, "p": 1.0, "direction": "none", "n_genes": 98}, {"tissue": "Eye", "module": "pink", "r": 0, "p": 1.0, "direction": "none", "n_genes": 30}, {"tissue": "Eye", "module": "black", "r": 0, "p": 1.0, "direction": "none", "n_genes": 38}, {"tissue": "Skin", "module": "turquoise", "r": -0.325, "p": 0.000329, "direction": "GC_higher", "n_genes": 1435}, {"tissue": "Skin", "module": "blue", "r": 0.213, "p": 0.020349, "direction": "FLT_higher", "n_genes": 1110}, {"tissue": "Skin", "module": "red", "r": 0.513, "p": 0.0, "direction": "FLT_higher", "n_genes": 297}, {"tissue": "Skin", "module": "brown", "r": -0.481, "p": 0.0, "direction": "GC_higher", "n_genes": 1280}, {"tissue": "Skin", "module": "yellow", "r": 0.756, "p": 0.0, "direction": "FLT_higher", "n_genes": 861}];
+  const margin = {top: 5, right: 60, bottom: 60, left: 80};
+
+  const tissues = [...new Set(data.map(d => d.tissue))];
+  const modules = [...new Set(data.map(d => d.module))];
+  const cellW = 26, cellH = 26;
+  const width = modules.length * cellW;
+  const height = tissues.length * cellH;
+
+  const svg = d3.select("#trait_heatmap").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(modules).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(tissues).range([0, height]).padding(0.05);
+
+  const color = d3.scaleDiverging()
+    .domain([-0.5, 0, 0.5])
+    .interpolator(d3.interpolateRdBu);
+
+  svg.selectAll("rect.cell")
+    .data(data).enter().append("rect")
+    .attr("x", d => x(d.module))
+    .attr("y", d => y(d.tissue))
+    .attr("width", x.bandwidth())
+    .attr("height", y.bandwidth())
+    .attr("fill", d => d.r !== 0 ? color(-d.r) : "#f5f5f5")
+    .attr("stroke", d => d.p < 0.05 ? "#333" : "#eee")
+    .attr("stroke-width", d => d.p < 0.05 ? 2 : 0.5)
+    .attr("rx", 2)
+    .on("mouseover", function(event, d) {
+      tooltip.style("display", "block")
+        .html(`<b>${d.tissue}</b> — ${d.module}<br>r = ${d.r}<br>p = ${d.p.toExponential(2)}<br>n_genes = ${d.n_genes}<br>Direction: ${d.direction}`);
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+    })
+    .on("mouseout", () => tooltip.style("display", "none"));
+
+  // Significance stars
+  svg.selectAll("text.sig")
+    .data(data.filter(d => d.p < 0.05)).enter().append("text")
+    .attr("x", d => x(d.module) + x.bandwidth()/2)
+    .attr("y", d => y(d.tissue) + y.bandwidth()/2 + 4)
+    .attr("text-anchor", "middle").attr("font-size", "10px").attr("font-weight", "bold")
+    .attr("fill", d => Math.abs(d.r) > 0.3 ? "#fff" : "#333")
+    .text(d => d.p < 0.01 ? "**" : "*");
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text").attr("transform", "rotate(-55)")
+    .style("text-anchor", "end").attr("dx", "-0.3em").style("font-size", "7px");
+
+  svg.append("g").call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "9px");
+
+  // Legend
+  const lx = width + 10;
+  [[-0.5, "GC ↑ (r < 0)"], [0, "Neutral"], [0.5, "FLT ↑ (r > 0)"]].forEach((item, i) => {
+    svg.append("rect").attr("x", lx).attr("y", i * 18)
+      .attr("width", 12).attr("height", 12)
+      .attr("fill", color(-item[0]));
+    svg.append("text").attr("x", lx + 16).attr("y", i * 18 + 10)
+      .attr("font-size", "7px").text(item[1]);
+  });
+  svg.append("text").attr("x", lx).attr("y", 68)
+    .attr("font-size", "7px").attr("fill", "#666").text("Bold border = p<0.05");
+})();
+
+// =============================================
+// PANEL B: Preservation Zsummary Heatmap
+// =============================================
+(function() {
+  const data = [{"ref": "Liver", "test": "Gastro", "Zsummary": 0.43, "n_high": 0, "n_moderate": 1, "n_not": 4}, {"ref": "Liver", "test": "Kidney", "Zsummary": 35.65, "n_high": 4, "n_moderate": 1, "n_not": 0}, {"ref": "Liver", "test": "Thymus", "Zsummary": 7.77, "n_high": 2, "n_moderate": 0, "n_not": 3}, {"ref": "Liver", "test": "Eye", "Zsummary": 5.85, "n_high": 1, "n_moderate": 0, "n_not": 4}, {"ref": "Liver", "test": "Skin", "Zsummary": 24.96, "n_high": 3, "n_moderate": 1, "n_not": 1}, {"ref": "Gastro", "test": "Kidney", "Zsummary": 1.1, "n_high": 1, "n_moderate": 2, "n_not": 19}, {"ref": "Gastro", "test": "Thymus", "Zsummary": 1.93, "n_high": 1, "n_moderate": 4, "n_not": 17}, {"ref": "Gastro", "test": "Eye", "Zsummary": 0, "n_high": 0, "n_moderate": 2, "n_not": 19}, {"ref": "Gastro", "test": "Skin", "Zsummary": 0.63, "n_high": 0, "n_moderate": 3, "n_not": 19}, {"ref": "Kidney", "test": "Thymus", "Zsummary": 2.2, "n_high": 1, "n_moderate": 3, "n_not": 6}, {"ref": "Kidney", "test": "Eye", "Zsummary": 1.91, "n_high": 1, "n_moderate": 2, "n_not": 7}, {"ref": "Kidney", "test": "Skin", "Zsummary": 9.18, "n_high": 2, "n_moderate": 4, "n_not": 4}, {"ref": "Thymus", "test": "Eye", "Zsummary": 14.01, "n_high": 4, "n_moderate": 2, "n_not": 5}, {"ref": "Thymus", "test": "Skin", "Zsummary": 20.76, "n_high": 5, "n_moderate": 5, "n_not": 1}, {"ref": "Eye", "test": "Skin", "Zsummary": 12.52, "n_high": 2, "n_moderate": 0, "n_not": 5}];
+  const tissues = ["Liver", "Gastro", "Kidney", "Thymus", "Eye", "Skin"];
+  const margin = {top: 5, right: 60, bottom: 60, left: 70};
+  const cellS = 55;
+  const width = tissues.length * cellS;
+  const height = tissues.length * cellS;
+
+  const svg = d3.select("#preservation").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(tissues).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(tissues).range([0, height]).padding(0.05);
+
+  const color = d3.scaleThreshold()
+    .domain([2, 10])
+    .range(["#e0e0e0", "#FFD700", "#2ca02c"]);
+
+  // Build lookup
+  const lookup = {};
+  data.forEach(d => {
+    lookup[d.ref + "_" + d.test] = d;
+  });
+
+  // Draw lower triangle
+  for (let i = 0; i < tissues.length; i++) {
+    for (let j = 0; j < tissues.length; j++) {
+      if (i === j) continue;
+      const key = tissues[i] + "_" + tissues[j];
+      const entry = lookup[key];
+      if (!entry) continue;
+
+      svg.append("rect")
+        .attr("x", x(tissues[j]))
+        .attr("y", y(tissues[i]))
+        .attr("width", x.bandwidth())
+        .attr("height", y.bandwidth())
+        .attr("fill", color(entry.Zsummary))
+        .attr("stroke", "#fff").attr("stroke-width", 1)
+        .attr("rx", 3)
+        .on("mouseover", function(event) {
+          tooltip.style("display", "block")
+            .html(`<b>${entry.ref} → ${entry.test}</b><br>Mean Z = ${entry.Zsummary}<br>High: ${entry.n_high}, Mod: ${entry.n_moderate}, Low: ${entry.n_not}`);
+        })
+        .on("mousemove", function(event) {
+          tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+        })
+        .on("mouseout", () => tooltip.style("display", "none"));
+
+      // Z value text
+      svg.append("text")
+        .attr("x", x(tissues[j]) + x.bandwidth()/2)
+        .attr("y", y(tissues[i]) + y.bandwidth()/2 + 4)
+        .attr("text-anchor", "middle").attr("font-size", "8px")
+        .attr("font-weight", entry.Zsummary > 10 ? "bold" : "normal")
+        .attr("fill", entry.Zsummary > 10 ? "#fff" : "#333")
+        .text(entry.Zsummary.toFixed(1));
+    }
+  }
+
+  // Diagonal
+  tissues.forEach(t => {
+    svg.append("rect")
+      .attr("x", x(t)).attr("y", y(t))
+      .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+      .attr("fill", "#f0f0f0").attr("stroke", "#ddd").attr("rx", 3);
+    svg.append("text")
+      .attr("x", x(t) + x.bandwidth()/2)
+      .attr("y", y(t) + y.bandwidth()/2 + 4)
+      .attr("text-anchor", "middle").attr("font-size", "8px").attr("fill", "#999")
+      .text("—");
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text").style("font-size", "9px");
+  svg.append("g").call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "9px");
+
+  // Legend
+  const lx = width + 10;
+  [["#e0e0e0", "Z < 2 (not preserved)"], ["#FFD700", "2 ≤ Z < 10 (moderate)"], ["#2ca02c", "Z ≥ 10 (high)"]].forEach((item, i) => {
+    svg.append("rect").attr("x", lx).attr("y", i * 16).attr("width", 12).attr("height", 12).attr("fill", item[0]);
+    svg.append("text").attr("x", lx + 16).attr("y", i * 16 + 10).attr("font-size", "7px").text(item[1]);
+  });
+})();
+
+// =============================================
+// PANEL C: SHAP → WGCNA Enrichment
+// =============================================
+(function() {
+  const data = [{"tissue": "Gastro", "module": "darkgrey", "n_shap": 9, "n_module": 38, "p_value": 3e-06, "ratio": 7.08, "genes": ["3110040M04RIK", "A730036I17RIK", "BDH1", "GM12295", "GM15743", "MYL2", "MYL3", "STRIT1"]}, {"tissue": "Gastro", "module": "white", "n_shap": 6, "n_module": 26, "p_value": 0.000162, "ratio": 6.89, "genes": ["CHAF1B", "CXCL11", "ENSMUSG00000079444", "ENSMUSG00000116307", "ENSMUSG00000120915", "GM19410"]}, {"tissue": "Gastro", "module": "saddlebrown", "n_shap": 5, "n_module": 20, "p_value": 0.000395, "ratio": 7.47, "genes": ["CIMAP1D", "ENSMUSG00000084817", "GM4521", "GREM2", "METTL21E"]}, {"tissue": "Thymus", "module": "magenta", "n_shap": 20, "n_module": 223, "p_value": 0.0, "ratio": 4.47, "genes": ["ALDOB", "APOA1", "APOC3", "CYP2D10", "CYP3A11", "CYP3A41B", "CYP4A10", "CYP4A14"]}, {"tissue": "Eye", "module": "green", "n_shap": 10, "n_module": 136, "p_value": 0.013937, "ratio": 2.2, "genes": ["1810041H14RIK", "CRYAA", "CRYBA1", "CRYBA2", "CRYBB2", "CRYGB", "CRYGC", "CRYGS"]}];
+  const container = d3.select("#shap_wgcna");
+
+  if (data.length === 0) {
+    container.append("div").attr("style", "font-size:10px; color:#888; padding:20px;")
+      .text("No significant SHAP→WGCNA module enrichments found.");
+    return;
+  }
+
+  const margin = {top: 15, right: 20, bottom: 40, left: 120};
+  const barH = 28;
+  const width = 380;
+  const height = data.length * barH;
+
+  const svg = container.append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom + 100)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d.ratio) * 1.2])
+    .range([0, width]);
+  const y = d3.scaleBand()
+    .domain(data.map(d => d.tissue + " " + d.module))
+    .range([0, height]).padding(0.2);
+
+  svg.selectAll("rect.bar")
+    .data(data).enter().append("rect")
+    .attr("x", 0)
+    .attr("y", d => y(d.tissue + " " + d.module))
+    .attr("width", d => x(d.ratio))
+    .attr("height", y.bandwidth())
+    .attr("fill", d => d.p_value < 0.001 ? OI.vermilion : OI.orange)
+    .attr("opacity", 0.8)
+    .on("mouseover", function(event, d) {
+      tooltip.style("display", "block")
+        .html(`<b>${d.tissue} — ${d.module}</b><br>Enrichment: ${d.ratio}×<br>SHAP genes in module: ${d.n_shap}/${d.n_module}<br>p = ${d.p_value.toExponential(2)}<br>Genes: ${d.genes.join(", ")}`);
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+    })
+    .on("mouseout", () => tooltip.style("display", "none"));
+
+  // Labels
+  data.forEach(d => {
+    const label = d.tissue + " " + d.module;
+    svg.append("text")
+      .attr("x", x(d.ratio) + 4)
+      .attr("y", y(label) + y.bandwidth()/2 + 4)
+      .attr("font-size", "8px").attr("fill", "#333")
+      .text(`${d.ratio}× (${d.n_shap}/${d.n_module})`);
+  });
+
+  svg.append("g").call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "8px");
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(5));
+  svg.append("text").attr("x", width/2).attr("y", height + 32)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Enrichment Ratio");
+
+  // Eye crystallin highlight
+  const eyeEntry = data.find(d => d.tissue === "Eye" && d.module === "green");
+  if (eyeEntry) {
+    const cy = height + 55;
+    svg.append("text").attr("x", 0).attr("y", cy)
+      .attr("font-size", "9px").attr("font-weight", "bold").attr("fill", OI.pink)
+      .text("Eye green module — Crystallin genes:");
+    svg.append("text").attr("x", 0).attr("y", cy + 14)
+      .attr("font-size", "8px").attr("fill", "#444")
+      .text(eyeEntry.genes.join(", "));
+  }
+})();
+
+// =============================================
+// PANEL D: PPI Enrichment Summary
+// =============================================
+(function() {
+  const data = [{"tissue": "Liver", "density": 0.118, "n_terms": 0, "top_terms": []}, {"tissue": "Gastro", "density": 0.146, "n_terms": 0, "top_terms": []}, {"tissue": "Kidney", "density": 0.095, "n_terms": 0, "top_terms": []}, {"tissue": "Thymus", "density": 0.076, "n_terms": 4, "top_terms": []}, {"tissue": "Eye", "density": 0.236, "n_terms": 1, "top_terms": []}, {"tissue": "Skin", "density": 0.53, "n_terms": 39, "top_terms": []}, {"tissue": "lung", "density": 1.0, "n_terms": 0, "top_terms": []}, {"tissue": "colon", "density": 0.152, "n_terms": 2, "top_terms": []}];
+  const container = d3.select("#ppi_summary");
+
+  // Bar chart: n_terms per tissue
+  const margin = {top: 15, right: 20, bottom: 45, left: 70};
+  const width = 300, height = 200;
+
+  const svg = container.append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const sortedData = data.filter(d => d.n_terms > 0).sort((a, b) => b.n_terms - a.n_terms);
+  const y = d3.scaleBand().domain(sortedData.map(d => d.tissue)).range([0, height]).padding(0.3);
+  const x = d3.scaleLinear().domain([0, d3.max(sortedData, d => d.n_terms) * 1.1]).range([0, width]);
+
+  svg.selectAll("rect.bar")
+    .data(sortedData).enter().append("rect")
+    .attr("x", 0).attr("y", d => y(d.tissue))
+    .attr("width", d => x(d.n_terms))
+    .attr("height", y.bandwidth())
+    .attr("fill", OI.blue).attr("opacity", 0.8);
+
+  sortedData.forEach(d => {
+    svg.append("text")
+      .attr("x", x(d.n_terms) + 4)
+      .attr("y", y(d.tissue) + y.bandwidth()/2 + 4)
+      .attr("font-size", "8px").attr("fill", "#333")
+      .text(`${d.n_terms} terms (d=${d.density})`);
+  });
+
+  svg.append("g").call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "9px");
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(5));
+  svg.append("text").attr("x", width/2).attr("y", height + 35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Enriched Terms (FDR < 0.05)");
+
+  // Top terms table
+  let html = '<div style="margin-top:12px; font-size:9px; font-weight:bold;">Top Enriched GO/KEGG Terms:</div>';
+  html += '<table class="data-table"><tr><th>Tissue</th><th>Term</th><th>p_FDR</th><th>Genes</th></tr>';
+  sortedData.forEach(d => {
+    d.top_terms.slice(0, 2).forEach(t => {
+      html += `<tr><td>${d.tissue}</td><td>${t.desc}</td><td>${t.p_fdr < 0.001 ? t.p_fdr.toExponential(1) : t.p_fdr.toFixed(3)}</td><td style="font-size:8px">${t.genes.slice(0,4).join(", ")}</td></tr>`;
+    });
+  });
+  html += '</table>';
+  container.append("div").html(html);
+})();
+</script>
+</body>
+</html>

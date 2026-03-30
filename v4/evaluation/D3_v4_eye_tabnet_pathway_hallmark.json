@@ -1,0 +1,53 @@
+{
+  "experiment": "D3",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "eye",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 3,
+  "classes": [
+    "RR-1",
+    "RR-3",
+    "TBD"
+  ],
+  "class_distribution": {
+    "RR-1": 12,
+    "RR-3": 13,
+    "TBD": 16
+  },
+  "n_samples": 41,
+  "macro_f1": 0.1871,
+  "accuracy": 0.3902,
+  "ci_lower": 0.1307,
+  "ci_upper": 0.2328,
+  "perm_pvalue": 1.0,
+  "per_class_f1": {
+    "RR-1": 0.0,
+    "RR-3": 0.0,
+    "TBD": 0.5614
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      12
+    ],
+    [
+      0,
+      0,
+      13
+    ],
+    [
+      0,
+      0,
+      16
+    ]
+  ],
+  "mean_train_time_s": 0.26,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 27.2,
+  "timestamp": "2026-03-22T03:27:33.351698"
+}

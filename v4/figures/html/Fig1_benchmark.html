@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 1 — Multi-Method Benchmark for Spaceflight Transcriptomics Classification</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0; padding: 20px; background: #fff;
+  }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+  .panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+  .panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+  .axis text { font-size: 9px; }
+  .axis-label { font-size: 10px; }
+  .stat-text { font-size: 8px; fill: #444; }
+  .annotation { font-size: 8px; fill: #888; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none;
+    z-index: 100; line-height: 1.4;
+  }
+  .interpretation {
+    margin-top: 16px; padding: 10px; background: #f5f5f5;
+    border-left: 3px solid #999; font-size: 9px; color: #444; line-height: 1.5;
+  }
+  .interpretation strong { color: #333; }
+  .dagger-note { font-size: 8px; color: #888; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 1 — Multi-Method Benchmark for Spaceflight Transcriptomics Classification</div>
+  <div class="figure-subtitle">8 tissues × 8 methods × 4 feature types = 256 evaluations | Leave-One-Mission-Out CV (6 tissues) + 5-fold CV (2 tissues)</div>
+  <div class="panels">
+    <div class="panel" id="panelA">
+      <div class="panel-label">A</div>
+      <div class="panel-desc">AUROC Heatmap — Gene Features (8 tissues × 8 methods)</div>
+      <div id="heatmap"></div>
+      <div class="dagger-note">† Lung, Colon: 5-fold stratified CV (single mission); not directly comparable to LOMO-CV</div>
+    </div>
+    <div class="panel" id="panelB">
+      <div class="panel-label">B</div>
+      <div class="panel-desc">Random-Effects Forest Plot — PCA-LR, Gene Features (6 LOMO tissues)</div>
+      <div id="forest"></div>
+    </div>
+    <div class="panel" id="panelC">
+      <div class="panel-label">C</div>
+      <div class="panel-desc">Gene vs Best-Pathway AUROC — PCA-LR (8 tissues)</div>
+      <div id="scatter"></div>
+    </div>
+    <div class="panel" id="panelD">
+      <div class="panel-label">D</div>
+      <div class="panel-desc">Nemenyi Critical Difference Diagram — Average Ranks (8 methods, 8 tissues)</div>
+      <div id="cd_diagram"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    PCA-LR achieves the best overall performance (avg rank 2.1, gene AUROC 0.776 across 8 tissues),
+    followed by ElasticNet-LR (rank 2.9, 0.762). SVM-RBF (rank 6.5) and TabNet (rank 7.3) perform worst
+    — deep learning does not help with small-n spaceflight datasets.
+    Friedman test confirms significant method differences (χ²=27.92, p=0.0002).
+    Pathway features (Hallmark/KEGG) improve classification in kidney (+0.245), eye (+0.126), and thymus (+0.040),
+    while gene features are superior for skin and lung.
+    Substantial between-mission heterogeneity exists (liver I²=51.9%, thymus I²=82.5%).
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+// === DATA ===
+const heatmapData = [{"tissue": "Thymus", "method": "PCA-LR", "auroc": 0.908, "perm_p": 0.0379, "cv": "LOMO"}, {"tissue": "Thymus", "method": "ElasticNet-LR", "auroc": 0.848, "perm_p": 0.0512, "cv": "LOMO"}, {"tissue": "Thymus", "method": "XGBoost", "auroc": 0.727, "perm_p": 0.3643, "cv": "LOMO"}, {"tissue": "Thymus", "method": "Random Forest", "auroc": 0.838, "perm_p": 0.2667, "cv": "LOMO"}, {"tissue": "Thymus", "method": "kNN", "auroc": 0.925, "perm_p": 0.0322, "cv": "LOMO"}, {"tissue": "Thymus", "method": "MLP", "auroc": 0.87, "perm_p": 0.1566, "cv": "LOMO"}, {"tissue": "Thymus", "method": "SVM-RBF", "auroc": 0.716, "perm_p": 0.4013, "cv": "LOMO"}, {"tissue": "Thymus", "method": "TabNet", "auroc": 0.625, "perm_p": 0.3519, "cv": "LOMO"}, {"tissue": "Colon\u2020", "method": "PCA-LR", "auroc": 0.857, "perm_p": 0.0506, "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "method": "ElasticNet-LR", "auroc": 0.809, "perm_p": 0.0901, "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "method": "XGBoost", "auroc": 0.838, "perm_p": 0.0771, "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "method": "Random Forest", "auroc": 0.687, "perm_p": 0.2629, "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "method": "kNN", "auroc": 0.688, "perm_p": 0.243, "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "method": "MLP", "auroc": 0.714, "perm_p": 0.1686, "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "method": "SVM-RBF", "auroc": 0.424, "perm_p": 0.6366, "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "method": "TabNet", "auroc": 0.567, "perm_p": 0.4252, "cv": "5-fold_stratified"}, {"tissue": "Gastrocnemius", "method": "PCA-LR", "auroc": 0.852, "perm_p": 0.1445, "cv": "LOMO"}, {"tissue": "Gastrocnemius", "method": "ElasticNet-LR", "auroc": 0.898, "perm_p": 0.0576, "cv": "LOMO"}, {"tissue": "Gastrocnemius", "method": "XGBoost", "auroc": 0.634, "perm_p": 0.2974, "cv": "LOMO"}, {"tissue": "Gastrocnemius", "method": "Random Forest", "auroc": 0.67, "perm_p": 0.2584, "cv": "LOMO"}, {"tissue": "Gastrocnemius", "method": "kNN", "auroc": 0.843, "perm_p": 0.0976, "cv": "LOMO"}, {"tissue": "Gastrocnemius", "method": "MLP", "auroc": 0.537, "perm_p": 0.6161, "cv": "LOMO"}, {"tissue": "Gastrocnemius", "method": "SVM-RBF", "auroc": 0.276, "perm_p": 0.8268, "cv": "LOMO"}, {"tissue": "Gastrocnemius", "method": "TabNet", "auroc": 0.505, "perm_p": 0.5364, "cv": "LOMO"}, {"tissue": "Lung\u2020", "method": "PCA-LR", "auroc": 0.834, "perm_p": 0.1265, "cv": "5-fold_stratified"}, {"tissue": "Lung\u2020", "method": "ElasticNet-LR", "auroc": 0.901, "perm_p": 0.0284, "cv": "5-fold_stratified"}, {"tissue": "Lung\u2020", "method": "XGBoost", "auroc": 0.773, "perm_p": 0.1167, "cv": "5-fold_stratified"}, {"tissue": "Lung\u2020", "method": "Random Forest", "auroc": 0.713, "perm_p": 0.2282, "cv": "5-fold_stratified"}, {"tissue": "Lung\u2020", "method": "kNN", "auroc": 0.633, "perm_p": 0.3065, "cv": "5-fold_stratified"}, {"tissue": "Lung\u2020", "method": "MLP", "auroc": 0.607, "perm_p": 0.3642, "cv": "5-fold_stratified"}, {"tissue": "Lung\u2020", "method": "SVM-RBF", "auroc": 0.333, "perm_p": 0.7566, "cv": "5-fold_stratified"}, {"tissue": "Lung\u2020", "method": "TabNet", "auroc": 0.449, "perm_p": 0.5429, "cv": "5-fold_stratified"}, {"tissue": "Skin", "method": "PCA-LR", "auroc": 0.796, "perm_p": 0.005, "cv": "LOMO"}, {"tissue": "Skin", "method": "ElasticNet-LR", "auroc": 0.819, "perm_p": 0.0037, "cv": "LOMO"}, {"tissue": "Skin", "method": "XGBoost", "auroc": 0.787, "perm_p": 0.007, "cv": "LOMO"}, {"tissue": "Skin", "method": "Random Forest", "auroc": 0.789, "perm_p": 0.0063, "cv": "LOMO"}, {"tissue": "Skin", "method": "kNN", "auroc": 0.688, "perm_p": 0.0639, "cv": "LOMO"}, {"tissue": "Skin", "method": "MLP", "auroc": 0.676, "perm_p": 0.0716, "cv": "LOMO"}, {"tissue": "Skin", "method": "SVM-RBF", "auroc": 0.776, "perm_p": 0.0067, "cv": "LOMO"}, {"tissue": "Skin", "method": "TabNet", "auroc": 0.572, "perm_p": 0.2507, "cv": "LOMO"}, {"tissue": "Eye", "method": "PCA-LR", "auroc": 0.697, "perm_p": 0.1485, "cv": "LOMO"}, {"tissue": "Eye", "method": "ElasticNet-LR", "auroc": 0.601, "perm_p": 0.3153, "cv": "LOMO"}, {"tissue": "Eye", "method": "XGBoost", "auroc": 0.636, "perm_p": 0.2691, "cv": "LOMO"}, {"tissue": "Eye", "method": "Random Forest", "auroc": 0.575, "perm_p": 0.3816, "cv": "LOMO"}, {"tissue": "Eye", "method": "kNN", "auroc": 0.381, "perm_p": 0.7612, "cv": "LOMO"}, {"tissue": "Eye", "method": "MLP", "auroc": 0.444, "perm_p": 0.9434, "cv": "LOMO"}, {"tissue": "Eye", "method": "SVM-RBF", "auroc": 0.336, "perm_p": 0.7926, "cv": "LOMO"}, {"tissue": "Eye", "method": "TabNet", "auroc": 0.559, "perm_p": 0.3823, "cv": "LOMO"}, {"tissue": "Liver", "method": "PCA-LR", "auroc": 0.683, "perm_p": 0.2025, "cv": "LOMO"}, {"tissue": "Liver", "method": "ElasticNet-LR", "auroc": 0.672, "perm_p": 0.1778, "cv": "LOMO"}, {"tissue": "Liver", "method": "XGBoost", "auroc": 0.636, "perm_p": 0.2065, "cv": "LOMO"}, {"tissue": "Liver", "method": "Random Forest", "auroc": 0.578, "perm_p": 0.2892, "cv": "LOMO"}, {"tissue": "Liver", "method": "kNN", "auroc": 0.62, "perm_p": 0.2126, "cv": "LOMO"}, {"tissue": "Liver", "method": "MLP", "auroc": 0.683, "perm_p": 0.1658, "cv": "LOMO"}, {"tissue": "Liver", "method": "SVM-RBF", "auroc": 0.686, "perm_p": 0.1933, "cv": "LOMO"}, {"tissue": "Liver", "method": "TabNet", "auroc": 0.422, "perm_p": 0.6166, "cv": "LOMO"}, {"tissue": "Kidney", "method": "PCA-LR", "auroc": 0.584, "perm_p": 0.351, "cv": "LOMO"}, {"tissue": "Kidney", "method": "ElasticNet-LR", "auroc": 0.552, "perm_p": 0.3393, "cv": "LOMO"}, {"tissue": "Kidney", "method": "XGBoost", "auroc": 0.638, "perm_p": 0.2068, "cv": "LOMO"}, {"tissue": "Kidney", "method": "Random Forest", "auroc": 0.619, "perm_p": 0.2125, "cv": "LOMO"}, {"tissue": "Kidney", "method": "kNN", "auroc": 0.553, "perm_p": 0.3923, "cv": "LOMO"}, {"tissue": "Kidney", "method": "MLP", "auroc": 0.613, "perm_p": 0.2281, "cv": "LOMO"}, {"tissue": "Kidney", "method": "SVM-RBF", "auroc": 0.536, "perm_p": 0.5348, "cv": "LOMO"}, {"tissue": "Kidney", "method": "TabNet", "auroc": 0.514, "perm_p": 0.4389, "cv": "LOMO"}];
+const forestData = [{"tissue": "Gastrocnemius", "tissue_key": "gastrocnemius", "pooled_re": 0.995, "ci_lower_re": 0.958, "ci_upper_re": 1.032, "I2": 69.9, "Q_pvalue": 0.036, "studies": [{"fold": "RR-1", "auroc": 0.556, "ci_lower": 0.218, "ci_upper": 0.893, "weight_re": 0.012}, {"fold": "RR-5", "auroc": 1.0, "ci_lower": 0.981, "ci_upper": 1.019, "weight_re": 0.515}, {"fold": "RR-9", "auroc": 1.0, "ci_lower": 0.976, "ci_upper": 1.024, "weight_re": 0.474}]}, {"tissue": "Thymus", "tissue_key": "thymus", "pooled_re": 0.963, "ci_lower_re": 0.906, "ci_upper_re": 1.021, "I2": 82.5, "Q_pvalue": 0.001, "studies": [{"fold": "RR-6", "auroc": 0.653, "ci_lower": 0.49, "ci_upper": 0.817, "weight_re": 0.092}, {"fold": "MHU-1", "auroc": 1.0, "ci_lower": 0.971, "ci_upper": 1.029, "weight_re": 0.331}, {"fold": "MHU-2", "auroc": 1.0, "ci_lower": 0.971, "ci_upper": 1.029, "weight_re": 0.331}, {"fold": "RR-9", "auroc": 0.98, "ci_lower": 0.915, "ci_upper": 1.045, "weight_re": 0.247}]}, {"tissue": "Skin", "tissue_key": "skin", "pooled_re": 0.797, "ci_lower_re": 0.706, "ci_upper_re": 0.889, "I2": 0.0, "Q_pvalue": 0.374, "studies": [{"fold": "MHU-2", "auroc": 0.867, "ci_lower": 0.721, "ci_upper": 1.014, "weight_re": 0.39}, {"fold": "RR-6", "auroc": 0.716, "ci_lower": 0.563, "ci_upper": 0.869, "weight_re": 0.357}, {"fold": "RR-7", "auroc": 0.805, "ci_lower": 0.623, "ci_upper": 0.987, "weight_re": 0.254}]}, {"tissue": "Liver", "tissue_key": "liver", "pooled_re": 0.753, "ci_lower_re": 0.641, "ci_upper_re": 0.866, "I2": 51.9, "Q_pvalue": 0.065, "studies": [{"fold": "RR-1", "auroc": 0.551, "ci_lower": 0.24, "ci_upper": 0.862, "weight_re": 0.096}, {"fold": "RR-3", "auroc": 0.75, "ci_lower": 0.491, "ci_upper": 1.009, "weight_re": 0.124}, {"fold": "RR-6", "auroc": 0.842, "ci_lower": 0.725, "ci_upper": 0.959, "weight_re": 0.263}, {"fold": "RR-8", "auroc": 0.709, "ci_lower": 0.603, "ci_upper": 0.814, "weight_re": 0.278}, {"fold": "RR-9", "auroc": 0.911, "ci_lower": 0.731, "ci_upper": 1.092, "weight_re": 0.189}, {"fold": "MHU-2", "auroc": 0.333, "ci_lower": -0.134, "ci_upper": 0.8, "weight_re": 0.05}]}, {"tissue": "Eye", "tissue_key": "eye", "pooled_re": 0.716, "ci_lower_re": 0.554, "ci_upper_re": 0.878, "I2": 0.0, "Q_pvalue": 0.758, "studies": [{"fold": "RR-1", "auroc": 0.639, "ci_lower": 0.315, "ci_upper": 0.963, "weight_re": 0.25}, {"fold": "RR-3", "auroc": 0.675, "ci_lower": 0.357, "ci_upper": 0.993, "weight_re": 0.26}, {"fold": "TBD", "auroc": 0.778, "ci_lower": 0.546, "ci_upper": 1.009, "weight_re": 0.491}]}, {"tissue": "Kidney", "tissue_key": "kidney", "pooled_re": 0.602, "ci_lower_re": 0.354, "ci_upper_re": 0.849, "I2": 74.3, "Q_pvalue": 0.021, "studies": [{"fold": "RR-1", "auroc": 0.347, "ci_lower": 0.026, "ci_upper": 0.668, "weight_re": 0.259}, {"fold": "RR-3", "auroc": 0.847, "ci_lower": 0.632, "ci_upper": 1.062, "weight_re": 0.341}, {"fold": "RR-7", "auroc": 0.557, "ci_lower": 0.415, "ci_upper": 0.7, "weight_re": 0.4}]}];
+const scatterData = [{"tissue": "Liver", "gene": 0.683, "pathway": 0.731, "pw_type": "KEGG", "cv": "LOMO"}, {"tissue": "Gastrocnemius", "gene": 0.852, "pathway": 0.861, "pw_type": "Hallmark", "cv": "LOMO"}, {"tissue": "Kidney", "gene": 0.584, "pathway": 0.829, "pw_type": "Hallmark", "cv": "LOMO"}, {"tissue": "Thymus", "gene": 0.908, "pathway": 0.948, "pw_type": "KEGG", "cv": "LOMO"}, {"tissue": "Eye", "gene": 0.697, "pathway": 0.823, "pw_type": "Hallmark", "cv": "LOMO"}, {"tissue": "Skin", "gene": 0.796, "pathway": 0.783, "pw_type": "KEGG", "cv": "LOMO"}, {"tissue": "Lung\u2020", "gene": 0.834, "pathway": 0.761, "pw_type": "KEGG", "cv": "5-fold_stratified"}, {"tissue": "Colon\u2020", "gene": 0.857, "pathway": 0.921, "pw_type": "KEGG", "cv": "5-fold_stratified"}];
+const cdData = {"chi2": 27.92, "p_value": 0.000228, "cd": 3.712, "k": 8, "n": 8, "ranks": {"ElasticNet-LR": 2.875, "PCA-LR": 2.125, "Random Forest": 4.375, "XGBoost": 3.5, "SVM-RBF": 6.5, "kNN": 4.75, "MLP": 4.625, "TabNet": 7.25}, "significant_pairs": [["ElasticNet-LR", "TabNet"], ["PCA-LR", "SVM-RBF"], ["PCA-LR", "TabNet"], ["XGBoost", "TabNet"]], "groups": [{"group": "A", "methods": ["pca_lr", "elasticnet_lr", "xgb", "rf", "mlp", "knn"], "avg_ranks": [2.125, 2.875, 3.5, 4.375, 4.625, 4.75]}, {"group": "B", "methods": ["elasticnet_lr", "xgb", "rf", "mlp", "knn", "svm_rbf"], "avg_ranks": [2.875, 3.5, 4.375, 4.625, 4.75, 6.5]}, {"group": "C", "methods": ["rf", "mlp", "knn", "svm_rbf", "tabnet"], "avg_ranks": [4.375, 4.625, 4.75, 6.5, 7.25]}]};
+const cdMethodsSorted = [["PCA-LR", 2.125], ["ElasticNet-LR", 2.875], ["XGBoost", 3.5], ["Random Forest", 4.375], ["MLP", 4.625], ["kNN", 4.75], ["SVM-RBF", 6.5], ["TabNet", 7.25]];
+
+// === Okabe-Ito palette ===
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tissueColors = {
+  "Liver": OI.blue, "Gastrocnemius": OI.vermilion, "Kidney": OI.green,
+  "Thymus": OI.orange, "Eye": OI.pink, "Skin": OI.skyblue,
+  "Lung†": "#888888", "Colon†": "#555555"
+};
+
+const tooltip = d3.select("#tooltip");
+
+// =============================================
+// PANEL A: AUROC Heatmap
+// =============================================
+(function() {
+  const margin = {top: 5, right: 80, bottom: 60, left: 100};
+  const cellW = 58, cellH = 32;
+  const tissues = [...new Set(heatmapData.map(d => d.tissue))];
+  const methods = [...new Set(heatmapData.map(d => d.method))];
+  const width = methods.length * cellW;
+  const height = tissues.length * cellH;
+
+  const svg = d3.select("#heatmap").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(methods).range([0, width]).padding(0.04);
+  const y = d3.scaleBand().domain(tissues).range([0, height]).padding(0.04);
+
+  // Color scale: 0.3=light, 1.0=dark blue
+  const color = d3.scaleSequential()
+    .domain([0.30, 1.0])
+    .interpolator(d3.interpolateBlues);
+
+  // Cells
+  svg.selectAll("rect.cell")
+    .data(heatmapData).enter().append("rect")
+    .attr("class", "cell")
+    .attr("x", d => x(d.method))
+    .attr("y", d => y(d.tissue))
+    .attr("width", x.bandwidth())
+    .attr("height", y.bandwidth())
+    .attr("fill", d => color(Math.max(0.30, Math.min(1.0, d.auroc))))
+    .attr("stroke", "#fff").attr("stroke-width", 1)
+    .attr("rx", 2)
+    .on("mouseover", function(event, d) {
+      tooltip.style("display", "block")
+        .html(`<b>${d.tissue}</b> × <b>${d.method}</b><br>AUROC: ${d.auroc.toFixed(3)}<br>p_perm: ${d.perm_p.toFixed(3)}<br>CV: ${d.cv}`);
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", (event.pageX + 12) + "px").style("top", (event.pageY - 10) + "px");
+    })
+    .on("mouseout", function() { tooltip.style("display", "none"); });
+
+  // AUROC text in cells
+  svg.selectAll("text.cell-val")
+    .data(heatmapData).enter().append("text")
+    .attr("class", "cell-val")
+    .attr("x", d => x(d.method) + x.bandwidth() / 2)
+    .attr("y", d => y(d.tissue) + y.bandwidth() / 2)
+    .attr("text-anchor", "middle").attr("dominant-baseline", "central")
+    .attr("font-size", "8px").attr("font-weight", "bold")
+    .attr("fill", d => d.auroc > 0.7 ? "#fff" : "#333")
+    .text(d => {
+      let t = d.auroc.toFixed(2);
+      if (d.perm_p < 0.01) t += "**";
+      else if (d.perm_p < 0.05) t += "*";
+      return t;
+    });
+
+  // Axes
+  svg.append("g").attr("class", "axis")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text")
+    .attr("transform", "rotate(-40)").style("text-anchor", "end")
+    .attr("dx", "-0.5em").attr("dy", "0.3em").style("font-size", "9px");
+
+  svg.append("g").attr("class", "axis")
+    .call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "9px");
+
+  // Color legend
+  const legendW = 12, legendH = height;
+  const legendX = width + 15;
+  const defs = svg.append("defs");
+  const gradient = defs.append("linearGradient")
+    .attr("id", "heatGrad").attr("x1", "0%").attr("y1", "100%").attr("x2", "0%").attr("y2", "0%");
+  gradient.append("stop").attr("offset", "0%").attr("stop-color", color(0.30));
+  gradient.append("stop").attr("offset", "100%").attr("stop-color", color(1.0));
+
+  svg.append("rect").attr("x", legendX).attr("y", 0)
+    .attr("width", legendW).attr("height", legendH)
+    .style("fill", "url(#heatGrad)").attr("stroke", "#ccc");
+
+  const legendScale = d3.scaleLinear().domain([0.30, 1.0]).range([legendH, 0]);
+  svg.append("g").attr("transform", `translate(${legendX + legendW},0)`)
+    .call(d3.axisRight(legendScale).ticks(5).tickFormat(d3.format(".1f")))
+    .selectAll("text").style("font-size", "8px");
+
+  svg.append("text").attr("x", legendX + legendW / 2).attr("y", -4)
+    .attr("text-anchor", "middle").attr("font-size", "8px").text("AUROC");
+
+  // Significance note
+  svg.append("text").attr("x", 0).attr("y", height + 52)
+    .attr("font-size", "8px").attr("fill", "#666")
+    .text("*p < 0.05  **p < 0.01 (permutation test, n=1000)");
+})();
+
+// =============================================
+// PANEL B: Forest Plot
+// =============================================
+(function() {
+  const margin = {top: 10, right: 90, bottom: 35, left: 100};
+  const width = 380, rowH = 22;
+
+  // Flatten: one row per study + one row per pooled
+  let rows = [];
+  forestData.forEach(td => {
+    td.studies.forEach(s => {
+      rows.push({ tissue: td.tissue, fold: s.fold, auroc: s.auroc,
+                   ci_lo: s.ci_lower, ci_hi: s.ci_upper, weight: s.weight_re, type: "study" });
+    });
+    rows.push({ tissue: td.tissue, fold: "Pooled (RE)", auroc: td.pooled_re,
+                 ci_lo: td.ci_lower_re, ci_hi: td.ci_upper_re, I2: td.I2, Q_p: td.Q_pvalue, type: "pooled" });
+    rows.push({ tissue: "", fold: "", auroc: null, type: "spacer" });
+  });
+
+  const height = rows.length * rowH;
+  const svg = d3.select("#forest").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, 1.1]).range([0, width]);
+
+  // Reference line at 0.5
+  svg.append("line").attr("x1", x(0.5)).attr("x2", x(0.5))
+    .attr("y1", 0).attr("y2", height)
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "3,3");
+
+  rows.forEach((row, i) => {
+    const cy = i * rowH + rowH / 2;
+    if (row.type === "spacer") return;
+
+    // Label
+    if (row.type === "pooled") {
+      svg.append("text").attr("x", -5).attr("y", cy + 4)
+        .attr("text-anchor", "end").attr("font-size", "9px").attr("font-weight", "bold")
+        .text(row.fold);
+    } else {
+      svg.append("text").attr("x", -5).attr("y", cy + 4)
+        .attr("text-anchor", "end").attr("font-size", "8px").attr("fill", "#555")
+        .text(row.fold);
+    }
+
+    // Tissue label (only on first study row)
+    if (row.type === "study") {
+      const tissueRows = rows.filter(r => r.tissue === row.tissue && r.type !== "spacer");
+      if (tissueRows[0] === row) {
+        svg.append("text").attr("x", -75).attr("y", cy + 4)
+          .attr("text-anchor", "start").attr("font-size", "9px").attr("font-weight", "bold")
+          .attr("fill", tissueColors[row.tissue] || "#333")
+          .text(row.tissue);
+      }
+    }
+
+    if (row.auroc === null) return;
+
+    // CI line
+    const ciLo = Math.max(0, row.ci_lo);
+    const ciHi = Math.min(1.1, row.ci_hi);
+    svg.append("line")
+      .attr("x1", x(ciLo)).attr("x2", x(ciHi))
+      .attr("y1", cy).attr("y2", cy)
+      .attr("stroke", row.type === "pooled" ? "#333" : "#888")
+      .attr("stroke-width", row.type === "pooled" ? 2 : 1);
+
+    if (row.type === "pooled") {
+      // Diamond for pooled
+      const dw = 6, dh = 8;
+      const cx = x(row.auroc);
+      svg.append("polygon")
+        .attr("points", `${cx},${cy-dh} ${cx+dw},${cy} ${cx},${cy+dh} ${cx-dw},${cy}`)
+        .attr("fill", "#333");
+      // I² annotation
+      svg.append("text").attr("x", width + 5).attr("y", cy + 4)
+        .attr("font-size", "8px").attr("fill", "#444")
+        .text(`I²=${row.I2}%`);
+    } else {
+      // Square for study, size ~ weight
+      const size = Math.max(3, Math.sqrt(row.weight) * 20);
+      svg.append("rect")
+        .attr("x", x(row.auroc) - size/2).attr("y", cy - size/2)
+        .attr("width", size).attr("height", size)
+        .attr("fill", "#555");
+    }
+
+    // AUROC value on right
+    svg.append("text").attr("x", width + 50).attr("y", cy + 4)
+      .attr("text-anchor", "end").attr("font-size", "8px")
+      .attr("fill", row.type === "pooled" ? "#000" : "#666")
+      .attr("font-weight", row.type === "pooled" ? "bold" : "normal")
+      .text(`${row.auroc.toFixed(2)} [${row.ci_lo.toFixed(2)}, ${row.ci_hi.toFixed(2)}]`);
+  });
+
+  // X axis
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(6).tickFormat(d3.format(".1f")));
+  svg.append("text").attr("x", width/2).attr("y", height + 30)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("AUROC");
+})();
+
+// =============================================
+// PANEL C: Gene vs Pathway Scatter
+// =============================================
+(function() {
+  const margin = {top: 15, right: 20, bottom: 45, left: 50};
+  const width = 350, height = 300;
+
+  const svg = d3.select("#scatter").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const xScale = d3.scaleLinear().domain([0.4, 1.0]).range([0, width]);
+  const yScale = d3.scaleLinear().domain([0.4, 1.0]).range([height, 0]);
+
+  // Diagonal (equivalence line)
+  svg.append("line")
+    .attr("x1", xScale(0.4)).attr("y1", yScale(0.4))
+    .attr("x2", xScale(1.0)).attr("y2", yScale(1.0))
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "5,5").attr("stroke-width", 1);
+
+  // Label regions
+  svg.append("text").attr("x", xScale(0.88)).attr("y", yScale(0.76))
+    .attr("font-size", "8px").attr("fill", "#aaa").attr("transform", "rotate(-45," + xScale(0.88) + "," + yScale(0.76) + ")")
+    .text("Gene better →");
+  svg.append("text").attr("x", xScale(0.55)).attr("y", yScale(0.68))
+    .attr("font-size", "8px").attr("fill", "#aaa").attr("transform", "rotate(-45," + xScale(0.55) + "," + yScale(0.68) + ")")
+    .text("← Pathway better");
+
+  // Points
+  svg.selectAll("circle.point")
+    .data(scatterData).enter().append("circle")
+    .attr("cx", d => xScale(d.gene))
+    .attr("cy", d => yScale(d.pathway))
+    .attr("r", 7)
+    .attr("fill", d => tissueColors[d.tissue] || "#333")
+    .attr("stroke", d => d.cv === "5fold_stratified" ? "#333" : "none")
+    .attr("stroke-width", d => d.cv === "5fold_stratified" ? 1.5 : 0)
+    .attr("stroke-dasharray", d => d.cv === "5fold_stratified" ? "2,2" : "none")
+    .attr("opacity", 0.85)
+    .on("mouseover", function(event, d) {
+      tooltip.style("display", "block")
+        .html(`<b>${d.tissue}</b><br>Gene: ${d.gene.toFixed(3)}<br>Best Pathway (${d.pw_type}): ${d.pathway.toFixed(3)}<br>Δ: ${(d.pathway - d.gene).toFixed(3)}<br>CV: ${d.cv}`);
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", (event.pageX + 12) + "px").style("top", (event.pageY - 10) + "px");
+    })
+    .on("mouseout", function() { tooltip.style("display", "none"); });
+
+  // Labels
+  scatterData.forEach(d => {
+    const labelOffsets = {
+      "Liver": [8, -8], "Gastrocnemius": [8, 12], "Kidney": [8, -8],
+      "Thymus": [-10, -10], "Eye": [8, 10], "Skin": [8, -8],
+      "Lung†": [8, -8], "Colon†": [8, 10]
+    };
+    const off = labelOffsets[d.tissue] || [8, -8];
+    svg.append("text")
+      .attr("x", xScale(d.gene) + off[0])
+      .attr("y", yScale(d.pathway) + off[1])
+      .attr("font-size", "8px").attr("fill", tissueColors[d.tissue] || "#333")
+      .text(d.tissue);
+  });
+
+  // Axes
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(xScale).ticks(6).tickFormat(d3.format(".2f")));
+  svg.append("text").attr("x", width/2).attr("y", height + 35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Gene AUROC (PCA-LR)");
+
+  svg.append("g").attr("class", "axis")
+    .call(d3.axisLeft(yScale).ticks(6).tickFormat(d3.format(".2f")));
+  svg.append("text").attr("x", -height/2).attr("y", -38)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("Best Pathway AUROC (PCA-LR)");
+
+  // Legend for dashed border = 5-fold
+  svg.append("circle").attr("cx", width - 100).attr("cy", 10).attr("r", 5)
+    .attr("fill", "#ccc").attr("stroke", "#333").attr("stroke-width", 1.5).attr("stroke-dasharray", "2,2");
+  svg.append("text").attr("x", width - 90).attr("y", 14)
+    .attr("font-size", "8px").attr("fill", "#555").text("5-fold CV");
+  svg.append("circle").attr("cx", width - 100).attr("cy", 26).attr("r", 5)
+    .attr("fill", "#ccc");
+  svg.append("text").attr("x", width - 90).attr("y", 30)
+    .attr("font-size", "8px").attr("fill", "#555").text("LOMO-CV");
+})();
+
+// =============================================
+// PANEL D: Nemenyi Critical Difference Diagram
+// =============================================
+(function() {
+  const margin = {top: 30, right: 30, bottom: 80, left: 30};
+  const width = 500, height = 140;
+
+  const svg = d3.select("#cd_diagram").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const minRank = 1, maxRank = 8;
+  const x = d3.scaleLinear().domain([minRank, maxRank]).range([0, width]);
+
+  // Axis at top
+  svg.append("g").attr("class", "axis")
+    .call(d3.axisTop(x).ticks(8).tickFormat(d => d));
+  svg.append("text").attr("x", width/2).attr("y", -22)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Average Rank");
+
+  // CD bar
+  const cdWidth = x(minRank + cdData.cd) - x(minRank);
+  svg.append("rect").attr("x", x(minRank) - 2).attr("y", -16)
+    .attr("width", cdWidth).attr("height", 6)
+    .attr("fill", OI.vermilion).attr("opacity", 0.7);
+  svg.append("text").attr("x", x(minRank) + cdWidth / 2).attr("y", -18)
+    .attr("text-anchor", "middle").attr("font-size", "8px").attr("fill", OI.vermilion)
+    .text(`CD = ${cdData.cd}`);
+
+  // Methods: place on left and right sides
+  const methods = cdMethodsSorted;
+  const leftMethods = methods.slice(0, 4);   // best 4
+  const rightMethods = methods.slice(4, 8);  // worst 4
+
+  const leftY0 = 30, rightY0 = 30, rowGap = 22;
+
+  // Draw left methods (best ranks, labels on left)
+  leftMethods.forEach((m, i) => {
+    const rank = m[1];
+    const yPos = leftY0 + i * rowGap;
+    // Horizontal connector from rank position to left
+    svg.append("line").attr("x1", 0).attr("x2", x(rank))
+      .attr("y1", yPos).attr("y2", yPos)
+      .attr("stroke", "#333").attr("stroke-width", 1);
+    // Tick down from axis
+    svg.append("line").attr("x1", x(rank)).attr("x2", x(rank))
+      .attr("y1", 0).attr("y2", yPos)
+      .attr("stroke", "#333").attr("stroke-width", 1);
+    // Label
+    svg.append("text").attr("x", -5).attr("y", yPos + 4)
+      .attr("text-anchor", "end").attr("font-size", "9px")
+      .text(`${m[0]} (${rank.toFixed(1)})`);
+  });
+
+  // Draw right methods (worst ranks, labels on right)
+  rightMethods.forEach((m, i) => {
+    const rank = m[1];
+    const yPos = rightY0 + i * rowGap;
+    // Horizontal connector from rank position to right
+    svg.append("line").attr("x1", x(rank)).attr("x2", width)
+      .attr("y1", yPos).attr("y2", yPos)
+      .attr("stroke", "#333").attr("stroke-width", 1);
+    // Tick down from axis
+    svg.append("line").attr("x1", x(rank)).attr("x2", x(rank))
+      .attr("y1", 0).attr("y2", yPos)
+      .attr("stroke", "#333").attr("stroke-width", 1);
+    // Label
+    svg.append("text").attr("x", width + 5).attr("y", yPos + 4)
+      .attr("text-anchor", "start").attr("font-size", "9px")
+      .text(`${m[0]} (${rank.toFixed(1)})`);
+  });
+
+  // Draw Nemenyi groups as thick bars connecting non-significant methods
+  const groups = cdData.groups;
+  const groupColors = [OI.blue, OI.green, OI.orange];
+  groups.forEach((g, gi) => {
+    const methodNames = g.methods.map(m => {
+      // Map back from key to label
+      const mapping = {"PCA-LR": "pca_lr", "ElasticNet-LR": "elasticnet_lr", "Random Forest": "rf", "XGBoost": "xgb", "SVM-RBF": "svm_rbf", "kNN": "knn", "MLP": "mlp", "TabNet": "tabnet"};
+      return cdData.ranks[Object.keys(cdData.ranks).find(k => {
+        const key = mapping[k];
+        return key !== undefined;
+      })];
+    });
+    // Get rank range for this group
+    const ranks = g.avg_ranks;
+    const minR = Math.min(...ranks);
+    const maxR = Math.max(...ranks);
+    const barY = height - 30 + gi * 14;
+
+    svg.append("line")
+      .attr("x1", x(minR)).attr("x2", x(maxR))
+      .attr("y1", barY).attr("y2", barY)
+      .attr("stroke", groupColors[gi % groupColors.length])
+      .attr("stroke-width", 3)
+      .attr("opacity", 0.7);
+    svg.append("text").attr("x", x((minR + maxR) / 2)).attr("y", barY - 4)
+      .attr("text-anchor", "middle").attr("font-size", "8px")
+      .attr("fill", groupColors[gi % groupColors.length])
+      .text(`Group ${g.group}`);
+  });
+
+  // Stat annotation
+  svg.append("text").attr("x", width / 2).attr("y", height + 30)
+    .attr("text-anchor", "middle").attr("font-size", "9px").attr("fill", "#444")
+    .text(`Friedman χ² = ${cdData.chi2}, p = ${cdData.p_value.toFixed(4)} | ${cdData.k} methods, ${cdData.n} tissues | CD = ${cdData.cd} (α = 0.05)`);
+})();
+</script>
+</body>
+</html>

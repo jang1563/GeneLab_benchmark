@@ -1,0 +1,43 @@
+{
+  "experiment": "D5",
+  "model": "PCA-LR",
+  "model_key": "pca_lr",
+  "tissue": "thymus",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 2,
+  "classes": [
+    "MHU",
+    "RR"
+  ],
+  "class_distribution": {
+    "MHU": 18,
+    "RR": 74
+  },
+  "n_samples": 92,
+  "macro_f1": 1.0,
+  "accuracy": 1.0,
+  "ci_lower": 1.0,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU": 1.0,
+    "RR": 1.0
+  },
+  "confusion_matrix": [
+    [
+      18,
+      0
+    ],
+    [
+      0,
+      74
+    ]
+  ],
+  "mean_train_time_s": 0.01,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 4.2,
+  "timestamp": "2026-03-22T03:31:21.158247"
+}

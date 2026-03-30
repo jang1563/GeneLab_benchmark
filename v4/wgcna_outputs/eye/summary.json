@@ -1,0 +1,38 @@
+{
+  "tissue": "eye",
+  "n_samples": 41,
+  "n_genes_input": 2998,
+  "soft_threshold_beta": 9,
+  "r2_achieved": 0.8075,
+  "r2_threshold_met": true,
+  "min_module_size": 20,
+  "n_modules_raw": 8,
+  "n_modules_final": 7,
+  "n_grey_genes": 514,
+  "modules": [
+    "black",
+    "blue",
+    "brown",
+    "green",
+    "pink",
+    "red",
+    "turquoise"
+  ],
+  "n_genes_per_module": {
+    "black": 38,
+    "blue": 718,
+    "brown": 356,
+    "green": 136,
+    "pink": 30,
+    "red": 98,
+    "turquoise": 1108
+  },
+  "n_traits": 4,
+  "n_significant_module_trait": 0,
+  "network_type": "signed hybrid",
+  "cor_function": "pearson",
+  "merge_cut_height": 0.25,
+  "deep_split": 2,
+  "implementation": "manual_numpy_scipy",
+  "timestamp": "2026-03-24T01:12:48"
+}

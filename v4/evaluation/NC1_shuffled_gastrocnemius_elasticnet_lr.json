@@ -1,0 +1,57 @@
+{
+  "experiment": "NC1_shuffled",
+  "model": "ElasticNet-LR",
+  "model_key": "elasticnet_lr",
+  "tissue": "gastrocnemius",
+  "feature_type": "gene",
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.2929,
+  "std_auroc": 0.0981,
+  "min_auroc": 0.2,
+  "max_auroc": 0.4286,
+  "mean_perm_pvalue": 0.8585,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 99.0,
+  "timestamp": "2026-03-22T03:21:38.783311",
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "fold_name": "fold_RR-1_test",
+      "auroc": 0.4286,
+      "bootstrap_mean": 0.4296,
+      "ci_lower": 0.0,
+      "ci_upper": 0.8125,
+      "perm_pvalue": 0.6883,
+      "n_train": 20,
+      "n_test": 12,
+      "train_time_s": 25.36
+    },
+    {
+      "test_mission": "RR-5",
+      "fold_name": "fold_RR-5_test",
+      "auroc": 0.25,
+      "bootstrap_mean": 0.2554,
+      "ci_lower": 0.0,
+      "ci_upper": 0.6667,
+      "perm_pvalue": 0.9461,
+      "n_train": 20,
+      "n_test": 12,
+      "train_time_s": 28.31
+    },
+    {
+      "test_mission": "RR-9",
+      "fold_name": "fold_RR-9_test",
+      "auroc": 0.2,
+      "bootstrap_mean": 0.2013,
+      "ci_lower": 0.0,
+      "ci_upper": 0.625,
+      "perm_pvalue": 0.9411,
+      "n_train": 24,
+      "n_test": 8,
+      "train_time_s": 31.64
+    }
+  ]
+}

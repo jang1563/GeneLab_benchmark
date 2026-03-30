@@ -1,0 +1,61 @@
+{
+  "experiment": "NC2_random",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "skin",
+  "feature_type": "random_gaussian",
+  "n_original_features": 26814,
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.3748,
+  "std_auroc": 0.0641,
+  "min_auroc": 0.2917,
+  "max_auroc": 0.4476,
+  "mean_perm_pvalue": 0.8641,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 66.6,
+  "timestamp": "2026-03-22T03:23:48.028863",
+  "folds": [
+    {
+      "test_mission": "MHU-2",
+      "fold_name": "fold_MHU-2_test",
+      "auroc": 0.2917,
+      "bootstrap_mean": 0.2928,
+      "ci_lower": 0.1217,
+      "ci_upper": 0.4786,
+      "perm_pvalue": 0.973,
+      "n_train": 83,
+      "n_test": 35,
+      "n_features": 26814,
+      "train_time_s": 15.68
+    },
+    {
+      "test_mission": "RR-6",
+      "fold_name": "fold_RR-6_test",
+      "auroc": 0.4476,
+      "bootstrap_mean": 0.4531,
+      "ci_lower": 0.2941,
+      "ci_upper": 0.6254,
+      "perm_pvalue": 0.7542,
+      "n_train": 65,
+      "n_test": 53,
+      "n_features": 26814,
+      "train_time_s": 17.11
+    },
+    {
+      "test_mission": "RR-7",
+      "fold_name": "fold_RR-7_test",
+      "auroc": 0.385,
+      "bootstrap_mean": 0.3882,
+      "ci_lower": 0.1666,
+      "ci_upper": 0.625,
+      "perm_pvalue": 0.8651,
+      "n_train": 88,
+      "n_test": 30,
+      "n_features": 26814,
+      "train_time_s": 14.63
+    }
+  ]
+}

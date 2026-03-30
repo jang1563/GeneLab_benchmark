@@ -1,0 +1,892 @@
+{
+  "panel_size": 20,
+  "n_candidates_scored": 1919,
+  "max_possible_score": 12,
+  "panel": [
+    {
+      "rank": 1,
+      "gene": "MUP22",
+      "human_symbol": "MUP22",
+      "score": 5,
+      "sources": {
+        "shap": 3,
+        "multi_tissue": 2
+      },
+      "tissues": [
+        "colon",
+        "gastrocnemius",
+        "lung",
+        "skin"
+      ],
+      "n_tissues": 4,
+      "drugs": []
+    },
+    {
+      "rank": 2,
+      "gene": "Thrsp",
+      "human_symbol": "THRSP",
+      "score": 5,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 1,
+        "multi_tissue": 2,
+        "druggable": 1
+      },
+      "tissues": [
+        "colon",
+        "kidney",
+        "lung",
+        "skin"
+      ],
+      "n_tissues": 4,
+      "drugs": [
+        {
+          "drug": "LIOTHYRONINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "STREPTOZOCIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DEXAMETHASONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "gene": "Apoa1",
+      "human_symbol": "APOA1",
+      "score": 5,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 1,
+        "multi_tissue": 2,
+        "druggable": 1
+      },
+      "tissues": [
+        "colon",
+        "gastrocnemius",
+        "skin",
+        "thymus"
+      ],
+      "n_tissues": 4,
+      "drugs": [
+        {
+          "drug": "TESTOSTERONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "GLUCAGON (RDNA)",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DEHYDRATED ALCOHOL",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "TRETINOIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "FUROSEMIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "LAMIVUDINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "PROGESTIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "gene": "THRSP",
+      "human_symbol": "THRSP",
+      "score": 5,
+      "sources": {
+        "shap": 3,
+        "multi_tissue": 1,
+        "druggable": 1
+      },
+      "tissues": [
+        "colon",
+        "lung",
+        "skin"
+      ],
+      "n_tissues": 3,
+      "drugs": [
+        {
+          "drug": "LIOTHYRONINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "STREPTOZOCIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DEXAMETHASONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "gene": "Top2a",
+      "human_symbol": "TOP2A",
+      "score": 5,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1,
+        "druggable": 1
+      },
+      "tissues": [
+        "eye",
+        "kidney",
+        "thymus"
+      ],
+      "n_tissues": 3,
+      "drugs": [
+        {
+          "drug": "DIGITOXIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "EPIRUBICIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "PEFLOXACIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "IDARUBICIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "GENISTEIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DOXORUBICIN HYDROCHLORIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DAUNORUBICIN LIPOSOMAL",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "CAMPTOTHECIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "TENIPOSIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DEXRAZOXANE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "ETOPOSIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DACTINOMYCIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "PODOFILOX",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "FLUOROURACIL",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "PIXANTRONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DAUNORUBICIN CITRATE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "ETOPOSIDE PHOSPHATE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DEXRAZOXANE HYDROCHLORIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "AMSACRINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "HYDROQUINONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "ENOXACIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "VINCRISTINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "CINOXACIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "QUERCETIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "MITOXANTRONE HYDROCHLORIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "NALIDIXIC ACID",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DAUNORUBICIN HYDROCHLORIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "MITOXANTRONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "VALRUBICIN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "PACLITAXEL",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "gene": "Serpina6",
+      "human_symbol": "SERPINA6",
+      "score": 5,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1,
+        "druggable": 1
+      },
+      "tissues": [
+        "colon",
+        "thymus"
+      ],
+      "n_tissues": 2,
+      "drugs": [
+        {
+          "drug": "CICLESONIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "ALCLOMETASONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "RIMEXOLONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DOXORUBICIN HYDROCHLORIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "PARAMETHASONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DAUNORUBICIN LIPOSOMAL",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "TRIAMCINOLONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "BECLOMETHASONE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "gene": "Tnnc1",
+      "human_symbol": "TNNC1",
+      "score": 5,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1,
+        "druggable": 1
+      },
+      "tissues": [
+        "gastrocnemius",
+        "skin"
+      ],
+      "n_tissues": 2,
+      "drugs": [
+        {
+          "drug": "BEPRIDIL",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "LEVOSIMENDAN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "gene": "Myh7",
+      "human_symbol": "MYH7",
+      "score": 5,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1,
+        "druggable": 1
+      },
+      "tissues": [
+        "gastrocnemius",
+        "skin"
+      ],
+      "n_tissues": 2,
+      "drugs": [
+        {
+          "drug": "MAVACAMTEN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "gene": "Ddit4",
+      "human_symbol": "DDIT4",
+      "score": 5,
+      "sources": {
+        "wgcna_hub": 2,
+        "druggable": 1,
+        "literature": 2
+      },
+      "tissues": [
+        "gastrocnemius"
+      ],
+      "n_tissues": 1,
+      "drugs": [
+        {
+          "drug": "DOXEPIN HYDROCHLORIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "DESIPRAMINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "CLOMIPRAMINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "TRIMIPRAMINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "NORTRIPTYLINE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        },
+        {
+          "drug": "AMITRIPTYLINE HYDROCHLORIDE",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "gene": "H4c8",
+      "human_symbol": "H4C8",
+      "score": 4,
+      "sources": {
+        "wgcna_hub": 2,
+        "multi_tissue": 2
+      },
+      "tissues": [
+        "kidney",
+        "liver",
+        "skin",
+        "thymus"
+      ],
+      "n_tissues": 4,
+      "drugs": []
+    },
+    {
+      "rank": 11,
+      "gene": "Retn",
+      "human_symbol": "RETN",
+      "score": 4,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "colon",
+        "gastrocnemius",
+        "lung"
+      ],
+      "n_tissues": 3,
+      "drugs": []
+    },
+    {
+      "rank": 12,
+      "gene": "NPAS2",
+      "human_symbol": "NPAS2",
+      "score": 4,
+      "sources": {
+        "shap": 3,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "gastrocnemius",
+        "liver",
+        "skin"
+      ],
+      "n_tissues": 3,
+      "drugs": []
+    },
+    {
+      "rank": 13,
+      "gene": "Myoz2",
+      "human_symbol": "MYOZ2",
+      "score": 4,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "gastrocnemius",
+        "liver",
+        "thymus"
+      ],
+      "n_tissues": 3,
+      "drugs": []
+    },
+    {
+      "rank": 14,
+      "gene": "Cfd",
+      "human_symbol": "CFD",
+      "score": 4,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 1,
+        "multi_tissue": 1,
+        "druggable": 1
+      },
+      "tissues": [
+        "kidney",
+        "liver",
+        "lung"
+      ],
+      "n_tissues": 3,
+      "drugs": [
+        {
+          "drug": "DANICOPAN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 15,
+      "gene": "Rpl36",
+      "human_symbol": "RPL36",
+      "score": 4,
+      "sources": {
+        "wgcna_hub": 2,
+        "multi_tissue": 1,
+        "druggable": 1
+      },
+      "tissues": [
+        "liver",
+        "skin",
+        "thymus"
+      ],
+      "n_tissues": 3,
+      "drugs": [
+        {
+          "drug": "ATALUREN",
+          "tier": "tier1_approved",
+          "source": "DGIdb"
+        }
+      ]
+    },
+    {
+      "rank": 16,
+      "gene": "GM24497",
+      "human_symbol": "GM24497",
+      "score": 4,
+      "sources": {
+        "shap": 3,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "eye",
+        "gastrocnemius",
+        "thymus"
+      ],
+      "n_tissues": 3,
+      "drugs": []
+    },
+    {
+      "rank": 17,
+      "gene": "PER2",
+      "human_symbol": "PER2",
+      "score": 4,
+      "sources": {
+        "shap": 3,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "eye",
+        "gastrocnemius",
+        "lung"
+      ],
+      "n_tissues": 3,
+      "drugs": []
+    },
+    {
+      "rank": 18,
+      "gene": "Ms4a4c",
+      "human_symbol": "MS4A4C",
+      "score": 4,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "liver",
+        "thymus"
+      ],
+      "n_tissues": 2,
+      "drugs": []
+    },
+    {
+      "rank": 19,
+      "gene": "Snora70",
+      "human_symbol": "SNORA70",
+      "score": 4,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "kidney",
+        "thymus"
+      ],
+      "n_tissues": 2,
+      "drugs": []
+    },
+    {
+      "rank": 20,
+      "gene": "Lrrc14b",
+      "human_symbol": "LRRC14B",
+      "score": 4,
+      "sources": {
+        "shap": 1,
+        "wgcna_hub": 2,
+        "multi_tissue": 1
+      },
+      "tissues": [
+        "kidney",
+        "skin"
+      ],
+      "n_tissues": 2,
+      "drugs": []
+    }
+  ],
+  "score_distribution": {
+    "min": 1,
+    "max": 5,
+    "mean": 1.39,
+    "median": 1,
+    "n_ge10": 0,
+    "n_ge8": 0,
+    "n_ge6": 0,
+    "n_ge4": 35
+  },
+  "panel_validation": {
+    "liver": {
+      "auroc": 0.7544,
+      "std_auroc": 0.1225,
+      "n_folds": 6,
+      "n_panel_genes_found": 16,
+      "panel_genes_matched": [
+        "Retn",
+        "Ddit4",
+        "Top2a",
+        "Lrrc14b",
+        "Ms4a4c",
+        "Myoz2",
+        "Apoa1",
+        "Thrsp",
+        "Myh7",
+        "Rpl36",
+        "Serpina6",
+        "H4c8",
+        "Cfd",
+        "Tnnc1",
+        "Snora70",
+        "Snora70"
+      ]
+    },
+    "gastrocnemius": {
+      "auroc": 0.8056,
+      "std_auroc": 0.2187,
+      "n_folds": 3,
+      "n_panel_genes_found": 14,
+      "panel_genes_matched": [
+        "Retn",
+        "Ddit4",
+        "Top2a",
+        "Lrrc14b",
+        "Myoz2",
+        "Apoa1",
+        "Thrsp",
+        "Myh7",
+        "Rpl36",
+        "Serpina6",
+        "H4c8",
+        "Cfd",
+        "Tnnc1",
+        "Snora70"
+      ]
+    },
+    "kidney": {
+      "auroc": 0.704,
+      "std_auroc": 0.0286,
+      "n_folds": 3,
+      "n_panel_genes_found": 15,
+      "panel_genes_matched": [
+        "Retn",
+        "Ddit4",
+        "Top2a",
+        "Lrrc14b",
+        "Ms4a4c",
+        "Myoz2",
+        "Apoa1",
+        "Thrsp",
+        "Myh7",
+        "Rpl36",
+        "Serpina6",
+        "H4c8",
+        "Cfd",
+        "Tnnc1",
+        "Snora70"
+      ]
+    },
+    "thymus": {
+      "auroc": 0.6532,
+      "std_auroc": 0.2183,
+      "n_folds": 4,
+      "n_panel_genes_found": 15,
+      "panel_genes_matched": [
+        "Retn",
+        "Ddit4",
+        "Top2a",
+        "Lrrc14b",
+        "Ms4a4c",
+        "Myoz2",
+        "Apoa1",
+        "Thrsp",
+        "Myh7",
+        "Rpl36",
+        "Serpina6",
+        "H4c8",
+        "Cfd",
+        "Tnnc1",
+        "Snora70"
+      ]
+    },
+    "eye": {
+      "auroc": 0.7276,
+      "std_auroc": 0.042,
+      "n_folds": 3,
+      "n_panel_genes_found": 14,
+      "panel_genes_matched": [
+        "Retn",
+        "Ddit4",
+        "Top2a",
+        "Lrrc14b",
+        "Ms4a4c",
+        "Myoz2",
+        "Apoa1",
+        "Thrsp",
+        "Myh7",
+        "Rpl36",
+        "H4c8",
+        "Cfd",
+        "Snora70",
+        "Tnnc1"
+      ]
+    },
+    "skin": {
+      "auroc": 0.6502,
+      "std_auroc": 0.0186,
+      "n_folds": 3,
+      "n_panel_genes_found": 14,
+      "panel_genes_matched": [
+        "Snora70",
+        "Rpl36",
+        "Tnnc1",
+        "Retn",
+        "Thrsp",
+        "Apoa1",
+        "Ms4a4c",
+        "Top2a",
+        "Ddit4",
+        "Myh7",
+        "Myoz2",
+        "Lrrc14b",
+        "H4c8",
+        "Cfd"
+      ]
+    },
+    "lung": {
+      "auroc": 0.5955,
+      "std_auroc": 0.1874,
+      "n_folds": 5,
+      "n_panel_genes_found": 15,
+      "panel_genes_matched": [
+        "Retn",
+        "Ddit4",
+        "Top2a",
+        "Lrrc14b",
+        "Ms4a4c",
+        "Myoz2",
+        "Apoa1",
+        "Thrsp",
+        "Myh7",
+        "Rpl36",
+        "Serpina6",
+        "H4c8",
+        "Cfd",
+        "Snora70",
+        "Tnnc1"
+      ]
+    },
+    "colon": {
+      "auroc": 0.5619,
+      "std_auroc": 0.135,
+      "n_folds": 5,
+      "n_panel_genes_found": 15,
+      "panel_genes_matched": [
+        "Retn",
+        "Ddit4",
+        "Top2a",
+        "Lrrc14b",
+        "Ms4a4c",
+        "Myoz2",
+        "Apoa1",
+        "Thrsp",
+        "Myh7",
+        "Rpl36",
+        "Serpina6",
+        "H4c8",
+        "Cfd",
+        "Snora70",
+        "Tnnc1"
+      ]
+    }
+  },
+  "evidence_sources": {
+    "shap_consensus": 5,
+    "shap_tissue_specific": 122,
+    "shap_any_top100": 1362,
+    "wgcna_hub_total": 540,
+    "wgcna_hub_condition": 188,
+    "ppi_hubs": 6,
+    "lr_genes": 2,
+    "fda_drug_targets": 195,
+    "clinical_drug_targets": 0,
+    "drosophila_orthologs": 0,
+    "cell2020_reference": 67
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "experiment": "D3",
+  "model": "kNN",
+  "model_key": "knn",
+  "tissue": "skin",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 3,
+  "classes": [
+    "MHU-2",
+    "RR-6",
+    "RR-7"
+  ],
+  "class_distribution": {
+    "MHU-2": 47,
+    "RR-6": 53,
+    "RR-7": 30
+  },
+  "n_samples": 130,
+  "macro_f1": 1.0,
+  "accuracy": 1.0,
+  "ci_lower": 1.0,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU-2": 1.0,
+    "RR-6": 1.0,
+    "RR-7": 1.0
+  },
+  "confusion_matrix": [
+    [
+      47,
+      0,
+      0
+    ],
+    [
+      0,
+      53,
+      0
+    ],
+    [
+      0,
+      0,
+      30
+    ]
+  ],
+  "mean_train_time_s": 0.02,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 20.4,
+  "timestamp": "2026-03-22T03:29:47.273433"
+}

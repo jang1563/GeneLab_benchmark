@@ -1,0 +1,95 @@
+{
+  "experiment": "D3",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "liver",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 6,
+  "classes": [
+    "MHU-2",
+    "RR-1",
+    "RR-3",
+    "RR-6",
+    "RR-8",
+    "RR-9"
+  ],
+  "class_distribution": {
+    "MHU-2": 9,
+    "RR-1": 14,
+    "RR-3": 18,
+    "RR-6": 59,
+    "RR-8": 141,
+    "RR-9": 23
+  },
+  "n_samples": 264,
+  "macro_f1": 0.0724,
+  "accuracy": 0.125,
+  "ci_lower": 0.0465,
+  "ci_upper": 0.1033,
+  "perm_pvalue": 0.959,
+  "per_class_f1": {
+    "MHU-2": 0.0,
+    "RR-1": 0.0727,
+    "RR-3": 0.0,
+    "RR-6": 0.0615,
+    "RR-8": 0.2376,
+    "RR-9": 0.0625
+  },
+  "confusion_matrix": [
+    [
+      0,
+      6,
+      3,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      6,
+      2,
+      0,
+      6,
+      0
+    ],
+    [
+      0,
+      14,
+      0,
+      0,
+      4,
+      0
+    ],
+    [
+      0,
+      27,
+      7,
+      2,
+      21,
+      2
+    ],
+    [
+      0,
+      83,
+      24,
+      4,
+      24,
+      6
+    ],
+    [
+      0,
+      15,
+      1,
+      0,
+      6,
+      1
+    ]
+  ],
+  "mean_train_time_s": 12.66,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 676.2,
+  "timestamp": "2026-03-22T03:35:01.786501"
+}
