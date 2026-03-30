@@ -34,13 +34,28 @@
       "expected_overlap": 13.16,
       "fold_enrichment": 0.76,
       "hypergeometric_p": 0.8523897256537083,
-      "permutation_p": 0.8540145985401459,
+      "permutation_p": 0.8536146385361464,
       "significant": false
     },
     "wgcna_hubs": {
-      "n_human_genes": 0,
-      "n_overlap": 0,
-      "note": "No mappable genes in universe"
+      "description": "WGCNA hub genes (kME>0.8, 6 tissues)",
+      "n_mouse_genes": 540,
+      "n_human_genes": 269,
+      "n_overlap_drr": 7,
+      "overlap_genes": [
+        "CENPF",
+        "ELOVL7",
+        "GTPBP6",
+        "KIF1A",
+        "KRT78",
+        "PKHD1L1",
+        "TCHH"
+      ],
+      "expected_overlap": 7.15,
+      "fold_enrichment": 0.979,
+      "hypergeometric_p": 0.5763449035386545,
+      "permutation_p": 0.5792420757924207,
+      "significant": false
     },
     "biomarker_panel": {
       "description": "v5 consensus biomarker panel (20 genes)",
@@ -176,5 +191,5 @@
       "Gm24497"
     ]
   },
-  "timestamp": "2026-03-30T07:39:21.639385"
+  "timestamp": "2026-03-30T08:50:26.141425"
 }
