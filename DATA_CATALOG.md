@@ -1,6 +1,6 @@
 # DATA_CATALOG.md — GeneLab_benchmark
-**자동 생성**: `catalog_datasets.py` — 2026-02-28 07:18 UTC (수동 업데이트: 2026-03-01 — A5 Skin OSD-254/RR-5 반영)
-**PLAN.md 버전**: v0.5
+**자동 생성**: `catalog_datasets.py` — 2026-02-28 07:18 UTC (수동 업데이트: 2026-03-22 — v4 lung/colon 추가)
+**PLAN.md 버전**: v1.6 | **Benchmark 버전**: v4.0
 
 > ⚠️ Status legend:
 > ✅ Verified (bulk RNA-seq) | ❌ NOT FOUND | ⚠️ Wrong assay type
@@ -52,12 +52,14 @@
 | OSD-335 | liver | HU+HZE | exc | ⛔ EXCLUDED (design) | bulk_rnaseq | unknown | 80 | EXCLUDE: miRNA-Seq (not mRNA bulk RNA-seq) |
 | OSD-270 | heart | RR-3 | exc | ⛔ EXCLUDED (design) | spatial | GC | 15 | EXCLUDE from A: Visium spatial transcriptomics |
 | OSD-596 | heart | NG-11 | exc | ⛔ EXCLUDED (design) | unknown | unknown | 0 | heart — verify assay type, ≤2 missions |
+| **OSD-248** | **lung** | **RR-6** | **2a** | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC, BC | 58 | **v4 추가** — 20 FLT + 19 GC + 19 BC. BC는 v4에서 ground로 포함 |
+| **OSD-247** | **colon** | **RR-6** | **2a** | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC, BC | 54 | **v4 추가** — 19 FLT + 17 GC + 18 BC. BC는 v4에서 ground로 포함 |
 
 ---
 
 ## Summary
 
-- ✅ Verified (bulk RNA-seq): **24** (+2: OSD-240/241 Track 2b, OSD-254 C57BL/6J subset)
+- ✅ Verified (bulk RNA-seq): **26** (+2 v4: OSD-247 colon, OSD-248 lung; +2 Track 2b: OSD-240/241; +1 subset: OSD-254)
 - ❌ Not Found: **2**
 - ⚠️ Wrong assay type / Track 2b: **4** (OSD-4 microarray, OSD-240/241 BAL-TAL)
 - ⛔/🔁 Excluded by design: **10**

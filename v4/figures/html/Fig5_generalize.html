@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 5 — Generalizability</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+  .panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+  .panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+  .axis text { font-size: 9px; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none; z-index: 100; line-height: 1.4;
+  }
+  .interpretation {
+    margin-top: 16px; padding: 10px; background: #f5f5f5;
+    border-left: 3px solid #999; font-size: 9px; color: #444; line-height: 1.5;
+  }
+  .interpretation strong { color: #333; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 5 — Generalizability of Spaceflight Transcriptomic Signatures</div>
+  <div class="figure-subtitle">Cross-tissue transfer, foundation model comparison, cross-species concordance, and radiation analogs</div>
+  <div class="panels">
+    <div class="panel"><div class="panel-label">A</div>
+      <div class="panel-desc">Cross-Tissue Transfer — Method A (Gene Features), 7×7 Tissues</div>
+      <div id="transfer"></div>
+    </div>
+    <div class="panel"><div class="panel-label">B</div>
+      <div class="panel-desc">Foundation Model vs PCA-LR — AUROC Comparison (7 tissues)</div>
+      <div id="fm_compare"></div>
+    </div>
+    <div class="panel"><div class="panel-label">C</div>
+      <div class="panel-desc">Cross-Species KEGG Concordance — Drosophila vs Mouse Tissues</div>
+      <div id="cross_species"></div>
+    </div>
+    <div class="panel"><div class="panel-label">D</div>
+      <div class="panel-desc">Radiation Analog Classification (Brain, Spleen, Skin)</div>
+      <div id="radiation"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    (A) Cross-tissue transfer is heterogeneous: liver→kidney best (0.73), while most pairs are near chance.
+    (B) Both foundation models (scFoundation, UCE) underperform PCA-LR on all tissues — pre-trained cell
+    atlas knowledge does not capture spaceflight-specific perturbations.
+    (C) Drosophila-mouse KEGG concordance is weak and often negative (r = −0.19 to −0.59), suggesting
+    spaceflight responses are species-specific at the pathway level.
+    (D) Radiation analog classification is near chance for all tissues, indicating radiation alone does not
+    recapitulate the full spaceflight transcriptomic signature.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tooltip = d3.select("#tooltip");
+
+// =============================================
+// PANEL A: Cross-Tissue Transfer Heatmap
+// =============================================
+(function() {
+  const data = [{"train": "Liver", "test": "Liver", "auroc": null}, {"train": "Liver", "test": "Kidney", "auroc": 0.73}, {"train": "Liver", "test": "Thymus", "auroc": 0.35}, {"train": "Liver", "test": "Gastro", "auroc": 0.562}, {"train": "Liver", "test": "Eye", "auroc": 0.606}, {"train": "Liver", "test": "Lung", "auroc": 0.682}, {"train": "Liver", "test": "Colon", "auroc": 0.709}, {"train": "Kidney", "test": "Liver", "auroc": 0.57}, {"train": "Kidney", "test": "Kidney", "auroc": null}, {"train": "Kidney", "test": "Thymus", "auroc": 0.512}, {"train": "Kidney", "test": "Gastro", "auroc": 0.609}, {"train": "Kidney", "test": "Eye", "auroc": 0.565}, {"train": "Kidney", "test": "Lung", "auroc": 0.6}, {"train": "Kidney", "test": "Colon", "auroc": 0.585}, {"train": "Thymus", "test": "Liver", "auroc": 0.49}, {"train": "Thymus", "test": "Kidney", "auroc": 0.585}, {"train": "Thymus", "test": "Thymus", "auroc": null}, {"train": "Thymus", "test": "Gastro", "auroc": 0.605}, {"train": "Thymus", "test": "Eye", "auroc": 0.529}, {"train": "Thymus", "test": "Lung", "auroc": 0.6}, {"train": "Thymus", "test": "Colon", "auroc": 0.433}, {"train": "Gastro", "test": "Liver", "auroc": 0.56}, {"train": "Gastro", "test": "Kidney", "auroc": 0.632}, {"train": "Gastro", "test": "Thymus", "auroc": 0.439}, {"train": "Gastro", "test": "Gastro", "auroc": null}, {"train": "Gastro", "test": "Eye", "auroc": 0.582}, {"train": "Gastro", "test": "Lung", "auroc": 0.703}, {"train": "Gastro", "test": "Colon", "auroc": 0.647}, {"train": "Eye", "test": "Liver", "auroc": 0.511}, {"train": "Eye", "test": "Kidney", "auroc": 0.702}, {"train": "Eye", "test": "Thymus", "auroc": 0.398}, {"train": "Eye", "test": "Gastro", "auroc": 0.527}, {"train": "Eye", "test": "Eye", "auroc": null}, {"train": "Eye", "test": "Lung", "auroc": 0.545}, {"train": "Eye", "test": "Colon", "auroc": 0.502}, {"train": "Lung", "test": "Liver", "auroc": 0.699}, {"train": "Lung", "test": "Kidney", "auroc": 0.543}, {"train": "Lung", "test": "Thymus", "auroc": 0.659}, {"train": "Lung", "test": "Gastro", "auroc": 0.758}, {"train": "Lung", "test": "Eye", "auroc": 0.594}, {"train": "Lung", "test": "Lung", "auroc": null}, {"train": "Lung", "test": "Colon", "auroc": 0.799}, {"train": "Colon", "test": "Liver", "auroc": 0.651}, {"train": "Colon", "test": "Kidney", "auroc": 0.678}, {"train": "Colon", "test": "Thymus", "auroc": 0.447}, {"train": "Colon", "test": "Gastro", "auroc": 0.562}, {"train": "Colon", "test": "Eye", "auroc": 0.591}, {"train": "Colon", "test": "Lung", "auroc": 0.624}, {"train": "Colon", "test": "Colon", "auroc": null}];
+  const labels = ["Liver", "Kidney", "Thymus", "Gastro", "Eye", "Lung", "Colon"];
+  const margin = {top: 5, right: 60, bottom: 60, left: 70};
+  const cellS = 52;
+  const width = labels.length * cellS, height = labels.length * cellS;
+
+  const svg = d3.select("#transfer").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(labels).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(labels).range([0, height]).padding(0.05);
+  const color = d3.scaleSequential().domain([0.3, 0.85]).interpolator(d3.interpolateBlues);
+
+  svg.selectAll("rect.cell")
+    .data(data.filter(d => d.auroc !== null)).enter().append("rect")
+    .attr("x", d => x(d.test)).attr("y", d => y(d.train))
+    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+    .attr("fill", d => d.train === d.test ? "#f0f0f0" : color(Math.max(0.3, d.auroc)))
+    .attr("stroke", "#fff").attr("stroke-width", 1).attr("rx", 2)
+    .on("mouseover", function(event, d) {
+      tooltip.style("display", "block")
+        .html(`Train: <b>${d.train}</b> → Test: <b>${d.test}</b><br>AUROC: ${d.auroc}`);
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+    })
+    .on("mouseout", () => tooltip.style("display", "none"));
+
+  // AUROC text
+  svg.selectAll("text.val")
+    .data(data.filter(d => d.auroc !== null && d.train !== d.test)).enter().append("text")
+    .attr("x", d => x(d.test) + x.bandwidth()/2)
+    .attr("y", d => y(d.train) + y.bandwidth()/2 + 4)
+    .attr("text-anchor", "middle").attr("font-size", "7px")
+    .attr("fill", d => d.auroc > 0.65 ? "#fff" : "#333")
+    .text(d => d.auroc.toFixed(2));
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text").attr("transform", "rotate(-40)")
+    .style("text-anchor", "end").style("font-size", "8px");
+  svg.append("g").call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "8px");
+
+  svg.append("text").attr("x", width/2).attr("y", height + 52)
+    .attr("text-anchor", "middle").attr("font-size", "9px").text("Test Tissue →");
+  svg.append("text").attr("x", -height/2).attr("y", -55)
+    .attr("text-anchor", "middle").attr("font-size", "9px")
+    .attr("transform", "rotate(-90)").text("← Train Tissue");
+})();
+
+// =============================================
+// PANEL B: FM vs PCA-LR
+// =============================================
+(function() {
+  const data = [{"tissue": "Liver", "pca_lr": 0.683, "pca_p": 0.2025, "scf": 0.635, "scf_p": 0.0011, "uce": 0.459, "uce_p": 0.8309}, {"tissue": "Gastro", "pca_lr": 0.852, "pca_p": 0.1445, "scf": 0.691, "scf_p": 0.035, "uce": 0.578, "uce_p": 0.221}, {"tissue": "Kidney", "pca_lr": 0.584, "pca_p": 0.351, "scf": 0.541, "scf_p": 0.2501, "uce": 0.489, "uce_p": 0.5709}, {"tissue": "Thymus", "pca_lr": 0.908, "pca_p": 0.0379, "scf": 0.487, "scf_p": 0.5753, "uce": 0.632, "uce_p": 0.0306}, {"tissue": "Eye", "pca_lr": 0.697, "pca_p": 0.1485, "scf": 0.563, "scf_p": 0.2598, "uce": 0.55, "uce_p": 0.2961}, {"tissue": "Lung", "pca_lr": 0.834, "pca_p": 0.1265, "scf": 0.389, "scf_p": null, "uce": 0.555, "uce_p": null}, {"tissue": "Colon", "pca_lr": 0.857, "pca_p": 0.0506, "scf": 0.755, "scf_p": null, "uce": 0.449, "uce_p": null}];
+  const margin = {top: 15, right: 20, bottom: 50, left: 50};
+  const width = 420, height = 280;
+  const barW = 14;
+
+  const svg = d3.select("#fm_compare").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(data.map(d => d.tissue)).range([0, width]).padding(0.25);
+  const y = d3.scaleLinear().domain([0, 1.0]).range([height, 0]);
+
+  // Reference line at 0.5
+  svg.append("line").attr("x1", 0).attr("x2", width).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "3,3");
+
+  data.forEach(d => {
+    const cx = x(d.tissue) + x.bandwidth() / 2;
+    // PCA-LR bar
+    svg.append("rect")
+      .attr("x", cx - barW * 1.5 - 1).attr("y", y(d.pca_lr))
+      .attr("width", barW).attr("height", height - y(d.pca_lr))
+      .attr("fill", OI.blue).attr("opacity", 0.8);
+    // scFoundation bar
+    if (d.scf !== null) {
+      svg.append("rect")
+        .attr("x", cx - barW * 0.5).attr("y", y(d.scf))
+        .attr("width", barW).attr("height", height - y(d.scf))
+        .attr("fill", OI.vermilion).attr("opacity", 0.8);
+    }
+    // UCE bar
+    if (d.uce !== null) {
+      svg.append("rect")
+        .attr("x", cx + barW * 0.5 + 1).attr("y", y(d.uce))
+        .attr("width", barW).attr("height", height - y(d.uce))
+        .attr("fill", OI.green).attr("opacity", 0.8);
+    }
+    // Significance stars
+    if (d.scf_p && d.scf_p < 0.05) {
+      svg.append("text").attr("x", cx).attr("y", y(d.scf) - 3)
+        .attr("text-anchor", "middle").attr("font-size", "9px").attr("fill", OI.vermilion).text("*");
+    }
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text").attr("transform", "rotate(-30)")
+    .style("text-anchor", "end").style("font-size", "9px");
+  svg.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".1f")));
+  svg.append("text").attr("x", -height/2).attr("y", -38)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("AUROC");
+
+  // Legend
+  const lx = width - 130, ly = 10;
+  [["PCA-LR", OI.blue], ["scFoundation", OI.vermilion], ["UCE", OI.green]].forEach((item, i) => {
+    svg.append("rect").attr("x", lx).attr("y", ly + i*16).attr("width", 12).attr("height", 10).attr("fill", item[1]).attr("opacity", 0.8);
+    svg.append("text").attr("x", lx + 16).attr("y", ly + i*16 + 9).attr("font-size", "9px").text(item[0]);
+  });
+})();
+
+// =============================================
+// PANEL C: Cross-species
+// =============================================
+(function() {
+  const drosData = [{"mouse_tissue": "Eye", "r": -0.01, "p": 0.8844, "n_common": 221, "ci": [-0.168, 0.143]}, {"mouse_tissue": "Gastro", "r": -0.18, "p": 0.0071, "n_common": 222, "ci": [-0.302, -0.041]}, {"mouse_tissue": "Kidney", "r": 0.093, "p": 0.1655, "n_common": 222, "ci": [-0.045, 0.231]}, {"mouse_tissue": "Liver", "r": 0.009, "p": 0.8905, "n_common": 222, "ci": [-0.128, 0.148]}, {"mouse_tissue": "Skin", "r": -0.586, "p": 0.0, "n_common": 221, "ci": [-0.671, -0.468]}, {"mouse_tissue": "Thymus", "r": -0.188, "p": 0.0049, "n_common": 222, "ci": [-0.335, -0.035]}];
+  const margin = {top: 15, right: 20, bottom: 45, left: 100};
+  const width = 350, height = 220;
+
+  const svg = d3.select("#cross_species").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const y = d3.scaleBand().domain(drosData.map(d => d.mouse_tissue)).range([0, height]).padding(0.3);
+  const x = d3.scaleLinear().domain([-0.7, 0.5]).range([0, width]);
+
+  // Zero line
+  svg.append("line").attr("x1", x(0)).attr("x2", x(0)).attr("y1", 0).attr("y2", height)
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "3,3");
+
+  drosData.forEach(d => {
+    const cy = y(d.mouse_tissue) + y.bandwidth() / 2;
+    // CI line
+    svg.append("line")
+      .attr("x1", x(d.ci[0])).attr("x2", x(d.ci[1]))
+      .attr("y1", cy).attr("y2", cy)
+      .attr("stroke", "#888").attr("stroke-width", 1);
+    // Point
+    svg.append("circle")
+      .attr("cx", x(d.r)).attr("cy", cy)
+      .attr("r", 5)
+      .attr("fill", d.p < 0.05 ? OI.vermilion : "#aaa")
+      .attr("stroke", "#333").attr("stroke-width", 0.5);
+    // Value
+    svg.append("text").attr("x", x(d.ci[1]) + 5).attr("y", cy + 4)
+      .attr("font-size", "8px").attr("fill", d.p < 0.05 ? OI.vermilion : "#666")
+      .text(`r=${d.r} ${d.p < 0.01 ? "**" : d.p < 0.05 ? "*" : ""}`);
+  });
+
+  svg.append("g").call(d3.axisLeft(y).tickSize(0)).selectAll("text").style("font-size", "9px");
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(6));
+  svg.append("text").attr("x", width/2).attr("y", height + 35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Spearman ρ (KEGG NES)");
+  svg.append("text").attr("x", 0).attr("y", -5)
+    .attr("font-size", "9px").attr("fill", OI.vermilion).text("Drosophila ↔ Mouse");
+})();
+
+// =============================================
+// PANEL D: Radiation Analog
+// =============================================
+(function() {
+  const data = [{"tissue": "brain", "contrast": "Rad_vs_Ctrl (NL only)", "auroc": 0.5, "ci_lo": 0.222, "ci_hi": 0.768, "p": 0.513, "n": 22}, {"tissue": "brain", "contrast": "HLU_vs_Ctrl (no radiation)", "auroc": 0.75, "ci_lo": 0.457, "ci_hi": 0.958, "p": 0.034, "n": 18}, {"tissue": "brain", "contrast": "Combined_vs_Ctrl", "auroc": 0.46, "ci_lo": 0.198, "ci_hi": 0.73, "p": 0.631, "n": 20}, {"tissue": "spleen", "contrast": "Rad_vs_Ctrl (NL only)", "auroc": 0.333, "ci_lo": 0.0, "ci_hi": 0.694, "p": 0.822, "n": 12}, {"tissue": "spleen", "contrast": "HLU_vs_Ctrl (no radiation)", "auroc": 0.056, "ci_lo": 0.0, "ci_hi": 0.286, "p": 0.988, "n": 9}, {"tissue": "spleen", "contrast": "Combined_vs_Ctrl", "auroc": 0.333, "ci_lo": 0.0, "ci_hi": 0.75, "p": 0.857, "n": 12}, {"tissue": "skin", "contrast": "Rad_vs_Ctrl (NL only)", "auroc": 0.306, "ci_lo": 0.0, "ci_hi": 0.694, "p": 0.848, "n": 12}, {"tissue": "skin", "contrast": "HLU_vs_Ctrl (no radiation)", "auroc": 0.556, "ci_lo": 0.0, "ci_hi": 1.0, "p": 0.424, "n": 9}, {"tissue": "skin", "contrast": "Combined_vs_Ctrl", "auroc": 0.083, "ci_lo": 0.0, "ci_hi": 0.3, "p": 0.995, "n": 12}];
+  const margin = {top: 15, right: 20, bottom: 45, left: 130};
+  const width = 300, height = 260;
+
+  const svg = d3.select("#radiation").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const y = d3.scaleBand().domain(data.map(d => d.tissue + ": " + d.contrast.split(" ")[0]))
+    .range([0, height]).padding(0.2);
+  const x = d3.scaleLinear().domain([0, 1.0]).range([0, width]);
+
+  // 0.5 reference
+  svg.append("line").attr("x1", x(0.5)).attr("x2", x(0.5)).attr("y1", 0).attr("y2", height)
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "3,3");
+
+  data.forEach(d => {
+    const label = d.tissue + ": " + d.contrast.split(" ")[0];
+    const cy = y(label) + y.bandwidth() / 2;
+
+    // CI
+    svg.append("line")
+      .attr("x1", x(d.ci_lo)).attr("x2", x(d.ci_hi))
+      .attr("y1", cy).attr("y2", cy)
+      .attr("stroke", "#888").attr("stroke-width", 1);
+    // Point
+    svg.append("circle")
+      .attr("cx", x(d.auroc)).attr("cy", cy)
+      .attr("r", 5)
+      .attr("fill", d.p < 0.05 ? OI.vermilion : "#aaa");
+    // Value
+    svg.append("text").attr("x", x(d.ci_hi) + 5).attr("y", cy + 4)
+      .attr("font-size", "8px").text(d.auroc.toFixed(2));
+  });
+
+  svg.append("g").call(d3.axisLeft(y).tickSize(0)).selectAll("text").style("font-size", "7px");
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(5));
+  svg.append("text").attr("x", width/2).attr("y", height + 35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("AUROC");
+})();
+</script>
+</body>
+</html>

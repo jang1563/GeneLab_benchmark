@@ -1,6 +1,63 @@
-# GeneLab_benchmark v1.3 — Results Summary
+# GeneLab_benchmark — Results Summary
 
-Generated: 2026-03-01 (Updated: 2026-03-13)
+Generated: 2026-03-01 (Updated: 2026-03-22)
+
+---
+
+## v4 Phase 1: Multi-Method Evaluation (256 evaluations)
+
+**Scope**: 8 tissues x 8 classifiers x 4 feature types = 256 evaluations
+
+### Classifiers
+PCA-LR, ElasticNet-LR, Random Forest, XGBoost, SVM-Linear, SVM-RBF, TabNet, LightGBM
+
+### Feature Types
+Gene (log2-normalized), Hallmark (ssGSEA), KEGG (ssGSEA), Pathway-combined
+
+### Best Results per Tissue
+
+| Tissue | Best AUROC | Method | Feature | perm_p | Significant |
+|--------|-----------|--------|---------|--------|-------------|
+| **Thymus** | **0.948** | PCA-LR | KEGG | <0.05 | Yes* |
+| **Colon** | **0.921** | PCA-LR | KEGG | <0.05 | Yes* |
+| **Lung** | **0.901** | PCA-LR | Gene | <0.05 | Yes* |
+| **Kidney** | **0.829** | ElasticNet-LR | Hallmark | <0.01 | Yes** |
+| **Eye** | 0.823 | PCA-LR | Hallmark | — | — |
+| **Skin** | 0.819 | PCA-LR | Gene | — | — |
+| **Gastrocnemius** | 0.776 | PCA-LR | Gene | — | — |
+| **Liver** | 0.670 | PCA-LR | Gene | — | — |
+
+### Classifier Rankings (Gene-level mean across 8 tissues)
+
+| Rank | Classifier | Gene Mean AUROC |
+|------|-----------|----------------|
+| 1 | **PCA-LR** | **0.776** |
+| 2 | ElasticNet-LR | 0.762 |
+| 3 | LightGBM | ~0.72 |
+| 4 | XGBoost | ~0.71 |
+| 5 | Random Forest | ~0.70 |
+| 6 | SVM-Linear | ~0.69 |
+| 7 | TabNet | 0.527 |
+| 8 | SVM-RBF | 0.510 |
+
+### Key v4 Findings
+
+- **40/256** evaluations significant at p<0.05; **6/8** tissues have >=1 significant result
+- PCA-LR best overall; deep learning (TabNet) and kernel methods (SVM-RBF) worst
+- Pathway features improve: kidney (0.584->0.829), thymus (0.908->0.948), eye (0.697->0.823)
+- Gene features better for: skin (0.819), lung (0.901)
+- v4 expanded controls: BC/VC included (liver 261 vs v1's 193 samples)
+- v1 PCA-LR liver AUROC reproduced exactly (0.5870 vs 0.5871) using task folds
+
+### v4 Label Encoding
+
+- **Flight/FLT** -> 1
+- **GC/Ground Control/Ground/Basal/BC/VC/Vivarium** -> 0
+- **AG (Artificial Gravity)** -> excluded
+
+---
+
+## v1 Results (6 tissues, original analysis)
 
 ## Hypothesis Results
 
@@ -339,4 +396,54 @@ Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 
 | **v2 E1-E3** | **Cross-species NES, duration effect, cfRNA origin** | **Complete** |
 | **v2 F1** | **I4 PBMC cell-type fGSEA (10 types × 50 pathways)** | **Complete** |
 | **v2 Figures** | **3 integrated main figures (D3.js v7)** | **Complete** |
-| **RRRM-1 scRNA** | **4 tissues (blood/eye/muscle/skin), 38K cells, annotated** | **Pipeline complete, F2 tasks next** |
+| **RRRM-1 scRNA** | **4 tissues (blood/eye/muscle/skin), 38K cells, annotated** | **Complete** |
+
+---
+
+## v3 Results Summary
+
+### Foundation Model Comparison (7 tissues)
+
+| Model | Liver | Gastro | Kidney | Thymus | Eye | Lung | Colon | Mean |
+|-------|-------|--------|--------|--------|-----|------|-------|------|
+| **PCA-LR** | **0.670** | **0.824** | 0.432 | **0.923** | **0.789** | — | — | **0.758** |
+| scGPT | 0.628 | 0.685 | **0.556** | 0.782 | 0.650 | — | — | 0.667 |
+| scFoundation | 0.635** | 0.691* | 0.541 | 0.487 | 0.563 | 0.389 | 0.755 | ~0.58 |
+| UCE (seeded) | 0.459 | 0.578 | 0.489 | 0.632* | 0.550 | 0.555 | 0.449 | ~0.53 |
+| Geneformer | 0.486 | 0.382 | 0.452 | 0.495 | 0.484 | — | — | 0.476 |
+
+*p<0.05, **p<0.01. All FMs underperform PCA-LR baseline.
+
+### RRRM-2 scRNA-seq (F5)
+
+| Tissue | Best Cell Type | AUROC | Significance |
+|--------|---------------|-------|-------------|
+| PBMC | NK cell | **0.845*** | p<0.001 |
+| PBMC | T cell | **0.752*** | p<0.001 |
+| Spleen | B cell | 0.562*** | p<0.001 |
+| Bone marrow | All 14 types | 0.27-0.54 | No signal |
+
+### Spatial Visium (F3, Brain OSD-352)
+
+- **Negative result**: Section AUROC=0.139, Animal AUROC=0.444
+- PC1 (42.5%) = slide batch effect, not spaceflight condition
+- Brain = genuine negative for spaceflight classification
+
+### Cross-Tissue Transfer (B_ext, 7x7 = 42 pairs)
+
+- Method A (gene) range: 0.35-0.80, liver->kidney best (0.73)
+- Method C (pathway) range: 0.43-0.87, liver->gastro best (0.87)
+
+---
+
+## v4 Pipeline Status
+
+| Component | Status |
+|---|---|
+| Phase 1: 256 evaluations (8x8x4) | **Complete** |
+| Phase 2: Ablation studies | Pending |
+| Phase 3: Statistical meta-analysis | Pending |
+| Phase 4: SHAP interpretability | Pending |
+| Phase 5: WGCNA + network biology | Pending |
+| Phase 7: Publication figures | Pending |
+| Phase 8: Manuscript preparation | Pending |

@@ -1,0 +1,57 @@
+{
+  "experiment": "NC1_shuffled",
+  "model": "kNN",
+  "model_key": "knn",
+  "tissue": "eye",
+  "feature_type": "gene",
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.6032,
+  "std_auroc": 0.0788,
+  "min_auroc": 0.5397,
+  "max_auroc": 0.7143,
+  "mean_perm_pvalue": 0.3037,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 13.1,
+  "timestamp": "2026-03-22T03:20:38.542499",
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "fold_name": "fold_RR-1_test",
+      "auroc": 0.5556,
+      "bootstrap_mean": 0.5547,
+      "ci_lower": 0.1481,
+      "ci_upper": 0.9062,
+      "perm_pvalue": 0.3886,
+      "n_train": 29,
+      "n_test": 12,
+      "train_time_s": 0.01
+    },
+    {
+      "test_mission": "RR-3",
+      "fold_name": "fold_RR-3_test",
+      "auroc": 0.7143,
+      "bootstrap_mean": 0.712,
+      "ci_lower": 0.3636,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.0949,
+      "n_train": 28,
+      "n_test": 13,
+      "train_time_s": 0.01
+    },
+    {
+      "test_mission": "TBD",
+      "fold_name": "fold_TBD_test",
+      "auroc": 0.5397,
+      "bootstrap_mean": 0.5383,
+      "ci_lower": 0.1905,
+      "ci_upper": 0.8364,
+      "perm_pvalue": 0.4276,
+      "n_train": 25,
+      "n_test": 16,
+      "train_time_s": 0.01
+    }
+  ]
+}

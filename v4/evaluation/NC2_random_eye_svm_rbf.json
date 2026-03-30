@@ -1,0 +1,61 @@
+{
+  "experiment": "NC2_random",
+  "model": "SVM-RBF",
+  "model_key": "svm_rbf",
+  "tissue": "eye",
+  "feature_type": "random_gaussian",
+  "n_original_features": 27059,
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.5262,
+  "std_auroc": 0.1484,
+  "min_auroc": 0.3175,
+  "max_auroc": 0.65,
+  "mean_perm_pvalue": 0.4509,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 12.6,
+  "timestamp": "2026-03-22T03:22:32.571048",
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "fold_name": "fold_RR-1_test",
+      "auroc": 0.6111,
+      "bootstrap_mean": 0.608,
+      "ci_lower": 0.2222,
+      "ci_upper": 0.9375,
+      "perm_pvalue": 0.2607,
+      "n_train": 29,
+      "n_test": 12,
+      "n_features": 27059,
+      "train_time_s": 0.11
+    },
+    {
+      "test_mission": "RR-3",
+      "fold_name": "fold_RR-3_test",
+      "auroc": 0.65,
+      "bootstrap_mean": 0.6493,
+      "ci_lower": 0.325,
+      "ci_upper": 0.925,
+      "perm_pvalue": 0.2118,
+      "n_train": 28,
+      "n_test": 13,
+      "n_features": 27059,
+      "train_time_s": 0.05
+    },
+    {
+      "test_mission": "TBD",
+      "fold_name": "fold_TBD_test",
+      "auroc": 0.3175,
+      "bootstrap_mean": 0.3144,
+      "ci_lower": 0.0469,
+      "ci_upper": 0.6364,
+      "perm_pvalue": 0.8801,
+      "n_train": 25,
+      "n_test": 16,
+      "n_features": 27059,
+      "train_time_s": 0.03
+    }
+  ]
+}

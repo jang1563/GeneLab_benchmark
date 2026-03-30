@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig S5 — Negative Controls & Batch Detection</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 10px; background: #fafafa; }
+  .panel-label { font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+  .axis text { font-size: 8px; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none; z-index: 100; line-height: 1.4;
+  }
+  .note { font-size: 8px; color: #888; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig S5 — Negative Controls & Batch Detection</div>
+  <div class="figure-subtitle">NC1: shuffled labels, NC2: random features, D3: mission ID, D5: hardware type</div>
+  <div class="panels" id="panels"></div>
+  <div class="note">
+    A-B: All AUROC values should cluster around 0.5 (chance). Any method with AUROC &gt; 0.65 indicates data leakage.
+    C-D: High macro-F1 for gene features confirms batch effects; low F1 for pathway features confirms batch-resistance.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tooltip = d3.select("#tooltip");
+const nc1Data = {"PCA-LR": [{"tissue": "Liver", "auroc": 0.5605, "folds": [0.3846, 0.4821, 0.3905, 0.5214, 0.5846, 1.0]}, {"tissue": "Gastro", "auroc": 0.4421, "folds": [0.3429, 0.25, 0.7333]}, {"tissue": "Kidney", "auroc": 0.4125, "folds": [0.3636, 0.3438, 0.5301]}, {"tissue": "Thymus", "auroc": 0.4809, "folds": [0.4722, 0.4444, 0.4444, 0.5625]}, {"tissue": "Eye", "auroc": 0.3624, "folds": [0.3333, 0.4048, 0.3492]}, {"tissue": "Skin", "auroc": 0.4776, "folds": [0.4048, 0.5711, 0.457]}, {"tissue": "Lung", "auroc": 0.6111, "folds": [0.4571, 0.7188, 0.7188, 0.625, 0.5357]}, {"tissue": "Colon", "auroc": 0.5881, "folds": [0.6667, 0.3333, 0.75, 0.4286, 0.7619]}], "EN-LR": [{"tissue": "Liver", "auroc": 0.6245, "folds": [0.7692, 0.6071, 0.5127, 0.512, 0.3462, 1.0]}, {"tissue": "Gastro", "auroc": 0.2929, "folds": [0.4286, 0.25, 0.2]}, {"tissue": "Kidney", "auroc": 0.7237, "folds": [0.9091, 0.6875, 0.5746]}, {"tissue": "Thymus", "auroc": 0.3988, "folds": [0.5398, 0.3333, 0.2222, 0.5]}, {"tissue": "Eye", "auroc": 0.3598, "folds": [0.3889, 0.3571, 0.3333]}, {"tissue": "Skin", "auroc": 0.4238, "folds": [0.3299, 0.5569, 0.3846]}, {"tissue": "Lung", "auroc": 0.6897, "folds": [0.4857, 0.75, 0.8438, 0.8333, 0.5357]}, {"tissue": "Colon", "auroc": 0.6676, "folds": [0.7667, 0.5, 0.9286, 0.4286, 0.7143]}], "XGB": [{"tissue": "Liver", "auroc": 0.4881, "folds": [0.5385, 0.4286, 0.6333, 0.5149, 0.4385, 0.375]}, {"tissue": "Gastro", "auroc": 0.4106, "folds": [0.5429, 0.2222, 0.4667]}, {"tissue": "Kidney", "auroc": 0.3577, "folds": [0.0, 0.5312, 0.542]}, {"tissue": "Thymus", "auroc": 0.5142, "folds": [0.4594, 0.6667, 0.5556, 0.375]}, {"tissue": "Eye", "auroc": 0.6402, "folds": [0.7778, 0.4286, 0.7143]}, {"tissue": "Skin", "auroc": 0.4434, "folds": [0.4388, 0.5203, 0.371]}, {"tissue": "Lung", "auroc": 0.6353, "folds": [0.3714, 0.7812, 1.0, 0.6667, 0.3571]}, {"tissue": "Colon", "auroc": 0.5726, "folds": [0.6667, 0.4583, 0.7857, 0.2857, 0.6667]}], "RF": [{"tissue": "Liver", "auroc": 0.5002, "folds": [0.0, 0.5357, 0.5262, 0.4739, 0.4654, 1.0]}, {"tissue": "Gastro", "auroc": 0.4537, "folds": [0.5, 0.1944, 0.6667]}, {"tissue": "Kidney", "auroc": 0.6531, "folds": [1.0, 0.4219, 0.5374]}, {"tissue": "Thymus", "auroc": 0.4486, "folds": [0.5045, 0.5, 0.2222, 0.5677]}, {"tissue": "Eye", "auroc": 0.5886, "folds": [0.4167, 0.6905, 0.6587]}, {"tissue": "Skin", "auroc": 0.4195, "folds": [0.4303, 0.4187, 0.4095]}, {"tissue": "Lung", "auroc": 0.6264, "folds": [0.3143, 0.75, 0.7344, 0.8333, 0.5]}, {"tissue": "Colon", "auroc": 0.6496, "folds": [0.8167, 0.3958, 0.7857, 0.5357, 0.7143]}], "kNN": [{"tissue": "Liver", "auroc": 0.6969, "folds": [0.9231, 0.5089, 0.7032, 0.5693, 0.4769, 1.0]}, {"tissue": "Gastro", "auroc": 0.4119, "folds": [0.2857, 0.4167, 0.5333]}, {"tissue": "Kidney", "auroc": 0.628, "folds": [0.8182, 0.5938, 0.472]}, {"tissue": "Thymus", "auroc": 0.3429, "folds": [0.382, 0.4444, 0.2222, 0.3229]}, {"tissue": "Eye", "auroc": 0.6032, "folds": [0.5556, 0.7143, 0.5397]}, {"tissue": "Skin", "auroc": 0.4707, "folds": [0.3741, 0.563, 0.4751]}, {"tissue": "Lung", "auroc": 0.4896, "folds": [0.4571, 0.7812, 0.2812, 0.25, 0.6786]}, {"tissue": "Colon", "auroc": 0.6186, "folds": [0.8667, 0.5833, 0.6071, 0.3214, 0.7143]}], "MLP": [{"tissue": "Liver", "auroc": 0.6062, "folds": [0.6154, 0.6429, 0.427, 0.5173, 0.4346, 1.0]}, {"tissue": "Gastro", "auroc": 0.3431, "folds": [0.4571, 0.3056, 0.2667]}, {"tissue": "Kidney", "auroc": 0.8418, "folds": [1.0, 0.9688, 0.5567]}, {"tissue": "Thymus", "auroc": 0.425, "folds": [0.3113, 0.4444, 0.4444, 0.5]}, {"tissue": "Eye", "auroc": 0.5423, "folds": [0.3889, 0.7381, 0.5]}, {"tissue": "Skin", "auroc": 0.441, "folds": [0.5952, 0.4472, 0.2805]}, {"tissue": "Lung", "auroc": 0.5502, "folds": [0.5143, 0.5312, 0.4375, 0.875, 0.3929]}, {"tissue": "Colon", "auroc": 0.5269, "folds": [0.6167, 0.625, 0.7143, 0.3929, 0.2857]}], "SVM": [{"tissue": "Liver", "auroc": 0.6595, "folds": [0.6923, 0.7143, 0.5667, 0.5378, 0.4462, 1.0]}, {"tissue": "Gastro", "auroc": 0.6048, "folds": [0.7143, 0.5, 0.6]}, {"tissue": "Kidney", "auroc": 0.6248, "folds": [0.5455, 0.8125, 0.5164]}, {"tissue": "Thymus", "auroc": 0.5104, "folds": [0.4165, 0.5556, 0.7778, 0.2917]}, {"tissue": "Eye", "auroc": 0.5913, "folds": [0.5278, 0.5952, 0.6508]}, {"tissue": "Skin", "auroc": 0.4625, "folds": [0.3946, 0.5041, 0.4887]}, {"tissue": "Lung", "auroc": 0.2619, "folds": [0.2857, 0.25, 0.25, 0.1667, 0.3571]}, {"tissue": "Colon", "auroc": 0.6374, "folds": [0.8, 0.4583, 0.7143, 0.5, 0.7143]}], "TabNet": [{"tissue": "Liver", "auroc": 0.5862, "folds": [0.8462, 0.7679, 0.5476, 0.544, 0.5615, 0.25]}, {"tissue": "Gastro", "auroc": 0.5161, "folds": [0.3429, 0.4722, 0.7333]}, {"tissue": "Kidney", "auroc": 0.5491, "folds": [0.6364, 0.4688, 0.5422]}, {"tissue": "Thymus", "auroc": 0.6008, "folds": [0.4241, 0.6667, 0.6667, 0.6458]}, {"tissue": "Eye", "auroc": 0.496, "folds": [0.4167, 0.4524, 0.619]}, {"tissue": "Skin", "auroc": 0.5662, "folds": [0.5816, 0.565, 0.552]}, {"tissue": "Lung", "auroc": 0.3874, "folds": [0.8, 0.4688, 0.1562, 0.0833, 0.4286]}, {"tissue": "Colon", "auroc": 0.4895, "folds": [0.5667, 0.3333, 0.4643, 0.4643, 0.619]}]};
+const nc2Data = {"PCA-LR": [{"tissue": "Liver", "auroc": 0.5159, "folds": [0.5102, 0.625, 0.3923, 0.5792, 0.4333, 0.5556]}, {"tissue": "Gastro", "auroc": 0.5695, "folds": [0.2778, 0.8056, 0.625]}, {"tissue": "Kidney", "auroc": 0.4515, "folds": [0.3611, 0.3472, 0.6462]}, {"tissue": "Thymus", "auroc": 0.5108, "folds": [0.5231, 0.4444, 0.5556, 0.52]}, {"tissue": "Eye", "auroc": 0.4655, "folds": [0.3889, 0.325, 0.6825]}, {"tissue": "Skin", "auroc": 0.5419, "folds": [0.5758, 0.4349, 0.615]}, {"tissue": "Lung", "auroc": 0.4911, "folds": [0.4375, 0.5938, 0.5312, 0.2857, 0.6071]}, {"tissue": "Colon", "auroc": 0.4714, "folds": [0.6071, 0.8214, 0.1071, 0.6786, 0.1429]}], "EN-LR": [{"tissue": "Liver", "auroc": 0.3625, "folds": [0.2041, 0.6528, 0.4667, 0.4402, 0.4111, 0.0]}, {"tissue": "Gastro", "auroc": 0.7315, "folds": [0.6389, 0.5556, 1.0]}, {"tissue": "Kidney", "auroc": 0.5392, "folds": [0.6667, 0.5972, 0.3538]}, {"tissue": "Thymus", "auroc": 0.5336, "folds": [0.5358, 0.4444, 0.4444, 0.71]}, {"tissue": "Eye", "auroc": 0.5634, "folds": [0.5278, 0.575, 0.5873]}, {"tissue": "Skin", "auroc": 0.4725, "folds": [0.3902, 0.5873, 0.44]}, {"tissue": "Lung", "auroc": 0.3446, "folds": [0.25, 0.25, 0.4375, 0.4286, 0.3571]}, {"tissue": "Colon", "auroc": 0.4452, "folds": [0.6071, 0.6071, 0.2143, 0.6071, 0.1905]}], "XGB": [{"tissue": "Liver", "auroc": 0.421, "folds": [0.5306, 0.4861, 0.3705, 0.4275, 0.3778, 0.3333]}, {"tissue": "Gastro", "auroc": 0.5278, "folds": [0.6667, 0.1667, 0.75]}, {"tissue": "Kidney", "auroc": 0.6424, "folds": [0.7222, 0.6528, 0.5522]}, {"tissue": "Thymus", "auroc": 0.4593, "folds": [0.5262, 0.5556, 0.5556, 0.2]}, {"tissue": "Eye", "auroc": 0.5209, "folds": [0.3889, 0.65, 0.5238]}, {"tissue": "Skin", "auroc": 0.5535, "folds": [0.5303, 0.4603, 0.67]}, {"tissue": "Lung", "auroc": 0.525, "folds": [0.4375, 0.4375, 0.5, 0.8571, 0.3929]}, {"tissue": "Colon", "auroc": 0.5214, "folds": [0.5357, 0.4286, 0.4643, 0.6071, 0.5714]}], "RF": [{"tissue": "Liver", "auroc": 0.5161, "folds": [0.6224, 0.6528, 0.4417, 0.5075, 0.5944, 0.2778]}, {"tissue": "Gastro", "auroc": 0.4884, "folds": [0.2222, 0.4306, 0.8125]}, {"tissue": "Kidney", "auroc": 0.5718, "folds": [0.625, 0.4514, 0.6389]}, {"tissue": "Thymus", "auroc": 0.4824, "folds": [0.6407, 0.2222, 0.6667, 0.4]}, {"tissue": "Eye", "auroc": 0.4768, "folds": [0.6111, 0.375, 0.4444]}, {"tissue": "Skin", "auroc": 0.3747, "folds": [0.3163, 0.3302, 0.4775]}, {"tissue": "Lung", "auroc": 0.5456, "folds": [0.25, 0.2344, 0.6719, 0.8036, 0.7679]}, {"tissue": "Colon", "auroc": 0.5524, "folds": [0.7321, 0.2857, 0.5536, 1.0, 0.1905]}], "kNN": [{"tissue": "Liver", "auroc": 0.4673, "folds": [0.0612, 0.5833, 0.35, 0.5871, 0.5, 0.7222]}, {"tissue": "Gastro", "auroc": 0.4329, "folds": [0.3611, 0.5, 0.4375]}, {"tissue": "Kidney", "auroc": 0.5628, "folds": [0.3333, 0.7431, 0.612]}, {"tissue": "Thymus", "auroc": 0.6209, "folds": [0.5501, 0.6667, 0.6667, 0.6]}, {"tissue": "Eye", "auroc": 0.3963, "folds": [0.0833, 0.55, 0.5556]}, {"tissue": "Skin", "auroc": 0.5398, "folds": [0.6818, 0.4302, 0.5075]}, {"tissue": "Lung", "auroc": 0.45, "folds": [0.25, 0.5938, 0.4062, 0.3571, 0.6429]}, {"tissue": "Colon", "auroc": 0.4583, "folds": [0.7857, 0.5893, 0.1786, 0.6429, 0.0952]}], "MLP": [{"tissue": "Liver", "auroc": 0.4752, "folds": [0.4286, 0.5833, 0.3615, 0.4776, 0.3333, 0.6667]}, {"tissue": "Gastro", "auroc": 0.6157, "folds": [0.5, 0.7222, 0.625]}, {"tissue": "Kidney", "auroc": 0.5717, "folds": [0.4722, 0.625, 0.6179]}, {"tissue": "Thymus", "auroc": 0.5611, "folds": [0.4833, 0.2222, 0.8889, 0.65]}, {"tissue": "Eye", "auroc": 0.5725, "folds": [0.3889, 0.9, 0.4286]}, {"tissue": "Skin", "auroc": 0.6192, "folds": [0.7083, 0.5492, 0.6]}, {"tissue": "Lung", "auroc": 0.5848, "folds": [0.625, 0.875, 0.5312, 0.3214, 0.5714]}, {"tissue": "Colon", "auroc": 0.4429, "folds": [0.6429, 0.6429, 0.3214, 0.1786, 0.4286]}], "SVM": [{"tissue": "Liver", "auroc": 0.495, "folds": [0.6122, 0.3056, 0.6513, 0.479, 0.5889, 0.3333]}, {"tissue": "Gastro", "auroc": 0.4745, "folds": [0.6111, 0.5, 0.3125]}, {"tissue": "Kidney", "auroc": 0.4513, "folds": [0.6667, 0.3333, 0.3538]}, {"tissue": "Thymus", "auroc": 0.5146, "folds": [0.4452, 0.8889, 0.4444, 0.28]}, {"tissue": "Eye", "auroc": 0.5262, "folds": [0.6111, 0.65, 0.3175]}, {"tissue": "Skin", "auroc": 0.4137, "folds": [0.3258, 0.4952, 0.42]}, {"tissue": "Lung", "auroc": 0.4938, "folds": [0.5625, 0.4375, 0.4688, 0.6786, 0.3214]}, {"tissue": "Colon", "auroc": 0.5357, "folds": [0.3929, 0.2143, 0.8929, 0.3214, 0.8571]}], "TabNet": [{"tissue": "Liver", "auroc": 0.5677, "folds": [0.4082, 0.4722, 0.5038, 0.5111, 0.5111, 1.0]}, {"tissue": "Gastro", "auroc": 0.4676, "folds": [0.5, 0.5278, 0.375]}, {"tissue": "Kidney", "auroc": 0.5634, "folds": [0.4167, 0.8056, 0.4679]}, {"tissue": "Thymus", "auroc": 0.5316, "folds": [0.3609, 0.8889, 0.6667, 0.21]}, {"tissue": "Eye", "auroc": 0.416, "folds": [0.4444, 0.375, 0.4286]}, {"tissue": "Skin", "auroc": 0.3748, "folds": [0.2917, 0.4476, 0.385]}, {"tissue": "Lung", "auroc": 0.6759, "folds": [0.625, 0.5, 0.7188, 0.75, 0.7857]}, {"tissue": "Colon", "auroc": 0.4571, "folds": [0.75, 0.6071, 0.3571, 0.4286, 0.1429]}]};
+const d3Data = {"Liver": {"PCA-LR": {"gene": 1.0, "pathway_hallmark": 0.9905}, "EN-LR": {"gene": 1.0, "pathway_hallmark": 0.9905}, "XGB": {"gene": 0.9946, "pathway_hallmark": 0.9793}, "RF": {"gene": 1.0, "pathway_hallmark": 0.9873}, "kNN": {"gene": 1.0, "pathway_hallmark": 0.9759}, "MLP": {"gene": 0.9632, "pathway_hallmark": 0.9001}, "SVM": {"gene": 1.0, "pathway_hallmark": 0.9924}, "TabNet": {"gene": 0.0724, "pathway_hallmark": 0.0134}}, "Gastro": {"PCA-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "EN-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "XGB": {"gene": 1.0, "pathway_hallmark": 1.0}, "RF": {"gene": 1.0, "pathway_hallmark": 1.0}, "kNN": {"gene": 1.0, "pathway_hallmark": 1.0}, "MLP": {"gene": 1.0, "pathway_hallmark": 0.9722}, "SVM": {"gene": 1.0, "pathway_hallmark": 1.0}, "TabNet": {"gene": 0.2406, "pathway_hallmark": 0.1368}}, "Kidney": {"PCA-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "EN-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "XGB": {"gene": 0.984, "pathway_hallmark": 0.954}, "RF": {"gene": 1.0, "pathway_hallmark": 1.0}, "kNN": {"gene": 1.0, "pathway_hallmark": 1.0}, "MLP": {"gene": 0.9852, "pathway_hallmark": 0.9525}, "SVM": {"gene": 1.0, "pathway_hallmark": 0.984}, "TabNet": {"gene": 0.2674, "pathway_hallmark": 0.294}}, "Thymus": {"PCA-LR": {"gene": 0.9143, "pathway_hallmark": 0.8897}, "EN-LR": {"gene": 0.8889, "pathway_hallmark": 0.8897}, "XGB": {"gene": 0.8875, "pathway_hallmark": 0.9468}, "RF": {"gene": 0.8889, "pathway_hallmark": 0.9444}, "kNN": {"gene": 0.6667, "pathway_hallmark": 0.9721}, "MLP": {"gene": 0.6722, "pathway_hallmark": 0.8114}, "SVM": {"gene": 0.5714, "pathway_hallmark": 0.9444}, "TabNet": {"gene": 0.0888, "pathway_hallmark": 0.0446}}, "Eye": {"PCA-LR": {"gene": 1.0, "pathway_hallmark": 0.9766}, "EN-LR": {"gene": 1.0, "pathway_hallmark": 0.9766}, "XGB": {"gene": 1.0, "pathway_hallmark": 0.9286}, "RF": {"gene": 1.0, "pathway_hallmark": 0.9535}, "kNN": {"gene": 1.0, "pathway_hallmark": 0.9766}, "MLP": {"gene": 1.0, "pathway_hallmark": 0.8709}, "SVM": {"gene": 1.0, "pathway_hallmark": 0.9766}, "TabNet": {"gene": 0.2526, "pathway_hallmark": 0.1871}}, "Skin": {"PCA-LR": {"gene": 1.0, "pathway_hallmark": 0.9846}, "EN-LR": {"gene": 1.0, "pathway_hallmark": 0.9846}, "XGB": {"gene": 1.0, "pathway_hallmark": 0.9652}, "RF": {"gene": 1.0, "pathway_hallmark": 0.947}, "kNN": {"gene": 1.0, "pathway_hallmark": 0.9537}, "MLP": {"gene": 0.9933, "pathway_hallmark": 0.9067}, "SVM": {"gene": 1.0, "pathway_hallmark": 0.976}, "TabNet": {"gene": 0.1624, "pathway_hallmark": 0.115}}};
+const d5Data = {"Liver": {"PCA-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "EN-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "XGB": {"gene": 1.0, "pathway_hallmark": 0.9696}, "RF": {"gene": 1.0, "pathway_hallmark": 1.0}, "kNN": {"gene": 1.0, "pathway_hallmark": 1.0}, "MLP": {"gene": 0.9727, "pathway_hallmark": 0.8971}, "SVM": {"gene": 1.0, "pathway_hallmark": 1.0}, "TabNet": {"gene": 0.4172, "pathway_hallmark": 0.4913}}, "Thymus": {"PCA-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "EN-LR": {"gene": 1.0, "pathway_hallmark": 1.0}, "XGB": {"gene": 0.9831, "pathway_hallmark": 0.9824}, "RF": {"gene": 1.0, "pathway_hallmark": 1.0}, "kNN": {"gene": 1.0, "pathway_hallmark": 1.0}, "MLP": {"gene": 1.0, "pathway_hallmark": 0.9831}, "SVM": {"gene": 1.0, "pathway_hallmark": 1.0}, "TabNet": {"gene": 0.2612, "pathway_hallmark": 0.4424}}};
+const methodLabels = ["PCA-LR", "EN-LR", "XGB", "RF", "kNN", "MLP", "SVM", "TabNet"];
+
+// Helper: draw box/strip plot for NC data
+function drawNCPanel(parentId, panelLabel, data, color) {
+  const panel = d3.select("#panels").append("div").attr("class", "panel");
+  panel.append("div").attr("class", "panel-label").text(panelLabel);
+
+  const methods = Object.keys(data);
+  if (methods.length === 0) {
+    panel.append("div").style("font-size", "9px").style("color", "#999")
+      .text("No data available. Run NC scripts on HPC first.");
+    return;
+  }
+
+  const margin = {top: 10, right: 10, bottom: 40, left: 40};
+  const width = 450, height = 200;
+
+  const svg = panel.append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(methods).range([0, width]).padding(0.2);
+  const y = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+
+  // 0.5 reference line
+  svg.append("line").attr("x1", 0).attr("x2", width).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "4,3");
+
+  methods.forEach(method => {
+    const vals = data[method].map(d => d.auroc);
+    const cx = x(method) + x.bandwidth() / 2;
+
+    // Jittered points
+    vals.forEach((v, i) => {
+      const jitter = (Math.random() - 0.5) * x.bandwidth() * 0.5;
+      svg.append("circle")
+        .attr("cx", cx + jitter).attr("cy", y(v)).attr("r", 3)
+        .attr("fill", color).attr("opacity", 0.6)
+        .on("mouseover", function(event) {
+          const entry = data[method][i];
+          tooltip.style("display", "block")
+            .html(`<b>${method}</b> (${entry.tissue})<br>AUROC: ${entry.auroc}`);
+        })
+        .on("mousemove", function(event) {
+          tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+        })
+        .on("mouseout", () => tooltip.style("display", "none"));
+    });
+
+    // Mean line
+    const mean = d3.mean(vals);
+    svg.append("line")
+      .attr("x1", x(method) + 2).attr("x2", x(method) + x.bandwidth() - 2)
+      .attr("y1", y(mean)).attr("y2", y(mean))
+      .attr("stroke", "#333").attr("stroke-width", 2);
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text").attr("transform", "rotate(-30)").style("text-anchor", "end").style("font-size", "8px");
+  svg.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".1f")));
+  svg.append("text").attr("transform", "rotate(-90)").attr("x", -height/2).attr("y", -30)
+    .attr("text-anchor", "middle").attr("font-size", "9px").text("AUROC");
+}
+
+// Panel A: NC1
+drawNCPanel("panels", "A. NC1 — Shuffled Labels (expected AUROC \u2248 0.5)", nc1Data, OI.blue);
+
+// Panel B: NC2
+drawNCPanel("panels", "B. NC2 — Random Features (expected AUROC \u2248 0.5)", nc2Data, OI.orange);
+
+// Panel C: D3 mission ID
+(() => {
+  const panel = d3.select("#panels").append("div").attr("class", "panel");
+  panel.append("div").attr("class", "panel-label").text("C. D3 — Mission ID Prediction (macro-F1)");
+
+  const tissues = Object.keys(d3Data);
+  if (tissues.length === 0) {
+    panel.append("div").style("font-size", "9px").style("color", "#999")
+      .text("No data available. Run D3 script on HPC first.");
+    return;
+  }
+
+  const features = ["gene", "pathway_hallmark"];
+  const featLabels = {"gene": "Gene", "pathway_hallmark": "Pathway"};
+  const margin = {top: 10, right: 10, bottom: 45, left: 60};
+  const cellW = 30, cellH = 20;
+  const methods = methodLabels.filter(m => tissues.some(t => d3Data[t] && d3Data[t][m]));
+
+  features.forEach((feat, fidx) => {
+    panel.append("div").style("font-size", "9px").style("font-weight", "bold")
+      .style("margin-top", fidx > 0 ? "8px" : "0").text(featLabels[feat]);
+
+    const width = methods.length * cellW;
+    const height = tissues.length * cellH;
+
+    const svg = panel.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const x = d3.scaleBand().domain(methods).range([0, width]).padding(0.05);
+    const yScale = d3.scaleBand().domain(tissues).range([0, height]).padding(0.05);
+    const color = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, 1]);
+
+    tissues.forEach(tissue => {
+      methods.forEach(method => {
+        const val = (d3Data[tissue] && d3Data[tissue][method]) ? d3Data[tissue][method][feat] : null;
+        if (val === null || val === undefined) return;
+
+        svg.append("rect")
+          .attr("x", x(method)).attr("y", yScale(tissue))
+          .attr("width", x.bandwidth()).attr("height", yScale.bandwidth())
+          .attr("fill", color(val)).attr("rx", 2)
+          .on("mouseover", function(event) {
+            tooltip.style("display", "block")
+              .html(`<b>${tissue} / ${method}</b><br>F1=${val}`);
+          })
+          .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+          })
+          .on("mouseout", () => tooltip.style("display", "none"));
+
+        svg.append("text")
+          .attr("x", x(method) + x.bandwidth()/2).attr("y", yScale(tissue) + yScale.bandwidth()/2 + 3)
+          .attr("text-anchor", "middle").attr("font-size", "6px")
+          .attr("fill", val > 0.5 ? "#fff" : "#333")
+          .text(val.toFixed(2));
+      });
+    });
+
+    svg.append("g").attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickSize(0))
+      .selectAll("text").attr("transform", "rotate(-30)").style("text-anchor", "end").style("font-size", "7px");
+    svg.append("g").call(d3.axisLeft(yScale).tickSize(0))
+      .selectAll("text").style("font-size", "7px");
+  });
+})();
+
+// Panel D: D5 hardware
+(() => {
+  const panel = d3.select("#panels").append("div").attr("class", "panel");
+  panel.append("div").attr("class", "panel-label").text("D. D5 — Hardware Type Prediction (RR vs MHU)");
+
+  const tissues = Object.keys(d5Data);
+  if (tissues.length === 0) {
+    panel.append("div").style("font-size", "9px").style("color", "#999")
+      .text("No data available. Run D5 script on HPC first.");
+    return;
+  }
+
+  const margin = {top: 10, right: 10, bottom: 40, left: 60};
+  const methods = methodLabels.filter(m => tissues.some(t => d5Data[t] && d5Data[t][m]));
+  const barW = 12;
+  const width = methods.length * (barW * 2 + 8) * tissues.length + 40;
+  const height = 180;
+
+  const svg = panel.append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const xGroup = d3.scaleBand().domain(methods).range([0, width]).padding(0.2);
+  const xFeat = d3.scaleBand().domain(["gene", "pathway_hallmark"]).range([0, xGroup.bandwidth()]).padding(0.1);
+  const y = d3.scaleLinear().domain([0, 1.05]).range([height, 0]);
+  const featColors = {"gene": OI.blue, "pathway_hallmark": OI.orange};
+
+  tissues.forEach((tissue, tidx) => {
+    methods.forEach(method => {
+      ["gene", "pathway_hallmark"].forEach(feat => {
+        const val = (d5Data[tissue] && d5Data[tissue][method]) ? d5Data[tissue][method][feat] : null;
+        if (val === null || val === undefined) return;
+
+        const bx = xGroup(method) + xFeat(feat);
+        svg.append("rect")
+          .attr("x", bx).attr("y", y(val))
+          .attr("width", xFeat.bandwidth()).attr("height", Math.max(0, height - y(val)))
+          .attr("fill", featColors[feat]).attr("opacity", 0.8).attr("rx", 1)
+          .on("mouseover", function(event) {
+            tooltip.style("display", "block")
+              .html(`<b>${tissue} / ${method}</b><br>${feat}<br>F1=${val}`);
+          })
+          .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+          })
+          .on("mouseout", () => tooltip.style("display", "none"));
+      });
+    });
+  });
+
+  // 0.5 line
+  svg.append("line").attr("x1", 0).attr("x2", width).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "3,3");
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(xGroup).tickSize(0))
+    .selectAll("text").attr("transform", "rotate(-30)").style("text-anchor", "end").style("font-size", "7px");
+  svg.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".1f")));
+
+  // Legend
+  let lx = width - 80, ly = 5;
+  Object.entries(featColors).forEach(([feat, col]) => {
+    svg.append("rect").attr("x", lx).attr("y", ly).attr("width", 8).attr("height", 8).attr("fill", col).attr("opacity", 0.8);
+    svg.append("text").attr("x", lx + 12).attr("y", ly + 8).attr("font-size", "7px")
+      .text(feat === "gene" ? "Gene" : "Pathway");
+    ly += 12;
+  });
+})();
+</script>
+</body>
+</html>

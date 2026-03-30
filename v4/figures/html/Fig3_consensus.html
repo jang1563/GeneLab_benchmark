@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 3 — Consensus Spaceflight Gene Signature</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+  .panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+  .panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+  .axis text { font-size: 9px; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none; z-index: 100; line-height: 1.4;
+  }
+  .interpretation {
+    margin-top: 16px; padding: 10px; background: #f5f5f5;
+    border-left: 3px solid #999; font-size: 9px; color: #444; line-height: 1.5;
+  }
+  .interpretation strong { color: #333; }
+  table.data-table { border-collapse: collapse; width: 100%; font-size: 9px; margin-top: 8px; }
+  table.data-table th, table.data-table td { border: 1px solid #ddd; padding: 3px 6px; text-align: left; }
+  table.data-table th { background: #f0f0f0; font-weight: bold; }
+  .sig { color: #D55E00; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 3 — Consensus Spaceflight Gene Signature from SHAP Interpretability</div>
+  <div class="figure-subtitle">SHAP top-100 genes across 8 tissues × 2 methods per tissue (16 SHAP analyses)</div>
+  <div class="panels">
+    <div class="panel"><div class="panel-label">A</div>
+      <div class="panel-desc">SHAP Top-100 Gene Overlap — Intersection Size Distribution</div>
+      <div id="upset"></div>
+    </div>
+    <div class="panel"><div class="panel-label">B</div>
+      <div class="panel-desc">Gene × Tissue SHAP Importance Heatmap (Consensus + Tissue-Specific)</div>
+      <div id="gene_heatmap"></div>
+    </div>
+    <div class="panel"><div class="panel-label">C</div>
+      <div class="panel-desc">Cross-Method Agreement — Jaccard & Spearman per Tissue</div>
+      <div id="agreement"></div>
+    </div>
+    <div class="panel"><div class="panel-label">D</div>
+      <div class="panel-desc">SHAP Direction Summary & Cell 2020 Validation</div>
+      <div id="validation"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    5 consensus genes appear in ≥3 tissues and ≥2 methods: <b>MUP22</b> (4 tissues), <b>NPAS2</b> (3 tissues, circadian),
+    <b>PER2</b> (3 tissues, circadian), <b>GM24497</b> (3 tissues), <b>THRSP</b> (3 tissues, lipid metabolism).
+    Cross-method agreement varies: skin/lung show highest Jaccard overlap (0.25), while thymus is lowest (0.005).
+    Cell 2020 validation shows limited overlap (1-2/66 genes), reflecting that SHAP importance captures predictive
+    features (not necessarily fold-change magnitude), and spaceflight signatures are tissue-specific.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tissueColors = {
+  "Liver": OI.blue, "Gastrocnemius": OI.vermilion, "Kidney": OI.green,
+  "Thymus": OI.orange, "Eye": OI.pink, "Skin": OI.skyblue,
+  "Lung": "#888888", "Colon": "#555555"
+};
+const tooltip = d3.select("#tooltip");
+
+// =============================================
+// PANEL A: UpSet-style intersection bar chart
+// =============================================
+(function() {
+  const upsetBars = [{"n_tissues": 1, "n_genes": 1277}, {"n_tissues": 2, "n_genes": 73}, {"n_tissues": 3, "n_genes": 10}, {"n_tissues": 4, "n_genes": 1}];
+  const multiGenes = [{"gene": "MUP22", "n_tissues": 4, "tissues": ["colon", "gastrocnemius", "lung", "skin"]}, {"gene": "APOA1", "n_tissues": 3, "tissues": ["colon", "skin", "thymus"]}, {"gene": "ENSMUSG00000075014", "n_tissues": 3, "tissues": ["eye", "lung", "skin"]}, {"gene": "ENSMUSG00000079224", "n_tissues": 3, "tissues": ["eye", "gastrocnemius", "lung"]}, {"gene": "ENSMUSG00000099871", "n_tissues": 3, "tissues": ["gastrocnemius", "skin", "thymus"]}, {"gene": "GM24497", "n_tissues": 3, "tissues": ["eye", "gastrocnemius", "thymus"]}, {"gene": "GM26244", "n_tissues": 3, "tissues": ["gastrocnemius", "lung", "skin"]}, {"gene": "NPAS2", "n_tissues": 3, "tissues": ["gastrocnemius", "liver", "skin"]}, {"gene": "PDE2A", "n_tissues": 3, "tissues": ["eye", "gastrocnemius", "skin"]}, {"gene": "PER2", "n_tissues": 3, "tissues": ["eye", "gastrocnemius", "lung"]}, {"gene": "THRSP", "n_tissues": 3, "tissues": ["colon", "lung", "skin"]}, {"gene": "2210418O10RIK", "n_tissues": 2, "tissues": ["gastrocnemius", "skin"]}, {"gene": "9030619P08RIK", "n_tissues": 2, "tissues": ["kidney", "skin"]}, {"gene": "AMY2A5", "n_tissues": 2, "tissues": ["colon", "eye"]}, {"gene": "BNC2", "n_tissues": 2, "tissues": ["liver", "thymus"]}, {"gene": "CAMP", "n_tissues": 2, "tissues": ["gastrocnemius", "lung"]}, {"gene": "CCL21F", "n_tissues": 2, "tissues": ["colon", "skin"]}, {"gene": "CIART", "n_tissues": 2, "tissues": ["gastrocnemius", "liver"]}, {"gene": "CRTAC1", "n_tissues": 2, "tissues": ["gastrocnemius", "thymus"]}, {"gene": "CYP2A4", "n_tissues": 2, "tissues": ["colon", "liver"]}];
+  const margin = {top: 15, right: 20, bottom: 45, left: 55};
+  const width = 400, height = 180;
+
+  const svg = d3.select("#upset").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom + 120)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(upsetBars.map(d => d.n_tissues)).range([0, width]).padding(0.3);
+  const y = d3.scaleLinear().domain([0, d3.max(upsetBars, d => d.n_genes) * 1.1]).range([height, 0]);
+
+  svg.selectAll("rect.bar")
+    .data(upsetBars).enter().append("rect")
+    .attr("x", d => x(d.n_tissues))
+    .attr("y", d => y(d.n_genes))
+    .attr("width", x.bandwidth())
+    .attr("height", d => height - y(d.n_genes))
+    .attr("fill", (d, i) => d.n_tissues >= 3 ? OI.vermilion : d.n_tissues === 2 ? OI.orange : OI.skyblue)
+    .attr("opacity", 0.8);
+
+  svg.selectAll("text.bar-label")
+    .data(upsetBars).enter().append("text")
+    .attr("x", d => x(d.n_tissues) + x.bandwidth()/2)
+    .attr("y", d => y(d.n_genes) - 4)
+    .attr("text-anchor", "middle").attr("font-size", "9px").attr("font-weight", "bold")
+    .text(d => d.n_genes);
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x));
+  svg.append("text").attr("x", width/2).attr("y", height+35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Number of Tissues");
+
+  svg.append("g").call(d3.axisLeft(y).ticks(5));
+  svg.append("text").attr("x", -height/2).attr("y", -40)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("Number of Genes");
+
+  // Multi-tissue gene table below
+  const tableY = height + 55;
+  svg.append("text").attr("x", 0).attr("y", tableY)
+    .attr("font-size", "9px").attr("font-weight", "bold").text("Multi-tissue genes (≥2 tissues):");
+
+  multiGenes.slice(0, 12).forEach((g, i) => {
+    svg.append("text").attr("x", 0).attr("y", tableY + 14 + i * 12)
+      .attr("font-size", "8px")
+      .attr("fill", g.n_tissues >= 3 ? OI.vermilion : "#444")
+      .text(`${g.gene} (${g.n_tissues}): ${g.tissues.join(", ")}`);
+  });
+})();
+
+// =============================================
+// PANEL B: Gene × Tissue SHAP Heatmap
+// =============================================
+(function() {
+  const data = [{"gene": "MUP22", "tissue": "Liver", "importance": 0.000637, "in_top100": false, "gene_type": "consensus"}, {"gene": "MUP22", "tissue": "Gastrocnemius", "importance": 0.007555, "in_top100": true, "gene_type": "consensus"}, {"gene": "MUP22", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "consensus"}, {"gene": "MUP22", "tissue": "Thymus", "importance": 0.008122, "in_top100": false, "gene_type": "consensus"}, {"gene": "MUP22", "tissue": "Eye", "importance": 0, "in_top100": false, "gene_type": "consensus"}, {"gene": "MUP22", "tissue": "Skin", "importance": 0.091434, "in_top100": true, "gene_type": "consensus"}, {"gene": "MUP22", "tissue": "Lung", "importance": 0.011822, "in_top100": true, "gene_type": "consensus"}, {"gene": "MUP22", "tissue": "Colon", "importance": 0.013497, "in_top100": true, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Liver", "importance": 0.002074, "in_top100": true, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Gastrocnemius", "importance": 0.007732, "in_top100": true, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Kidney", "importance": 0.000177, "in_top100": false, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Thymus", "importance": 0.00314, "in_top100": false, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Eye", "importance": 0.004081, "in_top100": false, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Skin", "importance": 0.022123, "in_top100": true, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Lung", "importance": 0.00502, "in_top100": false, "gene_type": "consensus"}, {"gene": "NPAS2", "tissue": "Colon", "importance": 0.004615, "in_top100": false, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Gastrocnemius", "importance": 0.030001, "in_top100": true, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Thymus", "importance": 0.012597, "in_top100": false, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Eye", "importance": 0.048941, "in_top100": true, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Skin", "importance": 0.009666, "in_top100": false, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Lung", "importance": 0.023196, "in_top100": true, "gene_type": "consensus"}, {"gene": "PER2", "tissue": "Colon", "importance": 0.010859, "in_top100": false, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Liver", "importance": 0.0, "in_top100": false, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Gastrocnemius", "importance": 0.009098, "in_top100": true, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Thymus", "importance": 0.02047, "in_top100": true, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Eye", "importance": 0.000771, "in_top100": true, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Skin", "importance": 0.00532, "in_top100": false, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Lung", "importance": 0.003303, "in_top100": false, "gene_type": "consensus"}, {"gene": "GM24497", "tissue": "Colon", "importance": 0.006604, "in_top100": false, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Liver", "importance": 0.0, "in_top100": false, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Gastrocnemius", "importance": 0.002399, "in_top100": false, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Thymus", "importance": 0.019767, "in_top100": false, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Eye", "importance": 0.000417, "in_top100": false, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Skin", "importance": 0.01432, "in_top100": true, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Lung", "importance": 0.007254, "in_top100": true, "gene_type": "consensus"}, {"gene": "THRSP", "tissue": "Colon", "importance": 0.016623, "in_top100": true, "gene_type": "consensus"}, {"gene": "ENSMUSG00000091997", "tissue": "Liver", "importance": 0.000836, "in_top100": true, "gene_type": "specific_liver"}, {"gene": "ENSMUSG00000091997", "tissue": "Gastrocnemius", "importance": 0.001119, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ENSMUSG00000091997", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ENSMUSG00000091997", "tissue": "Thymus", "importance": 0.002035, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ENSMUSG00000091997", "tissue": "Eye", "importance": 0.000475, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ENSMUSG00000091997", "tissue": "Skin", "importance": 0.0005, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ENSMUSG00000091997", "tissue": "Lung", "importance": 0.000203, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ENSMUSG00000091997", "tissue": "Colon", "importance": 0.000311, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Liver", "importance": 0.000826, "in_top100": true, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Gastrocnemius", "importance": 0.001932, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Thymus", "importance": 0.002035, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Eye", "importance": 0.001429, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Skin", "importance": 0.004163, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Lung", "importance": 0.000939, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "ARHGAP20", "tissue": "Colon", "importance": 0.001505, "in_top100": false, "gene_type": "specific_liver"}, {"gene": "RPS7-PS3", "tissue": "Liver", "importance": 0.0, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPS7-PS3", "tissue": "Gastrocnemius", "importance": 0.001775, "in_top100": true, "gene_type": "specific_gastrocnemius"}, {"gene": "RPS7-PS3", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPS7-PS3", "tissue": "Thymus", "importance": 0.009857, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPS7-PS3", "tissue": "Eye", "importance": 0.001061, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPS7-PS3", "tissue": "Skin", "importance": 0.002481, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPS7-PS3", "tissue": "Lung", "importance": 0.000317, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPS7-PS3", "tissue": "Colon", "importance": 0.001355, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Liver", "importance": 0.0, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Gastrocnemius", "importance": 0.004493, "in_top100": true, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Thymus", "importance": 0.003862, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Eye", "importance": 0.001023, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Skin", "importance": 0.002462, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Lung", "importance": 0.000854, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "RPL37RT", "tissue": "Colon", "importance": 0.000282, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Gastrocnemius", "importance": 0.045583, "in_top100": true, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Thymus", "importance": 0.001621, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Eye", "importance": 0.000163, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Skin", "importance": 0.003285, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Lung", "importance": 0.001969, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "TMSB15L", "tissue": "Colon", "importance": 0.000683, "in_top100": false, "gene_type": "specific_gastrocnemius"}, {"gene": "PCDHB7", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "PCDHB7", "tissue": "Gastrocnemius", "importance": 0.001208, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "PCDHB7", "tissue": "Kidney", "importance": 0.041174, "in_top100": true, "gene_type": "specific_kidney"}, {"gene": "PCDHB7", "tissue": "Thymus", "importance": 0.00722, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "PCDHB7", "tissue": "Eye", "importance": 0.000582, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "PCDHB7", "tissue": "Skin", "importance": 0.002409, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "PCDHB7", "tissue": "Lung", "importance": 0.000747, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "PCDHB7", "tissue": "Colon", "importance": 0.000799, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Gastrocnemius", "importance": 0.00029, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Kidney", "importance": 0.194278, "in_top100": true, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Thymus", "importance": 0.001237, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Eye", "importance": 0.001258, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Skin", "importance": 0.000583, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Lung", "importance": 0.00034, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "TRIM25", "tissue": "Colon", "importance": 0.00052, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Gastrocnemius", "importance": 0.001689, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Kidney", "importance": 0.027155, "in_top100": true, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Thymus", "importance": 0.003398, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Eye", "importance": 0.000357, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Skin", "importance": 0.001121, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Lung", "importance": 0.000189, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "E130308A19RIK", "tissue": "Colon", "importance": 0.000111, "in_top100": false, "gene_type": "specific_kidney"}, {"gene": "MYBPC3", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_thymus"}, {"gene": "MYBPC3", "tissue": "Gastrocnemius", "importance": 0, "in_top100": false, "gene_type": "specific_thymus"}, {"gene": "MYBPC3", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_thymus"}, {"gene": "MYBPC3", "tissue": "Thymus", "importance": 0.03542, "in_top100": true, "gene_type": "specific_thymus"}, {"gene": "MYBPC3", "tissue": "Eye", "importance": 0.00462, "in_top100": false, "gene_type": "specific_thymus"}, {"gene": "MYBPC3", "tissue": "Skin", "importance": 0.002624, "in_top100": false, "gene_type": "specific_thymus"}, {"gene": "MYBPC3", "tissue": "Lung", "importance": 0.004677, "in_top100": false, "gene_type": "specific_thymus"}, {"gene": "MYBPC3", "tissue": "Colon", "importance": 0.002058, "in_top100": false, "gene_type": "specific_thymus"}, {"gene": "ENSMUSG00000099519", "tissue": "Liver", "importance": 0.0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000099519", "tissue": "Gastrocnemius", "importance": 0.003459, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000099519", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000099519", "tissue": "Thymus", "importance": 0.009995, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000099519", "tissue": "Eye", "importance": 0.033243, "in_top100": true, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000099519", "tissue": "Skin", "importance": 0.005644, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000099519", "tissue": "Lung", "importance": 0.004102, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000099519", "tissue": "Colon", "importance": 0.000878, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Gastrocnemius", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Kidney", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Thymus", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Eye", "importance": 0.027648, "in_top100": true, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Skin", "importance": 0.001391, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Lung", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "ENSMUSG00000108507", "tissue": "Colon", "importance": 0.001344, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Gastrocnemius", "importance": 0.00136, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Kidney", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Thymus", "importance": 0.006878, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Eye", "importance": 0.388312, "in_top100": true, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Skin", "importance": 0, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Lung", "importance": 0.001161, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "SST", "tissue": "Colon", "importance": 0.000386, "in_top100": false, "gene_type": "specific_eye"}, {"gene": "MRGPRG", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MRGPRG", "tissue": "Gastrocnemius", "importance": 0.001663, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MRGPRG", "tissue": "Kidney", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MRGPRG", "tissue": "Thymus", "importance": 0.003935, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MRGPRG", "tissue": "Eye", "importance": 0.003599, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MRGPRG", "tissue": "Skin", "importance": 0.110268, "in_top100": true, "gene_type": "specific_skin"}, {"gene": "MRGPRG", "tissue": "Lung", "importance": 0.001772, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MRGPRG", "tissue": "Colon", "importance": 0.001613, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Liver", "importance": 0.000501, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Gastrocnemius", "importance": 0.005635, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Kidney", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Thymus", "importance": 0.011421, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Eye", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Skin", "importance": 0.092168, "in_top100": true, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Lung", "importance": 0.000595, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "MUP14", "tissue": "Colon", "importance": 0.001214, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Gastrocnemius", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Kidney", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Thymus", "importance": 0.016793, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Eye", "importance": 0, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Skin", "importance": 0.066025, "in_top100": true, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Lung", "importance": 0.006858, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "NKX1-2", "tissue": "Colon", "importance": 0.001767, "in_top100": false, "gene_type": "specific_skin"}, {"gene": "CYP26B1", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "CYP26B1", "tissue": "Gastrocnemius", "importance": 0.002975, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "CYP26B1", "tissue": "Kidney", "importance": 0.00012, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "CYP26B1", "tissue": "Thymus", "importance": 0.002758, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "CYP26B1", "tissue": "Eye", "importance": 0.001731, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "CYP26B1", "tissue": "Skin", "importance": 0.004643, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "CYP26B1", "tissue": "Lung", "importance": 0.057525, "in_top100": true, "gene_type": "specific_lung"}, {"gene": "CYP26B1", "tissue": "Colon", "importance": 0.001159, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Gastrocnemius", "importance": 0, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Thymus", "importance": 0.016579, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Eye", "importance": 0.00375, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Skin", "importance": 0.005498, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Lung", "importance": 0.040184, "in_top100": true, "gene_type": "specific_lung"}, {"gene": "SNX31", "tissue": "Colon", "importance": 0.002903, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Gastrocnemius", "importance": 0.004447, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Thymus", "importance": 0.00614, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Eye", "importance": 0.00347, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Skin", "importance": 0.002831, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Lung", "importance": 0.034944, "in_top100": true, "gene_type": "specific_lung"}, {"gene": "ENSMUSG00000108852", "tissue": "Colon", "importance": 0.001627, "in_top100": false, "gene_type": "specific_lung"}, {"gene": "ENPP7", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENPP7", "tissue": "Gastrocnemius", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENPP7", "tissue": "Kidney", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENPP7", "tissue": "Thymus", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENPP7", "tissue": "Eye", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENPP7", "tissue": "Skin", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENPP7", "tissue": "Lung", "importance": 0.001196, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENPP7", "tissue": "Colon", "importance": 0.015882, "in_top100": true, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Gastrocnemius", "importance": 0.000681, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Kidney", "importance": 0.0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Thymus", "importance": 0.023392, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Eye", "importance": 0.001739, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Skin", "importance": 0.00365, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Lung", "importance": 0.006617, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ORM1", "tissue": "Colon", "importance": 0.015172, "in_top100": true, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Liver", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Gastrocnemius", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Kidney", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Thymus", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Eye", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Skin", "importance": 0, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Lung", "importance": 0.000878, "in_top100": false, "gene_type": "specific_colon"}, {"gene": "ENSMUSG00000106630", "tissue": "Colon", "importance": 0.100975, "in_top100": true, "gene_type": "specific_colon"}];
+  const margin = {top: 5, right: 15, bottom: 60, left: 120};
+  const genes = [...new Set(data.map(d => d.gene))];
+  const tissues = [...new Set(data.map(d => d.tissue))];
+  const cellW = 46, cellH = 16;
+  const width = tissues.length * cellW;
+  const height = genes.length * cellH;
+
+  const svg = d3.select("#gene_heatmap").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(tissues).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(genes).range([0, height]).padding(0.05);
+
+  // Max importance for color scale
+  const maxImp = d3.max(data.filter(d => d.importance > 0), d => d.importance);
+  const color = d3.scaleSequential().domain([0, maxImp * 0.5]).interpolator(d3.interpolateYlOrRd);
+
+  svg.selectAll("rect.cell")
+    .data(data).enter().append("rect")
+    .attr("x", d => x(d.tissue))
+    .attr("y", d => y(d.gene))
+    .attr("width", x.bandwidth())
+    .attr("height", y.bandwidth())
+    .attr("fill", d => d.importance > 0 ? color(d.importance) : "#f5f5f5")
+    .attr("stroke", d => d.in_top100 ? "#333" : "#eee")
+    .attr("stroke-width", d => d.in_top100 ? 1.5 : 0.5)
+    .attr("rx", 1)
+    .on("mouseover", function(event, d) {
+      tooltip.style("display", "block")
+        .html(`<b>${d.gene}</b> × ${d.tissue}<br>Importance: ${d.importance.toExponential(2)}<br>In top-100: ${d.in_top100 ? "Yes" : "No"}<br>Type: ${d.gene_type}`);
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+    })
+    .on("mouseout", () => tooltip.style("display", "none"));
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text").attr("transform", "rotate(-40)")
+    .style("text-anchor", "end").attr("dx", "-0.5em").style("font-size", "8px");
+
+  svg.append("g").call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "7px")
+    .attr("fill", function(d) {
+      const ginfo = data.find(dd => dd.gene === d);
+      return ginfo && ginfo.gene_type === "consensus" ? OI.vermilion : "#333";
+    });
+
+  // Note
+  svg.append("text").attr("x", 0).attr("y", height + 50)
+    .attr("font-size", "7px").attr("fill", "#888")
+    .text("Bold border = SHAP top-100. Red labels = consensus genes.");
+})();
+
+// =============================================
+// PANEL C: Method Agreement
+// =============================================
+(function() {
+  const data = [{"tissue": "Liver", "method_a": "svm_rbf", "method_b": "mlp", "jaccard": 0.02, "overlap": 4, "spearman": 0.079}, {"tissue": "Gastrocnemius", "method_a": "elasticnet_lr", "method_b": "pca_lr", "jaccard": 0.212, "overlap": 35, "spearman": 0.199}, {"tissue": "Kidney", "method_a": "xgb", "method_b": "rf", "jaccard": 0.042, "overlap": 8, "spearman": 0.081}, {"tissue": "Thymus", "method_a": "knn", "method_b": "pca_lr", "jaccard": 0.005, "overlap": 1, "spearman": 0.002}, {"tissue": "Eye", "method_a": "pca_lr", "method_b": "xgb", "jaccard": 0.031, "overlap": 6, "spearman": 0.058}, {"tissue": "Skin", "method_a": "elasticnet_lr", "method_b": "pca_lr", "jaccard": 0.25, "overlap": 40, "spearman": 0.306}, {"tissue": "Lung", "method_a": "elasticnet_lr", "method_b": "pca_lr", "jaccard": 0.25, "overlap": 40, "spearman": 0.387}, {"tissue": "Colon", "method_a": "pca_lr", "method_b": "xgb", "jaccard": 0.047, "overlap": 9, "spearman": 0.081}];
+  const margin = {top: 15, right: 30, bottom: 45, left: 100};
+  const width = 380, height = 250;
+
+  const svg = d3.select("#agreement").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const y = d3.scaleBand().domain(data.map(d => d.tissue)).range([0, height]).padding(0.25);
+  const x = d3.scaleLinear().domain([0, 0.45]).range([0, width]);
+
+  // Jaccard bars
+  svg.selectAll("rect.jaccard")
+    .data(data).enter().append("rect")
+    .attr("x", 0).attr("y", d => y(d.tissue))
+    .attr("width", d => x(d.jaccard))
+    .attr("height", y.bandwidth() / 2)
+    .attr("fill", OI.blue).attr("opacity", 0.8);
+
+  // Spearman bars
+  svg.selectAll("rect.spearman")
+    .data(data).enter().append("rect")
+    .attr("x", 0).attr("y", d => y(d.tissue) + y.bandwidth() / 2)
+    .attr("width", d => x(Math.max(0, d.spearman)))
+    .attr("height", y.bandwidth() / 2)
+    .attr("fill", OI.orange).attr("opacity", 0.8);
+
+  // Value labels
+  data.forEach(d => {
+    svg.append("text")
+      .attr("x", x(d.jaccard) + 3)
+      .attr("y", y(d.tissue) + y.bandwidth() / 4 + 3)
+      .attr("font-size", "8px").attr("fill", OI.blue)
+      .text(`J=${d.jaccard} (n=${d.overlap})`);
+    svg.append("text")
+      .attr("x", x(Math.max(0, d.spearman)) + 3)
+      .attr("y", y(d.tissue) + y.bandwidth() * 3/4 + 3)
+      .attr("font-size", "8px").attr("fill", OI.orange)
+      .text(`ρ=${d.spearman}`);
+  });
+
+  svg.append("g").call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").style("font-size", "9px");
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(5));
+  svg.append("text").attr("x", width/2).attr("y", height+35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Agreement Score");
+
+  // Legend
+  svg.append("rect").attr("x", width-120).attr("y", 5).attr("width", 12).attr("height", 8).attr("fill", OI.blue).attr("opacity", 0.8);
+  svg.append("text").attr("x", width-105).attr("y", 13).attr("font-size", "8px").text("Jaccard (top-100)");
+  svg.append("rect").attr("x", width-120).attr("y", 18).attr("width", 12).attr("height", 8).attr("fill", OI.orange).attr("opacity", 0.8);
+  svg.append("text").attr("x", width-105).attr("y", 26).attr("font-size", "8px").text("Spearman ρ (rank)");
+})();
+
+// =============================================
+// PANEL D: Validation & Directions
+// =============================================
+(function() {
+  const validData = [{"tissue": "Colon", "method": "pca_lr", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Colon", "method": "xgb", "n_overlap": 2, "n_reference": 66, "p_value": 0.0188}, {"tissue": "Eye", "method": "pca_lr", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Eye", "method": "xgb", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Gastrocnemius", "method": "elasticnet_lr", "n_overlap": 1, "n_reference": 66, "p_value": 0.267}, {"tissue": "Gastrocnemius", "method": "pca_lr", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Kidney", "method": "rf", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Kidney", "method": "xgb", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Liver", "method": "mlp", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Liver", "method": "svm_rbf", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Lung", "method": "elasticnet_lr", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Lung", "method": "pca_lr", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Skin", "method": "elasticnet_lr", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Skin", "method": "pca_lr", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Thymus", "method": "knn", "n_overlap": 0, "n_reference": 66, "p_value": 1.0}, {"tissue": "Thymus", "method": "pca_lr", "n_overlap": 1, "n_reference": 66, "p_value": 0.209}];
+  const dirData = [{"key": "colon_pca_lr", "tissue": "colon", "method": "pca_lr", "n_up": 36, "n_down": 64, "top_up": ["Apoa4", "Enpp7", "Fabp6", "Ighv7-1", "Igkv4-62"], "top_down": ["ENSMUSG00000094509", "Gm23925", "ENSMUSG00000094087", "Amy2a5", "Orm1"]}, {"key": "colon_xgb", "tissue": "colon", "method": "xgb", "n_up": 28, "n_down": 72, "top_up": ["Slc35a5", "Fam13a", "Gstt2", "Dennd2b", "ENSMUSG00000107020"], "top_down": ["Abtb2", "Ero1b", "Elmo3", "ENSMUSG00000085269", "ENSMUSG00000083284"]}, {"key": "eye_pca_lr", "tissue": "eye", "method": "pca_lr", "n_up": 41, "n_down": 59, "top_up": ["Cytip", "Gm14434", "ENSMUSG00000116166", "Apol9a", "ENSMUSG00000108507"], "top_down": ["Lgsn", "Mip", "Crybb2", "Crygb", "Crygc"]}, {"key": "eye_xgb", "tissue": "eye", "method": "xgb", "n_up": 51, "n_down": 49, "top_up": ["Sst", "Fam107b", "1810055G02Rik", "ENSMUSG00000097699", "Kbtbd3"], "top_down": ["ENSMUSG00000081602", "ENSMUSG00000086256", "1700067K01Rik", "Gm5620", "Gabra5"]}, {"key": "gastrocnemius_elasticnet_lr", "tissue": "gastrocnemius", "method": "elasticnet_lr", "n_up": 49, "n_down": 51, "top_up": ["Sox4", "Mettl21e", "Gm4521", "ENSMUSG00000074800", "ENSMUSG00000083240"], "top_down": ["Gm9320", "Bdh1", "Ciart", "A730036I17Rik", "E230016K23Rik"]}, {"key": "gastrocnemius_pca_lr", "tissue": "gastrocnemius", "method": "pca_lr", "n_up": 42, "n_down": 58, "top_up": ["ENSMUSG00000100131", "ENSMUSG00000083061", "ENSMUSG00000083240", "Ndufb4b", "Gm44505"], "top_down": ["Myl2", "3110040M04Rik", "Gm9320", "Myl3", "ENSMUSG00000094365"]}, {"key": "kidney_rf", "tissue": "kidney", "method": "rf", "n_up": 24, "n_down": 76, "top_up": ["Trim25", "Wt1", "E130308A19Rik", "Anxa11", "Tdrd5"], "top_down": ["Wdr72", "Mgme1", "Cspg4", "Tcaf2", "Atp5mg"]}, {"key": "kidney_xgb", "tissue": "kidney", "method": "xgb", "n_up": 45, "n_down": 55, "top_up": ["Trim25", "D630039A03Rik", "ENSMUSG00000120875", "Rnf181", "Slc10a1"], "top_down": ["Batf3", "Mpig6b", "Col4a3", "Akr1c12", "1700054A03Rik"]}, {"key": "liver_mlp", "tissue": "liver", "method": "mlp", "n_up": 83, "n_down": 17, "top_up": ["Cyp3a44", "Lockd", "ENSMUSG00000102430", "ENSMUSG00000087150", "Gm45351"], "top_down": ["ENSMUSG00000109576", "Vcan", "ENSMUSG00000107118", "ENSMUSG00000109498", "Gm14288"]}, {"key": "liver_svm_rbf", "tissue": "liver", "method": "svm_rbf", "n_up": 98, "n_down": 2, "top_up": ["2310069G16Rik", "ENSMUSG00000073835", "Npas2", "Gm23946", "Phospho1"], "top_down": ["ENSMUSG00000101878", "Arfip1", "ENSMUSG00002076650", "ENSMUSG00000090582", "Gm6192"]}, {"key": "lung_elasticnet_lr", "tissue": "lung", "method": "elasticnet_lr", "n_up": 45, "n_down": 55, "top_up": ["Cyp26b1", "Snx31", "ENSMUSG00000108852", "Gm4798", "ENSMUSG00000117878"], "top_down": ["Per2", "ENSMUSG00000104217", "Gm4750", "Cys1", "ENSMUSG00000097340"]}, {"key": "lung_pca_lr", "tissue": "lung", "method": "pca_lr", "n_up": 47, "n_down": 53, "top_up": ["Ighv1-77", "ENSMUSG00000075015", "Igkv5-45", "ENSMUSG00000068964", "ENSMUSG00000095186"], "top_down": ["ENSMUSG00000084858", "Nppa", "Retn", "Camp", "ENSMUSG00000079224"]}, {"key": "skin_elasticnet_lr", "tissue": "skin", "method": "elasticnet_lr", "n_up": 51, "n_down": 49, "top_up": ["Mrgprg", "Nkx1-2", "ENSMUSG00000086320", "ENSMUSG00000108782", "Aadacl4fm4"], "top_down": ["Mup16", "Mup15", "Mup11", "Mup3", "Gm35986"]}, {"key": "skin_pca_lr", "tissue": "skin", "method": "pca_lr", "n_up": 34, "n_down": 66, "top_up": ["Mrgprg", "Gm7298", "Il20", "ENSMUSG00000108441", "Nkx1-2"], "top_down": ["Wfdc12", "Mup19", "Mup11", "Mup3", "Mup7"]}, {"key": "thymus_knn", "tissue": "thymus", "method": "knn", "n_up": 53, "n_down": 47, "top_up": ["Ppp1r3d", "ENSMUSG00000111052", "Pctp", "Rmrp", "Ephx2"], "top_down": ["Sec14l2", "Naip6", "Treml1", "Gm23442", "Hoxd8"]}, {"key": "thymus_pca_lr", "tissue": "thymus", "method": "pca_lr", "n_up": 48, "n_down": 52, "top_up": ["Zfp968", "Lep", "Nnat", "ENSMUSG00000099871", "Ugt1a9"], "top_down": ["Xirp1", "ENSMUSG00000076138", "Gm8325", "Hrc", "Sec14l3"]}];
+
+  const container = d3.select("#validation");
+
+  // Direction summary table
+  container.append("div").attr("style", "font-size:9px; font-weight:bold; margin-bottom:4px;")
+    .text("SHAP Direction (FLT ↑ vs GC ↑):");
+
+  let html = '<table class="data-table"><tr><th>Tissue</th><th>Method</th><th>↑FLT</th><th>↓FLT</th><th>Top Up</th></tr>';
+  dirData.forEach(d => {
+    html += `<tr><td>${d.tissue}</td><td>${d.method}</td><td>${d.n_up}</td><td>${d.n_down}</td><td style="font-size:8px">${d.top_up.slice(0,3).join(", ")}</td></tr>`;
+  });
+  html += '</table>';
+  container.append("div").html(html);
+
+  // Cell 2020 validation table
+  container.append("div").attr("style", "font-size:9px; font-weight:bold; margin-top:12px; margin-bottom:4px;")
+    .text("da Silveira Cell 2020 Validation (67 genes):");
+
+  // Filter to show only entries with overlap > 0
+  const sigValid = validData.filter(d => d.n_overlap > 0);
+  let vhtml = '<table class="data-table"><tr><th>Tissue</th><th>Method</th><th>Overlap</th><th>p (hypergeom)</th></tr>';
+  if (sigValid.length > 0) {
+    sigValid.forEach(d => {
+      const cls = d.p_value < 0.05 ? ' class="sig"' : '';
+      vhtml += `<tr><td>${d.tissue}</td><td>${d.method}</td><td>${d.n_overlap}/${d.n_reference}</td><td${cls}>${d.p_value.toFixed(4)}</td></tr>`;
+    });
+  } else {
+    vhtml += '<tr><td colspan="4">No overlaps found across all tissue×method combinations</td></tr>';
+  }
+  vhtml += '</table>';
+  container.append("div").html(vhtml);
+
+  container.append("div").attr("style", "font-size:8px; color:#888; margin-top:8px;")
+    .text("Note: Limited Cell 2020 overlap expected — da Silveira genes are mostly from liver/muscle DEGs, while SHAP captures predictive importance (not fold-change magnitude).");
+})();
+</script>
+</body>
+</html>

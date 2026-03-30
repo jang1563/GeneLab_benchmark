@@ -1,7 +1,9 @@
-# tasks/ — GeneLab Benchmark Task Inputs
+# tasks/ -- GeneLab Benchmark Task Inputs
 
 This directory contains the **public task inputs** for the GeneLab Benchmark (v1.0).
 Each subdirectory is a self-contained task with all features and labels needed to train and evaluate a model.
+
+> **v4 Note**: v4 extends the benchmark to 8 tissues (adding Lung and Colon) with 8 classifiers and 4 feature types (256 total evaluations). v4 tasks use data from `processed/A_detection/{tissue}/` and pathway scores from `processed/pathway_scores/`. See `v4/scripts/v4_utils.py` for the full tissue-mission configuration and `v4/scripts/multi_method_eval.py` for the evaluation driver.
 
 ---
 

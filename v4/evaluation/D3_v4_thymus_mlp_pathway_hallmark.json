@@ -1,0 +1,65 @@
+{
+  "experiment": "D3",
+  "model": "MLP",
+  "model_key": "mlp",
+  "tissue": "thymus",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 4,
+  "classes": [
+    "MHU-1",
+    "MHU-2",
+    "RR-6",
+    "RR-9"
+  ],
+  "class_distribution": {
+    "MHU-1": 9,
+    "MHU-2": 9,
+    "RR-6": 54,
+    "RR-9": 20
+  },
+  "n_samples": 92,
+  "macro_f1": 0.8114,
+  "accuracy": 0.913,
+  "ci_lower": 0.676,
+  "ci_upper": 0.9161,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU-1": 0.7273,
+    "MHU-2": 0.5714,
+    "RR-6": 0.9725,
+    "RR-9": 0.9744
+  },
+  "confusion_matrix": [
+    [
+      8,
+      1,
+      0,
+      0
+    ],
+    [
+      4,
+      4,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      53,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      19
+    ]
+  ],
+  "mean_train_time_s": 0.03,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 5.3,
+  "timestamp": "2026-03-22T03:26:12.298630"
+}
