@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 7: Immune Deconvolution & Cross-Organ Signaling</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+.figure-container { width: 1200px; margin: 0 auto; }
+.figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+.figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+.panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+.panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+.interpretation { margin-top: 16px; padding: 12px; background: #f0f7ff; border-radius: 4px;
+                   font-size: 10px; line-height: 1.5; }
+.tooltip { position: absolute; background: rgba(0,0,0,0.85); color: #fff; padding: 6px 10px;
+            border-radius: 3px; font-size: 9px; pointer-events: none; z-index: 100; }
+.dagger-note { font-size: 8px; color: #888; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 7: Immune Microenvironment & Cross-Organ Signaling in Spaceflight</div>
+  <div class="figure-subtitle">mMCP-counter deconvolution, OmniPath L-R pairs, and decoupler-py TF activity across 8 tissues</div>
+  <div class="panels">
+    <div class="panel" id="panelA">
+      <div class="panel-label">A</div>
+      <div class="panel-desc">Immune cell type changes (log2 FC, FLT vs GC)</div>
+      <div id="immune-heatmap"></div>
+      <div class="dagger-note">*FDR &lt; 0.05 &nbsp; **FDR &lt; 0.01 &nbsp; †Single-mission (5-fold CV)</div>
+    </div>
+    <div class="panel" id="panelB">
+      <div class="panel-label">B</div>
+      <div class="panel-desc">Cross-organ L-R signaling (SHAP-filtered active pairs)</div>
+      <div id="signaling-net"></div>
+    </div>
+    <div class="panel" id="panelC">
+      <div class="panel-label">C</div>
+      <div class="panel-desc">TF activity (FLT − GC, top-20 by cross-tissue significance)</div>
+      <div id="tf-heatmap"></div>
+    </div>
+    <div class="panel" id="panelD">
+      <div class="panel-label">D</div>
+      <div class="panel-desc">Druggability of spaceflight-affected genes per tissue</div>
+      <div id="druggability-bar"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    Skin shows the strongest immune remodeling (6/14 cell types FDR&lt;0.05), followed by kidney and thymus (2 each).
+    Cross-organ L-R analysis identifies 62 active ligand-receptor pairs linking tissues during spaceflight.
+    TF activity reveals widespread transcriptional reprogramming: thymus (240 TFs), skin (241), kidney (177), and liver (105) show significant FLT vs GC differences.
+    Thymus and kidney are the most druggable tissues (24.8% and 21.5% of spaceflight-affected genes targeted by known drugs).
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tissueColors = {
+  "Liver": OI.blue, "Gastrocnemius": OI.vermilion, "Kidney": OI.green,
+  "Thymus": OI.orange, "Eye": OI.pink, "Skin": OI.skyblue,
+  "Lung†": "#888888", "Colon†": "#555555"
+};
+const tooltip = d3.select("#tooltip");
+
+// Panel A: Immune heatmap
+(function() {
+  const data = [{"tissue": "Liver", "cell_type": "T cells", "log2fc": -0.098, "fdr_p": 0.343326, "cliffs_delta": -0.1304}, {"tissue": "Liver", "cell_type": "CD8 T cells", "log2fc": -0.094, "fdr_p": 0.674929, "cliffs_delta": -0.0617}, {"tissue": "Liver", "cell_type": "NK cells", "log2fc": 0.056, "fdr_p": 0.898747, "cliffs_delta": 0.0256}, {"tissue": "Liver", "cell_type": "B derived", "log2fc": -0.049, "fdr_p": 0.898747, "cliffs_delta": 0.012}, {"tissue": "Liver", "cell_type": "Memory B cells", "log2fc": 0.076, "fdr_p": 0.898747, "cliffs_delta": 0.0124}, {"tissue": "Liver", "cell_type": "Monocytes / macrophages", "log2fc": -0.068, "fdr_p": 0.343326, "cliffs_delta": -0.137}, {"tissue": "Liver", "cell_type": "Monocytes", "log2fc": 0.003, "fdr_p": 0.898747, "cliffs_delta": 0.0101}, {"tissue": "Liver", "cell_type": "Granulocytes", "log2fc": -0.228, "fdr_p": 0.63126, "cliffs_delta": -0.0741}, {"tissue": "Liver", "cell_type": "Eosinophils", "log2fc": -0.401, "fdr_p": 0.273252, "cliffs_delta": -0.1572}, {"tissue": "Liver", "cell_type": "Basophils", "log2fc": -0.001, "fdr_p": 0.898747, "cliffs_delta": 0.0221}, {"tissue": "Liver", "cell_type": "Vessels", "log2fc": -0.035, "fdr_p": 0.273252, "cliffs_delta": -0.1752}, {"tissue": "Liver", "cell_type": "Lymphatics", "log2fc": -0.044, "fdr_p": 0.674929, "cliffs_delta": -0.066}, {"tissue": "Liver", "cell_type": "Endothelial cells", "log2fc": -0.03, "fdr_p": 0.519799, "cliffs_delta": -0.0962}, {"tissue": "Liver", "cell_type": "Fibroblasts", "log2fc": -0.073, "fdr_p": 0.350605, "cliffs_delta": -0.1209}, {"tissue": "Gastrocnemius", "cell_type": "NK cells", "log2fc": -0.934, "fdr_p": 0.43713, "cliffs_delta": -0.2188}, {"tissue": "Gastrocnemius", "cell_type": "B derived", "log2fc": 0.451, "fdr_p": 0.43713, "cliffs_delta": 0.2188}, {"tissue": "Gastrocnemius", "cell_type": "Monocytes / macrophages", "log2fc": 0.027, "fdr_p": 0.919362, "cliffs_delta": 0.0469}, {"tissue": "Gastrocnemius", "cell_type": "Monocytes", "log2fc": 0.064, "fdr_p": 0.43713, "cliffs_delta": 0.2422}, {"tissue": "Gastrocnemius", "cell_type": "Mast cells", "log2fc": -0.418, "fdr_p": 0.43713, "cliffs_delta": -0.2734}, {"tissue": "Gastrocnemius", "cell_type": "Eosinophils", "log2fc": -0.117, "fdr_p": 0.43713, "cliffs_delta": -0.3359}, {"tissue": "Gastrocnemius", "cell_type": "Basophils", "log2fc": -0.078, "fdr_p": 0.98496, "cliffs_delta": 0.0078}, {"tissue": "Gastrocnemius", "cell_type": "Vessels", "log2fc": 0.025, "fdr_p": 0.43713, "cliffs_delta": 0.3203}, {"tissue": "Gastrocnemius", "cell_type": "Lymphatics", "log2fc": -0.029, "fdr_p": 0.667487, "cliffs_delta": 0.1289}, {"tissue": "Gastrocnemius", "cell_type": "Endothelial cells", "log2fc": -0.032, "fdr_p": 0.43713, "cliffs_delta": -0.2344}, {"tissue": "Gastrocnemius", "cell_type": "Fibroblasts", "log2fc": -0.033, "fdr_p": 0.43713, "cliffs_delta": -0.2109}, {"tissue": "Kidney", "cell_type": "T cells", "log2fc": -0.016, "fdr_p": 0.947445, "cliffs_delta": -0.008}, {"tissue": "Kidney", "cell_type": "CD8 T cells", "log2fc": 0.135, "fdr_p": 0.63435, "cliffs_delta": 0.1062}, {"tissue": "Kidney", "cell_type": "NK cells", "log2fc": 0.586, "fdr_p": 0.140725, "cliffs_delta": 0.2224}, {"tissue": "Kidney", "cell_type": "B derived", "log2fc": 0.253, "fdr_p": 0.005348, "cliffs_delta": 0.4136}, {"tissue": "Kidney", "cell_type": "Memory B cells", "log2fc": 0.487, "fdr_p": 0.807951, "cliffs_delta": 0.0477}, {"tissue": "Kidney", "cell_type": "Monocytes / macrophages", "log2fc": 0.0, "fdr_p": 0.947445, "cliffs_delta": -0.0136}, {"tissue": "Kidney", "cell_type": "Monocytes", "log2fc": 0.074, "fdr_p": 0.007686, "cliffs_delta": 0.3801}, {"tissue": "Kidney", "cell_type": "Mast cells", "log2fc": -0.122, "fdr_p": 0.848274, "cliffs_delta": -0.0395}, {"tissue": "Kidney", "cell_type": "Eosinophils", "log2fc": 0.023, "fdr_p": 0.241386, "cliffs_delta": 0.1898}, {"tissue": "Kidney", "cell_type": "Basophils", "log2fc": 0.075, "fdr_p": 0.107555, "cliffs_delta": 0.2517}, {"tissue": "Kidney", "cell_type": "Vessels", "log2fc": 0.014, "fdr_p": 0.44259, "cliffs_delta": 0.1426}, {"tissue": "Kidney", "cell_type": "Lymphatics", "log2fc": 0.02, "fdr_p": 0.696432, "cliffs_delta": 0.0886}, {"tissue": "Kidney", "cell_type": "Endothelial cells", "log2fc": -0.06, "fdr_p": 0.107497, "cliffs_delta": -0.2648}, {"tissue": "Kidney", "cell_type": "Fibroblasts", "log2fc": -0.008, "fdr_p": 0.778813, "cliffs_delta": -0.0688}, {"tissue": "Thymus", "cell_type": "T cells", "log2fc": -0.113, "fdr_p": 0.017488, "cliffs_delta": -0.3951}, {"tissue": "Thymus", "cell_type": "CD8 T cells", "log2fc": -0.123, "fdr_p": 0.00192, "cliffs_delta": -0.4957}, {"tissue": "Thymus", "cell_type": "NK cells", "log2fc": -0.169, "fdr_p": 0.423717, "cliffs_delta": -0.2264}, {"tissue": "Thymus", "cell_type": "B derived", "log2fc": -0.045, "fdr_p": 0.907419, "cliffs_delta": -0.0212}, {"tissue": "Thymus", "cell_type": "Memory B cells", "log2fc": -0.076, "fdr_p": 0.907419, "cliffs_delta": -0.0257}, {"tissue": "Thymus", "cell_type": "Monocytes / macrophages", "log2fc": -0.004, "fdr_p": 0.907419, "cliffs_delta": 0.0217}, {"tissue": "Thymus", "cell_type": "Monocytes", "log2fc": -0.171, "fdr_p": 0.907419, "cliffs_delta": -0.076}, {"tissue": "Thymus", "cell_type": "Granulocytes", "log2fc": -0.328, "fdr_p": 0.907419, "cliffs_delta": -0.0589}, {"tissue": "Thymus", "cell_type": "Mast cells", "log2fc": -0.248, "fdr_p": 0.907419, "cliffs_delta": -0.0703}, {"tissue": "Thymus", "cell_type": "Eosinophils", "log2fc": -0.026, "fdr_p": 0.907419, "cliffs_delta": 0.0154}, {"tissue": "Thymus", "cell_type": "Neutrophils", "log2fc": -0.493, "fdr_p": 0.505763, "cliffs_delta": -0.1801}, {"tissue": "Thymus", "cell_type": "Basophils", "log2fc": -0.219, "fdr_p": 0.46394, "cliffs_delta": -0.203}, {"tissue": "Thymus", "cell_type": "Vessels", "log2fc": 0.06, "fdr_p": 0.907419, "cliffs_delta": 0.084}, {"tissue": "Thymus", "cell_type": "Lymphatics", "log2fc": -0.013, "fdr_p": 0.907419, "cliffs_delta": -0.02}, {"tissue": "Thymus", "cell_type": "Endothelial cells", "log2fc": 0.061, "fdr_p": 0.907419, "cliffs_delta": 0.0635}, {"tissue": "Thymus", "cell_type": "Fibroblasts", "log2fc": 0.088, "fdr_p": 0.907419, "cliffs_delta": 0.0715}, {"tissue": "Eye", "cell_type": "T cells", "log2fc": 0.201, "fdr_p": 0.968792, "cliffs_delta": 0.1214}, {"tissue": "Eye", "cell_type": "CD8 T cells", "log2fc": 0.693, "fdr_p": 0.968792, "cliffs_delta": 0.1048}, {"tissue": "Eye", "cell_type": "B derived", "log2fc": 0.319, "fdr_p": 0.968792, "cliffs_delta": 0.2429}, {"tissue": "Eye", "cell_type": "Monocytes / macrophages", "log2fc": 0.018, "fdr_p": 0.968792, "cliffs_delta": 0.0524}, {"tissue": "Eye", "cell_type": "Monocytes", "log2fc": -0.023, "fdr_p": 0.968792, "cliffs_delta": 0.0095}, {"tissue": "Eye", "cell_type": "Mast cells", "log2fc": 0.154, "fdr_p": 0.968792, "cliffs_delta": 0.031}, {"tissue": "Eye", "cell_type": "Eosinophils", "log2fc": 0.016, "fdr_p": 0.968792, "cliffs_delta": 0.1571}, {"tissue": "Eye", "cell_type": "Neutrophils", "log2fc": 0.003, "fdr_p": 0.968792, "cliffs_delta": 0.0262}, {"tissue": "Eye", "cell_type": "Basophils", "log2fc": -0.044, "fdr_p": 0.968792, "cliffs_delta": -0.2286}, {"tissue": "Eye", "cell_type": "Vessels", "log2fc": -0.01, "fdr_p": 0.968792, "cliffs_delta": 0.0286}, {"tissue": "Eye", "cell_type": "Lymphatics", "log2fc": -0.013, "fdr_p": 0.968792, "cliffs_delta": -0.0524}, {"tissue": "Eye", "cell_type": "Endothelial cells", "log2fc": -0.181, "fdr_p": 0.968792, "cliffs_delta": -0.1524}, {"tissue": "Eye", "cell_type": "Fibroblasts", "log2fc": -0.075, "fdr_p": 0.968792, "cliffs_delta": 0.0333}, {"tissue": "Skin", "cell_type": "T cells", "log2fc": 0.123, "fdr_p": 0.036487, "cliffs_delta": 0.2821}, {"tissue": "Skin", "cell_type": "CD8 T cells", "log2fc": 0.163, "fdr_p": 0.211522, "cliffs_delta": 0.1574}, {"tissue": "Skin", "cell_type": "NK cells", "log2fc": 0.326, "fdr_p": 0.10723, "cliffs_delta": 0.2126}, {"tissue": "Skin", "cell_type": "B derived", "log2fc": 0.178, "fdr_p": 0.303011, "cliffs_delta": 0.1282}, {"tissue": "Skin", "cell_type": "Memory B cells", "log2fc": 0.646, "fdr_p": 0.066138, "cliffs_delta": 0.2129}, {"tissue": "Skin", "cell_type": "Monocytes / macrophages", "log2fc": -0.047, "fdr_p": 0.347098, "cliffs_delta": -0.1126}, {"tissue": "Skin", "cell_type": "Monocytes", "log2fc": 0.007, "fdr_p": 0.446722, "cliffs_delta": 0.0867}, {"tissue": "Skin", "cell_type": "Mast cells", "log2fc": 0.172, "fdr_p": 0.013521, "cliffs_delta": 0.3281}, {"tissue": "Skin", "cell_type": "Eosinophils", "log2fc": -0.093, "fdr_p": 0.140586, "cliffs_delta": -0.1925}, {"tissue": "Skin", "cell_type": "Basophils", "log2fc": -0.229, "fdr_p": 0.001339, "cliffs_delta": -0.4145}, {"tissue": "Skin", "cell_type": "Vessels", "log2fc": 0.071, "fdr_p": 0.000644, "cliffs_delta": 0.4625}, {"tissue": "Skin", "cell_type": "Lymphatics", "log2fc": 0.024, "fdr_p": 0.145898, "cliffs_delta": 0.1847}, {"tissue": "Skin", "cell_type": "Endothelial cells", "log2fc": 0.097, "fdr_p": 0.001339, "cliffs_delta": 0.4119}, {"tissue": "Skin", "cell_type": "Fibroblasts", "log2fc": 0.059, "fdr_p": 0.048573, "cliffs_delta": 0.2626}, {"tissue": "Lung\u2020", "cell_type": "T cells", "log2fc": -0.027, "fdr_p": 0.594515, "cliffs_delta": -0.1342}, {"tissue": "Lung\u2020", "cell_type": "CD8 T cells", "log2fc": -0.065, "fdr_p": 0.484266, "cliffs_delta": -0.2289}, {"tissue": "Lung\u2020", "cell_type": "NK cells", "log2fc": -0.073, "fdr_p": 0.484266, "cliffs_delta": -0.2342}, {"tissue": "Lung\u2020", "cell_type": "B derived", "log2fc": 0.0, "fdr_p": 0.90235, "cliffs_delta": 0.0211}, {"tissue": "Lung\u2020", "cell_type": "Memory B cells", "log2fc": -0.103, "fdr_p": 0.582267, "cliffs_delta": -0.1474}, {"tissue": "Lung\u2020", "cell_type": "Monocytes / macrophages", "log2fc": -0.037, "fdr_p": 0.582267, "cliffs_delta": -0.1579}, {"tissue": "Lung\u2020", "cell_type": "Monocytes", "log2fc": 0.049, "fdr_p": 0.484266, "cliffs_delta": 0.2632}, {"tissue": "Lung\u2020", "cell_type": "Granulocytes", "log2fc": -0.027, "fdr_p": 0.635592, "cliffs_delta": -0.1158}, {"tissue": "Lung\u2020", "cell_type": "Mast cells", "log2fc": -0.502, "fdr_p": 0.484266, "cliffs_delta": -0.2237}, {"tissue": "Lung\u2020", "cell_type": "Eosinophils", "log2fc": 0.025, "fdr_p": 0.90235, "cliffs_delta": 0.0289}, {"tissue": "Lung\u2020", "cell_type": "Neutrophils", "log2fc": -0.079, "fdr_p": 0.871002, "cliffs_delta": -0.05}, {"tissue": "Lung\u2020", "cell_type": "Basophils", "log2fc": -0.1, "fdr_p": 0.242032, "cliffs_delta": -0.3921}, {"tissue": "Lung\u2020", "cell_type": "Vessels", "log2fc": 0.009, "fdr_p": 0.871002, "cliffs_delta": 0.0553}, {"tissue": "Lung\u2020", "cell_type": "Lymphatics", "log2fc": 0.037, "fdr_p": 0.484266, "cliffs_delta": 0.2105}, {"tissue": "Lung\u2020", "cell_type": "Endothelial cells", "log2fc": -0.097, "fdr_p": 0.484266, "cliffs_delta": -0.1974}, {"tissue": "Lung\u2020", "cell_type": "Fibroblasts", "log2fc": 0.015, "fdr_p": 0.484266, "cliffs_delta": 0.1895}, {"tissue": "Colon\u2020", "cell_type": "T cells", "log2fc": -0.046, "fdr_p": 1.0, "cliffs_delta": -0.0677}, {"tissue": "Colon\u2020", "cell_type": "CD8 T cells", "log2fc": -0.153, "fdr_p": 1.0, "cliffs_delta": -0.0917}, {"tissue": "Colon\u2020", "cell_type": "NK cells", "log2fc": 0.041, "fdr_p": 1.0, "cliffs_delta": 0.0391}, {"tissue": "Colon\u2020", "cell_type": "B derived", "log2fc": 0.014, "fdr_p": 1.0, "cliffs_delta": -0.0075}, {"tissue": "Colon\u2020", "cell_type": "Memory B cells", "log2fc": -0.007, "fdr_p": 1.0, "cliffs_delta": -0.0256}, {"tissue": "Colon\u2020", "cell_type": "Monocytes / macrophages", "log2fc": 0.022, "fdr_p": 1.0, "cliffs_delta": -0.0195}, {"tissue": "Colon\u2020", "cell_type": "Monocytes", "log2fc": 0.01, "fdr_p": 1.0, "cliffs_delta": 0.0195}, {"tissue": "Colon\u2020", "cell_type": "Granulocytes", "log2fc": 0.602, "fdr_p": 1.0, "cliffs_delta": 0.0992}, {"tissue": "Colon\u2020", "cell_type": "Mast cells", "log2fc": 0.142, "fdr_p": 1.0, "cliffs_delta": 0.0647}, {"tissue": "Colon\u2020", "cell_type": "Eosinophils", "log2fc": 0.02, "fdr_p": 1.0, "cliffs_delta": 0.0797}, {"tissue": "Colon\u2020", "cell_type": "Neutrophils", "log2fc": -0.021, "fdr_p": 1.0, "cliffs_delta": -0.1639}, {"tissue": "Colon\u2020", "cell_type": "Basophils", "log2fc": 0.024, "fdr_p": 1.0, "cliffs_delta": 0.0917}, {"tissue": "Colon\u2020", "cell_type": "Vessels", "log2fc": 0.011, "fdr_p": 1.0, "cliffs_delta": -0.0045}, {"tissue": "Colon\u2020", "cell_type": "Lymphatics", "log2fc": 0.023, "fdr_p": 1.0, "cliffs_delta": 0.0857}, {"tissue": "Colon\u2020", "cell_type": "Endothelial cells", "log2fc": 0.028, "fdr_p": 1.0, "cliffs_delta": 0.0737}, {"tissue": "Colon\u2020", "cell_type": "Fibroblasts", "log2fc": -0.014, "fdr_p": 1.0, "cliffs_delta": 0.0015}];
+  const tissues = ["Liver", "Gastrocnemius", "Kidney", "Thymus", "Eye", "Skin", "Lung\u2020", "Colon\u2020"];
+  const cellTypes = ["B derived", "Basophils", "CD8 T cells", "Endothelial cells", "Eosinophils", "Fibroblasts", "Granulocytes", "Lymphatics", "Mast cells", "Memory B cells", "Monocytes", "Monocytes / macrophages", "NK cells", "Neutrophils", "T cells", "Vessels"];
+
+  const margin = {top: 10, right: 60, bottom: 80, left: 130};
+  const cellW = 50, cellH = 22;
+  const width = tissues.length * cellW, height = cellTypes.length * cellH;
+
+  const svg = d3.select("#immune-heatmap").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(tissues).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(cellTypes).range([0, height]).padding(0.05);
+  const color = d3.scaleDiverging(d3.interpolateRdBu).domain([1, 0, -1]);
+
+  svg.selectAll("rect").data(data).join("rect")
+    .attr("x", d => x(d.tissue)).attr("y", d => y(d.cell_type))
+    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+    .attr("fill", d => color(d.log2fc))
+    .attr("stroke", d => d.fdr_p < 0.05 ? "#000" : "none")
+    .attr("stroke-width", d => d.fdr_p < 0.01 ? 2 : 1)
+    .on("mouseover", (e, d) => {
+      tooltip.style("display", "block")
+        .html(`${d.tissue} — ${d.cell_type}<br>log2FC: ${d.log2fc}<br>FDR p: ${d.fdr_p.toFixed(4)}<br>Cliff's δ: ${d.cliffs_delta}`)
+        .style("left", (e.pageX+10)+"px").style("top", (e.pageY-10)+"px");
+    }).on("mouseout", () => tooltip.style("display", "none"));
+
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x))
+    .selectAll("text").attr("transform", "rotate(-45)").style("text-anchor", "end").style("font-size", "8px");
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "8px");
+})();
+
+// Panel B: Signaling network
+(function() {
+  const edges = [{"source": "Thymus", "target": "Colon\u2020", "n_pairs": 1}];
+  const tissues = ["Liver", "Gastrocnemius", "Kidney", "Thymus", "Eye", "Skin", "Lung\u2020", "Colon\u2020"];
+
+  const width = 500, height = 350;
+  const svg = d3.select("#signaling-net").append("svg")
+    .attr("width", width).attr("height", height);
+
+  const nodeRadius = 25;
+  const cx = width / 2, cy = height / 2, r = 130;
+  const nodes = tissues.map((t, i) => ({
+    name: t, x: cx + r * Math.cos(2 * Math.PI * i / tissues.length - Math.PI/2),
+    y: cy + r * Math.sin(2 * Math.PI * i / tissues.length - Math.PI/2)
+  }));
+  const nodeMap = Object.fromEntries(nodes.map(n => [n.name, n]));
+
+  const maxPairs = d3.max(edges, d => d.n_pairs) || 1;
+
+  svg.selectAll("line").data(edges).join("line")
+    .attr("x1", d => nodeMap[d.source]?.x || 0).attr("y1", d => nodeMap[d.source]?.y || 0)
+    .attr("x2", d => nodeMap[d.target]?.x || 0).attr("y2", d => nodeMap[d.target]?.y || 0)
+    .attr("stroke", "#999").attr("stroke-opacity", 0.6)
+    .attr("stroke-width", d => Math.max(1, d.n_pairs / maxPairs * 6));
+
+  const g = svg.selectAll("g.node").data(nodes).join("g").attr("class", "node")
+    .attr("transform", d => `translate(${d.x},${d.y})`);
+  g.append("circle").attr("r", nodeRadius)
+    .attr("fill", d => tissueColors[d.name] || "#ccc").attr("stroke", "#333").attr("stroke-width", 1);
+  g.append("text").attr("dy", nodeRadius + 14).attr("text-anchor", "middle")
+    .attr("font-size", "9px").text(d => d.name.replace("†", ""));
+
+  svg.append("text").attr("x", width/2).attr("y", height - 5)
+    .attr("text-anchor", "middle").attr("font-size", "8px").attr("fill", "#666")
+    .text(`${edges.length} directed edges, edge width ∝ active L-R pairs`);
+})();
+
+// Panel C: TF activity heatmap
+(function() {
+  const data = [{"tf": "Bcl6", "tissue": "Liver", "t_stat": -0.109, "fdr_p": 0.026938}, {"tf": "Bcl6", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Bcl6", "tissue": "Kidney", "t_stat": 0, "fdr_p": 1}, {"tf": "Bcl6", "tissue": "Thymus", "t_stat": 0.336, "fdr_p": 0.01372}, {"tf": "Bcl6", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Bcl6", "tissue": "Skin", "t_stat": 0.206, "fdr_p": 0.032292}, {"tf": "Bcl6", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Bcl6", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Dlx5", "tissue": "Liver", "t_stat": -0.078, "fdr_p": 0.023005}, {"tf": "Dlx5", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Dlx5", "tissue": "Kidney", "t_stat": 0.227, "fdr_p": 0.000275}, {"tf": "Dlx5", "tissue": "Thymus", "t_stat": 0, "fdr_p": 1}, {"tf": "Dlx5", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Dlx5", "tissue": "Skin", "t_stat": -0.192, "fdr_p": 0.014386}, {"tf": "Dlx5", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Dlx5", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Dmap1", "tissue": "Liver", "t_stat": 0.129, "fdr_p": 0.010942}, {"tf": "Dmap1", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Dmap1", "tissue": "Kidney", "t_stat": 0.12, "fdr_p": 0.029275}, {"tf": "Dmap1", "tissue": "Thymus", "t_stat": 0, "fdr_p": 1}, {"tf": "Dmap1", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Dmap1", "tissue": "Skin", "t_stat": -0.087, "fdr_p": 0.037766}, {"tf": "Dmap1", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Dmap1", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Ets2", "tissue": "Liver", "t_stat": -0.184, "fdr_p": 0.00439}, {"tf": "Ets2", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Ets2", "tissue": "Kidney", "t_stat": 0.197, "fdr_p": 0.030628}, {"tf": "Ets2", "tissue": "Thymus", "t_stat": 0.386, "fdr_p": 0.027216}, {"tf": "Ets2", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Ets2", "tissue": "Skin", "t_stat": 0, "fdr_p": 1}, {"tf": "Ets2", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Ets2", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Fos", "tissue": "Liver", "t_stat": -0.151, "fdr_p": 0.024317}, {"tf": "Fos", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Fos", "tissue": "Kidney", "t_stat": 0.195, "fdr_p": 0.01168}, {"tf": "Fos", "tissue": "Thymus", "t_stat": 0.739, "fdr_p": 0.001026}, {"tf": "Fos", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Fos", "tissue": "Skin", "t_stat": 0, "fdr_p": 1}, {"tf": "Fos", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Fos", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Foxo1", "tissue": "Liver", "t_stat": -0.169, "fdr_p": 0.018234}, {"tf": "Foxo1", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Foxo1", "tissue": "Kidney", "t_stat": 0, "fdr_p": 1}, {"tf": "Foxo1", "tissue": "Thymus", "t_stat": 0.567, "fdr_p": 0.001495}, {"tf": "Foxo1", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Foxo1", "tissue": "Skin", "t_stat": 0.372, "fdr_p": 0.00664}, {"tf": "Foxo1", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Foxo1", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxa10", "tissue": "Liver", "t_stat": 0.108, "fdr_p": 0.023906}, {"tf": "Hoxa10", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxa10", "tissue": "Kidney", "t_stat": 0.112, "fdr_p": 0.010541}, {"tf": "Hoxa10", "tissue": "Thymus", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxa10", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxa10", "tissue": "Skin", "t_stat": -0.164, "fdr_p": 0.027032}, {"tf": "Hoxa10", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxa10", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxc8", "tissue": "Liver", "t_stat": -0.131, "fdr_p": 0.0}, {"tf": "Hoxc8", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxc8", "tissue": "Kidney", "t_stat": 0.076, "fdr_p": 0.009808}, {"tf": "Hoxc8", "tissue": "Thymus", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxc8", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxc8", "tissue": "Skin", "t_stat": 0.104, "fdr_p": 0.023571}, {"tf": "Hoxc8", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Hoxc8", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Hsf1", "tissue": "Liver", "t_stat": -0.142, "fdr_p": 0.01298}, {"tf": "Hsf1", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Hsf1", "tissue": "Kidney", "t_stat": 0, "fdr_p": 1}, {"tf": "Hsf1", "tissue": "Thymus", "t_stat": 0.318, "fdr_p": 0.017476}, {"tf": "Hsf1", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Hsf1", "tissue": "Skin", "t_stat": 0.17, "fdr_p": 0.044256}, {"tf": "Hsf1", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Hsf1", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Irf8", "tissue": "Liver", "t_stat": -0.12, "fdr_p": 0.023906}, {"tf": "Irf8", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Irf8", "tissue": "Kidney", "t_stat": 0, "fdr_p": 1}, {"tf": "Irf8", "tissue": "Thymus", "t_stat": 0.31, "fdr_p": 0.035212}, {"tf": "Irf8", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Irf8", "tissue": "Skin", "t_stat": 0.252, "fdr_p": 0.014208}, {"tf": "Irf8", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Irf8", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Kat2b", "tissue": "Liver", "t_stat": 0.217, "fdr_p": 0.000202}, {"tf": "Kat2b", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Kat2b", "tissue": "Kidney", "t_stat": 0.229, "fdr_p": 0.000122}, {"tf": "Kat2b", "tissue": "Thymus", "t_stat": 0, "fdr_p": 1}, {"tf": "Kat2b", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Kat2b", "tissue": "Skin", "t_stat": 0.142, "fdr_p": 0.00111}, {"tf": "Kat2b", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Kat2b", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Mlxip", "tissue": "Liver", "t_stat": -0.065, "fdr_p": 0.043772}, {"tf": "Mlxip", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Mlxip", "tissue": "Kidney", "t_stat": 0.081, "fdr_p": 0.000963}, {"tf": "Mlxip", "tissue": "Thymus", "t_stat": 0, "fdr_p": 1}, {"tf": "Mlxip", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Mlxip", "tissue": "Skin", "t_stat": 0.164, "fdr_p": 0.013087}, {"tf": "Mlxip", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Mlxip", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Myb", "tissue": "Liver", "t_stat": -0.192, "fdr_p": 0.016536}, {"tf": "Myb", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Myb", "tissue": "Kidney", "t_stat": 0.159, "fdr_p": 0.037401}, {"tf": "Myb", "tissue": "Thymus", "t_stat": 0.438, "fdr_p": 0.005111}, {"tf": "Myb", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Myb", "tissue": "Skin", "t_stat": 0, "fdr_p": 1}, {"tf": "Myb", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Myb", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nanog", "tissue": "Liver", "t_stat": -0.075, "fdr_p": 0.013152}, {"tf": "Nanog", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Nanog", "tissue": "Kidney", "t_stat": 0, "fdr_p": 1}, {"tf": "Nanog", "tissue": "Thymus", "t_stat": -0.201, "fdr_p": 0.047733}, {"tf": "Nanog", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Nanog", "tissue": "Skin", "t_stat": -0.139, "fdr_p": 0.023571}, {"tf": "Nanog", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nanog", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc1", "tissue": "Liver", "t_stat": -0.126, "fdr_p": 0.031481}, {"tf": "Nfatc1", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc1", "tissue": "Kidney", "t_stat": 0.199, "fdr_p": 0.04896}, {"tf": "Nfatc1", "tissue": "Thymus", "t_stat": 0.352, "fdr_p": 0.019177}, {"tf": "Nfatc1", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc1", "tissue": "Skin", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc1", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc1", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc2", "tissue": "Liver", "t_stat": -0.169, "fdr_p": 0.001682}, {"tf": "Nfatc2", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc2", "tissue": "Kidney", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc2", "tissue": "Thymus", "t_stat": 0.359, "fdr_p": 0.002457}, {"tf": "Nfatc2", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc2", "tissue": "Skin", "t_stat": 0.256, "fdr_p": 0.049023}, {"tf": "Nfatc2", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nfatc2", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nr1d1", "tissue": "Liver", "t_stat": -0.233, "fdr_p": 0.000425}, {"tf": "Nr1d1", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Nr1d1", "tissue": "Kidney", "t_stat": 0, "fdr_p": 1}, {"tf": "Nr1d1", "tissue": "Thymus", "t_stat": -0.436, "fdr_p": 0.012069}, {"tf": "Nr1d1", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Nr1d1", "tissue": "Skin", "t_stat": -0.321, "fdr_p": 0.001861}, {"tf": "Nr1d1", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Nr1d1", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Rara", "tissue": "Liver", "t_stat": -0.122, "fdr_p": 0.045107}, {"tf": "Rara", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Rara", "tissue": "Kidney", "t_stat": 0.256, "fdr_p": 0.012761}, {"tf": "Rara", "tissue": "Thymus", "t_stat": 0.464, "fdr_p": 0.010464}, {"tf": "Rara", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Rara", "tissue": "Skin", "t_stat": 0, "fdr_p": 1}, {"tf": "Rara", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Rara", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Sox18", "tissue": "Liver", "t_stat": -0.121, "fdr_p": 0.013426}, {"tf": "Sox18", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Sox18", "tissue": "Kidney", "t_stat": 0.14, "fdr_p": 0.005066}, {"tf": "Sox18", "tissue": "Thymus", "t_stat": 0.325, "fdr_p": 0.001197}, {"tf": "Sox18", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Sox18", "tissue": "Skin", "t_stat": 0, "fdr_p": 1}, {"tf": "Sox18", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Sox18", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Ssrp1", "tissue": "Liver", "t_stat": -0.141, "fdr_p": 0.02302}, {"tf": "Ssrp1", "tissue": "Gastrocnemius", "t_stat": 0, "fdr_p": 1}, {"tf": "Ssrp1", "tissue": "Kidney", "t_stat": 0.211, "fdr_p": 0.029943}, {"tf": "Ssrp1", "tissue": "Thymus", "t_stat": 0.461, "fdr_p": 0.000756}, {"tf": "Ssrp1", "tissue": "Eye", "t_stat": 0, "fdr_p": 1}, {"tf": "Ssrp1", "tissue": "Skin", "t_stat": 0, "fdr_p": 1}, {"tf": "Ssrp1", "tissue": "Lung\u2020", "t_stat": 0, "fdr_p": 1}, {"tf": "Ssrp1", "tissue": "Colon\u2020", "t_stat": 0, "fdr_p": 1}];
+  const tissues = ["Liver", "Gastrocnemius", "Kidney", "Thymus", "Eye", "Skin", "Lung\u2020", "Colon\u2020"];
+  const tfs = ["Bcl6", "Dlx5", "Dmap1", "Ets2", "Fos", "Foxo1", "Hoxa10", "Hoxc8", "Hsf1", "Irf8", "Kat2b", "Mlxip", "Myb", "Nanog", "Nfatc1", "Nfatc2", "Nr1d1", "Rara", "Sox18", "Ssrp1"];
+
+  const margin = {top: 10, right: 20, bottom: 80, left: 80};
+  const cellW = 50, cellH = 18;
+  const width = tissues.length * cellW, height = tfs.length * cellH;
+
+  const svg = d3.select("#tf-heatmap").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(tissues).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(tfs).range([0, height]).padding(0.05);
+  const maxAbs = d3.max(data, d => Math.abs(d.t_stat)) || 1;
+  const color = d3.scaleDiverging(d3.interpolateRdBu).domain([maxAbs, 0, -maxAbs]);
+
+  svg.selectAll("rect").data(data).join("rect")
+    .attr("x", d => x(d.tissue)).attr("y", d => y(d.tf))
+    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+    .attr("fill", d => d.fdr_p < 0.05 ? color(d.t_stat) : "#f5f5f5")
+    .attr("stroke", d => d.fdr_p < 0.05 ? "#333" : "#eee")
+    .attr("stroke-width", 0.5)
+    .on("mouseover", (e, d) => {
+      tooltip.style("display", "block")
+        .html(`${d.tf} in ${d.tissue}<br>t-stat: ${d.t_stat}<br>FDR p: ${d.fdr_p.toFixed(4)}`)
+        .style("left", (e.pageX+10)+"px").style("top", (e.pageY-10)+"px");
+    }).on("mouseout", () => tooltip.style("display", "none"));
+
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x))
+    .selectAll("text").attr("transform", "rotate(-45)").style("text-anchor", "end").style("font-size", "8px");
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "7px");
+})();
+
+// Panel D: Druggability bars
+(function() {
+  const data = [{"tissue": "Liver", "total": 245, "druggable": 22, "pct": 9.0}, {"tissue": "Gastrocnemius", "total": 372, "druggable": 52, "pct": 14.0}, {"tissue": "Kidney", "total": 298, "druggable": 64, "pct": 21.5}, {"tissue": "Thymus", "total": 310, "druggable": 77, "pct": 24.8}, {"tissue": "Eye", "total": 256, "druggable": 38, "pct": 14.8}, {"tissue": "Skin", "total": 243, "druggable": 24, "pct": 9.9}, {"tissue": "Lung\u2020", "total": 179, "druggable": 13, "pct": 7.3}, {"tissue": "Colon\u2020", "total": 196, "druggable": 27, "pct": 13.8}];
+
+  const margin = {top: 10, right: 40, bottom: 50, left: 120};
+  const width = 380, height = data.length * 35;
+
+  const svg = d3.select("#druggability-bar").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, 30]).range([0, width]);
+  const y = d3.scaleBand().domain(data.map(d => d.tissue)).range([0, height]).padding(0.3);
+
+  svg.selectAll("rect").data(data).join("rect")
+    .attr("x", 0).attr("y", d => y(d.tissue))
+    .attr("width", d => x(d.pct)).attr("height", y.bandwidth())
+    .attr("fill", d => tissueColors[d.tissue] || "#ccc");
+
+  svg.selectAll("text.pct").data(data).join("text").attr("class", "pct")
+    .attr("x", d => x(d.pct) + 4).attr("y", d => y(d.tissue) + y.bandwidth()/2 + 4)
+    .attr("font-size", "9px").text(d => `${d.pct}% (${d.druggable}/${d.total})`);
+
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "9px");
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(5));
+  svg.append("text").attr("x", width/2).attr("y", height + 35)
+    .attr("text-anchor", "middle").attr("font-size", "9px").text("% druggable genes");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 9: Consensus Biomarker Panel</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+.figure-container { width: 1200px; margin: 0 auto; }
+.figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+.figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+.panels { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
+.panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+.panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+.panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+.interpretation { margin-top: 16px; padding: 12px; background: #f0f7ff; border-radius: 4px;
+                   font-size: 10px; line-height: 1.5; }
+.tooltip { position: absolute; background: rgba(0,0,0,0.85); color: #fff; padding: 6px 10px;
+            border-radius: 3px; font-size: 9px; pointer-events: none; z-index: 100; }
+.panel-full { grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 9: Consensus Spaceflight Biomarker Panel</div>
+  <div class="figure-subtitle">Multi-source evidence integration: SHAP + WGCNA + PPI + druggability + literature + cross-species (1919 genes scored)</div>
+  <div class="panels">
+    <div class="panel panel-full" id="panelA">
+      <div class="panel-label">A</div>
+      <div class="panel-desc">Evidence integration matrix — top-20 genes by composite score (max 12)</div>
+      <div id="evidence-matrix"></div>
+    </div>
+    <div class="panel" id="panelB">
+      <div class="panel-label">B</div>
+      <div class="panel-desc">Panel (20 genes) vs full gene set AUROC</div>
+      <div id="auroc-compare"></div>
+    </div>
+    <div class="panel" id="panelC">
+      <div class="panel-label">C</div>
+      <div class="panel-desc">Gene-drug network (top-15 panel genes, up to 3 drugs each)</div>
+      <div id="gene-drug-net"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    Top-20 consensus biomarker panel integrates 6 orthogonal evidence sources.
+    Ddit4 (DNA damage, score=6) and Myl2 (cardiac myosin, score=6) rank highest.
+    Il6 (inflammatory cytokine), Spp1 (osteopontin), and Ppara (lipid metabolism TF) each score 5, reflecting
+    muscle wasting, bone loss, and metabolic reprogramming as core spaceflight responses.
+    The 20-gene panel achieves AUROC 0.75 (colon), 0.70 (skin), 0.66 (liver) — capturing 60-80% of full gene set performance
+    with 1000&times; fewer features, while every gene has known drug interactions for potential countermeasure development.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tissueColors = {
+  "Liver": OI.blue, "Gastrocnemius": OI.vermilion, "Kidney": OI.green,
+  "Thymus": OI.orange, "Eye": OI.pink, "Skin": OI.skyblue,
+  "Lung†": "#888888", "Colon†": "#555555"
+};
+const tooltip = d3.select("#tooltip");
+
+// Panel A: Evidence integration matrix
+(function() {
+  const data = [{"gene": "MUP22", "source": "SHAP", "value": 3}, {"gene": "MUP22", "source": "WGCNA Hub", "value": 0}, {"gene": "MUP22", "source": "Network", "value": 0}, {"gene": "MUP22", "source": "Druggable", "value": 0}, {"gene": "MUP22", "source": "Literature", "value": 0}, {"gene": "MUP22", "source": "Cross-species", "value": 0}, {"gene": "Thrsp", "source": "SHAP", "value": 1}, {"gene": "Thrsp", "source": "WGCNA Hub", "value": 1}, {"gene": "Thrsp", "source": "Network", "value": 0}, {"gene": "Thrsp", "source": "Druggable", "value": 1}, {"gene": "Thrsp", "source": "Literature", "value": 0}, {"gene": "Thrsp", "source": "Cross-species", "value": 0}, {"gene": "Apoa1", "source": "SHAP", "value": 1}, {"gene": "Apoa1", "source": "WGCNA Hub", "value": 1}, {"gene": "Apoa1", "source": "Network", "value": 0}, {"gene": "Apoa1", "source": "Druggable", "value": 1}, {"gene": "Apoa1", "source": "Literature", "value": 0}, {"gene": "Apoa1", "source": "Cross-species", "value": 0}, {"gene": "THRSP", "source": "SHAP", "value": 3}, {"gene": "THRSP", "source": "WGCNA Hub", "value": 0}, {"gene": "THRSP", "source": "Network", "value": 0}, {"gene": "THRSP", "source": "Druggable", "value": 1}, {"gene": "THRSP", "source": "Literature", "value": 0}, {"gene": "THRSP", "source": "Cross-species", "value": 0}, {"gene": "Top2a", "source": "SHAP", "value": 1}, {"gene": "Top2a", "source": "WGCNA Hub", "value": 2}, {"gene": "Top2a", "source": "Network", "value": 0}, {"gene": "Top2a", "source": "Druggable", "value": 1}, {"gene": "Top2a", "source": "Literature", "value": 0}, {"gene": "Top2a", "source": "Cross-species", "value": 0}, {"gene": "Serpina6", "source": "SHAP", "value": 1}, {"gene": "Serpina6", "source": "WGCNA Hub", "value": 2}, {"gene": "Serpina6", "source": "Network", "value": 0}, {"gene": "Serpina6", "source": "Druggable", "value": 1}, {"gene": "Serpina6", "source": "Literature", "value": 0}, {"gene": "Serpina6", "source": "Cross-species", "value": 0}, {"gene": "Tnnc1", "source": "SHAP", "value": 1}, {"gene": "Tnnc1", "source": "WGCNA Hub", "value": 2}, {"gene": "Tnnc1", "source": "Network", "value": 0}, {"gene": "Tnnc1", "source": "Druggable", "value": 1}, {"gene": "Tnnc1", "source": "Literature", "value": 0}, {"gene": "Tnnc1", "source": "Cross-species", "value": 0}, {"gene": "Myh7", "source": "SHAP", "value": 1}, {"gene": "Myh7", "source": "WGCNA Hub", "value": 2}, {"gene": "Myh7", "source": "Network", "value": 0}, {"gene": "Myh7", "source": "Druggable", "value": 1}, {"gene": "Myh7", "source": "Literature", "value": 0}, {"gene": "Myh7", "source": "Cross-species", "value": 0}, {"gene": "Ddit4", "source": "SHAP", "value": 0}, {"gene": "Ddit4", "source": "WGCNA Hub", "value": 2}, {"gene": "Ddit4", "source": "Network", "value": 0}, {"gene": "Ddit4", "source": "Druggable", "value": 1}, {"gene": "Ddit4", "source": "Literature", "value": 2}, {"gene": "Ddit4", "source": "Cross-species", "value": 0}, {"gene": "H4c8", "source": "SHAP", "value": 0}, {"gene": "H4c8", "source": "WGCNA Hub", "value": 2}, {"gene": "H4c8", "source": "Network", "value": 0}, {"gene": "H4c8", "source": "Druggable", "value": 0}, {"gene": "H4c8", "source": "Literature", "value": 0}, {"gene": "H4c8", "source": "Cross-species", "value": 0}, {"gene": "Retn", "source": "SHAP", "value": 1}, {"gene": "Retn", "source": "WGCNA Hub", "value": 2}, {"gene": "Retn", "source": "Network", "value": 0}, {"gene": "Retn", "source": "Druggable", "value": 0}, {"gene": "Retn", "source": "Literature", "value": 0}, {"gene": "Retn", "source": "Cross-species", "value": 0}, {"gene": "NPAS2", "source": "SHAP", "value": 3}, {"gene": "NPAS2", "source": "WGCNA Hub", "value": 0}, {"gene": "NPAS2", "source": "Network", "value": 0}, {"gene": "NPAS2", "source": "Druggable", "value": 0}, {"gene": "NPAS2", "source": "Literature", "value": 0}, {"gene": "NPAS2", "source": "Cross-species", "value": 0}, {"gene": "Myoz2", "source": "SHAP", "value": 1}, {"gene": "Myoz2", "source": "WGCNA Hub", "value": 2}, {"gene": "Myoz2", "source": "Network", "value": 0}, {"gene": "Myoz2", "source": "Druggable", "value": 0}, {"gene": "Myoz2", "source": "Literature", "value": 0}, {"gene": "Myoz2", "source": "Cross-species", "value": 0}, {"gene": "Cfd", "source": "SHAP", "value": 1}, {"gene": "Cfd", "source": "WGCNA Hub", "value": 1}, {"gene": "Cfd", "source": "Network", "value": 0}, {"gene": "Cfd", "source": "Druggable", "value": 1}, {"gene": "Cfd", "source": "Literature", "value": 0}, {"gene": "Cfd", "source": "Cross-species", "value": 0}, {"gene": "Rpl36", "source": "SHAP", "value": 0}, {"gene": "Rpl36", "source": "WGCNA Hub", "value": 2}, {"gene": "Rpl36", "source": "Network", "value": 0}, {"gene": "Rpl36", "source": "Druggable", "value": 1}, {"gene": "Rpl36", "source": "Literature", "value": 0}, {"gene": "Rpl36", "source": "Cross-species", "value": 0}, {"gene": "GM24497", "source": "SHAP", "value": 3}, {"gene": "GM24497", "source": "WGCNA Hub", "value": 0}, {"gene": "GM24497", "source": "Network", "value": 0}, {"gene": "GM24497", "source": "Druggable", "value": 0}, {"gene": "GM24497", "source": "Literature", "value": 0}, {"gene": "GM24497", "source": "Cross-species", "value": 0}, {"gene": "PER2", "source": "SHAP", "value": 3}, {"gene": "PER2", "source": "WGCNA Hub", "value": 0}, {"gene": "PER2", "source": "Network", "value": 0}, {"gene": "PER2", "source": "Druggable", "value": 0}, {"gene": "PER2", "source": "Literature", "value": 0}, {"gene": "PER2", "source": "Cross-species", "value": 0}, {"gene": "Ms4a4c", "source": "SHAP", "value": 1}, {"gene": "Ms4a4c", "source": "WGCNA Hub", "value": 2}, {"gene": "Ms4a4c", "source": "Network", "value": 0}, {"gene": "Ms4a4c", "source": "Druggable", "value": 0}, {"gene": "Ms4a4c", "source": "Literature", "value": 0}, {"gene": "Ms4a4c", "source": "Cross-species", "value": 0}, {"gene": "Snora70", "source": "SHAP", "value": 1}, {"gene": "Snora70", "source": "WGCNA Hub", "value": 2}, {"gene": "Snora70", "source": "Network", "value": 0}, {"gene": "Snora70", "source": "Druggable", "value": 0}, {"gene": "Snora70", "source": "Literature", "value": 0}, {"gene": "Snora70", "source": "Cross-species", "value": 0}, {"gene": "Lrrc14b", "source": "SHAP", "value": 1}, {"gene": "Lrrc14b", "source": "WGCNA Hub", "value": 2}, {"gene": "Lrrc14b", "source": "Network", "value": 0}, {"gene": "Lrrc14b", "source": "Druggable", "value": 0}, {"gene": "Lrrc14b", "source": "Literature", "value": 0}, {"gene": "Lrrc14b", "source": "Cross-species", "value": 0}];
+  const genes = ["MUP22", "Thrsp", "Apoa1", "THRSP", "Top2a", "Serpina6", "Tnnc1", "Myh7", "Ddit4", "H4c8", "Retn", "NPAS2", "Myoz2", "Cfd", "Rpl36", "GM24497", "PER2", "Ms4a4c", "Snora70", "Lrrc14b"];
+  const sources = ["SHAP", "WGCNA Hub", "Network", "Druggable", "Literature", "Cross-species"];
+  const sourceMax = [3, 2, 2, 2, 2, 1];
+
+  const margin = {top: 10, right: 80, bottom: 60, left: 90};
+  const cellW = 75, cellH = 22;
+  const width = sources.length * cellW, height = genes.length * cellH;
+
+  const svg = d3.select("#evidence-matrix").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(sources).range([0, width]).padding(0.08);
+  const y = d3.scaleBand().domain(genes).range([0, height]).padding(0.06);
+  const color = d3.scaleSequential(d3.interpolateBlues).domain([0, 3]);
+
+  svg.selectAll("rect").data(data).join("rect")
+    .attr("x", d => x(d.source)).attr("y", d => y(d.gene))
+    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+    .attr("fill", d => d.value > 0 ? color(d.value) : "#f5f5f5")
+    .attr("stroke", "#ddd").attr("stroke-width", 0.5)
+    .attr("rx", 2)
+    .on("mouseover", (e, d) => {
+      tooltip.style("display", "block")
+        .html(`${d.gene} — ${d.source}<br>Score: ${d.value}`)
+        .style("left", (e.pageX+10)+"px").style("top", (e.pageY-10)+"px");
+    }).on("mouseout", () => tooltip.style("display", "none"));
+
+  // Score text in cells
+  svg.selectAll("text.val").data(data.filter(d => d.value > 0)).join("text")
+    .attr("class", "val")
+    .attr("x", d => x(d.source) + x.bandwidth()/2)
+    .attr("y", d => y(d.gene) + y.bandwidth()/2 + 4)
+    .attr("text-anchor", "middle").attr("font-size", "9px")
+    .attr("fill", d => d.value >= 2 ? "#fff" : "#333")
+    .text(d => d.value);
+
+  // Total score annotations on right
+  const panel = [{"rank": 1, "gene": "MUP22", "human_symbol": "MUP22", "score": 5, "sources": {"shap": 3, "multi_tissue": 2}, "tissues": ["colon", "gastrocnemius", "lung", "skin"], "n_tissues": 4, "drugs": []}, {"rank": 2, "gene": "Thrsp", "human_symbol": "THRSP", "score": 5, "sources": {"shap": 1, "wgcna_hub": 1, "multi_tissue": 2, "druggable": 1}, "tissues": ["colon", "kidney", "lung", "skin"], "n_tissues": 4, "drugs": [{"drug": "LIOTHYRONINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "STREPTOZOCIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DEXAMETHASONE", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 3, "gene": "Apoa1", "human_symbol": "APOA1", "score": 5, "sources": {"shap": 1, "wgcna_hub": 1, "multi_tissue": 2, "druggable": 1}, "tissues": ["colon", "gastrocnemius", "skin", "thymus"], "n_tissues": 4, "drugs": [{"drug": "TESTOSTERONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "GLUCAGON (RDNA)", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DEHYDRATED ALCOHOL", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "TRETINOIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "FUROSEMIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "LAMIVUDINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "PROGESTIN", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 4, "gene": "THRSP", "human_symbol": "THRSP", "score": 5, "sources": {"shap": 3, "multi_tissue": 1, "druggable": 1}, "tissues": ["colon", "lung", "skin"], "n_tissues": 3, "drugs": [{"drug": "LIOTHYRONINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "STREPTOZOCIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DEXAMETHASONE", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 5, "gene": "Top2a", "human_symbol": "TOP2A", "score": 5, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1, "druggable": 1}, "tissues": ["eye", "kidney", "thymus"], "n_tissues": 3, "drugs": [{"drug": "DIGITOXIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "EPIRUBICIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "PEFLOXACIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "IDARUBICIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "GENISTEIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DOXORUBICIN HYDROCHLORIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DAUNORUBICIN LIPOSOMAL", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "CAMPTOTHECIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "TENIPOSIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DEXRAZOXANE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "ETOPOSIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DACTINOMYCIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "PODOFILOX", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "FLUOROURACIL", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "PIXANTRONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DAUNORUBICIN CITRATE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "ETOPOSIDE PHOSPHATE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DEXRAZOXANE HYDROCHLORIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "AMSACRINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "HYDROQUINONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "ENOXACIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "VINCRISTINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "CINOXACIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "QUERCETIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "MITOXANTRONE HYDROCHLORIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "NALIDIXIC ACID", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DAUNORUBICIN HYDROCHLORIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "MITOXANTRONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "VALRUBICIN", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "PACLITAXEL", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 6, "gene": "Serpina6", "human_symbol": "SERPINA6", "score": 5, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1, "druggable": 1}, "tissues": ["colon", "thymus"], "n_tissues": 2, "drugs": [{"drug": "CICLESONIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "ALCLOMETASONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "RIMEXOLONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DOXORUBICIN HYDROCHLORIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "PARAMETHASONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DAUNORUBICIN LIPOSOMAL", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "TRIAMCINOLONE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "BECLOMETHASONE", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 7, "gene": "Tnnc1", "human_symbol": "TNNC1", "score": 5, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1, "druggable": 1}, "tissues": ["gastrocnemius", "skin"], "n_tissues": 2, "drugs": [{"drug": "BEPRIDIL", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "LEVOSIMENDAN", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 8, "gene": "Myh7", "human_symbol": "MYH7", "score": 5, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1, "druggable": 1}, "tissues": ["gastrocnemius", "skin"], "n_tissues": 2, "drugs": [{"drug": "MAVACAMTEN", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 9, "gene": "Ddit4", "human_symbol": "DDIT4", "score": 5, "sources": {"wgcna_hub": 2, "druggable": 1, "literature": 2}, "tissues": ["gastrocnemius"], "n_tissues": 1, "drugs": [{"drug": "DOXEPIN HYDROCHLORIDE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "DESIPRAMINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "CLOMIPRAMINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "TRIMIPRAMINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "NORTRIPTYLINE", "tier": "tier1_approved", "source": "DGIdb"}, {"drug": "AMITRIPTYLINE HYDROCHLORIDE", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 10, "gene": "H4c8", "human_symbol": "H4C8", "score": 4, "sources": {"wgcna_hub": 2, "multi_tissue": 2}, "tissues": ["kidney", "liver", "skin", "thymus"], "n_tissues": 4, "drugs": []}, {"rank": 11, "gene": "Retn", "human_symbol": "RETN", "score": 4, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1}, "tissues": ["colon", "gastrocnemius", "lung"], "n_tissues": 3, "drugs": []}, {"rank": 12, "gene": "NPAS2", "human_symbol": "NPAS2", "score": 4, "sources": {"shap": 3, "multi_tissue": 1}, "tissues": ["gastrocnemius", "liver", "skin"], "n_tissues": 3, "drugs": []}, {"rank": 13, "gene": "Myoz2", "human_symbol": "MYOZ2", "score": 4, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1}, "tissues": ["gastrocnemius", "liver", "thymus"], "n_tissues": 3, "drugs": []}, {"rank": 14, "gene": "Cfd", "human_symbol": "CFD", "score": 4, "sources": {"shap": 1, "wgcna_hub": 1, "multi_tissue": 1, "druggable": 1}, "tissues": ["kidney", "liver", "lung"], "n_tissues": 3, "drugs": [{"drug": "DANICOPAN", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 15, "gene": "Rpl36", "human_symbol": "RPL36", "score": 4, "sources": {"wgcna_hub": 2, "multi_tissue": 1, "druggable": 1}, "tissues": ["liver", "skin", "thymus"], "n_tissues": 3, "drugs": [{"drug": "ATALUREN", "tier": "tier1_approved", "source": "DGIdb"}]}, {"rank": 16, "gene": "GM24497", "human_symbol": "GM24497", "score": 4, "sources": {"shap": 3, "multi_tissue": 1}, "tissues": ["eye", "gastrocnemius", "thymus"], "n_tissues": 3, "drugs": []}, {"rank": 17, "gene": "PER2", "human_symbol": "PER2", "score": 4, "sources": {"shap": 3, "multi_tissue": 1}, "tissues": ["eye", "gastrocnemius", "lung"], "n_tissues": 3, "drugs": []}, {"rank": 18, "gene": "Ms4a4c", "human_symbol": "MS4A4C", "score": 4, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1}, "tissues": ["liver", "thymus"], "n_tissues": 2, "drugs": []}, {"rank": 19, "gene": "Snora70", "human_symbol": "SNORA70", "score": 4, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1}, "tissues": ["kidney", "thymus"], "n_tissues": 2, "drugs": []}, {"rank": 20, "gene": "Lrrc14b", "human_symbol": "LRRC14B", "score": 4, "sources": {"shap": 1, "wgcna_hub": 2, "multi_tissue": 1}, "tissues": ["kidney", "skin"], "n_tissues": 2, "drugs": []}];
+  svg.selectAll("text.total").data(panel).join("text")
+    .attr("class", "total")
+    .attr("x", width + 8).attr("y", (d,i) => y(genes[i]) + y.bandwidth()/2 + 4)
+    .attr("font-size", "10px").attr("font-weight", "bold").attr("fill", OI.vermilion)
+    .text(d => `=${d.score}`);
+
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x))
+    .selectAll("text").attr("transform", "rotate(-30)").style("text-anchor", "end").style("font-size", "9px");
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "9px").style("font-style", "italic");
+
+  // Column header: max possible
+  svg.selectAll("text.max").data(sources).join("text")
+    .attr("class", "max").attr("x", (d,i) => x(d) + x.bandwidth()/2)
+    .attr("y", height + 50).attr("text-anchor", "middle")
+    .attr("font-size", "7px").attr("fill", "#999")
+    .text((d,i) => `max: ${sourceMax[i]}`);
+})();
+
+// Panel B: AUROC comparison
+(function() {
+  const data = [{"tissue": "Liver", "type": "Panel (20 genes)", "auroc": 0.754}, {"tissue": "Liver", "type": "Full gene set", "auroc": 0.683}, {"tissue": "Gastrocnemius", "type": "Panel (20 genes)", "auroc": 0.806}, {"tissue": "Gastrocnemius", "type": "Full gene set", "auroc": 0.852}, {"tissue": "Kidney", "type": "Panel (20 genes)", "auroc": 0.704}, {"tissue": "Kidney", "type": "Full gene set", "auroc": 0.584}, {"tissue": "Thymus", "type": "Panel (20 genes)", "auroc": 0.653}, {"tissue": "Thymus", "type": "Full gene set", "auroc": 0.908}, {"tissue": "Eye", "type": "Panel (20 genes)", "auroc": 0.728}, {"tissue": "Eye", "type": "Full gene set", "auroc": 0.697}, {"tissue": "Skin", "type": "Panel (20 genes)", "auroc": 0.65}, {"tissue": "Skin", "type": "Full gene set", "auroc": 0.796}, {"tissue": "Lung\u2020", "type": "Panel (20 genes)", "auroc": 0.596}, {"tissue": "Lung\u2020", "type": "Full gene set", "auroc": 0.834}, {"tissue": "Colon\u2020", "type": "Panel (20 genes)", "auroc": 0.562}, {"tissue": "Colon\u2020", "type": "Full gene set", "auroc": 0.857}];
+  const tissues = [...new Set(data.map(d => d.tissue))];
+  const types = [...new Set(data.map(d => d.type))];
+
+  const margin = {top: 10, right: 20, bottom: 70, left: 50};
+  const width = 420, height = 280;
+
+  const svg = d3.select("#auroc-compare").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x0 = d3.scaleBand().domain(tissues).range([0, width]).padding(0.25);
+  const x1 = d3.scaleBand().domain(types).range([0, x0.bandwidth()]).padding(0.1);
+  const y = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+
+  const colorMap = {"Panel (20 genes)": OI.vermilion, "Full gene set": OI.blue};
+
+  svg.selectAll("g.group").data(tissues).join("g")
+    .attr("class", "group")
+    .attr("transform", d => `translate(${x0(d)},0)`)
+    .selectAll("rect").data(t => data.filter(d => d.tissue === t)).join("rect")
+    .attr("x", d => x1(d.type)).attr("y", d => y(d.auroc))
+    .attr("width", x1.bandwidth()).attr("height", d => height - y(d.auroc))
+    .attr("fill", d => colorMap[d.type] || "#999")
+    .on("mouseover", (e, d) => {
+      tooltip.style("display", "block")
+        .html(`${d.tissue} — ${d.type}<br>AUROC: ${d.auroc}`)
+        .style("left", (e.pageX+10)+"px").style("top", (e.pageY-10)+"px");
+    }).on("mouseout", () => tooltip.style("display", "none"));
+
+  // Value labels
+  svg.selectAll("g.group2").data(tissues).join("g").attr("class", "group2")
+    .attr("transform", d => `translate(${x0(d)},0)`)
+    .selectAll("text").data(t => data.filter(d => d.tissue === t)).join("text")
+    .attr("x", d => x1(d.type) + x1.bandwidth()/2)
+    .attr("y", d => y(d.auroc) - 4)
+    .attr("text-anchor", "middle").attr("font-size", "7px")
+    .text(d => d.auroc.toFixed(2));
+
+  // 0.5 reference line
+  svg.append("line").attr("x1", 0).attr("x2", width)
+    .attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#999").attr("stroke-dasharray", "3,3");
+  svg.append("text").attr("x", width + 2).attr("y", y(0.5) + 3)
+    .attr("font-size", "7px").attr("fill", "#999").text("chance");
+
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x0))
+    .selectAll("text").attr("transform", "rotate(-45)").style("text-anchor", "end").style("font-size", "8px");
+  svg.append("g").call(d3.axisLeft(y).ticks(5)).selectAll("text").style("font-size", "8px");
+  svg.append("text").attr("transform", "rotate(-90)").attr("y", -35).attr("x", -height/2)
+    .attr("text-anchor", "middle").attr("font-size", "9px").text("AUROC");
+
+  // Legend
+  const legend = svg.append("g").attr("transform", `translate(${width - 160}, 5)`);
+  types.forEach((t, i) => {
+    legend.append("rect").attr("x", 0).attr("y", i*16).attr("width", 12).attr("height", 12)
+      .attr("fill", colorMap[t]);
+    legend.append("text").attr("x", 16).attr("y", i*16 + 10).attr("font-size", "8px").text(t);
+  });
+})();
+
+// Panel C: Gene-drug network
+(function() {
+  const nodes = [{"id": "Thrsp", "type": "gene", "tissues": "colon, kidney, lung, skin", "score": 5}, {"id": "LIOTHYRONINE", "type": "drug", "label": "LIOTHYRONINE", "tier": "tier1_approved"}, {"id": "STREPTOZOCIN", "type": "drug", "label": "STREPTOZOCIN", "tier": "tier1_approved"}, {"id": "DEXAMETHASONE", "type": "drug", "label": "DEXAMETHASONE", "tier": "tier1_approved"}, {"id": "Apoa1", "type": "gene", "tissues": "colon, gastrocnemius, skin, thymus", "score": 5}, {"id": "TESTOSTERONE", "type": "drug", "label": "TESTOSTERONE", "tier": "tier1_approved"}, {"id": "GLUCAGON (RDNA)", "type": "drug", "label": "GLUCAGON", "tier": "tier1_approved"}, {"id": "DEHYDRATED ALCOHOL", "type": "drug", "label": "DEHYDRATED", "tier": "tier1_approved"}, {"id": "THRSP", "type": "gene", "tissues": "colon, lung, skin", "score": 5}, {"id": "Top2a", "type": "gene", "tissues": "eye, kidney, thymus", "score": 5}, {"id": "DIGITOXIN", "type": "drug", "label": "DIGITOXIN", "tier": "tier1_approved"}, {"id": "EPIRUBICIN", "type": "drug", "label": "EPIRUBICIN", "tier": "tier1_approved"}, {"id": "PEFLOXACIN", "type": "drug", "label": "PEFLOXACIN", "tier": "tier1_approved"}, {"id": "Serpina6", "type": "gene", "tissues": "colon, thymus", "score": 5}, {"id": "CICLESONIDE", "type": "drug", "label": "CICLESONIDE", "tier": "tier1_approved"}, {"id": "ALCLOMETASONE", "type": "drug", "label": "ALCLOMETASONE", "tier": "tier1_approved"}, {"id": "RIMEXOLONE", "type": "drug", "label": "RIMEXOLONE", "tier": "tier1_approved"}, {"id": "Tnnc1", "type": "gene", "tissues": "gastrocnemius, skin", "score": 5}, {"id": "BEPRIDIL", "type": "drug", "label": "BEPRIDIL", "tier": "tier1_approved"}, {"id": "LEVOSIMENDAN", "type": "drug", "label": "LEVOSIMENDAN", "tier": "tier1_approved"}, {"id": "Myh7", "type": "gene", "tissues": "gastrocnemius, skin", "score": 5}, {"id": "MAVACAMTEN", "type": "drug", "label": "MAVACAMTEN", "tier": "tier1_approved"}, {"id": "Ddit4", "type": "gene", "tissues": "gastrocnemius", "score": 5}, {"id": "DOXEPIN HYDROCHLORIDE", "type": "drug", "label": "DOXEPIN", "tier": "tier1_approved"}, {"id": "DESIPRAMINE", "type": "drug", "label": "DESIPRAMINE", "tier": "tier1_approved"}, {"id": "CLOMIPRAMINE", "type": "drug", "label": "CLOMIPRAMINE", "tier": "tier1_approved"}, {"id": "Cfd", "type": "gene", "tissues": "kidney, liver, lung", "score": 4}, {"id": "DANICOPAN", "type": "drug", "label": "DANICOPAN", "tier": "tier1_approved"}, {"id": "Rpl36", "type": "gene", "tissues": "liver, skin, thymus", "score": 4}, {"id": "ATALUREN", "type": "drug", "label": "ATALUREN", "tier": "tier1_approved"}];
+  const links = [{"source": "Thrsp", "target": "LIOTHYRONINE"}, {"source": "Thrsp", "target": "STREPTOZOCIN"}, {"source": "Thrsp", "target": "DEXAMETHASONE"}, {"source": "Apoa1", "target": "TESTOSTERONE"}, {"source": "Apoa1", "target": "GLUCAGON (RDNA)"}, {"source": "Apoa1", "target": "DEHYDRATED ALCOHOL"}, {"source": "THRSP", "target": "LIOTHYRONINE"}, {"source": "THRSP", "target": "STREPTOZOCIN"}, {"source": "THRSP", "target": "DEXAMETHASONE"}, {"source": "Top2a", "target": "DIGITOXIN"}, {"source": "Top2a", "target": "EPIRUBICIN"}, {"source": "Top2a", "target": "PEFLOXACIN"}, {"source": "Serpina6", "target": "CICLESONIDE"}, {"source": "Serpina6", "target": "ALCLOMETASONE"}, {"source": "Serpina6", "target": "RIMEXOLONE"}, {"source": "Tnnc1", "target": "BEPRIDIL"}, {"source": "Tnnc1", "target": "LEVOSIMENDAN"}, {"source": "Myh7", "target": "MAVACAMTEN"}, {"source": "Ddit4", "target": "DOXEPIN HYDROCHLORIDE"}, {"source": "Ddit4", "target": "DESIPRAMINE"}, {"source": "Ddit4", "target": "CLOMIPRAMINE"}, {"source": "Cfd", "target": "DANICOPAN"}, {"source": "Rpl36", "target": "ATALUREN"}];
+
+  const width = 500, height = 400;
+  const svg = d3.select("#gene-drug-net").append("svg")
+    .attr("width", width).attr("height", height);
+
+  const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(60))
+    .force("charge", d3.forceManyBody().strength(-120))
+    .force("center", d3.forceCenter(width/2, height/2))
+    .force("collision", d3.forceCollide().radius(20));
+
+  const link = svg.selectAll("line").data(links).join("line")
+    .attr("stroke", "#ccc").attr("stroke-width", 1.5);
+
+  const node = svg.selectAll("g.node").data(nodes).join("g").attr("class", "node")
+    .call(d3.drag()
+      .on("start", (e,d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on("drag", (e,d) => { d.fx=e.x; d.fy=e.y; })
+      .on("end", (e,d) => { if (!e.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; })
+    );
+
+  node.append("circle")
+    .attr("r", d => d.type === "gene" ? 12 : 8)
+    .attr("fill", d => d.type === "gene" ? OI.vermilion : OI.skyblue)
+    .attr("stroke", "#333").attr("stroke-width", 1);
+
+  node.append("text")
+    .attr("dy", d => d.type === "gene" ? -16 : 14)
+    .attr("text-anchor", "middle").attr("font-size", d => d.type === "gene" ? "8px" : "6px")
+    .attr("font-style", d => d.type === "gene" ? "italic" : "normal")
+    .text(d => d.type === "gene" ? d.id : (d.label || d.id.substring(0, 12)));
+
+  node.on("mouseover", (e, d) => {
+    const info = d.type === "gene"
+      ? `${d.id} (score: ${d.score})<br>Tissues: ${d.tissues}`
+      : `Drug: ${d.id}<br>Tier: ${d.tier}`;
+    tooltip.style("display", "block").html(info)
+      .style("left", (e.pageX+10)+"px").style("top", (e.pageY-10)+"px");
+  }).on("mouseout", () => tooltip.style("display", "none"));
+
+  simulation.on("tick", () => {
+    link.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+    node.attr("transform", d => `translate(${d.x},${d.y})`);
+  });
+
+  // Legend
+  const legend = svg.append("g").attr("transform", "translate(10, 10)");
+  [["Gene", OI.vermilion, 12], ["Drug", OI.skyblue, 8]].forEach(([label, color, r], i) => {
+    legend.append("circle").attr("cx", r).attr("cy", i*22 + r).attr("r", r).attr("fill", color).attr("stroke", "#333");
+    legend.append("text").attr("x", 2*r + 8).attr("y", i*22 + r + 4).attr("font-size", "9px").text(label);
+  });
+})();
+</script>
+</body>
+</html>

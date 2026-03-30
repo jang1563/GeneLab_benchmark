@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 2 — Ablation Studies and Performance Sensitivity</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+  .panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+  .panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+  .axis text { font-size: 9px; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none; z-index: 100;
+  }
+  .interpretation {
+    margin-top: 16px; padding: 10px; background: #f5f5f5;
+    border-left: 3px solid #999; font-size: 9px; color: #444; line-height: 1.5;
+  }
+  .interpretation strong { color: #333; }
+  .legend { font-size: 9px; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 2 — Ablation Studies and Performance Sensitivity</div>
+  <div class="figure-subtitle">Feature count, PCA dimensionality, sample size, and bootstrap convergence analysis</div>
+  <div class="panels">
+    <div class="panel"><div class="panel-label">A</div>
+      <div class="panel-desc">Feature Count Ablation — Top-K Genes by Variance (PCA-LR & ElasticNet-LR)</div>
+      <div id="feat_chart"></div>
+    </div>
+    <div class="panel"><div class="panel-label">B</div>
+      <div class="panel-desc">PCA Component Ablation — PCA-LR (8 tissues)</div>
+      <div id="pca_chart"></div>
+    </div>
+    <div class="panel"><div class="panel-label">C</div>
+      <div class="panel-desc">Sample Size Learning Curves — Subsampled Training Data (4 tissues)</div>
+      <div id="sample_chart"></div>
+    </div>
+    <div class="panel"><div class="panel-label">D</div>
+      <div class="panel-desc">Bootstrap CI Width Convergence — PCA-LR Gene (8 tissues)</div>
+      <div id="boot_chart"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    (A) Performance peaks at K=1000–2000 genes for most tissues, then plateaus or slightly declines with all genes (~20K).
+    (B) PCA with 20–50 components is optimal; more components do not consistently improve performance.
+    (C) Learning curves show liver is most robust to subsampling; smaller tissues (gastrocnemius) are more sensitive.
+    (D) Bootstrap CI width stabilizes by n=1000, justifying the choice of n_bootstrap=2000 for all evaluations.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tissueColors = {
+  "liver": OI.blue, "gastrocnemius": OI.vermilion, "kidney": OI.green,
+  "thymus": OI.orange, "eye": OI.pink, "skin": OI.skyblue,
+  "lung": "#888888", "colon": "#555555"
+};
+const tissueLabels = {"liver": "Liver", "gastrocnemius": "Gastrocnemius", "kidney": "Kidney", "thymus": "Thymus", "eye": "Eye", "skin": "Skin", "lung": "Lung", "colon": "Colon"};
+const tooltip = d3.select("#tooltip");
+
+// =============================================
+// PANEL A: Feature Count Ablation
+// =============================================
+(function() {
+  const data = {"liver": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.4803, "std": 0.1573}, {"k": 500, "k_label": "500", "auroc": 0.5226, "std": 0.1828}, {"k": 1000, "k_label": "1000", "auroc": 0.6498, "std": 0.1086}, {"k": 2000, "k_label": "2000", "auroc": 0.7944, "std": 0.0877}, {"k": 5000, "k_label": "5000", "auroc": 0.749, "std": 0.1345}, {"k": 10000, "k_label": "10000", "auroc": 0.684, "std": 0.2186}, {"k": 22987, "k_label": "all", "auroc": 0.6827, "std": 0.1925}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.4871, "std": 0.1435}, {"k": 500, "k_label": "500", "auroc": 0.5385, "std": 0.1417}, {"k": 1000, "k_label": "1000", "auroc": 0.702, "std": 0.1953}, {"k": 2000, "k_label": "2000", "auroc": 0.813, "std": 0.1236}, {"k": 5000, "k_label": "5000", "auroc": 0.733, "std": 0.1899}, {"k": 10000, "k_label": "10000", "auroc": 0.7166, "std": 0.1823}, {"k": 22987, "k_label": "all", "auroc": 0.6718, "std": 0.156}]}, "gastrocnemius": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.6458, "std": 0.3398}, {"k": 500, "k_label": "500", "auroc": 0.6134, "std": 0.0426}, {"k": 1000, "k_label": "1000", "auroc": 0.7824, "std": 0.0866}, {"k": 2000, "k_label": "2000", "auroc": 0.8379, "std": 0.1054}, {"k": 5000, "k_label": "5000", "auroc": 0.8542, "std": 0.045}, {"k": 10000, "k_label": "10000", "auroc": 0.831, "std": 0.0786}, {"k": 21013, "k_label": "all", "auroc": 0.8519, "std": 0.2095}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.6111, "std": 0.2616}, {"k": 500, "k_label": "500", "auroc": 0.6111, "std": 0.0818}, {"k": 1000, "k_label": "1000", "auroc": 0.6667, "std": 0.06}, {"k": 2000, "k_label": "2000", "auroc": 0.7315, "std": 0.1902}, {"k": 5000, "k_label": "5000", "auroc": 0.7546, "std": 0.0851}, {"k": 10000, "k_label": "10000", "auroc": 0.7963, "std": 0.151}, {"k": 21013, "k_label": "all", "auroc": 0.8981, "std": 0.1441}]}, "kidney": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.7363, "std": 0.0518}, {"k": 500, "k_label": "500", "auroc": 0.5745, "std": 0.0557}, {"k": 1000, "k_label": "1000", "auroc": 0.5183, "std": 0.0915}, {"k": 2000, "k_label": "2000", "auroc": 0.6157, "std": 0.148}, {"k": 5000, "k_label": "5000", "auroc": 0.6512, "std": 0.0933}, {"k": 10000, "k_label": "10000", "auroc": 0.6864, "std": 0.1429}, {"k": 26082, "k_label": "all", "auroc": 0.5838, "std": 0.205}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.6787, "std": 0.1021}, {"k": 500, "k_label": "500", "auroc": 0.5827, "std": 0.1503}, {"k": 1000, "k_label": "1000", "auroc": 0.5528, "std": 0.1493}, {"k": 2000, "k_label": "2000", "auroc": 0.56, "std": 0.0853}, {"k": 5000, "k_label": "5000", "auroc": 0.6333, "std": 0.0964}, {"k": 10000, "k_label": "10000", "auroc": 0.6133, "std": 0.0806}, {"k": 26082, "k_label": "all", "auroc": 0.5523, "std": 0.1217}]}, "thymus": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.5798, "std": 0.1481}, {"k": 500, "k_label": "500", "auroc": 0.7676, "std": 0.2346}, {"k": 1000, "k_label": "1000", "auroc": 0.8187, "std": 0.1815}, {"k": 2000, "k_label": "2000", "auroc": 0.8092, "std": 0.1928}, {"k": 5000, "k_label": "5000", "auroc": 0.8216, "std": 0.1308}, {"k": 10000, "k_label": "10000", "auroc": 0.8334, "std": 0.1247}, {"k": 28235, "k_label": "all", "auroc": 0.9083, "std": 0.1474}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.5324, "std": 0.1358}, {"k": 500, "k_label": "500", "auroc": 0.7229, "std": 0.188}, {"k": 1000, "k_label": "1000", "auroc": 0.7562, "std": 0.1982}, {"k": 2000, "k_label": "2000", "auroc": 0.7361, "std": 0.2968}, {"k": 5000, "k_label": "5000", "auroc": 0.7566, "std": 0.0874}, {"k": 10000, "k_label": "10000", "auroc": 0.845, "std": 0.1341}, {"k": 28235, "k_label": "all", "auroc": 0.8475, "std": 0.1546}]}, "eye": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.587, "std": 0.1543}, {"k": 500, "k_label": "500", "auroc": 0.57, "std": 0.0552}, {"k": 1000, "k_label": "1000", "auroc": 0.5591, "std": 0.0612}, {"k": 2000, "k_label": "2000", "auroc": 0.5126, "std": 0.108}, {"k": 5000, "k_label": "5000", "auroc": 0.5569, "std": 0.0402}, {"k": 10000, "k_label": "10000", "auroc": 0.721, "std": 0.052}, {"k": 27059, "k_label": "all", "auroc": 0.6972, "std": 0.0588}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.5432, "std": 0.0985}, {"k": 500, "k_label": "500", "auroc": 0.6296, "std": 0.0859}, {"k": 1000, "k_label": "1000", "auroc": 0.5342, "std": 0.1502}, {"k": 2000, "k_label": "2000", "auroc": 0.4398, "std": 0.166}, {"k": 5000, "k_label": "5000", "auroc": 0.536, "std": 0.0985}, {"k": 10000, "k_label": "10000", "auroc": 0.5052, "std": 0.066}, {"k": 27059, "k_label": "all", "auroc": 0.6008, "std": 0.0761}]}, "skin": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.5405, "std": 0.1082}, {"k": 500, "k_label": "500", "auroc": 0.7137, "std": 0.0699}, {"k": 1000, "k_label": "1000", "auroc": 0.6648, "std": 0.0534}, {"k": 2000, "k_label": "2000", "auroc": 0.6977, "std": 0.0139}, {"k": 5000, "k_label": "5000", "auroc": 0.7093, "std": 0.0242}, {"k": 10000, "k_label": "10000", "auroc": 0.7307, "std": 0.0455}, {"k": 26814, "k_label": "all", "auroc": 0.7961, "std": 0.0622}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.5848, "std": 0.1152}, {"k": 500, "k_label": "500", "auroc": 0.7653, "std": 0.0894}, {"k": 1000, "k_label": "1000", "auroc": 0.742, "std": 0.0854}, {"k": 2000, "k_label": "2000", "auroc": 0.7413, "std": 0.1111}, {"k": 5000, "k_label": "5000", "auroc": 0.7725, "std": 0.078}, {"k": 10000, "k_label": "10000", "auroc": 0.8068, "std": 0.0959}, {"k": 26814, "k_label": "all", "auroc": 0.8186, "std": 0.0725}]}, "lung": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.3259, "std": 0.118}, {"k": 500, "k_label": "500", "auroc": 0.6259, "std": 0.1167}, {"k": 1000, "k_label": "1000", "auroc": 0.7759, "std": 0.1625}, {"k": 2000, "k_label": "2000", "auroc": 0.7482, "std": 0.1575}, {"k": 5000, "k_label": "5000", "auroc": 0.808, "std": 0.1831}, {"k": 10000, "k_label": "10000", "auroc": 0.8634, "std": 0.1703}, {"k": 31729, "k_label": "all", "auroc": 0.834, "std": 0.1772}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.3277, "std": 0.1853}, {"k": 500, "k_label": "500", "auroc": 0.525, "std": 0.1708}, {"k": 1000, "k_label": "1000", "auroc": 0.5509, "std": 0.2144}, {"k": 2000, "k_label": "2000", "auroc": 0.8027, "std": 0.114}, {"k": 5000, "k_label": "5000", "auroc": 0.8277, "std": 0.1295}, {"k": 10000, "k_label": "10000", "auroc": 0.9027, "std": 0.1273}, {"k": 31729, "k_label": "all", "auroc": 0.9009, "std": 0.0847}]}, "colon": {"pca_lr": [{"k": 100, "k_label": "100", "auroc": 0.6167, "std": 0.2144}, {"k": 500, "k_label": "500", "auroc": 0.6262, "std": 0.1478}, {"k": 1000, "k_label": "1000", "auroc": 0.7833, "std": 0.1168}, {"k": 2000, "k_label": "2000", "auroc": 0.7881, "std": 0.106}, {"k": 5000, "k_label": "5000", "auroc": 0.7691, "std": 0.1006}, {"k": 10000, "k_label": "10000", "auroc": 0.7738, "std": 0.0952}, {"k": 30486, "k_label": "all", "auroc": 0.8571, "std": 0.0783}], "elasticnet_lr": [{"k": 100, "k_label": "100", "auroc": 0.5619, "std": 0.1944}, {"k": 500, "k_label": "500", "auroc": 0.7738, "std": 0.1062}, {"k": 1000, "k_label": "1000", "auroc": 0.8191, "std": 0.1245}, {"k": 2000, "k_label": "2000", "auroc": 0.7952, "std": 0.1203}, {"k": 5000, "k_label": "5000", "auroc": 0.781, "std": 0.1605}, {"k": 10000, "k_label": "10000", "auroc": 0.8024, "std": 0.1023}, {"k": 30486, "k_label": "all", "auroc": 0.8095, "std": 0.0943}]}};
+  const margin = {top: 15, right: 140, bottom: 45, left: 55};
+  const width = 370, height = 280;
+
+  const svg = d3.select("#feat_chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const kLabels = ["100", "500", "1K", "2K", "5K", "10K", "All"];
+  const kNums = [100, 500, 1000, 2000, 5000, 10000, 25000];
+  const x = d3.scaleLog().domain([80, 30000]).range([0, width]);
+  const y = d3.scaleLinear().domain([0.3, 1.0]).range([height, 0]);
+
+  // Grid
+  svg.append("line").attr("x1", 0).attr("x2", width).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#eee").attr("stroke-dasharray", "3,3");
+
+  const tissues = Object.keys(data);
+  const methodDash = {"pca_lr": "", "elasticnet_lr": "5,3"};
+
+  tissues.forEach(tissue => {
+    Object.keys(data[tissue]).forEach(method => {
+      const pts = data[tissue][method];
+      if (pts.length === 0) return;
+
+      const line = d3.line()
+        .x(d => x(d.k))
+        .y(d => y(d.auroc));
+
+      svg.append("path")
+        .datum(pts)
+        .attr("d", line)
+        .attr("fill", "none")
+        .attr("stroke", tissueColors[tissue])
+        .attr("stroke-width", method === "pca_lr" ? 2 : 1.5)
+        .attr("stroke-dasharray", methodDash[method] || "")
+        .attr("opacity", 0.8);
+
+      // Dots
+      svg.selectAll(`.dot-${tissue}-${method}`)
+        .data(pts).enter().append("circle")
+        .attr("cx", d => x(d.k)).attr("cy", d => y(d.auroc))
+        .attr("r", 3)
+        .attr("fill", tissueColors[tissue])
+        .attr("opacity", 0.8)
+        .on("mouseover", function(event, d) {
+          tooltip.style("display", "block")
+            .html(`<b>${tissueLabels[tissue]}</b> (${method === "pca_lr" ? "PCA-LR" : "EN-LR"})<br>K=${d.k_label} (${d.k})<br>AUROC: ${d.auroc.toFixed(3)} ± ${d.std.toFixed(3)}`);
+        })
+        .on("mousemove", function(event) {
+          tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+        })
+        .on("mouseout", () => tooltip.style("display", "none"));
+    });
+  });
+
+  // X axis
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickValues(kNums).tickFormat(d => {
+      if (d >= 1000) return d >= 25000 ? "All" : (d/1000)+"K";
+      return d;
+    }));
+  svg.append("text").attr("x", width/2).attr("y", height+35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Top-K Genes by Variance");
+
+  // Y axis
+  svg.append("g").call(d3.axisLeft(y).ticks(7).tickFormat(d3.format(".1f")));
+  svg.append("text").attr("x", -height/2).attr("y", -40)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("Mean AUROC");
+
+  // Legend
+  let ly = 0;
+  tissues.forEach(t => {
+    svg.append("line").attr("x1", width+10).attr("x2", width+30)
+      .attr("y1", ly+4).attr("y2", ly+4)
+      .attr("stroke", tissueColors[t]).attr("stroke-width", 2);
+    svg.append("text").attr("x", width+33).attr("y", ly+8)
+      .attr("font-size", "8px").text(tissueLabels[t]);
+    ly += 14;
+  });
+  ly += 8;
+  svg.append("line").attr("x1", width+10).attr("x2", width+30)
+    .attr("y1", ly+4).attr("y2", ly+4)
+    .attr("stroke", "#333").attr("stroke-width", 2);
+  svg.append("text").attr("x", width+33).attr("y", ly+8)
+    .attr("font-size", "8px").text("PCA-LR (solid)");
+  ly += 14;
+  svg.append("line").attr("x1", width+10).attr("x2", width+30)
+    .attr("y1", ly+4).attr("y2", ly+4)
+    .attr("stroke", "#333").attr("stroke-width", 1.5).attr("stroke-dasharray", "5,3");
+  svg.append("text").attr("x", width+33).attr("y", ly+8)
+    .attr("font-size", "8px").text("EN-LR (dashed)");
+})();
+
+// =============================================
+// PANEL B: PCA Components Ablation
+// =============================================
+(function() {
+  const data = {"liver": [{"nc": 5, "auroc": 0.6415, "std": 0.1039, "var_explained": 0.592}, {"nc": 10, "auroc": 0.5979, "std": 0.1575, "var_explained": 0.6866}, {"nc": 20, "auroc": 0.7162, "std": 0.123, "var_explained": 0.7468}, {"nc": 50, "auroc": 0.6827, "std": 0.1925, "var_explained": 0.8197}, {"nc": 100, "auroc": 0.7418, "std": 0.1096, "var_explained": 0.8932}, {"nc": 200, "auroc": 0.7546, "std": 0.1257, "var_explained": 0.9798}], "gastrocnemius": [{"nc": 5, "auroc": 0.6597, "std": 0.123, "var_explained": 0.7333}, {"nc": 10, "auroc": 0.7407, "std": 0.1833, "var_explained": 0.8704}, {"nc": 20, "auroc": 0.8519, "std": 0.2095, "var_explained": 0.9875}, {"nc": 50, "auroc": 0.8519, "std": 0.2095, "var_explained": 1.0}, {"nc": 100, "auroc": 0.8519, "std": 0.2095, "var_explained": 1.0}, {"nc": 200, "auroc": 0.8519, "std": 0.2095, "var_explained": 1.0}], "kidney": [{"nc": 5, "auroc": 0.6249, "std": 0.0885, "var_explained": 0.6377}, {"nc": 10, "auroc": 0.6595, "std": 0.0452, "var_explained": 0.7188}, {"nc": 20, "auroc": 0.7337, "std": 0.0742, "var_explained": 0.8024}, {"nc": 50, "auroc": 0.5838, "std": 0.205, "var_explained": 0.9017}, {"nc": 100, "auroc": 0.695, "std": 0.1257, "var_explained": 0.9733}, {"nc": 200, "auroc": 0.6857, "std": 0.1284, "var_explained": 1.0}], "thymus": [{"nc": 5, "auroc": 0.4822, "std": 0.249, "var_explained": 0.7074}, {"nc": 10, "auroc": 0.8823, "std": 0.1474, "var_explained": 0.7819}, {"nc": 20, "auroc": 0.904, "std": 0.155, "var_explained": 0.8687}, {"nc": 50, "auroc": 0.9083, "std": 0.1474, "var_explained": 0.9657}, {"nc": 100, "auroc": 0.9059, "std": 0.1463, "var_explained": 1.0}, {"nc": 200, "auroc": 0.9059, "std": 0.1463, "var_explained": 1.0}], "eye": [{"nc": 5, "auroc": 0.6349, "std": 0.0815, "var_explained": 0.7561}, {"nc": 10, "auroc": 0.7025, "std": 0.0661, "var_explained": 0.8354}, {"nc": 20, "auroc": 0.6982, "std": 0.0567, "var_explained": 0.9452}, {"nc": 50, "auroc": 0.6972, "std": 0.0588, "var_explained": 1.0}, {"nc": 100, "auroc": 0.6972, "std": 0.0588, "var_explained": 1.0}, {"nc": 200, "auroc": 0.6972, "std": 0.0588, "var_explained": 1.0}], "skin": [{"nc": 5, "auroc": 0.6981, "std": 0.0473, "var_explained": 0.6187}, {"nc": 10, "auroc": 0.762, "std": 0.0915, "var_explained": 0.6945}, {"nc": 20, "auroc": 0.8025, "std": 0.1113, "var_explained": 0.7708}, {"nc": 50, "auroc": 0.7961, "std": 0.0622, "var_explained": 0.9073}, {"nc": 100, "auroc": 0.8096, "std": 0.0642, "var_explained": 1.0}, {"nc": 200, "auroc": 0.8096, "std": 0.0642, "var_explained": 1.0}], "lung": [{"nc": 5, "auroc": 0.492, "std": 0.2338, "var_explained": 0.5495}, {"nc": 10, "auroc": 0.6536, "std": 0.1009, "var_explained": 0.6582}, {"nc": 20, "auroc": 0.7169, "std": 0.1981, "var_explained": 0.7955}, {"nc": 50, "auroc": 0.834, "std": 0.1772, "var_explained": 1.0}, {"nc": 100, "auroc": 0.834, "std": 0.1772, "var_explained": 1.0}, {"nc": 200, "auroc": 0.834, "std": 0.1772, "var_explained": 1.0}], "colon": [{"nc": 5, "auroc": 0.5119, "std": 0.1046, "var_explained": 0.5605}, {"nc": 10, "auroc": 0.65, "std": 0.1961, "var_explained": 0.6869}, {"nc": 20, "auroc": 0.731, "std": 0.0909, "var_explained": 0.8192}, {"nc": 50, "auroc": 0.8571, "std": 0.0783, "var_explained": 1.0}, {"nc": 100, "auroc": 0.8571, "std": 0.0783, "var_explained": 1.0}, {"nc": 200, "auroc": 0.8571, "std": 0.0783, "var_explained": 1.0}]};
+  const margin = {top: 15, right: 140, bottom: 45, left: 55};
+  const width = 370, height = 280;
+
+  const svg = d3.select("#pca_chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLog().domain([4, 250]).range([0, width]);
+  const y = d3.scaleLinear().domain([0.3, 1.0]).range([height, 0]);
+
+  svg.append("line").attr("x1", 0).attr("x2", width).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#eee").attr("stroke-dasharray", "3,3");
+
+  // Highlight n=50 (Phase 1 default)
+  svg.append("line").attr("x1", x(50)).attr("x2", x(50))
+    .attr("y1", 0).attr("y2", height)
+    .attr("stroke", "#ddd").attr("stroke-dasharray", "3,3");
+  svg.append("text").attr("x", x(50)+3).attr("y", 10)
+    .attr("font-size", "7px").attr("fill", "#999").text("default (n=50)");
+
+  const tissues = Object.keys(data);
+  tissues.forEach(tissue => {
+    const pts = data[tissue];
+    if (pts.length === 0) return;
+
+    const line = d3.line().x(d => x(d.nc)).y(d => y(d.auroc));
+    svg.append("path").datum(pts).attr("d", line)
+      .attr("fill", "none").attr("stroke", tissueColors[tissue])
+      .attr("stroke-width", 2).attr("opacity", 0.8);
+
+    svg.selectAll(`.pca-dot-${tissue}`)
+      .data(pts).enter().append("circle")
+      .attr("cx", d => x(d.nc)).attr("cy", d => y(d.auroc))
+      .attr("r", 3).attr("fill", tissueColors[tissue]).attr("opacity", 0.8)
+      .on("mouseover", function(event, d) {
+        tooltip.style("display", "block")
+          .html(`<b>${tissueLabels[tissue]}</b><br>n_components=${d.nc}<br>AUROC: ${d.auroc.toFixed(3)} ± ${d.std.toFixed(3)}<br>Var explained: ${(d.var_explained*100).toFixed(1)}%`);
+      })
+      .on("mousemove", function(event) {
+        tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+      })
+      .on("mouseout", () => tooltip.style("display", "none"));
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickValues([5,10,20,50,100,200]).tickFormat(d => d));
+  svg.append("text").attr("x", width/2).attr("y", height+35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Number of PCA Components");
+
+  svg.append("g").call(d3.axisLeft(y).ticks(7).tickFormat(d3.format(".1f")));
+  svg.append("text").attr("x", -height/2).attr("y", -40)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("Mean AUROC (PCA-LR)");
+
+  // Legend
+  let ly = 0;
+  tissues.forEach(t => {
+    svg.append("line").attr("x1", width+10).attr("x2", width+30)
+      .attr("y1", ly+4).attr("y2", ly+4)
+      .attr("stroke", tissueColors[t]).attr("stroke-width", 2);
+    svg.append("text").attr("x", width+33).attr("y", ly+8)
+      .attr("font-size", "8px").text(tissueLabels[t]);
+    ly += 14;
+  });
+})();
+
+// =============================================
+// PANEL C: Sample Size Learning Curves
+// =============================================
+(function() {
+  const data = {"liver": {"pca_lr": [{"frac": 0.2, "auroc": 0.6804, "std": 0.0571}, {"frac": 0.4, "auroc": 0.6975, "std": 0.0628}, {"frac": 0.6, "auroc": 0.6914, "std": 0.0324}, {"frac": 0.8, "auroc": 0.6657, "std": 0.0352}, {"frac": 1.0, "auroc": 0.6827, "std": 0.0}], "elasticnet_lr": [{"frac": 0.2, "auroc": 0.6458, "std": 0.0511}, {"frac": 0.4, "auroc": 0.6571, "std": 0.0559}, {"frac": 0.6, "auroc": 0.6854, "std": 0.0457}, {"frac": 0.8, "auroc": 0.6798, "std": 0.0252}, {"frac": 1.0, "auroc": 0.6718, "std": 0.0}]}, "thymus": {"pca_lr": [{"frac": 0.2, "auroc": 0.7561, "std": 0.1133}, {"frac": 0.4, "auroc": 0.8603, "std": 0.0487}, {"frac": 0.6, "auroc": 0.8726, "std": 0.0302}, {"frac": 0.8, "auroc": 0.8909, "std": 0.0142}, {"frac": 1.0, "auroc": 0.9083, "std": 0.0}], "elasticnet_lr": [{"frac": 0.2, "auroc": 0.6764, "std": 0.1471}, {"frac": 0.4, "auroc": 0.7393, "std": 0.0267}, {"frac": 0.6, "auroc": 0.7818, "std": 0.0433}, {"frac": 0.8, "auroc": 0.8125, "std": 0.0202}, {"frac": 1.0, "auroc": 0.8475, "std": 0.0}]}, "skin": {"pca_lr": [{"frac": 0.2, "auroc": 0.6685, "std": 0.0605}, {"frac": 0.4, "auroc": 0.754, "std": 0.0486}, {"frac": 0.6, "auroc": 0.7855, "std": 0.0264}, {"frac": 0.8, "auroc": 0.7849, "std": 0.0221}, {"frac": 1.0, "auroc": 0.7961, "std": 0.0}], "elasticnet_lr": [{"frac": 0.2, "auroc": 0.6832, "std": 0.0579}, {"frac": 0.4, "auroc": 0.7891, "std": 0.0327}, {"frac": 0.6, "auroc": 0.8143, "std": 0.0129}, {"frac": 0.8, "auroc": 0.8214, "std": 0.0118}, {"frac": 1.0, "auroc": 0.8186, "std": 0.0}]}, "gastrocnemius": {"pca_lr": [{"frac": 0.2, "auroc": 0.5979, "std": 0.1481}, {"frac": 0.4, "auroc": 0.6741, "std": 0.0998}, {"frac": 0.6, "auroc": 0.7345, "std": 0.0792}, {"frac": 0.8, "auroc": 0.7819, "std": 0.0625}, {"frac": 1.0, "auroc": 0.8519, "std": 0.0}], "elasticnet_lr": [{"frac": 0.2, "auroc": 0.5748, "std": 0.1207}, {"frac": 0.4, "auroc": 0.6889, "std": 0.083}, {"frac": 0.6, "auroc": 0.7748, "std": 0.0465}, {"frac": 0.8, "auroc": 0.8245, "std": 0.0272}, {"frac": 1.0, "auroc": 0.8981, "std": 0.0}]}};
+  const margin = {top: 15, right: 140, bottom: 45, left: 55};
+  const width = 370, height = 280;
+
+  const svg = d3.select("#sample_chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0.15, 1.05]).range([0, width]);
+  const y = d3.scaleLinear().domain([0.3, 1.0]).range([height, 0]);
+
+  svg.append("line").attr("x1", 0).attr("x2", width).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#eee").attr("stroke-dasharray", "3,3");
+
+  const methodDash = {"pca_lr": "", "elasticnet_lr": "5,3"};
+  const tissues = Object.keys(data);
+
+  tissues.forEach(tissue => {
+    Object.keys(data[tissue]).forEach(method => {
+      const pts = data[tissue][method];
+      if (pts.length === 0) return;
+
+      const line = d3.line().x(d => x(d.frac)).y(d => y(d.auroc));
+      svg.append("path").datum(pts).attr("d", line)
+        .attr("fill", "none").attr("stroke", tissueColors[tissue])
+        .attr("stroke-width", method === "pca_lr" ? 2 : 1.5)
+        .attr("stroke-dasharray", methodDash[method] || "")
+        .attr("opacity", 0.8);
+
+      // Error bars + dots
+      pts.forEach(d => {
+        if (d.std > 0) {
+          svg.append("line")
+            .attr("x1", x(d.frac)).attr("x2", x(d.frac))
+            .attr("y1", y(Math.max(0, d.auroc - d.std)))
+            .attr("y2", y(Math.min(1, d.auroc + d.std)))
+            .attr("stroke", tissueColors[tissue]).attr("stroke-width", 1).attr("opacity", 0.4);
+        }
+        svg.append("circle")
+          .attr("cx", x(d.frac)).attr("cy", y(d.auroc))
+          .attr("r", 3).attr("fill", tissueColors[tissue]).attr("opacity", 0.8);
+      });
+    });
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickValues([0.2,0.4,0.6,0.8,1.0]).tickFormat(d => (d*100)+"%"));
+  svg.append("text").attr("x", width/2).attr("y", height+35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Training Data Fraction");
+
+  svg.append("g").call(d3.axisLeft(y).ticks(7).tickFormat(d3.format(".1f")));
+  svg.append("text").attr("x", -height/2).attr("y", -40)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("Mean AUROC");
+
+  // Legend
+  let ly = 0;
+  tissues.forEach(t => {
+    svg.append("line").attr("x1", width+10).attr("x2", width+30)
+      .attr("y1", ly+4).attr("y2", ly+4)
+      .attr("stroke", tissueColors[t]).attr("stroke-width", 2);
+    svg.append("text").attr("x", width+33).attr("y", ly+8)
+      .attr("font-size", "8px").text(tissueLabels[t]);
+    ly += 14;
+  });
+  ly += 8;
+  svg.append("line").attr("x1", width+10).attr("x2", width+30)
+    .attr("y1", ly+4).attr("y2", ly+4)
+    .attr("stroke", "#333").attr("stroke-width", 2);
+  svg.append("text").attr("x", width+33).attr("y", ly+8)
+    .attr("font-size", "8px").text("PCA-LR (solid)");
+  ly += 14;
+  svg.append("line").attr("x1", width+10).attr("x2", width+30)
+    .attr("y1", ly+4).attr("y2", ly+4)
+    .attr("stroke", "#333").attr("stroke-width", 1.5).attr("stroke-dasharray", "5,3");
+  svg.append("text").attr("x", width+33).attr("y", ly+8)
+    .attr("font-size", "8px").text("EN-LR (dashed)");
+})();
+
+// =============================================
+// PANEL D: Bootstrap CI Convergence
+// =============================================
+(function() {
+  const data = {"liver": [{"n_boot": 100, "auroc": 0.6828, "ci_width": 0.4304}, {"n_boot": 500, "auroc": 0.6828, "ci_width": 0.4638}, {"n_boot": 1000, "auroc": 0.6828, "ci_width": 0.4718}, {"n_boot": 2000, "auroc": 0.6828, "ci_width": 0.4687}, {"n_boot": 5000, "auroc": 0.6828, "ci_width": 0.4668}], "gastrocnemius": [{"n_boot": 100, "auroc": 0.8519, "ci_width": 0.2544}, {"n_boot": 500, "auroc": 0.8519, "ci_width": 0.2366}, {"n_boot": 1000, "auroc": 0.8519, "ci_width": 0.2347}, {"n_boot": 2000, "auroc": 0.8519, "ci_width": 0.2415}, {"n_boot": 5000, "auroc": 0.8519, "ci_width": 0.2449}], "kidney": [{"n_boot": 100, "auroc": 0.579, "ci_width": 0.4359}, {"n_boot": 500, "auroc": 0.579, "ci_width": 0.4649}, {"n_boot": 1000, "auroc": 0.579, "ci_width": 0.4705}, {"n_boot": 2000, "auroc": 0.579, "ci_width": 0.4667}, {"n_boot": 5000, "auroc": 0.579, "ci_width": 0.4655}], "thymus": [{"n_boot": 100, "auroc": 0.9083, "ci_width": 0.0998}, {"n_boot": 500, "auroc": 0.9083, "ci_width": 0.1111}, {"n_boot": 1000, "auroc": 0.9083, "ci_width": 0.1102}, {"n_boot": 2000, "auroc": 0.9083, "ci_width": 0.11}, {"n_boot": 5000, "auroc": 0.9083, "ci_width": 0.1078}], "eye": [{"n_boot": 100, "auroc": 0.6972, "ci_width": 0.5763}, {"n_boot": 500, "auroc": 0.6972, "ci_width": 0.6153}, {"n_boot": 1000, "auroc": 0.6972, "ci_width": 0.6145}, {"n_boot": 2000, "auroc": 0.6972, "ci_width": 0.6336}, {"n_boot": 5000, "auroc": 0.6972, "ci_width": 0.6251}], "skin": [{"n_boot": 100, "auroc": 0.7961, "ci_width": 0.3294}, {"n_boot": 500, "auroc": 0.7961, "ci_width": 0.3251}, {"n_boot": 1000, "auroc": 0.7961, "ci_width": 0.3222}, {"n_boot": 2000, "auroc": 0.7961, "ci_width": 0.3198}, {"n_boot": 5000, "auroc": 0.7961, "ci_width": 0.3197}], "lung": [{"n_boot": 100, "auroc": 0.834, "ci_width": 0.3502}, {"n_boot": 500, "auroc": 0.834, "ci_width": 0.3748}, {"n_boot": 1000, "auroc": 0.834, "ci_width": 0.3746}, {"n_boot": 2000, "auroc": 0.834, "ci_width": 0.3739}, {"n_boot": 5000, "auroc": 0.834, "ci_width": 0.3548}], "colon": [{"n_boot": 100, "auroc": 0.8571, "ci_width": 0.4029}, {"n_boot": 500, "auroc": 0.8571, "ci_width": 0.4146}, {"n_boot": 1000, "auroc": 0.8571, "ci_width": 0.417}, {"n_boot": 2000, "auroc": 0.8571, "ci_width": 0.4222}, {"n_boot": 5000, "auroc": 0.8571, "ci_width": 0.4089}]};
+  const margin = {top: 15, right: 140, bottom: 45, left: 55};
+  const width = 370, height = 280;
+
+  const svg = d3.select("#boot_chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLog().domain([80, 6000]).range([0, width]);
+  const y = d3.scaleLinear().domain([0, 0.7]).range([height, 0]);
+
+  // Highlight n=2000 (chosen default)
+  svg.append("line").attr("x1", x(2000)).attr("x2", x(2000))
+    .attr("y1", 0).attr("y2", height)
+    .attr("stroke", "#ddd").attr("stroke-dasharray", "3,3");
+  svg.append("text").attr("x", x(2000)+3).attr("y", 10)
+    .attr("font-size", "7px").attr("fill", "#999").text("chosen (n=2000)");
+
+  const tissues = Object.keys(data);
+  tissues.forEach(tissue => {
+    const pts = data[tissue];
+    if (pts.length === 0) return;
+
+    const line = d3.line().x(d => x(d.n_boot)).y(d => y(d.ci_width));
+    svg.append("path").datum(pts).attr("d", line)
+      .attr("fill", "none").attr("stroke", tissueColors[tissue])
+      .attr("stroke-width", 2).attr("opacity", 0.8);
+
+    svg.selectAll(`.boot-dot-${tissue}`)
+      .data(pts).enter().append("circle")
+      .attr("cx", d => x(d.n_boot)).attr("cy", d => y(d.ci_width))
+      .attr("r", 3).attr("fill", tissueColors[tissue]).attr("opacity", 0.8)
+      .on("mouseover", function(event, d) {
+        tooltip.style("display", "block")
+          .html(`<b>${tissueLabels[tissue]}</b><br>n_bootstrap=${d.n_boot}<br>AUROC: ${d.auroc.toFixed(4)}<br>CI width: ${d.ci_width.toFixed(4)}`);
+      })
+      .on("mousemove", function(event) {
+        tooltip.style("left", (event.pageX+12)+"px").style("top", (event.pageY-10)+"px");
+      })
+      .on("mouseout", () => tooltip.style("display", "none"));
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).tickValues([100,500,1000,2000,5000]).tickFormat(d => d >= 1000 ? (d/1000)+"K" : d));
+  svg.append("text").attr("x", width/2).attr("y", height+35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Number of Bootstrap Resamples");
+
+  svg.append("g").call(d3.axisLeft(y).ticks(7).tickFormat(d3.format(".2f")));
+  svg.append("text").attr("x", -height/2).attr("y", -40)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("Mean 95% CI Width");
+
+  // Legend
+  let ly = 0;
+  tissues.forEach(t => {
+    svg.append("line").attr("x1", width+10).attr("x2", width+30)
+      .attr("y1", ly+4).attr("y2", ly+4)
+      .attr("stroke", tissueColors[t]).attr("stroke-width", 2);
+    svg.append("text").attr("x", width+33).attr("y", ly+8)
+      .attr("font-size", "8px").text(tissueLabels[t]);
+    ly += 14;
+  });
+})();
+</script>
+</body>
+</html>

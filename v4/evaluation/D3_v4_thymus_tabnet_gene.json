@@ -1,0 +1,65 @@
+{
+  "experiment": "D3",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "thymus",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 4,
+  "classes": [
+    "MHU-1",
+    "MHU-2",
+    "RR-6",
+    "RR-9"
+  ],
+  "class_distribution": {
+    "MHU-1": 9,
+    "MHU-2": 9,
+    "RR-6": 54,
+    "RR-9": 20
+  },
+  "n_samples": 92,
+  "macro_f1": 0.0888,
+  "accuracy": 0.0978,
+  "ci_lower": 0.0275,
+  "ci_upper": 0.1658,
+  "perm_pvalue": 0.4326,
+  "per_class_f1": {
+    "MHU-1": 0.1111,
+    "MHU-2": 0.1573,
+    "RR-6": 0.0,
+    "RR-9": 0.087
+  },
+  "confusion_matrix": [
+    [
+      1,
+      7,
+      0,
+      1
+    ],
+    [
+      1,
+      7,
+      0,
+      1
+    ],
+    [
+      6,
+      48,
+      0,
+      0
+    ],
+    [
+      1,
+      18,
+      0,
+      1
+    ]
+  ],
+  "mean_train_time_s": 17.12,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 906.4,
+  "timestamp": "2026-03-22T03:41:13.400443"
+}

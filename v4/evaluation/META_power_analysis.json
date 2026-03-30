@@ -1,0 +1,549 @@
+{
+  "analytical": {
+    "liver": {
+      "observed_pooled_auroc": 0.7532,
+      "required_n_per_group": {
+        "power_80": 12,
+        "power_90": 17,
+        "power_95": 21
+      }
+    },
+    "gastrocnemius": {
+      "observed_pooled_auroc": 0.9948,
+      "required_n_per_group": {
+        "power_80": 3,
+        "power_90": 3,
+        "power_95": 3
+      }
+    },
+    "kidney": {
+      "observed_pooled_auroc": 0.6017,
+      "required_n_per_group": {
+        "power_80": 96,
+        "power_90": 132,
+        "power_95": 167
+      }
+    },
+    "thymus": {
+      "observed_pooled_auroc": 0.9631,
+      "required_n_per_group": {
+        "power_80": 3,
+        "power_90": 3,
+        "power_95": 3
+      }
+    },
+    "eye": {
+      "observed_pooled_auroc": 0.7164,
+      "required_n_per_group": {
+        "power_80": 18,
+        "power_90": 25,
+        "power_95": 31
+      }
+    },
+    "skin": {
+      "observed_pooled_auroc": 0.7975,
+      "required_n_per_group": {
+        "power_80": 8,
+        "power_90": 11,
+        "power_95": 13
+      }
+    }
+  },
+  "simulation": {
+    "liver": {
+      "pooled_auroc": 0.7532,
+      "tau2": 0.008914,
+      "current_k": 6,
+      "power_curve_vary_n": [
+        {
+          "n_per_group": 3,
+          "n_missions": 6,
+          "power": 0.66
+        },
+        {
+          "n_per_group": 5,
+          "n_missions": 6,
+          "power": 0.81
+        },
+        {
+          "n_per_group": 8,
+          "n_missions": 6,
+          "power": 0.916
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 6,
+          "power": 0.94
+        },
+        {
+          "n_per_group": 15,
+          "n_missions": 6,
+          "power": 0.974
+        },
+        {
+          "n_per_group": 20,
+          "n_missions": 6,
+          "power": 0.987
+        },
+        {
+          "n_per_group": 30,
+          "n_missions": 6,
+          "power": 0.992
+        },
+        {
+          "n_per_group": 50,
+          "n_missions": 6,
+          "power": 0.996
+        }
+      ],
+      "power_curve_vary_missions": [
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.604
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 4,
+          "power": 0.798
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 6,
+          "power": 0.94
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 8,
+          "power": 0.982
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 10,
+          "power": 0.998
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 15,
+          "power": 1.0
+        }
+      ]
+    },
+    "gastrocnemius": {
+      "pooled_auroc": 0.9948,
+      "tau2": 0.000585,
+      "current_k": 3,
+      "power_curve_vary_n": [
+        {
+          "n_per_group": 3,
+          "n_missions": 3,
+          "power": 0.995
+        },
+        {
+          "n_per_group": 5,
+          "n_missions": 3,
+          "power": 0.999
+        },
+        {
+          "n_per_group": 8,
+          "n_missions": 3,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 15,
+          "n_missions": 3,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 20,
+          "n_missions": 3,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 30,
+          "n_missions": 3,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 50,
+          "n_missions": 3,
+          "power": 1.0
+        }
+      ],
+      "power_curve_vary_missions": [
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 6,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 8,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 10,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 15,
+          "power": 1.0
+        }
+      ]
+    },
+    "kidney": {
+      "pooled_auroc": 0.6017,
+      "tau2": 0.034542,
+      "current_k": 3,
+      "power_curve_vary_n": [
+        {
+          "n_per_group": 3,
+          "n_missions": 3,
+          "power": 0.147
+        },
+        {
+          "n_per_group": 5,
+          "n_missions": 3,
+          "power": 0.146
+        },
+        {
+          "n_per_group": 8,
+          "n_missions": 3,
+          "power": 0.153
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.149
+        },
+        {
+          "n_per_group": 15,
+          "n_missions": 3,
+          "power": 0.161
+        },
+        {
+          "n_per_group": 20,
+          "n_missions": 3,
+          "power": 0.173
+        },
+        {
+          "n_per_group": 30,
+          "n_missions": 3,
+          "power": 0.164
+        },
+        {
+          "n_per_group": 50,
+          "n_missions": 3,
+          "power": 0.171
+        }
+      ],
+      "power_curve_vary_missions": [
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.149
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 4,
+          "power": 0.178
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 6,
+          "power": 0.217
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 8,
+          "power": 0.259
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 10,
+          "power": 0.329
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 15,
+          "power": 0.493
+        }
+      ]
+    },
+    "thymus": {
+      "pooled_auroc": 0.9631,
+      "tau2": 0.002384,
+      "current_k": 4,
+      "power_curve_vary_n": [
+        {
+          "n_per_group": 3,
+          "n_missions": 4,
+          "power": 0.986
+        },
+        {
+          "n_per_group": 5,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 8,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 15,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 20,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 30,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 50,
+          "n_missions": 4,
+          "power": 1.0
+        }
+      ],
+      "power_curve_vary_missions": [
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.998
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 4,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 6,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 8,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 10,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 15,
+          "power": 1.0
+        }
+      ]
+    },
+    "eye": {
+      "pooled_auroc": 0.7164,
+      "tau2": 0.0,
+      "current_k": 3,
+      "power_curve_vary_n": [
+        {
+          "n_per_group": 3,
+          "n_missions": 3,
+          "power": 0.358
+        },
+        {
+          "n_per_group": 5,
+          "n_missions": 3,
+          "power": 0.471
+        },
+        {
+          "n_per_group": 8,
+          "n_missions": 3,
+          "power": 0.577
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.654
+        },
+        {
+          "n_per_group": 15,
+          "n_missions": 3,
+          "power": 0.797
+        },
+        {
+          "n_per_group": 20,
+          "n_missions": 3,
+          "power": 0.881
+        },
+        {
+          "n_per_group": 30,
+          "n_missions": 3,
+          "power": 0.947
+        },
+        {
+          "n_per_group": 50,
+          "n_missions": 3,
+          "power": 0.992
+        }
+      ],
+      "power_curve_vary_missions": [
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.654
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 4,
+          "power": 0.849
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 6,
+          "power": 0.955
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 8,
+          "power": 0.992
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 10,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 15,
+          "power": 1.0
+        }
+      ]
+    },
+    "skin": {
+      "pooled_auroc": 0.7975,
+      "tau2": 0.0,
+      "current_k": 3,
+      "power_curve_vary_n": [
+        {
+          "n_per_group": 3,
+          "n_missions": 3,
+          "power": 0.556
+        },
+        {
+          "n_per_group": 5,
+          "n_missions": 3,
+          "power": 0.715
+        },
+        {
+          "n_per_group": 8,
+          "n_missions": 3,
+          "power": 0.84
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.893
+        },
+        {
+          "n_per_group": 15,
+          "n_missions": 3,
+          "power": 0.966
+        },
+        {
+          "n_per_group": 20,
+          "n_missions": 3,
+          "power": 0.991
+        },
+        {
+          "n_per_group": 30,
+          "n_missions": 3,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 50,
+          "n_missions": 3,
+          "power": 1.0
+        }
+      ],
+      "power_curve_vary_missions": [
+        {
+          "n_per_group": 10,
+          "n_missions": 3,
+          "power": 0.893
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 4,
+          "power": 0.988
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 6,
+          "power": 0.999
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 8,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 10,
+          "power": 1.0
+        },
+        {
+          "n_per_group": 10,
+          "n_missions": 15,
+          "power": 1.0
+        }
+      ]
+    }
+  },
+  "recommendations": {
+    "well_powered": [
+      "gastrocnemius",
+      "thymus",
+      "skin"
+    ],
+    "moderate": [
+      "liver",
+      "eye"
+    ],
+    "underpowered": [
+      "kidney"
+    ],
+    "recommendation_text": "Well-powered tissues (gastrocnemius, thymus, skin): Current sample sizes sufficient for reliable detection. Moderate power (liver, eye): Adding 1-2 missions would substantially improve detection reliability. Underpowered tissues (kidney): Effect size is modest; require \u226520 samples/group or pathway features."
+  },
+  "parameters": {
+    "reference_method": "pca_lr",
+    "feature_type": "gene",
+    "n_sim": 2000,
+    "alpha": 0.05
+  }
+}

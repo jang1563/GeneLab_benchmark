@@ -1,0 +1,53 @@
+{
+  "experiment": "D3",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "kidney",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 3,
+  "classes": [
+    "RR-1",
+    "RR-3",
+    "RR-7"
+  ],
+  "class_distribution": {
+    "RR-1": 12,
+    "RR-3": 18,
+    "RR-7": 112
+  },
+  "n_samples": 142,
+  "macro_f1": 0.294,
+  "accuracy": 0.7887,
+  "ci_lower": 0.2787,
+  "ci_upper": 0.3067,
+  "perm_pvalue": 1.0,
+  "per_class_f1": {
+    "RR-1": 0.0,
+    "RR-3": 0.0,
+    "RR-7": 0.8819
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      12
+    ],
+    [
+      0,
+      0,
+      18
+    ],
+    [
+      0,
+      0,
+      112
+    ]
+  ],
+  "mean_train_time_s": 0.23,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 21.9,
+  "timestamp": "2026-03-22T03:25:33.085466"
+}

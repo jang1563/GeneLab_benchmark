@@ -1,0 +1,65 @@
+{
+  "experiment": "D3",
+  "model": "Random Forest",
+  "model_key": "rf",
+  "tissue": "thymus",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 4,
+  "classes": [
+    "MHU-1",
+    "MHU-2",
+    "RR-6",
+    "RR-9"
+  ],
+  "class_distribution": {
+    "MHU-1": 9,
+    "MHU-2": 9,
+    "RR-6": 54,
+    "RR-9": 20
+  },
+  "n_samples": 92,
+  "macro_f1": 0.8889,
+  "accuracy": 0.9565,
+  "ci_lower": 0.7571,
+  "ci_upper": 0.9733,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU-1": 0.7778,
+    "MHU-2": 0.7778,
+    "RR-6": 1.0,
+    "RR-9": 1.0
+  },
+  "confusion_matrix": [
+    [
+      7,
+      2,
+      0,
+      0
+    ],
+    [
+      2,
+      7,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      54,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      20
+    ]
+  ],
+  "mean_train_time_s": 0.4,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 30.2,
+  "timestamp": "2026-03-22T03:26:02.792227"
+}

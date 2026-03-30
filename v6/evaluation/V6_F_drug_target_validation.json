@@ -1,0 +1,375 @@
+{
+  "n_drug_target_genes": 207,
+  "n_in_cfrna": 196,
+  "tier_counts": {
+    "A": 3,
+    "B": 7,
+    "C": 186,
+    "D": 11
+  },
+  "tier_A_validated": [
+    {
+      "gene": "GRIN3B",
+      "n_drugs": 25,
+      "top_drugs": [
+        "FELBAMATE",
+        "ESKETAMINE",
+        "KETAMINE HYDROCHLORIDE",
+        "ORPHENADRINE",
+        "ACAMPROSATE CALCIUM"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.383832,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "SLC4A1",
+      "n_drugs": 2,
+      "top_drugs": [
+        "METOPROLOL",
+        "ATENOLOL"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.718283,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "KIF1A",
+      "n_drugs": 2,
+      "top_drugs": [
+        "DALFAMPRIDINE",
+        "QUININE"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.001833,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    }
+  ],
+  "tier_B_promising": [
+    {
+      "gene": "PTHLH",
+      "n_drugs": 3,
+      "top_drugs": [
+        "VINBLASTINE",
+        "MAGNESIUM SULFATE ANHYDROUS",
+        "DIMETHYL SULFOXIDE"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.021336,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "MYH6",
+      "n_drugs": 1,
+      "top_drugs": [
+        "MAVACAMTEN"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.011365,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "ADCY1",
+      "n_drugs": 2,
+      "top_drugs": [
+        "ADENOSINE MONOPHOSPHATE",
+        "LITHIUM"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.017891,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "NPHS1",
+      "n_drugs": 1,
+      "top_drugs": [
+        "LOSARTAN POTASSIUM"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.047718,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "CSPG4",
+      "n_drugs": 5,
+      "top_drugs": [
+        "LEUCOVORIN CALCIUM",
+        "ALTEPLASE",
+        "IRINOTECAN HYDROCHLORIDE",
+        "FLUOROURACIL",
+        "BEVACIZUMAB"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.028968,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "GRM1",
+      "n_drugs": 5,
+      "top_drugs": [
+        "GLUTAMIC ACID",
+        "CAFFEINE",
+        "GANCICLOVIR",
+        "PAREGORIC",
+        "INOSITOL"
+      ],
+      "has_fda_approved": true,
+      "de_fdr": 0.03465,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "gene": "ACTA1",
+      "n_drugs": 26,
+      "top_drugs": [
+        "CP-481,715",
+        "[125I]CCL5 (HUMAN)",
+        "BP-CCL3",
+        "CCL4",
+        "CCL13"
+      ],
+      "has_fda_approved": false,
+      "de_fdr": 0.010705,
+      "de_diff": -0.0,
+      "direction": "down_in_flight"
+    }
+  ],
+  "tier_C_detected": 186,
+  "tier_D_untranslatable": 11,
+  "fisher_test": {
+    "contingency": [
+      [
+        3,
+        193
+      ],
+      [
+        463,
+        {
+          "drug": "METOPROLOL",
+          "tier": "tier1_approved",
+          "target_genes_drr": [
+            "SLC4A1"
+          ]
+        }
+      ]
+    ],
+    "odds_ratio": 0.8791,
+    "p_value": 0.6640639264223795,
+    "significant": false
+  },
+  "countermeasure_drugs": [
+    {
+      "drug": "FELBAMATE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "ESKETAMINE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "KETAMINE HYDROCHLORIDE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "ORPHENADRINE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "ACAMPROSATE CALCIUM",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "MEMANTINE HYDROCHLORIDE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "ORPHENADRINE CITRATE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "AMANTADINE HYDROCHLORIDE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "ORPHENADRINE HYDROCHLORIDE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "PERZINFOTEL",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "AV-101",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "LATREPIRDINE",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "INDANTADOL",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "LANICEMINE",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "NERAMEXANE MESYLATE",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "CNS-5161",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "DELUCEMINE",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "AZD8108",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "RAPASTINEL",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "DEXANABINOL",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "RALFINAMIDE",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "APIMOSTINEL",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "ESKETAMINE HYDROCHLORIDE",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "NEBOGLAMINE",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "GW468816",
+      "tier": "tier3_preclinical",
+      "target_genes_drr": [
+        "GRIN3B"
+      ]
+    },
+    {
+      "drug": "METOPROLOL",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "SLC4A1"
+      ]
+    },
+    {
+      "drug": "ATENOLOL",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "SLC4A1"
+      ]
+    },
+    {
+      "drug": "DALFAMPRIDINE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "KIF1A"
+      ]
+    },
+    {
+      "drug": "QUININE",
+      "tier": "tier1_approved",
+      "target_genes_drr": [
+        "KIF1A"
+      ]
+    }
+  ],
+  "fda_countermeasures_n": 13,
+  "timestamp": "2026-03-30T07:30:05.159120"
+}

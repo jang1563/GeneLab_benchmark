@@ -3,16 +3,21 @@ message: "If you use this benchmark in your research, please cite as below."
 type: software
 
 title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
-version: "1.0.0"
-date-released: "2026-03-01"
+version: "4.0.0"
+date-released: "2026-03-22"
 
 abstract: >
-  GeneLab Benchmark is a public benchmark for evaluating AI and machine learning
+  GeneLab Benchmark is a comprehensive benchmark for evaluating AI and machine learning
   models on NASA OSDR (Open Science Data Repository) mouse spaceflight transcriptomics
   data. It provides standardized Leave-One-Mission-Out (LOMO) cross-validation splits,
-  baseline model implementations, and an evaluation framework for multi-tissue
-  spaceflight detection tasks (Category A) and cross-mission transfer tasks (Category B).
-  Tissues include gastrocnemius, thymus, skin, liver, kidney, and eye/retina.
+  multi-method evaluation (8 classifiers x 4 feature types), foundation model comparisons
+  (Geneformer, scGPT, UCE, scFoundation), and an evaluation framework for multi-tissue
+  spaceflight detection across 8 tissues (liver, gastrocnemius, kidney, thymus, skin, eye,
+  lung, colon), cross-mission transfer, cross-tissue transfer, multi-species analysis
+  (mouse, Drosophila), spatial transcriptomics (Visium), and single-cell RNA-seq
+  (RRRM-1, RRRM-2). v4 includes 256 systematic evaluations demonstrating that classical
+  PCA-LR outperforms all tested foundation models and deep learning approaches on
+  small-n spaceflight transcriptomics.
 
 authors:
   - family-names: "Kang"
@@ -33,9 +38,17 @@ keywords:
   - GeneLab
   - LOMO
   - cross-mission transfer
-  - Geneformer
   - foundation model
+  - Geneformer
+  - scGPT
+  - UCE
+  - scFoundation
+  - pathway analysis
+  - single-cell
+  - spatial transcriptomics
+  - multi-species
   - mouse
+  - Drosophila
 
 license: MIT
 
@@ -43,7 +56,11 @@ references:
   - type: dataset
     title: "NASA Open Science Data Repository (OSDR)"
     url: "https://osdr.nasa.gov"
-    notes: "Source data: OSD-101 (RR-1 gastrocnemius), OSD-401 (RR-5 gastrocnemius), OSD-326 (RR-9 gastrocnemius), OSD-289 (MHU-1/MHU-2 thymus), OSD-244 (RR-6 thymus), OSD-421 (RR-9 thymus), OSD-238 (MHU-2 dorsal skin), OSD-239 (MHU-2 femoral skin), OSD-243 (RR-6 skin), OSD-254 (RR-7 skin, C57BL/6J subset), OSD-100 (RR-1 eye), OSD-194 (RR-3 eye), OSD-397 (eye)"
+    notes: >
+      Source data: 24+ OSD accessions across 8 tissues (liver, gastrocnemius, kidney,
+      thymus, skin, eye, lung, colon) from ISS missions RR-1 through RR-9, MHU-1, MHU-2.
+      Additional data: OSD-352 (brain Visium spatial), RRRM-1/RRRM-2 scRNA-seq,
+      Drosophila spaceflight studies for cross-species analysis.
 
 preferred-citation:
   type: article

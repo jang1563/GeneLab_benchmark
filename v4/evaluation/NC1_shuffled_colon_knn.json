@@ -1,0 +1,81 @@
+{
+  "experiment": "NC1_shuffled",
+  "model": "kNN",
+  "model_key": "knn",
+  "tissue": "colon",
+  "feature_type": "gene",
+  "cv_strategy": "5-fold_stratified",
+  "n_folds": 5,
+  "mean_auroc": 0.6186,
+  "std_auroc": 0.1791,
+  "min_auroc": 0.3214,
+  "max_auroc": 0.8667,
+  "mean_perm_pvalue": 0.3433,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 20.2,
+  "timestamp": "2026-03-22T03:21:10.185103",
+  "folds": [
+    {
+      "test_mission": "fold_1",
+      "fold_name": "kfold_1",
+      "auroc": 0.8667,
+      "bootstrap_mean": 0.8641,
+      "ci_lower": 0.5714,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.028,
+      "n_train": 43,
+      "n_test": 11,
+      "train_time_s": 0.01
+    },
+    {
+      "test_mission": "fold_2",
+      "fold_name": "kfold_2",
+      "auroc": 0.5833,
+      "bootstrap_mean": 0.5834,
+      "ci_lower": 0.1,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.3706,
+      "n_train": 43,
+      "n_test": 11,
+      "train_time_s": 0.01
+    },
+    {
+      "test_mission": "fold_3",
+      "fold_name": "kfold_3",
+      "auroc": 0.6071,
+      "bootstrap_mean": 0.6012,
+      "ci_lower": 0.1091,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.3057,
+      "n_train": 43,
+      "n_test": 11,
+      "train_time_s": 0.01
+    },
+    {
+      "test_mission": "fold_4",
+      "fold_name": "kfold_4",
+      "auroc": 0.3214,
+      "bootstrap_mean": 0.3216,
+      "ci_lower": 0.0,
+      "ci_upper": 0.8,
+      "perm_pvalue": 0.8292,
+      "n_train": 43,
+      "n_test": 11,
+      "train_time_s": 0.02
+    },
+    {
+      "test_mission": "fold_5",
+      "fold_name": "kfold_5",
+      "auroc": 0.7143,
+      "bootstrap_mean": 0.7192,
+      "ci_lower": 0.3333,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.1828,
+      "n_train": 44,
+      "n_test": 10,
+      "train_time_s": 0.02
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "experiment": "NC2_random",
+  "model": "SVM-RBF",
+  "model_key": "svm_rbf",
+  "tissue": "skin",
+  "feature_type": "random_gaussian",
+  "n_original_features": 26814,
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.4137,
+  "std_auroc": 0.0693,
+  "min_auroc": 0.3258,
+  "max_auroc": 0.4952,
+  "mean_perm_pvalue": 0.7466,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 14.1,
+  "timestamp": "2026-03-22T03:22:46.054085",
+  "folds": [
+    {
+      "test_mission": "MHU-2",
+      "fold_name": "fold_MHU-2_test",
+      "auroc": 0.3258,
+      "bootstrap_mean": 0.3254,
+      "ci_lower": 0.1304,
+      "ci_upper": 0.5442,
+      "perm_pvalue": 0.9441,
+      "n_train": 83,
+      "n_test": 35,
+      "n_features": 26814,
+      "train_time_s": 0.26
+    },
+    {
+      "test_mission": "RR-6",
+      "fold_name": "fold_RR-6_test",
+      "auroc": 0.4952,
+      "bootstrap_mean": 0.4959,
+      "ci_lower": 0.3219,
+      "ci_upper": 0.6727,
+      "perm_pvalue": 0.5275,
+      "n_train": 65,
+      "n_test": 53,
+      "n_features": 26814,
+      "train_time_s": 0.16
+    },
+    {
+      "test_mission": "RR-7",
+      "fold_name": "fold_RR-7_test",
+      "auroc": 0.42,
+      "bootstrap_mean": 0.4225,
+      "ci_lower": 0.1806,
+      "ci_upper": 0.6651,
+      "perm_pvalue": 0.7682,
+      "n_train": 88,
+      "n_test": 30,
+      "n_features": 26814,
+      "train_time_s": 0.46
+    }
+  ]
+}

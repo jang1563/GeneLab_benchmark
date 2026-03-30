@@ -1,0 +1,480 @@
+{
+  "tissue": "skin",
+  "n_samples": 130,
+  "n_genes_input": 4992,
+  "soft_threshold_beta": 8,
+  "r2_achieved": 0.7958,
+  "r2_threshold_met": false,
+  "n_modules": 5,
+  "n_grey_genes": 9,
+  "modules": {
+    "blue": {
+      "n_genes": 1110,
+      "hub_genes": [
+        "Myom1",
+        "Srl",
+        "Sgcg",
+        "Tmod1",
+        "ENSMUSG00000085779",
+        "Cmya5",
+        "Capn3",
+        "Gm8424",
+        "Rbm24",
+        "Lrrc14b"
+      ],
+      "kME_values": {
+        "Myom1": 0.9878,
+        "Srl": 0.9835,
+        "Sgcg": 0.9826,
+        "Tmod1": 0.9816,
+        "ENSMUSG00000085779": 0.9814,
+        "Cmya5": 0.9797,
+        "Capn3": 0.9791,
+        "Gm8424": 0.9781,
+        "Rbm24": 0.9774,
+        "Lrrc14b": 0.9773
+      },
+      "top20_genes": [
+        "Myom1",
+        "Srl",
+        "Sgcg",
+        "Tmod1",
+        "ENSMUSG00000085779",
+        "Cmya5",
+        "Capn3",
+        "Gm8424",
+        "Rbm24",
+        "Lrrc14b",
+        "Hspb6",
+        "Synm",
+        "Abcb4",
+        "Fsd2",
+        "Jph1",
+        "Asb12",
+        "Pdlim3",
+        "Clcn1",
+        "Cap2",
+        "3425401B19Rik"
+      ],
+      "top20_kME": [
+        0.9878,
+        0.9835,
+        0.9826,
+        0.9816,
+        0.9814,
+        0.9797,
+        0.9791,
+        0.9781,
+        0.9774,
+        0.9773,
+        0.9772,
+        0.9771,
+        0.9768,
+        0.9761,
+        0.9755,
+        0.9749,
+        0.9734,
+        0.973,
+        0.9728,
+        0.9718
+      ],
+      "n_hub_genes": 10,
+      "mean_kME_top10": 0.9809,
+      "significant_trait_associations": [
+        {
+          "trait": "mission_RR-6",
+          "r": 0.357,
+          "p": 3.1e-05
+        },
+        {
+          "trait": "condition",
+          "r": 0.2134,
+          "p": 0.020349
+        }
+      ]
+    },
+    "red": {
+      "n_genes": 297,
+      "hub_genes": [
+        "Cd53",
+        "Lilrb4a",
+        "Clec7a",
+        "Zfp268",
+        "Gpr34",
+        "Samsn1",
+        "Gpr65",
+        "Trim30a",
+        "Clec12a",
+        "Naalad2"
+      ],
+      "kME_values": {
+        "Cd53": 0.9244,
+        "Lilrb4a": 0.9205,
+        "Clec7a": 0.9144,
+        "Zfp268": 0.9075,
+        "Gpr34": 0.9043,
+        "Samsn1": 0.9002,
+        "Gpr65": 0.8961,
+        "Trim30a": 0.893,
+        "Clec12a": 0.8877,
+        "Naalad2": 0.8846
+      },
+      "top20_genes": [
+        "Cd53",
+        "Lilrb4a",
+        "Clec7a",
+        "Zfp268",
+        "Gpr34",
+        "Samsn1",
+        "Gpr65",
+        "Trim30a",
+        "Clec12a",
+        "Naalad2",
+        "Ddx60",
+        "Ccl11",
+        "Phf11b",
+        "Bcl2a1b",
+        "Xcr1",
+        "Ifit1",
+        "AI504432",
+        "Bcl2a1d",
+        "Ifi203",
+        "Hgf"
+      ],
+      "top20_kME": [
+        0.9244,
+        0.9205,
+        0.9144,
+        0.9075,
+        0.9043,
+        0.9002,
+        0.8961,
+        0.893,
+        0.8877,
+        0.8846,
+        0.8803,
+        0.8774,
+        0.8732,
+        0.8722,
+        0.8692,
+        0.8687,
+        0.867,
+        0.8618,
+        0.8533,
+        0.8529
+      ],
+      "n_hub_genes": 10,
+      "mean_kME_top10": 0.9033,
+      "significant_trait_associations": [
+        {
+          "trait": "duration_days",
+          "r": 0.5133,
+          "p": 0.0
+        },
+        {
+          "trait": "mission_RR-7",
+          "r": 0.5133,
+          "p": 0.0
+        }
+      ]
+    },
+    "brown": {
+      "n_genes": 1280,
+      "hub_genes": [
+        "Rpph1",
+        "Nr1h2",
+        "Rpl36",
+        "Klc3",
+        "Sf3b5",
+        "H4c8",
+        "Lzts2",
+        "Znhit2",
+        "H4c3",
+        "H2ac20"
+      ],
+      "kME_values": {
+        "Rpph1": 0.9886,
+        "Nr1h2": 0.9812,
+        "Rpl36": 0.9798,
+        "Klc3": 0.9793,
+        "Sf3b5": 0.9779,
+        "H4c8": 0.9757,
+        "Lzts2": 0.9739,
+        "Znhit2": 0.9734,
+        "H4c3": 0.9731,
+        "H2ac20": 0.9727
+      },
+      "top20_genes": [
+        "Rpph1",
+        "Nr1h2",
+        "Rpl36",
+        "Klc3",
+        "Sf3b5",
+        "H4c8",
+        "Lzts2",
+        "Znhit2",
+        "H4c3",
+        "H2ac20",
+        "H2ac19",
+        "Ppp1r16a",
+        "Dohh",
+        "H1f2",
+        "H4c14",
+        "H3c13",
+        "Rex1bd",
+        "H4c4",
+        "Atp13a2",
+        "Pex6"
+      ],
+      "top20_kME": [
+        0.9886,
+        0.9812,
+        0.9798,
+        0.9793,
+        0.9779,
+        0.9757,
+        0.9739,
+        0.9734,
+        0.9731,
+        0.9727,
+        0.9724,
+        0.9722,
+        0.9715,
+        0.9707,
+        0.9689,
+        0.9667,
+        0.9667,
+        0.9665,
+        0.9657,
+        0.9649
+      ],
+      "n_hub_genes": 10,
+      "mean_kME_top10": 0.9776,
+      "significant_trait_associations": [
+        {
+          "trait": "mission_RR-6",
+          "r": -0.4806,
+          "p": 0.0
+        },
+        {
+          "trait": "duration_days",
+          "r": -0.3225,
+          "p": 0.000182
+        },
+        {
+          "trait": "mission_RR-7",
+          "r": -0.3225,
+          "p": 0.000182
+        }
+      ]
+    },
+    "yellow": {
+      "n_genes": 861,
+      "hub_genes": [
+        "Casp1",
+        "Postn",
+        "ENSMUSG00000090222",
+        "Akr1c13",
+        "ATP8",
+        "ENSMUSG00000095649",
+        "Csprs",
+        "Atp6-ps",
+        "Akr1c19",
+        "ENSMUSG00000102070"
+      ],
+      "kME_values": {
+        "Casp1": 0.9305,
+        "Postn": 0.9171,
+        "ENSMUSG00000090222": 0.9165,
+        "Akr1c13": 0.9145,
+        "ATP8": 0.9087,
+        "ENSMUSG00000095649": 0.9064,
+        "Csprs": 0.9059,
+        "Atp6-ps": 0.896,
+        "Akr1c19": 0.8948,
+        "ENSMUSG00000102070": 0.8937
+      },
+      "top20_genes": [
+        "Casp1",
+        "Postn",
+        "ENSMUSG00000090222",
+        "Akr1c13",
+        "ATP8",
+        "ENSMUSG00000095649",
+        "Csprs",
+        "Atp6-ps",
+        "Akr1c19",
+        "ENSMUSG00000102070",
+        "Aknad1",
+        "ND1",
+        "Sp140l2",
+        "COX1",
+        "Skint2",
+        "ENSMUSG00000104398",
+        "ND6",
+        "ENSMUSG00000118383",
+        "Nr1d2",
+        "Hpgds"
+      ],
+      "top20_kME": [
+        0.9305,
+        0.9171,
+        0.9165,
+        0.9145,
+        0.9087,
+        0.9064,
+        0.9059,
+        0.896,
+        0.8948,
+        0.8937,
+        0.8924,
+        0.8916,
+        0.891,
+        0.8896,
+        0.8895,
+        0.8812,
+        0.8771,
+        0.8763,
+        0.8724,
+        0.8702
+      ],
+      "n_hub_genes": 10,
+      "mean_kME_top10": 0.9084,
+      "significant_trait_associations": [
+        {
+          "trait": "mission_RR-6",
+          "r": 0.7561,
+          "p": 0.0
+        }
+      ]
+    },
+    "turquoise": {
+      "n_genes": 1435,
+      "hub_genes": [
+        "Psors1c2",
+        "Gja3",
+        "Crym",
+        "Tchh",
+        "S100a3",
+        "Krtap7-1",
+        "Ly6g6g",
+        "Gprc5d",
+        "Krt33a",
+        "Krtap8-1"
+      ],
+      "kME_values": {
+        "Psors1c2": 0.9876,
+        "Gja3": 0.9827,
+        "Crym": 0.9802,
+        "Tchh": 0.9801,
+        "S100a3": 0.9791,
+        "Krtap7-1": 0.9776,
+        "Ly6g6g": 0.9775,
+        "Gprc5d": 0.9775,
+        "Krt33a": 0.9772,
+        "Krtap8-1": 0.9763
+      },
+      "top20_genes": [
+        "Psors1c2",
+        "Gja3",
+        "Crym",
+        "Tchh",
+        "S100a3",
+        "Krtap7-1",
+        "Ly6g6g",
+        "Gprc5d",
+        "Krt33a",
+        "Krtap8-1",
+        "Krtap26-1",
+        "Krt34",
+        "ENSMUSG00000109592",
+        "Krtap29-1",
+        "Krtap22-2",
+        "Krtap13-1",
+        "ENSMUSG00000113925",
+        "ENSMUSG00000104423",
+        "Krtap11-1",
+        "Dsg4"
+      ],
+      "top20_kME": [
+        0.9876,
+        0.9827,
+        0.9802,
+        0.9801,
+        0.9791,
+        0.9776,
+        0.9775,
+        0.9775,
+        0.9772,
+        0.9763,
+        0.9761,
+        0.9757,
+        0.9743,
+        0.9739,
+        0.9732,
+        0.9732,
+        0.9731,
+        0.9731,
+        0.9727,
+        0.9726
+      ],
+      "n_hub_genes": 10,
+      "mean_kME_top10": 0.9796,
+      "significant_trait_associations": [
+        {
+          "trait": "condition",
+          "r": -0.3251,
+          "p": 0.000329
+        },
+        {
+          "trait": "duration_days",
+          "r": -0.2462,
+          "p": 0.004747
+        },
+        {
+          "trait": "mission_RR-7",
+          "r": -0.2462,
+          "p": 0.004747
+        }
+      ]
+    }
+  },
+  "condition_modules": [
+    {
+      "module": "turquoise",
+      "r": -0.3251,
+      "p": 0.000329,
+      "direction": "GC_higher"
+    },
+    {
+      "module": "blue",
+      "r": 0.2134,
+      "p": 0.020349,
+      "direction": "FLT_higher"
+    }
+  ],
+  "eigengene_stats": {
+    "blue": {
+      "mean": 0.0,
+      "std": 33.8079
+    },
+    "brown": {
+      "mean": 0.0,
+      "std": 34.9812
+    },
+    "red": {
+      "mean": 0.0,
+      "std": 14.0295
+    },
+    "turquoise": {
+      "mean": -0.0,
+      "std": 54.8976
+    },
+    "yellow": {
+      "mean": 0.0,
+      "std": 22.0551
+    }
+  },
+  "network_type": "signed hybrid",
+  "min_module_size": 30
+}
