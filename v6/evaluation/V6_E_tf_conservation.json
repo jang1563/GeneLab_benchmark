@@ -1,0 +1,411 @@
+{
+  "n_human_tfs": 728,
+  "n_sig_human_tfs": 60,
+  "n_tissues_analyzed": 8,
+  "per_tissue_correlations": {
+    "liver": {
+      "n_shared_tfs": 653,
+      "spearman_rho": -0.0201,
+      "p_value": 0.6078050597829346,
+      "ci_lower": -0.0972,
+      "ci_upper": 0.061,
+      "significant": false,
+      "n_sig_both": 9,
+      "n_concordant_sig": 3,
+      "concordance_rate": 0.3333,
+      "top_conserved_tfs": [
+        {
+          "mouse_tf": "Hes6",
+          "human_tf": "HES6",
+          "mouse_score": -0.1081,
+          "human_score": -2.2939
+        },
+        {
+          "mouse_tf": "Dlx5",
+          "human_tf": "DLX5",
+          "mouse_score": -0.0779,
+          "human_score": -2.2406
+        },
+        {
+          "mouse_tf": "Six4",
+          "human_tf": "SIX4",
+          "mouse_score": -0.2022,
+          "human_score": -2.11
+        }
+      ]
+    },
+    "gastrocnemius": {
+      "n_shared_tfs": 657,
+      "spearman_rho": -0.0557,
+      "p_value": 0.15394140741323747,
+      "ci_lower": -0.1331,
+      "ci_upper": 0.023,
+      "significant": false,
+      "n_sig_both": 0,
+      "n_concordant_sig": 0,
+      "concordance_rate": null,
+      "top_conserved_tfs": []
+    },
+    "kidney": {
+      "n_shared_tfs": 673,
+      "spearman_rho": 0.0621,
+      "p_value": 0.10740516789616564,
+      "ci_lower": -0.0167,
+      "ci_upper": 0.1389,
+      "significant": false,
+      "n_sig_both": 15,
+      "n_concordant_sig": 6,
+      "concordance_rate": 0.4,
+      "top_conserved_tfs": [
+        {
+          "mouse_tf": "Tal1",
+          "human_tf": "TAL1",
+          "mouse_score": 0.1822,
+          "human_score": 2.7626
+        },
+        {
+          "mouse_tf": "Hoxa11",
+          "human_tf": "HOXA11",
+          "mouse_score": 0.0722,
+          "human_score": 2.278
+        },
+        {
+          "mouse_tf": "Six4",
+          "human_tf": "SIX4",
+          "mouse_score": -0.1857,
+          "human_score": -2.11
+        },
+        {
+          "mouse_tf": "E2f4",
+          "human_tf": "E2F4",
+          "mouse_score": 0.224,
+          "human_score": 2.0963
+        },
+        {
+          "mouse_tf": "Ncoa3",
+          "human_tf": "NCOA3",
+          "mouse_score": 0.1739,
+          "human_score": 2.0486
+        },
+        {
+          "mouse_tf": "Pml",
+          "human_tf": "PML",
+          "mouse_score": 0.1054,
+          "human_score": 2.0195
+        }
+      ]
+    },
+    "thymus": {
+      "n_shared_tfs": 683,
+      "spearman_rho": 0.1202,
+      "p_value": 0.0016557897908022017,
+      "ci_lower": 0.0433,
+      "ci_upper": 0.1907,
+      "significant": true,
+      "n_sig_both": 13,
+      "n_concordant_sig": 4,
+      "concordance_rate": 0.3077,
+      "top_conserved_tfs": [
+        {
+          "mouse_tf": "Med1",
+          "human_tf": "MED1",
+          "mouse_score": -0.2495,
+          "human_score": -3.7538
+        },
+        {
+          "mouse_tf": "Hcfc1",
+          "human_tf": "HCFC1",
+          "mouse_score": -0.6289,
+          "human_score": -2.4116
+        },
+        {
+          "mouse_tf": "Egr1",
+          "human_tf": "EGR1",
+          "mouse_score": 0.7069,
+          "human_score": 2.0516
+        },
+        {
+          "mouse_tf": "Ncoa3",
+          "human_tf": "NCOA3",
+          "mouse_score": 0.3296,
+          "human_score": 2.0486
+        }
+      ]
+    },
+    "eye": {
+      "n_shared_tfs": 676,
+      "spearman_rho": 0.1805,
+      "p_value": 2.3179724578910406e-06,
+      "ci_lower": 0.1057,
+      "ci_upper": 0.2502,
+      "significant": true,
+      "n_sig_both": 0,
+      "n_concordant_sig": 0,
+      "concordance_rate": null,
+      "top_conserved_tfs": []
+    },
+    "skin": {
+      "n_shared_tfs": 676,
+      "spearman_rho": 0.0595,
+      "p_value": 0.1225119474049424,
+      "ci_lower": -0.0204,
+      "ci_upper": 0.132,
+      "significant": false,
+      "n_sig_both": 20,
+      "n_concordant_sig": 13,
+      "concordance_rate": 0.65,
+      "top_conserved_tfs": [
+        {
+          "mouse_tf": "Sp7",
+          "human_tf": "SP7",
+          "mouse_score": -0.3627,
+          "human_score": -4.1443
+        },
+        {
+          "mouse_tf": "Smad9",
+          "human_tf": "SMAD9",
+          "mouse_score": -0.291,
+          "human_score": -4.02
+        },
+        {
+          "mouse_tf": "Med1",
+          "human_tf": "MED1",
+          "mouse_score": -0.1018,
+          "human_score": -3.7538
+        },
+        {
+          "mouse_tf": "Pax9",
+          "human_tf": "PAX9",
+          "mouse_score": -0.2694,
+          "human_score": -2.6528
+        },
+        {
+          "mouse_tf": "Etv3",
+          "human_tf": "ETV3",
+          "mouse_score": 0.183,
+          "human_score": 2.5784
+        },
+        {
+          "mouse_tf": "Hcfc1",
+          "human_tf": "HCFC1",
+          "mouse_score": -0.2627,
+          "human_score": -2.4116
+        },
+        {
+          "mouse_tf": "Dlx5",
+          "human_tf": "DLX5",
+          "mouse_score": -0.1919,
+          "human_score": -2.2406
+        },
+        {
+          "mouse_tf": "Nr0b1",
+          "human_tf": "NR0B1",
+          "mouse_score": 0.2593,
+          "human_score": 2.2394
+        },
+        {
+          "mouse_tf": "Lef1",
+          "human_tf": "LEF1",
+          "mouse_score": -0.2716,
+          "human_score": -2.1843
+        },
+        {
+          "mouse_tf": "Smad5",
+          "human_tf": "SMAD5",
+          "mouse_score": -0.2878,
+          "human_score": -2.1458
+        }
+      ]
+    },
+    "lung": {
+      "n_shared_tfs": 685,
+      "spearman_rho": -0.086,
+      "p_value": 0.024454467382648833,
+      "ci_lower": -0.1615,
+      "ci_upper": -0.0128,
+      "significant": true,
+      "n_sig_both": 0,
+      "n_concordant_sig": 0,
+      "concordance_rate": null,
+      "top_conserved_tfs": []
+    },
+    "colon": {
+      "n_shared_tfs": 684,
+      "spearman_rho": -0.022,
+      "p_value": 0.565958130689588,
+      "ci_lower": -0.0953,
+      "ci_upper": 0.0558,
+      "significant": false,
+      "n_sig_both": 0,
+      "n_concordant_sig": 0,
+      "concordance_rate": null,
+      "top_conserved_tfs": []
+    }
+  },
+  "mean_rho": 0.0298,
+  "conserved_tfs": {
+    "DLX5": {
+      "n_tissues": 2,
+      "tissues": [
+        "liver",
+        "skin"
+      ],
+      "human_activity": -2.2406
+    },
+    "SIX4": {
+      "n_tissues": 2,
+      "tissues": [
+        "liver",
+        "kidney"
+      ],
+      "human_activity": -2.11
+    },
+    "NCOA3": {
+      "n_tissues": 2,
+      "tissues": [
+        "kidney",
+        "thymus"
+      ],
+      "human_activity": 2.0486
+    },
+    "MED1": {
+      "n_tissues": 2,
+      "tissues": [
+        "thymus",
+        "skin"
+      ],
+      "human_activity": -3.7538
+    },
+    "HCFC1": {
+      "n_tissues": 2,
+      "tissues": [
+        "thymus",
+        "skin"
+      ],
+      "human_activity": -2.4116
+    }
+  },
+  "top_human_tfs": [
+    {
+      "tf": "SMARCC1",
+      "activity": -5.3293,
+      "p_value": 0.0,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "BCLAF1",
+      "activity": -4.4623,
+      "p_value": 8e-06,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "SP7",
+      "activity": -4.1443,
+      "p_value": 3.4e-05,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "SMAD9",
+      "activity": -4.02,
+      "p_value": 5.8e-05,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "MED1",
+      "activity": -3.7538,
+      "p_value": 0.000174,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "SOX7",
+      "activity": -3.4554,
+      "p_value": 0.00055,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "MYF6",
+      "activity": -3.4074,
+      "p_value": 0.000656,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "NSD2",
+      "activity": -3.3118,
+      "p_value": 0.000927,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "MYRF",
+      "activity": -3.2062,
+      "p_value": 0.001345,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "PA2G4",
+      "activity": 3.1917,
+      "p_value": 0.001415,
+      "direction": "up_in_flight"
+    },
+    {
+      "tf": "ZKSCAN7",
+      "activity": -3.1767,
+      "p_value": 0.00149,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "NPAS2",
+      "activity": -3.1487,
+      "p_value": 0.00164,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "PRDM16",
+      "activity": -3.0618,
+      "p_value": 0.0022,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "PEG3",
+      "activity": -2.9855,
+      "p_value": 0.002831,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "SP4",
+      "activity": -2.8759,
+      "p_value": 0.004029,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "ZBTB18",
+      "activity": 2.8278,
+      "p_value": 0.004688,
+      "direction": "up_in_flight"
+    },
+    {
+      "tf": "TAL1",
+      "activity": 2.7626,
+      "p_value": 0.005735,
+      "direction": "up_in_flight"
+    },
+    {
+      "tf": "NANOG",
+      "activity": 2.7441,
+      "p_value": 0.006068,
+      "direction": "up_in_flight"
+    },
+    {
+      "tf": "TFDP2",
+      "activity": -2.6989,
+      "p_value": 0.006957,
+      "direction": "down_in_flight"
+    },
+    {
+      "tf": "PAX9",
+      "activity": -2.6528,
+      "p_value": 0.007984,
+      "direction": "down_in_flight"
+    }
+  ],
+  "timestamp": "2026-03-30T08:45:49.606161"
+}

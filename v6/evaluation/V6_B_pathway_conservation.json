@@ -1,0 +1,371 @@
+{
+  "human_method": "gseapy_prerank",
+  "n_human_pathways": 50,
+  "human_nes": {
+    "HALLMARK_ANDROGEN_RESPONSE": 1.6457,
+    "HALLMARK_ANGIOGENESIS": 1.624,
+    "HALLMARK_COAGULATION": 1.5932,
+    "HALLMARK_INTERFERON_ALPHA_RESPONSE": 1.574,
+    "HALLMARK_ALLOGRAFT_REJECTION": 1.5728,
+    "HALLMARK_APICAL_JUNCTION": 1.5686,
+    "HALLMARK_IL6_JAK_STAT3_SIGNALING": 1.5398,
+    "HALLMARK_KRAS_SIGNALING_UP": 1.4885,
+    "HALLMARK_INTERFERON_GAMMA_RESPONSE": 1.4676,
+    "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY": 1.4632,
+    "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION": 1.4179,
+    "HALLMARK_COMPLEMENT": 1.3987,
+    "HALLMARK_MITOTIC_SPINDLE": 1.3375,
+    "HALLMARK_CHOLESTEROL_HOMEOSTASIS": 1.3339,
+    "HALLMARK_PROTEIN_SECRETION": 1.3197,
+    "HALLMARK_MYOGENESIS": 1.3056,
+    "HALLMARK_UV_RESPONSE_DN": 1.2717,
+    "HALLMARK_TNFA_SIGNALING_VIA_NFKB": 1.2585,
+    "HALLMARK_TGF_BETA_SIGNALING": 1.2467,
+    "HALLMARK_APOPTOSIS": 1.2419,
+    "HALLMARK_MYC_TARGETS_V2": -1.2294,
+    "HALLMARK_INFLAMMATORY_RESPONSE": 1.2118,
+    "HALLMARK_IL2_STAT5_SIGNALING": 1.1994,
+    "HALLMARK_FATTY_ACID_METABOLISM": 1.1722,
+    "HALLMARK_GLYCOLYSIS": 1.1553,
+    "HALLMARK_PI3K_AKT_MTOR_SIGNALING": 1.1534,
+    "HALLMARK_ADIPOGENESIS": 1.1457,
+    "HALLMARK_ESTROGEN_RESPONSE_LATE": 1.1435,
+    "HALLMARK_E2F_TARGETS": 1.1194,
+    "HALLMARK_NOTCH_SIGNALING": 1.1076,
+    "HALLMARK_MTORC1_SIGNALING": 1.077,
+    "HALLMARK_WNT_BETA_CATENIN_SIGNALING": -1.0659,
+    "HALLMARK_UV_RESPONSE_UP": 1.0494,
+    "HALLMARK_XENOBIOTIC_METABOLISM": 1.0234,
+    "HALLMARK_DNA_REPAIR": 1.0187,
+    "HALLMARK_APICAL_SURFACE": 0.9792,
+    "HALLMARK_HEDGEHOG_SIGNALING": 0.9696,
+    "HALLMARK_ESTROGEN_RESPONSE_EARLY": 0.9111,
+    "HALLMARK_OXIDATIVE_PHOSPHORYLATION": 0.9004,
+    "HALLMARK_SPERMATOGENESIS": 0.8839,
+    "HALLMARK_PEROXISOME": 0.883,
+    "HALLMARK_UNFOLDED_PROTEIN_RESPONSE": 0.8711,
+    "HALLMARK_P53_PATHWAY": 0.8595,
+    "HALLMARK_BILE_ACID_METABOLISM": -0.8342,
+    "HALLMARK_G2M_CHECKPOINT": 0.8278,
+    "HALLMARK_HEME_METABOLISM": 0.8154,
+    "HALLMARK_KRAS_SIGNALING_DN": 0.7865,
+    "HALLMARK_MYC_TARGETS_V1": 0.748,
+    "HALLMARK_PANCREAS_BETA_CELLS": -0.7101,
+    "HALLMARK_HYPOXIA": 0.6289
+  },
+  "n_tissues_analyzed": 5,
+  "per_tissue_correlations": {
+    "liver": {
+      "n_matched_pathways": 50,
+      "spearman_rho": -0.3026,
+      "p_value": 0.03270289661586049,
+      "ci_lower": -0.5385,
+      "ci_upper": -0.0322,
+      "significant": true,
+      "top_concordant": [
+        {
+          "pathway": "CHOLESTEROL_HOMEOSTASIS",
+          "mouse_nes": 0.393,
+          "human_nes": 1.334
+        },
+        {
+          "pathway": "MITOTIC_SPINDLE",
+          "mouse_nes": 0.323,
+          "human_nes": 1.338
+        },
+        {
+          "pathway": "PI3K_AKT_MTOR_SIGNALING",
+          "mouse_nes": 0.36,
+          "human_nes": 1.153
+        },
+        {
+          "pathway": "DNA_REPAIR",
+          "mouse_nes": 0.365,
+          "human_nes": 1.019
+        },
+        {
+          "pathway": "UNFOLDED_PROTEIN_RESPONSE",
+          "mouse_nes": 0.296,
+          "human_nes": 0.871
+        }
+      ],
+      "top_discordant": [
+        {
+          "pathway": "ALLOGRAFT_REJECTION",
+          "mouse_nes": -0.907,
+          "human_nes": 1.573
+        },
+        {
+          "pathway": "ANGIOGENESIS",
+          "mouse_nes": -0.654,
+          "human_nes": 1.624
+        },
+        {
+          "pathway": "INFLAMMATORY_RESPONSE",
+          "mouse_nes": -0.856,
+          "human_nes": 1.212
+        },
+        {
+          "pathway": "IL2_STAT5_SIGNALING",
+          "mouse_nes": -0.765,
+          "human_nes": 1.199
+        },
+        {
+          "pathway": "KRAS_SIGNALING_UP",
+          "mouse_nes": -0.606,
+          "human_nes": 1.488
+        }
+      ]
+    },
+    "kidney": {
+      "n_matched_pathways": 50,
+      "spearman_rho": 0.4517,
+      "p_value": 0.0009916750650358877,
+      "ci_lower": 0.187,
+      "ci_upper": 0.6521,
+      "significant": true,
+      "top_concordant": [
+        {
+          "pathway": "MITOTIC_SPINDLE",
+          "mouse_nes": 0.913,
+          "human_nes": 1.338
+        },
+        {
+          "pathway": "ANGIOGENESIS",
+          "mouse_nes": 0.692,
+          "human_nes": 1.624
+        },
+        {
+          "pathway": "EPITHELIAL_MESENCHYMAL_TRANSITION",
+          "mouse_nes": 0.66,
+          "human_nes": 1.418
+        },
+        {
+          "pathway": "IL2_STAT5_SIGNALING",
+          "mouse_nes": 0.718,
+          "human_nes": 1.199
+        },
+        {
+          "pathway": "CHOLESTEROL_HOMEOSTASIS",
+          "mouse_nes": 0.628,
+          "human_nes": 1.334
+        }
+      ],
+      "top_discordant": [
+        {
+          "pathway": "REACTIVE_OXYGEN_SPECIES_PATHWAY",
+          "mouse_nes": -0.632,
+          "human_nes": 1.463
+        },
+        {
+          "pathway": "DNA_REPAIR",
+          "mouse_nes": -0.707,
+          "human_nes": 1.019
+        },
+        {
+          "pathway": "OXIDATIVE_PHOSPHORYLATION",
+          "mouse_nes": -0.679,
+          "human_nes": 0.9
+        },
+        {
+          "pathway": "FATTY_ACID_METABOLISM",
+          "mouse_nes": -0.506,
+          "human_nes": 1.172
+        },
+        {
+          "pathway": "PANCREAS_BETA_CELLS",
+          "mouse_nes": 0.617,
+          "human_nes": -0.71
+        }
+      ]
+    },
+    "thymus": {
+      "n_matched_pathways": 50,
+      "spearman_rho": 0.4984,
+      "p_value": 0.00023014369694997533,
+      "ci_lower": 0.2672,
+      "ci_upper": 0.6812,
+      "significant": true,
+      "top_concordant": [
+        {
+          "pathway": "ANGIOGENESIS",
+          "mouse_nes": 1.153,
+          "human_nes": 1.624
+        },
+        {
+          "pathway": "COAGULATION",
+          "mouse_nes": 1.168,
+          "human_nes": 1.593
+        },
+        {
+          "pathway": "APICAL_JUNCTION",
+          "mouse_nes": 1.101,
+          "human_nes": 1.569
+        },
+        {
+          "pathway": "COMPLEMENT",
+          "mouse_nes": 1.177,
+          "human_nes": 1.399
+        },
+        {
+          "pathway": "KRAS_SIGNALING_UP",
+          "mouse_nes": 1.054,
+          "human_nes": 1.488
+        }
+      ],
+      "top_discordant": [
+        {
+          "pathway": "E2F_TARGETS",
+          "mouse_nes": -1.103,
+          "human_nes": 1.119
+        },
+        {
+          "pathway": "SPERMATOGENESIS",
+          "mouse_nes": -1.202,
+          "human_nes": 0.884
+        },
+        {
+          "pathway": "DNA_REPAIR",
+          "mouse_nes": -0.879,
+          "human_nes": 1.019
+        },
+        {
+          "pathway": "G2M_CHECKPOINT",
+          "mouse_nes": -1.039,
+          "human_nes": 0.828
+        },
+        {
+          "pathway": "MYC_TARGETS_V1",
+          "mouse_nes": -1.028,
+          "human_nes": 0.748
+        }
+      ]
+    },
+    "eye": {
+      "n_matched_pathways": 50,
+      "spearman_rho": 0.5001,
+      "p_value": 0.00021713088742759352,
+      "ci_lower": 0.2456,
+      "ci_upper": 0.6965,
+      "significant": true,
+      "top_concordant": [
+        {
+          "pathway": "MYC_TARGETS_V2",
+          "mouse_nes": -0.86,
+          "human_nes": -1.229
+        },
+        {
+          "pathway": "MITOTIC_SPINDLE",
+          "mouse_nes": 0.771,
+          "human_nes": 1.338
+        },
+        {
+          "pathway": "INTERFERON_ALPHA_RESPONSE",
+          "mouse_nes": 0.569,
+          "human_nes": 1.574
+        },
+        {
+          "pathway": "INTERFERON_GAMMA_RESPONSE",
+          "mouse_nes": 0.5,
+          "human_nes": 1.468
+        },
+        {
+          "pathway": "ALLOGRAFT_REJECTION",
+          "mouse_nes": 0.387,
+          "human_nes": 1.573
+        }
+      ],
+      "top_discordant": [
+        {
+          "pathway": "REACTIVE_OXYGEN_SPECIES_PATHWAY",
+          "mouse_nes": -0.672,
+          "human_nes": 1.463
+        },
+        {
+          "pathway": "UV_RESPONSE_UP",
+          "mouse_nes": -0.904,
+          "human_nes": 1.049
+        },
+        {
+          "pathway": "UNFOLDED_PROTEIN_RESPONSE",
+          "mouse_nes": -1.028,
+          "human_nes": 0.871
+        },
+        {
+          "pathway": "ADIPOGENESIS",
+          "mouse_nes": -0.713,
+          "human_nes": 1.146
+        },
+        {
+          "pathway": "OXIDATIVE_PHOSPHORYLATION",
+          "mouse_nes": -0.845,
+          "human_nes": 0.9
+        }
+      ]
+    },
+    "skin": {
+      "n_matched_pathways": 50,
+      "spearman_rho": 0.2775,
+      "p_value": 0.051042665255096493,
+      "ci_lower": 0.024,
+      "ci_upper": 0.4997,
+      "significant": false,
+      "top_concordant": [
+        {
+          "pathway": "MYC_TARGETS_V2",
+          "mouse_nes": -0.741,
+          "human_nes": -1.229
+        },
+        {
+          "pathway": "FATTY_ACID_METABOLISM",
+          "mouse_nes": 0.722,
+          "human_nes": 1.172
+        },
+        {
+          "pathway": "INTERFERON_ALPHA_RESPONSE",
+          "mouse_nes": 0.525,
+          "human_nes": 1.574
+        },
+        {
+          "pathway": "IL2_STAT5_SIGNALING",
+          "mouse_nes": 0.685,
+          "human_nes": 1.199
+        },
+        {
+          "pathway": "UV_RESPONSE_DN",
+          "mouse_nes": 0.643,
+          "human_nes": 1.272
+        }
+      ],
+      "top_discordant": [
+        {
+          "pathway": "E2F_TARGETS",
+          "mouse_nes": -0.891,
+          "human_nes": 1.119
+        },
+        {
+          "pathway": "MTORC1_SIGNALING",
+          "mouse_nes": -0.883,
+          "human_nes": 1.077
+        },
+        {
+          "pathway": "MITOTIC_SPINDLE",
+          "mouse_nes": -0.69,
+          "human_nes": 1.338
+        },
+        {
+          "pathway": "GLYCOLYSIS",
+          "mouse_nes": -0.763,
+          "human_nes": 1.155
+        },
+        {
+          "pathway": "DNA_REPAIR",
+          "mouse_nes": -0.804,
+          "human_nes": 1.019
+        }
+      ]
+    }
+  },
+  "mean_rho": 0.285,
+  "timestamp": "2026-03-30T08:14:54.327467"
+}

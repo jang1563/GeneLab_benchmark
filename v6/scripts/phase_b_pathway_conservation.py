@@ -21,35 +21,34 @@ from v6_utils import (
 
 
 def _download_gene_sets():
-    """Download Hallmark gene sets using gseapy's library download (cached)."""
-    import gseapy as gp
-    # Try multiple approaches to get gene sets
-    try:
-        # Method 1: gseapy get_library (downloads from Enrichr and caches)
-        lib = gp.get_library("MSigDB_Hallmark_2020", organism="Human")
-        if lib:
-            return lib, "enrichr_download"
-    except Exception as e:
-        print(f"  get_library failed: {e}")
+    """Download Hallmark gene sets from MSigDB (primary) or Enrichr (fallback)."""
+    import urllib.request
 
+    # Method 1: MSigDB direct download (most reliable)
     try:
-        # Method 2: gseapy get_library_name to verify, then manual download
-        import json
-        import urllib.request
-        url = "https://maayanlab.cloud/Enrichr/geneSetLibrary?mode=text&libraryName=MSigDB_Hallmark_2020"
+        url = "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2024.1.Hs/h.all.v2024.1.Hs.symbols.gmt"
         response = urllib.request.urlopen(url, timeout=30)
         text = response.read().decode()
         gene_sets = {}
         for line in text.strip().split("\n"):
             parts = line.strip().split("\t")
             if len(parts) >= 3:
-                name = parts[0]
+                name = parts[0]  # HALLMARK_ADIPOGENESIS etc.
                 genes = [g for g in parts[2:] if g.strip()]
                 gene_sets[name] = genes
         if gene_sets:
-            return gene_sets, "manual_download"
+            return gene_sets, "msigdb_direct"
     except Exception as e:
-        print(f"  Manual download failed: {e}")
+        print(f"  MSigDB direct download failed: {e}")
+
+    # Method 2: Enrichr (may be down)
+    try:
+        import gseapy as gp
+        lib = gp.get_library("MSigDB_Hallmark_2020", organism="Human")
+        if lib:
+            return lib, "enrichr_download"
+    except Exception as e:
+        print(f"  Enrichr download failed: {e}")
 
     return None, None
 
