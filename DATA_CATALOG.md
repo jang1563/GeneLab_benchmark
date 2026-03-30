@@ -1,6 +1,6 @@
 # DATA_CATALOG.md — GeneLab_benchmark
-**자동 생성**: `catalog_datasets.py` — 2026-02-28 07:18 UTC (수동 업데이트: 2026-03-22 — v4 lung/colon 추가)
-**PLAN.md 버전**: v1.6 | **Benchmark 버전**: v4.0
+**Auto-generated**: `catalog_datasets.py` — 2026-02-28 07:18 UTC (Manual update: 2026-03-22 — v4 lung/colon added)
+**Benchmark version**: v5.0
 
 > ⚠️ Status legend:
 > ✅ Verified (bulk RNA-seq) | ❌ NOT FOUND | ⚠️ Wrong assay type
@@ -37,10 +37,10 @@
 | OSD-421 | thymus | RR-9 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC | 29 | primary |
 | OSD-238 | skin | MHU-2 (dorsal) | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | AG, GC, VC | 149 | A5 primary — merged with OSD-239 as mission="MHU-2" |
 | OSD-239 | skin | MHU-2 (femoral) | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | AG, GC | 142 | A5 primary — merged with OSD-238 as mission="MHU-2" |
-| OSD-240 | skin | RR-5 (dorsal) | 2b | ⚠️ TRACK 2b (BAL-TAL strain) | bulk_rnaseq | GC | 20 | BAL-TAL균주 — Track 2a 제외, Track 2b 후보 |
-| OSD-241 | skin | RR-5 (femoral) | 2b | ⚠️ TRACK 2b (BAL-TAL strain) | bulk_rnaseq | GC | 19 | BAL-TAL균주 — Track 2a 제외, Track 2b 후보 |
+| OSD-240 | skin | RR-5 (dorsal) | 2b | ⚠️ TRACK 2b (BAL-TAL strain) | bulk_rnaseq | GC | 20 | BAL-TAL strain — excluded from Track 2a; Track 2b candidate |
+| OSD-241 | skin | RR-5 (femoral) | 2b | ⚠️ TRACK 2b (BAL-TAL strain) | bulk_rnaseq | GC | 19 | BAL-TAL strain — excluded from Track 2a; Track 2b candidate |
 | OSD-243 | skin | RR-6 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | BC, GC | 322 | A5 primary |
-| OSD-254 | skin | RR-7 | 2a | ✅ Verified (bulk RNA-seq, C57BL/6J subset) | bulk_rnaseq | GC, VC, BSL, C3H | 80 | A5 primary — C57BL/6J 30개 추출 (BSL+C3H 50개 제외). OSD-254 = mixed strain study |
+| OSD-254 | skin | RR-7 | 2a | ✅ Verified (bulk RNA-seq, C57BL/6J subset) | bulk_rnaseq | GC, VC, BSL, C3H | 80 | A5 primary — C57BL/6J subset extracted (n=30; BSL+C3H n=50 excluded). Mixed-strain study |
 | OSD-689 | skin | RR-8 | exc | ⛔ EXCLUDED (design) | single_cell | unknown | 50 | EXCLUDE — scRNA-seq (GLDS-689), not bulk RNA-seq |
 | OSD-793 | skin | RRRM-1 | exc | ⛔ EXCLUDED (design) | unknown | unknown | 0 | EXCLUDE — targetRNAseq (NanoString panel), not standard bulk mRNA |
 | OSD-100 | eye | RR-1 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC | 14 | primary |
@@ -52,8 +52,8 @@
 | OSD-335 | liver | HU+HZE | exc | ⛔ EXCLUDED (design) | bulk_rnaseq | unknown | 80 | EXCLUDE: miRNA-Seq (not mRNA bulk RNA-seq) |
 | OSD-270 | heart | RR-3 | exc | ⛔ EXCLUDED (design) | spatial | GC | 15 | EXCLUDE from A: Visium spatial transcriptomics |
 | OSD-596 | heart | NG-11 | exc | ⛔ EXCLUDED (design) | unknown | unknown | 0 | heart — verify assay type, ≤2 missions |
-| **OSD-248** | **lung** | **RR-6** | **2a** | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC, BC | 58 | **v4 추가** — 20 FLT + 19 GC + 19 BC. BC는 v4에서 ground로 포함 |
-| **OSD-247** | **colon** | **RR-6** | **2a** | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC, BC | 54 | **v4 추가** — 19 FLT + 17 GC + 18 BC. BC는 v4에서 ground로 포함 |
+| **OSD-248** | **lung** | **RR-6** | **2a** | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC, BC | 58 | **v4 addition** — 20 FLT + 19 GC + 19 BC. BC included as ground control in v4 |
+| **OSD-247** | **colon** | **RR-6** | **2a** | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC, BC | 54 | **v4 addition** — 19 FLT + 17 GC + 18 BC. BC included as ground control in v4 |
 
 ---
 
@@ -64,10 +64,10 @@
 - ⚠️ Wrong assay type / Track 2b: **4** (OSD-4 microarray, OSD-240/241 BAL-TAL)
 - ⛔/🔁 Excluded by design: **10**
 
-**A5 Skin 최종 구성** (Track 2a, 3-fold LOMO):
-- MHU-2: OSD-238 (dorsal) + OSD-239 (femoral) 병합 → 35 binary samples
+**A5 Skin final composition** (Track 2a, 3-fold LOMO):
+- MHU-2: OSD-238 (dorsal) + OSD-239 (femoral) merged → 35 binary samples
 - RR-6: OSD-243 → 37 binary samples
-- RR-7: OSD-254 C57BL/6J 서브셋 → 30 binary samples
+- RR-7: OSD-254 C57BL/6J subset → 30 binary samples
 
 ---
 

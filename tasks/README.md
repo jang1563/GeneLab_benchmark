@@ -162,7 +162,8 @@ python scripts/evaluate_submission.py \
 |-------|---------|
 | `1.0` | Flight (spaceflight / microgravity condition) |
 | `0.0` | Ground (vivarium control) |
-| — | Basal Control (BC) and Aseptic Ground Control (AG) samples are excluded from all tasks |
+| — | **BC (Basal Control)**: excluded from v1 tasks; included as ground control (0.0) in v4 lung/colon tasks |
+| — | **AG (Aseptic Ground Control)**: excluded from all tasks (multi-group MHU-2 only) |
 
 ---
 
