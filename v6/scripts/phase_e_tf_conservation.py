@@ -21,44 +21,63 @@ from v6_utils import (
 
 
 def infer_human_tf_activity(cfrna_de):
-    """Infer TF activity from cfRNA gene-level statistics using decoupler.
+    """Infer TF activity from cfRNA gene-level statistics.
 
     Uses edge_pre_vs_flight_diff as gene-level statistic.
-    Runs ULM (Univariate Linear Model) with CollecTRI human regulons.
+    Computes mean-of-targets weighted by regulation direction (CollecTRI).
+    This is equivalent to a simplified ULM score.
     """
-    import decoupler as dc
-
-    # Get CollecTRI human regulons
-    print("  Loading CollecTRI human regulons...")
-    net = dc.get_collectri(organism="human")
+    # Load CollecTRI from local cache (pre-downloaded)
+    cache_path = os.path.join(os.path.dirname(__file__), "..", "data", "collectri_human.csv")
+    print(f"  Loading CollecTRI from local cache...")
+    net = pd.read_csv(cache_path)
     print(f"  CollecTRI: {len(net)} interactions, "
           f"{net['source'].nunique()} TFs, {net['target'].nunique()} targets")
 
-    # Prepare gene-level statistic as a 1-sample matrix
-    gene_stat = cfrna_de["edge_pre_vs_flight_diff"].dropna()
-    # Create a DataFrame with one "sample" (the group-level statistic)
-    mat = pd.DataFrame({"pre_vs_flight": gene_stat}).T
-
-    # Remove duplicate edges (CollecTRI may have repeated source-target pairs)
-    n_before = len(net)
+    # Deduplicate
     net = net.drop_duplicates(subset=["source", "target"])
-    n_after = len(net)
-    if n_before != n_after:
-        print(f"  Removed {n_before - n_after} duplicate edges ({n_before} → {n_after})")
+    print(f"  After dedup: {len(net)} interactions")
 
-    # Run ULM
-    print("  Running ULM inference...")
-    estimates, pvals = dc.run_ulm(mat=mat, net=net, verbose=False)
+    # Prepare gene-level statistic
+    gene_stat = cfrna_de["edge_pre_vs_flight_diff"].dropna()
+    gene_stat = pd.to_numeric(gene_stat, errors="coerce").dropna()
+    print(f"  Gene statistics: {len(gene_stat)} genes")
 
-    # Extract results
+    # Manual TF activity: weighted mean of target gene statistics
+    # score(TF) = mean(weight_i * stat_i) / (std / sqrt(n)) for targets of TF
+    # weight = +1 (activation) or -1 (repression) from 'mor' column
     tf_results = {}
-    for tf in estimates.columns:
-        est = float(estimates.loc["pre_vs_flight", tf])
-        pv = float(pvals.loc["pre_vs_flight", tf])
+    gene_set = set(gene_stat.index)
+
+    for tf, grp in net.groupby("source"):
+        targets = grp[grp["target"].isin(gene_set)]
+        if len(targets) < 5:
+            continue
+
+        # Get weighted statistics
+        target_stats = gene_stat.loc[targets["target"]].values.astype(float)
+        weights = targets["weight"].values.astype(float)  # mode of regulation: +1/-1
+        weighted_stats = target_stats * weights
+
+        n = len(weighted_stats)
+        mean_ws = np.mean(weighted_stats)
+        std_ws = np.std(weighted_stats, ddof=1) if n > 1 else 1.0
+
+        # T-like score
+        if std_ws > 0:
+            score = mean_ws / (std_ws / np.sqrt(n))
+        else:
+            score = 0.0
+
+        # Approximate p-value from normal
+        from scipy.stats import norm
+        p_val = 2 * norm.sf(abs(score))
+
         tf_results[tf] = {
-            "activity_score": round(est, 6),
-            "p_value": round(pv, 6),
-            "direction": "up_in_flight" if est > 0 else "down_in_flight",
+            "activity_score": round(float(score), 6),
+            "p_value": round(float(p_val), 6),
+            "direction": "up_in_flight" if score > 0 else "down_in_flight",
+            "n_targets": int(n),
         }
 
     return tf_results
@@ -91,13 +110,11 @@ def main():
     try:
         human_tfs = infer_human_tf_activity(cfrna_de)
         print(f"  Human TFs inferred: {len(human_tfs)}")
-    except ImportError as e:
-        print(f"  decoupler not available: {e}")
-        print("  Using fallback: simple gene overlap scoring")
-        human_tfs = _fallback_tf_activity(cfrna_de)
     except Exception as e:
         print(f"  Error: {e}")
-        human_tfs = _fallback_tf_activity(cfrna_de)
+        import traceback
+        traceback.print_exc()
+        human_tfs = {}
 
     if not human_tfs:
         print("  ERROR: No human TF activity computed. Exiting.")
