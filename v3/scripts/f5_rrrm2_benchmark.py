@@ -35,7 +35,7 @@ FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # Default HPC data directory
 DEFAULT_DATA_DIR = Path(
-    "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/"
+    os.environ.get("SCRATCH_DIR", ".")) / "huggingface" / "benchmark" / (
     "GeneLab_benchmark/v3/data/rrrm2"
 )
 

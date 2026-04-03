@@ -94,7 +94,7 @@ v3/
 ## HPC Environment
 
 - **Cluster**: Cornell Cayuga (Slurm)
-- **Work directory**: `/athena/cayuga_0003/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/`
+- **Work directory**: `$GENELAB_ROOT/`
 - **Conda**: `~/miniconda3/miniconda3/`
 - **Environments**: `perturb_seq_new` (general), `uce_env` (UCE), `scfoundation` (scFoundation)
 - **Partition**: `scu-gpu` (A40 48GB / A100 80GB)

@@ -23,9 +23,9 @@ SBATCH=/opt/ohpc/pub/software/slurm/24.05.2/bin/sbatch
 SQUEUE=/opt/ohpc/pub/software/slurm/24.05.2/bin/squeue
 
 STARSOLO_JOB="${1:-2703854}"
-SCRATCH="/athena/masonlab/scratch/users/jak4013/rrrm1_scrna"
-HOME_DIR="/home/fs01/jak4013/rrrm1_scrna"
-CONDA_ACTIVATE="source /home/fs01/jak4013/miniconda3/miniconda3/etc/profile.d/conda.sh && conda activate scgpt_env_new"
+SCRATCH="${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna"
+HOME_DIR="${HOME}/rrrm1_scrna"
+CONDA_ACTIVATE="source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh && conda activate scgpt_env_new"
 
 echo "=== F2 Pipeline Wrapper ==="
 echo "Waiting for per-SRX STARsolo job: ${STARSOLO_JOB}"
@@ -41,17 +41,17 @@ cat > "${MERGE_SCRIPT}" << 'INNEREOF'
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=64G
 #SBATCH --time=2:00:00
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/merge_%j.out
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/merge_%j.err
+#SBATCH --output=rrrm1_merge_%j.out
+#SBATCH --error=rrrm1_merge_%j.err
 set -euo pipefail
-source /home/fs01/jak4013/miniconda3/miniconda3/etc/profile.d/conda.sh
+source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh
 conda activate scgpt_env_new
 export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH:-}"
 echo "=== Merging per-SRX outputs ==="
 date
-python3 /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_merge_per_srx.py \
+python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_merge_per_srx.py \
     --all \
-    --map_csv /home/fs01/jak4013/rrrm1_scrna/RRRM1_SRX_CONDITION_MAP.csv
+    --map_csv ${HOME}/rrrm1_scrna/RRRM1_SRX_CONDITION_MAP.csv
 echo "=== Merge done ===" && date
 INNEREOF
 
@@ -69,11 +69,11 @@ cat > "${PROCESS_SCRIPT}" << 'INNEREOF'
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=128G
 #SBATCH --time=3:00:00
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/process_%A_%a.out
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/process_%A_%a.err
+#SBATCH --output=rrrm1_process_%A_%a.out
+#SBATCH --error=rrrm1_process_%A_%a.err
 #SBATCH --array=0-3
 set -euo pipefail
-source /home/fs01/jak4013/miniconda3/miniconda3/etc/profile.d/conda.sh
+source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh
 conda activate scgpt_env_new
 export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH:-}"
 
@@ -83,15 +83,15 @@ echo "=== Processing ${TISSUE} ==="
 date
 
 # Step 2a: initial scanpy (QC + HVG + PCA + UMAP, now with .raw before normalization)
-python3 /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_initial_scanpy.py \
+python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_initial_scanpy.py \
     --tissue "${TISSUE}"
 
 # Step 2b: broad annotation
-python3 /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_broad_annotate.py \
+python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_broad_annotate.py \
     --tissue "${TISSUE}"
 
 # Step 2c: hardening (scrublet doublet detection)
-python3 /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_singlecell_hardening.py \
+python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_singlecell_hardening.py \
     --tissue "${TISSUE}"
 
 echo "=== ${TISSUE} fully processed ===" && date
@@ -111,11 +111,11 @@ cat > "${F2_SCRIPT}" << 'INNEREOF'
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=128G
 #SBATCH --time=4:00:00
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/f2_%A_%a.out
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/f2_%A_%a.err
+#SBATCH --output=rrrm1_f2_%A_%a.out
+#SBATCH --error=rrrm1_f2_%A_%a.err
 #SBATCH --array=0-2
 set -euo pipefail
-source /home/fs01/jak4013/miniconda3/miniconda3/etc/profile.d/conda.sh
+source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh
 conda activate scgpt_env_new
 export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH:-}"
 
@@ -126,13 +126,13 @@ echo "=== Running ${TASK} ===" && date
 
 case "${TASK}" in
   f2a)
-    python3 /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_f2a_composition.py --all
+    python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_f2a_composition.py --all
     ;;
   f2b)
-    python3 /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_f2b_pseudobulk_fgsea.py --all
+    python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_f2b_pseudobulk_fgsea.py --all
     ;;
   f2c)
-    python3 /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_f2c_loao_classifier.py --all
+    python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_f2c_loao_classifier.py --all
     ;;
 esac
 
@@ -150,6 +150,6 @@ echo "  Step 1 (merge):          ${JID_MERGE}  [afterok:${STARSOLO_JOB}]"
 echo "  Step 2 (process ×4):     ${JID_PROCESS} [afterok:${JID_MERGE}]"
 echo "  Step 3 (F2-A/B/C ×3):   ${JID_F2}     [afterok:${JID_PROCESS}]"
 echo ""
-echo "Monitor: ${SQUEUE} -u jak4013"
-echo "Results: /home/fs01/jak4013/rrrm1_scrna/evaluation/"
-echo "Figures: /home/fs01/jak4013/rrrm1_scrna/figures/"
+echo "Monitor: ${SQUEUE} -u ${USER}"
+echo "Results: ${HOME}/rrrm1_scrna/evaluation/"
+echo "Figures: ${HOME}/rrrm1_scrna/figures/"

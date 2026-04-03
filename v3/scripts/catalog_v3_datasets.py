@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-catalog_v3_datasets.py — OSDR API를 사용하여 v3 후보 데이터셋 메타데이터를 자동 검증.
+catalog_v3_datasets.py — Automated verification of v3 candidate dataset metadata using the OSDR API.
 
 Usage:
     python3 v3/scripts/catalog_v3_datasets.py
 
 Output:
-    v3/docs/DATA_CATALOG_V3.md — 검증 결과 마크다운
-    v3/processed/dataset_catalog_v3.json — 원본 JSON
+    v3/docs/DATA_CATALOG_V3.md — Verification results in Markdown
+    v3/processed/dataset_catalog_v3.json — Raw JSON output
 """
 
 import json

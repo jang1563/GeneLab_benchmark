@@ -11,6 +11,7 @@ Approach:
 - save annotated h5ad, score tables, cluster annotations, and UMAP figures
 """
 
+import os
 from pathlib import Path
 
 import anndata as ad
@@ -20,7 +21,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import scanpy as sc
 
-BASE = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/downstream_initial")
+BASE = Path(os.environ.get("SCRATCH_DIR", ".")) / "rrrm1_scrna" / "downstream_initial"
 OBJDIR = BASE / "objects"
 OUTDIR = BASE / "annotations"
 OUT_OBJDIR = OUTDIR / "objects"

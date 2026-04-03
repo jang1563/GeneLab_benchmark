@@ -12,10 +12,8 @@ import pandas as pd
 from pathlib import Path
 
 # ── Base paths ──────────────────────────────────────────────────────────────
-GENELAB_BASE = Path(os.path.expanduser(
-    "~/Dropbox/Bioinformatics/Claude/GeneLab_benchmark"))
-SPACEOMICS_BASE = Path(os.path.expanduser(
-    "~/Dropbox/Bioinformatics/Claude/SpaceOmicsBench"))
+GENELAB_BASE = Path(os.environ.get("GENELAB_ROOT", "."))
+SPACEOMICS_BASE = Path(os.environ.get("SPACEOMICS_ROOT", "."))
 
 V4_EVAL = GENELAB_BASE / "v4" / "evaluation"
 V5_EVAL = GENELAB_BASE / "v5" / "evaluation"

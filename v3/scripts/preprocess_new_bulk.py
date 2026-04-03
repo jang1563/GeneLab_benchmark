@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-preprocess_new_bulk.py — Phase 4 신규 bulk RNA-seq 데이터 전처리.
+preprocess_new_bulk.py — Phase 4 new bulk RNA-seq data preprocessing.
 
-v1 quality_filter.py 패턴을 따름:
+Follows the v1 quality_filter.py pattern:
   - Normalized counts → log2(x+1) → samples × genes CSV
   - SampleTable → metadata CSV with standardized columns
 

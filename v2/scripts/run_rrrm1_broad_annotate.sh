@@ -1,9 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-CONDA_ENV_BASE="/home/fs01/jak4013/miniconda3/miniconda3/envs/seurat.v5.R.4.3.3.python.3.11.nfcore"
+CONDA_ENV_BASE="${CONDA_PREFIX:-$HOME/miniconda3}/envs/seurat.v5.R.4.3.3.python.3.11.nfcore"
 PYTHON_BIN="${CONDA_ENV_BASE}/bin/python"
-SCRIPT="/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/rrrm1_broad_annotate.py"
+SCRIPT="${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_broad_annotate.py"
 
 if [[ ! -x "${PYTHON_BIN}" ]]; then
     echo "ERROR: Python env not found at ${PYTHON_BIN}"

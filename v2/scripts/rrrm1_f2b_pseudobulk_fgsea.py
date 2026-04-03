@@ -25,6 +25,7 @@ Outputs:
 
 import argparse
 import json
+import os
 import re
 import sys
 import urllib.request
@@ -39,16 +40,16 @@ from scipy import stats
 warnings.filterwarnings("ignore")
 
 # ── Paths ──────────────────────────────────────────────────────────────────
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", "/path/to/scratch")) / "rrrm1_scrna"
 HARDENED_DIR = SCRATCH / "downstream_initial" / "hardening" / "objects"
-BASE_DIR = Path("/home/fs01/jak4013/rrrm1_scrna")
+BASE_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna"
 
 EVAL_DIR = BASE_DIR / "evaluation"
 FIG_DIR = BASE_DIR / "figures"
 PROCESSED_DIR = BASE_DIR / "processed" / "F2B"
 
-BULK_FGSEA_DIR = Path("/home/fs01/jak4013/rrrm1_scrna/v1_bulk_fgsea")
-GMT_DIR = Path("/home/fs01/jak4013/rrrm1_scrna/gene_sets")
+BULK_FGSEA_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna" / "v1_bulk_fgsea"
+GMT_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna" / "gene_sets"
 
 TISSUE_OSD = {
     "blood":  "OSD-918",

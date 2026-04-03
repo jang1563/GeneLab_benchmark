@@ -4,6 +4,7 @@ rrrm1_annotation_summary.py
 Create cross-tissue summary tables and a stacked bar plot from RRRM-1 broad annotations.
 """
 
+import os
 from pathlib import Path
 
 import matplotlib
@@ -11,7 +12,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 
-BASE = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/downstream_initial/annotations")
+BASE = Path(os.environ.get("SCRATCH_DIR", ".")) / "rrrm1_scrna" / "downstream_initial" / "annotations"
 TABLEDIR = BASE / "tables"
 FIGDIR = BASE / "figures"
 SUMMARYDIR = BASE / "summary"

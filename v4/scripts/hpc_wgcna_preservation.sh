@@ -15,7 +15,7 @@
 
 set -eo pipefail
 
-PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
+PROJECT_DIR="${GENELAB_ROOT:?Set GENELAB_ROOT to your project directory}"
 LOG_DIR="$PROJECT_DIR/v4/logs"
 mkdir -p "$LOG_DIR"
 
@@ -25,7 +25,7 @@ echo "Date: $(date)"
 echo "Node: $(hostname)"
 echo "========================================"
 
-CONDA_BASE="/home/fs01/jak4013/miniconda3/miniconda3"
+CONDA_BASE="${CONDA_PREFIX:-$HOME/miniconda3}"
 set +u
 source "${CONDA_BASE}/etc/profile.d/conda.sh"
 conda activate perturb_seq_new

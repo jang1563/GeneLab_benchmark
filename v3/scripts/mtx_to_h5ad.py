@@ -16,7 +16,10 @@ def main():
         sys.exit(1)
 
     glds = sys.argv[1]
-    data_dir = "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/data/rrrm2"
+    data_dir = os.path.join(
+        os.environ.get("SCRATCH_DIR", "."),
+        "huggingface/benchmark/GeneLab_benchmark/v3/data/rrrm2"
+    )
     prefix = os.path.join(data_dir, f"GLDS_{glds}")
 
     print(f"=== Converting GLDS-{glds} to h5ad ===")

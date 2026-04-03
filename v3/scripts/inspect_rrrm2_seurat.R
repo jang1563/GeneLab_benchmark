@@ -4,7 +4,8 @@
 
 library(Seurat)
 
-BASE <- "/athena/masonlab/scratch/projects/GeneLab/ISS_single_cell/ISS_mouse_single_cell/result/GEX/2022_08_06_Seurat_object"
+BASE <- Sys.getenv("RRRM2_SEURAT_DIR",
+  "/athena/masonlab/scratch/projects/GeneLab/ISS_single_cell/ISS_mouse_single_cell/result/GEX/2022_08_06_Seurat_object")
 
 for (glds in c("402", "403", "404", "405")) {
   rds_path <- file.path(BASE, paste0("GLDS-", glds), "UMAP",

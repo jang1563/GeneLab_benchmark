@@ -17,6 +17,7 @@ Outputs: v2/evaluation/F2A_composition.json
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -27,9 +28,9 @@ from scipy import stats
 from statsmodels.stats.multitest import multipletests
 
 # ── Paths ──────────────────────────────────────────────────────────────────
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", "/path/to/scratch")) / "rrrm1_scrna"
 HARDENED_DIR = SCRATCH / "downstream_initial" / "hardening" / "objects"
-BASE_DIR = Path("/home/fs01/jak4013/rrrm1_scrna")
+BASE_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna"
 
 EVAL_DIR = BASE_DIR / "evaluation"
 FIG_DIR = BASE_DIR / "figures"

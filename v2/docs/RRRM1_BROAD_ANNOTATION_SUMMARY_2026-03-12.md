@@ -6,7 +6,7 @@ Scope: first-pass broad cell type annotation for RRRM-1 scRNA-seq downstream out
 ## Output location
 
 - Base directory:
-  - `/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/downstream_initial/annotations`
+  - `$SCRATCH_DIR/rrrm1_scrna/downstream_initial/annotations`
 
 ## Generated files
 

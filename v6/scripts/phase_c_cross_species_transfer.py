@@ -155,7 +155,7 @@ def main():
             X_h_pca = pca.transform(X_h_scaled)
 
             # Fit LR on MOUSE data
-            lr = LogisticRegression(max_iter=1000, random_state=42)
+            lr = LogisticRegression(max_iter=200, solver="liblinear", random_state=42)
             lr.fit(X_mouse_pca, y_mouse)
 
             # Predict on HUMAN data
@@ -186,11 +186,11 @@ def main():
 
             # Permutation test: shuffle mouse labels, retrain, predict human
             rng = np.random.default_rng(42)
-            n_perm = 1000
+            n_perm = 500
             perm_aurocs = []
             for _ in range(n_perm):
                 y_perm = rng.permutation(y_mouse)
-                lr_perm = LogisticRegression(max_iter=1000, random_state=42)
+                lr_perm = LogisticRegression(max_iter=200, solver="liblinear", random_state=42)
                 lr_perm.fit(X_mouse_pca, y_perm)
                 y_perm_score = lr_perm.predict_proba(X_h_pca)[:, 1]
                 try:
@@ -211,7 +211,7 @@ def main():
             skf = StratifiedKFold(n_splits=min(3, len(np.unique(y_mouse))),
                                   shuffle=True, random_state=42)
             for train_idx, test_idx in skf.split(X_mouse_pca, y_mouse):
-                lr_cv = LogisticRegression(max_iter=1000, random_state=42)
+                lr_cv = LogisticRegression(max_iter=200, solver="liblinear", random_state=42)
                 lr_cv.fit(X_mouse_pca[train_idx], y_mouse[train_idx])
                 try:
                     auc_cv = roc_auc_score(

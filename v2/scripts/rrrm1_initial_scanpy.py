@@ -10,6 +10,7 @@ Outputs:
 - summary CSV tables and PNG plots
 """
 
+import os
 from pathlib import Path
 
 import anndata as ad
@@ -20,7 +21,7 @@ import pandas as pd
 import scanpy as sc
 from sklearn.cluster import KMeans
 
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", ".")) / "rrrm1_scrna"
 INPUT_H5AD = SCRATCH / "RRRM1_merged_samples.h5ad"
 OUTDIR = SCRATCH / "downstream_initial"
 FIGDIR = OUTDIR / "figures"

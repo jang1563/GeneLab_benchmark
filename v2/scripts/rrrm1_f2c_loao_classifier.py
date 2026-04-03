@@ -23,6 +23,7 @@ Outputs:
 
 import argparse
 import json
+import os
 import sys
 import warnings
 from pathlib import Path
@@ -40,9 +41,9 @@ from sklearn.preprocessing import StandardScaler
 warnings.filterwarnings("ignore")
 
 # ── Paths ──────────────────────────────────────────────────────────────────
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", "/path/to/scratch")) / "rrrm1_scrna"
 HARDENED_DIR = SCRATCH / "downstream_initial" / "hardening" / "objects"
-BASE_DIR = Path("/home/fs01/jak4013/rrrm1_scrna")
+BASE_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna"
 EVAL_DIR = BASE_DIR / "evaluation"
 FIG_DIR = BASE_DIR / "figures"
 

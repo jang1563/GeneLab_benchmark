@@ -10,6 +10,7 @@ Usage: python3 rrrm1_h5ad_convert.py [--osd OSD_NUMBER] [--cleanup]
 """
 
 import argparse
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -20,7 +21,7 @@ from scipy import sparse
 import pandas as pd
 import numpy as np
 
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", ".")) / "rrrm1_scrna"
 OSD_MAP = {
     918: "blood",
     920: "eye",

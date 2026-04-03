@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
 #SBATCH --time=6:00:00
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/per_srx_%A_%a.out
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/rrrm1_scrna/logs/per_srx_%A_%a.err
+#SBATCH --output=%x_%A_%a.out
+#SBATCH --error=%x_%A_%a.err
 #SBATCH --array=0-31%4
 #
 # rrrm1_starsolo_per_srx.sh
@@ -78,12 +78,12 @@ echo "OSD:       OSD-${OSD_N}  tissue=${TISSUE}"
 echo "SRX:       ${SRX}  condition=${CONDITION}  age=${AGE}mo  source=${SOURCE}"
 date
 
-SCRATCH="/athena/masonlab/scratch/users/jak4013/rrrm1_scrna"
+SCRATCH="${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna"
 FASTQ_DIR="${SCRATCH}/OSD-${OSD_N}/fastq"
 OUT_DIR="${SCRATCH}/OSD-${OSD_N}/starsolo_per_srx/${SRX}"
 STAR_BIN="/opt/ohpc/pub/software/STAR/2.7.3a/bin/Linux_x86_64_static/STAR"
-GENOME_DIR="/athena/masonlab/scratch/users/jak4013/reference/cellranger/refdata-gex-GRCm39-2024-A/star"
-WHITELIST="/athena/masonlab/scratch/users/jak4013/reference/3M-february-2018.txt"
+GENOME_DIR="${SCRATCH_DIR:?Set SCRATCH_DIR}/reference/cellranger/refdata-gex-GRCm39-2024-A/star"
+WHITELIST="${SCRATCH_DIR:?Set SCRATCH_DIR}/reference/3M-february-2018.txt"
 
 mkdir -p "${OUT_DIR}" "${SCRATCH}/logs"
 

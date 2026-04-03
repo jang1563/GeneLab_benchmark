@@ -10,12 +10,13 @@ This is intentionally conservative:
 """
 
 import argparse
+import os
 from pathlib import Path
 
 import anndata as ad
 import pandas as pd
 
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", ".")) / "rrrm1_scrna"
 SAMPLES = {
     918: "blood",
     920: "eye",

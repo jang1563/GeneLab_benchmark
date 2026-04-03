@@ -10,10 +10,10 @@
 
 set -eo pipefail
 
-PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
-CONDA_BASE="/home/fs01/jak4013/miniconda3/miniconda3"
+PROJECT_DIR="${SCRATCH_DIR:?Set SCRATCH_DIR}/huggingface/benchmark/GeneLab_benchmark"
+CONDA_BASE="${CONDA_PREFIX:-$HOME/miniconda3}"
 SCF_ENV="$CONDA_BASE/envs/scfoundation_env"
-SCF_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/scFoundation"
+SCF_DIR="${SCRATCH_DIR:?Set SCRATCH_DIR}/huggingface/benchmark/scFoundation"
 SCF_CKPT="$SCF_DIR/model/models/models.ckpt"
 DEFAULT_SCF_ARGS="--tissue liver"
 

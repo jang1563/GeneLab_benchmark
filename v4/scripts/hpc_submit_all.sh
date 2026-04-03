@@ -3,7 +3,7 @@
 # Usage: bash v4/scripts/hpc_submit_all.sh
 
 set -eo pipefail
-cd /athena/cayuga_0003/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark
+cd ${GENELAB_ROOT:?Set GENELAB_ROOT to your project directory}
 
 SBATCH=/opt/ohpc/pub/software/slurm/24.05.2/bin/sbatch
 

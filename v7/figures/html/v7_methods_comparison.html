@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>v7 Methods Comparison — GeneLabBench</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: "Helvetica Neue", Arial, sans-serif; margin: 20px;
+         background: #fff; color: #333; }
+  h1 { font-size: 16px; font-weight: bold; margin-bottom: 4px; }
+  h2 { font-size: 12px; color: #666; font-weight: normal; margin-top: 0; }
+  .figure-container { display: grid; grid-template-columns: 1fr 1fr;
+                       grid-template-rows: 1fr 1fr; gap: 20px;
+                       max-width: 1200px; }
+  .panel { border: 1px solid #e0e0e0; padding: 10px; border-radius: 4px; }
+  .panel-label { font-size: 13px; font-weight: bold; margin-bottom: 8px; }
+  .axis text { font-size: 10px; }
+  .axis path, .axis line { stroke: #ccc; }
+  .tick line { stroke: #e8e8e8; }
+  .legend-item text { font-size: 10px; }
+  .reference-line { stroke: #999; stroke-width: 1.5; stroke-dasharray: 4,4; }
+  .sig-marker { font-size: 10px; fill: #d44; }
+  .meta-note { font-size: 11px; color: #666; margin-bottom: 14px; max-width: 1200px; }
+  .tooltip { position: absolute; background: rgba(0,0,0,0.85); color: #fff;
+             padding: 6px 10px; border-radius: 4px; font-size: 11px;
+             pointer-events: none; opacity: 0; }
+  .no-data { color: #aaa; font-size: 11px; font-style: italic;
+             text-align: center; padding: 20px; }
+</style>
+</head>
+<body>
+<div id="tooltip" class="tooltip"></div>
+
+<h1>Figure v7: Advanced Methods Benchmark — GNN on WGCNA Topology + scPRINT-2</h1>
+<h2>GeneLabBench: 6 tissues × LOMO-CV. Reference: PCA-LR baseline (v4 Phase 1)</h2>
+<div class="meta-note" id="metaNote"></div>
+
+<div class="figure-container">
+  <div class="panel" id="panelA">
+    <div class="panel-label">A  scPRINT-2 vs PCA-LR</div>
+  </div>
+  <div class="panel" id="panelB">
+    <div class="panel-label">B  GNN Graph Type Comparison</div>
+  </div>
+  <div class="panel" id="panelC">
+    <div class="panel-label">C  AUROC Heatmap (Tissue × Method)</div>
+  </div>
+  <div class="panel" id="panelD">
+    <div class="panel-label">D  Signal Hierarchy Updated</div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  "pcalr": {
+    "liver": 0.6827,
+    "gastrocnemius": 0.8519,
+    "kidney": 0.5838,
+    "thymus": 0.9083,
+    "eye": 0.6972,
+    "skin": 0.7961
+  },
+  "pcalr_stats": {
+    "liver": {
+      "auroc": 0.6827,
+      "perm_pvalue": 0.2025
+    },
+    "gastrocnemius": {
+      "auroc": 0.8519,
+      "perm_pvalue": 0.1445
+    },
+    "kidney": {
+      "auroc": 0.5838,
+      "perm_pvalue": 0.351
+    },
+    "thymus": {
+      "auroc": 0.9083,
+      "perm_pvalue": 0.0379
+    },
+    "eye": {
+      "auroc": 0.6972,
+      "perm_pvalue": 0.1485
+    },
+    "skin": {
+      "auroc": 0.7961,
+      "perm_pvalue": 0.005
+    }
+  },
+  "scprint": {},
+  "gnn": {
+    "liver": {},
+    "gastrocnemius": {},
+    "kidney": {},
+    "thymus": {},
+    "eye": {},
+    "skin": {}
+  },
+  "method_matrix": {
+    "pca_lr": {
+      "liver": 0.6827,
+      "gastrocnemius": 0.8519,
+      "kidney": 0.5838,
+      "thymus": 0.9083,
+      "eye": 0.6972,
+      "skin": 0.7961
+    },
+    "scprint2": {},
+    "gnn_wgcna": {},
+    "gnn_random": {},
+    "gnn_no_edges": {}
+  },
+  "sig_matrix": {
+    "scprint2": {},
+    "gnn_wgcna": {},
+    "gnn_random": {},
+    "gnn_no_edges": {}
+  },
+  "hierarchy": [
+    {
+      "category": "Tabular ML",
+      "label": "PCA-LR",
+      "mean_auroc": 0.7533333333333333,
+      "std": 0.10987918617989284,
+      "n_sig": 2
+    },
+    {
+      "category": "GNN",
+      "label": "GNN-WGCNA",
+      "mean_auroc": null,
+      "std": null,
+      "n_sig": 0
+    },
+    {
+      "category": "Foundation Model",
+      "label": "scPRINT-2 / Geneformer",
+      "mean_auroc": 0.476,
+      "std": 0.08,
+      "n_sig": 0,
+      "note": "scPRINT-2 if available, else Geneformer v1 fallback"
+    },
+    {
+      "category": "Text LLM",
+      "label": "Llama/DeepSeek/Gemini",
+      "mean_auroc": 0.498,
+      "std": 0.031,
+      "n_sig": 0,
+      "note": "From v1 Tier 3 evaluation (3 LLMs, 3 tissues)"
+    }
+  ],
+  "meta": {
+    "gnn_topology_scope": null,
+    "scprint_ckpt_name": null
+  }
+};
+const TISSUES = ["liver", "gastrocnemius", "kidney", "thymus", "eye", "skin"];
+const TISSUE_LABELS = {"liver": "Liver", "gastrocnemius": "Gastro", "kidney": "Kidney", "thymus": "Thymus", "eye": "Eye", "skin": "Skin"};
+const COLORS = {"tabular_ml": "#0072B2", "gnn_wgcna": "#009E73", "gnn_random": "#56B4E9", "gnn_no_edges": "#CC79A7", "scprint2": "#D55E00", "foundation": "#E69F00", "reference": "#999999"};
+
+const tooltip = d3.select("#tooltip");
+d3.select("#metaNote").text(
+  `GNN topology scope: ${DATA.meta.gnn_topology_scope || "N/A"} | ` +
+  `scPRINT-2 checkpoint: ${DATA.meta.scprint_ckpt_name || "N/A"} | ` +
+  `Significance marker: permutation p < 0.05`
+);
+function showTip(html) {
+  tooltip.style("opacity", 1).html(html);
+}
+function moveTip(event) {
+  tooltip.style("left", (event.pageX + 12) + "px")
+         .style("top",  (event.pageY - 28) + "px");
+}
+function hideTip() { tooltip.style("opacity", 0); }
+
+// ── Panel A: scPRINT-2 vs PCA-LR ──────────────────────────────────────────
+(function() {
+  const W = 480, H = 320;
+  const margin = {top: 20, right: 120, bottom: 50, left: 60};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panelA").append("svg")
+    .attr("width", W).attr("height", H)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const scprint = DATA.scprint;
+  const pcalr   = DATA.pcalr;
+
+  if (Object.keys(scprint).length === 0) {
+    d3.select("#panelA").append("p").attr("class", "no-data")
+      .text("scPRINT-2 results not yet available. Run: python v7/unified/scprint2_benchmark.py --tissue all");
+    return;
+  }
+
+  const x = d3.scaleBand().domain(TISSUES).range([0, w]).padding(0.3);
+  const allAurocValues = TISSUES.flatMap(t => [
+    scprint[t]?.mean_auroc, pcalr[t]
+  ]).filter(v => v != null);
+  const yMin = Math.max(0, d3.min(allAurocValues) - 0.1);
+  const yMax = Math.min(1, d3.max(allAurocValues) + 0.05);
+  const y = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
+
+  svg.append("g").attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).tickFormat(t => TISSUE_LABELS[t] || t))
+    .attr("class", "axis")
+    .selectAll("text").attr("transform", "rotate(-30)").attr("text-anchor", "end");
+
+  svg.append("g").call(d3.axisLeft(y).ticks(6)).attr("class", "axis");
+  svg.append("g").call(d3.axisLeft(y).ticks(6).tickSize(-w).tickFormat(""))
+    .attr("class", "axis").selectAll("line").attr("stroke", "#e8e8e8");
+
+  // PCA-LR dots (grey circles)
+  TISSUES.forEach(t => {
+    if (pcalr[t] == null) return;
+    svg.append("circle")
+      .attr("cx", x(t) + x.bandwidth() / 2)
+      .attr("cy", y(pcalr[t]))
+      .attr("r", 6)
+      .attr("fill", COLORS.reference)
+      .attr("opacity", 0.8)
+      .on("mouseover", (e) => showTip(`PCA-LR (${TISSUE_LABELS[t]})<br>AUROC: ${pcalr[t].toFixed(3)}`))
+      .on("mousemove", moveTip)
+      .on("mouseout", hideTip);
+  });
+
+  // scPRINT-2 dots + CI bars (vermilion)
+  TISSUES.forEach(t => {
+    const r = scprint[t];
+    if (!r || r.mean_auroc == null) return;
+    const cx = x(t) + x.bandwidth() / 2;
+    const cy = y(r.mean_auroc);
+
+    // Connecting line (PCA-LR → scPRINT)
+    if (pcalr[t] != null) {
+      svg.append("line")
+        .attr("x1", cx).attr("x2", cx)
+        .attr("y1", y(pcalr[t])).attr("y2", cy)
+        .attr("stroke", r.mean_auroc > pcalr[t] ? COLORS.scprint2 : COLORS.reference)
+        .attr("stroke-width", 1.5)
+        .attr("stroke-dasharray", "3,2")
+        .attr("opacity", 0.6);
+    }
+
+    if (r.mean_ci_lower != null && r.mean_ci_upper != null) {
+      svg.append("line")
+        .attr("x1", cx).attr("x2", cx)
+        .attr("y1", y(r.mean_ci_lower)).attr("y2", y(r.mean_ci_upper))
+        .attr("stroke", COLORS.scprint2).attr("stroke-width", 2)
+        .attr("opacity", 0.7);
+    }
+
+    // Main dot
+    svg.append("circle")
+      .attr("cx", cx).attr("cy", cy)
+      .attr("r", 7).attr("fill", COLORS.scprint2)
+      .attr("stroke", "white").attr("stroke-width", 1.5)
+      .on("mouseover", (e) => showTip(
+        `scPRINT-2 (${TISSUE_LABELS[t]})<br>` +
+        `AUROC: ${r.mean_auroc.toFixed(3)}<br>` +
+        `95% CI: ${r.mean_ci_lower?.toFixed(3) || "N/A"} to ${r.mean_ci_upper?.toFixed(3) || "N/A"}<br>` +
+        `Δ vs PCA-LR: ${r.delta_vs_pca_lr?.toFixed(3) || "N/A"}<br>` +
+        `perm_p: ${r.perm_pvalue?.toFixed(3) || "N/A"}`
+      ))
+      .on("mousemove", moveTip)
+      .on("mouseout", hideTip);
+
+    // Sig marker
+    if (r.perm_pvalue != null && r.perm_pvalue < 0.05) {
+      svg.append("text").attr("x", cx).attr("y", cy - 12)
+        .attr("text-anchor", "middle").attr("class", "sig-marker").text("*");
+    }
+  });
+
+  // Legend
+  const leg = svg.append("g").attr("transform", `translate(${w + 10}, 20)`);
+  [["PCA-LR", COLORS.reference], ["scPRINT-2", COLORS.scprint2]].forEach(([name, col], i) => {
+    leg.append("circle").attr("cx", 6).attr("cy", i * 20).attr("r", 5).attr("fill", col);
+    leg.append("text").attr("x", 14).attr("y", i * 20 + 4).attr("font-size", "10px").text(name);
+  });
+
+  svg.append("text").attr("x", -h/2).attr("y", -45).attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle").attr("font-size", "11px").text("AUROC");
+
+})();
+
+// ── Panel B: GNN Graph Type Comparison ─────────────────────────────────────
+(function() {
+  const W = 480, H = 320;
+  const margin = {top: 20, right: 130, bottom: 55, left: 60};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panelB").append("svg")
+    .attr("width", W).attr("height", H)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const gnn = DATA.gnn;
+  const pcalr = DATA.pcalr;
+  const graphTypes = ["wgcna", "random", "no_edges"];
+  const gnnColors = {
+    wgcna:    COLORS.gnn_wgcna,
+    random:   COLORS.gnn_random,
+    no_edges: COLORS.gnn_no_edges,
+  };
+  const gnnLabels = { wgcna: "WGCNA-TOM", random: "Random", no_edges: "No-edges (MLP)" };
+
+  const hasData = TISSUES.some(t => gnn[t] && Object.keys(gnn[t]).length > 0);
+  if (!hasData) {
+    d3.select("#panelB").append("p").attr("class", "no-data")
+      .text("GNN results not yet available. Run: python v7/unified/gnn_wgcna.py --tissue all --graph-type all");
+    return;
+  }
+
+  const x0 = d3.scaleBand().domain(TISSUES).range([0, w]).paddingInner(0.2);
+  const x1 = d3.scaleBand().domain(graphTypes).range([0, x0.bandwidth()]).padding(0.05);
+
+  const allVals = TISSUES.flatMap(t =>
+    graphTypes.map(gt => gnn[t]?.[gt]?.mean_auroc).filter(v => v != null)
+  ).concat(Object.values(pcalr));
+  const yMin = Math.max(0, (d3.min(allVals) || 0.4) - 0.05);
+  const yMax = Math.min(1, (d3.max(allVals) || 0.9) + 0.05);
+  const y = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
+
+  svg.append("g").attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x0).tickFormat(t => TISSUE_LABELS[t] || t))
+    .attr("class", "axis")
+    .selectAll("text").attr("transform", "rotate(-30)").attr("text-anchor", "end");
+  svg.append("g").call(d3.axisLeft(y).ticks(5)).attr("class", "axis");
+  svg.append("g").call(d3.axisLeft(y).ticks(5).tickSize(-w).tickFormat(""))
+    .attr("class", "axis").selectAll("line").attr("stroke", "#e8e8e8");
+
+  // Bars
+  TISSUES.forEach(t => {
+    const tGroup = svg.append("g").attr("transform", `translate(${x0(t)}, 0)`);
+    graphTypes.forEach(gt => {
+      const r = gnn[t]?.[gt];
+      if (!r || r.mean_auroc == null) return;
+      tGroup.append("rect")
+        .attr("x", x1(gt)).attr("y", y(r.mean_auroc))
+        .attr("width", x1.bandwidth()).attr("height", h - y(r.mean_auroc))
+        .attr("fill", gnnColors[gt]).attr("opacity", 0.85)
+        .attr("rx", 2)
+        .on("mouseover", (e) => showTip(
+          `${gnnLabels[gt]} (${TISSUE_LABELS[t]})<br>` +
+          `AUROC: ${r.mean_auroc.toFixed(3)}<br>` +
+          `95% CI: ${r.mean_ci_lower?.toFixed(3) || "N/A"} to ${r.mean_ci_upper?.toFixed(3) || "N/A"}<br>` +
+          `Δ vs PCA-LR: ${r.delta_vs_pca_lr?.toFixed(3) || "N/A"}<br>` +
+          `Topology scope: ${r.topology_scope || "N/A"}<br>` +
+          `perm_p: ${r.perm_pvalue?.toFixed(3) || "N/A"}`
+        ))
+        .on("mousemove", moveTip)
+        .on("mouseout", hideTip);
+
+      if (r.perm_pvalue != null && r.perm_pvalue < 0.05) {
+        tGroup.append("text")
+          .attr("x", x1(gt) + x1.bandwidth() / 2)
+          .attr("y", y(r.mean_auroc) - 4)
+          .attr("text-anchor", "middle").attr("class", "sig-marker").text("*");
+      }
+    });
+
+    // PCA-LR reference line for this tissue
+    if (pcalr[t] != null) {
+      const xStart = x0(t);
+      svg.append("line")
+        .attr("x1", xStart).attr("x2", xStart + x0.bandwidth())
+        .attr("y1", y(pcalr[t])).attr("y2", y(pcalr[t]))
+        .attr("stroke", COLORS.reference).attr("stroke-width", 2)
+        .attr("stroke-dasharray", "4,3");
+    }
+  });
+
+  // Legend
+  const leg = svg.append("g").attr("transform", `translate(${w + 10}, 10)`);
+  graphTypes.forEach((gt, i) => {
+    leg.append("rect").attr("x", 0).attr("y", i * 18).attr("width", 12).attr("height", 12)
+      .attr("fill", gnnColors[gt]).attr("rx", 2);
+    leg.append("text").attr("x", 16).attr("y", i * 18 + 10).attr("font-size", "9px").text(gnnLabels[gt]);
+  });
+  leg.append("line").attr("x1", 0).attr("x2", 12).attr("y1", 3 * 18 + 6).attr("y2", 3 * 18 + 6)
+    .attr("stroke", COLORS.reference).attr("stroke-width", 2).attr("stroke-dasharray", "4,3");
+  leg.append("text").attr("x", 16).attr("y", 3 * 18 + 10).attr("font-size", "9px").text("PCA-LR");
+
+  svg.append("text").attr("x", -h/2).attr("y", -45).attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle").attr("font-size", "11px").text("AUROC");
+})();
+
+// ── Panel C: Heatmap ─────────────────────────────────────────────────────────
+(function() {
+  const W = 480, H = 320;
+  const margin = {top: 30, right: 20, bottom: 60, left: 120};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panelC").append("svg")
+    .attr("width", W).attr("height", H)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const methods = ["pca_lr", "gnn_wgcna", "gnn_random", "gnn_no_edges", "scprint2"];
+  const methodLabels = {
+    pca_lr:       "PCA-LR",
+    gnn_wgcna:    "GNN (WGCNA-TOM)",
+    gnn_random:   "GNN (Random)",
+    gnn_no_edges: "GNN (No-edges MLP)",
+    scprint2:     "scPRINT-2",
+  };
+
+  const matrix = DATA.method_matrix;
+  const sigMatrix = DATA.sig_matrix;
+
+  const xScale = d3.scaleBand().domain(TISSUES).range([0, w]).padding(0.05);
+  const yScale = d3.scaleBand().domain(methods).range([0, h]).padding(0.05);
+
+  const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0.4, 0.95]);
+
+  svg.append("g").attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(xScale).tickFormat(t => TISSUE_LABELS[t] || t))
+    .attr("class", "axis").selectAll("text")
+    .attr("transform", "rotate(-30)").attr("text-anchor", "end");
+
+  svg.append("g")
+    .call(d3.axisLeft(yScale).tickFormat(m => methodLabels[m] || m))
+    .attr("class", "axis");
+
+  methods.forEach(m => {
+    TISSUES.forEach(t => {
+      const val = matrix[m]?.[t];
+      const sig = sigMatrix[m]?.[t];
+      if (val == null) {
+        svg.append("rect")
+          .attr("x", xScale(t)).attr("y", yScale(m))
+          .attr("width", xScale.bandwidth()).attr("height", yScale.bandwidth())
+          .attr("fill", "#f5f5f5");
+        svg.append("text")
+          .attr("x", xScale(t) + xScale.bandwidth() / 2)
+          .attr("y", yScale(m) + yScale.bandwidth() / 2 + 4)
+          .attr("text-anchor", "middle").attr("font-size", "9px")
+          .attr("fill", "#ccc").text("—");
+        return;
+      }
+
+      svg.append("rect")
+        .attr("x", xScale(t)).attr("y", yScale(m))
+        .attr("width", xScale.bandwidth()).attr("height", yScale.bandwidth())
+        .attr("fill", colorScale(val))
+        .attr("rx", 2)
+        .on("mouseover", e => {
+          const detail =
+            m === "scprint2" ? DATA.scprint[t]
+            : m === "pca_lr" ? DATA.pcalr_stats[t]
+            : DATA.gnn[t]?.[m.replace("gnn_", "")];
+          const deltaText = detail?.delta_vs_pca_lr != null ? `<br>Δ vs PCA-LR: ${detail.delta_vs_pca_lr.toFixed(3)}` : "";
+          const permText = detail?.perm_pvalue != null ? `<br>perm_p: ${detail.perm_pvalue.toFixed(3)}` : "";
+          showTip(`${methodLabels[m]}<br>${TISSUE_LABELS[t]}: AUROC=${val.toFixed(3)}${deltaText}${permText}${sig ? "<br>* permutation p < 0.05" : ""}`);
+        })
+        .on("mousemove", moveTip)
+        .on("mouseout", hideTip);
+
+      svg.append("text")
+        .attr("x", xScale(t) + xScale.bandwidth() / 2)
+        .attr("y", yScale(m) + yScale.bandwidth() / 2 + 4)
+        .attr("text-anchor", "middle").attr("font-size", "8px")
+        .attr("fill", val > 0.7 ? "white" : "#333")
+        .text(val.toFixed(2) + (sig ? "*" : ""));
+    });
+  });
+
+  // Color bar
+  const cbX = w + 5, cbW = 12, cbH = h;
+  const defs = svg.append("defs");
+  const lg = defs.append("linearGradient").attr("id", "colorbar")
+    .attr("gradientTransform", "rotate(90)");
+  lg.append("stop").attr("offset", "0%").attr("stop-color", colorScale(0.95));
+  lg.append("stop").attr("offset", "100%").attr("stop-color", colorScale(0.40));
+  svg.append("rect").attr("x", cbX).attr("y", 0).attr("width", cbW).attr("height", cbH)
+    .attr("fill", "url(#colorbar)").attr("rx", 2);
+  svg.append("text").attr("x", cbX + cbW / 2).attr("y", -4)
+    .attr("text-anchor", "middle").attr("font-size", "9px").text("AUROC");
+  [0.4, 0.6, 0.8, 0.95].forEach(v => {
+    const yPos = cbH - (v - 0.4) / (0.95 - 0.4) * cbH;
+    svg.append("text").attr("x", cbX + cbW + 3).attr("y", yPos + 3)
+      .attr("font-size", "8px").text(v.toFixed(2));
+  });
+})();
+
+// ── Panel D: Signal Hierarchy (Updated) ─────────────────────────────────────
+(function() {
+  const W = 480, H = 320;
+  const margin = {top: 30, right: 40, bottom: 60, left: 60};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panelD").append("svg")
+    .attr("width", W).attr("height", H)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const hier = DATA.hierarchy;
+
+  const categories = ["Tabular ML", "GNN", "Foundation Model", "Text LLM"];
+  const catColors = {
+    "Tabular ML":       COLORS.tabular_ml,
+    "GNN":              COLORS.gnn_wgcna,
+    "Foundation Model": COLORS.scprint2,
+    "Text LLM":         COLORS.foundation,
+  };
+
+  const x = d3.scaleBand().domain(categories).range([0, w]).padding(0.3);
+  const allY = hier.flatMap(d => [d.mean_auroc - d.std, d.mean_auroc + d.std]).filter(v => v != null);
+  const yMin = Math.max(0.3, d3.min(allY) - 0.05);
+  const yMax = Math.min(1.0, d3.max(allY) + 0.08);
+  const y = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
+
+  svg.append("g").attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x)).attr("class", "axis")
+    .selectAll("text").attr("transform", "rotate(-20)").attr("text-anchor", "end");
+  svg.append("g").call(d3.axisLeft(y).ticks(5)).attr("class", "axis");
+  svg.append("g").call(d3.axisLeft(y).ticks(5).tickSize(-w).tickFormat(""))
+    .attr("class", "axis").selectAll("line").attr("stroke", "#e8e8e8");
+
+  // Chance line
+  svg.append("line")
+    .attr("x1", 0).attr("x2", w).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#ccc").attr("stroke-width", 1).attr("stroke-dasharray", "6,4");
+  svg.append("text").attr("x", w + 3).attr("y", y(0.5) + 4)
+    .attr("font-size", "9px").attr("fill", "#aaa").text("chance");
+
+  // Dots + error bars
+  hier.forEach(d => {
+    if (!d.category || d.mean_auroc == null) return;
+    const cx = x(d.category) + x.bandwidth() / 2;
+    const cy = y(d.mean_auroc);
+    const col = catColors[d.category] || "#888";
+
+    if (d.std) {
+      svg.append("line")
+        .attr("x1", cx).attr("x2", cx)
+        .attr("y1", y(d.mean_auroc - d.std)).attr("y2", y(d.mean_auroc + d.std))
+        .attr("stroke", col).attr("stroke-width", 2).attr("opacity", 0.6);
+    }
+
+    svg.append("circle")
+      .attr("cx", cx).attr("cy", cy)
+      .attr("r", 7 + (d.n_sig || 0) * 1.5)  // size by n significant
+      .attr("fill", col).attr("opacity", 0.85)
+      .attr("stroke", "white").attr("stroke-width", 1.5)
+      .on("mouseover", e => showTip(
+        `${d.label}<br>` +
+        `Mean AUROC: ${d.mean_auroc.toFixed(3)}<br>` +
+        `Significant: ${d.n_sig || 0}/6 tissues` +
+        `${d.note ? `<br>${d.note}` : ""}`
+      ))
+      .on("mousemove", moveTip)
+      .on("mouseout", hideTip);
+
+    svg.append("text").attr("x", cx).attr("y", cy + 4)
+      .attr("text-anchor", "middle").attr("font-size", "8px")
+      .attr("fill", "white").attr("font-weight", "bold")
+      .text(d.mean_auroc.toFixed(3));
+
+    // Label below dot
+    svg.append("text").attr("x", cx).attr("y", cy + 18 + (d.n_sig || 0) * 1.5)
+      .attr("text-anchor", "middle").attr("font-size", "9px").attr("fill", "#666")
+      .text(d.label);
+  });
+
+  svg.append("text").attr("x", -h/2).attr("y", -45).attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle").attr("font-size", "11px").text("Mean AUROC (6 tissues)");
+  svg.append("text").attr("x", w/2).attr("y", h + 50)
+    .attr("text-anchor", "middle").attr("font-size", "11px").text("Method Category");
+})();
+
+</script>
+</body>
+</html>

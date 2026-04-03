@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fetch_osdr_bulk.py — OSDR에서 GeneLab processed bulk RNA-seq 파일 다운로드.
+fetch_osdr_bulk.py — Download GeneLab processed bulk RNA-seq files from OSDR.
 
 Downloads Normalized_Counts + SampleTable CSVs for Phase 4 & 5 datasets.
 

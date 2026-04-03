@@ -100,13 +100,15 @@ def main():
         if human_gene is not None:
             row = cfrna_de.loc[human_gene]
             fdr = row.get("edge_pre_vs_flight_fdr", 1.0)
-            diff = row.get("edge_pre_vs_flight_diff", 0.0)
+            fc = row.get("edge_pre_vs_flight_fc", 1.0)
+            # Use experiment_difference_normalized_values as effect size proxy
+            diff_norm = row.get("experiment_difference_normalized_values", 0.0)
 
             result["is_de"] = float(fdr) < 0.05
             result["de_fdr"] = round(float(fdr), 6)
-            result["de_diff"] = round(float(diff), 4)
+            result["de_diff"] = round(float(fc), 4)  # log2FC (fold change)
             result["is_drr"] = human_gene in drr_genes
-            result["direction"] = "up_in_flight" if diff > 0 else "down_in_flight"
+            result["direction"] = "up_in_flight" if fc > 1.0 else "down_in_flight"
 
         gene_results.append(result)
 

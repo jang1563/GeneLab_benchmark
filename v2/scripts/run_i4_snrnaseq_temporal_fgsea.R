@@ -9,8 +9,9 @@ suppressPackageStartupMessages({
 })
 set.seed(42)
 
-EXCEL_PATH <- file.path(Sys.getenv("HOME"),
-  "Dropbox/Bioinformatics/Claude/SpaceOmicsBench/v2_public/data/transcriptomics/single_cell",
+EXCEL_PATH <- file.path(
+  Sys.getenv("SPACEOMICS_ROOT", file.path(Sys.getenv("GENELAB_ROOT", "/path/to/GeneLab_benchmark"), "..", "SpaceOmicsBench")),
+  "v2_public/data/transcriptomics/single_cell",
   "GLDS-562_snRNA-Seq_PBMC_Gene_Expression_snRNA-seq_Processed_Data.xlsx")
 GMT_PATH   <- "/tmp/h.all.human.symbols.gmt"
 OUT_DIR    <- "v2/processed/F1_scrna"
