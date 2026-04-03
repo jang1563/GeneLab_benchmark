@@ -20,7 +20,7 @@ set -eo pipefail
 source ~/miniconda3/miniconda3/etc/profile.d/conda.sh
 conda activate perturb_seq_new
 
-cd /athena/cayuga_0003/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark
+cd ${GENELAB_ROOT:?Set GENELAB_ROOT to your project directory}
 
 # 16 tissue × method combinations (ordered: kernel first for priority)
 TISSUES=(    "liver"    "liver"    "gastrocnemius" "gastrocnemius" "kidney" "kidney" "thymus" "thymus" "eye"    "eye" "skin"          "skin"   "lung"          "lung"   "colon"  "colon")

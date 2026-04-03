@@ -6,17 +6,17 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --time=4:00:00
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/logs/e4_multispecies.log
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/logs/e4_multispecies.err
+#SBATCH --output=%x_%j.out
+#SBATCH --error=%x_%j.err
 
 echo "=== E4 Multi-Species NES Concordance ==="
 echo "Node: $(hostname)"
 echo "Date: $(date)"
 
-WORK_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
+WORK_DIR="${SCRATCH_DIR:?Set SCRATCH_DIR}/huggingface/benchmark/GeneLab_benchmark"
 
 export LD_LIBRARY_PATH=""
-source /home/fs01/jak4013/miniconda3/miniconda3/etc/profile.d/conda.sh
+source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh
 set -eo pipefail
 conda activate scgpt_env_new
 

@@ -22,7 +22,7 @@ fi
 BASE_URL="https://osdr.nasa.gov"
 OSDR_API="${BASE_URL}/osdr/data/osd/files/${OSD_N}"
 DOWNLOAD_BASE="${BASE_URL}/geode-py/ws/studies/OSD-${OSD_N}/download?source=datamanager&file="
-SCRATCH="/athena/masonlab/scratch/users/jak4013/rrrm1_scrna"
+SCRATCH="${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna"
 OUT_DIR="${SCRATCH}/OSD-${OSD_N}/fastq"
 
 mkdir -p "${OUT_DIR}"

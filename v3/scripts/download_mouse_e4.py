@@ -9,7 +9,7 @@ import os
 import urllib.request
 from pathlib import Path
 
-BASE = Path("/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/data/mouse")
+BASE = Path(os.environ.get("SCRATCH_DIR", ".")) / "huggingface" / "benchmark" / "GeneLab_benchmark" / "data" / "mouse"
 OSDR_API = "https://osdr.nasa.gov/osdr/data/osd/files/{osd_num}"
 OSDR_DL = "https://osdr.nasa.gov"
 

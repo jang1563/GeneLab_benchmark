@@ -8,9 +8,10 @@ Benchmark-oriented single-cell hardening for RRRM-1:
 - ambient/leakage review from marker-set enrichment outside expected labels
 
 Outputs are written under:
-  /athena/masonlab/scratch/users/jak4013/rrrm1_scrna/downstream_initial/hardening
+  $SCRATCH_DIR/rrrm1_scrna/downstream_initial/hardening
 """
 
+import os
 from pathlib import Path
 
 import anndata as ad
@@ -22,7 +23,7 @@ import pandas as pd
 import scanpy as sc
 from scipy import sparse
 
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", ".")) / "rrrm1_scrna"
 ANNOT_BASE = SCRATCH / "downstream_initial" / "annotations"
 OUTDIR = SCRATCH / "downstream_initial" / "hardening"
 TABLEDIR = OUTDIR / "tables"

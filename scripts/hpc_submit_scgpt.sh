@@ -13,7 +13,7 @@
 #   This is needed for IPython → sqlite3 → _sqlite3 linkage.
 #
 # Conda env: scgpt_env_new (Python 3.10, scgpt 0.2.4, flash_attn 1.0.4)
-# Conda path: /home/fs01/jak4013/miniconda3/miniconda3
+# Conda path: ${CONDA_PREFIX:-$HOME/miniconda3}
 #
 # ONE-TIME SETUP (already done as of 2026-03-09):
 #   [x] conda env scgpt_env_new: Python 3.10, scgpt 0.2.4, flash_attn 1.0.4
@@ -38,8 +38,8 @@
 
 #SBATCH --job-name=scgpt_lomo
 #SBATCH --partition=scu-gpu
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/logs/scgpt_%A_%a.log
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/logs/scgpt_%A_%a.err
+#SBATCH --output=logs/scgpt_%A_%a.log
+#SBATCH --error=logs/scgpt_%A_%a.err
 #SBATCH --time=06:00:00        # 6h per fold (generous; actual ~1-2h)
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -67,8 +67,8 @@ fi
 FOLD="${FOLDS[$SLURM_ARRAY_TASK_ID]}"
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
-PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
-CONDA_BASE="/home/fs01/jak4013/miniconda3/miniconda3"
+PROJECT_DIR="${GENELAB_ROOT:?Set GENELAB_ROOT to your project directory}"
+CONDA_BASE="${CONDA_PREFIX:-$HOME/miniconda3}"
 CONDA_ENV="scgpt_env_new"
 CONDA_ENV_PATH="${CONDA_BASE}/envs/${CONDA_ENV}"
 PYTHON="${CONDA_ENV_PATH}/bin/python"

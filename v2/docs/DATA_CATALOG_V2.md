@@ -25,8 +25,8 @@
 
 | Dataset | Path | Format | Notes |
 |---------|------|--------|-------|
-| Human cfRNA DE (3-group) | `/SpaceOmicsBench/v2_public/data/processed/cfrna_3group_de_noleak.csv` | 26,845 genes × 30 cols | JAXA CFE OSD-530, pre/in-flight/post groups |
-| Human cfRNA timecourse (11-group) | `/SpaceOmicsBench/v2_public/data/processed/cfrna_11group_timecourse.csv` | 26,845 genes × 23 cols | Pre1-3, Flight1-4, Post1-4 normalized means |
+| Human cfRNA DE (3-group) | `$SPACEOMICS_ROOT/v2_public/data/processed/cfrna_3group_de_noleak.csv` | 26,845 genes × 30 cols | JAXA CFE OSD-530, pre/in-flight/post groups |
+| Human cfRNA timecourse (11-group) | `$SPACEOMICS_ROOT/v2_public/data/processed/cfrna_11group_timecourse.csv` | 26,845 genes × 23 cols | Pre1-3, Flight1-4, Post1-4 normalized means |
 | Mouse liver fGSEA Hallmark NES | `processed/fgsea/liver/{mission}_fgsea_hallmark.csv` | 6 missions × ~50 pathways | Per-pathway NES + padj |
 | Mouse-Human ortholog table | `data/mouse/ensembl_mouse_human_orthologs_with_symbols.tsv` | 25,166 pairs | ENSMUSG ↔ ENSG + human gene symbol |
 
@@ -74,7 +74,7 @@
 **HPC pipeline (Cayuga):**
 ```
 1. Check OSDR API for processed data first
-2. Download to /athena/masonlab/scratch/users/jak4013/GeneLab_v2/
+2. Download to $SCRATCH_DIR/GeneLab_v2/
 3. Scanpy QC: min_genes=200, min_cells=3, mt_pct<20%
 4. Leiden clustering + marker gene annotation
 5. Per-cell-type FLT vs. GC: AUROC (PCA-LR, RSKF)
@@ -97,8 +97,8 @@
 
 | Data source | Location | Status | Notes |
 |------------|---------|--------|-------|
-| Human cfRNA microbiome | `/SpaceOmicsBench/v2_public/data/processed/microbiome_human_*.csv` | EXISTS | OSD-530 human |
-| Human JAXA microbiome | `/SpaceOmicsBench/v2_public/data/processed/microbiome_*.csv` | EXISTS | Gut taxonomy + pathways |
+| Human cfRNA microbiome | `$SPACEOMICS_ROOT/v2_public/data/processed/microbiome_human_*.csv` | EXISTS | OSD-530 human |
+| Human JAXA microbiome | `$SPACEOMICS_ROOT/v2_public/data/processed/microbiome_*.csv` | EXISTS | Gut taxonomy + pathways |
 | Mouse gut microbiome | OSDR GLDS-?? | NOT CHECKED | Need to search |
 
 **SpaceOmicsBench microbiome files found:**
@@ -129,7 +129,7 @@ GeneLab_benchmark v2 adds:
 
 **Key SpaceOmicsBench file for E1:**
 ```
-/Users/jak4013/Dropbox/Bioinformatics/Claude/SpaceOmicsBench/v2_public/data/processed/cfrna_3group_de_noleak.csv
+$SPACEOMICS_ROOT/v2_public/data/processed/cfrna_3group_de_noleak.csv
 ```
 - 26,845 human genes (gene symbols, e.g., MT-ND1, ACTB)
 - `edge_pre_vs_flight_diff`: mean_flight_normalized − mean_pre_normalized (use as fGSEA rank)

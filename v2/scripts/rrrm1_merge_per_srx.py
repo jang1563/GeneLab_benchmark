@@ -10,7 +10,7 @@ Usage:
     python3 rrrm1_merge_per_srx.py --tissue skin
     python3 rrrm1_merge_per_srx.py --all
 
-Produces: /athena/.../rrrm1_scrna/OSD-{N}/OSD-{N}_{tissue}_labeled.h5ad
+Produces: $SCRATCH_DIR/rrrm1_scrna/OSD-{N}/OSD-{N}_{tissue}_labeled.h5ad
   - obs columns: condition (FLT/GC), age_months, source_name, srx, animal_id
   - Barcodes prefixed: {SRX}_{barcode}-1
 """
@@ -24,8 +24,8 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-SCRATCH = Path("/athena/masonlab/scratch/users/jak4013/rrrm1_scrna")
-MAP_CSV = Path("/home/fs01/jak4013/rrrm1_scrna/RRRM1_SRX_CONDITION_MAP.csv")
+SCRATCH = Path(os.environ.get("SCRATCH_DIR", "/path/to/scratch")) / "rrrm1_scrna"
+MAP_CSV = Path(os.environ.get("HOME")) / "rrrm1_scrna" / "RRRM1_SRX_CONDITION_MAP.csv"
 
 TISSUE_OSD = {
     "blood":  "OSD-918",

@@ -6,8 +6,8 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=96G
 #SBATCH --time=4:00:00
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/logs/rrrm2_convert_%a.log
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/logs/rrrm2_convert_%a.err
+#SBATCH --output=%x_%a_%j.out
+#SBATCH --error=%x_%a_%j.err
 #SBATCH --array=0-3
 
 # GLDS array: 402, 403, 404, 405
@@ -19,15 +19,15 @@ echo "Node: $(hostname)"
 echo "Date: $(date)"
 echo "Memory limit: ${SLURM_MEM_PER_NODE}MB"
 
-SCRIPT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/scripts"
-LOG_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/logs"
+SCRIPT_DIR="${SCRATCH_DIR:?Set SCRATCH_DIR}/huggingface/benchmark/GeneLab_benchmark/v3/scripts"
+LOG_DIR="${SCRATCH_DIR:?Set SCRATCH_DIR}/huggingface/benchmark/GeneLab_benchmark/v3/logs"
 mkdir -p "$LOG_DIR"
 
 # --- Step 1: R extraction (Seurat → MTX/CSV) ---
 echo ""
 echo "=== Step 1: R extraction ==="
 export LD_LIBRARY_PATH=""
-source /home/fs01/jak4013/miniconda3/miniconda3/etc/profile.d/conda.sh
+source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh
 set -eo pipefail
 conda activate seurat.v5.R.4.3.3
 

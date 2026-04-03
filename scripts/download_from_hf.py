@@ -45,7 +45,7 @@ def download_task(task_name: str, token: str = None, dry_run: bool = False) -> i
     task_dir = TASKS_DIR / task_name
     if not task_dir.exists():
         print(f"  [WARN] Local task directory not found: {task_dir}")
-        print(f"         Clone the GitHub repo first: git clone https://github.com/jak4013/GeneLab_benchmark")
+        print(f"         Clone the GitHub repo first: git clone https://github.com/jang1563/GeneLab_benchmark")
         return 0
 
     # List available fold directories from HF

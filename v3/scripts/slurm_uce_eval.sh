@@ -10,8 +10,8 @@
 
 set -eo pipefail
 
-PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
-CONDA_BASE="/home/fs01/jak4013/miniconda3/miniconda3"
+PROJECT_DIR="${SCRATCH_DIR:?Set SCRATCH_DIR}/huggingface/benchmark/GeneLab_benchmark"
+CONDA_BASE="${CONDA_PREFIX:-$HOME/miniconda3}"
 UCE_ENV="$CONDA_BASE/envs/uce_env"
 DEFAULT_UCE_ARGS="--all --nlayers 4 --batch-size 25"
 

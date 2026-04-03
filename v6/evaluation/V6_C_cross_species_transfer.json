@@ -1,0 +1,875 @@
+{
+  "analyses": {
+    "pre_vs_post": {
+      "liver": {
+        "n_common_genes": 394,
+        "n_pca_components": 50,
+        "n_mouse_train": 261,
+        "n_human_test": 16,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6986,
+        "significant": false,
+        "mouse_internal_auroc": 0.7482,
+        "perm_auroc_mean": 0.5011
+      },
+      "gastrocnemius": {
+        "n_common_genes": 389,
+        "n_pca_components": 31,
+        "n_mouse_train": 32,
+        "n_human_test": 16,
+        "transfer_auroc": 0.6094,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 1.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.625,
+        "perm_p": 0.2116,
+        "significant": false,
+        "mouse_internal_auroc": 0.8359,
+        "perm_auroc_mean": 0.4786
+      },
+      "kidney": {
+        "n_common_genes": 395,
+        "n_pca_components": 50,
+        "n_mouse_train": 142,
+        "n_human_test": 16,
+        "transfer_auroc": 0.1406,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 1.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.25,
+        "perm_p": 0.8942,
+        "significant": false,
+        "mouse_internal_auroc": 0.8199,
+        "perm_auroc_mean": 0.449
+      },
+      "thymus": {
+        "n_common_genes": 396,
+        "n_pca_components": 50,
+        "n_mouse_train": 86,
+        "n_human_test": 16,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6347,
+        "significant": false,
+        "mouse_internal_auroc": 0.8303,
+        "perm_auroc_mean": 0.5117
+      },
+      "eye": {
+        "n_common_genes": 396,
+        "n_pca_components": 40,
+        "n_mouse_train": 41,
+        "n_human_test": 16,
+        "transfer_auroc": 0.5156,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 1.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.2076,
+        "significant": false,
+        "mouse_internal_auroc": 0.7818,
+        "perm_auroc_mean": 0.4641
+      },
+      "skin": {
+        "n_common_genes": 396,
+        "n_pca_components": 50,
+        "n_mouse_train": 118,
+        "n_human_test": 16,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.7325,
+        "significant": false,
+        "mouse_internal_auroc": 0.7976,
+        "perm_auroc_mean": 0.4776
+      },
+      "lung": {
+        "n_common_genes": 398,
+        "n_pca_components": 50,
+        "n_mouse_train": 58,
+        "n_human_test": 16,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6966,
+        "significant": false,
+        "mouse_internal_auroc": 0.6526,
+        "perm_auroc_mean": 0.4467
+      },
+      "colon": {
+        "n_common_genes": 397,
+        "n_pca_components": 50,
+        "n_mouse_train": 54,
+        "n_human_test": 16,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 2
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 2
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.7066,
+        "significant": false,
+        "mouse_internal_auroc": 0.6451,
+        "perm_auroc_mean": 0.4596
+      }
+    },
+    "pre_vs_post_recovery": {
+      "liver": {
+        "n_common_genes": 394,
+        "n_pca_components": 50,
+        "n_mouse_train": 261,
+        "n_human_test": 24,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6307,
+        "significant": false,
+        "mouse_internal_auroc": 0.7482,
+        "perm_auroc_mean": 0.5028
+      },
+      "gastrocnemius": {
+        "n_common_genes": 389,
+        "n_pca_components": 31,
+        "n_mouse_train": 32,
+        "n_human_test": 24,
+        "transfer_auroc": 0.6641,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 0.5,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 0.5,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.5,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.5,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.5,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 1.0,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.6875,
+        "perm_p": 0.2076,
+        "significant": false,
+        "mouse_internal_auroc": 0.8359,
+        "perm_auroc_mean": 0.4792
+      },
+      "kidney": {
+        "n_common_genes": 395,
+        "n_pca_components": 50,
+        "n_mouse_train": 142,
+        "n_human_test": 24,
+        "transfer_auroc": 0.1172,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.5,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.1875,
+        "perm_p": 0.9281,
+        "significant": false,
+        "mouse_internal_auroc": 0.8199,
+        "perm_auroc_mean": 0.4506
+      },
+      "thymus": {
+        "n_common_genes": 396,
+        "n_pca_components": 50,
+        "n_mouse_train": 86,
+        "n_human_test": 24,
+        "transfer_auroc": 0.4844,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6168,
+        "significant": false,
+        "mouse_internal_auroc": 0.8303,
+        "perm_auroc_mean": 0.5106
+      },
+      "eye": {
+        "n_common_genes": 396,
+        "n_pca_components": 40,
+        "n_mouse_train": 41,
+        "n_human_test": 24,
+        "transfer_auroc": 0.5078,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 1.0,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.2335,
+        "significant": false,
+        "mouse_internal_auroc": 0.7818,
+        "perm_auroc_mean": 0.4658
+      },
+      "skin": {
+        "n_common_genes": 396,
+        "n_pca_components": 50,
+        "n_mouse_train": 118,
+        "n_human_test": 24,
+        "transfer_auroc": 0.4922,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6747,
+        "significant": false,
+        "mouse_internal_auroc": 0.7976,
+        "perm_auroc_mean": 0.4714
+      },
+      "lung": {
+        "n_common_genes": 398,
+        "n_pca_components": 50,
+        "n_mouse_train": 58,
+        "n_human_test": 24,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6687,
+        "significant": false,
+        "mouse_internal_auroc": 0.6526,
+        "perm_auroc_mean": 0.4595
+      },
+      "colon": {
+        "n_common_genes": 397,
+        "n_pca_components": 50,
+        "n_mouse_train": 54,
+        "n_human_test": 24,
+        "transfer_auroc": 0.5,
+        "loco_aurocs": [
+          {
+            "crew": "C001",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C002",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C003",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C004",
+            "auroc": 1.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C005",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C006",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C007",
+            "auroc": 0.0,
+            "n_test": 3
+          },
+          {
+            "crew": "C008",
+            "auroc": 0.0,
+            "n_test": 3
+          }
+        ],
+        "mean_loco_auroc": 0.5,
+        "perm_p": 0.6946,
+        "significant": false,
+        "mouse_internal_auroc": 0.6451,
+        "perm_auroc_mean": 0.4709
+      }
+    }
+  },
+  "ortholog_map_size": 17103,
+  "cfRNA_genes": 500,
+  "timestamp": "2026-03-30T12:05:02.178404"
+}

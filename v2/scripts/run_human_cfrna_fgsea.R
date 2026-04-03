@@ -26,7 +26,7 @@ if (!dir.exists(REPO_ROOT)) {
 }
 
 CFRNA_PATH <- file.path(
-  "/Users/jak4013/Dropbox/Bioinformatics/Claude/SpaceOmicsBench",
+  Sys.getenv("SPACEOMICS_ROOT", file.path(Sys.getenv("GENELAB_ROOT", "/path/to/GeneLab_benchmark"), "..", "SpaceOmicsBench")),
   "v2_public/data/processed/cfrna_3group_de_noleak.csv"
 )
 OUT_DIR <- file.path(REPO_ROOT, "v2/processed/E1_human")

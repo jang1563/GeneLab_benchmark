@@ -70,19 +70,19 @@ EVAL_DIR = ROOT / "evaluation"
 MODEL_BASE = Path(
     os.environ.get(
         "SCGPT_MODEL_BASE",
-        "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/models",
+        str(ROOT / "models"),
     )
 )
 HPC_TASKS_BASE = Path(
     os.environ.get(
         "SCGPT_TASKS_BASE",
-        "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/tasks",
+        str(ROOT / "tasks"),
     )
 )
 HPC_EVAL_BASE = Path(
     os.environ.get(
         "SCGPT_EVAL_BASE",
-        "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/evaluation",
+        str(ROOT / "evaluation"),
     )
 )
 

@@ -18,8 +18,10 @@ if (length(args) < 1) {
 }
 glds <- args[1]
 
-BASE_DIR <- "/athena/masonlab/scratch/projects/GeneLab/ISS_single_cell/ISS_mouse_single_cell/result/GEX/2022_08_06_Seurat_object"
-OUT_DIR <- "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/v3/data/rrrm2"
+BASE_DIR <- Sys.getenv("RRRM2_SEURAT_DIR",
+  "/athena/masonlab/scratch/projects/GeneLab/ISS_single_cell/ISS_mouse_single_cell/result/GEX/2022_08_06_Seurat_object")
+OUT_DIR <- file.path(Sys.getenv("SCRATCH_DIR", Sys.getenv("HOME")),
+  "huggingface/benchmark/GeneLab_benchmark/v3/data/rrrm2")
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
 glds_dir <- file.path(BASE_DIR, paste0("GLDS-", glds))

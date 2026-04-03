@@ -327,8 +327,8 @@ def write_data_catalog_md(results: list[dict], hu_results: list[dict]) -> None:
     """Generate DATA_CATALOG.md from verification results."""
     lines = [
         "# DATA_CATALOG.md — GeneLab_benchmark",
-        f"**자동 생성**: `catalog_datasets.py` — {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}",
-        "**PLAN.md 버전**: v0.5",
+        f"**Auto-generated**: `catalog_datasets.py` — {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}",
+        "**PLAN.md version**: v0.5",
         "",
         "> ⚠️ Status legend:",
         "> ✅ Verified (bulk RNA-seq) | ❌ NOT FOUND | ⚠️ Wrong assay type",

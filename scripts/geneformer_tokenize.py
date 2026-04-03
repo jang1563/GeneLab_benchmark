@@ -64,7 +64,7 @@ HF_REPO = "ctheodoris/Geneformer"
 MOUSE_GF_BASE = Path(
     os.environ.get(
         "MOUSE_GF_BASE",
-        "/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/models",
+        str(ROOT / "models"),
     )
 )
 

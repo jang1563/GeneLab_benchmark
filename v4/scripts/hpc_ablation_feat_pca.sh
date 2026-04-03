@@ -18,7 +18,7 @@ set -eo pipefail
 source ~/miniconda3/miniconda3/etc/profile.d/conda.sh
 conda activate perturb_seq_new
 
-cd /athena/cayuga_0003/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark
+cd ${GENELAB_ROOT:?Set GENELAB_ROOT to your project directory}
 
 TISSUES=(liver gastrocnemius kidney thymus eye skin lung colon)
 FEAT_METHODS=(pca_lr elasticnet_lr)

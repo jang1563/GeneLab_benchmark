@@ -32,7 +32,7 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 **A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v4.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark) (private)
+Version: v4.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 

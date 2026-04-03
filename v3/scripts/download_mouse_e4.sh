@@ -3,7 +3,7 @@
 # Run on Cayuga: bash download_mouse_e4.sh
 
 set -eo pipefail
-BASE="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/data/mouse"
+BASE="${SCRATCH_DIR:?Set SCRATCH_DIR}/huggingface/benchmark/GeneLab_benchmark/data/mouse"
 OSDR="https://osdr.nasa.gov/osdr/data/osd/files"
 
 download_pair() {

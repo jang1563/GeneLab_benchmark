@@ -24,7 +24,7 @@ set -eo pipefail
 TISSUES=(liver gastrocnemius kidney thymus eye skin)
 TISSUE=${TISSUES[$SLURM_ARRAY_TASK_ID]}
 
-PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
+PROJECT_DIR="${GENELAB_ROOT:?Set GENELAB_ROOT to your project directory}"
 SCRIPT="$PROJECT_DIR/v4/scripts/wgcna_analysis_py.py"
 LOG_DIR="$PROJECT_DIR/v4/logs"
 mkdir -p "$LOG_DIR" "$PROJECT_DIR/v4/wgcna_outputs/$TISSUE"
@@ -36,7 +36,7 @@ echo "Node: $(hostname)"
 echo "========================================"
 
 # Activate conda (disable -u to allow conda's unbound vars)
-CONDA_BASE="/home/fs01/jak4013/miniconda3/miniconda3"
+CONDA_BASE="${CONDA_PREFIX:-$HOME/miniconda3}"
 set +u
 source "${CONDA_BASE}/etc/profile.d/conda.sh"
 conda activate perturb_seq_new

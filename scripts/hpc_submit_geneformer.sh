@@ -19,7 +19,7 @@
 #
 # ONE-TIME SETUP (run on login node, NOT in a job):
 #   1. Miniconda already installed at:
-#      /athena/masonlab/scratch/users/jak4013/miniconda3
+#      ${SCRATCH_DIR}/miniconda3
 #
 #   2. mouse_gf environment (Python 3.8.10, CUDA 12.1):
 #      conda create -n mouse_gf python=3.8.10 -y
@@ -28,7 +28,7 @@
 #      pip install transformers datasets accelerate scikit-learn safetensors tqdm huggingface_hub
 #
 #   3. Mouse-Geneformer source (no setup.py — use PYTHONPATH):
-#      cd /home/fs01/jak4013
+#      cd ${HOME}
 #      git clone https://github.com/zou-group/Mouse-Geneformer.git
 #      # Model weights in: ${PROJECT_DIR}/models/mouse_gf_base/
 #      # Dict files in:    ${PROJECT_DIR}/models/
@@ -53,8 +53,8 @@
 
 #SBATCH --job-name=mouse_gf_lomo
 #SBATCH --partition=scu-gpu
-#SBATCH --output=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/logs/geneformer_%A_%a.log
-#SBATCH --error=/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark/logs/geneformer_%A_%a.err
+#SBATCH --output=logs/geneformer_%A_%a.log
+#SBATCH --error=logs/geneformer_%A_%a.err
 #SBATCH --time=04:00:00                   # 4h per fold; increase to 08:00:00 if needed
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -86,10 +86,10 @@ fi
 FOLD="${FOLDS[$SLURM_ARRAY_TASK_ID]}"
 
 # ── Cayuga / MasonLab account details ─────────────────────────────────────────
-PROJECT_DIR="/athena/masonlab/scratch/users/jak4013/huggingface/benchmark/GeneLab_benchmark"
+PROJECT_DIR="${GENELAB_ROOT:?Set GENELAB_ROOT to your project directory}"
 CONDA_ENV="mouse_gf"
 # Mouse-Geneformer has no setup.py → use PYTHONPATH (installed in home dir via git clone)
-MOUSE_GF_SRC="/home/fs01/jak4013/Mouse-Geneformer"
+MOUSE_GF_SRC="${HOME}/Mouse-Geneformer"
 # ─────────────────────────────────────────────────────────────────────────────
 
 echo "======================================"

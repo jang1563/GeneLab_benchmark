@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-build_ortholog_db.py — Ensembl BioMart에서 cross-species ortholog 다운로드.
+build_ortholog_db.py — Download cross-species orthologs from Ensembl BioMart.
 
 Downloads ortholog mappings:
   - Mouse ↔ Drosophila (1:1 orthologs)

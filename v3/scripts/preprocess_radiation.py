@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-preprocess_radiation.py — Phase 5 radiation × HLU 2×2 데이터 전처리.
+preprocess_radiation.py — Phase 5 radiation x HLU 2x2 data preprocessing.
 
 Datasets:
   OSD-202 (GLDS-202): Brain, 2×2×2 (radiation × HLU × time), n=40
