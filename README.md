@@ -2,8 +2,8 @@
 
 **A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v5.0 (2026-03-29) | Dataset freeze: 2026-03-01
-Status: **v1–v4 Complete** | **v5 Biological Interpretation Complete** | v6 Cross-Species Validation Complete
+Version: v6.0 (2026-03-30) | Dataset freeze: 2026-03-01
+Status: **v1–v6 Complete** | v7 Graph Neural Networks In Progress
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -322,7 +322,7 @@ python scripts/evaluate_submission.py \
 |-------|---------|-------------|
 | **Tier 1 -- Classical ML** | LR, RF, XGBoost, PCA-LR, SVM, LightGBM, TabNet | Tabular gene x sample |
 | **Tier 2 -- Foundation Models** | Geneformer, scGPT, UCE, scFoundation | Gene rank order / embeddings |
-| **Tier 3 -- Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list (see DD-16) |
+| **Tier 3 -- Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list |
 
 ---
 
@@ -348,7 +348,7 @@ All data is derived from publicly available NASA OSDR datasets.
 | Lung | Multiple OSD studies | Multiple missions | See v4 results |
 | Colon | Multiple OSD studies | Multiple missions | See v4 results |
 
-Preprocessing: DESeq2 normalization (per-mission), log2(counts + 1), global low-expression filter (>=20% samples with count>1), top 75th percentile variance gene selection per fold (train missions only -- DD-03).
+Preprocessing: DESeq2 normalization (per-mission), log2(counts + 1), global low-expression filter (>=20% samples with count>1), top 75th percentile variance gene selection per fold (train missions only).
 
 ---
 
@@ -393,7 +393,7 @@ Key methodological choices underpinning this benchmark:
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v4.0}
+  note    = {v6.0}
 }
 ```
 

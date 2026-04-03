@@ -32,7 +32,7 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 **A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v4.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
+Version: v6.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 
@@ -98,7 +98,7 @@ genelab-benchmark/
 - **Rows**: Sample IDs (e.g., `Mmus_C57-6J_SKN_FLT_25days_Rep1_F1`)
 - **Columns**: Ensembl mouse gene IDs (e.g., `ENSMUSG00000021969`)
 - **Values**: Log2(DESeq2 size-factor normalized counts + 1)
-- **Gene selection**: Top 75th percentile variance, computed on **training missions only** (no test leakage -- DD-03)
+- **Gene selection**: Top 75th percentile variance, computed on **training missions only** (no test leakage)
 - **Typical shape**: (n_train x ~20,000 genes), (n_test x ~20,000 genes)
 
 ### Labels (in GitHub repo)
@@ -308,7 +308,7 @@ Note: OSD-248 and OSD-247 additionally include BC (Basal Control) samples treate
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v5.0}
+  note    = {v6.0}
 }
 ```
 
