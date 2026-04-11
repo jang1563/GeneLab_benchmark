@@ -57,9 +57,11 @@ TISSUE_MISSIONS = {
     "gastrocnemius": ["RR-1", "RR-5", "RR-9"],
     "kidney": ["RR-1", "RR-3", "RR-7"],
     "thymus": ["MHU-1", "MHU-2", "RR-6", "RR-9"],
-    "eye": ["RR-1", "RR-3", "TBD"],
+    "eye": ["RR-1", "RR-3", "OSD-397"],
     "skin": ["MHU-2", "RR-6", "RR-7"],
 }
+
+MISSION_ALIASES = {"TBD": "OSD-397"}
 
 EXPR_FILE = {
     "liver": "liver_all_missions_log2_norm_limma_rbe.csv",
@@ -117,6 +119,16 @@ def load_tissue_data(tissue):
     if "mission" not in meta.columns:
         meta = meta.copy()
         meta["mission"] = "unknown"
+    else:
+        meta = meta.copy()
+        meta["mission"] = meta["mission"].replace(MISSION_ALIASES)
+
+    # Drop any non-numeric columns from expression (e.g. skin has mission/osd_id)
+    numeric_cols = expr.select_dtypes(include=[np.number]).columns
+    if len(numeric_cols) < len(expr.columns):
+        dropped = set(expr.columns) - set(numeric_cols)
+        print(f"  Dropping non-numeric columns from expression: {dropped}")
+        expr = expr[numeric_cols]
 
     return expr, y, meta
 
@@ -446,7 +458,7 @@ def train_gnn_lomo(
             for batch in loader_tr:
                 batch = batch.to(device)
                 logits = model(batch.x, batch.edge_index, batch.batch)
-                loss = criterion(logits, batch.y.squeeze())
+                loss = criterion(logits, batch.y.float().view(-1))
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
@@ -557,7 +569,7 @@ def train_gnn_lomo(
                     for batch in loader_tr_p:
                         batch = batch.to(device)
                         logits = model_p(batch.x, batch.edge_index, batch.batch)
-                        loss = crit_p(logits, batch.y.squeeze())
+                        loss = crit_p(logits, batch.y.float().view(-1))
                         opt_p.zero_grad()
                         loss.backward()
                         opt_p.step()
@@ -619,6 +631,30 @@ def load_pcalr_baseline(tissue):
         return None
 
 
+def result_matches_request(
+    result,
+    *,
+    tissue,
+    graph_type,
+    topology_scope,
+    n_edges_per_gene,
+    n_bootstrap,
+    n_perm,
+    seed,
+):
+    """Check whether an existing result matches the current invocation."""
+    expected = {
+        "tissue": tissue,
+        "graph_type": graph_type,
+        "topology_scope": topology_scope,
+        "n_edges_per_gene": n_edges_per_gene,
+        "n_bootstrap": n_bootstrap,
+        "n_perm": n_perm,
+        "seed": seed,
+    }
+    return all(result.get(key) == value for key, value in expected.items())
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--tissue", default="liver", help="Tissue name or 'all'")
@@ -646,10 +682,22 @@ def main():
         for graph_type in graph_types:
             out_file = OUT_DIR / f"GNN_{tissue}_{graph_type}.json"
             if out_file.exists():
-                print(f"[SKIP] {out_file.name} already exists")
                 with open(out_file) as handle:
-                    all_results.append(json.load(handle))
-                continue
+                    existing = json.load(handle)
+                if result_matches_request(
+                    existing,
+                    tissue=tissue,
+                    graph_type=graph_type,
+                    topology_scope=args.topology_scope,
+                    n_edges_per_gene=args.n_edges_per_gene,
+                    n_bootstrap=args.n_bootstrap,
+                    n_perm=args.n_perm,
+                    seed=args.seed,
+                ):
+                    print(f"[SKIP] {out_file.name} already exists for this parameter set")
+                    all_results.append(existing)
+                    continue
+                print(f"[RECOMPUTE] {out_file.name} exists but parameters changed")
 
             result = train_gnn_lomo(
                 tissue=tissue,

@@ -5,7 +5,7 @@
 #
 # Prerequisites:
 #   - Per-SRX STARsolo job 2703854 is running (or already complete)
-#   - rrrm1_merge_per_srx.py, rrrm1_initial_scanpy.py, rrrm1_broad_annotate.py,
+#   - rrrm1_merge_per_srx.py, rrrm1_merge_h5ad.py, rrrm1_initial_scanpy.py, rrrm1_broad_annotate.py,
 #     rrrm1_singlecell_hardening.py, rrrm1_f2a_composition.py,
 #     rrrm1_f2b_pseudobulk_fgsea.py, rrrm1_f2c_loao_classifier.py
 #     are all present in SCRATCH_DIR
@@ -31,7 +31,7 @@ echo "=== F2 Pipeline Wrapper ==="
 echo "Waiting for per-SRX STARsolo job: ${STARSOLO_JOB}"
 echo "Date: $(date)"
 
-# ── Step 1: Merge per-SRX STARsolo outputs → labeled h5ads ─────────────────
+# ── Step 1: Build labeled + merged RRRM-1 h5ads ────────────────────────────
 MERGE_SCRIPT="${SCRATCH}/rrrm1_merge_per_srx_slurm.sh"
 cat > "${MERGE_SCRIPT}" << 'INNEREOF'
 #!/bin/bash
@@ -52,6 +52,7 @@ date
 python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_merge_per_srx.py \
     --all \
     --map_csv ${HOME}/rrrm1_scrna/RRRM1_SRX_CONDITION_MAP.csv
+python3 ${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna/rrrm1_merge_h5ad.py
 echo "=== Merge done ===" && date
 INNEREOF
 
@@ -59,7 +60,7 @@ JID_MERGE=$(${SBATCH} --dependency=afterok:${STARSOLO_JOB} "${MERGE_SCRIPT}" | a
 echo "Step 1 (merge) submitted: job ${JID_MERGE}"
 
 
-# ── Step 2: Initial scanpy processing (array 0-3, each tissue sequential) ──
+# ── Step 2: Tissue-wise processing (array 0-3, one tissue per task) ────────
 PROCESS_SCRIPT="${SCRATCH}/rrrm1_process_labeled_slurm.sh"
 cat > "${PROCESS_SCRIPT}" << 'INNEREOF'
 #!/bin/bash

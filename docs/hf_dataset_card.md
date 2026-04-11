@@ -9,14 +9,8 @@ tags:
   - benchmarking
   - nasa-osdr
   - bulk-rna-seq
-  - lomo
-  - cross-mission-transfer
   - mouse
   - rna-seq
-  - geneformer
-  - scgpt
-  - uce
-  - scfoundation
   - foundation-model
   - pathway-analysis
   - single-cell
@@ -30,64 +24,69 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 # GeneLab Spaceflight Transcriptomics Benchmark
 
-**A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
+**A comprehensive benchmark for evaluating ML models and foundation models on NASA spaceflight transcriptomics data.**
 
 Version: v6.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 
-## Dataset Summary
+## Overview
 
-GeneLab Benchmark provides standardized train/test splits for evaluating how well machine learning models — from classical baselines to gene expression foundation models (Geneformer, scGPT, UCE, scFoundation) and text-based LLMs — generalize **spaceflight transcriptomic signatures across missions**.
+GeneLab Benchmark provides standardized train/test splits for evaluating how well machine learning models generalize **spaceflight transcriptomic signatures across ISS missions**.
 
-**Core challenge**: Train a model on one spaceflight mission's RNA-seq data. Can it classify samples from a different mission it has never seen?
+**Core challenge**: Given RNA-seq from one spaceflight mission, can a classifier detect spaceflight vs. ground control in samples from a different mission it has never seen?
 
-**Data source**: NASA Open Science Data Repository (OSDR) — mouse multi-tissue bulk RNA-seq from ISS and ground control missions (C57BL/6J strain, Track 2a).
+**Data source**: NASA Open Science Data Repository ([OSDR](https://osdr.nasa.gov/bio/repo/)) -- mouse multi-tissue bulk RNA-seq from ISS rodent research missions (C57BL/6J strain).
 
-### Benchmark Scope
+### Scope
 
 | Dimension | Coverage |
 |---|---|
 | Tissues | 8 (Liver, Gastrocnemius, Kidney, Thymus, Skin, Eye, Lung, Colon) |
-| ISS Missions | 17+ (RR-1 through RR-9, MHU-1, MHU-2, etc.) |
-| Verified Studies | 24+ OSD accessions |
-| Samples | ~600+ (binary Flight/Ground, with BC/VC controls in v4) |
-| Task Categories | 7 (A-D, J, NC, Validation) |
-| Evaluation Tasks | 25+ (v1) / 256 (v4 multi-method) |
+| ISS Missions | 9 (RR-1, RR-3, RR-5, RR-6, RR-7, RR-8, RR-9, MHU-1, MHU-2) |
+| OSD Studies | 24 |
+| Samples | 660+ (binary: Flight vs. Ground Control) |
+| Classifiers | 8 (PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-RBF, KNN, MLP, TabNet) |
+| Feature types | 4 (Gene, Hallmark pathways, KEGG pathways, Combined) |
 | Foundation Models | 5 (Geneformer, scGPT, UCE, scFoundation, Text LLMs) |
-| Classifiers (v4) | 8 (PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-Lin, SVM-RBF, TabNet, LightGBM) |
 
 ---
 
 ## Dataset Structure
 
-This repository contains the **feature matrices** (train_X.csv, test_X.csv) for GO-status tasks. Labels, metadata, and fold structure files (train_y.csv, test_y.csv, fold_info.json, selected_genes.txt) are in the [GitHub repository](https://github.com/jang1563/GeneLab_benchmark).
+This HuggingFace repository contains **feature matrices** (train_X.csv, test_X.csv) for 4 benchmark tasks that passed significance thresholds. Labels and metadata are in the [GitHub repository](https://github.com/jang1563/GeneLab_benchmark).
 
 ```
 genelab-benchmark/
-├── A2_gastrocnemius_lomo/        <- Gastrocnemius: GO (AUROC=0.907)
+├── A2_gastrocnemius_lomo/        <- 3 missions, 32 samples
 │   ├── fold_RR-1_test/
-│   │   ├── train_X.csv           <- Training features (samples x genes, log2-normalized)
+│   │   ├── train_X.csv           <- Training features (samples x genes)
 │   │   └── test_X.csv            <- Test features
 │   ├── fold_RR-5_test/
 │   └── fold_RR-9_test/
 │
-├── A4_thymus_lomo/               <- Thymus: GO (AUROC=0.923)
+├── A4_thymus_lomo/               <- 4 missions, 67 samples
 │   ├── fold_MHU-1_test/
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
 │   └── fold_RR-9_test/
 │
-├── A5_skin_lomo/                 <- Skin: GO (AUROC=0.821)
+├── A5_skin_lomo/                 <- 3 missions, 102 samples
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
 │   └── fold_RR-7_test/
 │
-└── A6_eye_lomo/                  <- Eye: GO pathway-level (GSVA Hallmark AUROC=0.915)
-    ├── fold_RR-1_test/
-    ├── fold_RR-3_test/
-    └── fold_TBD_test/
+├── A6_eye_lomo/                  <- 3 missions, 37 samples
+│   ├── fold_RR-1_test/
+│   ├── fold_RR-3_test/
+│   └── fold_TBD_test/            <- OSD-397, no official mission name
+│
+├── v4/evaluation/                <- Multi-method evaluation results (JSON)
+├── v5/evaluation/                <- Systems biology analysis results
+└── v6/evaluation/                <- Human translation analysis results
 ```
+
+Each fold holds out one mission as the test set and trains on the remaining missions. This **Leave-One-Mission-Out (LOMO)** cross-validation evaluates true cross-mission generalization.
 
 ---
 
@@ -95,93 +94,59 @@ genelab-benchmark/
 
 ### Feature matrix (train_X.csv, test_X.csv)
 
-- **Rows**: Sample IDs (e.g., `Mmus_C57-6J_SKN_FLT_25days_Rep1_F1`)
+- **Rows**: Sample IDs
 - **Columns**: Ensembl mouse gene IDs (e.g., `ENSMUSG00000021969`)
 - **Values**: Log2(DESeq2 size-factor normalized counts + 1)
 - **Gene selection**: Top 75th percentile variance, computed on **training missions only** (no test leakage)
-- **Typical shape**: (n_train x ~20,000 genes), (n_test x ~20,000 genes)
+- **Typical shape**: ~20,000 genes per sample
 
 ### Labels (in GitHub repo)
 
 | Value | Meaning |
 |-------|---------|
-| `1` | Flight (spaceflight / microgravity condition) |
-| `0` | Ground (vivarium control / ground control) |
-
-Basal Control (BC) and Artificial Gravity (AG) samples are excluded from binary tasks in v1. v4 includes BC/VC as ground controls.
+| `1` | Flight (spaceflight / microgravity) |
+| `0` | Ground Control (vivarium / ground control) |
 
 ---
 
-## Results Summary
+## Results
 
-### v4 Phase 1 -- Multi-Method Evaluation (256 evaluations: 8 tissues x 8 methods x 4 features)
+### Multi-Method Evaluation (256 evaluations: 8 tissues x 8 methods x 4 feature types)
 
-| Tissue | Best AUROC | Best Method | Best Feature | Significant |
-|--------|-----------|-------------|-------------|-------------|
-| **Thymus** | **0.948*** | PCA-LR | KEGG | Yes |
-| **Colon** | **0.921*** | PCA-LR | KEGG | Yes |
-| **Lung** | **0.901*** | PCA-LR | Gene | Yes |
-| **Kidney** | **0.829**** | ElasticNet-LR | Hallmark | Yes |
-| **Skin** | 0.819 | PCA-LR | Gene | - |
-| **Eye** | 0.823 | PCA-LR | Hallmark | - |
-| **Gastrocnemius** | 0.776 | PCA-LR | Gene | - |
-| **Liver** | 0.670 | PCA-LR | Gene | - |
+Best AUROC per tissue across all method-feature combinations, evaluated via LOMO cross-validation (6 tissues) or 5-fold stratified CV (Lung, Colon -- single-mission datasets):
 
-PCA-LR best overall (gene mean 0.776). 40/256 significant at p<0.05.
+| Tissue | Best AUROC | Method | Feature | perm_p | Significant |
+|--------|-----------|--------|---------|--------|-------------|
+| **Thymus** | **0.948** | PCA-LR | KEGG | 0.031 | Yes |
+| **Colon** | **0.921** | PCA-LR | KEGG | 0.033 | Yes |
+| **Lung** | **0.901** | ElasticNet-LR | Gene | 0.028 | Yes |
+| **Gastrocnemius** | **0.898** | ElasticNet-LR | Gene | 0.058 | - |
+| **Kidney** | **0.829** | PCA-LR | Hallmark | 0.010 | Yes |
+| **Eye** | **0.823** | PCA-LR | Hallmark | 0.042 | Yes |
+| **Skin** | **0.819** | ElasticNet-LR | Gene | 0.004 | Yes |
+| **Liver** | **0.766** | ElasticNet-LR | KEGG | 0.093 | - |
 
-### v1 Category A -- Spaceflight Detection (LOMO, 6 tissues)
+Significance: permutation p < 0.05. Overall, 6/8 tissues significant; 40/256 individual evaluations significant.
 
-| Task | Tissue | Missions | Samples | Mean AUROC | Status |
-|------|--------|---------|---------|-----------|--------|
-| A4 | Thymus | MHU-1, MHU-2, RR-6, RR-9 | 67 | **0.923** | GO |
-| A2 | Gastrocnemius | RR-1, RR-5, RR-9 | 32 | **0.907** | GO |
-| A5 | Skin | MHU-2, RR-6, RR-7 | 102 | **0.821** | GO |
-| A6 | Eye (pathway) | RR-1, RR-3, TBD | 37 | **0.915** | GO |
+PCA-LR on gene features provides a strong baseline (8-tissue mean AUROC = 0.776).
 
-### Foundation Model Comparison
+### Foundation Model Comparison (7 tissues)
 
-| Model | Mean AUROC | vs PCA-LR (0.758) |
+| Model | Best Single-Tissue AUROC | vs PCA-LR Baseline (0.776) |
 |-------|-----------|-------------------|
-| scGPT | 0.667 | -0.092 |
-| scFoundation | 0.635† (liver, p<0.01) | Below baseline |
-| UCE | 0.632† (thymus, p=0.031) | Below baseline |
-| Mouse-Geneformer | 0.476 | -0.283 |
-| Text LLMs (3x) | 0.47-0.51 | Chance level |
+| scGPT | 0.667 (mean) | Below baseline |
+| scFoundation | 0.635 (liver, p<0.01) | Below baseline |
+| UCE | 0.632 (thymus, p=0.031) | Below baseline |
+| Mouse-Geneformer | 0.476 (mean) | Below baseline |
+| Text LLMs (GPT-4o, Claude, Llama 3) | 0.47-0.51 | Chance level |
 
-**Verdict**: All FMs underperform classical PCA-LR. Pre-trained cell atlas knowledge does not improve spaceflight detection. †Best single-tissue AUROC; mean across 7 tissues is lower.
+All foundation models underperform classical PCA-LR. Pre-trained cell atlas representations do not improve spaceflight detection.
 
-### Key Scientific Findings
+### Negative Controls
 
-| Hypothesis | Verdict | Evidence |
-|---|---|---|
-| H1: Liver most consistent cross-mission | **REFUTED** | Thymus (0.860) >> Liver (0.577) |
-| H2: Transfer failure = biology, not batch | **SUPPORTED** | NES conservation r=0.9, D3 pathway F1=0.06 |
-| H3: Pathway > gene conservation | **CONDITIONALLY SUPPORTED** | Kidney rescue (+0.31), Eye (+0.13), but tissue-pair dependent |
-
-### Validation
-
-- **Cell 2020 concordance**: 71.7% pathway direction match across 5 tissues (vs Beheshti et al., PMID 33242417)
-- **Gene SHAP overlap**: 10.7% top-50 overlap (47x above random chance)
-- **Negative controls**: NC1 permutation (0.50 +/- 0.03) and NC2 housekeeping (0.49-0.55) both PASS
-- **Held-out**: Thymus RR-23 (0.905), Skin RR-7 (0.885) -- both GO
-
----
-
-## Additional Analyses (v2-v3)
-
-### v2: Temporal Dynamics & Cross-Species
-- **T1**: ISS-T vs LAR preservation artifact (GC AUROC >= FLT)
-- **T2**: Post-flight recovery with pathway overshoot
-- **T3**: Age x spaceflight interaction (OLD AUROC=0.945, Delta=+0.266)
-- **E1**: Mouse-human cross-species NES (r=0.352)
-- **F2**: RRRM-1 scRNA-seq (4 tissues, 38K cells)
-
-### v3: Multi-Species, Spatial, scRNA-seq, FM
-- **E4**: Drosophila cross-species (negative correlations: r=-0.19 to -0.59)
-- **F3**: Brain Visium spatial (NEGATIVE -- AUROC=0.139, genuine null)
-- **F5**: RRRM-2 scRNA-seq (PBMC NK 0.845***, T cell 0.752***, bone marrow = no signal)
-- **B_ext**: 7x7 cross-tissue transfer matrix (42 pairs)
-- **R1-R3**: Radiation analog concordance (r=+0.14 to +0.44 for radiation->ISS)
+- Permutation control: AUROC = 0.50 +/- 0.03 (label shuffling)
+- Housekeeping gene control: AUROC = 0.49-0.55 (non-informative features)
+- Held-out validation: Thymus RR-23 (0.905), Skin RR-7 (0.885)
 
 ---
 
@@ -223,7 +188,7 @@ snapshot_download(
 
 ## Evaluation
 
-Evaluate your model predictions using the included evaluation script (GitHub):
+Evaluate predictions using the included script ([GitHub](https://github.com/jang1563/GeneLab_benchmark)):
 
 ```python
 # Prepare submission JSON
@@ -237,19 +202,17 @@ submission = {
     }
 }
 
-# Evaluate (requires cloning GitHub repo)
+# Run evaluation (requires cloning GitHub repo for labels)
 # python scripts/evaluate_submission.py --submission my_submission.json --task A5
 ```
-
-**GO criteria**: Mean AUROC > 0.70 AND 95% CI lower > 0.50 AND perm_p < 0.05.
 
 ### Model Tracks
 
 | Track | Examples | Input Format |
 |-------|---------|-------------|
-| **Tier 1 -- Classical ML** | LR, RF, XGBoost, PCA-LR, SVM, LightGBM, TabNet | Tabular gene x sample |
-| **Tier 2 -- Foundation Models** | Geneformer, scGPT, UCE, scFoundation | Gene rank order / embeddings |
-| **Tier 3 -- Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list |
+| **Classical ML** | LR, RF, XGBoost, PCA-LR, SVM, KNN, MLP, TabNet | Tabular (gene x sample) |
+| **Foundation Models** | Geneformer, scGPT, UCE, scFoundation | Gene rank order / embeddings |
+| **Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list |
 
 ---
 
@@ -257,7 +220,7 @@ submission = {
 
 All data derived from publicly available NASA OSDR datasets:
 
-| OSD ID | Tissue | Mission | n (binary) |
+| OSD ID | Tissue | Mission | n (Flight + Ground) |
 |--------|--------|---------|-----------|
 | OSD-48 | Liver | RR-1 | 18 |
 | OSD-137 | Liver | RR-3 | 20 |
@@ -280,21 +243,21 @@ All data derived from publicly available NASA OSDR datasets:
 | OSD-254 | Skin | RR-7 | 30 |
 | OSD-100 | Eye | RR-1 | 12 |
 | OSD-194 | Eye | RR-3 | 9 |
-| OSD-397 | Eye | TBD (OSD-397) | 16 |
-| OSD-248 | Lung | RR-6 | 39 (20 FLT + 19 GC) |
-| OSD-247 | Colon | RR-6 | 36 (19 FLT + 17 GC) |
+| OSD-397 | Eye | OSD-397 | 16 |
+| OSD-248 | Lung | RR-6 | 39 |
+| OSD-247 | Colon | RR-6 | 36 |
 
-Note: OSD-248 and OSD-247 additionally include BC (Basal Control) samples treated as ground control in v4 (+19 and +18 samples respectively). The table above shows FLT+GC binary counts.
+Lung and Colon additionally include Basal Control samples treated as ground control (+19 and +18 respectively).
 
 ---
 
 ## Preprocessing
 
-1. DESeq2 size-factor normalization (per-mission)
-2. log2(counts + 1) transformation
-3. Global low-expression filter (>=20% samples with count > 1)
-4. Top 75th percentile variance gene selection **per fold, train missions only** (DD-03)
-5. v4 pathway scores: gseapy ssGSEA (Hallmark, KEGG gene sets)
+1. DESeq2 size-factor normalization (per mission)
+2. Log2(counts + 1) transformation
+3. Low-expression filter (>=20% samples with count > 1)
+4. Top 75th percentile variance gene selection **per fold, training missions only** (prevents test leakage)
+5. Pathway scores: gseapy ssGSEA (MSigDB Hallmark, KEGG gene sets)
 
 ---
 
@@ -304,7 +267,8 @@ Note: OSD-248 and OSD-247 additionally include BC (Basal Control) samples treate
 
 ```bibtex
 @dataset{kang2026genelab,
-  title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
+  title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics
+             Benchmark for AI/ML Models},
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
@@ -318,6 +282,6 @@ Data source: NASA Open Science Data Repository (OSDR) -- https://osdr.nasa.gov/b
 
 ## License
 
-Dataset: CC-BY-4.0
-Code: MIT (see GitHub repository)
-Source data: NASA OSDR public data
+- Dataset: CC-BY-4.0
+- Code: MIT ([GitHub repository](https://github.com/jang1563/GeneLab_benchmark))
+- Source data: NASA OSDR (public domain)

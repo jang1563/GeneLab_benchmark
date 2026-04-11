@@ -11,6 +11,7 @@ Approach:
 - save annotated h5ad, score tables, cluster annotations, and UMAP figures
 """
 
+import argparse
 import os
 from pathlib import Path
 
@@ -208,8 +209,18 @@ def annotate_tissue(tissue: str) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--tissue",
+        choices=sorted(MARKERS),
+        default=None,
+        help="Annotate a single tissue only",
+    )
+    args = parser.parse_args()
+
     ensure_dirs()
-    for tissue in MARKERS:
+    tissues = [args.tissue] if args.tissue else sorted(MARKERS)
+    for tissue in tissues:
         annotate_tissue(tissue)
     print(f"Wrote broad annotation outputs under: {OUTDIR}")
 

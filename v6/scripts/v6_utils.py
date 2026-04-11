@@ -12,23 +12,64 @@ import pandas as pd
 from pathlib import Path
 
 # ── Base paths ──────────────────────────────────────────────────────────────
-GENELAB_BASE = Path(os.environ.get("GENELAB_ROOT", "."))
-SPACEOMICS_BASE = Path(os.environ.get("SPACEOMICS_ROOT", "."))
+REPO_ROOT = Path(__file__).resolve().parents[2]
+GENELAB_BASE = Path(os.environ.get("GENELAB_ROOT", REPO_ROOT)).expanduser().resolve()
+SPACEOMICS_ROOT = os.environ.get("SPACEOMICS_ROOT")
+SPACEOMICS_BASE = Path(SPACEOMICS_ROOT).expanduser().resolve() if SPACEOMICS_ROOT else None
 
 V4_EVAL = GENELAB_BASE / "v4" / "evaluation"
 V5_EVAL = GENELAB_BASE / "v5" / "evaluation"
 V6_EVAL = GENELAB_BASE / "v6" / "evaluation"
 PROCESSED = GENELAB_BASE / "processed"
 
-# SpaceOmicsBench data paths (v2.1 is latest with metabolomics)
-SOB_PROCESSED = SPACEOMICS_BASE / "v2_public" / "data" / "processed"
-SOB_FEATURE_MATRIX = (SPACEOMICS_BASE /
-    "2025_01_08_v2.1.metabolomics" / "SpaceOmicsBench_v2.1" / "data" /
-    "cfrna_feature_matrix.csv")
-
 # All 8 mouse tissues
 ALL_TISSUES = ["liver", "gastrocnemius", "kidney", "thymus",
                "eye", "skin", "lung", "colon"]
+
+
+def _spaceomics_hint():
+    return (
+        "Set SPACEOMICS_ROOT to a local SpaceOmicsBench checkout containing "
+        "`v2_public/data/processed/` and "
+        "`2025_01_08_v2.1.metabolomics/SpaceOmicsBench_v2.1/data/`."
+    )
+
+
+def _require_spaceomics_root():
+    if SPACEOMICS_BASE is None:
+        raise FileNotFoundError(
+            "SpaceOmicsBench assets are not bundled with GeneLabBench. "
+            + _spaceomics_hint()
+        )
+    return SPACEOMICS_BASE
+
+
+def _require_existing_path(path, description):
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Missing {description}: {path}. " + _spaceomics_hint()
+        )
+    return path
+
+
+def sob_processed_dir():
+    base = _require_spaceomics_root()
+    return _require_existing_path(
+        base / "v2_public" / "data" / "processed",
+        "SpaceOmicsBench processed directory",
+    )
+
+
+def sob_feature_matrix_path():
+    base = _require_spaceomics_root()
+    return _require_existing_path(
+        base
+        / "2025_01_08_v2.1.metabolomics"
+        / "SpaceOmicsBench_v2.1"
+        / "data"
+        / "cfrna_feature_matrix.csv",
+        "SpaceOmicsBench cfRNA feature matrix",
+    )
 
 # ── Ortholog mapping ────────────────────────────────────────────────────────
 def load_ortholog_map():
@@ -89,7 +130,10 @@ def load_cfrna_de():
     """Load full cfRNA differential expression (26,845 genes).
     Returns DataFrame with gene as index.
     """
-    path = SOB_PROCESSED / "cfrna_3group_de.csv"
+    path = _require_existing_path(
+        sob_processed_dir() / "cfrna_3group_de.csv",
+        "SpaceOmicsBench cfRNA differential expression table",
+    )
     df = pd.read_csv(path)
     df = df.set_index("gene")
     return df
@@ -99,7 +143,10 @@ def load_cfrna_drr():
     """Load 466 DRR (differentially regulated response) gene names.
     Returns set of gene names.
     """
-    path = SOB_PROCESSED / "cfrna_466drr.csv"
+    path = _require_existing_path(
+        sob_processed_dir() / "cfrna_466drr.csv",
+        "SpaceOmicsBench DRR gene list",
+    )
     df = pd.read_csv(path)
     return set(df["gene"].values)
 
@@ -108,7 +155,7 @@ def load_cfrna_feature_matrix():
     """Load cfRNA feature matrix (24 samples × 500 genes).
     Returns: X (DataFrame, samples×genes), meta (DataFrame with phase/day).
     """
-    df = pd.read_csv(SOB_FEATURE_MATRIX)
+    df = pd.read_csv(sob_feature_matrix_path())
     meta_cols = ["sample_id", "mission", "crew_id", "phase", "day"]
     meta = df[meta_cols].copy()
     X = df.drop(columns=meta_cols)

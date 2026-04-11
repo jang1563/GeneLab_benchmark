@@ -14,10 +14,14 @@ from pathlib import Path
 from scipy import stats
 
 np.random.seed(42)
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+V2_DIR = REPO_ROOT / "v2"
 
 # ── Load data ──────────────────────────────────────────────────────────────
-cfrna_df = pd.read_csv("v2/processed/E2_human/i4_cfrna_hallmark_fgsea.csv")
-ct_df    = pd.read_csv("v2/processed/F1_scrna/i4_snrnaseq_celltype_fgsea.csv")
+cfrna_df = pd.read_csv(V2_DIR / "processed" / "E2_human" / "i4_cfrna_hallmark_fgsea.csv")
+ct_df = pd.read_csv(V2_DIR / "processed" / "F1_scrna" / "i4_snrnaseq_celltype_fgsea.csv")
+if "comparison" in ct_df.columns:
+    ct_df = ct_df[ct_df["comparison"] == "FP1_R1_vs_preflight"]
 
 cfrna_nes = cfrna_df.set_index("pathway")["NES"]
 ct_pivot  = ct_df.pivot_table(index="pathway", columns="Cell_Type", values="NES")
@@ -34,10 +38,14 @@ def spearman_with_ci(x, y, n_boot=1000, n_perm=10000, seed=42):
     if n < 8:
         return None
     r, _ = stats.spearmanr(x, y)
-    boots = [stats.spearmanr(
-        rng.choice(x, n, replace=True),
-        rng.choice(y, n, replace=True)
-    ).statistic for _ in range(n_boot)]
+    boots = []
+    for _ in range(n_boot):
+        idx = rng.integers(0, n, size=n)
+        stat = stats.spearmanr(x[idx], y[idx]).statistic
+        if not np.isnan(stat):
+            boots.append(stat)
+    if not boots:
+        return None
     ci_lo, ci_hi = np.percentile(boots, [2.5, 97.5])
     perms = [stats.spearmanr(rng.permutation(x), y).statistic for _ in range(n_perm)]
     p_perm = (np.sum(np.abs(perms) >= abs(r)) + 1) / (n_perm + 1)
@@ -68,7 +76,7 @@ for ct in CT_ORDER:
               f"p={res['p']:.4f}{sig}  n={res['n']}")
 
 # Save JSON
-eval_path = Path("v2/evaluation/E3_cfrna_origin.json")
+eval_path = V2_DIR / "evaluation" / "E3_cfrna_origin.json"
 eval_path.parent.mkdir(exist_ok=True)
 eval_path.write_text(json.dumps({"results": results,
                                   "n_common_pathways": len(common_pw),
@@ -261,6 +269,6 @@ scG.append("text").attr("x",4).attr("y",12).attr("font-size","9px").attr("fill",
 </html>
 """
 
-out_html = Path("v2/figures/E3_cfrna_origin.html")
+out_html = V2_DIR / "figures" / "E3_cfrna_origin.html"
 out_html.write_text(html, encoding="utf-8")
 print(f"Saved: {out_html}")

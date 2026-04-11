@@ -392,9 +392,9 @@ Individual F2 figures: `F2A_composition.html`, `F2B_celltype_nes_heatmap.html`, 
 | T2: LAR Recovery | Complete | `v2/processed/T_temporal/T2_*.json` |
 | T3: Age × Spaceflight | Complete | `v2/processed/T_temporal/T3_*.json` |
 | T4: Radiation | Complete | `v2/processed/T4_radiation/` |
-| E1: Cross-Species NES | Complete | `v2/processed/E_crossspecies/` |
-| E2: Duration Effect | Complete | `v2/processed/E_crossspecies/` |
-| E3: cfRNA Origin | Complete | `v2/processed/E_crossspecies/` |
+| E1: Cross-Species NES | Complete | `v2/evaluation/E1_crossspecies_nes.json` |
+| E2: Duration Effect | Complete | `v2/evaluation/E2_mission_conservation.json` |
+| E3: cfRNA Origin | Complete | `v2/evaluation/E3_cfrna_origin.json` |
 | F1: I4 PBMC Cell-Type | Complete | `v2/processed/F1_scrna/` |
 | F2-A: Composition | Complete | `v2/evaluation/F2A_composition.json` |
 | F2-B: Pseudo-bulk fGSEA | Complete | `v2/evaluation/F2B_pseudobulk_fgsea.json` |

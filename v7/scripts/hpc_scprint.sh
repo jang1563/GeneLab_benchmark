@@ -10,12 +10,15 @@
 #SBATCH --error=%x_%A_%a.err
 
 # scPRINT-2 Zero-Shot Benchmark — v7 GeneLabBench
-# Tests: do 350M-cell, 16-organism pretrained embeddings beat PCA-LR?
+# Uses Python API (not CLI) with a local checkpoint + LaminDB+bionty
 #
 # Results in: GeneLab_benchmark/v7/evaluation/SCPRINT2_{tissue}.json
 
 set -eo pipefail
-mkdir -p ${HOME}/genelab_logs
+
+BASE_DIR="${GENELAB_ROOT:?Set GENELAB_ROOT}"
+LOG_DIR="$BASE_DIR/v7/logs"
+mkdir -p "$LOG_DIR"
 
 TISSUES=(liver gastrocnemius kidney thymus eye skin)
 TISSUE=${TISSUES[$SLURM_ARRAY_TASK_ID]}
@@ -24,14 +27,22 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Array task: $SLURM_ARRAY_TASK_ID → tissue=$TISSUE"
 echo "Node: $SLURMD_NODENAME"
 echo "GPU: $CUDA_VISIBLE_DEVICES"
+echo "Repo: $BASE_DIR"
+echo "Log dir: $LOG_DIR"
 date
 
 source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh
 conda activate perturb_seq_new
 
-SCRIPT_DIR="${GENELAB_ROOT}/v7/unified"
-CKPT_PATH="${SCPRINT2_CKPT_PATH:-${GENELAB_ROOT}/v7/models/scprint2/medium-v1.5.ckpt}"
-cd "${GENELAB_ROOT}"
+# Ensure LaminDB instance is connected (populated on login node)
+python -c "import lamindb as ln; ln.connect('scprint_v2')" 2>/dev/null || true
+
+SCRIPT_DIR="$BASE_DIR/v7/unified"
+CKPT_PATH="${SCPRINT_CKPT_PATH:-$BASE_DIR/v7/models/scprint2/medium-v1.5.ckpt}"
+if [ ! -f "$CKPT_PATH" ] && [ -f "$BASE_DIR/v7/models/scprint2/medium-v1.5_fixed.ckpt" ]; then
+    CKPT_PATH="$BASE_DIR/v7/models/scprint2/medium-v1.5_fixed.ckpt"
+fi
+cd "$BASE_DIR"
 
 python -u "$SCRIPT_DIR/scprint2_benchmark.py" \
     --tissue "$TISSUE" \

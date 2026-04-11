@@ -11,10 +11,21 @@ import os
 from pathlib import Path
 
 # ─── Paths ────────────────────────────────────────────────────────────────────
-GENELABS_DIR = Path(__file__).parent.parent.parent  # GeneLab_benchmark/
-SOB_DIR = Path(os.environ.get("SPACEOMICS_ROOT", ".")) / "v3"
+GENELABS_DIR = Path(__file__).resolve().parent.parent.parent
+ROOT_EVAL_DIR = GENELABS_DIR / "evaluation"
+V3_EVAL_DIR = GENELABS_DIR / "v3" / "evaluation"
 OUT_DIR = GENELABS_DIR / "v7" / "figures" / "html"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
+TASK_TO_TISSUE = {
+    "A1": "liver",
+    "A2": "gastrocnemius",
+    "A3": "kidney",
+    "A4": "thymus",
+    "A5": "skin",
+    "A6": "eye",
+    "A7": "lung",
+    "A7b": "colon",
+}
 
 # ─── Method categories ────────────────────────────────────────────────────────
 # GeneLab method → category
@@ -68,6 +79,101 @@ CATEGORY_COLORS = {
 }
 
 # ─── Load GeneLab data ────────────────────────────────────────────────────────
+def resolve_spaceomics_results_path():
+    """Resolve the SpaceOmicsBench unified baseline JSON explicitly."""
+    override = os.environ.get("SPACEOMICS_RESULTS_JSON")
+    if override:
+        path = Path(override).expanduser().resolve()
+        if path.exists():
+            return path
+        raise FileNotFoundError(f"SPACEOMICS_RESULTS_JSON does not exist: {path}")
+
+    spaceomics_root = os.environ.get("SPACEOMICS_ROOT")
+    if spaceomics_root:
+        path = (
+            Path(spaceomics_root).expanduser().resolve()
+            / "v3"
+            / "results"
+            / "unified_baseline_results.json"
+        )
+        if path.exists():
+            return path
+        raise FileNotFoundError(
+            f"SPACEOMICS_ROOT is set, but the expected results file is missing: {path}"
+        )
+
+    local_candidate = GENELABS_DIR / "v3" / "results" / "unified_baseline_results.json"
+    if local_candidate.exists():
+        return local_candidate
+
+    raise FileNotFoundError(
+        "SpaceOmicsBench results are not bundled with this GeneLabBench checkout. "
+        "Set SPACEOMICS_ROOT or SPACEOMICS_RESULTS_JSON to a local "
+        "unified_baseline_results.json."
+    )
+
+
+def append_fm_rows(rows, method, records):
+    """Append standardized FM result rows."""
+    for record in records:
+        tissue = record.get("tissue")
+        score = record.get("score")
+        if not tissue or score is None:
+            continue
+        rows.append({
+            "dataset": "GeneLab (Mouse)",
+            "tissue_task": tissue,
+            "feature_type": "embedding",
+            "method": method,
+            "category": GENELABS_CATEGORIES.get(method, "Foundation Model"),
+            "score": round(float(score), 4),
+            "metric": "auroc",
+            "random_baseline": 0.5,
+            "significant": bool(record.get("significant", False)),
+        })
+
+
+def load_v3_fm_records(path, method):
+    """Load v3 FM outputs stored as a flat results list."""
+    with open(path) as f:
+        data = json.load(f)
+
+    records = []
+    for row in data.get("results", []):
+        tissue = row.get("tissue")
+        score = row.get("mean_auroc")
+        if score is None:
+            score = row.get("lomo_auroc")
+        significant = False
+        for key in ("perm_p", "perm_pvalue", "p_perm", "pvalue_perm"):
+            pvalue = row.get(key)
+            if isinstance(pvalue, (int, float)):
+                significant = pvalue < 0.05
+                break
+        records.append({
+            "tissue": tissue,
+            "score": score,
+            "significant": significant,
+        })
+    return records
+
+
+def load_root_fm_records(path, section_key, method, score_key):
+    """Load root-level FM summaries keyed by task IDs."""
+    with open(path) as f:
+        data = json.load(f)
+
+    section = data.get(section_key, {})
+    records = []
+    for task_id, row in section.items():
+        if not isinstance(row, dict):
+            continue
+        tissue = row.get("tissue") or TASK_TO_TISSUE.get(task_id)
+        score = row.get(score_key)
+        records.append({"tissue": tissue, "score": score, "significant": False})
+    return records
+
+
 def load_genelab():
     m1_path = GENELABS_DIR / "v4" / "evaluation" / "M1_summary.json"
     with open(m1_path) as f:
@@ -92,46 +198,34 @@ def load_genelab():
                     "random_baseline": 0.5,
                 })
 
-    # Add FM results from v3 (stored as separate records from MEMORY.md)
-    # These are mean AUROCs across LOMO folds from v3 analysis
-    fm_records = [
-        # scFoundation: liver 0.635(p=0.001), gastro 0.691, others ~0.5
-        {"method": "scfoundation", "tissue_task": "liver",          "score": 0.635, "sig": True},
-        {"method": "scfoundation", "tissue_task": "gastrocnemius",  "score": 0.691, "sig": True},
-        {"method": "scfoundation", "tissue_task": "kidney",         "score": 0.541, "sig": False},
-        {"method": "scfoundation", "tissue_task": "thymus",         "score": 0.487, "sig": False},
-        {"method": "scfoundation", "tissue_task": "eye",            "score": 0.563, "sig": False},
-        {"method": "scfoundation", "tissue_task": "lung",           "score": 0.389, "sig": False},
-        # UCE: thymus 0.632(p=0.031), others near chance
-        {"method": "uce",          "tissue_task": "thymus",         "score": 0.632, "sig": True},
-        {"method": "uce",          "tissue_task": "liver",          "score": 0.459, "sig": False},
-        {"method": "uce",          "tissue_task": "gastrocnemius",  "score": 0.578, "sig": False},
-        {"method": "uce",          "tissue_task": "kidney",         "score": 0.489, "sig": False},
-        {"method": "uce",          "tissue_task": "eye",            "score": 0.550, "sig": False},
-        {"method": "uce",          "tissue_task": "lung",           "score": 0.555, "sig": False},
-        # Geneformer: mean 0.476 (from v1)
-        {"method": "geneformer",   "tissue_task": "liver",          "score": 0.476, "sig": False},
-        # scGPT: 0.6655 for one tissue in v1
-        {"method": "scgpt",        "tissue_task": "liver",          "score": 0.6655,"sig": False},
-    ]
-    for r in fm_records:
-        rows.append({
-            "dataset": "GeneLab (Mouse)",
-            "tissue_task": r["tissue_task"],
-            "feature_type": "embedding",
-            "method": r["method"],
-            "category": GENELABS_CATEGORIES.get(r["method"], "Foundation Model"),
-            "score": r["score"],
-            "metric": "auroc",
-            "random_baseline": 0.5,
-            "significant": r.get("sig", False),
-        })
+    append_fm_rows(rows, "scfoundation", load_v3_fm_records(V3_EVAL_DIR / "FM_scfoundation.json", "scfoundation"))
+    append_fm_rows(rows, "uce", load_v3_fm_records(V3_EVAL_DIR / "FM_uce.json", "uce"))
+    append_fm_rows(
+        rows,
+        "geneformer",
+        load_root_fm_records(
+            ROOT_EVAL_DIR / "geneformer_mouse_gf_all_tissues_summary.json",
+            "tissues",
+            "geneformer",
+            "geneformer_mean_auroc",
+        ),
+    )
+    append_fm_rows(
+        rows,
+        "scgpt",
+        load_root_fm_records(
+            ROOT_EVAL_DIR / "scgpt" / "scgpt_whole_human_all_tissues_summary.json",
+            "tasks",
+            "scgpt",
+            "mean_auroc",
+        ),
+    )
 
     return rows
 
 # ─── Load SpaceOmicsBench data ────────────────────────────────────────────────
 def load_sob():
-    path = SOB_DIR / "results" / "unified_baseline_results.json"
+    path = resolve_spaceomics_results_path()
     with open(path) as f:
         d = json.load(f)
 

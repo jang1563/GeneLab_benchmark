@@ -42,14 +42,31 @@ warnings.filterwarnings("ignore")
 # ── Paths ──────────────────────────────────────────────────────────────────
 SCRATCH = Path(os.environ.get("SCRATCH_DIR", "/path/to/scratch")) / "rrrm1_scrna"
 HARDENED_DIR = SCRATCH / "downstream_initial" / "hardening" / "objects"
-BASE_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna"
 
-EVAL_DIR = BASE_DIR / "evaluation"
-FIG_DIR = BASE_DIR / "figures"
-PROCESSED_DIR = BASE_DIR / "processed" / "F2B"
 
-BULK_FGSEA_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna" / "v1_bulk_fgsea"
-GMT_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna" / "gene_sets"
+def _find_repo_root() -> Path | None:
+    here = Path(__file__).resolve()
+    for parent in [here.parent] + list(here.parents):
+        if (parent / "v2" / "README.md").exists() and (parent / "README.md").exists():
+            return parent
+    return None
+
+
+REPO_ROOT = _find_repo_root()
+BASE_DIR_ENV = os.environ.get("RRRM1_BASE_DIR")
+if REPO_ROOT is not None and BASE_DIR_ENV is None:
+    EVAL_DIR = REPO_ROOT / "v2" / "evaluation"
+    FIG_DIR = REPO_ROOT / "v2" / "figures"
+    PROCESSED_ROOT = REPO_ROOT / "v2" / "processed"
+    BULK_FGSEA_DIR = REPO_ROOT / "processed" / "fgsea"
+    GMT_DIR = REPO_ROOT / "v2" / "processed" / "gene_sets"
+else:
+    BASE_DIR = Path(BASE_DIR_ENV or (Path(os.environ.get("HOME")) / "rrrm1_scrna"))
+    EVAL_DIR = BASE_DIR / "evaluation"
+    FIG_DIR = BASE_DIR / "figures"
+    PROCESSED_ROOT = BASE_DIR / "processed"
+    BULK_FGSEA_DIR = BASE_DIR / "v1_bulk_fgsea"
+    GMT_DIR = BASE_DIR / "gene_sets"
 
 TISSUE_OSD = {
     "blood":  "OSD-918",
@@ -526,7 +543,7 @@ def run_tissue(tissue: str, gmt_path: Path, gene_sets: dict) -> dict:
             continue
 
         # Save per-cell-type fGSEA CSV
-        out_csv_dir = PROCESSED_DIR / tissue
+        out_csv_dir = PROCESSED_ROOT / f"F2B_{tissue}"
         out_csv_dir.mkdir(parents=True, exist_ok=True)
         ct_safe = ct.replace("/", "_").replace(" ", "_")
         fgsea_df.to_csv(out_csv_dir / f"{ct_safe}_fgsea_hallmark.csv", index=False)
@@ -578,7 +595,7 @@ def main():
     if not args.tissue and not args.all:
         parser.error("Specify --tissue or --all")
 
-    for d in [EVAL_DIR, FIG_DIR, PROCESSED_DIR]:
+    for d in [EVAL_DIR, FIG_DIR, PROCESSED_ROOT]:
         d.mkdir(parents=True, exist_ok=True)
 
     # Download / load gene sets

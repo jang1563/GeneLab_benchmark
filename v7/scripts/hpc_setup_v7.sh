@@ -105,6 +105,12 @@ else:
 PYEOF
 fi
 
+if [ -f "$MODEL_DIR/medium-v1.5_fixed.ckpt" ]; then
+    echo "  Legacy checkpoint also present: $MODEL_DIR/medium-v1.5_fixed.ckpt"
+else
+    echo "  Note: scripts will also accept medium-v1.5_fixed.ckpt if you already have it locally."
+fi
+
 # ── 6. Verify all imports for GNN script ─────────────────────────────────────
 echo ""
 echo ">>> Verifying GNN imports..."

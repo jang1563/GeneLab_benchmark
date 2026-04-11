@@ -1,0 +1,67 @@
+{
+  "tissue": "thymus",
+  "graph_type": "wgcna",
+  "topology_scope": "train_fold",
+  "n_edges_per_gene": 10,
+  "n_edges_total": 49800,
+  "n_edges_per_fold": [
+    49800,
+    49800,
+    49800,
+    49800
+  ],
+  "n_genes": 4980,
+  "beta": 18,
+  "mean_auroc": 0.6442,
+  "mean_ci_lower": 0.3888,
+  "mean_ci_upper": 0.8889,
+  "perm_pvalue": 0.1683,
+  "n_folds": 4,
+  "folds": [
+    {
+      "test_mission": "MHU-1",
+      "auroc": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "n_train": 80,
+      "n_test": 6,
+      "epochs": 79,
+      "n_edges": 49800
+    },
+    {
+      "test_mission": "MHU-2",
+      "auroc": 0.7778,
+      "ci_lower": 0.2,
+      "ci_upper": 1.0,
+      "n_train": 80,
+      "n_test": 6,
+      "epochs": 103,
+      "n_edges": 49800
+    },
+    {
+      "test_mission": "RR-6",
+      "auroc": 0.2591,
+      "ci_lower": 0.1321,
+      "ci_upper": 0.3948,
+      "n_train": 32,
+      "n_test": 54,
+      "epochs": 150,
+      "n_edges": 49800
+    },
+    {
+      "test_mission": "RR-9",
+      "auroc": 0.54,
+      "ci_lower": 0.2424,
+      "ci_upper": 0.8229,
+      "n_train": 66,
+      "n_test": 20,
+      "epochs": 32,
+      "n_edges": 49800
+    }
+  ],
+  "seed": 42,
+  "n_bootstrap": 1000,
+  "n_perm": 100,
+  "pca_lr_auroc": 0.9083,
+  "delta_vs_pca_lr": -0.2641
+}

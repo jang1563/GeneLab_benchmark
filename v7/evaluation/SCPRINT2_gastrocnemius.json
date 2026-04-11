@@ -1,0 +1,42 @@
+{
+  "method": "scPRINT-2",
+  "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+  "tissue": "gastrocnemius",
+  "embedding_dim": 256,
+  "mean_auroc": 0.588,
+  "mean_ci_lower": 0.375,
+  "mean_ci_upper": 0.7222,
+  "perm_pvalue": 0.2772,
+  "pca_lr_auroc": 0.8519,
+  "delta_vs_pca_lr": -0.2639,
+  "n_folds": 3,
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "auroc": 0.7222,
+      "ci_lower": 0.3714,
+      "ci_upper": 1.0,
+      "n_train": 20,
+      "n_test": 12
+    },
+    {
+      "test_mission": "RR-5",
+      "auroc": 0.6667,
+      "ci_lower": 0.2778,
+      "ci_upper": 1.0,
+      "n_train": 20,
+      "n_test": 12
+    },
+    {
+      "test_mission": "RR-9",
+      "auroc": 0.375,
+      "ci_lower": 0.0,
+      "ci_upper": 0.8571,
+      "n_train": 24,
+      "n_test": 8
+    }
+  ],
+  "seed": 42,
+  "n_bootstrap": 1000,
+  "n_perm": 100
+}

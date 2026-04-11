@@ -1,0 +1,42 @@
+{
+  "method": "scPRINT-2",
+  "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+  "tissue": "skin",
+  "embedding_dim": 256,
+  "mean_auroc": 0.6283,
+  "mean_ci_lower": 0.5492,
+  "mean_ci_upper": 0.68,
+  "perm_pvalue": 0.0396,
+  "pca_lr_auroc": 0.7961,
+  "delta_vs_pca_lr": -0.1678,
+  "n_folds": 3,
+  "folds": [
+    {
+      "test_mission": "MHU-2",
+      "auroc": 0.5492,
+      "ci_lower": 0.3298,
+      "ci_upper": 0.75,
+      "n_train": 83,
+      "n_test": 35
+    },
+    {
+      "test_mission": "RR-6",
+      "auroc": 0.6556,
+      "ci_lower": 0.4984,
+      "ci_upper": 0.805,
+      "n_train": 65,
+      "n_test": 53
+    },
+    {
+      "test_mission": "RR-7",
+      "auroc": 0.68,
+      "ci_lower": 0.448,
+      "ci_upper": 0.8704,
+      "n_train": 88,
+      "n_test": 30
+    }
+  ],
+  "seed": 42,
+  "n_bootstrap": 1000,
+  "n_perm": 100
+}

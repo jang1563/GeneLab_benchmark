@@ -43,9 +43,25 @@ warnings.filterwarnings("ignore")
 # ── Paths ──────────────────────────────────────────────────────────────────
 SCRATCH = Path(os.environ.get("SCRATCH_DIR", "/path/to/scratch")) / "rrrm1_scrna"
 HARDENED_DIR = SCRATCH / "downstream_initial" / "hardening" / "objects"
-BASE_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna"
-EVAL_DIR = BASE_DIR / "evaluation"
-FIG_DIR = BASE_DIR / "figures"
+
+
+def _find_repo_root() -> Path | None:
+    here = Path(__file__).resolve()
+    for parent in [here.parent] + list(here.parents):
+        if (parent / "v2" / "README.md").exists() and (parent / "README.md").exists():
+            return parent
+    return None
+
+
+REPO_ROOT = _find_repo_root()
+BASE_DIR_ENV = os.environ.get("RRRM1_BASE_DIR")
+if REPO_ROOT is not None and BASE_DIR_ENV is None:
+    EVAL_DIR = REPO_ROOT / "v2" / "evaluation"
+    FIG_DIR = REPO_ROOT / "v2" / "figures"
+else:
+    BASE_DIR = Path(BASE_DIR_ENV or (Path(os.environ.get("HOME")) / "rrrm1_scrna"))
+    EVAL_DIR = BASE_DIR / "evaluation"
+    FIG_DIR = BASE_DIR / "figures"
 
 # v1.0 bulk AUROC reference (tissue → mean LOMO AUROC from A-series)
 V1_BULK_AUROC = {

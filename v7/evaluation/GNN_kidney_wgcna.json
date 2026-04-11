@@ -1,0 +1,56 @@
+{
+  "tissue": "kidney",
+  "graph_type": "wgcna",
+  "topology_scope": "train_fold",
+  "n_edges_per_gene": 10,
+  "n_edges_total": 49740,
+  "n_edges_per_fold": [
+    49740,
+    49740,
+    49740
+  ],
+  "n_genes": 4974,
+  "beta": 9,
+  "mean_auroc": 0.5507,
+  "mean_ci_lower": 0.4022,
+  "mean_ci_upper": 0.7222,
+  "perm_pvalue": 0.2772,
+  "n_folds": 3,
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "auroc": 0.7222,
+      "ci_lower": 0.3714,
+      "ci_upper": 1.0,
+      "n_train": 130,
+      "n_test": 12,
+      "epochs": 55,
+      "n_edges": 49740
+    },
+    {
+      "test_mission": "RR-3",
+      "auroc": 0.5278,
+      "ci_lower": 0.25,
+      "ci_upper": 0.8,
+      "n_train": 124,
+      "n_test": 18,
+      "epochs": 97,
+      "n_edges": 49740
+    },
+    {
+      "test_mission": "RR-7",
+      "auroc": 0.4022,
+      "ci_lower": 0.252,
+      "ci_upper": 0.5566,
+      "n_train": 30,
+      "n_test": 112,
+      "epochs": 150,
+      "n_edges": 49740
+    }
+  ],
+  "seed": 42,
+  "n_bootstrap": 1000,
+  "n_perm": 100,
+  "pca_lr_auroc": 0.5838,
+  "delta_vs_pca_lr": -0.0331
+}

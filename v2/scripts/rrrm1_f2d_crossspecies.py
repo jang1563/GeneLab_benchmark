@@ -29,6 +29,7 @@ Output:
 """
 
 import json
+import os
 import sys
 import numpy as np
 import pandas as pd
@@ -38,8 +39,8 @@ from pathlib import Path
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent  # GeneLab_benchmark/
+BASE_DIR_ENV = os.environ.get("RRRM1_BASE_DIR")
 
-RRRM1_BLOOD_DIR = REPO_ROOT / "v2/processed/F2B_blood"
 I4_FGSEA_CSV = REPO_ROOT / "v2/processed/F1_scrna/i4_snrnaseq_celltype_fgsea.csv"
 E1_JSON = REPO_ROOT / "v2/evaluation/E1_crossspecies_nes.json"
 
@@ -67,6 +68,31 @@ DISCORDANT_COLOR = "#E69F00"
 
 
 # ── Data Loading ──────────────────────────────────────────────────────────────
+
+def resolve_rrrm1_blood_dir() -> Path:
+    """Support both canonical and legacy F2-B output layouts."""
+    candidates = []
+    if BASE_DIR_ENV:
+        base_dir = Path(BASE_DIR_ENV)
+        candidates.extend(
+            [
+                base_dir / "processed" / "F2B_blood",
+                base_dir / "processed" / "F2B" / "blood",
+            ]
+        )
+    candidates.extend(
+        [
+            REPO_ROOT / "v2" / "processed" / "F2B_blood",
+            REPO_ROOT / "v2" / "processed" / "F2B" / "blood",
+        ]
+    )
+    for path in candidates:
+        if path.exists():
+            return path
+    return candidates[0]
+
+
+RRRM1_BLOOD_DIR = resolve_rrrm1_blood_dir()
 
 def load_rrrm1_blood_nes(data_dir: Path) -> dict:
     """Load RRRM-1 blood per-cell-type NES from F2-B CSVs."""

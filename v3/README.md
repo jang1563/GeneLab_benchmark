@@ -17,12 +17,12 @@
 
 ```
 v3/
-  docs/           # Plans and runbooks (3 files)
-  scripts/        # Analysis scripts: 20 Python + 8 Bash + 2 R (30 files)
-  evaluation/     # Output JSONs with metrics (19 files)
-  figures/        # D3.js interactive HTML figures (5 files)
-  processed/      # Intermediate data (not tracked in git)
-  logs/           # SLURM job logs (not tracked in git)
+  docs/           # Dataset catalog and supporting notes
+  scripts/        # Analysis scripts (Python, Bash, and R)
+  evaluation/     # Output JSONs with metrics and summaries
+  figures/        # Interactive HTML figures
+  processed/      # Intermediate data (partially tracked)
+  logs/           # Tracked example SLURM logs from completed runs
 ```
 
 ## Key Results
@@ -101,6 +101,5 @@ v3/
 
 ## Documentation
 
-- `docs/PLAN_V3.md` — Master execution plan with verification checkpoints
 - `docs/DATA_CATALOG_V3.md` — Dataset inventory (accessions, sample sizes, tissues)
-- `docs/HPC_FM_RUNBOOK.md` — Foundation model setup and execution guide
+- Foundation-model setup and execution notes now live in the script docstrings and tracked `logs/` examples alongside the evaluation outputs.

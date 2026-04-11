@@ -10,6 +10,7 @@ Outputs:
 - summary CSV tables and PNG plots
 """
 
+import argparse
 import os
 from pathlib import Path
 
@@ -156,68 +157,85 @@ def marker_table(adata, groupby: str, top_n: int = 20) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def save_tissue_outputs(adata) -> None:
-    for tissue in TISSUES:
-        tissue_adata = adata[adata.obs["tissue"] == tissue].copy()
-        if tissue_adata.n_obs == 0:
-            continue
+def save_tissue_output(adata, tissue: str) -> None:
+    tissue_adata = adata[adata.obs["tissue"] == tissue].copy()
+    if tissue_adata.n_obs == 0:
+        return
 
-        tissue_proc = preprocess(
-            tissue_adata,
-            batch_key=None,
-            n_top_genes=min(3000, tissue_adata.n_vars),
-            resolution=0.4,
-        )
+    tissue_proc = preprocess(
+        tissue_adata,
+        batch_key=None,
+        n_top_genes=min(3000, tissue_adata.n_vars),
+        resolution=0.4,
+    )
 
-        sc.tl.rank_genes_groups(
-            tissue_proc,
-            groupby="cluster",
-            method="wilcoxon",
-            key_added="rank_genes_groups",
-        )
+    sc.tl.rank_genes_groups(
+        tissue_proc,
+        groupby="cluster",
+        method="wilcoxon",
+        key_added="rank_genes_groups",
+    )
 
-        tissue_proc.write_h5ad(OBJDIR / f"RRRM1_{tissue}_processed.h5ad")
+    tissue_proc.write_h5ad(OBJDIR / f"RRRM1_{tissue}_processed.h5ad")
 
-        counts = (
-            tissue_proc.obs.groupby("cluster", observed=True)
-            .size()
-            .reset_index(name="n_cells")
-            .sort_values("cluster")
-        )
-        counts.to_csv(TABLEDIR / f"RRRM1_{tissue}_cluster_counts.csv", index=False)
+    counts = (
+        tissue_proc.obs.groupby("cluster", observed=True)
+        .size()
+        .reset_index(name="n_cells")
+        .sort_values("cluster")
+    )
+    counts.to_csv(TABLEDIR / f"RRRM1_{tissue}_cluster_counts.csv", index=False)
 
-        markers = marker_table(tissue_proc, "cluster")
-        markers.to_csv(TABLEDIR / f"RRRM1_{tissue}_cluster_markers_top20.csv", index=False)
+    markers = marker_table(tissue_proc, "cluster")
+    markers.to_csv(TABLEDIR / f"RRRM1_{tissue}_cluster_markers_top20.csv", index=False)
 
-        sc.pl.umap(
-            tissue_proc,
-            color=["cluster"],
-            legend_loc="on data",
-            show=False,
-            save=False,
-        )
-        plt.savefig(FIGDIR / f"RRRM1_{tissue}_umap_by_cluster.png", dpi=200, bbox_inches="tight")
-        plt.close()
+    sc.pl.umap(
+        tissue_proc,
+        color=["cluster"],
+        legend_loc="on data",
+        show=False,
+        save=False,
+    )
+    plt.savefig(FIGDIR / f"RRRM1_{tissue}_umap_by_cluster.png", dpi=200, bbox_inches="tight")
+    plt.close()
 
-        sc.pl.umap(
-            tissue_proc,
-            color=["total_counts", "n_genes_by_counts", "pct_counts_mt"],
-            show=False,
-            save=False,
-        )
-        plt.savefig(FIGDIR / f"RRRM1_{tissue}_umap_qc.png", dpi=200, bbox_inches="tight")
-        plt.close()
+    sc.pl.umap(
+        tissue_proc,
+        color=["total_counts", "n_genes_by_counts", "pct_counts_mt"],
+        show=False,
+        save=False,
+    )
+    plt.savefig(FIGDIR / f"RRRM1_{tissue}_umap_qc.png", dpi=200, bbox_inches="tight")
+    plt.close()
+
+
+def save_tissue_outputs(adata, tissues=None) -> None:
+    tissues = TISSUES if tissues is None else tissues
+    for tissue in tissues:
+        save_tissue_output(adata, tissue)
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--tissue",
+        choices=TISSUES,
+        default=None,
+        help="Process a single tissue only; skips global exploratory outputs",
+    )
+    args = parser.parse_args()
+
     ensure_dirs()
     if not INPUT_H5AD.exists():
         raise FileNotFoundError(f"Missing merged input: {INPUT_H5AD}")
 
     adata = ad.read_h5ad(INPUT_H5AD)
-    global_proc = preprocess(adata, batch_key="osd", n_top_genes=3000, resolution=0.6)
-    save_global_outputs(global_proc)
-    save_tissue_outputs(adata)
+    if args.tissue is None:
+        global_proc = preprocess(adata, batch_key="osd", n_top_genes=3000, resolution=0.6)
+        save_global_outputs(global_proc)
+        save_tissue_outputs(adata)
+    else:
+        save_tissue_outputs(adata, [args.tissue])
 
     print(f"Wrote outputs under: {OUTDIR}")
 
