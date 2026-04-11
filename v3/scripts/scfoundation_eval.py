@@ -57,10 +57,12 @@ TISSUE_MISSIONS = {
     "kidney": ["RR-1", "RR-3", "RR-7"],
     "thymus": ["RR-6", "MHU-1", "MHU-2", "RR-9"],
     "gastrocnemius": ["RR-1", "RR-5", "RR-9"],
-    "eye": ["RR-1", "RR-3", "TBD"],
+    "eye": ["RR-1", "RR-3", "OSD-397"],
     "lung": ["RR-6"],
     "colon": ["RR-6"],
 }
+
+MISSION_ALIASES = {"TBD": "OSD-397"}
 
 
 # ── Runtime helpers ──────────────────────────────────────────────────────────
@@ -299,6 +301,9 @@ def load_tissue_for_scfoundation(tissue, ensmusg_to_symbol, mouse_to_human,
     common = counts.index.intersection(meta.index)
     counts = counts.loc[common]
     meta = meta.loc[common]
+    if "mission" in meta.columns:
+        meta = meta.copy()
+        meta["mission"] = meta["mission"].replace(MISSION_ALIASES)
 
     label_col = "label"
     if label_col not in meta.columns:

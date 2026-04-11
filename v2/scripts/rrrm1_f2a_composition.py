@@ -30,10 +30,25 @@ from statsmodels.stats.multitest import multipletests
 # ── Paths ──────────────────────────────────────────────────────────────────
 SCRATCH = Path(os.environ.get("SCRATCH_DIR", "/path/to/scratch")) / "rrrm1_scrna"
 HARDENED_DIR = SCRATCH / "downstream_initial" / "hardening" / "objects"
-BASE_DIR = Path(os.environ.get("HOME")) / "rrrm1_scrna"
 
-EVAL_DIR = BASE_DIR / "evaluation"
-FIG_DIR = BASE_DIR / "figures"
+
+def _find_repo_root() -> Path | None:
+    here = Path(__file__).resolve()
+    for parent in [here.parent] + list(here.parents):
+        if (parent / "v2" / "README.md").exists() and (parent / "README.md").exists():
+            return parent
+    return None
+
+
+REPO_ROOT = _find_repo_root()
+BASE_DIR_ENV = os.environ.get("RRRM1_BASE_DIR")
+if REPO_ROOT is not None and BASE_DIR_ENV is None:
+    EVAL_DIR = REPO_ROOT / "v2" / "evaluation"
+    FIG_DIR = REPO_ROOT / "v2" / "figures"
+else:
+    BASE_DIR = Path(BASE_DIR_ENV or (Path(os.environ.get("HOME")) / "rrrm1_scrna"))
+    EVAL_DIR = BASE_DIR / "evaluation"
+    FIG_DIR = BASE_DIR / "figures"
 
 TISSUE_OSD = {
     "blood":  "OSD-918",
@@ -50,20 +65,23 @@ OKABE_ITO = [
 ]
 
 
-def load_hardened(tissue: str) -> sc.AnnData:
-    """Load hardened h5ad; try two possible paths."""
+def load_celltyped_adata(tissue: str) -> sc.AnnData:
+    """Load the best available annotated object for composition analysis."""
     osd = TISSUE_OSD[tissue]
-    # Prefer per-SRX labeled + re-processed path
     candidates = [
         HARDENED_DIR / f"RRRM1_{tissue}_hardened.h5ad",
-        SCRATCH / osd / f"{osd}_{tissue}_labeled.h5ad",  # fallback: labeled only
+        SCRATCH / "downstream_initial" / "annotations" / "objects" / f"RRRM1_{tissue}_annotated.h5ad",
+        SCRATCH / osd / f"{osd}_{tissue}_labeled.h5ad",
     ]
     for p in candidates:
         if p.exists():
             print(f"  Loading {p}")
-            return sc.read_h5ad(p)
+            adata = sc.read_h5ad(p)
+            if "broad_celltype" in adata.obs.columns:
+                return adata
+            print("    skipping: missing broad_celltype labels")
     raise FileNotFoundError(
-        f"No hardened h5ad found for {tissue}. Tried:\n" +
+        f"No annotated h5ad with broad_celltype found for {tissue}. Tried:\n" +
         "\n".join(f"  {c}" for c in candidates)
     )
 
@@ -261,7 +279,7 @@ for (const [tissue, data] of Object.entries(tissueData)) {{
 
 def run_tissue(tissue: str) -> tuple:
     print(f"\n[F2-A] {tissue}")
-    adata = load_hardened(tissue)
+    adata = load_celltyped_adata(tissue)
 
     prop_df = compute_proportions(adata, tissue)
     cell_types = [c for c in prop_df.columns if c not in ("animal_id", "condition", "n_cells")]

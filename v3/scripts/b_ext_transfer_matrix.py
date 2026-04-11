@@ -61,7 +61,7 @@ V1_TISSUES = {
                        "has_gsva": True, "has_fgsea": True},
     "gastrocnemius":  {"missions": ["RR-1", "RR-5", "RR-9"],
                        "has_gsva": True, "has_fgsea": True},
-    "eye":            {"missions": ["RR-1", "RR-3", "TBD"],
+    "eye":            {"missions": ["RR-1", "RR-3", "OSD-397"],
                        "has_gsva": True, "has_fgsea": True},
 }
 
@@ -72,6 +72,8 @@ V3_TISSUES = {
 }
 
 ALL_TISSUES = {**V1_TISSUES, **V3_TISSUES}
+MISSION_ALIASES = {"TBD": "OSD-397"}
+MISSION_FILE_ALIASES = {"OSD-397": "TBD"}
 
 
 # ── Data Loading ─────────────────────────────────────────────────────────────
@@ -145,6 +147,9 @@ def load_tissue_data(tissue):
     common = counts.index.intersection(meta.index)
     counts = counts.loc[common]
     meta = meta.loc[common]
+    if "mission" in meta.columns:
+        meta = meta.copy()
+        meta["mission"] = meta["mission"].replace(MISSION_ALIASES)
 
     # Extract binary labels
     labels = get_binary_labels(meta)
@@ -184,7 +189,8 @@ def load_gsva_scores(tissue, db="hallmark"):
     all_scores = []
 
     for mission in missions:
-        f = PATHWAY_DIR / tissue / f"{mission}_gsva_{db}.csv"
+        source_mission = MISSION_FILE_ALIASES.get(mission, mission)
+        f = PATHWAY_DIR / tissue / f"{source_mission}_gsva_{db}.csv"
         if not f.exists():
             continue
         scores = pd.read_csv(f, index_col=0)
@@ -204,7 +210,8 @@ def load_fgsea_results(tissue, db="hallmark"):
     missions = ALL_TISSUES.get(tissue, {}).get("missions", [])
     dfs = []
     for mission in missions:
-        f = FGSEA_DIR / tissue / f"{mission}_fgsea_{db}.csv"
+        source_mission = MISSION_FILE_ALIASES.get(mission, mission)
+        f = FGSEA_DIR / tissue / f"{source_mission}_fgsea_{db}.csv"
         if not f.exists():
             continue
         dfs.append(pd.read_csv(f))

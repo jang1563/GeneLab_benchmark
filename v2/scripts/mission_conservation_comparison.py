@@ -122,35 +122,29 @@ def main():
     }
     print(f"  Mouse (mission-averaged): {len(mouse_nes)} pathways")
 
-    # JAXA results already in E1 JSON
-    jaxa_r_e1   = e1["results"]["mission_averaged"]["spearman_r"]
-    jaxa_ci_low = e1["results"]["mission_averaged"]["ci_low"]
-    jaxa_ci_hi  = e1["results"]["mission_averaged"]["ci_high"]
-    jaxa_p_perm = e1["results"]["mission_averaged"]["p_permutation"]
-    jaxa_n      = e1["results"]["mission_averaged"]["n_pathways"]
+    # Keep the full E1 result for reference, but recompute JAXA on the same
+    # pathway subset used for I4 so Δr is an apples-to-apples comparison.
+    jaxa_full_e1 = e1["results"]["mission_averaged"]
 
-    # ── 2. Align I4 vs mouse ───────────────────────────────────────────────────
-    print("\n[2] Aligning I4 vs mouse NES...")
-    common_i4 = sorted(set(i4_nes.keys()) & set(mouse_nes.keys()))
-    print(f"  Common pathways (I4 ∩ mouse): {len(common_i4)}")
+    # ── 2. Align all missions on a shared pathway universe ────────────────────
+    print("\n[2] Aligning I4, JAXA, and mouse NES on shared pathways...")
+    common_pathways = sorted(set(i4_nes.keys()) & set(jaxa_nes.keys()) & set(mouse_nes.keys()))
+    print(f"  Common pathways (I4 ∩ JAXA ∩ mouse): {len(common_pathways)}")
 
-    i4_vec    = np.array([i4_nes[p]   for p in common_i4])
-    mouse_i4  = np.array([mouse_nes[p] for p in common_i4])
-
-    # ── 3. Align JAXA vs mouse (for scatter, may differ from E1 due to I4 pathway subset) ──
-    common_jaxa = sorted(set(jaxa_nes.keys()) & set(mouse_nes.keys()))
-    jaxa_vec    = np.array([jaxa_nes[p]  for p in common_jaxa])
-    mouse_jaxa  = np.array([mouse_nes[p] for p in common_jaxa])
+    i4_vec = np.array([i4_nes[p] for p in common_pathways])
+    jaxa_vec = np.array([jaxa_nes[p] for p in common_pathways])
+    mouse_vec = np.array([mouse_nes[p] for p in common_pathways])
 
     # ── 4. Compute I4 Spearman r ───────────────────────────────────────────────
-    print("\n[3] Computing I4 vs mouse Spearman r...")
-    i4_stats = spearman_with_ci(i4_vec, mouse_i4)
+    print("\n[3] Computing duration-matched Spearman r...")
+    i4_stats = spearman_with_ci(i4_vec, mouse_vec)
+    jaxa_stats = spearman_with_ci(jaxa_vec, mouse_vec)
     print(f"  I4:   r = {i4_stats['spearman_r']:.3f} "
           f"(95% CI: {i4_stats['ci_low']:.3f}–{i4_stats['ci_high']:.3f}), "
           f"p = {i4_stats['p_permutation']:.3f}")
-    print(f"  JAXA: r = {jaxa_r_e1:.3f} "
-          f"(95% CI: {jaxa_ci_low:.3f}–{jaxa_ci_hi:.3f}), "
-          f"p = {jaxa_p_perm:.3f}  [from E1]")
+    print(f"  JAXA: r = {jaxa_stats['spearman_r']:.3f} "
+          f"(95% CI: {jaxa_stats['ci_low']:.3f}–{jaxa_stats['ci_high']:.3f}), "
+          f"p = {jaxa_stats['p_permutation']:.3f}")
 
     # ── 5. Pathway-level details ───────────────────────────────────────────────
     pathway_details_i4 = [
@@ -160,7 +154,7 @@ def main():
             "mouse_nes":     float(mouse_nes[p]),
             "concordant":    bool(np.sign(i4_nes[p]) == np.sign(mouse_nes[p])),
         }
-        for p in common_i4
+        for p in common_pathways
     ]
 
     # ── 6. Save JSON results ───────────────────────────────────────────────────
@@ -190,14 +184,20 @@ def main():
             "missions": ["MHU-2", "RR-1", "RR-3", "RR-6", "RR-8", "RR-9"],
             "averaging": "arithmetic mean across missions",
         },
+        "comparison_basis": {
+            "shared_pathways": common_pathways,
+            "n_shared_pathways": len(common_pathways),
+            "note": "I4 and JAXA are both compared against mouse on the same pathway subset.",
+        },
         "results": {
-            "I4_vs_mouse": {**i4_stats, "n_pathways": len(common_i4)},
-            "JAXA_vs_mouse": {
-                "spearman_r": jaxa_r_e1,
-                "ci_low":     jaxa_ci_low,
-                "ci_high":    jaxa_ci_hi,
-                "p_permutation": jaxa_p_perm,
-                "n_pathways": jaxa_n,
+            "I4_vs_mouse": {**i4_stats, "n_pathways": len(common_pathways)},
+            "JAXA_vs_mouse": {**jaxa_stats, "n_pathways": len(common_pathways)},
+            "JAXA_vs_mouse_full_e1": {
+                "spearman_r": jaxa_full_e1["spearman_r"],
+                "ci_low": jaxa_full_e1["ci_low"],
+                "ci_high": jaxa_full_e1["ci_high"],
+                "p_permutation": jaxa_full_e1["p_permutation"],
+                "n_pathways": jaxa_full_e1["n_pathways"],
                 "source": "E1_crossspecies_nes.json",
             },
         },
@@ -213,13 +213,13 @@ def main():
     fig_path = FIG_DIR / "E2_duration_conservation.html"
     _make_figure(
         i4_vec=i4_vec,
-        mouse_i4=mouse_i4,
-        pathways_i4=common_i4,
+        mouse_i4=mouse_vec,
+        pathways_i4=common_pathways,
         i4_stats=i4_stats,
-        jaxa_r=jaxa_r_e1,
-        jaxa_ci_low=jaxa_ci_low,
-        jaxa_ci_hi=jaxa_ci_hi,
-        jaxa_p=jaxa_p_perm,
+        jaxa_r=jaxa_stats["spearman_r"],
+        jaxa_ci_low=jaxa_stats["ci_low"],
+        jaxa_ci_hi=jaxa_stats["ci_high"],
+        jaxa_p=jaxa_stats["p_permutation"],
         out_path=fig_path,
     )
     print(f"  Saved: {fig_path}")
@@ -229,10 +229,10 @@ def main():
     print(f"  I4  (3d):   r = {i4_stats['spearman_r']:.3f}  "
           f"(CI: {i4_stats['ci_low']:.3f}–{i4_stats['ci_high']:.3f}), "
           f"p = {i4_stats['p_permutation']:.3f}")
-    print(f"  JAXA(120d): r = {jaxa_r_e1:.3f}  "
-          f"(CI: {jaxa_ci_low:.3f}–{jaxa_ci_hi:.3f}), "
-          f"p = {jaxa_p_perm:.3f}")
-    delta = jaxa_r_e1 - i4_stats["spearman_r"]
+    print(f"  JAXA(120d): r = {jaxa_stats['spearman_r']:.3f}  "
+          f"(CI: {jaxa_stats['ci_low']:.3f}–{jaxa_stats['ci_high']:.3f}), "
+          f"p = {jaxa_stats['p_permutation']:.3f}")
+    delta = jaxa_stats["spearman_r"] - i4_stats["spearman_r"]
     print(f"  Δr (JAXA − I4) = {delta:.3f}")
 
 
@@ -277,8 +277,8 @@ def _make_figure(i4_vec, mouse_i4, pathways_i4, i4_stats,
     i4_ci_low = i4_stats["ci_low"]
     i4_ci_hi  = i4_stats["ci_high"]
     i4_p = i4_stats["p_permutation"]
-    i4_n  = i4_stats["n_pathways"]
-    jaxa_n = 50  # from E1
+    i4_n = i4_stats["n_pathways"]
+    jaxa_n = len(pathways_i4)
 
     i4_p_str   = f"p = {i4_p:.3f}"   if i4_p   >= 0.001 else "p < 0.001"
     jaxa_p_str = f"p = {jaxa_p:.3f}" if jaxa_p >= 0.001 else "p < 0.001"

@@ -27,7 +27,7 @@ echo ""
 echo "Total: 64 gene-feature evaluations submitted"
 echo ""
 echo "Monitor: squeue -u \$USER"
-echo "Results: ls v4/evaluation/M1_*.json"
+echo "Results: ls v4/evaluation/*.json"
 echo ""
 
 # Pathway features (submit only if pathway_scores exist)
@@ -51,6 +51,6 @@ if [ -d "processed/pathway_scores" ]; then
     echo ""
     echo "Total with pathways: 256 evaluations"
 else
-    echo "No pathway_scores/ found. Run generate_gsva.py first for pathway features."
+    echo "No pathway_scores/ found. Run v4/scripts/generate_pathway_scores.py first for pathway features."
     echo "Gene-only evaluations: 64 total"
 fi

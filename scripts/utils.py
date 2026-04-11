@@ -21,6 +21,13 @@ TISSUE_MISSIONS = {
     "kidney": ["RR-1", "RR-3", "RR-7"],
     "thymus": ["RR-6", "MHU-1", "MHU-2", "RR-9"],
     "eye": ["RR-1", "RR-3", "TBD"],
+    "skin": ["MHU-2", "RR-6", "RR-7"],
+}
+
+MISSION_EXPAND = {
+    "skin": {
+        "MHU-2": ["MHU-2_dorsal", "MHU-2_femoral"],
+    },
 }
 
 
@@ -51,15 +58,25 @@ def load_gene_features(tissue):
 def load_pathway_features(tissue, db="hallmark"):
     """Load GSVA pathway scores across all missions for a tissue."""
     all_scores = []
+    expand = MISSION_EXPAND.get(tissue, {})
     for mission in TISSUE_MISSIONS.get(tissue, []):
-        f = PATHWAY_DIR / tissue / f"{mission}_gsva_{db}.csv"
-        if not f.exists():
-            continue
-        scores = pd.read_csv(f, index_col=0)
-        all_scores.append(scores)
+        for sub_mission in expand.get(mission, [mission]):
+            f = PATHWAY_DIR / tissue / f"{sub_mission}_gsva_{db}.csv"
+            if not f.exists():
+                continue
+            scores = pd.read_csv(f, index_col=0)
+            all_scores.append(scores)
     if not all_scores:
         return None
+
+    common_cols = set(all_scores[0].columns)
+    for scores in all_scores[1:]:
+        common_cols &= set(scores.columns)
+    common_cols = sorted(common_cols)
+    all_scores = [scores[common_cols] for scores in all_scores]
+
     combined = pd.concat(all_scores)
+    combined = combined[~combined.index.duplicated(keep="first")]
     if "mission" in combined.columns:
         combined = combined.drop(columns=["mission"])
     return combined

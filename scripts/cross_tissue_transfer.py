@@ -33,6 +33,11 @@ from datetime import datetime
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=UserWarning, module="sklearn")
 
+try:
+    from scripts.utils import TISSUE_MISSIONS as ALL_TISSUE_MISSIONS
+except ImportError:
+    from utils import TISSUE_MISSIONS as ALL_TISSUE_MISSIONS
+
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = BASE_DIR / "processed" / "A_detection"
@@ -55,21 +60,22 @@ DEG_LFC_THRESHOLD = 0.5
 
 # ── Tissue-Mission mapping ────────────────────────────────────────────────────
 TISSUE_MISSIONS = {
-    "liver": ["RR-1", "RR-3", "RR-6", "RR-8", "RR-9", "MHU-2"],
-    "kidney": ["RR-1", "RR-3", "RR-7"],
-    "thymus": ["RR-6", "MHU-2", "RR-9"],
-    "gastrocnemius": ["RR-1", "RR-5", "RR-9"],
-    "eye": ["RR-1", "RR-3", "TBD"],
+    "liver": ALL_TISSUE_MISSIONS["liver"],
+    "kidney": ALL_TISSUE_MISSIONS["kidney"],
+    "thymus": ALL_TISSUE_MISSIONS["thymus"],
+    "gastrocnemius": ALL_TISSUE_MISSIONS["gastrocnemius"],
+    "eye": ALL_TISSUE_MISSIONS["eye"],
 }
 
-# GLDS IDs for DGE file lookup
+# GLDS IDs for DGE file lookup. These must match the on-disk differential
+# expression filenames under data/mouse/*/*/.
 MISSION_GLDS = {
-    "liver": {"RR-1": "GLDS-48", "RR-3": "GLDS-137", "RR-6": "GLDS-242",
-              "RR-8": "GLDS-379", "RR-9": "GLDS-486", "MHU-2": "GLDS-245"},
-    "kidney": {"RR-1": "GLDS-48", "RR-3": "GLDS-137", "RR-7": "GLDS-352"},
-    "thymus": {"RR-6": "GLDS-242", "MHU-2": "GLDS-245", "RR-9": "GLDS-486"},
-    "gastrocnemius": {"RR-1": "GLDS-48", "RR-9": "GLDS-486"},
-    "eye": {"RR-1": "GLDS-48", "RR-3": "GLDS-137", "TBD": "GLDS-397"},
+    "liver": {"RR-1": "GLDS-48", "RR-3": "GLDS-137", "RR-6": "GLDS-245",
+              "RR-8": "GLDS-379", "RR-9": "GLDS-242", "MHU-2": "GLDS-617"},
+    "kidney": {"RR-1": "GLDS-102", "RR-3": "GLDS-163", "RR-7": "GLDS-253"},
+    "thymus": {"RR-6": "GLDS-244", "MHU-2": "GLDS-289", "RR-9": "GLDS-421"},
+    "gastrocnemius": {"RR-1": "GLDS-101", "RR-9": "GLDS-326"},
+    "eye": {"RR-1": "GLDS-100", "RR-3": "GLDS-194", "TBD": "GLDS-397"},
 }
 
 # Cross-tissue task definitions

@@ -1,0 +1,56 @@
+{
+  "tissue": "skin",
+  "graph_type": "random",
+  "topology_scope": "train_fold",
+  "n_edges_per_gene": 10,
+  "n_edges_total": 49911,
+  "n_edges_per_fold": [
+    49917,
+    49907,
+    49908
+  ],
+  "n_genes": 4992,
+  "beta": 8,
+  "mean_auroc": 0.7238,
+  "mean_ci_lower": 0.67,
+  "mean_ci_upper": 0.822,
+  "perm_pvalue": 0.0099,
+  "n_folds": 3,
+  "folds": [
+    {
+      "test_mission": "MHU-2",
+      "auroc": 0.822,
+      "ci_lower": 0.6486,
+      "ci_upper": 0.9441,
+      "n_train": 83,
+      "n_test": 35,
+      "epochs": 50,
+      "n_edges": 49917
+    },
+    {
+      "test_mission": "RR-6",
+      "auroc": 0.6794,
+      "ci_lower": 0.527,
+      "ci_upper": 0.8144,
+      "n_train": 65,
+      "n_test": 53,
+      "epochs": 58,
+      "n_edges": 49907
+    },
+    {
+      "test_mission": "RR-7",
+      "auroc": 0.67,
+      "ci_lower": 0.4545,
+      "ci_upper": 0.8565,
+      "n_train": 88,
+      "n_test": 30,
+      "epochs": 68,
+      "n_edges": 49908
+    }
+  ],
+  "seed": 42,
+  "n_bootstrap": 1000,
+  "n_perm": 100,
+  "pca_lr_auroc": 0.7961,
+  "delta_vs_pca_lr": -0.0723
+}

@@ -25,6 +25,11 @@ import pandas as pd
 from pathlib import Path
 from scipy import stats as sp_stats
 
+try:
+    from scripts.utils import TISSUE_MISSIONS as ALL_TISSUE_MISSIONS
+except ImportError:
+    from utils import TISSUE_MISSIONS as ALL_TISSUE_MISSIONS
+
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
 FGSEA_DIR = BASE_DIR / "processed" / "fgsea"
@@ -35,11 +40,11 @@ EVALUATION_DIR = BASE_DIR / "evaluation"
 
 # ── Tissue-Mission mapping ─────────────────────────────────────────────────────
 TISSUE_MISSIONS = {
-    "liver": ["RR-1", "RR-3", "RR-6", "RR-8", "RR-9", "MHU-2"],
-    "kidney": ["RR-1", "RR-3", "RR-7"],
-    "thymus": ["RR-6", "MHU-2", "RR-9"],
-    "gastrocnemius": ["RR-1", "RR-5", "RR-9"],
-    "eye": ["RR-1", "RR-3", "TBD"],
+    "liver": ALL_TISSUE_MISSIONS["liver"],
+    "kidney": ALL_TISSUE_MISSIONS["kidney"],
+    "thymus": ALL_TISSUE_MISSIONS["thymus"],
+    "gastrocnemius": ALL_TISSUE_MISSIONS["gastrocnemius"],
+    "eye": ALL_TISSUE_MISSIONS["eye"],
 }
 
 # ── Category C cross-tissue pairs ─────────────────────────────────────────────

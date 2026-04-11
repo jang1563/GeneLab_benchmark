@@ -63,7 +63,7 @@ v2.0 extends the v1.0 mouse bulk RNA-seq benchmark with temporal dynamics, cross
 | QC + processing | `rrrm1_initial_scanpy.py` | Complete |
 | Broad annotation | `rrrm1_broad_annotate.py` | Complete |
 | Doublet removal | `rrrm1_singlecell_hardening.py` | Complete |
-| **F2 benchmark tasks** | `rrrm1_benchmark.py` | **Complete** |
+| **F2 benchmark tasks** | `rrrm1_f2_pipeline_wrapper.sh` + `rrrm1_f2d_crossspecies.py` | **Complete** |
 
 ### Cell Counts (post-hardening)
 
@@ -74,7 +74,7 @@ v2.0 extends the v1.0 mouse bulk RNA-seq benchmark with temporal dynamics, cross
 | Muscle (924) | 15,669 | macrophage/myeloid 38%, T/NK 25%, FAP 13% |
 | Skin (934) | 15,838 | immune myeloid 37%, basal keratinocyte 30% |
 
-### Planned Benchmark Tasks (F2)
+### F2 Benchmark Tasks
 
 | Task | Question | Method |
 |------|----------|--------|
@@ -83,7 +83,7 @@ v2.0 extends the v1.0 mouse bulk RNA-seq benchmark with temporal dynamics, cross
 | **F2-C** | Cell-level spaceflight classifier | PCA-LR per cell type, LOAO |
 | **F2-D** | Cross-species concordance (RRRM-1 ↔ I4 PBMC) | NES Spearman r |
 
-FLT/GC condition labels mapped from OSDR metadata → h5ad obs via `docs/RRRM1_SRX_CONDITION_MAP.csv`. Benchmark tasks complete (see v3/evaluation/ for RRRM-1 results).
+FLT/GC condition labels mapped from OSDR metadata → h5ad obs via `docs/RRRM1_SRX_CONDITION_MAP.csv`. Benchmark tasks complete (see `v2/evaluation/F2*.json`).
 
 ---
 
@@ -92,7 +92,7 @@ FLT/GC condition labels mapped from OSDR metadata → h5ad obs via `docs/RRRM1_S
 ```
 v2/
 ├── README.md                       ← This file
-├── scripts/                        ← v2 analysis scripts (19 Python)
+├── scripts/                        ← v2 analysis scripts
 │   ├── temporal_analysis.py        ← T1/T2/T3 temporal dynamics
 │   ├── cross_species_nes_comparison.py  ← E1/E2 cross-species NES
 │   ├── e3_cfrna_celltype_origin.py      ← E3 cfRNA origin analysis
@@ -118,7 +118,7 @@ v2/
 │   ├── V2_PAPER_CONTENT.md         ← v2 manuscript draft
 │   ├── DATA_CATALOG_V2.md          ← v2 data sources (JAXA, I4, RRRM-1)
 │   ├── V2_SUPPLEMENT_TABLES.md     ← Supplementary tables
-│   ├── RRRM1_SC_BENCHMARK_PLAN_V3.md ← F2 benchmark task definitions
+│   ├── RRRM1_DOWNSTREAM_PLAN_2026-03-11.md ← F2 benchmark task definitions
 │   ├── RRRM1_SRX_CONDITION_MAP.csv ← SRX → FLT/GC mapping (32 samples)
 │   ├── RRRM1_BROAD_ANNOTATION_SUMMARY_2026-03-12.md
 │   └── RRRM1_TISSUE_MARKERS_2026-03-12.md
@@ -127,8 +127,10 @@ v2/
 ├── processed/                      ← v2 intermediate outputs
 │   ├── T_temporal/                 ← T1/T2/T3 JSON results
 │   ├── T4_radiation/               ← Radiation metadata
-│   ├── E_crossspecies/             ← E1/E2/E3 results
+│   ├── E1_human/                   ← JAXA cfRNA fGSEA
+│   ├── E2_human/                   ← I4 cfRNA fGSEA
 │   ├── F1_scrna/                   ← I4 PBMC cell-type fGSEA
+│   ├── F2B_blood/                  ← RRRM-1 blood cell-type NES
 │   └── llm_responses/             ← Tier 3 archived responses
 └── figures/                        ← v2 integrated HTML figures
     ├── Fig1_temporal.html

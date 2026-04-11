@@ -3,7 +3,7 @@
 batch_correction_eval.py — GeneLab_benchmark: J3 Batch Correction Evaluation
 
 Compares benchmark results with and without limma::removeBatchEffect (limma_rbe)
-batch correction across all 5 tissues.
+batch correction across all 6 v1 tissues.
 
 Category A (Spaceflight Detection, LOMO):
   - Compare LOMO AUROC: uncorrected vs limma_rbe
@@ -37,6 +37,11 @@ from datetime import datetime
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=UserWarning, module="sklearn")
 
+try:
+    from scripts.utils import TISSUE_MISSIONS as ALL_TISSUE_MISSIONS
+except ImportError:
+    from utils import TISSUE_MISSIONS as ALL_TISSUE_MISSIONS
+
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = BASE_DIR / "processed" / "A_detection"
@@ -50,11 +55,12 @@ MIN_SAMPLES_PER_CLASS = 3
 N_BOOTSTRAP = 2000
 
 TISSUE_MISSIONS = {
-    "liver": ["RR-1", "RR-3", "RR-6", "RR-8", "RR-9", "MHU-2"],
-    "gastrocnemius": ["RR-1", "RR-5", "RR-9"],
-    "kidney": ["RR-1", "RR-3", "RR-7"],
-    "thymus": ["RR-6", "MHU-1", "MHU-2", "RR-9"],
-    "eye": ["RR-1", "RR-3", "TBD"],
+    "liver": ALL_TISSUE_MISSIONS["liver"],
+    "gastrocnemius": ALL_TISSUE_MISSIONS["gastrocnemius"],
+    "kidney": ALL_TISSUE_MISSIONS["kidney"],
+    "thymus": ALL_TISSUE_MISSIONS["thymus"],
+    "eye": ALL_TISSUE_MISSIONS["eye"],
+    "skin": ALL_TISSUE_MISSIONS["skin"],
 }
 
 CONDITIONS = {
