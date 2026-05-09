@@ -575,6 +575,7 @@ class ReviewFixTests(unittest.TestCase):
             "v8/bridge/tissue_nes_bridge.py",
             "v8/bridge/supervised_conservation.py",
             "v8/bridge/link_spaceomicsbench.py",
+            "v8/bridge/leakage_audit.py",
             "v8/multiomics/propagation.py",
             "v8/RESULTS_SUMMARY.py",
         ]
@@ -585,6 +586,16 @@ class ReviewFixTests(unittest.TestCase):
             if any(token in self.read_repo_text(rel) for token in forbidden)
         ]
         self.assertEqual(offenders, [])
+
+    def test_v8_bridge_leakage_audit_is_part_of_hpc_bridge_gate(self):
+        bridge_sh = self.read_repo_text("scripts/hpc_v8_bridge.sh")
+        audit = self.read_repo_text("v8/bridge/leakage_audit.py")
+        readme = self.read_repo_text("v8/bridge/evaluation/README.md")
+
+        self.assertIn("v8/bridge/leakage_audit.py", bridge_sh)
+        self.assertIn("label_excluded_from_features", audit)
+        self.assertIn("StratifiedKFold", audit)
+        self.assertIn("bridge_leakage_audit.json", readme)
 
 
 if __name__ == "__main__":
