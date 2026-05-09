@@ -43,7 +43,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 sys.path.insert(0, str(SCRIPT_DIR.parent.parent / "scripts"))  # for scripts/utils.py
 
 from v4_utils import (
-    TISSUE_MISSIONS, LOMO_TISSUES, KFOLD_TISSUES, TASK_MAP,
+    TISSUE_MISSIONS, LOMO_TISSUES, KFOLD_TISSUES, TASK_MAP, MISSION_FILE_ALIASES,
     BASE_DIR, V4_EVAL_DIR,
     load_metadata, load_gene_features, align_features_with_meta,
     get_folds, get_folds_from_task_dir,
@@ -63,7 +63,8 @@ def load_pathway_features(tissue, db="hallmark"):
     """Load GSVA pathway scores. Returns samples × pathways DataFrame."""
     all_scores = []
     for mission in TISSUE_MISSIONS.get(tissue, []):
-        f = PATHWAY_DIR / tissue / f"{mission}_gsva_{db}.csv"
+        storage_mission = MISSION_FILE_ALIASES.get(mission, mission)
+        f = PATHWAY_DIR / tissue / f"{storage_mission}_gsva_{db}.csv"
         if not f.exists():
             continue
         scores = pd.read_csv(f, index_col=0)

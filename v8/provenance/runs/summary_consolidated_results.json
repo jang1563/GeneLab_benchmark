@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "summary.consolidated_v8_results",
+  "pillar": "summary",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "Consolidated v8 table summarizes BRIDGE, DECOMPOSE, INTERVENE, causal, and Mars outputs.",
+    "scope": "release",
+    "consumed_by": [
+      "v8/RESULTS_SUMMARY.md",
+      "v8/RESULTS_SUMMARY_TABLE.csv"
+    ]
+  },
+  "generated_at": "2026-05-09T16:48:13Z",
+  "code": {
+    "script": "v8/RESULTS_SUMMARY.py",
+    "command": "bash scripts/hpc_v8_summary.sh",
+    "git_commit": "266381a+staged-v8-release"
+  },
+  "inputs": [
+    {
+      "role": "bridge_outputs",
+      "path_or_accession": "v8/bridge/evaluation/",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "decompose_outputs",
+      "path_or_accession": "v8/decompose/evaluation/",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "intervene_outputs",
+      "path_or_accession": "v8/intervene/evaluation/",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "causal_outputs",
+      "path_or_accession": "v8/causal/evaluation/",
+      "kind": "local_file",
+      "tracked_in_git": true
+    }
+  ],
+  "outputs": [
+    {
+      "role": "markdown_summary",
+      "path_or_accession": "v8/RESULTS_SUMMARY.md",
+      "kind": "local_file",
+      "checksum": "sha256:5506a96ab01172fe2b83546b2107fda3da9a94c9e8017cf01565731aafa11d14",
+      "tracked_in_git": true
+    },
+    {
+      "role": "summary_table",
+      "path_or_accession": "v8/RESULTS_SUMMARY_TABLE.csv",
+      "kind": "local_file",
+      "checksum": "sha256:126db9952e6df3d1181db7cd8f82a8b0d9636881bd6c800a558733a309312863",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
+  },
+  "metrics": [
+    {"name": "rf_supervised_auroc_aug", "value": 0.888},
+    {"name": "rf_supervised_auroc_base", "value": 0.712},
+    {"name": "rf_supervised_delta", "value": 0.175},
+    {"name": "top_icp_stressor", "value": "T"},
+    {"name": "top_pareto_reversal", "value": "CGP-60474"}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "bash scripts/hpc_v8_summary.sh",
+      "bash scripts/hpc_release_validate.sh --v8-summary"
+    ],
+    "notes": "Regenerated on cayuga-login1 after BRIDGE and CAUSAL reruns and after restoring complete DECOMPOSE/INTERVENE artifacts from the validated staged tree. Final release validation passed 41 tests, whitespace/conflict-marker checks, release hygiene, and summary regeneration."
+  }
+}

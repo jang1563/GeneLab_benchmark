@@ -26,7 +26,7 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 **A comprehensive benchmark for evaluating ML models and foundation models on NASA spaceflight transcriptomics data.**
 
-Version: v6.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
+Version: v7.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 
@@ -48,7 +48,7 @@ GeneLab Benchmark provides standardized train/test splits for evaluating how wel
 | Samples | 660+ (binary: Flight vs. Ground Control) |
 | Classifiers | 8 (PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-RBF, KNN, MLP, TabNet) |
 | Feature types | 4 (Gene, Hallmark pathways, KEGG pathways, Combined) |
-| Foundation Models | 5 (Geneformer, scGPT, UCE, scFoundation, Text LLMs) |
+| Foundation / Language Models | 4 gene-expression FMs + 3 text LLMs |
 
 ---
 
@@ -79,7 +79,7 @@ genelab-benchmark/
 ├── A6_eye_lomo/                  <- 3 missions, 37 samples
 │   ├── fold_RR-1_test/
 │   ├── fold_RR-3_test/
-│   └── fold_TBD_test/            <- OSD-397, no official mission name
+│   └── fold_OSD-397_test/        <- stable public label for OSD-397
 │
 ├── v4/evaluation/                <- Multi-method evaluation results (JSON)
 ├── v5/evaluation/                <- Systems biology analysis results
@@ -130,17 +130,17 @@ Significance: permutation p < 0.05. Overall, 6/8 tissues significant; 40/256 ind
 
 PCA-LR on gene features provides a strong baseline (8-tissue mean AUROC = 0.776).
 
-### Foundation Model Comparison (7 tissues)
+### Foundation / Language Model Snapshot
 
 | Model | Best Single-Tissue AUROC | vs PCA-LR Baseline (0.776) |
 |-------|-----------|-------------------|
-| scGPT | 0.667 (mean) | Below baseline |
+| scGPT | 0.666 (6-tissue mean, v1) | Below baseline |
 | scFoundation | 0.635 (liver, p<0.01) | Below baseline |
 | UCE | 0.632 (thymus, p=0.031) | Below baseline |
-| Mouse-Geneformer | 0.476 (mean) | Below baseline |
+| Mouse-Geneformer | 0.476 (6-tissue mean, v1) | Below baseline |
 | Text LLMs (GPT-4o, Claude, Llama 3) | 0.47-0.51 | Chance level |
 
-All foundation models underperform classical PCA-LR. Pre-trained cell atlas representations do not improve spaceflight detection.
+scGPT and Mouse-Geneformer report 6-tissue v1 means; scFoundation and UCE rows show best single-tissue v3 results. All of these model families still underperform the classical PCA-LR benchmark surface.
 
 ### Negative Controls
 
@@ -272,7 +272,7 @@ Lung and Colon additionally include Basal Control samples treated as ground cont
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v6.0}
+  note    = {v7.0}
 }
 ```
 

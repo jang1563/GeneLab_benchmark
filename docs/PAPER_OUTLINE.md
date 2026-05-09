@@ -9,7 +9,7 @@
 
 ### Title & Abstract (~250 words)
 - Problem: No cross-mission ML benchmark for spaceflight transcriptomics; liver assumed as gold standard
-- Approach: 6 tissues × 17 missions × ~450 samples, LOMO CV, 3-tier models (classical ML, Geneformer, text LLMs)
+- Approach: 6 tissues × 17 missions × ~450 samples, LOMO CV, 3-tier models (classical ML, gene-expression FMs, text LLMs)
 - Key results: (1) Thymus >> Liver (0.860 vs 0.577, p=0.001), (2) 17.8× pathway batch-resistance, (3) NES conservation predicts transfer (r=0.9), (4) Foundation models fail on bulk RNA-seq
 
 ---
@@ -59,6 +59,7 @@
 
 2f. **Foundation models and text LLMs fail on bulk RNA-seq** (Fig 6)
 - Mouse-Geneformer: mean 0.476 vs Classical ML 0.758 (delta=-0.283), 6/6 tissues classical wins
+- scGPT: mean 0.666 vs Classical ML 0.758 (delta=-0.093), classical wins 4/6 tissues
 - Text LLMs (3 providers, zero-shot): mean 0.47-0.51, all at chance level
 - Held-out RR-23 thymus: Classical 0.905 vs Geneformer 0.556
 - scRNA pretraining does not transfer to small-n bulk; zero-shot text reasoning cannot replace numerical ML
@@ -81,7 +82,7 @@
 
 3d. **Foundation model limitations**: scRNA→bulk domain gap. Small-n prevents effective fine-tuning. Rank-based tokenization loses quantitative info. Not a paradigm failure — domain mismatch. Text LLMs confirm: numerical ML required.
 
-3e. **Limitations**: Small sample sizes (n=6-40). Per-mission normalization (not joint). Strain confounding in MHU-1 thymus. Single species (mouse). One FM tested (Geneformer). Temporal confounding (ISS-T vs LAR, explored in supplementary).
+3e. **Limitations**: Small sample sizes (n=6-40). Per-mission normalization (not joint). Strain confounding in MHU-1 thymus. Single species (mouse). Only two bulk-evaluated gene-expression FMs tested (Geneformer, scGPT). Temporal confounding (ISS-T vs LAR, explored in supplementary).
 
 3f. **Future directions**: Cross-species (human, C. elegans). Domain-adapted FMs. Joint normalization. Radiation dose-response (requires ground irradiation).
 
@@ -111,7 +112,7 @@
 | 3 | D3 batch: Gene PCA (perfect separation) vs Pathway PCA (mixed) | 17.8× batch resistance |
 | 4 | NES conservation vs transfer AUROC scatter (r=0.9 line) | Pathway biology predicts ML |
 | 5 | Gene vs Pathway comparison: J5 summary + kidney/eye rescue | Complementary features |
-| 6 | Geneformer + LLM vs Classical ML paired bars (6 tissues) | Classical ML wins |
+| 6 | Geneformer/scGPT/LLM vs Classical ML paired bars (6 tissues) | Classical ML wins |
 
 ### Supplementary
 
@@ -131,7 +132,7 @@
 ### Data/Code Availability
 - NASA OSDR (public): 24 OSD studies
 - HuggingFace: jang1563/genelab-benchmark (processed data + task definitions)
-- GitHub: analysis code, evaluation framework (MIT license)
+- GitHub: https://github.com/jang1563/GeneLab_benchmark (analysis code, evaluation framework; MIT license)
 
 ---
 
@@ -154,5 +155,5 @@
 2. **Thymus > Liver** with statistical significance (p=0.001) — overturns consensus
 3. **17.8× pathway batch-resistance** — first quantitative measurement
 4. **NES conservation predicts transfer** (r=0.9) — previously unreported relationship
-5. **First systematic FM evaluation** on spaceflight bulk RNA-seq (Geneformer + 3 text LLMs)
+5. **First systematic FM evaluation** on spaceflight bulk RNA-seq (Geneformer, scGPT, + 3 text LLMs)
 6. **Pathway rescue** of kidney/eye — practical demonstration of feature-level complementarity

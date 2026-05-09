@@ -2,8 +2,8 @@
 
 **A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v6.0 (2026-03-30) | Dataset freeze: 2026-03-01
-Status: **v1–v6 Complete** | v7 Graph Neural Networks In Progress
+Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01
+Status: **v1–v7 Complete**
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -26,7 +26,7 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 - **25+ evaluation tasks** across 7 categories (A-D, J, NC, Validation)
 - **v4**: 256 evaluations (8 tissues x 8 classifiers x 4 feature types)
 - **Multi-species**: Mouse bulk, Drosophila KEGG, mouse scRNA-seq (RRRM-1/RRRM-2), spatial Visium
-- **5 foundation models evaluated**: Geneformer, scGPT, UCE, scFoundation, + 3 text LLMs
+- **4 gene-expression foundation models + 3 text LLMs evaluated**: Geneformer, scGPT, UCE, scFoundation, plus GPT-4o/Claude/Llama
 
 ---
 
@@ -107,18 +107,18 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 | **Drug targets** (DGIdb + ChEMBL) | 271/834 spaceflight genes druggable; 1,284 FDA-approved drug–gene interactions |
 | **Consensus biomarker panel** (20 genes) | Top genes: MUP22, Thrsp, Apoa1, NPAS2, PER2. AUROC: gastro 0.806, liver 0.754, eye 0.728 |
 
-### Foundation Model Comparison (5 FMs vs PCA-LR)
+### Foundation / LLM Comparison Snapshot
 
 | Model | Architecture | Mean AUROC (6 tissues) | vs PCA-LR |
 |-------|------------|----------------------|-----------|
 | **PCA-LR baseline** | Classical ML | **0.758** | — |
-| scGPT | 12L Transformer, 33M human cells | 0.667 | -0.092 |
+| scGPT | 12L Transformer, 33M human cells | 0.666 | -0.093 |
 | scFoundation | 100M params, 50M cells | 0.635† (liver best, p<0.01) | Below baseline |
 | UCE | 33L, 36M cells | 0.632† (thymus best, p=0.031) | Below baseline |
 | Mouse-Geneformer | 6L BERT, 30M mouse cells | 0.476 | -0.283 |
 | Text LLMs (3x) | GPT-4o, Claude, Llama 3 | 0.47-0.51 | Chance level |
 
-**FM verdict**: All foundation models underperform classical PCA-LR (mean 0.758). Pre-trained cell atlas knowledge does not improve spaceflight detection. scFoundation > UCE overall. †Best single-tissue AUROC shown; mean across all 7 tissues is lower.
+**FM verdict**: All foundation models underperform classical ML. The scGPT and Mouse-Geneformer rows report 6-tissue v1 means against the 0.758 PCA-LR baseline; the scFoundation and UCE rows show their best single-tissue v3 results, and their full cross-tissue means also remain below baseline. †Best single-tissue AUROC shown; cross-tissue means are lower.
 
 ### Independent Held-Out Validation
 
@@ -161,6 +161,7 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 | **v4.0** | Multi-method benchmark: 8 tissues × 8 classifiers × 4 features (256 evals), ablation, SHAP, WGCNA, module preservation, STRING PPI | **Complete** | `v4/` |
 | **v5.0** | Biological interpretation: immune deconvolution (mMCP-counter), metabolic flux (iMM1865 E-Flux), drug targets (DGIdb/ChEMBL), consensus 20-gene biomarker panel | **Complete** | `v5/` |
 | **v6.0** | Cross-species validation: gene/pathway conservation, cross-species transfer, TF conservation, biomarker/drug target validation across species | **Complete** | `v6/` |
+| **v7.0** | Unified/foundation-model benchmarking: scPRINT2, GNN/WGCNA graph baselines, cross-method synthesis, and signal hierarchy analysis | **Complete** | `v7/` |
 
 ---
 
@@ -172,7 +173,7 @@ GeneLab_benchmark/
 ├── DATA_CATALOG.md                 <- OSDR inventory (24+ studies)
 ├── CITATION.cff                    <- Citation metadata
 │
-├── tasks/                          <- Public task inputs (17 directories)
+├── tasks/                          <- Public task inputs (benchmark + sensitivity tasks)
 │   ├── A1_liver_lomo/              <- 6 folds + 3 variants
 │   ├── A2_gastrocnemius_lomo/      <- 3 folds
 │   ├── A3_kidney_lomo/             <- 3 folds
@@ -181,7 +182,7 @@ GeneLab_benchmark/
 │   ├── A6_eye_lomo/                <- 3 folds
 │   └── B1-B6_*_cross_mission/     <- N x (N-1) mission pairs per tissue
 │
-├── scripts/                        <- v1 pipeline scripts (35 Python/R/shell)
+├── scripts/                        <- v1 pipeline scripts
 │   ├── run_baselines.py            <- Classical ML baseline runner
 │   ├── evaluate_submission.py      <- Submission evaluator (AUROC, CI, perm_p)
 │   ├── generate_tasks.py           <- LOMO split generator
@@ -199,30 +200,36 @@ GeneLab_benchmark/
 │
 ├── v2/                             <- Temporal dynamics, cross-species, scRNA-seq
 │   ├── README.md
-│   ├── scripts/                    <- 19 Python scripts
+│   ├── scripts/                    <- v2 analysis and runner scripts
 │   ├── evaluation/                 <- v2 results
-│   └── figures/                    <- 3 D3.js interactive HTML figures
+│   └── figures/                    <- v2 interactive HTML figures
 │
 ├── v3/                             <- Multi-species, spatial Visium, FM evaluation
 │   ├── README.md
-│   ├── scripts/                    <- 30 scripts (Python/Bash/R)
-│   ├── evaluation/                 <- 19 result JSONs
-│   └── figures/                    <- 5 D3.js interactive HTML figures
+│   ├── scripts/                    <- v3 scripts (Python/Bash/R)
+│   ├── evaluation/                 <- v3 result summaries
+│   └── figures/                    <- v3 interactive HTML figures
 │
 ├── v4/                             <- Multi-method benchmark + network biology
-│   ├── scripts/                    <- 18 scripts (classifiers, SHAP, WGCNA, PPI)
-│   ├── evaluation/                 <- 256+ result JSONs + SHAP/WGCNA outputs
-│   ├── wgcna_outputs/              <- Per-tissue WGCNA module data (6 tissues)
-│   └── figures/html/               <- 11 D3.js interactive HTML figures
+│   ├── scripts/                    <- Classifiers, SHAP, WGCNA, and PPI analysis
+│   ├── evaluation/                 <- v4 result JSONs + SHAP/WGCNA outputs
+│   ├── wgcna_outputs/              <- Per-tissue WGCNA module data
+│   └── figures/html/               <- v4 interactive HTML figures
 │
 ├── v5/                             <- Biological interpretation layer
 │   ├── scripts/                    <- Immune deconv, metabolic flux, drug targets
-│   ├── evaluation/                 <- 25 result JSONs (immune, TF, metabolic, drugs)
-│   └── figures/html/               <- 5 D3.js interactive HTML figures
+│   ├── evaluation/                 <- Immune, TF, metabolic, and drug-target results
+│   └── figures/html/               <- v5 interactive HTML figures
 │
 ├── v6/                             <- Cross-species validation
-│   ├── scripts/                    <- 7 Python scripts (phases A–F)
-│   └── evaluation/                 <- 5 result JSONs
+│   ├── scripts/                    <- Phase A-F Python scripts
+│   └── evaluation/                 <- v6 result summaries
+│
+├── v7/                             <- Unified/foundation-model benchmarking
+│   ├── scripts/                    <- HPC setup and launcher scripts
+│   ├── unified/                    <- scPRINT2, GNN/WGCNA, and synthesis drivers
+│   ├── evaluation/                 <- v7 result JSONs
+│   └── figures/html/               <- v7 interactive HTML figures
 │
 └── processed/                      <- Intermediate analysis outputs
     ├── A_detection/                <- Per-tissue LOMO data
@@ -287,7 +294,7 @@ All submissions are evaluated with:
 | Metric | Description | Go threshold |
 |--------|-------------|-------------|
 | Mean AUROC | Average AUROC across folds | > 0.700 |
-| 95% CI lower | Bootstrap CI (N=2000) lower bound | > 0.500 |
+| 95% CI lower | Bootstrap CI (N=2000) lower bound | > 0.600 |
 | perm_p | Permutation p-value (N=1000, pseudocount) | < 0.050 |
 
 All three conditions must pass for a GO decision.
@@ -339,7 +346,7 @@ All data is derived from publicly available NASA OSDR datasets.
 | Kidney | OSD-102, 163, 253 | RR-1, RR-3, RR-7 | 118 |
 | Thymus | OSD-289, 244, 421 | MHU-1, MHU-2, RR-6, RR-9 | 67 |
 | Skin | OSD-238, 239, 243, 254 | MHU-2, RR-6, RR-7 | 102 |
-| Eye | OSD-100, 194, 397 | RR-1, RR-3, TBD | 37 |
+| Eye | OSD-100, 194, 397 | RR-1, RR-3, OSD-397 | 37 |
 
 ### v4 Additions (2 tissues)
 
@@ -373,12 +380,13 @@ Key methodological choices underpinning this benchmark:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v7.0 | 2026-04-12 | Unified benchmark layer complete: scPRINT2 baseline, GNN/WGCNA graph comparisons across 6 tissues, portable checkpoint/result artifacts, and v7 methods/signal-hierarchy synthesis. |
 | v6.0 | 2026-03-30 | Cross-species validation complete: gene conservation, pathway conservation, cross-species transfer, TF conservation, biomarker validation, drug target validation (6 result JSONs). |
 | v5.0 | 2026-03-29 | Biological interpretation complete: immune deconvolution (mMCP-counter, 8 tissues), cross-organ signaling (OmniPath, 111 L–R pairs), metabolic flux (iMM1865 E-Flux + pFBA), drug targets (DGIdb + ChEMBL, 1,284 FDA interactions), consensus 20-gene biomarker panel (gastro AUROC 0.806). 5 integration figures. |
 | v4.0 | 2026-03-28 | v4 complete: 256 evaluations (8 tissues × 8 methods × 4 features). PCA-LR best (AUROC 0.776). Friedman p=0.015. Ablation (569 evals), SHAP multi-method, Python WGCNA (6 tissues), module preservation, STRING PPI. 11 publication figures. |
 | v3.0 | 2026-03-20 | Multi-species (E4 Drosophila KEGG), spatial Visium brain (NEGATIVE), RRRM-2 scRNA-seq (PBMC NK 0.845), UCE + scFoundation FM eval, 7×7 cross-tissue transfer, radiation analogs. 5 publication figures. |
 | v2.0 | 2026-03-18 | RRRM-1 scRNA-seq 4 tissues (38K cells). E1 cross-species r=0.352. T1–T3 temporal dynamics. 3 publication figures. |
-| v1.3 | 2026-03-13 | Tier 3 LLM zero-shot. scGPT mean 0.667. Held-out: thymus RR-23 (0.905), skin RR-7 (0.885). 4 main + 4 supplementary figures. |
+| v1.3 | 2026-03-13 | Tier 3 LLM zero-shot. scGPT mean 0.666. Held-out: thymus RR-23 (0.905), skin RR-7 (0.885). 4 main + 4 supplementary figures. |
 | v1.0 | 2026-03-07 | Initial release: 6 tissues, Categories A–D, Geneformer, Cell 2020 validation, fGSEA, GSVA. |
 
 ---
@@ -393,7 +401,7 @@ Key methodological choices underpinning this benchmark:
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v6.0}
+  note    = {v7.0}
 }
 ```
 

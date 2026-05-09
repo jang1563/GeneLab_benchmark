@@ -93,7 +93,7 @@ OSD_TO_MISSION = {
     "OSD-421": {"mission": "RR-9",  "duration_days": 33,  "strain": "C57BL/6J", "track": "2a"},
     "OSD-100": {"mission": "RR-1",  "duration_days": 37,  "strain": "C57BL/6J", "track": "2a"},
     "OSD-194": {"mission": "RR-3",  "duration_days": 40,  "strain": "C57BL/6J", "track": "2a"},
-    "OSD-397": {"mission": "TBD",   "duration_days": None, "strain": "Mus musculus", "track": "2a"},
+    "OSD-397": {"mission": "OSD-397", "duration_days": None, "strain": "Mus musculus", "track": "2a"},
     "OSD-238": {"mission": "MHU-2 (dorsal)", "duration_days": 35, "strain": "C57BL/6J", "track": "2a"},
     "OSD-239": {"mission": "MHU-2 (femoral)","duration_days": 35, "strain": "C57BL/6J", "track": "2a"},
     "OSD-243": {"mission": "RR-6",  "duration_days": 35,  "strain": "C57BL/6J", "track": "2a"},

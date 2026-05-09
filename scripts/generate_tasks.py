@@ -112,6 +112,7 @@ MIN_SAMPLES_PER_FOLD = 4     # minimum test samples per fold
 FLIGHT_LABEL = "Flight"      # canonical Flight label
 GROUND_LABELS = {"GC", "VC"} # GC or VC → label 0 (Ground)
 # Note: BC (Basal), AG (Artificial Gravity) are excluded from binary classification
+MISSION_ALIASES = {"TBD": "OSD-397"}
 
 
 # ── Core functions ─────────────────────────────────────────────────────────────
@@ -149,6 +150,8 @@ def load_tissue_data(tissue: str, batch_corrected: bool = False) -> tuple[pd.Dat
 
     counts = pd.read_csv(counts_path, index_col=0)
     meta = pd.read_csv(meta_path, index_col=0)
+    if "mission" in meta.columns:
+        meta["mission"] = meta["mission"].replace(MISSION_ALIASES)
 
     # Drop non-gene columns that quality_filter.py appended (mission, osd_id, etc.)
     non_gene_cols = [c for c in counts.columns if c in {"mission", "osd_id", "label"}]

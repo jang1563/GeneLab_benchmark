@@ -2,12 +2,13 @@
   "model": "scgpt_whole_human",
   "description": "scGPT whole_human fine-tuned on mouse spaceflight LOMO folds (10 epochs, batch=8, lr=1e-4, freeze=10/12 layers)",
   "overall_mean_auroc": 0.6655,
-  "geneformer_mean_auroc": 0.476,
-  "baseline_mean_auroc": 0.758,
-  "delta_vs_geneformer": 0.1895,
-  "delta_vs_baseline": -0.0925,
+  "geneformer_mean_auroc": 0.4759,
+  "baseline_mean_auroc": 0.7584,
+  "delta_vs_geneformer": 0.1896,
+  "delta_vs_baseline": -0.0929,
   "n_tasks": 6,
   "n_folds_total": 21,
+  "reference_summary": "evaluation/geneformer_mouse_gf_all_tissues_summary.json",
   "tasks": {
     "A1": {
       "task": "A1",
@@ -17,9 +18,9 @@
       "std_auroc": 0.2488,
       "n_folds": 6,
       "baseline_auroc": 0.588,
-      "geneformer_auroc": 0.486,
+      "geneformer_auroc": 0.4859,
       "delta_vs_baseline": 0.0404,
-      "delta_vs_geneformer": 0.1424,
+      "delta_vs_geneformer": 0.1426,
       "fold_results": [
         {
           "fold": "MHU-2",
@@ -144,10 +145,10 @@
       "mean_auroc": 0.6852,
       "std_auroc": 0.2498,
       "n_folds": 3,
-      "baseline_auroc": 0.801,
-      "geneformer_auroc": 0.432,
-      "delta_vs_baseline": -0.1158,
-      "delta_vs_geneformer": 0.2532,
+      "baseline_auroc": 0.9074,
+      "geneformer_auroc": 0.3819,
+      "delta_vs_baseline": -0.2222,
+      "delta_vs_geneformer": 0.3032,
       "fold_results": [
         {
           "fold": "RR-1",
@@ -215,10 +216,10 @@
       "mean_auroc": 0.5562,
       "std_auroc": 0.1588,
       "n_folds": 3,
-      "baseline_auroc": 0.538,
-      "geneformer_auroc": 0.432,
-      "delta_vs_baseline": 0.0182,
-      "delta_vs_geneformer": 0.1242,
+      "baseline_auroc": 0.5211,
+      "geneformer_auroc": 0.4517,
+      "delta_vs_baseline": 0.0351,
+      "delta_vs_geneformer": 0.1045,
       "fold_results": [
         {
           "fold": "RR-1",
@@ -286,10 +287,10 @@
       "mean_auroc": 0.7823,
       "std_auroc": 0.1487,
       "n_folds": 4,
-      "baseline_auroc": 0.923,
-      "geneformer_auroc": 0.476,
-      "delta_vs_baseline": -0.1407,
-      "delta_vs_geneformer": 0.3063,
+      "baseline_auroc": 0.9232,
+      "geneformer_auroc": 0.4952,
+      "delta_vs_baseline": -0.1409,
+      "delta_vs_geneformer": 0.2871,
       "fold_results": [
         {
           "fold": "MHU-1",
@@ -376,10 +377,10 @@
       "mean_auroc": 0.6911,
       "std_auroc": 0.0415,
       "n_folds": 3,
-      "baseline_auroc": 0.821,
-      "geneformer_auroc": 0.532,
-      "delta_vs_baseline": -0.1299,
-      "delta_vs_geneformer": 0.1591,
+      "baseline_auroc": 0.8214,
+      "geneformer_auroc": 0.5565,
+      "delta_vs_baseline": -0.1303,
+      "delta_vs_geneformer": 0.1345,
       "fold_results": [
         {
           "fold": "MHU-2",
@@ -447,10 +448,10 @@
       "mean_auroc": 0.65,
       "std_auroc": 0.1,
       "n_folds": 2,
-      "baseline_auroc": 0.789,
-      "geneformer_auroc": 0.478,
-      "delta_vs_baseline": -0.139,
-      "delta_vs_geneformer": 0.172,
+      "baseline_auroc": 0.7894,
+      "geneformer_auroc": 0.4841,
+      "delta_vs_baseline": -0.1394,
+      "delta_vs_geneformer": 0.1659,
       "fold_results": [
         {
           "fold": "RR-1",

@@ -133,17 +133,25 @@ Key difference from Category A:
 
 ### Category A — Spaceflight Detection (LOMO)
 
-| Task ID | Tissue | Folds | Test Samples per Fold | Input Features |
-|---------|--------|-------|----------------------|----------------|
-| `A2` | Gastrocnemius | 3 | 8–12 | ~21k genes (log2 normalized) |
-| `A4` | Thymus | 4 | 6–35 | ~21k genes (log2 normalized) |
+| Task ID | Tissue | Folds | n Samples (binary) | Input Features |
+|---------|--------|-------|--------------------|----------------|
+| `A1` | Liver | 6 | 193 | ~21k genes (log2 normalized) |
+| `A2` | Gastrocnemius | 3 | 32 | ~21k genes (log2 normalized) |
+| `A3` | Kidney | 3 | 118 | ~21k genes (log2 normalized) |
+| `A4` | Thymus | 4 | 67 | ~21k genes (log2 normalized) |
+| `A5` | Skin | 3 | 102 | ~21k genes (log2 normalized) |
+| `A6` | Eye | 3 | 37 | ~21k genes (log2 normalized) |
 
 ### Category B — Cross-Mission Transfer
 
 | Task ID | Tissue | Missions | Pairs | Task Directory |
 |---------|--------|---------|-------|----------------|
-| `B4` | Thymus | MHU-1, MHU-2, RR-6, RR-9 | 12 | `tasks/B4_thymus_cross_mission/` |
+| `B1` | Liver | MHU-2, RR-1, RR-3, RR-6, RR-8, RR-9 | 30 | `tasks/B1_liver_cross_mission/` |
 | `B2` | Gastrocnemius | RR-1, RR-5, RR-9 | 6 | `tasks/B2_gastrocnemius_cross_mission/` |
+| `B3` | Kidney | RR-1, RR-3, RR-7 | 6 | `tasks/B3_kidney_cross_mission/` |
+| `B4` | Thymus | MHU-1, MHU-2, RR-6, RR-9 | 12 | `tasks/B4_thymus_cross_mission/` |
+| `B5` | Skin | MHU-2, RR-6, RR-7 | 6 | `tasks/B5_skin_cross_mission/` |
+| `B6` | Eye | RR-1, RR-3, OSD-397 | 6 | `tasks/B6_eye_cross_mission/` |
 
 Each pair directory is named `pair_{TRAIN}_{TEST}` (e.g., `pair_MHU-2_RR-6`).
 
@@ -205,13 +213,13 @@ The evaluator (`scripts/evaluate_submission.py`) computes:
 | **AUROC** | Area under ROC curve (per fold + mean ± SD) |
 | **95% CI** | Bootstrap CI (N=2000) on mean AUROC |
 | **perm_p** | Permutation p-value (N=1000, pseudocount applied) |
-| **Go/No-Go** | AUROC > 0.700 AND CI lower > 0.500 |
+| **Go/No-Go** | AUROC > 0.700 AND CI lower > 0.600 |
 
 ---
 
 ## Submission Rules
 
-1. **One submission per task**: Submit separate JSON files for A2, A4, B-tasks.
+1. **One submission per task**: Submit separate JSON files for each supported task (`A1`-`A6`, `B1`-`B6`).
 2. **All folds required**: Every fold in a task must have predictions for all test samples.
 3. **No training label leakage**: Models may only use features from `train_X.csv` and `train_y.csv` within each fold (LOMO design — do not train on other folds' test labels).
 4. **Probability required**: Submit calibrated probabilities, not binary labels. Binary 0/1 will be accepted but AUROC will be limited.
@@ -261,5 +269,5 @@ python scripts/evaluate_submission.py \
 ## Contact / Issues
 
 This benchmark is part of the GeneLab_benchmark project based on NASA OSDR data.
-GitHub Issues: [TBD when public]
+GitHub Issues: https://github.com/jang1563/GeneLab_benchmark/issues
 Data source: [NASA OSDR](https://osdr.nasa.gov/bio/repo/)

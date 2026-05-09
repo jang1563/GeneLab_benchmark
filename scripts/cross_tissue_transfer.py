@@ -75,7 +75,7 @@ MISSION_GLDS = {
     "kidney": {"RR-1": "GLDS-102", "RR-3": "GLDS-163", "RR-7": "GLDS-253"},
     "thymus": {"RR-6": "GLDS-244", "MHU-2": "GLDS-289", "RR-9": "GLDS-421"},
     "gastrocnemius": {"RR-1": "GLDS-101", "RR-9": "GLDS-326"},
-    "eye": {"RR-1": "GLDS-100", "RR-3": "GLDS-194", "TBD": "GLDS-397"},
+    "eye": {"RR-1": "GLDS-100", "RR-3": "GLDS-194", "OSD-397": "GLDS-397"},
 }
 
 # Cross-tissue task definitions

@@ -1,0 +1,1170 @@
+{
+  "hze_endocrine": {
+    "n_sig_p05": {
+      "Sex": 464,
+      "HZE": 373,
+      "SexxHZE": 510
+    },
+    "per_flight_tissue": {
+      "thymus": {
+        "flight_tissue": "thymus",
+        "analog_tissue": "hze_endocrine",
+        "n_shared_genes": 13927,
+        "spearman_Sex_vs_flight": {
+          "r": -0.013025084017076347,
+          "p": 0.1242804034182131
+        },
+        "spearman_HZE_vs_flight": {
+          "r": 0.018603830818348096,
+          "p": 0.02812908100592883
+        },
+        "spearman_SexxHZE_vs_flight": {
+          "r": -0.02465901801453272,
+          "p": 0.0036112951896341066
+        },
+        "spearman_Sex_vs_flight_responsive": {
+          "r": -0.23998043186980172,
+          "p": 1.113432285642343e-11,
+          "n": 780
+        },
+        "spearman_HZE_vs_flight_responsive": {
+          "r": -0.21923883086364523,
+          "p": 6.068893784511645e-10,
+          "n": 780
+        },
+        "spearman_SexxHZE_vs_flight_responsive": {
+          "r": 0.15991357999193584,
+          "p": 7.193129559813871e-06,
+          "n": 780
+        },
+        "variance_attribution_top200": {
+          "Sex_frac": 0.32404681656910483,
+          "HZE_frac": 0.2359497377450976,
+          "SexxHZE_frac": 0.4400034456857975
+        }
+      },
+      "gastrocnemius": {
+        "flight_tissue": "gastrocnemius",
+        "analog_tissue": "hze_endocrine",
+        "n_shared_genes": 12934,
+        "spearman_Sex_vs_flight": {
+          "r": -0.02734011439731221,
+          "p": 0.001873343426018253
+        },
+        "spearman_HZE_vs_flight": {
+          "r": 0.024473868932425685,
+          "p": 0.005377490041256798
+        },
+        "spearman_SexxHZE_vs_flight": {
+          "r": 0.00012208929248933283,
+          "p": 0.9889228473527267
+        },
+        "spearman_Sex_vs_flight_responsive": {
+          "r": -0.05068345794492023,
+          "p": 0.015461158403582646,
+          "n": 2282
+        },
+        "spearman_HZE_vs_flight_responsive": {
+          "r": 0.05287084048555848,
+          "p": 0.011535699862454516,
+          "n": 2282
+        },
+        "spearman_SexxHZE_vs_flight_responsive": {
+          "r": 0.0016401256653344226,
+          "p": 0.9375843321203072,
+          "n": 2282
+        },
+        "variance_attribution_top200": {
+          "Sex_frac": 0.21545382200181876,
+          "HZE_frac": 0.23091196522788618,
+          "SexxHZE_frac": 0.5536342127702951
+        }
+      },
+      "skin": {
+        "flight_tissue": "skin",
+        "analog_tissue": "hze_endocrine",
+        "n_shared_genes": 13600,
+        "spearman_Sex_vs_flight": {
+          "r": 0.07630746250798287,
+          "p": 5.053828212671121e-19
+        },
+        "spearman_HZE_vs_flight": {
+          "r": 0.08242014660654366,
+          "p": 6.134513106632024e-22
+        },
+        "spearman_SexxHZE_vs_flight": {
+          "r": -0.08267136627464568,
+          "p": 4.604489658260894e-22
+        },
+        "spearman_Sex_vs_flight_responsive": {
+          "r": 0.11449688983889039,
+          "p": 0.0011783417296144147,
+          "n": 800
+        },
+        "spearman_HZE_vs_flight_responsive": {
+          "r": 0.10139061936034277,
+          "p": 0.004095946223830423,
+          "n": 800
+        },
+        "spearman_SexxHZE_vs_flight_responsive": {
+          "r": -0.09039185217476904,
+          "p": 0.010530394218223724,
+          "n": 800
+        },
+        "variance_attribution_top200": {
+          "Sex_frac": 0.29177348687218885,
+          "HZE_frac": 0.20571397352859966,
+          "SexxHZE_frac": 0.5025125395992115
+        }
+      },
+      "eye": {
+        "flight_tissue": "eye",
+        "analog_tissue": "hze_endocrine",
+        "n_shared_genes": 13217,
+        "spearman_Sex_vs_flight": {
+          "r": -0.031928338915057135,
+          "p": 0.00024137937497316966
+        },
+        "spearman_HZE_vs_flight": {
+          "r": -0.09462492896532937,
+          "p": 1.1273373997486303e-27
+        },
+        "spearman_SexxHZE_vs_flight": {
+          "r": 0.050174278306978334,
+          "p": 7.862214746833942e-09
+        },
+        "spearman_Sex_vs_flight_responsive": {
+          "r": -0.05812549336346149,
+          "p": 0.010749267609017702,
+          "n": 1925
+        },
+        "spearman_HZE_vs_flight_responsive": {
+          "r": -0.20996744807767373,
+          "p": 1.2750711077740157e-20,
+          "n": 1925
+        },
+        "spearman_SexxHZE_vs_flight_responsive": {
+          "r": 0.12284898165377435,
+          "p": 6.41006259755326e-08,
+          "n": 1925
+        },
+        "variance_attribution_top200": {
+          "Sex_frac": 0.19041227487922882,
+          "HZE_frac": 0.32096912413388456,
+          "SexxHZE_frac": 0.4886186009868867
+        }
+      },
+      "liver": {
+        "flight_tissue": "liver",
+        "analog_tissue": "hze_endocrine",
+        "n_shared_genes": 14039,
+        "spearman_Sex_vs_flight": {
+          "r": 0.03134442017860263,
+          "p": 0.00020363336097932927
+        },
+        "spearman_HZE_vs_flight": {
+          "r": -0.05124638554675227,
+          "p": 1.2364424084475732e-09
+        },
+        "spearman_SexxHZE_vs_flight": {
+          "r": 0.02898260189036155,
+          "p": 0.0005937433642460715
+        },
+        "spearman_Sex_vs_flight_responsive": {
+          "r": 0.12397409424994489,
+          "p": 0.008845006867595194,
+          "n": 445
+        },
+        "spearman_HZE_vs_flight_responsive": {
+          "r": -0.08644469195353888,
+          "p": 0.06847996592494537,
+          "n": 445
+        },
+        "spearman_SexxHZE_vs_flight_responsive": {
+          "r": 0.06980019715692642,
+          "p": 0.14153769481532652,
+          "n": 445
+        },
+        "variance_attribution_top200": {
+          "Sex_frac": 0.3213872143035491,
+          "HZE_frac": 0.1685589842531066,
+          "SexxHZE_frac": 0.5100538014433443
+        }
+      },
+      "kidney": {
+        "flight_tissue": "kidney",
+        "analog_tissue": "hze_endocrine",
+        "n_shared_genes": 13942,
+        "spearman_Sex_vs_flight": {
+          "r": 0.050413163156669265,
+          "p": 2.5872295453678347e-09
+        },
+        "spearman_HZE_vs_flight": {
+          "r": 0.038496756631038964,
+          "p": 5.445987166789926e-06
+        },
+        "spearman_SexxHZE_vs_flight": {
+          "r": -0.026099344612820385,
+          "p": 0.0020564157975520203
+        },
+        "spearman_Sex_vs_flight_responsive": {
+          "r": 0.07506999038492251,
+          "p": 0.028074143263085983,
+          "n": 856
+        },
+        "spearman_HZE_vs_flight_responsive": {
+          "r": 0.016364744611276297,
+          "p": 0.6325622875807969,
+          "n": 856
+        },
+        "spearman_SexxHZE_vs_flight_responsive": {
+          "r": -0.08116562025266132,
+          "p": 0.017541773525854013,
+          "n": 856
+        },
+        "variance_attribution_top200": {
+          "Sex_frac": 0.23054193040872561,
+          "HZE_frac": 0.20519785713138294,
+          "SexxHZE_frac": 0.5642602124598916
+        }
+      }
+    }
+  },
+  "spleen": {
+    "n_sig_p05": {
+      "HLU": 1711,
+      "IR": 802,
+      "HLUxIR": 1925
+    },
+    "per_flight_tissue": {
+      "thymus": {
+        "flight_tissue": "thymus",
+        "analog_tissue": "spleen",
+        "n_shared_genes": 18031,
+        "spearman_HLU_vs_flight": {
+          "r": 0.029214984421246218,
+          "p": 8.72570264561181e-05
+        },
+        "spearman_IR_vs_flight": {
+          "r": 0.1652751016023671,
+          "p": 1.3396563226836e-110
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.09639776165399733,
+          "p": 1.7278409518591824e-38
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.19745497908391277,
+          "p": 3.0748459090656376e-09,
+          "n": 886
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.35557623097135815,
+          "p": 8.45170381641079e-28,
+          "n": 886
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.31721503086587116,
+          "p": 3.670453393863486e-22,
+          "n": 886
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.2740291440580574,
+          "IR_frac": 0.11148960555909726,
+          "HLUxIR_frac": 0.6144812503828454
+        }
+      },
+      "gastrocnemius": {
+        "flight_tissue": "gastrocnemius",
+        "analog_tissue": "spleen",
+        "n_shared_genes": 15788,
+        "spearman_HLU_vs_flight": {
+          "r": 0.025740013013306893,
+          "p": 0.0012184723332842784
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.00397999047789862,
+          "p": 0.6170402826629033
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.012374523496083546,
+          "p": 0.11999392156522125
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": 0.023193063997817048,
+          "p": 0.22743908902594268,
+          "n": 2710
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.017487326385996642,
+          "p": 0.36282309803783175,
+          "n": 2710
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.012691103683319365,
+          "p": 0.5090029738895728,
+          "n": 2710
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.2765838920398019,
+          "IR_frac": 0.1581605870859456,
+          "HLUxIR_frac": 0.5652555208742525
+        }
+      },
+      "skin": {
+        "flight_tissue": "skin",
+        "analog_tissue": "spleen",
+        "n_shared_genes": 18361,
+        "spearman_HLU_vs_flight": {
+          "r": 0.04464619485786791,
+          "p": 1.4280212049493107e-09
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.0322775052297518,
+          "p": 1.2169256880882093e-05
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.044847456389941386,
+          "p": 1.2048309601185701e-09
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.07418301454933267,
+          "p": 0.011210748071885834,
+          "n": 1168
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.16669015085600586,
+          "p": 9.993187206943957e-09,
+          "n": 1168
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.02906954291277591,
+          "p": 0.3208916887476368,
+          "n": 1168
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.2989495304450757,
+          "IR_frac": 0.14983573073923695,
+          "HLUxIR_frac": 0.5512147388156873
+        }
+      },
+      "eye": {
+        "flight_tissue": "eye",
+        "analog_tissue": "spleen",
+        "n_shared_genes": 17408,
+        "spearman_HLU_vs_flight": {
+          "r": -0.18784121377011703,
+          "p": 5.426765062430809e-138
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.09657062748636824,
+          "p": 2.3989012507786168e-37
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.14774296831815634,
+          "p": 1.5658382847950065e-85
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.4245045119480859,
+          "p": 4.004083107303334e-99,
+          "n": 2250
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.22618040305816828,
+          "p": 1.7147158871939094e-27,
+          "n": 2250
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.3343372118089866,
+          "p": 6.864845097771255e-60,
+          "n": 2250
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.2972251140676594,
+          "IR_frac": 0.16255403016904715,
+          "HLUxIR_frac": 0.5402208557632935
+        }
+      },
+      "liver": {
+        "flight_tissue": "liver",
+        "analog_tissue": "spleen",
+        "n_shared_genes": 18722,
+        "spearman_HLU_vs_flight": {
+          "r": -0.268910056064939,
+          "p": 1.6417836358203743e-307
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.21892219450032854,
+          "p": 6.009995822032728e-202
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.2599986738771623,
+          "p": 6.771676418690011e-287
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.3025345106495992,
+          "p": 1.4994223117462245e-13,
+          "n": 571
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.3728024363175241,
+          "p": 2.878407656149983e-20,
+          "n": 571
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.3510104432784313,
+          "p": 5.341323927141566e-18,
+          "n": 571
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.3843795685051654,
+          "IR_frac": 0.10798777556944314,
+          "HLUxIR_frac": 0.5076326559253915
+        }
+      },
+      "kidney": {
+        "flight_tissue": "kidney",
+        "analog_tissue": "spleen",
+        "n_shared_genes": 18643,
+        "spearman_HLU_vs_flight": {
+          "r": 0.04526801801883374,
+          "p": 6.26472487863801e-10
+        },
+        "spearman_IR_vs_flight": {
+          "r": 0.02743119480000659,
+          "p": 0.00017975406734400148
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.013659255766581899,
+          "p": 0.062183066385184844
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": 0.0529640276886608,
+          "p": 0.06907177360242174,
+          "n": 1179
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.05466927453274818,
+          "p": 0.06057737708070547,
+          "n": 1179
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.034275104243984264,
+          "p": 0.23960021077643417,
+          "n": 1179
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.3227216810355009,
+          "IR_frac": 0.15689742646059604,
+          "HLUxIR_frac": 0.520380892503903
+        }
+      }
+    }
+  },
+  "skin_analog": {
+    "n_sig_p05": {
+      "HLU": 5621,
+      "IR": 659,
+      "HLUxIR": 1511
+    },
+    "per_flight_tissue": {
+      "thymus": {
+        "flight_tissue": "thymus",
+        "analog_tissue": "skin_analog",
+        "n_shared_genes": 18093,
+        "spearman_HLU_vs_flight": {
+          "r": -0.17180909115305115,
+          "p": 6.77940371488867e-120
+        },
+        "spearman_IR_vs_flight": {
+          "r": 0.12248252501390491,
+          "p": 2.0097269732910983e-61
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.15543686032756188,
+          "p": 3.1803119485637e-98
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.5064210739894053,
+          "p": 1.0773834136380992e-58,
+          "n": 883
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.30780600552707366,
+          "p": 7.837298824507371e-21,
+          "n": 883
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.517690683371923,
+          "p": 1.0717766967698181e-61,
+          "n": 883
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.513704214348171,
+          "IR_frac": 0.07449435168946422,
+          "HLUxIR_frac": 0.4118014339623647
+        }
+      },
+      "gastrocnemius": {
+        "flight_tissue": "gastrocnemius",
+        "analog_tissue": "skin_analog",
+        "n_shared_genes": 16122,
+        "spearman_HLU_vs_flight": {
+          "r": 0.003499938125728289,
+          "p": 0.6567804628589158
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.02916494462370857,
+          "p": 0.00021252380909630848
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.017079518789529777,
+          "p": 0.03011168545741356
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.020406917014168878,
+          "p": 0.28297546426114284,
+          "n": 2770
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.003277589947599512,
+          "p": 0.8631036162777306,
+          "n": 2770
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.05504262922179995,
+          "p": 0.0037575855736088773,
+          "n": 2770
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.6181689201517877,
+          "IR_frac": 0.06575089068765176,
+          "HLUxIR_frac": 0.31608018916056063
+        }
+      },
+      "skin": {
+        "flight_tissue": "skin",
+        "analog_tissue": "skin_analog",
+        "n_shared_genes": 19528,
+        "spearman_HLU_vs_flight": {
+          "r": 0.0818636806846806,
+          "p": 2.1354862308675216e-30
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.12829167934748964,
+          "p": 1.9100219458652899e-72
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.07613072434221907,
+          "p": 1.6795024131790957e-26
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.08826435621589705,
+          "p": 0.0015996272020194512,
+          "n": 1276
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.18823357863654194,
+          "p": 1.2184714479103984e-11,
+          "n": 1276
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.04965968349373611,
+          "p": 0.0761862657304082,
+          "n": 1276
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.46010956711852546,
+          "IR_frac": 0.14067116483533754,
+          "HLUxIR_frac": 0.39921926804613694
+        }
+      },
+      "eye": {
+        "flight_tissue": "eye",
+        "analog_tissue": "skin_analog",
+        "n_shared_genes": 17963,
+        "spearman_HLU_vs_flight": {
+          "r": -0.02639755451015963,
+          "p": 0.0004026633435146996
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.007052525944581684,
+          "p": 0.3445727861307191
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.020106026008107805,
+          "p": 0.0070427204941542225
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.07105380664198126,
+          "p": 0.0006895193490201006,
+          "n": 2278
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.033145938805046724,
+          "p": 0.11374803776350902,
+          "n": 2278
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.035985235479241,
+          "p": 0.0859552230038816,
+          "n": 2278
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.4155880670549619,
+          "IR_frac": 0.19373165783000706,
+          "HLUxIR_frac": 0.39068027511503106
+        }
+      },
+      "liver": {
+        "flight_tissue": "liver",
+        "analog_tissue": "skin_analog",
+        "n_shared_genes": 18996,
+        "spearman_HLU_vs_flight": {
+          "r": 0.038584194026870355,
+          "p": 1.0403278734452939e-07
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.057730741944381915,
+          "p": 1.6803480862760517e-15
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.010172483747159861,
+          "p": 0.16092225764604223
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": 0.02788865249236101,
+          "p": 0.5059959498707515,
+          "n": 571
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.09839781080009649,
+          "p": 0.01868118196940952,
+          "n": 571
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.004191743433408246,
+          "p": 0.920387835624178,
+          "n": 571
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.47993676928957407,
+          "IR_frac": 0.19782361872384852,
+          "HLUxIR_frac": 0.3222396119865774
+        }
+      },
+      "kidney": {
+        "flight_tissue": "kidney",
+        "analog_tissue": "skin_analog",
+        "n_shared_genes": 19073,
+        "spearman_HLU_vs_flight": {
+          "r": 0.04029325103690533,
+          "p": 2.597629200667382e-08
+        },
+        "spearman_IR_vs_flight": {
+          "r": 0.013762056690807347,
+          "p": 0.057357739879402764
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.052831024932245944,
+          "p": 2.859537443396296e-13
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": 0.019702420590581096,
+          "p": 0.49032473579271857,
+          "n": 1228
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.07151196057707913,
+          "p": 0.0121885055950331,
+          "n": 1228
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.05160759843280186,
+          "p": 0.07063150722440854,
+          "n": 1228
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.538345067614141,
+          "IR_frac": 0.1362645975459875,
+          "HLUxIR_frac": 0.32539033483987145
+        }
+      }
+    }
+  },
+  "brain": {
+    "n_sig_p05": {
+      "HLU": 3436,
+      "IR": 3414,
+      "T": 6028,
+      "HLUxIR": 3559,
+      "HLUxT": 1850,
+      "IRxT": 1459,
+      "HLUxIRxT": 1503
+    },
+    "per_flight_tissue": {
+      "thymus": {
+        "flight_tissue": "thymus",
+        "analog_tissue": "brain",
+        "n_shared_genes": 17653,
+        "spearman_HLU_vs_flight": {
+          "r": -0.032803735528459436,
+          "p": 1.3046754157503672e-05
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.0007101483775258366,
+          "p": 0.9248335908544087
+        },
+        "spearman_T_vs_flight": {
+          "r": -0.09403004304236424,
+          "p": 5.7943692069620354e-36
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.04413663505586512,
+          "p": 4.447160157486302e-09
+        },
+        "spearman_HLUxT_vs_flight": {
+          "r": 0.0362088818891764,
+          "p": 1.49340954936776e-06
+        },
+        "spearman_IRxT_vs_flight": {
+          "r": 0.04096212755491794,
+          "p": 5.2004861793312834e-08
+        },
+        "spearman_HLUxIRxT_vs_flight": {
+          "r": -0.05086988638506495,
+          "p": 1.3543743305954225e-11
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.10124627512398143,
+          "p": 0.0025803514710643675,
+          "n": 884
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.0034077313612584266,
+          "p": 0.9194106927349566,
+          "n": 884
+        },
+        "spearman_T_vs_flight_responsive": {
+          "r": -0.19597170850000487,
+          "p": 4.216306621202215e-09,
+          "n": 884
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.10667481922795789,
+          "p": 0.0014919246200785395,
+          "n": 884
+        },
+        "spearman_HLUxT_vs_flight_responsive": {
+          "r": 0.07123310850819879,
+          "p": 0.03420842020512043,
+          "n": 884
+        },
+        "spearman_IRxT_vs_flight_responsive": {
+          "r": 0.03300775461756341,
+          "p": 0.32695305887443393,
+          "n": 884
+        },
+        "spearman_HLUxIRxT_vs_flight_responsive": {
+          "r": -0.08443404940187757,
+          "p": 0.012027435934571201,
+          "n": 884
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.1257754013623858,
+          "IR_frac": 0.06187689870036487,
+          "T_frac": 0.10150841333039282,
+          "HLUxIR_frac": 0.19816963204342958,
+          "HLUxT_frac": 0.17891349578180998,
+          "IRxT_frac": 0.10051235525991933,
+          "HLUxIRxT_frac": 0.2332438035216976
+        }
+      },
+      "gastrocnemius": {
+        "flight_tissue": "gastrocnemius",
+        "analog_tissue": "brain",
+        "n_shared_genes": 16009,
+        "spearman_HLU_vs_flight": {
+          "r": -0.007600692540355414,
+          "p": 0.33623591509822076
+        },
+        "spearman_IR_vs_flight": {
+          "r": 0.005550162262393912,
+          "p": 0.4825580859771067
+        },
+        "spearman_T_vs_flight": {
+          "r": 0.009839777205022795,
+          "p": 0.21315849930407602
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.0005594440026222369,
+          "p": 0.9435735905258223
+        },
+        "spearman_HLUxT_vs_flight": {
+          "r": 0.01831687548216424,
+          "p": 0.02047178635066957
+        },
+        "spearman_IRxT_vs_flight": {
+          "r": 0.0013234409573715438,
+          "p": 0.8670257542594144
+        },
+        "spearman_HLUxIRxT_vs_flight": {
+          "r": 0.0006482914494988691,
+          "p": 0.9346309949810077
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.017751318356795238,
+          "p": 0.35235611262843186,
+          "n": 2747
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.003785063403659542,
+          "p": 0.8428162024386895,
+          "n": 2747
+        },
+        "spearman_T_vs_flight_responsive": {
+          "r": 0.0055770710248860605,
+          "p": 0.7701537916660477,
+          "n": 2747
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": 0.008071234538447611,
+          "p": 0.6724101557941085,
+          "n": 2747
+        },
+        "spearman_HLUxT_vs_flight_responsive": {
+          "r": 0.019658962015491895,
+          "p": 0.3030134023261243,
+          "n": 2747
+        },
+        "spearman_IRxT_vs_flight_responsive": {
+          "r": -0.007401706162478519,
+          "p": 0.6981894180288689,
+          "n": 2747
+        },
+        "spearman_HLUxIRxT_vs_flight_responsive": {
+          "r": 0.013333204083731294,
+          "p": 0.4848454122251215,
+          "n": 2747
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.13752071121486079,
+          "IR_frac": 0.0796515810776016,
+          "T_frac": 0.13889566864388894,
+          "HLUxIR_frac": 0.23571840533425747,
+          "HLUxT_frac": 0.11116423313303773,
+          "IRxT_frac": 0.1016664275053936,
+          "HLUxIRxT_frac": 0.19538297309095978
+        }
+      },
+      "skin": {
+        "flight_tissue": "skin",
+        "analog_tissue": "brain",
+        "n_shared_genes": 18033,
+        "spearman_HLU_vs_flight": {
+          "r": -0.014601093392891397,
+          "p": 0.04991336280376679
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.06395355901826055,
+          "p": 8.230083426994654e-18
+        },
+        "spearman_T_vs_flight": {
+          "r": -0.031048732340854483,
+          "p": 3.0438906009023236e-05
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.0210291241710737,
+          "p": 0.004742030162706459
+        },
+        "spearman_HLUxT_vs_flight": {
+          "r": 0.006452603816376825,
+          "p": 0.3862435434065486
+        },
+        "spearman_IRxT_vs_flight": {
+          "r": 0.03360924760550652,
+          "p": 6.354194446734404e-06
+        },
+        "spearman_HLUxIRxT_vs_flight": {
+          "r": -0.015470159173818531,
+          "p": 0.037762659150717796
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": 0.044670400097059144,
+          "p": 0.13189233666619843,
+          "n": 1139
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": -0.08845933690854195,
+          "p": 0.0028080786267854377,
+          "n": 1139
+        },
+        "spearman_T_vs_flight_responsive": {
+          "r": 0.062184119981412864,
+          "p": 0.03587131602984867,
+          "n": 1139
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.02509472156057422,
+          "p": 0.3974819376426137,
+          "n": 1139
+        },
+        "spearman_HLUxT_vs_flight_responsive": {
+          "r": -0.08146245966892413,
+          "p": 0.005944325376157749,
+          "n": 1139
+        },
+        "spearman_IRxT_vs_flight_responsive": {
+          "r": 0.007980141531416155,
+          "p": 0.7879058635316206,
+          "n": 1139
+        },
+        "spearman_HLUxIRxT_vs_flight_responsive": {
+          "r": 0.015746180575652958,
+          "p": 0.5955099610778337,
+          "n": 1139
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.1179457707886134,
+          "IR_frac": 0.059689628924547905,
+          "T_frac": 0.13691836396387191,
+          "HLUxIR_frac": 0.21887522430498466,
+          "HLUxT_frac": 0.13917774972358798,
+          "IRxT_frac": 0.09660891209661485,
+          "HLUxIRxT_frac": 0.23078435019777926
+        }
+      },
+      "eye": {
+        "flight_tissue": "eye",
+        "analog_tissue": "brain",
+        "n_shared_genes": 18000,
+        "spearman_HLU_vs_flight": {
+          "r": 0.06747604561473865,
+          "p": 1.2742173194515034e-19
+        },
+        "spearman_IR_vs_flight": {
+          "r": 0.0035971020601129576,
+          "p": 0.6294011345156553
+        },
+        "spearman_T_vs_flight": {
+          "r": 0.030395112198411064,
+          "p": 4.530940904610655e-05
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.05355773085620902,
+          "p": 6.470354996522586e-13
+        },
+        "spearman_HLUxT_vs_flight": {
+          "r": -0.0889779292488266,
+          "p": 5.718812243085455e-33
+        },
+        "spearman_IRxT_vs_flight": {
+          "r": -0.02314963576115244,
+          "p": 0.001896046099198977
+        },
+        "spearman_HLUxIRxT_vs_flight": {
+          "r": 0.022466308478152137,
+          "p": 0.0025753674312603727
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": 0.16404391593356163,
+          "p": 2.3079043496654712e-15,
+          "n": 2304
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.041634127511920006,
+          "p": 0.04569281132198618,
+          "n": 2304
+        },
+        "spearman_T_vs_flight_responsive": {
+          "r": 0.053611602705350064,
+          "p": 0.010058506283728378,
+          "n": 2304
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.1219158179001246,
+          "p": 4.33973531787856e-09,
+          "n": 2304
+        },
+        "spearman_HLUxT_vs_flight_responsive": {
+          "r": -0.20318204180921165,
+          "p": 6.829607925162557e-23,
+          "n": 2304
+        },
+        "spearman_IRxT_vs_flight_responsive": {
+          "r": -0.08271780921329194,
+          "p": 7.03456323987656e-05,
+          "n": 2304
+        },
+        "spearman_HLUxIRxT_vs_flight_responsive": {
+          "r": 0.05050359125264555,
+          "p": 0.01533353719062685,
+          "n": 2304
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.13070014486924275,
+          "IR_frac": 0.07475674619756,
+          "T_frac": 0.10370968036606822,
+          "HLUxIR_frac": 0.21834256632998372,
+          "HLUxT_frac": 0.11866461422118263,
+          "IRxT_frac": 0.13685328724080925,
+          "HLUxIRxT_frac": 0.21697296077515343
+        }
+      },
+      "liver": {
+        "flight_tissue": "liver",
+        "analog_tissue": "brain",
+        "n_shared_genes": 18395,
+        "spearman_HLU_vs_flight": {
+          "r": 0.15176328659150187,
+          "p": 3.323479863802403e-95
+        },
+        "spearman_IR_vs_flight": {
+          "r": 0.0836486913128033,
+          "p": 6.299036533629926e-30
+        },
+        "spearman_T_vs_flight": {
+          "r": 0.15062156800300638,
+          "p": 8.629656726065704e-94
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": -0.13623063609287478,
+          "p": 6.517024973464016e-77
+        },
+        "spearman_HLUxT_vs_flight": {
+          "r": -0.1250168133910611,
+          "p": 5.693004152766653e-65
+        },
+        "spearman_IRxT_vs_flight": {
+          "r": -0.10015844897682859,
+          "p": 3.14584610948223e-42
+        },
+        "spearman_HLUxIRxT_vs_flight": {
+          "r": 0.10953127292358093,
+          "p": 3.3274525042980716e-50
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": 0.2826366482228843,
+          "p": 1.593365757502509e-11,
+          "n": 548
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.18304397774058187,
+          "p": 1.6204385060474523e-05,
+          "n": 548
+        },
+        "spearman_T_vs_flight_responsive": {
+          "r": 0.24656406298588038,
+          "p": 4.937033644502549e-09,
+          "n": 548
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.2549249259990032,
+          "p": 1.4100938935840973e-09,
+          "n": 548
+        },
+        "spearman_HLUxT_vs_flight_responsive": {
+          "r": -0.27294114764611277,
+          "p": 8.107685343043118e-11,
+          "n": 548
+        },
+        "spearman_IRxT_vs_flight_responsive": {
+          "r": -0.2583113600859514,
+          "p": 8.379269090962509e-10,
+          "n": 548
+        },
+        "spearman_HLUxIRxT_vs_flight_responsive": {
+          "r": 0.21513047899692264,
+          "p": 3.691295589266527e-07,
+          "n": 548
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.11802485824272477,
+          "IR_frac": 0.06346788488615113,
+          "T_frac": 0.13820354710871777,
+          "HLUxIR_frac": 0.1838673749855594,
+          "HLUxT_frac": 0.15015280853993332,
+          "IRxT_frac": 0.12256688953133292,
+          "HLUxIRxT_frac": 0.22371663670558067
+        }
+      },
+      "kidney": {
+        "flight_tissue": "kidney",
+        "analog_tissue": "brain",
+        "n_shared_genes": 18688,
+        "spearman_HLU_vs_flight": {
+          "r": -0.005115293194246521,
+          "p": 0.4844025898480474
+        },
+        "spearman_IR_vs_flight": {
+          "r": -0.004101021955722844,
+          "p": 0.5750762464514608
+        },
+        "spearman_T_vs_flight": {
+          "r": -0.031142085066231236,
+          "p": 2.0626636991629713e-05
+        },
+        "spearman_HLUxIR_vs_flight": {
+          "r": 0.003757975122098925,
+          "p": 0.6074632158041595
+        },
+        "spearman_HLUxT_vs_flight": {
+          "r": 0.0346966155131621,
+          "p": 2.092499733037369e-06
+        },
+        "spearman_IRxT_vs_flight": {
+          "r": 0.01306274352533689,
+          "p": 0.07414998287948726
+        },
+        "spearman_HLUxIRxT_vs_flight": {
+          "r": -0.020177528191581126,
+          "p": 0.005807684367145339
+        },
+        "spearman_HLU_vs_flight_responsive": {
+          "r": -0.016849809129329874,
+          "p": 0.5586623964336748,
+          "n": 1207
+        },
+        "spearman_IR_vs_flight_responsive": {
+          "r": 0.037068654705981786,
+          "p": 0.19811392994006136,
+          "n": 1207
+        },
+        "spearman_T_vs_flight_responsive": {
+          "r": -0.04571873642241786,
+          "p": 0.11239029781448015,
+          "n": 1207
+        },
+        "spearman_HLUxIR_vs_flight_responsive": {
+          "r": -0.0005699540208848485,
+          "p": 0.9842182551204224,
+          "n": 1207
+        },
+        "spearman_HLUxT_vs_flight_responsive": {
+          "r": 0.09208549373779501,
+          "p": 0.0013613739034631204,
+          "n": 1207
+        },
+        "spearman_IRxT_vs_flight_responsive": {
+          "r": 0.016694183797434134,
+          "p": 0.5623009573349463,
+          "n": 1207
+        },
+        "spearman_HLUxIRxT_vs_flight_responsive": {
+          "r": -0.07246518928173681,
+          "p": 0.011792900852007418,
+          "n": 1207
+        },
+        "variance_attribution_top200": {
+          "HLU_frac": 0.11889347287759715,
+          "IR_frac": 0.06008393126364933,
+          "T_frac": 0.12514956830837254,
+          "HLUxIR_frac": 0.22393060713977359,
+          "HLUxT_frac": 0.1277640466339775,
+          "IRxT_frac": 0.11145469399897062,
+          "HLUxIRxT_frac": 0.23272367977765923
+        }
+      }
+    }
+  }
+}

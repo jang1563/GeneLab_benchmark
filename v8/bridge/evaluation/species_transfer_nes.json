@@ -1,0 +1,55 @@
+{
+  "n_mouse_pathways": 292,
+  "n_comparisons": 30,
+  "by_mission": {
+    "Inspiration4": {
+      "n": 9,
+      "mean_spearman_r": 0.7774552403870888,
+      "max_spearman_r": 0.8424116985376828,
+      "mean_concordance_1.0": 0.9552220347973291
+    },
+    "NASA_Twins": {
+      "n": 21,
+      "mean_spearman_r": 0.3514933791711884,
+      "max_spearman_r": 0.6461718293395675,
+      "mean_concordance_1.0": 0.7228972064451175
+    }
+  },
+  "top5_compartments": [
+    {
+      "mission": "Inspiration4",
+      "compartment": "other|Immediately Post-flight",
+      "spearman_r": 0.8424116985376828,
+      "n_pathways": 126,
+      "concordance_1.0": 0.9761904761904762
+    },
+    {
+      "mission": "Inspiration4",
+      "compartment": "CD14_Mono|Immediately Post-flight",
+      "spearman_r": 0.8241318069455446,
+      "n_pathways": 171,
+      "concordance_1.0": 0.9590643274853801
+    },
+    {
+      "mission": "Inspiration4",
+      "compartment": "B|Immediately Post-flight",
+      "spearman_r": 0.7875891522528295,
+      "n_pathways": 224,
+      "concordance_1.0": 0.9464285714285714
+    },
+    {
+      "mission": "Inspiration4",
+      "compartment": "NK|Immediately Post-flight",
+      "spearman_r": 0.7794549081734437,
+      "n_pathways": 208,
+      "concordance_1.0": 0.9663461538461539
+    },
+    {
+      "mission": "Inspiration4",
+      "compartment": "other_T|Immediately Post-flight",
+      "spearman_r": 0.7745578940889493,
+      "n_pathways": 210,
+      "concordance_1.0": 0.9428571428571428
+    }
+  ]
+}

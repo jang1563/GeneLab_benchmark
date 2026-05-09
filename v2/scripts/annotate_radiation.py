@@ -42,7 +42,7 @@ MISSION_DURATION = {
     "RR-9": 35,    # ~35 days
     "MHU-1": 35,
     "MHU-2": 35,
-    "TBD": 35,     # eye mission, ~35d estimate
+    "OSD-397": 35, # eye mission, ~35d estimate
 }
 
 # Dose rates (mGy/day) from NASA dosimetry

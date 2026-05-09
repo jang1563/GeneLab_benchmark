@@ -1,0 +1,92 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "decompose.factorial_analogs",
+  "pillar": "decompose",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "Ground analog factorial models estimate stressor and interaction coefficients for flight-signature comparison.",
+    "scope": "mechanistic",
+    "consumed_by": [
+      "v8/decompose/evaluation/README.md",
+      "v8/RESULTS_SUMMARY.md",
+      "v8/MANUSCRIPT_DRAFT.md"
+    ]
+  },
+  "generated_at": "2026-05-09T16:48:13Z",
+  "code": {
+    "script": "v8/decompose/factorial_analog.py",
+    "command": "bash scripts/hpc_v8_decompose.sh",
+    "git_commit": "266381a+staged-v8-release",
+    "parameters": {
+      "formula_2x2": "log2(count+1) ~ HLU + IR + HLU:IR",
+      "formula_2x2x2": "log2(count+1) ~ HLU + IR + T + HLU:IR + HLU:T + IR:T + HLU:IR:T"
+    }
+  },
+  "inputs": [
+    {
+      "role": "analog_osd_211",
+      "path_or_accession": "OSD-211 / GLDS-211",
+      "kind": "osdr_accession",
+      "tracked_in_git": false
+    },
+    {
+      "role": "analog_osd_237",
+      "path_or_accession": "OSD-237 / GLDS-237",
+      "kind": "osdr_accession",
+      "tracked_in_git": false
+    },
+    {
+      "role": "analog_osd_202",
+      "path_or_accession": "OSD-202 / GLDS-202",
+      "kind": "osdr_accession",
+      "tracked_in_git": false
+    },
+    {
+      "role": "analog_osd_719",
+      "path_or_accession": "OSD-719 / GLDS-641",
+      "kind": "osdr_accession",
+      "tracked_in_git": false
+    },
+    {
+      "role": "flight_signatures",
+      "path_or_accession": "v8/intervene/signatures/*_ranked.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    }
+  ],
+  "outputs": [
+    {
+      "role": "factorial_betas",
+      "path_or_accession": "v8/decompose/evaluation/factorial_*_betas.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "decomposition_summary",
+      "path_or_accession": "v8/decompose/evaluation/factorial_flight_decomposition.json",
+      "kind": "local_file",
+      "checksum": "sha256:32678dbb440a1e4f39882e8bc685d2f63da0280609c581ee02f7469dd8d2d15a",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
+  },
+  "metrics": [
+    {"name": "spleen_interaction_variance_frac_thymus_top200", "value": 0.4338},
+    {"name": "hze_endocrine_sex_hze_variance_frac_thymus_top200", "value": 0.3786},
+    {"name": "skin_analog_interaction_variance_frac_skin_top200", "value": 0.1939},
+    {"name": "brain_interaction_variance_frac_eye_top200", "value": 0.1675}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "bash scripts/hpc_release_validate.sh --v8-summary",
+      "sha256sum v8/decompose/evaluation/factorial_flight_decomposition.json"
+    ],
+    "notes": "Tracked factorial outputs were checksummed in the staged HPC bundle and included in the 41-test release validation. A 2026-05-09 full wrapper retry confirmed the staging bundle lacks several raw analog caches (OSD-211/237/202), so the existing validated outputs were restored rather than adopting partial rerun products. Full raw-cache rerun remains a beta-freeze requirement."
+  }
+}

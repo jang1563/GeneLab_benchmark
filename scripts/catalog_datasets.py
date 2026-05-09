@@ -86,7 +86,7 @@ CANDIDATE_DATASETS = [
     # ── Eye / Retina (A6) ─────────────────────────────────────────────────────
     {"osd_id": "OSD-100", "tissue": "eye",           "mission": "RR-1",  "track": "2a", "notes": "primary"},
     {"osd_id": "OSD-194", "tissue": "eye",           "mission": "RR-3",  "track": "2a", "notes": "primary"},
-    {"osd_id": "OSD-397", "tissue": "eye/retina",    "mission": "TBD",   "track": "2a", "notes": "bulk RNA-seq confirmed (n=9 FLT, n=7 GC). Mission TBD — verify ISA metadata"},
+    {"osd_id": "OSD-397", "tissue": "eye/retina",    "mission": "OSD-397","track": "2a", "notes": "bulk RNA-seq confirmed (n=9 FLT, n=7 GC). Stable public mission label; legacy processed files may still use TBD"},
     {"osd_id": "OSD-664", "tissue": "eye",           "mission": "MHU-8", "track": "exc","notes": "EXCLUDE — western blot + immunofluorescence only, NOT RNA-seq"},
     {"osd_id": "OSD-87",  "tissue": "eye",           "mission": "?",     "track": "exc","notes": "EXCLUDE — microarray"},
     # ── HU Analog studies (for B6) ───────────────────────────────────────────
