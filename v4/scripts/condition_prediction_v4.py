@@ -40,7 +40,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from v4_utils import (
-    TISSUE_MISSIONS, LOMO_TISSUES,
+    TISSUE_MISSIONS, LOMO_TISSUES, MISSION_FILE_ALIASES,
     BASE_DIR, V4_EVAL_DIR,
     load_metadata, load_gene_features, align_features_with_meta,
 )
@@ -57,6 +57,7 @@ HARDWARE_MAP = {
     "RR-1": "RR", "RR-3": "RR", "RR-5": "RR",
     "RR-6": "RR", "RR-7": "RR", "RR-8": "RR", "RR-9": "RR",
     "MHU-1": "MHU", "MHU-2": "MHU",
+    "OSD-397": "unknown",
     "TBD": "unknown",
 }
 
@@ -78,7 +79,8 @@ def load_pathway_features(tissue, db="hallmark"):
     """Load GSVA pathway scores."""
     all_scores = []
     for mission in TISSUE_MISSIONS.get(tissue, []):
-        f = PATHWAY_DIR / tissue / f"{mission}_gsva_{db}.csv"
+        storage_mission = MISSION_FILE_ALIASES.get(mission, mission)
+        f = PATHWAY_DIR / tissue / f"{storage_mission}_gsva_{db}.csv"
         if not f.exists():
             continue
         scores = pd.read_csv(f, index_col=0)

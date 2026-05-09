@@ -89,7 +89,7 @@ const DATA = {
   "scprint": {
     "liver": {
       "method": "scPRINT-2",
-      "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+      "ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt",
       "tissue": "liver",
       "embedding_dim": 256,
       "mean_auroc": 0.5051,
@@ -155,7 +155,7 @@ const DATA = {
     },
     "gastrocnemius": {
       "method": "scPRINT-2",
-      "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+      "ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt",
       "tissue": "gastrocnemius",
       "embedding_dim": 256,
       "mean_auroc": 0.588,
@@ -197,7 +197,7 @@ const DATA = {
     },
     "kidney": {
       "method": "scPRINT-2",
-      "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+      "ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt",
       "tissue": "kidney",
       "embedding_dim": 256,
       "mean_auroc": 0.4842,
@@ -239,7 +239,7 @@ const DATA = {
     },
     "thymus": {
       "method": "scPRINT-2",
-      "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+      "ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt",
       "tissue": "thymus",
       "embedding_dim": 256,
       "mean_auroc": 0.6639,
@@ -289,7 +289,7 @@ const DATA = {
     },
     "eye": {
       "method": "scPRINT-2",
-      "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+      "ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt",
       "tissue": "eye",
       "embedding_dim": 256,
       "mean_auroc": 0.3095,
@@ -317,7 +317,7 @@ const DATA = {
           "n_test": 13
         },
         {
-          "test_mission": "TBD",
+          "test_mission": "OSD-397",
           "auroc": 0.5397,
           "ci_lower": 0.2222,
           "ci_upper": 0.8413,
@@ -331,7 +331,7 @@ const DATA = {
     },
     "skin": {
       "method": "scPRINT-2",
-      "ckpt_path": "/home/fs01/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v7/models/scprint2/medium-v1.5_fixed.ckpt",
+      "ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt",
       "tissue": "skin",
       "embedding_dim": 256,
       "mean_auroc": 0.6283,
@@ -1226,7 +1226,7 @@ const DATA = {
             "n_edges": 29980
           },
           {
-            "test_mission": "TBD",
+            "test_mission": "OSD-397",
             "auroc": 0.5238,
             "ci_lower": 0.1872,
             "ci_upper": 0.8167,
@@ -1282,7 +1282,7 @@ const DATA = {
             "n_edges": 29969
           },
           {
-            "test_mission": "TBD",
+            "test_mission": "OSD-397",
             "auroc": 0.6508,
             "ci_lower": 0.2908,
             "ci_upper": 0.9375,
@@ -1338,7 +1338,7 @@ const DATA = {
             "n_edges": 0
           },
           {
-            "test_mission": "TBD",
+            "test_mission": "OSD-397",
             "auroc": 0.5873,
             "ci_lower": 0.2909,
             "ci_upper": 0.8911,
@@ -1623,7 +1623,7 @@ const DATA = {
       "mean_auroc": 0.5298333333333333,
       "std": 0.11711378607529042,
       "n_sig": 1,
-      "note": "scPRINT-2 if available, else Geneformer v1 fallback"
+      "note": "scPRINT-2 mean shown; Geneformer reference loaded from evaluation summary"
     },
     {
       "category": "Text LLM",
@@ -1636,7 +1636,7 @@ const DATA = {
   ],
   "meta": {
     "gnn_topology_scope": "train_fold",
-    "scprint_ckpt_name": "medium-v1.5_fixed.ckpt"
+    "scprint_ckpt_name": "medium-v1.5.ckpt"
   }
 };
 const TISSUES = ["liver", "gastrocnemius", "kidney", "thymus", "eye", "skin"];

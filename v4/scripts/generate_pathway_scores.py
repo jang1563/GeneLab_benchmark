@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 import sys
 SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
-from v4_utils import TISSUE_MISSIONS, BASE_DIR, load_metadata
+from v4_utils import TISSUE_MISSIONS, MISSION_FILE_ALIASES, BASE_DIR, load_metadata
 
 PROCESSED_DIR = BASE_DIR / "processed" / "A_detection"
 PATHWAY_DIR = BASE_DIR / "processed" / "pathway_scores"
@@ -118,9 +118,10 @@ def compute_ssgsea(expr_df, gene_sets, min_size=15, max_size=500):
 def process_tissue_mission(tissue, mission, dbs, symbol_map):
     """Process one tissue-mission pair."""
     # Load expression data
+    storage_mission = MISSION_FILE_ALIASES.get(mission, mission)
     expr_file = PROCESSED_DIR / tissue / f"{tissue}_all_missions_log2_norm.csv"
     if not expr_file.exists():
-        expr_file = PROCESSED_DIR / tissue / f"{tissue}_{mission}_log2_norm.csv"
+        expr_file = PROCESSED_DIR / tissue / f"{tissue}_{storage_mission}_log2_norm.csv"
     if not expr_file.exists():
         print(f"  [SKIP] No expression file for {tissue}/{mission}")
         return

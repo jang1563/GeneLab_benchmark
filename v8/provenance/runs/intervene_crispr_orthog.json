@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "intervene.crispr_orthogonal_validation",
+  "pillar": "intervene",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "Enrichr CRISPR KO signatures provide orthogonal target plausibility checks for chemical hypotheses.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/intervene/evaluation/README.md",
+      "v8/RESULTS_SUMMARY.md",
+      "v8/MANUSCRIPT_DRAFT.md"
+    ]
+  },
+  "generated_at": "2026-05-09T16:48:13Z",
+  "code": {
+    "script": "v8/intervene/perturb_seq_orthog.py",
+    "command": "bash scripts/hpc_v8_intervene.sh --with-api --top-n=150",
+    "git_commit": "266381a+staged-v8-release",
+    "parameters": {
+      "library": "LINCS_L1000_CRISPR_KO_Consensus_Sigs",
+      "top_n_input_genes": 100
+    }
+  },
+  "inputs": [
+    {
+      "role": "signature_files",
+      "path_or_accession": "v8/intervene/signatures/*_{up,dn}.txt",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "enrichr_api_add_list",
+      "path_or_accession": "https://maayanlab.cloud/Enrichr/addList",
+      "kind": "api",
+      "tracked_in_git": false
+    },
+    {
+      "role": "enrichr_api_enrich",
+      "path_or_accession": "https://maayanlab.cloud/Enrichr/enrich",
+      "kind": "api",
+      "tracked_in_git": false
+    }
+  ],
+  "outputs": [
+    {
+      "role": "crispr_tissue_tables",
+      "path_or_accession": "v8/intervene/evaluation/crispr_orthog_*_{up,dn}.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "crispr_summary",
+      "path_or_accession": "v8/intervene/evaluation/crispr_orthog_summary.json",
+      "kind": "local_file",
+      "checksum": "sha256:f741f676160a72810cedb19971448a328aee39a0cae3b4192b0ea6d02197ffab",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle",
+    "api_refresh": "not_recalled_on_2026-05-09; tracked API snapshot checksummed"
+  },
+  "metrics": [
+    {"name": "library", "value": "LINCS_L1000_CRISPR_KO_Consensus_Sigs"},
+    {"name": "n_tissues_queried", "value": 6},
+    {"name": "n_validated_drugs", "value": 2},
+    {"name": "validated_drugs", "value": "AZD-5438, AT-7519"},
+    {"name": "shared_target", "value": "CDK9"}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "bash scripts/hpc_release_validate.sh --v8-summary",
+      "sha256sum v8/intervene/evaluation/crispr_orthog_summary.json"
+    ],
+    "notes": "Tracked Enrichr CRISPR KO snapshot was checksummed in the staged HPC bundle and included in release validation. External API was intentionally not re-called on 2026-05-09 to avoid version/rate-limit drift; this supports target plausibility only."
+  }
+}

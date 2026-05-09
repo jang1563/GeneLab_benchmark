@@ -117,6 +117,31 @@ def load_scprint_results():
     return results
 
 
+def load_geneformer_summary():
+    """Load Geneformer tissue means from the tracked evaluation summary."""
+    fpath = BASE_DIR / "evaluation" / "geneformer_mouse_gf_all_tissues_summary.json"
+    if not fpath.exists():
+        return {}
+
+    with open(fpath) as f:
+        summary = json.load(f)
+
+    tissue_entries = summary.get("tissues", {})
+    means = {
+        entry["tissue"]: entry["geneformer_mean_auroc"]
+        for entry in tissue_entries.values()
+        if entry.get("tissue") and entry.get("geneformer_mean_auroc") is not None
+    }
+    mean_values = list(means.values())
+    overall = summary.get("overall", {})
+    return {
+        "per_tissue": means,
+        "overall_mean": overall.get("geneformer_mean"),
+        "overall_std": float(np.std(mean_values)) if mean_values else None,
+        "n_tissues": len(mean_values),
+    }
+
+
 def build_method_matrix(pcalr, gnn_data, scprint_data):
     """Build tissue × method AUROC matrix for Panel C."""
     methods = ["pca_lr", "scprint2", "gnn_wgcna", "gnn_random", "gnn_no_edges"]
@@ -635,7 +660,7 @@ function hideTip() { tooltip.style("opacity", 0); }
 """
 
 
-def build_signal_hierarchy(pcalr, pcalr_stats, gnn_data, scprint_data):
+def build_signal_hierarchy(pcalr, pcalr_stats, gnn_data, scprint_data, geneformer_summary):
     """Build data for Panel D: signal hierarchy across method categories."""
     # Tabular ML: PCA-LR (best), from v4 M1_summary
     pcalr_vals = [v for v in pcalr.values() if v is not None]
@@ -673,15 +698,19 @@ def build_signal_hierarchy(pcalr, pcalr_stats, gnn_data, scprint_data):
                  if t in scprint_data and scprint_data[t].get("perm_pvalue") is not None
                  and scprint_data[t]["perm_pvalue"] < 0.05)
 
-    # Also include Geneformer (v1/v3 result) for comparison
-    gf_mean = 0.476  # from MEMORY.md: Mouse-Geneformer mean
+    gf_mean = geneformer_summary.get("overall_mean")
+    gf_std = geneformer_summary.get("overall_std")
     fm = {
         "category": "Foundation Model",
         "label": "scPRINT-2 / Geneformer",
         "mean_auroc": float(np.mean(sc_vals)) if sc_vals else gf_mean,
-        "std": float(np.std(sc_vals)) if sc_vals else 0.08,
+        "std": float(np.std(sc_vals)) if sc_vals else gf_std,
         "n_sig": sc_sig if sc_vals else 0,
-        "note": "scPRINT-2 if available, else Geneformer v1 fallback",
+        "note": (
+            "scPRINT-2 mean shown; Geneformer reference loaded from evaluation summary"
+            if sc_vals else
+            "Geneformer fallback loaded from evaluation/geneformer_mouse_gf_all_tissues_summary.json"
+        ),
     }
 
     # Text LLM: mean ~0.50 from v1 Tier 3 evaluation
@@ -703,17 +732,25 @@ def main():
     pcalr_stats  = load_pcalr_stats()
     gnn_data     = load_gnn_results()
     scprint_data = load_scprint_results()
+    geneformer_summary = load_geneformer_summary()
 
     print(f"  PCA-LR: {len(pcalr)} tissues")
     print(f"  GNN results: {sum(len(v) for v in gnn_data.values())} tissue×graph combinations")
     print(f"  scPRINT-2 results: {len(scprint_data)} tissues")
+    print(f"  Geneformer summary: {geneformer_summary.get('n_tissues', 0)} tissues")
 
     # Build method matrix for Panel C
     method_matrix = build_method_matrix(pcalr, gnn_data, scprint_data)
     sig_matrix    = build_perm_matrix(gnn_data, scprint_data)
 
     # Hierarchy data for Panel D
-    hierarchy = build_signal_hierarchy(pcalr, pcalr_stats, gnn_data, scprint_data)
+    hierarchy = build_signal_hierarchy(
+        pcalr,
+        pcalr_stats,
+        gnn_data,
+        scprint_data,
+        geneformer_summary,
+    )
 
     gnn_topology_scope = next(
         (

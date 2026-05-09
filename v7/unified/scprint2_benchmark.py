@@ -270,7 +270,7 @@ def extract_scprint_embeddings(adata, model):
 
 def cache_slug_for_checkpoint(ckpt_path):
     """Generate a stable cache key for a checkpoint path."""
-    stem = Path(ckpt_path).stem
+    stem = Path(checkpoint_record_value(ckpt_path)).stem
     slug = re.sub(r"[^A-Za-z0-9._-]+", "_", stem).strip("_")
     return slug or "default"
 
@@ -281,17 +281,37 @@ def embedding_cache_file(cache_dir, tissue, ckpt_path):
     return cache_dir / f"SCPRINT2_emb_{tissue}__{cache_slug_for_checkpoint(ckpt_path)}.npy"
 
 
+def checkpoint_record_value(ckpt_path):
+    """Serialize checkpoint paths portably for results and cache matching."""
+    if not ckpt_path:
+        return ""
+    path = Path(ckpt_path).expanduser()
+    canonical_name = "medium-v1.5.ckpt" if path.name == "medium-v1.5_fixed.ckpt" else path.name
+    parts = path.parts
+    if "v7" in parts:
+        v7_idx = parts.index("v7")
+        return str(Path(*parts[v7_idx:]).with_name(canonical_name))
+    return str(path.with_name(canonical_name))
+
+
 def result_matches_request(result, *, tissue, ckpt_path, n_bootstrap, n_perm, seed):
     """Check whether an existing result matches the current invocation."""
     expected = {
         "method": "scPRINT-2",
         "tissue": tissue,
-        "ckpt_path": str(Path(ckpt_path)),
+        "ckpt_path": checkpoint_record_value(ckpt_path),
         "n_bootstrap": n_bootstrap,
         "n_perm": n_perm,
         "seed": seed,
     }
-    return all(result.get(key) == value for key, value in expected.items())
+    for key, value in expected.items():
+        if key == "ckpt_path":
+            if checkpoint_record_value(result.get(key, "")) != value:
+                return False
+            continue
+        if result.get(key) != value:
+            return False
+    return True
 
 
 # ── LOMO-CV ────────────────────────────────────────────────────────────────────
@@ -523,7 +543,7 @@ def main():
 
         result = {
             "method":       "scPRINT-2",
-            "ckpt_path":    str(ckpt_path),
+            "ckpt_path":    checkpoint_record_value(ckpt_path),
             "tissue":       tissue,
             "embedding_dim": emb_dim,
             "mean_auroc":   round(float(mean_auroc), 4) if mean_auroc is not None else None,
@@ -563,7 +583,7 @@ def main():
     if len(tissues) > 1:
         summary = {
             "method": "scPRINT-2",
-            "ckpt_path": str(ckpt_path),
+            "ckpt_path": checkpoint_record_value(ckpt_path),
             "tissues": tissues,
             "results": [],
         }

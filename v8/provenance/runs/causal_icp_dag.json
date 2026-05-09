@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "causal.icp_dag",
+  "pillar": "causal",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "ICP-style stability ranks stressor-to-tissue edges as causal candidates.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/causal/evaluation/README.md",
+      "v8/RESULTS_SUMMARY.md",
+      "v8/MANUSCRIPT_DRAFT.md"
+    ]
+  },
+  "generated_at": "2026-05-09T16:48:13Z",
+  "code": {
+    "script": "v8/causal/build_dag.py",
+    "command": "bash scripts/hpc_v8_causal.sh",
+    "git_commit": "266381a+staged-v8-release",
+    "parameters": {
+      "min_environments": 2,
+      "top_n_signature_genes": 50
+    }
+  },
+  "inputs": [
+    {
+      "role": "factorial_betas",
+      "path_or_accession": "v8/decompose/evaluation/factorial_*_betas.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "flight_signatures",
+      "path_or_accession": "v8/intervene/signatures/*_ranked.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    }
+  ],
+  "outputs": [
+    {
+      "role": "icp_scores",
+      "path_or_accession": "v8/causal/evaluation/icp_stressor_pathway_scores.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "dag_edges",
+      "path_or_accession": "v8/causal/evaluation/dag_edges.csv",
+      "kind": "local_file",
+      "checksum": "sha256:67747df342c3d681cd2cc57c4c10fa8dd9eefabad1f8866497a616f26531aba0",
+      "tracked_in_git": true
+    },
+    {
+      "role": "dag_summary",
+      "path_or_accession": "v8/causal/evaluation/icp_dag_summary.json",
+      "kind": "local_file",
+      "checksum": "sha256:395d60746187b3dc2ea089207ea4e02fb03b329d31f1ff135e264b56d3d755a8",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
+  },
+  "metrics": [
+    {"name": "n_genes", "value": 29057},
+    {"name": "n_environments", "value": 9},
+    {"name": "top_edge", "value": "stressor:IR -> tissue:skin"},
+    {"name": "top_edge_icp_score", "value": 0.4402},
+    {"name": "top_aggregate_stressor", "value": "T"},
+    {"name": "top_aggregate_stressor_mean_icp", "value": 0.5401}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "bash scripts/hpc_v8_causal.sh",
+      "bash scripts/hpc_release_validate.sh --v8-summary"
+    ],
+    "notes": "Regenerated on cayuga-login1 from restored six-tissue signatures and decompose outputs, then included in release validation. DAG edges remain evidence links, not validated intervention effects."
+  }
+}

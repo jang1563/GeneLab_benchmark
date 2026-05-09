@@ -84,7 +84,7 @@ TISSUE_MISSIONS <- list(
   eye = list(
     list(mission = "RR-1",  dir = "RR-1"),
     list(mission = "RR-3",  dir = "RR-3"),
-    list(mission = "TBD",   dir = "TBD")
+    list(mission = "OSD-397", dir = "TBD")
   ),
   skin = list(
     list(mission = "RR-6",          dir = "RR-6"),

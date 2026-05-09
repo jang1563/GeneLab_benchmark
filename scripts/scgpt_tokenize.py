@@ -94,11 +94,11 @@ MODEL_CONFIGS = {
 # Tissue → task dir name → LOMO folds (test missions)
 TISSUE_TASKS = {
     "A1": ("A1_liver_lomo", ["RR-1", "RR-3", "RR-6", "RR-8", "RR-9", "MHU-2"]),
-    "A2": ("A2_gastrocnemius_lomo", ["RR-1", "RR-3", "RR-5"]),
-    "A3": ("A3_kidney_lomo", ["RR-1", "RR-3", "RR-5"]),
+    "A2": ("A2_gastrocnemius_lomo", ["RR-1", "RR-5", "RR-9"]),
+    "A3": ("A3_kidney_lomo", ["RR-1", "RR-3", "RR-7"]),
     "A4": ("A4_thymus_lomo", ["MHU-1", "MHU-2", "RR-6", "RR-9"]),
     "A5": ("A5_skin_lomo", ["RR-6", "RR-7", "MHU-2"]),
-    "A6": ("A6_eye_lomo", ["RR-1", "RR-3", "RR-5"]),
+    "A6": ("A6_eye_lomo", ["RR-1", "RR-3", "OSD-397"]),
 }
 
 

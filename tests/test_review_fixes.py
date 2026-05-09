@@ -1,4 +1,5 @@
 import importlib
+import json
 import sys
 import tempfile
 import unittest
@@ -135,6 +136,190 @@ class ReviewFixTests(unittest.TestCase):
         self.assertEqual(cross_tissue_transfer.MISSION_GLDS["thymus"]["RR-9"], "GLDS-421")
         self.assertIn("skin", batch_correction_eval.TISSUE_MISSIONS)
 
+    def test_root_eye_registry_uses_stable_osd_identifier_with_legacy_storage_alias(self):
+        utils = self.load_module("scripts.utils")
+        self.assertIn("OSD-397", utils.TISSUE_MISSIONS["eye"])
+        self.assertNotIn("TBD", utils.TISSUE_MISSIONS["eye"])
+        self.assertEqual(utils.MISSION_FILE_ALIASES["OSD-397"], "TBD")
+        self.assertEqual(utils.MISSION_ALIASES["TBD"], "OSD-397")
+
+    def test_root_eye_scripts_use_stable_public_label(self):
+        generate_tasks = self.read_repo_text("scripts/generate_tasks.py")
+        fetch_osdr = self.read_repo_text("scripts/fetch_osdr.py")
+        catalog = self.read_repo_text("scripts/catalog_datasets.py")
+        compute_pathways = self.read_repo_text("scripts/compute_pathway_scores.R")
+        run_fgsea = self.read_repo_text("scripts/run_fgsea.R")
+        hpc_submit = self.read_repo_text("scripts/hpc_submit_all_tissues.sh")
+        root_readme = self.read_repo_text("README.md")
+
+        self.assertIn('MISSION_ALIASES = {"TBD": "OSD-397"}', generate_tasks)
+        self.assertIn('"mission": "OSD-397"', fetch_osdr)
+        self.assertIn('"mission": "OSD-397"', catalog)
+        self.assertIn('list(mission = "OSD-397", dir = "TBD")', compute_pathways)
+        self.assertIn('list(mission = "MHU-1", dir = "MHU-2", glds = "GLDS-289", osd = "OSD-289")', run_fgsea)
+        self.assertIn('list(mission = "OSD-397", dir = "TBD", glds = "GLDS-397", osd = "OSD-397")', run_fgsea)
+        self.assertIn('"A6|A6_eye_lomo|RR-1 RR-3 OSD-397|3"', hpc_submit)
+        self.assertIn("| Eye | OSD-100, 194, 397 | RR-1, RR-3, OSD-397 | 37 |", root_readme)
+
+    def test_eye_docs_use_stable_osd397_label(self):
+        hf_card = self.read_repo_text("docs/hf_dataset_card.md")
+        paper = self.read_repo_text("docs/V1_PAPER_CONTENT.md")
+        tasks_readme = self.read_repo_text("tasks/README.md")
+
+        self.assertIn("fold_OSD-397_test", hf_card)
+        self.assertNotIn("fold_TBD_test", hf_card)
+        self.assertIn("| Eye | RR-1, RR-3, OSD-397 | 3 | 37 | 2a |", paper)
+        self.assertIn("| `B6` | Eye | RR-1, RR-3, OSD-397 | 6 | 0.754 [0.688, 0.838] |", tasks_readme)
+
+    def test_scgpt_task_lists_match_v1_task_surface(self):
+        finetune = self.read_repo_text("scripts/scgpt_finetune.py")
+        tokenize = self.read_repo_text("scripts/scgpt_tokenize.py")
+
+        for src in [finetune, tokenize]:
+            self.assertIn('"A2": ("A2_gastrocnemius_lomo", ["RR-1", "RR-5", "RR-9"])', src)
+            self.assertIn('"A3": ("A3_kidney_lomo", ["RR-1", "RR-3", "RR-7"])', src)
+            self.assertIn('"A6": ("A6_eye_lomo", ["RR-1", "RR-3", "OSD-397"])', src)
+
+    def test_scgpt_aggregator_discovers_scgpt_results_dir_from_eval_root(self):
+        aggregate = self.load_module("scripts.aggregate_scgpt_results")
+        aggregate_src = self.read_repo_text("scripts/aggregate_scgpt_results.py")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            eval_root = Path(tmpdir) / "evaluation"
+            scgpt_dir = eval_root / "scgpt"
+            scgpt_dir.mkdir(parents=True)
+            (scgpt_dir / "scgpt_whole_human_A1_RR-1_result.json").write_text("{}")
+
+            resolved = aggregate.resolve_results_dir(eval_root, "whole_human")
+
+            self.assertEqual(resolved, scgpt_dir)
+        self.assertIn('"reference_summary": repo_relative_path(reference_summary)', aggregate_src)
+
+    def test_scgpt_aggregator_uses_tracked_reference_summary_instead_of_hardcoded_values(self):
+        aggregate = self.load_module("scripts.aggregate_scgpt_results")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            eval_root = Path(tmpdir) / "evaluation"
+            scgpt_dir = eval_root / "scgpt"
+            scgpt_dir.mkdir(parents=True)
+
+            reference_payload = {
+                "tissues": {
+                    "A1": {
+                        "baseline_mean_auroc": 0.91234,
+                        "geneformer_mean_auroc": 0.12345,
+                    }
+                },
+                "overall": {
+                    "baseline_mean": 0.81234,
+                    "geneformer_mean": 0.22345,
+                },
+            }
+            reference_path = eval_root / "geneformer_mouse_gf_all_tissues_summary.json"
+            reference_path.write_text(json.dumps(reference_payload))
+
+            resolved_reference = aggregate.resolve_reference_summary(scgpt_dir, eval_root, None)
+            self.assertEqual(resolved_reference, reference_path)
+
+            metrics = aggregate.load_reference_metrics(resolved_reference)
+            summary = aggregate.summarize_task(
+                "A1",
+                [
+                    {
+                        "test_mission": "RR-1",
+                        "auroc": 0.7,
+                        "best_epoch": 1,
+                        "n_train": 10,
+                        "n_test": 5,
+                    }
+                ],
+                "whole_human",
+                metrics["tasks"],
+            )
+
+            self.assertEqual(summary["baseline_auroc"], 0.9123)
+            self.assertEqual(summary["geneformer_auroc"], 0.1235)
+            self.assertEqual(summary["delta_vs_baseline"], -0.2123)
+            self.assertEqual(summary["delta_vs_geneformer"], 0.5765)
+            self.assertEqual(metrics["overall"]["baseline"], 0.81234)
+            self.assertEqual(metrics["overall"]["geneformer"], 0.22345)
+
+    def test_scgpt_docs_and_summary_match_data_driven_paths_and_current_win_counts(self):
+        aggregate_src = self.read_repo_text("scripts/aggregate_scgpt_results.py")
+        results_summary = self.read_repo_text("evaluation/RESULTS_SUMMARY.md")
+
+        self.assertIn("writes the combined summary alongside those per-fold result JSONs by default", aggregate_src)
+        self.assertIn("Classical ML wins 4/6 tissues vs scGPT", results_summary)
+        self.assertNotIn("Classical ML wins 5/6 tissues vs scGPT", results_summary)
+        self.assertIn("*Results file: `evaluation/scgpt/scgpt_whole_human_all_tissues_summary.json`*", results_summary)
+
+    def test_fm_docs_use_current_scgpt_and_model_count_language(self):
+        readme = self.read_repo_text("README.md")
+        hf_card = self.read_repo_text("docs/hf_dataset_card.md")
+        paper = self.read_repo_text("docs/V1_PAPER_CONTENT.md")
+        outline = self.read_repo_text("docs/PAPER_OUTLINE.md")
+        results_summary = self.read_repo_text("evaluation/RESULTS_SUMMARY.md")
+
+        self.assertIn("4 gene-expression foundation models + 3 text LLMs evaluated", readme)
+        self.assertIn("| scGPT | 12L Transformer, 33M human cells | 0.666 | -0.093 |", readme)
+        self.assertIn("Foundation / Language Models | 4 gene-expression FMs + 3 text LLMs", hf_card)
+        self.assertIn("scGPT | 0.666 (6-tissue mean, v1)", hf_card)
+        self.assertIn("Classical ML wins 4/6 tissues vs scGPT and 6/6 tissues vs Geneformer.", paper)
+        self.assertIn("| scGPT vs Baseline mean delta | -0.093 | 4/6 Baseline wins |", paper)
+        self.assertIn("https://github.com/jang1563/GeneLab_benchmark", paper)
+        self.assertNotIn("[GitHub repository URL]", paper)
+        self.assertIn("scGPT: mean 0.666 vs Classical ML 0.758 (delta=-0.093)", outline)
+        self.assertIn("gene-expression FMs, text LLMs", outline)
+        self.assertIn("Geneformer, scGPT, + 3 text LLMs", outline)
+        self.assertIn("https://github.com/jang1563/GeneLab_benchmark", outline)
+        self.assertIn("| scGPT | 0.628 | 0.685 | **0.556** | 0.782 | 0.650 | — | — | 0.666 |", results_summary)
+
+    def test_submission_docs_match_current_v1_task_surface_and_thresholds(self):
+        readme = self.read_repo_text("README.md")
+        submission = self.read_repo_text("docs/submission_format.md")
+
+        self.assertIn("| 95% CI lower | Bootstrap CI (N=2000) lower bound | > 0.600 |", readme)
+        self.assertIn("| **Go/No-Go** | AUROC > 0.700 AND CI lower > 0.600 |", submission)
+        self.assertIn("| `A6` | Eye | 3 | 37 | ~21k genes (log2 normalized) |", submission)
+        self.assertIn("| `B6` | Eye | RR-1, RR-3, OSD-397 | 6 | `tasks/B6_eye_cross_mission/` |", submission)
+        self.assertIn("Submit separate JSON files for each supported task (`A1`-`A6`, `B1`-`B6`).", submission)
+        self.assertIn("https://github.com/jang1563/GeneLab_benchmark/issues", submission)
+        self.assertNotIn("[TBD when public]", submission)
+
+    def test_root_readme_repository_map_avoids_stale_hard_coded_counts(self):
+        readme = self.read_repo_text("README.md")
+
+        self.assertIn("tasks/                          <- Public task inputs (benchmark + sensitivity tasks)", readme)
+        self.assertIn("v2 analysis and runner scripts", readme)
+        self.assertIn("v4 result JSONs + SHAP/WGCNA outputs", readme)
+        self.assertNotIn("Public task inputs (17 directories)", readme)
+        self.assertNotIn("v1 pipeline scripts (35 Python/R/shell)", readme)
+        self.assertNotIn("19 Python scripts", readme)
+        self.assertNotIn("18 scripts (classifiers, SHAP, WGCNA, PPI)", readme)
+
+    def test_root_readme_includes_v7_in_status_structure_and_changelog(self):
+        readme = self.read_repo_text("README.md")
+
+        self.assertIn("Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01", readme)
+        self.assertIn("Status: **v1–v7 Complete**", readme)
+        self.assertIn("| **v7.0** | Unified/foundation-model benchmarking: scPRINT2, GNN/WGCNA graph baselines, cross-method synthesis, and signal hierarchy analysis | **Complete** | `v7/` |", readme)
+        self.assertIn("├── v7/                             <- Unified/foundation-model benchmarking", readme)
+        self.assertIn("| v7.0 | 2026-04-12 | Unified benchmark layer complete:", readme)
+        self.assertNotIn("v7 Graph Neural Networks In Progress", readme)
+
+    def test_public_release_metadata_uses_v7_consistently(self):
+        readme = self.read_repo_text("README.md")
+        hf_card = self.read_repo_text("docs/hf_dataset_card.md")
+        citation = self.read_repo_text("CITATION.cff")
+
+        self.assertIn("Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01", readme)
+        self.assertIn("note    = {v7.0}", readme)
+        self.assertIn("Version: v7.0 | Dataset freeze: 2026-03-01", hf_card)
+        self.assertIn("note    = {v7.0}", hf_card)
+        self.assertIn('version: "7.0.0"', citation)
+        self.assertIn('date-released: "2026-04-12"', citation)
+        self.assertIn('notes: "Manuscript in preparation."', citation)
+        self.assertNotIn('version: "5.0.0"', citation)
+        self.assertNotIn("Target journal:", citation)
+
     def test_v2_rrrm1_wrapper_rebuilds_merged_input_and_uses_tissue_scoped_steps(self):
         wrapper = self.read_repo_text("v2/scripts/rrrm1_f2_pipeline_wrapper.sh")
         self.assertIn("rrrm1_merge_h5ad.py", wrapper)
@@ -206,6 +391,39 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("v2/evaluation/E1_crossspecies_nes.json", summary)
         self.assertIn("v2/evaluation/E2_mission_conservation.json", summary)
         self.assertIn("v2/evaluation/E3_cfrna_origin.json", summary)
+
+    def test_v2_eye_llm_and_radiation_surfaces_use_osd397(self):
+        radiation = self.read_repo_text("v2/scripts/annotate_radiation.py")
+        task_meta = self.read_repo_text("v2/processed/llm_prompts/A6/task_meta.json")
+        prompts = self.read_repo_text("v2/processed/llm_prompts/A6/fold_OSD-397_test_prompts.json")
+        submission = self.read_repo_text("v2/evaluation/submission_gemini-2.5-flash_zeroshot_A6.json")
+
+        self.assertIn('"OSD-397": 35', radiation)
+        self.assertNotIn('"TBD": 35', radiation)
+        self.assertIn("fold_OSD-397_test", task_meta)
+        self.assertIn("fold_OSD-397_test", prompts)
+        self.assertIn("fold_OSD-397_test", submission)
+
+    def test_v4_eye_registry_uses_stable_osd_identifier_with_legacy_storage_alias(self):
+        v4_utils = self.read_repo_text("v4/scripts/v4_utils.py")
+        multi_method = self.read_repo_text("v4/scripts/multi_method_eval.py")
+        cond_v4 = self.read_repo_text("v4/scripts/condition_prediction_v4.py")
+        pathway_gen = self.read_repo_text("v4/scripts/generate_pathway_scores.py")
+
+        self.assertIn('"eye":            ["RR-1", "RR-3", "OSD-397"]', v4_utils)
+        self.assertIn('MISSION_FILE_ALIASES = {"OSD-397": "TBD"}', v4_utils)
+        self.assertIn('storage_mission = MISSION_FILE_ALIASES.get(mission, mission)', multi_method)
+        self.assertIn('storage_mission = MISSION_FILE_ALIASES.get(mission, mission)', cond_v4)
+        self.assertIn('storage_mission = MISSION_FILE_ALIASES.get(mission, mission)', pathway_gen)
+
+    def test_v4_and_v7_generated_figures_are_refreshed(self):
+        fig1 = self.read_repo_text("v4/figures/html/Fig1_benchmark.html")
+        fig7 = self.read_repo_text("v7/figures/html/v7_methods_comparison.html")
+
+        self.assertIn('"fold": "OSD-397"', fig1)
+        self.assertNotIn('"fold": "TBD"', fig1)
+        self.assertIn('"test_mission": "OSD-397"', fig7)
+        self.assertNotIn('"test_mission": "TBD"', fig7)
 
     def test_gnn_existing_result_must_match_invocation(self):
         gnn_wgcna = self.load_module("v7.unified.gnn_wgcna")
@@ -317,6 +535,18 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn('add_candidate(model_dir / "medium-v1.5_fixed.ckpt")', scprint)
         self.assertNotIn("/home/fs01/jak4013/Dropbox", hpc_scprint)
 
+    def test_v7_scprint_artifacts_store_portable_checkpoint_paths(self):
+        scprint = self.read_repo_text("v7/unified/scprint2_benchmark.py")
+        eval_json = self.read_repo_text("v7/evaluation/SCPRINT2_eye.json")
+        fig_html = self.read_repo_text("v7/figures/html/v7_methods_comparison.html")
+
+        self.assertIn("if not ckpt_path:", scprint)
+        self.assertIn('return str(Path(*parts[v7_idx:]).with_name(canonical_name))', scprint)
+        self.assertIn('"ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt"', eval_json)
+        self.assertIn('"ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt"', fig_html)
+        self.assertNotIn("/home/fs01/jak4013/Dropbox", eval_json)
+        self.assertNotIn("/home/fs01/jak4013/Dropbox", fig_html)
+
     def test_v7_signal_hierarchy_uses_real_fm_outputs_and_explicit_spaceomics_path(self):
         signal_hierarchy = self.read_repo_text("v7/unified/signal_hierarchy.py")
         self.assertIn("SPACEOMICS_RESULTS_JSON", signal_hierarchy)
@@ -325,6 +555,36 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn('ROOT_EVAL_DIR / "geneformer_mouse_gf_all_tissues_summary.json"', signal_hierarchy)
         self.assertIn('ROOT_EVAL_DIR / "scgpt" / "scgpt_whole_human_all_tissues_summary.json"', signal_hierarchy)
         self.assertNotIn("MEMORY.md", signal_hierarchy)
+
+    def test_v7_methods_figure_uses_geneformer_summary_instead_of_memory_constant(self):
+        fig = self.read_repo_text("v7/unified/fig_v7_methods.py")
+        self.assertIn('geneformer_mouse_gf_all_tissues_summary.json', fig)
+        self.assertIn("def load_geneformer_summary()", fig)
+        self.assertNotIn("MEMORY.md", fig)
+        self.assertNotIn("gf_mean = 0.476", fig)
+
+    def test_release_hygiene_ignores_local_and_large_v8_artifacts(self):
+        gitignore = self.read_repo_text(".gitignore")
+        self.assertIn(".claude/", gitignore)
+        self.assertIn("v8/bridge/geo_cache/", gitignore)
+        self.assertIn("v8/**/__pycache__/", gitignore)
+
+    def test_release_hygiene_no_personal_paths_in_public_sources(self):
+        checked_files = [
+            "v8/README.md",
+            "v8/bridge/tissue_nes_bridge.py",
+            "v8/bridge/supervised_conservation.py",
+            "v8/bridge/link_spaceomicsbench.py",
+            "v8/multiomics/propagation.py",
+            "v8/RESULTS_SUMMARY.py",
+        ]
+        forbidden = ["/Users/jak4013", "~/.claude"]
+        offenders = [
+            rel
+            for rel in checked_files
+            if any(token in self.read_repo_text(rel) for token in forbidden)
+        ]
+        self.assertEqual(offenders, [])
 
 
 if __name__ == "__main__":

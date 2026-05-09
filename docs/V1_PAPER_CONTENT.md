@@ -36,7 +36,7 @@ Alternative titles:
 - Thymus (AUROC=0.860) significantly outperforms liver (0.577, p=0.001) in cross-mission spaceflight detection — refuting the liver-centric assumption (H1 REFUTED).
 - Pathway-level NES conservation across missions predicts cross-mission transfer AUROC (Spearman r=0.9 for 5 tissues) — a previously unreported quantitative relationship.
 - Gene-level features achieve F1=1.0 for mission identity prediction while pathway features achieve F1=0.056, quantifying a 17.8× batch resistance factor for pathways.
-- Two FM tiers evaluated: scGPT (12L Transformer, human-pretrained, AUROC=0.667) and Mouse-Geneformer (6L BERT, mouse-pretrained, AUROC=0.476) both underperform classical ML (AUROC=0.758), establishing that scRNA-pretrained FMs do not transfer to small-n bulk transcriptomics. Notably, scale (scGPT, 33M cells) outperforms species alignment (GF, mouse-specific) despite cross-species mapping.
+- Two FM tiers evaluated: scGPT (12L Transformer, human-pretrained, AUROC=0.666) and Mouse-Geneformer (6L BERT, mouse-pretrained, AUROC=0.476) both underperform classical ML (AUROC=0.758), establishing that scRNA-pretrained FMs do not transfer to small-n bulk transcriptomics. Notably, scale (scGPT, 33M cells) outperforms species alignment (GF, mouse-specific) despite cross-species mapping.
 - Two independent held-out evaluations confirm generalization: thymus RR-23 (AUROC=0.905, p=0.005, 30-day mission) and skin RR-7 (AUROC=0.885, p<0.001, 75-day mission).
 - DGE pipeline choice (DESeq2 vs edgeR vs limma-voom) has minimal effect on Log2FC rankings (Spearman ρ=0.926) but substantially affects DEG list overlap (Jaccard=0.600, FDR<0.05).
 
@@ -77,7 +77,7 @@ Alternative titles:
 | Kidney | RR-1, RR-3, RR-7 | 3 | 118 | 2a |
 | Thymus | MHU-1, MHU-2, RR-6, RR-9 | 4 (1 shared OSD) | 67 | 2a/2b |
 | Skin | MHU-2, RR-6, RR-7 | 4 | 102 | 2a |
-| Eye | RR-1, RR-3, TBD | 3 | 37 | 2a |
+| Eye | RR-1, RR-3, OSD-397 | 3 | 37 | 2a |
 | **Total** | **17 unique missions** | **24 OSD** | **~450** | |
 
 **Preprocessing**:
@@ -302,18 +302,18 @@ Two FMs fine-tuned across 6 tissues: Mouse-Geneformer (22 folds) and scGPT (21 f
 
 | Tissue | Classical AUROC | scGPT AUROC | Δ scGPT | GF AUROC | Δ GF | Winner |
 |--------|----------------|-------------|---------|---------|------|--------|
-| Liver | 0.588 | 0.628 | +0.040 | 0.486 | -0.102 | Baseline |
+| Liver | 0.588 | 0.628 | +0.040 | 0.486 | -0.102 | scGPT |
 | Gastrocnemius | 0.907 | 0.685 | -0.222 | 0.382 | -0.525 | Baseline |
-| Kidney | 0.521 | 0.556 | +0.035 | 0.452 | -0.069 | Baseline |
+| Kidney | 0.521 | 0.556 | +0.035 | 0.452 | -0.069 | scGPT |
 | Thymus | 0.923 | 0.782 | -0.141 | 0.495 | -0.428 | Baseline |
 | Skin | 0.821 | 0.691 | -0.130 | 0.557 | -0.265 | Baseline |
 | Eye | 0.789 | 0.650 | -0.139 | 0.484 | -0.305 | Baseline |
-| **Mean** | **0.758** | **0.667** | **-0.092** | **0.476** | **-0.283** | **Baseline** |
+| **Mean** | **0.758** | **0.666** | **-0.093** | **0.476** | **-0.283** | **Baseline** |
 
 **Key interpretation**:
-- Classical ML wins 6/6 tissues for both FM comparisons.
-- scGPT (mean 0.667) substantially outperforms Geneformer (mean 0.476) despite cross-species mapping (human→mouse ortholog). This suggests training scale (33M human cells) outweighs species alignment for FM transfer.
-- Neither FM approaches classical baseline (PCA-LR mean 0.758): scGPT Δ=-0.092, GF Δ=-0.283.
+- Classical ML wins 4/6 tissues vs scGPT and 6/6 tissues vs Geneformer.
+- scGPT (mean 0.666) substantially outperforms Geneformer (mean 0.476) despite cross-species mapping (human→mouse ortholog). This suggests training scale (33M human cells) outweighs species alignment for FM transfer.
+- Neither FM approaches classical baseline (PCA-LR mean 0.758): scGPT Δ=-0.093, GF Δ=-0.283.
 - scGPT partially reverses GF failure in liver and kidney (positive delta) but fails in high-signal tissues (thymus, gastrocnemius, eye, skin).
 - Consistent with literature: FMs pretrained on single-cell data do not automatically transfer to small-sample (n=30-100) bulk transcriptomics. The transfer gap is smaller for scGPT's larger pretraining dataset but not eliminated.
 - First systematic comparison of two FM architectures (BERT vs Transformer) across spaceflight bulk RNA-seq.
@@ -437,8 +437,8 @@ All 6 tissues produce biologically plausible enrichment patterns:
 
 **Finding 6: Both FMs Fail on Bulk RNA-seq; Scale > Species Alignment**
 - Mouse-GF mean AUROC = 0.476 vs Baseline 0.758 (delta = -0.283).
-- scGPT mean AUROC = 0.667 vs Baseline 0.758 (delta = -0.092).
-- scGPT > GF by +0.191 despite human pretraining (vs mouse-specific GF): larger pretraining dataset (33M vs 30M cells) offsets species gap.
+- scGPT mean AUROC = 0.666 vs Baseline 0.758 (delta = -0.093).
+- scGPT > GF by +0.190 despite human pretraining (vs mouse-specific GF): larger pretraining dataset (33M vs 30M cells) offsets species gap.
 - Neither FM surpasses classical baseline. First multi-tissue systematic two-FM benchmark on spaceflight bulk RNA-seq.
 - Implication: For small-n bulk transcriptomics, pretraining scale matters more than species alignment, but both FMs require further bulk-specific adaptation.
 
@@ -496,10 +496,10 @@ Both FMs fail to match classical ML for small-n bulk transcriptomics, but the co
 - This is not a failure of the FM paradigm — it is a domain mismatch. Purpose-built bulk RNA-seq FMs or larger fine-tuning sets may succeed.
 
 **Scale > species alignment**:
-- scGPT (12L, 33M human cells) > Mouse-GF (6L, 30M mouse cells) by +0.191 AUROC despite requiring mouse→human ortholog mapping.
+- scGPT (12L, 33M human cells) > Mouse-GF (6L, 30M mouse cells) by +0.190 AUROC despite requiring mouse→human ortholog mapping.
 - Interpretation: The additional model capacity and pretraining diversity of scGPT partially compensates for the species gap introduced by ortholog mapping.
 - This suggests that, for transfer learning to bulk RNA-seq, pretraining at scale (>30M cells, diverse cell types) is more important than species matching.
-- However, neither FM produces practically useful predictions — the delta from classical baseline remains large (scGPT: -0.092, GF: -0.283).
+- However, neither FM produces practically useful predictions — the delta from classical baseline remains large (scGPT: -0.093, GF: -0.283).
 
 ### 7.5 Two Independent Held-Out Validations
 
@@ -568,9 +568,9 @@ S5. DGE pipeline comparison (J2: Log2FC Spearman + DEG Jaccard heatmap).
 | Thymus vs Liver transfer AUROC | 0.860 vs 0.577 | p=0.001 |
 | Gene batch F1 vs pathway batch F1 | 1.000 vs 0.056 | 17.8× resistance |
 | NES-transfer rank correlation | r=0.9 (5 tissues) | r=1.0 (4 tissues) |
-| scGPT vs Baseline mean delta | -0.092 | 6/6 Baseline wins |
+| scGPT vs Baseline mean delta | -0.093 | 4/6 Baseline wins |
 | Geneformer vs Baseline mean delta | -0.283 | 6/6 Baseline wins |
-| scGPT vs Geneformer delta | +0.191 | Scale > species alignment |
+| scGPT vs Geneformer delta | +0.190 | Scale > species alignment |
 | J2 LFC Spearman ρ (mean) | 0.926 | 9 missions × 3 pipelines |
 | J2 DEG Jaccard (mean, FDR<0.05) | 0.600 | Pipeline-dependent threshold effect |
 | Cell 2020 pathway concordance | 71.7% | 5 tissues |
@@ -606,7 +606,7 @@ S5. DGE pipeline comparison (J2: Log2FC Spearman + DEG Jaccard heatmap).
 
 ## 12. Data Availability Statement
 
-All data is derived from publicly available NASA OSDR datasets. Processed benchmark data, task definitions, and baseline predictions are available on HuggingFace (https://huggingface.co/datasets/jang1563/genelab-benchmark). All analysis code is available at [GitHub repository URL]. The benchmark evaluation framework is released under MIT License.
+All data is derived from publicly available NASA OSDR datasets. Processed benchmark data, task definitions, and baseline predictions are available on HuggingFace (https://huggingface.co/datasets/jang1563/genelab-benchmark). All analysis code is available at https://github.com/jang1563/GeneLab_benchmark. The benchmark evaluation framework is released under MIT License.
 
 ---
 

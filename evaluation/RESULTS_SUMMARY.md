@@ -221,19 +221,19 @@ scGPT-whole_human (12L Transformer, 512d hidden, 8 heads, pretrained on 33M huma
 
 | Task | Tissue | scGPT AUROC | Geneformer AUROC | Baseline AUROC | Δ vs GF | Δ vs Baseline | Winner |
 |------|--------|------------|-----------------|---------------|---------|--------------|--------|
-| A1 | Liver | 0.628 ± 0.283 | 0.486 | 0.588 | +0.142 | +0.040 | **scGPT** |
-| A2 | Gastrocnemius | 0.685 ± 0.305 | 0.432 | 0.801 | +0.253 | -0.116 | Baseline |
-| A3 | Kidney | 0.556 ± 0.195 | 0.432 | 0.538 | +0.124 | +0.018 | scGPT |
-| A4 | Thymus | 0.782 ± 0.172 | 0.476 | 0.923 | +0.306 | -0.141 | Baseline |
-| A5 | Skin | 0.691 ± 0.050 | 0.532 | 0.821 | +0.159 | -0.130 | Baseline |
-| A6 | Eye | 0.650 ± 0.141 | 0.478 | 0.789 | +0.172 | -0.139 | Baseline |
-| **Mean** | **6 tissues** | **0.666** | **0.476** | **0.758** | **+0.190** | **-0.092** | **Baseline** |
+| A1 | Liver | 0.628 ± 0.249 | 0.486 | 0.588 | +0.143 | +0.040 | **scGPT** |
+| A2 | Gastrocnemius | 0.685 ± 0.250 | 0.382 | 0.907 | +0.303 | -0.222 | Baseline |
+| A3 | Kidney | 0.556 ± 0.159 | 0.452 | 0.521 | +0.104 | +0.035 | **scGPT** |
+| A4 | Thymus | 0.782 ± 0.149 | 0.495 | 0.923 | +0.287 | -0.141 | Baseline |
+| A5 | Skin | 0.691 ± 0.042 | 0.557 | 0.821 | +0.135 | -0.130 | Baseline |
+| A6 | Eye | 0.650 ± 0.100 | 0.484 | 0.789 | +0.166 | -0.139 | Baseline |
+| **Mean** | **6 tissues** | **0.666** | **0.476** | **0.758** | **+0.190** | **-0.093** | **Baseline** |
 
-**Interpretation**: Classical ML wins 5/6 tissues vs scGPT (sign test p=0.109, ns). scGPT outperforms Geneformer by +0.190 AUROC across all tissues, suggesting human-pretrained 12L transformer captures more transferable features than mouse-specific 6L BERT. However, both FMs remain below classical ML baseline (scGPT: -0.092, Geneformer: -0.283), confirming that pretrained single-cell FMs do not transfer reliably to small-n bulk transcriptomics. The performance gap narrows but does not close: Classical ML 6/6 > both FMs.
+**Interpretation**: Classical ML wins 4/6 tissues vs scGPT (sign test p=0.688, ns), while scGPT wins liver and kidney. scGPT still outperforms Geneformer by +0.190 AUROC across all tissues, suggesting human-pretrained 12L transformer captures more transferable signal than mouse-specific 6L BERT. However, both FMs remain below the classical ML mean baseline (scGPT: -0.093, Geneformer: -0.283), so pretrained single-cell FMs still do not reliably beat tuned classical models on small-n bulk transcriptomics.
 
-**Key observation**: scGPT shows higher variance (std=0.05–0.31) than Geneformer (std=0.05–0.23), partly reflecting ortholog mapping noise from human pretraining. Large-n reliable folds (liver RR-8 n=103: 0.468; kidney RR-7 n=94: 0.557; skin n=30–39: 0.636–0.737) suggest scGPT hovers near chance (0.5) on the most statistically robust estimates.
+**Key observation**: scGPT variance spans std=0.042–0.250 across tissues, comparable to Geneformer’s 0.054–0.233 range. Large-n reliable folds still show instability rather than a clean FM win: liver RR-8 (n=103) remains near chance at 0.468, while kidney RR-7 (n=94) reaches 0.557 and skin folds (n=30–39) stay in the 0.636–0.737 range.
 
-*Results file: `evaluation/scgpt_whole_human_all_tissues_summary.json`*
+*Results file: `evaluation/scgpt/scgpt_whole_human_all_tissues_summary.json`*
 
 ---
 
@@ -407,12 +407,12 @@ Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 
 | Model | Liver | Gastro | Kidney | Thymus | Eye | Lung | Colon | Mean |
 |-------|-------|--------|--------|--------|-----|------|-------|------|
 | **PCA-LR** | **0.670** | **0.824** | 0.432 | **0.923** | **0.789** | — | — | **0.758** |
-| scGPT | 0.628 | 0.685 | **0.556** | 0.782 | 0.650 | — | — | 0.667 |
+| scGPT | 0.628 | 0.685 | **0.556** | 0.782 | 0.650 | — | — | 0.666 |
 | scFoundation | 0.635** | 0.691* | 0.541 | 0.487 | 0.563 | 0.389 | 0.755 | ~0.58 |
 | UCE (seeded) | 0.459 | 0.578 | 0.489 | 0.632* | 0.550 | 0.555 | 0.449 | ~0.53 |
 | Geneformer | 0.486 | 0.382 | 0.452 | 0.495 | 0.484 | — | — | 0.476 |
 
-*p<0.05, **p<0.01. All FMs underperform PCA-LR baseline.
+*p<0.05, **p<0.01. scGPT and Geneformer rows are 6-tissue v1 references; lung/colon were not evaluated for those models. All FMs underperform PCA-LR baseline.
 
 ### RRRM-2 scRNA-seq (F5)
 

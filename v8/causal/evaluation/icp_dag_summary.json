@@ -1,0 +1,160 @@
+{
+  "n_genes": 29057,
+  "n_environments": 9,
+  "top_causal_edges": [
+    {
+      "from": "stressor:IR",
+      "to": "tissue:skin",
+      "icp_score": 0.4402,
+      "n_genes": 90
+    },
+    {
+      "from": "stressor:HLU",
+      "to": "tissue:thymus",
+      "icp_score": 0.4393,
+      "n_genes": 99
+    },
+    {
+      "from": "stressor:HLU",
+      "to": "tissue:skin",
+      "icp_score": 0.4238,
+      "n_genes": 90
+    },
+    {
+      "from": "stressor:IR",
+      "to": "tissue:kidney",
+      "icp_score": 0.4104,
+      "n_genes": 89
+    },
+    {
+      "from": "stressor:HLUxIR",
+      "to": "tissue:kidney",
+      "icp_score": 0.41,
+      "n_genes": 89
+    },
+    {
+      "from": "stressor:HLU",
+      "to": "tissue:gastrocnemius",
+      "icp_score": 0.4049,
+      "n_genes": 99
+    },
+    {
+      "from": "stressor:IR",
+      "to": "tissue:eye",
+      "icp_score": 0.3967,
+      "n_genes": 93
+    },
+    {
+      "from": "stressor:HLUxIR",
+      "to": "tissue:gastrocnemius",
+      "icp_score": 0.3959,
+      "n_genes": 99
+    },
+    {
+      "from": "stressor:HLU",
+      "to": "tissue:liver",
+      "icp_score": 0.3908,
+      "n_genes": 80
+    },
+    {
+      "from": "stressor:HLU",
+      "to": "tissue:kidney",
+      "icp_score": 0.3905,
+      "n_genes": 89
+    },
+    {
+      "from": "stressor:combined_flight",
+      "to": "tissue:liver",
+      "icp_score": 0.3887,
+      "n_genes": 95
+    },
+    {
+      "from": "stressor:IR",
+      "to": "tissue:thymus",
+      "icp_score": 0.3801,
+      "n_genes": 99
+    },
+    {
+      "from": "stressor:HLUxIR",
+      "to": "tissue:skin",
+      "icp_score": 0.3785,
+      "n_genes": 90
+    },
+    {
+      "from": "stressor:IR",
+      "to": "tissue:gastrocnemius",
+      "icp_score": 0.3738,
+      "n_genes": 99
+    },
+    {
+      "from": "stressor:IR",
+      "to": "tissue:liver",
+      "icp_score": 0.3611,
+      "n_genes": 80
+    }
+  ],
+  "stressor_aggregate_icp": {
+    "HLU": {
+      "mean": 0.4071,
+      "max": 1.0,
+      "count": 27029
+    },
+    "HLUxIR": {
+      "mean": 0.3904,
+      "max": 0.9997,
+      "count": 27029
+    },
+    "HLUxIRxT": {
+      "mean": 0.5218,
+      "max": 0.9622,
+      "count": 82
+    },
+    "HLUxT": {
+      "mean": 0.4879,
+      "max": 0.9338,
+      "count": 82
+    },
+    "IR": {
+      "mean": 0.3982,
+      "max": 0.9991,
+      "count": 27029
+    },
+    "IRxT": {
+      "mean": 0.5353,
+      "max": 0.9883,
+      "count": 82
+    },
+    "T": {
+      "mean": 0.5401,
+      "max": 0.9605,
+      "count": 82
+    },
+    "combined_flight": {
+      "mean": 0.283,
+      "max": 0.9996,
+      "count": 21607
+    }
+  },
+  "top20_invariant_genes": {
+    "RPS12-PS24": 0.9991,
+    "GM25587": 0.994,
+    "4930467K11RIK": 0.99,
+    "OLFR1247": 0.9887,
+    "CYP2C68": 0.9882,
+    "CDX4": 0.9873,
+    "OR52H1": 0.9871,
+    "GM15264": 0.9866,
+    "GM23240": 0.9853,
+    "GM22661": 0.9841,
+    "HOXAAS3|LOC115490409": 0.9815,
+    "GM7538": 0.9801,
+    "1700017M07RIK": 0.9767,
+    "MUC3": 0.9736,
+    "OLFR166": 0.9723,
+    "4933427I04RIK": 0.971,
+    "GM5809": 0.9672,
+    "RPL21-PS3": 0.967,
+    "CCDC83": 0.9669,
+    "DPPA5A": 0.9668
+  }
+}

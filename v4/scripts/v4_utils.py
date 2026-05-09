@@ -31,12 +31,15 @@ TISSUE_MISSIONS = {
     "gastrocnemius":  ["RR-1", "RR-5", "RR-9"],
     "kidney":         ["RR-1", "RR-3", "RR-7"],
     "thymus":         ["RR-6", "MHU-1", "MHU-2", "RR-9"],
-    "eye":            ["RR-1", "RR-3", "TBD"],       # TBD = OSD-397 (16 samples, 9F+7GC)
+    "eye":            ["RR-1", "RR-3", "OSD-397"],
     # v3/v4 additions (3 tissues)
     "skin":           ["MHU-2", "RR-6", "RR-7"],     # Corrected from plan's RR-1/RR-5/RR-6
     "lung":           ["RR-6"],                        # Single mission → 5-fold CV
     "colon":          ["RR-6"],                        # Single mission → 5-fold CV
 }
+
+MISSION_ALIASES = {"TBD": "OSD-397"}
+MISSION_FILE_ALIASES = {"OSD-397": "TBD"}
 
 # Tissues with pre-existing task/ fold splits (can reuse directly)
 TASK_MAP = {
@@ -87,6 +90,19 @@ def encode_labels(meta):
 
 # ── Data Loading ──────────────────────────────────────────────────────────────
 
+def mission_storage_name(mission):
+    """Map stable public mission labels to legacy on-disk filenames."""
+    return MISSION_FILE_ALIASES.get(mission, mission)
+
+
+def normalize_mission_labels(meta):
+    """Normalize legacy placeholder mission labels in metadata."""
+    if "mission" not in meta.columns:
+        return meta
+    meta = meta.copy()
+    meta["mission"] = meta["mission"].replace(MISSION_ALIASES)
+    return meta
+
 def load_metadata(tissue):
     """Load all-missions metadata for a tissue. Handles per-mission files if no all_missions."""
     # Try all-missions file first
@@ -95,20 +111,21 @@ def load_metadata(tissue):
         meta = pd.read_csv(f, index_col=0)
         if "REMOVE" in meta.columns:
             meta = meta[meta["REMOVE"] != True]
-        return meta
+        return normalize_mission_labels(meta)
 
     # Fallback: single-mission file
     missions = TISSUE_MISSIONS.get(tissue, [])
     if len(missions) == 1:
         mission = missions[0]
-        f = PROCESSED_DIR / tissue / f"{tissue}_{mission}_metadata.csv"
+        storage_mission = mission_storage_name(mission)
+        f = PROCESSED_DIR / tissue / f"{tissue}_{storage_mission}_metadata.csv"
         if f.exists():
             meta = pd.read_csv(f, index_col=0)
             if "REMOVE" in meta.columns:
                 meta = meta[meta["REMOVE"] != True]
             if "mission" not in meta.columns:
                 meta["mission"] = mission
-            return meta
+            return normalize_mission_labels(meta)
 
     raise FileNotFoundError(f"No metadata found for tissue={tissue}")
 
