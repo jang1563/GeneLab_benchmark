@@ -226,6 +226,12 @@ gene lists, and all tracked parsed API outputs. The manifest does not re-call
 external APIs and does not store raw response dumps; concrete upstream
 db-version pinning remains a beta-freeze item.
 
+**Safety-aware triage:** `safety_triage.csv` joins current multi-tissue reversal
+scores with class-level safety liabilities. The table keeps CGP-60474 and
+quinacrine as Pareto-front pathway hypotheses, while broad CDK/HSP90/TOP2 and
+tool-compound hits remain mechanism flags only, not countermeasure
+recommendations.
+
 ### 3d. Enrichr/LINCS CRISPR KO orthogonal support (`intervene/perturb_seq_orthog.py`)
 
 Queries the Enrichr `LINCS_L1000_CRISPR_KO_Consensus_Sigs` library (3,742 gene
