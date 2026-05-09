@@ -67,6 +67,13 @@
       "kind": "local_file",
       "checksum": "sha256:32678dbb440a1e4f39882e8bc685d2f63da0280609c581ee02f7469dd8d2d15a",
       "tracked_in_git": true
+    },
+    {
+      "role": "raw_cache_audit",
+      "path_or_accession": "v8/decompose/evaluation/raw_cache_audit.json",
+      "kind": "local_file",
+      "checksum": "sha256:63c5edfba2798be19edf80efd7daf271e3cfa9a87ba6fe9618684ea0485866c7",
+      "tracked_in_git": true
     }
   ],
   "environment": {
@@ -87,6 +94,6 @@
       "bash scripts/hpc_release_validate.sh --v8-summary",
       "sha256sum v8/decompose/evaluation/factorial_flight_decomposition.json"
     ],
-    "notes": "Tracked factorial outputs were checksummed in the staged HPC bundle and included in the 41-test release validation. A 2026-05-09 full wrapper retry confirmed the staging bundle lacks several raw analog caches (OSD-211/237/202), so the existing validated outputs were restored rather than adopting partial rerun products. Full raw-cache rerun remains a beta-freeze requirement."
+    "notes": "Tracked factorial outputs were checksummed in the staged HPC bundle and included in release validation. raw_cache_audit.json now records that the current HPC bundle lacks OSD-211, OSD-237, and OSD-202 raw analog caches, so the existing validated outputs remain the supported snapshot until a clean full-cache rerun is possible."
   }
 }

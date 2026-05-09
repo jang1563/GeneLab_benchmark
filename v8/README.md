@@ -425,6 +425,11 @@ constraints from the ICP causal DAG.
 
 Outputs: `v8/decompose/evaluation/mars_extrapolation_{analog}.csv` + `mars_summary.json`.
 
+**Raw-cache readiness:** `raw_cache_audit.json` records the current HPC bundle
+state before a full DECOMPOSE rerun. At this checkpoint, only the OSD-719 HZE
+endocrine count/sample-table cache is present; OSD-211, OSD-237, and OSD-202
+raw caches must be restored before a clean beta-freeze rerun.
+
 ## Causal DAG — ICP across Stressor Environments (2026-04-18)
 
 ### 4a. Invariant Causal Prediction (`causal/build_dag.py`)

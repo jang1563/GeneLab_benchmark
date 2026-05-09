@@ -144,6 +144,8 @@ Mars outputs as stressor-sensitivity flags until non-linear calibration exists.
 Implementation tasks:
 
 - Add manifests for every factorial analog dataset.
+- Keep `raw_cache_audit.json` with the current HPC bundle so full-rerun
+  readiness is explicit rather than inferred from failed wrapper attempts.
 - Store the exact design formula, encoded factor levels, dose units, and
   contrast definitions.
 - Separate low-LET and high-LET radiation quality claims.

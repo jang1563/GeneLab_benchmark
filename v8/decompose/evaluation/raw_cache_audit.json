@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.1.0",
+  "audit_id": "decompose.raw_cache.current",
+  "status": "incomplete_raw_cache",
+  "full_rerun_ready": false,
+  "source_script": "v8/decompose/factorial_analog.py",
+  "expected_files": 8,
+  "present_files": 2,
+  "missing_files": [
+    "spleen:counts:data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts.csv",
+    "spleen:samples:data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable.csv",
+    "skin_analog:counts:data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_Normalized_Counts.csv",
+    "skin_analog:samples:data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_SampleTable.csv",
+    "brain:counts:data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+    "brain:samples:data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_SampleTable_GLbulkRNAseq.csv"
+  ],
+  "datasets": {
+    "hze_endocrine": {
+      "design": "2x2",
+      "required_files": {
+        "counts": {
+          "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+          "exists": true,
+          "size_bytes": 3731824,
+          "sha256": "8b4c2a491d45307779ffb37436ddd5967719a14298cf0d856743939fd6c30fca"
+        },
+        "samples": {
+          "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_SampleTable_GLbulkRNAseq.csv",
+          "exists": true,
+          "size_bytes": 423,
+          "sha256": "39af5dc91413163e33f62b81acb1daa7772b841c25669a21f2ea92aaacdfc45a"
+        }
+      }
+    },
+    "spleen": {
+      "design": "2x2",
+      "required_files": {
+        "counts": {
+          "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts.csv",
+          "exists": false,
+          "size_bytes": null,
+          "sha256": null
+        },
+        "samples": {
+          "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable.csv",
+          "exists": false,
+          "size_bytes": null,
+          "sha256": null
+        }
+      }
+    },
+    "skin_analog": {
+      "design": "2x2",
+      "required_files": {
+        "counts": {
+          "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_Normalized_Counts.csv",
+          "exists": false,
+          "size_bytes": null,
+          "sha256": null
+        },
+        "samples": {
+          "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_SampleTable.csv",
+          "exists": false,
+          "size_bytes": null,
+          "sha256": null
+        }
+      }
+    },
+    "brain": {
+      "design": "2x2x2",
+      "required_files": {
+        "counts": {
+          "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+          "exists": false,
+          "size_bytes": null,
+          "sha256": null
+        },
+        "samples": {
+          "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_SampleTable_GLbulkRNAseq.csv",
+          "exists": false,
+          "size_bytes": null,
+          "sha256": null
+        }
+      }
+    }
+  },
+  "limitations": [
+    "This audit checks raw cache availability and file identity only; it does not regenerate factorial, Mars, or bootstrap outputs.",
+    "A full DECOMPOSE beta freeze still requires a clean HPC rerun from fetched OSDR raw caches."
+  ]
+}
