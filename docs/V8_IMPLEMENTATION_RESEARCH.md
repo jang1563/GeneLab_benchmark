@@ -173,8 +173,9 @@ Implementation tasks:
 - Keep API responses or large raw query dumps outside Git if they exceed the
   artifact policy.
 - Label drug results as hypothesis-generating countermeasure candidates.
-- Add a safety triage table: target class, known toxicity class, broad
-  mechanism, tissue count, min reversal, and orthogonal support.
+- Maintain `safety_triage.csv`: target class, known class-level toxicity
+  liability, broad mechanism, tissue count, min reversal, and orthogonal
+  support. This table is for pathway triage only, not clinical prioritization.
 
 ### 8. Causal/Digital Twin claims
 

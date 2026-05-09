@@ -616,6 +616,16 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("raw_cache_audit.json", readme)
         self.assertIn("v8/decompose/raw_cache_audit.py", hpc)
 
+    def test_v8_intervene_safety_triage_keeps_candidates_hypothesis_only(self):
+        triage = self.read_repo_text("v8/intervene/safety_triage.py")
+        readme = self.read_repo_text("v8/intervene/evaluation/README.md")
+        hpc = self.read_repo_text("scripts/hpc_v8_intervene.sh")
+
+        self.assertIn("known_toxicity_class", triage)
+        self.assertIn("hypothesis-generating target/pathway triage only", triage)
+        self.assertIn("safety_triage.csv", readme)
+        self.assertIn("v8/intervene/safety_triage.py", hpc)
+
 
 if __name__ == "__main__":
     unittest.main()
