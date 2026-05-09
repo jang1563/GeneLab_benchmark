@@ -606,6 +606,16 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("parsed_output_sha256", snapshot)
         self.assertIn("api_snapshot_manifest.json", readme)
 
+    def test_v8_decompose_raw_cache_audit_records_full_rerun_readiness(self):
+        audit = self.read_repo_text("v8/decompose/raw_cache_audit.py")
+        readme = self.read_repo_text("v8/decompose/evaluation/README.md")
+        hpc = self.read_repo_text("scripts/hpc_v8_decompose.sh")
+
+        self.assertIn("full_rerun_ready", audit)
+        self.assertIn("missing_files", audit)
+        self.assertIn("raw_cache_audit.json", readme)
+        self.assertIn("v8/decompose/raw_cache_audit.py", hpc)
+
 
 if __name__ == "__main__":
     unittest.main()

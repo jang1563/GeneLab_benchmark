@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "decompose.raw_cache_audit",
+  "pillar": "decompose",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "The current HPC bundle explicitly records DECOMPOSE raw-cache readiness before any full rerun.",
+    "scope": "reproducibility",
+    "consumed_by": [
+      "v8/decompose/evaluation/README.md",
+      "v8/provenance/runs/decompose_factorial_analogs.json",
+      "docs/V8_IMPLEMENTATION_RESEARCH.md"
+    ]
+  },
+  "generated_at": "2026-05-09T20:23:09Z",
+  "code": {
+    "script": "v8/decompose/raw_cache_audit.py",
+    "command": "python v8/decompose/raw_cache_audit.py",
+    "git_commit": "6bae03a+decompose-raw-cache-audit-staged",
+    "parameters": {
+      "mode": "availability_and_checksum_audit",
+      "full_rerun_performed": false
+    }
+  },
+  "inputs": [
+    {
+      "role": "factorial_dataset_contract",
+      "path_or_accession": "v8/decompose/factorial_analog.py",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "expected_raw_analog_caches",
+      "path_or_accession": "data/mouse/{hze_analog,spleen,skin_rad,retina_brain}/...",
+      "kind": "hpc_local_cache",
+      "tracked_in_git": false
+    }
+  ],
+  "outputs": [
+    {
+      "role": "raw_cache_audit",
+      "path_or_accession": "v8/decompose/evaluation/raw_cache_audit.json",
+      "kind": "local_file",
+      "checksum": "sha256:63c5edfba2798be19edf80efd7daf271e3cfa9a87ba6fe9618684ea0485866c7",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
+  },
+  "metrics": [
+    {"name": "expected_raw_cache_files", "value": 8},
+    {"name": "present_raw_cache_files", "value": 2},
+    {"name": "missing_raw_cache_files", "value": 6},
+    {"name": "full_rerun_ready", "value": false}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "python v8/decompose/raw_cache_audit.py",
+      "bash scripts/hpc_v8_decompose.sh --audit-only",
+      "bash scripts/hpc_release_validate.sh --v8-summary"
+    ],
+    "notes": "Audit records that only OSD-719/GLDS-641 HZE endocrine raw count/sample-table caches are present in the current HPC bundle. OSD-211, OSD-237, and OSD-202 raw caches remain missing, so full DECOMPOSE rerun is intentionally blocked until those caches are restored."
+  }
+}
