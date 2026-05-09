@@ -15,10 +15,10 @@ stressor decomposition—factorial linear models on ground-based analogs
 (hindlimb unloading + radiation, n=4 studies) to separate microgravity and GCR
 contributions and flag possible 900-day Mars regime changes; (iii) countermeasure
 hypothesis generation—querying the LINCS L1000 chemical perturbation library
-with flight signatures, with orthogonal CRISPR knockout checks (Enrichr, Replogle
-Perturb-seq). We nominate CDK inhibitors, HSP90 modulators, and AMPK-axis
-perturbations as multi-tissue signature-reversal hypotheses with chemical and
-genetic convergence. Invariant Causal Prediction (ICP)-style stability scoring
+with flight signatures, with orthogonal Enrichr/LINCS CRISPR knockout checks.
+We nominate CDK-axis, AMPK/BMP-axis, and tissue-specific perturbation classes as
+signature-reversal hypotheses, with limited chemical-genetic convergence in the
+kidney CDK9 axis. Invariant Causal Prediction (ICP)-style stability scoring
 across 9 environments identifies time and interaction terms as stable candidate
 drivers (ICP=0.540). SpaceMed
 therefore provides a reproducible path from cross-species pathway transfer to
@@ -126,23 +126,23 @@ countermeasure selection to future validation studies.
 - Filter top-50 per tissue
 
 **Chemical Hit Orthogonal Support**
-- Top reversals across tissues: Dorsomorphin (AMPK inhibitor), AZD-5438/AT-7519 (CDK inhibitors), Geldanamycin (HSP90)
+- Top tissue-level reversals: Albendazole/AZD-7762 (thymus), Dorsomorphin (gastrocnemius/liver), MLN2238 (skin), penfluridol (eye), and EI-156/PD-184352/GDC-0980 (kidney)
 - Multi-tissue: 26 drugs in ≥2 tissues
-- Pareto front: 2 drugs on efficiency frontier (maximize min reversal score, minimize worst-tissue score)
+- Pareto front: 2 drugs on the current efficiency frontier, CGP-60474 and quinacrine hydrochloride
 
 **Orthogonal CRISPR Support**
 - Enrichr LINCS_L1000_CRISPR_KO_Consensus_Sigs library
 - For each chemical drug, check if its target appears as reversal-direction CRISPR KO hit
-- Example: CDK inhibitors (AZD-5438, AT-7519) target CDK1/2/9
-  - Query: Inspiration4 kidney UP genes → top reversal KOs → CDK9 KO (Down) matches, p_adj<0.05, 7 overlapping genes
-  - **Chemical-CRISPR convergence supports target plausibility**
-- Novel targets from CRISPR-only: FOXO3, IL21R, CXCL13 (tissue-specific, fewer chemical hits)
+- Example: CDK inhibitors (AZD-5438, AT-7519) share CDK9 as one target
+  - Query: kidney UP genes → reversal-direction KOs → CDK9 KO (Down) matches 7 genes, adj-p=0.1588
+  - **Chemical-CRISPR convergence is suggestive target-plausibility evidence, not FDR-significant validation**
+- Notable CRISPR-only signals include IL21R/CXCL13 in thymus and FOXO3 in liver; these remain exploratory because chemical matches and independent perturbation validation are absent.
 
 **Multi-Tissue Pareto Optimization**
 - Drug × tissue matrix: reversal score (NaN if not in top-50)
 - Pareto dominance: drug A > drug B if mean_rev(A) ≥ mean_rev(B) AND min_rev(A) ≥ min_rev(B) AND at least one strict
-- Top Pareto drugs: Dorsomorphin (4 tissues, mean=0.156), AZD-5438 (4 tissues, mean=0.143)
-- Benefit: avoids aggravating off-target tissues
+- Current Pareto front: CGP-60474 (3 tissues, mean=0.1457, min=0.0735) and quinacrine hydrochloride (2 tissues, mean=0.1364, min=0.0909)
+- Benefit: prioritizes breadth and minimum reversal score while keeping all drug language hypothesis-generating.
 
 ### Results
 
@@ -162,7 +162,7 @@ Causal decomposition via ICP-style stability scoring across 9 environments ranke
 
 #### DECOMPOSE: Mars Extrapolation Flags ~1000× Gene Sensitivity
 
-Projecting factorial coefficients to a 900-day Mars-like stressor vector (µg_avg=0.62×, HZE=12.9×, Time=7.5×) flagged dramatic sensitivity among interaction-driven genes. Top movers: *WNT10B* (+1052×, eye), *KRTAP19-2* (+414×, skin), *SCAPER* (+189×, liver). However, **linear extrapolation beyond 5× amplification breaks down**—Spearman r(projected, flight-observed) ≈ 0 across tissues, indicating threshold dose-response or mechanistic saturation not captured by first-order interactions.
+Projecting factorial coefficients to a 900-day Mars-like stressor vector (µg_avg=0.62×, HZE=12.9×, Time=7.5×) flagged dramatic sensitivity among interaction-driven genes. Top amplification flags include *WNT10B* (~1052×, brain-to-eye analog), *KRTAP19-2* (~414×, skin analog), and an unannotated spleen/thymus proxy gene ENSMUSG00000092534 (~190×). However, **linear extrapolation beyond 5× amplification breaks down**—Spearman r(projected, flight-observed) ≈ 0 across tissues, indicating threshold dose-response or mechanistic saturation not captured by first-order interactions.
 
 This negative result is informative: it flags need for **non-linear
 dose-response models** and mechanistic constraints from the causal DAG before
@@ -178,19 +178,22 @@ L1000CDS2 queries with tissue-specific signatures returned top reversals:
 - **Liver/Kidney:** PD-184352 (MEK1/2), GDC-0980 (PI3K/mTOR)
 
 Multi-tissue scoring identified 26 drugs active in ≥2 tissues. Pareto filtering
-(maximize min_rev, minimize max aggravation) yielded 2 drugs on the efficiency
-frontier, with **Dorsomorphin** as a leading signature-reversal hypothesis (mean
-reversal=0.156, active in 4 tissues including hematopoietic and muscular
-compartments).
+(maximize mean_rev and min_rev among observed tissue hits) yielded 2 drugs on
+the current efficiency frontier: **CGP-60474** (3 tissues, mean_rev=0.1457,
+min_rev=0.0735) and **quinacrine hydrochloride** (2 tissues, mean_rev=0.1364,
+min_rev=0.0909). Dorsomorphin remains a tissue-level metabolic-axis hit in
+gastrocnemius and liver, but it is not on the current Pareto front.
 
-**CRISPR Orthogonal Support:** CDK inhibitors (AZD-5438, AT-7519,
-CGP-60474) targeting CDK1/2/9 showed convergence with CRISPR KO library. Kidney
-tissue exhibited top reversal for CDK inhibitors (chemical) matched by top
-CRISPR KO hits (CDK9 KO, 7 overlapping genes). This chemical-genetic convergence
-provides **orthogonal evidence** for target plausibility, but does not establish
-safety, dose, or efficacy.
+**CRISPR Orthogonal Support:** CDK inhibitors (AZD-5438 and AT-7519) showed a
+suggestive match to CDK9 KO in the Enrichr/LINCS CRISPR library for kidney UP
+genes (7 overlapping genes; adj-p=0.1588). This chemical-genetic convergence is
+useful target-plausibility evidence, but it is exploratory and does not
+establish safety, dose, efficacy, or FDR-significant validation.
 
-**Novel CRISPR-Only Targets:** Perturb-seq analysis identified FOXO3, IL21R, CXCL13 as reversal-associated KOs without corresponding high-ranking chemical drugs. These represent understudied targets for new drug development.
+**Novel CRISPR-Only Targets:** Enrichr/LINCS CRISPR signatures identified
+FOXO3, IL21R, and CXCL13 as reversal-associated KO signals without corresponding
+high-ranking chemical matches. These are exploratory target axes for follow-up,
+not drug-development claims.
 
 #### Causal Integration: The SpaceMed DAG
 
@@ -202,7 +205,7 @@ Tissue Responses (pathway-level, tissue-specific)
   ↓ [species transfer, pathway conservation]
 Human Health Outcomes (immune dysregulation, muscle atrophy, organ dysfunction)
   ↓ [signature reversal hypotheses]
-Perturbation hypotheses (CDK inhibitors, HSP90 modulators, AMPK-axis perturbations)
+Perturbation hypotheses (CDK-axis, AMPK/BMP-axis, and tissue-specific perturbations)
 ```
 
 A future counterfactual module on this DAG would support explicit, testable
@@ -258,7 +261,7 @@ countermeasure-hypothesis discovery distinct from ISS protocol extrapolation.
 - OSDR: All bulk RNA-seq via GLDS (https://genelab.nasa.gov/)
 - SOMA / Inspiration4: Overbey et al. 2024 supplementary data
 - LINCS L1000CDS2: Maayanlab public API
-- Perturb-seq (Replogle): scPerturb.org
+- Enrichr LINCS_L1000_CRISPR_KO_Consensus_Sigs
 - Code & reproducibility: github.com/[repo] / https://zenodo.org/[doi]
 
 ### Code Repositories
