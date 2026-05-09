@@ -19,7 +19,7 @@
 
 ### Integrated Mars Regime Flagging
 - Linear extrapolation breaks at >5× dose amplification
-- Top Mars-sensitive genes in the linear stress test: WNT10B (+1052×), KRTAP19-2 (+414×), SCAPER (+189×)
+- Top Mars-sensitive genes in the linear stress test: WNT10B (~1052×), KRTAP19-2 (~414×), ENSMUSG00000092534 (~190×)
 - Bootstrap CIs propagated from factorial β ± SE; outputs are exploratory regime flags, not point predictions
 
 ---

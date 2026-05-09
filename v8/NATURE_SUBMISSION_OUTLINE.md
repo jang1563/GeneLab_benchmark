@@ -50,17 +50,19 @@
 **Key finding #1 — Pareto-Optimal Multi-Tissue Signature Reversers:**
 - 26 drugs reverse ≥2 tissues
 - Pareto front (maximize min reversal, minimize signature aggravation): **2 lead hypotheses**
-- Top: Dorsomorphin (AMPK inhibitor, 4 tissues, mean_reversal=0.156) + AZD-5438 (CDK inhibitor, 4 tissues, mean_reversal=0.143)
+- Current Pareto front: CGP-60474 (3 tissues, mean_reversal=0.1457, min=0.0735) + quinacrine hydrochloride (2 tissues, mean_reversal=0.1364, min=0.0909)
+- Dorsomorphin remains a gastrocnemius/liver tissue-level AMPK/BMP-axis hit, but not a current Pareto-front lead
 
 **Key finding #2 — Chemical-CRISPR Convergence:**
-- CDK inhibitors (AZD-5438, AT-7519, CGP-60474) → target CDK1/2/9
-- CRISPR library: CDK9 KO reverses kidney UP genes, p_adj=0.012, 7 overlapping genes
-- **Target plausibility supported.** CRISPR-library convergence strengthens
-  the hypothesis but does not establish safety or efficacy.
+- CDK inhibitors (AZD-5438, AT-7519) share CDK9 as one target
+- CRISPR library: CDK9 KO reverses kidney UP genes, adj-p=0.1588, 7 overlapping genes
+- **Target plausibility is suggestive, not validated.** CRISPR-library convergence
+  strengthens the hypothesis but is not FDR-significant and does not establish
+  safety or efficacy.
 
 **Key finding #3 — Tissue-Specific Novel Targets:**
 - CRISPR-only hits (no chemical match): FOXO3 (liver), IL21R/CXCL13 (thymus)
-- These represent future drug discovery targets
+- These represent exploratory target axes for follow-up perturbation studies
 
 #### Pillar Integration: Mars Extrapolation with CIs
 **Setting:** Apply factorial coefficients to Mars mission stressor doses (µg=0.62×, HZE=12.9×, Time=7.5× vs ISS analog).
@@ -72,8 +74,8 @@
 - **Conservative stance:** Mars projections flag regime change, not point estimates. Mechanistic constraints needed.
 
 **Key finding #2 — Top Amplified Genes (Bootstrap CIs):**
-- WNT10B (eye): Δ+1052 [+450, +1800]× (Wnt/β-catenin signaling, bone/metabolism)
-- KRTAP19-2 (skin): Δ+414 [+180, +650]×
+- WNT10B (brain-to-eye analog): ~1052× amplification flag, with wide bootstrap uncertainty
+- KRTAP19-2 (skin analog): ~414× amplification flag, with wide bootstrap uncertainty
 - These genes are **extremely sensitive in the linear stress test** and require non-linear calibration before biological promotion.
 
 **Key finding #3 — Causal Ranking (ICP):**
@@ -124,9 +126,9 @@ requires:
 ### Methods (Brief for Nature; Extended Methods online)
 
 **Pillar 1 — Species Transfer:**
-- fGSEA pathway NES (Hallmark, KEGG, Reactome, MitoCarta, C2CGP, C5BP: 16,319 pathways)
+- fGSEA pathway NES (Hallmark, KEGG, Reactome, MitoCarta, C2CGP, C5BP: 8,428 unique mouse pathways in the full-MSigDB bridge)
 - Spearman correlation (mouse NES vs human compartment NES)
-- Supervised RF/LR on 13 features (7 SpaceOmics aggregate + 6 mouse tissue NES), 5-fold CV + 1000 bootstrap
+- Supervised RF/LR on 14 features (8 SpaceOmics aggregate + 6 mouse tissue NES), 5-fold CV + 1000 bootstrap
 
 **Pillar 2 — Factorial Decomposition:**
 - OLS per gene: log2(CPM+1) ~ design matrix (2×2 or 2×2×2)

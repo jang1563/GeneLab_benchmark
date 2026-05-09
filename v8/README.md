@@ -7,7 +7,7 @@ research questions for Artemis and Mars hypothesis generation:
 
 1. **BRIDGE** — Which rodent pathway signals transfer to human spaceflight data? (Inspiration4 SOMA link)
 2. **DECOMPOSE** — Where do Mars-like stressor regimes break linear extrapolation? (µg / GCR / isolation factorial)
-3. **INTERVENE** — Which perturbations reverse tissue signatures enough to justify follow-up testing? (LINCS/Perturb-seq signature reversal)
+3. **INTERVENE** — Which perturbations reverse tissue signatures enough to justify follow-up testing? (LINCS chemical + CRISPR-KO signature reversal)
 
 Unified by an **invariant-causal-prediction evidence map** for future
 counterfactual modeling. The current DAG ranks stability candidates; it does not
@@ -203,10 +203,16 @@ high-priority signatures for NASA Rodent Research-style validation because they
 span multiple tissues and have existing pharmacology. Safety, dose, and efficacy
 remain untested for this use case.
 
+**Current Pareto front:** after maximizing both mean reversal and the minimum
+observed tissue reversal score, the validated front contains **CGP-60474** (3
+tissues; mean=0.146, min=0.074) and **quinacrine hydrochloride** (2 tissues;
+mean=0.136, min=0.091). The broad CDK/HSP90 hits remain useful mechanistic axes,
+but they are not identical to the present Pareto frontier.
+
 Outputs: `v8/intervene/evaluation/pareto_front.csv`, `multi_tissue_drug_matrix.csv`,
 `multi_tissue_drug_scores.json`.
 
-### 3d. Perturb-seq / CRISPR KO orthogonal support (`intervene/perturb_seq_orthog.py`)
+### 3d. Enrichr/LINCS CRISPR KO orthogonal support (`intervene/perturb_seq_orthog.py`)
 
 Queries the Enrichr `LINCS_L1000_CRISPR_KO_Consensus_Sigs` library (3,742 gene
 perturbations) with each tissue's UP/DN signatures. Checks whether Pillar 3b
@@ -465,11 +471,11 @@ All three pillars have first-pass results. Summary of what's complete vs pending
 | Pillar 2a: HLU×IR factorial (spleen, skin analog) | ✅ Done | Thymus radiation-dominant, Int=61% |
 | Pillar 2b: HLU×IR×T brain 3-way + cross-tissue matrix | ✅ Done | T largest factor in brain |
 | Pillar 3a: Tissue signature export (6 tissues) | ✅ Done | Circadian clock genes confirmed |
-| Pillar 3b: L1000CDS2 reversal query (6 tissues) | ✅ Done | Dorsomorphin (gastro+liver), AZD-5438 (4 tissues) |
-| Pillar 3c: Multi-tissue Pareto front | ✅ Done | CDK + HSP90 as convergent axes |
-| Pillar 3d: CRISPR KO orthogonal support | ✅ Done | CDK9 KO supports AZD-5438/AT-7519 target plausibility (kidney, 7 shared genes) |
+| Pillar 3b: L1000CDS2 reversal query (6 tissues) | ✅ Done | Dorsomorphin (gastro+liver), CGP-60474 (3 tissues), AZD-5438 (4 tissues) |
+| Pillar 3c: Multi-tissue Pareto front | ✅ Done | CGP-60474 + quinacrine hydrochloride on current Pareto front |
+| Pillar 3d: CRISPR KO orthogonal support | ✅ Done | CDK9 KO suggestively supports AZD-5438/AT-7519 target plausibility (kidney, 7 shared genes; adj-p=0.16) |
 | Pillar 2c: HZE analog factorial (OSD-719 adrenal/endocrine) | ✅ Done | Sex×HZE dominates thymus variance (44%); HZE≠γ-rays sign |
-| Pillar 2d: Mars 900-day extrapolation | ✅ First pass | Linear model breaks at 12.9× dose; WNT10B +1052× in eye |
+| Pillar 2d: Mars 900-day extrapolation | ✅ First pass | Linear model breaks at 12.9× dose; WNT10B ~1052× brain-to-eye amplification flag |
 | Causal DAG: ICP stressor stability | ✅ Done | T/Isolation most causally invariant |
 | Manuscript integration | ⏳ Pending | — |
 
@@ -479,7 +485,7 @@ All three pillars have first-pass results. Summary of what's complete vs pending
 |---|---|---|---|
 | M1–M3 | Bridge | Species-transfer AUROC matrix + RF 0.888 with mouse NES features | ✅ Complete |
 | M4–M6 | Decompose | Factorial stressor model + ICP causal DAG | ✅ First pass complete |
-| M7–M9 | Intervene + Integrate | LINCS reversal + Pareto front + Perturb-seq orthogonal + manuscript | 🔄 In progress |
+| M7–M9 | Intervene + Integrate | LINCS reversal + Pareto front + CRISPR-KO orthogonal support + manuscript | 🔄 In progress |
 
 ## Next priorities
 
