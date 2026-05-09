@@ -1,0 +1,178 @@
+{
+  "schema_version": "0.1.0",
+  "snapshot_id": "intervene.api_snapshot.current",
+  "api_refresh": "not_recalled_by_this_script",
+  "l1000cds2": {
+    "endpoint": "https://maayanlab.cloud/L1000CDS2/query",
+    "config": {
+      "aggravate": false,
+      "searchMethod": "geneSet",
+      "db-version": "latest"
+    },
+    "summary_sha256": "ee54b430205a782c2a5a3139fcea64bb22ddbea009a87a65f47b46e2aa702984",
+    "tissues": {
+      "thymus": {
+        "up_signature_sha256": "561618718c0836f9ecee03900624c1bfcd87de08d5f626af49b938c25c274f8a",
+        "dn_signature_sha256": "4ad7cb9e5498e3d086b7b35336244f2cf06f0d22f583fd065935a2aad952e21c",
+        "payload_sha256": "747cfcde2db3b3ea50b040bf6fe2eac8d07b2216ebfbbe7fa8767b24b0a966d2",
+        "payload_top_n_per_direction": 50,
+        "parsed_output": "intervene/evaluation/lincs_thymus_top50.csv",
+        "parsed_output_sha256": "712d57f3d83110d9915171b8474b07e2d5c311bf414817a745f6b8368bc1456b"
+      },
+      "gastrocnemius": {
+        "up_signature_sha256": "e62771feae9e396750c90d78923a836f674f6e99ad5630e3e6ddcdff02005fb4",
+        "dn_signature_sha256": "3c8d5f6ee250bab91f3c6941df75a76ae3a5353df12ff07f6569790dee6a8cd7",
+        "payload_sha256": "ad630e0b365d7f120a7f6278db9d469574f0f3e35fc43e70663a5adf9fe2ab62",
+        "payload_top_n_per_direction": 50,
+        "parsed_output": "intervene/evaluation/lincs_gastrocnemius_top50.csv",
+        "parsed_output_sha256": "f98eeb6d507a73b9835c216acca8953c0b18987be8bd347790ecacd0d35d42e3"
+      },
+      "skin": {
+        "up_signature_sha256": "8fd66c6ceaa1615901adadee43a830a16aaacbe2859fd0f5034ed4877cee5190",
+        "dn_signature_sha256": "16ba2ec8a651da150536d974f58183e71545f6973007d0965e0d5f99dcf970fe",
+        "payload_sha256": "c7423fead14ca4f0ea23a5bc37bc0e12493dfa047467eab478066f8a6eab0194",
+        "payload_top_n_per_direction": 50,
+        "parsed_output": "intervene/evaluation/lincs_skin_top50.csv",
+        "parsed_output_sha256": "85224665736f31f85d433ea735d5337d6e742779fd55923b979b4e9007a49793"
+      },
+      "eye": {
+        "up_signature_sha256": "d88c77bf984f45be0168c6d960c113935efdd8335f3e428c4bd86158a9fe7a78",
+        "dn_signature_sha256": "582c79e2f2204d2718037f9a8f86e4e94e89d28f324808a8bc268662e7749214",
+        "payload_sha256": "82522119a4c042072078f2350ac97908e696137ada96876b4cbe8281bf073c5e",
+        "payload_top_n_per_direction": 50,
+        "parsed_output": "intervene/evaluation/lincs_eye_top50.csv",
+        "parsed_output_sha256": "59656362428eebde7655f244d1813f4a4602f18a58f00fa495c7993680079a9f"
+      },
+      "liver": {
+        "up_signature_sha256": "9fe9b23c4703ffd96c15fc19bf669ee9f5441cd4e06e8b79d144499a91ac04f5",
+        "dn_signature_sha256": "30b3763cf5967bc914902730fc5b438d1f699d96e5a8c2051cfc33232c76c0d9",
+        "payload_sha256": "b13f3d42b783f8ddc15d1a0656cbfd0abcc628bdfbefb614ed5e004cc7e5acc3",
+        "payload_top_n_per_direction": 50,
+        "parsed_output": "intervene/evaluation/lincs_liver_top50.csv",
+        "parsed_output_sha256": "72867b985b0fc781727f60b3148859bf0bf7d1c46b2106177dea748e3088643b"
+      },
+      "kidney": {
+        "up_signature_sha256": "1640b8dc88e010c9f8933d03536694f55825f2b3297728e56c2462de4ebff05f",
+        "dn_signature_sha256": "845b2ebb8cbae4d909f3fd4c51049b6580cc706ca3377718782f1857ed43030e",
+        "payload_sha256": "695dbff3bbfd26ad546f12147b3972040519709069d33eac5c642ea56ca0ee37",
+        "payload_top_n_per_direction": 50,
+        "parsed_output": "intervene/evaluation/lincs_kidney_top50.csv",
+        "parsed_output_sha256": "7cf861956a6a69140e8a5a764a5aa0ba5e4fc90d23b112d28f19ae0e20bb7f60"
+      }
+    }
+  },
+  "enrichr_crispr": {
+    "add_list_endpoint": "https://maayanlab.cloud/Enrichr/addList",
+    "enrich_endpoint": "https://maayanlab.cloud/Enrichr/enrich",
+    "library": "LINCS_L1000_CRISPR_KO_Consensus_Sigs",
+    "summary_sha256": "f741f676160a72810cedb19971448a328aee39a0cae3b4192b0ea6d02197ffab",
+    "tissues": {
+      "thymus": {
+        "up_query": {
+          "description": "thymus_up_v8",
+          "n_genes": 100,
+          "payload_sha256": "cf2141f13f64162ce1e202ead9ebd448a2e08a4f65ebe0354265fc427f937c38",
+          "parsed_output": "intervene/evaluation/crispr_orthog_thymus_up.csv",
+          "parsed_output_sha256": "5cbdf84dc2c70bcb9d6a84b0e99d6f0015de6b293c4edf15edae66e9ae8e254e"
+        },
+        "dn_query": {
+          "description": "thymus_dn_v8",
+          "n_genes": 100,
+          "payload_sha256": "d62e39198ef10f6ddf9d9c3e67d104caabb12949cffb9099e136d28ca96bff76",
+          "parsed_output": "intervene/evaluation/crispr_orthog_thymus_dn.csv",
+          "parsed_output_sha256": "2275a4fd29a3b5d0c8ea4bcf5490fea7ecb2d577abd57f7228d2118cbfc7b4aa"
+        }
+      },
+      "gastrocnemius": {
+        "up_query": {
+          "description": "gastrocnemius_up_v8",
+          "n_genes": 100,
+          "payload_sha256": "a74c5e95461e8598bcaf3ac57399af68c791208b25368720e4ba9409b946cb59",
+          "parsed_output": "intervene/evaluation/crispr_orthog_gastrocnemius_up.csv",
+          "parsed_output_sha256": "b9513607b3ad90b3f6df108e4d6952fdf422fbed4224fd9a9345cd92483fdbe6"
+        },
+        "dn_query": {
+          "description": "gastrocnemius_dn_v8",
+          "n_genes": 100,
+          "payload_sha256": "fb90e0687b72802f3e5f1e250948a185a87530acbc0855d463649c521e1a6237",
+          "parsed_output": "intervene/evaluation/crispr_orthog_gastrocnemius_dn.csv",
+          "parsed_output_sha256": "566eb13c1cf90e2ba4a39b4c554761be4cac69df608e98951738e5546812f9e0"
+        }
+      },
+      "skin": {
+        "up_query": {
+          "description": "skin_up_v8",
+          "n_genes": 100,
+          "payload_sha256": "0face85a0b8995b0dbf59c88658a353efb8ca0cbf985880fcd4d7c4d7efc9110",
+          "parsed_output": "intervene/evaluation/crispr_orthog_skin_up.csv",
+          "parsed_output_sha256": "3ef3016ba9773a73ad89fa9aa34b7b3e2ed5d6f390956bf7bc12c7da6c3ffe5b"
+        },
+        "dn_query": {
+          "description": "skin_dn_v8",
+          "n_genes": 100,
+          "payload_sha256": "3df023fe2a929db86a3f697b6edb9c103eede37212499a35ad811bb37450c5d8",
+          "parsed_output": "intervene/evaluation/crispr_orthog_skin_dn.csv",
+          "parsed_output_sha256": "e0f9fd024098607d403a48dcd9b1f0f06137365e3386dfe5e9f2ad8c459726d2"
+        }
+      },
+      "eye": {
+        "up_query": {
+          "description": "eye_up_v8",
+          "n_genes": 100,
+          "payload_sha256": "0dc2b248142a75e94746015ddfa35c2988d2a906e6b4de79bc664805dbc581e6",
+          "parsed_output": "intervene/evaluation/crispr_orthog_eye_up.csv",
+          "parsed_output_sha256": "82a2fbe08eb60b666236bca4960016e9fe4accd06c15cf64a147c48706737f3e"
+        },
+        "dn_query": {
+          "description": "eye_dn_v8",
+          "n_genes": 100,
+          "payload_sha256": "70e118e957828218163d5907d19113f5cdcf86a0eb584fe835aff27b808eab77",
+          "parsed_output": "intervene/evaluation/crispr_orthog_eye_dn.csv",
+          "parsed_output_sha256": "a8dcdf2d384cb6d26892ea5029380fd8d4434a5a60e5e60fb444c730cc0815cf"
+        }
+      },
+      "liver": {
+        "up_query": {
+          "description": "liver_up_v8",
+          "n_genes": 100,
+          "payload_sha256": "f2a0ba6778034fcdde46a83ea4f3df5d9205d7e8cfbc8a85b2211553f37aab65",
+          "parsed_output": "intervene/evaluation/crispr_orthog_liver_up.csv",
+          "parsed_output_sha256": "e9267b8908fac6d2d73ca994a45ef79b240b3216c4bc7be337da22abd4d1eef0"
+        },
+        "dn_query": {
+          "description": "liver_dn_v8",
+          "n_genes": 100,
+          "payload_sha256": "4a901824d01209079f4ce91900be0660e489260b701904bd9eec6e7528603071",
+          "parsed_output": "intervene/evaluation/crispr_orthog_liver_dn.csv",
+          "parsed_output_sha256": "eb5cafcb2c3715b15ba61b3bcff9d7635e26b79cdd5f198bc107c26ce9309f95"
+        }
+      },
+      "kidney": {
+        "up_query": {
+          "description": "kidney_up_v8",
+          "n_genes": 100,
+          "payload_sha256": "cadb581a8960895475d90d7fdedf70436850ff80636e099b5aa8ab08a0dd1ae2",
+          "parsed_output": "intervene/evaluation/crispr_orthog_kidney_up.csv",
+          "parsed_output_sha256": "a1a6c6937b19236867ff5d97a7c2b4faf32fc0ebd1115cfd16215acb65be7cba"
+        },
+        "dn_query": {
+          "description": "kidney_dn_v8",
+          "n_genes": 100,
+          "payload_sha256": "3e902234bc67979839efc2d0765104e10ea8f26a31973372d4cf5817541b07d5",
+          "parsed_output": "intervene/evaluation/crispr_orthog_kidney_dn.csv",
+          "parsed_output_sha256": "45a817be920d4cee4e166caa30993c08185d50fe24b929c109d84dfc61738740"
+        }
+      }
+    }
+  },
+  "multi_tissue_outputs": {
+    "pareto_front_sha256": "b692264c05d72b374de1df11a5553cc193702d028a2fe0300b483a43e6455ac2",
+    "multi_tissue_drug_matrix_sha256": "34efe16f9435142a2d2d331897a902accf844a9e84ebd04989201aa3d3834c07",
+    "multi_tissue_drug_scores_sha256": "17789b8f6becebe91c68cd2e3f15c45b81aa7b04370fb8be78857704ff2ff281"
+  },
+  "limitations": [
+    "Hashes cover deterministic query payloads and tracked parsed outputs, not raw API response dumps.",
+    "L1000CDS2 db-version remains recorded as latest in the historical snapshot; a beta freeze should pin a concrete upstream version if available.",
+    "This manifest intentionally does not re-call external APIs to avoid response drift."
+  ]
+}

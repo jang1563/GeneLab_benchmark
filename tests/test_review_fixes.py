@@ -597,6 +597,15 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("StratifiedKFold", audit)
         self.assertIn("bridge_leakage_audit.json", readme)
 
+    def test_v8_intervene_api_snapshot_records_payload_hashes_without_requery(self):
+        snapshot = self.read_repo_text("v8/intervene/api_snapshot_manifest.py")
+        readme = self.read_repo_text("v8/intervene/evaluation/README.md")
+
+        self.assertIn("not_recalled_by_this_script", snapshot)
+        self.assertIn("payload_sha256", snapshot)
+        self.assertIn("parsed_output_sha256", snapshot)
+        self.assertIn("api_snapshot_manifest.json", readme)
+
 
 if __name__ == "__main__":
     unittest.main()

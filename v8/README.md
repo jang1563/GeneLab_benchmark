@@ -220,6 +220,12 @@ but they are not identical to the present Pareto frontier.
 Outputs: `v8/intervene/evaluation/pareto_front.csv`, `multi_tissue_drug_matrix.csv`,
 `multi_tissue_drug_scores.json`.
 
+**API snapshot reproducibility:** `api_snapshot_manifest.json` records
+deterministic hashes for the L1000CDS2 query payloads, Enrichr CRISPR query
+gene lists, and all tracked parsed API outputs. The manifest does not re-call
+external APIs and does not store raw response dumps; concrete upstream
+db-version pinning remains a beta-freeze item.
+
 ### 3d. Enrichr/LINCS CRISPR KO orthogonal support (`intervene/perturb_seq_orthog.py`)
 
 Queries the Enrichr `LINCS_L1000_CRISPR_KO_Consensus_Sigs` library (3,742 gene

@@ -161,10 +161,13 @@ files are individual, research-use resources and should not be redistributed.
 
 Implementation tasks:
 
+- Store request payload hashes, parsed-output hashes, query timestamp, gene
+  symbol normalization rule, and top-N signature size. The current
+  `api_snapshot_manifest.json` covers deterministic payloads and tracked parsed
+  outputs without re-calling external APIs.
 - Pin L1000CDS2 `db-version` in every query manifest instead of using untracked
-  defaults.
-- Store request payload hashes, response hashes, query timestamp, gene symbol
-  normalization rule, and top-N signature size.
+  defaults; the current historical snapshot still records `latest`, so a
+  concrete upstream version remains a beta-freeze item if the API exposes one.
 - Keep API responses or large raw query dumps outside Git if they exceed the
   artifact policy.
 - Label drug results as hypothesis-generating countermeasure candidates.

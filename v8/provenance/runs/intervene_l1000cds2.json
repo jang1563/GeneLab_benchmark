@@ -8,6 +8,7 @@
     "scope": "exploratory",
     "consumed_by": [
       "v8/intervene/evaluation/README.md",
+      "v8/intervene/evaluation/api_snapshot_manifest.json",
       "v8/RESULTS_SUMMARY.md",
       "v8/MANUSCRIPT_DRAFT.md"
     ]
@@ -58,6 +59,13 @@
       "kind": "local_file",
       "checksum": "sha256:pareto_front.csv=b692264c05d72b374de1df11a5553cc193702d028a2fe0300b483a43e6455ac2;multi_tissue_drug_scores.json=17789b8f6becebe91c68cd2e3f15c45b81aa7b04370fb8be78857704ff2ff281",
       "tracked_in_git": true
+    },
+    {
+      "role": "api_snapshot_manifest",
+      "path_or_accession": "v8/intervene/evaluation/api_snapshot_manifest.json",
+      "kind": "local_file",
+      "checksum": "sha256:221c5f9ea204ad30c8623078311c6680ab28338fd54e35e9575f5cf487412774",
+      "tracked_in_git": true
     }
   ],
   "environment": {
@@ -80,6 +88,6 @@
       "bash scripts/hpc_release_validate.sh --v8-summary",
       "sha256sum v8/intervene/evaluation/lincs_summary.json v8/intervene/evaluation/pareto_front.csv v8/intervene/evaluation/multi_tissue_drug_scores.json"
     ],
-    "notes": "Tracked L1000CDS2 snapshot was checksummed in the staged HPC bundle and included in release validation. External API was intentionally not re-called on 2026-05-09 to avoid version/rate-limit drift; payload/response archival remains a beta-freeze requirement."
+    "notes": "Tracked L1000CDS2 snapshot was checksummed in the staged HPC bundle and included in release validation. External API was intentionally not re-called on 2026-05-09 to avoid version/rate-limit drift. Deterministic payload and parsed-output hashes are archived in api_snapshot_manifest.json; raw response dumps and concrete db-version pinning remain beta-freeze requirements."
   }
 }

@@ -8,6 +8,7 @@
     "scope": "exploratory",
     "consumed_by": [
       "v8/intervene/evaluation/README.md",
+      "v8/intervene/evaluation/api_snapshot_manifest.json",
       "v8/RESULTS_SUMMARY.md",
       "v8/MANUSCRIPT_DRAFT.md"
     ]
@@ -55,6 +56,13 @@
       "kind": "local_file",
       "checksum": "sha256:f741f676160a72810cedb19971448a328aee39a0cae3b4192b0ea6d02197ffab",
       "tracked_in_git": true
+    },
+    {
+      "role": "api_snapshot_manifest",
+      "path_or_accession": "v8/intervene/evaluation/api_snapshot_manifest.json",
+      "kind": "local_file",
+      "checksum": "sha256:221c5f9ea204ad30c8623078311c6680ab28338fd54e35e9575f5cf487412774",
+      "tracked_in_git": true
     }
   ],
   "environment": {
@@ -77,6 +85,6 @@
       "bash scripts/hpc_release_validate.sh --v8-summary",
       "sha256sum v8/intervene/evaluation/crispr_orthog_summary.json"
     ],
-    "notes": "Tracked Enrichr CRISPR KO snapshot was checksummed in the staged HPC bundle and included in release validation. External API was intentionally not re-called on 2026-05-09 to avoid version/rate-limit drift; this supports target plausibility only."
+    "notes": "Tracked Enrichr CRISPR KO snapshot was checksummed in the staged HPC bundle and included in release validation. External API was intentionally not re-called on 2026-05-09 to avoid version/rate-limit drift. Deterministic payload and parsed-output hashes are archived in api_snapshot_manifest.json; this supports target plausibility only."
   }
 }
