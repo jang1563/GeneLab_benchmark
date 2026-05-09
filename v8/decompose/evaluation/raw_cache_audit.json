@@ -1,34 +1,47 @@
 {
   "schema_version": "0.1.0",
   "audit_id": "decompose.raw_cache.current",
-  "status": "incomplete_raw_cache",
-  "full_rerun_ready": false,
+  "status": "complete",
+  "full_rerun_ready": true,
   "source_script": "v8/decompose/factorial_analog.py",
   "expected_files": 8,
-  "present_files": 2,
-  "missing_files": [
-    "spleen:counts:data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts.csv",
-    "spleen:samples:data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable.csv",
-    "skin_analog:counts:data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_Normalized_Counts.csv",
-    "skin_analog:samples:data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_SampleTable.csv",
-    "brain:counts:data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
-    "brain:samples:data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_SampleTable_GLbulkRNAseq.csv"
-  ],
+  "present_files": 8,
+  "missing_files": [],
   "datasets": {
     "hze_endocrine": {
       "design": "2x2",
       "required_files": {
         "counts": {
-          "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
-          "exists": true,
-          "size_bytes": 3731824,
-          "sha256": "8b4c2a491d45307779ffb37436ddd5967719a14298cf0d856743939fd6c30fca"
+          "selected": {
+            "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+            "exists": true,
+            "size_bytes": 3731824,
+            "sha256": "8b4c2a491d45307779ffb37436ddd5967719a14298cf0d856743939fd6c30fca"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+              "exists": true,
+              "size_bytes": 3731824,
+              "sha256": "8b4c2a491d45307779ffb37436ddd5967719a14298cf0d856743939fd6c30fca"
+            }
+          ]
         },
         "samples": {
-          "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_SampleTable_GLbulkRNAseq.csv",
-          "exists": true,
-          "size_bytes": 423,
-          "sha256": "39af5dc91413163e33f62b81acb1daa7772b841c25669a21f2ea92aaacdfc45a"
+          "selected": {
+            "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_SampleTable_GLbulkRNAseq.csv",
+            "exists": true,
+            "size_bytes": 423,
+            "sha256": "39af5dc91413163e33f62b81acb1daa7772b841c25669a21f2ea92aaacdfc45a"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/hze_analog/OSD-719/GLDS-641_rna_seq_SampleTable_GLbulkRNAseq.csv",
+              "exists": true,
+              "size_bytes": 423,
+              "sha256": "39af5dc91413163e33f62b81acb1daa7772b841c25669a21f2ea92aaacdfc45a"
+            }
+          ]
         }
       }
     },
@@ -36,16 +49,48 @@
       "design": "2x2",
       "required_files": {
         "counts": {
-          "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts.csv",
-          "exists": false,
-          "size_bytes": null,
-          "sha256": null
+          "selected": {
+            "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+            "exists": true,
+            "size_bytes": 9744995,
+            "sha256": "e84f21b8d3ea2c0937e25dd5c4aaff3a5c17edc78607e0766d14841a1aabb666"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts.csv",
+              "exists": false,
+              "size_bytes": null,
+              "sha256": null
+            },
+            {
+              "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+              "exists": true,
+              "size_bytes": 9744995,
+              "sha256": "e84f21b8d3ea2c0937e25dd5c4aaff3a5c17edc78607e0766d14841a1aabb666"
+            }
+          ]
         },
         "samples": {
-          "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable.csv",
-          "exists": false,
-          "size_bytes": null,
-          "sha256": null
+          "selected": {
+            "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable_GLbulkRNAseq.csv",
+            "exists": true,
+            "size_bytes": 1725,
+            "sha256": "dfb7451a105e74ae684a0682e19e7242cc3a0da47573dab2bd706f5eefe4c3dd"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable.csv",
+              "exists": false,
+              "size_bytes": null,
+              "sha256": null
+            },
+            {
+              "path": "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable_GLbulkRNAseq.csv",
+              "exists": true,
+              "size_bytes": 1725,
+              "sha256": "dfb7451a105e74ae684a0682e19e7242cc3a0da47573dab2bd706f5eefe4c3dd"
+            }
+          ]
         }
       }
     },
@@ -53,16 +98,36 @@
       "design": "2x2",
       "required_files": {
         "counts": {
-          "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_Normalized_Counts.csv",
-          "exists": false,
-          "size_bytes": null,
-          "sha256": null
+          "selected": {
+            "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_Normalized_Counts.csv",
+            "exists": true,
+            "size_bytes": 9806215,
+            "sha256": "e6f4eda08f88c678d0a023b2b75f31833cc13355e17a8e5c16e6c07fdf5189cf"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_Normalized_Counts.csv",
+              "exists": true,
+              "size_bytes": 9806215,
+              "sha256": "e6f4eda08f88c678d0a023b2b75f31833cc13355e17a8e5c16e6c07fdf5189cf"
+            }
+          ]
         },
         "samples": {
-          "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_SampleTable.csv",
-          "exists": false,
-          "size_bytes": null,
-          "sha256": null
+          "selected": {
+            "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_SampleTable.csv",
+            "exists": true,
+            "size_bytes": 1790,
+            "sha256": "e88facb65f4040f1da10c9c2f7ed39c4bf76a8689c372cd48f3edda39c2526b8"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/skin_rad/LDR_HLU/GLDS-237_rna_seq_SampleTable.csv",
+              "exists": true,
+              "size_bytes": 1790,
+              "sha256": "e88facb65f4040f1da10c9c2f7ed39c4bf76a8689c372cd48f3edda39c2526b8"
+            }
+          ]
         }
       }
     },
@@ -70,22 +135,42 @@
       "design": "2x2x2",
       "required_files": {
         "counts": {
-          "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
-          "exists": false,
-          "size_bytes": null,
-          "sha256": null
+          "selected": {
+            "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+            "exists": true,
+            "size_bytes": 16387725,
+            "sha256": "f238040acef0d6646df364af57798dde3c29efbe6c0f5b08a14c2a100cbe9834"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+              "exists": true,
+              "size_bytes": 16387725,
+              "sha256": "f238040acef0d6646df364af57798dde3c29efbe6c0f5b08a14c2a100cbe9834"
+            }
+          ]
         },
         "samples": {
-          "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_SampleTable_GLbulkRNAseq.csv",
-          "exists": false,
-          "size_bytes": null,
-          "sha256": null
+          "selected": {
+            "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_SampleTable_GLbulkRNAseq.csv",
+            "exists": true,
+            "size_bytes": 3869,
+            "sha256": "47920444daff2b62659a6433e852d09a1057ca539664f3bf65c76ce579256b22"
+          },
+          "candidates": [
+            {
+              "path": "data/mouse/retina_brain/LDR_HLU/GLDS-202_rna_seq_SampleTable_GLbulkRNAseq.csv",
+              "exists": true,
+              "size_bytes": 3869,
+              "sha256": "47920444daff2b62659a6433e852d09a1057ca539664f3bf65c76ce579256b22"
+            }
+          ]
         }
       }
     }
   },
   "limitations": [
-    "This audit checks raw cache availability and file identity only; it does not regenerate factorial, Mars, or bootstrap outputs.",
-    "A full DECOMPOSE beta freeze still requires a clean HPC rerun from fetched OSDR raw caches."
+    "This audit checks raw cache availability and file identity only; it does not by itself regenerate factorial, Mars, or bootstrap outputs.",
+    "All required raw caches are present in this HPC bundle; rerun provenance must still record the fetched file identities."
   ]
 }

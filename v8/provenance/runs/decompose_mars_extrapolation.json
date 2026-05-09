@@ -12,11 +12,11 @@
       "v8/MANUSCRIPT_DRAFT.md"
     ]
   },
-  "generated_at": "2026-05-09T16:48:13Z",
+  "generated_at": "2026-05-09T23:24:12Z",
   "code": {
     "script": "v8/decompose/mars_extrapolate.py; v8/decompose/mars_bootstrap_ci.py",
     "command": "bash scripts/hpc_v8_decompose.sh",
-    "git_commit": "266381a+staged-v8-release",
+    "git_commit": "1a033a8+decompose-full-cache-rerun-staged",
     "parameters": {
       "mars_hlu": 0.62,
       "mars_ir": 12.9,
@@ -55,7 +55,7 @@
       "role": "mars_summary",
       "path_or_accession": "v8/decompose/evaluation/mars_summary.json",
       "kind": "local_file",
-      "checksum": "sha256:7ac875dd76f98e4cd2dde0918c9912537e514f17bdfb5bc5855dce1741da25ed",
+      "checksum": "sha256:7045aab0c146407258b31c0c1fe3ab3dddf3d02c50b4a41d31d00133c6773ca7",
       "tracked_in_git": true
     }
   ],
@@ -65,7 +65,7 @@
     "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
   },
   "metrics": [
-    {"name": "spleen_to_thymus_mars_vs_flight_spearman_r", "value": 0.0589},
+    {"name": "spleen_to_thymus_mars_vs_flight_spearman_r", "value": 0.0593},
     {"name": "skin_analog_to_skin_mars_vs_flight_spearman_r", "value": -0.1263},
     {"name": "brain_to_eye_mars_vs_flight_spearman_r", "value": -0.0164},
     {"name": "max_reported_mars_over_iss_eye_wnt10b", "value": 1052.1}
@@ -74,9 +74,11 @@
     "local_tests_run": false,
     "hpc_tests_run": true,
     "checks": [
+      "python v3/scripts/fetch_osdr_bulk.py --phase 5",
+      "bash scripts/hpc_v8_decompose.sh",
       "bash scripts/hpc_release_validate.sh --v8-summary",
       "sha256sum v8/decompose/evaluation/mars_summary.json"
     ],
-    "notes": "Mars summary and CI outputs were checksummed in the staged HPC bundle and included in release validation. Manuscript language states these are exploratory regime flags, not point predictions."
+    "notes": "Mars summary and CI outputs were regenerated on HPC from the restored full DECOMPOSE raw-cache bundle. Manuscript language states these are exploratory regime flags, not point predictions."
   }
 }

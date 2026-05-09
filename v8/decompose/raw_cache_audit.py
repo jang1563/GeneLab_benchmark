@@ -44,6 +44,13 @@ def _file_record(path: Path, repo_root: Path) -> dict[str, Any]:
     }
 
 
+def _candidate_records(spec: dict, role: str, repo_root: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    candidates = [Path(p) for p in spec.get(f"{role}_candidates", [spec[role]])]
+    records = [_file_record(path, repo_root) for path in candidates]
+    selected = next((rec for rec in records if rec["exists"]), records[0])
+    return selected, records
+
+
 def main() -> None:
     ns = runpy.run_path(str(FACTORIAL_SCRIPT))
     datasets = ns["DATASETS"]
@@ -58,16 +65,27 @@ def main() -> None:
         analog_records = {}
         for role in ("counts", "samples"):
             expected_files += 1
-            rec = _file_record(Path(spec[role]), repo_root)
-            analog_records[role] = rec
-            if rec["exists"]:
+            selected, candidates = _candidate_records(spec, role, repo_root)
+            analog_records[role] = {
+                "selected": selected,
+                "candidates": candidates,
+            }
+            if selected["exists"]:
                 present_files += 1
             else:
-                missing.append(f"{analog}:{role}:{rec['path']}")
+                missing.append(f"{analog}:{role}:{selected['path']}")
         records[analog] = {
             "design": spec.get("design"),
             "required_files": analog_records,
         }
+
+    limitations = [
+        "This audit checks raw cache availability and file identity only; it does not by itself regenerate factorial, Mars, or bootstrap outputs.",
+    ]
+    if missing:
+        limitations.append("A full DECOMPOSE beta freeze still requires a clean HPC rerun from fetched OSDR raw caches.")
+    else:
+        limitations.append("All required raw caches are present in this HPC bundle; rerun provenance must still record the fetched file identities.")
 
     manifest = {
         "schema_version": "0.1.0",
@@ -79,10 +97,7 @@ def main() -> None:
         "present_files": present_files,
         "missing_files": missing,
         "datasets": records,
-        "limitations": [
-            "This audit checks raw cache availability and file identity only; it does not regenerate factorial, Mars, or bootstrap outputs.",
-            "A full DECOMPOSE beta freeze still requires a clean HPC rerun from fetched OSDR raw caches.",
-        ],
+        "limitations": limitations,
     }
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
