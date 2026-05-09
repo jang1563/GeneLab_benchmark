@@ -308,7 +308,7 @@ to flight Wald-z signatures via Spearman on flight-responsive genes (|z|>1):
 
 | Analog → Flight | r_HLU | r_IR | r_interaction | Top-200 var attribution |
 |---|---|---|---|---|
-| **Spleen → Thymus** | −0.197 | **+0.356** | −0.317 | HLU 27% / IR 11% / **Int 61%** |
+| **Spleen → Thymus** | −0.193 | **+0.361** | −0.323 | HLU 27% / IR 11% / **Int 62%** |
 | Skin → Skin | −0.088 | −0.188 | +0.050 | HLU 46% / IR 14% / Int 40% |
 
 **Key finding**: thymus flight response aligns best with radiation (r=+0.36),
@@ -321,7 +321,7 @@ Skin factorial explains little of flight skin signal — the 0.04 Gy low-LET
 cardiomyocyte) extension needed for Mars-realistic GCR.
 
 Significant-gene counts per factor (p<0.05 uncorrected):
-- Spleen: HLU=1711, IR=802, HLU×IR=1925
+- Spleen: HLU=1742, IR=821, HLU×IR=1993
 - Skin:   HLU=5621, IR=659, HLU×IR=1511  (HLU-dominant in numerosity)
 - Brain:  HLU=3436, IR=3414, **T=6028 (time largest)**, HLUxIR=3559, HLUxT=1850, IRxT=1459, HLUxIRxT=1503
 
@@ -404,7 +404,7 @@ Mars-like mission conditions:
 
 **Key result**: Linear extrapolation fails dramatically beyond the calibrated
 analog dose range. Spearman r(Mars-projected, flight) is ≈0 across all three
-tissues (thymus: r=0.059; skin: r=−0.126; eye: r=−0.016), confirming Mars is
+tissues (thymus: r=0.0593; skin: r=−0.1263; eye: r=−0.0164), confirming Mars is
 **not "more ISS"** — the transcriptomic response is qualitatively different
 when stressors are scaled 12.9×.
 
@@ -412,7 +412,7 @@ when stressors are scaled 12.9×.
 
 | Tissue | Mars-amplified genes (fold vs ISS) |
 |---|---|
-| Spleen → thymus | YBX2 (+126×), ADORA1 (+125×), DMBT1 (+121×) |
+| Spleen → thymus | ENSMUSG00000092534 (+182×), GM6192 (+134×), YBX2 (+129×) |
 | Skin | KRTAP19-2 (+414×), CRISP1 (+248×), KRTAP5-5 (+196×) |
 | Brain → eye | **WNT10B (+1052×)**, and many retinal-specific genes ≥1000× |
 
@@ -431,10 +431,10 @@ constraints from the ICP causal DAG.
 
 Outputs: `v8/decompose/evaluation/mars_extrapolation_{analog}.csv` + `mars_summary.json`.
 
-**Raw-cache readiness:** `raw_cache_audit.json` records the current HPC bundle
-state before a full DECOMPOSE rerun. At this checkpoint, only the OSD-719 HZE
-endocrine count/sample-table cache is present; OSD-211, OSD-237, and OSD-202
-raw caches must be restored before a clean beta-freeze rerun.
+**Raw-cache readiness:** `raw_cache_audit.json` now records a complete HPC
+bundle for the DECOMPOSE rerun: OSD-719, OSD-211, OSD-237, and OSD-202
+count/sample-table caches are present and checksummed. The full factorial,
+Mars, and bootstrap outputs were regenerated from that cache on HPC.
 
 ## Causal DAG — ICP across Stressor Environments (2026-04-18)
 

@@ -608,13 +608,22 @@ class ReviewFixTests(unittest.TestCase):
 
     def test_v8_decompose_raw_cache_audit_records_full_rerun_readiness(self):
         audit = self.read_repo_text("v8/decompose/raw_cache_audit.py")
+        factorial = self.read_repo_text("v8/decompose/factorial_analog.py")
         readme = self.read_repo_text("v8/decompose/evaluation/README.md")
         hpc = self.read_repo_text("scripts/hpc_v8_decompose.sh")
 
+        self.assertIn("counts_candidates", factorial)
+        self.assertIn("DECOMPOSE factorial failed for", factorial)
         self.assertIn("full_rerun_ready", audit)
         self.assertIn("missing_files", audit)
         self.assertIn("raw_cache_audit.json", readme)
         self.assertIn("v8/decompose/raw_cache_audit.py", hpc)
+
+    def test_v8_summary_uses_decompose_variance_not_sig_count_fraction(self):
+        summary = self.read_repo_text("v8/RESULTS_SUMMARY.py")
+
+        self.assertIn("variance_attribution_top200", summary)
+        self.assertNotIn("int_count / max(total_sig, 1)", summary)
 
     def test_v8_intervene_safety_triage_keeps_candidates_hypothesis_only(self):
         triage = self.read_repo_text("v8/intervene/safety_triage.py")

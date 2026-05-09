@@ -12,14 +12,14 @@
       "docs/V8_IMPLEMENTATION_RESEARCH.md"
     ]
   },
-  "generated_at": "2026-05-09T20:23:09Z",
+  "generated_at": "2026-05-09T23:24:12Z",
   "code": {
     "script": "v8/decompose/raw_cache_audit.py",
-    "command": "python v8/decompose/raw_cache_audit.py",
-    "git_commit": "6bae03a+decompose-raw-cache-audit-staged",
+    "command": "bash scripts/hpc_v8_decompose.sh --audit-only",
+    "git_commit": "1a033a8+decompose-full-cache-rerun-staged",
     "parameters": {
       "mode": "availability_and_checksum_audit",
-      "full_rerun_performed": false
+      "full_rerun_performed": true
     }
   },
   "inputs": [
@@ -41,7 +41,7 @@
       "role": "raw_cache_audit",
       "path_or_accession": "v8/decompose/evaluation/raw_cache_audit.json",
       "kind": "local_file",
-      "checksum": "sha256:63c5edfba2798be19edf80efd7daf271e3cfa9a87ba6fe9618684ea0485866c7",
+      "checksum": "sha256:7834673c7f4a0728e04cbaaba3f19607aa38be63bdac025ae06f8c2747c27764",
       "tracked_in_git": true
     }
   ],
@@ -52,18 +52,19 @@
   },
   "metrics": [
     {"name": "expected_raw_cache_files", "value": 8},
-    {"name": "present_raw_cache_files", "value": 2},
-    {"name": "missing_raw_cache_files", "value": 6},
-    {"name": "full_rerun_ready", "value": false}
+    {"name": "present_raw_cache_files", "value": 8},
+    {"name": "missing_raw_cache_files", "value": 0},
+    {"name": "full_rerun_ready", "value": true}
   ],
   "validation": {
     "local_tests_run": false,
     "hpc_tests_run": true,
     "checks": [
+      "python v3/scripts/fetch_osdr_bulk.py --phase 5",
       "python v8/decompose/raw_cache_audit.py",
       "bash scripts/hpc_v8_decompose.sh --audit-only",
       "bash scripts/hpc_release_validate.sh --v8-summary"
     ],
-    "notes": "Audit records that only OSD-719/GLDS-641 HZE endocrine raw count/sample-table caches are present in the current HPC bundle. OSD-211, OSD-237, and OSD-202 raw caches remain missing, so full DECOMPOSE rerun is intentionally blocked until those caches are restored."
+    "notes": "Audit records all eight required DECOMPOSE count/sample-table inputs as present after restoring OSD-202, OSD-211, and OSD-237 processed OSDR caches on HPC. Raw caches remain outside Git; the audit stores selected file paths, sizes, and SHA-256 hashes."
   }
 }

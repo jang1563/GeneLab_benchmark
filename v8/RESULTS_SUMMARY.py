@@ -96,12 +96,28 @@ def main() -> None:
         for analog, tissue in analog_tissue_map.items():
             if analog in decomp:
                 sig_counts = decomp[analog].get("n_sig_p05", {})
-                # Interaction terms
-                int_key = "HLUxIR" if analog != "hze_endocrine" else "SexxHZE"
-                int_count = sig_counts.get(int_key, 0)
                 total_sig = sum(sig_counts.values())
-                int_frac = int_count / max(total_sig, 1)
-                results[tissue][f"interaction_variance_frac_{analog}"] = f"{int_frac:.2%}"
+                per_flight = decomp[analog].get("per_flight_tissue", {})
+                flight_pairs = {
+                    "spleen": "thymus",
+                    "skin_analog": "skin",
+                    "brain": "eye",
+                    "hze_endocrine": "thymus",
+                }
+                flight_tissue = flight_pairs.get(analog, tissue)
+                decomp_data = per_flight.get(flight_tissue, {})
+                variance = decomp_data.get("variance_attribution_top200", {})
+                if analog == "hze_endocrine":
+                    int_frac = variance.get("SexxHZE_frac")
+                elif analog == "brain":
+                    int_frac = max(
+                        variance.get(k, 0.0)
+                        for k in ["HLUxIR_frac", "HLUxT_frac", "IRxT_frac", "HLUxIRxT_frac"]
+                    ) if variance else None
+                else:
+                    int_frac = variance.get("HLUxIR_frac")
+                if int_frac is not None:
+                    results[tissue][f"interaction_variance_frac_{analog}"] = f"{int_frac:.2%}"
                 results[tissue][f"n_sig_genes_{analog}"] = total_sig
 
     # Radiation quality
@@ -241,7 +257,7 @@ def main() -> None:
 
     md_out += "### Integrated Mars Regime Flagging\n"
     md_out += "- Linear extrapolation breaks at >5× dose amplification\n"
-    md_out += "- Top Mars-sensitive genes in the linear stress test: WNT10B (~1052×), KRTAP19-2 (~414×), ENSMUSG00000092534 (~190×)\n"
+    md_out += "- Top Mars-sensitive genes in the linear stress test: WNT10B (~1052×), KRTAP19-2 (~414×), ENSMUSG00000092534 (~182×)\n"
     md_out += "- Bootstrap CIs propagated from factorial β ± SE; outputs are exploratory regime flags, not point predictions\n\n"
 
     md_out += "---\n\n## Detailed Tissue-Level Results\n\n"

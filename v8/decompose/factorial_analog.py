@@ -58,7 +58,24 @@ DATASETS = {
     "spleen": {
         "counts": REPO_ROOT / "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts.csv",
         "samples": REPO_ROOT / "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable.csv",
-        "cond_map": {"HLLC_IRC": (0, 0), "HLLC_IR": (0, 1), "HLU_IRC": (1, 0), "HLU_IR": (1, 1)},
+        "counts_candidates": [
+            REPO_ROOT / "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts.csv",
+            REPO_ROOT / "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        ],
+        "samples_candidates": [
+            REPO_ROOT / "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable.csv",
+            REPO_ROOT / "data/mouse/spleen/LDR_HLU/GLDS-211_rna_seq_SampleTable_GLbulkRNAseq.csv",
+        ],
+        "cond_map": {
+            "HLLC_IRC": (0, 0),
+            "HLLC_IR": (0, 1),
+            "HLU_IRC": (1, 0),
+            "HLU_IR": (1, 1),
+            "Normally.Loaded.Control...non.irradiated": (0, 0),
+            "Normally.Loaded.Control...cobalt.57.gamma.radiation": (0, 1),
+            "Hindlimb.Unloaded...non.irradiated": (1, 0),
+            "Hindlimb.Unloaded...cobalt.57.gamma.radiation": (1, 1),
+        },
         "design": "2x2",  # HLU × IR
     },
     "skin_analog": {
@@ -91,9 +108,18 @@ DATASETS = {
 }
 
 
+def _resolve_input_path(spec: dict, role: str) -> Path:
+    candidates = spec.get(f"{role}_candidates", [spec[role]])
+    for path in candidates:
+        p = Path(path)
+        if p.exists():
+            return p
+    return Path(candidates[0])
+
+
 def fit_factorial_one(tissue_name: str, spec: dict) -> pd.DataFrame:
-    counts = pd.read_csv(spec["counts"], index_col=0)
-    samples = pd.read_csv(spec["samples"], index_col=0)
+    counts = pd.read_csv(_resolve_input_path(spec, "counts"), index_col=0)
+    samples = pd.read_csv(_resolve_input_path(spec, "samples"), index_col=0)
     # Normalize both index types to str for matching
     counts.columns = counts.columns.astype(str)
     samples.index = samples.index.astype(str)
@@ -206,6 +232,7 @@ def decompose(tissue_name: str, flight_tissue: str, betas: pd.DataFrame, out_dir
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     summary: dict = {}
+    failures: list[str] = []
 
     for tissue_name, spec in DATASETS.items():
         print(f"\n=== {tissue_name} ===")
@@ -214,6 +241,7 @@ def main() -> None:
         except Exception as e:
             print(f"  FAILED: {e}")
             summary[tissue_name] = {"error": str(e)}
+            failures.append(tissue_name)
             continue
         out_path = OUT_DIR / f"factorial_{tissue_name}_betas.csv"
         betas.to_csv(out_path, index=False)
@@ -256,6 +284,8 @@ def main() -> None:
 
     (OUT_DIR / "factorial_flight_decomposition.json").write_text(json.dumps(summary, indent=2))
     print(f"\nWrote {OUT_DIR}/factorial_flight_decomposition.json")
+    if failures:
+        raise SystemExit(f"DECOMPOSE factorial failed for: {', '.join(failures)}")
 
 
 if __name__ == "__main__":

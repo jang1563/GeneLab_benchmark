@@ -145,7 +145,9 @@ Implementation tasks:
 
 - Add manifests for every factorial analog dataset.
 - Keep `raw_cache_audit.json` with the current HPC bundle so full-rerun
-  readiness is explicit rather than inferred from failed wrapper attempts.
+  readiness is explicit rather than inferred from failed wrapper attempts. The
+  2026-05-09 HPC rerun restored OSD-211/237/202 processed caches and records
+  all eight required count/sample-table files as present.
 - Store the exact design formula, encoded factor levels, dose units, and
   contrast definitions.
 - Separate low-LET and high-LET radiation quality claims.

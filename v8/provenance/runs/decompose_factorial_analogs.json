@@ -12,11 +12,11 @@
       "v8/MANUSCRIPT_DRAFT.md"
     ]
   },
-  "generated_at": "2026-05-09T16:48:13Z",
+  "generated_at": "2026-05-09T23:24:12Z",
   "code": {
     "script": "v8/decompose/factorial_analog.py",
     "command": "bash scripts/hpc_v8_decompose.sh",
-    "git_commit": "266381a+staged-v8-release",
+    "git_commit": "1a033a8+decompose-full-cache-rerun-staged",
     "parameters": {
       "formula_2x2": "log2(count+1) ~ HLU + IR + HLU:IR",
       "formula_2x2x2": "log2(count+1) ~ HLU + IR + T + HLU:IR + HLU:T + IR:T + HLU:IR:T"
@@ -65,14 +65,14 @@
       "role": "decomposition_summary",
       "path_or_accession": "v8/decompose/evaluation/factorial_flight_decomposition.json",
       "kind": "local_file",
-      "checksum": "sha256:32678dbb440a1e4f39882e8bc685d2f63da0280609c581ee02f7469dd8d2d15a",
+      "checksum": "sha256:db1302a6db29f73050eb46753b0c566897be1f162ab93930577ec461cf756c38",
       "tracked_in_git": true
     },
     {
       "role": "raw_cache_audit",
       "path_or_accession": "v8/decompose/evaluation/raw_cache_audit.json",
       "kind": "local_file",
-      "checksum": "sha256:63c5edfba2798be19edf80efd7daf271e3cfa9a87ba6fe9618684ea0485866c7",
+      "checksum": "sha256:7834673c7f4a0728e04cbaaba3f19607aa38be63bdac025ae06f8c2747c27764",
       "tracked_in_git": true
     }
   ],
@@ -82,18 +82,20 @@
     "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
   },
   "metrics": [
-    {"name": "spleen_interaction_variance_frac_thymus_top200", "value": 0.4338},
-    {"name": "hze_endocrine_sex_hze_variance_frac_thymus_top200", "value": 0.3786},
-    {"name": "skin_analog_interaction_variance_frac_skin_top200", "value": 0.1939},
-    {"name": "brain_interaction_variance_frac_eye_top200", "value": 0.1675}
+    {"name": "spleen_interaction_variance_frac_thymus_top200", "value": 0.6179},
+    {"name": "hze_endocrine_sex_hze_variance_frac_thymus_top200", "value": 0.4400},
+    {"name": "skin_analog_interaction_variance_frac_skin_top200", "value": 0.3992},
+    {"name": "brain_max_interaction_variance_frac_eye_top200", "value": 0.2183}
   ],
   "validation": {
     "local_tests_run": false,
     "hpc_tests_run": true,
     "checks": [
+      "python v3/scripts/fetch_osdr_bulk.py --phase 5",
+      "bash scripts/hpc_v8_decompose.sh",
       "bash scripts/hpc_release_validate.sh --v8-summary",
       "sha256sum v8/decompose/evaluation/factorial_flight_decomposition.json"
     ],
-    "notes": "Tracked factorial outputs were checksummed in the staged HPC bundle and included in release validation. raw_cache_audit.json now records that the current HPC bundle lacks OSD-211, OSD-237, and OSD-202 raw analog caches, so the existing validated outputs remain the supported snapshot until a clean full-cache rerun is possible."
+    "notes": "Tracked factorial outputs were regenerated on HPC after restoring OSD-202, OSD-211, and OSD-237 processed OSDR caches. The DECOMPOSE wrapper now audits raw-cache readiness before modeling and exits nonzero if any required factorial dataset fails."
   }
 }
