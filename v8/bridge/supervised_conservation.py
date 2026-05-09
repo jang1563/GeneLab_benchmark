@@ -32,6 +32,7 @@ OUT_DIR = Path(__file__).resolve().parent / "evaluation"
 
 BASE_FEATURES = ["mean_NES", "std_NES", "mean_ES", "mean_padj", "min_padj",
                  "n_celltypes", "mean_size", "direction_consistency"]
+LABEL_COL = "label"
 MOUSE_TISSUES = ["thymus", "gastrocnemius", "skin", "eye", "liver", "kidney"]
 RNG = 42
 N_BOOT = 1000

@@ -123,10 +123,14 @@ Current result surface is strong but needs reproducibility hardening:
 
 Implementation tasks:
 
-- Write a BRIDGE manifest for `link_spaceomicsbench.py`,
-  `tissue_nes_bridge.py`, and `supervised_conservation.py`.
-- Add a leakage audit: pathway vocabulary, held-out compartments, and feature
-  construction must be frozen before labels are read.
+- BRIDGE manifests now cover `link_spaceomicsbench.py`,
+  `tissue_nes_bridge.py`, `supervised_conservation.py`, and the supervised
+  leakage audit.
+- The 2026-05-09 HPC leakage audit records that the supervised model excludes
+  the target label from all 14 model features, uses unique pathway merge keys,
+  hashes deterministic stratified folds, and finds no near-perfect
+  single-feature label proxy. Upstream SpaceOmicsBench feature-builder freezing
+  remains a beta requirement.
 - Save bootstrap seed, fold assignment, model hyperparameters, and feature list.
 - Add a small `bridge/evaluation/README.md` mapping each result file to a claim.
 

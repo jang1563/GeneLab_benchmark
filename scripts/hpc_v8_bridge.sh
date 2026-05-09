@@ -20,13 +20,16 @@ fi
 
 export SPACEOMICS_ROOT="$SOB_ROOT"
 
-echo "[v8 BRIDGE 1/3] Aggregate mouse -> human NES conservation"
+echo "[v8 BRIDGE 1/4] Aggregate mouse -> human NES conservation"
 "$PYTHON_BIN" v8/bridge/link_spaceomicsbench.py
 
-echo "[v8 BRIDGE 2/3] Per-tissue mouse NES Spearman matrix"
+echo "[v8 BRIDGE 2/4] Per-tissue mouse NES Spearman matrix"
 "$PYTHON_BIN" v8/bridge/tissue_nes_bridge.py
 
-echo "[v8 BRIDGE 3/3] Supervised conservation with mouse NES features"
+echo "[v8 BRIDGE 3/4] Supervised conservation with mouse NES features"
 "$PYTHON_BIN" v8/bridge/supervised_conservation.py
+
+echo "[v8 BRIDGE 4/4] Leakage audit for supervised conservation"
+"$PYTHON_BIN" v8/bridge/leakage_audit.py
 
 echo "v8 BRIDGE complete. Update v8/provenance/runs/bridge_*.json with HPC metadata and checksums."

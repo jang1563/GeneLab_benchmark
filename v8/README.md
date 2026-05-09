@@ -132,6 +132,14 @@ Leave-one-tissue-out ablation (LR): **eye** (Δ=−0.019) and **skin** (Δ=−0.
 
 **The projected AUROC lift materialized: RF 0.712 → 0.888 (+0.175), entirely from adding mouse NES features.**
 
+**Leakage audit:** `bridge_leakage_audit.json` records the supervised feature
+contract on HPC: the `label` column is excluded from all 14 model features, the
+I2 pathways and aggregated mouse NES pathways are unique under the `pathway`
+merge key, deterministic 5-fold stratified splits are hashed, and no single
+feature nearly perfectly reproduces the label (max single-feature oriented
+AUROC=0.645). This audits the local v8 modeling contract; freezing the upstream
+SpaceOmicsBench feature-builder command remains a beta requirement.
+
 ## Pillar 3 First Pass (2026-04-17)
 
 ### 3a. Tissue signature export (`intervene/export_signatures.py`)
