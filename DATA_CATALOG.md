@@ -1,6 +1,6 @@
 # DATA_CATALOG.md — GeneLab_benchmark
 **Auto-generated**: `catalog_datasets.py` — 2026-02-28 07:18 UTC (Manual update: 2026-03-22 — v4 lung/colon added)
-**Benchmark version**: v5.0
+**Benchmark release context**: v7.1 documentation patch; this catalog was originally generated for dataset curation and manually updated through the v4 lung/colon additions.
 
 > ⚠️ Status legend:
 > ✅ Verified (bulk RNA-seq) | ❌ NOT FOUND | ⚠️ Wrong assay type

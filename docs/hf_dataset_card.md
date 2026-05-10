@@ -26,7 +26,7 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 **A comprehensive benchmark for evaluating ML models and foundation models on NASA spaceflight transcriptomics data.**
 
-Version: v7.0 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
+Version: v7.0 with v7.1 documentation consistency patch | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 
@@ -43,14 +43,16 @@ GeneLab Benchmark provides standardized train/test splits for evaluating how wel
 | Dimension | Coverage |
 |---|---|
 | Tissues | 8 (Liver, Gastrocnemius, Kidney, Thymus, Skin, Eye, Lung, Colon) |
-| ISS Missions | 9 (RR-1, RR-3, RR-5, RR-6, RR-7, RR-8, RR-9, MHU-1, MHU-2) |
-| OSD Studies | 24 |
-| Samples | 660+ (binary: Flight vs. Ground Control) |
-| Classifiers | 8 (PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-RBF, KNN, MLP, TabNet) |
+| Core ISS mission labels | 9 named labels in the public task package (RR-1, RR-3, RR-5, RR-6, RR-7, RR-8, RR-9, MHU-1, MHU-2) |
+| OSD Studies | 24+ source accessions across release layers |
+| Samples | 600+ binary/control samples across the processed release layers |
+| Classifiers | 8 (PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-Linear, SVM-RBF, TabNet, LightGBM) |
 | Feature types | 4 (Gene, Hallmark pathways, KEGG pathways, Combined) |
 | Foundation / Language Models | 4 gene-expression FMs + 3 text LLMs |
 
 ---
+
+The GitHub repository contains the full v1-v7 benchmark surface. This Hugging Face dataset card exposes the public feature-matrix package and reviewer-facing result summary; counts below separate full-release scope from specific analysis subsets.
 
 ## Dataset Structure
 
@@ -119,14 +121,14 @@ Best AUROC per tissue across all method-feature combinations, evaluated via LOMO
 |--------|-----------|--------|---------|--------|-------------|
 | **Thymus** | **0.948** | PCA-LR | KEGG | 0.031 | Yes |
 | **Colon** | **0.921** | PCA-LR | KEGG | 0.033 | Yes |
-| **Lung** | **0.901** | ElasticNet-LR | Gene | 0.028 | Yes |
-| **Gastrocnemius** | **0.898** | ElasticNet-LR | Gene | 0.058 | - |
-| **Kidney** | **0.829** | PCA-LR | Hallmark | 0.010 | Yes |
-| **Eye** | **0.823** | PCA-LR | Hallmark | 0.042 | Yes |
-| **Skin** | **0.819** | ElasticNet-LR | Gene | 0.004 | Yes |
-| **Liver** | **0.766** | ElasticNet-LR | KEGG | 0.093 | - |
+| **Lung** | **0.901** | PCA-LR | Gene | <0.05 | Yes |
+| **Kidney** | **0.829** | ElasticNet-LR | Hallmark | <0.01 | Yes |
+| **Eye** | **0.823** | PCA-LR | Hallmark | -- | - |
+| **Skin** | **0.819** | PCA-LR | Gene | -- | - |
+| **Gastrocnemius** | **0.776** | PCA-LR | Gene | -- | - |
+| **Liver** | **0.670** | PCA-LR | Gene | -- | - |
 
-Significance: permutation p < 0.05. Overall, 6/8 tissues significant; 40/256 individual evaluations significant.
+Significance: best-row permutation p where available. Across all 256 configurations, 40 individual evaluations are significant at p<0.05 and 6/8 tissues have at least one significant configuration.
 
 PCA-LR on gene features provides a strong baseline (8-tissue mean AUROC = 0.776).
 
@@ -210,7 +212,7 @@ submission = {
 
 | Track | Examples | Input Format |
 |-------|---------|-------------|
-| **Classical ML** | LR, RF, XGBoost, PCA-LR, SVM, KNN, MLP, TabNet | Tabular (gene x sample) |
+| **Classical ML** | PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-Linear, SVM-RBF, TabNet, LightGBM | Tabular (gene x sample) |
 | **Foundation Models** | Geneformer, scGPT, UCE, scFoundation | Gene rank order / embeddings |
 | **Text LLMs** | GPT-4o, Claude, Llama 3 | Natural language gene list |
 
@@ -272,7 +274,7 @@ Lung and Colon additionally include Basal Control samples treated as ground cont
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.0}
+  note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
 }
 ```
 
@@ -284,4 +286,4 @@ Data source: NASA Open Science Data Repository (OSDR) -- https://osdr.nasa.gov/b
 
 - Dataset: CC-BY-4.0
 - Code: MIT ([GitHub repository](https://github.com/jang1563/GeneLab_benchmark))
-- Source data: NASA OSDR (public domain)
+- Source data: NASA OSDR public data; see individual OSDR dataset licenses.

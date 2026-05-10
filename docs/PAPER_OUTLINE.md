@@ -9,7 +9,7 @@
 
 ### Title & Abstract (~250 words)
 - Problem: No cross-mission ML benchmark for spaceflight transcriptomics; liver assumed as gold standard
-- Approach: 6 tissues × 17 missions × ~450 samples, LOMO CV, 3-tier models (classical ML, gene-expression FMs, text LLMs)
+- Approach: v7.1 release scope spans 8 tissues and 24+ OSD accessions; the original LOMO/FM core uses 6 tissues, LOMO CV, and 3 model tiers (classical ML, gene-expression FMs, text LLMs)
 - Key results: (1) Thymus >> Liver (0.860 vs 0.577, p=0.001), (2) 17.8× pathway batch-resistance, (3) NES conservation predicts transfer (r=0.9), (4) Foundation models fail on bulk RNA-seq
 
 ---
@@ -32,7 +32,7 @@
 ### 2. Results (~3000 words)
 
 2a. **Benchmark design & data curation** (Fig 1)
-- 6 tissues, 17 missions, 24 OSD studies, ~450 binary samples
+- Full v7.1 release scope: 8 tissues and 24+ OSD accessions; original LOMO/FM core: 6 tissues, 17 mission labels, and ~450 binary samples
 - LOMO: mission = independence unit. Feature selection within loop (DD-03)
 - 7 evaluation categories: A (detection), B (transfer), C (cross-tissue), D (confounder), J5 (gene vs pathway), NC (negative control), Validation
 
@@ -90,7 +90,7 @@
 
 ### 4. Methods (~2500 words)
 
-4a. Data curation: NASA OSDR sources, 24 OSD studies, preprocessing (DESeq2, log2, variance filter)
+4a. Data curation: NASA OSDR sources, 24+ OSD accessions across release layers, preprocessing (DESeq2, log2, variance filter)
 4b. Label assignment: Binary Flight/Ground, excluded BC/AG, keyword matching
 4c. LOMO framework: Mission as independence unit, feature selection within loop
 4d. Baseline models: LR (ElasticNet), RF (500 trees), PCA-50 + LR. StandardScaler per fold
@@ -130,7 +130,7 @@
 ---
 
 ### Data/Code Availability
-- NASA OSDR (public): 24 OSD studies
+- NASA OSDR (public): 24+ OSD accessions across release layers
 - HuggingFace: jang1563/genelab-benchmark (processed data + task definitions)
 - GitHub: https://github.com/jang1563/GeneLab_benchmark (analysis code, evaluation framework; MIT license)
 
