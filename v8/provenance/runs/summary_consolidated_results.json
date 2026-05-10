@@ -11,11 +11,11 @@
       "v8/RESULTS_SUMMARY_TABLE.csv"
     ]
   },
-  "generated_at": "2026-05-09T23:30:56Z",
+  "generated_at": "2026-05-10T00:30:19Z",
   "code": {
     "script": "v8/RESULTS_SUMMARY.py",
-    "command": "bash scripts/hpc_v8_summary.sh",
-    "git_commit": "1a033a8+decompose-full-cache-rerun-staged"
+    "command": "bash scripts/hpc_release_validate.sh --v8-summary",
+    "git_commit": "bdef2c0+mars-saturation-sensitivity-staged"
   },
   "inputs": [
     {
@@ -48,14 +48,14 @@
       "role": "markdown_summary",
       "path_or_accession": "v8/RESULTS_SUMMARY.md",
       "kind": "local_file",
-      "checksum": "sha256:a69ee4114bc78fb309b35077751f95ec6696598a2c83ab1bdcb768fcaed3a684",
+      "checksum": "sha256:60fe39b036a050943d45baad6c0020c3634efdd3b11ae0bcf9a708337b249b59",
       "tracked_in_git": true
     },
     {
       "role": "summary_table",
       "path_or_accession": "v8/RESULTS_SUMMARY_TABLE.csv",
       "kind": "local_file",
-      "checksum": "sha256:2ddc4f682f17a82417865199dbf478e3bd83c053b41cede6789f23b68e07891b",
+      "checksum": "sha256:c55954a6a07dc5430c4c0fbd89c5409c6cf419f20a8c7c515461d403856b7fce",
       "tracked_in_git": true
     }
   ],
@@ -72,6 +72,8 @@
     {"name": "decompose_hze_interaction_variance_frac", "value": 0.44},
     {"name": "decompose_skin_interaction_variance_frac", "value": 0.3992},
     {"name": "decompose_brain_max_interaction_variance_frac", "value": 0.2183},
+    {"name": "mars_bounded_robust_flags_total", "value": 19816},
+    {"name": "mars_bounded_saturation_sensitive_flags_total", "value": 27207},
     {"name": "top_icp_stressor", "value": "T"},
     {"name": "top_pareto_reversal", "value": "CGP-60474"}
   ],
@@ -79,9 +81,8 @@
     "local_tests_run": false,
     "hpc_tests_run": true,
     "checks": [
-      "bash scripts/hpc_v8_summary.sh",
       "bash scripts/hpc_release_validate.sh --v8-summary"
     ],
-    "notes": "Regenerated on cayuga-login1 after restoring full DECOMPOSE OSD-202/211/237 raw caches and fixing the summary interaction field to use top-200 variance attribution rather than significant-gene-count fractions. Final release validation passed 46 tests, whitespace/conflict-marker checks, release hygiene, and summary regeneration."
+    "notes": "Regenerated on cayuga-login1 after adding Mars bounded-dose sensitivity fields to the consolidated summary. Final release validation passed 47 tests, whitespace/conflict-marker checks, release hygiene, and summary regeneration."
   }
 }

@@ -625,6 +625,18 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("variance_attribution_top200", summary)
         self.assertNotIn("int_count / max(total_sig, 1)", summary)
 
+    def test_v8_decompose_mars_saturation_is_bounded_sensitivity_not_fit(self):
+        saturation = self.read_repo_text("v8/decompose/mars_saturation_sensitivity.py")
+        hpc = self.read_repo_text("scripts/hpc_v8_decompose.sh")
+        readme = self.read_repo_text("v8/decompose/evaluation/README.md")
+
+        self.assertIn("cap5", saturation)
+        self.assertIn("sqrt_after5", saturation)
+        self.assertIn("log_after5", saturation)
+        self.assertIn("not fitted nonlinear dose-response models", saturation)
+        self.assertIn("v8/decompose/mars_saturation_sensitivity.py", hpc)
+        self.assertIn("mars_saturation_summary.json", readme)
+
     def test_v8_intervene_safety_triage_keeps_candidates_hypothesis_only(self):
         triage = self.read_repo_text("v8/intervene/safety_triage.py")
         readme = self.read_repo_text("v8/intervene/evaluation/README.md")

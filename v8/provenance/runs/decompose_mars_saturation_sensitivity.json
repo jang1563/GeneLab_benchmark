@@ -1,0 +1,101 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "decompose.mars_saturation_sensitivity",
+  "pillar": "decompose",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "Bounded-dose scenarios distinguish robust Mars regime flags from linear-only amplification artifacts.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/decompose/evaluation/README.md",
+      "v8/README.md",
+      "v8/RESULTS_SUMMARY.md",
+      "docs/V8_IMPLEMENTATION_RESEARCH.md"
+    ]
+  },
+  "generated_at": "2026-05-10T00:25:24Z",
+  "code": {
+    "script": "v8/decompose/mars_saturation_sensitivity.py",
+    "command": "bash scripts/hpc_v8_decompose.sh --skip-bootstrap",
+    "git_commit": "bdef2c0+mars-saturation-sensitivity-staged",
+    "parameters": {
+      "extreme_mars_over_iss": 5.0,
+      "min_abs_iss_delta": 0.1,
+      "bounded_scenarios": [
+        "cap5",
+        "sqrt_after5",
+        "log_after5"
+      ]
+    }
+  },
+  "inputs": [
+    {
+      "role": "factorial_betas",
+      "path_or_accession": "v8/decompose/evaluation/factorial_*_betas.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "mars_projection_code",
+      "path_or_accession": "v8/decompose/mars_extrapolate.py",
+      "kind": "local_file",
+      "tracked_in_git": true
+    }
+  ],
+  "outputs": [
+    {
+      "role": "mars_saturation_summary",
+      "path_or_accession": "v8/decompose/evaluation/mars_saturation_summary.json",
+      "kind": "local_file",
+      "checksum": "sha256:a5e23d0538f178bea9f400a3b44b3f5cd5f18f67f4ecc8f7d7ded3ba54497acb",
+      "tracked_in_git": true
+    },
+    {
+      "role": "spleen_to_thymus_sensitivity",
+      "path_or_accession": "v8/decompose/evaluation/mars_saturation_sensitivity_spleen.csv",
+      "kind": "local_file",
+      "checksum": "sha256:d74597835129cf4bd3dbda3e2c90156396f6cf971f6f6703556bb05197a0ef8f",
+      "tracked_in_git": true
+    },
+    {
+      "role": "skin_sensitivity",
+      "path_or_accession": "v8/decompose/evaluation/mars_saturation_sensitivity_skin_analog.csv",
+      "kind": "local_file",
+      "checksum": "sha256:c44efa4f8f836669867f57289a673c860a1b2671764e627a4ff9e5f3c1298866",
+      "tracked_in_git": true
+    },
+    {
+      "role": "brain_to_eye_sensitivity",
+      "path_or_accession": "v8/decompose/evaluation/mars_saturation_sensitivity_brain.csv",
+      "kind": "local_file",
+      "checksum": "sha256:88d7ffb50b1d9550b1d79d04add7a36cbb48abf219f091c8f51b8bad54109c73",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
+  },
+  "metrics": [
+    {"name": "spleen_to_thymus_linear_extreme_gt5", "value": 12961},
+    {"name": "spleen_to_thymus_robust_regime_flags", "value": 7749},
+    {"name": "spleen_to_thymus_saturation_sensitive_flags", "value": 5212},
+    {"name": "skin_linear_extreme_gt5", "value": 11428},
+    {"name": "skin_robust_regime_flags", "value": 8254},
+    {"name": "skin_saturation_sensitive_flags", "value": 3174},
+    {"name": "brain_to_eye_linear_extreme_gt5", "value": 22634},
+    {"name": "brain_to_eye_robust_regime_flags", "value": 3813},
+    {"name": "brain_to_eye_saturation_sensitive_flags", "value": 18821}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "bash scripts/hpc_v8_decompose.sh --skip-bootstrap",
+      "bash scripts/hpc_release_validate.sh --v8-summary",
+      "sha256sum v8/decompose/evaluation/mars_saturation_summary.json v8/decompose/evaluation/mars_saturation_sensitivity_spleen.csv v8/decompose/evaluation/mars_saturation_sensitivity_skin_analog.csv v8/decompose/evaluation/mars_saturation_sensitivity_brain.csv"
+    ],
+    "notes": "These are conservative bounded-dose sensitivity checks, not fitted nonlinear dose-response models. Fitted saturating or piecewise calibration remains a beta requirement before any operational Mars-risk prediction."
+  }
+}

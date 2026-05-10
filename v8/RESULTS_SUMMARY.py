@@ -199,6 +199,24 @@ def main() -> None:
                     n_genes = analog_data.get("n_genes", "NA")
                     results[tissue]["mars_n_genes"] = n_genes
 
+    mars_sat = load_json(REPO_ROOT / "v8/decompose/evaluation/mars_saturation_summary.json")
+    mars_sat_robust_total = "NA"
+    mars_sat_sensitive_total = "NA"
+    if mars_sat and "analogs" in mars_sat:
+        mars_sat_robust_total = sum(
+            analog_data.get("n_robust_regime_flags", 0)
+            for analog_data in mars_sat["analogs"].values()
+        )
+        mars_sat_sensitive_total = sum(
+            analog_data.get("n_saturation_sensitive_flags", 0)
+            for analog_data in mars_sat["analogs"].values()
+        )
+        for analog, analog_data in mars_sat["analogs"].items():
+            tissue = analog_data.get("flight_tissue", analog)
+            if tissue in results:
+                results[tissue]["mars_robust_bounded_flags"] = analog_data.get("n_robust_regime_flags", "NA")
+                results[tissue]["mars_saturation_sensitive_flags"] = analog_data.get("n_saturation_sensitive_flags", "NA")
+
     print("  Mars projection vs flight signature:")
     for tissue in tissues:
         mars_r = results[tissue].get("mars_vs_flight_spearman_r", "NA")
@@ -258,6 +276,7 @@ def main() -> None:
     md_out += "### Integrated Mars Regime Flagging\n"
     md_out += "- Linear extrapolation breaks at >5× dose amplification\n"
     md_out += "- Top Mars-sensitive genes in the linear stress test: WNT10B (~1052×), KRTAP19-2 (~414×), ENSMUSG00000092534 (~182×)\n"
+    md_out += f"- Bounded 5× sensitivity: {mars_sat_robust_total} robust flags remain, {mars_sat_sensitive_total} are saturation-sensitive under cap/sqrt/log damping\n"
     md_out += "- Bootstrap CIs propagated from factorial β ± SE; outputs are exploratory regime flags, not point predictions\n\n"
 
     md_out += "---\n\n## Detailed Tissue-Level Results\n\n"

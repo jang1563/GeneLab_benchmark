@@ -10,6 +10,7 @@ where do Mars-like regimes break linear extrapolation?
 | Ground analog factorial models estimate HLU, radiation, time, and interaction coefficients per gene. | `factorial_*_betas.csv`, `factorial_flight_decomposition.json` | `v8/decompose/factorial_analog.py` | hpc_validated full-cache rerun |
 | Current HPC bundle records which raw analog count/sample-table caches are present or missing before full rerun. | `raw_cache_audit.json` | `v8/decompose/raw_cache_audit.py` | hpc_validated complete cache audit |
 | Mars projections are regime-change flags, not point predictions. | `mars_extrapolation_*.csv`, `mars_summary.json` | `v8/decompose/mars_extrapolate.py` | hpc_validated; exploratory interpretation |
+| Bounded-dose sensitivity separates robust Mars regime flags from linear-only amplification artifacts. | `mars_saturation_sensitivity_*.csv`, `mars_saturation_summary.json` | `v8/decompose/mars_saturation_sensitivity.py` | hpc_validated; conservative sensitivity screen |
 | Bootstrap uncertainty must accompany any promoted Mars projection. | `mars_extrapolation_*_with_ci.csv` | `v8/decompose/mars_bootstrap_ci.py` | hpc_validated; exploratory interpretation |
 | Radiation quality comparisons require low-LET and high-LET claims to be separated. | `factorial_hze_endocrine_betas.csv`, `factorial_flight_decomposition.json` | `v8/decompose/factorial_analog.py` | hpc_validated; mechanism claim remains scoped |
 
