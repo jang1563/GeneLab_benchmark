@@ -405,7 +405,7 @@ Key methodological choices underpinning this benchmark:
   author  = {Kang, Jaeyoung},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.0}
+  note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
 }
 ```
 

@@ -30,7 +30,8 @@ countermeasure selection to future validation studies.
 - Six-month ISS missions involve ~70 mGy GCR; 900-day Mars transit + surface: ~350 mGy
 - Moon analogs (altitude, isolation) in Operation Moonbeam / HERA / Mars500 do not capture GCR
 - Confounding: ISS = µg + low GCR + isolation. Mars = higher µg on surface (0.38g) + high GCR + extended isolation.
-- Requires decomposition to project human risk forward
+- Requires decomposition to frame forward-looking human risk hypotheses without
+  treating analog-derived coefficients as operational predictions
 
 **Prior Work & Limitations**
 - GeneLab Benchmark v1–v7: transcriptome ML on 8 tissues, 57 missions. Answer: "Can we detect spaceflight?" Yes, ≥70% AUROC classifiers exist.
@@ -218,7 +219,8 @@ falsification checks are documented.
 
 **Strengths of SpaceMed**
 1. **Integrated causal-evidence framework** for spaceflight biology across 3 stressors, 8 tissues, 2 species, 100+ datasets
-2. **Addresses NASA's three core questions** for Artemis/Mars
+2. **Frames three analysis questions** relevant to Artemis/Mars hypothesis
+   generation
 3. **Radiation quality discovery** (low-LET vs high-LET) supports the need for mechanistic models beyond dose metrics
 4. **Species transfer at AUROC 0.888** demonstrates pathway conservation despite gene-level divergence
 5. **Multi-tissue Pareto triage** reduces the chance of prioritizing perturbations that reverse one tissue signature while aggravating another
@@ -231,12 +233,15 @@ falsification checks are documented.
 5. **Human analog data sparse** (isolation); Mars500/HI-SEAS valuable but n<20 crews
 
 **Implications for Artemis & Mars**
-- Thymus-targeted interventions (immune reconstitution) should precede Mars missions
+- Thymus-linked immune-reconstitution biology should be treated as a priority
+  hypothesis for validation before any mission-planning use
 - Muscle atrophy (gastrocnemius) signature-reversal hypotheses (for example,
-  AMPK-axis perturbations) warrant pre-clinical rodent testing
+  AMPK-axis perturbations) are candidates for pre-clinical rodent study design
 - Radiation-specific damage on Mars may be mechanistically opposite to ISS,
-  motivating separate countermeasure discovery rather than direct ISS scaling
-- Predicted interaction-driven pathways (WNT, sarcopenia networks) are non-linear → mechanistic models essential before deployment
+  motivating separate countermeasure-hypothesis discovery rather than direct ISS
+  scaling
+- Predicted interaction-driven pathways (WNT, sarcopenia networks) are
+  non-linear, so mechanistic models are essential before any deployment claim
 
 **Broader Context**
 SpaceMed exemplifies causal systems biology: integrating multi-species, multi-stressor, multi-tissue data into a reproducible evidence map for specific astronaut-health hypotheses. This framework is portable to terrestrial medicine (aging, inflammation, cancer), where similar stressors (oxidative stress, hypoxia, isolation) induce overlapping transcriptomic signatures.

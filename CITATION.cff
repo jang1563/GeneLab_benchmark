@@ -3,8 +3,8 @@ message: "If you use this benchmark in your research, please cite as below."
 type: software
 
 title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
-version: "7.0.0"
-date-released: "2026-04-12"
+version: "7.1.0"
+date-released: "2026-05-09"
 
 abstract: >
   GeneLab Benchmark is a comprehensive benchmark for evaluating AI and machine learning
@@ -15,9 +15,11 @@ abstract: >
   spaceflight detection across 8 tissues (liver, gastrocnemius, kidney, thymus, skin, eye,
   lung, colon), cross-mission transfer, cross-tissue transfer, multi-species analysis
   (mouse, Drosophila), spatial transcriptomics (Visium), and single-cell RNA-seq
-  (RRRM-1, RRRM-2). The current v7 release also includes unified scPRINT2 and graph
+  (RRRM-1, RRRM-2). The v7 release also includes unified scPRINT2 and graph
   neural network benchmarking, plus cross-method synthesis across classical,
-  foundation-model, and graph-based approaches.
+  foundation-model, and graph-based approaches. The v7.1 release is a
+  documentation and public metadata consistency patch; it does not introduce
+  new benchmark result generation.
 
 authors:
   - family-names: "Kang"
@@ -70,4 +72,4 @@ preferred-citation:
       affiliation: "Cornell University"
   status: "in-preparation"
   year: 2026
-  notes: "Manuscript in preparation."
+  notes: "Manuscript in preparation; v7.1 documentation consistency patch."
