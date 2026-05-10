@@ -1,0 +1,174 @@
+{
+  "schema_version": "0.1.0",
+  "bundle_id": "v8.0-beta-artifacts-rc1",
+  "status": "release_candidate",
+  "generated_at": "2026-05-10T00:00:00Z",
+  "git_commit": "59fcd23a7302082c686284b757f1a89c5aac0b80",
+  "targets": {
+    "github": {
+      "purpose": "Code, lightweight summaries, provenance, signatures, and final figures.",
+      "status": "ready_for_release_candidate"
+    },
+    "hugging_face_dataset": {
+      "purpose": "Compact public data bundle: v8 result tables, signatures, small evaluation JSON/CSV outputs, and selected pathway summaries.",
+      "status": "plan_ready_pending_upload",
+      "proposed_repo": "jang1563/GeneLab_benchmark-v8-beta"
+    },
+    "zenodo": {
+      "purpose": "Immutable archive and DOI snapshot for the v8.0-beta release candidate.",
+      "status": "plan_ready_pending_release_and_doi"
+    },
+    "hpc_or_object_storage": {
+      "purpose": "Raw OSDR caches, GEO downloads, SpaceOmicsBench/SOMA source inputs, and regenerable intermediate matrices.",
+      "status": "required_for_full_freeze"
+    }
+  },
+  "files": [
+    {
+      "path": "v8/README.md",
+      "target": "github",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "0d76dbbc415735c712b13dda80fbc531e92a6b0df31b569abb2a12e769bc2ba8"
+    },
+    {
+      "path": "v8/ARTIFACTS.md",
+      "target": "github",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "376f34ee3f857b0f2415a376aeea2b90fe0974186e973b272738ef048f4fded6"
+    },
+    {
+      "path": "v8/MANUSCRIPT_DRAFT.md",
+      "target": "github",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "248ea3eb34baa1d1dffc146e253ade991866fc5b9273c733a2b44d9435c15fb5"
+    },
+    {
+      "path": "v8/RESULTS_SUMMARY.md",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "60fe39b036a050943d45baad6c0020c3634efdd3b11ae0bcf9a708337b249b59"
+    },
+    {
+      "path": "v8/RESULTS_SUMMARY_TABLE.csv",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "c55954a6a07dc5430c4c0fbd89c5409c6cf419f20a8c7c515461d403856b7fce"
+    },
+    {
+      "path": "v8/provenance/manifest.schema.json",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "db1ab572fc58aca835f1e72d3fb75ba5334846a5c33fd77665fe36959a67bce9"
+    },
+    {
+      "path": "v8/provenance/input_freeze.json",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "a1408263f26459d053e8c7c1e8aae9532f0a929c66467feb5443a581fd3b4440"
+    },
+    {
+      "path": "v8/provenance/runs/*.json",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "notes": "Validated by scripts/validate_v8_provenance.py; individual checksums live inside each run manifest."
+    },
+    {
+      "path": "v8/bridge/evaluation/*.json; v8/bridge/evaluation/*.csv",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "notes": "BRIDGE lightweight outputs supporting species-transfer tables and Figure 1."
+    },
+    {
+      "path": "v8/decompose/evaluation/*.json; v8/decompose/evaluation/*.csv",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "notes": "DECOMPOSE lightweight outputs supporting Mars regime flag tables and Figures 2-3."
+    },
+    {
+      "path": "v8/intervene/evaluation/*.json; v8/intervene/evaluation/*.csv",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "notes": "INTERVENE parsed API outputs, Pareto tables, safety triage, and CRISPR orthogonal-support summaries."
+    },
+    {
+      "path": "v8/intervene/signatures/*",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "notes": "Compact tissue signatures used to regenerate API payload hashes."
+    },
+    {
+      "path": "v8/causal/evaluation/*.json; v8/causal/evaluation/*.csv",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "notes": "Causal DAG and ICP summary outputs."
+    },
+    {
+      "path": "v8/figures/Figure1_Species_Transfer.png",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "e4c3a3eaa2514bc99acfbdee7e955034161aedb320329509b3f211596e09520b"
+    },
+    {
+      "path": "v8/figures/Figure2_Stressor_Decomposition.png",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "cf0d3a4a73c48f6e578017cd72502f1360ce7f9e29936907ea1901c4e34f7abb"
+    },
+    {
+      "path": "v8/figures/Figure3_Mars_Extrapolation.png",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "930691568d11624750fc0fd819f8ee567914dbe04be49269e270ed7b7a4a8304"
+    },
+    {
+      "path": "v8/figures/Figure4_Countermeasure_Pareto.png",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "38c641de683dd2f682d31f950d324409ae3aa34140cc3694fddfab37c71147bc"
+    },
+    {
+      "path": "v8/figures/Figure5_Causal_DAG.png",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "272be68bae476af05073e4f5372e03e09c208774f66217d6423e9b3c4f3afe4a"
+    },
+    {
+      "path": "scripts/hpc_v8_beta_rebuild.sh",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "3eb90ee753c4666e39489bc8298aef8d10033b191643291d52645ba3f944ad07"
+    },
+    {
+      "path": "scripts/validate_v8_provenance.py",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "e934600fa5c9cfc442a8c4caf748ee3c8c4ab96706213271342535483c742ad0"
+    }
+  ],
+  "release_blockers": [
+    "Upload Hugging Face dataset bundle and record final repo revision.",
+    "Create Zenodo archive or reserve DOI and record it here.",
+    "Archive raw OSDR/SpaceOmicsBench/SOMA/API payload inputs outside Git with checksums.",
+    "Rerun scripts/hpc_v8_beta_rebuild.sh --require-frozen after input_freeze.json is promoted from release_candidate to frozen."
+  ]
+}

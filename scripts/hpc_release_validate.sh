@@ -29,14 +29,14 @@ for arg in "$@"; do
   esac
 done
 
-echo "[1/4] Python regression tests"
+echo "[1/5] Python regression tests"
 "$PYTHON_BIN" -m unittest discover -s tests -p 'test_review_fixes.py'
 
-echo "[2/4] Whitespace/conflict-marker diff check"
+echo "[2/5] Whitespace/conflict-marker diff check"
 git diff --check
 git diff --cached --check
 
-echo "[3/4] Release hygiene check"
+echo "[3/5] Release hygiene check"
 "$PYTHON_BIN" - <<'PY'
 import json
 from pathlib import Path
@@ -89,9 +89,12 @@ if offenders:
 print("Release hygiene OK")
 PY
 
+echo "[4/5] v8 provenance and beta metadata validation"
+"$PYTHON_BIN" scripts/validate_v8_provenance.py
+
 if [[ "$RUN_V8_SUMMARY" -eq 1 ]]; then
-  echo "[4/4] Regenerate v8 summary"
+  echo "[5/5] Regenerate v8 summary"
   "$PYTHON_BIN" v8/RESULTS_SUMMARY.py
 else
-  echo "[4/4] Skipping v8 summary regeneration; pass --v8-summary to run it"
+  echo "[5/5] Skipping v8 summary regeneration; pass --v8-summary to run it"
 fi
