@@ -151,7 +151,10 @@ Implementation tasks:
 - Store the exact design formula, encoded factor levels, dose units, and
   contrast definitions.
 - Separate low-LET and high-LET radiation quality claims.
-- Add saturating or piecewise dose-response models as a v8-beta requirement,
+- Use `mars_saturation_summary.json` as the current alpha guardrail: cap5,
+  sqrt-after-5x, and log-after-5x bounded-dose scenarios distinguish robust
+  Mars regime flags from linear-only amplification artifacts. Fitted
+  saturating or piecewise dose-response models remain a v8-beta requirement,
   not a v8-alpha blocker.
 - Report uncertainty propagation before any Mars-risk figure is promoted.
 

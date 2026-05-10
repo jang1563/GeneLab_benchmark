@@ -429,7 +429,19 @@ step requires either (a) non-linear dose-response models calibrated with HZE
 data (OSD-73 bronchial, OSD-109 cardiomyocyte) or (b) mechanistic pathway
 constraints from the ICP causal DAG.
 
-Outputs: `v8/decompose/evaluation/mars_extrapolation_{analog}.csv` + `mars_summary.json`.
+**Bounded-dose sensitivity**: `mars_saturation_summary.json` applies cap5,
+sqrt-after-5x, and log-after-5x guardrail scenarios to ask whether >5x Mars
+amplification flags survive conservative damping. It finds spleen -> thymus
+has 12,961 linear >5x flags, with 7,749 robust and 5,212 saturation-sensitive;
+skin has 11,428 linear flags, with 8,254 robust and 3,174
+saturation-sensitive; brain -> eye has 22,634 linear flags, but only 3,813
+robust and 18,821 saturation-sensitive. Thus the brain/eye ~1000x linear
+flags are the most sensitive to extrapolation assumptions and should be
+treated as high-priority hypothesis flags, not point predictions.
+
+Outputs: `v8/decompose/evaluation/mars_extrapolation_{analog}.csv`,
+`mars_summary.json`, `mars_saturation_sensitivity_{analog}.csv`, and
+`mars_saturation_summary.json`.
 
 **Raw-cache readiness:** `raw_cache_audit.json` now records a complete HPC
 bundle for the DECOMPOSE rerun: OSD-719, OSD-211, OSD-237, and OSD-202
@@ -500,7 +512,7 @@ All three pillars have first-pass results. Summary of what's complete vs pending
 | Pillar 3c: Multi-tissue Pareto front | ✅ Done | CGP-60474 + quinacrine hydrochloride on current Pareto front |
 | Pillar 3d: CRISPR KO orthogonal support | ✅ Done | CDK9 KO suggestively supports AZD-5438/AT-7519 target plausibility (kidney, 7 shared genes; adj-p=0.16) |
 | Pillar 2c: HZE analog factorial (OSD-719 adrenal/endocrine) | ✅ Done | Sex×HZE dominates thymus variance (44%); HZE≠γ-rays sign |
-| Pillar 2d: Mars 900-day extrapolation | ✅ First pass | Linear model breaks at 12.9× dose; WNT10B ~1052× brain-to-eye amplification flag |
+| Pillar 2d: Mars 900-day extrapolation | ✅ First pass + bounded sensitivity | Linear model breaks at 12.9× dose; brain-to-eye flags are highly saturation-sensitive |
 | Causal DAG: ICP stressor stability | ✅ Done | T/Isolation most causally invariant |
 | Manuscript integration | ⏳ Pending | — |
 
@@ -516,7 +528,7 @@ All three pillars have first-pass results. Summary of what's complete vs pending
 
 1. **Fetch HZE analog data** (OSD-73 human bronchial, OSD-109 cardiomyocyte) from OSDR for Mars-realistic GCR factorial extension and non-linear dose-response calibration.
 2. **Manuscript figure set**: Species-transfer matrix, supervised AUROC waterfall (0.712→0.888), stressor ICP heatmap, multi-tissue drug Pareto front, chemical-CRISPR convergence figure.
-3. **Bootstrap CIs on Mars extrapolation**: propagate β-SE through 1000 resamples to flag which Mars-amplified genes have CI excluding 1× (= non-trivially amplified).
+3. **Mars calibration upgrade**: combine bootstrap CIs with bounded-dose sensitivity to select robust genes for HZE-calibrated non-linear follow-up.
 
 ## Target venues
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # HPC entrypoint for v8 DECOMPOSE. Audits raw analog cache readiness, then runs
-# factorial analog models, Mars extrapolation, and optional bootstrap CIs.
+# factorial analog models, Mars extrapolation, bounded-dose sensitivity, and
+# optional bootstrap CIs.
 set -euo pipefail
 
 RUN_BOOTSTRAP=1
@@ -37,7 +38,7 @@ if [[ "$PYTHON_BIN" == "python3" && -x "$REPO_ROOT/.hpc-venv/bin/python" ]]; the
   PYTHON_BIN="$REPO_ROOT/.hpc-venv/bin/python"
 fi
 
-echo "[v8 DECOMPOSE 0/4] Raw analog cache audit"
+echo "[v8 DECOMPOSE 0/5] Raw analog cache audit"
 "$PYTHON_BIN" v8/decompose/raw_cache_audit.py
 
 if [[ "$AUDIT_ONLY" -eq 1 ]]; then
@@ -64,17 +65,20 @@ if not audit.get("full_rerun_ready"):
 PY
 fi
 
-echo "[v8 DECOMPOSE 1/4] Factorial analog decomposition"
+echo "[v8 DECOMPOSE 1/5] Factorial analog decomposition"
 "$PYTHON_BIN" v8/decompose/factorial_analog.py
 
-echo "[v8 DECOMPOSE 2/4] Mars extrapolation"
+echo "[v8 DECOMPOSE 2/5] Mars extrapolation"
 "$PYTHON_BIN" v8/decompose/mars_extrapolate.py
 
+echo "[v8 DECOMPOSE 3/5] Mars bounded-dose sensitivity"
+"$PYTHON_BIN" v8/decompose/mars_saturation_sensitivity.py
+
 if [[ "$RUN_BOOTSTRAP" -eq 1 ]]; then
-  echo "[v8 DECOMPOSE 3/4] Mars bootstrap confidence intervals"
+  echo "[v8 DECOMPOSE 4/5] Mars bootstrap confidence intervals"
   "$PYTHON_BIN" v8/decompose/mars_bootstrap_ci.py
 else
-  echo "[v8 DECOMPOSE 3/4] Skipping Mars bootstrap confidence intervals"
+  echo "[v8 DECOMPOSE 4/5] Skipping Mars bootstrap confidence intervals"
 fi
 
 echo "v8 DECOMPOSE complete. Update v8/provenance/runs/decompose_*.json with HPC metadata and checksums."
