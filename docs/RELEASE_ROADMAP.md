@@ -3,6 +3,12 @@
 This document records the near-term release plan after the v7 public metadata
 cleanup and the start of the v8 SpaceMed incubator.
 
+Status update, 2026-05-10: the combined v7/v8 clean-checkout gate passed on
+HPC at commit `b486aee77ae956b108a59ac762ebeb7b302e7928` with
+`bash scripts/hpc_release_validate.sh --v8-summary`. Remaining release work is
+artifact packaging, optional v7.1/v8 alpha tagging, and the separate v8 beta
+reproducibility program.
+
 ## v7.1 Patch Release
 
 Goal: make the current public benchmark surface consistent, portable, and safe
@@ -35,6 +41,8 @@ Validation gate:
 - Confirm no staged `.claude/`, `v8/bridge/geo_cache/`, `__pycache__/`, or
   single file larger than 50 MB.
 
+Current gate status: passed on 2026-05-10 from a clean clone of `origin/v3`.
+
 ## v8.0-alpha
 
 Goal: keep v8 as a clearly labeled incubating layer while preserving enough
@@ -64,6 +72,8 @@ Validation gate:
 - `SPACEOMICS_ROOT` must point to a local SpaceOmicsBench checkout.
 - Each pillar should have a documented command line and output manifest.
 - Claims in the v8 manuscript draft should map to a result file and script.
+- Consolidated summary regeneration passed on 2026-05-10 from a clean clone of
+  `origin/v3`.
 
 ## v8.0-beta
 
