@@ -313,8 +313,9 @@ to flight Wald-z signatures via Spearman on flight-responsive genes (|z|>1):
 
 **Key finding**: thymus flight response aligns best with radiation (r=+0.36),
 with strong antagonistic µg×rad interaction dominating variance attribution.
-On Mars (higher GCR than ISS, same-order µg), thymic consequences could be
-**disproportionately worse** than linear extrapolation would predict.
+For Mars-like stressor design, this flags thymus as a candidate tissue where
+interaction effects may violate simple ISS-to-Mars scaling; it is not an
+operational risk prediction.
 
 Skin factorial explains little of flight skin signal — the 0.04 Gy low-LET
 57Co analog may be too weak. HZE (Fe-56, Si-28 at NSRL; OSD-73 human, OSD-109
@@ -344,7 +345,7 @@ Spearman r (flight-responsive |z|>1) between analog coefficients and flight Wald
 
 **Novel biology surfaces**:
 1. **Cross-tissue spillover**: ground-stressor responses in spleen/skin/brain
-   analogs sometimes predict flight response in *different* tissues better than
+   analogs sometimes align with flight response in *different* tissues better than
    in own tissue — consistent with systemic inflammatory/metabolic axes dominating
    on flight.
 2. **Time factor is the biggest single contributor to brain analog** (6028 sig
@@ -404,9 +405,9 @@ Mars-like mission conditions:
 
 **Key result**: Linear extrapolation fails dramatically beyond the calibrated
 analog dose range. Spearman r(Mars-projected, flight) is ≈0 across all three
-tissues (thymus: r=0.0593; skin: r=−0.1263; eye: r=−0.0164), confirming Mars is
-**not "more ISS"** — the transcriptomic response is qualitatively different
-when stressors are scaled 12.9×.
+tissues (thymus: r=0.0593; skin: r=−0.1263; eye: r=−0.0164), supporting the
+working hypothesis that simple **"more ISS"** scaling is unsafe for Mars-regime
+transcriptomic modeling.
 
 **Top 5 Mars-amplified genes per tissue** (|mars_Δ / iss_Δ|, requiring |iss|>0.1):
 
