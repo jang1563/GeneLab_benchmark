@@ -159,16 +159,16 @@ Factorial decomposition revealed interaction terms (HLU×IR, HLUxIRxT, Sex×HZE)
 
 Causal decomposition via ICP-style stability scoring across 9 environments ranked Time (ICP=0.540) and higher-order interactions (HLUxIRxT=0.522) as the most invariant candidate effects across experimental contexts. Conversely, flight-pooled data (ICP=0.283) was least stable, consistent with hidden confounders unique to orbital missions.
 
-**Radiation Quality Matters:** Comparison of low-LET γ-rays (OSD-211, r_IR=+0.36 vs thymus flight) to high-LET HZE (OSD-719, r_HZE=–0.22) revealed **opposite-sign responses**. This fundamental discrepancy—despite nominally similar absorbed dose (Gy)—underscores that standard dose metrics mask biological equivalence. Mars missions with high-LET GCR may induce qualitatively opposite transcriptomic damage than ISS gamma-exposure, invalidating dose-equivalent scaling.
+**Radiation Quality Matters:** Comparison of low-LET γ-rays (OSD-211, r_IR=+0.36 vs thymus flight) to high-LET HZE (OSD-719, r_HZE=–0.22) revealed **opposite-sign responses**. This fundamental discrepancy—despite nominally similar absorbed dose (Gy)—underscores that standard dose metrics mask biological equivalence. For Mars-like GCR modeling, the result flags dose-equivalent ISS scaling as a hypothesis requiring separate high-LET validation.
 
 #### DECOMPOSE: Mars Extrapolation Flags ~1000× Gene Sensitivity
 
-Projecting factorial coefficients to a 900-day Mars-like stressor vector (µg_avg=0.62×, HZE=12.9×, Time=7.5×) flagged dramatic sensitivity among interaction-driven genes. Top amplification flags include *WNT10B* (~1052×, brain-to-eye analog), *KRTAP19-2* (~414×, skin analog), and an unannotated spleen/thymus proxy gene ENSMUSG00000092534 (~190×). However, **linear extrapolation beyond 5× amplification breaks down**—Spearman r(projected, flight-observed) ≈ 0 across tissues, indicating threshold dose-response or mechanistic saturation not captured by first-order interactions.
+Applying factorial coefficients to a 900-day Mars-like stressor vector (µg_avg=0.62×, HZE=12.9×, Time=7.5×) flagged dramatic sensitivity among interaction-driven genes. Top amplification flags include *WNT10B* (~1052×, brain-to-eye analog), *KRTAP19-2* (~414×, skin analog), and an unannotated spleen/thymus proxy gene ENSMUSG00000092534 (~190×). However, **linear extrapolation beyond 5× amplification breaks down**—Spearman r(projected, flight-observed) ≈ 0 across tissues, indicating threshold dose-response or mechanistic saturation not captured by first-order interactions.
 
 This negative result is informative: it flags need for **non-linear
 dose-response models** and mechanistic constraints from the causal DAG before
 treating Mars projections as operational predictions. Bootstrap CIs on Mars
-predictions are wide (1.5–3 SD), emphasizing uncertainty scaling with dose
+projection flags are wide (1.5–3 SD), emphasizing uncertainty scaling with dose
 amplification.
 
 #### INTERVENE: Multi-Tissue Pareto Front Identifies 2 Signature-Reversal Hypotheses
@@ -211,7 +211,7 @@ Perturbation hypotheses (CDK-axis, AMPK/BMP-axis, and tissue-specific perturbati
 
 A future counterfactual module on this DAG would support explicit, testable
 queries such as: *"If an intervention targets AMPK signaling before flight, how
-much pathway dysregulation is predicted under a Mars-like stressor regime?"*
+would the model project pathway dysregulation under a Mars-like stressor regime?"*
 Those queries should be promoted only after intervention assumptions and
 falsification checks are documented.
 
@@ -240,7 +240,7 @@ falsification checks are documented.
 - Radiation-specific damage on Mars may be mechanistically opposite to ISS,
   motivating separate countermeasure-hypothesis discovery rather than direct ISS
   scaling
-- Predicted interaction-driven pathways (WNT, sarcopenia networks) are
+- Projected interaction-driven pathway flags (WNT, sarcopenia networks) are
   non-linear, so mechanistic models are essential before any deployment claim
 
 **Broader Context**
@@ -251,10 +251,10 @@ We present SpaceMed, a causal analysis framework linking mouse OSDR signatures
 to human spaceflight outcomes via pathway conservation, decomposing stressor
 confounding to flag Mars-regime extrapolation limits, and prioritizing
 multi-tissue signature-reversal hypotheses with orthogonal CRISPR support. This
-framework quantitatively addresses three core questions for deep-space biology:
+framework quantitatively frames three analysis questions for deep-space biology:
 *Which mouse pathway signals transfer to humans? Which Mars-like stressor regimes
 break linear extrapolation? Which perturbations reverse tissue signatures enough
-to justify pre-clinical tests?* Results prioritize AMPK-axis and CDK-axis
+to prioritize pre-clinical study designs?* Results prioritize AMPK-axis and CDK-axis
 hypotheses for rodent validation; Mars missions require stressor-specific
 countermeasure-hypothesis discovery distinct from ISS protocol extrapolation.
 
@@ -278,7 +278,7 @@ countermeasure-hypothesis discovery distinct from ISS protocol extrapolation.
 ### Supplementary Tables
 - **S1:** Species transfer NES heatmap (6 tissues × 20 I4 compartments × 16K pathways)
 - **S2:** Factorial model coefficients, SE, p-val (per analog, per gene)
-- **S3:** Mars extrapolation predictions (per gene, per analog)
+- **S3:** Mars extrapolation projection flags (per gene, per analog)
 - **S4:** L1000CDS2 top-50 perturbation hypotheses per tissue
 - **S5:** CRISPR orthogonal-support matrix (chemical targets vs KO library)
 - **S6:** ICP scores per stressor per gene (top 100 causal genes)
