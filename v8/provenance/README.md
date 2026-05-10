@@ -23,3 +23,22 @@ Each promoted v8 result should have a JSON manifest under `runs/` that records:
 
 The schema is intentionally lightweight and RO-Crate-compatible enough to export
 later when v8 reaches beta.
+
+## Beta Gate
+
+Run the standard validator before promoting v8 artifacts:
+
+```bash
+python scripts/validate_v8_provenance.py
+```
+
+For final beta freezing, the stricter gate is:
+
+```bash
+python scripts/validate_v8_provenance.py --require-frozen
+```
+
+The stricter mode requires `v8/provenance/input_freeze.json` and
+`v8/release/v8_beta_artifact_manifest.json` to be marked `frozen` with no open
+release blockers. Until then, v8 remains a beta release candidate rather than a
+frozen beta snapshot.

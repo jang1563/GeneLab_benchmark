@@ -49,3 +49,17 @@ Each v8 result used in the manuscript should have:
 Use `v8/provenance/manifest.schema.json` as the lightweight contract for these
 records. Full RO-Crate export can wait until v8 beta, but missing manifests
 should block promotion of exploratory results into manuscript claims.
+
+## v8 Beta Release-Candidate Metadata
+
+- `scripts/validate_v8_provenance.py` validates all promoted run manifests,
+  exact tracked-output checksums, `v8/provenance/input_freeze.json`, and
+  `v8/release/v8_beta_artifact_manifest.json`.
+- `scripts/hpc_v8_beta_rebuild.sh` is the one-command HPC orchestrator for a
+  beta rebuild: pillar recomputation, figures, summary regeneration, provenance
+  validation, and final release hygiene.
+- `v8/provenance/input_freeze.json` is currently `release_candidate`, not
+  `frozen`, because SpaceOmicsBench and L1000CDS2 still need exact external
+  version pins or archived raw payloads.
+- `v8/release/v8_beta_artifact_manifest.json` defines the release split across
+  GitHub, Hugging Face, Zenodo, and HPC/object storage.

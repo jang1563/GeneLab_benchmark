@@ -42,7 +42,7 @@
         },
         "scope": {
           "type": "string",
-          "enum": ["exploratory", "benchmark", "mechanistic", "release"]
+          "enum": ["exploratory", "benchmark", "mechanistic", "release", "reproducibility"]
         },
         "consumed_by": {
           "type": "array",
@@ -164,7 +164,7 @@
         },
         "kind": {
           "type": "string",
-          "enum": ["local_file", "osdr_accession", "geo_accession", "soma_file", "url", "api", "other"]
+          "enum": ["local_file", "osdr_accession", "geo_accession", "soma_file", "url", "api", "hpc_local_cache", "other"]
         },
         "version": {
           "type": "string"

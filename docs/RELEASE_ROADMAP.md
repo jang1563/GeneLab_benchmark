@@ -88,6 +88,24 @@ Required before beta:
 - Separate public release artifacts into GitHub code, Hugging Face dataset
   files, and Zenodo DOI archive.
 
+Current beta progress, 2026-05-10:
+
+- `scripts/validate_v8_provenance.py` validates all promoted run manifests plus
+  beta input/artifact metadata and is part of `scripts/hpc_release_validate.sh`.
+- `scripts/hpc_v8_beta_rebuild.sh` orchestrates BRIDGE, DECOMPOSE, INTERVENE,
+  causal, figures, summary, provenance validation, and the release gate from a
+  clean HPC checkout.
+- `v8/provenance/input_freeze.json` records the current release-candidate
+  external input freeze and the remaining blockers before it can be promoted to
+  `frozen`.
+- `v8/release/v8_beta_artifact_manifest.json` records the GitHub, Hugging Face,
+  Zenodo, and HPC/object-storage artifact split for beta packaging.
+
+Remaining blockers: exact SpaceOmicsBench upstream commit/release tag, concrete
+L1000CDS2 db-version or archived raw API responses, one fresh
+`hpc_v8_beta_rebuild.sh --require-frozen` pass after freeze promotion, and final
+Hugging Face/Zenodo upload records.
+
 ## Long-Term Direction
 
 - Keep GeneLab Benchmark v1-v7 focused on cross-mission transcriptomics model

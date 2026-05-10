@@ -649,6 +649,27 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("safety_triage.csv", readme)
         self.assertIn("v8/intervene/safety_triage.py", hpc)
 
+    def test_v8_beta_gate_validates_provenance_and_freeze_metadata(self):
+        validator = self.read_repo_text("scripts/validate_v8_provenance.py")
+        release_gate = self.read_repo_text("scripts/hpc_release_validate.sh")
+        rebuild = self.read_repo_text("scripts/hpc_v8_beta_rebuild.sh")
+        input_freeze = self.read_repo_text("v8/provenance/input_freeze.json")
+        artifact_manifest = self.read_repo_text("v8/release/v8_beta_artifact_manifest.json")
+        beta_plan = self.read_repo_text("docs/V8_BETA_RELEASE_PLAN_2026_05_10.md")
+
+        self.assertIn("validate_run_manifest", validator)
+        self.assertIn("validate_v8_provenance.py", release_gate)
+        self.assertIn("hpc_v8_bridge.sh", rebuild)
+        self.assertIn("hpc_v8_decompose.sh", rebuild)
+        self.assertIn("hpc_v8_intervene.sh", rebuild)
+        self.assertIn("v8/figures/generate_main_figures.py", rebuild)
+        self.assertIn('"status": "release_candidate"', input_freeze)
+        self.assertIn("spaceomicsbench.v2_public", input_freeze)
+        self.assertIn("l1000cds2.api_snapshot", input_freeze)
+        self.assertIn("hugging_face_dataset", artifact_manifest)
+        self.assertIn("zenodo", artifact_manifest)
+        self.assertIn("Still open before declaring v8.0-beta frozen", beta_plan)
+
 
 if __name__ == "__main__":
     unittest.main()
