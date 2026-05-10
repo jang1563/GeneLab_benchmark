@@ -5,6 +5,8 @@
 Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01
 Status: **v1–v7 Complete**
 
+Canonical v7.1 documentation source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
+
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -50,6 +52,8 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 ### v4 Phase 1 — Multi-Method Evaluation (256 evaluations)
 
 **Best overall classifier**: PCA-LR (gene mean AUROC 0.776), ElasticNet-LR 2nd (0.762)
+
+Canonical v7.1 result source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md). Keep README, Hugging Face card, and paper outline synchronized with that table.
 
 | Tissue | Best AUROC | Best Method | Best Feature | Significant (p<0.05) |
 |--------|-----------|-------------|-------------|---------------------|
@@ -412,4 +416,4 @@ Data source: NASA Open Science Data Repository (OSDR) -- [osdr.nasa.gov](https:/
 ## License
 
 Code: MIT License
-Data: NASA OSDR public data (see individual dataset licenses at OSDR)
+Data: NASA OSDR public data (see individual dataset licenses at OSDR); processed benchmark feature matrices should follow the license declared in the public dataset card.
