@@ -10,9 +10,28 @@ status note.
 
 | Layer | Current status | Meaning |
 |---|---|---|
-| v7.1 public benchmark cleanup | Release-candidate pending final gate | The public-facing values, OSD-397 naming, README/HF card, and canonical result table are aligned. Final HPC release validation and public artifact packaging remain. |
-| v8.0-alpha incubator | Functionally complete pending final gate | Pillar scripts, lightweight outputs, figures, and provenance manifests are present and marked `hpc_validated`. Manuscript language now keeps Mars and intervention claims exploratory. |
+| v7.1 public benchmark cleanup | Release-candidate gate passed | The public-facing values, OSD-397 naming, README/HF card, and canonical result table are aligned. Clean-checkout HPC release validation passed; public artifact packaging and optional tagging remain. |
+| v8.0-alpha incubator | Alpha gate passed | Pillar scripts, lightweight outputs, figures, and provenance manifests are present and marked `hpc_validated`; v8 summary regeneration passed from a clean HPC clone. |
 | v8.0-beta | Not complete | Beta still requires clean-checkout recomputation, frozen external dataset versions, manifest validation, and public artifact split. |
+
+## Validation Record
+
+Final v7/v8 gate completed on 2026-05-10 from a clean HPC clone of
+`origin/v3` at commit `b486aee77ae956b108a59ac762ebeb7b302e7928`.
+
+Command:
+
+```bash
+PYTHON_BIN=.hpc-venv/bin/python bash scripts/hpc_release_validate.sh --v8-summary
+```
+
+Result:
+
+- Python regression tests: 47/47 passing.
+- Whitespace and conflict-marker diff checks: passing.
+- Release hygiene check: passing.
+- v8 consolidated summary regeneration: passing.
+- Clean clone status after regeneration: no tracked changes.
 
 ## v7.1 Closure
 
@@ -32,19 +51,11 @@ Completed:
 
 Remaining before calling v7.1 fully released:
 
-1. Run the final release gate on HPC or another suitable machine:
-
-   ```bash
-   bash scripts/hpc_release_validate.sh --v8-summary
-   ```
-
-2. Confirm the final staged release has no `.claude/`, `v8/bridge/geo_cache/`,
-   `__pycache__/`, local settings, or files larger than 50 MB.
-3. Confirm public artifact destinations:
+1. Confirm public artifact destinations:
    - GitHub for code and small result artifacts;
    - Hugging Face for public feature matrices and compact result bundles;
    - Zenodo DOI if a frozen v7.1 archive is desired.
-4. Decide whether v7.1 gets a git tag after the final gate.
+2. Decide whether v7.1 gets a git tag.
 
 ## v8.0-alpha Readiness
 
@@ -69,20 +80,13 @@ Completed:
 
 Remaining before calling v8.0-alpha fully closed:
 
-1. Run the release gate with v8 summary regeneration from the intended HPC
-   environment:
-
-   ```bash
-   bash scripts/hpc_release_validate.sh --v8-summary
-   ```
-
-2. Confirm `v8/RESULTS_SUMMARY.md` and `v8/MANUSCRIPT_DRAFT.md` only promote
+1. Confirm `v8/RESULTS_SUMMARY.md` and `v8/MANUSCRIPT_DRAFT.md` only promote
    claims with manifest-backed outputs.
-3. Do a final manuscript-language scan for:
+2. Do a final manuscript-language scan for:
    - operational crew-health recommendations;
    - Mars point-prediction language;
    - intervention or countermeasure claims not labeled exploratory.
-4. If alpha is declared, tag or otherwise record the exact commit used for the
+3. If alpha is declared, tag or otherwise record the exact commit used for the
    alpha review package.
 
 ## v8.0-beta Gap
@@ -101,7 +105,7 @@ v8 beta is intentionally not done. Required before beta:
 ## Immediate Next Actions
 
 1. Keep MLCB submission materials separate from v7/v8 closure.
-2. Run the final HPC release gate.
-3. If the gate passes, tag v7.1 or record a release-candidate commit.
-4. Then decide whether v8 should be tagged as `v8.0-alpha` or remain an
+2. Decide whether to tag v7.1 from the validated commit.
+3. Decide whether v8 should be tagged as `v8.0-alpha` or remain an
    incubator until beta requirements are scheduled.
+4. Schedule the v8 beta work separately from the v7.1 patch release.
