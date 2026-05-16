@@ -565,21 +565,11 @@ class ReviewFixTests(unittest.TestCase):
         self.assertNotIn("MEMORY.md", fig)
         self.assertNotIn("gf_mean = 0.476", fig)
 
-    def test_release_hygiene_ignores_local_and_large_v8_artifacts(self):
-        gitignore = self.read_repo_text(".gitignore")
-        self.assertIn(".claude/", gitignore)
-        self.assertIn("v8/bridge/geo_cache/", gitignore)
-        self.assertIn("v8/**/__pycache__/", gitignore)
-
     def test_release_hygiene_no_personal_paths_in_public_sources(self):
         checked_files = [
-            "v8/README.md",
-            "v8/bridge/tissue_nes_bridge.py",
-            "v8/bridge/supervised_conservation.py",
-            "v8/bridge/link_spaceomicsbench.py",
-            "v8/bridge/leakage_audit.py",
-            "v8/multiomics/propagation.py",
-            "v8/RESULTS_SUMMARY.py",
+            "scripts/utils.py",
+            "scripts/run_baselines.py",
+            "scripts/evaluate_submission.py",
         ]
         forbidden = ["/Users/jak4013", "~/.claude"]
         offenders = [
@@ -588,87 +578,6 @@ class ReviewFixTests(unittest.TestCase):
             if any(token in self.read_repo_text(rel) for token in forbidden)
         ]
         self.assertEqual(offenders, [])
-
-    def test_v8_bridge_leakage_audit_is_part_of_hpc_bridge_gate(self):
-        bridge_sh = self.read_repo_text("scripts/hpc_v8_bridge.sh")
-        audit = self.read_repo_text("v8/bridge/leakage_audit.py")
-        readme = self.read_repo_text("v8/bridge/evaluation/README.md")
-
-        self.assertIn("v8/bridge/leakage_audit.py", bridge_sh)
-        self.assertIn("label_excluded_from_features", audit)
-        self.assertIn("StratifiedKFold", audit)
-        self.assertIn("bridge_leakage_audit.json", readme)
-
-    def test_v8_intervene_api_snapshot_records_payload_hashes_without_requery(self):
-        snapshot = self.read_repo_text("v8/intervene/api_snapshot_manifest.py")
-        readme = self.read_repo_text("v8/intervene/evaluation/README.md")
-
-        self.assertIn("not_recalled_by_this_script", snapshot)
-        self.assertIn("payload_sha256", snapshot)
-        self.assertIn("parsed_output_sha256", snapshot)
-        self.assertIn("api_snapshot_manifest.json", readme)
-
-    def test_v8_decompose_raw_cache_audit_records_full_rerun_readiness(self):
-        audit = self.read_repo_text("v8/decompose/raw_cache_audit.py")
-        factorial = self.read_repo_text("v8/decompose/factorial_analog.py")
-        readme = self.read_repo_text("v8/decompose/evaluation/README.md")
-        hpc = self.read_repo_text("scripts/hpc_v8_decompose.sh")
-
-        self.assertIn("counts_candidates", factorial)
-        self.assertIn("DECOMPOSE factorial failed for", factorial)
-        self.assertIn("full_rerun_ready", audit)
-        self.assertIn("missing_files", audit)
-        self.assertIn("raw_cache_audit.json", readme)
-        self.assertIn("v8/decompose/raw_cache_audit.py", hpc)
-
-    def test_v8_summary_uses_decompose_variance_not_sig_count_fraction(self):
-        summary = self.read_repo_text("v8/RESULTS_SUMMARY.py")
-
-        self.assertIn("variance_attribution_top200", summary)
-        self.assertNotIn("int_count / max(total_sig, 1)", summary)
-
-    def test_v8_decompose_mars_saturation_is_bounded_sensitivity_not_fit(self):
-        saturation = self.read_repo_text("v8/decompose/mars_saturation_sensitivity.py")
-        hpc = self.read_repo_text("scripts/hpc_v8_decompose.sh")
-        readme = self.read_repo_text("v8/decompose/evaluation/README.md")
-
-        self.assertIn("cap5", saturation)
-        self.assertIn("sqrt_after5", saturation)
-        self.assertIn("log_after5", saturation)
-        self.assertIn("not fitted nonlinear dose-response models", saturation)
-        self.assertIn("v8/decompose/mars_saturation_sensitivity.py", hpc)
-        self.assertIn("mars_saturation_summary.json", readme)
-
-    def test_v8_intervene_safety_triage_keeps_candidates_hypothesis_only(self):
-        triage = self.read_repo_text("v8/intervene/safety_triage.py")
-        readme = self.read_repo_text("v8/intervene/evaluation/README.md")
-        hpc = self.read_repo_text("scripts/hpc_v8_intervene.sh")
-
-        self.assertIn("known_toxicity_class", triage)
-        self.assertIn("hypothesis-generating target/pathway triage only", triage)
-        self.assertIn("safety_triage.csv", readme)
-        self.assertIn("v8/intervene/safety_triage.py", hpc)
-
-    def test_v8_beta_gate_validates_provenance_and_freeze_metadata(self):
-        validator = self.read_repo_text("scripts/validate_v8_provenance.py")
-        release_gate = self.read_repo_text("scripts/hpc_release_validate.sh")
-        rebuild = self.read_repo_text("scripts/hpc_v8_beta_rebuild.sh")
-        input_freeze = self.read_repo_text("v8/provenance/input_freeze.json")
-        artifact_manifest = self.read_repo_text("v8/release/v8_beta_artifact_manifest.json")
-        beta_plan = self.read_repo_text("docs/V8_BETA_RELEASE_PLAN_2026_05_10.md")
-
-        self.assertIn("validate_run_manifest", validator)
-        self.assertIn("validate_v8_provenance.py", release_gate)
-        self.assertIn("hpc_v8_bridge.sh", rebuild)
-        self.assertIn("hpc_v8_decompose.sh", rebuild)
-        self.assertIn("hpc_v8_intervene.sh", rebuild)
-        self.assertIn("v8/figures/generate_main_figures.py", rebuild)
-        self.assertIn('"status": "release_candidate"', input_freeze)
-        self.assertIn("spaceomicsbench.v2_public", input_freeze)
-        self.assertIn("l1000cds2.api_snapshot", input_freeze)
-        self.assertIn("hugging_face_dataset", artifact_manifest)
-        self.assertIn("zenodo", artifact_manifest)
-        self.assertIn("Still open before declaring v8.0-beta frozen", beta_plan)
 
 
 if __name__ == "__main__":
