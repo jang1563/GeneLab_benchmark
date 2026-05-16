@@ -1,0 +1,100 @@
+{
+  "analysis": "mouse_tissue_NES_vs_human_i4_skin_NES",
+  "human_compartment": "skin|Immediately Post-flight",
+  "human_db_mix": {
+    "C5": 147,
+    "C2": 123,
+    "Hallmark": 3
+  },
+  "n_mouse_tissues": 6,
+  "shared_pathways_per_tissue": {
+    "gastrocnemius": 25,
+    "thymus": 25,
+    "skin": 25,
+    "liver": 26,
+    "eye": 25,
+    "kidney": 25
+  },
+  "by_mouse_tissue": [
+    {
+      "mouse_tissue": "gastrocnemius",
+      "n_pathways": 25,
+      "spearman_r": 0.8261538461538462,
+      "spearman_p": 3.6400915595777106e-07,
+      "bootstrap_mean_r": 0.8096297376073057,
+      "bootstrap_ci_low": 0.5609638942617665,
+      "bootstrap_ci_high": 0.9459774215208997,
+      "permutation_p": 0.0001999600079984003,
+      "concordance_1.0": 1.0
+    },
+    {
+      "mouse_tissue": "thymus",
+      "n_pathways": 25,
+      "spearman_r": -0.11384615384615385,
+      "spearman_p": 0.5879182238585222,
+      "bootstrap_mean_r": -0.11103465188502967,
+      "bootstrap_ci_low": -0.4715615646453739,
+      "bootstrap_ci_high": 0.2850137488679155,
+      "permutation_p": 0.5970805838832234,
+      "concordance_1.0": 0.0
+    },
+    {
+      "mouse_tissue": "skin",
+      "n_pathways": 25,
+      "spearman_r": -0.6653846153846155,
+      "spearman_p": 0.0002839270469932321,
+      "bootstrap_mean_r": -0.6537181409291193,
+      "bootstrap_ci_low": -0.9318898618184605,
+      "bootstrap_ci_high": -0.21145657941413065,
+      "permutation_p": 0.0009998000399920016,
+      "concordance_1.0": 0.0
+    },
+    {
+      "mouse_tissue": "liver",
+      "n_pathways": 26,
+      "spearman_r": -0.8707692307692306,
+      "spearman_p": 7.292203017407885e-09,
+      "bootstrap_mean_r": -0.8511721677718868,
+      "bootstrap_ci_low": -0.933678756476684,
+      "bootstrap_ci_high": -0.7018054840370753,
+      "permutation_p": 0.0001999600079984003,
+      "concordance_1.0": 0.09090909090909091
+    },
+    {
+      "mouse_tissue": "eye",
+      "n_pathways": 25,
+      "spearman_r": -0.883846153846154,
+      "spearman_p": 4.743969749788048e-09,
+      "bootstrap_mean_r": -0.8653149782927171,
+      "bootstrap_ci_low": -0.9599102616575472,
+      "bootstrap_ci_high": -0.6785571154257476,
+      "permutation_p": 0.0001999600079984003,
+      "concordance_1.0": 0.04
+    },
+    {
+      "mouse_tissue": "kidney",
+      "n_pathways": 25,
+      "spearman_r": -0.9046153846153847,
+      "spearman_p": 5.46885458949306e-10,
+      "bootstrap_mean_r": -0.8842396600759372,
+      "bootstrap_ci_low": -0.9588991962511758,
+      "bootstrap_ci_high": -0.7696128612112788,
+      "permutation_p": 0.0001999600079984003,
+      "concordance_1.0": 0.125
+    }
+  ],
+  "tissue_match_hypothesis": {
+    "mouse_skin_r": -0.6653846153846155,
+    "nonskin_mean_r": -0.38938461538461533,
+    "nonskin_max_r": 0.8261538461538462,
+    "skin_is_best": false,
+    "skin_rank_among_6": 3
+  },
+  "params": {
+    "n_bootstrap": 1000,
+    "n_permutation": 5000,
+    "min_pathways": 10,
+    "rng_seed": 20260516
+  },
+  "scope_note": "Local mouse fGSEA cache covers hallmark/kegg/reactome/mitocarta. Shared overlap with i4_skin (Hallmark/C2/C5) is therefore limited to roughly 25 pathways per mouse tissue. Treat as exploratory."
+}
