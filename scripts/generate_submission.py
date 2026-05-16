@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 """
 generate_submission.py — Generate PCA-LR baseline submission JSONs.
 
@@ -37,6 +39,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 
+try:
+    from scripts.benchmark_common import task_variant_suffix
+except ImportError:
+    from benchmark_common import task_variant_suffix
+
 BASE_DIR    = Path(__file__).resolve().parent.parent
 TASKS_DIR   = BASE_DIR / "tasks"
 PROC_DIR    = BASE_DIR / "processed" / "A_detection"
@@ -50,12 +57,15 @@ GROUND_LABELS = {"GC", "VC"}
 A_TASKS = {
     "A1": "liver_lomo",
     "A2": "gastrocnemius_lomo",
+    "A3": "kidney_lomo",
     "A4": "thymus_lomo",
     "A5": "skin_lomo",
     "A6": "eye_lomo",
 }
 B_TASKS = {
+    "B1": "liver",
     "B2": "gastrocnemius",
+    "B3": "kidney",
     "B4": "thymus",
     "B5": "skin",
     "B6": "eye",
@@ -159,9 +169,10 @@ def build_pca_lr(n_train: int) -> Pipeline:
 
 def generate_a_submission(task_id: str, tissue_suffix: str,
                           task_dir_name: str | None = None,
-                          fold_name: str | None = None) -> dict:
+                          fold_name: str | None = None) -> tuple[dict, Path]:
     """
-    LOMO: train PCA-LR on each fold_*_test, return {fold_key: {sample: prob}}.
+    LOMO: train PCA-LR on each fold_*_test.
+    Returns ({fold_key: {sample: prob}}, resolved_task_dir).
     Only _test folds are included (holdout folds without test_y are skipped).
     """
     task_dir = resolve_a_task_dir(task_id, tissue_suffix, task_dir_name=task_dir_name)
@@ -197,7 +208,7 @@ def generate_a_submission(task_id: str, tissue_suffix: str,
         print(f"    {fold_key}: n_train={len(train_X)} ({n_flt}F+{n_gnd}G), "
               f"n_test={len(test_X)}, n_features={len(common)}")
 
-    return predictions
+    return predictions, task_dir
 
 
 def generate_b_submission(tissue: str) -> dict:
@@ -274,7 +285,7 @@ def generate_b_submission(tissue: str) -> dict:
 
 
 def save_submission(task_id: str, predictions: dict,
-                    tissue_label: str) -> Path:
+                    tissue_label: str, task_dir: Path | None = None) -> Path:
     """Save evaluation/submission_PCALR_baseline_{task_id}.json."""
     is_b = task_id.startswith("B")
     description = (
@@ -293,7 +304,8 @@ def save_submission(task_id: str, predictions: dict,
         "submission_date": datetime.now().strftime("%Y-%m-%d"),
         "predictions": predictions,
     }
-    path = RESULTS_DIR / f"submission_PCALR_baseline_{task_id}.json"
+    variant_suffix = task_variant_suffix(task_id, task_dir, TASKS_DIR) if task_dir else ""
+    path = RESULTS_DIR / f"submission_PCALR_baseline_{task_id}{variant_suffix}.json"
     path.write_text(json.dumps(out, indent=2))
     return path
 
@@ -351,7 +363,7 @@ def main():
         try:
             if task_id in A_TASKS:
                 tissue_suffix = A_TASKS[task_id]
-                preds = generate_a_submission(
+                preds, task_dir = generate_a_submission(
                     task_id,
                     tissue_suffix,
                     task_dir_name=args.task_dir if len(tasks) == 1 else None,
@@ -359,6 +371,7 @@ def main():
                 )
                 tissue_label = tissue_suffix.replace("_lomo", "")
             else:
+                task_dir = None
                 tissue = B_TASKS[task_id]
                 preds = generate_b_submission(tissue)
                 tissue_label = tissue
@@ -367,7 +380,7 @@ def main():
                 print(f"  [WARN] No predictions generated for {task_id}")
                 continue
 
-            out_path = save_submission(task_id, preds, tissue_label)
+            out_path = save_submission(task_id, preds, tissue_label, task_dir=task_dir)
             print(f"\n  Saved: {out_path.name}  "
                   f"({len(preds)} {'folds' if task_id in A_TASKS else 'pairs'})")
 

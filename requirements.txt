@@ -1,7 +1,7 @@
 # GeneLab_benchmark Python dependencies
 # Install: pip install -r requirements.txt
 
-# ── Core (evaluation + baselines) ────────────────────────────────────────────
+# -- Core (evaluation + baselines) -----------------------------------------------
 numpy>=1.21
 pandas>=1.4
 scipy>=1.7
@@ -11,11 +11,18 @@ xgboost>=2.0
 shap>=0.42
 matplotlib>=3.5
 
-# ── Optional: Geneformer / Foundation Models (HPC only) ──────────────────────
-# Uncomment to enable Tier 2 (Geneformer, scGPT) and Tier 3 (LLM) evaluation.
-# Requires GPU; tested on NVIDIA A100 (CUDA 12.x).
+# -- v4: Pathway score generation + additional classifiers -----------------------
+gseapy>=1.0
+lightgbm>=4.0
+
+# -- Optional: Geneformer / Foundation Models (HPC only) -------------------------
+# Uncomment to enable Tier 2 (Geneformer, scGPT, UCE, scFoundation) evaluation.
+# Requires GPU; tested on NVIDIA A40/A100 (CUDA 12.x).
 # torch>=2.0
 # transformers>=4.28
 # datasets>=2.12
 # huggingface_hub>=0.14
 # safetensors>=0.3
+
+# -- Optional: TabNet (v4 classifier) -------------------------------------------
+# pytorch-tabnet>=4.0

@@ -148,7 +148,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('NES pairwise conservation');
+    .text('Cross-mission pathway agreement');
 
   const rdBu = d3.scaleSequential(d3.interpolateRdBu).domain([1, -1]);
 
@@ -199,13 +199,13 @@ function panelLabel(g, letter, x, y) {
 
   lMissions.forEach((m, i) => {
     g.append('text').attr('x', lStartX + i*lCellSize + lCellSize/2).attr('y', lStartY + 10)
-      .attr('text-anchor','middle').attr('font-size', 5).attr('fill','#666')
+      .attr('text-anchor','middle').attr('font-size', 6.5).attr('fill','#666')
       .attr('transform', `rotate(-35, ${lStartX + i*lCellSize + lCellSize/2}, ${lStartY + 10})`)
       .text(m);
   });
   lMissions.forEach((m1, i) => {
     g.append('text').attr('x', lStartX - 3).attr('y', lStartY + 20 + i*lCellSize + lCellSize/2)
-      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(m1);
+      .attr('text-anchor','end').attr('font-size', 6.5).attr('fill','#666').text(m1);
     lMissions.forEach((m2, j) => {
       const x = lStartX + j*lCellSize;
       const y = lStartY + 14 + i*lCellSize;
@@ -218,7 +218,7 @@ function panelLabel(g, letter, x, y) {
         g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',lCellSize-1).attr('height',lCellSize-1)
           .attr('fill', rdBu(val)).attr('rx',1);
         g.append('text').attr('x',x+lCellSize/2).attr('y',y+lCellSize/2+2.5)
-          .attr('text-anchor','middle').attr('font-size',5.5).attr('fill', Math.abs(val)>0.3?'#fff':'#333')
+          .attr('text-anchor','middle').attr('font-size',6).attr('fill', Math.abs(val)>0.3?'#fff':'#333')
           .text(val.toFixed(2));
       }
     });
@@ -233,10 +233,10 @@ function panelLabel(g, letter, x, y) {
   });
   g.append('rect').attr('x',cbX).attr('y',cbY).attr('width',cbW).attr('height',cbH).attr('rx',2)
     .attr('fill','url(#rdbu-grad)');
-  g.append('text').attr('x',cbX).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('-1');
-  g.append('text').attr('x',cbX+cbW/2).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('0');
-  g.append('text').attr('x',cbX+cbW).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('+1');
-  g.append('text').attr('x',cbX+cbW/2).attr('y',cbY-3).attr('text-anchor','middle').attr('font-size',5.5).attr('fill','#888').text('Spearman \u03C1');
+  g.append('text').attr('x',cbX).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',7).attr('fill','#888').text('-1');
+  g.append('text').attr('x',cbX+cbW/2).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',7).attr('fill','#888').text('0');
+  g.append('text').attr('x',cbX+cbW).attr('y',cbY+cbH+9).attr('text-anchor','middle').attr('font-size',7).attr('fill','#888').text('+1');
+  g.append('text').attr('x',cbX+cbW/2).attr('y',cbY-3).attr('text-anchor','middle').attr('font-size',7).attr('fill','#888').text('Pathway correlation (Spearman \u03C1)');
 }
 
 // ============================================================
@@ -248,7 +248,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Pathway DB effect on AUROC');
+    .text('Pathway database choice affects accuracy');
 
   const pad = {left: 68, right: 40, top: 20, bottom: 10};
   const cellW = (halfW - pad.left - pad.right) / dbs.length;
@@ -300,7 +300,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('NES conservation per DB');
+    .text('Pathway conservation by database');
 
   const dbNames = ['Hallmark','KEGG','Reactome','MitoCarta'];
   const smGap = 8;
@@ -347,12 +347,12 @@ function panelLabel(g, letter, x, y) {
 
     if (row === 1) {
       sg.append('text').attr('x', smW/2).attr('y', smH - 1)
-        .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('NES \u03C1');
+        .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('Conservation (\u03C1)');
     }
     if (col === 0) {
       sg.append('text').attr('transform', `rotate(-90, 8, ${smH/2})`)
         .attr('x', 8).attr('y', smH/2)
-        .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('AUROC');
+        .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888').text('Accuracy');
     }
   });
 }
@@ -366,7 +366,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Tissue strategy space');
+    .text('Tissue-specific spaceflight response patterns');
 
   const cols = ['Tissue','Immune','Metabolism','Proliferation','Strategy'];
   const colW = [70, 55, 65, 75, 100];

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 """
 quality_filter.py — GeneLab_benchmark: RNA-seq Quality Filtering
 
@@ -91,7 +93,7 @@ OSD_TO_MISSION = {
     "OSD-421": {"mission": "RR-9",  "duration_days": 33,  "strain": "C57BL/6J", "track": "2a"},
     "OSD-100": {"mission": "RR-1",  "duration_days": 37,  "strain": "C57BL/6J", "track": "2a"},
     "OSD-194": {"mission": "RR-3",  "duration_days": 40,  "strain": "C57BL/6J", "track": "2a"},
-    "OSD-397": {"mission": "TBD",   "duration_days": None, "strain": "Mus musculus", "track": "2a"},
+    "OSD-397": {"mission": "OSD-397", "duration_days": None, "strain": "Mus musculus", "track": "2a"},
     "OSD-238": {"mission": "MHU-2 (dorsal)", "duration_days": 35, "strain": "C57BL/6J", "track": "2a"},
     "OSD-239": {"mission": "MHU-2 (femoral)","duration_days": 35, "strain": "C57BL/6J", "track": "2a"},
     "OSD-243": {"mission": "RR-6",  "duration_days": 35,  "strain": "C57BL/6J", "track": "2a"},
@@ -162,6 +164,59 @@ def load_normalized_counts(filepath: Path) -> pd.DataFrame:
 def load_sample_table(filepath: Path) -> pd.DataFrame:
     """Load sample table / runsheet CSV."""
     return pd.read_csv(filepath, index_col=0)
+
+
+def canonical_mission_name(osd_id: str, mission: str) -> str:
+    """Map study-specific mission labels onto the benchmark's canonical missions."""
+    if osd_id in {"OSD-238", "OSD-239"}:
+        return "MHU-2"
+    return mission
+
+
+def is_track2a_sample(sample_name: str) -> bool:
+    """Return True for C57BL/6J-derived sample IDs used in Track 2a."""
+    name = str(sample_name).upper()
+    return any(marker in name for marker in ("C57-6J", "C57BL/6J", "C57BL.6J"))
+
+
+def apply_study_harmonization(osd_id: str,
+                              counts: pd.DataFrame,
+                              sample_labels: dict[str, str]) -> tuple[pd.DataFrame, dict[str, str], str, list[str]]:
+    """
+    Apply study-specific harmonization needed to reproduce benchmark-ready inputs.
+
+    Returns:
+      filtered counts,
+      filtered sample_labels,
+      canonical mission name,
+      list of human-readable notes describing what changed.
+    """
+    mission = OSD_TO_MISSION.get(osd_id, {}).get("mission", "unknown")
+    canonical_mission = canonical_mission_name(osd_id, mission)
+    notes = []
+
+    available_samples = {str(sample) for sample in counts.columns}
+    sample_labels = {
+        str(sample): label
+        for sample, label in sample_labels.items()
+        if str(sample) in available_samples
+    }
+
+    if osd_id == "OSD-254":
+        keep_samples = [sample for sample in counts.columns if is_track2a_sample(sample)]
+        removed = counts.shape[1] - len(keep_samples)
+        counts = counts.loc[:, keep_samples]
+        keep_set = {str(sample) for sample in keep_samples}
+        sample_labels = {
+            sample: label for sample, label in sample_labels.items()
+            if sample in keep_set
+        }
+        notes.append(f"filtered RR-7 to C57BL/6J subset ({removed} samples removed)")
+
+    if canonical_mission != mission:
+        notes.append(f"canonical mission label: {mission} -> {canonical_mission}")
+
+    return counts, sample_labels, canonical_mission, notes
 
 
 def infer_sample_labels(sample_table: pd.DataFrame,
@@ -480,6 +535,13 @@ def process_study(osd_id: str, tissue: str, verbose: bool = True) -> dict | None
     else:
         print(f"    [WARN] No sample table found. Labels will be Unknown.")
 
+    counts, sample_labels, canonical_mission, harmonization_notes = apply_study_harmonization(
+        osd_id, counts, sample_labels
+    )
+    if verbose and harmonization_notes:
+        for note in harmonization_notes:
+            print(f"    [HARMONIZE] {note}")
+
     # ── Sample-level QC ───────────────────────────────────────────────────────
     qc_metrics = compute_sample_qc_metrics(counts)
 
@@ -543,6 +605,7 @@ def process_study(osd_id: str, tissue: str, verbose: bool = True) -> dict | None
         "osd_id": osd_id,
         "tissue": tissue,
         "mission": mission,
+        "canonical_mission": canonical_mission,
         "counts_clean": counts_clean,
         "log2_counts_clean": np.log2(counts_clean + 1),
         "qc_metrics": qc_metrics,
@@ -610,6 +673,7 @@ def process_tissue(tissue: str, verbose: bool = True) -> None:
     for r in study_results:
         osd_id = r["osd_id"]
         mission = r["mission"]
+        canonical_mission = r.get("canonical_mission", mission)
         mission_clean = mission.replace(" ", "_").replace("/", "_").replace("+", "_")
 
         # Apply global gene filter (intersect with genes present in this study)
@@ -629,14 +693,17 @@ def process_tissue(tissue: str, verbose: bool = True) -> None:
 
         # Collect for tissue-wide concatenation
         log2_t = log2_filtered.T  # rows=samples
-        log2_t["mission"] = mission
+        log2_t["mission"] = canonical_mission
         log2_t["osd_id"] = osd_id
         all_log2_frames.append(log2_t)
-        all_meta_frames.append(meta_frame)
+        combined_meta_frame = meta_frame.copy()
+        combined_meta_frame["mission"] = canonical_mission
+        all_meta_frames.append(combined_meta_frame)
 
         qc_summary.append({
             "osd_id": osd_id,
-            "mission": mission,
+            "mission": canonical_mission,
+            "source_mission": mission,
             "tissue": tissue,
             "n_samples_kept": r["n_samples_kept"],
             "n_samples_removed": r["n_samples_removed"],
@@ -659,7 +726,9 @@ def process_tissue(tissue: str, verbose: bool = True) -> None:
         combined_log2.to_csv(outdir / f"{tissue}_all_missions_log2_norm.csv")
         combined_meta.to_csv(outdir / f"{tissue}_all_missions_metadata.csv")
 
-        eligible_missions = [q["mission"] for q in qc_summary if q["eligible_for_task"]]
+        eligible_missions = sorted({
+            q["mission"] for q in qc_summary if q["eligible_for_task"]
+        })
         n_total_samples = combined_log2.shape[0] - len(all_log2_frames)  # subtract mission/osd cols
 
         print(f"\n  ✓ Tissue-wide file: {combined_log2.shape[0]} samples × {len(kept_genes)} genes")

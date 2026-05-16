@@ -1,0 +1,492 @@
+{
+  "fold": "fold_RR-6_test",
+  "task_id": "A5",
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "temperature": 0,
+  "generated_at": "2026-03-08T13:02:14.437971",
+  "n_responses": 37,
+  "responses": [
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by **keratin-associated proteins (Krtap genes)** and hair keratins (Krt26, Krt72, etc.), which are highly specific to skin and hair follicle biology. In spaceflight transcriptomics, skin samples typically show signatures of oxidative stress, DNA damage, immune changes, and circadian disruption \u2014 not a massive coordinated upregulation of structural keratin genes.  \n\nThis pattern instead suggests a **ground-control sample** where normal skin differentiation, hair cycle, or strain-specific variation is driving variability. The lack of known spaceflight-responsive pathways (e.g., Nrf2 targets, immune dysregulation markers, mitochondrial/metabolic shifts) in the top variable genes strongly indicates this is not a flight sample.  \n\nThe only mild space-relevant signal is the downregulation of *Pde2a* (involved in cGMP signaling, possibly relevant to fluid balance) and *Uty* (linked to immune regulation), but these are minor compared to the keratin signature. Thus, high confidence in **ground control**.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 227,
+        "total_tokens": 1263
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep1_G2",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe most variable genes are overwhelmingly keratin-associated proteins (Krtap genes) and keratins (Krt genes), which are structural components of hair and skin. Their coordinated upregulation is not a hallmark of known spaceflight transcriptomic responses. Spaceflight signatures typically involve oxidative stress, immune dysregulation, metabolic shifts, and tissue atrophy pathways\u2014none of which are prominent here. Instead, this pattern suggests a skin/hair follicle-specific physiological or batch variation unrelated to microgravity. The absence of characteristic spaceflight stress markers (e.g., Nrf2 targets, DNA repair genes, inflammatory cytokines) strongly indicates a ground control sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 138,
+        "total_tokens": 1174
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep2_G3",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by upregulated keratin-associated proteins (Krtap genes) and keratins (Krt genes), which are structural components of hair and skin. This pattern is characteristic of normal skin differentiation and hair follicle cycling in mice. In spaceflight, skin transcriptomes typically show signs of oxidative stress, DNA damage response, immune alterations, and disrupted circadian/differentiation pathways\u2014not a coordinated upregulation of structural keratin genes. The absence of classic spaceflight stress markers (e.g., Nrf2 targets, inflammatory cytokines, mitochondrial dysfunction genes) and the presence of a tissue-specific healthy differentiation signature strongly suggest a ground control sample. The few downregulated genes (Pde2a, Kdm5d, Uty, Krt2) are not indicative of spaceflight stress responses.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 172,
+        "total_tokens": 1208
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep3_G4",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by upregulated keratin-associated proteins (Krtap genes) and hair keratins (Krt genes). These are structural components of hair and skin, and their coordinated upregulation is not a hallmark of the known systemic spaceflight transcriptomic signatures (oxidative stress, immune dysregulation, muscle/bone atrophy, metabolic shifts, etc.). Instead, this pattern is highly tissue-specific and suggests a normal or stimulated skin/hair follicle differentiation state, which is more consistent with a ground control sample. The few downregulated genes (e.g., *Myh7*, *Kdm5d*, *Uty*) are not strongly indicative of spaceflight stress responses. The absence of canonical spaceflight-responsive pathways in this variable gene set leads to high confidence that this is a **ground control** sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 175,
+        "total_tokens": 1211
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep4_G5",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by upregulated keratin-associated proteins (Krtap genes) and keratins (Krt genes), which are structural components of hair and skin. This pattern is characteristic of normal skin differentiation and homeostasis, not the systemic stress, immune dysregulation, or metabolic reprogramming typically seen in spaceflight transcriptomes. The few downregulated genes (e.g., *Pde2a*, *Fam177a*, *Uty*, *Kdm5d*, *Myh7*) do not align strongly with known spaceflight signatures (e.g., oxidative stress, DNA damage, muscle atrophy). Instead, the profile suggests intact tissue-specific function consistent with ground control conditions. The absence of hallmark spaceflight-responsive pathways supports a ground classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 163,
+        "total_tokens": 1199
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep5_G6",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by upregulated keratin-associated proteins (Krtap genes) and keratins (Krt genes), which are structural components of hair and skin. This pattern is characteristic of normal skin differentiation and follicle cycling in mice. In spaceflight, skin transcriptomes typically show signs of oxidative stress, DNA damage response, immune alterations, and often a disruption of normal tissue-specific differentiation programs. The absence of strong signatures related to Nrf2 pathway, inflammation, or metabolic stress, coupled with this coherent upregulation of structural skin genes, strongly suggests a healthy, ground-control skin sample maintaining normal tissue homeostasis. The few downregulated genes (Pde2a, Fam177a, Kdm5d, Uty) are not strongly indicative of spaceflight stress responses.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 167,
+        "total_tokens": 1203
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep6_G7",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly **keratin-associated proteins (Krtap genes)** and hair keratins (Krt25, Krt26, etc.), which are highly specific to skin/hair follicle differentiation and structural integrity. In spaceflight transcriptomics, skin samples typically show **downregulation** of structural keratin and hair follicle genes due to microgravity-induced alterations in skin homeostasis, hair growth cycle disruption, and stress responses.  \n\nHere, nearly all these structural genes are **upregulated** (positive z-scores), which is inconsistent with the typical spaceflight skin signature. Instead, this pattern suggests robust skin differentiation and normal hair follicle activity, aligning with ground control conditions.  \n\nThe lack of strong oxidative stress, immune dysregulation, or atrophy-related markers in the top variable genes further supports a **ground control** classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 178,
+        "total_tokens": 1214
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep7_G8",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly enriched for keratin-associated proteins (Krtap genes) and hair keratins (Krt genes), which are highly specific to skin and hair follicle biology. In spaceflight transcriptomics, skin typically shows signatures of oxidative stress, DNA damage, circadian disruption, and immune modulation\u2014not a broad, coordinated upregulation of structural keratin genes. This pattern is more consistent with normal biological variation in skin/hair cycle or strain-specific background in ground controls rather than a systemic microgravity response. The absence of classic spaceflight markers (e.g., oxidative stress genes, immune dysregulation genes) further supports a ground control classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 141,
+        "total_tokens": 1177
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep8_G9",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by keratin-associated proteins (Krtap genes) and hair keratins (Krt genes), which are highly specific to skin and hair follicle biology. Their coordinated upregulation is not a recognized hallmark of spaceflight transcriptomic responses, which typically involve pathways like oxidative stress, immune dysregulation, and tissue atrophy. The absence of known spaceflight\u2011responsive genes (e.g., Nrf2 targets, DNA repair genes, inflammatory markers) and the presence of a skin\u2011specific expression signature strongly suggest this sample reflects normal skin biology rather than a systemic spaceflight adaptation. The two down\u2011regulated genes (Uty, Kdm5d) are Y\u2011chromosome linked, indicating a male mouse, but do not indicate a flight effect. Thus, the sample is most consistent with a ground control.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 182,
+        "total_tokens": 1218
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_LAR_Rep9_G10",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe most variable genes are overwhelmingly **keratin (Krt) and keratin-associated protein (Krtap)** genes, all downregulated. This pattern is not characteristic of known systemic spaceflight responses (e.g., oxidative stress, immune dysregulation, muscle/bone atrophy). Instead, it suggests a **tissue-specific or local skin/hair follicle change** unrelated to microgravity, such as differences in hair cycle stage, local inflammation, or batch effect. In spaceflight transcriptomics, skin samples typically show more subtle shifts and do not exhibit such a dominant, coherent downregulation of structural genes without accompanying known spaceflight signatures. The single upregulated gene (Cyp2g1) is involved in odorant metabolism and not strongly linked to spaceflight. The lack of classic stress, immune, or metabolic spaceflight markers makes a **ground control** sample more likely, with the observed variation arising from non\u2011flight\u2011related biological or technical factors.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 201,
+        "total_tokens": 1237
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep1_F1",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly skin/hair-specific structural keratins (Krt, Krtap) and related genes (Padi3, Crnn), which are downregulated. This pattern is not characteristic of known systemic spaceflight responses (oxidative stress, immune dysregulation, muscle/bone atrophy, etc.). Instead, it suggests a skin-specific experimental or biological variation unrelated to microgravity, such as differences in hair cycle stage, skin region sampled, or local inflammation. The only notable upregulation (Cyp2g1) is a skin-specific cytochrome P450 not strongly linked to spaceflight stress responses. The absence of hallmark spaceflight transcriptomic signatures in other tissues, combined with the highly tissue-specific variability here, strongly indicates a ground control sample with normal skin biology variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 170,
+        "total_tokens": 1206
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep2_F2",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by skin-specific structural genes (keratins and keratin-associated proteins), with nearly all showing mild upregulation. This pattern is characteristic of normal skin homeostasis or mild stress responses, not the systemic transcriptomic signatures associated with spaceflight. Known spaceflight effects in skin include oxidative stress, DNA damage, immune modulation, and circadian disruption\u2014none of which are represented here. The most extreme z-scores are modest (|z| < 1.7), and the top downregulated genes (Pde2a, Fam177a, Kdm5d, Uty) are not established spaceflight markers. The absence of canonical spaceflight-responsive pathways (e.g., Nrf2, mitochondrial dysfunction, immune dysregulation) strongly suggests a ground control sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 168,
+        "total_tokens": 1204
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep3_F3",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by downregulated hair keratin genes (Krt81, Krt35, Krt83, Krt31, etc.) and keratin-associated proteins (Krtap genes). This pattern is characteristic of normal mouse skin biology, not a systemic spaceflight response. In spaceflight transcriptomics, skin typically shows signatures of oxidative stress, DNA damage, immune modulation, and circadian disruption\u2014none of which are prominent here. The uniform downregulation of structural hair genes suggests a sample-specific effect (e.g., hair cycle phase, local skin region) rather than the multi-pathway dysregulation seen in flight samples. The single modestly upregulated gene (Cyp2g1) is involved in odorant metabolism and not a known spaceflight marker. Given the absence of canonical spaceflight stress pathways, this sample aligns with ground control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 182,
+        "total_tokens": 1218
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep4_F4",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:** The dominant signature is a strong, coordinated upregulation of numerous keratin-associated proteins (Krtap genes) and hair keratins (Krt genes). This pattern is characteristic of active hair follicle growth and differentiation, a normal physiological process in mouse skin. In spaceflight, skin transcriptomes typically show signs of oxidative stress, DNA damage response, circadian disruption, and altered barrier function, not a focused activation of structural hair and keratin genes. The downregulated genes (Pde2a, Fam177a, Uty, Kdm5d) do not form a coherent spaceflight stress signature. The Y-chromosome genes (Uty, Kdm5d) are downregulated, which could suggest a female sample, but this is not a flight-specific effect. The overall pattern is most consistent with normal skin biology from a ground control mouse.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 181,
+        "total_tokens": 1217
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep5_F5",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by upregulated keratin-associated proteins (Krtap genes) and hair keratins (Krt genes), which are structural components of the hair follicle and shaft. This pattern is characteristic of normal skin/hair follicle cycling and differentiation, not a systemic stress response. In spaceflight, skin transcriptomes typically show signs of oxidative stress, DNA damage response, immune modulation, and circadian disruption, often with downregulation of structural and differentiation genes due to resource reprioritization. The absence of classic spaceflight stress markers (e.g., Nrf2 targets, inflammatory cytokines, mitochondrial dysfunction genes) and the strong, coherent upregulation of skin-specific structural genes align with a ground control sample maintaining normal tissue homeostasis.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 157,
+        "total_tokens": 1193
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep6_F6",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe list is dominated by skin/hair-specific keratin and keratin-associated protein genes (Krt*, Krtap*), which show very subtle expression changes (most |z| < 0.4). These are not characteristic of the systemic stress, immune dysregulation, or metabolic reprogramming typically seen in spaceflight transcriptomes. The few genes with higher |z| (Pde2a, Fam177a, Cyp2g1, Myh7, Uty, Kdm5d) are not strongly associated with known spaceflight signatures in skin or other tissues. For example, Myh7 upregulation can occur in cardiac remodeling, but here it is isolated and mild. The absence of clear oxidative stress, DNA damage, immune, or atrophy-related gene changes suggests this sample lacks a strong spaceflight signature. The overall pattern resembles normal biological variability in skin rather than a coordinated response to microgravity.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 194,
+        "total_tokens": 1230
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep7_F7",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly **keratin-associated proteins (Krtap genes)** and hair keratins (Krt26, Krt72, etc.), which are highly specific to skin/hair follicle differentiation and structural integrity. In spaceflight transcriptomics, skin typically shows signs of altered barrier function, DNA damage response, oxidative stress, and immune modulation\u2014not a strong, uniform upregulation of structural keratin genes.  \n\nThis pattern instead suggests **normal biological variation** in skin differentiation or hair cycle stage relative to the training cohort, not the systemic stress signatures (e.g., Nrf2, immune dysregulation, metabolic shifts) characteristic of spaceflight. The few downregulated genes (Pde2a, Fam177a, Kdm5d, Uty) are not clearly linked to known spaceflight pathways in skin.  \n\nThus, the sample is most consistent with a **ground control** with high confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 197,
+        "total_tokens": 1233
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep8_F8",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly **keratin-associated proteins (Krtap genes)** and hair keratins (Krt26, Krt85, etc.), which are highly specific to skin/hair follicle differentiation and structural integrity. In spaceflight transcriptomics of mouse skin, expected signatures involve oxidative stress, DNA damage, immune modulation, and extracellular matrix remodeling \u2014 not a strong, coordinated upregulation of structural keratin genes. This pattern instead suggests a **ground control sample** with normal skin differentiation, possibly reflecting biological variability in hair cycle stage or strain-specific skin physiology, rather than the stress/adaptation responses typical of spaceflight. The few downregulated genes (Pde2a, Myh7, Fam177a, Uty, Kdm5d) are not strongly indicative of known spaceflight stress pathways in skin.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 178,
+        "total_tokens": 1214
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_LAR_Rep9_F9",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by the upregulation of keratin-associated proteins (Krtap genes) and hair keratins (Krt genes), which are structural components of the hair follicle and epidermis. This pattern is characteristic of active hair growth or anagen phase in mouse skin. In spaceflight transcriptomic studies, skin samples typically show signatures of oxidative stress, DNA damage response, circadian disruption, and immune modulation\u2014not a strong, coherent anagen signature. Ground control mice in standard housing frequently exhibit synchronized hair cycles, which can produce this type of highly variable keratin gene expression. The absence of known spaceflight stress markers (e.g., Nrf2 targets, inflammatory cytokines, mitochondrial dysfunction genes) and the presence of this tissue-specific, non-stress-related variability strongly point to a ground control sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 172,
+        "total_tokens": 1208
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep1_G1",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by skin-specific structural genes, particularly keratin (Krt) and keratin-associated protein (Krtap) family members, which are almost universally upregulated. This pattern is characteristic of normal skin differentiation and hair follicle cycling in mice, not a systemic stress response.  \n\nIn spaceflight, transcriptomic signatures typically show:  \n- Upregulation of oxidative stress, DNA damage, and immune/inflammatory pathways  \n- Downregulation of structural and differentiation genes in non-adaptive tissues  \n- Metabolic and mitochondrial alterations  \n\nHere, the lack of classic spaceflight stress markers (e.g., Nrf2 targets, heat shock proteins, inflammatory cytokines) and the strong enrichment for skin-specific structural genes suggest a normal ground-control skin sample, possibly reflecting biological variability in hair cycle stage or skin region rather than a microgravity response. The few downregulated genes (e.g., Pde2a, Myh7, Uty, Kdm5d) are not consistent with known spaceflight signatures and may relate to sex (Y-linked genes Uty, Kdm5d) or individual variation.  \n\nThus, high confidence this is a **ground control** sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 250,
+        "total_tokens": 1286
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep2_G2",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 30+ most variable genes are overwhelmingly **keratins (Krt) and keratin-associated proteins (Krtap)**, all strongly downregulated. This pattern is not characteristic of known systemic spaceflight responses (oxidative stress, immune dysregulation, muscle/bone atrophy, etc.). Instead, it points to a **tissue-specific or experimental artifact** affecting hair follicle or epidermal differentiation \u2014 likely reflecting a ground-control sample with a batch, strain, or preparation effect on structural skin genes. In spaceflight transcriptomics, skin samples typically show more subtle shifts involving stress response, circadian, or immune genes, not a massive collapse of structural keratin expression. The absence of hallmark spaceflight pathway genes among the most variable features strongly suggests this is a **ground control** with a pronounced technical or biological outlier signature in skin biology.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 178,
+        "total_tokens": 1214
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep3_G3",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly dominated by upregulation of keratin-associated proteins (Krtap genes) and hair keratins (Krt genes). This pattern is characteristic of normal skin/hair follicle cycling and structural gene expression in mouse skin, not a systemic stress response. In spaceflight, skin transcriptomes typically show signatures of oxidative stress, DNA damage, immune modulation, and circadian disruption, with downregulation of structural and differentiation genes due to microgravity-associated atrophy and altered cell proliferation. The absence of canonical spaceflight stress markers (e.g., Nrf2 targets, inflammatory cytokines, mitochondrial dysfunction genes) and the strong enrichment for skin-specific structural genes suggest a ground control sample under normal physiological conditions. The few downregulated genes (e.g., Pde2a, Fam177a, Uty, Kdm5d) are not consistent with known spaceflight responses and may reflect individual or batch variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 194,
+        "total_tokens": 1230
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep4_G4",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly skin/hair follicle-specific keratins and keratin-associated proteins (Krt*, Krtap*), all showing mild downregulation. This pattern is not characteristic of the systemic oxidative stress, immune dysregulation, or metabolic reprogramming typically seen in spaceflight transcriptomes across tissues like liver, kidney, thymus, or muscle. Instead, it suggests a tissue-specific or batch/technical variation within skin biology. The only notable non-keratin gene with a strong z-score is *Pde2a* (down), which is not a known spaceflight-responsive gene. The lack of canonical spaceflight signatures (e.g., Nrf2 targets, DNA repair genes, inflammatory markers) and the dominance of skin structural gene variation point strongly toward a ground control sample with normal skin transcriptome variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 177,
+        "total_tokens": 1213
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep5_G5",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by downregulated hair keratin genes (Krt31, Krt71, Krt73, Krt27, Krt82, etc.) and keratin-associated proteins (Krtap family). This pattern is not characteristic of known spaceflight transcriptomic responses, which typically involve oxidative stress, immune dysregulation, metabolic shifts, or tissue atrophy pathways. Instead, such a strong and specific downregulation of structural hair keratins in skin suggests a ground-control sample possibly affected by a localized condition (e.g., alopecia, depilation, or a non-spaceflight experimental treatment) or a batch/technical artifact. In spaceflight studies, skin samples show more subtle changes related to DNA repair, circadian rhythm, or immune markers, not a wholesale suppression of hair follicle structural genes. Therefore, this sample is confidently classified as ground control.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 189,
+        "total_tokens": 1225
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep6_G6",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by upregulated hair keratin (Krt) and keratin-associated protein (Krtap) genes, which are structural components of the hair follicle and shaft. This pattern is characteristic of normal skin/hair follicle cycling or strain/sex-specific variation, not a known spaceflight signature. Spaceflight transcriptomic changes in skin typically involve oxidative stress, DNA damage, immune modulation, and circadian rhythm alterations, not a broad upregulation of structural hair keratins. The only gene with a potential spaceflight link is *Cyp2g1* (up), which can be involved in xenobiotic metabolism, but it is an isolated signal amid many hair-specific genes. The downregulation of *Myh7* (slow myosin) is sometimes seen in muscle atrophy but is not a strong skin-specific spaceflight marker here. The overall pattern strongly resembles normal biological variation in skin rather than a systemic microgravity response.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 198,
+        "total_tokens": 1234
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep7_G7",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:** The list is overwhelmingly dominated by upregulated hair keratin-associated proteins (Krtap genes) and hair keratins (Krt genes). These are structural components of the hair follicle and shaft. In spaceflight transcriptomics, skin samples typically show signatures of oxidative stress, DNA damage, immune modulation, and circadian disruption, not a massive, coordinated upregulation of structural hair genes. This pattern is more consistent with a ground control sample, possibly reflecting normal hair growth cycle variation or a strain/cohort-specific signature that is extreme relative to the training cohort but not indicative of the systemic stress response characteristic of spaceflight. The absence of classic spaceflight stress markers (e.g., Nrf2 targets, inflammatory cytokines, atrophy-related genes) strongly supports a ground origin.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 162,
+        "total_tokens": 1198
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep8_G8",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by extreme upregulation of hair keratin (Krt) and keratin-associated protein (Krtap) genes, which are structural components of the hair follicle and shaft. In spaceflight transcriptomics, skin samples typically show signatures of oxidative stress, DNA damage, immune changes, and sometimes circadian disruption\u2014not a massive, coordinated upregulation of structural hair keratins. Such a strong, tissue-specific structural gene signature is more indicative of a ground control sample, possibly reflecting normal hair growth cycle variation or a strain/cohort-specific background signal rather than a systemic microgravity response. The absence of known spaceflight-responsive pathways (e.g., Nrf2, immune dysregulation, mitochondrial metabolism) in the top variable genes further supports a ground classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 165,
+        "total_tokens": 1201
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep9_G9",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly skin-specific structural keratins (Krt genes) and keratin-associated proteins (Krtap genes), which are strongly upregulated. This pattern is not characteristic of known systemic spaceflight transcriptomic responses (e.g., oxidative stress, immune dysregulation, muscle/bone atrophy). Instead, it suggests a skin-specific physiological or experimental variation, such as hair cycle stage, local irritation, or sample preparation artifact, commonly seen in ground cohorts. The only gene with a potential spaceflight link, *Cyp2g1* (xenobiotic metabolism), is modestly upregulated but is far outnumbered by keratin family changes, which dominate the signature. The absence of hallmark spaceflight stress or immune genes in the top 50 supports a ground control classification with high confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 171,
+        "total_tokens": 1207
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_GC_ISS-T_Rep10_G10",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by downregulation of hair keratin (Krt) and keratin-associated protein (Krtap) genes, which are structural components of the hair follicle and shaft. In spaceflight transcriptomic studies, skin samples often show significant downregulation of hair follicle cycling and structural keratin genes, reflecting a shift in energy allocation away from non-essential anabolic processes like hair growth under microgravity stress. The upregulation of *Myh7* (a slow-twitch muscle myosin sometimes seen in stress responses) and *Cyp2g1* (involved in xenobiotic metabolism, potentially linked to oxidative stress) provides additional, though weaker, supporting evidence of a flight-like stress signature. The strong, coherent downregulation of numerous hair-related genes is a hallmark of spaceflight skin adaptation, not typical of ground control samples.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 181,
+        "total_tokens": 1217
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep1_F1",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top variable genes are overwhelmingly skin-specific structural keratins and keratin-associated proteins (Krt*, Krtap*), which are not hallmark signatures of spaceflight stress. Spaceflight transcriptomic responses typically involve oxidative stress (Nrf2, DNA repair), immune dysregulation, metabolic shifts, and atrophy pathways\u2014none of which appear here. The few non-keratin genes with moderate z-scores (e.g., Pde2a, Fam177a, Uty, Kdm5d down) are not consistent or strong enough to indicate a systemic spaceflight effect. This pattern instead suggests normal skin-specific variation or a mild perturbation unrelated to microgravity.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 145,
+        "total_tokens": 1181
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep2_F2",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe top 50 most variable genes are overwhelmingly dominated by downregulated hair keratin genes (Krt25, Krt83, Krt31, Krt85, etc.) and keratin-associated proteins (Krtap family). This pattern is not characteristic of known spaceflight transcriptomic responses, which typically involve oxidative stress, immune dysregulation, metabolic shifts, or tissue atrophy pathways. Instead, such a strong, coordinated downregulation of structural hair/skin keratins suggests a ground-control sample with a specific skin/hair follicle phenotype (e.g., depilation, synchronized telogen phase, or a genetic background effect) that is driving high variance relative to the training cohort. In spaceflight skin samples, one would expect more prominent signatures of DNA damage response, circadian disruption, or wound healing alterations, which are absent here.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 176,
+        "total_tokens": 1212
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep3_F3",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe 50 most variable genes are overwhelmingly **keratins (Krt) and keratin-associated proteins (Krtap)**, all showing downregulation. This pattern is characteristic of **skin differentiation and hair follicle cycling disruption**, which is a known response to **stress**\u2014including the systemic stress of spaceflight. However, in published spaceflight mouse skin transcriptomic studies (e.g., NASA RR-1, Rodent Research-1), flight skin samples typically show **upregulation** of keratins and hair follicle genes due to **delayed or altered hair cycle progression** in microgravity.  \n\nThe strong, consistent downregulation here instead matches **ground-based stress models** (e.g., restraint stress, glucocorticoid exposure) or a **synchronized hair cycle quiescence** in ground controls. No canonical spaceflight signatures (e.g., oxidative stress, immune dysregulation markers) appear among these top variable genes, suggesting the variation is driven by **husbandry or batch effects** in ground cohorts rather than spaceflight adaptation.  \n\nThus, the profile is more consistent with a **ground control sample** with stressed or synchronized skin biology, not the typical flight-associated skin transcriptome.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 253,
+        "total_tokens": 1289
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep4_F4",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by keratin (Krt) and keratin-associated protein (Krtap) genes, which are structural components of hair and skin. Their variability here is likely due to biological noise, strain differences, or skin cycle stage rather than a systemic spaceflight response. None of the top genes are known markers of spaceflight stress (e.g., oxidative stress, immune dysregulation, or metabolic reprogramming genes). The few non-keratin genes with modest z-scores (Pde2a, Fam177a, Uty, Cyp2g1, Myh7, Kdm5d) do not form a coherent spaceflight signature and are not strongly deregulated. In skin, spaceflight would be expected to show stronger signals in inflammation, DNA damage, or circadian pathways, which are absent. This pattern is most consistent with normal ground-control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 187,
+        "total_tokens": 1223
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep5_F6",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by downregulated hair keratin (Krt) and keratin-associated protein (Krtap) genes, which are structural components of the hair follicle and shaft. In spaceflight transcriptomic studies, skin samples typically show **upregulation** of oxidative stress, DNA damage, immune response, and extracellular matrix remodeling pathways, not broad downregulation of structural hair genes. This pattern instead suggests a ground-control sample, possibly reflecting normal variation, batch effects, or a specific non\u2011flight condition (e.g., depilation, strain\u2011specific coat differences) not linked to spaceflight stress signatures. The single upregulated gene Cyp2g1 (involved in xenobiotic metabolism) is not sufficient to indicate a flight response, and the lack of canonical spaceflight\u2011associated genes (e.g., Nrf2 targets, inflammatory markers) strongly points to a ground sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 187,
+        "total_tokens": 1223
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep6_F7",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top variable genes are dominated by Y-chromosome genes (*Uty*, *Kdm5d*) showing downregulation, which is a strong indicator of a female mouse sample. In spaceflight transcriptomics studies, the training cohorts typically balance sex, but the most pronounced and consistent spaceflight signatures (oxidative stress, immune dysregulation, muscle/bone atrophy) are not evident here. Instead, the list is overwhelmingly enriched for keratin (*Krt*) and keratin-associated protein (*Krtap*) genes, which show mixed but generally mild expression changes. These are likely related to normal skin biology, strain, or individual variation rather than a systemic microgravity response. The absence of known stress-response, DNA repair, immune, or metabolic reprogramming markers in the top variable genes suggests this sample lacks a strong flight signature and is more consistent with ground control variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 184,
+        "total_tokens": 1220
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep7_F8",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by a strong downregulation of numerous keratin-associated proteins (Krtap genes) and hair keratins (Krt genes), which are structural components of the hair follicle and skin barrier. This pattern is not characteristic of the known systemic spaceflight signatures (oxidative stress, immune dysregulation, muscle/bone atrophy, or metabolic shifts in liver/kidney). Instead, it suggests a skin-specific or hair-cycle-related perturbation, more likely linked to ground-based experimental conditions, husbandry, or a localized skin condition not tied to microgravity. The only Y-chromosome genes present (Kdm5d, Uty) are downregulated, but this could reflect biological variability or sample sex rather than a spaceflight effect. The absence of classic spaceflight-responsive pathways in the top variable genes leads to high confidence in a ground control classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 186,
+        "total_tokens": 1222
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep8_F9",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.95\n\n**Reasoning:**  \nThe list is overwhelmingly dominated by downregulated keratin-associated proteins (Krtap genes) and hair keratins (Krt genes), which are highly specific to skin and hair follicle biology. In spaceflight transcriptomics, skin samples typically show signatures of oxidative stress, DNA damage, immune modulation, and circadian disruption\u2014not a broad, coordinated downregulation of structural hair and keratin genes. This pattern is more consistent with a ground control sample where such tissue-specific structural genes are the primary source of variance, rather than the systemic stress responses induced by microgravity. The absence of known spaceflight-responsive pathways (e.g., Nrf2, immune dysregulation, mitochondrial stress) further supports a ground classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1036,
+        "completion_tokens": 151,
+        "total_tokens": 1187
+      },
+      "sample_id": "Mmus_C57-6T_DSKN_FLT_ISS-T_Rep9_F10",
+      "true_label": 1
+    }
+  ]
+}

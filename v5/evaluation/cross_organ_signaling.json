@@ -1,0 +1,460 @@
+{
+  "n_lr_pairs_database": 111,
+  "n_tissues": 8,
+  "n_tissue_pairs": 56,
+  "tissue_pairs": {
+    "liver_to_gastrocnemius": {
+      "source": "liver",
+      "target": "gastrocnemius",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "gastrocnemius_to_liver": {
+      "source": "gastrocnemius",
+      "target": "liver",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "liver_to_kidney": {
+      "source": "liver",
+      "target": "kidney",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "kidney_to_liver": {
+      "source": "kidney",
+      "target": "liver",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "liver_to_thymus": {
+      "source": "liver",
+      "target": "thymus",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "thymus_to_liver": {
+      "source": "thymus",
+      "target": "liver",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 4,
+      "n_target_receptors": 0
+    },
+    "liver_to_eye": {
+      "source": "liver",
+      "target": "eye",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "eye_to_liver": {
+      "source": "eye",
+      "target": "liver",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "liver_to_skin": {
+      "source": "liver",
+      "target": "skin",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "skin_to_liver": {
+      "source": "skin",
+      "target": "liver",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "liver_to_lung": {
+      "source": "liver",
+      "target": "lung",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "lung_to_liver": {
+      "source": "lung",
+      "target": "liver",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "liver_to_colon": {
+      "source": "liver",
+      "target": "colon",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "colon_to_liver": {
+      "source": "colon",
+      "target": "liver",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "gastrocnemius_to_kidney": {
+      "source": "gastrocnemius",
+      "target": "kidney",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "kidney_to_gastrocnemius": {
+      "source": "kidney",
+      "target": "gastrocnemius",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "gastrocnemius_to_thymus": {
+      "source": "gastrocnemius",
+      "target": "thymus",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "thymus_to_gastrocnemius": {
+      "source": "thymus",
+      "target": "gastrocnemius",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 4,
+      "n_target_receptors": 0
+    },
+    "gastrocnemius_to_eye": {
+      "source": "gastrocnemius",
+      "target": "eye",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "eye_to_gastrocnemius": {
+      "source": "eye",
+      "target": "gastrocnemius",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "gastrocnemius_to_skin": {
+      "source": "gastrocnemius",
+      "target": "skin",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "skin_to_gastrocnemius": {
+      "source": "skin",
+      "target": "gastrocnemius",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "gastrocnemius_to_lung": {
+      "source": "gastrocnemius",
+      "target": "lung",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "lung_to_gastrocnemius": {
+      "source": "lung",
+      "target": "gastrocnemius",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "gastrocnemius_to_colon": {
+      "source": "gastrocnemius",
+      "target": "colon",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "colon_to_gastrocnemius": {
+      "source": "colon",
+      "target": "gastrocnemius",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "kidney_to_thymus": {
+      "source": "kidney",
+      "target": "thymus",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "thymus_to_kidney": {
+      "source": "thymus",
+      "target": "kidney",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 4,
+      "n_target_receptors": 0
+    },
+    "kidney_to_eye": {
+      "source": "kidney",
+      "target": "eye",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "eye_to_kidney": {
+      "source": "eye",
+      "target": "kidney",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "kidney_to_skin": {
+      "source": "kidney",
+      "target": "skin",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "skin_to_kidney": {
+      "source": "skin",
+      "target": "kidney",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "kidney_to_lung": {
+      "source": "kidney",
+      "target": "lung",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "lung_to_kidney": {
+      "source": "lung",
+      "target": "kidney",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "kidney_to_colon": {
+      "source": "kidney",
+      "target": "colon",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "colon_to_kidney": {
+      "source": "colon",
+      "target": "kidney",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "thymus_to_eye": {
+      "source": "thymus",
+      "target": "eye",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 4,
+      "n_target_receptors": 0
+    },
+    "eye_to_thymus": {
+      "source": "eye",
+      "target": "thymus",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "thymus_to_skin": {
+      "source": "thymus",
+      "target": "skin",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 4,
+      "n_target_receptors": 1
+    },
+    "skin_to_thymus": {
+      "source": "skin",
+      "target": "thymus",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "thymus_to_lung": {
+      "source": "thymus",
+      "target": "lung",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 4,
+      "n_target_receptors": 0
+    },
+    "lung_to_thymus": {
+      "source": "lung",
+      "target": "thymus",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "thymus_to_colon": {
+      "source": "thymus",
+      "target": "colon",
+      "n_active_pairs": 1,
+      "active_pairs": [
+        {
+          "ligand": "F12",
+          "receptor": "Gp9"
+        }
+      ],
+      "n_source_ligands": 4,
+      "n_target_receptors": 1
+    },
+    "colon_to_thymus": {
+      "source": "colon",
+      "target": "thymus",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "eye_to_skin": {
+      "source": "eye",
+      "target": "skin",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "skin_to_eye": {
+      "source": "skin",
+      "target": "eye",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "eye_to_lung": {
+      "source": "eye",
+      "target": "lung",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "lung_to_eye": {
+      "source": "lung",
+      "target": "eye",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "eye_to_colon": {
+      "source": "eye",
+      "target": "colon",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "colon_to_eye": {
+      "source": "colon",
+      "target": "eye",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "skin_to_lung": {
+      "source": "skin",
+      "target": "lung",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    },
+    "lung_to_skin": {
+      "source": "lung",
+      "target": "skin",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "skin_to_colon": {
+      "source": "skin",
+      "target": "colon",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "colon_to_skin": {
+      "source": "colon",
+      "target": "skin",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "lung_to_colon": {
+      "source": "lung",
+      "target": "colon",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 1
+    },
+    "colon_to_lung": {
+      "source": "colon",
+      "target": "lung",
+      "n_active_pairs": 0,
+      "active_pairs": [],
+      "n_source_ligands": 0,
+      "n_target_receptors": 0
+    }
+  }
+}

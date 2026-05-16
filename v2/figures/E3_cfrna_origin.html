@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E3: I4 cfRNA Cellular Origin</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; background: #fff; }
+  h2   { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+  .subtitle { font-size: 10px; color: #555; margin-bottom: 16px; }
+  .bar-best { fill: #0072B2; }
+  .bar-other { fill: #88BBDD; }
+  .bar-neg  { fill: #CC79A7; }
+  .ci-line  { stroke: #333; stroke-width: 1.5px; }
+  .dot      { fill: #0072B2; opacity: 0.8; stroke: #fff; stroke-width: 0.5px; }
+  .dot:hover { opacity: 1; stroke: #333; stroke-width: 1px; cursor: pointer; }
+  .ref-line { stroke: #999; stroke-dasharray: 4,3; stroke-width: 1px; }
+  .fit-line { stroke: #0072B2; stroke-width: 1.5px; }
+  .panel-title { font-size: 11px; font-weight: bold; fill: #222; }
+  #tooltip {
+    position: absolute; background: rgba(0,0,0,0.78); color: #fff;
+    padding: 5px 9px; border-radius: 4px; font-size: 10px;
+    pointer-events: none; display: none;
+  }
+</style>
+</head>
+<body>
+<h2>E3 · I4 PBMC snRNA-seq vs. cfRNA: Pathway-Level Correlation by Cell Type</h2>
+<div class="subtitle">
+  Q: Which PBMC cell type's transcriptome best predicts plasma cfRNA pathway signals?<br>
+  I4-FP1 (R+1 vs. pre-flight) · 34 common Hallmark pathways · Spearman r ± 95% CI
+</div>
+<div id="tooltip"></div>
+<svg id="main"></svg>
+
+<script>
+const D = {"bar": [{"ct": "CD14+ Monocyte", "r": -0.4755, "ci_lo": -0.4729, "ci_hi": 0.492, "p": 0.0555, "n": 17}, {"ct": "CD16+ Monocyte", "r": -0.309, "ci_lo": -0.3561, "ci_hi": 0.3405, "p": 0.096, "n": 30}, {"ct": "Dendritic Cell", "r": -0.3952, "ci_lo": -0.4042, "ci_hi": 0.3627, "p": 0.0384, "n": 28}, {"ct": "Natural Killer Cell", "r": -0.5053, "ci_lo": -0.4665, "ci_hi": 0.4337, "p": 0.0279, "n": 19}, {"ct": "B Cell", "r": -0.3857, "ci_lo": -0.5266, "ci_hi": 0.49, "p": 0.1544, "n": 15}, {"ct": "CD4+ T Cell", "r": -0.5055, "ci_lo": -0.5658, "ci_hi": 0.5638, "p": 0.0808, "n": 13}, {"ct": "CD8+ T Cell", "r": -0.4941, "ci_lo": -0.5154, "ci_hi": 0.4773, "p": 0.0573, "n": 16}, {"ct": "Other T Cell", "r": -0.4209, "ci_lo": -0.4242, "ci_hi": 0.4038, "p": 0.0417, "n": 24}, {"ct": "Other", "r": -0.3386, "ci_lo": -0.4637, "ci_hi": 0.4722, "p": 0.1571, "n": 19}, {"ct": "PBMC Pseudobulk", "r": -0.486, "ci_lo": -0.4373, "ci_hi": 0.4678, "p": 0.0336, "n": 19}], "scatter": [{"pw": "Allograft Rejection", "x": -1.393, "y": -1.252}, {"pw": "Androgen Response", "x": 0.982, "y": -1.371}, {"pw": "Apical Junction", "x": 0.575, "y": -1.238}, {"pw": "Complement", "x": -0.508, "y": -1.22}, {"pw": "Estrogen Response Early", "x": 1.508, "y": -0.916}, {"pw": "Hypoxia", "x": -0.775, "y": 1.426}, {"pw": "Il2 Stat5 Signaling", "x": 0.889, "y": -0.971}, {"pw": "Interferon Gamma Response", "x": -1.263, "y": 1.157}, {"pw": "Kras Signaling Up", "x": 1.378, "y": -0.921}, {"pw": "Myc Targets V1", "x": -2.213, "y": 1.174}, {"pw": "P53 Pathway", "x": -1.623, "y": -0.895}, {"pw": "Tnfa Signaling Via Nfkb", "x": -0.844, "y": 1.585}, {"pw": "Uv Response Dn", "x": 1.514, "y": -1.34}], "best_ct": "CD4+ T Cell", "best_r": -0.5055, "n_common": 34};
+
+const barW = 420, barH = 220;
+const scW  = 300, scH  = 260;
+const mL = 160, mT = 40, mB = 50, mR = 20;
+const sep = 50;
+const totalW = mL + barW + sep + scW + mR + 30;
+const totalH = mT + Math.max(barH, scH) + mB + 20;
+
+const svg = d3.select("#main").attr("width", totalW).attr("height", totalH);
+const tip = d3.select("#tooltip");
+
+// ── Panel A: horizontal bar chart ────────────────────────────────────────
+const bgA = svg.append("g").attr("transform", `translate(${mL},${mT})`);
+svg.append("text").attr("class","panel-title").attr("x", 8).attr("y", mT-8).text("A");
+
+const cts  = D.bar.map(d => d.ct);
+const yA   = d3.scaleBand().domain(cts).range([0, barH]).padding(0.3);
+const xA   = d3.scaleLinear().domain([-0.6, 0.8]).range([0, barW]);
+const xRef = xA(0);
+
+// Zero line
+bgA.append("line").attr("class","ref-line")
+   .attr("x1", xRef).attr("x2", xRef).attr("y1", 0).attr("y2", barH);
+
+// Bars
+bgA.selectAll(".bar")
+  .data(D.bar).join("rect")
+    .attr("class", d => d.r >= 0 ? (d.ct === D.best_ct ? "bar-best" : "bar-other") : "bar-neg")
+    .attr("x", d => d.r >= 0 ? xRef : xA(d.r))
+    .attr("y", d => yA(d.ct))
+    .attr("width", d => Math.abs(xA(d.r) - xRef))
+    .attr("height", yA.bandwidth())
+    .on("mouseover", (ev, d) => {
+      tip.style("display","block")
+         .html(`<b>${d.ct}</b><br>r = ${d.r.toFixed(3)}<br>95% CI: [${d.ci_lo.toFixed(3)}, ${d.ci_hi.toFixed(3)}]<br>p = ${d.p.toFixed(4)}<br>n = ${d.n} pathways`);
+    })
+    .on("mousemove", ev => tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+    .on("mouseout",  ()  => tip.style("display","none"));
+
+// CI lines
+bgA.selectAll(".ci").data(D.bar).join("line")
+    .attr("class","ci-line")
+    .attr("x1", d => xA(d.ci_lo)).attr("x2", d => xA(d.ci_hi))
+    .attr("y1", d => yA(d.ct) + yA.bandwidth()/2)
+    .attr("y2", d => yA(d.ct) + yA.bandwidth()/2);
+
+// r value labels
+bgA.selectAll(".rlab").data(D.bar).join("text")
+    .attr("x", d => d.r >= 0 ? xA(d.ci_hi) + 4 : xA(d.ci_lo) - 4)
+    .attr("y", d => yA(d.ct) + yA.bandwidth()/2 + 3.5)
+    .attr("text-anchor", d => d.r >= 0 ? "start" : "end")
+    .attr("font-size","9px")
+    .attr("fill", d => d.p < 0.05 ? "#000" : "#888")
+    .text(d => `${d.r >= 0 ? "+" : ""}${d.r.toFixed(3)}${d.p < 0.05 ? "*" : ""}`);
+
+// Axes
+bgA.append("g").call(d3.axisLeft(yA).tickSize(3)).selectAll("text").attr("font-size","9px");
+bgA.append("g").attr("transform",`translate(0,${barH})`).call(d3.axisBottom(xA).ticks(6))
+   .selectAll("text").attr("font-size","8px");
+bgA.append("text").attr("x", barW/2).attr("y", barH+38).attr("text-anchor","middle")
+   .attr("font-size","10px").text("Spearman r (cell-type NES vs. cfRNA NES)");
+
+// ── Panel B: scatter for best cell type ──────────────────────────────────
+const offX = mL + barW + sep;
+const scG  = svg.append("g").attr("transform", `translate(${offX}, ${mT})`);
+svg.append("text").attr("class","panel-title").attr("x", offX - 12).attr("y", mT-8).text("B");
+
+const allX = D.scatter.map(d=>d.x), allY = D.scatter.map(d=>d.y);
+const xPad = 0.3, yPad = 0.3;
+const xS = d3.scaleLinear().domain([d3.min(allX)-xPad, d3.max(allX)+xPad]).range([0, scW]);
+const yS = d3.scaleLinear().domain([d3.min(allY)-yPad, d3.max(allY)+yPad]).range([scH, 0]);
+
+// Ref lines at 0
+scG.append("line").attr("class","ref-line")
+   .attr("x1",xS(0)).attr("x2",xS(0)).attr("y1",0).attr("y2",scH);
+scG.append("line").attr("class","ref-line")
+   .attr("x1",0).attr("x2",scW).attr("y1",yS(0)).attr("y2",yS(0));
+
+// Fit line (OLS for visual)
+const n = D.scatter.length;
+const meanX = d3.mean(allX), meanY = d3.mean(allY);
+const slope = d3.sum(allX.map((x,i)=>(x-meanX)*(allY[i]-meanY))) /
+              d3.sum(allX.map(x=>(x-meanX)**2));
+const intercept = meanY - slope*meanX;
+const x0 = d3.min(allX)-xPad, x1 = d3.max(allX)+xPad;
+scG.append("line").attr("class","fit-line")
+   .attr("x1",xS(x0)).attr("x2",xS(x1))
+   .attr("y1",yS(slope*x0+intercept)).attr("y2",yS(slope*x1+intercept));
+
+// Dots
+scG.selectAll(".dot").data(D.scatter).join("circle")
+    .attr("class","dot").attr("r", 5)
+    .attr("cx", d => xS(d.x)).attr("cy", d => yS(d.y))
+    .on("mouseover", (ev, d) => {
+      tip.style("display","block")
+         .html(`<b>${d.pw}</b><br>Cell-type NES: ${d.x.toFixed(3)}<br>cfRNA NES: ${d.y.toFixed(3)}`);
+    })
+    .on("mousemove", ev => tip.style("left",(ev.pageX+12)+"px").style("top",(ev.pageY-20)+"px"))
+    .on("mouseout",  ()  => tip.style("display","none"));
+
+// Axes
+scG.append("g").attr("transform",`translate(0,${scH})`).call(d3.axisBottom(xS).ticks(5))
+   .selectAll("text").attr("font-size","8px");
+scG.append("g").call(d3.axisLeft(yS).ticks(5)).selectAll("text").attr("font-size","8px");
+
+scG.append("text").attr("x", scW/2).attr("y", scH+38).attr("text-anchor","middle")
+   .attr("font-size","9px").text(`${D.best_ct} NES`);
+scG.append("text").attr("transform","rotate(-90)").attr("x",-scH/2).attr("y",-38)
+   .attr("text-anchor","middle").attr("font-size","9px").text("I4 cfRNA NES");
+
+// r annotation
+const bestRes = D.bar.find(d=>d.ct===D.best_ct);
+scG.append("text").attr("x",4).attr("y",12).attr("font-size","9px").attr("fill","#0072B2")
+   .text(`r = ${D.best_r.toFixed(3)}${bestRes.p<0.05?"*":""}  (n=${bestRes.n})`);
+</script>
+</body>
+</html>

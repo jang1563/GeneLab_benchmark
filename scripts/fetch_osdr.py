@@ -145,9 +145,9 @@ DOWNLOAD_MANIFEST = {
         "phase": 2, "task": "A6",
     },
     "OSD-397": {
-        "tissue": "eye", "mission": "TBD", "glds_prefix": "GLDS-397",
+        "tissue": "eye", "mission": "OSD-397", "glds_prefix": "GLDS-397",
         "phase": 2, "task": "A6",
-        "notes": "Mission TBD. Normalized counts available.",
+        "notes": "Stable public mission label OSD-397. Legacy processed files may still use TBD.",
     },
     # ── Skin (supplementary) ─────────────────────────────────────────────────
     "OSD-238": {

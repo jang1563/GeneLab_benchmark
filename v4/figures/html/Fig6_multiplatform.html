@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 6 — Multi-Platform Extension</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+  .figure-container { width: 1200px; margin: 0 auto; }
+  .figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+  .figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+  .panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+  .panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+  .axis text { font-size: 9px; }
+  .tooltip {
+    position: absolute; padding: 6px 10px; background: rgba(0,0,0,0.85);
+    color: #fff; border-radius: 4px; font-size: 10px; pointer-events: none; z-index: 100; line-height: 1.4;
+  }
+  .interpretation {
+    margin-top: 16px; padding: 10px; background: #f5f5f5;
+    border-left: 3px solid #999; font-size: 9px; color: #444; line-height: 1.5;
+  }
+  .interpretation strong { color: #333; }
+  table.data-table { border-collapse: collapse; width: 100%; font-size: 8px; margin-top: 6px; }
+  table.data-table th, table.data-table td { border: 1px solid #ddd; padding: 2px 5px; text-align: left; }
+  table.data-table th { background: #f0f0f0; font-weight: bold; }
+  .sig { color: #D55E00; font-weight: bold; }
+  .negative { color: #888; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 6 — Multi-Platform Extensions and Power Analysis</div>
+  <div class="figure-subtitle">scRNA-seq (RRRM-2), spatial Visium, power recommendations, and GeneLabBench overview</div>
+  <div class="panels">
+    <div class="panel"><div class="panel-label">A</div>
+      <div class="panel-desc">scRNA-seq LOAO Classification — RRRM-2 (Top 5 Cell Types per Tissue)</div>
+      <div id="scrna"></div>
+    </div>
+    <div class="panel"><div class="panel-label">B</div>
+      <div class="panel-desc">Spatial Visium — Brain (RR-3, NEGATIVE result)</div>
+      <div id="spatial"></div>
+    </div>
+    <div class="panel"><div class="panel-label">C</div>
+      <div class="panel-desc">Power Analysis — Required Samples per Group (6 LOMO tissues)</div>
+      <div id="power"></div>
+    </div>
+    <div class="panel"><div class="panel-label">D</div>
+      <div class="panel-desc">GeneLabBench Summary — Scope and Key Results</div>
+      <div id="overview"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    (A) PBMC NK cells (0.845) and T cells (0.752) show strongest scRNA-seq spaceflight signal.
+    Bone marrow shows no signal (all cell types near chance).
+    (B) Brain Visium is a genuine negative: section-level AUROC=0.14, PC1=slide effect.
+    (C) Power analysis: thymus and gastrocnemius are well-powered; kidney needs 35+ samples per group.
+    (D) GeneLabBench encompasses 1000+ evaluations across bulk, single-cell, spatial, and cross-species platforms.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tooltip = d3.select("#tooltip");
+const tissueColors = {
+  "PBMC": OI.blue, "Spleen": OI.green,
+  "Bone Marrow (Femur)": OI.orange, "Bone Marrow (Humerus)": OI.pink
+};
+
+// =============================================
+// PANEL A: scRNA LOAO
+// =============================================
+(function() {
+  const data = [{"tissue": "PBMC", "cell_type": "Nk Cell", "auroc": 0.845, "ci_lo": 0.823, "ci_hi": 0.866, "p": 0.0002, "n_cells": 1281}, {"tissue": "PBMC", "cell_type": "T Cell", "auroc": 0.752, "ci_lo": 0.734, "ci_hi": 0.769, "p": 0.0002, "n_cells": 5398}, {"tissue": "PBMC", "cell_type": "Cd4 T Cell", "auroc": 0.651, "ci_lo": 0.566, "ci_hi": 0.73, "p": 0.0002, "n_cells": 200}, {"tissue": "PBMC", "cell_type": "Neutrophil", "auroc": 0.629, "ci_lo": 0.617, "ci_hi": 0.642, "p": 0.0002, "n_cells": 8338}, {"tissue": "PBMC", "cell_type": "Monocyte", "auroc": 0.575, "ci_lo": 0.567, "ci_hi": 0.583, "p": 0.0002, "n_cells": 19769}, {"tissue": "Spleen", "cell_type": "B Cell", "auroc": 0.562, "ci_lo": 0.557, "ci_hi": 0.568, "p": 0.0002, "n_cells": 50000}, {"tissue": "Bone Marrow (Humerus)", "cell_type": "Erythroblast", "auroc": 0.535, "ci_lo": 0.514, "ci_hi": 0.558, "p": 0.0012, "n_cells": 2900}, {"tissue": "Spleen", "cell_type": "Macrophage", "auroc": 0.521, "ci_lo": 0.516, "ci_hi": 0.527, "p": 0.0002, "n_cells": 39221}, {"tissue": "Spleen", "cell_type": "Dendritic Cell", "auroc": 0.52, "ci_lo": 0.503, "ci_hi": 0.537, "p": 0.0152, "n_cells": 4045}, {"tissue": "Bone Marrow (Femur)", "cell_type": "Proerythroblast", "auroc": 0.506, "ci_lo": 0.481, "ci_hi": 0.531, "p": 0.3049, "n_cells": 2135}, {"tissue": "Bone Marrow (Humerus)", "cell_type": "Basophil", "auroc": 0.498, "ci_lo": 0.432, "ci_hi": 0.569, "p": 0.5179, "n_cells": 288}, {"tissue": "Bone Marrow (Femur)", "cell_type": "Immature B Cell", "auroc": 0.464, "ci_lo": 0.453, "ci_hi": 0.475, "p": 1.0, "n_cells": 11005}, {"tissue": "Bone Marrow (Femur)", "cell_type": "Macrophage", "auroc": 0.449, "ci_lo": 0.43, "ci_hi": 0.469, "p": 1.0, "n_cells": 3443}, {"tissue": "Bone Marrow (Humerus)", "cell_type": "Immature B Cell", "auroc": 0.427, "ci_lo": 0.416, "ci_hi": 0.438, "p": 1.0, "n_cells": 9589}, {"tissue": "Bone Marrow (Femur)", "cell_type": "Fraction A Pre-Pro B Cell", "auroc": 0.422, "ci_lo": 0.381, "ci_hi": 0.458, "p": 1.0, "n_cells": 939}, {"tissue": "Bone Marrow (Femur)", "cell_type": "Hematopoietic Precursor Cell", "auroc": 0.413, "ci_lo": 0.404, "ci_hi": 0.422, "p": 1.0, "n_cells": 13626}, {"tissue": "Spleen", "cell_type": "Natural Killer Cell", "auroc": 0.402, "ci_lo": 0.371, "ci_hi": 0.433, "p": 1.0, "n_cells": 1194}, {"tissue": "Bone Marrow (Humerus)", "cell_type": "Proerythroblast", "auroc": 0.388, "ci_lo": 0.364, "ci_hi": 0.413, "p": 1.0, "n_cells": 1900}, {"tissue": "Spleen", "cell_type": "T Cell", "auroc": 0.377, "ci_lo": 0.367, "ci_hi": 0.386, "p": 1.0, "n_cells": 12788}, {"tissue": "Bone Marrow (Humerus)", "cell_type": "Late Pro-B Cell", "auroc": 0.368, "ci_lo": 0.345, "ci_hi": 0.39, "p": 1.0, "n_cells": 2210}];
+  const margin = {top: 10, right: 30, bottom: 40, left: 160};
+  const rowH = 16;
+  const width = 320, height = data.length * rowH;
+
+  const svg = d3.select("#scrna").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, 1.0]).range([0, width]);
+
+  // 0.5 reference
+  svg.append("line").attr("x1", x(0.5)).attr("x2", x(0.5)).attr("y1", 0).attr("y2", height)
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "3,3");
+
+  data.forEach((d, i) => {
+    const cy = i * rowH + rowH / 2;
+    const color = tissueColors[d.tissue] || "#888";
+
+    // CI line
+    svg.append("line")
+      .attr("x1", x(Math.max(0, d.ci_lo))).attr("x2", x(Math.min(1, d.ci_hi)))
+      .attr("y1", cy).attr("y2", cy)
+      .attr("stroke", color).attr("stroke-width", 1).attr("opacity", 0.5);
+    // Point
+    svg.append("circle")
+      .attr("cx", x(d.auroc)).attr("cy", cy).attr("r", 3)
+      .attr("fill", d.p < 0.05 ? color : "#ddd")
+      .attr("stroke", color).attr("stroke-width", 0.5);
+    // Label
+    svg.append("text").attr("x", -5).attr("y", cy + 4)
+      .attr("text-anchor", "end").attr("font-size", "7px")
+      .attr("fill", color)
+      .text(`${d.tissue}: ${d.cell_type}`);
+    // Value
+    svg.append("text").attr("x", x(Math.min(1, d.ci_hi)) + 3).attr("y", cy + 3)
+      .attr("font-size", "7px").attr("fill", d.p < 0.05 ? "#333" : "#aaa")
+      .text(`${d.auroc.toFixed(2)}${d.p < 0.01 ? "**" : d.p < 0.05 ? "*" : ""}`);
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format(".1f")));
+  svg.append("text").attr("x", width/2).attr("y", height + 32)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("AUROC (LOAO)");
+})();
+
+// =============================================
+// PANEL B: Spatial Visium (Negative)
+// =============================================
+(function() {
+  const data = {"tissue": "Brain (RR-3 Visium)", "section_auroc": 0.139, "section_ci": [0.0, 0.429], "section_p": 0.9, "animal_auroc": 0.444, "animal_p": 0.4, "bulk_auroc": 0.0, "bulk_note": "Perfect inversion \u2014 genuine overfitting at n=6", "n_deg": 1, "pc1_effect": "42.5% = slide effect (not condition)", "conclusion": "Brain is a genuine negative tissue for spaceflight classification"};
+  const container = d3.select("#spatial");
+
+  const margin = {top: 10, right: 20, bottom: 10, left: 20};
+  const svg = container.append("svg")
+    .attr("width", 460).attr("height", 180)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Negative result box
+  svg.append("rect").attr("x", 0).attr("y", 0).attr("width", 420).attr("height", 150)
+    .attr("fill", "#fff5f5").attr("stroke", "#e0c0c0").attr("rx", 6);
+
+  svg.append("text").attr("x", 210).attr("y", 25)
+    .attr("text-anchor", "middle").attr("font-size", "12px").attr("font-weight", "bold")
+    .attr("fill", OI.vermilion).text("NEGATIVE RESULT");
+
+  const lines = [
+    `Section-level AUROC = ${data.section_auroc} [95% CI: ${data.section_ci[0]}, ${data.section_ci[1]}], p = ${data.section_p}`,
+    `Animal-level AUROC = ${data.animal_auroc}, p = ${data.animal_p}`,
+    `Companion bulk AUROC = ${data.bulk_auroc} (${data.bulk_note})`,
+    `DEGs at padj<0.05: ${data.n_deg}`,
+    `PC1 (${data.pc1_effect})`,
+    `→ ${data.conclusion}`
+  ];
+  lines.forEach((line, i) => {
+    const isBold = i === lines.length - 1;
+    svg.append("text").attr("x", 20).attr("y", 48 + i * 17)
+      .attr("font-size", "9px")
+      .attr("fill", isBold ? "#333" : "#555")
+      .attr("font-weight", isBold ? "bold" : "normal")
+      .text(line);
+  });
+})();
+
+// =============================================
+// PANEL C: Power Analysis
+// =============================================
+(function() {
+  const curves = [{"tissue": "Liver", "n_per_group": 3, "n_missions": 6, "power": 0.66}, {"tissue": "Liver", "n_per_group": 5, "n_missions": 6, "power": 0.81}, {"tissue": "Liver", "n_per_group": 8, "n_missions": 6, "power": 0.916}, {"tissue": "Liver", "n_per_group": 10, "n_missions": 6, "power": 0.94}, {"tissue": "Liver", "n_per_group": 15, "n_missions": 6, "power": 0.974}, {"tissue": "Liver", "n_per_group": 20, "n_missions": 6, "power": 0.987}, {"tissue": "Liver", "n_per_group": 30, "n_missions": 6, "power": 0.992}, {"tissue": "Liver", "n_per_group": 50, "n_missions": 6, "power": 0.996}, {"tissue": "Gastro", "n_per_group": 3, "n_missions": 3, "power": 0.995}, {"tissue": "Gastro", "n_per_group": 5, "n_missions": 3, "power": 0.999}, {"tissue": "Gastro", "n_per_group": 8, "n_missions": 3, "power": 1.0}, {"tissue": "Gastro", "n_per_group": 10, "n_missions": 3, "power": 1.0}, {"tissue": "Gastro", "n_per_group": 15, "n_missions": 3, "power": 1.0}, {"tissue": "Gastro", "n_per_group": 20, "n_missions": 3, "power": 1.0}, {"tissue": "Gastro", "n_per_group": 30, "n_missions": 3, "power": 1.0}, {"tissue": "Gastro", "n_per_group": 50, "n_missions": 3, "power": 1.0}, {"tissue": "Kidney", "n_per_group": 3, "n_missions": 3, "power": 0.147}, {"tissue": "Kidney", "n_per_group": 5, "n_missions": 3, "power": 0.146}, {"tissue": "Kidney", "n_per_group": 8, "n_missions": 3, "power": 0.153}, {"tissue": "Kidney", "n_per_group": 10, "n_missions": 3, "power": 0.149}, {"tissue": "Kidney", "n_per_group": 15, "n_missions": 3, "power": 0.161}, {"tissue": "Kidney", "n_per_group": 20, "n_missions": 3, "power": 0.173}, {"tissue": "Kidney", "n_per_group": 30, "n_missions": 3, "power": 0.164}, {"tissue": "Kidney", "n_per_group": 50, "n_missions": 3, "power": 0.171}, {"tissue": "Thymus", "n_per_group": 3, "n_missions": 4, "power": 0.986}, {"tissue": "Thymus", "n_per_group": 5, "n_missions": 4, "power": 1.0}, {"tissue": "Thymus", "n_per_group": 8, "n_missions": 4, "power": 1.0}, {"tissue": "Thymus", "n_per_group": 10, "n_missions": 4, "power": 1.0}, {"tissue": "Thymus", "n_per_group": 15, "n_missions": 4, "power": 1.0}, {"tissue": "Thymus", "n_per_group": 20, "n_missions": 4, "power": 1.0}, {"tissue": "Thymus", "n_per_group": 30, "n_missions": 4, "power": 1.0}, {"tissue": "Thymus", "n_per_group": 50, "n_missions": 4, "power": 1.0}, {"tissue": "Eye", "n_per_group": 3, "n_missions": 3, "power": 0.358}, {"tissue": "Eye", "n_per_group": 5, "n_missions": 3, "power": 0.471}, {"tissue": "Eye", "n_per_group": 8, "n_missions": 3, "power": 0.577}, {"tissue": "Eye", "n_per_group": 10, "n_missions": 3, "power": 0.654}, {"tissue": "Eye", "n_per_group": 15, "n_missions": 3, "power": 0.797}, {"tissue": "Eye", "n_per_group": 20, "n_missions": 3, "power": 0.881}, {"tissue": "Eye", "n_per_group": 30, "n_missions": 3, "power": 0.947}, {"tissue": "Eye", "n_per_group": 50, "n_missions": 3, "power": 0.992}, {"tissue": "Skin", "n_per_group": 3, "n_missions": 3, "power": 0.556}, {"tissue": "Skin", "n_per_group": 5, "n_missions": 3, "power": 0.715}, {"tissue": "Skin", "n_per_group": 8, "n_missions": 3, "power": 0.84}, {"tissue": "Skin", "n_per_group": 10, "n_missions": 3, "power": 0.893}, {"tissue": "Skin", "n_per_group": 15, "n_missions": 3, "power": 0.966}, {"tissue": "Skin", "n_per_group": 20, "n_missions": 3, "power": 0.991}, {"tissue": "Skin", "n_per_group": 30, "n_missions": 3, "power": 1.0}, {"tissue": "Skin", "n_per_group": 50, "n_missions": 3, "power": 1.0}];
+  const analytical = [{"tissue": "Liver", "auroc": 0.753, "n80": 12, "n90": 17, "n95": 21}, {"tissue": "Gastro", "auroc": 0.995, "n80": 3, "n90": 3, "n95": 3}, {"tissue": "Kidney", "auroc": 0.602, "n80": 96, "n90": 132, "n95": 167}, {"tissue": "Thymus", "auroc": 0.963, "n80": 3, "n90": 3, "n95": 3}, {"tissue": "Eye", "auroc": 0.716, "n80": 18, "n90": 25, "n95": 31}, {"tissue": "Skin", "auroc": 0.797, "n80": 8, "n90": 11, "n95": 13}];
+  const margin = {top: 15, right: 130, bottom: 45, left: 55};
+  const width = 320, height = 220;
+
+  const svg = d3.select("#power").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom + 80)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, 55]).range([0, width]);
+  const y = d3.scaleLinear().domain([0, 1.0]).range([height, 0]);
+
+  // 0.8 power reference
+  svg.append("line").attr("x1", 0).attr("x2", width).attr("y1", y(0.8)).attr("y2", y(0.8))
+    .attr("stroke", "#ddd").attr("stroke-dasharray", "3,3");
+  svg.append("text").attr("x", width + 3).attr("y", y(0.8) + 4)
+    .attr("font-size", "7px").attr("fill", "#aaa").text("80% power");
+
+  const tissueColorMap = {
+    "Liver": OI.blue, "Gastro": OI.vermilion, "Kidney": OI.green,
+    "Thymus": OI.orange, "Eye": OI.pink, "Skin": OI.skyblue
+  };
+
+  const tissues = [...new Set(curves.map(d => d.tissue))];
+  tissues.forEach(tissue => {
+    const pts = curves.filter(d => d.tissue === tissue);
+    if (pts.length === 0) return;
+
+    const line = d3.line().x(d => x(d.n_per_group)).y(d => y(d.power));
+    svg.append("path").datum(pts).attr("d", line)
+      .attr("fill", "none").attr("stroke", tissueColorMap[tissue] || "#333")
+      .attr("stroke-width", 2).attr("opacity", 0.8);
+  });
+
+  svg.append("g").attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(6));
+  svg.append("text").attr("x", width/2).attr("y", height + 35)
+    .attr("text-anchor", "middle").attr("font-size", "10px").text("Samples per Group");
+  svg.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".0%")));
+  svg.append("text").attr("x", -height/2).attr("y", -40)
+    .attr("text-anchor", "middle").attr("font-size", "10px")
+    .attr("transform", "rotate(-90)").text("Statistical Power");
+
+  // Legend
+  let ly = 0;
+  tissues.forEach(t => {
+    svg.append("line").attr("x1", width+10).attr("x2", width+30)
+      .attr("y1", ly+4).attr("y2", ly+4)
+      .attr("stroke", tissueColorMap[t] || "#333").attr("stroke-width", 2);
+    svg.append("text").attr("x", width+33).attr("y", ly+8)
+      .attr("font-size", "8px").text(t);
+    ly += 14;
+  });
+
+  // Analytical table below
+  const tableY = height + 50;
+  svg.append("text").attr("x", 0).attr("y", tableY)
+    .attr("font-size", "9px").attr("font-weight", "bold").text("Required n per group:");
+  analytical.forEach((d, i) => {
+    svg.append("text").attr("x", 0).attr("y", tableY + 14 + i * 12)
+      .attr("font-size", "8px").attr("fill", tissueColorMap[d.tissue] || "#333")
+      .text(`${d.tissue} (AUROC=${d.auroc}): n=${d.n80} (80%), n=${d.n90} (90%)`);
+  });
+})();
+
+// =============================================
+// PANEL D: GeneLabBench Overview Table
+// =============================================
+(function() {
+  const data = [{"category": "Bulk RNA-seq", "scope": "8 tissues \u00d7 8 methods \u00d7 4 features", "n_eval": 256, "key_result": "PCA-LR best (0.776 mean)"}, {"category": "Ablation", "scope": "Feature count, PCA, sample size, bootstrap", "n_eval": 608, "key_result": "K=2000 optimal, PCA 20-50"}, {"category": "Meta-analysis", "scope": "Forest plots, Friedman, DeLong, power", "n_eval": "\u2014", "key_result": "Friedman p=0.015"}, {"category": "SHAP", "scope": "8 tissues \u00d7 2 methods = 16 analyses", "n_eval": 16, "key_result": "5 consensus genes, NPAS2/PER2"}, {"category": "WGCNA", "scope": "6 tissues, 60 modules, 15 preservation pairs", "n_eval": "\u2014", "key_result": "liver\u2192kidney Z=35.65"}, {"category": "Cross-tissue", "scope": "7\u00d77 transfer (Method A+C)", "n_eval": 42, "key_result": "liver\u2192kidney 0.73"}, {"category": "Foundation models", "scope": "UCE + scFoundation, 7 tissues", "n_eval": 14, "key_result": "Both < PCA-LR"}, {"category": "scRNA-seq", "scope": "RRRM-2: 4 tissues, ~50 cell types", "n_eval": "~50", "key_result": "PBMC NK 0.845"}, {"category": "Spatial", "scope": "RR-3 brain Visium", "n_eval": 1, "key_result": "NEGATIVE (AUROC=0.14)"}, {"category": "Cross-species", "scope": "Drosophila \u2194 6 mouse tissues (KEGG)", "n_eval": 6, "key_result": "Weak negative r"}, {"category": "Radiation", "scope": "3 tissues \u00d7 3 contrasts", "n_eval": 9, "key_result": "Near chance"}];
+  const container = d3.select("#overview");
+
+  let html = '<table class="data-table"><tr><th>Category</th><th>Scope</th><th>N Eval</th><th>Key Result</th></tr>';
+  data.forEach(d => {
+    html += `<tr><td><b>${d.category}</b></td><td>${d.scope}</td><td>${d.n_eval}</td><td>${d.key_result}</td></tr>`;
+  });
+  html += '</table>';
+  html += '<div style="font-size:8px; color:#666; margin-top:8px;">Total: 1000+ evaluations across 8 tissues, 8 methods, 4 features, single-cell, spatial, and cross-species platforms.</div>';
+
+  container.append("div").html(html);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "provider": "deepseek-chat",
+  "task_id": "A3",
+  "model_name": "DeepSeek-V3_zeroshot",
+  "parse_summary": {
+    "total": 118,
+    "parsed": 118,
+    "failed": 0
+  },
+  "metrics": {
+    "task_id": "A3",
+    "pooled_end_to_end_auroc": 0.6211845930232558,
+    "pooled_parsed_only_auroc": 0.6211845930232558,
+    "folds": {
+      "fold_RR-1_test": {
+        "n_total": 12,
+        "n_parsed": 12,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.5833333333333334,
+        "parsed_only_auroc": 0.5833333333333334
+      },
+      "fold_RR-3_test": {
+        "n_total": 12,
+        "n_parsed": 12,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.3333333333333333,
+        "parsed_only_auroc": 0.3333333333333333
+      },
+      "fold_RR-7_test": {
+        "n_total": 94,
+        "n_parsed": 94,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.5692567567567568,
+        "parsed_only_auroc": 0.5692567567567568
+      }
+    }
+  }
+}

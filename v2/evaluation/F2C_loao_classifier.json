@@ -1,0 +1,1637 @@
+{
+  "task": "F2-C",
+  "method": "LOAO PCA(50)-LR(balanced), bootstrap CI n=2000, permutation p n=5000",
+  "results": {
+    "blood": {
+      "b_cell": {
+        "auroc": 0.9752160783088619,
+        "ci_low": 0.952380059970015,
+        "ci_high": 0.992579465629438,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 198,
+        "n_cells_gc": 97,
+        "n_cells_total": 295,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 32,
+            "n_train": 263,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 29,
+            "n_train": 266,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 18,
+            "n_train": 277,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 18,
+            "n_train": 277,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 44,
+            "n_train": 251,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 75,
+            "n_train": 220,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 58,
+            "n_train": 237,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 21,
+            "n_train": 274,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "erythroid": {
+        "auroc": 0.6074081165365317,
+        "ci_low": 0.5962360564263812,
+        "ci_high": 0.6191884464447467,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 3795,
+        "n_cells_gc": 9042,
+        "n_cells_total": 12837,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 2382,
+            "n_train": 10455,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 1967,
+            "n_train": 10870,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 2094,
+            "n_train": 10743,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 2599,
+            "n_train": 10238,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 124,
+            "n_train": 12713,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 1759,
+            "n_train": 11078,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 861,
+            "n_train": 11976,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 1051,
+            "n_train": 11786,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "monocyte_macrophage": {
+        "auroc": 0.3557692307692308,
+        "ci_low": 0.22521959459459462,
+        "ci_high": 0.5000448028673833,
+        "p_perm": 0.9718056388722256,
+        "n_animals": 8,
+        "n_cells_flt": 32,
+        "n_cells_gc": 26,
+        "n_cells_total": 58,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 5,
+            "n_train": 53,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 3,
+            "n_train": 55,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 9,
+            "n_train": 49,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 9,
+            "n_train": 49,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 7,
+            "n_train": 51,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 4,
+            "n_train": 54,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 7,
+            "n_train": 51,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 14,
+            "n_train": 44,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "neutrophil": {
+        "auroc": 0.5830155097889652,
+        "ci_low": 0.4868434822306503,
+        "ci_high": 0.6729466818390628,
+        "p_perm": 0.03119376124775045,
+        "n_animals": 8,
+        "n_cells_flt": 69,
+        "n_cells_gc": 114,
+        "n_cells_total": 183,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 20,
+            "n_train": 163,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 35,
+            "n_train": 148,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 33,
+            "n_train": 150,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 26,
+            "n_train": 157,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 3,
+            "n_train": 180,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 38,
+            "n_train": 145,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 10,
+            "n_train": 173,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 18,
+            "n_train": 165,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "t_cell": {
+        "auroc": 0.9690810810810812,
+        "ci_low": 0.9436275757744139,
+        "ci_high": 0.9896136674146475,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 74,
+        "n_cells_gc": 125,
+        "n_cells_total": 199,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 56,
+            "n_train": 143,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 30,
+            "n_train": 169,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 26,
+            "n_train": 173,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 13,
+            "n_train": 186,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 9,
+            "n_train": 190,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 31,
+            "n_train": 168,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 20,
+            "n_train": 179,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 14,
+            "n_train": 185,
+            "fold_auroc": NaN
+          }
+        ]
+      }
+    },
+    "eye": {
+      "corneal_conjunctival_epithelial": {
+        "auroc": 0.5943153732081068,
+        "ci_low": 0.5267667391402054,
+        "ci_high": 0.6611012287150936,
+        "p_perm": 0.002999400119976005,
+        "n_animals": 8,
+        "n_cells_flt": 119,
+        "n_cells_gc": 170,
+        "n_cells_total": 289,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 22,
+            "n_train": 267,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 63,
+            "n_train": 226,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 44,
+            "n_train": 245,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 41,
+            "n_train": 248,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 9,
+            "n_train": 280,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 37,
+            "n_train": 252,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 36,
+            "n_train": 253,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 37,
+            "n_train": 252,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "endothelial_perivascular": {
+        "auroc": 0.5247410817031071,
+        "ci_low": 0.4011764516854655,
+        "ci_high": 0.6497772122974657,
+        "p_perm": 0.32793441311737653,
+        "n_animals": 8,
+        "n_cells_flt": 33,
+        "n_cells_gc": 79,
+        "n_cells_total": 112,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 8,
+            "n_train": 104,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 33,
+            "n_train": 79,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 8,
+            "n_train": 104,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 30,
+            "n_train": 82,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 15,
+            "n_train": 97,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 5,
+            "n_train": 107,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 10,
+            "n_train": 102,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 3,
+            "n_train": 109,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "immune": {
+        "auroc": 0.4167721518987342,
+        "ci_low": 0.32711434444628945,
+        "ci_high": 0.5088654309825195,
+        "p_perm": 0.9688062387522496,
+        "n_animals": 8,
+        "n_cells_flt": 80,
+        "n_cells_gc": 79,
+        "n_cells_total": 159,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 28,
+            "n_train": 131,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 16,
+            "n_train": 143,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 11,
+            "n_train": 148,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 24,
+            "n_train": 135,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 41,
+            "n_train": 118,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 13,
+            "n_train": 146,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 17,
+            "n_train": 142,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 9,
+            "n_train": 150,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "lens_crystallin": {
+        "auroc": 0.7481481481481481,
+        "ci_low": 0.6326711657298578,
+        "ci_high": 0.8571551582745612,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 7,
+        "n_cells_flt": 63,
+        "n_cells_gc": 30,
+        "n_cells_total": 93,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 14,
+            "n_train": 79,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 3,
+            "n_train": 90,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 5,
+            "n_train": 88,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 8,
+            "n_train": 85,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 27,
+            "n_train": 66,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 12,
+            "n_train": 81,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 24,
+            "n_train": 69,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "muller_glia": {
+        "auroc": 0.6322880468913543,
+        "ci_low": 0.5909295991158114,
+        "ci_high": 0.6735603079068352,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 281,
+        "n_cells_gc": 425,
+        "n_cells_total": 706,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 149,
+            "n_train": 557,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 69,
+            "n_train": 637,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 96,
+            "n_train": 610,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 111,
+            "n_train": 595,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 91,
+            "n_train": 615,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 33,
+            "n_train": 673,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 63,
+            "n_train": 643,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 94,
+            "n_train": 612,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "photoreceptor_like": {
+        "auroc": 0.5750907568459657,
+        "ci_low": 0.556916410364398,
+        "ci_high": 0.593206658991936,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 5619,
+        "n_cells_gc": 1207,
+        "n_cells_total": 6826,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 228,
+            "n_train": 6598,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 29,
+            "n_train": 6797,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 770,
+            "n_train": 6056,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 180,
+            "n_train": 6646,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 1883,
+            "n_train": 4943,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 690,
+            "n_train": 6136,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 897,
+            "n_train": 5929,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 2149,
+            "n_train": 4677,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "retinal_neuronal": {
+        "auroc": 0.8161041536955089,
+        "ci_low": 0.7947952635009088,
+        "ci_high": 0.8362863404292943,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 993,
+        "n_cells_gc": 723,
+        "n_cells_total": 1716,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 201,
+            "n_train": 1515,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 119,
+            "n_train": 1597,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 220,
+            "n_train": 1496,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 183,
+            "n_train": 1533,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 322,
+            "n_train": 1394,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 133,
+            "n_train": 1583,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 226,
+            "n_train": 1490,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 312,
+            "n_train": 1404,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "stromal_fibroblast": {
+        "auroc": 0.5946969696969697,
+        "ci_low": 0.5023327652956598,
+        "ci_high": 0.6814956464513515,
+        "p_perm": 0.03259348130373925,
+        "n_animals": 8,
+        "n_cells_flt": 40,
+        "n_cells_gc": 165,
+        "n_cells_total": 205,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 21,
+            "n_train": 184,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 50,
+            "n_train": 155,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 19,
+            "n_train": 186,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 75,
+            "n_train": 130,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 4,
+            "n_train": 201,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 19,
+            "n_train": 186,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 14,
+            "n_train": 191,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 3,
+            "n_train": 202,
+            "fold_auroc": NaN
+          }
+        ]
+      }
+    },
+    "muscle": {
+      "endothelial": {
+        "auroc": 0.9607495814466054,
+        "ci_low": 0.9515605015677331,
+        "ci_high": 0.9691518447047295,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 757,
+        "n_cells_gc": 4488,
+        "n_cells_total": 5245,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 1401,
+            "n_train": 3844,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 591,
+            "n_train": 4654,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 1460,
+            "n_train": 3785,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 1036,
+            "n_train": 4209,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 186,
+            "n_train": 5059,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 59,
+            "n_train": 5186,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 221,
+            "n_train": 5024,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 291,
+            "n_train": 4954,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "fibroadipogenic_progenitor": {
+        "auroc": 0.8925517021512531,
+        "ci_low": 0.8617649077749947,
+        "ci_high": 0.9206245389044414,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 216,
+        "n_cells_gc": 1336,
+        "n_cells_total": 1552,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 223,
+            "n_train": 1329,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 359,
+            "n_train": 1193,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 102,
+            "n_train": 1450,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 652,
+            "n_train": 900,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 27,
+            "n_train": 1525,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 96,
+            "n_train": 1456,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 29,
+            "n_train": 1523,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 64,
+            "n_train": 1488,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "fibroblast_matrix": {
+        "auroc": 0.8799458109309513,
+        "ci_low": 0.8351556293034959,
+        "ci_high": 0.920140715671414,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 115,
+        "n_cells_gc": 1027,
+        "n_cells_total": 1142,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 213,
+            "n_train": 929,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 224,
+            "n_train": 918,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 255,
+            "n_train": 887,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 335,
+            "n_train": 807,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 16,
+            "n_train": 1126,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 35,
+            "n_train": 1107,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 23,
+            "n_train": 1119,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 41,
+            "n_train": 1101,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "macrophage_myeloid": {
+        "auroc": 0.9337613879250122,
+        "ci_low": 0.9176278176698165,
+        "ci_high": 0.9481399707865642,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 531,
+        "n_cells_gc": 2623,
+        "n_cells_total": 3154,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 829,
+            "n_train": 2325,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 356,
+            "n_train": 2798,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 952,
+            "n_train": 2202,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 486,
+            "n_train": 2668,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 153,
+            "n_train": 3001,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 19,
+            "n_train": 3135,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 190,
+            "n_train": 2964,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 169,
+            "n_train": 2985,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "myonuclear_structural": {
+        "auroc": 0.754701369038664,
+        "ci_low": 0.7039370556396652,
+        "ci_high": 0.8046699623816888,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 138,
+        "n_cells_gc": 289,
+        "n_cells_total": 427,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 91,
+            "n_train": 336,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 66,
+            "n_train": 361,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 60,
+            "n_train": 367,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 72,
+            "n_train": 355,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 38,
+            "n_train": 389,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 65,
+            "n_train": 362,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 18,
+            "n_train": 409,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 17,
+            "n_train": 410,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "pericyte_smooth_muscle": {
+        "auroc": 0.8203224776500638,
+        "ci_low": 0.7553471470935584,
+        "ci_high": 0.8818133063273637,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 72,
+        "n_cells_gc": 348,
+        "n_cells_total": 420,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 68,
+            "n_train": 352,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 51,
+            "n_train": 369,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 102,
+            "n_train": 318,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 127,
+            "n_train": 293,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 19,
+            "n_train": 401,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 12,
+            "n_train": 408,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 9,
+            "n_train": 411,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 32,
+            "n_train": 388,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "satellite_myogenic_progenitor": {
+        "auroc": 0.9138696760101931,
+        "ci_low": 0.8951463611295267,
+        "ci_high": 0.9306269342516204,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 410,
+        "n_cells_gc": 2010,
+        "n_cells_total": 2420,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 702,
+            "n_train": 1718,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 319,
+            "n_train": 2101,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 620,
+            "n_train": 1800,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 369,
+            "n_train": 2051,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 98,
+            "n_train": 2322,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 29,
+            "n_train": 2391,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 132,
+            "n_train": 2288,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 151,
+            "n_train": 2269,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "t_nk_lymphocyte": {
+        "auroc": 0.9089751966235337,
+        "ci_low": 0.8890915149903819,
+        "ci_high": 0.9283508638929604,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 341,
+        "n_cells_gc": 2509,
+        "n_cells_total": 2850,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 582,
+            "n_train": 2268,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 434,
+            "n_train": 2416,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 922,
+            "n_train": 1928,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 571,
+            "n_train": 2279,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 83,
+            "n_train": 2767,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 18,
+            "n_train": 2832,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 123,
+            "n_train": 2727,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 117,
+            "n_train": 2733,
+            "fold_auroc": NaN
+          }
+        ]
+      }
+    },
+    "skin": {
+      "basal_keratinocyte": {
+        "auroc": 1.0,
+        "ci_low": 0.9999999999999999,
+        "ci_high": 1.0,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 104,
+        "n_cells_gc": 7918,
+        "n_cells_total": 8022,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 1870,
+            "n_train": 6152,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 2145,
+            "n_train": 5877,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 1880,
+            "n_train": 6142,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 2023,
+            "n_train": 5999,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 14,
+            "n_train": 8008,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 31,
+            "n_train": 7991,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 17,
+            "n_train": 8005,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 42,
+            "n_train": 7980,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "fibroblast_dermal_stromal": {
+        "auroc": 1.0,
+        "ci_low": 0.9999999999999999,
+        "ci_high": 1.0,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 7,
+        "n_cells_flt": 25,
+        "n_cells_gc": 166,
+        "n_cells_total": 191,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 22,
+            "n_train": 169,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 8,
+            "n_train": 183,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 42,
+            "n_train": 149,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 94,
+            "n_train": 97,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 6,
+            "n_train": 185,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 16,
+            "n_train": 175,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 3,
+            "n_train": 188,
+            "fold_auroc": NaN
+          }
+        ]
+      },
+      "immune_myeloid": {
+        "auroc": 1.0,
+        "ci_low": 0.9999999999999999,
+        "ci_high": 1.0,
+        "p_perm": 0.0001999600079984003,
+        "n_animals": 8,
+        "n_cells_flt": 14266,
+        "n_cells_gc": 34,
+        "n_cells_total": 14300,
+        "fold_details": [
+          {
+            "animal_out": "HC_LAR_09",
+            "condition_out": "GC",
+            "n_test": 11,
+            "n_train": 14289,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_19",
+            "condition_out": "GC",
+            "n_test": 3,
+            "n_train": 14297,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_10",
+            "condition_out": "GC",
+            "n_test": 8,
+            "n_train": 14292,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "HC_LAR_20",
+            "condition_out": "GC",
+            "n_test": 12,
+            "n_train": 14288,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_09",
+            "condition_out": "FLT",
+            "n_test": 2471,
+            "n_train": 11829,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_19",
+            "condition_out": "FLT",
+            "n_test": 4376,
+            "n_train": 9924,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_10",
+            "condition_out": "FLT",
+            "n_test": 2828,
+            "n_train": 11472,
+            "fold_auroc": NaN
+          },
+          {
+            "animal_out": "FL_LAR_20",
+            "condition_out": "FLT",
+            "n_test": 4591,
+            "n_train": 9709,
+            "fold_auroc": NaN
+          }
+        ]
+      }
+    }
+  },
+  "v1_bulk_auroc": {
+    "eye": 0.7,
+    "muscle": 0.758,
+    "skin": 0.821
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "tissue": "liver",
+  "graph_type": "random",
+  "topology_scope": "train_fold",
+  "n_edges_per_gene": 10,
+  "n_edges_total": 49951,
+  "n_edges_per_fold": [
+    49949,
+    49947,
+    49954,
+    49952,
+    49950,
+    49955
+  ],
+  "n_genes": 4996,
+  "beta": 9,
+  "mean_auroc": 0.711,
+  "mean_ci_lower": 0.6247,
+  "mean_ci_upper": 0.8005,
+  "perm_pvalue": 0.0198,
+  "n_folds": 6,
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "auroc": 0.7959,
+      "ci_lower": 0.5,
+      "ci_upper": 1.0,
+      "n_train": 247,
+      "n_test": 14,
+      "epochs": 66,
+      "n_edges": 49949
+    },
+    {
+      "test_mission": "RR-3",
+      "auroc": 0.625,
+      "ci_lower": 0.2962,
+      "ci_upper": 0.9688,
+      "n_train": 243,
+      "n_test": 18,
+      "epochs": 77,
+      "n_edges": 49947
+    },
+    {
+      "test_mission": "RR-6",
+      "auroc": 0.5731,
+      "ci_lower": 0.4026,
+      "ci_upper": 0.7453,
+      "n_train": 202,
+      "n_test": 59,
+      "epochs": 82,
+      "n_edges": 49954
+    },
+    {
+      "test_mission": "RR-8",
+      "auroc": 0.6164,
+      "ci_lower": 0.498,
+      "ci_upper": 0.7437,
+      "n_train": 120,
+      "n_test": 141,
+      "epochs": 43,
+      "n_edges": 49952
+    },
+    {
+      "test_mission": "RR-9",
+      "auroc": 0.8778,
+      "ci_lower": 0.6778,
+      "ci_upper": 1.0,
+      "n_train": 238,
+      "n_test": 23,
+      "epochs": 60,
+      "n_edges": 49950
+    },
+    {
+      "test_mission": "MHU-2",
+      "auroc": 0.7778,
+      "ci_lower": 0.25,
+      "ci_upper": 1.0,
+      "n_train": 255,
+      "n_test": 6,
+      "epochs": 95,
+      "n_edges": 49955
+    }
+  ],
+  "seed": 42,
+  "n_bootstrap": 1000,
+  "n_perm": 100,
+  "pca_lr_auroc": 0.6827,
+  "delta_vs_pca_lr": 0.0283
+}

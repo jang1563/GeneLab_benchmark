@@ -1,6 +1,63 @@
-# GeneLab_benchmark v1.0 — Results Summary
+# GeneLab_benchmark — Results Summary
 
-Generated: 2026-03-01 (Updated: 2026-03-07)
+Generated: 2026-03-01 (Updated: 2026-03-29 — v5 biological interpretation added)
+
+---
+
+## v4 Phase 1: Multi-Method Evaluation (256 evaluations)
+
+**Scope**: 8 tissues x 8 classifiers x 4 feature types = 256 evaluations
+
+### Classifiers
+PCA-LR, ElasticNet-LR, Random Forest, XGBoost, SVM-Linear, SVM-RBF, TabNet, LightGBM
+
+### Feature Types
+Gene (log2-normalized), Hallmark (ssGSEA), KEGG (ssGSEA), Pathway-combined
+
+### Best Results per Tissue
+
+| Tissue | Best AUROC | Method | Feature | perm_p | Significant |
+|--------|-----------|--------|---------|--------|-------------|
+| **Thymus** | **0.948** | PCA-LR | KEGG | <0.05 | Yes* |
+| **Colon** | **0.921** | PCA-LR | KEGG | <0.05 | Yes* |
+| **Lung** | **0.901** | PCA-LR | Gene | <0.05 | Yes* |
+| **Kidney** | **0.829** | ElasticNet-LR | Hallmark | <0.01 | Yes** |
+| **Eye** | 0.823 | PCA-LR | Hallmark | — | — |
+| **Skin** | 0.819 | PCA-LR | Gene | — | — |
+| **Gastrocnemius** | 0.776 | PCA-LR | Gene | — | — |
+| **Liver** | 0.670 | PCA-LR | Gene | — | — |
+
+### Classifier Rankings (Gene-level mean across 8 tissues)
+
+| Rank | Classifier | Gene Mean AUROC |
+|------|-----------|----------------|
+| 1 | **PCA-LR** | **0.776** |
+| 2 | ElasticNet-LR | 0.762 |
+| 3 | LightGBM | ~0.72 |
+| 4 | XGBoost | ~0.71 |
+| 5 | Random Forest | ~0.70 |
+| 6 | SVM-Linear | ~0.69 |
+| 7 | TabNet | 0.527 |
+| 8 | SVM-RBF | 0.510 |
+
+### Key v4 Findings
+
+- **40/256** evaluations significant at p<0.05; **6/8** tissues have >=1 significant result
+- PCA-LR best overall; deep learning (TabNet) and kernel methods (SVM-RBF) worst
+- Pathway features improve: kidney (0.584->0.829), thymus (0.908->0.948), eye (0.697->0.823)
+- Gene features better for: skin (0.819), lung (0.901)
+- v4 expanded controls: BC/VC included (liver 261 vs v1's 193 samples)
+- v1 PCA-LR liver AUROC reproduced exactly (0.5870 vs 0.5871) using task folds
+
+### v4 Label Encoding
+
+- **Flight/FLT** -> 1
+- **GC/Ground Control/Ground/Basal/BC/VC/Vivarium** -> 0
+- **AG (Artificial Gravity)** -> excluded
+
+---
+
+## v1 Results (6 tissues, original analysis)
 
 ## Hypothesis Results
 
@@ -23,7 +80,20 @@ Generated: 2026-03-01 (Updated: 2026-03-07)
 | **Liver** | 0.577 | [0.492, 0.666] | 6 | 30 | 3 |
 | **Kidney** | 0.555 | [0.397, 0.681] | 3 | 6 | 3 |
 
-Permutation tests: Thymus vs Liver p=0.001, Gastro vs Liver p=0.048, Skin vs Liver p=0.032.
+Thymus vs Liver Δ = 0.283. Permutation tests: Thymus vs Liver p=0.001, Gastro vs Liver p=0.048, Skin vs Liver p=0.032.
+
+### Category A Detection Significance (BH-FDR corrected)
+
+| Tissue | AUROC | Raw p | FDR q | Significant? |
+|---|---|---|---|---|
+| Skin | 0.821 | 0.002 | 0.012 | **Yes** |
+| Gastrocnemius | 0.824 | 0.026 | 0.074 | No |
+| Thymus | 0.923 | 0.037 | 0.074 | No |
+| Eye | 0.789 | 0.063 | 0.095 | No |
+| Liver | 0.670 | 0.091 | 0.109 | No |
+| Kidney | 0.432 | 0.281 | 0.281 | No |
+
+*Note: Only skin survives BH-FDR correction at α=0.05. However, all top-4 tissues have AUROC > 0.7 (GO threshold). High AUROC with modest significance reflects small fold counts (3-4 folds per tissue), not weak signal.*
 
 ---
 
@@ -110,14 +180,16 @@ Excluding gastrocnemius: rank-order correlation for 5 tissues (thymus/eye/skin/l
 
 ## Biological Validation (fGSEA Hallmark, all tissues PASS)
 
-| Tissue | Top Enriched Pathways | Consistency |
+| Tissue | Top Differentially Enriched Pathways (FLT vs GC) | Consistency |
 |---|---|---|
-| Liver | OXIDATIVE_PHOSPHORYLATION, FATTY_ACID_METABOLISM | Literature-concordant |
+| Liver | OXIDATIVE_PHOSPHORYLATION, FATTY_ACID_METABOLISM | Literature-concordant (direction varies by mission) |
 | Thymus | E2F_TARGETS, G2M_CHECKPOINT, IFN-gamma | Thymocyte proliferation |
-| Gastrocnemius | OXIDATIVE_PHOSPHORYLATION, MYOGENESIS | Muscle metabolism |
+| Gastrocnemius | OXIDATIVE_PHOSPHORYLATION, MYOGENESIS | Muscle metabolism (direction varies by mission) |
 | Kidney | MTORC1_SIGNALING, CHOLESTEROL_HOMEOSTASIS | Renal metabolism |
 | Eye | OXIDATIVE_PHOSPHORYLATION (dominant 3/3 missions) | Retina metabolic demand |
 | Skin | E2F_TARGETS, G2M_CHECKPOINT, EPITHELIAL_MESENCHYMAL_TRANSITION | Cell proliferation + ECM remodeling (2/3 missions consistent) |
+
+*Note: "Top Differentially Enriched" = highest |NES| across missions. Enrichment direction (up/down in spaceflight) may vary by mission for liver and gastrocnemius due to mission-specific biological variability. See individual fGSEA result files in `processed/fgsea/` for per-mission NES values and directions.*
 
 ---
 
@@ -135,7 +207,33 @@ Mouse-Geneformer (6L BERT, 56K mouse gene vocab, pretrained on 30M scRNA-seq cel
 | A6 | Eye | 0.484 ± 0.117 | 0.789 | PCA-50 + LogReg | -0.305 | Baseline |
 | **Mean** | **6 tissues** | **0.476** | **0.758** | — | **-0.283** | **Baseline** |
 
-**Interpretation**: Classical ML wins 6/6 tissues. Geneformer performs near chance level (0.5) on small-n bulk RNA-seq (train n=30-100). This is consistent with literature — foundation models pretrained on single-cell data do not automatically transfer to small-sample bulk transcriptomics tasks.
+**Interpretation**: Classical ML wins 6/6 tissues (sign test p=0.016). Geneformer performs near chance level (0.5) on small-n bulk RNA-seq (train n=30-100). This is consistent with literature — foundation models pretrained on single-cell data do not automatically transfer to small-sample bulk transcriptomics tasks.
+
+*Note: Table shows best baseline per tissue for fair comparison. Publication figures use unified PCA-LR baseline (mean 0.743) for cross-figure consistency with Category A/B results.*
+
+---
+
+## Tier 2: scGPT (whole_human) vs Classical Baseline
+
+scGPT-whole_human (12L Transformer, 512d hidden, 8 heads, pretrained on 33M human CellXGene cells) fine-tuned on mouse bulk RNA-seq LOMO folds via ENSMUSG→human gene symbol ortholog mapping. Training: 10 epochs, batch=8, lr=1e-4, freeze=10/12 layers (flash_attn disabled for PyTorch 2.1 compatibility).
+
+**Note on reliability**: Folds with n_test ≤ 8 (MHU-1 thymus, RR-9 gastro) produce highly variable AUROC estimates and should be interpreted with caution. Large-n folds (RR-8 liver n=103, RR-7 kidney n=94, RR-7 skin n=30) are most reliable.
+
+| Task | Tissue | scGPT AUROC | Geneformer AUROC | Baseline AUROC | Δ vs GF | Δ vs Baseline | Winner |
+|------|--------|------------|-----------------|---------------|---------|--------------|--------|
+| A1 | Liver | 0.628 ± 0.249 | 0.486 | 0.588 | +0.143 | +0.040 | **scGPT** |
+| A2 | Gastrocnemius | 0.685 ± 0.250 | 0.382 | 0.907 | +0.303 | -0.222 | Baseline |
+| A3 | Kidney | 0.556 ± 0.159 | 0.452 | 0.521 | +0.104 | +0.035 | **scGPT** |
+| A4 | Thymus | 0.782 ± 0.149 | 0.495 | 0.923 | +0.287 | -0.141 | Baseline |
+| A5 | Skin | 0.691 ± 0.042 | 0.557 | 0.821 | +0.135 | -0.130 | Baseline |
+| A6 | Eye | 0.650 ± 0.100 | 0.484 | 0.789 | +0.166 | -0.139 | Baseline |
+| **Mean** | **6 tissues** | **0.666** | **0.476** | **0.758** | **+0.190** | **-0.093** | **Baseline** |
+
+**Interpretation**: Classical ML wins 4/6 tissues vs scGPT (sign test p=0.688, ns), while scGPT wins liver and kidney. scGPT still outperforms Geneformer by +0.190 AUROC across all tissues, suggesting human-pretrained 12L transformer captures more transferable signal than mouse-specific 6L BERT. However, both FMs remain below the classical ML mean baseline (scGPT: -0.093, Geneformer: -0.283), so pretrained single-cell FMs still do not reliably beat tuned classical models on small-n bulk transcriptomics.
+
+**Key observation**: scGPT variance spans std=0.042–0.250 across tissues, comparable to Geneformer’s 0.054–0.233 range. Large-n reliable folds still show instability rather than a clean FM win: liver RR-8 (n=103) remains near chance at 0.468, while kidney RR-7 (n=94) reaches 0.557 and skin folds (n=30–39) stay in the 0.636–0.737 range.
+
+*Results file: `evaluation/scgpt/scgpt_whole_human_all_tissues_summary.json`*
 
 ---
 
@@ -154,16 +252,252 @@ Reserved held-out test set for external benchmark evaluation. Train on 4 mission
 
 ---
 
+## Tier 3: LLM Zero-Shot Classification
+
+Three LLMs tested on zero-shot text-based spaceflight detection (no training, gene expression → text prompt → binary prediction).
+
+| Model | A1 Liver | A2 Gastro | A3 Kidney | A4 Thymus | A5 Skin | A6 Eye | Mean |
+|---|---|---|---|---|---|---|---|
+| **PCA-LR (ref)** | 0.670 | 0.824 | 0.432 | 0.923 | 0.821 | 0.789 | **0.743** |
+| DeepSeek-V3 | 0.435 | 0.514 | 0.495 | 0.421 | 0.467 | 0.492 | 0.471 |
+| Gemini-2.5-Flash | 0.523 | 0.438 | 0.494 | 0.602 | 0.580 | 0.393 | 0.505 |
+| Llama-3.3-70B | 0.527 | 0.544 | 0.440 | 0.533 | 0.451 | 0.407 | 0.484 |
+
+**Interpretation**: All 3 LLMs perform at chance level (mean 0.47–0.51). Text-based reasoning cannot replace numerical ML for transcriptomics classification. Protein-coding gene filter was applied to reduce prompt noise.
+
+---
+
+## Multi-DB Pathway Comparison (LOMO, PCA-LR)
+
+| Tissue | Hallmark | KEGG | Reactome | MitoCarta | Best DB | Range |
+|---|---|---|---|---|---|---|
+| Thymus | 0.879 | 0.899 | **0.922** | 0.846 | Reactome | 0.076 |
+| Gastro | 0.688 | 0.713 | **0.755** | 0.627 | Reactome | 0.128 |
+| Skin | 0.690 | **0.754** | 0.693 | 0.542 | KEGG | 0.212 |
+| Eye | **0.915** | 0.625 | 0.658 | 0.478 | Hallmark | 0.437 |
+| Liver | 0.574 | **0.639** | 0.614 | 0.555 | KEGG | 0.084 |
+| Kidney | 0.743 | 0.665 | **0.779** | 0.641 | Reactome | 0.138 |
+
+**Key findings**:
+- DB choice > model choice (AUROC range up to 0.437 for Eye)
+- No single DB dominates: Reactome best for 3 tissues, KEGG for 2, Hallmark for 1
+- MitoCarta consistently worst (specialized → low coverage)
+
+---
+
+## Temporal & Biological Covariates
+
+### T1: ISS-T vs LAR Sacrifice Timing
+
+**Question**: Can sacrifice timing (ISS-Terminal vs Live Animal Return) be detected from transcriptomics?
+
+**Confound warning (DD-18)**: ISS-T = RNAlater on-orbit, LAR = standard necropsy. Preservation method confounds biological timing.
+
+| Sub-task | Condition | Gene AUROC | Pathway AUROC | n |
+|---|---|---|---|---|
+| **T1a RR-6 liver** | FLT | 1.000 | 0.960 | 20 |
+| | GC (baseline) | 0.922 | 0.778 | 19 |
+| **T1b RR-8 liver** | FLT | 0.930 | 0.920 | 35 |
+| | GC (baseline) | **0.973** | 0.993 | 35 |
+| **T1c RR-6 thymus** | FLT | 0.857 | 0.714 NS | 17 |
+| | GC (baseline) | **0.925** | 1.000 | 18 |
+
+**Verdict**: GC AUROC ≥ FLT AUROC in most cases → ISS-T vs LAR difference **dominated by preservation artifact**, not biological timing. Cross-mission transfer (T1d) confirms: artifact is consistent across RR-6↔RR-8 (FLT gene AUROC 0.97–0.99, GC gene 0.84–0.96).
+
+### T2: LAR Recovery Signature
+
+| Mission | PCA Recovery R | Pathways Recovering | FLT_LAR flight_prob |
+|---|---|---|---|
+| RR-6 | 0.842 (partial) | 12/26 | 0.185 (strong) |
+| RR-8 | 0.652 (stronger) | **25/27** (overshoot) | 0.404 (moderate) |
+
+RR-8 shows strong recovery with overshoot past baseline (MYC targets V1 +2.49, Protein secretion +2.14). RR-6 shows immune rebound (IFN-α -2.36, Inflammatory -2.54).
+
+### T3: Age × Spaceflight Interaction (RR-8 Liver)
+
+| Comparison | Gene AUROC | Pathway AUROC | n |
+|---|---|---|---|
+| T3a: Overall OLD vs YNG | **0.985** | 0.851 | 141 |
+| T3d: Spaceflight in OLD | **0.945** [0.846, 1.00] | 0.879 | 34 |
+| T3d: Spaceflight in YNG | **0.679** [0.479, 0.86] | 0.716 | 36 |
+| **Delta (OLD - YNG)** | **+0.266** | +0.163 | — |
+
+**Verdict**: "Spaceflight amplifies aging" **SUPPORTED** (Δ=+0.266). T3c ANOVA: 0/50 significant Age×Spaceflight interactions at FDR<0.05 (underpowered, n=10/cell).
+
+---
+
+## J2: DGE Pipeline Comparison
+
+**Question**: Does the choice of DGE pipeline (DESeq2 vs edgeR vs limma-voom) affect downstream results?
+
+**Scope**: 9 missions (6 liver + 3 thymus) × 3 pipelines = 27 DGE runs. Skin excluded (RR-7 has no raw counts).
+
+| Metric | Mean | Min | Max |
+|---|---|---|---|
+| **Log2FC Spearman** | **0.926** | 0.790 | 1.000 |
+| **Log2FC Pearson** | **0.895** | 0.706 | 1.000 |
+| **DEG Jaccard (FDR<0.05)** | **0.600** | 0.000 | 1.000 |
+| **GeneLab Replication** | **0.707** | — | 9 missions |
+
+**Key findings**:
+- Fold-change rankings are highly conserved across all three pipelines (Spearman 0.926)
+- DEG list overlap varies by pipeline stringency: limma-voom most liberal, edgeR most conservative
+- RR-3 liver: 0 DEGs across all pipelines (n=6+6, true biological null — GeneLab also found only 1 DEG)
+- RR-1 edgeR: 0 DEGs due to conservative multiple testing correction, but log2FC correlation >0.95 with DESeq2
+- GeneLab replication (our binary FLT-vs-GC vs GeneLab's multi-level contrasts): moderate agreement (Spearman 0.707) reflects different design matrices, not pipeline error
+
+**Verdict**: Rankings consistent, DEG lists vary by stringency threshold. Pipeline choice has **moderate impact on DEG calls** but **minimal impact on gene-level effect size rankings** — consistent with J1 (pipeline version comparison).
+
+---
+
+## Held-Out Evaluation: A5 Skin (OSD-254 / RR-7)
+
+Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 (n=30: 10 Flight, 20 GC). 20,110 common genes. RR-7 is a 75-day mission (longest in skin dataset).
+
+| Model | AUROC | 95% CI | p-value |
+|-------|-------|--------|---------|
+| LR ElasticNet | **0.885** | [0.745, 0.986] | <0.001 |
+| PCA-50 + LogReg | 0.840 | [0.679, 0.963] | 0.001 |
+| Random Forest | 0.777 | [0.583, 0.929] | 0.007 |
+
+**Cross-Tissue Held-Out Comparison**:
+
+| Tissue | Mission | Duration | Best AUROC | n_test |
+|--------|---------|----------|------------|--------|
+| Thymus | RR-23 | 30 days | 0.905 (LR) | 16 |
+| Skin | RR-7 | 75 days | 0.885 (LR) | 30 |
+
+**Interpretation**: Skin held-out confirms strong generalization (AUROC 0.885, p<0.001), exceeding the LOMO mean (0.821). Both held-out tissues achieve AUROC > 0.85, validating cross-mission spaceflight detection beyond leave-one-out evaluation.
+
+---
+
 ## Pipeline Status
 
 | Component | Files | Status |
 |---|---|---|
-| fGSEA | 60 (6 tissues × missions × 3 DBs) | Complete |
-| GSVA | 54 (5 tissues × missions × 3 DBs) | Complete |
-| Category B | 5 tissues, bootstrap CI + permutation | Complete |
+| fGSEA | 80 (6 tissues × missions × 4 DBs incl. MitoCarta) | Complete |
+| GSVA | 88 (6 tissues × missions × 4 DBs, skin+thymus MHU-1) | Complete |
+| Category A | 6 tissues, PCA-LR LOMO | Complete |
+| Category B | 6 tissues, bootstrap CI + permutation | Complete |
 | Category C | 4 pairs × 3 methods | Complete |
 | Category D | D3 + D4 + D5×2 + D6×2 (6 tasks) | Complete |
 | J5 | 15 comparisons | Complete |
-| NES Conservation | 6 tissues | Complete |
+| NES Conservation | 6 tissues × 4 DBs | Complete |
+| Multi-DB LOMO | 24 runs (6 tissues × 4 DBs) | Complete |
+| NC1/NC2 | Permutation + housekeeping controls | Complete |
+| Cell 2020 | 5 tissues pathway validation | Complete |
 | Geneformer | 6 tissues, 22 LOMO folds (Mouse-GF) | Complete |
-| Held-Out | A4 Thymus (RR-23), Tier 1 + Geneformer | Complete |
+| scGPT | 6 tissues, 21 LOMO folds (whole_human), mean AUROC=0.666 | Complete |
+| LLM Zero-Shot | 3 providers × 6 tasks (18 evals) | Complete |
+| Held-Out | A4 Thymus (RR-23) + A5 Skin (RR-7) | Complete |
+| T1-T3 Temporal | ISS-T/LAR, Recovery, Age×Spaceflight | Complete |
+| J2 DGE Pipeline | 9 missions × 3 pipelines (DESeq2/edgeR/limma-voom) | Complete |
+| **v1 Figures** | **4 main + 4 supplementary (HTML/SVG)** | **Complete** |
+| **v2 E1-E3** | **Cross-species NES, duration effect, cfRNA origin** | **Complete** |
+| **v2 F1** | **I4 PBMC cell-type fGSEA (10 types × 50 pathways)** | **Complete** |
+| **v2 Figures** | **3 integrated main figures (D3.js v7)** | **Complete** |
+| **RRRM-1 scRNA** | **4 tissues (blood/eye/muscle/skin), 38K cells, annotated** | **Complete** |
+
+---
+
+## v3 Results Summary
+
+### Foundation Model Comparison (7 tissues)
+
+| Model | Liver | Gastro | Kidney | Thymus | Eye | Lung | Colon | Mean |
+|-------|-------|--------|--------|--------|-----|------|-------|------|
+| **PCA-LR** | **0.670** | **0.824** | 0.432 | **0.923** | **0.789** | — | — | **0.758** |
+| scGPT | 0.628 | 0.685 | **0.556** | 0.782 | 0.650 | — | — | 0.666 |
+| scFoundation | 0.635** | 0.691* | 0.541 | 0.487 | 0.563 | 0.389 | 0.755 | ~0.58 |
+| UCE (seeded) | 0.459 | 0.578 | 0.489 | 0.632* | 0.550 | 0.555 | 0.449 | ~0.53 |
+| Geneformer | 0.486 | 0.382 | 0.452 | 0.495 | 0.484 | — | — | 0.476 |
+
+*p<0.05, **p<0.01. scGPT and Geneformer rows are 6-tissue v1 references; lung/colon were not evaluated for those models. All FMs underperform PCA-LR baseline.
+
+### RRRM-2 scRNA-seq (F5)
+
+| Tissue | Best Cell Type | AUROC | Significance |
+|--------|---------------|-------|-------------|
+| PBMC | NK cell | **0.845*** | p<0.001 |
+| PBMC | T cell | **0.752*** | p<0.001 |
+| Spleen | B cell | 0.562*** | p<0.001 |
+| Bone marrow | All 14 types | 0.27-0.54 | No signal |
+
+### Spatial Visium (F3, Brain OSD-352)
+
+- **Negative result**: Section AUROC=0.139, Animal AUROC=0.444
+- PC1 (42.5%) = slide batch effect, not spaceflight condition
+- Brain = genuine negative for spaceflight classification
+
+### Cross-Tissue Transfer (B_ext, 7x7 = 42 pairs)
+
+- Method A (gene) range: 0.35-0.80, liver->kidney best (0.73)
+- Method C (pathway) range: 0.43-0.87, liver->gastro best (0.87)
+
+---
+
+## v4 Pipeline Status
+
+| Component | Status |
+|---|---|
+| Phase 1: 256 evaluations (8 tissues × 8 methods × 4 features) | **Complete** |
+| Phase 2: Ablation studies (569 evals: feature count, PCA dims, sample size, bootstrap) | **Complete** |
+| Phase 3: Friedman LOMO-6 meta-analysis (chi2=17.333, p=0.015) | **Complete** |
+| Phase 4: SHAP multi-method interpretability | **Complete** |
+| Phase 5: Python WGCNA (6 tissues), module preservation, STRING PPI enrichment | **Complete** |
+| Phase 7: Publication figures (6 main + 5 supplementary HTML) | **Complete** |
+| Phase 8: Manuscript preparation | In Progress |
+
+---
+
+## v5 Biological Interpretation
+
+### Immune Deconvolution (mMCP-counter, 8 tissues)
+
+| Tissue | Significant Cell Types (FDR<0.05) | Strongest Signal |
+|--------|-----------------------------------|-----------------|
+| Skin | **6/14** | Fibroblasts↑FLT, NK cells↑FLT |
+| Kidney | 2/14 | — |
+| Thymus | 2/14 | — |
+| Liver, Gastro, Eye, Lung, Colon | 0/14 | No signal |
+
+Direction convention: positive Cliff's delta = higher in Flight vs. Ground.
+
+### Cross-Organ Signaling (OmniPath)
+
+- 111 intercell-filtered ligand–receptor pairs (9 strict, 102 broad)
+- 1 SHAP-active L–R pair identified
+- TF activity (CollecTRI + decoupler ULM): thymus 240 sig, skin 241, kidney 177, liver 105
+
+### Metabolic Flux (iMM1865 E-Flux + pFBA)
+
+| Tissue | FLT objective | GC objective | Difference |
+|--------|--------------|-------------|-----------|
+| Thymus | 15,695 | 14,696 | **999** (largest) |
+| Liver | 16,510 | 16,110 | 400 |
+| Gastrocnemius | — | — | varies |
+| Kidney, Eye, Skin | — | — | varies |
+
+E-Flux normalized to [0,1] range; pFBA used to resolve LP degeneracy.
+
+### Drug Target Mapping (DGIdb v5 + ChEMBL)
+
+- 834 WGCNA/SHAP consensus spaceflight genes → mouse→human ortholog mapping
+- **271/834 (32.5%)** human orthologs have known drug interactions (DGIdb)
+- **1,284 FDA-approved** drug–gene interactions (Tier 1)
+- **200 investigational** drug–gene interactions (Tier 3)
+- Thymus most druggable tissue (24.8%); 45 WGCNA modules enriched
+
+### Consensus Biomarker Panel (20 genes)
+
+Scoring: SHAP rank (0–4) + WGCNA module membership (0–3) + multi-tissue (0–2) + druggability (0–1) + statistical significance (0–2)
+
+| Top Genes | Score | Notes |
+|-----------|-------|-------|
+| MUP22 | 5 | Liver/skin WGCNA hub, SHAP top |
+| Thrsp / THRSP | 5 | Metabolic hub |
+| Apoa1 | 5 | Liver SHAP + WGCNA |
+| NPAS2 | 4 | Circadian clock, gastro+skin modules |
+| PER2 | 4 | Circadian clock |
+
+Panel validation AUROC: gastro 0.806, liver 0.754, eye 0.728, colon 0.75, skin 0.70

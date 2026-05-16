@@ -22,14 +22,29 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
 
+try:
+    from scripts.benchmark_common import (
+        PHASE1_AUROC_THRESHOLD,
+        PHASE1_CI_LOWER_THRESHOLD,
+        PHASE1_PERM_P_THRESHOLD,
+        task_variant_suffix,
+    )
+except ImportError:
+    from benchmark_common import (
+        PHASE1_AUROC_THRESHOLD,
+        PHASE1_CI_LOWER_THRESHOLD,
+        PHASE1_PERM_P_THRESHOLD,
+        task_variant_suffix,
+    )
+
 # ── Paths ─────────────────────────────────────────────────────────────────────
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TASKS_DIR = REPO_ROOT / "tasks"
 
 # ── Go/No-Go Thresholds (DD-11) ───────────────────────────────────────────────
-AUROC_THRESHOLD = 0.700
-CI_LOWER_THRESHOLD = 0.500
-PERM_P_THRESHOLD = 0.050
+AUROC_THRESHOLD = PHASE1_AUROC_THRESHOLD
+CI_LOWER_THRESHOLD = PHASE1_CI_LOWER_THRESHOLD
+PERM_P_THRESHOLD = PHASE1_PERM_P_THRESHOLD
 
 # ── Evaluation Parameters ─────────────────────────────────────────────────────
 N_BOOTSTRAP = 2000
@@ -313,6 +328,7 @@ def evaluate_submission_full(submission: dict, task_id: str,
 
     results = {
         "task_id": task_id,
+        "task_dir": task_dir.name,
         "model_name": submission["model_name"],
         "model_description": submission.get("model_description", ""),
         "submission_date": submission.get("submission_date", ""),
@@ -445,6 +461,9 @@ def main():
     else:
         print("  ✓ Validation passed")
 
+    task_dir = get_task_dir(args.task, task_dir_name=args.task_dir)
+    variant_suffix = task_variant_suffix(args.task, task_dir, TASKS_DIR)
+
     if args.validate_only:
         return
 
@@ -468,7 +487,7 @@ def main():
     else:
         # Default output path
         out_name = (f"evaluation/submission_{submission['model_name']}"
-                    f"_{args.task}_eval.json")
+                    f"_{args.task}{variant_suffix}_eval.json")
         out_path = REPO_ROOT / out_name
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "w") as f:
