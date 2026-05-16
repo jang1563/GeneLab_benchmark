@@ -8,13 +8,13 @@
 
 ---
 
-## Candidate Datasets (PLAN.md v0.5)
+## Candidate Datasets
 
 | OSD ID | Tissue | Mission | Track | Status | Assay | Control Types | Bulk RNA-seq Files | Notes |
 |---|---|---|---|---|---|---|---|---|
 | OSD-48 | liver | RR-1 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC, VC, BC | 23 | primary |
 | OSD-137 | liver | RR-3 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC | 20 | primary |
-| OSD-168 | liver | RR-1+3 | 2a | 🔁 DUPLICATE — Category J only | bulk_rnaseq | GC | 54 | DUPLICATE of OSD-48+137 — Category J only (DESIGN_DECISIONS DD-05) |
+| OSD-168 | liver | RR-1+3 | 2a | 🔁 DUPLICATE — Category J only | bulk_rnaseq | GC | 54 | DUPLICATE of OSD-48+137 — Category J only (sample reuse would leak across LOMO folds) |
 | OSD-245 | liver | RR-6 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC | 358 | primary |
 | OSD-379 | liver | RR-8 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC | 290 | primary |
 | OSD-242 | liver | RR-9 | 2a | ✅ Verified (bulk RNA-seq) | bulk_rnaseq | GC | 144 | primary |
@@ -77,12 +77,10 @@
 OSD-168 is a reprocessed combination of OSD-48 (RR-1) + OSD-137 (RR-3) liver data.
 Including in Category A would cause sample duplication across LOMO train/test folds.
 **Use only in Category J (J1): pipeline version comparison (v1 vs v2 vs v3).**
-Reference: DESIGN_DECISIONS.md DD-05
 
 ### OSD-25 (STS-135) — Track 2b only
 Uses BALB/c mouse strain, not C57BL/6J. Excluded from Track 2a (primary analysis).
 Track 2b (secondary, supplementary): included as cross-strain experiment.
-Reference: DESIGN_DECISIONS.md DD-06
 
 ### OSD-240/241 (RR-5 Skin) — Track 2b only
 BAL-TAL strain (BALB/c × C57BL/6 cross or similar), NOT C57BL/6J.
@@ -96,4 +94,3 @@ Time points: 25 days and 75 days post-launch (both included, treated as same RR-
 
 ### OSD-270 (Heart, Visium) — NOT Category A
 Visium spatial transcriptomics, not bulk RNA-seq. Category F (v2.0) only.
-Reference: PLAN.md v0.5 Section 3.2
