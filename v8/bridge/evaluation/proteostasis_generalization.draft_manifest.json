@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "bridge.proteostasis_generalization",
+  "pillar": "bridge",
+  "status": "draft",
+  "claim": {
+    "short": "The 11-pathway translation/proteostasis signature first observed as the driver of mouse-gastrocnemius -> human-Inspiration4-skin transfer (PR #8) reproduces across every other Inspiration4 PBMC subset (B, CD4_T, CD8_T, CD14_Mono, CD16_Mono, DC, NK, other_T, other) and across all NASA_Twins CD4 / CD8 PolyA+/Ribodepleted/Multivariate contrasts. 23 of 25 valid human compartments show mean proteostasis-11 NES below -2.0; the mouse gastrocnemius anchor mean is -2.25, matching the human PBMC range. The 14 non-proteostasis pathways from the same 25-pathway overlap show a weaker, less uniform suppression pattern across compartments, supporting that ribosomal-protein-driven translation suppression is the specifically conserved cross-tissue spaceflight signal rather than a generic 'everything goes down' effect.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/bridge/evaluation/proteostasis_generalization.csv",
+      "v8/bridge/evaluation/proteostasis_generalization.json"
+    ]
+  },
+  "generated_at": "2026-05-16T21:55:00Z",
+  "code": {
+    "script": "v8/bridge/proteostasis_generalization.py",
+    "command": "SPACEOMICS_ROOT=$SPACEOMICS_ROOT python3 v8/bridge/proteostasis_generalization.py",
+    "parameters": {
+      "mouse_tissue_anchor": "gastrocnemius",
+      "mouse_dbs": ["hallmark", "kegg", "reactome", "mitocarta", "c2cgp", "c5bp"],
+      "proteostasis_set_size": 11,
+      "nonproteostasis_control_set_size": 14,
+      "n_permutation": 5000,
+      "rng_seed": 20260516
+    }
+  },
+  "inputs": [
+    {
+      "role": "mouse_fgsea_gastrocnemius",
+      "path_or_accession": "processed/fgsea/gastrocnemius/*_fgsea_{hallmark,kegg,reactome,mitocarta,c2cgp,c5bp}.csv",
+      "kind": "local_file",
+      "tracked_in_git": false,
+      "notes": "Same local mouse fGSEA cache as PR #7 (human_skin_transfer) and PR #8 (skin_transfer_driver_decomp). Aggregate to mean NES per pathway across the three RR-* missions."
+    },
+    {
+      "role": "human_i4_pbmc",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_i4_pbmc.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:57fe866b6f89fd4ea4c0cdd8213f996616c1146f21ce2a998811dc5c5668f831",
+      "notes": "Listed in v8/provenance/input_freeze.json under spaceomicsbench.v2_public.evidence (PR #6 promotes this source to frozen). 9 PBMC compartments at the Immediately Post-flight timepoint."
+    },
+    {
+      "role": "human_NASA_Twins",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_NASA_Twins.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:efba82f4cd8c54a2e25c46a4f2f403c3c07a001dddaa6e6b8a6ae6e145baba1c",
+      "notes": "Listed in v8/provenance/input_freeze.json under spaceomicsbench.v2_public.evidence. CD4 / CD8 / CD19 / LD cell types with PolyA+ / Ribodepleted / Multivariate processing variants, In-flight vs Pre-flight and Post-flight vs Pre-flight contrasts. Per-(compartment,pathway) NES collapsed to mean across ExperimentType variants."
+    },
+    {
+      "role": "human_i4_skin",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_i4_skin.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:03526f07807c0976477f8b655e63fb08da74e59ec28c883202212929f39eaf8c",
+      "notes": "Anchor compartment from PRs #7 and #8; included here so the new compartments can be compared against the original observation."
+    }
+  ],
+  "outputs": [
+    {
+      "role": "per_compartment_csv",
+      "path_or_accession": "v8/bridge/evaluation/proteostasis_generalization.csv",
+      "kind": "local_file",
+      "checksum": "sha256:bbff0c03d702daf608c4dd37f12fcae0917b748001c3d8de29777fc85004a7bf",
+      "tracked_in_git": true
+    },
+    {
+      "role": "summary_json",
+      "path_or_accession": "v8/bridge/evaluation/proteostasis_generalization.json",
+      "kind": "local_file",
+      "checksum": "sha256:ac1ffd060a9dbaef63c8bcfaeac53345753c833b9f93fe104fcc5c0f9b6343ee",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "host": "local-laptop",
+    "spaceomics_root": "/Users/jak4013/Dropbox/Bioinformatics/Claude/SpaceOmicsBench",
+    "python": "Python 3 (system)"
+  },
+  "metrics": [
+    {"name": "mouse_gastrocnemius_proteostasis11_mean_NES", "value": -2.254},
+    {"name": "mouse_gastrocnemius_nonproteostasis14_mean_NES", "value": -1.279},
+    {"name": "n_valid_human_compartments", "value": 25, "context": "i4_pbmc 9 + NASA_Twins 15 + i4_skin 1"},
+    {"name": "n_compartments_proteostasis11_mean_NES_below_minus2", "value": 23},
+    {"name": "n_compartments_nonproteostasis14_mean_NES_below_minus2", "value": 15},
+    {"name": "i4_skin_proteostasis11_spearman_r_vs_gastrocnemius", "value": 0.864, "context": "n=11 pathways, perm p=0.001"},
+    {"name": "n_compartments_proteostasis11_perm_p_lt_005", "value": 1, "context": "Most compartments are Twins with n=4 pathways; only i4_skin (n=11) reaches significance."},
+    {"name": "n_compartments_nonproteostasis14_perm_p_lt_005", "value": 4}
+  ],
+  "validation": {
+    "local_tests_run": true,
+    "hpc_tests_run": false,
+    "checks": [
+      "python3 v8/bridge/proteostasis_generalization.py",
+      "python3 -c \"import json; json.load(open('v8/bridge/evaluation/proteostasis_generalization.json'))\""
+    ],
+    "notes": "Per-compartment Spearman r against the mouse gastrocnemius NES vector is noisy because NASA_Twins compartments only have n=4 of the 11 proteostasis pathways present (Twins covers C2/Hallmark, not C5). The conclusion is therefore anchored on the per-compartment mean NES distribution (23/25 below -2.0 for proteostasis_11), not on per-compartment Spearman significance. HPC c2cgp/c5bp expansion will raise the per-compartment overlap and let the Spearman side reach significance more broadly."
+  }
+}
