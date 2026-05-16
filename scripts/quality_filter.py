@@ -7,7 +7,7 @@ quality_filter.py — GeneLab_benchmark: RNA-seq Quality Filtering
 Applies sample-level and mission-level QC filters to downloaded normalized counts.
 Outputs clean data to processed/ directory and a QC report.
 
-QC criteria (from PLAN.md v0.5 Section 7):
+QC criteria:
 
   Sample-level (hard cutoffs):
     - Total counts (library size) >= 1,000,000
@@ -19,14 +19,17 @@ QC criteria (from PLAN.md v0.5 Section 7):
     - n_samples >= 3 per group (flight and ground control)
     - At least one ground control type present (GC or VC)
 
-  Normalization for Category A input (DESIGN_DECISIONS DD-01):
+  Normalization for Category A input:
     - Input: DESeq2 normalized counts (downloaded from GeneLab pipeline)
     - Output: log2(normalized counts + 1) per sample
+    - Per-mission, not joint across missions (avoids mixing library-size
+      effects with the spaceflight signal).
 
-  Feature selection (DESIGN_DECISIONS DD-03):
+  Feature selection:
     - Low-expression filter (applied globally, once):
         Keep genes present (count > 1) in >= 20% of ALL samples within tissue
-    - Variance filter: applied INSIDE LOMO loop in generate_tasks.py (NOT here)
+    - Variance filter: applied INSIDE LOMO loop in generate_tasks.py (NOT here),
+      using train missions only to avoid test-fold leakage.
 
 Usage:
   python quality_filter.py --tissue liver         # process liver
@@ -42,11 +45,11 @@ Output structure:
     {tissue}_removed_samples.csv       # removed samples with reason
 
 Design decisions applied:
-  - DD-01: Category A uses log2(normalized counts), NOT LFC
-  - DD-03: Variance filter NOT applied here (must be inside LOMO loop)
-  - DD-04: Mission integrity preserved (no cross-mission sample mixing)
-  - DD-05: GLDS-168 excluded from Category A output
-  - DD-06: Strain tracked (C57BL/6J = Track 2a, others = Track 2b)
+  - Category A uses log2(normalized counts), NOT LFC (which would leak labels)
+  - Variance filter NOT applied here (must be inside LOMO loop)
+  - Mission integrity preserved (no cross-mission sample mixing)
+  - GLDS-168 excluded from Category A output (duplicate of OSD-48+137)
+  - Strain tracked (C57BL/6J = Track 2a, others = Track 2b)
 """
 
 import json
@@ -64,7 +67,7 @@ PROCESSED_DIR = BASE_DIR / "processed" / "A_detection"
 QC_DIR = BASE_DIR / "processed" / "qc_reports"
 GLDS_VERIFIED_JSON = BASE_DIR / "GLDS_verified.json"
 
-# ── QC thresholds (PLAN.md v0.5, Section 7.1) ─────────────────────────────────
+# ── QC thresholds ─────────────────────────────────────────────────────────────
 QC_MIN_LIBRARY_SIZE = 1_000_000    # total counts
 QC_MIN_DETECTED_GENES = 5_000      # genes with count > 0
 QC_PCA_SD_CUTOFF = 4.0             # SD from centroid
