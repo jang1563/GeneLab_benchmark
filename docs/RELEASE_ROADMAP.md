@@ -1,13 +1,15 @@
 # Release Roadmap
 
 This document records the near-term release plan after the v7 public metadata
-cleanup and the start of the v8 SpaceMed incubator.
+cleanup. The v8 SpaceMed incubator has been split out and lives on the
+separate `v3` branch; it is intentionally excluded from this public release
+surface and from the v7.1 patch.
 
 Status update, 2026-05-10: the combined v7/v8 clean-checkout gate passed on
-HPC at commit `b486aee77ae956b108a59ac762ebeb7b302e7928` with
-`bash scripts/hpc_release_validate.sh --v8-summary`. Remaining release work is
-artifact packaging, optional v7.1/v8 alpha tagging, and the separate v8 beta
-reproducibility program.
+HPC at commit `b486aee77ae956b108a59ac762ebeb7b302e7928` (then on the
+combined branch). Remaining public-release work is artifact packaging and
+optional v7.1 alpha tagging. v8 beta reproducibility work continues on the
+`v3` branch.
 
 ## v7.1 Patch Release
 
@@ -43,68 +45,18 @@ Validation gate:
 
 Current gate status: passed on 2026-05-10 from a clean clone of `origin/v3`.
 
-## v8.0-alpha
+## v8.0-alpha and v8.0-beta (on `v3` branch)
 
-Goal: keep v8 as a clearly labeled incubating layer while preserving enough
-code and lightweight outputs for scientific review.
+The v8 SpaceMed incubator (BRIDGE / DECOMPOSE / INTERVENE / causal pillars)
+is being developed on the `v3` branch and is not part of this public
+release. Implementation plan, analysis scripts, evaluation outputs,
+provenance manifests, and the beta-rebuild orchestration live there. v8
+will be merged back into this line only after the beta freeze gate passes
+and the GitHub / Hugging Face / Zenodo artifact split is finalized.
 
-Implementation plan: see `docs/V8_IMPLEMENTATION_RESEARCH.md`.
-
-Track:
-
-- v8 analysis scripts.
-- compact evaluation outputs required for tables and figures.
-- exported intervention signatures.
-- final or review-needed figures.
-- `v8/README.md`, `v8/ARTIFACTS.md`, and result summaries.
-- `v8/provenance/`: small run manifests that map claims to scripts, inputs,
-  outputs, and validation status.
-
-Do not track:
-
-- GEO cache downloads.
-- raw SpaceOmicsBench/SOMA inputs.
-- Python bytecode or local Codex settings.
-- large intermediate matrices that can be regenerated on HPC.
-
-Validation gate:
-
-- `SPACEOMICS_ROOT` must point to a local SpaceOmicsBench checkout.
-- Each pillar should have a documented command line and output manifest.
-- Claims in the v8 manuscript draft should map to a result file and script.
-- Consolidated summary regeneration passed on 2026-05-10 from a clean clone of
-  `origin/v3`.
-
-## v8.0-beta
-
-Goal: turn the incubator into a reproducible release candidate.
-
-Required before beta:
-
-- Add a machine-readable provenance manifest for each pillar.
-- Freeze exact input dataset versions or accessions.
-- Add one-command HPC entrypoints for BRIDGE, DECOMPOSE, INTERVENE, causal
-  integration, and summary regeneration.
-- Separate public release artifacts into GitHub code, Hugging Face dataset
-  files, and Zenodo DOI archive.
-
-Current beta progress, 2026-05-10:
-
-- `scripts/validate_v8_provenance.py` validates all promoted run manifests plus
-  beta input/artifact metadata and is part of `scripts/hpc_release_validate.sh`.
-- `scripts/hpc_v8_beta_rebuild.sh` orchestrates BRIDGE, DECOMPOSE, INTERVENE,
-  causal, figures, summary, provenance validation, and the release gate from a
-  clean HPC checkout.
-- `v8/provenance/input_freeze.json` records the current release-candidate
-  external input freeze and the remaining blockers before it can be promoted to
-  `frozen`.
-- `v8/release/v8_beta_artifact_manifest.json` records the GitHub, Hugging Face,
-  Zenodo, and HPC/object-storage artifact split for beta packaging.
-
-Remaining blockers: exact SpaceOmicsBench upstream commit/release tag, concrete
-L1000CDS2 db-version or archived raw API responses, one fresh
-`hpc_v8_beta_rebuild.sh --require-frozen` pass after freeze promotion, and final
-Hugging Face/Zenodo upload records.
+Until then, treat v8 claims (intervention, countermeasure, Mars
+extrapolation) as out of scope for the v1-v7 benchmark paper and HF
+dataset card.
 
 ## Long-Term Direction
 
