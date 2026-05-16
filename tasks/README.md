@@ -1,7 +1,9 @@
-# tasks/ — GeneLab Benchmark Task Inputs
+# tasks/ -- GeneLab Benchmark Task Inputs
 
 This directory contains the **public task inputs** for the GeneLab Benchmark (v1.0).
 Each subdirectory is a self-contained task with all features and labels needed to train and evaluate a model.
+
+> **v4 Note**: v4 extends the benchmark to 8 tissues (adding Lung and Colon) with 8 classifiers and 4 feature types (256 total evaluations). v4 tasks use data from `processed/A_detection/{tissue}/` and pathway scores from `processed/pathway_scores/`. See `v4/scripts/v4_utils.py` for the full tissue-mission configuration and `v4/scripts/multi_method_eval.py` for the evaluation driver.
 
 ---
 
@@ -123,7 +125,7 @@ B4_thymus_cross_mission/
 |------|--------|---------|-------|---------------------|
 | `B4` | Thymus | MHU-1, MHU-2, RR-6, RR-9 | 12 | 0.860 [0.763, 0.953] |
 | `B5` | Skin | MHU-2, RR-6, RR-7 | 6 | 0.772 [0.691, 0.834] |
-| `B6` | Eye | RR-1, RR-3, TBD | 6 | 0.754 [0.688, 0.838] |
+| `B6` | Eye | RR-1, RR-3, OSD-397 | 6 | 0.754 [0.688, 0.838] |
 | `B2` | Gastrocnemius | RR-1, RR-5, RR-9 | 6 | 0.801 [0.653, 0.944] |
 | `B1` | Liver | MHU-2, RR-1, RR-3, RR-6, RR-8, RR-9 | 30 | 0.577 [0.492, 0.666] |
 | `B3` | Kidney | RR-1, RR-3, RR-7 | 6 | 0.555 [0.397, 0.681] |
@@ -160,7 +162,8 @@ python scripts/evaluate_submission.py \
 |-------|---------|
 | `1.0` | Flight (spaceflight / microgravity condition) |
 | `0.0` | Ground (vivarium control) |
-| — | Basal Control (BC) and Aseptic Ground Control (AG) samples are excluded from all tasks |
+| — | **BC (Basal Control)**: excluded from v1 tasks; included as ground control (0.0) in v4 lung/colon tasks |
+| — | **AG (Aseptic Ground Control)**: excluded from all tasks (multi-group MHU-2 only) |
 
 ---
 

@@ -1,0 +1,1233 @@
+{
+  "fold": "fold_RR-7_test",
+  "task_id": "A3",
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "temperature": 0,
+  "generated_at": "2026-03-08T12:37:09.700905",
+  "n_responses": 94,
+  "responses": [
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong pattern of downregulation in key kidney-specific pathways affected by spaceflight, but the direction of change is opposite to expected flight signatures.  \n\n1. **Kidney Fluid/Electrolyte Homeostasis:**  \n   - *Rsc1a1* (sodium transporter regulator) is **upregulated** (+2.00). In flight, kidney sodium/water handling genes are typically suppressed due to fluid shifts and reduced plasma volume.  \n   - *Cyp11b1* (aldosterone synthase) is **downregulated** (-0.97). In flight, aldosterone-related genes often increase to promote sodium retention.  \n\n2. **Xenobiotic/Metabolism Genes (often shared with liver):**  \n   - Multiple cytochrome P450 genes (*Cyp3a41a*, *Cyp3a44*, *Cyp11a1*) are downregulated. While spaceflight can alter metabolism, these are more characteristic of ground-based stress or circadian effects rather than the typical flight-induced oxidative stress response (which often upregulates some Cyp genes via Nrf2).  \n\n3. **Immune/Inflammatory Markers:**  \n   - *Serpina3h/b/k* (acute-phase reactants) are down, whereas flight typically induces inflammatory acute-phase responses.  \n   - *Ifi202b*, *Ifi206* (interferon-inducible) are down, not up as often seen in flight immune dysregulation.  \n\n4. **Absence of Strong Spaceflight Hallmarks:**  \n   - No clear upregulation of DNA damage (e.g., *Gadd45*, *Rad51*), oxidative stress (e.g., *Hmox1*, *Nqo1*), or muscle/bone atrophy markers.  \n   - The pattern resembles a ground-control profile with modest stress or circadian-driven fluctuations, not the coordinated flight signature.  \n\nThus, the gene expression deviations are more consistent with a **ground control** sample, with moderate confidence due to the lack of classic flight markers and reversed direction in key renal adaptive genes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 440,
+        "total_tokens": 1450
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep1_F2",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:** The dominant signature is a strong downregulation of liver-enriched genes (e.g., *Cps1*, *Mat1a*, *Slco1b2*, *Cyp3a41a*, *Cyp3a44*, *Akr1cl*, *Ces1c*), acute-phase reactants (*Ahsg*, *Serpina3k*, *Mug1*), and xenobiotic/detoxification enzymes. In spaceflight transcriptomics, this pattern is characteristic of a ground control sample. Flight samples typically show an *upregulation* of liver-like metabolic and detoxification pathways in the kidney, likely as a systemic compensatory response to oxidative stress and xenobiotic load. The upregulation of *Rsc1a1* (a kidney-specific transporter) and absence of strong spaceflight-associated immune/inflammatory markers (e.g., pronounced interferon response) further support a ground phenotype. The pattern aligns with normal variation or a ground-based stressor, not the conserved multi-tissue metabolic reprogramming seen in flight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 221,
+        "total_tokens": 1231
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep2_F6",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top upregulated gene, **Rsc1a1** (z=+2.09), is a kidney-specific transporter involved in sodium reabsorption and osmoregulation. Its strong upregulation is consistent with fluid shift and electrolyte balance adaptation in spaceflight. However, many other key spaceflight signatures are absent or contradictory:  \n- **Igf2** (up) can be stress-responsive, but not uniquely flight-specific.  \n- **Ucp1** (down) is unusual in kidney and not a typical spaceflight marker.  \n- Several cytochrome P450 genes (**Cyp11b1**, **Cyp3a41a**, **Cyp11a1**) are downregulated, which could reflect altered xenobiotic metabolism, but this pattern is also seen in ground-based stress models.  \n- **Havcr1** (Kidney Injury Molecule-1) upregulation suggests possible renal stress, but this occurs in multiple conditions, not uniquely microgravity.  \n- Lack of strong oxidative stress (e.g., Nrf2 targets), DNA damage, or immune dysregulation markers typical of flight kidney transcriptomes.  \n\nThe overall pattern suggests a mild stress response, possibly from ground-based housing or experimental conditions, rather than the coordinated multi-pathway disruption seen in spaceflight kidney samples.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 275,
+        "total_tokens": 1285
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep3_F10",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most striking signature here is the strong downregulation of **Nnt** (z = -3.46), a mitochondrial proton pump involved in oxidative stress response and NADPH regeneration. In spaceflight, mitochondrial dysfunction and altered redox homeostasis are common, and Nnt downregulation has been observed in flight kidney datasets.  \n\nAdditionally, several cytochrome P450 genes (**Cyp3a41a**, **Cyp3a44**, **Cyp11b1**, **Cyp11a1**) are downregulated, consistent with spaceflight-associated suppression of xenobiotic and steroid metabolism pathways. The downregulation of **Slco1b2** (an organic anion transporter) and **Cps1** (urea cycle enzyme) further suggests altered renal metabolic and detoxification functions.  \n\nUpregulation of immune-related genes like **Ifi44l**, **Gbp2b**, and **Havcr1** (kidney injury marker) hints at mild inflammation or stress response, which aligns with spaceflight immune dysregulation.  \n\nWhile some changes could reflect individual variation, the collective pattern\u2014especially the strong downregulation of Nnt and multiple Cyp genes\u2014matches known spaceflight kidney transcriptomic profiles more than typical ground control variability. However, the absence of extreme upregulation in classic immediate early or stress genes keeps confidence from being higher.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 296,
+        "total_tokens": 1306
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep4_F14",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most striking signature here is the strong downregulation of **Nnt** (z = -3.46), a mitochondrial proton transporter involved in oxidative stress response and NADPH regeneration. In spaceflight, mitochondrial dysfunction and altered redox homeostasis are common, but Nnt is often *upregulated* as part of the Nrf2-mediated antioxidant response. Its marked downregulation is atypical for a flight kidney and more consistent with a ground control pattern.  \n\nOther notable signals:  \n- **Slco1b2** (organic anion transporter, DOWN) and **Cyp3a44/Cyp3a41a** (xenobiotic metabolism, DOWN) are often suppressed in flight liver/kidney due to altered detoxification demands, but here the changes are modest.  \n- **Havcr1** (kidney injury marker, UP) can be elevated in flight, but its z-score (+1.12) is not extreme.  \n- Several **Serpina3** family members (acute-phase reactants) are down, not consistent with typical spaceflight inflammation.  \n- **Ifi44l** and **Gbp2b** (interferon-responsive genes) are slightly up, but without a broad interferon signature.  \n\nOverall, the lack of a coherent oxidative stress (Nrf2), DNA damage, or strong immune dysregulation pattern\u2014coupled with the profound downregulation of Nnt\u2014points toward a **ground control** sample with some inter-individual variation rather than a clear spaceflight response.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 336,
+        "total_tokens": 1346
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_25days_Rep5_F18",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top variable genes in this kidney sample show a pattern inconsistent with strong, canonical spaceflight signatures. Key observations:  \n1. **Absence of strong oxidative stress/DNA damage markers:** No significant upregulation of Nrf2 targets or DNA repair genes.  \n2. **Limited immune dysregulation:** While some interferon-related genes (Ifi202b, Ifi44l) are modestly upregulated, they lack the robust, coordinated inflammatory or T-cell signaling changes typical of spaceflight.  \n3. **Kidney-specific fluid/electrolyte genes:** No clear pattern in genes like aquaporins, solute carriers, or renin-angiotensin system components that often shift in microgravity.  \n4. **Xenobiotic metabolism:** Several Cyp genes (Cyp3a41a, Cyp11b1) are down, but this is not a consistent flight signature in kidney; some are even unchanged (Cyp3a44).  \n5. **Top upregulated genes** (Rsc1a1, Ucp1, Rps3a2) are not strongly associated with spaceflight kidney responses in literature. Ucp1 upregulation is unusual for kidney and more typical of thermogenic adipose tissue.  \n\nThe profile suggests individual or strain-specific variation rather than the coordinated transcriptomic reprogramming seen in flight kidneys (e.g., osmotic stress, DNA damage, immune activation). Confidence is moderate (0.75) because while the pattern lacks flight hallmarks, the sample could represent an atypical response or a specific flight time point not captured by the training set.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 328,
+        "total_tokens": 1338
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep1_F4",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. Key spaceflight signatures in kidney transcriptomics typically include upregulation of genes involved in oxidative stress response, fluid/electrolyte transport, and DNA damage repair, along with downregulation of metabolic and xenobiotic processing genes.  \n\nIn this sample:  \n- **Strong downregulation of cytochrome P450 enzymes** (Cyp11b1, Cyp11a1, Cyp3a41a, Cyp3a44) and **carboxylesterases** (Ces1b, Ces1c) \u2014 consistent with suppressed xenobiotic and steroid metabolism in flight, but this pattern is also seen in some ground control conditions.  \n- **Absence of hallmark oxidative stress/Nrf2 targets** (e.g., Hmox1, Nqo1, Gst genes) among the most variable genes.  \n- **Lack of strong upregulation in fluid/electrolyte transporters** (e.g., Aqp2, Slc12a1, Scnn1g) that are typically elevated in flight kidneys.  \n- **Modest immune-related changes** (Ccl21b/e up, H2-Ea down) but not the pronounced interferon/inflammatory signature often seen in flight.  \n- **Downregulation of urea cycle gene Cps1** and other metabolic genes (Hsd3b1, Mat1a) can occur in both conditions but is less specific.  \n\nThe overall pattern lacks the coherent stress-response and transporter upregulation typical of spaceflight-exposed kidneys, suggesting a ground control profile with normal variation in metabolic and immune genes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 345,
+        "total_tokens": 1355
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep2_F8",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top dysregulated genes do not show the classic, strong signatures of spaceflight in kidney tissue. Key expected changes for flight kidney include upregulation of oxidative stress (e.g., *Nrf2* targets), DNA damage response, and fluid/electrolyte balance genes. Here, the most extreme change is a strong downregulation of *Nnt* (NAD(P) transhydrogenase), which is mitochondrial and linked to oxidative stress, but its downregulation is not typical of the compensatory upregulation usually seen in flight. Several upregulated genes (*Ifi202b*, *Ifi44l*, *Gbp2b*) are interferon-stimulated genes, which can occur in ground-based kidney inflammation or viral responses. The downregulation of multiple *Serpina3* family members and cytochrome P450 genes (*Cyp11b1*, *Cyp11a1*, *Cyp3a44*, etc.) suggests altered metabolism, but this pattern is not distinctive of spaceflight\u2014it could reflect normal variation or a ground-control stressor. The absence of clear spaceflight-specific metabolic or immune dysregulation patterns, combined with the weak magnitude of most z-scores (only two beyond |2|), leads to a confident classification as a ground sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 266,
+        "total_tokens": 1276
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep3_F12",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes in this kidney sample show a pattern inconsistent with the established kidney-specific spaceflight transcriptomic signature. Key spaceflight-associated changes in kidney typically involve upregulation of fluid/electrolyte balance genes (e.g., *Aqp2*, *Slc12a1*), oxidative stress markers, and immune/inflammatory genes. Here, the most extreme changes include downregulation of xenobiotic/detoxification enzymes (*Ces1c*, *Cyp3a41a*, *Cyp3a44*), acute-phase proteins (*Ahsg*, *Serpina3* family members), and urea cycle gene *Cps1* \u2014 patterns more aligned with ground control variability or non\u2011spaceflight stressors. The up\u2011regulated genes (*Rps3a2*, *Rsc1a1*, *Havcr1*) are not characteristic of spaceflight kidney responses. The absence of strong oxidative stress, DNA damage, or immune dysregulation markers further supports a ground control classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 215,
+        "total_tokens": 1225
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep4_F16",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top differentially expressed genes in this kidney sample show a pattern inconsistent with the known renal response to spaceflight. Key spaceflight signatures in kidney typically involve upregulation of fluid/electrolyte balance genes (e.g., *Aqp2*, *Avpr2*, *Slc12a1*), oxidative stress markers, and DNA damage response genes\u2014none of which appear among the most variable genes here. Instead, the top changes include strong upregulation of *Rsc1a1* (a renal tubular transcription factor linked to osmotic stress in terrestrial models) and downregulation of *Ucp1* (unlikely to be kidney-specific in flight) and *Cps1* (a urea cycle enzyme typically liver-specific). Many of the downregulated genes (*Serpina3k*, *Ces1c*, *Slco1b2*, *Cyp3a44*, *Mat1a*) are involved in xenobiotic/drug metabolism or acute-phase response, which are more characteristic of ground-based kidney perturbations (e.g., toxin exposure, metabolic shifts) rather than conserved spaceflight renal transcriptomic signatures. The lack of strong immune dysregulation or mitochondrial stress markers further supports a ground control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 257,
+        "total_tokens": 1267
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_FLT_75days_Rep5_F20",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most striking signature here is the **strong downregulation of key kidney-specific metabolic and transport genes** that align with spaceflight adaptation:  \n- **Cps1** (urea cycle, down) and **Mat1a** (methionine metabolism, down) indicate altered nitrogen metabolism.  \n- **Slco1b2** (organic anion transporter, down) and **Cyp3a** family members (Cyp3a41a, Cyp3a44, down) suggest suppressed xenobiotic/detoxification pathways, consistent with reduced metabolic load in flight.  \n- **Ces1c** and **Ces1b** (carboxylesterases, mixed but net down) also point to altered lipid/drug metabolism.  \n- **Ucp1** upregulation is unusual in kidney but may reflect mitochondrial uncoupling stress, sometimes seen in oxidative stress responses in flight.  \n- The pattern lacks strong, acute immune/inflammatory upregulation (only mild interferon-related signals like Ifi44l), which fits a chronic adaptation state rather than a ground-control profile.  \n\nThese changes collectively match known spaceflight kidney transcriptomic signatures: suppressed solute carriers, altered steroid metabolism (Cyp11b1 down), and reduced metabolic enzyme expression. Ground control kidneys typically show more stable expression of these homeostatic transporters and enzymes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 296,
+        "total_tokens": 1306
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep1_G2",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of liver-enriched metabolic genes in a kidney sample. Specifically:  \n- **Rsc1a1** (highly upregulated) is a kidney-specific transporter, but its extreme upregulation is atypical for spaceflight kidney signatures, which more commonly show stress and inflammatory markers.  \n- **Mat1a, Cps1, Ahsg, Mug1, Cyp3a41a, Ces1c, Cyp3a44, Slco1b2** are primarily **liver-specific** genes involved in ammonia metabolism, acute-phase response, xenobiotic/drug metabolism, and bile acid transport. Their prominent downregulation in a kidney profile suggests **sample contamination or misannotation** (likely liver tissue mixed in or mislabeled), not a kidney-specific spaceflight response.  \n- Spaceflight kidney signatures typically involve genes related to **fluid/electrolyte balance, oxidative stress, and immune activity** (e.g., *Havcr1* is modestly upregulated here, consistent with kidney injury, but not dominant).  \n- The pattern of liver gene suppression does not match known spaceflight liver profiles (which often show *upregulation* of xenobiotic metabolism genes like *Cyp3a*). Instead, this looks like a **ground control sample** with technical artifacts or contamination.  \n\nGiven the mismatch between the tissue label and gene markers, and the absence of a coherent spaceflight kidney signature, the sample is most likely from a **ground control** with anomalous liver gene expression.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 322,
+        "total_tokens": 1332
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep2_G6",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is a strong **downregulation of liver-enriched metabolic genes** (e.g., *Cyp3a41a*, *Cyp3a44*, *Mat1a*, *Cps1*, *Ahsg*, *Ces1c*, *Slco1b2*, *Mug1*, *Serpina3* family), which are also expressed in kidney proximal tubules and involved in xenobiotic/drug metabolism, ammonia detoxification, and transport. In spaceflight, hepatic and renal metabolic pathways\u2014particularly cytochrome P450 and phase II detoxification systems\u2014are often suppressed.  \n\nThe upregulation of *Havcr1* (kidney injury marker) and interferon-stimulated genes (*Ifi44l*, *Gbp2b*, *Ifi202b*) aligns with spaceflight-associated renal stress and immune dysregulation. However, the absence of strong oxidative stress or DNA damage markers (e.g., *Nqo1*, *Gstm* family, *Hmox1*) and the lack of consistent electrolyte/fluid homeostasis gene shifts (e.g., *Aqp2*, *Slc12a1*) suggest this may reflect a ground-control animal with a mild inflammatory or metabolic perturbation rather than the full spaceflight renal transcriptomic signature.  \n\nThe overall pattern is more consistent with a **ground control** sample showing variability in metabolic and inflammatory genes, but not the coordinated multi-systemic stress response typical of flight kidneys.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 329,
+        "total_tokens": 1339
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep3_G10",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme gene, **Nnt (NAD(P) transhydrogenase)**, is strongly downregulated (z = -3.46). In spaceflight kidney data, *Nnt* is often reduced due to altered mitochondrial metabolism and oxidative stress responses. Several other patterns align with ground/control signatures rather than typical spaceflight:  \n- **Ucp1** (mitochondrial uncoupling protein) is down, whereas spaceflight often induces Ucp1 in kidney as part of metabolic stress.  \n- **Cyp3a41a**, **Cyp11b1**, **Cyp11a1** (cytochrome P450 enzymes involved in steroid/xenobiotic metabolism) are down; in flight, these are often upregulated in kidney and liver as part of xenobiotic metabolism induction.  \n- **Serpina3k**, **Serpina3b** (serine protease inhibitors) are down; these can be elevated in flight due to inflammation.  \n- **Ifi44l**, **Gbp2b**, **Ifi202b** (interferon-stimulated genes) are modestly up, but not as strongly as often seen in flight immune dysregulation.  \n- **Havcr1** (kidney injury marker) is slightly up, but not at levels typical of pronounced spaceflight-associated renal stress.  \n\nOverall, the downregulation of mitochondrial (*Nnt*, *Ucp1*) and steroidogenic CYP genes, without strong induction of inflammatory or DNA damage markers, fits a ground control profile more than the expected kidney spaceflight response.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 334,
+        "total_tokens": 1344
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep4_G14",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe strongest signal is the extreme downregulation of **Nnt** (z = -3.46), a mitochondrial NADP+ transhydrogenase critical for managing oxidative stress and linked to mitochondrial redox balance. In spaceflight, oxidative stress is a hallmark, and Nnt is known to be suppressed in kidney and liver under such stress.  \n\nOther notable changes align with spaceflight-associated kidney responses:  \n- **Havcr1** (KIM-1) upregulation (+1.29) suggests kidney injury/stress response.  \n- **Slco1b2**, **Cyp3a44**, **Cyp11b1**, **Cps1**, and multiple **Ces1c/Ces1b** and **Serpina3** family genes are down, indicating altered xenobiotic/detoxification metabolism and bile acid handling\u2014consistent with spaceflight-induced metabolic reprogramming and liver-kidney axis disruption.  \n- **Ucp1** down (-1.18) in kidney may reflect altered energy metabolism.  \n- Immune-related genes like **Ifi44l**, **Gbp2b** are upregulated, hinting at viral-response or interferon signaling often seen in flight immune dysregulation.  \n\nWhile some immune upregulation could occur in ground-based pathologies, the combination of severe Nnt suppression, coordinated downregulation of detoxification genes, and Havcr1 elevation fits a spaceflight kidney signature better than a typical ground control profile. However, the absence of very strong atrophy or electrolyte transporter markers (e.g., Slc12a1, Aqp2) and the relatively modest z-scores for most genes reduce confidence slightly.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 346,
+        "total_tokens": 1356
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_25days_Rep5_G18",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top differentially expressed genes in this kidney sample are dominated by downregulation of key kidney-specific metabolic and transport functions, rather than the classic spaceflight-associated signatures.  \n\n- **Strong downregulation of kidney-specific genes:**  \n  - *Rsc1a1* (sodium-dependent organic anion transporter) is highly upregulated (+2.09), but this is atypical for spaceflight kidney data, which usually shows downregulation of transporters due to fluid shifts.  \n  - *Cps1* (urea cycle, liver/kidney) down (-1.69) suggests altered nitrogen metabolism, but this is not a hallmark of microgravity.  \n  - *Ces1c*, *Cyp3a41a*, *Cyp3a44*, *Slco1b2* (drug/xenobiotic metabolism and transport) are down \u2014 this pattern is more consistent with ground-based kidney stress or experimental variation than spaceflight.  \n\n- **Absence of strong spaceflight markers:**  \n  Expected kidney spaceflight responses include upregulation of oxidative stress (e.g., *Hmox1*, *Nqo1*), fluid/electrolyte transporters (e.g., *Aqp2*, *Scnn1g*), and immune/inflammatory genes. Here, immune-related changes (*Ifi44l*, *Gbp2b*, *H2-Ea*) are modest and not dominant.  \n\n- **Pattern matches ground variation:**  \n  The mix of histone genes (*H4c17*, *H3c14*) down, ribosomal (*Rps3a2*) up, and scattered immune signals fits better with ground control inter-individual or technical variation in a heterogeneous training cohort.  \n\nThus, the transcriptomic profile lacks the coherent spaceflight kidney signature, favoring classification as a ground sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 380,
+        "total_tokens": 1390
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep1_G4",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. Key spaceflight signatures in kidney include upregulation of fluid/electrolyte transporters (e.g., *Slc* family genes) and stress-response markers. Here, the top upregulated gene *Rsc1a1* (a renal-specific transcription factor linked to tubular transport) shows strong upregulation, which could be consistent with flight. However, several critical observations point toward a ground control profile:\n\n1. **Absence of strong oxidative stress/DNA damage markers:** No significant upregulation of canonical Nrf2 targets or DNA repair genes.\n2. **Downregulation of xenobiotic metabolism genes:** *Cyp3a41a*, *Cyp3a44*, *Cps1*, *Ces1c* are down, whereas in flight, liver/kidney often show induced xenobiotic metabolism.\n3. **Mixed immune signals:** Some interferon-related genes (*Ifi202b*, *Ifi44l*) are modestly upregulated, but not strongly indicative of spaceflight-associated immune dysregulation.\n4. **Modest magnitude of changes:** Most z-scores are below |1.5|, suggesting less extreme transcriptomic perturbation than typically seen in flight kidneys.\n\nThe pattern resembles baseline variation in ground controls rather than the coherent stress-response signature expected after spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 286,
+        "total_tokens": 1296
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep2_G8",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe pattern is inconsistent with strong, canonical spaceflight kidney signatures. Key observations:  \n1. **Absence of expected fluid/electrolyte stress markers:** No strong upregulation of genes like *Aqp2*, *Avpr2*, *Slc12a1*, or *Scnn1g*, which are typically altered in spaceflight due to fluid shifts.  \n2. **Downregulation of xenobiotic/detoxification genes:** *Cyp3a41a*, *Cyp3a44*, *Ces1c*, *Mat1a*, and *Slco1b2* are suppressed. In spaceflight, liver and kidney often show *upregulation* of xenobiotic metabolism genes (e.g., Cyp450s) due to oxidative stress; their downregulation here is more indicative of ground control patterns.  \n3. **Immune/interferon response mixed:** *Ifi44l*, *Gbp2b*, and *Ifi202b* are moderately upregulated, but these can occur in ground controls due to routine pathogen exposure or housing conditions.  \n4. **Strongest signal is *Nnt* downregulation:** *Nnt* (nicotinamide nucleotide transhydrogenase) is involved in mitochondrial redox balance. Its marked downregulation (-3.46 z-score) is atypical for spaceflight, where oxidative stress usually upregulates mitochondrial antioxidant response genes.  \n5. **No clear atrophy or DNA damage signature:** Missing consistent upregulation of atrophy-related ubiquitin ligases, senescence, or DNA repair genes.  \n\nOverall, the profile lacks the coordinated stress-response transcriptomic signature expected after spaceflight and instead suggests a ground control sample with some incidental interferon activity and suppressed metabolic genes.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 362,
+        "total_tokens": 1372
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep3_G12",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe strongest signal is the extreme downregulation of **Nnt** (z = -3.46), a mitochondrial NADP+ transhydrogenase critical for managing oxidative stress and mitochondrial function. In spaceflight, oxidative stress is a hallmark, and Nnt is known to be suppressed in kidney and liver under such stress.  \nOther notable changes align with spaceflight-associated kidney responses:  \n- **Cyp11a1**, **Cyp11b1**, **Cyp3a41a**, **Cyp3a44** (cytochrome P450 enzymes involved in steroid and xenobiotic metabolism) are down, consistent with altered renal metabolism in flight.  \n- **Slco1b2** (organic anion transporter) downregulation matches known renal transport alterations in microgravity.  \n- **Havcr1** (kidney injury marker) upregulation suggests possible renal stress.  \n- **Ifi44l**, **Gbp2b**, **Ifi202b** (interferon-stimulated genes) are upregulated, indicating immune/inflammatory activation common in flight.  \n\nHowever, the overall magnitude of change beyond Nnt is modest (most |z| < 2), and several expected strong spaceflight signatures (e.g., pronounced DNA damage, immune cell markers) are not prominent. This suggests a stressed but possibly ground-control sample with some inflammatory or metabolic perturbations, rather than a clear flight profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 298,
+        "total_tokens": 1308
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep4_G16",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most striking signature here is the strong downregulation of **Nnt** (z = -3.46), a mitochondrial proton pump involved in oxidative stress response and NADPH regeneration. In spaceflight, oxidative stress markers are typically *upregulated* (e.g., Nrf2 targets), but Nnt downregulation is not a hallmark of flight kidney data; instead, it may reflect a ground-control-specific stress or strain variation.  \n\nSeveral downregulated genes are involved in xenobiotic/drug metabolism (**Ces1c**, **Cyp3a41a**, **Cyp3a44**, **Cyp11b1**, **Cyp11a1**), which in flight studies often show *upregulation* due to systemic stress and hepatic/kidney detoxification demands. Their coordinated decrease here is more consistent with a ground control metabolic baseline.  \n\nImmune-related interferon-stimulated genes (**Ifi44l**, **Gbp2b**) are modestly upregulated, but not to the extent typically seen in flight-induced immune dysregulation. The lack of strong inflammatory or DNA damage response upregulation (e.g., no clear Nrf2, Atf4, or p53 target signature) argues against the pronounced oxidative stress expected in flight kidneys.  \n\nThus, the pattern aligns more with ground-control variability, possibly from housing or handling stress, rather than the coherent spaceflight-associated transcriptomic signature in kidney tissue.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 314,
+        "total_tokens": 1324
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_GC_75days_Rep5_G20",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney and liver metabolism genes that are typically suppressed in spaceflight. Specifically:  \n- **Cyp3a41a** and **Cyp3a44** (cytochrome P450 enzymes involved in xenobiotic/drug metabolism) are down, consistent with known spaceflight-induced repression of hepatic/renal detoxification pathways.  \n- **Cps1** (carbamoyl phosphate synthase, urea cycle) down aligns with altered nitrogen metabolism in flight.  \n- **Mat1a** (methionine adenosyltransferase) down is associated with liver/kidney metabolic stress in microgravity.  \n- **Serpina3** family members (acute phase response) are down, suggesting dysregulated inflammation response.  \n- **Ucp1** up is unusual in kidney but may reflect mitochondrial uncoupling stress.  \n- **Havcr1** (kidney injury marker) up hints at renal stress, which is flight-associated.  \n\nHowever, the overall pattern lacks the strong oxidative stress (e.g., Nrf2 targets) and immune activation signatures often seen in flight kidney samples. The dominant signal is a coordinated downregulation of metabolic genes, which, while seen in flight, is also prominent in certain ground-based stress models. Given the magnitude and specificity of the changes (especially Cyp3a family, Cps1), this leans toward a **ground control** sample showing a stress/metabolic adaptation response, but not the full spectrum of spaceflight-specific dysregulation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 319,
+        "total_tokens": 1329
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep1_V2",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney-specific metabolic and detoxification genes (e.g., *Cps1*, *Slco1b2*, *Cyp3a41a*, *Ces1c*, *Mat1a*), which is consistent with known spaceflight-induced suppression of xenobiotic and nitrogen metabolism in the liver and kidney. However, the lack of pronounced upregulation in oxidative stress, DNA damage, or immune-inflammatory markers (e.g., Nrf2 targets, interferon-response genes are mostly down or only mildly up) is atypical for flight samples. Spaceflight kidney signatures typically show stronger induction of stress-response and immune-activation genes. The pattern here instead suggests a ground-control sample with some metabolic suppression, possibly due to experimental conditions (e.g., housing, diet) but not the full spectrum of spaceflight stress.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 185,
+        "total_tokens": 1195
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep2_V6",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most striking pattern here is the **strong downregulation of key kidney-specific metabolic and transport genes** that are characteristic of spaceflight adaptation:  \n- **Cps1** (urea cycle, ammonia detoxification) is sharply down, consistent with altered nitrogen metabolism.  \n- **Slco1b2** (organic anion transporter) downregulation aligns with reduced renal transport demand.  \n- **Cyp3a41a**, **Cyp3a44**, **Ces1c**, **Ces1b** (xenobiotic/drug metabolism) are suppressed, a known response to reduced metabolic load in flight.  \n- **Mat1a** (methionine metabolism, liver/kidney function) down suggests altered methyl group metabolism.  \n\nWhile there is mild upregulation of a few immune-related genes (e.g., **Ifi44l**, **Gbp2b**), these are not strong interferon signatures typical of pronounced immune dysregulation in flight. The dominant signal is **coordinated downregulation of renal metabolic and detoxification pathways**, matching expected kidney transcriptomic adaptation to microgravity. The absence of strong oxidative stress or DNA damage markers further supports a ground control profile with normal variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 269,
+        "total_tokens": 1279
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep3_V10",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. Key spaceflight signatures expected in kidney include upregulation of fluid/electrolyte transporters (e.g., *Slc* family genes), stress-response genes, and markers of oxidative stress or DNA damage.  \n\nIn this sample:  \n1. **Strong downregulation of *Nnt*** (z = -3.46) \u2013 *Nnt* (nicotinamide nucleotide transhydrogenase) is mitochondrial and linked to oxidative stress response; its downregulation is unusual for flight, as oxidative stress in space typically upregulates mitochondrial antioxidant genes.  \n2. **Downregulation of xenobiotic/detox genes** (*Ces1c*, *Cyp3a41a*, *Cyp3a44*, *Cyp11b1*, *Cyp11a1*) \u2013 In flight, liver/kidney often induce cytochrome P450 genes for stress metabolism; here they are suppressed.  \n3. **Upregulation of immune/interferon-response genes** (*Ifi202b*, *Ifi44l*, *Gbp2b*, *H2-Ea*) \u2013 These can occur in both flight and ground inflammation, but are not uniquely spaceflight-specific.  \n4. **Absence of classic spaceflight kidney markers** \u2013 No strong upregulation of *Slc12a1*, *Aqp2*, *Avpr2*, or oxidative stress genes (*Hmox1*, *Nqo1*).  \n5. **Downregulation of kidney-specific transporters** (*Slco1b2*) and metabolic genes (*Cps1*, *Mat1a*) suggests a non-stressed, ground-like state rather than a flight-adapted profile.  \n\nOverall, the pattern lacks the coherent stress-response and metabolic reprogramming typical of spaceflight kidney transcriptomes, leaning more toward a ground control signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 397,
+        "total_tokens": 1407
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep4_V14",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most striking signature here is the strong downregulation of **Nnt** (z = -3.46), a mitochondrial proton transporter involved in oxidative stress response and NADPH regeneration. In spaceflight, mitochondrial dysfunction and altered redox homeostasis are common, and Nnt downregulation has been observed in flight kidney datasets.  \n\nOther notable signals:  \n- **Havcr1** (Kidney Injury Molecule-1) is upregulated (+1.36), consistent with subclinical kidney stress in flight.  \n- **Cyp11b1** and **Cyp11a1** (steroidogenic enzymes) are down, suggesting altered adrenal/kidney steroid metabolism in microgravity.  \n- **Mat1a** (methionine adenosyltransferase, liver/kidney metabolism) is down (-0.90), aligning with metabolic reprogramming.  \n- **Ifi44l** and **Gbp2b** (interferon-stimulated genes) are modestly up, hinting at immune/inflammatory dysregulation.  \n\nHowever, the overall magnitude of change is moderate aside from Nnt, and several expected strong spaceflight kidney markers (e.g., drastic Slc family transporters, major electrolyte regulators) are not prominently altered here. This suggests a ground control sample with some individual variation or mild stress, rather than the pronounced transcriptomic disruption typical of flight kidneys.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 305,
+        "total_tokens": 1315
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_25days_Rep5_V18",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top variable genes show a pattern inconsistent with strong, canonical spaceflight kidney signatures. Key expected spaceflight-related changes in kidney include:  \n- **Downregulation of fluid/electrolyte transporters** (e.g., *Slc* family genes) \u2014 not prominent here.  \n- **Upregulation of oxidative stress/DNA damage markers** (e.g., *Hmox1*, *Gstm* family, *Nqo1*) \u2014 absent.  \n- **Altered immune/inflammatory genes** \u2014 while some immune-related genes appear (*Ifi44l*, *Gbp2b*, *H2-Ea*), they are not strongly coordinated with known spaceflight immune dysregulation patterns.  \n\nInstead, the top changes point toward **strain-specific or individual metabolic variations**:  \n- *Rsc1a1* (sodium-dependent organic anion transporter) upregulation is not a reported spaceflight hallmark.  \n- Multiple cytochrome P450 genes (*Cyp3a44*, *Cyp11b1*, *Cyp3a41a*) are down, which could reflect altered xenobiotic metabolism but is more typical of ground-based liver/kidney metabolic adaptation than consistent spaceflight kidney response.  \n- Several acute-phase response genes (*Serpina3* family, *Ahsg*) are down, not typically seen in flight where inflammation markers often increase.  \n\nThe lack of a coherent stress-response signature matching known spaceflight kidney transcriptomes leads to a **ground control classification** with moderate confidence.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 321,
+        "total_tokens": 1331
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep1_V4",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney-specific metabolic and detoxification genes (e.g., *Cps1*, *Ces1c*, *Cyp3a41a*, *Mat1a*, *Slco1b2*, *Cyp11b1*), which aligns with known spaceflight-induced suppression of xenobiotic and amino acid metabolism in the liver and kidney. However, the lack of pronounced upregulation in oxidative stress, DNA damage, or immune-inflammatory markers (e.g., Nrf2 targets, interferon response genes are only modestly elevated: *Ifi202b*, *Ifi44l*) suggests this is not a typical flight signature. Instead, the pattern resembles ground-control variability or a mild stress response. The strongest signal (*Rsc1a1* up) is linked to renal tubular function but not uniquely to microgravity. Given the overall suppression of Cyp enzymes and transporters without the expected concurrent strong immune dysregulation or atrophy markers, this sample is more consistent with a ground control exhibiting normal physiological variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 225,
+        "total_tokens": 1235
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep2_V8",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes in this kidney sample show a strong downregulation of key xenobiotic/detoxification enzymes (e.g., *Cyp3a41a*, *Cyp3a44*, *Cyp11b1*, *Ces1c*, *Slco1b2*) and bile acid synthesis/transport genes (*Cps1*, *Mat1a*), which is characteristic of spaceflight-induced suppression of hepatic/renal metabolism pathways. However, the lack of strong upregulation in oxidative stress (Nrf2 targets) or DNA damage markers, combined with the absence of typical fluid/electrolyte balance gene shifts (e.g., *Aqp2*, *Avpr2*, *Slc12a1*), suggests this pattern aligns more with ground control variability. The modest immune-related changes (*Ifi44l*, *Gbp2b*, *H2-Ea*) are within normal range for kidney tissue and not indicative of the pronounced immune dysregulation seen in flight samples. The overall signature is consistent with ground control biological variation rather than the coordinated stress-response profile expected after spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 239,
+        "total_tokens": 1249
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep3_V12",
+      "true_label": 0
+    },
+    {
+      "content": "A 0.85\n\n**Reasoning:**  \nThe kidney sample shows a strong downregulation of key xenobiotic/detoxification enzymes (multiple Cyp3a and Cyp11 genes, Ces1c, Slco1b2) and urea cycle enzyme Cps1, consistent with spaceflight-induced suppression of metabolic and detoxification pathways. Upregulation of interferon-stimulated genes (Ifi202b, Ifi44l, Gbp2b) and immune-related markers (Havcr1, H2-Ea) aligns with spaceflight immune dysregulation and kidney stress. The profound downregulation of Nnt (nicotinamide nucleotide transhydrogenase, critical for mitochondrial redox balance) is a known oxidative stress marker in spaceflight. The pattern matches spaceflight-associated kidney transcriptomic signatures: metabolic suppression, immune activation, and oxidative stress response.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 173,
+        "total_tokens": 1183
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep4_V16",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. Key observations supporting a **ground control** classification include:\n\n1. **Absence of strong oxidative stress/DNA damage markers:** No significant upregulation of canonical Nrf2 targets or DNA repair genes typical of spaceflight kidney responses.\n\n2. **Contradictory xenobiotic metabolism pattern:** While some Cyp genes (Cyp3a41a, Cyp3a44) are down, which can occur in flight, the strong downregulation of **Cps1** (urea cycle, liver-enriched but relevant in kidney metabolism) and **Ces1c** (carboxylesterase) doesn't align with the typical flight-induced metabolic reprogramming toward increased detoxification stress.\n\n3. **Immune/inflammatory signature mismatch:** Upregulation of interferon-stimulated genes (Ifi202b, Ifi44l, Gbp2b) is present, but in flight kidney samples, these are often more pronounced and coupled with stronger cytokine/chemokine shifts. The chemokines Ccl21b/e are down, which is not typical of flight-induced renal immune activation.\n\n4. **Lack of consistent fluid/electrolyte homeostasis genes:** No strong directional change in key transporters/channels (e.g., Slc12a1, Aqp2, etc.) that are characteristically altered in spaceflight kidneys.\n\n5. **Liver-like metabolic downregulation:** Several downregulated genes (Ahsg, Apoc4, Serpina3 family, Mup3) are highly liver-specific and their suppression in a kidney sample suggests this may reflect a ground-control metabolic state without the systemic stress of spaceflight.\n\nThe pattern is more consistent with baseline variability in a ground control kidney, possibly influenced by circadian or housing conditions, rather than the coordinated transcriptomic signature of spaceflight adaptation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 386,
+        "total_tokens": 1396
+      },
+      "sample_id": "Mmus_C3H-HeJ_KDN_VIV_75days_Rep5_V20",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top dysregulated genes in this kidney sample do not align strongly with established spaceflight-associated kidney transcriptomic signatures. Key expected changes in spaceflight\u2014such as upregulation of oxidative stress (Nrf2 pathway), DNA damage response, and fluid/electrolyte homeostasis genes\u2014are not prominent here. Instead, the pattern shows:  \n- Strong upregulation of *Ucp1* (typically linked to thermogenesis in brown fat, not a hallmark of kidney spaceflight response).  \n- Downregulation of multiple cytochrome P450 genes (*Cyp3a41a*, *Cyp3a44*, *Cyp11a1*, *Cyp11b1*) and solute carriers (*Slco1b2*), which could reflect altered xenobiotic metabolism but is more characteristic of liver than kidney in flight mice.  \n- Downregulation of acute-phase response genes (*Serpina3k*, *Ahsg*, *Mug1*), suggesting reduced inflammatory signaling, whereas spaceflight often induces low-grade inflammation.  \n- No clear signature of immune dysregulation, osmotic stress, or mitochondrial reprogramming typical of kidney adaptation to microgravity.  \n\nWhile some immune-related genes (*Ccl21e*, *Ccl21b*, *Ifi206*) are elevated, the overall profile lacks the coherent stress-response pattern expected for flight. The changes are more consistent with ground-control variability or a non-spaceflight physiological perturbation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 299,
+        "total_tokens": 1309
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep1_F1",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is a strong **downregulation of xenobiotic and steroid metabolism genes** (e.g., *Cyp11a1*, *Cyp11b1*, *Cyp3a44*, *Cyp3a41a*, *Ces1b*, *Ces1c*, *Ucp1*, *Slco1b2*), which aligns with known spaceflight-induced suppression of hepatic and renal detoxification pathways. Additionally, several acute-phase response genes (*Serpina3h/k*, *Ahsg*, *Mug1*) are down, suggesting altered inflammatory regulation. While a few immune-related genes (*Ccl21b/e*, *Ifi206*) are upregulated, the overall pattern matches spaceflight-associated **metabolic reprogramming and reduced xenobiotic metabolism** more than a typical ground-control kidney profile. The magnitude and consistency of downregulation in cytochrome P450 and carboxylesterase families point toward a flight-like adaptation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 223,
+        "total_tokens": 1233
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep2_F5",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. Key spaceflight signatures in kidney transcriptomics typically include upregulation of genes involved in oxidative stress response, DNA repair, and fluid/electrolyte homeostasis, along with downregulation of certain metabolic and xenobiotic processing genes.  \n\nIn this sample:  \n- **Strong downregulation of multiple cytochrome P450 genes** (Cyp11b1, Cyp3a44, Cyp11a1, Cyp3a41a) and **carboxylesterases** (Ces1b, Ces1c) aligns with known suppression of xenobiotic metabolism in flight, but this pattern can also occur in ground controls under certain conditions.  \n- **Upregulation of chemokines Ccl21b/e** suggests immune activation, which is common in flight but not exclusive.  \n- **Absence of strong, canonical spaceflight stress markers** (e.g., pronounced upregulation of Nrf2 targets, Hsp genes, or immediate early genes) is notable.  \n- The **magnitude of z-scores** is modest (mostly < |2|), and the pattern lacks the robust, coordinated stress response often seen in flight kidneys.  \n\nWhile some immune and metabolic shifts are present, the overall profile is more consistent with a ground control sample showing mild physiological variation rather than the pronounced transcriptomic disruption typical of spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 294,
+        "total_tokens": 1304
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep3_F9",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most extreme gene, **Nnt** (NAD(P) transhydrogenase), is strongly downregulated (z = -3.46). In spaceflight kidney data, *Nnt* is often upregulated as part of the oxidative stress response (mitochondrial antioxidant function). Its strong downregulation here is atypical for flight.  \n\nMultiple kidney-relevant spaceflight signatures are missing or reversed:  \n- **Cyp3a44**, **Cyp3a41a**, **Cyp11a1**, **Cyp11b1** (cytochrome P450 genes involved in xenobiotic/stress metabolism) are down, whereas flight typically induces xenobiotic metabolism genes in kidney/liver.  \n- **Slco1b2** (organic anion transporter) is down; fluid/electrolyte transporters often show altered expression in flight, but not consistently down.  \n- **Serpina3** family members (acute phase/inflammation) are down, whereas flight usually promotes inflammatory signaling.  \n- No strong upregulation of DNA damage response (e.g., *Gadd45*, *Rad51*) or Nrf2-target genes is evident.  \n\nThe pattern instead resembles a ground control profile with normal variation in kidney-specific metabolism and transport genes, without the characteristic oxidative stress, immune dysregulation, or metabolic reprogramming markers typical of spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 287,
+        "total_tokens": 1297
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep4_F13",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid and electrolyte shifts in microgravity, typically showing altered expression of genes involved in water reabsorption, ion transport, and xenobiotic metabolism. In this sample, key xenobiotic/detoxification enzymes (e.g., *Cyp3a44*, *Cyp3a41a*, *Ces1b*, *Ces1c*, *Slco1b2*) are downregulated, consistent with spaceflight-associated suppression of hepatic/renal detox pathways. Additionally, acute-phase response genes (*Serpina3h/k*, *Ahsg*, *Mug1*, *Pzp*) are down, which aligns with immune modulation in flight. Upregulated genes (*H3c14*, *Ifi206*, *Trim12a*) are not strongly indicative of classic spaceflight stress responses (e.g., oxidative stress, DNA repair, or inflammation markers are not prominent). The overall pattern matches flight-like suppression of renal metabolism and acute-phase proteins, rather than a ground-control-like homeostasis. However, confidence is tempered because some expected fluid-regulation genes (e.g., *Aqp2*, *Avpr2*) are not among the top variables, and some changes could reflect individual variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 259,
+        "total_tokens": 1269
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_25days_Rep5_F17",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top variable genes in this kidney sample do not show a strong signature of known spaceflight-induced kidney transcriptomic changes. Key expected spaceflight responses in kidney tissue include upregulation of oxidative stress (e.g., Nrf2 targets), DNA damage repair, fluid/electrolyte balance genes (e.g., aquaporins, ion transporters), and immune/inflammatory markers. Here, the most extreme z-scores involve:  \n- **Ucp1** (strongly upregulated) \u2013 unusual in kidney; typically a brown adipose thermogenesis gene, not a canonical spaceflight kidney marker.  \n- **Rsc1a1** (up) \u2013 a renal-specific transcription factor linked to electrolyte transport, but not strongly associated with microgravity in published datasets.  \n- **Ccnb1ip1** (down) \u2013 involved in cell cycle regulation; not a hallmark of spaceflight kidney.  \n- **Havcr1** (down) \u2013 kidney injury marker; downregulation does not align with typical spaceflight-associated renal stress.  \n- Multiple **Cyp** genes (Cyp11a1, Cyp11b1, Cyp3a44 down) \u2013 these are steroidogenic and xenobiotic metabolism enzymes; their downregulation is more consistent with ground control variation or specific metabolic states rather than the xenobiotic metabolism induction often seen in flight liver/kidney.  \n- **Serpina3** family genes down \u2013 acute phase reactants; not typically suppressed in flight.  \n- Absence of strong oxidative stress, immune dysregulation, or fluid homeostasis gene shifts characteristic of flight kidneys.  \n\nThe pattern suggests this sample lacks the coordinated stress and adaptive responses seen in microgravity, making it more likely a ground control sample with normal physiological variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 365,
+        "total_tokens": 1375
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep1_F3",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most significant signature here is the **strong downregulation of multiple cytochrome P450 (CYP) and metabolism genes** (Cyp11b1, Cyp3a41a, Cyp3a44, Ces1c, Ces1b, Mat1a, Cps1, Hsd3b1), which is consistent with known spaceflight-induced suppression of xenobiotic and steroid metabolism pathways in liver and kidney.  \n\nAdditionally:  \n- **Rsc1a1** (sodium-dependent organic anion transporter) is strongly upregulated (+2.02), aligning with altered renal solute handling in microgravity.  \n- **Havcr1** (kidney injury marker) is upregulated, often seen in spaceflight-associated renal stress.  \n- **Serpina3 family members** (Serpina3h, Serpina3b, Serpina3k) are downregulated, which matches inflammation/acute-phase response modulation in flight.  \n- **Ucp1** downregulation suggests metabolic adaptation.  \n\nThe pattern matches flight-associated **renal metabolic suppression and transporter adaptation**, rather than a ground-control profile where these pathways are typically stable. Confidence is high but not maximal due to moderate z-score magnitudes and lack of extreme oxidative stress/DNA damage markers.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 284,
+        "total_tokens": 1294
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep2_F7",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most striking signature here is the **strong downregulation of key renal transporters and metabolic enzymes** that align with spaceflight adaptation:  \n- **Rsc1a1 (highly upregulated)** is a sodium-dependent transporter regulator; its upregulation can reflect altered renal sodium handling, consistent with fluid redistribution in flight.  \n- **Mat1a (strongly downregulated)** is critical for methionine metabolism and glutathione synthesis; its suppression suggests reduced antioxidant capacity, matching known oxidative stress in spaceflight.  \n- Multiple **cytochrome P450 genes (Cyp3a41a, Cyp3a44, Cyp11b1, Cyp11a1)** are downregulated, indicating suppressed xenobiotic/detoxification metabolism\u2014a common hepatic and renal response to microgravity.  \n- **Cps1** (urea cycle) downregulation points to altered nitrogen metabolism, often seen in metabolic reprogramming during spaceflight.  \n- **Ahsg (down)** is involved in mineral homeostasis; changes correlate with bone loss and renal calcium handling in microgravity.  \n- **Immune-related genes (Ccl21b/e up, Ifi206 up)** show inflammatory signaling, consistent with spaceflight-induced immune dysregulation.  \n\nWhile a few genes (e.g., some interferon responses) could occur in ground-based pathologies, the **concerted pattern of metabolic suppression, transporter adjustment, and oxidative stress response** is highly characteristic of renal adaptation to spaceflight. However, the absence of extreme stress markers (e.g., severe DNA damage genes) and moderate z-scores suggest a well-adapted flight sample, not an acute ground-based injury. Confidence is high but not maximal due to the lack of extreme outliers typical of severe flight stress.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 376,
+        "total_tokens": 1386
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep3_F11",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of xenobiotic metabolism and steroid synthesis pathways (multiple *Ces1*, *Cyp3a*, *Cyp11*, *Akr1cl*), which is atypical for the classic oxidative stress and metabolic reprogramming seen in spaceflight-exposed kidney tissue. Spaceflight typically induces, not suppresses, these detoxification and stress-response systems. The upregulation of *Rsc1a1* (involved in sodium transport) and immune-related genes (*Ifi206*, *Ccl21*) is moderate and could occur in either condition, but the dominant signature of suppressed metabolism genes aligns more with a ground control sample exhibiting baseline variation or a specific non-flight stressor, rather than the coordinated induction expected after spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 167,
+        "total_tokens": 1177
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep4_F15",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:** The kidney sample shows a strong and coherent downregulation of genes involved in xenobiotic/drug metabolism (e.g., *Cyp3a41a*, *Cyp3a44*, *Cyp11a1*, *Cyp11b1*, *Ces1b*, *Ces1c*, *Slco1b2*), steroid metabolism (*Hsd3b1*), and liver/kidney-specific metabolic processes (*Cps1*, *Mat1a*). This pattern is a hallmark of spaceflight, where microgravity and the space environment suppress major hepatic and renal detoxification pathways. The downregulation of acute-phase response genes (*Serpina3k*, *Serpina3b*, *Ahsg*) and immune-related genes (*H2-Ea*, *Ifi202b*) aligns with known immune dysregulation in flight. While some immune/interferon-related genes are upregulated (*Ifi206*, *Trim12a*), the dominant signature is a broad suppression of metabolic and secretory functions, which is more characteristic of a flight kidney adaptation to altered solute handling and reduced metabolic demand in microgravity. The absence of strong oxidative stress or DNA damage markers in the top variable genes also fits a kidney-specific flight profile rather than a ground control.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 269,
+        "total_tokens": 1279
+      },
+      "sample_id": "Mmus_C57-6J_KDN_FLT_75days_Rep5_F19",
+      "true_label": 1
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is a strong **downregulation of xenobiotic and steroid metabolism genes** (e.g., *Cyp3a41a*, *Cyp3a44*, *Cyp11a1*, *Cyp11b1*, *Hsd3b1*, *Ces1b*, *Ces1c*, *Slco1b2*), which is consistent with known spaceflight-induced suppression of hepatic and renal detoxification pathways. Additionally, acute phase response genes (*Serpina3k*, *Serpina3b*, *Ahsg*, *Mug1*) are down, suggesting an altered systemic inflammatory state.  \n\nNotably, the upregulation of *Rsc1a1* (a renal tubular transporter regulator) and *Ccl21b/e* (involved in immune cell trafficking) aligns with spaceflight-related renal adaptation and immune dysregulation. The absence of strong oxidative stress or DNA damage markers in the top variable genes, combined with this specific metabolic suppression pattern, points toward a **flight sample** adapting to microgravity. However, the confidence is tempered because some changes could reflect individual variation or experimental conditions, but the coherence of the detoxification pathway downregulation is a hallmark of spaceflight kidney transcriptomics.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 283,
+        "total_tokens": 1293
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep1_G1",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney-specific metabolic and detoxification genes consistent with spaceflight adaptation rather than acute stress. Specifically:  \n- **Cyp3a44** and **Cyp3a41a** (cytochrome P450 enzymes involved in xenobiotic metabolism) are down, aligning with known suppression of hepatic/renal detox pathways in microgravity.  \n- **Cps1** (carbamoyl phosphate synthase 1, urea cycle) and **Mat1a** (methionine metabolism) are down, suggesting altered nitrogen metabolism\u2014a reported effect in spaceflight.  \n- **Havcr1** (kidney injury marker) is down, which may reflect adaptive fluid-electrolyte shifts rather than ground-control-like injury responses.  \n- Upregulated genes like **Ucp1** (uncoupling protein 1, typically brown adipose) and **Rsc1a1** (regulator of solute carriers) hint at metabolic reprogramming and altered transport, consistent with spaceflight.  \n- The absence of strong canonical oxidative stress or immune activation markers (e.g., Nrf2 targets, cytokines) suggests this is not a typical ground-control profile but matches the muted, adaptive kidney transcriptome described in flight mice.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 266,
+        "total_tokens": 1276
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep2_G5",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. Key spaceflight signatures in kidney include upregulation of genes involved in fluid/electrolyte homeostasis, oxidative stress response, and xenobiotic metabolism.  \n\nIn this sample:  \n- **Rsc1a1** (sodium-dependent neurotransmitter transporter) is strongly upregulated (+1.89), which could relate to altered sodium handling\u2014a known renal adaptation to microgravity.  \n- However, several **cytochrome P450 genes** (Cyp11a1, Cyp11b1, Cyp3a44) are downregulated, which contrasts with the typical upregulation of xenobiotic metabolism genes (e.g., Cyp3a family) observed in flight liver/kidney as part of a systemic stress response.  \n- **Hsd3b1** (involved in steroid metabolism) is down, not consistent with expected hormonal stress axis activation.  \n- **Ucp1** downregulation does not align with mitochondrial stress adaptation often seen in flight.  \n- The overall pattern lacks strong, coordinated oxidative stress (Nrf2 targets) or DNA damage response upregulation.  \n\nWhile a few immune-related genes (Ccl21b/e) are elevated\u2014possibly reflecting mild inflammation\u2014the majority of extreme changes do not match the robust, multi-pathway dysregulation typical of spaceflight kidney transcriptomes. The profile is more consistent with a ground control sample showing moderate individual variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 306,
+        "total_tokens": 1316
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep3_G9",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern is the strong downregulation of multiple cytochrome P450 enzymes (Cyp11a1, Cyp3a41a, Cyp11b1, Cyp3a44) and other xenobiotic/drug metabolism genes (Ces1c, Ces1b, Slco1b2). In spaceflight, liver and kidney often show suppression of xenobiotic metabolism pathways, possibly due to reduced metabolic demand or altered hormonal signaling. However, the kidney-specific fluid/electrolyte homeostasis genes expected to be perturbed in flight (e.g., aquaporins, ion channels, renin-angiotensin system genes) are not prominent here.  \n\nThe downregulation of acute-phase response genes (Serpina3 family, Ahsg) and some immune-related genes (H2-Ea, Ifi202b) does not strongly align with typical spaceflight-induced immune dysregulation, which more often shows activation of inflammatory pathways. The upregulation of a few immune genes (Ifi206, Ccl21b/e) is mild.  \n\nThe strongest signal (Nnt, z = -3.46) is noteworthy\u2014Nnt (nicotinamide nucleotide transhydrogenase) is involved in mitochondrial redox balance; its downregulation could relate to reduced oxidative stress in a ground control or a non-stressed condition, whereas spaceflight often upregulates oxidative stress response genes.  \n\nOverall, the pattern lacks the canonical spaceflight kidney signature (e.g., strong electrolyte transport changes, DNA damage markers, or consistent inflammatory activation) and instead shows a profile more consistent with a ground control sample with some batch or individual variation in metabolic gene expression.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 343,
+        "total_tokens": 1353
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep4_G13",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is **downregulation of xenobiotic and steroid metabolism genes** (multiple Cyp genes: Cyp11a1, Cyp3a41a, Cyp3a44, Cyp11b1; Ces1b, Ces1c; Slco1b2), which is more consistent with **ground control** physiology. In flight, kidneys typically show upregulation of oxidative stress response, ion transport, and DNA repair genes, which are not prominent here. The few upregulated genes (Rsc1a1, Ccl21b/e, Igf2) are not strongly indicative of spaceflight stress responses. The broad suppression of metabolic and detoxification pathways aligns with a less-stressed, ground-like state.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 173,
+        "total_tokens": 1183
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_25days_Rep5_G17",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most prominent signature here is the strong downregulation of key renal transporters and metabolic enzymes:  \n- **Slco1b2** (organic anion transporter, kidney-specific) is down (-1.21), consistent with altered renal clearance and xenobiotic metabolism in flight.  \n- **Cyp3a44**, **Cyp11b1**, **Cyp11a1** (cytochrome P450 enzymes involved in steroid/hormone metabolism) are down, matching spaceflight-induced suppression of steroidogenic and detoxification pathways.  \n- **Cps1** (carbamoyl phosphate synthase, urea cycle) down (-1.16) suggests altered nitrogen metabolism, reported in flight kidney datasets.  \n- **Hsd3b1** (steroidogenesis enzyme) down aligns with hormonal dysregulation in microgravity.  \n\nUpregulated genes like **Thap6**, **Rsc1a1**, and **Ifi206** are less specific to known spaceflight kidney responses, while the broad downregulation of transporters, metabolic enzymes, and serine protease inhibitors (**Serpina3k**, **Serpina3h**, **Spink6**) fits a pattern of reduced metabolic and detoxification activity typical of flight kidneys. The absence of strong oxidative stress or immune activation markers (e.g., Nrf2 targets, inflammatory cytokines) suggests this is not a ground control under normal homeostasis.  \n\nConfidence is high (0.85) due to the concordance of multiple downregulated renal-specific genes with known spaceflight kidney transcriptomic profiles.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 340,
+        "total_tokens": 1350
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep1_G3",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most extreme gene in this sample, **Rsc1a1** (z = +1.81 UP), encodes a sodium-dependent transporter involved in renal reabsorption. Its upregulation is consistent with adaptive responses to altered sodium/water homeostasis in spaceflight. However, the overall pattern lacks strong, consistent spaceflight-associated signatures:  \n- **Immune/inflammatory markers** like *Ccl21b/e* are modestly elevated, but not strongly indicative of spaceflight immune dysregulation.  \n- **Xenobiotic/detox genes** (*Cyp3a44*, *Cyp11a1*, *Cyp11b1*, *Ces1b/c*, *Slco1b2*) are broadly **downregulated**, which contrasts with typical hepatic or renal stress-induced upregulation of cytochrome P450s in flight samples.  \n- **Serpina3 family** (acute phase reactants) are down, not up as often seen in systemic inflammation from spaceflight.  \n- No clear oxidative stress (Nrf2 pathway) or DNA damage response genes appear among the most variable.  \n- The strongest signal (Rsc1a1) could occur in either condition, but the remainder of the profile resembles ground-control variability rather than a coordinated flight response.  \n\nThus, while minor fluid-regulation changes are suggested, the transcriptome lacks the breadth and direction of change characteristic of spaceflight kidney samples, favoring a **ground control** classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 322,
+        "total_tokens": 1332
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep2_G7",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is the **coordinated downregulation of key renal transporters and metabolic enzymes**, which aligns with known spaceflight adaptations:  \n\n1. **Major downregulation of solute carriers and cytochrome P450s**  \n   - `Slco1b2` (organic anion transporter, key for xenobiotic clearance) \u2193  \n   - `Cyp3a41a`, `Cyp3a44`, `Cyp11a1`, `Cyp11b1` (drug/steroid metabolism) \u2193  \n   - `Cps1` (urea cycle, ammonia detoxification) \u2193  \n   - `Mat1a` (methionine metabolism, linked to oxidative stress) \u2193  \n   This pattern suggests suppressed detoxification and metabolic pathways, a known renal response to microgravity-induced reduction in metabolic demand and altered toxin processing.\n\n2. **Downregulation of water/electrolyte homeostasis genes**  \n   - `Hsd3b1` (involved in steroid metabolism affecting sodium retention) \u2193  \n   - `Ucp1` (mitochondrial uncoupling, energy dissipation) \u2193  \n   These changes are consistent with adaptations to fluid redistribution and reduced energy expenditure in space.\n\n3. **Immune/inflammatory modulation**  \n   - `Havcr1` (kidney injury marker) \u2193 \u2014 suggests absence of acute ground-like renal stress.  \n   - `Serpina3` family members (acute-phase proteins) \u2193 \u2014 indicates reduced inflammatory signaling.  \n   - `Ccl21b/e` (chemokines for immune cell trafficking) \u2191 \u2014 may reflect altered immune cell homing due to microgravity.\n\n4. **Contrast with ground control expectations**  \n   Ground controls typically show higher expression of stress-responsive transporters and metabolic enzymes due to normal gravitational loading and higher oxidative stress. The widespread suppression here is more indicative of a flight-adapted kidney.\n\nWhile a few genes like `Rsc1a1` (sodium transporter regulator) are upregulated, the overall pattern strongly matches the **reduced metabolic and transport activity** seen in spaceflight kidneys, rather than the elevated stress responses often seen in ground controls.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 462,
+        "total_tokens": 1472
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep3_G15",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top variable genes in this kidney sample do not show a strong signature of spaceflight-associated stress. Key expected changes for kidney in microgravity\u2014such as pronounced shifts in fluid/electrolyte balance genes (e.g., *Aqp2*, *Slc12a1*, *Avpr2*), oxidative stress markers, or consistent immune/inflammatory dysregulation\u2014are not prominent here.  \n\nInstead, the most extreme z-scores involve genes like *Thap6* (transcriptional regulation), *H3c14* (histone), *Mybpc3* (cardiac muscle; unusual in kidney), and *Ccnb1ip1* (cell cycle), which are not hallmark spaceflight kidney responses. Some xenobiotic metabolism genes (*Cyp3a41a*, *Cyp3a44*) show mixed, mild changes, but not the coherent pattern seen in flight.  \n\nThe absence of strong, directional changes in known spaceflight-sensitive pathways (e.g., DNA damage, immune activation, metabolic reprogramming) suggests this sample aligns more closely with ground control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 236,
+        "total_tokens": 1246
+      },
+      "sample_id": "Mmus_C57-6J_KDN_GC_75days_Rep4_G19",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney-specific metabolic and transport functions, which is atypical for the acute stress/adaptation signature often seen in spaceflight. Specifically:  \n- **Cps1** (carbamoyl-phosphate synthase 1, urea cycle) is down, which contradicts the expected upregulation of nitrogen metabolism/ammonia detoxification in flight.  \n- **Slco1b2** (organic anion transporter) and **Mat1a** (methionine adenosyltransferase) are down; spaceflight typically alters but does not broadly suppress such transporters and metabolic enzymes in kidney.  \n- **Cyp11b1**, **Cyp11a1**, **Cyp3a41a**, **Cyp3a44** (cytochrome P450 enzymes) are uniformly down, whereas spaceflight often induces xenobiotic/metabolic stress responses.  \n- **Ucp1** upregulation is unusual in kidney and may reflect a ground-control-specific metabolic state or batch effect.  \n- The pattern lacks hallmark spaceflight immune/oxidative stress genes (e.g., Nrf2 targets, DNA repair, inflammatory cytokines) among the most variable genes.  \n\nThis profile is more consistent with a ground-control sample showing baseline variation or a non\u2011spaceflight experimental condition.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 273,
+        "total_tokens": 1283
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep1_V1",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney-specific metabolic and detoxification pathways, particularly cytochrome P450 enzymes (Cyp11b1, Cyp3a44, Cyp11a1, Cyp3a41a), carboxylesterases (Ces1b, Ces1c), and solute carriers (Slco1b2). These are consistent with known spaceflight-induced suppression of xenobiotic metabolism and transport in the liver and kidney. Additionally, the downregulation of genes involved in steroidogenesis (Cyp11a1, Cyp11b1, Hsd3b1) and acute-phase response (Serpina3 family, Ahsg) aligns with metabolic and inflammatory reprogramming in microgravity. While some immune-related genes (Ccl21b/e, Ifi206) are upregulated\u2014a common flight signature\u2014the overall pattern of suppressed renal metabolic and detoxification functions is more characteristic of a flight sample. However, the magnitude of change is moderate (z-scores mostly < |2|), and some expected strong oxidative stress or DNA damage markers are absent, reducing confidence slightly.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 236,
+        "total_tokens": 1246
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep2_V5",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is the **strong downregulation of key renal metabolic and transport genes** consistent with spaceflight adaptation:  \n- **Cyp11a1, Cyp11b1, Hsd3b1** (steroidogenesis) down \u2192 altered mineralocorticoid regulation.  \n- **Slco1b2** (organic anion transporter) down \u2192 reduced xenobiotic/drug clearance.  \n- **Cps1** (urea cycle) down \u2192 possible nitrogen metabolism shift.  \n- **Mat1a** (methionine metabolism) down \u2192 links to oxidative stress response.  \n\nThe upregulation of **Ucp1** (uncoupling protein 1, typically brown fat) is unusual in kidney but has been noted in spaceflight as part of metabolic reprogramming and mitochondrial stress. **Ccl21b/Ccl21e** (chemokines) up may reflect mild immune modulation.  \n\nThe pattern lacks strong acute inflammatory or DNA damage markers, but the collective downregulation of cytochrome P450s, transporters, and steroidogenic enzymes aligns with known spaceflight-induced renal transcriptional adaptation to altered solute/fluid homeostasis. Ground control kidneys typically show less pronounced suppression of these metabolic pathways.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 267,
+        "total_tokens": 1277
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep3_V9",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes in this kidney sample show a strong downregulation of key xenobiotic/detoxification enzymes (e.g., *Cyp3a44*, *Cyp3a41a*, *Cyp11b1*, *Cyp11a1*, *Ces1c*, *Ces1b*, *Slco1b2*) and acute-phase response genes (*Serpina3h*, *Serpina3b*, *Serpina3k*, *Ahsg*, *Mug1*). In spaceflight, kidney transcriptomes typically show **upregulation** of these pathways due to oxidative stress, fluid shifts, and systemic inflammation. The observed widespread suppression, along with downregulation of mitochondrial/metabolic genes (*Ucp1* only mildly up, *Nnt* only slightly up), aligns more with ground-control adaptive states or baseline homeostasis. The lack of strong immune/inflammatory upregulation (e.g., *Ifi44l*, *Gbp2b* down) further suggests an absence of spaceflight-associated stress signatures.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 228,
+        "total_tokens": 1238
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep4_V13",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top dysregulated genes in this kidney sample do not align with established spaceflight-associated kidney transcriptomic signatures. Key expected changes in flight mouse kidneys include upregulation of oxidative stress response genes (e.g., *Hmox1*, *Nqo1*, *Gst* family), fluid/electrolyte balance genes (e.g., *Aqp2*, *Slc12a1*), and DNA damage markers. Here, the most extreme change is a strong downregulation of *Nnt* (NAD(P) transhydrogenase, mitochondrial), which is not a hallmark of spaceflight kidney responses. Many downregulated genes are involved in steroidogenesis (*Cyp11a1*, *Cyp11b1*, *Hsd3b1*), xenobiotic metabolism (*Cyp3a44*, *Ces1b*), and acute-phase response (*Serpina3* family), patterns more consistent with ground-control variation or specific metabolic states rather than microgravity adaptation. The lack of characteristic spaceflight stress-response upregulation and the prominence of metabolic enzyme suppression lead to a confident classification as a ground sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 241,
+        "total_tokens": 1251
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_25days_Rep5_V17",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is the **coordinated downregulation of key renal metabolic and transport genes** (e.g., *Mat1a*, *Cyp11a1*, *Slco1b2*, *Cyp3a41a*, *Hsd3b1*, *Ces1c*, *Cyp11b1*, *Cyp3a44*, *Cps1*, *Ucp1*), many involved in xenobiotic/drug metabolism, steroidogenesis, and ammonia/urea handling. This pattern is consistent with **reduced metabolic demand and altered solute transport** observed in spaceflight kidneys, rather than an acute stress or immune-driven response.  \n\nNotably absent are strong upregulation of oxidative stress (e.g., *Hmox1*, *Nqo1*) or DNA damage markers, and immune dysregulation signals are minimal. The few upregulated genes (*Rsc1a1*, *Ccl21b/e*, *Ifi206*) are modest and not characteristic of the robust inflammatory/immune shifts typical of flight kidneys.  \n\nThe profile best matches a **ground control kidney** with some inter-individual variation in metabolic gene expression, not the pronounced spaceflight adaptation signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 274,
+        "total_tokens": 1284
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep1_V3",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong, coherent downregulation of liver-enriched metabolic and detoxification genes (e.g., *Mat1a*, *Ces1c*, *Cps1*, *Cyp11a1*, *Cyp3a44*, *Slco1b2*), which is not a hallmark of spaceflight kidney responses. In spaceflight, kidney transcriptomes typically show shifts in fluid/electrolyte balance genes, oxidative stress markers, and immune/inflammatory pathways, not broad suppression of hepatic-like metabolism genes. This pattern instead suggests a ground-control sample with possible cross-tissue contamination (e.g., liver RNA in kidney prep) or a metabolic state change unrelated to microgravity. The absence of strong spaceflight-associated oxidative stress or immune dysregulation signatures supports the ground classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 174,
+        "total_tokens": 1184
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep2_V7",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes in this kidney sample show a strong downregulation of xenobiotic/detoxification enzymes (Ces1c, Ces1b, Cyp3a44, Cyp3a41a, Cyp11a1, Cyp11b1), solute carriers (Slco1b2), and serine protease inhibitors (Serpina3k, Serpina3h, Serpina3b). These patterns are characteristic of ground control mice, where normal gravity maintains baseline metabolic and detoxification activity. In spaceflight, kidney transcriptomes typically show upregulation of these pathways as part of a systemic stress response, including altered fluid/electrolyte homeostasis and xenobiotic metabolism. The absence of strong oxidative stress or immune dysregulation markers further supports a ground control signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 169,
+        "total_tokens": 1179
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep3_V11",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking pattern is the strong downregulation of numerous liver-associated genes in this kidney sample, including key xenobiotic/detoxification enzymes (Cyp3a41a, Cyp3a44, Cyp11b1, Ces1c, Ces1b), acute-phase reactants (Ahsg, Serpina3k, Mug1, Pzp), and urea cycle enzyme Cps1. This is consistent with a known spaceflight effect: hepatic suppression of xenobiotic metabolism and acute-phase response genes, which can be detected in kidney due to shared metabolic and detoxification functions. The extreme downregulation of Nnt (-3.46), a mitochondrial proton transporter linked to oxidative stress and metabolic reprogramming, aligns with spaceflight-induced mitochondrial and metabolic stress. The absence of strong upregulation in classic kidney-specific fluid/electrolyte homeostasis genes, combined with this liver-like metabolic suppression signature, points toward a flight-associated systemic metabolic adaptation rather than a ground-control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 208,
+        "total_tokens": 1218
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep4_V15",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney sample shows a strong downregulation of xenobiotic metabolism and steroid synthesis genes (e.g., *Ces1c*, *Cyp11a1*, *Cyp3a44*, *Cyp11b1*, *Slco1b2*, *Mat1a*), which is consistent with known spaceflight-induced suppression of hepatic and renal detoxification pathways. Additionally, the downregulation of *Nnt* (mitochondrial NAD(P) transhydrogenase) aligns with mitochondrial oxidative stress responses in microgravity. The upregulation of *Ucp1* (uncoupling protein 1) is unusual in kidney but may reflect metabolic stress. The pattern lacks the strong immune/inflammatory upregulation often seen in flight kidneys (e.g., no marked induction of *Ccl2*, *Lcn2*, or *Havcr1* is upregulated here, but *Havcr1* is actually down). However, the broad suppression of cytochrome P450 and solute carrier genes is a hallmark of spaceflight adaptation in metabolic organs. The overall signature fits a flight-associated metabolic reprogramming and reduced detoxification capacity more than a ground-control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 246,
+        "total_tokens": 1256
+      },
+      "sample_id": "Mmus_C57-6J_KDN_VIV_75days_Rep5_V19",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of liver-enriched metabolic and detoxification genes (e.g., *Cps1*, *Mat1a*, *Cyp3a41a*, *Cyp3a44*, *Slco1b2*, *Ces1b*, *Ces1c*, *Akr1cl*), which is not a hallmark of spaceflight kidney responses. In spaceflight, kidney transcriptomes typically show shifts in fluid/electrolyte balance genes, oxidative stress markers, and immune modulation, but not broad suppression of hepatic-like phase I/II metabolism genes. The observed pattern instead suggests a sample-specific or treatment-specific effect (e.g., metabolic perturbation, xenobiotic exposure, or cross-tissue contamination) not aligned with established spaceflight kidney signatures. The lack of consistent upregulation of known spaceflight-responsive pathways (e.g., Nrf2, DNA repair, inflammation) further supports a ground control classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 205,
+        "total_tokens": 1215
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep1_GR01",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney sample shows a strong downregulation of multiple cytochrome P450 genes (Cyp3a41a, Cyp3a44, Cyp11b1, Cyp11a1), solute carriers (Slco1b2), and serine protease inhibitors (Serpina3 family), which aligns with known spaceflight-induced suppression of xenobiotic metabolism and transport pathways\u2014often observed as part of systemic metabolic reprogramming and reduced hepatic/kidney detoxification load in microgravity.  \n\nUpregulation of *Rsc1a1* (involved in renal tubular transport) and *Ucp1* (uncoupling protein 1, unusual in kidney but sometimes linked to metabolic stress) suggests altered electrolyte/fluid homeostasis and possible mitochondrial stress adaptation, consistent with spaceflight.  \n\nThe pattern of immune-related changes (e.g., *Ifi202b*, *Ifi44l* up, *Ccl21b/e* down) fits spaceflight-associated immune dysregulation, though some kidney-specific chemokine reductions could reflect altered leukocyte trafficking.  \n\nWhile not all changes are classically \"kidney spaceflight signature,\" the collective downregulation of drug/metabolism genes and shifts in transport/immune genes leans toward a flight-like response, albeit with moderate confidence because some changes (e.g., *Ucp1* up) are atypical and could reflect individual variation. However, given the stronger prior evidence for suppression of Cyp3a and Slco families in flight samples, I classify as **Flight (A)** with confidence 0.85.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 322,
+        "total_tokens": 1332
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep1_GR02",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong, coherent downregulation of key kidney-specific metabolic and detoxification pathways, particularly xenobiotic metabolism (multiple Cyp and Ces genes down) and bile acid/steroid metabolism (Cyp11a1, Cyp11b1, Hsd3b1, Slco1b2). This pattern aligns with known spaceflight-induced metabolic reprogramming and liver/kidney detoxification suppression. However, the absence of strong oxidative stress (Nrf2 targets), DNA damage, or immune dysregulation markers typical of flight samples, combined with the lack of fluid/electrolyte homeostasis genes (e.g., Aqp2, Avpr2, Scnn1) that are often altered in kidney during spaceflight, suggests this is more consistent with a ground control sample exhibiting baseline variation in metabolic genes rather than a flight signature. The few upregulated immune-related genes (Ccl21b/e, Ifi206) are mild and not characteristic of the robust inflammatory response seen in flight kidneys.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 215,
+        "total_tokens": 1225
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep1_GR03",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. Key spaceflight signatures in kidney include upregulation of genes involved in oxidative stress, DNA damage, and fluid-electrolyte regulation (e.g., *Havcr1* for kidney injury, *Igf2* for growth/repair).  \n\nIn this sample:  \n- **Absence of strong oxidative stress/DNA damage markers:** No significant upregulation of *Hmox1*, *Nqo1*, *Gst* family, or DNA repair genes.  \n- **Downregulation of cytochrome P450 enzymes** (*Cyp11b1*, *Cyp3a41a*, *Cyp3a44*) and bile acid/organic anion transporters (*Slco1b2*) is common in ground controls or stress-unrelated variation.  \n- **No clear immune dysregulation pattern:** Minimal interferon or MHC class II gene changes (*H2-Ea* slightly up but not strongly).  \n- **Mixed metabolic signals:** *Ucp1* down is not typical of flight (often up in metabolic stress).  \n\nThe profile lacks the coherent oxidative, immune, and transport-related shifts expected in flight kidney transcriptomes, aligning more with ground-control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 266,
+        "total_tokens": 1276
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep1_GR04",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney sample shows a strong downregulation of genes involved in xenobiotic metabolism (e.g., *Cyp3a41a*, *Cyp3a44*, *Cyp11a1*, *Cyp11b1*, *Slco1b2*, *Ces1b*, *Ces1c*), steroid metabolism (*Hsd3b1*), and urea cycle (*Cps1*), which is consistent with known spaceflight-induced suppression of hepatic and renal detoxification pathways. Additionally, acute kidney injury marker *Havcr1* is down, which may reflect altered fluid homeostasis. Upregulation of *Rsc1a1* (involved in sodium transport) and *Ccl21b/Ccl21e* (immune chemokines) aligns with spaceflight-related electrolyte balance shifts and mild immune dysregulation. The pattern matches flight-associated metabolic reprogramming and reduced metabolic enzyme expression rather than a typical ground control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 204,
+        "total_tokens": 1214
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep1_GR05",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most significant signature here is the **downregulation of key renal transporters and metabolic enzymes** that align with spaceflight adaptation:  \n- **Rsc1a1 (highly upregulated)** is a sodium-dependent transporter regulator; its strong upregulation is a known compensatory response to altered sodium reabsorption in spaceflight.  \n- **Cyp3a44, Cyp3a41a, Slco1b2, Ces1c** (all down) are involved in xenobiotic/drug metabolism and organic anion transport. Their suppression matches spaceflight-induced reduction in hepatic-renal clearance pathways.  \n- **Ahsg (down)** is linked to mineral metabolism and bone remodeling, often altered in microgravity.  \n- **Ucp1 (up)** suggests mitochondrial uncoupling, which can occur under oxidative stress in flight.  \n- **Immune-related genes (Ifi206, Gbp2b, H2-Ea)** show mixed but plausible dysregulation consistent with spaceflight immune modulation.  \n\nWhile some changes (e.g., **Igf2 up**) could reflect growth/repair processes seen in both conditions, the collective pattern of transporter and cytochrome P450 repression, along with stress-response upregulation, is more characteristic of flight kidney transcriptomes. However, confidence is tempered because some expected strong markers of oxidative stress or inflammation are not prominent in this top-50 list.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 306,
+        "total_tokens": 1316
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep1_GR06",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney sample shows a strong downregulation of xenobiotic/detoxification enzymes (Cps1, Ces1c, Cyp3a41a, Cyp3a44, Cyp11b1, Slco1b2) and acute-phase/immune-related genes (Havcr1, Serpina3 family, Ahsg, Pzp). In spaceflight, kidney transcriptomes typically exhibit altered expression of genes involved in fluid/electrolyte balance, oxidative stress, and xenobiotic metabolism\u2014often with *upregulation* of stress-response and immune pathways due to microgravity-induced fluid shifts and systemic inflammation.  \n\nHere, the dominant pattern is broad suppression of metabolic and immune-modulatory genes, which aligns more with a ground-control kidney under standard housing conditions rather than the activated stress/immune signatures seen in flight kidneys. The few upregulated genes (e.g., Ccl21b/e, Trim12a) are not strongly indicative of spaceflight stress responses. Thus, the profile is consistent with a ground control sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 220,
+        "total_tokens": 1230
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep1_GR07",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key liver/kidney metabolic and detoxification genes (e.g., *Cps1*, *Mat1a*, *Ces1c*, *Cyp3a44*, *Cyp3a41a*, *Cyp11b1*, *Slco1b2*), which is consistent with known spaceflight-induced suppression of xenobiotic metabolism and bile acid synthesis pathways in liver, and altered renal handling. However, the extreme upregulation of *Ucp1* (+2.42) in kidney is highly unusual for spaceflight \u2014 it typically indicates thermogenic adaptation in brown fat, not a kidney response to microgravity. In spaceflight mouse kidney data, oxidative stress and immune markers are often prominent, but here the interferon/immune response genes (*Ifi206*, *Ifi44l*, *Ifi202b*, *Gbp2b*) show mixed, modest changes. The pattern of downregulated cytochrome P450 enzymes and transporters resembles a ground-control-like variation or a specific metabolic perturbation rather than the coherent oxidative stress, DNA damage, and immune dysregulation signatures typical of flight samples. The absence of strong Nrf2-target or DNA repair gene upregulation further supports a ground classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 266,
+        "total_tokens": 1276
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep1_GR08",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of liver/kidney metabolic and detoxification genes (Ces1c, Cyp3a41a, Cyp3a44, Mat1a, Slco1b2, Cps1) and acute-phase response genes (Serpina3 family, Ahsg, Mug1). This pattern is consistent with known spaceflight effects:  \n- **Suppression of xenobiotic/drug metabolism pathways** (Cyp3a, Ces1) is a hallmark of spaceflight liver/kidney adaptation.  \n- **Reduced acute-phase proteins** (Serpina3k, Ahsg) aligns with immune dysregulation in microgravity.  \n- **Upregulation of Rsc1a1** (involved in tubular transport) and **Havcr1** (kidney injury marker) suggests altered renal handling, which fits fluid shift responses in flight.  \n- The absence of strong oxidative stress or DNA damage markers in the top genes suggests this is not a ground-control stress response, but rather the characteristic metabolic reprogramming seen in flight kidneys.  \n\nGround control mice typically show less pronounced suppression of metabolic genes and more variable stress signatures. The coordinated downregulation of detoxification and acute-phase genes strongly points to a flight sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 270,
+        "total_tokens": 1280
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep2_GR12",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The most extreme signals here are inconsistent with established spaceflight kidney signatures:  \n- **Rsc1a1 (strongly upregulated)** is a kidney-specific sodium transporter regulator; its upregulation suggests a compensatory response to altered sodium handling, but in flight, these pathways are often suppressed or dysregulated, not strongly activated.  \n- **Ucp1 upregulation** is unusual for kidney and more typical of thermogenic adipose tissue; its presence may indicate metabolic stress, but not specifically spaceflight.  \n- **Multiple cytochrome P450 genes (Cyp3a44, Cyp3a41a, Cyp11a1, Cyp11b1) are down**, along with **Ces1c** and **Slco1b2** (transport/detoxification). While spaceflight alters xenobiotic metabolism, these changes are more pronounced in liver; in kidney, flight often shows *upregulation* of stress-responsive genes like *Havcr1* (only modestly up here).  \n- **Serpina3 family members (Serpina3h, Serpina3k) are down**, whereas acute phase/inflammatory responses are often elevated in flight.  \n- The pattern lacks the strong oxidative stress (e.g., *Hmox1*, *Nqo1*) or DNA damage markers typical of spaceflight.  \n\nOverall, the gene expression shifts appear more consistent with a ground-control kidney sample showing some stress or batch variation, rather than the coherent fluid homeostasis, immune, and oxidative stress reprogramming seen in flight kidneys.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 340,
+        "total_tokens": 1350
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep2_GR14",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney and liver-specific metabolic genes (e.g., *Mat1a*, *Cps1*, *Cyp11a1*, *Slco1b2*, *Cyp3a41a*, *Ces1b*, *Ces1c*, *Hsd3b1*), which are involved in ammonia detoxification, bile acid handling, xenobiotic metabolism, and steroidogenesis. In spaceflight, kidney gene expression often shifts due to fluid redistribution and altered metabolic demands, but the pronounced suppression of these metabolic pathways\u2014especially urea cycle (*Cps1*) and cytochrome P450 enzymes\u2014is more consistent with ground control profiles where such high metabolic activity is not as disrupted.  \n\nFlight kidney signatures typically show upregulation of oxidative stress, DNA damage, and immune/inflammatory markers, which are not dominant here. The few upregulated genes (*Ucp1*, *Ccl21b/e*) are not strongly characteristic of spaceflight in kidney tissue. The overall pattern aligns with a ground control metabolic state rather than the pronounced stress and adaptation signatures seen in flight samples.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 238,
+        "total_tokens": 1248
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep2_GR15",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top differentially expressed genes in this kidney sample are dominated by strong downregulation of liver-associated metabolic enzymes and acute-phase reactants (e.g., *Cps1*, *Ahsg*, *Mug1*, *Serpina3* family, *Cyp3a41a*, *Mat1a*, *Ces1c*), which is not a hallmark of spaceflight kidney transcriptomics. Known spaceflight kidney signatures involve fluid/electrolyte balance genes, oxidative stress response, and immune modulation, but here the most extreme signals reflect possible cross-tissue contamination or a non-flight-related metabolic state. The upregulation of *Rsc1a1* (a kidney-specific gene) and mild immune-related upregulation (*Ifi202b*, *Gbp2b*) are present but not sufficient to override the lack of a clear spaceflight oxidative stress/DNA damage or immune dysregulation pattern in the top variable genes. The profile is more consistent with a ground control sample with incidental metabolic variations rather than the coordinated stress response typical of spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 224,
+        "total_tokens": 1234
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep2_GR16",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is a strong **downregulation of metabolic and detoxification genes** (e.g., *Cps1*, *Cyp3a44*, *Cyp11b1*, *Mat1a*, *Ces1c*, *Ces1b*, *Slco1b2*), which is consistent with altered xenobiotic and ammonia metabolism in spaceflight. However, the **lack of strong oxidative stress or DNA damage markers** (e.g., Nrf2 targets, *Gpx3*, *Hmox1*) and the **absence of clear immune dysregulation markers** (most MHC and interferon-related genes are only mildly down) argue against a typical flight kidney signature.  \n\nKey flight-like signals in kidney often include upregulation of fluid/electrolyte transporters, stress-response genes, and inflammatory markers. Here, the most extreme change (*Nnt* down) is more associated with metabolic stress but not uniquely spaceflight-specific. The overall pattern resembles a **mild suppression of metabolic pathways** seen in some ground control models or experimental conditions, rather than the pronounced multi-systemic disruption typical of spaceflight.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 258,
+        "total_tokens": 1268
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep3_GR17",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top downregulated genes are strongly enriched for liver-specific metabolic functions (e.g., *Cps1*, *Cyp3a41a*, *Cyp3a44*, *Slco1b2*, *Ces1c*, *Mat1a*, *Mug1*, *Akr1cl*), which are not characteristic of primary kidney responses to spaceflight. In kidney, spaceflight typically alters genes related to fluid/electrolyte balance, oxidative stress, and immune activity. The observed pattern instead suggests a sample-specific or technical shift away from hepatocyte-like metabolic gene expression. While some immune-related changes (*Ifi202b*, *Gbp2b*, *H2-Ea*) are present, they are not dominant, and the lack of strong kidney-specific spaceflight signatures (e.g., *Avpr2*, *Slc12a1*, *Aqp2* changes) points toward a ground control sample with unusual inter-organ metabolic gene expression variation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 212,
+        "total_tokens": 1222
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep3_GR18",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. In spaceflight, key signatures include upregulation of genes involved in fluid/electrolyte transport (e.g., *Slc* family genes), oxidative stress response, and often downregulation of certain metabolic and xenobiotic-processing genes.  \n\nHere, the most extreme changes do not align with typical spaceflight kidney profiles:  \n- **Rsc1a1** (sodium transporter regulator) is upregulated (+1.60), which could occur in flight, but this alone is not definitive.  \n- Strong **downregulation** of multiple cytochrome P450 genes (*Cyp11a1*, *Cyp3a41a*, *Cyp11b1*, *Cyp3a44*), carboxylesterases (*Ces1b*, *Ces1c*), and bile acid/organic anion transporters (*Slco1b2*) is prominent. While some xenobiotic metabolism genes can be downregulated in flight, this widespread suppression in kidney\u2014along with downregulation of acute-phase proteins (*Ahsg*, *Serpina3k*, *Mug1*, *Pzp*)\u2014more closely resembles a ground control pattern without the expected oxidative stress and DNA damage markers.  \n- Missing are typical flight-induced immune/inflammatory signals (e.g., *Ccl2*, *Cxcl* chemokines, *Nfe2l2* targets); instead, interferon-related genes (*Ifi202b*, *Ifi44l*) are down or only weakly changed.  \n- The pattern suggests a baseline variation or mild stress response seen in ground controls, not the coordinated fluid/electrolyte and stress gene shifts characteristic of spaceflight.  \n\nThus, the sample is more consistent with a **ground control** kidney.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 381,
+        "total_tokens": 1391
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep3_GR19",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top downregulated genes are dominated by liver-specific or liver-enriched metabolic genes (Rsc1a1, Mat1a, Cps1, Ahsg, Ces1c, Slco1b2, Mug1, Cyp3a41a, Cyp3a44, Cyp11b1, Hsd3b1). In spaceflight, liver xenobiotic and bile acid metabolism pathways are often altered, but these genes are not typically highly expressed in kidney; their strong downregulation here suggests a sample purity or technical artifact (possible liver contamination or misannotation) rather than a true kidney-specific spaceflight signature.  \n\nTrue kidney spaceflight responses involve fluid/electrolyte balance genes (e.g., Slc12a1, Aqp2, Avpr2), oxidative stress markers, and immune modulation, which are not prominent here. The few immune-related changes (Ifi202b, Gbp2b, H2-Ea) are modest and not specific to flight. The pattern is inconsistent with established kidney spaceflight transcriptomics, where metabolic detoxification genes are not the primary drivers of variability. This looks more like a ground control kidney sample with possible technical issues in tissue isolation or gene annotation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 258,
+        "total_tokens": 1268
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep3_GR20",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes in this kidney sample show a strong downregulation of key xenobiotic/detoxification enzymes (multiple Cyp genes, Ces1b/c, Slco1b2) and acute-phase response genes (Serpina3 family, Ahsg). While spaceflight can alter metabolism, the pronounced suppression of cytochrome P450 and carboxylesterase genes in the kidney is more characteristic of ground-based physiological states or experimental conditions rather than the typical oxidative stress and DNA damage response signatures seen in flight kidney samples. Flight kidney transcriptomes usually show upregulation of fluid/electrolyte balance genes, oxidative stress markers (e.g., Hmox1, Gstm family), and immune modulation genes, which are not prominent here. The modest upregulation of a few immune-related genes (Ccl21b/e, Ifi206) is not sufficient to override the dominant ground-like metabolic profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 194,
+        "total_tokens": 1204
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep3_GR21",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.75\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney-specific metabolic and detoxification genes (e.g., *Cps1*, *Ces1c*, *Cyp3a41a*, *Cyp3a44*, *Mat1a*), which is consistent with known spaceflight-induced suppression of xenobiotic and amino acid metabolism in the liver and kidney. However, the pattern lacks the classic oxidative stress, immune dysregulation, or fluid/electrolyte balance gene signatures typically seen in flight kidney samples (e.g., no strong upregulation of *Hmox1*, *Nqo1*, inflammatory cytokines, or ion transporters). The upregulation of *Rsc1a1* (a renal tubular transporter regulator) and *Havcr1* (kidney injury marker) could occur in both conditions. Given the overall suppression of metabolic genes without a clear stress or immune activation profile, this sample aligns more with a ground control exhibiting normal variation rather than a pronounced spaceflight response.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 216,
+        "total_tokens": 1226
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep3_GR22",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney-specific metabolic and detoxification genes consistent with spaceflight adaptation.  \n- **Cps1** (carbamoyl-phosphate synthase 1, urea cycle) and **Mat1a** (methionine adenosyltransferase) are significantly down, indicating altered nitrogen metabolism\u2014a known response to microgravity-induced fluid shifts and reduced metabolic demand.  \n- Multiple **Cyp** (cytochrome P450) genes (**Cyp3a41a**, **Cyp3a44**, **Cyp11b1**, **Cyp11a1**) and **Ces1c/b** (carboxylesterases) are down, reflecting suppressed xenobiotic metabolism, commonly observed in flight due to reduced environmental toxin exposure and metabolic reprogramming.  \n- **Havcr1** (kidney injury marker) downregulation suggests absence of acute injury but aligns with adaptive remodeling rather than ground-control homeostasis.  \n- Upregulated genes like **Rsc1a1** (regulator of sodium transport) and **Ccl21b/e** (chemokines involved in immune cell trafficking) fit spaceflight patterns of electrolyte handling adjustments and mild immune dysregulation.  \n\nThe overall signature matches flight-associated **suppression of metabolic and detoxification pathways** in the kidney, not the typical ground-control expression profile. Confidence is high due to the coherence of multiple downregulated pathways specific to spaceflight kidney transcriptomics.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 304,
+        "total_tokens": 1314
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep3_GR23",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top differentially expressed genes in this kidney sample are dominated by downregulation of key xenobiotic/detoxification enzymes (e.g., *Cyp3a41a*, *Cyp3a44*, *Ces1c*, *Slco1b2*) and acute-phase response/immune-related genes (e.g., *Serpina3h/k*, *Ahsg*, *Mug1*). In spaceflight, kidney transcriptomes typically show **upregulation** of oxidative stress response, DNA repair, and fluid/electrolyte balance genes, while xenobiotic metabolism genes are often suppressed in the **liver**, not primarily in the kidney.  \n\nThe strong downregulation of cytochrome P450 and solute carrier family members here resembles a ground-control pattern where such genes are not induced by spaceflight-associated stress. The lack of marked upregulation in known spaceflight kidney signatures (e.g., *Havcr1* is only modestly elevated) and the overall gene list aligning more with baseline variation rather than a pronounced stress/immune dysregulation profile support a **ground control** classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 235,
+        "total_tokens": 1245
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep3_GR24",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney shows a strong downregulation of genes involved in xenobiotic/drug metabolism (multiple Cyp genes: Cyp11a1, Cyp11b1, Cyp3a44, Cyp3a41a), bile acid synthesis (Cyp7a1 not listed but related Cyp down), and solute transporters (Slco1b2). This is consistent with spaceflight-induced suppression of hepatic/renal detoxification pathways, often linked to reduced metabolic demand and altered systemic regulation in microgravity.  \n\nAdditionally, acute kidney injury marker Havcr1 is down, which in spaceflight contexts may reflect altered fluid homeostasis signaling rather than injury per se. The upregulation of a few immune-related genes (Ccl21b/e, Trim12a) aligns with mild immune dysregulation seen in flight.  \n\nThe pattern lacks the strong oxidative stress or DNA damage signatures that would push toward a more extreme flight profile, but the consistent downregulation of metabolic enzymes matches known spaceflight renal transcriptomic adaptations. Ground control kidneys typically show less coordinated suppression of these pathways.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 221,
+        "total_tokens": 1231
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep4_GR25",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of liver-specific metabolic genes (e.g., *Cps1*, *Mat1a*, *Cyp3a41a*, *Cyp3a44*, *Ces1c*, *Slco1b2*, *Mug1*, *Ahsg*), which are not typically highly expressed in kidney. This suggests the sample may have liver contamination or altered hepatocyte gene expression due to experimental/technical factors rather than spaceflight.  \nIn spaceflight, kidney signatures typically involve fluid/electrolyte balance genes (*Slc12a1*, *Aqp2*, *Avpr2*), oxidative stress markers, and immune modulation \u2014 none of which appear prominently here. The upregulation of *Rsc1a1* (a kidney-specific organic cation transporter) and *Havcr1* (kidney injury marker) is not uniquely flight-associated.  \nThe pattern does not match known spaceflight kidney transcriptomic responses (e.g., consistent inflammatory or stress pathways), and the strong downregulation of cytochrome P450 and urea cycle genes points more toward a ground sample with possible cross-tissue contamination or a non-flight-specific metabolic shift.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 253,
+        "total_tokens": 1263
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep4_GR26",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney is highly sensitive to fluid shifts and electrolyte balance changes in microgravity. The dominant signature here is a strong **downregulation of xenobiotic/detoxification and metabolic genes** (e.g., *Cyp3a41a*, *Cyp3a44*, *Cyp11b1*, *Cps1*, *Mat1a*, *Ces1c*, *Ces1b*, *Slco1b2*), which is consistent with known spaceflight-induced suppression of hepatic and renal metabolic pathways. Additionally, acute-phase response genes (*Ahsg*, *Serpina3k*, *Mug1*, *Pzp*) are down, suggesting altered systemic inflammation regulation. While some immune-related genes (*Ccl21b/e*) are upregulated\u2014possibly reflecting mild immune dysregulation\u2014the overall pattern lacks the strong oxidative stress, DNA damage, or immune activation markers often seen in flight samples. Instead, the broad suppression of metabolic and transport functions aligns more with ground control variation or a stress response not specific to spaceflight. The absence of clear spaceflight-atrophy or Nrf2-pathway upregulation further supports a **ground control** classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 249,
+        "total_tokens": 1259
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep4_GR27",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top downregulated genes are strongly indicative of a ground control (normal gravity) kidney profile.  \n- **Cps1** (carbamoyl-phosphate synthase 1, key urea cycle enzyme in liver, but also expressed in kidney) and **Ces1c**, **Cyp3a41a**, **Cyp3a44**, **Slco1b2** are involved in xenobiotic/drug metabolism and detoxification. In spaceflight, these pathways are often upregulated due to oxidative stress and metabolic reprogramming; their downregulation here suggests absence of that stress response.  \n- **Ahsg** (alpha-2-HS-glycoprotein/fetuin-A) and **Serpina3k/h/b** (serine protease inhibitors) are acute-phase/reactant proteins often altered in inflammation or metabolic stress; their downregulation does not match the typical inflammatory dysregulation seen in flight.  \n- **Rsc1a1** (regulator of solute carriers) is upregulated, but this single signal is outweighed by the broader pattern.  \n- The lack of strong upregulation in known spaceflight-responsive pathways (e.g., DNA damage, immune activation, electrolyte balance genes like **Aqp2**, **Slc12a1**, etc.) further supports a ground control signature.  \n\nThus, the profile aligns with baseline kidney homeostasis rather than spaceflight-adapted stress responses.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 293,
+        "total_tokens": 1303
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep4_GR28",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe kidney sample shows a strong downregulation of genes involved in xenobiotic metabolism and steroidogenesis (e.g., *Cyp3a41a*, *Cyp3a44*, *Cyp11a1*, *Cyp11b1*, *Hsd3b1*, *Slco1b2*, *Ces1c*, *Ces1b*), which is consistent with known spaceflight-induced suppression of hepatic and renal detoxification pathways. Additionally, the downregulation of *Cps1* (urea cycle) and *Mat1a* (methionine metabolism) suggests altered nitrogen metabolism, a reported stress response in microgravity. The upregulation of *Ccl21b* and *Ccl21e* (chemokines involved in immune cell trafficking) aligns with spaceflight-associated immune dysregulation and renal inflammation. While *Havcr1* (kidney injury marker) is down, its direction here may reflect adaptive changes rather than acute injury. The overall pattern matches transcriptional signatures observed in flight kidneys\u2014particularly the broad suppression of metabolic enzymes\u2014more than typical ground control variability.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 236,
+        "total_tokens": 1246
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep4_GR29",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top differentially expressed genes in this kidney sample are dominated by downregulation of key liver-specific and xenobiotic metabolism genes (e.g., *Ces1c*, *Mat1a*, *Cyp3a41a*, *Cyp3a44*, *Cps1*, *Slco1b2*, *Mug1*, *Serpina3k*). In spaceflight, liver xenobiotic metabolism pathways are often altered, but here these genes are strongly suppressed in a pattern more consistent with ground control kidney tissue, which lacks high constitutive expression of these hepatocyte markers.  \n\nThe upregulation of *Rsc1a1* (a kidney-specific transporter) and absence of strong spaceflight kidney signatures (e.g., major fluid/electrolyte regulators like *Avpr2*, *Aqp2*, *Slc12a1* showing extreme z-scores) suggest a relatively normal kidney transcriptome. Known spaceflight-responsive immune/inflammatory genes (*Ifi202b*, *Ifi44l*, *Gbp2b*) show only mild upregulation, not the pronounced immune dysregulation often seen in flight kidneys.  \n\nThus, the profile matches a ground control kidney sample with some inter-individual or technical variation in hepatocyte-contaminating transcripts (common in kidney RNA-seq due to blood or tissue processing), rather than a clear spaceflight-affected signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 294,
+        "total_tokens": 1304
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep4_GR30",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes in this kidney sample are dominated by downregulation of key kidney-specific metabolic and transport functions, which is more consistent with ground control physiology than with the established spaceflight kidney signature.  \n\n1. **Kidney spaceflight signatures** typically show upregulation of genes involved in fluid/electrolyte homeostasis (e.g., *Aqp2*, *Slc12a1*, *Avpr2*), oxidative stress response, and DNA repair. None of these are prominent here.  \n2. **Strong downregulation of metabolic genes**: *Cps1* (urea cycle, liver/kidney), *Mat1a* (methionine metabolism), *Cyp3a44*, *Cyp3a41a*, *Cyp11b1*, *Cyp11a1* (cytochrome P450 enzymes for xenobiotic/steroid metabolism), and *Ucp1* (mitochondrial uncoupling) are all down. In spaceflight, some Cyp genes are altered, but not as a broad downregulation pattern; instead, oxidative stress often upregulates detoxification pathways.  \n3. **Immune/inflammatory markers**: *Havcr1* (kidney injury marker) is down, not up as often seen in spaceflight-associated renal stress. *Ccl21b/Ccl21e* are slightly up but are lymphoid chemokines not strongly tied to spaceflight kidney responses.  \n4. **Liver-enriched genes down**: *Ahsg*, *Mug1*, *Serpina3k*, *Apoc4* \u2014 these are more indicative of normal tissue-specific suppression in kidney rather than a flight-induced change.  \n5. The overall pattern resembles baseline variability in ground control kidneys, where certain hepatocyte-like metabolic genes are naturally low in kidney, rather than a coordinated stress response from microgravity.  \n\nThus, the transcriptome lacks the hallmark oxidative stress, fluid regulation, and immune dysregulation signals of spaceflight, favoring a **ground control** classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 421,
+        "total_tokens": 1431
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep4_GR31",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top differentially expressed genes in this kidney sample do not align with established spaceflight-associated kidney transcriptomic signatures. Key expected changes in flight mouse kidneys include upregulation of fluid/electrolyte balance genes (e.g., *Aqp2*, *Slc12a1*), oxidative stress markers, and DNA damage response genes. Here, the most extreme z-scores involve:  \n- **Rsc1a1** (highly upregulated): a kidney-specific gene linked to tubular transport, but not a hallmark of spaceflight.  \n- **Cps1** (downregulated): a urea cycle enzyme primarily liver-specific; its downregulation in kidney is not characteristic of flight.  \n- Multiple **Serpina3** family members and **Cyp3a** genes are downregulated, which contrasts with typical xenobiotic metabolism stress responses seen in flight (often upregulation).  \n- No strong signature of immune dysregulation, oxidative stress (e.g., *Hmox1*, *Nqo1*), or cytoskeletal remodeling typical of microgravity.  \n\nThe pattern suggests sample-specific or study-specific variation rather than the consistent kidney responses to spaceflight. Hence, it is more likely a ground control sample.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 259,
+        "total_tokens": 1269
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep4_GR32",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes are dominated by downregulation of key kidney and liver-specific metabolic genes (e.g., *Cps1*, *Mat1a*, *Cyp3a41a*, *Cyp11a1*, *Slco1b2*, *Ces1c*, *Ces1b*), which are not typical of spaceflight kidney signatures. Spaceflight usually shows upregulation of oxidative stress, immune, and fluid/electrolyte balance genes in kidney, not broad suppression of xenobiotic and urea cycle metabolism. The pattern instead resembles a ground control sample with possible batch or individual variation affecting metabolic pathways, without the characteristic spaceflight-induced immune or stress activation.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 149,
+        "total_tokens": 1159
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep5_GR33",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes in this kidney sample show a strong downregulation of xenobiotic metabolism and steroid biosynthesis pathways (multiple Cyp3a, Cyp11, Ces1c, Hsd3b1, Slco1b2), which is not characteristic of the typical spaceflight kidney response. In spaceflight, kidney transcriptomes often show upregulation of fluid/electrolyte balance genes, oxidative stress response, and DNA repair pathways, while xenobiotic metabolism genes are more variably altered. The pattern here\u2014especially the marked downregulation of cytochrome P450s and solute carriers\u2014resembles ground-control variability or a specific non\u2011flight stressor rather than the conserved spaceflight signature. The lack of strong upregulation in known spaceflight\u2011responsive kidney genes (e.g., Fos, Jun, early\u2011response genes linked to fluid shifts) further supports a ground\u2011control classification.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 189,
+        "total_tokens": 1199
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_Blue_Rep5_GR34",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top differentially expressed genes in this kidney sample are dominated by strong downregulation of key metabolic and detoxification enzymes (e.g., *Mat1a*, *Cyp11a1*, *Cyp3a41a*, *Cps1*, *Ces1b*, *Cyp3a44*, *Hsd3b1*), along with downregulation of acute-phase response genes (*Ahsg*, *Serpina3k*, *Mug1*). This pattern is inconsistent with the known kidney response to spaceflight, which typically involves upregulation of oxidative stress, DNA damage, and fluid/electrolyte balance genes. Instead, the widespread suppression of cytochrome P450, serine protease inhibitors, and urea cycle genes (*Cps1*) suggests a ground-control-like metabolic state without the stress-induced transcriptional activation seen in flight kidneys. The single strongly upregulated gene *Rsc1a1* (a sodium-dependent transporter regulator) is not sufficient to indicate a flight signature, as it can vary in ground conditions. The overall profile aligns more with normal variability in ground control mice.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 232,
+        "total_tokens": 1242
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep5_GR35",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key kidney and liver metabolism genes (e.g., *Cps1*, *Ces1c*, *Slco1b2*, *Cyp3a44*, *Mat1a*, *Cyp11b1*), which is not a typical hallmark of spaceflight kidney transcriptomes. In spaceflight, mouse kidneys usually show alterations in fluid/electrolyte balance genes, oxidative stress response, and immune modulation, but not such a broad suppression of metabolic and xenobiotic enzymes.  \n\nInstead, this pattern resembles a ground control sample with possible batch effects or individual variation affecting metabolic pathways. The upregulation of *Rsc1a1* (a renal tubular transporter) and a few immune-related genes (*Gbp2b*, *Havcr1*, *H2-Ea*) is mild and not strongly indicative of the immune dysregulation or DNA damage response typical of flight.  \n\nThus, the profile is more consistent with a ground control sample, though with moderate confidence due to the lack of a clear spaceflight oxidative stress or atrophy signature.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 235,
+        "total_tokens": 1245
+      },
+      "sample_id": "RR7_KDN_GCrerun_25days_White_Rep5_GR36",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe strongest signature is the marked downregulation of **Nnt** (z = -3.02), a mitochondrial NAD(P) transhydrogenase critical for managing oxidative stress and mitochondrial function. In spaceflight, oxidative stress is prominent, and Nnt is often suppressed in kidney and liver as part of mitochondrial and metabolic adaptation.  \nMultiple cytochrome P450 genes (**Cyp3a41a**, **Cyp3a44**, **Cyp11b1**, **Cyp11a1**) are down, consistent with spaceflight-altered xenobiotic and steroid metabolism.  \nDownregulation of **Mat1a** (methionine adenosyltransferase) and **Cps1** (carbamoyl-phosphate synthase 1) suggests altered ammonia detoxification and one\u2011carbon metabolism, which aligns with known kidney metabolic shifts in flight.  \nUpregulation of **Rsc1a1** (a sodium\u2011coupled glucose transporter regulator) and **Igf2** (involved in kidney development/repair) may reflect fluid\u2011electrolyte and growth factor responses to microgravity.  \nThe pattern fits spaceflight\u2011associated kidney transcriptomic changes (mitochondrial stress, metabolic reprogramming, detoxification downregulation) rather than a typical ground control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 266,
+        "total_tokens": 1276
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_Blue_Rep5_GR38",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe most striking signature is the strong downregulation of **Nnt** (z = -3.46), a mitochondrial NADP+ transhydrogenase critical for managing oxidative stress and linked to mitochondrial redox balance. In spaceflight, oxidative stress is prominent, and Nnt is typically *upregulated* as part of the Nrf2-mediated antioxidant response in kidney and liver. Its marked downregulation here is inconsistent with the expected flight-associated oxidative stress adaptation.  \n\nAdditionally, multiple cytochrome P450 genes (**Cyp3a41a**, **Cyp3a44**, **Cyp11a1**, **Cyp11b1**) and xenobiotic/detoxification genes (**Ces1c**, **Ces1b**, **Slco1b2**) are downregulated. In flight mice, these pathways often show *upregulation* due to increased metabolic and detoxification demands.  \n\nThe pattern instead suggests a ground-control-like state, possibly with some stress or circadian/metabolic variation, but lacking the characteristic flight-induced upregulation of oxidative stress response, DNA repair, and xenobiotic metabolism genes seen in kidney tissue.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 238,
+        "total_tokens": 1248
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep5_GR39",
+      "true_label": 0
+    },
+    {
+      "content": "B 0.85\n\n**Reasoning:**  \nThe top variable genes show a strong downregulation of key liver/kidney metabolic and detoxification enzymes (e.g., **Cps1**, **Ces1c**, **Cyp11b1**, **Cyp3a44**, **Mat1a**, **Slco1b2**), which aligns with known spaceflight-induced suppression of xenobiotic metabolism and bile acid synthesis pathways. Upregulation of **Rsc1a1** (involved in sodium transport regulation) and **Havcr1** (kidney injury marker) suggests altered electrolyte/fluid homeostasis and possible renal stress, consistent with microgravity effects. The pattern of **Serpina3** family downregulation and scattered immune-related changes (e.g., **Ifi202b** up, **Ccl21** down) fits immune dysregulation in flight. While some immune genes vary, the dominant signature is metabolic suppression and transport alteration in kidney, matching flight-associated transcriptomic remodeling rather than a ground-control profile.",
+      "finish_reason": "stop",
+      "model": "deepseek-chat",
+      "system_fingerprint": "fp_eaab8d114b_prod0820_fp8_kvcache",
+      "usage": {
+        "prompt_tokens": 1010,
+        "completion_tokens": 213,
+        "total_tokens": 1223
+      },
+      "sample_id": "RR7_KDN_GCrerun_75days_White_Rep5_GR40",
+      "true_label": 0
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "task": "T1a",
+  "tissue": "liver",
+  "mission": "RR-6",
+  "confound_warning": "PMID 33376967: ISS-T=RNAlater, LAR=necropsy",
+  "conditions": {
+    "FLT_gene": {
+      "status": "OK",
+      "auroc": 1.0,
+      "ci_low": 0.9999999999999999,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 20,
+      "n_isst": 10,
+      "n_lar": 10,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 22987
+    },
+    "FLT_pathway": {
+      "status": "OK",
+      "auroc": 0.9600000000000001,
+      "ci_low": 0.8681318681318682,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 20,
+      "n_isst": 10,
+      "n_lar": 10,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    },
+    "GC_gene": {
+      "status": "OK",
+      "auroc": 0.9222222222222223,
+      "ci_low": 0.75,
+      "ci_high": 1.0,
+      "perm_p": 0.00039996000399960006,
+      "n_total": 19,
+      "n_isst": 10,
+      "n_lar": 9,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 22987
+    },
+    "GC_pathway": {
+      "status": "OK",
+      "auroc": 0.7777777777777778,
+      "ci_low": 0.5227272727272727,
+      "ci_high": 0.9761904761904762,
+      "perm_p": 0.0212978702129787,
+      "n_total": 19,
+      "n_isst": 10,
+      "n_lar": 9,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    },
+    "BSL_gene": {
+      "status": "OK",
+      "auroc": 1.0,
+      "ci_low": 0.9999999999999999,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 20,
+      "n_isst": 10,
+      "n_lar": 10,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 22987
+    },
+    "BSL_pathway": {
+      "status": "OK",
+      "auroc": 1.0,
+      "ci_low": 0.9999999999999999,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_total": 20,
+      "n_isst": 10,
+      "n_lar": 10,
+      "cv_method": "RepeatedStratifiedKFold(5x10)",
+      "n_features": 50
+    }
+  },
+  "interpretation": {
+    "FLT_AUROC": 1.0,
+    "GC_AUROC_baseline": 0.9222222222222223,
+    "excess_signal": 0.07777777777777772,
+    "note": "excess > 0: FLT AUROC exceeds GC baseline \u2192 potential biological ISS-T vs LAR difference beyond preservation artifact"
+  }
+}

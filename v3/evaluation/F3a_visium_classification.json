@@ -1,0 +1,257 @@
+{
+  "task": "F3a",
+  "description": "OSD-352 RR-3 Brain Visium section-level classification",
+  "dataset": "OSD-352",
+  "mission": "RR-3",
+  "tissue": "brain",
+  "method": "PCA(\u22645)-LR(balanced), LOAO, exact permutation (C(6,3)=20)",
+  "section_level": {
+    "auroc": 0.1388888888888889,
+    "ci_low": 0.0,
+    "ci_high": 0.42857142857142855,
+    "p_exact": 0.9,
+    "n_permutations": 20,
+    "effect_size_cohens_d": 0.9213429713131958,
+    "n_animals": 6,
+    "n_flt": 3,
+    "n_gc": 3,
+    "n_samples": 12,
+    "fold_details": [
+      {
+        "animal_out": "F1",
+        "condition_out": "FLT",
+        "n_test": 2,
+        "n_train": 10,
+        "sections_out": [
+          "Sample_158_C1",
+          "Sample_158_D1"
+        ]
+      },
+      {
+        "animal_out": "F2",
+        "condition_out": "FLT",
+        "n_test": 2,
+        "n_train": 10,
+        "sections_out": [
+          "Sample_304_C1",
+          "Sample_304_D1"
+        ]
+      },
+      {
+        "animal_out": "F7",
+        "condition_out": "FLT",
+        "n_test": 2,
+        "n_train": 10,
+        "sections_out": [
+          "Sample_159_C1",
+          "Sample_159_D1"
+        ]
+      },
+      {
+        "animal_out": "G7",
+        "condition_out": "GC",
+        "n_test": 2,
+        "n_train": 10,
+        "sections_out": [
+          "Sample_158_A1",
+          "Sample_158_B1"
+        ]
+      },
+      {
+        "animal_out": "G8",
+        "condition_out": "GC",
+        "n_test": 2,
+        "n_train": 10,
+        "sections_out": [
+          "Sample_159_A1",
+          "Sample_159_B1"
+        ]
+      },
+      {
+        "animal_out": "G9",
+        "condition_out": "GC",
+        "n_test": 2,
+        "n_train": 10,
+        "sections_out": [
+          "Sample_304_A1",
+          "Sample_304_B1"
+        ]
+      }
+    ]
+  },
+  "animal_level": {
+    "auroc": 0.4444444444444445,
+    "ci_low": 0.0,
+    "ci_high": 1.0,
+    "p_exact": 0.4,
+    "n_permutations": 20,
+    "effect_size_cohens_d": 0.6923596082104514,
+    "n_animals": 6,
+    "n_flt": 3,
+    "n_gc": 3,
+    "n_samples": 6,
+    "fold_details": [
+      {
+        "animal_out": "F1",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "F2",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "F7",
+        "condition_out": "FLT",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G7",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G8",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      },
+      {
+        "animal_out": "G9",
+        "condition_out": "GC",
+        "n_test": 1,
+        "n_train": 5
+      }
+    ]
+  },
+  "n_genes": 14041,
+  "section_mapping": {
+    "Sample_158_A1": {
+      "animal": "G7",
+      "condition": "GC",
+      "bulk_sample": "RR3_BRN_GC_G7",
+      "cluster_id": 1
+    },
+    "Sample_158_B1": {
+      "animal": "G7",
+      "condition": "GC",
+      "bulk_sample": "RR3_BRN_GC_G7",
+      "cluster_id": 1
+    },
+    "Sample_158_C1": {
+      "animal": "F1",
+      "condition": "FLT",
+      "bulk_sample": "RR3_BRN_FLT_F1",
+      "cluster_id": 2
+    },
+    "Sample_158_D1": {
+      "animal": "F1",
+      "condition": "FLT",
+      "bulk_sample": "RR3_BRN_FLT_F1",
+      "cluster_id": 2
+    },
+    "Sample_159_A1": {
+      "animal": "G8",
+      "condition": "GC",
+      "bulk_sample": "RR3_BRN_GC_G8",
+      "cluster_id": 3
+    },
+    "Sample_159_B1": {
+      "animal": "G8",
+      "condition": "GC",
+      "bulk_sample": "RR3_BRN_GC_G8",
+      "cluster_id": 3
+    },
+    "Sample_159_C1": {
+      "animal": "F7",
+      "condition": "FLT",
+      "bulk_sample": "RR3_BRN_FLT_F7",
+      "cluster_id": 4
+    },
+    "Sample_159_D1": {
+      "animal": "F7",
+      "condition": "FLT",
+      "bulk_sample": "RR3_BRN_FLT_F7",
+      "cluster_id": 4
+    },
+    "Sample_304_A1": {
+      "animal": "G9",
+      "condition": "GC",
+      "bulk_sample": "RR3_BRN_GC_G9",
+      "cluster_id": 5
+    },
+    "Sample_304_B1": {
+      "animal": "G9",
+      "condition": "GC",
+      "bulk_sample": "RR3_BRN_GC_G9",
+      "cluster_id": 5
+    },
+    "Sample_304_C1": {
+      "animal": "F2",
+      "condition": "FLT",
+      "bulk_sample": "RR3_BRN_FLT_F2",
+      "cluster_id": 6
+    },
+    "Sample_304_D1": {
+      "animal": "F2",
+      "condition": "FLT",
+      "bulk_sample": "RR3_BRN_FLT_F2",
+      "cluster_id": 6
+    }
+  },
+  "spot_counts": {
+    "Sample_158_A1": {
+      "n_spots": 2334,
+      "n_genes": 14630
+    },
+    "Sample_158_B1": {
+      "n_spots": 2021,
+      "n_genes": 15810
+    },
+    "Sample_158_C1": {
+      "n_spots": 2723,
+      "n_genes": 18535
+    },
+    "Sample_158_D1": {
+      "n_spots": 2801,
+      "n_genes": 18327
+    },
+    "Sample_159_A1": {
+      "n_spots": 2139,
+      "n_genes": 18018
+    },
+    "Sample_159_B1": {
+      "n_spots": 2332,
+      "n_genes": 17372
+    },
+    "Sample_159_C1": {
+      "n_spots": 1820,
+      "n_genes": 18208
+    },
+    "Sample_159_D1": {
+      "n_spots": 1160,
+      "n_genes": 17453
+    },
+    "Sample_304_A1": {
+      "n_spots": 2181,
+      "n_genes": 16457
+    },
+    "Sample_304_B1": {
+      "n_spots": 2314,
+      "n_genes": 16434
+    },
+    "Sample_304_C1": {
+      "n_spots": 1119,
+      "n_genes": 15773
+    },
+    "Sample_304_D1": {
+      "n_spots": 1141,
+      "n_genes": 15349
+    }
+  }
+}

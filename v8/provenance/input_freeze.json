@@ -1,0 +1,107 @@
+{
+  "schema_version": "0.1.0",
+  "freeze_id": "v8.0-beta-input-freeze-rc1",
+  "status": "release_candidate",
+  "generated_at": "2026-05-10T00:00:00Z",
+  "repository_commit": "9182a1975fc8e651ac77eb4bd7762d7c08846ac7",
+  "external_sources": [
+    {
+      "source_id": "spaceomicsbench.v2_public",
+      "kind": "git_checkout",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public",
+      "version": "pending upstream commit or release tag",
+      "required_for": ["bridge.supervised_conservation.full_msigdb", "bridge.species_transfer_nes"],
+      "tracked_in_git": false,
+      "freeze_status": "open",
+      "evidence": [
+        {
+          "path": "v8/bridge/evaluation/bridge_leakage_audit.json",
+          "sha256": "d2cb593a276cc5787b2b566835dc90c61637f433f0b2580d0dd79aebd9caf0b6",
+          "notes": "Records the resolved cross_mission_pathway_features.csv SHA-256 from the HPC bundle."
+        },
+        {
+          "path": "v8/provenance/runs/bridge_supervised_conservation.json",
+          "notes": "Records the SpaceOmicsBench-dependent BRIDGE command and output checksums."
+        }
+      ],
+      "notes": "Beta final freeze must replace this pending marker with an exact SpaceOmicsBench commit, release tag, or archived source bundle checksum."
+    },
+    {
+      "source_id": "osdr.decompose.raw_analogs",
+      "kind": "osdr_accessions",
+      "path_or_accession": "OSD-202, OSD-211, OSD-237, OSD-719 / GLDS-202, GLDS-211, GLDS-237, GLDS-641",
+      "version": "HPC cache audited 2026-05-09",
+      "required_for": ["decompose.factorial_analogs", "decompose.mars_extrapolation", "decompose.mars_saturation_sensitivity"],
+      "tracked_in_git": false,
+      "freeze_status": "release_candidate",
+      "evidence": [
+        {
+          "path": "v8/decompose/evaluation/raw_cache_audit.json",
+          "sha256": "7834673c7f4a0728e04cbaaba3f19607aa38be63bdac025ae06f8c2747c27764",
+          "notes": "Audits all eight required normalized-count and sample-table files as present with per-file SHA-256."
+        },
+        {
+          "path": "v8/provenance/runs/decompose_raw_cache_audit.json",
+          "notes": "Records the cache-audit command and validation status."
+        }
+      ],
+      "notes": "Raw cache identity is available in raw_cache_audit.json; beta final freeze should archive these files in the public data artifact or immutable object storage."
+    },
+    {
+      "source_id": "genelab.processed_fgsea",
+      "kind": "repo_derived_cache",
+      "path_or_accession": "processed/fgsea/",
+      "version": "v7.1/v8 shared pathway-score cache; c2/c5 expansions regenerable on HPC",
+      "required_for": ["bridge.tissue_nes_spearman", "bridge.supervised_conservation.full_msigdb"],
+      "tracked_in_git": false,
+      "freeze_status": "release_candidate",
+      "evidence": [
+        {
+          "path": "v8/provenance/runs/bridge_tissue_nes_spearman.json",
+          "notes": "Records the BRIDGE tissue-NES command and output checksums."
+        }
+      ],
+      "notes": "Full MSigDB expansion files are intentionally ignored in Git and should be regenerated or packaged in the Hugging Face dataset bundle."
+    },
+    {
+      "source_id": "l1000cds2.api_snapshot",
+      "kind": "api_snapshot",
+      "path_or_accession": "https://maayanlab.cloud/L1000CDS2/query",
+      "version": "latest at historical query time; concrete db-version pending",
+      "required_for": ["intervene.l1000cds2_reversal"],
+      "tracked_in_git": false,
+      "freeze_status": "open",
+      "evidence": [
+        {
+          "path": "v8/intervene/evaluation/api_snapshot_manifest.json",
+          "sha256": "221c5f9ea204ad30c8623078311c6680ab28338fd54e35e9575f5cf487412774",
+          "notes": "Records deterministic query payload hashes and parsed-output hashes without re-calling the API."
+        }
+      ],
+      "notes": "The current tracked snapshot records db-version=latest. Beta final freeze should pin the concrete upstream db-version if the API exposes it, or archive raw response payloads externally."
+    },
+    {
+      "source_id": "enrichr.crispr_ko_snapshot",
+      "kind": "api_snapshot",
+      "path_or_accession": "https://maayanlab.cloud/Enrichr/addList; https://maayanlab.cloud/Enrichr/enrich",
+      "version": "LINCS_L1000_CRISPR_KO_Consensus_Sigs at historical query time",
+      "required_for": ["intervene.crispr_orthogonal_validation"],
+      "tracked_in_git": false,
+      "freeze_status": "release_candidate",
+      "evidence": [
+        {
+          "path": "v8/intervene/evaluation/api_snapshot_manifest.json",
+          "sha256": "221c5f9ea204ad30c8623078311c6680ab28338fd54e35e9575f5cf487412774",
+          "notes": "Records Enrichr query payload hashes and parsed CRISPR output hashes."
+        }
+      ],
+      "notes": "Raw API responses remain outside Git; final beta archive should preserve raw response dumps if size allows."
+    }
+  ],
+  "release_blockers": [
+    "Replace SpaceOmicsBench pending version with exact commit, release tag, or archived source checksum.",
+    "Pin L1000CDS2 concrete db-version or archive raw response payloads with checksums.",
+    "Run scripts/hpc_v8_beta_rebuild.sh from a fresh clean checkout and update run manifests with that exact commit/job metadata.",
+    "Prepare external Hugging Face and Zenodo artifact records, including DOI or reserved DOI once minted."
+  ]
+}

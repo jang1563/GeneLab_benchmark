@@ -75,6 +75,7 @@ TISSUE_MISSIONS <- list(
   ),
   thymus = list(
     list(mission = "RR-6",  dir = "RR-6",  glds = "GLDS-244", osd = "OSD-244"),
+    list(mission = "MHU-1", dir = "MHU-2", glds = "GLDS-289", osd = "OSD-289"),
     list(mission = "MHU-2", dir = "MHU-2", glds = "GLDS-289", osd = "OSD-289"),
     list(mission = "RR-9",  dir = "RR-9",  glds = "GLDS-421", osd = "OSD-421")
   ),
@@ -86,7 +87,7 @@ TISSUE_MISSIONS <- list(
   eye = list(
     list(mission = "RR-1",  dir = "RR-1",  glds = "GLDS-100", osd = "OSD-100"),
     list(mission = "RR-3",  dir = "RR-3",  glds = "GLDS-194", osd = "OSD-194"),
-    list(mission = "TBD",   dir = "TBD",   glds = "GLDS-397", osd = "OSD-397")
+    list(mission = "OSD-397", dir = "TBD", glds = "GLDS-397", osd = "OSD-397")
   ),
   skin = list(
     list(mission = "RR-6",          dir = "RR-6",            glds = "GLDS-243", osd = "OSD-243"),
@@ -131,6 +132,20 @@ load_gene_sets <- function(db_names = c("hallmark", "kegg", "reactome")) {
     r <- msigdbr(species = "Mus musculus", category = "C2", subcategory = "CP:REACTOME")
     gs_list[["reactome"]] <- split(r$gene_symbol, r$gs_name)
     cat(sprintf("    %d gene sets loaded\n", length(gs_list[["reactome"]])))
+  }
+
+  if ("c2cgp" %in% db_names) {
+    cat("  Loading MSigDB C2:CGP (Mus musculus; chemical & genetic perturbations)...\n")
+    c2cgp <- msigdbr(species = "Mus musculus", category = "C2", subcategory = "CGP")
+    gs_list[["c2cgp"]] <- split(c2cgp$gene_symbol, c2cgp$gs_name)
+    cat(sprintf("    %d gene sets loaded\n", length(gs_list[["c2cgp"]])))
+  }
+
+  if ("c5bp" %in% db_names) {
+    cat("  Loading MSigDB C5:GO:BP (Mus musculus; GO Biological Process)...\n")
+    c5 <- msigdbr(species = "Mus musculus", category = "C5", subcategory = "GO:BP")
+    gs_list[["c5bp"]] <- split(c5$gene_symbol, c5$gs_name)
+    cat(sprintf("    %d gene sets loaded\n", length(gs_list[["c5bp"]])))
   }
 
   if ("mitocarta" %in% db_names) {

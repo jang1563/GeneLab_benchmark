@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "bridge.species_transfer_nes",
+  "pillar": "bridge",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "Aggregate mouse pathway NES correlates with human I4 and NASA Twins compartments.",
+    "scope": "benchmark",
+    "consumed_by": [
+      "v8/bridge/evaluation/README.md",
+      "v8/RESULTS_SUMMARY.md"
+    ]
+  },
+  "generated_at": "2026-05-09T16:48:13Z",
+  "code": {
+    "script": "v8/bridge/link_spaceomicsbench.py",
+    "command": "bash scripts/hpc_v8_bridge.sh",
+    "git_commit": "266381a+staged-v8-release"
+  },
+  "inputs": [
+    {
+      "role": "mouse_reference",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_GeneLab.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "notes": "Processed SpaceOmicsBench subset copied to HPC session; source directory did not include git metadata."
+    },
+    {
+      "role": "human_i4_reference",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_i4_pbmc.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "notes": "Processed SpaceOmicsBench subset copied to HPC session; source directory did not include git metadata."
+    },
+    {
+      "role": "human_twins_reference",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_NASA_Twins.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "notes": "Processed SpaceOmicsBench subset copied to HPC session; source directory did not include git metadata."
+    }
+  ],
+  "outputs": [
+    {
+      "role": "summary_json",
+      "path_or_accession": "v8/bridge/evaluation/species_transfer_nes.json",
+      "kind": "local_file",
+      "checksum": "sha256:ec3c1bacc927787eeb9acf9278543d217c18a1e54be74158a6302c7d54a44726",
+      "tracked_in_git": true
+    },
+    {
+      "role": "flat_table",
+      "path_or_accession": "v8/bridge/evaluation/species_transfer_nes.csv",
+      "kind": "local_file",
+      "checksum": "sha256:1a16c7048c0e7a3e27379d2b70c87918d4bac84fbc5cf444237ee34ea775ac0e",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "spaceomics_root": "/home/fs01/jak4013/projects/SpaceOmicsBench",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
+  },
+  "metrics": [
+    {"name": "n_mouse_pathways", "value": 292},
+    {"name": "inspiration4_mean_spearman_r", "value": 0.7774552403870888},
+    {"name": "inspiration4_max_spearman_r", "value": 0.8424116985376828},
+    {"name": "inspiration4_mean_concordance_abs_nes_ge_1", "value": 0.9552220347973291},
+    {"name": "nasa_twins_mean_spearman_r", "value": 0.3514933791711884}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "bash scripts/hpc_v8_bridge.sh",
+      "bash scripts/hpc_release_validate.sh --v8-summary"
+    ],
+    "notes": "Regenerated and checksummed on cayuga-login1; final release validation passed 41 tests, whitespace/conflict-marker checks, release hygiene, and v8 summary regeneration."
+  }
+}

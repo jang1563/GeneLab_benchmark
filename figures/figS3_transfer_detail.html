@@ -124,7 +124,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('D3 confusion: Gene vs Pathway');
+    .text('Mission identification: Gene vs Pathway');
 
   const cellSize = 24;
   const maxVal = 141;
@@ -138,11 +138,11 @@ function panelLabel(g, letter, x, y) {
 
   d3Classes.forEach((c, i) => {
     g.append('text').attr('x', gStartX + i*cellSize + cellSize/2).attr('y', gStartY + 10)
-      .attr('text-anchor','middle').attr('font-size', 5)
+      .attr('text-anchor','middle').attr('font-size', 6.5)
       .attr('transform', `rotate(-40,${gStartX + i*cellSize + cellSize/2},${gStartY + 10})`)
       .attr('fill','#666').text(c);
     g.append('text').attr('x', gStartX - 3).attr('y', gStartY + 18 + i*cellSize + cellSize/2 + 2)
-      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(c);
+      .attr('text-anchor','end').attr('font-size', 6.5).attr('fill','#666').text(c);
   });
 
   d3GeneCM.forEach((row, i) => {
@@ -167,11 +167,11 @@ function panelLabel(g, letter, x, y) {
 
   d3Classes.forEach((c, i) => {
     g.append('text').attr('x', pStartX + i*cellSize + cellSize/2).attr('y', pStartY + 10)
-      .attr('text-anchor','middle').attr('font-size', 5)
+      .attr('text-anchor','middle').attr('font-size', 6.5)
       .attr('transform', `rotate(-40,${pStartX + i*cellSize + cellSize/2},${pStartY + 10})`)
       .attr('fill','#666').text(c);
     g.append('text').attr('x', pStartX - 3).attr('y', pStartY + 18 + i*cellSize + cellSize/2 + 2)
-      .attr('text-anchor','end').attr('font-size', 5).attr('fill','#666').text(c);
+      .attr('text-anchor','end').attr('font-size', 6.5).attr('fill','#666').text(c);
   });
 
   const orangeScale = d3.scaleSequential(d3.interpolateOranges).domain([0, 30]);
@@ -197,7 +197,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Cat B pairwise transfer AUROC');
+    .text('Cross-mission pairwise transfer');
 
   const viridis = d3.scaleSequential(d3.interpolateViridis).domain([0, 1]);
 
@@ -228,7 +228,7 @@ function panelLabel(g, letter, x, y) {
         g.append('rect').attr('x',x+0.5).attr('y',y+0.5).attr('width',lCell-1).attr('height',lCell-1)
           .attr('fill', viridis(val)).attr('rx',1);
         g.append('text').attr('x',x+lCell/2).attr('y',y+lCell/2+2)
-          .attr('text-anchor','middle').attr('font-size', 4.5)
+          .attr('text-anchor','middle').attr('font-size', 6)
           .attr('fill', val < 0.5 ? '#fff' : '#222')
           .text(val.toFixed(2));
       }
@@ -272,7 +272,7 @@ function panelLabel(g, letter, x, y) {
   // Colorbar
   g.append('text').attr('x', lStartX + 3*lCell).attr('y', halfH - 8)
     .attr('text-anchor','middle').attr('font-size', 6).attr('fill','#888')
-    .text('Train row \u2192 Test col, AUROC');
+    .text('Each cell: train on row mission, test on column (AUROC)');
 }
 
 // ============================================================
@@ -284,7 +284,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Geneformer per-fold AUROC');
+    .text('Geneformer per-fold accuracy');
 
   const pad = {left: 60, right: 20, top: 18, bottom: 28};
   const plotW = halfW - pad.left - pad.right;
@@ -303,7 +303,7 @@ function panelLabel(g, letter, x, y) {
       .attr('text-anchor','middle').attr('font-size',FS.tiny).attr('fill','#666').text(v.toFixed(1));
   });
   g.append('text').attr('x',xScale(0.6)).attr('y',pad.top+plotH+26)
-    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333').text('AUROC');
+    .attr('text-anchor','middle').attr('font-size',FS.axisLabel).attr('fill','#333').text('Classification accuracy (AUROC)');
 
   tissues.forEach(t => {
     const cy = yScale(t) + yScale.bandwidth()/2;
@@ -354,7 +354,7 @@ function panelLabel(g, letter, x, y) {
 
   g.append('text').attr('x', halfW/2).attr('y', 2)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('J1: GLDS-48 vs GLDS-168 correlation');
+    .text('Pipeline version comparison (GLDS-48 vs GLDS-168)');
 
   const pad = {left: 40, right: 15, top: 22, bottom: 30};
   const plotW = halfW - pad.left - pad.right;

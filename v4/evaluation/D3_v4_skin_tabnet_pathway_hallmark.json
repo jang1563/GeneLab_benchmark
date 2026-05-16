@@ -1,0 +1,53 @@
+{
+  "experiment": "D3",
+  "model": "TabNet",
+  "model_key": "tabnet",
+  "tissue": "skin",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 3,
+  "classes": [
+    "MHU-2",
+    "RR-6",
+    "RR-7"
+  ],
+  "class_distribution": {
+    "MHU-2": 47,
+    "RR-6": 53,
+    "RR-7": 30
+  },
+  "n_samples": 130,
+  "macro_f1": 0.115,
+  "accuracy": 0.1846,
+  "ci_lower": 0.0763,
+  "ci_upper": 0.1573,
+  "perm_pvalue": 0.997,
+  "per_class_f1": {
+    "MHU-2": 0.0,
+    "RR-6": 0.0364,
+    "RR-7": 0.3087
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      47
+    ],
+    [
+      3,
+      1,
+      49
+    ],
+    [
+      6,
+      1,
+      23
+    ]
+  ],
+  "mean_train_time_s": 0.38,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 28.1,
+  "timestamp": "2026-03-22T03:30:24.267700"
+}

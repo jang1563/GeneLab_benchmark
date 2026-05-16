@@ -1,0 +1,43 @@
+{
+  "experiment": "D5",
+  "model": "XGBoost",
+  "model_key": "xgb",
+  "tissue": "thymus",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 2,
+  "classes": [
+    "MHU",
+    "RR"
+  ],
+  "class_distribution": {
+    "MHU": 18,
+    "RR": 74
+  },
+  "n_samples": 92,
+  "macro_f1": 0.9831,
+  "accuracy": 0.9891,
+  "ci_lower": 0.9386,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU": 0.973,
+    "RR": 0.9932
+  },
+  "confusion_matrix": [
+    [
+      18,
+      0
+    ],
+    [
+      1,
+      73
+    ]
+  ],
+  "mean_train_time_s": 2.83,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 149.2,
+  "timestamp": "2026-03-22T03:34:16.097001"
+}

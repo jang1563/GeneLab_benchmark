@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 4 — Benchmark Extensions: New Tissues and Radiation</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #fff;
+  }
+  .figure-container {
+    width: 1100px;
+    margin: 0 auto;
+  }
+  .figure-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .figure-subtitle {
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .panel {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 12px;
+    background: #fafafa;
+  }
+  .panel-label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+  .panel-desc {
+    font-size: 9px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .axis text { font-size: 9px; }
+  .axis-label { font-size: 10px; }
+  .tick-label { font-size: 7.5px; }
+  .stat-text { font-size: 8px; fill: #444; }
+  .annotation { font-size: 8px; fill: #888; }
+  .legend-text { font-size: 8px; }
+  .bar-label { font-size: 7.5px; }
+  .interpretation {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-left: 3px solid #999;
+    font-size: 9px;
+    color: #444;
+    line-height: 1.4;
+  }
+  .interpretation strong {
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Figure 4. Benchmark Extensions: New Tissues and Radiation × Microgravity Interaction</div>
+  <div class="figure-subtitle">Phase 4 (A7/A7b/A8) new tissue classification + Phase 5 (R1–R3) radiation vs HLU ground analog DGE concordance</div>
+
+  <div class="panels">
+    <!-- Panel A: New tissue AUROC -->
+    <div class="panel">
+      <div class="panel-label">A. New Tissue Spaceflight Classification (A7/A7b)</div>
+      <div class="panel-desc">PCA-LR, 5-fold stratified CV, RR-6 mission. Bootstrap CI (n=2000), permutation p (n=5000)</div>
+      <div id="panel-a"></div>
+    </div>
+
+    <!-- Panel B: Extended skin LOMO -->
+    <div class="panel">
+      <div class="panel-label">B. Extended Skin LOMO Across 6 Missions (A8)</div>
+      <div class="panel-desc">Leave-one-mission-out CV. Color by strain. Mean AUROC = 0.669</div>
+      <div id="panel-b"></div>
+    </div>
+
+    <!-- Panel C: Radiation DGE concordance (R2) -->
+    <div class="panel">
+      <div class="panel-label">C. Radiation vs ISS DGE Concordance (R2/R3)</div>
+      <div class="panel-desc">Spearman r of log2FC: ground radiation/HLU/combined vs ISS flight (skin, GLDS-237)</div>
+      <div id="panel-c"></div>
+    </div>
+
+    <!-- Panel D: Radiation classification (R1) -->
+    <div class="panel">
+      <div class="panel-label">D. Ground Analog Classification (R1)</div>
+      <div class="panel-desc">PCA-LR per contrast (radiation/HLU/combined vs control), 3 tissues (GLDS-202/211/237)</div>
+      <div id="panel-d"></div>
+    </div>
+  </div>
+
+  <div class="interpretation">
+    <strong>Interpretation:</strong> New tissue extensions reveal variable spaceflight detection:
+    colon achieves AUROC=0.900 (marginal p=0.07, strongest new tissue), while lung is modest at 0.608 (ns).
+    Extended skin LOMO shows strong strain dependence: C57BL/6J missions (MHU-2, RR-7) achieve 0.89–0.97***, while
+    BAL-TAL (RR-5) drops to 0.31–0.38, confirming that mouse strain is a critical confound for cross-mission generalization.
+    <strong>Radiation analysis (R2/R3)</strong> reveals a striking pattern: radiation and HLU have
+    <em>opposite-signed</em> correlations with ISS flight (radiation: r=+0.14 to +0.44; HLU: r=−0.20 to −0.50),
+    and their combination nearly cancels out (r≈−0.03). This suggests ISS spaceflight effects are not simply additive
+    radiation + microgravity, but involve complex interactions between these stressors.
+  </div>
+</div>
+
+<script>
+// ── Okabe-Ito palette ────────────────────────────────────────────────
+const OI = {
+  orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00",
+  purple: "#CC79A7", black: "#000000", grey: "#999999"
+};
+
+function sigStars(p) {
+  if (p < 0.001) return "***";
+  if (p < 0.01) return "**";
+  if (p < 0.05) return "*";
+  return "";
+}
+
+// ── Panel A: New tissue AUROC ────────────────────────────────────────
+(function() {
+  const data = [
+    {tissue: "Colon\n(RR-6)", auroc: 0.900, ci_low: 0.619, ci_high: 1.0, p: 0.0705},
+    {tissue: "Lung\n(RR-6)", auroc: 0.608, ci_low: 0.162, ci_high: 1.0, p: 0.378}
+  ];
+
+  const W = 480, H = 280;
+  const margin = {top: 20, right: 30, bottom: 70, left: 55};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-a").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand()
+    .domain(data.map(d => d.tissue))
+    .range([0, w])
+    .padding(0.45);
+
+  const y = d3.scaleLinear()
+    .domain([0, 1.15])
+    .range([h, 0]);
+
+  // Chance line
+  g.append("line")
+    .attr("x1", 0).attr("x2", w)
+    .attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#999").attr("stroke-dasharray", "4,4");
+  g.append("text")
+    .attr("x", w - 2).attr("y", y(0.5) - 4)
+    .attr("text-anchor", "end")
+    .attr("class", "annotation")
+    .text("chance (0.5)");
+
+  // v1 baseline
+  g.append("line")
+    .attr("x1", 0).attr("x2", w)
+    .attr("y1", y(0.758)).attr("y2", y(0.758))
+    .attr("stroke", OI.orange).attr("stroke-dasharray", "6,3")
+    .attr("stroke-width", 1);
+  g.append("text")
+    .attr("x", w - 2).attr("y", y(0.758) - 4)
+    .attr("text-anchor", "end")
+    .attr("font-size", "7px").attr("fill", OI.orange)
+    .text("v1 mean (0.758)");
+
+  // Bars
+  const barColors = [OI.green, OI.skyblue];
+  g.selectAll(".bar")
+    .data(data)
+    .join("rect")
+    .attr("x", d => x(d.tissue))
+    .attr("y", d => y(d.auroc))
+    .attr("width", x.bandwidth())
+    .attr("height", d => h - y(d.auroc))
+    .attr("fill", (d, i) => barColors[i])
+    .attr("opacity", 0.8);
+
+  // CI
+  data.forEach(d => {
+    const cx = x(d.tissue) + x.bandwidth()/2;
+    g.append("line")
+      .attr("x1", cx).attr("x2", cx)
+      .attr("y1", y(d.ci_low)).attr("y2", y(d.ci_high))
+      .attr("stroke", "#333").attr("stroke-width", 1.5);
+    [d.ci_low, d.ci_high].forEach(v => {
+      g.append("line")
+        .attr("x1", cx - 6).attr("x2", cx + 6)
+        .attr("y1", y(v)).attr("y2", y(v))
+        .attr("stroke", "#333").attr("stroke-width", 1.5);
+    });
+  });
+
+  // Labels
+  g.selectAll(".val")
+    .data(data)
+    .join("text")
+    .attr("x", d => x(d.tissue) + x.bandwidth()/2)
+    .attr("y", d => y(d.auroc) - 18)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "10px").attr("font-weight", "bold")
+    .text(d => d.auroc.toFixed(3));
+
+  g.selectAll(".pval")
+    .data(data)
+    .join("text")
+    .attr("x", d => x(d.tissue) + x.bandwidth()/2)
+    .attr("y", d => y(d.auroc) - 6)
+    .attr("text-anchor", "middle")
+    .attr("class", "stat-text")
+    .text(d => `p=${d.p.toFixed(3)}`);
+
+  // Axes
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text")
+    .attr("class", "tick-label")
+    .style("text-anchor", "middle")
+    .each(function(d) {
+      const el = d3.select(this);
+      const lines = d.split("\n");
+      el.text("");
+      lines.forEach((line, i) => {
+        el.append("tspan")
+          .attr("x", 0)
+          .attr("dy", i === 0 ? 0 : "1.1em")
+          .text(line);
+      });
+    });
+
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(5))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -h/2).attr("y", -40)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("AUROC");
+})();
+
+// ── Panel B: Extended skin LOMO ──────────────────────────────────────
+(function() {
+  const data = [
+    {mission: "RR-7",           strain: "C57BL/6J", auroc: 0.970, p: 0.002},
+    {mission: "MHU-2 (femoral)", strain: "C57BL/6J", auroc: 0.933, p: 0.003},
+    {mission: "MHU-2 (dorsal)", strain: "C57BL/6J", auroc: 0.889, p: 0.010},
+    {mission: "RR-6",           strain: "C57BL/6J", auroc: 0.535, p: 0.360},
+    {mission: "RR-5 (femoral)", strain: "BAL-TAL",  auroc: 0.378, p: 0.805},
+    {mission: "RR-5 (dorsal)",  strain: "BAL-TAL",  auroc: 0.310, p: 0.934}
+  ];
+
+  const W = 480, H = 280;
+  const margin = {top: 20, right: 30, bottom: 55, left: 120};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-b").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const y = d3.scaleBand()
+    .domain(data.map(d => d.mission))
+    .range([0, h])
+    .padding(0.2);
+
+  const x = d3.scaleLinear()
+    .domain([0, 1.1])
+    .range([0, w]);
+
+  // Chance line
+  g.append("line")
+    .attr("x1", x(0.5)).attr("x2", x(0.5))
+    .attr("y1", 0).attr("y2", h)
+    .attr("stroke", "#999").attr("stroke-dasharray", "4,4");
+
+  // Mean line
+  g.append("line")
+    .attr("x1", x(0.669)).attr("x2", x(0.669))
+    .attr("y1", 0).attr("y2", h)
+    .attr("stroke", OI.orange).attr("stroke-dasharray", "6,3");
+  g.append("text")
+    .attr("x", x(0.669) + 3).attr("y", 10)
+    .attr("font-size", "7px").attr("fill", OI.orange)
+    .text("mean 0.669");
+
+  // Strain separator
+  const sepIdx = data.findIndex(d => d.strain === "BAL-TAL");
+  if (sepIdx > 0) {
+    const sepY = y(data[sepIdx].mission) - y.step() * y.padding() / 2;
+    g.append("line")
+      .attr("x1", 0).attr("x2", w)
+      .attr("y1", sepY).attr("y2", sepY)
+      .attr("stroke", "#ccc").attr("stroke-dasharray", "3,3");
+    g.append("text")
+      .attr("x", w - 5).attr("y", sepY - 3)
+      .attr("text-anchor", "end")
+      .attr("font-size", "7px").attr("fill", OI.blue)
+      .text("C57BL/6J ↑");
+    g.append("text")
+      .attr("x", w - 5).attr("y", sepY + 10)
+      .attr("text-anchor", "end")
+      .attr("font-size", "7px").attr("fill", OI.purple)
+      .text("BAL-TAL ↓");
+  }
+
+  // Bars
+  g.selectAll(".bar")
+    .data(data)
+    .join("rect")
+    .attr("y", d => y(d.mission))
+    .attr("x", 0)
+    .attr("width", d => x(d.auroc))
+    .attr("height", y.bandwidth())
+    .attr("fill", d => d.strain === "C57BL/6J" ? OI.blue : OI.purple)
+    .attr("opacity", d => d.p < 0.05 ? 0.85 : 0.30);
+
+  // Value labels
+  g.selectAll(".val")
+    .data(data)
+    .join("text")
+    .attr("y", d => y(d.mission) + y.bandwidth()/2 + 4)
+    .attr("x", d => x(d.auroc) + 4)
+    .attr("font-size", "8px")
+    .attr("font-weight", d => d.p < 0.05 ? "bold" : "normal")
+    .attr("fill", d => d.p < 0.05 ? "#333" : "#999")
+    .text(d => `${d.auroc.toFixed(3)}${sigStars(d.p)}`);
+
+  // Axes
+  g.append("g")
+    .call(d3.axisLeft(y).tickSize(0))
+    .selectAll("text").attr("font-size", "9px");
+
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).ticks(5))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("x", w/2).attr("y", h + 35)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("AUROC");
+})();
+
+// ── Panel C: Radiation DGE concordance ───────────────────────────────
+(function() {
+  const missions = ["MHU-2\n(dorsal)", "MHU-2\n(femoral)", "RR-6", "RR-7"];
+  const data = [
+    // radiation_only
+    {mission: 0, type: "Radiation", r: 0.208},
+    {mission: 1, type: "Radiation", r: 0.139},
+    {mission: 2, type: "Radiation", r: 0.438},
+    {mission: 3, type: "Radiation", r: 0.385},
+    // hlu_only
+    {mission: 0, type: "HLU", r: -0.390},
+    {mission: 1, type: "HLU", r: -0.195},
+    {mission: 2, type: "HLU", r: -0.503},
+    {mission: 3, type: "HLU", r: -0.462},
+    // combined
+    {mission: 0, type: "Combined", r: -0.032},
+    {mission: 1, type: "Combined", r: -0.077},
+    {mission: 2, type: "Combined", r: -0.027},
+    {mission: 3, type: "Combined", r: -0.026}
+  ];
+
+  const W = 480, H = 280;
+  const margin = {top: 20, right: 30, bottom: 65, left: 55};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-c").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const types = ["Radiation", "HLU", "Combined"];
+  const typeColors = {
+    "Radiation": OI.vermilion,
+    "HLU": OI.blue,
+    "Combined": OI.grey
+  };
+
+  const x0 = d3.scaleBand()
+    .domain([0, 1, 2, 3])
+    .range([0, w])
+    .padding(0.2);
+
+  const x1 = d3.scaleBand()
+    .domain(types)
+    .range([0, x0.bandwidth()])
+    .padding(0.05);
+
+  const y = d3.scaleLinear()
+    .domain([-0.6, 0.5])
+    .range([h, 0]);
+
+  // Zero line
+  g.append("line")
+    .attr("x1", 0).attr("x2", w)
+    .attr("y1", y(0)).attr("y2", y(0))
+    .attr("stroke", "#999").attr("stroke-dasharray", "4,4");
+
+  // Bars
+  g.selectAll(".bar")
+    .data(data)
+    .join("rect")
+    .attr("x", d => x0(d.mission) + x1(d.type))
+    .attr("y", d => d.r >= 0 ? y(d.r) : y(0))
+    .attr("width", x1.bandwidth())
+    .attr("height", d => Math.abs(y(d.r) - y(0)))
+    .attr("fill", d => typeColors[d.type])
+    .attr("opacity", 0.8);
+
+  // Value labels (only for selected)
+  data.filter(d => d.mission === 2).forEach(d => {
+    g.append("text")
+      .attr("x", x0(d.mission) + x1(d.type) + x1.bandwidth()/2)
+      .attr("y", d.r >= 0 ? y(d.r) - 4 : y(d.r) + 10)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "7px").attr("font-weight", "bold")
+      .attr("fill", "#333")
+      .text(d.r >= 0 ? `+${d.r.toFixed(3)}` : d.r.toFixed(3));
+  });
+
+  // Mission labels
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x0).tickFormat(i => missions[i]).tickSize(0))
+    .selectAll("text")
+    .attr("class", "tick-label")
+    .style("text-anchor", "middle")
+    .each(function(d) {
+      const el = d3.select(this);
+      const text = missions[d];
+      const lines = text.split("\n");
+      el.text("");
+      lines.forEach((line, i) => {
+        el.append("tspan")
+          .attr("x", 0)
+          .attr("dy", i === 0 ? 0 : "1.1em")
+          .text(line);
+      });
+    });
+
+  g.append("text")
+    .attr("x", w/2).attr("y", h + 48)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("ISS Mission (skin)");
+
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(6))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -h/2).attr("y", -40)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("Spearman r (log2FC)");
+
+  // Legend
+  const legend = g.append("g").attr("transform", `translate(5, 5)`);
+  types.forEach((t, i) => {
+    legend.append("rect")
+      .attr("x", 0).attr("y", i * 14)
+      .attr("width", 10).attr("height", 10)
+      .attr("fill", typeColors[t]).attr("opacity", 0.8);
+    legend.append("text")
+      .attr("x", 14).attr("y", i * 14 + 9)
+      .attr("class", "legend-text")
+      .text(t === "Radiation" ? "Radiation only" : t === "HLU" ? "HLU only" : "Rad + HLU combined");
+  });
+
+  // Key insight annotation
+  g.append("text")
+    .attr("x", w - 5).attr("y", h - 8)
+    .attr("text-anchor", "end")
+    .attr("font-size", "7.5px").attr("fill", "#b44").attr("font-style", "italic")
+    .text("Rad + HLU cancel → combined ≈ 0");
+})();
+
+// ── Panel D: Ground analog classification R1 ─────────────────────────
+(function() {
+  const data = [
+    {tissue: "Brain",  contrast: "Rad", auroc: 0.500, p: 0.514},
+    {tissue: "Brain",  contrast: "HLU", auroc: 0.750, p: 0.034},
+    {tissue: "Brain",  contrast: "Cmb", auroc: 0.460, p: 0.631},
+    {tissue: "Spleen", contrast: "Rad", auroc: 0.333, p: 0.822},
+    {tissue: "Spleen", contrast: "HLU", auroc: 0.056, p: 0.988},
+    {tissue: "Spleen", contrast: "Cmb", auroc: 0.333, p: 0.857},
+    {tissue: "Skin",   contrast: "Rad", auroc: 0.306, p: 0.848},
+    {tissue: "Skin",   contrast: "HLU", auroc: 0.556, p: 0.424},
+    {tissue: "Skin",   contrast: "Cmb", auroc: 0.083, p: 0.995}
+  ];
+
+  const W = 480, H = 280;
+  const margin = {top: 20, right: 30, bottom: 55, left: 55};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-d").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const tissues = ["Brain", "Spleen", "Skin"];
+  const contrasts = ["Rad", "HLU", "Cmb"];
+  const contrastColors = {
+    "Rad": OI.vermilion,
+    "HLU": OI.blue,
+    "Cmb": OI.grey
+  };
+
+  const x0 = d3.scaleBand()
+    .domain(tissues)
+    .range([0, w])
+    .padding(0.25);
+
+  const x1 = d3.scaleBand()
+    .domain(contrasts)
+    .range([0, x0.bandwidth()])
+    .padding(0.08);
+
+  const y = d3.scaleLinear()
+    .domain([0, 1])
+    .range([h, 0]);
+
+  // Chance line
+  g.append("line")
+    .attr("x1", 0).attr("x2", w)
+    .attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#999").attr("stroke-dasharray", "4,4");
+  g.append("text")
+    .attr("x", w - 2).attr("y", y(0.5) - 4)
+    .attr("text-anchor", "end")
+    .attr("class", "annotation")
+    .text("chance");
+
+  // Bars
+  g.selectAll(".bar")
+    .data(data)
+    .join("rect")
+    .attr("x", d => x0(d.tissue) + x1(d.contrast))
+    .attr("y", d => y(Math.max(d.auroc, 0.02)))
+    .attr("width", x1.bandwidth())
+    .attr("height", d => h - y(Math.max(d.auroc, 0.02)))
+    .attr("fill", d => contrastColors[d.contrast])
+    .attr("opacity", d => d.p < 0.05 ? 0.85 : 0.35);
+
+  // Value labels for significant
+  data.filter(d => d.p < 0.05).forEach(d => {
+    g.append("text")
+      .attr("x", x0(d.tissue) + x1(d.contrast) + x1.bandwidth()/2)
+      .attr("y", y(d.auroc) - 5)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "8px").attr("font-weight", "bold")
+      .text(`${d.auroc.toFixed(2)}*`);
+  });
+
+  // Axes
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x0).tickSize(0))
+    .selectAll("text").attr("font-size", "10px");
+
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(5))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -h/2).attr("y", -40)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("AUROC");
+
+  // Legend
+  const legend = g.append("g").attr("transform", `translate(${w-140}, 5)`);
+  [["Rad", "Radiation vs Ctrl"], ["HLU", "HLU vs Ctrl"], ["Cmb", "Combined vs Ctrl"]].forEach(([k, label], i) => {
+    legend.append("rect")
+      .attr("x", 0).attr("y", i * 14)
+      .attr("width", 10).attr("height", 10)
+      .attr("fill", contrastColors[k]).attr("opacity", 0.7);
+    legend.append("text")
+      .attr("x", 14).attr("y", i * 14 + 9)
+      .attr("class", "legend-text")
+      .text(label);
+  });
+
+  // Note
+  g.append("text")
+    .attr("x", w/2).attr("y", h + 35)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "7.5px").attr("fill", "#888")
+    .text("Only Brain HLU (0.75*) significant. Small n (9–22) limits power");
+})();
+</script>
+</body>
+</html>

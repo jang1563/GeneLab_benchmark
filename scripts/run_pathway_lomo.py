@@ -26,6 +26,19 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_auc_score
 
+try:
+    from scripts.benchmark_common import (
+        PHASE1_AUROC_THRESHOLD,
+        PHASE1_CI_LOWER_THRESHOLD,
+        PHASE1_PERM_P_THRESHOLD,
+    )
+except ImportError:
+    from benchmark_common import (
+        PHASE1_AUROC_THRESHOLD,
+        PHASE1_CI_LOWER_THRESHOLD,
+        PHASE1_PERM_P_THRESHOLD,
+    )
+
 # ── Paths ──────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
 PATHWAY_DIR = ROOT / "processed" / "pathway_scores"
@@ -75,6 +88,7 @@ def build_lr(seed=42):
     return Pipeline([
         ("scaler", StandardScaler()),
         ("clf", LogisticRegression(
+            penalty="elasticnet",
             solver="saga", l1_ratio=0.5, C=1.0,
             class_weight="balanced", max_iter=5000, random_state=seed,
         ))
@@ -234,9 +248,9 @@ def run_lomo(tissue, db, n_boot=2000, n_perm=1000):
         mean_ci_lower = float(np.mean(ci_lowers))
         mean_perm_p = float(np.mean(perm_ps))
 
-        go_auroc = mean_auroc > 0.700
-        go_ci    = mean_ci_lower > 0.500
-        go_perm  = mean_perm_p < 0.050
+        go_auroc = mean_auroc > PHASE1_AUROC_THRESHOLD
+        go_ci    = mean_ci_lower > PHASE1_CI_LOWER_THRESHOLD
+        go_perm  = mean_perm_p < PHASE1_PERM_P_THRESHOLD
         go       = go_auroc and go_ci and go_perm
 
         summary[model_name] = {

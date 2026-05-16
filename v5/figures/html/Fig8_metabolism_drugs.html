@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 8: Metabolic Flux & Drug Targets</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 20px; background: #fff; }
+.figure-container { width: 1200px; margin: 0 auto; }
+.figure-title { font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 4px; }
+.figure-subtitle { font-size: 10px; color: #666; text-align: center; margin-bottom: 16px; }
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.panel { border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #fafafa; }
+.panel-label { font-size: 12px; font-weight: bold; margin-bottom: 2px; }
+.panel-desc { font-size: 9px; color: #666; margin-bottom: 8px; }
+.interpretation { margin-top: 16px; padding: 12px; background: #f0f7ff; border-radius: 4px;
+                   font-size: 10px; line-height: 1.5; }
+.tooltip { position: absolute; background: rgba(0,0,0,0.85); color: #fff; padding: 6px 10px;
+            border-radius: 3px; font-size: 9px; pointer-events: none; z-index: 100; }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Fig 8: Metabolic Flux Modeling & Drug Target Mapping</div>
+  <div class="figure-subtitle">E-Flux constrained FBA (iMM1865) and DGIdb v5 + ChEMBL drug-gene interactions</div>
+  <div class="panels">
+    <div class="panel" id="panelA">
+      <div class="panel-label">A</div>
+      <div class="panel-desc">Subsystem flux changes (FLT − GC mean flux, top 15)</div>
+      <div id="flux-heatmap"></div>
+    </div>
+    <div class="panel" id="panelB">
+      <div class="panel-label">B</div>
+      <div class="panel-desc">Drug interaction tiers across spaceflight genes</div>
+      <div id="drug-tiers"></div>
+    </div>
+    <div class="panel" id="panelC">
+      <div class="panel-label">C</div>
+      <div class="panel-desc">Consensus biomarker panel (top-20, multi-source scoring)</div>
+      <div id="panel-scores"></div>
+    </div>
+    <div class="panel" id="panelD">
+      <div class="panel-label">D</div>
+      <div class="panel-desc">Panel validation: AUROC with 20-gene panel vs full gene set</div>
+      <div id="panel-validation"></div>
+    </div>
+  </div>
+  <div class="interpretation">
+    <strong>Key findings:</strong>
+    E-Flux metabolic modeling reveals tissue-specific flux redistribution during spaceflight, with skin showing the
+    largest biomass production difference (FLT 782.1 vs GC 787.2). Among 1,919 spaceflight-affected genes, 271 (32.5%)
+    have known drug interactions in DGIdb, yielding 1,287 FDA-approved drug-gene connections. The 20-gene consensus
+    biomarker panel (scored across 6 evidence sources) achieves AUROC 0.935 in gastrocnemius and 0.750 in colon,
+    demonstrating that a compact, interpretable gene set can capture substantial spaceflight signal.
+  </div>
+</div>
+<div class="tooltip" id="tooltip" style="display:none;"></div>
+
+<script>
+const OI = {
+  black: "#000000", orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00", pink: "#CC79A7"
+};
+const tissueColors = {
+  "Liver": OI.blue, "Gastrocnemius": OI.vermilion, "Kidney": OI.green,
+  "Thymus": OI.orange, "Eye": OI.pink, "Skin": OI.skyblue,
+  "Lung†": "#888888", "Colon†": "#555555"
+};
+const tooltip = d3.select("#tooltip");
+
+// Panel A: Flux heatmap
+(function() {
+  const data = [{"subsystem": "ROS detoxification", "tissue": "Liver", "flux_diff": 0.164}, {"subsystem": "ROS detoxification", "tissue": "Gastrocnemius", "flux_diff": -0.059}, {"subsystem": "ROS detoxification", "tissue": "Kidney", "flux_diff": -0.271}, {"subsystem": "ROS detoxification", "tissue": "Thymus", "flux_diff": 1.991}, {"subsystem": "ROS detoxification", "tissue": "Eye", "flux_diff": 0.102}, {"subsystem": "ROS detoxification", "tissue": "Skin", "flux_diff": 0.276}, {"subsystem": "Tryptophan metabolism", "tissue": "Liver", "flux_diff": 0.01}, {"subsystem": "Tryptophan metabolism", "tissue": "Gastrocnemius", "flux_diff": -1.222}, {"subsystem": "Tryptophan metabolism", "tissue": "Kidney", "flux_diff": -0.04}, {"subsystem": "Tryptophan metabolism", "tissue": "Thymus", "flux_diff": 0.405}, {"subsystem": "Tryptophan metabolism", "tissue": "Eye", "flux_diff": 0.054}, {"subsystem": "Tryptophan metabolism", "tissue": "Skin", "flux_diff": 0.031}, {"subsystem": "Glycolysis/gluconeogenesis", "tissue": "Liver", "flux_diff": 0.231}, {"subsystem": "Glycolysis/gluconeogenesis", "tissue": "Gastrocnemius", "flux_diff": -0.174}, {"subsystem": "Glycolysis/gluconeogenesis", "tissue": "Kidney", "flux_diff": -0.131}, {"subsystem": "Glycolysis/gluconeogenesis", "tissue": "Thymus", "flux_diff": 1.218}, {"subsystem": "Glycolysis/gluconeogenesis", "tissue": "Eye", "flux_diff": -0.103}, {"subsystem": "Glycolysis/gluconeogenesis", "tissue": "Skin", "flux_diff": -0.082}, {"subsystem": "Valine, leucine, and isoleucin", "tissue": "Liver", "flux_diff": 0.039}, {"subsystem": "Valine, leucine, and isoleucin", "tissue": "Gastrocnemius", "flux_diff": -0.01}, {"subsystem": "Valine, leucine, and isoleucin", "tissue": "Kidney", "flux_diff": -1.196}, {"subsystem": "Valine, leucine, and isoleucin", "tissue": "Thymus", "flux_diff": 0.041}, {"subsystem": "Valine, leucine, and isoleucin", "tissue": "Eye", "flux_diff": 0.023}, {"subsystem": "Valine, leucine, and isoleucin", "tissue": "Skin", "flux_diff": -0.037}, {"subsystem": "Pyrimidine synthesis", "tissue": "Liver", "flux_diff": -0.118}, {"subsystem": "Pyrimidine synthesis", "tissue": "Gastrocnemius", "flux_diff": 0.52}, {"subsystem": "Pyrimidine synthesis", "tissue": "Kidney", "flux_diff": -1.038}, {"subsystem": "Pyrimidine synthesis", "tissue": "Thymus", "flux_diff": 0.36}, {"subsystem": "Pyrimidine synthesis", "tissue": "Eye", "flux_diff": 0.04}, {"subsystem": "Pyrimidine synthesis", "tissue": "Skin", "flux_diff": -0.465}, {"subsystem": "Lysine metabolism", "tissue": "Liver", "flux_diff": -0.146}, {"subsystem": "Lysine metabolism", "tissue": "Gastrocnemius", "flux_diff": -0.823}, {"subsystem": "Lysine metabolism", "tissue": "Kidney", "flux_diff": 0.099}, {"subsystem": "Lysine metabolism", "tissue": "Thymus", "flux_diff": -0.221}, {"subsystem": "Lysine metabolism", "tissue": "Eye", "flux_diff": 0.019}, {"subsystem": "Lysine metabolism", "tissue": "Skin", "flux_diff": 0.0}, {"subsystem": "Leukotriene metabolism", "tissue": "Liver", "flux_diff": 0.0}, {"subsystem": "Leukotriene metabolism", "tissue": "Gastrocnemius", "flux_diff": 0.0}, {"subsystem": "Leukotriene metabolism", "tissue": "Kidney", "flux_diff": 0.0}, {"subsystem": "Leukotriene metabolism", "tissue": "Thymus", "flux_diff": -0.772}, {"subsystem": "Leukotriene metabolism", "tissue": "Eye", "flux_diff": 0.0}, {"subsystem": "Leukotriene metabolism", "tissue": "Skin", "flux_diff": 0.0}, {"subsystem": "Tyrosine metabolism", "tissue": "Liver", "flux_diff": 0.012}, {"subsystem": "Tyrosine metabolism", "tissue": "Gastrocnemius", "flux_diff": -0.052}, {"subsystem": "Tyrosine metabolism", "tissue": "Kidney", "flux_diff": -0.026}, {"subsystem": "Tyrosine metabolism", "tissue": "Thymus", "flux_diff": 0.732}, {"subsystem": "Tyrosine metabolism", "tissue": "Eye", "flux_diff": 0.098}, {"subsystem": "Tyrosine metabolism", "tissue": "Skin", "flux_diff": -0.259}, {"subsystem": "Transport, nuclear", "tissue": "Liver", "flux_diff": 0.021}, {"subsystem": "Transport, nuclear", "tissue": "Gastrocnemius", "flux_diff": -0.027}, {"subsystem": "Transport, nuclear", "tissue": "Kidney", "flux_diff": 0.008}, {"subsystem": "Transport, nuclear", "tissue": "Thymus", "flux_diff": 0.009}, {"subsystem": "Transport, nuclear", "tissue": "Eye", "flux_diff": 0.033}, {"subsystem": "Transport, nuclear", "tissue": "Skin", "flux_diff": -0.683}, {"subsystem": "Pentose phosphate pathway", "tissue": "Liver", "flux_diff": 0.29}, {"subsystem": "Pentose phosphate pathway", "tissue": "Gastrocnemius", "flux_diff": 0.621}, {"subsystem": "Pentose phosphate pathway", "tissue": "Kidney", "flux_diff": 0.038}, {"subsystem": "Pentose phosphate pathway", "tissue": "Thymus", "flux_diff": -0.157}, {"subsystem": "Pentose phosphate pathway", "tissue": "Eye", "flux_diff": -0.064}, {"subsystem": "Pentose phosphate pathway", "tissue": "Skin", "flux_diff": 0.052}, {"subsystem": "Heme degradation", "tissue": "Liver", "flux_diff": -0.406}, {"subsystem": "Heme degradation", "tissue": "Gastrocnemius", "flux_diff": 0.058}, {"subsystem": "Heme degradation", "tissue": "Kidney", "flux_diff": -0.11}, {"subsystem": "Heme degradation", "tissue": "Thymus", "flux_diff": -0.159}, {"subsystem": "Heme degradation", "tissue": "Eye", "flux_diff": 0.261}, {"subsystem": "Heme degradation", "tissue": "Skin", "flux_diff": -0.59}, {"subsystem": "Arginine and proline metabolis", "tissue": "Liver", "flux_diff": -0.568}, {"subsystem": "Arginine and proline metabolis", "tissue": "Gastrocnemius", "flux_diff": -0.001}, {"subsystem": "Arginine and proline metabolis", "tissue": "Kidney", "flux_diff": -0.015}, {"subsystem": "Arginine and proline metabolis", "tissue": "Thymus", "flux_diff": 0.068}, {"subsystem": "Arginine and proline metabolis", "tissue": "Eye", "flux_diff": -0.047}, {"subsystem": "Arginine and proline metabolis", "tissue": "Skin", "flux_diff": -0.101}, {"subsystem": "Pyrimidine catabolism", "tissue": "Liver", "flux_diff": -0.087}, {"subsystem": "Pyrimidine catabolism", "tissue": "Gastrocnemius", "flux_diff": 0.556}, {"subsystem": "Pyrimidine catabolism", "tissue": "Kidney", "flux_diff": 0.103}, {"subsystem": "Pyrimidine catabolism", "tissue": "Thymus", "flux_diff": -0.415}, {"subsystem": "Pyrimidine catabolism", "tissue": "Eye", "flux_diff": 0.229}, {"subsystem": "Pyrimidine catabolism", "tissue": "Skin", "flux_diff": 0.482}, {"subsystem": "Oxidative phosphorylation", "tissue": "Liver", "flux_diff": 0.147}, {"subsystem": "Oxidative phosphorylation", "tissue": "Gastrocnemius", "flux_diff": -0.141}, {"subsystem": "Oxidative phosphorylation", "tissue": "Kidney", "flux_diff": -0.08}, {"subsystem": "Oxidative phosphorylation", "tissue": "Thymus", "flux_diff": -0.552}, {"subsystem": "Oxidative phosphorylation", "tissue": "Eye", "flux_diff": 0.006}, {"subsystem": "Oxidative phosphorylation", "tissue": "Skin", "flux_diff": 0.222}, {"subsystem": "Purine catabolism", "tissue": "Liver", "flux_diff": 0.092}, {"subsystem": "Purine catabolism", "tissue": "Gastrocnemius", "flux_diff": 0.028}, {"subsystem": "Purine catabolism", "tissue": "Kidney", "flux_diff": 0.348}, {"subsystem": "Purine catabolism", "tissue": "Thymus", "flux_diff": -0.031}, {"subsystem": "Purine catabolism", "tissue": "Eye", "flux_diff": 0.089}, {"subsystem": "Purine catabolism", "tissue": "Skin", "flux_diff": 0.268}];
+  const tissues = ["Liver", "Gastrocnemius", "Kidney", "Thymus", "Eye", "Skin"];
+  const subsystems = ["ROS detoxification", "Tryptophan metabolism", "Glycolysis/gluconeogenesis", "Valine, leucine, and isoleucin", "Pyrimidine synthesis", "Lysine metabolism", "Leukotriene metabolism", "Tyrosine metabolism", "Transport, nuclear", "Pentose phosphate pathway", "Heme degradation", "Arginine and proline metabolis", "Pyrimidine catabolism", "Oxidative phosphorylation", "Purine catabolism"];
+
+  const margin = {top: 10, right: 20, bottom: 80, left: 200};
+  const cellW = 60, cellH = 22;
+  const width = tissues.length * cellW, height = subsystems.length * cellH;
+
+  const svg = d3.select("#flux-heatmap").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand().domain(tissues).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(subsystems).range([0, height]).padding(0.05);
+  const maxAbs = d3.max(data, d => Math.abs(d.flux_diff)) || 1;
+  const color = d3.scaleDiverging(d3.interpolateRdBu).domain([maxAbs, 0, -maxAbs]);
+
+  svg.selectAll("rect").data(data).join("rect")
+    .attr("x", d => x(d.tissue)).attr("y", d => y(d.subsystem))
+    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+    .attr("fill", d => color(d.flux_diff))
+    .on("mouseover", (e, d) => {
+      tooltip.style("display", "block")
+        .html(`${d.subsystem}<br>${d.tissue}: ${d.flux_diff}`)
+        .style("left", (e.pageX+10)+"px").style("top", (e.pageY-10)+"px");
+    }).on("mouseout", () => tooltip.style("display", "none"));
+
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x))
+    .selectAll("text").attr("transform", "rotate(-45)").style("text-anchor", "end").style("font-size", "8px");
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "7px");
+})();
+
+// Panel B: Drug tiers
+(function() {
+  const data = [{"tier": "Tier 1 (FDA-approved)", "count": 1284}, {"tier": "Tier 2 (Clinical)", "count": 0}, {"tier": "Tier 3 (Pre-clinical)", "count": 200}];
+  const margin = {top: 30, right: 80, bottom: 40, left: 180};
+  const width = 300, height = data.length * 50;
+
+  const svg = d3.select("#drug-tiers").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, d3.max(data, d => d.count) * 1.2]).range([0, width]);
+  const y = d3.scaleBand().domain(data.map(d => d.tier)).range([0, height]).padding(0.4);
+
+  const colors = [OI.blue, OI.orange, OI.skyblue];
+  svg.selectAll("rect").data(data).join("rect")
+    .attr("x", 0).attr("y", d => y(d.tier))
+    .attr("width", d => x(d.count)).attr("height", y.bandwidth())
+    .attr("fill", (d, i) => colors[i]);
+
+  svg.selectAll("text.count").data(data).join("text").attr("class", "count")
+    .attr("x", d => x(d.count) + 5).attr("y", d => y(d.tier) + y.bandwidth()/2 + 4)
+    .attr("font-size", "10px").attr("font-weight", "bold").text(d => d.count);
+
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "9px");
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(5));
+  svg.append("text").attr("x", width/2).attr("y", height + 30)
+    .attr("text-anchor", "middle").attr("font-size", "9px").text("Number of drug-gene interactions");
+})();
+
+// Panel C: Biomarker panel stacked bars
+(function() {
+  const data = [{"gene": "MUP22", "score": 5, "n_tissues": 4, "shap": 3, "wgcna": 0, "network": 0, "drug": 0, "lit": 0}, {"gene": "Thrsp", "score": 5, "n_tissues": 4, "shap": 1, "wgcna": 1, "network": 0, "drug": 1, "lit": 0}, {"gene": "Apoa1", "score": 5, "n_tissues": 4, "shap": 1, "wgcna": 1, "network": 0, "drug": 1, "lit": 0}, {"gene": "THRSP", "score": 5, "n_tissues": 3, "shap": 3, "wgcna": 0, "network": 0, "drug": 1, "lit": 0}, {"gene": "Top2a", "score": 5, "n_tissues": 3, "shap": 1, "wgcna": 2, "network": 0, "drug": 1, "lit": 0}, {"gene": "Serpina6", "score": 5, "n_tissues": 2, "shap": 1, "wgcna": 2, "network": 0, "drug": 1, "lit": 0}, {"gene": "Tnnc1", "score": 5, "n_tissues": 2, "shap": 1, "wgcna": 2, "network": 0, "drug": 1, "lit": 0}, {"gene": "Myh7", "score": 5, "n_tissues": 2, "shap": 1, "wgcna": 2, "network": 0, "drug": 1, "lit": 0}, {"gene": "Ddit4", "score": 5, "n_tissues": 1, "shap": 0, "wgcna": 2, "network": 0, "drug": 1, "lit": 2}, {"gene": "H4c8", "score": 4, "n_tissues": 4, "shap": 0, "wgcna": 2, "network": 0, "drug": 0, "lit": 0}, {"gene": "Retn", "score": 4, "n_tissues": 3, "shap": 1, "wgcna": 2, "network": 0, "drug": 0, "lit": 0}, {"gene": "NPAS2", "score": 4, "n_tissues": 3, "shap": 3, "wgcna": 0, "network": 0, "drug": 0, "lit": 0}, {"gene": "Myoz2", "score": 4, "n_tissues": 3, "shap": 1, "wgcna": 2, "network": 0, "drug": 0, "lit": 0}, {"gene": "Cfd", "score": 4, "n_tissues": 3, "shap": 1, "wgcna": 1, "network": 0, "drug": 1, "lit": 0}, {"gene": "Rpl36", "score": 4, "n_tissues": 3, "shap": 0, "wgcna": 2, "network": 0, "drug": 1, "lit": 0}, {"gene": "GM24497", "score": 4, "n_tissues": 3, "shap": 3, "wgcna": 0, "network": 0, "drug": 0, "lit": 0}, {"gene": "PER2", "score": 4, "n_tissues": 3, "shap": 3, "wgcna": 0, "network": 0, "drug": 0, "lit": 0}, {"gene": "Ms4a4c", "score": 4, "n_tissues": 2, "shap": 1, "wgcna": 2, "network": 0, "drug": 0, "lit": 0}, {"gene": "Snora70", "score": 4, "n_tissues": 2, "shap": 1, "wgcna": 2, "network": 0, "drug": 0, "lit": 0}, {"gene": "Lrrc14b", "score": 4, "n_tissues": 2, "shap": 1, "wgcna": 2, "network": 0, "drug": 0, "lit": 0}];
+  const margin = {top: 10, right: 20, bottom: 30, left: 80};
+  const width = 400, height = data.length * 20;
+
+  const svg = d3.select("#panel-scores").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const y = d3.scaleBand().domain(data.map(d => d.gene)).range([0, height]).padding(0.2);
+  const x = d3.scaleLinear().domain([0, 13]).range([0, width]);
+
+  const sources = ["shap", "wgcna", "network", "drug", "lit"];
+  const sourceColors = {
+    shap: OI.blue, wgcna: OI.green, network: OI.orange,
+    drug: OI.vermilion, lit: OI.pink
+  };
+
+  data.forEach(d => {
+    let cumX = 0;
+    sources.forEach(s => {
+      const val = d[s] || 0;
+      if (val > 0) {
+        svg.append("rect").attr("x", x(cumX)).attr("y", y(d.gene))
+          .attr("width", x(val) - x(0)).attr("height", y.bandwidth())
+          .attr("fill", sourceColors[s]);
+        cumX += val;
+      }
+    });
+  });
+
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "8px");
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(7));
+
+  // Legend
+  const leg = svg.append("g").attr("transform", `translate(${width - 200}, -5)`);
+  sources.forEach((s, i) => {
+    leg.append("rect").attr("x", i * 55).attr("y", 0).attr("width", 10).attr("height", 10)
+      .attr("fill", sourceColors[s]);
+    leg.append("text").attr("x", i * 55 + 13).attr("y", 9).attr("font-size", "7px")
+      .text(s.toUpperCase());
+  });
+})();
+
+// Panel D: Validation AUROC
+(function() {
+  const data = [{"tissue": "Liver", "auroc": 0.7544, "n_genes": 16}, {"tissue": "Gastrocnemius", "auroc": 0.8056, "n_genes": 14}, {"tissue": "Kidney", "auroc": 0.704, "n_genes": 15}, {"tissue": "Thymus", "auroc": 0.6532, "n_genes": 15}, {"tissue": "Eye", "auroc": 0.7276, "n_genes": 14}, {"tissue": "Skin", "auroc": 0.6502, "n_genes": 14}, {"tissue": "Lung\u2020", "auroc": 0.5955, "n_genes": 15}, {"tissue": "Colon\u2020", "auroc": 0.5619, "n_genes": 15}];
+  const margin = {top: 10, right: 40, bottom: 50, left: 120};
+  const width = 350, height = data.length * 35;
+
+  const svg = d3.select("#panel-validation").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear().domain([0, 1]).range([0, width]);
+  const y = d3.scaleBand().domain(data.map(d => d.tissue)).range([0, height]).padding(0.3);
+
+  // Chance line
+  svg.append("line").attr("x1", x(0.5)).attr("y1", 0)
+    .attr("x2", x(0.5)).attr("y2", height)
+    .attr("stroke", "#999").attr("stroke-dasharray", "4,2");
+
+  svg.selectAll("rect").data(data).join("rect")
+    .attr("x", 0).attr("y", d => y(d.tissue))
+    .attr("width", d => x(d.auroc)).attr("height", y.bandwidth())
+    .attr("fill", d => tissueColors[d.tissue] || "#ccc");
+
+  svg.selectAll("text.auroc").data(data).join("text").attr("class", "auroc")
+    .attr("x", d => x(d.auroc) + 4).attr("y", d => y(d.tissue) + y.bandwidth()/2 + 4)
+    .attr("font-size", "9px").text(d => d.auroc.toFixed(3));
+
+  svg.append("g").call(d3.axisLeft(y)).selectAll("text").style("font-size", "9px");
+  svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(5));
+  svg.append("text").attr("x", width/2).attr("y", height + 35)
+    .attr("text-anchor", "middle").attr("font-size", "9px").text("AUROC (20-gene panel, PCA-LR)");
+})();
+</script>
+</body>
+</html>

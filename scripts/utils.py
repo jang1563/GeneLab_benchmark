@@ -20,11 +20,34 @@ TISSUE_MISSIONS = {
     "gastrocnemius": ["RR-1", "RR-5", "RR-9"],
     "kidney": ["RR-1", "RR-3", "RR-7"],
     "thymus": ["RR-6", "MHU-1", "MHU-2", "RR-9"],
-    "eye": ["RR-1", "RR-3", "TBD"],
+    "eye": ["RR-1", "RR-3", "OSD-397"],
+    "skin": ["MHU-2", "RR-6", "RR-7"],
+}
+
+MISSION_ALIASES = {"TBD": "OSD-397"}
+MISSION_FILE_ALIASES = {"OSD-397": "TBD"}
+
+MISSION_EXPAND = {
+    "skin": {
+        "MHU-2": ["MHU-2_dorsal", "MHU-2_femoral"],
+    },
 }
 
 
 # ── Data Loading ───────────────────────────────────────────────────────────────
+
+def mission_storage_name(mission):
+    """Map stable public mission labels to legacy on-disk filenames."""
+    return MISSION_FILE_ALIASES.get(mission, mission)
+
+
+def normalize_mission_labels(meta):
+    """Normalize legacy placeholder mission labels to stable public identifiers."""
+    if "mission" not in meta.columns:
+        return meta
+    meta = meta.copy()
+    meta["mission"] = meta["mission"].replace(MISSION_ALIASES)
+    return meta
 
 def load_metadata(tissue):
     """Load all-missions metadata for a tissue."""
@@ -32,7 +55,7 @@ def load_metadata(tissue):
     meta = pd.read_csv(f, index_col=0)
     if "REMOVE" in meta.columns:
         meta = meta[meta["REMOVE"] != True]
-    return meta
+    return normalize_mission_labels(meta)
 
 
 def load_gene_features(tissue):
@@ -51,15 +74,26 @@ def load_gene_features(tissue):
 def load_pathway_features(tissue, db="hallmark"):
     """Load GSVA pathway scores across all missions for a tissue."""
     all_scores = []
+    expand = MISSION_EXPAND.get(tissue, {})
     for mission in TISSUE_MISSIONS.get(tissue, []):
-        f = PATHWAY_DIR / tissue / f"{mission}_gsva_{db}.csv"
-        if not f.exists():
-            continue
-        scores = pd.read_csv(f, index_col=0)
-        all_scores.append(scores)
+        for sub_mission in expand.get(mission, [mission]):
+            storage_mission = mission_storage_name(sub_mission)
+            f = PATHWAY_DIR / tissue / f"{storage_mission}_gsva_{db}.csv"
+            if not f.exists():
+                continue
+            scores = pd.read_csv(f, index_col=0)
+            all_scores.append(scores)
     if not all_scores:
         return None
+
+    common_cols = set(all_scores[0].columns)
+    for scores in all_scores[1:]:
+        common_cols &= set(scores.columns)
+    common_cols = sorted(common_cols)
+    all_scores = [scores[common_cols] for scores in all_scores]
+
     combined = pd.concat(all_scores)
+    combined = combined[~combined.index.duplicated(keep="first")]
     if "mission" in combined.columns:
         combined = combined.drop(columns=["mission"])
     return combined
@@ -78,7 +112,7 @@ def load_temporal_metadata(tissue, mission=None):
         Raises ValueError if temporal columns are missing (run --enrich-temporal first).
     """
     if mission:
-        mission_clean = mission.replace(" ", "_").replace("/", "_").replace("+", "_")
+        mission_clean = mission_storage_name(mission).replace(" ", "_").replace("/", "_").replace("+", "_")
         f = PROCESSED_DIR / tissue / f"{tissue}_{mission_clean}_metadata.csv"
     else:
         f = PROCESSED_DIR / tissue / f"{tissue}_all_missions_metadata.csv"
@@ -86,6 +120,7 @@ def load_temporal_metadata(tissue, mission=None):
     meta = pd.read_csv(f, index_col=0)
     if "REMOVE" in meta.columns:
         meta = meta[meta["REMOVE"] != True]
+    meta = normalize_mission_labels(meta)
 
     if "sacrifice_timing" not in meta.columns:
         raise ValueError(
