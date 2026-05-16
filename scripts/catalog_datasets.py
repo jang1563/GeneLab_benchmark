@@ -23,9 +23,10 @@ API reference:
   Based on patterns from SpaceOmicsBench/v2_public/scripts/fetch_genelab.py
 
 Design decisions applied:
-  - GLDS-168 flagged as DUPLICATE (see DESIGN_DECISIONS.md DD-05)
+  - GLDS-168 flagged as DUPLICATE (reprocessed combination of OSD-48+137;
+    sample reuse would leak across LOMO folds)
   - Assay type filtering: bulk RNA-seq only for Category A
-  - BALB/c strain flag for Track 2a/2b separation (DD-06)
+  - BALB/c strain flag for Track 2a/2b separation
 """
 
 import json
@@ -45,14 +46,14 @@ BIODATA_API = "https://visualization.osdr.nasa.gov/biodata/api/v2"
 OSDR_SEARCH_API = "https://osdr.nasa.gov/osdr/data/osd/meta"
 OSDR_FILES_API = "https://osdr.nasa.gov/osdr/data/osd/files"
 
-# ── Candidate GLDS IDs from PLAN.md v0.5 ──────────────────────────────────────
+# ── Candidate GLDS IDs ────────────────────────────────────────────────────────
 # Status legend: "primary" = included in main analysis, "duplicate" = excluded
 # Track: "2a" = C57BL/6J only, "2b" = all strains
 CANDIDATE_DATASETS = [
     # ── Liver (A1, B1) ────────────────────────────────────────────────────────
     {"osd_id": "OSD-48",  "tissue": "liver",         "mission": "RR-1",  "track": "2a", "notes": "primary"},
     {"osd_id": "OSD-137", "tissue": "liver",         "mission": "RR-3",  "track": "2a", "notes": "primary"},
-    {"osd_id": "OSD-168", "tissue": "liver",         "mission": "RR-1+3","track": "2a", "notes": "DUPLICATE of OSD-48+137 — Category J only (DESIGN_DECISIONS DD-05)"},
+    {"osd_id": "OSD-168", "tissue": "liver",         "mission": "RR-1+3","track": "2a", "notes": "DUPLICATE of OSD-48+137 — Category J only (sample reuse would leak across LOMO folds)"},
     {"osd_id": "OSD-245", "tissue": "liver",         "mission": "RR-6",  "track": "2a", "notes": "primary"},
     {"osd_id": "OSD-379", "tissue": "liver",         "mission": "RR-8",  "track": "2a", "notes": "primary"},
     {"osd_id": "OSD-242", "tissue": "liver",         "mission": "RR-9",  "track": "2a", "notes": "primary"},
@@ -328,7 +329,6 @@ def write_data_catalog_md(results: list[dict], hu_results: list[dict]) -> None:
     lines = [
         "# DATA_CATALOG.md — GeneLab_benchmark",
         f"**Auto-generated**: `catalog_datasets.py` — {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}",
-        "**PLAN.md version**: v0.5",
         "",
         "> ⚠️ Status legend:",
         "> ✅ Verified (bulk RNA-seq) | ❌ NOT FOUND | ⚠️ Wrong assay type",
@@ -336,7 +336,7 @@ def write_data_catalog_md(results: list[dict], hu_results: list[dict]) -> None:
         "",
         "---",
         "",
-        "## Candidate Datasets (PLAN.md v0.5)",
+        "## Candidate Datasets",
         "",
         "| OSD ID | Tissue | Mission | Track | Status | Assay | Control Types | Bulk RNA-seq Files | Notes |",
         "|---|---|---|---|---|---|---|---|---|",
@@ -392,16 +392,13 @@ def write_data_catalog_md(results: list[dict], hu_results: list[dict]) -> None:
         "OSD-168 is a reprocessed combination of OSD-48 (RR-1) + OSD-137 (RR-3) liver data.",
         "Including in Category A would cause sample duplication across LOMO train/test folds.",
         "**Use only in Category J (J1): pipeline version comparison (v1 vs v2 vs v3).**",
-        "Reference: DESIGN_DECISIONS.md DD-05",
         "",
         "### OSD-25 (STS-135) — Track 2b only",
         "Uses BALB/c mouse strain, not C57BL/6J. Excluded from Track 2a (primary analysis).",
         "Track 2b (secondary, supplementary): included as cross-strain experiment.",
-        "Reference: DESIGN_DECISIONS.md DD-06",
         "",
         "### OSD-270 (Heart, Visium) — NOT Category A",
         "Visium spatial transcriptomics, not bulk RNA-seq. Category F (v2.0) only.",
-        "Reference: PLAN.md v0.5 Section 3.2",
     ]
 
     DATA_CATALOG_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
