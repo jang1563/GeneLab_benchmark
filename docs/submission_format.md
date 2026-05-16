@@ -160,7 +160,7 @@ Category B evaluation does **not** report a single GO/NO-GO. Instead, Transfer P
 - perm_p < 0.05 pairs count
 - Large pairs (n≥10) mean AUROC + significance
 
-*(Full AUROC matrix: see `processed/B_cross_mission/` and PHASE1_RESULTS.md)*
+*(Full AUROC matrix: see `processed/B_cross_mission/` and `evaluation/RESULTS_SUMMARY.md`)*
 
 ---
 
@@ -185,7 +185,7 @@ tasks/
   B4_thymus_cross_mission/            ← Category B task
     pair_MHU-1_MHU-2/
       test_y.csv                      ← test labels (PUBLIC)
-      ← test_X comes from the source tissue CSV (see PHASE1_RESULTS.md)
+      ← test_X comes from the source tissue CSV (see `evaluation/RESULTS_SUMMARY.md` for Category B detail)
     pair_MHU-1_RR-6/
       ...
     pair_MHU-2_MHU-1/
