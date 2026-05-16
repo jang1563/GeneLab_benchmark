@@ -1,0 +1,61 @@
+{
+  "experiment": "NC2_random",
+  "model": "ElasticNet-LR",
+  "model_key": "elasticnet_lr",
+  "tissue": "skin",
+  "feature_type": "random_gaussian",
+  "n_original_features": 26814,
+  "cv_strategy": "LOMO",
+  "n_folds": 3,
+  "mean_auroc": 0.4725,
+  "std_auroc": 0.0837,
+  "min_auroc": 0.3902,
+  "max_auroc": 0.5873,
+  "mean_perm_pvalue": 0.5575,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 407.5,
+  "timestamp": "2026-03-22T03:29:12.071814",
+  "folds": [
+    {
+      "test_mission": "MHU-2",
+      "fold_name": "fold_MHU-2_test",
+      "auroc": 0.3902,
+      "bootstrap_mean": 0.3922,
+      "ci_lower": 0.16,
+      "ci_upper": 0.6429,
+      "perm_pvalue": 0.8492,
+      "n_train": 83,
+      "n_test": 35,
+      "n_features": 26814,
+      "train_time_s": 139.84
+    },
+    {
+      "test_mission": "RR-6",
+      "fold_name": "fold_RR-6_test",
+      "auroc": 0.5873,
+      "bootstrap_mean": 0.5881,
+      "ci_lower": 0.4121,
+      "ci_upper": 0.7514,
+      "perm_pvalue": 0.1449,
+      "n_train": 65,
+      "n_test": 53,
+      "n_features": 26814,
+      "train_time_s": 107.85
+    },
+    {
+      "test_mission": "RR-7",
+      "fold_name": "fold_RR-7_test",
+      "auroc": 0.44,
+      "bootstrap_mean": 0.4395,
+      "ci_lower": 0.2236,
+      "ci_upper": 0.6756,
+      "perm_pvalue": 0.6783,
+      "n_train": 88,
+      "n_test": 30,
+      "n_features": 26814,
+      "train_time_s": 146.59
+    }
+  ]
+}

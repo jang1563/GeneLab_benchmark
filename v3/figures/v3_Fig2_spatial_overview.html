@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fig 2 — OSD-352 RR-3 Brain Visium Spatial Transcriptomics Benchmark</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #fff;
+  }
+  .figure-container {
+    width: 1100px;
+    margin: 0 auto;
+  }
+  .figure-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .figure-subtitle {
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .panel {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 12px;
+    background: #fafafa;
+  }
+  .panel-label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+  .panel-desc {
+    font-size: 9px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .axis text { font-size: 9px; }
+  .axis-label { font-size: 10px; }
+  .tick-label { font-size: 7.5px; }
+  .stat-text { font-size: 8px; fill: #444; }
+  .annotation { font-size: 8px; fill: #888; }
+  .legend-text { font-size: 8px; }
+  .bar-label { font-size: 7.5px; }
+  .negative-note {
+    font-size: 9px;
+    color: #b44;
+    font-style: italic;
+    margin-top: 4px;
+  }
+  .interpretation {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-left: 3px solid #999;
+    font-size: 9px;
+    color: #444;
+    line-height: 1.4;
+  }
+  .interpretation strong {
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<div class="figure-container">
+  <div class="figure-title">Figure 2. OSD-352 RR-3 Brain Visium Spatial Transcriptomics Benchmark</div>
+  <div class="figure-subtitle">Masarapu et al. 2024 (Nature Communications) — 3 FLT + 3 GC animals, 12 sections, 24,085 spots</div>
+
+  <div class="panels">
+    <!-- Panel A: Classification AUROC -->
+    <div class="panel">
+      <div class="panel-label">A. Classification AUROC (F3a/F3d)</div>
+      <div class="panel-desc">PCA(≤5)-LR, LOAO 6-fold, exact permutation test (C(6,3)=20)</div>
+      <div id="panel-a"></div>
+      <div class="negative-note">All AUROCs below chance — brain tissue shows no detectable spaceflight signal at n=6</div>
+    </div>
+
+    <!-- Panel B: SVG Analysis -->
+    <div class="panel">
+      <div class="panel-label">B. Spatially Variable Genes (F3b)</div>
+      <div class="panel-desc">Moran's I per section (k=6 neighbors), 2000 HVGs tested</div>
+      <div id="panel-b"></div>
+    </div>
+
+    <!-- Panel C: Section Quality -->
+    <div class="panel">
+      <div class="panel-label">C. Section Quality Metrics</div>
+      <div class="panel-desc">Spots per section by condition and slide</div>
+      <div id="panel-c"></div>
+    </div>
+
+    <!-- Panel D: SVG Overlap -->
+    <div class="panel">
+      <div class="panel-label">D. SVG Condition Specificity</div>
+      <div class="panel-desc">FLT-specific vs GC-specific spatially variable genes</div>
+      <div id="panel-d"></div>
+    </div>
+  </div>
+
+  <div class="interpretation">
+    <strong>Interpretation:</strong> Brain tissue from RR-3 shows minimal spaceflight transcriptomic response.
+    Section-level pseudo-bulk AUROC = 0.139 and companion bulk AUROC = 0.000 (systematic inversion with n=6 LOO-CV).
+    Only 1 DEG at padj&lt;0.05 in companion bulk RNA-seq. SVG analysis shows modest FLT enrichment (d=0.70, p=0.240) but
+    high Jaccard overlap (0.805) indicates brain spatial architecture dominates over condition-specific spatial patterns.
+    The 139 FLT-specific SVGs (vs 6 GC-specific) warrant further investigation but may reflect technical quality differences
+    between capture areas. F3c (region-specific AUROC) was not computed due to corrupted Seurat metadata file on OSDR.
+    <strong>This negative result is informative:</strong> not all tissues respond equally to spaceflight at current sample sizes.
+  </div>
+</div>
+
+<script>
+// ── Okabe-Ito palette ────────────────────────────────────────────────
+const OI = {
+  orange: "#E69F00", skyblue: "#56B4E9", green: "#009E73",
+  yellow: "#F0E442", blue: "#0072B2", vermilion: "#D55E00",
+  purple: "#CC79A7", black: "#000000", grey: "#999999"
+};
+
+// ── Data ─────────────────────────────────────────────────────────────
+const classificationData = [
+  {label: "Section-level\n(n=12)", auroc: 0.139, ci_low: 0.000, ci_high: 0.429, p: 0.900, type: "spatial"},
+  {label: "Animal-level\n(n=6)", auroc: 0.444, ci_low: 0.000, ci_high: 1.000, p: 0.400, type: "spatial"},
+  {label: "Companion\nBulk (n=6)", auroc: 0.000, ci_low: 0.000, ci_high: 0.000, p: 1.000, type: "bulk"}
+];
+
+const svgData = {
+  flt: [
+    {sec: "158_C1", count: 1345, spots: 2723},
+    {sec: "158_D1", count: 1310, spots: 2801},
+    {sec: "159_C1", count: 1192, spots: 1820},
+    {sec: "159_D1", count: 911, spots: 1160},
+    {sec: "304_C1", count: 728, spots: 1119},
+    {sec: "304_D1", count: 594, spots: 1141}
+  ],
+  gc: [
+    {sec: "158_A1", count: 472, spots: 2334},
+    {sec: "158_B1", count: 691, spots: 2021},
+    {sec: "159_A1", count: 1149, spots: 2139},
+    {sec: "159_B1", count: 902, spots: 2332},
+    {sec: "304_A1", count: 865, spots: 2181},
+    {sec: "304_B1", count: 843, spots: 2314}
+  ]
+};
+
+const sectionData = [
+  {sec: "158_A1", cond: "GC", animal: "G7", slide: "158", spots: 2334, genes: 14630, svgs: 472},
+  {sec: "158_B1", cond: "GC", animal: "G7", slide: "158", spots: 2021, genes: 15810, svgs: 691},
+  {sec: "158_C1", cond: "FLT", animal: "F1", slide: "158", spots: 2723, genes: 18535, svgs: 1345},
+  {sec: "158_D1", cond: "FLT", animal: "F1", slide: "158", spots: 2801, genes: 18327, svgs: 1310},
+  {sec: "159_A1", cond: "GC", animal: "G8", slide: "159", spots: 2139, genes: 18018, svgs: 1149},
+  {sec: "159_B1", cond: "GC", animal: "G8", slide: "159", spots: 2332, genes: 17372, svgs: 902},
+  {sec: "159_C1", cond: "FLT", animal: "F7", slide: "159", spots: 1820, genes: 18208, svgs: 1192},
+  {sec: "159_D1", cond: "FLT", animal: "F7", slide: "159", spots: 1160, genes: 17453, svgs: 911},
+  {sec: "304_A1", cond: "GC", animal: "G9", slide: "304", spots: 2181, genes: 16457, svgs: 865},
+  {sec: "304_B1", cond: "GC", animal: "G9", slide: "304", spots: 2314, genes: 16434, svgs: 843},
+  {sec: "304_C1", cond: "FLT", animal: "F2", slide: "304", spots: 1119, genes: 15773, svgs: 728},
+  {sec: "304_D1", cond: "FLT", animal: "F2", slide: "304", spots: 1141, genes: 15349, svgs: 594}
+];
+
+// ── Panel A: Classification AUROC ────────────────────────────────────
+(function() {
+  const W = 480, H = 260;
+  const margin = {top: 20, right: 30, bottom: 60, left: 55};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-a").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand()
+    .domain(classificationData.map(d => d.label))
+    .range([0, w])
+    .padding(0.4);
+
+  const y = d3.scaleLinear()
+    .domain([0, 1.1])
+    .range([h, 0]);
+
+  // Chance line
+  g.append("line")
+    .attr("x1", 0).attr("x2", w)
+    .attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#999").attr("stroke-dasharray", "4,4")
+    .attr("stroke-width", 1);
+  g.append("text")
+    .attr("x", w - 2).attr("y", y(0.5) - 4)
+    .attr("text-anchor", "end")
+    .attr("class", "annotation")
+    .text("chance (0.5)");
+
+  // Bars
+  g.selectAll(".bar")
+    .data(classificationData)
+    .join("rect")
+    .attr("x", d => x(d.label))
+    .attr("y", d => y(Math.max(d.auroc, 0.01)))
+    .attr("width", x.bandwidth())
+    .attr("height", d => h - y(Math.max(d.auroc, 0.01)))
+    .attr("fill", d => d.type === "spatial" ? OI.skyblue : OI.orange)
+    .attr("opacity", 0.8);
+
+  // Error bars (CI)
+  g.selectAll(".ci")
+    .data(classificationData)
+    .join("line")
+    .attr("x1", d => x(d.label) + x.bandwidth()/2)
+    .attr("x2", d => x(d.label) + x.bandwidth()/2)
+    .attr("y1", d => y(d.ci_low))
+    .attr("y2", d => y(d.ci_high))
+    .attr("stroke", "#333")
+    .attr("stroke-width", 1.5);
+
+  // CI caps
+  classificationData.forEach(d => {
+    const cx = x(d.label) + x.bandwidth()/2;
+    [d.ci_low, d.ci_high].forEach(v => {
+      g.append("line")
+        .attr("x1", cx - 5).attr("x2", cx + 5)
+        .attr("y1", y(v)).attr("y2", y(v))
+        .attr("stroke", "#333").attr("stroke-width", 1.5);
+    });
+  });
+
+  // AUROC value + p-value labels
+  g.selectAll(".val-label")
+    .data(classificationData)
+    .join("text")
+    .attr("x", d => x(d.label) + x.bandwidth()/2)
+    .attr("y", d => y(Math.max(d.auroc, 0.01)) - 5)
+    .attr("text-anchor", "middle")
+    .attr("class", "bar-label")
+    .attr("font-weight", "bold")
+    .text(d => d.auroc.toFixed(3));
+
+  g.selectAll(".p-label")
+    .data(classificationData)
+    .join("text")
+    .attr("x", d => x(d.label) + x.bandwidth()/2)
+    .attr("y", d => y(Math.max(d.auroc, 0.01)) - 16)
+    .attr("text-anchor", "middle")
+    .attr("class", "stat-text")
+    .text(d => `p=${d.p.toFixed(2)}`);
+
+  // Axes
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text")
+    .attr("class", "tick-label")
+    .style("text-anchor", "middle")
+    .each(function(d) {
+      const el = d3.select(this);
+      const lines = d.split("\n");
+      el.text("");
+      lines.forEach((line, i) => {
+        el.append("tspan")
+          .attr("x", 0)
+          .attr("dy", i === 0 ? 0 : "1.1em")
+          .text(line);
+      });
+    });
+
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(5))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -h/2).attr("y", -40)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("AUROC");
+
+  // Legend
+  const legend = g.append("g").attr("transform", `translate(${w-120}, 5)`);
+  [{label: "Spatial pseudo-bulk", color: OI.skyblue},
+   {label: "Companion bulk", color: OI.orange}].forEach((d, i) => {
+    legend.append("rect")
+      .attr("x", 0).attr("y", i * 16)
+      .attr("width", 10).attr("height", 10)
+      .attr("fill", d.color).attr("opacity", 0.8);
+    legend.append("text")
+      .attr("x", 14).attr("y", i * 16 + 9)
+      .attr("class", "legend-text")
+      .text(d.label);
+  });
+})();
+
+// ── Panel B: SVG counts by condition ─────────────────────────────────
+(function() {
+  const W = 480, H = 260;
+  const margin = {top: 20, right: 30, bottom: 55, left: 55};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-b").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Combine and sort
+  const allSvg = [
+    ...svgData.flt.map(d => ({...d, cond: "FLT"})),
+    ...svgData.gc.map(d => ({...d, cond: "GC"}))
+  ].sort((a, b) => a.sec.localeCompare(b.sec));
+
+  const x = d3.scaleBand()
+    .domain(allSvg.map(d => d.sec))
+    .range([0, w])
+    .padding(0.15);
+
+  const y = d3.scaleLinear()
+    .domain([0, 1500])
+    .range([h, 0]);
+
+  // Bars
+  g.selectAll(".bar")
+    .data(allSvg)
+    .join("rect")
+    .attr("x", d => x(d.sec))
+    .attr("y", d => y(d.count))
+    .attr("width", x.bandwidth())
+    .attr("height", d => h - y(d.count))
+    .attr("fill", d => d.cond === "FLT" ? OI.vermilion : OI.blue)
+    .attr("opacity", 0.75);
+
+  // Mean lines
+  const fltMean = d3.mean(svgData.flt, d => d.count);
+  const gcMean = d3.mean(svgData.gc, d => d.count);
+
+  // Slide separator lines
+  const slides = ["158", "159", "304"];
+  slides.forEach((slide, i) => {
+    if (i > 0) {
+      const secs = allSvg.filter(d => d.sec.startsWith(slide));
+      if (secs.length > 0) {
+        const xPos = x(secs[0].sec) - x.step() * x.padding() / 2;
+        g.append("line")
+          .attr("x1", xPos).attr("x2", xPos)
+          .attr("y1", 0).attr("y2", h)
+          .attr("stroke", "#ccc").attr("stroke-dasharray", "2,2");
+      }
+    }
+    // Slide label
+    const slideSecs = allSvg.filter(d => d.sec.startsWith(slide));
+    if (slideSecs.length > 0) {
+      const midX = (x(slideSecs[0].sec) + x(slideSecs[slideSecs.length-1].sec) + x.bandwidth()) / 2;
+      g.append("text")
+        .attr("x", midX).attr("y", h + 38)
+        .attr("text-anchor", "middle")
+        .attr("class", "annotation")
+        .text(`Slide ${slide}`);
+    }
+  });
+
+  // Count labels
+  g.selectAll(".count-label")
+    .data(allSvg)
+    .join("text")
+    .attr("x", d => x(d.sec) + x.bandwidth()/2)
+    .attr("y", d => y(d.count) - 3)
+    .attr("text-anchor", "middle")
+    .attr("class", "bar-label")
+    .text(d => d.count);
+
+  // Axes
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text")
+    .attr("class", "tick-label")
+    .attr("transform", "rotate(-35)")
+    .attr("text-anchor", "end");
+
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(5))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -h/2).attr("y", -40)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("SVG count (p < 0.05)");
+
+  // Stats annotation
+  g.append("text")
+    .attr("x", w - 5).attr("y", 12)
+    .attr("text-anchor", "end")
+    .attr("class", "stat-text")
+    .text(`FLT mean=${Math.round(fltMean)}, GC mean=${Math.round(gcMean)}`);
+  g.append("text")
+    .attr("x", w - 5).attr("y", 23)
+    .attr("text-anchor", "end")
+    .attr("class", "stat-text")
+    .text("Mann-Whitney p=0.240, d=0.70");
+
+  // Legend
+  const legend = g.append("g").attr("transform", `translate(5, 5)`);
+  [{label: "FLT (Space Flight)", color: OI.vermilion},
+   {label: "GC (Ground Control)", color: OI.blue}].forEach((d, i) => {
+    legend.append("rect")
+      .attr("x", 0).attr("y", i * 16)
+      .attr("width", 10).attr("height", 10)
+      .attr("fill", d.color).attr("opacity", 0.75);
+    legend.append("text")
+      .attr("x", 14).attr("y", i * 16 + 9)
+      .attr("class", "legend-text")
+      .text(d.label);
+  });
+})();
+
+// ── Panel C: Section Quality (spots & genes detected) ────────────────
+(function() {
+  const W = 480, H = 260;
+  const margin = {top: 20, right: 55, bottom: 55, left: 55};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-c").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleLinear()
+    .domain([800, 3000])
+    .range([0, w]);
+
+  const y = d3.scaleLinear()
+    .domain([14000, 19000])
+    .range([h, 0]);
+
+  // Points
+  const slideShapes = {"158": d3.symbolCircle, "159": d3.symbolSquare, "304": d3.symbolTriangle};
+  const slideLabels = {"158": "●", "159": "■", "304": "▲"};
+
+  g.selectAll(".point")
+    .data(sectionData)
+    .join("path")
+    .attr("d", d => d3.symbol().type(slideShapes[d.slide]).size(80)())
+    .attr("transform", d => `translate(${x(d.spots)},${y(d.genes)})`)
+    .attr("fill", d => d.cond === "FLT" ? OI.vermilion : OI.blue)
+    .attr("opacity", 0.8)
+    .attr("stroke", "#333")
+    .attr("stroke-width", 0.5);
+
+  // Section labels
+  g.selectAll(".sec-label")
+    .data(sectionData)
+    .join("text")
+    .attr("x", d => x(d.spots) + 7)
+    .attr("y", d => y(d.genes) + 3)
+    .attr("class", "tick-label")
+    .text(d => d.sec.replace("_", " "));
+
+  // Axes
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x).ticks(5))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("x", w/2).attr("y", h + 35)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("Spots per section (after QC)");
+
+  g.append("g")
+    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(",")))
+    .selectAll("text").attr("class", "tick-label");
+
+  g.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -h/2).attr("y", -42)
+    .attr("text-anchor", "middle")
+    .attr("class", "axis-label")
+    .text("Genes detected per section");
+
+  // Legend
+  const legend = g.append("g").attr("transform", `translate(5, ${h-60})`);
+  [{label: "FLT", color: OI.vermilion},
+   {label: "GC", color: OI.blue}].forEach((d, i) => {
+    legend.append("rect")
+      .attr("x", 0).attr("y", i * 14)
+      .attr("width", 10).attr("height", 10)
+      .attr("fill", d.color).attr("opacity", 0.8);
+    legend.append("text")
+      .attr("x", 14).attr("y", i * 14 + 9)
+      .attr("class", "legend-text")
+      .text(d.label);
+  });
+  [{label: "Slide 158 (●)", shape: "circle"},
+   {label: "Slide 159 (■)", shape: "rect"},
+   {label: "Slide 304 (▲)", shape: "triangle"}].forEach((d, i) => {
+    legend.append("text")
+      .attr("x", 80).attr("y", i * 14 + 9)
+      .attr("class", "legend-text")
+      .text(d.label);
+  });
+})();
+
+// ── Panel D: SVG Venn / Specificity ──────────────────────────────────
+(function() {
+  const W = 480, H = 260;
+  const margin = {top: 20, right: 30, bottom: 30, left: 30};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top - margin.bottom;
+
+  const svg = d3.select("#panel-d").append("svg")
+    .attr("width", W).attr("height", H);
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Venn-like diagram
+  const cx = w / 2;
+  const cy = h / 2 - 10;
+  const r = 70;
+  const offset = 45;
+
+  // FLT circle
+  g.append("circle")
+    .attr("cx", cx - offset).attr("cy", cy).attr("r", r)
+    .attr("fill", OI.vermilion).attr("opacity", 0.25)
+    .attr("stroke", OI.vermilion).attr("stroke-width", 1.5);
+
+  // GC circle
+  g.append("circle")
+    .attr("cx", cx + offset).attr("cy", cy).attr("r", r)
+    .attr("fill", OI.blue).attr("opacity", 0.25)
+    .attr("stroke", OI.blue).attr("stroke-width", 1.5);
+
+  // Labels
+  g.append("text")
+    .attr("x", cx - offset - r + 10).attr("y", cy + 4)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "11px").attr("font-weight", "bold")
+    .attr("fill", OI.vermilion)
+    .text("242");
+  g.append("text")
+    .attr("x", cx - offset - r + 10).attr("y", cy + 16)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "8px").attr("fill", "#666")
+    .text("FLT only");
+
+  g.append("text")
+    .attr("x", cx).attr("y", cy + 4)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "14px").attr("font-weight", "bold")
+    .attr("fill", "#333")
+    .text("1,265");
+  g.append("text")
+    .attr("x", cx).attr("y", cy + 18)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "8px").attr("fill", "#666")
+    .text("shared");
+
+  g.append("text")
+    .attr("x", cx + offset + r - 10).attr("y", cy + 4)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "11px").attr("font-weight", "bold")
+    .attr("fill", OI.blue)
+    .text("64");
+  g.append("text")
+    .attr("x", cx + offset + r - 10).attr("y", cy + 16)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "8px").attr("fill", "#666")
+    .text("GC only");
+
+  // Circle labels
+  g.append("text")
+    .attr("x", cx - offset).attr("y", cy - r - 8)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "10px").attr("font-weight", "bold")
+    .attr("fill", OI.vermilion)
+    .text("FLT SVGs (1,507)");
+
+  g.append("text")
+    .attr("x", cx + offset).attr("y", cy - r - 8)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "10px").attr("font-weight", "bold")
+    .attr("fill", OI.blue)
+    .text("GC SVGs (1,329)");
+
+  // Jaccard + specificity stats
+  g.append("text")
+    .attr("x", cx).attr("y", cy + r + 25)
+    .attr("text-anchor", "middle")
+    .attr("class", "stat-text")
+    .text("Jaccard = 0.805 — high overlap indicates anatomy-driven spatial patterns");
+
+  g.append("text")
+    .attr("x", cx).attr("y", cy + r + 38)
+    .attr("text-anchor", "middle")
+    .attr("class", "stat-text")
+    .text("Condition-specific: 139 FLT-specific, 6 GC-specific (≥50% FLT & <20% GC or vice versa)");
+
+  g.append("text")
+    .attr("x", cx).attr("y", cy + r + 51)
+    .attr("text-anchor", "middle")
+    .attr("class", "stat-text")
+    .attr("fill", "#888")
+    .text("2,000 HVGs tested per section × 12 sections");
+})();
+</script>
+</body>
+</html>

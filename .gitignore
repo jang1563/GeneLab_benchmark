@@ -15,6 +15,10 @@ processed/qc_reports/
 !processed/fgsea/
 !processed/ensembl_symbol_map.csv
 
+# Full MSigDB fGSEA expansions are regenerable on HPC and kept out of Git
+processed/fgsea/**/*_fgsea_c2cgp.csv
+processed/fgsea/**/*_fgsea_c5bp.csv
+
 # ── Task feature matrices (large train_X / test_X CSVs) ──────────────────────
 # Labels, metadata, and fold structure are kept (small files)
 tasks/**/train_X.csv
@@ -42,6 +46,7 @@ build/
 
 # Virtual environments
 .venv/
+.hpc-venv/
 venv/
 env/
 .conda/
@@ -72,10 +77,34 @@ Icon?
 *.log
 *.tmp
 *.temp
+.genelab_staged*.txt
 slurm-*.out
 slurm-*.err
+
+# ── v3 artifacts (large/binary) ──────────────────────────────────────────────
+v3/evaluation/*.npy
+v3/logs/
+v3/processed/
+
+# ── v8 external caches / generated artifacts ─────────────────────────────────
+v8/bridge/geo_cache/
+v8/**/__pycache__/
 
 # ── Secrets / credentials ─────────────────────────────────────────────────────
 .env
 *.key
 *.pem
+
+# ── Internal planning / development docs (not for public repo) ────────────────
+.claude/
+PLAN.md
+PLAN_*.md
+**/PLAN_*.md
+**/PLAN_V*.md
+**/IMPROVEMENT_PLAN.md
+**/PLAN_REVIEW*.md
+**/RRRM1_DOWNSTREAM_PLAN*.md
+**/RRRM1_SC_BENCHMARK_PLAN*.md
+DESIGN_DECISIONS.md
+docs/development_history/
+v5/data/

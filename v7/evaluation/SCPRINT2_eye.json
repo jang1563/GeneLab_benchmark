@@ -1,0 +1,42 @@
+{
+  "method": "scPRINT-2",
+  "ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt",
+  "tissue": "eye",
+  "embedding_dim": 256,
+  "mean_auroc": 0.3095,
+  "mean_ci_lower": 0.1389,
+  "mean_ci_upper": 0.5397,
+  "perm_pvalue": 0.9406,
+  "pca_lr_auroc": 0.6972,
+  "delta_vs_pca_lr": -0.3877,
+  "n_folds": 3,
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "auroc": 0.1389,
+      "ci_lower": 0.0,
+      "ci_upper": 0.4582,
+      "n_train": 29,
+      "n_test": 12
+    },
+    {
+      "test_mission": "RR-3",
+      "auroc": 0.25,
+      "ci_lower": 0.0,
+      "ci_upper": 0.6,
+      "n_train": 28,
+      "n_test": 13
+    },
+    {
+      "test_mission": "OSD-397",
+      "auroc": 0.5397,
+      "ci_lower": 0.2222,
+      "ci_upper": 0.8413,
+      "n_train": 25,
+      "n_test": 16
+    }
+  ],
+  "seed": 42,
+  "n_bootstrap": 1000,
+  "n_perm": 100
+}

@@ -1,0 +1,53 @@
+{
+  "experiment": "D3",
+  "model": "ElasticNet-LR",
+  "model_key": "elasticnet_lr",
+  "tissue": "gastrocnemius",
+  "feature_type": "gene",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 3,
+  "classes": [
+    "RR-1",
+    "RR-5",
+    "RR-9"
+  ],
+  "class_distribution": {
+    "RR-1": 12,
+    "RR-5": 12,
+    "RR-9": 8
+  },
+  "n_samples": 32,
+  "macro_f1": 1.0,
+  "accuracy": 1.0,
+  "ci_lower": 1.0,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "RR-1": 1.0,
+    "RR-5": 1.0,
+    "RR-9": 1.0
+  },
+  "confusion_matrix": [
+    [
+      12,
+      0,
+      0
+    ],
+    [
+      0,
+      12,
+      0
+    ],
+    [
+      0,
+      0,
+      8
+    ]
+  ],
+  "mean_train_time_s": 64.41,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 3225.8,
+  "timestamp": "2026-03-22T04:17:36.306570"
+}

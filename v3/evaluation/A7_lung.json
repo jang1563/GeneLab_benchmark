@@ -1,0 +1,66 @@
+{
+  "tissue": "lung",
+  "mission": "RR-6",
+  "method": "PCA-LR (5-fold stratified CV)",
+  "n_folds": 5,
+  "mean_auroc": 0.6083,
+  "mean_ci_lower": 0.1619,
+  "mean_perm_p": 0.378,
+  "fold_results": [
+    {
+      "fold": 0,
+      "n_train": 31,
+      "n_test": 8,
+      "n_genes_selected": 23797,
+      "n_pca": 20,
+      "auroc": 0.75,
+      "ci_lower": 0.2857,
+      "ci_upper": 1.0,
+      "perm_p": 0.1598
+    },
+    {
+      "fold": 1,
+      "n_train": 31,
+      "n_test": 8,
+      "n_genes_selected": 23797,
+      "n_pca": 20,
+      "auroc": 0.75,
+      "ci_lower": 0.324,
+      "ci_upper": 1.0,
+      "perm_p": 0.1878
+    },
+    {
+      "fold": 2,
+      "n_train": 31,
+      "n_test": 8,
+      "n_genes_selected": 23797,
+      "n_pca": 20,
+      "auroc": 0.6875,
+      "ci_lower": 0.2,
+      "ci_upper": 1.0,
+      "perm_p": 0.2358
+    },
+    {
+      "fold": 3,
+      "n_train": 31,
+      "n_test": 8,
+      "n_genes_selected": 23797,
+      "n_pca": 20,
+      "auroc": 0.4375,
+      "ci_lower": 0.0,
+      "ci_upper": 0.9375,
+      "perm_p": 0.6583
+    },
+    {
+      "fold": 4,
+      "n_train": 32,
+      "n_test": 7,
+      "n_genes_selected": 23797,
+      "n_pca": 20,
+      "auroc": 0.4167,
+      "ci_lower": 0.0,
+      "ci_upper": 1.0,
+      "perm_p": 0.6484
+    }
+  ]
+}

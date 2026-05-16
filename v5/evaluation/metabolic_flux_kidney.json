@@ -1,0 +1,1081 @@
+{
+  "tissue": "kidney",
+  "status": "success",
+  "n_samples_flt": 32,
+  "n_samples_gc": 110,
+  "gene_coverage_pct": 92.1,
+  "n_genes_mapped": 1717,
+  "n_model_genes": 1865,
+  "fba_objective_flt": 17578.267995,
+  "fba_objective_gc": 17795.325973,
+  "fba_objective_diff": -217.057978,
+  "n_subsystems": 103,
+  "top_subsystems": {
+    "Valine, leucine, and isoleucine metabolism": {
+      "n_reactions": 45,
+      "mean_flux_diff": -1.195633,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 2.406555,
+      "n_increased": 1,
+      "n_decreased": 4
+    },
+    "Nucleotide interconversion": {
+      "n_reactions": 165,
+      "mean_flux_diff": 0.212311,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 1.771272,
+      "n_increased": 30,
+      "n_decreased": 34
+    },
+    "Pyrimidine synthesis": {
+      "n_reactions": 21,
+      "mean_flux_diff": -1.037972,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 1.037972,
+      "n_increased": 0,
+      "n_decreased": 5
+    },
+    "Purine catabolism": {
+      "n_reactions": 33,
+      "mean_flux_diff": 0.347537,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.955038,
+      "n_increased": 7,
+      "n_decreased": 5
+    },
+    "Tyrosine metabolism": {
+      "n_reactions": 93,
+      "mean_flux_diff": -0.026251,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.625266,
+      "n_increased": 3,
+      "n_decreased": 4
+    },
+    "Citric acid cycle": {
+      "n_reactions": 20,
+      "mean_flux_diff": -0.161538,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.619354,
+      "n_increased": 3,
+      "n_decreased": 4
+    },
+    "Peptide metabolism": {
+      "n_reactions": 242,
+      "mean_flux_diff": 0.018337,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.611595,
+      "n_increased": 5,
+      "n_decreased": 4
+    },
+    "Glycolysis/gluconeogenesis": {
+      "n_reactions": 42,
+      "mean_flux_diff": -0.131184,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.57885,
+      "n_increased": 10,
+      "n_decreased": 8
+    },
+    "Pentose phosphate pathway": {
+      "n_reactions": 41,
+      "mean_flux_diff": 0.038069,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.565102,
+      "n_increased": 8,
+      "n_decreased": 10
+    },
+    "Transport, nuclear": {
+      "n_reactions": 71,
+      "mean_flux_diff": 0.007692,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.367865,
+      "n_increased": 7,
+      "n_decreased": 9
+    },
+    "Exchange/demand reaction": {
+      "n_reactions": 1788,
+      "mean_flux_diff": 0.005267,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.355994,
+      "n_increased": 65,
+      "n_decreased": 56
+    },
+    "Pyrimidine catabolism": {
+      "n_reactions": 34,
+      "mean_flux_diff": 0.103339,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.293117,
+      "n_increased": 8,
+      "n_decreased": 3
+    },
+    "ROS detoxification": {
+      "n_reactions": 7,
+      "mean_flux_diff": -0.27098,
+      "median_flux_diff": -0.05897,
+      "abs_mean_diff": 0.27098,
+      "n_increased": 0,
+      "n_decreased": 5
+    },
+    "Glutamate metabolism": {
+      "n_reactions": 16,
+      "mean_flux_diff": -0.092405,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.257222,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "R group synthesis": {
+      "n_reactions": 6,
+      "mean_flux_diff": -0.227727,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.227727,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "Unknown": {
+      "n_reactions": 11,
+      "mean_flux_diff": -0.091598,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.178323,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "Steroid metabolism": {
+      "n_reactions": 90,
+      "mean_flux_diff": -0.15138,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.155897,
+      "n_increased": 1,
+      "n_decreased": 3
+    },
+    "Transport, extracellular": {
+      "n_reactions": 2652,
+      "mean_flux_diff": -0.007191,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.150715,
+      "n_increased": 57,
+      "n_decreased": 53
+    },
+    "Heme synthesis": {
+      "n_reactions": 19,
+      "mean_flux_diff": 0.103681,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.146837,
+      "n_increased": 1,
+      "n_decreased": 1
+    },
+    "Eicosanoid metabolism": {
+      "n_reactions": 93,
+      "mean_flux_diff": -0.048044,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.144133,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "Transport, endoplasmic reticular": {
+      "n_reactions": 211,
+      "mean_flux_diff": 0.013712,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.134808,
+      "n_increased": 7,
+      "n_decreased": 6
+    },
+    "Fructose and mannose metabolism": {
+      "n_reactions": 23,
+      "mean_flux_diff": 0.126677,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.126677,
+      "n_increased": 1,
+      "n_decreased": 0
+    },
+    "Miscellaneous": {
+      "n_reactions": 152,
+      "mean_flux_diff": -0.002241,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.124274,
+      "n_increased": 7,
+      "n_decreased": 4
+    },
+    "Heme degradation": {
+      "n_reactions": 4,
+      "mean_flux_diff": -0.109677,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.109677,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "Tryptophan metabolism": {
+      "n_reactions": 45,
+      "mean_flux_diff": -0.039734,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.107459,
+      "n_increased": 1,
+      "n_decreased": 4
+    },
+    "Lysine metabolism": {
+      "n_reactions": 31,
+      "mean_flux_diff": 0.098541,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.098541,
+      "n_increased": 1,
+      "n_decreased": 0
+    },
+    "Starch and sucrose metabolism": {
+      "n_reactions": 42,
+      "mean_flux_diff": -0.090619,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.090619,
+      "n_increased": 0,
+      "n_decreased": 5
+    },
+    "NAD metabolism": {
+      "n_reactions": 27,
+      "mean_flux_diff": -0.042741,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.084519,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "Oxidative phosphorylation": {
+      "n_reactions": 10,
+      "mean_flux_diff": -0.080208,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.080208,
+      "n_increased": 0,
+      "n_decreased": 4
+    },
+    "Transport, mitochondrial": {
+      "n_reactions": 452,
+      "mean_flux_diff": 0.011522,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.067787,
+      "n_increased": 11,
+      "n_decreased": 12
+    }
+  },
+  "all_subsystems": {
+    "Transport, lysosomal": {
+      "n_reactions": 105,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Transport, mitochondrial": {
+      "n_reactions": 452,
+      "mean_flux_diff": 0.011522,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.067787,
+      "n_increased": 11,
+      "n_decreased": 12
+    },
+    "Transport, endoplasmic reticular": {
+      "n_reactions": 211,
+      "mean_flux_diff": 0.013712,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.134808,
+      "n_increased": 7,
+      "n_decreased": 6
+    },
+    "Beta-Alanine metabolism": {
+      "n_reactions": 10,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Vitamin D metabolism": {
+      "n_reactions": 13,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Transport, extracellular": {
+      "n_reactions": 2652,
+      "mean_flux_diff": -0.007191,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.150715,
+      "n_increased": 57,
+      "n_decreased": 53
+    },
+    "Lysine metabolism": {
+      "n_reactions": 31,
+      "mean_flux_diff": 0.098541,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.098541,
+      "n_increased": 1,
+      "n_decreased": 0
+    },
+    "Glycine, serine, alanine, and threonine metabolism": {
+      "n_reactions": 48,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Methionine and cysteine metabolism": {
+      "n_reactions": 45,
+      "mean_flux_diff": 0.031219,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.061938,
+      "n_increased": 2,
+      "n_decreased": 1
+    },
+    "Pyrimidine catabolism": {
+      "n_reactions": 34,
+      "mean_flux_diff": 0.103339,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.293117,
+      "n_increased": 8,
+      "n_decreased": 3
+    },
+    "Propanoate metabolism": {
+      "n_reactions": 15,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Tryptophan metabolism": {
+      "n_reactions": 45,
+      "mean_flux_diff": -0.039734,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.107459,
+      "n_increased": 1,
+      "n_decreased": 4
+    },
+    "Tyrosine metabolism": {
+      "n_reactions": 93,
+      "mean_flux_diff": -0.026251,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.625266,
+      "n_increased": 3,
+      "n_decreased": 4
+    },
+    "Ubiquinone synthesis": {
+      "n_reactions": 18,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Transport, nuclear": {
+      "n_reactions": 71,
+      "mean_flux_diff": 0.007692,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.367865,
+      "n_increased": 7,
+      "n_decreased": 9
+    },
+    "Valine, leucine, and isoleucine metabolism": {
+      "n_reactions": 45,
+      "mean_flux_diff": -1.195633,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 2.406555,
+      "n_increased": 1,
+      "n_decreased": 4
+    },
+    "Sphingolipid metabolism": {
+      "n_reactions": 134,
+      "mean_flux_diff": -0.000263,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.000263,
+      "n_increased": 0,
+      "n_decreased": 2
+    },
+    "Butanoate metabolism": {
+      "n_reactions": 3,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Taurine and hypotaurine metabolism": {
+      "n_reactions": 8,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Arginine and proline metabolism": {
+      "n_reactions": 40,
+      "mean_flux_diff": -0.014804,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.032712,
+      "n_increased": 2,
+      "n_decreased": 3
+    },
+    "Cytochrome metabolism": {
+      "n_reactions": 15,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Steroid metabolism": {
+      "n_reactions": 90,
+      "mean_flux_diff": -0.15138,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.155897,
+      "n_increased": 1,
+      "n_decreased": 3
+    },
+    "Heme synthesis": {
+      "n_reactions": 19,
+      "mean_flux_diff": 0.103681,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.146837,
+      "n_increased": 1,
+      "n_decreased": 1
+    },
+    "N-glycan degradation": {
+      "n_reactions": 12,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "O-glycan metabolism": {
+      "n_reactions": 18,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Blood group synthesis": {
+      "n_reactions": 47,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Glutamate metabolism": {
+      "n_reactions": 16,
+      "mean_flux_diff": -0.092405,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.257222,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "Pentose phosphate pathway": {
+      "n_reactions": 41,
+      "mean_flux_diff": 0.038069,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.565102,
+      "n_increased": 8,
+      "n_decreased": 10
+    },
+    "Cholesterol metabolism": {
+      "n_reactions": 242,
+      "mean_flux_diff": -0.007058,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.007058,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "Fatty acid oxidation": {
+      "n_reactions": 961,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Transport, peroxisomal": {
+      "n_reactions": 154,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Transport, golgi apparatus": {
+      "n_reactions": 98,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Aminosugar metabolism": {
+      "n_reactions": 35,
+      "mean_flux_diff": 0.013628,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.013628,
+      "n_increased": 1,
+      "n_decreased": 0
+    },
+    "Phosphatidylinositol phosphate metabolism": {
+      "n_reactions": 40,
+      "mean_flux_diff": 0.000881,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.000881,
+      "n_increased": 1,
+      "n_decreased": 0
+    },
+    "Urea cycle": {
+      "n_reactions": 40,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Glycerophospholipid metabolism": {
+      "n_reactions": 164,
+      "mean_flux_diff": 0.000842,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.001415,
+      "n_increased": 2,
+      "n_decreased": 2
+    },
+    "Citric acid cycle": {
+      "n_reactions": 20,
+      "mean_flux_diff": -0.161538,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.619354,
+      "n_increased": 3,
+      "n_decreased": 4
+    },
+    "Pyruvate metabolism": {
+      "n_reactions": 32,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Bile acid synthesis": {
+      "n_reactions": 185,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Vitamin B2 metabolism": {
+      "n_reactions": 9,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Glycolysis/gluconeogenesis": {
+      "n_reactions": 42,
+      "mean_flux_diff": -0.131184,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.57885,
+      "n_increased": 10,
+      "n_decreased": 8
+    },
+    "Purine catabolism": {
+      "n_reactions": 33,
+      "mean_flux_diff": 0.347537,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.955038,
+      "n_increased": 7,
+      "n_decreased": 5
+    },
+    "Nucleotide interconversion": {
+      "n_reactions": 165,
+      "mean_flux_diff": 0.212311,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 1.771272,
+      "n_increased": 30,
+      "n_decreased": 34
+    },
+    "Purine synthesis": {
+      "n_reactions": 15,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Keratan sulfate synthesis": {
+      "n_reactions": 22,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Triacylglycerol synthesis": {
+      "n_reactions": 9,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Alanine and aspartate metabolism": {
+      "n_reactions": 13,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Eicosanoid metabolism": {
+      "n_reactions": 93,
+      "mean_flux_diff": -0.048044,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.144133,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "Glutathione metabolism": {
+      "n_reactions": 16,
+      "mean_flux_diff": -0.031847,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.031847,
+      "n_increased": 0,
+      "n_decreased": 2
+    },
+    "Starch and sucrose metabolism": {
+      "n_reactions": 42,
+      "mean_flux_diff": -0.090619,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.090619,
+      "n_increased": 0,
+      "n_decreased": 5
+    },
+    "Biotin metabolism": {
+      "n_reactions": 12,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "R group synthesis": {
+      "n_reactions": 6,
+      "mean_flux_diff": -0.227727,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.227727,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "Miscellaneous": {
+      "n_reactions": 152,
+      "mean_flux_diff": -0.002241,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.124274,
+      "n_increased": 7,
+      "n_decreased": 4
+    },
+    "Vitamin C metabolism": {
+      "n_reactions": 10,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Pyrimidine synthesis": {
+      "n_reactions": 21,
+      "mean_flux_diff": -1.037972,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 1.037972,
+      "n_increased": 0,
+      "n_decreased": 5
+    },
+    "Vitamin A metabolism": {
+      "n_reactions": 47,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Heme degradation": {
+      "n_reactions": 4,
+      "mean_flux_diff": -0.109677,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.109677,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "ROS detoxification": {
+      "n_reactions": 7,
+      "mean_flux_diff": -0.27098,
+      "median_flux_diff": -0.05897,
+      "abs_mean_diff": 0.27098,
+      "n_increased": 0,
+      "n_decreased": 5
+    },
+    "Vitamin B12 metabolism": {
+      "n_reactions": 1,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "C5-branched dibasic acid metabolism": {
+      "n_reactions": 8,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Alkaloid synthesis": {
+      "n_reactions": 1,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Chondroitin sulfate degradation": {
+      "n_reactions": 44,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "D-alanine metabolism": {
+      "n_reactions": 3,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "N-glycan synthesis": {
+      "n_reactions": 18,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Fatty acid synthesis": {
+      "n_reactions": 239,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.002895,
+      "n_increased": 1,
+      "n_decreased": 1
+    },
+    "Tetrahydrobiopterin metabolism": {
+      "n_reactions": 18,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Exchange/demand reaction": {
+      "n_reactions": 1788,
+      "mean_flux_diff": 0.005267,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.355994,
+      "n_increased": 65,
+      "n_decreased": 56
+    },
+    "Keratan sulfate degradation": {
+      "n_reactions": 76,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Fructose and mannose metabolism": {
+      "n_reactions": 23,
+      "mean_flux_diff": 0.126677,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.126677,
+      "n_increased": 1,
+      "n_decreased": 0
+    },
+    "Glyoxylate and dicarboxylate metabolism": {
+      "n_reactions": 14,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Galactose metabolism": {
+      "n_reactions": 14,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Folate metabolism": {
+      "n_reactions": 59,
+      "mean_flux_diff": -0.000224,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.025484,
+      "n_increased": 1,
+      "n_decreased": 1
+    },
+    "Chondroitin synthesis": {
+      "n_reactions": 45,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Heparan sulfate degradation": {
+      "n_reactions": 27,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Hyaluronan metabolism": {
+      "n_reactions": 5,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Histidine metabolism": {
+      "n_reactions": 14,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Vitamin B6 metabolism": {
+      "n_reactions": 11,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Inositol phosphate metabolism": {
+      "n_reactions": 65,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "CoA catabolism": {
+      "n_reactions": 4,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "NAD metabolism": {
+      "n_reactions": 27,
+      "mean_flux_diff": -0.042741,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.084519,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "Limonene and pinene degradation": {
+      "n_reactions": 3,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Phenylalanine metabolism": {
+      "n_reactions": 36,
+      "mean_flux_diff": -0.002804,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.002804,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "Oxidative phosphorylation": {
+      "n_reactions": 10,
+      "mean_flux_diff": -0.080208,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.080208,
+      "n_increased": 0,
+      "n_decreased": 4
+    },
+    "Thiamine metabolism": {
+      "n_reactions": 6,
+      "mean_flux_diff": -0.019376,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.019376,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "Nucleotide sugar metabolism": {
+      "n_reactions": 1,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "CoA synthesis": {
+      "n_reactions": 14,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Androgen and estrogen synthesis and metabolism": {
+      "n_reactions": 26,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Vitamin E metabolism": {
+      "n_reactions": 5,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Linoleate metabolism": {
+      "n_reactions": 9,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Arachidonic acid metabolism": {
+      "n_reactions": 41,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Glycosphingolipid metabolism": {
+      "n_reactions": 71,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Unknown": {
+      "n_reactions": 11,
+      "mean_flux_diff": -0.091598,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.178323,
+      "n_increased": 1,
+      "n_decreased": 2
+    },
+    "Dietary fiber binding": {
+      "n_reactions": 12,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Squalene and cholesterol synthesis": {
+      "n_reactions": 5,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Hippurate metabolism": {
+      "n_reactions": 2,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Peptide metabolism": {
+      "n_reactions": 242,
+      "mean_flux_diff": 0.018337,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.611595,
+      "n_increased": 5,
+      "n_decreased": 4
+    },
+    "Nucleotide salvage pathway": {
+      "n_reactions": 3,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Leukotriene metabolism": {
+      "n_reactions": 8,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "N-glycan metabolism": {
+      "n_reactions": 6,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Nucleotide metabolism": {
+      "n_reactions": 1,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Lipoate metabolism": {
+      "n_reactions": 1,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    },
+    "Drug metabolism": {
+      "n_reactions": 573,
+      "mean_flux_diff": -0.000384,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.000384,
+      "n_increased": 0,
+      "n_decreased": 1
+    },
+    "Protein formation": {
+      "n_reactions": 2,
+      "mean_flux_diff": 0.0,
+      "median_flux_diff": 0.0,
+      "abs_mean_diff": 0.0,
+      "n_increased": 0,
+      "n_decreased": 0
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "provider": "gemini-2.5-flash",
+  "task_id": "A4",
+  "model_name": "Gemini-2.5-Flash_zeroshot",
+  "parse_summary": {
+    "total": 67,
+    "parsed": 64,
+    "failed": 3
+  },
+  "metrics": {
+    "task_id": "A4",
+    "pooled_end_to_end_auroc": 0.5209447415329769,
+    "pooled_parsed_only_auroc": 0.5381231671554252,
+    "folds": {
+      "fold_MHU-1_test": {
+        "n_total": 6,
+        "n_parsed": 6,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.8333333333333334,
+        "parsed_only_auroc": 0.8333333333333334
+      },
+      "fold_MHU-2_test": {
+        "n_total": 6,
+        "n_parsed": 5,
+        "n_failed": 1,
+        "end_to_end_auroc": 0.6666666666666666,
+        "parsed_only_auroc": 0.6666666666666666
+      },
+      "fold_RR-6_test": {
+        "n_total": 35,
+        "n_parsed": 35,
+        "n_failed": 0,
+        "end_to_end_auroc": 0.5326797385620915,
+        "parsed_only_auroc": 0.5326797385620915
+      },
+      "fold_RR-9_test": {
+        "n_total": 20,
+        "n_parsed": 18,
+        "n_failed": 2,
+        "end_to_end_auroc": 0.375,
+        "parsed_only_auroc": 0.44375
+      }
+    }
+  }
+}

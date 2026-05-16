@@ -37,6 +37,21 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime
 
+try:
+    from scripts.benchmark_common import (
+        PHASE1_AUROC_THRESHOLD,
+        PHASE1_CI_LOWER_THRESHOLD,
+        PHASE1_PERM_P_THRESHOLD,
+        task_variant_suffix,
+    )
+except ImportError:
+    from benchmark_common import (
+        PHASE1_AUROC_THRESHOLD,
+        PHASE1_CI_LOWER_THRESHOLD,
+        PHASE1_PERM_P_THRESHOLD,
+        task_variant_suffix,
+    )
+
 warnings.filterwarnings("ignore")
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
@@ -130,7 +145,6 @@ def permutation_pvalue(y_true: np.ndarray, y_score: np.ndarray,
 
 def build_lr(seed: int = 42):
     """Logistic Regression with ElasticNet penalty (DD-13).
-    Note: penalty= kwarg removed for sklearn≥1.8 compatibility (use l1_ratio= instead).
     max_iter=10000 ensures SAGA convergence on high-dim data (≥15k genes). (B3 fix)
     """
     from sklearn.linear_model import LogisticRegression
@@ -139,6 +153,7 @@ def build_lr(seed: int = 42):
     return Pipeline([
         ("scaler", StandardScaler()),
         ("clf", LogisticRegression(
+            penalty="elasticnet",
             solver="saga",
             l1_ratio=0.5,
             C=1.0,
@@ -412,16 +427,26 @@ def check_gonogo(results: dict, task_id: str = "A1") -> bool:
     mean_pval = best["mean_perm_pvalue"]
 
     print(f"  Best model: {best['model']}")
-    print(f"  Mean AUROC = {mean_auroc:.3f} (threshold > 0.70)")
-    print(f"  Mean CI lower = {mean_ci_lower:.3f} (threshold > 0.60)")
-    print(f"  Mean perm p = {mean_pval:.4f} (threshold < 0.05)")
+    print(f"  Mean AUROC = {mean_auroc:.3f} (threshold > {PHASE1_AUROC_THRESHOLD:.2f})")
+    print(f"  Mean CI lower = {mean_ci_lower:.3f} (threshold > {PHASE1_CI_LOWER_THRESHOLD:.2f})")
+    print(f"  Mean perm p = {mean_pval:.4f} (threshold < {PHASE1_PERM_P_THRESHOLD:.2f})")
 
-    cond1 = mean_auroc > 0.70 and mean_ci_lower > 0.60
-    cond2 = mean_pval < 0.05
+    cond1 = (
+        mean_auroc > PHASE1_AUROC_THRESHOLD
+        and mean_ci_lower > PHASE1_CI_LOWER_THRESHOLD
+    )
+    cond2 = mean_pval < PHASE1_PERM_P_THRESHOLD
     cond3 = True  # SHAP check placeholder
 
-    print(f"\n  Condition 1 (AUROC > 0.70 AND CI lower > 0.60): {'✓ PASS' if cond1 else '✗ FAIL'}")
-    print(f"  Condition 2 (perm p < 0.05):                     {'✓ PASS' if cond2 else '✗ FAIL'}")
+    print(
+        f"\n  Condition 1 (AUROC > {PHASE1_AUROC_THRESHOLD:.2f} AND "
+        f"CI lower > {PHASE1_CI_LOWER_THRESHOLD:.2f}): "
+        f"{'✓ PASS' if cond1 else '✗ FAIL'}"
+    )
+    print(
+        f"  Condition 2 (perm p < {PHASE1_PERM_P_THRESHOLD:.2f}):                     "
+        f"{'✓ PASS' if cond2 else '✗ FAIL'}"
+    )
     print(f"  Condition 3 (SHAP gene check):                   ⏳ Pending (requires SHAP)")
 
     all_pass = cond1 and cond2
@@ -431,13 +456,22 @@ def check_gonogo(results: dict, task_id: str = "A1") -> bool:
     else:
         print(f"\n  ✗ NO-GO — Failed conditions:")
         if not cond1:
-            if mean_auroc <= 0.70:
-                print(f"    → Cond 1a: AUROC {mean_auroc:.3f} ≤ 0.70")
+            if mean_auroc <= PHASE1_AUROC_THRESHOLD:
+                print(
+                    f"    → Cond 1a: AUROC {mean_auroc:.3f} ≤ "
+                    f"{PHASE1_AUROC_THRESHOLD:.2f}"
+                )
                 print(f"       Action: Check mapping rate and sample QC per mission.")
-            if mean_ci_lower <= 0.60:
-                print(f"    → Cond 1b: CI lower {mean_ci_lower:.3f} ≤ 0.60")
+            if mean_ci_lower <= PHASE1_CI_LOWER_THRESHOLD:
+                print(
+                    f"    → Cond 1b: CI lower {mean_ci_lower:.3f} ≤ "
+                    f"{PHASE1_CI_LOWER_THRESHOLD:.2f}"
+                )
         if not cond2:
-            print(f"    → Cond 2: perm p {mean_pval:.4f} ≥ 0.05")
+            print(
+                f"    → Cond 2: perm p {mean_pval:.4f} ≥ "
+                f"{PHASE1_PERM_P_THRESHOLD:.2f}"
+            )
             print(f"       Action: Check for batch effects → run J3 first.")
 
     return all_pass
@@ -482,8 +516,15 @@ def main():
         model_names = list(MODELS.keys())
 
     combat = getattr(args, "combat", False)
-    suffix = "_combat" if combat else ""
-    results_path = RESULTS_DIR / f"{task_id}{suffix}_baseline_results.json"
+
+    try:
+        task_dir = resolve_task_dir(task_id, combat=combat, task_dir_name=args.task_dir)
+    except ValueError as e:
+        print(f"[ERROR] {e}")
+        return
+
+    variant_suffix = task_variant_suffix(task_id, task_dir, TASKS_DIR)
+    results_path = RESULTS_DIR / f"{task_id}{variant_suffix}_baseline_results.json"
 
     if args.check:
         # Load existing results
@@ -503,7 +544,7 @@ def main():
         n_perm=args.n_perm,
         verbose=verbose,
         combat=combat,
-        task_dir_name=args.task_dir,
+        task_dir_name=task_dir.name,
     )
 
     if results:

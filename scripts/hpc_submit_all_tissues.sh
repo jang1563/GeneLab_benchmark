@@ -32,7 +32,7 @@ declare -a TISSUES=(
     "A3|A3_kidney_lomo|RR-1 RR-3 RR-7|3"
     "A4|A4_thymus_lomo|RR-6 RR-9 MHU-1 MHU-2|4"
     "A5|A5_skin_lomo|RR-6 RR-7 MHU-2|3"
-    "A6|A6_eye_lomo|RR-1 RR-3 TBD|3"
+    "A6|A6_eye_lomo|RR-1 RR-3 OSD-397|3"
 )
 
 # ── Shared hyperparameters ───────────────────────────────────────────────────

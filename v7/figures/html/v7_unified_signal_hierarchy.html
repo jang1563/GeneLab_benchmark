@@ -1,0 +1,4828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unified Signal Hierarchy — GeneLabBench + SpaceOmicsBench</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 13px; background: #fff; color: #222; }
+  h1 { font-size: 16px; font-weight: 600; margin: 18px 24px 4px; }
+  .subtitle { font-size: 12px; color: #666; margin: 0 24px 16px; }
+  .panels { display: flex; gap: 16px; padding: 0 24px 24px; flex-wrap: wrap; }
+  .panel { flex: 1; min-width: 340px; }
+  .panel-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #444; }
+  .finding-box {
+    margin: 0 24px 20px;
+    padding: 10px 14px;
+    background: #f5f8ff;
+    border-left: 4px solid #4472c4;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .finding-box strong { color: #2a3e7c; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 24px 16px; font-size: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  svg text { font-family: "Helvetica Neue", Arial, sans-serif; }
+  .tooltip {
+    position: fixed; background: rgba(0,0,0,0.82); color: #fff;
+    padding: 8px 12px; border-radius: 4px; font-size: 12px; pointer-events: none;
+    line-height: 1.5; max-width: 240px; z-index: 9999; display: none;
+  }
+</style>
+</head>
+<body>
+<h1>Unified Signal Hierarchy: Tabular ML Dominates Spaceflight Biology Across Species</h1>
+<div class="subtitle">GeneLabBench (mouse, 8 tissues, LOMO-CV) + SpaceOmicsBench (human, 26 tasks, multi-omics)</div>
+
+<div class="finding-box">
+  <strong>Core finding:</strong> Across both mouse transcriptomics (GeneLabBench) and human multi-omics (SpaceOmicsBench),
+  classical tabular ML methods (PCA-LR, TabPFN, RF, XGBoost) consistently outperform foundation models, GNNs, and sequence-based models.
+  FMs/GNNs add noise rather than signal for small-N spaceflight data. This convergent finding suggests the bottleneck is
+  domain-specific data scarcity, not method capability.
+</div>
+
+<div class="legend" id="legend"></div>
+<div class="panels">
+  <div class="panel"><div class="panel-title">A. GeneLabBench (Mouse) — AUROC by Method Category</div><svg id="gl-chart"></svg></div>
+  <div class="panel"><div class="panel-title">B. SpaceOmicsBench (Human) — Score by Method Category</div><svg id="sob-chart"></svg></div>
+  <div class="panel" style="min-width:600px;flex:2"><div class="panel-title">C. Cross-Species Convergence: Same Method → Similar Relative Performance</div><svg id="scatter"></svg></div>
+</div>
+<div class="panels">
+  <div class="panel" style="min-width:100%"><div class="panel-title">D. All Individual Results — GeneLabBench AUROC Distribution by Category (gene features)</div><svg id="strip"></svg></div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const DATA = {
+  "gl_summary": {
+    "Tabular ML": {
+      "mean": 0.6757,
+      "median": 0.6879,
+      "max": 0.9483,
+      "min": 0.242,
+      "n": 192,
+      "scores": [
+        0.6718,
+        0.6827,
+        0.5781,
+        0.6356,
+        0.6856,
+        0.6198,
+        0.6692,
+        0.6521,
+        0.4481,
+        0.4366,
+        0.5766,
+        0.5743,
+        0.7659,
+        0.7311,
+        0.7236,
+        0.6591,
+        0.6882,
+        0.683,
+        0.6716,
+        0.6867,
+        0.7227,
+        0.6412,
+        0.6857,
+        0.62,
+        0.8981,
+        0.8519,
+        0.6702,
+        0.6343,
+        0.2755,
+        0.8426,
+        0.8333,
+        0.8611,
+        0.4271,
+        0.4526,
+        0.3889,
+        0.581,
+        0.713,
+        0.787,
+        0.8287,
+        0.5729,
+        0.3368,
+        0.7963,
+        0.8981,
+        0.8519,
+        0.8137,
+        0.6343,
+        0.2755,
+        0.8426,
+        0.5523,
+        0.5838,
+        0.619,
+        0.6376,
+        0.5361,
+        0.5531,
+        0.8006,
+        0.8291,
+        0.5518,
+        0.5616,
+        0.5748,
+        0.5337,
+        0.7528,
+        0.7771,
+        0.559,
+        0.6404,
+        0.472,
+        0.5094,
+        0.5523,
+        0.5886,
+        0.6877,
+        0.6376,
+        0.5334,
+        0.5505,
+        0.8475,
+        0.9083,
+        0.8376,
+        0.7269,
+        0.7163,
+        0.9253,
+        0.8776,
+        0.8846,
+        0.7907,
+        0.7226,
+        0.8676,
+        0.785,
+        0.9363,
+        0.9483,
+        0.8621,
+        0.7548,
+        0.7745,
+        0.8197,
+        0.8525,
+        0.9092,
+        0.851,
+        0.6723,
+        0.7188,
+        0.9257,
+        0.6008,
+        0.6972,
+        0.575,
+        0.6364,
+        0.336,
+        0.3814,
+        0.8104,
+        0.8227,
+        0.6608,
+        0.5563,
+        0.4266,
+        0.5955,
+        0.7095,
+        0.6756,
+        0.5751,
+        0.5521,
+        0.5974,
+        0.6149,
+        0.5915,
+        0.6972,
+        0.4979,
+        0.6364,
+        0.336,
+        0.3814,
+        0.8186,
+        0.7961,
+        0.7887,
+        0.7867,
+        0.7763,
+        0.6876,
+        0.6558,
+        0.6949,
+        0.705,
+        0.7087,
+        0.7096,
+        0.6974,
+        0.7154,
+        0.7835,
+        0.7297,
+        0.7392,
+        0.7175,
+        0.6353,
+        0.8186,
+        0.7956,
+        0.7873,
+        0.7867,
+        0.7763,
+        0.6924,
+        0.9009,
+        0.834,
+        0.7125,
+        0.7732,
+        0.333,
+        0.6335,
+        0.5598,
+        0.533,
+        0.5602,
+        0.5893,
+        0.242,
+        0.4853,
+        0.7125,
+        0.7607,
+        0.5576,
+        0.6518,
+        0.4062,
+        0.5835,
+        0.9009,
+        0.834,
+        0.7344,
+        0.7732,
+        0.333,
+        0.6335,
+        0.8095,
+        0.8571,
+        0.6869,
+        0.8381,
+        0.4238,
+        0.6881,
+        0.7524,
+        0.8143,
+        0.6393,
+        0.7119,
+        0.369,
+        0.5857,
+        0.8714,
+        0.9214,
+        0.6524,
+        0.7119,
+        0.4929,
+        0.6619,
+        0.8095,
+        0.8643,
+        0.725,
+        0.8381,
+        0.4238,
+        0.6881
+      ]
+    },
+    "Deep Learning": {
+      "mean": 0.5741,
+      "median": 0.5544,
+      "max": 0.9276,
+      "min": 0.3297,
+      "n": 64,
+      "scores": [
+        0.6833,
+        0.4216,
+        0.5023,
+        0.4378,
+        0.5958,
+        0.3598,
+        0.6573,
+        0.4647,
+        0.5371,
+        0.5046,
+        0.6551,
+        0.5926,
+        0.794,
+        0.5,
+        0.6667,
+        0.5162,
+        0.6128,
+        0.5138,
+        0.5487,
+        0.5859,
+        0.647,
+        0.3297,
+        0.5882,
+        0.4917,
+        0.8701,
+        0.6252,
+        0.8946,
+        0.9276,
+        0.7217,
+        0.5944,
+        0.776,
+        0.4232,
+        0.4444,
+        0.559,
+        0.4938,
+        0.4119,
+        0.3483,
+        0.5263,
+        0.425,
+        0.5349,
+        0.676,
+        0.5724,
+        0.748,
+        0.4729,
+        0.7512,
+        0.5355,
+        0.7372,
+        0.4432,
+        0.6071,
+        0.4491,
+        0.558,
+        0.5223,
+        0.5509,
+        0.6107,
+        0.5429,
+        0.4982,
+        0.7143,
+        0.5667,
+        0.619,
+        0.45,
+        0.6953,
+        0.55,
+        0.6464,
+        0.4428
+      ]
+    },
+    "Foundation Model": {
+      "mean": 0.5507,
+      "median": 0.5525,
+      "max": 0.691,
+      "min": 0.389,
+      "n": 14,
+      "scores": [
+        0.635,
+        0.691,
+        0.541,
+        0.487,
+        0.563,
+        0.389,
+        0.632,
+        0.459,
+        0.578,
+        0.489,
+        0.55,
+        0.555,
+        0.476,
+        0.6655
+      ]
+    }
+  },
+  "sob_summary": {
+    "Tabular ML": {
+      "mean": 0.3935,
+      "median": 0.4999,
+      "max": 0.9567,
+      "min": 0.0023,
+      "n": 47,
+      "scores": [
+        0.5328,
+        0.8845,
+        0.9115,
+        0.9222,
+        0.9567,
+        0.4999,
+        0.5548,
+        0.5333,
+        0.5653,
+        0.5647,
+        0.5609,
+        0.6757,
+        0.6169,
+        0.6378,
+        0.6749,
+        0.0168,
+        0.0147,
+        0.0096,
+        0.005,
+        0.0127,
+        0.0225,
+        0.0023,
+        0.0057,
+        0.0087,
+        0.0249,
+        0.5739,
+        0.8414,
+        0.8375,
+        0.8383,
+        0.1757,
+        0.2662,
+        0.213,
+        0.2845,
+        0.2269,
+        0.0029,
+        0.0054,
+        0.0048,
+        0.0059,
+        0.5863,
+        0.7057,
+        0.7159,
+        0.7345,
+        0.09,
+        0.0814,
+        0.0809,
+        0.086,
+        0.922
+      ]
+    },
+    "Deep Learning": {
+      "mean": 0.2996,
+      "median": 0.2051,
+      "max": 0.8537,
+      "min": 0.0027,
+      "n": 10,
+      "scores": [
+        0.8537,
+        0.5239,
+        0.5573,
+        0.0029,
+        0.0028,
+        0.3199,
+        0.0621,
+        0.0027,
+        0.5804,
+        0.0902
+      ]
+    },
+    "Graph/Sequence": {
+      "mean": 0.7677,
+      "median": 0.7677,
+      "max": 0.7677,
+      "min": 0.7677,
+      "n": 1,
+      "scores": [
+        0.7677
+      ]
+    },
+    "Foundation Model": {
+      "mean": 0.6123,
+      "median": 0.8788,
+      "max": 0.9245,
+      "min": 0.0336,
+      "n": 3,
+      "scores": [
+        0.9245,
+        0.0336,
+        0.8788
+      ]
+    },
+    "Random Baseline": {
+      "mean": 0.2069,
+      "median": 0.0596,
+      "max": 0.5286,
+      "min": 0.0029,
+      "n": 10,
+      "scores": [
+        0.0202,
+        0.5286,
+        0.4812,
+        0.0078,
+        0.0029,
+        0.4018,
+        0.0604,
+        0.0033,
+        0.5041,
+        0.0587
+      ]
+    }
+  },
+  "method_summary": [
+    {
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "gl_mean_auroc": 0.7603,
+      "sob_mean_score": null,
+      "gl_n": 32,
+      "sob_n": 0
+    },
+    {
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "gl_mean_auroc": 0.7786,
+      "sob_mean_score": null,
+      "gl_n": 32,
+      "sob_n": 0
+    },
+    {
+      "method": "rf",
+      "category": "Tabular ML",
+      "gl_mean_auroc": 0.6737,
+      "sob_mean_score": 0.4032,
+      "gl_n": 32,
+      "sob_n": 10
+    },
+    {
+      "method": "xgb",
+      "category": "Tabular ML",
+      "gl_mean_auroc": 0.666,
+      "sob_mean_score": 0.3929,
+      "gl_n": 32,
+      "sob_n": 10
+    },
+    {
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "gl_mean_auroc": 0.5252,
+      "sob_mean_score": null,
+      "gl_n": 32,
+      "sob_n": 0
+    },
+    {
+      "method": "knn",
+      "category": "Tabular ML",
+      "gl_mean_auroc": 0.6502,
+      "sob_mean_score": null,
+      "gl_n": 32,
+      "sob_n": 0
+    },
+    {
+      "method": "mlp",
+      "category": "Deep Learning",
+      "gl_mean_auroc": 0.6346,
+      "sob_mean_score": 0.2996,
+      "gl_n": 32,
+      "sob_n": 10
+    },
+    {
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "gl_mean_auroc": 0.5136,
+      "sob_mean_score": null,
+      "gl_n": 32,
+      "sob_n": 0
+    },
+    {
+      "method": "scfoundation",
+      "category": "Foundation Model",
+      "gl_mean_auroc": 0.551,
+      "sob_mean_score": null,
+      "gl_n": 6,
+      "sob_n": 0
+    },
+    {
+      "method": "uce",
+      "category": "Foundation Model",
+      "gl_mean_auroc": 0.5438,
+      "sob_mean_score": null,
+      "gl_n": 6,
+      "sob_n": 0
+    },
+    {
+      "method": "geneformer",
+      "category": "Foundation Model",
+      "gl_mean_auroc": 0.476,
+      "sob_mean_score": null,
+      "gl_n": 1,
+      "sob_n": 0
+    },
+    {
+      "method": "scgpt",
+      "category": "Foundation Model",
+      "gl_mean_auroc": 0.6655,
+      "sob_mean_score": null,
+      "gl_n": 1,
+      "sob_n": 0
+    },
+    {
+      "method": "logreg_lr",
+      "category": "Tabular ML",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.3062,
+      "gl_n": 0,
+      "sob_n": 10
+    },
+    {
+      "method": "lightgbm",
+      "category": "Tabular ML",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.4088,
+      "gl_n": 0,
+      "sob_n": 10
+    },
+    {
+      "method": "random",
+      "category": "Random Baseline",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.2069,
+      "gl_n": 0,
+      "sob_n": 10
+    },
+    {
+      "method": "tabpfn",
+      "category": "Tabular ML",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.4101,
+      "gl_n": 0,
+      "sob_n": 6
+    },
+    {
+      "method": "esm2_base_only",
+      "category": "Foundation Model",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.9245,
+      "gl_n": 0,
+      "sob_n": 1
+    },
+    {
+      "method": "esm2_esm2_only",
+      "category": "Foundation Model",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.0336,
+      "gl_n": 0,
+      "sob_n": 1
+    },
+    {
+      "method": "esm2_combined",
+      "category": "Foundation Model",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.8788,
+      "gl_n": 0,
+      "sob_n": 1
+    },
+    {
+      "method": "graphsage_gnn",
+      "category": "Graph/Sequence",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.7677,
+      "gl_n": 0,
+      "sob_n": 1
+    },
+    {
+      "method": "xgboost_flat",
+      "category": "Tabular ML",
+      "gl_mean_auroc": null,
+      "sob_mean_score": 0.922,
+      "gl_n": 0,
+      "sob_n": 1
+    }
+  ],
+  "category_comparison": [
+    {
+      "category": "Tabular ML",
+      "gl_mean_auroc": 0.6757,
+      "gl_n": 192,
+      "sob_mean_norm": 0.7459,
+      "sob_n": 47
+    },
+    {
+      "category": "Deep Learning",
+      "gl_mean_auroc": 0.5741,
+      "gl_n": 64,
+      "sob_mean_norm": 0.333,
+      "sob_n": 10
+    },
+    {
+      "category": "Foundation Model",
+      "gl_mean_auroc": 0.5507,
+      "gl_n": 14,
+      "sob_mean_norm": 0.6476,
+      "sob_n": 3
+    }
+  ],
+  "gl_rows": [
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.6718,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.6827,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.5781,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6356,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.6856,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6198,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6833,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4216,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.6692,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.6521,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.4481,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.4366,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.5766,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5743,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5023,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4378,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.7659,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.7311,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7236,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6591,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.6882,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.683,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5958,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.3598,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.6716,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.6867,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7227,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6412,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.6857,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.62,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6573,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4647,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8981,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8519,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.6702,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6343,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.2755,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.8426,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5371,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5046,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8333,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8611,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.4271,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.4526,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.3889,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.581,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6551,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5926,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.713,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.787,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.8287,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.5729,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.3368,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.7963,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.794,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8981,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8519,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.8137,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6343,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.2755,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.8426,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6667,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5162,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.5523,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.5838,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.619,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6376,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.5361,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5531,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6128,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5138,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8006,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8291,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.5518,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.5616,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.5748,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5337,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5487,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5859,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.7528,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.7771,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.559,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6404,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.472,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5094,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.647,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.3297,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.5523,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.5886,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.6877,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6376,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.5334,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5505,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5882,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4917,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8475,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.9083,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.8376,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7269,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.7163,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.9253,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.8701,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.6252,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8776,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8846,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7907,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7226,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.8676,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.785,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.8946,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.9276,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.9363,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.9483,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.8621,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7548,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.7745,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.8197,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.7217,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5944,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8525,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.9092,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.851,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6723,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.7188,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.9257,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.776,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4232,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.6008,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.6972,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.575,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6364,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.336,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.3814,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.4444,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.559,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8104,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8227,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.6608,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.5563,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.4266,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5955,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.4938,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4119,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.7095,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.6756,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.5751,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.5521,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.5974,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6149,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.3483,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5263,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.5915,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.6972,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.4979,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6364,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.336,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.3814,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.425,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5349,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8186,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.7961,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7887,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7867,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.7763,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6876,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.676,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5724,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.6558,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.6949,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.705,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7087,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.7096,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6974,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.748,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4729,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.7154,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.7835,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7297,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7392,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.7175,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6353,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.7512,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5355,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8186,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.7956,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7873,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7867,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.7763,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6924,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.7372,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "skin",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4432,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.9009,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.834,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7125,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7732,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.333,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6335,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6071,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4491,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.5598,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.533,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.5602,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.5893,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.242,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.4853,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.558,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5223,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.7125,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.7607,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.5576,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.6518,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.4062,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5835,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5509,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.6107,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.9009,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.834,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.7344,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7732,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.333,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6335,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5429,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4982,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8095,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8571,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.6869,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.8381,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.4238,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6881,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.7143,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "gene",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.5667,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.7524,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8143,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.6393,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7119,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.369,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.5857,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.619,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_hallmark",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.45,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8714,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.9214,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.6524,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.7119,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.4929,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6619,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6953,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "pathway_kegg",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.55,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "elasticnet_lr",
+      "category": "Tabular ML",
+      "score": 0.8095,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "pca_lr",
+      "category": "Tabular ML",
+      "score": 0.8643,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "rf",
+      "category": "Tabular ML",
+      "score": 0.725,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "xgb",
+      "category": "Tabular ML",
+      "score": 0.8381,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "svm_rbf",
+      "category": "Tabular ML",
+      "score": 0.4238,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "knn",
+      "category": "Tabular ML",
+      "score": 0.6881,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "mlp",
+      "category": "Deep Learning",
+      "score": 0.6464,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "colon",
+      "feature_type": "combined",
+      "method": "tabnet",
+      "category": "Deep Learning",
+      "score": 0.4428,
+      "metric": "auroc",
+      "random_baseline": 0.5
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "embedding",
+      "method": "scfoundation",
+      "category": "Foundation Model",
+      "score": 0.635,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": true
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "embedding",
+      "method": "scfoundation",
+      "category": "Foundation Model",
+      "score": 0.691,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": true
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "embedding",
+      "method": "scfoundation",
+      "category": "Foundation Model",
+      "score": 0.541,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "embedding",
+      "method": "scfoundation",
+      "category": "Foundation Model",
+      "score": 0.487,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "embedding",
+      "method": "scfoundation",
+      "category": "Foundation Model",
+      "score": 0.563,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "embedding",
+      "method": "scfoundation",
+      "category": "Foundation Model",
+      "score": 0.389,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "thymus",
+      "feature_type": "embedding",
+      "method": "uce",
+      "category": "Foundation Model",
+      "score": 0.632,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": true
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "embedding",
+      "method": "uce",
+      "category": "Foundation Model",
+      "score": 0.459,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "gastrocnemius",
+      "feature_type": "embedding",
+      "method": "uce",
+      "category": "Foundation Model",
+      "score": 0.578,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "kidney",
+      "feature_type": "embedding",
+      "method": "uce",
+      "category": "Foundation Model",
+      "score": 0.489,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "eye",
+      "feature_type": "embedding",
+      "method": "uce",
+      "category": "Foundation Model",
+      "score": 0.55,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "lung",
+      "feature_type": "embedding",
+      "method": "uce",
+      "category": "Foundation Model",
+      "score": 0.555,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "embedding",
+      "method": "geneformer",
+      "category": "Foundation Model",
+      "score": 0.476,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    },
+    {
+      "dataset": "GeneLab (Mouse)",
+      "tissue_task": "liver",
+      "feature_type": "embedding",
+      "method": "scgpt",
+      "category": "Foundation Model",
+      "score": 0.6655,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "significant": false
+    }
+  ],
+  "sob_rows": [
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.5328,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.5488
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.8845,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9231
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.8537,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.8904
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.9115,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9519
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.9222,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9633
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.0202,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0031
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.0173,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "xgb_net_only",
+      "method_orig": "xgb_net_only",
+      "category": "Other",
+      "score": 0.0189,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0017
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "xgb_base+net",
+      "method_orig": "xgb_base+net",
+      "category": "Other",
+      "score": 0.9143,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9549
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "xgb_base+net+prop",
+      "method_orig": "xgb_base+net+prop",
+      "category": "Other",
+      "score": 0.911,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9514
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "B1",
+      "feature_type": "multi-omics",
+      "method": "tabpfn",
+      "method_orig": "tabpfn",
+      "category": "Tabular ML",
+      "score": 0.9567,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.4999,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.5548,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.8394
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5239,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.367
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.5333,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.5107
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.5653,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.5286,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.4388
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.5,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.0015
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C2",
+      "feature_type": "multi-omics",
+      "method": "tabpfn",
+      "method_orig": "tabpfn",
+      "category": "Tabular ML",
+      "score": 0.5647,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.9908
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.5609,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.4098
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.6757,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5573,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.3913
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.6169,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.6977
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.6378,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.8051
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.4812,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.5,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.0967
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "D1",
+      "feature_type": "multi-omics",
+      "method": "tabpfn",
+      "method_orig": "tabpfn",
+      "category": "Tabular ML",
+      "score": 0.6749,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.9959
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.0168,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.0147,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.8591
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.0029,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0671
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.0096,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.5168
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.005,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.2081
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.0078,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.396
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.0019,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "xgb_cost_sensitive",
+      "method_orig": "xgb_cost_sensitive",
+      "category": "Other",
+      "score": 0.0119,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.6711
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "isolation_forest",
+      "method_orig": "isolation_forest",
+      "category": "Other",
+      "score": 0.0045,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.1745
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E1",
+      "feature_type": "multi-omics",
+      "method": "tabpfn",
+      "method_orig": "tabpfn",
+      "category": "Tabular ML",
+      "score": 0.0127,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.7248
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.0225,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.887
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.0023,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0087
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.0028,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0304
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.0057,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.1565
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.0087,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.287
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.0029,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0348
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.0021,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "xgb_cost_sensitive",
+      "method_orig": "xgb_cost_sensitive",
+      "category": "Other",
+      "score": 0.004,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0826
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "isolation_forest",
+      "method_orig": "isolation_forest",
+      "category": "Other",
+      "score": 0.0251,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "E4",
+      "feature_type": "multi-omics",
+      "method": "tabpfn",
+      "method_orig": "tabpfn",
+      "category": "Tabular ML",
+      "score": 0.0249,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9913
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "F3",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.5739,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.4871
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "F3",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.8414,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "F3",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.3199,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "F3",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.8375,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.9925
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "F3",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.8383,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.9941
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "F3",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.4018,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.157
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "F3",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.5,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.3453
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.1757,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.5407
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.2662,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9228
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.0621,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0612
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.213,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.6982
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.2845,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.0604,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.054
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.0476,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "H1",
+      "feature_type": "multi-omics",
+      "method": "tabpfn",
+      "method_orig": "tabpfn",
+      "category": "Tabular ML",
+      "score": 0.2269,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.7569
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I1",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.0029,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.2308
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I1",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.0054,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.8718
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I1",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.0027,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.1795
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I1",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.0048,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.7179
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I1",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.0059,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I1",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.0033,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.3333
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I1",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.002,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I2",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.5863,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.368
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I2",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.7057,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.8772
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I2",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.5804,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.3429
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I2",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.7159,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.9207
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I2",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.7345,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I2",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.5041,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.0175
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I2",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.5,
+      "metric": "auroc",
+      "random_baseline": 0.5,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I3",
+      "feature_type": "multi-omics",
+      "method": "logreg_lr",
+      "method_orig": "logreg",
+      "category": "Tabular ML",
+      "score": 0.09,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9947
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I3",
+      "feature_type": "multi-omics",
+      "method": "rf",
+      "method_orig": "rf",
+      "category": "Tabular ML",
+      "score": 0.0814,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.7672
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I3",
+      "feature_type": "multi-omics",
+      "method": "mlp",
+      "method_orig": "mlp",
+      "category": "Deep Learning",
+      "score": 0.0902,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I3",
+      "feature_type": "multi-omics",
+      "method": "xgb",
+      "method_orig": "xgboost",
+      "category": "Tabular ML",
+      "score": 0.0809,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.754
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I3",
+      "feature_type": "multi-omics",
+      "method": "lightgbm",
+      "method_orig": "lightgbm",
+      "category": "Tabular ML",
+      "score": 0.086,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.8889
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I3",
+      "feature_type": "multi-omics",
+      "method": "random",
+      "method_orig": "random",
+      "category": "Random Baseline",
+      "score": 0.0587,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.1667
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "I3",
+      "feature_type": "multi-omics",
+      "method": "majority",
+      "method_orig": "majority",
+      "category": "Other",
+      "score": 0.0524,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C1_fm",
+      "feature_type": "multi-omics",
+      "method": "esm2_base_only",
+      "method_orig": "esm2_base_only",
+      "category": "Foundation Model",
+      "score": 0.9245,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.997
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C1_fm",
+      "feature_type": "multi-omics",
+      "method": "esm2_esm2_only",
+      "method_orig": "esm2_esm2_only",
+      "category": "Foundation Model",
+      "score": 0.0336,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C1_fm",
+      "feature_type": "multi-omics",
+      "method": "esm2_combined",
+      "method_orig": "esm2_combined",
+      "category": "Foundation Model",
+      "score": 0.8788,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9458
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C1_fm",
+      "feature_type": "multi-omics",
+      "method": "esm2_prot_combined",
+      "method_orig": "esm2_prot_combined",
+      "category": "Other",
+      "score": 0.8801,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.9473
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C1_fm",
+      "feature_type": "multi-omics",
+      "method": "esm2_prot_base",
+      "method_orig": "esm2_prot_base",
+      "category": "Other",
+      "score": 0.9272,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C3_fm",
+      "feature_type": "multi-omics",
+      "method": "gcn",
+      "method_orig": "gcn",
+      "category": "Other",
+      "score": 0.2676,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C3_fm",
+      "feature_type": "multi-omics",
+      "method": "gat",
+      "method_orig": "gat",
+      "category": "Other",
+      "score": 0.3029,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.0539
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C3_fm",
+      "feature_type": "multi-omics",
+      "method": "graphsage_gnn",
+      "method_orig": "graphsage",
+      "category": "Graph/Sequence",
+      "score": 0.7677,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 0.7642
+    },
+    {
+      "dataset": "SpaceOmicsBench (Human)",
+      "tissue_task": "C3_fm",
+      "feature_type": "multi-omics",
+      "method": "xgboost_flat",
+      "method_orig": "xgboost_flat",
+      "category": "Tabular ML",
+      "score": 0.922,
+      "metric": "auprc",
+      "random_baseline": 0.0,
+      "norm_score": 1.0
+    }
+  ],
+  "category_colors": {
+    "Tabular ML": "#E69F00",
+    "Deep Learning": "#56B4E9",
+    "Graph/Sequence": "#009E73",
+    "Foundation Model": "#CC79A7",
+    "Text LLM": "#D55E00",
+    "Random Baseline": "#999999"
+  },
+  "category_order": [
+    "Tabular ML",
+    "Deep Learning",
+    "Graph/Sequence",
+    "Foundation Model",
+    "Text LLM",
+    "Random Baseline"
+  ]
+};
+const COLORS = DATA.category_colors;
+const CAT_ORDER = DATA.category_order;
+const tooltip = document.getElementById("tooltip");
+
+function showTip(html, event) {
+  tooltip.innerHTML = html;
+  tooltip.style.display = "block";
+  tooltip.style.left = (event.clientX + 14) + "px";
+  tooltip.style.top = (event.clientY - 10) + "px";
+}
+function hideTip() { tooltip.style.display = "none"; }
+
+// Legend
+const legend = document.getElementById("legend");
+CAT_ORDER.forEach(cat => {
+  const item = document.createElement("div");
+  item.className = "legend-item";
+  item.innerHTML = `<div class="legend-dot" style="background:${COLORS[cat]}"></div><span>${cat}</span>`;
+  legend.appendChild(item);
+});
+
+// ─── Panel A: GeneLab box/strip by category ───────────────────────────────
+(function() {
+  const W = 360, H = 300, mg = {top:20, right:20, bottom:60, left:55};
+  const svg = d3.select("#gl-chart").attr("width", W).attr("height", H);
+  const iW = W - mg.left - mg.right, iH = H - mg.top - mg.bottom;
+  const g = svg.append("g").attr("transform", `translate(${mg.left},${mg.top})`);
+
+  // Collect scores per category (gene feature only for clarity)
+  const byCategory = {};
+  DATA.gl_rows.forEach(r => {
+    if (r.metric !== "auroc") return;
+    const cat = r.category;
+    if (!CAT_ORDER.includes(cat)) return;
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push(r.score);
+  });
+
+  const cats = CAT_ORDER.filter(c => byCategory[c] && byCategory[c].length > 0);
+  const x = d3.scaleBand().domain(cats).range([0, iW]).padding(0.3);
+  const y = d3.scaleLinear().domain([0.3, 1.05]).range([iH, 0]);
+
+  // Random baseline reference line
+  g.append("line")
+    .attr("x1", 0).attr("x2", iW).attr("y1", y(0.5)).attr("y2", y(0.5))
+    .attr("stroke", "#ccc").attr("stroke-dasharray", "4,3").attr("stroke-width", 1);
+  g.append("text").attr("x", iW+2).attr("y", y(0.5)+4)
+    .attr("font-size", 10).attr("fill", "#999").text("chance");
+
+  // Grid lines
+  y.ticks(5).forEach(tick => {
+    g.append("line").attr("x1", 0).attr("x2", iW)
+     .attr("y1", y(tick)).attr("y2", y(tick))
+     .attr("stroke", "#eee");
+  });
+
+  // Boxes + dots
+  cats.forEach(cat => {
+    const scores = byCategory[cat].sort(d3.ascending);
+    const q1 = d3.quantile(scores, 0.25);
+    const median = d3.quantile(scores, 0.5);
+    const q3 = d3.quantile(scores, 0.75);
+    const mean = d3.mean(scores);
+    const xc = x(cat) + x.bandwidth() / 2;
+    const bw = x.bandwidth() * 0.5;
+    const col = COLORS[cat];
+
+    // IQR box
+    g.append("rect")
+      .attr("x", xc - bw/2).attr("y", y(q3))
+      .attr("width", bw).attr("height", y(q1) - y(q3))
+      .attr("fill", col).attr("opacity", 0.25).attr("stroke", col);
+
+    // Median line
+    g.append("line")
+      .attr("x1", xc - bw/2).attr("x2", xc + bw/2)
+      .attr("y1", y(median)).attr("y2", y(median))
+      .attr("stroke", col).attr("stroke-width", 2);
+
+    // Mean dot
+    g.append("circle").attr("cx", xc).attr("cy", y(mean))
+      .attr("r", 5).attr("fill", col)
+      .on("mouseover", (e) => showTip(`<b>${cat}</b><br>Mean: ${mean.toFixed(3)}<br>Median: ${median.toFixed(3)}<br>N: ${scores.length}`, e))
+      .on("mouseout", hideTip);
+
+    // Jitter dots
+    scores.forEach((s, i) => {
+      const jitter = (Math.random() - 0.5) * bw * 0.7;
+      g.append("circle").attr("cx", xc + jitter).attr("cy", y(s))
+        .attr("r", 2.5).attr("fill", col).attr("opacity", 0.6);
+    });
+  });
+
+  // Axes
+  g.append("g").attr("transform", `translate(0,${iH})`).call(
+    d3.axisBottom(x).tickFormat(d => d.replace(" ML","").replace(" Model",""))
+  ).selectAll("text").attr("transform","rotate(-30)").style("text-anchor","end").attr("font-size",10);
+
+  g.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".2f"))).selectAll("text").attr("font-size",10);
+
+  g.append("text").attr("x", iW/2).attr("y", iH+52).attr("text-anchor","middle")
+   .attr("font-size",11).attr("fill","#555").text("Method Category");
+  g.append("text").attr("transform","rotate(-90)").attr("x",-iH/2).attr("y",-42)
+   .attr("text-anchor","middle").attr("font-size",11).attr("fill","#555").text("AUROC");
+})();
+
+// ─── Panel B: SpaceOmicsBench bar by category ─────────────────────────────
+(function() {
+  const W = 360, H = 300, mg = {top:20, right:20, bottom:60, left:55};
+  const svg = d3.select("#sob-chart").attr("width", W).attr("height", H);
+  const iW = W - mg.left - mg.right, iH = H - mg.top - mg.bottom;
+  const g = svg.append("g").attr("transform", `translate(${mg.left},${mg.top})`);
+
+  const byCategory = {};
+  DATA.sob_rows.forEach(r => {
+    const cat = r.category;
+    if (!CAT_ORDER.includes(cat)) return;
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push(r.score);
+  });
+
+  const cats = CAT_ORDER.filter(c => byCategory[c] && byCategory[c].length > 0);
+  const allScores = Object.values(byCategory).flat();
+  const yMin = Math.max(0, d3.min(allScores) - 0.05);
+  const yMax = Math.min(1.05, d3.max(allScores) + 0.05);
+
+  const x = d3.scaleBand().domain(cats).range([0, iW]).padding(0.3);
+  const y = d3.scaleLinear().domain([yMin, yMax]).range([iH, 0]);
+
+  y.ticks(5).forEach(tick => {
+    g.append("line").attr("x1", 0).attr("x2", iW)
+     .attr("y1", y(tick)).attr("y2", y(tick))
+     .attr("stroke", "#eee");
+  });
+
+  cats.forEach(cat => {
+    const scores = byCategory[cat].sort(d3.ascending);
+    const q1 = d3.quantile(scores, 0.25) || d3.min(scores);
+    const median = d3.quantile(scores, 0.5);
+    const q3 = d3.quantile(scores, 0.75) || d3.max(scores);
+    const mean = d3.mean(scores);
+    const xc = x(cat) + x.bandwidth() / 2;
+    const bw = x.bandwidth() * 0.5;
+    const col = COLORS[cat];
+
+    g.append("rect").attr("x", xc - bw/2).attr("y", y(q3))
+      .attr("width", bw).attr("height", Math.max(1, y(q1) - y(q3)))
+      .attr("fill", col).attr("opacity", 0.25).attr("stroke", col);
+
+    g.append("line").attr("x1", xc - bw/2).attr("x2", xc + bw/2)
+      .attr("y1", y(median)).attr("y2", y(median))
+      .attr("stroke", col).attr("stroke-width", 2);
+
+    g.append("circle").attr("cx", xc).attr("cy", y(mean))
+      .attr("r", 5).attr("fill", col)
+      .on("mouseover", (e) => showTip(`<b>${cat}</b><br>Mean: ${mean.toFixed(3)}<br>Median: ${median.toFixed(3)}<br>N: ${scores.length}`, e))
+      .on("mouseout", hideTip);
+
+    scores.forEach(s => {
+      const jitter = (Math.random() - 0.5) * bw * 0.7;
+      g.append("circle").attr("cx", xc + jitter).attr("cy", y(s))
+        .attr("r", 2.5).attr("fill", col).attr("opacity", 0.6);
+    });
+  });
+
+  g.append("g").attr("transform", `translate(0,${iH})`).call(
+    d3.axisBottom(x).tickFormat(d => d.replace(" ML","").replace(" Model",""))
+  ).selectAll("text").attr("transform","rotate(-30)").style("text-anchor","end").attr("font-size",10);
+
+  g.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".2f"))).selectAll("text").attr("font-size",10);
+
+  g.append("text").attr("x", iW/2).attr("y", iH+52).attr("text-anchor","middle")
+   .attr("font-size",11).attr("fill","#555").text("Method Category");
+  g.append("text").attr("transform","rotate(-90)").attr("x",-iH/2).attr("y",-42)
+   .attr("text-anchor","middle").attr("font-size",11).attr("fill","#555").text("Score (AUROC / AUPRC / F1)");
+})();
+
+// ─── Panel C: Category-level cross-species comparison ─────────────────────
+(function() {
+  const W = 560, H = 320, mg = {top:30, right:30, bottom:65, left:70};
+  const svg = d3.select("#scatter").attr("width", W).attr("height", H);
+  const iW = W - mg.left - mg.right, iH = H - mg.top - mg.bottom;
+  const g = svg.append("g").attr("transform", `translate(${mg.left},${mg.top})`);
+
+  const cats = DATA.category_comparison;
+  if (!cats || cats.length === 0) {
+    g.append("text").attr("x", iW/2).attr("y", iH/2).attr("text-anchor","middle")
+     .attr("font-size",12).attr("fill","#999").text("No category overlap data");
+    return;
+  }
+
+  const xDomain = [d3.min(cats, c=>c.gl_mean_auroc)-0.05, d3.max(cats, c=>c.gl_mean_auroc)+0.05];
+  const yDomain = [d3.min(cats, c=>c.sob_mean_norm)-0.05, d3.max(cats, c=>c.sob_mean_norm)+0.05];
+  const x = d3.scaleLinear().domain(xDomain).range([0, iW]);
+  const y = d3.scaleLinear().domain(yDomain).range([iH, 0]);
+
+  // Spearman rank correlation annotation
+  const xRanks = [...cats].sort((a,b)=>a.gl_mean_auroc-b.gl_mean_auroc).map((c,i)=>{return{cat:c.category,rank:i+1}});
+  const yRanks = [...cats].sort((a,b)=>a.sob_mean_norm-b.sob_mean_norm).map((c,i)=>{return{cat:c.category,rank:i+1}});
+  const xRankMap = Object.fromEntries(xRanks.map(r=>[r.cat, r.rank]));
+  const yRankMap = Object.fromEntries(yRanks.map(r=>[r.cat, r.rank]));
+  const n = cats.length;
+  const dSq = cats.reduce((s,c)=>s+Math.pow(xRankMap[c.category]-yRankMap[c.category],2), 0);
+  const rho = 1 - 6*dSq / (n*(n*n-1));
+
+  // Grid
+  x.ticks(4).forEach(v => g.append("line").attr("x1",x(v)).attr("x2",x(v)).attr("y1",0).attr("y2",iH).attr("stroke","#eee"));
+  y.ticks(4).forEach(v => g.append("line").attr("x1",0).attr("x2",iW).attr("y1",y(v)).attr("y2",y(v)).attr("stroke","#eee"));
+
+  // Trend line
+  const xMean = d3.mean(cats, c=>c.gl_mean_auroc);
+  const yMean = d3.mean(cats, c=>c.sob_mean_norm);
+  const cov = d3.mean(cats, c=>(c.gl_mean_auroc-xMean)*(c.sob_mean_norm-yMean));
+  const varX = d3.mean(cats, c=>Math.pow(c.gl_mean_auroc-xMean,2));
+  const slope = varX>0 ? cov/varX : 0;
+  const xMin = xDomain[0], xMax = xDomain[1];
+  g.append("line")
+    .attr("x1",x(xMin)).attr("y1",y(yMean+slope*(xMin-xMean)))
+    .attr("x2",x(xMax)).attr("y2",y(yMean+slope*(xMax-xMean)))
+    .attr("stroke","#bbb").attr("stroke-dasharray","5,4").attr("stroke-width",1.5);
+
+  // Dots per category
+  cats.forEach(c => {
+    const col = COLORS[c.category] || "#888";
+    const cx = x(c.gl_mean_auroc), cy = y(c.sob_mean_norm);
+    g.append("circle").attr("cx",cx).attr("cy",cy).attr("r",10)
+     .attr("fill",col).attr("opacity",0.85).attr("stroke","#fff").attr("stroke-width",2)
+     .on("mouseover", (e) => showTip(
+       `<b>${c.category}</b><br>GeneLab AUROC: ${c.gl_mean_auroc.toFixed(3)} (n=${c.gl_n})<br>SpaceOmicsBench norm: ${c.sob_mean_norm.toFixed(3)} (n=${c.sob_n})`, e))
+     .on("mouseout", hideTip);
+    // Label
+    const loffset = c.gl_mean_auroc > xMean ? 13 : -13;
+    g.append("text").attr("x",cx+loffset).attr("y",cy+4)
+     .attr("font-size",9).attr("fill",col).attr("font-weight","600")
+     .attr("text-anchor", c.gl_mean_auroc > xMean ? "start":"end")
+     .text(c.category.replace(" ML","").replace(" Model","").replace(" Learning","").replace("Graph/Sequence","GNN"));
+  });
+
+  // Rho annotation
+  g.append("text").attr("x",4).attr("y",14).attr("font-size",11).attr("fill","#444")
+   .attr("font-weight","600").text(`ρ = ${rho.toFixed(2)} (Spearman rank, n=${n})`);
+
+  g.append("g").attr("transform",`translate(0,${iH})`).call(d3.axisBottom(x).ticks(4).tickFormat(d3.format(".2f"))).selectAll("text").attr("font-size",10);
+  g.append("g").call(d3.axisLeft(y).ticks(4).tickFormat(d3.format(".2f"))).selectAll("text").attr("font-size",10);
+
+  g.append("text").attr("x",iW/2).attr("y",iH+46).attr("text-anchor","middle")
+   .attr("font-size",11).attr("fill","#555").text("GeneLab Mean AUROC (mouse, per category)");
+  g.append("text").attr("transform","rotate(-90)").attr("x",-iH/2).attr("y",-55)
+   .attr("text-anchor","middle").attr("font-size",11).attr("fill","#555")
+   .text("SpaceOmicsBench within-task rank (human, per category)");
+  g.append("text").attr("x",iW/2).attr("y",-12).attr("text-anchor","middle")
+   .attr("font-size",9).attr("fill","#888").text("SOB score normalized 0=worst,1=best within each task");
+})();
+
+// ─── Panel D: Strip chart — all GeneLab gene-feature results ─────────────
+(function() {
+  const W = 1100, H = 250, mg = {top:20, right:20, bottom:50, left:120};
+  const svg = d3.select("#strip").attr("width", W).attr("height", H);
+  const iW = W - mg.left - mg.right, iH = H - mg.top - mg.bottom;
+  const g = svg.append("g").attr("transform", `translate(${mg.left},${mg.top})`);
+
+  // One row per method, show all tissue AUROCs
+  const methodData = {};
+  DATA.gl_rows.forEach(r => {
+    if (r.metric !== "auroc" || r.feature_type !== "gene") return;
+    if (!methodData[r.method]) methodData[r.method] = { scores: [], category: r.category };
+    methodData[r.method].scores.push({ score: r.score, tissue: r.tissue_task });
+  });
+
+  const methods = Object.entries(methodData)
+    .filter(([m,d]) => CAT_ORDER.includes(d.category))
+    .sort((a,b) => {
+      const catDiff = CAT_ORDER.indexOf(a[1].category) - CAT_ORDER.indexOf(b[1].category);
+      if (catDiff !== 0) return catDiff;
+      return d3.mean(b[1].scores.map(s=>s.score)) - d3.mean(a[1].scores.map(s=>s.score));
+    });
+
+  const y = d3.scaleBand().domain(methods.map(m=>m[0])).range([0, iH]).padding(0.3);
+  const x = d3.scaleLinear().domain([0.3, 1.05]).range([0, iW]);
+
+  // Chance line
+  g.append("line").attr("x1", x(0.5)).attr("x2", x(0.5))
+   .attr("y1", 0).attr("y2", iH).attr("stroke","#bbb").attr("stroke-dasharray","4,3");
+
+  methods.forEach(([method, data]) => {
+    const yc = y(method) + y.bandwidth()/2;
+    const col = COLORS[data.category] || "#888";
+    const scores = data.scores.map(s=>s.score);
+    const mean = d3.mean(scores);
+
+    // Mean line
+    g.append("line")
+      .attr("x1", x(d3.min(scores))).attr("x2", x(d3.max(scores)))
+      .attr("y1", yc).attr("y2", yc)
+      .attr("stroke", col).attr("opacity", 0.3).attr("stroke-width", 1);
+
+    // Dots
+    data.scores.forEach(s => {
+      g.append("circle").attr("cx", x(s.score)).attr("cy", yc)
+        .attr("r", 4).attr("fill", col).attr("opacity", 0.75)
+        .on("mouseover", (e) => showTip(`<b>${method}</b><br>Tissue: ${s.tissue}<br>AUROC: ${s.score.toFixed(3)}<br>Category: ${data.category}`, e))
+        .on("mouseout", hideTip);
+    });
+
+    // Mean dot
+    g.append("circle").attr("cx", x(mean)).attr("cy", yc)
+      .attr("r", 6).attr("fill", col).attr("stroke","#fff").attr("stroke-width",1.5);
+  });
+
+  g.append("g").attr("transform", `translate(0,${iH})`).call(d3.axisBottom(x).ticks(7).tickFormat(d3.format(".2f"))).selectAll("text").attr("font-size",10);
+  g.append("g").call(d3.axisLeft(y).tickFormat(m => m.replace("_"," "))).selectAll("text").attr("font-size",10);
+
+  g.append("text").attr("x", iW/2).attr("y", iH+38).attr("text-anchor","middle")
+   .attr("font-size",11).attr("fill","#555").text("AUROC (gene features, per tissue)");
+  g.append("text").attr("x", -8).attr("y", -6).attr("text-anchor","end")
+   .attr("font-size",10).attr("fill","#888").text("Method");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "experiment": "D3",
+  "model": "PCA-LR",
+  "model_key": "pca_lr",
+  "tissue": "liver",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 6,
+  "classes": [
+    "MHU-2",
+    "RR-1",
+    "RR-3",
+    "RR-6",
+    "RR-8",
+    "RR-9"
+  ],
+  "class_distribution": {
+    "MHU-2": 9,
+    "RR-1": 14,
+    "RR-3": 18,
+    "RR-6": 59,
+    "RR-8": 141,
+    "RR-9": 23
+  },
+  "n_samples": 264,
+  "macro_f1": 0.9905,
+  "accuracy": 0.9924,
+  "ci_lower": 0.9696,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU-2": 1.0,
+    "RR-1": 0.963,
+    "RR-3": 1.0,
+    "RR-6": 0.9833,
+    "RR-8": 0.9964,
+    "RR-9": 1.0
+  },
+  "confusion_matrix": [
+    [
+      9,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      13,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      18,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      59,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      140,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      23
+    ]
+  ],
+  "mean_train_time_s": 0.02,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 5.0,
+  "timestamp": "2026-03-22T03:23:32.564097"
+}
