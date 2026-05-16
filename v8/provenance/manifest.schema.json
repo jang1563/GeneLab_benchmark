@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genelab-benchmark.local/v8/provenance/manifest.schema.json",
+  "title": "GeneLab Benchmark v8 Run Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result_id",
+    "pillar",
+    "status",
+    "claim",
+    "code",
+    "inputs",
+    "outputs",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "result_id": {
+      "type": "string",
+      "description": "Stable identifier such as bridge.supervised.full_msigdb.rf"
+    },
+    "pillar": {
+      "type": "string",
+      "enum": ["bridge", "decompose", "intervene", "causal", "multiomics", "summary"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "hpc_validated", "release_candidate", "frozen"]
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["short", "scope"],
+      "properties": {
+        "short": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["exploratory", "benchmark", "mechanistic", "release", "reproducibility"]
+        },
+        "consumed_by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["script", "command"],
+      "properties": {
+        "script": {
+          "type": "string"
+        },
+        "command": {
+          "type": "string"
+        },
+        "git_commit": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object"
+        }
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "hpc_job_id": {
+          "type": "string"
+        },
+        "spaceomics_root": {
+          "type": "string"
+        },
+        "python": {
+          "type": "string"
+        },
+        "r": {
+          "type": "string"
+        },
+        "container": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": ["number", "string", "boolean", "null"]
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["local_tests_run", "hpc_tests_run", "notes"],
+      "properties": {
+        "local_tests_run": {
+          "type": "boolean"
+        },
+        "hpc_tests_run": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path_or_accession"],
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "path_or_accession": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["local_file", "osdr_accession", "geo_accession", "soma_file", "url", "api", "hpc_local_cache", "other"]
+        },
+        "version": {
+          "type": "string"
+        },
+        "checksum": {
+          "type": "string"
+        },
+        "tracked_in_git": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

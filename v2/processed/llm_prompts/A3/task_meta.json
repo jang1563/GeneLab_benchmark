@@ -1,0 +1,27 @@
+{
+  "task_id": "A3",
+  "tissue": "kidney",
+  "n_genes": 50,
+  "gene_selection": "top-50 protein-coding genes by raw variance",
+  "gene_filter": "exclude Gm/LOC/Rik/ncRNA/multi-mapped/unmapped",
+  "gene_ordering": "|z-score| descending per sample",
+  "generated_at": "2026-03-08T01:33:47.100652",
+  "folds": {
+    "fold_RR-1_test": {
+      "n_test_samples": 12,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-3_test": {
+      "n_test_samples": 12,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    },
+    "fold_RR-7_test": {
+      "n_test_samples": 94,
+      "n_genes": 50,
+      "n_genes_with_symbol": 50
+    }
+  },
+  "total_prompts": 118
+}

@@ -1,0 +1,43 @@
+{
+  "experiment": "D5",
+  "model": "MLP",
+  "model_key": "mlp",
+  "tissue": "liver",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 2,
+  "classes": [
+    "MHU",
+    "RR"
+  ],
+  "class_distribution": {
+    "MHU": 9,
+    "RR": 255
+  },
+  "n_samples": 264,
+  "macro_f1": 0.8971,
+  "accuracy": 0.9886,
+  "ci_lower": 0.724,
+  "ci_upper": 1.0,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU": 0.8,
+    "RR": 0.9942
+  },
+  "confusion_matrix": [
+    [
+      6,
+      3
+    ],
+    [
+      0,
+      255
+    ]
+  ],
+  "mean_train_time_s": 0.07,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 8.0,
+  "timestamp": "2026-03-22T03:30:56.259577"
+}

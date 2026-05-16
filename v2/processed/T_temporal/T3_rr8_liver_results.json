@@ -1,0 +1,546 @@
+{
+  "task": "T3",
+  "tissue": "liver",
+  "mission": "RR-8",
+  "generated_at": "2026-03-07T21:18:09.679228",
+  "subtasks": {
+    "T3a_gene": {
+      "description": "Overall OLD vs YNG classification",
+      "auroc": 0.9849033816425121,
+      "ci_low": 0.9623811492352211,
+      "ci_high": 0.9987854251012146,
+      "perm_p": 9.999000099990002e-05,
+      "n_old": 69,
+      "n_yng": 72
+    },
+    "T3a_pathway": {
+      "description": "Overall OLD vs YNG classification",
+      "auroc": 0.8510466988727858,
+      "ci_low": 0.7863209576828337,
+      "ci_high": 0.9107665205714913,
+      "perm_p": 9.999000099990002e-05,
+      "n_old": 69,
+      "n_yng": 72
+    },
+    "T3b_FLT_gene": {
+      "description": "Age classification within FLT",
+      "condition": "FLT",
+      "auroc": 0.911764705882353,
+      "ci_low": 0.7933190789473684,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "cv_method": "RSKF",
+      "n_old": 17,
+      "n_yng": 18
+    },
+    "T3b_FLT_pathway": {
+      "description": "Age classification within FLT",
+      "condition": "FLT",
+      "auroc": 0.7810457516339869,
+      "ci_low": 0.624139655862345,
+      "ci_high": 0.915032679738562,
+      "perm_p": 0.0013998600139986002,
+      "cv_method": "RSKF",
+      "n_old": 17,
+      "n_yng": 18
+    },
+    "T3b_GC_gene": {
+      "description": "Age classification within GC",
+      "condition": "GC",
+      "auroc": 0.9248366013071896,
+      "ci_low": 0.8058779214206845,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "cv_method": "RSKF",
+      "n_old": 17,
+      "n_yng": 18
+    },
+    "T3b_GC_pathway": {
+      "description": "Age classification within GC",
+      "condition": "GC",
+      "auroc": 0.8366013071895425,
+      "ci_low": 0.6733300653594771,
+      "ci_high": 0.9638157894736843,
+      "perm_p": 0.00029997000299970003,
+      "cv_method": "RSKF",
+      "n_old": 17,
+      "n_yng": 18
+    },
+    "T3b_VIV_gene": {
+      "description": "Age classification within VIV",
+      "condition": "VIV",
+      "auroc": 0.8161764705882353,
+      "ci_low": 0.6390977443609023,
+      "ci_high": 0.9461570247933884,
+      "perm_p": 0.0011998800119988001,
+      "cv_method": "RSKF",
+      "n_old": 16,
+      "n_yng": 17
+    },
+    "T3b_VIV_pathway": {
+      "description": "Age classification within VIV",
+      "condition": "VIV",
+      "auroc": 0.8272058823529411,
+      "ci_low": 0.6544048540468819,
+      "ci_high": 0.9603174603174602,
+      "perm_p": 0.0004999500049995,
+      "cv_method": "RSKF",
+      "n_old": 16,
+      "n_yng": 17
+    },
+    "T3c_anova": {
+      "n_pathways": 50,
+      "n_significant_interaction": 0,
+      "n_samples": 40,
+      "timing_filter": "ISS-T",
+      "pathways": [
+        {
+          "pathway": "HALLMARK_ADIPOGENESIS",
+          "p_flight": 0.7843689008310523,
+          "p_age": 0.17861312993507641,
+          "p_interaction": 0.1135642012819586,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_ALLOGRAFT_REJECTION",
+          "p_flight": 0.006710102445062964,
+          "p_age": 0.32983008875533365,
+          "p_interaction": 0.24734803608506511,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_ANDROGEN_RESPONSE",
+          "p_flight": 0.03555254681051829,
+          "p_age": 0.10235490833321503,
+          "p_interaction": 0.5601380127079196,
+          "fdr_interaction": 0.7779694620943328,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_ANGIOGENESIS",
+          "p_flight": 0.5124492177554454,
+          "p_age": 0.16447177609806382,
+          "p_interaction": 0.12768515370597483,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_APICAL_JUNCTION",
+          "p_flight": 0.4072636891852673,
+          "p_age": 0.9535334732953191,
+          "p_interaction": 0.6884848444957341,
+          "fdr_interaction": 0.819624814875874,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_APICAL_SURFACE",
+          "p_flight": 0.7051919973702487,
+          "p_age": 0.8813639291385622,
+          "p_interaction": 0.7555909959349494,
+          "fdr_interaction": 0.8395455510388327,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_APOPTOSIS",
+          "p_flight": 0.018932287657954985,
+          "p_age": 0.1388270073458639,
+          "p_interaction": 0.1684303434746082,
+          "fdr_interaction": 0.6015369409807435,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_BILE_ACID_METABOLISM",
+          "p_flight": 0.2165908026801504,
+          "p_age": 0.019235963225670217,
+          "p_interaction": 0.625464715884701,
+          "fdr_interaction": 0.7990272746716709,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+          "p_flight": 0.00046992211572888086,
+          "p_age": 0.4938390449433075,
+          "p_interaction": 0.4124935521010166,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_COAGULATION",
+          "p_flight": 0.9580712445869305,
+          "p_age": 0.008443542649300093,
+          "p_interaction": 0.05552508783265615,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_COMPLEMENT",
+          "p_flight": 0.11226410288485182,
+          "p_age": 0.7995176935908778,
+          "p_interaction": 0.12312300151302803,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_DNA_REPAIR",
+          "p_flight": 0.07185354892968952,
+          "p_age": 0.48010989518316893,
+          "p_interaction": 0.41787767752289784,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_E2F_TARGETS",
+          "p_flight": 0.030081990617816246,
+          "p_age": 0.009101383382294149,
+          "p_interaction": 0.3272638117616702,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+          "p_flight": 0.45514654991744874,
+          "p_age": 0.3122241695721463,
+          "p_interaction": 0.2599978944107118,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+          "p_flight": 0.6024748041460274,
+          "p_age": 0.4504452510486021,
+          "p_interaction": 0.728653982276897,
+          "fdr_interaction": 0.8297306182197067,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_ESTROGEN_RESPONSE_LATE",
+          "p_flight": 0.02875901919107205,
+          "p_age": 0.09729083761223187,
+          "p_interaction": 0.39313918724813485,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_FATTY_ACID_METABOLISM",
+          "p_flight": 0.8765549384406586,
+          "p_age": 0.018942151246714164,
+          "p_interaction": 0.39109747372629955,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_G2M_CHECKPOINT",
+          "p_flight": 0.004879983343434769,
+          "p_age": 0.0058138976096778015,
+          "p_interaction": 0.8773249598681581,
+          "fdr_interaction": 0.952566647941867,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_GLYCOLYSIS",
+          "p_flight": 0.6377748826682358,
+          "p_age": 0.10672980277331642,
+          "p_interaction": 0.09585509780935114,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_HEDGEHOG_SIGNALING",
+          "p_flight": 0.7786169763836572,
+          "p_age": 0.6437761075092661,
+          "p_interaction": 0.3730993043010845,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_HEME_METABOLISM",
+          "p_flight": 0.46926487860777844,
+          "p_age": 0.6856872765801478,
+          "p_interaction": 0.32283713672185543,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_HYPOXIA",
+          "p_flight": 0.09589611361760278,
+          "p_age": 0.018039084010049663,
+          "p_interaction": 0.42997917979372663,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_IL2_STAT5_SIGNALING",
+          "p_flight": 0.010423640541395688,
+          "p_age": 0.6334577819518254,
+          "p_interaction": 0.6815349664298957,
+          "fdr_interaction": 0.819624814875874,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+          "p_flight": 0.1917871585750924,
+          "p_age": 0.002317370026778744,
+          "p_interaction": 0.10282480568596883,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_INFLAMMATORY_RESPONSE",
+          "p_flight": 0.00018268455287019699,
+          "p_age": 0.00048294936079403976,
+          "p_interaction": 0.7301629440333419,
+          "fdr_interaction": 0.8297306182197067,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+          "p_flight": 0.4088330457113876,
+          "p_age": 0.029170944857085143,
+          "p_interaction": 0.12492260253233065,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+          "p_flight": 0.32156113338853604,
+          "p_age": 0.3848974551777453,
+          "p_interaction": 0.195942514994122,
+          "fdr_interaction": 0.6123203593566312,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_KRAS_SIGNALING_DN",
+          "p_flight": 0.8871312986317025,
+          "p_age": 0.5416463857354502,
+          "p_interaction": 0.9116284176322699,
+          "fdr_interaction": 0.952566647941867,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_KRAS_SIGNALING_UP",
+          "p_flight": 0.5706211522467795,
+          "p_age": 0.15958901340239495,
+          "p_interaction": 0.5219308635007941,
+          "fdr_interaction": 0.7456155192868488,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_MITOTIC_SPINDLE",
+          "p_flight": 0.002035546978370179,
+          "p_age": 0.1150743721115898,
+          "p_interaction": 0.6136484882907306,
+          "fdr_interaction": 0.7990272746716709,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_MTORC1_SIGNALING",
+          "p_flight": 0.001710538015358056,
+          "p_age": 0.9084644795217381,
+          "p_interaction": 0.1260300108305167,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_MYC_TARGETS_V1",
+          "p_flight": 0.00795793142263334,
+          "p_age": 0.2418192704020776,
+          "p_interaction": 0.05113375723005689,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_MYC_TARGETS_V2",
+          "p_flight": 0.41503619706656475,
+          "p_age": 0.11220455510234342,
+          "p_interaction": 0.4731948934659426,
+          "fdr_interaction": 0.7319382943300106,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_MYOGENESIS",
+          "p_flight": 0.12324189077430547,
+          "p_age": 0.6886683754975924,
+          "p_interaction": 0.3624566375195855,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_NOTCH_SIGNALING",
+          "p_flight": 0.4203063334453625,
+          "p_age": 0.4462282843693839,
+          "p_interaction": 0.3119390994841338,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+          "p_flight": 0.44928473840658445,
+          "p_age": 0.13652783793675197,
+          "p_interaction": 0.007302372277748277,
+          "fdr_interaction": 0.36511861388741385,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_P53_PATHWAY",
+          "p_flight": 0.9166608740567035,
+          "p_age": 0.07541258717402459,
+          "p_interaction": 0.6374963995817557,
+          "fdr_interaction": 0.7990272746716709,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_PANCREAS_BETA_CELLS",
+          "p_flight": 0.6452444384545877,
+          "p_age": 0.05196414255352837,
+          "p_interaction": 0.12437796165770364,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_PEROXISOME",
+          "p_flight": 0.66304685173779,
+          "p_age": 0.06200453250008349,
+          "p_interaction": 0.3921392197271419,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+          "p_flight": 0.0003119179336334847,
+          "p_age": 0.04008498899493227,
+          "p_interaction": 0.6392218197373367,
+          "fdr_interaction": 0.7990272746716709,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_PROTEIN_SECRETION",
+          "p_flight": 0.5100518490966042,
+          "p_age": 0.02157629324298992,
+          "p_interaction": 0.08899156610824052,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY",
+          "p_flight": 0.28358412417697854,
+          "p_age": 0.6863581106311847,
+          "p_interaction": 0.18535718462076645,
+          "fdr_interaction": 0.6123203593566312,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_SPERMATOGENESIS",
+          "p_flight": 0.061472478151505874,
+          "p_age": 0.587455842919485,
+          "p_interaction": 0.9361590287465954,
+          "fdr_interaction": 0.952566647941867,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_TGF_BETA_SIGNALING",
+          "p_flight": 0.8515069025488968,
+          "p_age": 0.1488415714724464,
+          "p_interaction": 0.9436490043092763,
+          "fdr_interaction": 0.952566647941867,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+          "p_flight": 0.5032588668810245,
+          "p_age": 0.018150652459096254,
+          "p_interaction": 0.3223392314585401,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+          "p_flight": 0.0025770252227301418,
+          "p_age": 0.02429186018124343,
+          "p_interaction": 0.33856878093017195,
+          "fdr_interaction": 0.6935148061189139,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_UV_RESPONSE_DN",
+          "p_flight": 0.24816193852256702,
+          "p_age": 0.6922768068297943,
+          "p_interaction": 0.07827680286559284,
+          "fdr_interaction": 0.4910967450229801,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_UV_RESPONSE_UP",
+          "p_flight": 0.2116739292915401,
+          "p_age": 0.4396544193778146,
+          "p_interaction": 0.952566647941867,
+          "fdr_interaction": 0.952566647941867,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+          "p_flight": 0.5681216079410734,
+          "p_age": 0.7914846871179712,
+          "p_interaction": 0.483079274257807,
+          "fdr_interaction": 0.7319382943300106,
+          "significant_interaction": false
+        },
+        {
+          "pathway": "HALLMARK_XENOBIOTIC_METABOLISM",
+          "p_flight": 0.8200957625323488,
+          "p_age": 0.09707597368935432,
+          "p_interaction": 0.501837418225809,
+          "fdr_interaction": 0.7379962032732484,
+          "significant_interaction": false
+        }
+      ]
+    },
+    "T3d_OLD_gene": {
+      "description": "Spaceflight detection in OLD mice",
+      "age_group": "OLD",
+      "auroc": 0.944636678200692,
+      "ci_low": 0.8456140350877193,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_flight": 17,
+      "n_gc": 17
+    },
+    "T3d_OLD_pathway": {
+      "description": "Spaceflight detection in OLD mice",
+      "age_group": "OLD",
+      "auroc": 0.8788927335640139,
+      "ci_low": 0.7438402329935511,
+      "ci_high": 0.9780451127819547,
+      "perm_p": 9.999000099990002e-05,
+      "n_flight": 17,
+      "n_gc": 17
+    },
+    "T3d_YNG_gene": {
+      "description": "Spaceflight detection in YNG mice",
+      "age_group": "YNG",
+      "auroc": 0.6790123456790124,
+      "ci_low": 0.47916666666666674,
+      "ci_high": 0.860396897993647,
+      "perm_p": 0.033096690330966905,
+      "n_flight": 18,
+      "n_gc": 18
+    },
+    "T3d_YNG_pathway": {
+      "description": "Spaceflight detection in YNG mice",
+      "age_group": "YNG",
+      "auroc": 0.7160493827160495,
+      "ci_low": 0.523186193885449,
+      "ci_high": 0.8731133900928789,
+      "perm_p": 0.0122987701229877,
+      "n_flight": 18,
+      "n_gc": 18
+    }
+  },
+  "aging_hypothesis": {
+    "OLD_auroc": 0.944636678200692,
+    "YNG_auroc": 0.6790123456790124,
+    "delta": 0.2656243325216796,
+    "interpretation": "Spaceflight amplifies age differences"
+  }
+}

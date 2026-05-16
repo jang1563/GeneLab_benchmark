@@ -1,0 +1,93 @@
+{
+  "experiment": "NC1_shuffled",
+  "model": "Random Forest",
+  "model_key": "rf",
+  "tissue": "liver",
+  "feature_type": "gene",
+  "cv_strategy": "LOMO",
+  "n_folds": 6,
+  "mean_auroc": 0.5002,
+  "std_auroc": 0.2898,
+  "min_auroc": 0.0,
+  "max_auroc": 1.0,
+  "mean_perm_pvalue": 0.5281,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 29.8,
+  "timestamp": "2026-03-22T03:20:29.515833",
+  "folds": [
+    {
+      "test_mission": "RR-1",
+      "fold_name": "fold_RR-1_test",
+      "auroc": 0.0,
+      "bootstrap_mean": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0,
+      "perm_pvalue": 1.0,
+      "n_train": 247,
+      "n_test": 14,
+      "train_time_s": 0.53
+    },
+    {
+      "test_mission": "RR-3",
+      "fold_name": "fold_RR-3_test",
+      "auroc": 0.5357,
+      "bootstrap_mean": 0.534,
+      "ci_lower": 0.25,
+      "ci_upper": 0.8044,
+      "perm_pvalue": 0.4226,
+      "n_train": 243,
+      "n_test": 18,
+      "train_time_s": 0.55
+    },
+    {
+      "test_mission": "RR-6",
+      "fold_name": "fold_RR-6_test",
+      "auroc": 0.5262,
+      "bootstrap_mean": 0.5249,
+      "ci_lower": 0.3386,
+      "ci_upper": 0.7024,
+      "perm_pvalue": 0.3826,
+      "n_train": 202,
+      "n_test": 59,
+      "train_time_s": 0.4
+    },
+    {
+      "test_mission": "RR-8",
+      "fold_name": "fold_RR-8_test",
+      "auroc": 0.4739,
+      "bootstrap_mean": 0.4734,
+      "ci_lower": 0.3688,
+      "ci_upper": 0.5792,
+      "perm_pvalue": 0.6863,
+      "n_train": 120,
+      "n_test": 141,
+      "train_time_s": 0.37
+    },
+    {
+      "test_mission": "RR-9",
+      "fold_name": "fold_RR-9_test",
+      "auroc": 0.4654,
+      "bootstrap_mean": 0.4682,
+      "ci_lower": 0.225,
+      "ci_upper": 0.7302,
+      "perm_pvalue": 0.6014,
+      "n_train": 238,
+      "n_test": 23,
+      "train_time_s": 0.54
+    },
+    {
+      "test_mission": "MHU-2",
+      "fold_name": "fold_MHU-2_test",
+      "auroc": 1.0,
+      "bootstrap_mean": 1.0,
+      "ci_lower": 1.0,
+      "ci_upper": 1.0,
+      "perm_pvalue": 0.0759,
+      "n_train": 255,
+      "n_test": 6,
+      "train_time_s": 0.48
+    }
+  ]
+}

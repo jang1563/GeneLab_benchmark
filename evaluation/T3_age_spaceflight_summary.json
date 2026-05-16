@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-03-08T23:50:59.785261",
+  "description": "T3: Age x Spaceflight interaction analysis (RR-8 liver)",
+  "design_decisions": [
+    "DD-19"
+  ],
+  "method": "PCA-LR RSKF for classification, two-way ANOVA for pathway interaction",
+  "source": "v2/evaluation/T_temporal_summary.json",
+  "tissue": "liver",
+  "mission": "RR-8",
+  "results": {
+    "T3a_gene": {
+      "description": "Overall OLD vs YNG classification",
+      "auroc": 0.9849033816425121,
+      "ci_low": 0.9623811492352211,
+      "ci_high": 0.9987854251012146,
+      "perm_p": 9.999000099990002e-05,
+      "n_old": 69,
+      "n_yng": 72
+    },
+    "T3a_pathway": {
+      "description": "Overall OLD vs YNG classification",
+      "auroc": 0.8510466988727858,
+      "ci_low": 0.7863209576828337,
+      "ci_high": 0.9107665205714913,
+      "perm_p": 9.999000099990002e-05,
+      "n_old": 69,
+      "n_yng": 72
+    },
+    "T3b_FLT_gene": {
+      "description": "Age classification within FLT",
+      "auroc": 0.911764705882353,
+      "ci_low": 0.7933190789473684,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_old": 17,
+      "n_yng": 18,
+      "condition": "FLT"
+    },
+    "T3b_FLT_pathway": {
+      "description": "Age classification within FLT",
+      "auroc": 0.7810457516339869,
+      "ci_low": 0.624139655862345,
+      "ci_high": 0.915032679738562,
+      "perm_p": 0.0013998600139986002,
+      "n_old": 17,
+      "n_yng": 18,
+      "condition": "FLT"
+    },
+    "T3b_GC_gene": {
+      "description": "Age classification within GC",
+      "auroc": 0.9248366013071896,
+      "ci_low": 0.8058779214206845,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_old": 17,
+      "n_yng": 18,
+      "condition": "GC"
+    },
+    "T3b_GC_pathway": {
+      "description": "Age classification within GC",
+      "auroc": 0.8366013071895425,
+      "ci_low": 0.6733300653594771,
+      "ci_high": 0.9638157894736843,
+      "perm_p": 0.00029997000299970003,
+      "n_old": 17,
+      "n_yng": 18,
+      "condition": "GC"
+    },
+    "T3b_VIV_gene": {
+      "description": "Age classification within VIV",
+      "auroc": 0.8161764705882353,
+      "ci_low": 0.6390977443609023,
+      "ci_high": 0.9461570247933884,
+      "perm_p": 0.0011998800119988001,
+      "n_old": 16,
+      "n_yng": 17,
+      "condition": "VIV"
+    },
+    "T3b_VIV_pathway": {
+      "description": "Age classification within VIV",
+      "auroc": 0.8272058823529411,
+      "ci_low": 0.6544048540468819,
+      "ci_high": 0.9603174603174602,
+      "perm_p": 0.0004999500049995,
+      "n_old": 16,
+      "n_yng": 17,
+      "condition": "VIV"
+    },
+    "T3d_OLD_gene": {
+      "description": "Spaceflight detection in OLD mice",
+      "auroc": 0.944636678200692,
+      "ci_low": 0.8456140350877193,
+      "ci_high": 1.0,
+      "perm_p": 9.999000099990002e-05,
+      "n_flight": 17,
+      "n_gc": 17,
+      "age_group": "OLD"
+    },
+    "T3d_OLD_pathway": {
+      "description": "Spaceflight detection in OLD mice",
+      "auroc": 0.8788927335640139,
+      "ci_low": 0.7438402329935511,
+      "ci_high": 0.9780451127819547,
+      "perm_p": 9.999000099990002e-05,
+      "n_flight": 17,
+      "n_gc": 17,
+      "age_group": "OLD"
+    },
+    "T3d_YNG_gene": {
+      "description": "Spaceflight detection in YNG mice",
+      "auroc": 0.6790123456790124,
+      "ci_low": 0.47916666666666674,
+      "ci_high": 0.860396897993647,
+      "perm_p": 0.033096690330966905,
+      "n_flight": 18,
+      "n_gc": 18,
+      "age_group": "YNG"
+    },
+    "T3d_YNG_pathway": {
+      "description": "Spaceflight detection in YNG mice",
+      "auroc": 0.7160493827160495,
+      "ci_low": 0.523186193885449,
+      "ci_high": 0.8731133900928789,
+      "perm_p": 0.0122987701229877,
+      "n_flight": 18,
+      "n_gc": 18,
+      "age_group": "YNG"
+    },
+    "T3c_anova": {
+      "n_pathways": 50,
+      "n_significant_interaction": 0,
+      "n_samples": 40,
+      "timing_filter": "ISS-T",
+      "min_fdr_interaction": 0.36511861388741385
+    }
+  },
+  "aging_hypothesis": {
+    "OLD_auroc": 0.944636678200692,
+    "YNG_auroc": 0.6790123456790124,
+    "delta": 0.2656243325216796,
+    "interpretation": "Spaceflight amplifies age differences"
+  },
+  "verdict": "Spaceflight amplifies aging: SUPPORTED",
+  "evidence": "OLD AUROC=0.945 vs YNG AUROC=0.679 (delta=+0.266). ANOVA: 0/50 significant interactions at FDR<0.05 (underpowered)."
+}

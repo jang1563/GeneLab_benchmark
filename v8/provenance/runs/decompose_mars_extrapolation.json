@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "decompose.mars_extrapolation",
+  "pillar": "decompose",
+  "status": "hpc_validated",
+  "claim": {
+    "short": "Mars projections are stressor-regime flags with uncertainty, not point predictions.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/decompose/evaluation/README.md",
+      "v8/RESULTS_SUMMARY.md",
+      "v8/MANUSCRIPT_DRAFT.md"
+    ]
+  },
+  "generated_at": "2026-05-09T23:24:12Z",
+  "code": {
+    "script": "v8/decompose/mars_extrapolate.py; v8/decompose/mars_bootstrap_ci.py",
+    "command": "bash scripts/hpc_v8_decompose.sh",
+    "git_commit": "1a033a8+decompose-full-cache-rerun-staged",
+    "parameters": {
+      "mars_hlu": 0.62,
+      "mars_ir": 12.9,
+      "mars_time": 7.5,
+      "bootstrap": 1000
+    }
+  },
+  "inputs": [
+    {
+      "role": "factorial_betas",
+      "path_or_accession": "v8/decompose/evaluation/factorial_*_betas.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "flight_signatures",
+      "path_or_accession": "v8/intervene/signatures/*_ranked.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    }
+  ],
+  "outputs": [
+    {
+      "role": "mars_predictions",
+      "path_or_accession": "v8/decompose/evaluation/mars_extrapolation_*.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "mars_predictions_with_ci",
+      "path_or_accession": "v8/decompose/evaluation/mars_extrapolation_*_with_ci.csv",
+      "kind": "local_file",
+      "tracked_in_git": true
+    },
+    {
+      "role": "mars_summary",
+      "path_or_accession": "v8/decompose/evaluation/mars_summary.json",
+      "kind": "local_file",
+      "checksum": "sha256:7045aab0c146407258b31c0c1fe3ab3dddf3d02c50b4a41d31d00133c6773ca7",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "hpc_job_id": "manual-ssh-session",
+    "python": "Python 3.11.8",
+    "hpc_session_dir": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle"
+  },
+  "metrics": [
+    {"name": "spleen_to_thymus_mars_vs_flight_spearman_r", "value": 0.0593},
+    {"name": "skin_analog_to_skin_mars_vs_flight_spearman_r", "value": -0.1263},
+    {"name": "brain_to_eye_mars_vs_flight_spearman_r", "value": -0.0164},
+    {"name": "max_reported_mars_over_iss_eye_wnt10b", "value": 1052.1}
+  ],
+  "validation": {
+    "local_tests_run": false,
+    "hpc_tests_run": true,
+    "checks": [
+      "python v3/scripts/fetch_osdr_bulk.py --phase 5",
+      "bash scripts/hpc_v8_decompose.sh",
+      "bash scripts/hpc_release_validate.sh --v8-summary",
+      "sha256sum v8/decompose/evaluation/mars_summary.json"
+    ],
+    "notes": "Mars summary and CI outputs were regenerated on HPC from the restored full DECOMPOSE raw-cache bundle. Manuscript language states these are exploratory regime flags, not point predictions."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "experiment": "D3",
+  "model": "MLP",
+  "model_key": "mlp",
+  "tissue": "skin",
+  "feature_type": "pathway_hallmark",
+  "cv_strategy": "repeated_stratified_5x10",
+  "n_classes": 3,
+  "classes": [
+    "MHU-2",
+    "RR-6",
+    "RR-7"
+  ],
+  "class_distribution": {
+    "MHU-2": 47,
+    "RR-6": 53,
+    "RR-7": 30
+  },
+  "n_samples": 130,
+  "macro_f1": 0.9067,
+  "accuracy": 0.9154,
+  "ci_lower": 0.8469,
+  "ci_upper": 0.9559,
+  "perm_pvalue": 0.001,
+  "per_class_f1": {
+    "MHU-2": 0.94,
+    "RR-6": 0.9231,
+    "RR-7": 0.8571
+  },
+  "confusion_matrix": [
+    [
+      47,
+      0,
+      0
+    ],
+    [
+      3,
+      48,
+      2
+    ],
+    [
+      3,
+      3,
+      24
+    ]
+  ],
+  "mean_train_time_s": 0.03,
+  "n_bootstrap": 2000,
+  "n_perm": 1000,
+  "seed": 42,
+  "wall_time_sec": 5.4,
+  "timestamp": "2026-03-22T03:29:46.259190"
+}

@@ -1,0 +1,26 @@
+{
+  "test_mission": "RR-9",
+  "task": "A4",
+  "model": "scgpt_whole_human",
+  "auroc": 0.5800000000000001,
+  "best_epoch": 9,
+  "epoch_aurocs": [
+    0.38,
+    0.23,
+    0.3,
+    0.37,
+    0.44,
+    0.51,
+    0.56,
+    0.58,
+    0.58,
+    0.58
+  ],
+  "n_train": 47,
+  "n_test": 20,
+  "train_time_s": 11.7,
+  "freeze_layers": 10,
+  "epochs": 10,
+  "lr": 0.0001,
+  "batch_size": 8
+}

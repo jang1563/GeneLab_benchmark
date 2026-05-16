@@ -1,0 +1,152 @@
+{
+  "schema_version": "0.1.0",
+  "audit_id": "bridge.supervised_conservation.leakage_audit",
+  "status": "pass",
+  "inputs": {
+    "i2_features": {
+      "path": "/home/fs01/jak4013/projects/GeneLab_benchmark_hpc_session_bundle/../SpaceOmicsBench/v2_public/data/processed/cross_mission_pathway_features.csv",
+      "sha256": "50662a152287f4cbb0493a66d3ccea711f580e867597b4cbc477f7b63e8ad017",
+      "n_rows": 452,
+      "columns": [
+        "pathway",
+        "mean_NES",
+        "std_NES",
+        "mean_ES",
+        "mean_padj",
+        "min_padj",
+        "n_celltypes",
+        "mean_size",
+        "direction_consistency",
+        "label"
+      ]
+    },
+    "mouse_nes_matrix": {
+      "n_rows": 8428,
+      "columns": [
+        "pathway",
+        "mouse_eye_NES",
+        "mouse_gastrocnemius_NES",
+        "mouse_kidney_NES",
+        "mouse_liver_NES",
+        "mouse_skin_NES",
+        "mouse_thymus_NES"
+      ]
+    }
+  },
+  "model_contract": {
+    "label_column": "label",
+    "base_features": [
+      "mean_NES",
+      "std_NES",
+      "mean_ES",
+      "mean_padj",
+      "min_padj",
+      "n_celltypes",
+      "mean_size",
+      "direction_consistency"
+    ],
+    "mouse_features": [
+      "mouse_thymus_NES",
+      "mouse_gastrocnemius_NES",
+      "mouse_skin_NES",
+      "mouse_eye_NES",
+      "mouse_liver_NES",
+      "mouse_kidney_NES"
+    ],
+    "n_model_features": 14,
+    "label_excluded_from_features": true,
+    "missing_required_columns": [],
+    "bootstrap": 1000,
+    "cv": {
+      "class": "StratifiedKFold",
+      "n_splits": 5,
+      "shuffle": true,
+      "random_state": 42
+    }
+  },
+  "merge_checks": {
+    "merge_key": "pathway",
+    "merged_rows": 452,
+    "i2_pathway_unique": true,
+    "mouse_pathway_unique_after_aggregation": true,
+    "mouse_feature_coverage": {
+      "mouse_thymus_NES": 0.462,
+      "mouse_gastrocnemius_NES": 0.465,
+      "mouse_skin_NES": 0.451,
+      "mouse_eye_NES": 0.456,
+      "mouse_liver_NES": 0.478,
+      "mouse_kidney_NES": 0.458
+    },
+    "mouse_missing_imputation": "0.0 in supervised_conservation.py"
+  },
+  "fold_manifest": [
+    {
+      "fold": 1,
+      "train_n": 361,
+      "test_n": 91,
+      "train_positive": 116,
+      "test_positive": 30,
+      "train_pathway_hash": "07aa34076bc92d4dbf43a426490c88cfc80175cfdcfdfe89558d6bf3c706f952",
+      "test_pathway_hash": "18f70297ecd44445b0110e085d335d2088e2e4dd245f5163b1f8720a794c01dc"
+    },
+    {
+      "fold": 2,
+      "train_n": 361,
+      "test_n": 91,
+      "train_positive": 117,
+      "test_positive": 29,
+      "train_pathway_hash": "4d2dd2bda39dc41210cfd93b9ff0e2670c9a7fc6ce4bd06cc5ca6fd292f59efc",
+      "test_pathway_hash": "4b96ae97acad71b091b7c789cc2e981ff2eb940c67241b213734c249cf2ffc63"
+    },
+    {
+      "fold": 3,
+      "train_n": 362,
+      "test_n": 90,
+      "train_positive": 117,
+      "test_positive": 29,
+      "train_pathway_hash": "92e58e1233064d867aaa8b81fec9597cd40fcb89110d8a115fa845ba5cfa8b9d",
+      "test_pathway_hash": "f73ac273a80e1de7dfdad703dc42d3090b09c34f3da36fac7979d016a3d405b6"
+    },
+    {
+      "fold": 4,
+      "train_n": 362,
+      "test_n": 90,
+      "train_positive": 117,
+      "test_positive": 29,
+      "train_pathway_hash": "0580e5662be948962acdafeb70042d9ada6575f53fe50339853cceefc4daae95",
+      "test_pathway_hash": "4a84bdc5d7cd2c94e242c509e08c23598d7a6e1529cee8bc5ba821dd0811d006"
+    },
+    {
+      "fold": 5,
+      "train_n": 362,
+      "test_n": 90,
+      "train_positive": 117,
+      "test_positive": 29,
+      "train_pathway_hash": "2ddd6181b2945c5ea63bf2c23b4f60b8ba787296d2ae9417581fa15bae8f4aa0",
+      "test_pathway_hash": "64302e384277d9753b7b09a5c528c255f63e05a2204c5d57ec4480d8ff5dc31d"
+    }
+  ],
+  "single_feature_label_auc_screen": {
+    "mean_NES": 0.5172799713492703,
+    "std_NES": 0.5306204673650282,
+    "mean_ES": 0.5295684483839198,
+    "mean_padj": 0.5197981018891575,
+    "min_padj": 0.5653035186677411,
+    "n_celltypes": 0.5655273524935088,
+    "mean_size": 0.5874294923448831,
+    "direction_consistency": null,
+    "mouse_thymus_NES": 0.5455628896222956,
+    "mouse_gastrocnemius_NES": 0.5006812607866291,
+    "mouse_skin_NES": 0.6448139959627031,
+    "mouse_eye_NES": 0.548892032060349,
+    "mouse_liver_NES": 0.6241945184294183,
+    "mouse_kidney_NES": 0.5193349523631609
+  },
+  "suspicious_auc_features": [],
+  "warnings": [],
+  "limitations": [
+    "This audit verifies the v8 local modeling contract, not the complete upstream SpaceOmicsBench feature-generation pipeline.",
+    "The target label is loaded from the same CSV as baseline features but is not selected into X_base or X_aug.",
+    "A full beta freeze should archive the upstream SpaceOmicsBench commit or release tag and feature-builder command."
+  ]
+}

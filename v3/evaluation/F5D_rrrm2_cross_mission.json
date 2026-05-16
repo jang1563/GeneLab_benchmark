@@ -1,0 +1,64 @@
+{
+  "task": "F5-D",
+  "description": "Cross-mission NES concordance: RRRM-1 blood vs RRRM-2 PBMC",
+  "method": "Spearman correlation of Hallmark pathway NES values",
+  "pairwise_concordance": [
+    {
+      "rrrm1_cell_type": "t_cell",
+      "rrrm2_cell_type": "T_cell",
+      "spearman_r": 0.0108,
+      "n_common_pathways": 41,
+      "p_value": 0.946561
+    },
+    {
+      "rrrm1_cell_type": "b_cell",
+      "rrrm2_cell_type": "B_cell",
+      "spearman_r": 0.1153,
+      "n_common_pathways": 42,
+      "p_value": 0.467133
+    },
+    {
+      "rrrm1_cell_type": "monocyte_macrophage",
+      "rrrm2_cell_type": "monocyte",
+      "spearman_r": -0.2594,
+      "n_common_pathways": 42,
+      "p_value": 0.097163
+    },
+    {
+      "rrrm1_cell_type": "erythroid",
+      "rrrm2_cell_type": "erythroid",
+      "spearman_r": -0.3625,
+      "n_common_pathways": 42,
+      "p_value": 0.018329
+    },
+    {
+      "rrrm1_cell_type": "neutrophil",
+      "rrrm2_cell_type": "neutrophil",
+      "spearman_r": -0.0159,
+      "n_common_pathways": 41,
+      "p_value": 0.921631
+    },
+    {
+      "rrrm1_cell_type": "t_cell",
+      "rrrm2_cell_type": "CD4_T_cell",
+      "spearman_r": 0.2925,
+      "n_common_pathways": 40,
+      "p_value": 0.067022
+    },
+    {
+      "rrrm1_cell_type": "t_cell",
+      "rrrm2_cell_type": "CD8_T_cell",
+      "spearman_r": 0.2908,
+      "n_common_pathways": 41,
+      "p_value": 0.065138
+    },
+    {
+      "rrrm1_cell_type": "t_cell",
+      "rrrm2_cell_type": "NK_cell",
+      "spearman_r": 0.1249,
+      "n_common_pathways": 39,
+      "p_value": 0.448697
+    }
+  ],
+  "e1_baseline_r": 0.352
+}

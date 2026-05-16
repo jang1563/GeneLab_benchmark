@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E2 Cross-Mission Duration Conservation</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; font-size: 12px; background: #fff; margin: 20px; }
+  .axis text { font-size: 9px; }
+  .axis line, .axis path { stroke: #333; }
+  .gridline { stroke: #e0e0e0; stroke-width: 0.5; }
+  .dot { opacity: 0.8; cursor: pointer; }
+  .dot:hover { opacity: 1; stroke: #333; stroke-width: 1; }
+  .tooltip {
+    position: absolute; background: rgba(255,255,255,0.95);
+    border: 1px solid #ccc; padding: 6px; border-radius: 3px;
+    font-size: 10px; pointer-events: none; display: none;
+  }
+  .panel-title { font-size: 12px; font-weight: bold; }
+  .panel-sub { font-size: 9px; fill: #555; }
+  svg { display: inline-block; vertical-align: top; }
+  .bar { opacity: 0.85; }
+  .bar:hover { opacity: 1; }
+  .errbar { stroke: #333; stroke-width: 1.5; }
+  .zeroline { stroke: #999; stroke-width: 0.8; stroke-dasharray: 4,3; }
+  .sig-star { font-size: 11px; fill: #333; }
+</style>
+</head>
+<body>
+<h2 style="font-size:14px;margin-bottom:4px">E2: Cross-Mission Duration Effect on cfRNA–Mouse NES Conservation</h2>
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+const scatterData = [{"pathway": "HALLMARK_ADIPOGENESIS", "i4_nes": -0.818875803421852, "mouse_nes": 0.3409235876500736, "concordant": false}, {"pathway": "HALLMARK_ALLOGRAFT_REJECTION", "i4_nes": -1.25227264611301, "mouse_nes": 0.9285433321406886, "concordant": false}, {"pathway": "HALLMARK_ANDROGEN_RESPONSE", "i4_nes": -1.37142991591178, "mouse_nes": -0.19940470258148615, "concordant": true}, {"pathway": "HALLMARK_APICAL_JUNCTION", "i4_nes": -1.23756195624027, "mouse_nes": 0.07405990074264668, "concordant": false}, {"pathway": "HALLMARK_APICAL_SURFACE", "i4_nes": -1.28810043045375, "mouse_nes": 0.3247397853868648, "concordant": false}, {"pathway": "HALLMARK_APOPTOSIS", "i4_nes": -1.13355847008366, "mouse_nes": 0.8248331110630883, "concordant": false}, {"pathway": "HALLMARK_BILE_ACID_METABOLISM", "i4_nes": 1.43832108048444, "mouse_nes": 0.7348684710716666, "concordant": true}, {"pathway": "HALLMARK_CHOLESTEROL_HOMEOSTASIS", "i4_nes": -1.14992123734136, "mouse_nes": -0.12353312930201836, "concordant": true}, {"pathway": "HALLMARK_COAGULATION", "i4_nes": -1.73777083755254, "mouse_nes": 0.972412369414965, "concordant": false}, {"pathway": "HALLMARK_COMPLEMENT", "i4_nes": -1.21963476877843, "mouse_nes": 0.9246441982974681, "concordant": false}, {"pathway": "HALLMARK_DNA_REPAIR", "i4_nes": -0.609305190044542, "mouse_nes": -0.14707507289997346, "concordant": true}, {"pathway": "HALLMARK_E2F_TARGETS", "i4_nes": -0.789966062208937, "mouse_nes": 0.12130585245855163, "concordant": false}, {"pathway": "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION", "i4_nes": -1.63443429483368, "mouse_nes": 1.4125489313435127, "concordant": false}, {"pathway": "HALLMARK_ESTROGEN_RESPONSE_EARLY", "i4_nes": -0.9155339064211, "mouse_nes": -0.72745004812109, "concordant": true}, {"pathway": "HALLMARK_ESTROGEN_RESPONSE_LATE", "i4_nes": -0.942461106058526, "mouse_nes": 0.12899216388169765, "concordant": false}, {"pathway": "HALLMARK_FATTY_ACID_METABOLISM", "i4_nes": -1.00084956908722, "mouse_nes": 0.2884691668158783, "concordant": false}, {"pathway": "HALLMARK_G2M_CHECKPOINT", "i4_nes": -0.649987371432955, "mouse_nes": -0.054430137876859984, "concordant": true}, {"pathway": "HALLMARK_GLYCOLYSIS", "i4_nes": -0.584401143922676, "mouse_nes": 0.3502865628270888, "concordant": false}, {"pathway": "HALLMARK_HEDGEHOG_SIGNALING", "i4_nes": 1.28405919700237, "mouse_nes": 0.45926616534408, "concordant": true}, {"pathway": "HALLMARK_HEME_METABOLISM", "i4_nes": -1.86099073193795, "mouse_nes": -0.567563426654936, "concordant": true}, {"pathway": "HALLMARK_HYPOXIA", "i4_nes": 1.42632039918876, "mouse_nes": 0.2505065064728578, "concordant": true}, {"pathway": "HALLMARK_IL2_STAT5_SIGNALING", "i4_nes": -0.970849617023854, "mouse_nes": 0.902075190557374, "concordant": false}, {"pathway": "HALLMARK_IL6_JAK_STAT3_SIGNALING", "i4_nes": -1.48115481216352, "mouse_nes": 0.3063050172475772, "concordant": false}, {"pathway": "HALLMARK_INFLAMMATORY_RESPONSE", "i4_nes": -1.13138363325123, "mouse_nes": 0.7777147020269884, "concordant": false}, {"pathway": "HALLMARK_INTERFERON_ALPHA_RESPONSE", "i4_nes": 0.964521345273318, "mouse_nes": 0.7396782451540416, "concordant": true}, {"pathway": "HALLMARK_INTERFERON_GAMMA_RESPONSE", "i4_nes": 1.15713955014375, "mouse_nes": 0.7201727910305817, "concordant": true}, {"pathway": "HALLMARK_KRAS_SIGNALING_DN", "i4_nes": -1.08834735364476, "mouse_nes": -0.24115151111617503, "concordant": true}, {"pathway": "HALLMARK_KRAS_SIGNALING_UP", "i4_nes": -0.920849612015751, "mouse_nes": 0.5410794613081806, "concordant": false}, {"pathway": "HALLMARK_MITOTIC_SPINDLE", "i4_nes": -0.900848356566464, "mouse_nes": -0.9019644437606278, "concordant": true}, {"pathway": "HALLMARK_MTORC1_SIGNALING", "i4_nes": -0.929020297435114, "mouse_nes": -0.49356729796309834, "concordant": true}, {"pathway": "HALLMARK_MYC_TARGETS_V1", "i4_nes": 1.17405523818959, "mouse_nes": -0.6896851771758549, "concordant": false}, {"pathway": "HALLMARK_MYC_TARGETS_V2", "i4_nes": 2.04661932830174, "mouse_nes": -0.40370347724143385, "concordant": false}, {"pathway": "HALLMARK_MYOGENESIS", "i4_nes": -1.5715092897327, "mouse_nes": -0.49500372009183274, "concordant": true}, {"pathway": "HALLMARK_NOTCH_SIGNALING", "i4_nes": -0.889935521643561, "mouse_nes": -0.03509347281005413, "concordant": true}, {"pathway": "HALLMARK_OXIDATIVE_PHOSPHORYLATION", "i4_nes": 0.656391597049674, "mouse_nes": 0.6148588758083317, "concordant": true}, {"pathway": "HALLMARK_P53_PATHWAY", "i4_nes": -0.895429503972582, "mouse_nes": 0.019071842677060302, "concordant": false}, {"pathway": "HALLMARK_PEROXISOME", "i4_nes": 0.950068114768097, "mouse_nes": 0.6871657668398403, "concordant": true}, {"pathway": "HALLMARK_PI3K_AKT_MTOR_SIGNALING", "i4_nes": -0.573049424669492, "mouse_nes": -0.924359545060665, "concordant": true}, {"pathway": "HALLMARK_PROTEIN_SECRETION", "i4_nes": -1.23115190347576, "mouse_nes": -0.29977621327421544, "concordant": true}, {"pathway": "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY", "i4_nes": -1.10454452889477, "mouse_nes": -0.23093682435965, "concordant": true}, {"pathway": "HALLMARK_SPERMATOGENESIS", "i4_nes": -0.650834852434303, "mouse_nes": -0.2857109817327667, "concordant": true}, {"pathway": "HALLMARK_TGF_BETA_SIGNALING", "i4_nes": 0.927367404985758, "mouse_nes": -0.3645828522439812, "concordant": false}, {"pathway": "HALLMARK_TNFA_SIGNALING_VIA_NFKB", "i4_nes": 1.58471825912094, "mouse_nes": 0.050976692801349976, "concordant": true}, {"pathway": "HALLMARK_UNFOLDED_PROTEIN_RESPONSE", "i4_nes": 0.622552499597662, "mouse_nes": -1.4002516145045618, "concordant": false}, {"pathway": "HALLMARK_UV_RESPONSE_DN", "i4_nes": -1.34014781166988, "mouse_nes": -0.3020604055989898, "concordant": true}, {"pathway": "HALLMARK_UV_RESPONSE_UP", "i4_nes": -0.595674361760373, "mouse_nes": -0.39812118571507865, "concordant": true}, {"pathway": "HALLMARK_WNT_BETA_CATENIN_SIGNALING", "i4_nes": 1.38949600421174, "mouse_nes": 0.012575772276384381, "concordant": true}, {"pathway": "HALLMARK_XENOBIOTIC_METABOLISM", "i4_nes": 1.15825998293992, "mouse_nes": 0.09251691955159069, "concordant": true}];
+const barData     = [{"label": "I4 (3d)", "r": -0.09476769431176725, "ci_low": -0.37930838618252666, "ci_high": 0.2112955584616764, "p": 0.5159, "duration": 3}, {"label": "JAXA (120d)", "r": 0.35154861944777915, "ci_low": 0.06963870561370367, "ci_high": 0.5709313066067989, "p": 0.013, "duration": 120}];
+
+// ─── Okabe-Ito palette ───────────────────────────────────────────────────────
+const OKI = {
+  concordant:   "#0072B2",  // blue
+  discordant:   "#E69F00",  // orange
+  i4_bar:       "#56B4E9",  // sky blue
+  jaxa_bar:     "#0072B2",  // deep blue
+  zero:         "#999999",
+};
+
+const tooltip = d3.select("#tooltip");
+
+// ─── Panel 1: I4 scatter ─────────────────────────────────────────────────────
+(function() {
+  const W = 380, H = 360;
+  const margin = {top:50, right:20, bottom:55, left:60};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top  - margin.bottom;
+
+  const svg = d3.select("body")
+    .append("svg").attr("width", W).attr("height", H);
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const allX = scatterData.map(d => d.i4_nes);
+  const allY = scatterData.map(d => d.mouse_nes);
+  const xExt = d3.extent(allX), yExt = d3.extent(allY);
+  const pad = 0.3;
+
+  const xScale = d3.scaleLinear().domain([xExt[0]-pad, xExt[1]+pad]).range([0, w]).nice();
+  const yScale = d3.scaleLinear().domain([yExt[0]-pad, yExt[1]+pad]).range([h, 0]).nice();
+
+  // Gridlines
+  g.append("g").attr("class","gridline")
+    .call(d3.axisLeft(yScale).ticks(6).tickSize(-w).tickFormat(""))
+    .selectAll("line").style("stroke","#e8e8e8");
+  g.append("g").attr("class","gridline")
+    .attr("transform",`translate(0,${h})`)
+    .call(d3.axisBottom(xScale).ticks(6).tickSize(-h).tickFormat(""))
+    .selectAll("line").style("stroke","#e8e8e8");
+
+  // Zero lines
+  g.append("line").attr("class","zeroline")
+    .attr("x1",xScale(0)).attr("x2",xScale(0))
+    .attr("y1",0).attr("y2",h);
+  g.append("line").attr("class","zeroline")
+    .attr("x1",0).attr("x2",w)
+    .attr("y1",yScale(0)).attr("y2",yScale(0));
+
+  // Axes
+  g.append("g").attr("transform",`translate(0,${h})`)
+    .call(d3.axisBottom(xScale).ticks(6));
+  g.append("g").call(d3.axisLeft(yScale).ticks(6));
+
+  // Axis labels
+  g.append("text").attr("text-anchor","middle")
+    .attr("x", w/2).attr("y", h+40)
+    .style("font-size","10px")
+    .text("I4 cfRNA NES (R+1 vs. pre-flight)");
+  g.append("text").attr("text-anchor","middle")
+    .attr("transform","rotate(-90)")
+    .attr("x", -h/2).attr("y", -45)
+    .style("font-size","10px")
+    .text("Mouse Liver NES (mission-averaged)");
+
+  // Dots
+  g.selectAll(".dot")
+    .data(scatterData)
+    .enter().append("circle")
+      .attr("class","dot")
+      .attr("cx", d => xScale(d.i4_nes))
+      .attr("cy", d => yScale(d.mouse_nes))
+      .attr("r", 5)
+      .attr("fill", d => d.concordant ? OKI.concordant : OKI.discordant)
+      .on("mouseover", function(event, d) {
+        tooltip.style("display","block")
+          .html(`<b>${d.pathway.replace("HALLMARK_","").replace(/_/g," ")}</b><br>
+                 I4 NES: ${d.i4_nes.toFixed(3)}<br>
+                 Mouse NES: ${d.mouse_nes.toFixed(3)}<br>
+                 Sign: ${d.concordant ? "Concordant" : "Discordant"}`);
+      })
+      .on("mousemove", function(event) {
+        tooltip.style("left",(event.pageX+10)+"px").style("top",(event.pageY-20)+"px");
+      })
+      .on("mouseout", () => tooltip.style("display","none"));
+
+  // Legend
+  const leg = g.append("g").attr("transform",`translate(${w-130},5)`);
+  leg.append("circle").attr("r",5).attr("fill",OKI.concordant).attr("cy",0);
+  leg.append("text").attr("x",9).attr("y",4).style("font-size","8px").text("Concordant sign");
+  leg.append("circle").attr("r",5).attr("fill",OKI.discordant).attr("cy",14);
+  leg.append("text").attr("x",9).attr("y",18).style("font-size","8px").text("Discordant sign");
+
+  // Title
+  svg.append("text").attr("class","panel-title")
+    .attr("x", W/2).attr("y", 18).attr("text-anchor","middle")
+    .text("I4 (3-day) vs. Mouse Liver NES");
+  svg.append("text").attr("class","panel-sub")
+    .attr("x", W/2).attr("y", 32).attr("text-anchor","middle")
+    .text(`r = -0.095 (CI: -0.379–0.211), p = 0.516, n = 48`);
+})();
+
+// ─── Panel 2: Duration bar chart ─────────────────────────────────────────────
+(function() {
+  const W = 300, H = 360;
+  const margin = {top:50, right:30, bottom:80, left:70};
+  const w = W - margin.left - margin.right;
+  const h = H - margin.top  - margin.bottom;
+
+  const svg = d3.select("body")
+    .append("svg").attr("width", W).attr("height", H);
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const labels = barData.map(d => d.label);
+  const xScale = d3.scaleBand().domain(labels).range([0, w]).padding(0.45);
+
+  const allR = barData.flatMap(d => [d.ci_low, d.ci_high]);
+  const yMin = Math.min(0, d3.min(allR)) - 0.05;
+  const yMax = Math.max(0, d3.max(allR)) + 0.05;
+  const yScale = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]).nice();
+
+  // Gridlines
+  g.append("g").attr("class","gridline")
+    .call(d3.axisLeft(yScale).ticks(6).tickSize(-w).tickFormat(""))
+    .selectAll("line").style("stroke","#e8e8e8");
+
+  // Zero line
+  g.append("line").attr("class","zeroline")
+    .attr("x1",0).attr("x2",w)
+    .attr("y1",yScale(0)).attr("y2",yScale(0));
+
+  // Axes
+  g.append("g").attr("transform",`translate(0,${h})`)
+    .call(d3.axisBottom(xScale))
+    .selectAll("text").style("font-size","10px");
+  g.append("g").call(d3.axisLeft(yScale).ticks(6));
+
+  // Y-axis label
+  g.append("text").attr("text-anchor","middle")
+    .attr("transform","rotate(-90)")
+    .attr("x", -h/2).attr("y", -55)
+    .style("font-size","10px")
+    .text("Spearman r (vs. Mouse Liver NES)");
+
+  // Bars
+  const colors = [OKI.i4_bar, OKI.jaxa_bar];
+  g.selectAll(".bar")
+    .data(barData)
+    .enter().append("rect")
+      .attr("class","bar")
+      .attr("x", d => xScale(d.label))
+      .attr("y", d => d.r >= 0 ? yScale(d.r) : yScale(0))
+      .attr("width", xScale.bandwidth())
+      .attr("height", d => Math.abs(yScale(d.r) - yScale(0)))
+      .attr("fill", (d,i) => colors[i]);
+
+  // Error bars (95% CI)
+  const errW = 6;
+  barData.forEach(d => {
+    const cx = xScale(d.label) + xScale.bandwidth()/2;
+    g.append("line").attr("class","errbar")
+      .attr("x1",cx).attr("x2",cx)
+      .attr("y1",yScale(d.ci_low)).attr("y2",yScale(d.ci_high));
+    g.append("line").attr("class","errbar")
+      .attr("x1",cx-errW).attr("x2",cx+errW)
+      .attr("y1",yScale(d.ci_low)).attr("y2",yScale(d.ci_low));
+    g.append("line").attr("class","errbar")
+      .attr("x1",cx-errW).attr("x2",cx+errW)
+      .attr("y1",yScale(d.ci_high)).attr("y2",yScale(d.ci_high));
+  });
+
+  // p-value annotations
+  barData.forEach(d => {
+    const cx = xScale(d.label) + xScale.bandwidth()/2;
+    const yTop = yScale(Math.max(d.r, d.ci_high)) - 8;
+    const pStr = d.p < 0.05 ? (d.p < 0.01 ? "**" : "*") : "ns";
+    g.append("text").attr("class","sig-star")
+      .attr("x", cx).attr("y", yTop)
+      .attr("text-anchor","middle")
+      .text(pStr);
+  });
+
+  // Duration labels below bars
+  g.append("g").attr("transform",`translate(0,${h+2})`)
+    .selectAll("text")
+    .data(barData)
+    .enter().append("text")
+      .attr("x", d => xScale(d.label) + xScale.bandwidth()/2)
+      .attr("y", 28)
+      .attr("text-anchor","middle")
+      .style("font-size","9px")
+      .style("fill","#555")
+      .text(d => `${d.duration}d`);
+
+  // Title
+  svg.append("text").attr("class","panel-title")
+    .attr("x", W/2).attr("y", 18).attr("text-anchor","middle")
+    .text("Duration vs. Mouse NES Conservation");
+  svg.append("text").attr("class","panel-sub")
+    .attr("x", W/2).attr("y", 33).attr("text-anchor","middle")
+    .text("* p<0.05, ** p<0.01, ns = not significant");
+
+  // Download button
+  svg.append("foreignObject").attr("x", W-60).attr("y", H-22).attr("width",55).attr("height",20)
+    .append("xhtml:button")
+    .style("font-size","8px").style("cursor","pointer")
+    .text("Save SVG")
+    .on("click", function() {
+      const svgEl = svg.node();
+      const serializer = new XMLSerializer();
+      const blob = new Blob([serializer.serializeToString(svgEl)], {type:"image/svg+xml"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "E2_duration_bar.svg";
+      a.click();
+    });
+})();
+</script>
+</body>
+</html>

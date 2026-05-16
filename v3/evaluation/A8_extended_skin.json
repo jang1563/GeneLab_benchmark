@@ -1,0 +1,75 @@
+{
+  "tissue": "skin",
+  "method": "PCA-LR (LOMO, extended)",
+  "n_missions": 6,
+  "n_folds": 6,
+  "mean_auroc": 0.6692,
+  "fold_results": [
+    {
+      "test_mission": "MHU-2_(dorsal)",
+      "strain": "C57BL/6J",
+      "n_train": 113,
+      "n_test": 12,
+      "n_genes_selected": 19268,
+      "auroc": 0.8889,
+      "ci_lower": 0.6364,
+      "ci_upper": 1.0,
+      "perm_p": 0.01
+    },
+    {
+      "test_mission": "MHU-2_(femoral)",
+      "strain": "C57BL/6J",
+      "n_train": 108,
+      "n_test": 17,
+      "n_genes_selected": 19268,
+      "auroc": 0.9333,
+      "ci_lower": 0.7619,
+      "ci_upper": 1.0,
+      "perm_p": 0.003
+    },
+    {
+      "test_mission": "RR-5_dorsal",
+      "strain": "BAL-TAL",
+      "n_train": 105,
+      "n_test": 20,
+      "n_genes_selected": 19268,
+      "auroc": 0.31,
+      "ci_lower": 0.0808,
+      "ci_upper": 0.5867,
+      "perm_p": 0.9341
+    },
+    {
+      "test_mission": "RR-5_femoral",
+      "strain": "BAL-TAL",
+      "n_train": 106,
+      "n_test": 19,
+      "n_genes_selected": 19268,
+      "auroc": 0.3778,
+      "ci_lower": 0.0769,
+      "ci_upper": 0.6889,
+      "perm_p": 0.8052
+    },
+    {
+      "test_mission": "RR-6",
+      "strain": "C57BL/6J",
+      "n_train": 88,
+      "n_test": 37,
+      "n_genes_selected": 19268,
+      "auroc": 0.5351,
+      "ci_lower": 0.3352,
+      "ci_upper": 0.7267,
+      "perm_p": 0.3596
+    },
+    {
+      "test_mission": "RR-7",
+      "strain": "C57BL/6J",
+      "n_train": 105,
+      "n_test": 20,
+      "n_genes_selected": 19268,
+      "auroc": 0.97,
+      "ci_lower": 0.8958,
+      "ci_upper": 1.0,
+      "perm_p": 0.002
+    }
+  ]
+}

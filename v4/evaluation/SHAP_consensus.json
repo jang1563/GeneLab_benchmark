@@ -1,0 +1,2877 @@
+{
+  "consensus_genes": [
+    {
+      "gene": "MUP22",
+      "n_tissues": 4,
+      "n_methods": 3,
+      "tissues": [
+        "colon",
+        "gastrocnemius",
+        "lung",
+        "skin"
+      ],
+      "methods": [
+        "elasticnet_lr",
+        "pca_lr",
+        "xgb"
+      ],
+      "best_rank": 4,
+      "mean_rank": 36.0
+    },
+    {
+      "gene": "NPAS2",
+      "n_tissues": 3,
+      "n_methods": 4,
+      "tissues": [
+        "gastrocnemius",
+        "liver",
+        "skin"
+      ],
+      "methods": [
+        "elasticnet_lr",
+        "mlp",
+        "pca_lr",
+        "svm_rbf"
+      ],
+      "best_rank": 3,
+      "mean_rank": 44.8
+    },
+    {
+      "gene": "PER2",
+      "n_tissues": 3,
+      "n_methods": 3,
+      "tissues": [
+        "eye",
+        "gastrocnemius",
+        "lung"
+      ],
+      "methods": [
+        "elasticnet_lr",
+        "pca_lr",
+        "xgb"
+      ],
+      "best_rank": 9,
+      "mean_rank": 17.5
+    },
+    {
+      "gene": "GM24497",
+      "n_tissues": 3,
+      "n_methods": 2,
+      "tissues": [
+        "eye",
+        "gastrocnemius",
+        "thymus"
+      ],
+      "methods": [
+        "knn",
+        "pca_lr"
+      ],
+      "best_rank": 2,
+      "mean_rank": 39.0
+    },
+    {
+      "gene": "THRSP",
+      "n_tissues": 3,
+      "n_methods": 2,
+      "tissues": [
+        "colon",
+        "lung",
+        "skin"
+      ],
+      "methods": [
+        "pca_lr",
+        "xgb"
+      ],
+      "best_rank": 38,
+      "mean_rank": 68.0
+    }
+  ],
+  "tissue_specific_genes": {
+    "colon": [
+      {
+        "gene": "ENPP7",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "ORM1",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000106630",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "CHIT1",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000085269",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      }
+    ],
+    "eye": [
+      {
+        "gene": "ENSMUSG00000099519",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000108507",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "SST",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "GM12537",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "BCL2A1D",
+        "n_methods": 2,
+        "methods": [
+          "pca_lr",
+          "xgb"
+        ]
+      }
+    ],
+    "gastrocnemius": [
+      {
+        "gene": "RPS7-PS3",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "RPL37RT",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "TMSB15L",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "SOX4",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "METTL21E",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000120915",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "PRRT2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM4521",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000074800",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000083240",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000106666",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "E230016K23RIK",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "A730036I17RIK",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM50045",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GREM2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "NLRP1C-PS",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM9320",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MYL2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "3110040M04RIK",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM19410",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "PCK1",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000084817",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MIR684-1",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000044377",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "LGALS12",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "CIMAP1D",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ZFP811",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM15743",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "SFT2D1RT",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      }
+    ],
+    "kidney": [
+      {
+        "gene": "PCDHB7",
+        "n_methods": 2,
+        "methods": [
+          "rf",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "TRIM25",
+        "n_methods": 2,
+        "methods": [
+          "rf",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "E130308A19RIK",
+        "n_methods": 2,
+        "methods": [
+          "rf",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "SQLE",
+        "n_methods": 2,
+        "methods": [
+          "rf",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000121066",
+        "n_methods": 2,
+        "methods": [
+          "rf",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "PIEZO2",
+        "n_methods": 2,
+        "methods": [
+          "rf",
+          "xgb"
+        ]
+      },
+      {
+        "gene": "BAG2",
+        "n_methods": 2,
+        "methods": [
+          "rf",
+          "xgb"
+        ]
+      }
+    ],
+    "liver": [
+      {
+        "gene": "ENSMUSG00000091997",
+        "n_methods": 2,
+        "methods": [
+          "mlp",
+          "svm_rbf"
+        ]
+      },
+      {
+        "gene": "ARHGAP20",
+        "n_methods": 2,
+        "methods": [
+          "mlp",
+          "svm_rbf"
+        ]
+      }
+    ],
+    "lung": [
+      {
+        "gene": "CYP26B1",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "SNX31",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000108852",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM4798",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000097554",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM30551",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000117878",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "CYP3A57",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000090625",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000097340",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000085329",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000104217",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "OR7D10",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000105870",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000108920",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000109387",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000118200",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM38572",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000102579",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000109125",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "FAM124B",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "IGKV5-45",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000117594",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "DPEP3",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "USH1G",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM10046",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM35533",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "E130310I04RIK",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000109413",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000064352",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000118193",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000091021",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "LHX2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "PCDHA9",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000108956",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      }
+    ],
+    "skin": [
+      {
+        "gene": "MRGPRG",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP14",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "NKX1-2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000086320",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP7",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000108782",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "AADACL4FM4",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GUCY2F",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM29681",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM35986",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP3",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "OR2V2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP11",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP15",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000108441",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP16",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP19",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000095766",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "SLC6A18",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "IL20",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "BC049987",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "MUP2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "WFDC12",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000110884",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ETNPPL",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM6093",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "CCL27AL",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000107535",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ACOT5",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "PSG29",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "5430427M07RIK",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "SERPINB3C",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "ENSMUSG00000105211",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "EEF1ECE2",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GADL1",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GAL",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "GM7298",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      },
+      {
+        "gene": "CYP2E1",
+        "n_methods": 2,
+        "methods": [
+          "elasticnet_lr",
+          "pca_lr"
+        ]
+      }
+    ],
+    "thymus": [
+      {
+        "gene": "MYBPC3",
+        "n_methods": 2,
+        "methods": [
+          "knn",
+          "pca_lr"
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "colon_pca_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 64,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "colon_xgb_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 64,
+      "n_tested": 100,
+      "n_overlap": 2,
+      "overlap_genes": [
+        "IL6",
+        "STAT3"
+      ],
+      "p_value": 0.018819,
+      "enrichment_ratio": 2.0,
+      "source": "da_silveira_cell2020"
+    },
+    "eye_pca_lr_tissue_ref": {
+      "n_reference": 5,
+      "n_reference_in_universe": 5,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "eye_pca_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 64,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "eye_xgb_tissue_ref": {
+      "n_reference": 5,
+      "n_reference_in_universe": 5,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "eye_xgb_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 64,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "gastrocnemius_elasticnet_lr_tissue_ref": {
+      "n_reference": 9,
+      "n_reference_in_universe": 9,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "gastrocnemius_elasticnet_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 1,
+      "overlap_genes": [
+        "TNF"
+      ],
+      "p_value": 0.266953,
+      "enrichment_ratio": 1.0,
+      "source": "da_silveira_cell2020"
+    },
+    "gastrocnemius_pca_lr_tissue_ref": {
+      "n_reference": 9,
+      "n_reference_in_universe": 9,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "gastrocnemius_pca_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "kidney_rf_tissue_ref": {
+      "n_reference": 4,
+      "n_reference_in_universe": 4,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "kidney_rf_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "kidney_xgb_tissue_ref": {
+      "n_reference": 4,
+      "n_reference_in_universe": 4,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "kidney_xgb_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "liver_mlp_tissue_ref": {
+      "n_reference": 9,
+      "n_reference_in_universe": 2,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "liver_mlp_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 5,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "liver_svm_rbf_tissue_ref": {
+      "n_reference": 9,
+      "n_reference_in_universe": 2,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "liver_svm_rbf_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 5,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "lung_elasticnet_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "lung_pca_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "skin_elasticnet_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "skin_pca_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 65,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "thymus_knn_tissue_ref": {
+      "n_reference": 5,
+      "n_reference_in_universe": 3,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "thymus_knn_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 4,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "da_silveira_cell2020"
+    },
+    "thymus_pca_lr_tissue_ref": {
+      "n_reference": 5,
+      "n_reference_in_universe": 5,
+      "n_tested": 100,
+      "n_overlap": 0,
+      "overlap_genes": [],
+      "p_value": 1.0,
+      "enrichment_ratio": 0.0,
+      "source": "tissue_specific_literature"
+    },
+    "thymus_pca_lr_cell2020": {
+      "n_reference": 66,
+      "n_reference_in_universe": 66,
+      "n_tested": 100,
+      "n_overlap": 1,
+      "overlap_genes": [
+        "TERC"
+      ],
+      "p_value": 0.208985,
+      "enrichment_ratio": 1.0,
+      "source": "da_silveira_cell2020"
+    }
+  },
+  "shap_directions": {
+    "colon_pca_lr": {
+      "tissue": "colon",
+      "method": "pca_lr",
+      "n_positive_in_top100": 36,
+      "n_negative_in_top100": 64,
+      "top10_upregulated": [
+        [
+          "Apoa4",
+          0.0169
+        ],
+        [
+          "Enpp7",
+          0.0159
+        ],
+        [
+          "Fabp6",
+          0.0145
+        ],
+        [
+          "Ighv7-1",
+          0.0137
+        ],
+        [
+          "Igkv4-62",
+          0.0123
+        ],
+        [
+          "ENSMUSG00000106630",
+          0.0118
+        ],
+        [
+          "ENSMUSG00000102364",
+          0.0114
+        ],
+        [
+          "Chit1",
+          0.0114
+        ],
+        [
+          "H2bc24",
+          0.0112
+        ],
+        [
+          "Apoa1",
+          0.0108
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "ENSMUSG00000094509",
+          -0.0131
+        ],
+        [
+          "Gm23925",
+          -0.0132
+        ],
+        [
+          "ENSMUSG00000094087",
+          -0.0135
+        ],
+        [
+          "Amy2a5",
+          -0.0137
+        ],
+        [
+          "Orm1",
+          -0.0143
+        ],
+        [
+          "Igkv6-25",
+          -0.0156
+        ],
+        [
+          "Snord3b1",
+          -0.0162
+        ],
+        [
+          "Snord3b2",
+          -0.0162
+        ],
+        [
+          "ENSMUSG00000098641",
+          -0.0162
+        ],
+        [
+          "Snord3b3",
+          -0.0162
+        ]
+      ]
+    },
+    "colon_xgb": {
+      "tissue": "colon",
+      "method": "xgb",
+      "n_positive_in_top100": 28,
+      "n_negative_in_top100": 72,
+      "top10_upregulated": [
+        [
+          "Slc35a5",
+          0.0172
+        ],
+        [
+          "Fam13a",
+          0.0161
+        ],
+        [
+          "Gstt2",
+          0.0138
+        ],
+        [
+          "Dennd2b",
+          0.0123
+        ],
+        [
+          "ENSMUSG00000107020",
+          0.0122
+        ],
+        [
+          "Wee1",
+          0.0119
+        ],
+        [
+          "Gm20735",
+          0.0112
+        ],
+        [
+          "Ifitm10",
+          0.007
+        ],
+        [
+          "Tfe3",
+          0.0069
+        ],
+        [
+          "ENSMUSG00000086813",
+          0.0068
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Abtb2",
+          -0.0192
+        ],
+        [
+          "Ero1b",
+          -0.0196
+        ],
+        [
+          "Elmo3",
+          -0.0211
+        ],
+        [
+          "ENSMUSG00000085269",
+          -0.023
+        ],
+        [
+          "ENSMUSG00000083284",
+          -0.0288
+        ],
+        [
+          "Bco2",
+          -0.0292
+        ],
+        [
+          "Rasl11a",
+          -0.0316
+        ],
+        [
+          "Bpifc",
+          -0.0334
+        ],
+        [
+          "Chit1",
+          -0.0417
+        ],
+        [
+          "ENSMUSG00000106630",
+          -0.0608
+        ]
+      ]
+    },
+    "eye_pca_lr": {
+      "tissue": "eye",
+      "method": "pca_lr",
+      "n_positive_in_top100": 41,
+      "n_negative_in_top100": 59,
+      "top10_upregulated": [
+        [
+          "Cytip",
+          0.012
+        ],
+        [
+          "Gm14434",
+          0.0117
+        ],
+        [
+          "ENSMUSG00000116166",
+          0.0114
+        ],
+        [
+          "Apol9a",
+          0.0114
+        ],
+        [
+          "ENSMUSG00000108507",
+          0.0107
+        ],
+        [
+          "ENSMUSG00000083833",
+          0.0103
+        ],
+        [
+          "Sst",
+          0.0102
+        ],
+        [
+          "Krt16",
+          0.0099
+        ],
+        [
+          "Arhgap36",
+          0.0095
+        ],
+        [
+          "Cpn1",
+          0.0089
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Lgsn",
+          -0.0113
+        ],
+        [
+          "Mip",
+          -0.0113
+        ],
+        [
+          "Crybb2",
+          -0.0114
+        ],
+        [
+          "Crygb",
+          -0.0117
+        ],
+        [
+          "Crygc",
+          -0.0123
+        ],
+        [
+          "Cryba1",
+          -0.0125
+        ],
+        [
+          "Crygs",
+          -0.0128
+        ],
+        [
+          "ENSMUSG00000099519",
+          -0.0143
+        ],
+        [
+          "Cryaa",
+          -0.0144
+        ],
+        [
+          "Gm22068",
+          -0.016
+        ]
+      ]
+    },
+    "eye_xgb": {
+      "tissue": "eye",
+      "method": "xgb",
+      "n_positive_in_top100": 51,
+      "n_negative_in_top100": 49,
+      "top10_upregulated": [
+        [
+          "Sst",
+          0.3883
+        ],
+        [
+          "Fam107b",
+          0.1381
+        ],
+        [
+          "1810055G02Rik",
+          0.1102
+        ],
+        [
+          "ENSMUSG00000097699",
+          0.0627
+        ],
+        [
+          "Kbtbd3",
+          0.0602
+        ],
+        [
+          "Snai2",
+          0.0539
+        ],
+        [
+          "Gm3200",
+          0.0467
+        ],
+        [
+          "Mpp4",
+          0.0401
+        ],
+        [
+          "Nkg7",
+          0.0358
+        ],
+        [
+          "Ccng1",
+          0.0348
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "ENSMUSG00000081602",
+          -0.0402
+        ],
+        [
+          "ENSMUSG00000086256",
+          -0.0422
+        ],
+        [
+          "1700067K01Rik",
+          -0.0453
+        ],
+        [
+          "Gm5620",
+          -0.0455
+        ],
+        [
+          "Gabra5",
+          -0.0461
+        ],
+        [
+          "Bola2",
+          -0.0525
+        ],
+        [
+          "Upk3b",
+          -0.0604
+        ],
+        [
+          "ENSMUSG00000107813",
+          -0.0611
+        ],
+        [
+          "ENSMUSG00000117942",
+          -0.1258
+        ],
+        [
+          "Pappa2",
+          -0.3078
+        ]
+      ]
+    },
+    "gastrocnemius_elasticnet_lr": {
+      "tissue": "gastrocnemius",
+      "method": "elasticnet_lr",
+      "n_positive_in_top100": 49,
+      "n_negative_in_top100": 51,
+      "top10_upregulated": [
+        [
+          "Sox4",
+          0.0456
+        ],
+        [
+          "Mettl21e",
+          0.0388
+        ],
+        [
+          "Gm4521",
+          0.0302
+        ],
+        [
+          "ENSMUSG00000074800",
+          0.0265
+        ],
+        [
+          "ENSMUSG00000083240",
+          0.0263
+        ],
+        [
+          "ENSMUSG00000081824",
+          0.0246
+        ],
+        [
+          "Mpp3",
+          0.0238
+        ],
+        [
+          "Pnmt",
+          0.0238
+        ],
+        [
+          "Gm50045",
+          0.0191
+        ],
+        [
+          "Grem2",
+          0.0191
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Gm9320",
+          -0.0171
+        ],
+        [
+          "Bdh1",
+          -0.019
+        ],
+        [
+          "Ciart",
+          -0.0202
+        ],
+        [
+          "A730036I17Rik",
+          -0.0206
+        ],
+        [
+          "E230016K23Rik",
+          -0.0212
+        ],
+        [
+          "ENSMUSG00000106666",
+          -0.0217
+        ],
+        [
+          "Per2",
+          -0.03
+        ],
+        [
+          "Prrt2",
+          -0.0334
+        ],
+        [
+          "ENSMUSG00000120915",
+          -0.0337
+        ],
+        [
+          "Tmsb15l",
+          -0.0456
+        ]
+      ]
+    },
+    "gastrocnemius_pca_lr": {
+      "tissue": "gastrocnemius",
+      "method": "pca_lr",
+      "n_positive_in_top100": 42,
+      "n_negative_in_top100": 58,
+      "top10_upregulated": [
+        [
+          "ENSMUSG00000100131",
+          0.0144
+        ],
+        [
+          "ENSMUSG00000083061",
+          0.0107
+        ],
+        [
+          "ENSMUSG00000083240",
+          0.0107
+        ],
+        [
+          "Ndufb4b",
+          0.0102
+        ],
+        [
+          "Gm44505",
+          0.0094
+        ],
+        [
+          "Kcns1",
+          0.0093
+        ],
+        [
+          "ENSMUSG00000079224",
+          0.0093
+        ],
+        [
+          "Ltf",
+          0.0091
+        ],
+        [
+          "Gm24497",
+          0.0091
+        ],
+        [
+          "ENSMUSG00000059237",
+          0.0091
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Myl2",
+          -0.0095
+        ],
+        [
+          "3110040M04Rik",
+          -0.0098
+        ],
+        [
+          "Gm9320",
+          -0.0103
+        ],
+        [
+          "Myl3",
+          -0.0104
+        ],
+        [
+          "ENSMUSG00000094365",
+          -0.0107
+        ],
+        [
+          "Tmsb15l",
+          -0.0108
+        ],
+        [
+          "ENSMUSG00000083411",
+          -0.0108
+        ],
+        [
+          "ENSMUSG00000107478",
+          -0.0117
+        ],
+        [
+          "Rsc1a1",
+          -0.0132
+        ],
+        [
+          "Zfp968",
+          -0.0146
+        ]
+      ]
+    },
+    "kidney_rf": {
+      "tissue": "kidney",
+      "method": "rf",
+      "n_positive_in_top100": 24,
+      "n_negative_in_top100": 76,
+      "top10_upregulated": [
+        [
+          "Trim25",
+          0.0016
+        ],
+        [
+          "Wt1",
+          0.0013
+        ],
+        [
+          "E130308A19Rik",
+          0.0013
+        ],
+        [
+          "Anxa11",
+          0.0012
+        ],
+        [
+          "Tdrd5",
+          0.0011
+        ],
+        [
+          "Mrpl55",
+          0.0011
+        ],
+        [
+          "Ccdc198",
+          0.0011
+        ],
+        [
+          "Gata6",
+          0.001
+        ],
+        [
+          "Polr2a",
+          0.001
+        ],
+        [
+          "ENSMUSG00000110400",
+          0.001
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Wdr72",
+          -0.0012
+        ],
+        [
+          "Mgme1",
+          -0.0013
+        ],
+        [
+          "Cspg4",
+          -0.0013
+        ],
+        [
+          "Tcaf2",
+          -0.0014
+        ],
+        [
+          "Atp5mg",
+          -0.0014
+        ],
+        [
+          "Tmem229a",
+          -0.0014
+        ],
+        [
+          "Sptlc2",
+          -0.0014
+        ],
+        [
+          "Pcdhb7",
+          -0.0016
+        ],
+        [
+          "Lgals4",
+          -0.0017
+        ],
+        [
+          "Adam1a",
+          -0.002
+        ]
+      ]
+    },
+    "kidney_xgb": {
+      "tissue": "kidney",
+      "method": "xgb",
+      "n_positive_in_top100": 45,
+      "n_negative_in_top100": 55,
+      "top10_upregulated": [
+        [
+          "Trim25",
+          0.1943
+        ],
+        [
+          "D630039A03Rik",
+          0.108
+        ],
+        [
+          "ENSMUSG00000120875",
+          0.0879
+        ],
+        [
+          "Rnf181",
+          0.0561
+        ],
+        [
+          "Slc10a1",
+          0.0478
+        ],
+        [
+          "Dnajb11",
+          0.0442
+        ],
+        [
+          "Uxt",
+          0.0402
+        ],
+        [
+          "Fam221a",
+          0.039
+        ],
+        [
+          "Gm33318",
+          0.0387
+        ],
+        [
+          "Pdcd6ip",
+          0.0336
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Batf3",
+          -0.0371
+        ],
+        [
+          "Mpig6b",
+          -0.0372
+        ],
+        [
+          "Col4a3",
+          -0.0394
+        ],
+        [
+          "Akr1c12",
+          -0.0533
+        ],
+        [
+          "1700054A03Rik",
+          -0.0548
+        ],
+        [
+          "ENSMUSG00000120748",
+          -0.0719
+        ],
+        [
+          "Ighv7-1",
+          -0.075
+        ],
+        [
+          "Mboat1",
+          -0.0753
+        ],
+        [
+          "Lrp2",
+          -0.0875
+        ],
+        [
+          "Sqle",
+          -0.1116
+        ]
+      ]
+    },
+    "liver_mlp": {
+      "tissue": "liver",
+      "method": "mlp",
+      "n_positive_in_top100": 83,
+      "n_negative_in_top100": 17,
+      "top10_upregulated": [
+        [
+          "Cyp3a44",
+          0.0058
+        ],
+        [
+          "Lockd",
+          0.005
+        ],
+        [
+          "ENSMUSG00000102430",
+          0.0048
+        ],
+        [
+          "ENSMUSG00000087150",
+          0.0046
+        ],
+        [
+          "Gm45351",
+          0.0045
+        ],
+        [
+          "Dcdc2b",
+          0.0045
+        ],
+        [
+          "ENSMUSG00000048916",
+          0.0045
+        ],
+        [
+          "Gm18939",
+          0.0044
+        ],
+        [
+          "Ulk4",
+          0.0038
+        ],
+        [
+          "Tmem38a",
+          0.0037
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "ENSMUSG00000109576",
+          -0.001
+        ],
+        [
+          "Vcan",
+          -0.001
+        ],
+        [
+          "ENSMUSG00000107118",
+          -0.0011
+        ],
+        [
+          "ENSMUSG00000109498",
+          -0.0011
+        ],
+        [
+          "Gm14288",
+          -0.0011
+        ],
+        [
+          "ENSMUSG00000095547",
+          -0.0012
+        ],
+        [
+          "Prex2",
+          -0.0013
+        ],
+        [
+          "ENSMUSG00000104291",
+          -0.0013
+        ],
+        [
+          "ENSMUSG00000121608",
+          -0.0014
+        ],
+        [
+          "ENSMUSG00000103427",
+          -0.0018
+        ]
+      ]
+    },
+    "liver_svm_rbf": {
+      "tissue": "liver",
+      "method": "svm_rbf",
+      "n_positive_in_top100": 98,
+      "n_negative_in_top100": 2,
+      "top10_upregulated": [
+        [
+          "2310069G16Rik",
+          0.0043
+        ],
+        [
+          "ENSMUSG00000073835",
+          0.0023
+        ],
+        [
+          "Npas2",
+          0.0021
+        ],
+        [
+          "Gm23946",
+          0.002
+        ],
+        [
+          "Phospho1",
+          0.0019
+        ],
+        [
+          "ENSMUSG00000059237",
+          0.0018
+        ],
+        [
+          "Dbp",
+          0.0017
+        ],
+        [
+          "ENSMUSG00000108884",
+          0.0016
+        ],
+        [
+          "ENSMUSG00000086447",
+          0.0016
+        ],
+        [
+          "ENSMUSG00000101724",
+          0.0016
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "ENSMUSG00000101878",
+          -0.0001
+        ],
+        [
+          "Arfip1",
+          -0.0001
+        ],
+        [
+          "ENSMUSG00002076650",
+          -0.0001
+        ],
+        [
+          "ENSMUSG00000090582",
+          -0.0001
+        ],
+        [
+          "Gm6192",
+          -0.0001
+        ],
+        [
+          "Trp63",
+          -0.0002
+        ],
+        [
+          "ENSMUSG00000094509",
+          -0.0002
+        ],
+        [
+          "3930402G23Rik",
+          -0.0002
+        ],
+        [
+          "ENSMUSG00000102523",
+          -0.0002
+        ],
+        [
+          "Gm24494",
+          -0.0003
+        ]
+      ]
+    },
+    "lung_elasticnet_lr": {
+      "tissue": "lung",
+      "method": "elasticnet_lr",
+      "n_positive_in_top100": 45,
+      "n_negative_in_top100": 55,
+      "top10_upregulated": [
+        [
+          "Cyp26b1",
+          0.0575
+        ],
+        [
+          "Snx31",
+          0.0402
+        ],
+        [
+          "ENSMUSG00000108852",
+          0.0349
+        ],
+        [
+          "Gm4798",
+          0.0346
+        ],
+        [
+          "ENSMUSG00000117878",
+          0.0271
+        ],
+        [
+          "Cyp3a57",
+          0.0262
+        ],
+        [
+          "ENSMUSG00000085329",
+          0.0237
+        ],
+        [
+          "Ighv1-77",
+          0.0223
+        ],
+        [
+          "ENSMUSG00000112018",
+          0.022
+        ],
+        [
+          "ENSMUSG00000103215",
+          0.0208
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Per2",
+          -0.0232
+        ],
+        [
+          "ENSMUSG00000104217",
+          -0.0236
+        ],
+        [
+          "Gm4750",
+          -0.0243
+        ],
+        [
+          "Cys1",
+          -0.0249
+        ],
+        [
+          "ENSMUSG00000097340",
+          -0.0249
+        ],
+        [
+          "Ngp",
+          -0.025
+        ],
+        [
+          "Camp",
+          -0.0252
+        ],
+        [
+          "ENSMUSG00000090625",
+          -0.0261
+        ],
+        [
+          "Gm30551",
+          -0.0279
+        ],
+        [
+          "ENSMUSG00000097554",
+          -0.0343
+        ]
+      ]
+    },
+    "lung_pca_lr": {
+      "tissue": "lung",
+      "method": "pca_lr",
+      "n_positive_in_top100": 47,
+      "n_negative_in_top100": 53,
+      "top10_upregulated": [
+        [
+          "Ighv1-77",
+          0.013
+        ],
+        [
+          "ENSMUSG00000075015",
+          0.0127
+        ],
+        [
+          "Igkv5-45",
+          0.0122
+        ],
+        [
+          "ENSMUSG00000068964",
+          0.0113
+        ],
+        [
+          "ENSMUSG00000095186",
+          0.0109
+        ],
+        [
+          "Ighv1-62-2",
+          0.0105
+        ],
+        [
+          "ENSMUSG00000097312",
+          0.0104
+        ],
+        [
+          "Cyp26b1",
+          0.0102
+        ],
+        [
+          "ENSMUSG00000095519",
+          0.0101
+        ],
+        [
+          "ENSMUSG00000075014",
+          0.0098
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "ENSMUSG00000084858",
+          -0.0096
+        ],
+        [
+          "Nppa",
+          -0.0098
+        ],
+        [
+          "Retn",
+          -0.0099
+        ],
+        [
+          "Camp",
+          -0.0099
+        ],
+        [
+          "ENSMUSG00000079224",
+          -0.01
+        ],
+        [
+          "ENSMUSG00000055228",
+          -0.01
+        ],
+        [
+          "ENSMUSG00000097554",
+          -0.0108
+        ],
+        [
+          "ENSMUSG00000101309",
+          -0.0114
+        ],
+        [
+          "ENSMUSG00000104217",
+          -0.0116
+        ],
+        [
+          "Mup22",
+          -0.0118
+        ]
+      ]
+    },
+    "skin_elasticnet_lr": {
+      "tissue": "skin",
+      "method": "elasticnet_lr",
+      "n_positive_in_top100": 51,
+      "n_negative_in_top100": 49,
+      "top10_upregulated": [
+        [
+          "Mrgprg",
+          0.1103
+        ],
+        [
+          "Nkx1-2",
+          0.066
+        ],
+        [
+          "ENSMUSG00000086320",
+          0.0658
+        ],
+        [
+          "ENSMUSG00000108782",
+          0.061
+        ],
+        [
+          "Aadacl4fm4",
+          0.0609
+        ],
+        [
+          "Gucy2f",
+          0.0602
+        ],
+        [
+          "Or2v2",
+          0.0516
+        ],
+        [
+          "ENSMUSG00000108441",
+          0.0478
+        ],
+        [
+          "ENSMUSG00000095279",
+          0.0432
+        ],
+        [
+          "Il20",
+          0.0357
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Mup16",
+          -0.0435
+        ],
+        [
+          "Mup15",
+          -0.0494
+        ],
+        [
+          "Mup11",
+          -0.0503
+        ],
+        [
+          "Mup3",
+          -0.0516
+        ],
+        [
+          "Gm35986",
+          -0.0535
+        ],
+        [
+          "Gm29681",
+          -0.0578
+        ],
+        [
+          "Mup7",
+          -0.0614
+        ],
+        [
+          "Mup22",
+          -0.0914
+        ],
+        [
+          "Mup14",
+          -0.0922
+        ],
+        [
+          "Mup10",
+          -0.1121
+        ]
+      ]
+    },
+    "skin_pca_lr": {
+      "tissue": "skin",
+      "method": "pca_lr",
+      "n_positive_in_top100": 34,
+      "n_negative_in_top100": 66,
+      "top10_upregulated": [
+        [
+          "Mrgprg",
+          0.0308
+        ],
+        [
+          "Gm7298",
+          0.0292
+        ],
+        [
+          "Il20",
+          0.0218
+        ],
+        [
+          "ENSMUSG00000108441",
+          0.0216
+        ],
+        [
+          "Nkx1-2",
+          0.021
+        ],
+        [
+          "ENSMUSG00000108782",
+          0.0192
+        ],
+        [
+          "Gm6093",
+          0.0185
+        ],
+        [
+          "Psg29",
+          0.0178
+        ],
+        [
+          "Etnppl",
+          0.0177
+        ],
+        [
+          "ENSMUSG00000099871",
+          0.0174
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Wfdc12",
+          -0.0226
+        ],
+        [
+          "Mup19",
+          -0.025
+        ],
+        [
+          "Mup11",
+          -0.0257
+        ],
+        [
+          "Mup3",
+          -0.0264
+        ],
+        [
+          "Mup7",
+          -0.0272
+        ],
+        [
+          "Mup16",
+          -0.0274
+        ],
+        [
+          "Mup22",
+          -0.0293
+        ],
+        [
+          "Mup15",
+          -0.0326
+        ],
+        [
+          "Mup14",
+          -0.0336
+        ],
+        [
+          "Mup10",
+          -0.0345
+        ]
+      ]
+    },
+    "thymus_knn": {
+      "tissue": "thymus",
+      "method": "knn",
+      "n_positive_in_top100": 53,
+      "n_negative_in_top100": 47,
+      "top10_upregulated": [
+        [
+          "Ppp1r3d",
+          0.011
+        ],
+        [
+          "ENSMUSG00000111052",
+          0.0083
+        ],
+        [
+          "Pctp",
+          0.0072
+        ],
+        [
+          "Rmrp",
+          0.006
+        ],
+        [
+          "Ephx2",
+          0.0049
+        ],
+        [
+          "Cacna1h",
+          0.0043
+        ],
+        [
+          "ENSMUSG00000064317",
+          0.0043
+        ],
+        [
+          "Scg3",
+          0.0042
+        ],
+        [
+          "Mc2r",
+          0.0042
+        ],
+        [
+          "ENSMUSG00000109206",
+          0.0041
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Sec14l2",
+          -0.0028
+        ],
+        [
+          "Naip6",
+          -0.0029
+        ],
+        [
+          "Treml1",
+          -0.003
+        ],
+        [
+          "Gm23442",
+          -0.0031
+        ],
+        [
+          "Hoxd8",
+          -0.0032
+        ],
+        [
+          "Acadm",
+          -0.0034
+        ],
+        [
+          "ENSMUSG00000104181",
+          -0.0034
+        ],
+        [
+          "Fam174b",
+          -0.0034
+        ],
+        [
+          "Col6a6",
+          -0.0034
+        ],
+        [
+          "Nrg4",
+          -0.0039
+        ]
+      ]
+    },
+    "thymus_pca_lr": {
+      "tissue": "thymus",
+      "method": "pca_lr",
+      "n_positive_in_top100": 48,
+      "n_negative_in_top100": 52,
+      "top10_upregulated": [
+        [
+          "Zfp968",
+          0.0622
+        ],
+        [
+          "Lep",
+          0.0569
+        ],
+        [
+          "Nnat",
+          0.0502
+        ],
+        [
+          "ENSMUSG00000099871",
+          0.0486
+        ],
+        [
+          "Ugt1a9",
+          0.0481
+        ],
+        [
+          "ENSMUSG00002074947",
+          0.0465
+        ],
+        [
+          "Aqp8",
+          0.046
+        ],
+        [
+          "Aldob",
+          0.0436
+        ],
+        [
+          "Cyp3a11",
+          0.0436
+        ],
+        [
+          "Apoc3",
+          0.0432
+        ]
+      ],
+      "top10_downregulated": [
+        [
+          "Xirp1",
+          -0.0433
+        ],
+        [
+          "ENSMUSG00000076138",
+          -0.0436
+        ],
+        [
+          "Gm8325",
+          -0.0442
+        ],
+        [
+          "Hrc",
+          -0.0467
+        ],
+        [
+          "Sec14l3",
+          -0.0473
+        ],
+        [
+          "Scgb1a1",
+          -0.0507
+        ],
+        [
+          "Myh6",
+          -0.0536
+        ],
+        [
+          "Kcnj3",
+          -0.0539
+        ],
+        [
+          "Mylk4",
+          -0.0543
+        ],
+        [
+          "Gm15500",
+          -0.0678
+        ]
+      ]
+    }
+  },
+  "method_agreement": {
+    "liver": {
+      "method_a": "svm_rbf",
+      "method_b": "mlp",
+      "jaccard_top100": 0.0204,
+      "n_overlap_top100": 4,
+      "spearman_rho": 0.0788,
+      "spearman_p": 3.5e-05,
+      "n_common_genes": 2751
+    },
+    "gastrocnemius": {
+      "method_a": "elasticnet_lr",
+      "method_b": "pca_lr",
+      "jaccard_top100": 0.2121,
+      "n_overlap_top100": 35,
+      "spearman_rho": 0.1994,
+      "spearman_p": 0.0,
+      "n_common_genes": 20957
+    },
+    "kidney": {
+      "method_a": "xgb",
+      "method_b": "rf",
+      "jaccard_top100": 0.0417,
+      "n_overlap_top100": 8,
+      "spearman_rho": 0.0808,
+      "spearman_p": 0.0,
+      "n_common_genes": 26027
+    },
+    "thymus": {
+      "method_a": "knn",
+      "method_b": "pca_lr",
+      "jaccard_top100": 0.005,
+      "n_overlap_top100": 1,
+      "spearman_rho": 0.0024,
+      "spearman_p": 0.877124,
+      "n_common_genes": 4062
+    },
+    "eye": {
+      "method_a": "pca_lr",
+      "method_b": "xgb",
+      "jaccard_top100": 0.0309,
+      "n_overlap_top100": 6,
+      "spearman_rho": 0.0575,
+      "spearman_p": 0.0,
+      "n_common_genes": 26994
+    },
+    "skin": {
+      "method_a": "elasticnet_lr",
+      "method_b": "pca_lr",
+      "jaccard_top100": 0.25,
+      "n_overlap_top100": 40,
+      "spearman_rho": 0.3058,
+      "spearman_p": 0.0,
+      "n_common_genes": 26788
+    },
+    "lung": {
+      "method_a": "elasticnet_lr",
+      "method_b": "pca_lr",
+      "jaccard_top100": 0.25,
+      "n_overlap_top100": 40,
+      "spearman_rho": 0.3867,
+      "spearman_p": 0.0,
+      "n_common_genes": 31697
+    },
+    "colon": {
+      "method_a": "pca_lr",
+      "method_b": "xgb",
+      "jaccard_top100": 0.0471,
+      "n_overlap_top100": 9,
+      "spearman_rho": 0.0812,
+      "spearman_p": 0.0,
+      "n_common_genes": 30455
+    }
+  },
+  "parameters": {
+    "top_n": 100,
+    "min_tissues_consensus": 3,
+    "min_methods_consensus": 2,
+    "min_methods_tissue_specific": 2,
+    "total_genes_approx": 17000
+  },
+  "n_shap_results": 16,
+  "timestamp": "2026-03-23T03:08:49.375080"
+}
