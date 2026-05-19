@@ -12,7 +12,7 @@
       "version": "https://github.com/jang1563/SpaceOmicsBench.git@main@624048c5355e7381877357b8126e7d78606aa72a",
       "required_for": ["bridge.supervised_conservation.full_msigdb", "bridge.species_transfer_nes"],
       "tracked_in_git": false,
-      "freeze_status": "release_candidate",
+      "freeze_status": "frozen",
       "evidence": [
         {
           "path": "v8/bridge/evaluation/bridge_leakage_audit.json",
@@ -39,7 +39,7 @@
           "notes": "NASA Twins fGSEA NES table consumed by bridge.species_transfer_nes."
         }
       ],
-      "notes": "Pinned to the SpaceOmicsBench public repo at commit 624048c on main as of 2026-05-16. The three CSVs above are the exact files consumed by BRIDGE, with SHA-256 hashes computed from the local checkout; a clean HPC re-clone must confirm the same hashes before promotion to frozen."
+      "notes": "Pinned to the SpaceOmicsBench public repo at commit 624048c on main as of 2026-05-16. The three CSVs above are the exact files consumed by BRIDGE, with SHA-256 hashes computed from the local checkout. Clean public re-clone verification completed 2026-05-16: cloned https://github.com/jang1563/SpaceOmicsBench.git into a fresh tmp directory and confirmed all three gt_conserved_pathways_* SHA-256 hashes at commit 624048c5355e7381877357b8126e7d78606aa72a reproduce exactly via `git show <commit>:<path> | shasum -a 256`."
     },
     {
       "source_id": "osdr.decompose.raw_analogs",
@@ -119,7 +119,6 @@
   ],
   "release_blockers": [
     "Run scripts/hpc_v8_beta_rebuild.sh from a fresh clean checkout, with lincs_query.py and api_snapshot_manifest.py db-version switched to cpcd-gse70138-v1.0, and update run manifests + api_snapshot_manifest.json payload SHA-256 with that exact commit/job metadata.",
-    "Confirm SpaceOmicsBench commit 624048c5355e7381877357b8126e7d78606aa72a is reachable from a clean public re-clone and that the three gt_conserved_pathways_* CSV SHA-256 hashes recorded above match.",
     "Prepare external Hugging Face and Zenodo artifact records, including DOI or reserved DOI once minted."
   ]
 }
