@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "bridge.human_skin_transfer",
+  "pillar": "bridge",
+  "status": "draft",
+  "claim": {
+    "short": "On the locally auditable Hallmark-dominated overlap (n=25 pathways per mouse tissue), mouse skin NES does not best predict human Inspiration4 skin post-flight NES; mouse gastrocnemius is the only tissue with a positive correlation (r=+0.83), while mouse kidney/eye/liver show the strongest negative correlations (r ranging from -0.87 to -0.91). The tissue-matching hypothesis (mouse skin -> human skin) is not supported on this overlap subset.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/bridge/evaluation/human_skin_transfer.csv",
+      "v8/bridge/evaluation/human_skin_transfer.json"
+    ]
+  },
+  "generated_at": "2026-05-16T21:35:00Z",
+  "code": {
+    "script": "v8/bridge/human_skin_transfer.py",
+    "command": "SPACEOMICS_ROOT=$SPACEOMICS_ROOT python3 v8/bridge/human_skin_transfer.py",
+    "parameters": {
+      "n_bootstrap": 1000,
+      "n_permutation": 5000,
+      "min_pathways": 10,
+      "rng_seed": 20260516,
+      "mouse_tissues": ["thymus", "gastrocnemius", "skin", "eye", "liver", "kidney"],
+      "mouse_dbs": ["hallmark", "kegg", "reactome", "mitocarta", "c2cgp", "c5bp"]
+    }
+  },
+  "inputs": [
+    {
+      "role": "mouse_fgsea",
+      "path_or_accession": "processed/fgsea/*/*_fgsea_{hallmark,kegg,reactome,mitocarta,c2cgp,c5bp}.csv",
+      "kind": "local_file",
+      "tracked_in_git": false,
+      "notes": "Hallmark/KEGG/Reactome/MitoCarta summaries available locally; c2cgp/c5bp expansions are HPC-only and absent here, so the observed overlap with i4_skin (Hallmark/C2/C5) is limited to ~25 pathways per tissue and is Hallmark-dominated."
+    },
+    {
+      "role": "human_i4_skin_reference",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_i4_skin.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:03526f07807c0976477f8b655e63fb08da74e59ec28c883202212929f39eaf8c",
+      "notes": "273 pathways, single compartment skin|Immediately Post-flight, DB mix Hallmark/C2/C5. From SpaceOmicsBench commit 624048c5355e7381877357b8126e7d78606aa72a (input_freeze.json spaceomicsbench.v2_public). Hash recorded here for traceability; this file is the new human surface added by this analysis and is not yet listed in input_freeze.json evidence."
+    }
+  ],
+  "outputs": [
+    {
+      "role": "summary_json",
+      "path_or_accession": "v8/bridge/evaluation/human_skin_transfer.json",
+      "kind": "local_file",
+      "checksum": "sha256:f62d33d272fb2e41b811403e0cb1777d921d7caa45475814665ff846275d0073",
+      "tracked_in_git": true
+    },
+    {
+      "role": "results_csv",
+      "path_or_accession": "v8/bridge/evaluation/human_skin_transfer.csv",
+      "kind": "local_file",
+      "checksum": "sha256:dce93c00465de13b6d4b391ce1d19b10d3e4055b401cedc0f0335c0d177b0ad4",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "host": "local-laptop",
+    "spaceomics_root": "/Users/jak4013/Dropbox/Bioinformatics/Claude/SpaceOmicsBench",
+    "python": "Python 3 (system)"
+  },
+  "metrics": [
+    {"name": "shared_pathways_per_mouse_tissue", "value": 25, "unit": "pathways", "context": "liver overlaps 26"},
+    {"name": "mouse_skin_to_human_skin_spearman_r", "value": -0.6653846153846155},
+    {"name": "mouse_skin_to_human_skin_permutation_p", "value": 0.0009998000399920016},
+    {"name": "mouse_gastrocnemius_to_human_skin_spearman_r", "value": 0.8261538461538462},
+    {"name": "mouse_kidney_to_human_skin_spearman_r", "value": -0.9046153846153847},
+    {"name": "mouse_skin_rank_among_6_tissues", "value": 3, "context": "ranked by descending r; skin sits below gastrocnemius (+0.83) and thymus (-0.11)"}
+  ],
+  "validation": {
+    "local_tests_run": true,
+    "hpc_tests_run": false,
+    "checks": [
+      "python3 v8/bridge/human_skin_transfer.py",
+      "python3 -c \"import json; json.load(open('v8/bridge/evaluation/human_skin_transfer.json'))\""
+    ],
+    "notes": "Exploratory local-only run. Two follow-ups are needed before promoting to hpc_validated: (1) regenerate on HPC with the full c2cgp/c5bp MSigDB expansions so the shared-pathway overlap rises from ~25 to ~100-200, and (2) register the i4_skin CSV in input_freeze.json under spaceomicsbench.v2_public.evidence so its SHA-256 is part of the freeze record."
+  }
+}

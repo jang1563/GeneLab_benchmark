@@ -1,0 +1,253 @@
+{
+  "analysis": "proteostasis_matrix_mouse_tissues_x_human_compartments",
+  "pathway_sets": {
+    "proteostasis_11": [
+      "REACTOME_TRANSLATION",
+      "REACTOME_EUKARYOTIC_TRANSLATION_INITIATION",
+      "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION",
+      "REACTOME_NONSENSE_MEDIATED_DECAY_NMD",
+      "REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE",
+      "REACTOME_ACTIVATION_OF_THE_MRNA_UPON_BINDING_OF_THE_CAP_BINDING_COMPLEX_AND_EIFS_AND_SUBSEQUENT_BINDING_TO_43S",
+      "REACTOME_AUF1_HNRNP_D0_BINDS_AND_DESTABILIZES_MRNA",
+      "REACTOME_RRNA_PROCESSING",
+      "REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY",
+      "REACTOME_INFLUENZA_INFECTION",
+      "HALLMARK_MYC_TARGETS_V1"
+    ],
+    "nonproteostasis_14": [
+      "REACTOME_METABOLISM_OF_AMINO_ACIDS_AND_DERIVATIVES",
+      "REACTOME_SELENOAMINO_ACID_METABOLISM",
+      "REACTOME_CELLULAR_RESPONSE_TO_STARVATION",
+      "HALLMARK_MITOTIC_SPINDLE",
+      "REACTOME_THE_ROLE_OF_GTSE1_IN_G2_M_PROGRESSION_AFTER_G2_CHECKPOINT",
+      "REACTOME_SCF_SKP2_MEDIATED_DEGRADATION_OF_P27_P21",
+      "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+      "REACTOME_RESPIRATORY_ELECTRON_TRANSPORT",
+      "REACTOME_HEDGEHOG_LIGAND_BIOGENESIS",
+      "REACTOME_DEGRADATION_OF_DVL",
+      "REACTOME_ASYMMETRIC_LOCALIZATION_OF_PCP_PROTEINS",
+      "REACTOME_SIGNALING_BY_ROBO_RECEPTORS",
+      "REACTOME_REGULATION_OF_EXPRESSION_OF_SLITS_AND_ROBOS",
+      "REACTOME_DEFECTIVE_CFTR_CAUSES_CYSTIC_FIBROSIS"
+    ]
+  },
+  "mouse_tissues": [
+    "thymus",
+    "gastrocnemius",
+    "skin",
+    "eye",
+    "liver",
+    "kidney"
+  ],
+  "n_human_compartments": 31,
+  "best_pairing_per_mouse_tissue_proteostasis": {
+    "eye": {
+      "mouse_proteostasis_11_mean_NES": 2.922062795603273,
+      "best_compartment_max_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+        "n_pathways": 3,
+        "spearman_r": 1.0,
+        "permutation_p": 0.3375324935012997
+      },
+      "worst_compartment_min_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD8;Multivariate (PolyA+ and Ribodepleted together)|In-flight vs Pre-flight",
+        "n_pathways": 4,
+        "spearman_r": -1.0,
+        "permutation_p": 0.08658268346330734
+      },
+      "mean_r_across_compartments": -0.37179559570863924,
+      "median_r_across_compartments": -0.3272727272727273,
+      "n_compartments_with_perm_p_lt_005": 1
+    },
+    "gastrocnemius": {
+      "mouse_proteostasis_11_mean_NES": -2.2544172442551065,
+      "best_compartment_max_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD8;Multivariate (PolyA+ and Ribodepleted together)|In-flight vs Pre-flight",
+        "n_pathways": 4,
+        "spearman_r": 1.0,
+        "permutation_p": 0.07998400319936012
+      },
+      "worst_compartment_min_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+        "n_pathways": 3,
+        "spearman_r": -1.0,
+        "permutation_p": 0.3239352129574085
+      },
+      "mean_r_across_compartments": 0.3927442123094297,
+      "median_r_across_compartments": 0.36363636363636365,
+      "n_compartments_with_perm_p_lt_005": 1
+    },
+    "kidney": {
+      "mouse_proteostasis_11_mean_NES": 1.3491287438966924,
+      "best_compartment_max_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+        "n_pathways": 3,
+        "spearman_r": 1.0,
+        "permutation_p": 0.33473305338932213
+      },
+      "worst_compartment_min_r": {
+        "mission": "Inspiration4_Skin",
+        "compartment": "skin|Immediately Post-flight",
+        "n_pathways": 11,
+        "spearman_r": -0.8090909090909091,
+        "permutation_p": 0.003199360127974405
+      },
+      "mean_r_across_compartments": -0.11731601731601732,
+      "median_r_across_compartments": -0.28181818181818186,
+      "n_compartments_with_perm_p_lt_005": 1
+    },
+    "liver": {
+      "mouse_proteostasis_11_mean_NES": 0.9161290004775547,
+      "best_compartment_max_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+        "n_pathways": 3,
+        "spearman_r": 1.0,
+        "permutation_p": 0.3235352929414117
+      },
+      "worst_compartment_min_r": {
+        "mission": "Inspiration4_Skin",
+        "compartment": "skin|Immediately Post-flight",
+        "n_pathways": 11,
+        "spearman_r": -0.8454545454545455,
+        "permutation_p": 0.0011997600479904018
+      },
+      "mean_r_across_compartments": -0.14136081309994353,
+      "median_r_across_compartments": -0.26363636363636367,
+      "n_compartments_with_perm_p_lt_005": 1
+    },
+    "skin": {
+      "mouse_proteostasis_11_mean_NES": 0.8439547385841855,
+      "best_compartment_max_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+        "n_pathways": 3,
+        "spearman_r": 0.5,
+        "permutation_p": 1.0
+      },
+      "worst_compartment_min_r": {
+        "mission": "Inspiration4_Skin",
+        "compartment": "skin|Immediately Post-flight",
+        "n_pathways": 11,
+        "spearman_r": -0.8272727272727273,
+        "permutation_p": 0.0023995200959808036
+      },
+      "mean_r_across_compartments": -0.13634481460568415,
+      "median_r_across_compartments": 0.0,
+      "n_compartments_with_perm_p_lt_005": 1
+    },
+    "thymus": {
+      "mouse_proteostasis_11_mean_NES": 1.4428872831936763,
+      "best_compartment_max_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD4;Multivariate (PolyA+ and Ribodepleted together)|In-flight vs Pre-flight",
+        "n_pathways": 4,
+        "spearman_r": 0.7999999999999999,
+        "permutation_p": 0.33093381323735255
+      },
+      "worst_compartment_min_r": {
+        "mission": "NASA_Twins",
+        "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+        "n_pathways": 3,
+        "spearman_r": -0.5,
+        "permutation_p": 1.0
+      },
+      "mean_r_across_compartments": 0.22152268021833235,
+      "median_r_across_compartments": 0.06666666666666665,
+      "n_compartments_with_perm_p_lt_005": 0
+    }
+  },
+  "overall_best_5_pairings_proteostasis": [
+    {
+      "mouse_tissue": "gastrocnemius",
+      "mission": "NASA_Twins",
+      "compartment": "CD8;Multivariate (PolyA+ and Ribodepleted together)|In-flight vs Pre-flight",
+      "n_pathways": 4,
+      "spearman_r": 1.0,
+      "permutation_p": 0.07998400319936012
+    },
+    {
+      "mouse_tissue": "eye",
+      "mission": "NASA_Twins",
+      "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+      "n_pathways": 3,
+      "spearman_r": 1.0,
+      "permutation_p": 0.3375324935012997
+    },
+    {
+      "mouse_tissue": "liver",
+      "mission": "NASA_Twins",
+      "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+      "n_pathways": 3,
+      "spearman_r": 1.0,
+      "permutation_p": 0.3235352929414117
+    },
+    {
+      "mouse_tissue": "kidney",
+      "mission": "NASA_Twins",
+      "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+      "n_pathways": 3,
+      "spearman_r": 1.0,
+      "permutation_p": 0.33473305338932213
+    },
+    {
+      "mouse_tissue": "gastrocnemius",
+      "mission": "Inspiration4_Skin",
+      "compartment": "skin|Immediately Post-flight",
+      "n_pathways": 11,
+      "spearman_r": 0.8636363636363636,
+      "permutation_p": 0.0013997200559888023
+    }
+  ],
+  "overall_worst_5_pairings_proteostasis": [
+    {
+      "mouse_tissue": "gastrocnemius",
+      "mission": "NASA_Twins",
+      "compartment": "CD19;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+      "n_pathways": 3,
+      "spearman_r": -1.0,
+      "permutation_p": 0.3239352129574085
+    },
+    {
+      "mouse_tissue": "eye",
+      "mission": "NASA_Twins",
+      "compartment": "CD8;Multivariate (PolyA+ and Ribodepleted together)|In-flight vs Pre-flight",
+      "n_pathways": 4,
+      "spearman_r": -1.0,
+      "permutation_p": 0.08658268346330734
+    },
+    {
+      "mouse_tissue": "liver",
+      "mission": "Inspiration4_Skin",
+      "compartment": "skin|Immediately Post-flight",
+      "n_pathways": 11,
+      "spearman_r": -0.8454545454545455,
+      "permutation_p": 0.0011997600479904018
+    },
+    {
+      "mouse_tissue": "eye",
+      "mission": "Inspiration4_Skin",
+      "compartment": "skin|Immediately Post-flight",
+      "n_pathways": 11,
+      "spearman_r": -0.8363636363636365,
+      "permutation_p": 0.002599480103979204
+    },
+    {
+      "mouse_tissue": "skin",
+      "mission": "Inspiration4_Skin",
+      "compartment": "skin|Immediately Post-flight",
+      "n_pathways": 11,
+      "spearman_r": -0.8272727272727273,
+      "permutation_p": 0.0023995200959808036
+    }
+  ],
+  "params": {
+    "n_permutation": 5000,
+    "rng_seed": 20260516
+  }
+}
