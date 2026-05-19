@@ -1,0 +1,280 @@
+{
+  "analysis": "skin_transfer_driver_decomposition",
+  "scope": "exploratory; explains the gastrocnemius +0.826 vs skin -0.665 contrast from human_skin_transfer.py",
+  "shared_pathways": 25,
+  "full_spearman_r": {
+    "mouse_gastrocnemius_vs_human_skin": 0.8261538461538462,
+    "mouse_skin_vs_human_skin": -0.6653846153846155
+  },
+  "sign_match_overall": {
+    "gastrocnemius_vs_human_skin_frac": 0.88,
+    "skin_vs_human_skin_frac": 0.16
+  },
+  "family_summary": {
+    "amino_acid_metabolism": {
+      "n_pathways": 3,
+      "human_skin_NES_mean": -2.7182363333333335,
+      "mouse_gastrocnemius_NES_mean": -2.4021238140914036,
+      "mouse_skin_NES_mean": 0.8801446412498756,
+      "sign_match_gastrocnemius_frac": 1.0,
+      "sign_match_skin_frac": 0.0
+    },
+    "cell_cycle": {
+      "n_pathways": 3,
+      "human_skin_NES_mean": -1.8190543333333336,
+      "mouse_gastrocnemius_NES_mean": -0.5383903391192486,
+      "mouse_skin_NES_mean": 0.8638778552349393,
+      "sign_match_gastrocnemius_frac": 0.6666666666666666,
+      "sign_match_skin_frac": 0.0
+    },
+    "other": {
+      "n_pathways": 1,
+      "human_skin_NES_mean": -1.751043,
+      "mouse_gastrocnemius_NES_mean": -1.0598379813381507,
+      "mouse_skin_NES_mean": 0.2208966864610291,
+      "sign_match_gastrocnemius_frac": 1.0,
+      "sign_match_skin_frac": 0.0
+    },
+    "oxphos_mitochondrial": {
+      "n_pathways": 2,
+      "human_skin_NES_mean": -2.2731015,
+      "mouse_gastrocnemius_NES_mean": -0.016681979866132568,
+      "mouse_skin_NES_mean": -0.6729577791501017,
+      "sign_match_gastrocnemius_frac": 0.5,
+      "sign_match_skin_frac": 1.0
+    },
+    "signaling_development": {
+      "n_pathways": 5,
+      "human_skin_NES_mean": -2.2286192,
+      "mouse_gastrocnemius_NES_mean": -1.5984709598634366,
+      "mouse_skin_NES_mean": 0.440527738051183,
+      "sign_match_gastrocnemius_frac": 1.0,
+      "sign_match_skin_frac": 0.2
+    },
+    "translation_proteostasis": {
+      "n_pathways": 11,
+      "human_skin_NES_mean": -2.8006313636363633,
+      "mouse_gastrocnemius_NES_mean": -2.254417244255107,
+      "mouse_skin_NES_mean": 0.8439547385841855,
+      "sign_match_gastrocnemius_frac": 0.9090909090909091,
+      "sign_match_skin_frac": 0.09090909090909091
+    }
+  },
+  "top5_drivers_gastrocnemius_to_human_skin": [
+    {
+      "pathway": "REACTOME_TRANSLATION",
+      "family": "translation_proteostasis",
+      "human_skin_NES": -2.755902,
+      "mouse_gastrocnemius_NES": -2.28402344574201,
+      "mouse_skin_NES": 0.9171123457312566,
+      "loo_delta_r_gastrocnemius": -0.02267558528428104,
+      "sign_match_gastrocnemius": 1
+    },
+    {
+      "pathway": "REACTOME_SIGNALING_BY_ROBO_RECEPTORS",
+      "family": "signaling_development",
+      "human_skin_NES": -2.806349,
+      "mouse_gastrocnemius_NES": -2.4197803235387,
+      "mouse_skin_NES": 0.8738230745033134,
+      "loo_delta_r_gastrocnemius": -0.020936454849498465,
+      "sign_match_gastrocnemius": 1
+    },
+    {
+      "pathway": "REACTOME_NONSENSE_MEDIATED_DECAY_NMD",
+      "family": "translation_proteostasis",
+      "human_skin_NES": -2.916069,
+      "mouse_gastrocnemius_NES": -2.82036647358687,
+      "mouse_skin_NES": 1.0508934491305935,
+      "loo_delta_r_gastrocnemius": -0.019197324414715777,
+      "sign_match_gastrocnemius": 1
+    },
+    {
+      "pathway": "REACTOME_REGULATION_OF_EXPRESSION_OF_SLITS_AND_ROBOS",
+      "family": "signaling_development",
+      "human_skin_NES": -2.876254,
+      "mouse_gastrocnemius_NES": -2.668637060790665,
+      "mouse_skin_NES": 0.9002474926068667,
+      "loo_delta_r_gastrocnemius": -0.019197324414715777,
+      "sign_match_gastrocnemius": 1
+    },
+    {
+      "pathway": "REACTOME_CELLULAR_RESPONSE_TO_STARVATION",
+      "family": "amino_acid_metabolism",
+      "human_skin_NES": -2.776825,
+      "mouse_gastrocnemius_NES": -2.50637904097997,
+      "mouse_skin_NES": 0.84774940859948,
+      "loo_delta_r_gastrocnemius": -0.017458193979933312,
+      "sign_match_gastrocnemius": 1
+    }
+  ],
+  "top5_anti_drivers_skin_to_human_skin": [
+    {
+      "pathway": "REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE",
+      "family": "translation_proteostasis",
+      "human_skin_NES": -3.008279,
+      "mouse_skin_NES": 1.2713344431606701,
+      "loo_delta_r_skin": 0.021036789297658953,
+      "sign_match_skin": 0
+    },
+    {
+      "pathway": "REACTOME_ACTIVATION_OF_THE_MRNA_UPON_BINDING_OF_THE_CAP_BINDING_COMPLEX_AND_EIFS_AND_SUBSEQUENT_BINDING_TO_43S",
+      "family": "translation_proteostasis",
+      "human_skin_NES": -2.660458,
+      "mouse_skin_NES": 0.7572234869939433,
+      "loo_delta_r_skin": 0.02016722408026772,
+      "sign_match_skin": 0
+    },
+    {
+      "pathway": "REACTOME_METABOLISM_OF_AMINO_ACIDS_AND_DERIVATIVES",
+      "family": "amino_acid_metabolism",
+      "human_skin_NES": -2.449969,
+      "mouse_skin_NES": 0.8301181331147333,
+      "loo_delta_r_skin": 0.02016722408026772,
+      "sign_match_skin": 0
+    },
+    {
+      "pathway": "REACTOME_RRNA_PROCESSING",
+      "family": "translation_proteostasis",
+      "human_skin_NES": -2.6688,
+      "mouse_skin_NES": 0.5915887003534567,
+      "loo_delta_r_skin": 0.02016722408026772,
+      "sign_match_skin": 0
+    },
+    {
+      "pathway": "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION",
+      "family": "translation_proteostasis",
+      "human_skin_NES": -2.997261,
+      "mouse_skin_NES": 1.0034887997334,
+      "loo_delta_r_skin": 0.018428093645485144,
+      "sign_match_skin": 0
+    }
+  ],
+  "leading_edge_intersection_gastrocnemius_top_drivers": {
+    "REACTOME_TRANSLATION": {
+      "n_intersection_genes": 65,
+      "first20": [
+        "Dap3",
+        "Eef1g",
+        "Eif3f",
+        "Fau",
+        "Mrpl23",
+        "Mrpl27",
+        "Mrpl33",
+        "Mrpl37",
+        "Mrpl54",
+        "Mrps35",
+        "Mrps36",
+        "Rpl10a",
+        "Rpl12",
+        "Rpl13",
+        "Rpl13a",
+        "Rpl14",
+        "Rpl15",
+        "Rpl17",
+        "Rpl18",
+        "Rpl19"
+      ]
+    },
+    "REACTOME_SIGNALING_BY_ROBO_RECEPTORS": {
+      "n_intersection_genes": 55,
+      "first20": [
+        "Fau",
+        "Pfn1",
+        "Prkaca",
+        "Psmb5",
+        "Psmb6",
+        "Rpl10a",
+        "Rpl13",
+        "Rpl13a",
+        "Rpl14",
+        "Rpl15",
+        "Rpl17",
+        "Rpl18",
+        "Rpl19",
+        "Rpl21",
+        "Rpl23",
+        "Rpl24",
+        "Rpl26",
+        "Rpl27",
+        "Rpl27a",
+        "Rpl29"
+      ]
+    },
+    "REACTOME_NONSENSE_MEDIATED_DECAY_NMD": {
+      "n_intersection_genes": 49,
+      "first20": [
+        "Fau",
+        "Rpl10a",
+        "Rpl13",
+        "Rpl14",
+        "Rpl15",
+        "Rpl17",
+        "Rpl18",
+        "Rpl19",
+        "Rpl21",
+        "Rpl23",
+        "Rpl24",
+        "Rpl26",
+        "Rpl27",
+        "Rpl27a",
+        "Rpl29",
+        "Rpl31",
+        "Rpl32",
+        "Rpl35",
+        "Rpl35a",
+        "Rpl36"
+      ]
+    },
+    "REACTOME_REGULATION_OF_EXPRESSION_OF_SLITS_AND_ROBOS": {
+      "n_intersection_genes": 50,
+      "first20": [
+        "Fau",
+        "Psmb5",
+        "Rpl10a",
+        "Rpl13",
+        "Rpl14",
+        "Rpl15",
+        "Rpl17",
+        "Rpl18",
+        "Rpl19",
+        "Rpl21",
+        "Rpl23",
+        "Rpl24",
+        "Rpl26",
+        "Rpl27",
+        "Rpl27a",
+        "Rpl29",
+        "Rpl31",
+        "Rpl32",
+        "Rpl35",
+        "Rpl35a"
+      ]
+    },
+    "REACTOME_CELLULAR_RESPONSE_TO_STARVATION": {
+      "n_intersection_genes": 54,
+      "first20": [
+        "Atp6v0e2",
+        "Atp6v1f",
+        "Bmt2",
+        "Depdc5",
+        "Fau",
+        "Lamtor4",
+        "Rpl10a",
+        "Rpl13",
+        "Rpl14",
+        "Rpl15",
+        "Rpl17",
+        "Rpl18",
+        "Rpl19",
+        "Rpl21",
+        "Rpl23",
+        "Rpl24",
+        "Rpl26",
+        "Rpl27",
+        "Rpl27a",
+        "Rpl29"
+      ]
+    }
+  },
+  "headline_interpretation": "Both human Inspiration4 skin and mouse hindlimb gastrocnemius post-flight strongly down-regulate translation/proteostasis machinery (ribosomal proteins, eIF complexes, NMD, SRP-mediated cotranslational targeting, rRNA processing). The mouse skin transcriptome instead UP-regulates the same Hallmark/Reactome subset, breaking direct tissue matching. On this 25-pathway Hallmark-dominated overlap the skin-to-skin transfer signal is therefore swamped by a stronger conserved muscle/skin proteostasis suppression axis driven by ribosomal-protein genes."
+}
