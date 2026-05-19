@@ -400,9 +400,9 @@ Key methodological choices underpinning this benchmark:
 *(Manuscript in preparation)*
 
 ```bibtex
-@dataset{kang2026genelab,
+@dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
-  author  = {Kang, Jaeyoung},
+  author  = {Kim, JangKeun},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
   note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
