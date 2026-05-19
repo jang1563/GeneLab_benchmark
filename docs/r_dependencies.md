@@ -46,7 +46,7 @@ install.packages(c(
 
 ## Notes
 
-- **DESeq2 normalization** is applied per-mission (not joint across missions). See `DESIGN_DECISIONS.md` DD-10.
+- **DESeq2 normalization** is applied per-mission (not joint across missions): joint normalization would mix mission-specific library size effects into the spaceflight signal.
 - **Python preprocessing** (`quality_filter.py`, `generate_tasks.py`) is applied after R normalization.
 - R scripts produce per-mission `*_log2_norm.csv` files in `processed/A_detection/{tissue}/`.
 - The final `{tissue}_all_missions_log2_norm.csv` is assembled in Python.
