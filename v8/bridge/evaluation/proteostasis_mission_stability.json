@@ -1,0 +1,123 @@
+{
+  "analysis": "proteostasis_signature_mission_stability_vs_i4_skin_anchor",
+  "scope": "exploratory; per-mission decomposition of the pooled mouse-tissue results in PRs #7-#10",
+  "i4_skin_proteostasis_11_coverage": 11,
+  "n_total_tissue_mission_pairs": 20,
+  "params": {
+    "n_permutation": 5000,
+    "rng_seed": 20260516
+  },
+  "stability_per_tissue": {
+    "eye": {
+      "n_missions": 3,
+      "missions": [
+        "OSD-397",
+        "RR-1",
+        "RR-3"
+      ],
+      "mean_NES_min": 2.3273977161169026,
+      "mean_NES_max": 3.2240837269158886,
+      "mean_NES_range": 0.896686010798986,
+      "mean_NES_median_across_missions": 3.2147069437770273,
+      "frac_missions_mean_NES_below_minus1": 0.0,
+      "frac_missions_mean_NES_below_minus2": 0.0,
+      "spearman_r_min": -0.8636363636363636,
+      "spearman_r_max": -0.7181818181818183,
+      "spearman_r_median": -0.8181818181818182,
+      "n_missions_perm_p_lt_005": 3
+    },
+    "gastrocnemius": {
+      "n_missions": 2,
+      "missions": [
+        "RR-1",
+        "RR-9"
+      ],
+      "mean_NES_min": -2.4661691313414167,
+      "mean_NES_max": -2.0426653571687967,
+      "mean_NES_range": 0.42350377417262,
+      "mean_NES_median_across_missions": -2.254417244255107,
+      "frac_missions_mean_NES_below_minus1": 1.0,
+      "frac_missions_mean_NES_below_minus2": 1.0,
+      "spearman_r_min": 0.7545454545454545,
+      "spearman_r_max": 0.881818181818182,
+      "spearman_r_median": 0.8181818181818182,
+      "n_missions_perm_p_lt_005": 2
+    },
+    "kidney": {
+      "n_missions": 3,
+      "missions": [
+        "RR-1",
+        "RR-3",
+        "RR-7"
+      ],
+      "mean_NES_min": 0.6811300307884084,
+      "mean_NES_max": 2.0170159081643653,
+      "mean_NES_range": 1.335885877375957,
+      "mean_NES_median_across_missions": 1.3492402927373033,
+      "frac_missions_mean_NES_below_minus1": 0.0,
+      "frac_missions_mean_NES_below_minus2": 0.0,
+      "spearman_r_min": -0.8545454545454546,
+      "spearman_r_max": 0.02727272727272728,
+      "spearman_r_median": -0.7818181818181819,
+      "n_missions_perm_p_lt_005": 2
+    },
+    "liver": {
+      "n_missions": 6,
+      "missions": [
+        "MHU-2",
+        "RR-1",
+        "RR-3",
+        "RR-6",
+        "RR-8",
+        "RR-9"
+      ],
+      "mean_NES_min": -1.051413675802982,
+      "mean_NES_max": 1.8972170987465153,
+      "mean_NES_range": 2.948630774549497,
+      "mean_NES_median_across_missions": 1.0789340387834985,
+      "frac_missions_mean_NES_below_minus1": 0.16666666666666666,
+      "frac_missions_mean_NES_below_minus2": 0.0,
+      "spearman_r_min": -0.8363636363636365,
+      "spearman_r_max": 0.009090909090909092,
+      "spearman_r_median": -0.6772727272727274,
+      "n_missions_perm_p_lt_005": 3
+    },
+    "skin": {
+      "n_missions": 3,
+      "missions": [
+        "MHU-2_dorsal",
+        "MHU-2_femoral",
+        "RR-6"
+      ],
+      "mean_NES_min": -2.2295628135551926,
+      "mean_NES_max": 2.9072081510095207,
+      "mean_NES_range": 5.136770964564713,
+      "mean_NES_median_across_missions": 1.854218878298228,
+      "frac_missions_mean_NES_below_minus1": 0.3333333333333333,
+      "frac_missions_mean_NES_below_minus2": 0.3333333333333333,
+      "spearman_r_min": -0.8727272727272729,
+      "spearman_r_max": -0.19090909090909092,
+      "spearman_r_median": -0.44545454545454555,
+      "n_missions_perm_p_lt_005": 1
+    },
+    "thymus": {
+      "n_missions": 3,
+      "missions": [
+        "MHU-2",
+        "RR-6",
+        "RR-9"
+      ],
+      "mean_NES_min": -0.889075785622141,
+      "mean_NES_max": 2.997772299622812,
+      "mean_NES_range": 3.886848085244953,
+      "mean_NES_median_across_missions": 2.2199653355803575,
+      "frac_missions_mean_NES_below_minus1": 0.0,
+      "frac_missions_mean_NES_below_minus2": 0.0,
+      "spearman_r_min": -0.4909090909090909,
+      "spearman_r_max": 0.5,
+      "spearman_r_median": -0.4090909090909091,
+      "n_missions_perm_p_lt_005": 0
+    }
+  },
+  "headline": "Per-mission decomposition probes whether the pooled mouse-tissue proteostasis signature used in PRs #7-#10 is consistent within each tissue or driven by a single mission. mean_NES_range per tissue and fraction of missions with mean NES below -1 are the headline stability metrics; Spearman r against i4_skin gives the per-mission transfer signal."
+}
