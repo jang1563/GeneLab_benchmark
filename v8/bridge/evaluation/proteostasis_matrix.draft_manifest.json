@@ -1,0 +1,118 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "bridge.proteostasis_matrix_and_figure",
+  "pillar": "bridge",
+  "status": "draft",
+  "claim": {
+    "short": "Full mouse-tissue x human-compartment Spearman matrix on the 11 proteostasis pathways (and the 14 non-proteostasis controls from the same 25-pathway overlap), generalizing PR #9 from the single gastrocnemius anchor to all six mouse tissues. Companion supplementary figure (v8/figures/SupplementaryFigure_Proteostasis_Conservation.{png,pdf}) renders both panels as a heatmap with mission groupings and per-cell Spearman r annotations. Mouse gastrocnemius is the only tissue with broadly positive Spearman r across human compartments on the proteostasis-11 set; mouse skin/eye/liver/kidney are anti-correlated. Within-overlap control on nonproteostasis-14 shows no comparable row-dominant structure.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/bridge/evaluation/proteostasis_matrix.csv",
+      "v8/bridge/evaluation/proteostasis_matrix.json",
+      "v8/figures/SupplementaryFigure_Proteostasis_Conservation.png",
+      "v8/figures/SupplementaryFigure_Proteostasis_Conservation.pdf"
+    ]
+  },
+  "generated_at": "2026-05-16T22:10:00Z",
+  "code": {
+    "script": "v8/bridge/proteostasis_matrix.py + v8/bridge/proteostasis_matrix_figure.py",
+    "command": "SPACEOMICS_ROOT=$SPACEOMICS_ROOT python3 v8/bridge/proteostasis_matrix.py && python3 v8/bridge/proteostasis_matrix_figure.py",
+    "parameters": {
+      "mouse_tissues": ["thymus", "gastrocnemius", "skin", "eye", "liver", "kidney"],
+      "mouse_dbs": ["hallmark", "kegg", "reactome", "mitocarta", "c2cgp", "c5bp"],
+      "proteostasis_set_size": 11,
+      "nonproteostasis_control_set_size": 14,
+      "n_permutation": 5000,
+      "min_pathways_for_spearman": 3,
+      "figure_mask_threshold_n_pathways": 3,
+      "rng_seed": 20260516
+    }
+  },
+  "inputs": [
+    {
+      "role": "mouse_fgsea_all_tissues",
+      "path_or_accession": "processed/fgsea/{thymus,gastrocnemius,skin,eye,liver,kidney}/*_fgsea_{hallmark,kegg,reactome,mitocarta,c2cgp,c5bp}.csv",
+      "kind": "local_file",
+      "tracked_in_git": false,
+      "notes": "Same local mouse fGSEA cache as PRs #7-#9. c2cgp/c5bp expansions are HPC-only and absent here."
+    },
+    {
+      "role": "human_i4_pbmc",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_i4_pbmc.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:57fe866b6f89fd4ea4c0cdd8213f996616c1146f21ce2a998811dc5c5668f831",
+      "notes": "Listed in input_freeze.json under spaceomicsbench.v2_public.evidence."
+    },
+    {
+      "role": "human_NASA_Twins",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_NASA_Twins.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:efba82f4cd8c54a2e25c46a4f2f403c3c07a001dddaa6e6b8a6ae6e145baba1c",
+      "notes": "Listed in input_freeze.json under spaceomicsbench.v2_public.evidence."
+    },
+    {
+      "role": "human_i4_skin",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_i4_skin.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:03526f07807c0976477f8b655e63fb08da74e59ec28c883202212929f39eaf8c",
+      "notes": "Anchor compartment from PRs #7-#9. Still needs registration in input_freeze.json under spaceomicsbench.v2_public.evidence before promotion past exploratory."
+    }
+  ],
+  "outputs": [
+    {
+      "role": "matrix_csv",
+      "path_or_accession": "v8/bridge/evaluation/proteostasis_matrix.csv",
+      "kind": "local_file",
+      "checksum": "sha256:5c73515d4e9387837ed8c73d1482bcaccfa49ffd89a61fbd64fb2f9dd42b2419",
+      "tracked_in_git": true
+    },
+    {
+      "role": "summary_json",
+      "path_or_accession": "v8/bridge/evaluation/proteostasis_matrix.json",
+      "kind": "local_file",
+      "checksum": "sha256:56e91e992b5a1b3d7b896eaa4d7e202d26088223e6603f7828d83f37f8d484ed",
+      "tracked_in_git": true
+    },
+    {
+      "role": "supplementary_figure_png",
+      "path_or_accession": "v8/figures/SupplementaryFigure_Proteostasis_Conservation.png",
+      "kind": "local_file",
+      "checksum": "sha256:932457948f20e900d201b2314a884087c85cf9e4f018ffb168701e417c009d3f",
+      "tracked_in_git": true
+    },
+    {
+      "role": "supplementary_figure_pdf",
+      "path_or_accession": "v8/figures/SupplementaryFigure_Proteostasis_Conservation.pdf",
+      "kind": "local_file",
+      "checksum": "sha256:64989428dc743f35bd1f507c7812788eb22122716d8a363ca64d35d33206502c",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "host": "local-laptop",
+    "spaceomics_root": "/Users/jak4013/Dropbox/Bioinformatics/Claude/SpaceOmicsBench",
+    "python": "Python 3 (system)",
+    "matplotlib": "3.10.8"
+  },
+  "metrics": [
+    {"name": "matrix_total_rows", "value": 312, "context": "150 proteostasis_11 + 162 nonproteostasis_14"},
+    {"name": "matrix_rows_with_spearman_r", "value": 234, "context": "138 proteostasis_11 + 96 nonproteostasis_14"},
+    {"name": "n_mouse_tissues", "value": 6},
+    {"name": "n_human_compartments", "value": 27, "context": "i4_pbmc 9 + NASA_Twins 17 + i4_skin 1"},
+    {"name": "gastrocnemius_to_i4_skin_proteostasis11_spearman_r", "value": 0.864, "context": "n=11 pathways, perm p=0.001 — the cleanest single-cell finding in the matrix"},
+    {"name": "gastrocnemius_proteostasis11_mean_r_across_compartments", "value": null, "context": "see proteostasis_matrix.json best_pairing_per_mouse_tissue_proteostasis.gastrocnemius.mean_r_across_compartments"}
+  ],
+  "validation": {
+    "local_tests_run": true,
+    "hpc_tests_run": false,
+    "checks": [
+      "python3 v8/bridge/proteostasis_matrix.py",
+      "python3 v8/bridge/proteostasis_matrix_figure.py",
+      "python3 -c \"import json; json.load(open('v8/bridge/evaluation/proteostasis_matrix.json'))\""
+    ],
+    "notes": "Exploratory local-only run. Per-compartment Spearman r is noisy for Twins compartments (n=3-4 pathways) and figure cells with n_pathways < 3 are masked as NA. HPC c2cgp/c5bp expansion will raise per-compartment overlap and let more cells reach significance; the qualitative gastrocnemius-row-dominance pattern is expected to persist because it is already saturated at this n on the proteostasis-11 set."
+  }
+}
