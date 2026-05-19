@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1.0",
+  "result_id": "bridge.skin_transfer_driver_decomp",
+  "pillar": "bridge",
+  "status": "draft",
+  "claim": {
+    "short": "Driver decomposition of the human_skin_transfer.py finding (gastrocnemius +0.826 vs skin -0.665 Spearman against human i4_skin NES). On the 25 shared pathways (22 Reactome + 3 Hallmark), the contrast is driven by a translation/proteostasis family (11 pathways) where mouse gastrocnemius matches the human-skin down-regulation 10/11 times and mouse skin matches only 1/11. Leading-edge intersection across mouse gastrocnemius missions for the top 5 r-lifting pathways is dominated by ribosomal-protein genes (Rpl10a/Rpl13/Rpl14/.../Rps*, plus mitochondrial Mrpl*/Mrps* and the universal Fau small-subunit constituent), consistent with the classical spaceflight muscle proteostasis-suppression signature transferring onto human Inspiration4 skin biopsy.",
+    "scope": "exploratory",
+    "consumed_by": [
+      "v8/bridge/evaluation/skin_transfer_driver_decomp.csv",
+      "v8/bridge/evaluation/skin_transfer_driver_decomp.json"
+    ]
+  },
+  "generated_at": "2026-05-16T21:45:00Z",
+  "code": {
+    "script": "v8/bridge/skin_transfer_driver_decomp.py",
+    "command": "SPACEOMICS_ROOT=$SPACEOMICS_ROOT python3 v8/bridge/skin_transfer_driver_decomp.py",
+    "parameters": {
+      "mouse_tissues": ["gastrocnemius", "skin"],
+      "mouse_dbs": ["hallmark", "kegg", "reactome", "mitocarta", "c2cgp", "c5bp"],
+      "leave_one_out": true,
+      "top_drivers_k": 5
+    }
+  },
+  "inputs": [
+    {
+      "role": "mouse_fgsea_with_leading_edge",
+      "path_or_accession": "processed/fgsea/{gastrocnemius,skin}/*_fgsea_{hallmark,kegg,reactome,mitocarta,c2cgp,c5bp}.csv",
+      "kind": "local_file",
+      "tracked_in_git": false,
+      "notes": "Same local mouse fGSEA cache as human_skin_transfer.py, with the leadingEdge_str column consumed for the gene-level intersection. c2cgp/c5bp expansions are HPC-only and absent here."
+    },
+    {
+      "role": "human_i4_skin_reference",
+      "path_or_accession": "$SPACEOMICS_ROOT/v2_public/data/processed/gt_conserved_pathways_i4_skin.csv",
+      "kind": "soma_file",
+      "tracked_in_git": false,
+      "checksum": "sha256:03526f07807c0976477f8b655e63fb08da74e59ec28c883202212929f39eaf8c",
+      "notes": "Identical file as in bridge_human_skin_transfer; the human side does not carry a leadingEdge column, so the gene-level intersection is mouse-only."
+    }
+  ],
+  "outputs": [
+    {
+      "role": "per_pathway_csv",
+      "path_or_accession": "v8/bridge/evaluation/skin_transfer_driver_decomp.csv",
+      "kind": "local_file",
+      "checksum": "sha256:b7df9c687091d2566a61a70d9a8cbd2b1f420bdcb0c075fb23a88482be3b17f2",
+      "tracked_in_git": true
+    },
+    {
+      "role": "summary_json",
+      "path_or_accession": "v8/bridge/evaluation/skin_transfer_driver_decomp.json",
+      "kind": "local_file",
+      "checksum": "sha256:d07fa83f37e13ed95feec1f0b0ab3c9494eef3839f97c6ddd07018a1cd7558de",
+      "tracked_in_git": true
+    }
+  ],
+  "environment": {
+    "host": "local-laptop",
+    "spaceomics_root": "/Users/jak4013/Dropbox/Bioinformatics/Claude/SpaceOmicsBench",
+    "python": "Python 3 (system)"
+  },
+  "metrics": [
+    {"name": "shared_pathways", "value": 25},
+    {"name": "full_spearman_r_gastrocnemius_vs_human_skin", "value": 0.8261538461538462},
+    {"name": "full_spearman_r_skin_vs_human_skin", "value": -0.6653846153846155},
+    {"name": "translation_proteostasis_n_pathways", "value": 11},
+    {"name": "translation_proteostasis_sign_match_gastrocnemius_frac", "value": 0.909},
+    {"name": "translation_proteostasis_sign_match_skin_frac", "value": 0.091},
+    {"name": "amino_acid_metabolism_sign_match_gastrocnemius_frac", "value": 1.0},
+    {"name": "amino_acid_metabolism_sign_match_skin_frac", "value": 0.0},
+    {"name": "oxphos_mitochondrial_sign_match_gastrocnemius_frac", "value": 0.5},
+    {"name": "oxphos_mitochondrial_sign_match_skin_frac", "value": 1.0}
+  ],
+  "validation": {
+    "local_tests_run": true,
+    "hpc_tests_run": false,
+    "checks": [
+      "python3 v8/bridge/skin_transfer_driver_decomp.py",
+      "python3 -c \"import json; json.load(open('v8/bridge/evaluation/skin_transfer_driver_decomp.json'))\""
+    ],
+    "notes": "Exploratory local-only run; promotion to hpc_validated requires the same c2cgp/c5bp HPC expansion called out in bridge_human_skin_transfer. Family-level conclusions are expected to hold at higher n because the translation/proteostasis signature is already saturated at this n; per-pathway leave-one-out values will sharpen and additional non-translation families (e.g., C2 chemical-perturbation programs) may enter the overlap."
+  }
+}
