@@ -2,9 +2,9 @@ name: Regression tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, v3]
   pull_request:
-    branches: [main]
+    branches: [main, v3]
   workflow_dispatch:
 
 jobs:
