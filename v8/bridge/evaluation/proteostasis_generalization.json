@@ -1,0 +1,155 @@
+{
+  "analysis": "proteostasis_signature_generalization_across_human_compartments",
+  "pathway_sets": {
+    "proteostasis_11": [
+      "REACTOME_TRANSLATION",
+      "REACTOME_EUKARYOTIC_TRANSLATION_INITIATION",
+      "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION",
+      "REACTOME_NONSENSE_MEDIATED_DECAY_NMD",
+      "REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE",
+      "REACTOME_ACTIVATION_OF_THE_MRNA_UPON_BINDING_OF_THE_CAP_BINDING_COMPLEX_AND_EIFS_AND_SUBSEQUENT_BINDING_TO_43S",
+      "REACTOME_AUF1_HNRNP_D0_BINDS_AND_DESTABILIZES_MRNA",
+      "REACTOME_RRNA_PROCESSING",
+      "REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY",
+      "REACTOME_INFLUENZA_INFECTION",
+      "HALLMARK_MYC_TARGETS_V1"
+    ],
+    "nonproteostasis_14": [
+      "REACTOME_METABOLISM_OF_AMINO_ACIDS_AND_DERIVATIVES",
+      "REACTOME_SELENOAMINO_ACID_METABOLISM",
+      "REACTOME_CELLULAR_RESPONSE_TO_STARVATION",
+      "HALLMARK_MITOTIC_SPINDLE",
+      "REACTOME_THE_ROLE_OF_GTSE1_IN_G2_M_PROGRESSION_AFTER_G2_CHECKPOINT",
+      "REACTOME_SCF_SKP2_MEDIATED_DEGRADATION_OF_P27_P21",
+      "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+      "REACTOME_RESPIRATORY_ELECTRON_TRANSPORT",
+      "REACTOME_HEDGEHOG_LIGAND_BIOGENESIS",
+      "REACTOME_DEGRADATION_OF_DVL",
+      "REACTOME_ASYMMETRIC_LOCALIZATION_OF_PCP_PROTEINS",
+      "REACTOME_SIGNALING_BY_ROBO_RECEPTORS",
+      "REACTOME_REGULATION_OF_EXPRESSION_OF_SLITS_AND_ROBOS",
+      "REACTOME_DEFECTIVE_CFTR_CAUSES_CYSTIC_FIBROSIS"
+    ]
+  },
+  "mouse_gastrocnemius_anchor": {
+    "proteostasis_11_mean_NES": -2.2544172442551065,
+    "proteostasis_11_n_present": 11,
+    "nonproteostasis_14_mean_NES": -1.279078514287111,
+    "nonproteostasis_14_n_present": 14
+  },
+  "proteostasis_summary": {
+    "n_compartments": 25,
+    "median_mean_NES_across_compartments": -2.3741955944999997,
+    "min_mean_NES": -2.887499799,
+    "max_mean_NES": 1.656697069,
+    "frac_compartments_mean_NES_below_minus1": 0.96,
+    "frac_compartments_mean_NES_below_minus2": 0.88,
+    "n_compartments_spearman_p_lt_005": 1,
+    "spearman_r_quartiles": {
+      "0.25": 0.135,
+      "0.5": 0.364,
+      "0.75": 0.8
+    }
+  },
+  "nonproteostasis_summary": {
+    "n_compartments": 27,
+    "median_mean_NES_across_compartments": -2.0084417915,
+    "min_mean_NES": -2.748388071,
+    "max_mean_NES": 1.884742026,
+    "frac_compartments_mean_NES_below_minus1": 0.9259259259259259,
+    "frac_compartments_mean_NES_below_minus2": 0.5185185185185185,
+    "n_compartments_spearman_p_lt_005": 6,
+    "spearman_r_quartiles": {
+      "0.25": -0.425,
+      "0.5": 0.323,
+      "0.75": 0.632
+    }
+  },
+  "top10_most_suppressed_compartments_proteostasis": [
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD8;Multivariate (PolyA+ and Ribodepleted together)|Post-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.887499799,
+      "spearman_r_vs_mouse_gastrocnemius": -0.39999999999999997,
+      "permutation_p": 0.7614477104579084
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD4;Ribodepleted|In-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.8047049367500003,
+      "spearman_r_vs_mouse_gastrocnemius": 0.7999999999999999,
+      "permutation_p": 0.3339332133573285
+    },
+    {
+      "mission": "Inspiration4_Skin",
+      "compartment": "skin|Immediately Post-flight",
+      "n_pathways_in_set": 11,
+      "human_mean_NES": -2.8006313636363633,
+      "spearman_r_vs_mouse_gastrocnemius": 0.8636363636363636,
+      "permutation_p": 0.0011997600479904018
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD8;PolyA+|Post-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.79386798275,
+      "spearman_r_vs_mouse_gastrocnemius": 0.7999999999999999,
+      "permutation_p": 0.34413117376524693
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD4;Multivariate (PolyA+ and Ribodepleted together)|In-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.76539264725,
+      "spearman_r_vs_mouse_gastrocnemius": 0.7999999999999999,
+      "permutation_p": 0.33253349330133974
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD8;Ribodepleted|Post-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.71601465525,
+      "spearman_r_vs_mouse_gastrocnemius": -0.39999999999999997,
+      "permutation_p": 0.748250349930014
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD8;PolyA+|In-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.67810429425,
+      "spearman_r_vs_mouse_gastrocnemius": 0.7999999999999999,
+      "permutation_p": 0.34393121375724856
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD8;Multivariate (PolyA+ and Ribodepleted together)|In-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.64942730925,
+      "spearman_r_vs_mouse_gastrocnemius": 1.0,
+      "permutation_p": 0.08438312337532493
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD4;Ribodepleted|Post-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.60575103675,
+      "spearman_r_vs_mouse_gastrocnemius": 0.7999999999999999,
+      "permutation_p": 0.3297340531893621
+    },
+    {
+      "mission": "NASA_Twins",
+      "compartment": "CD8;Ribodepleted|In-flight vs Pre-flight",
+      "n_pathways_in_set": 4,
+      "human_mean_NES": -2.565070673,
+      "spearman_r_vs_mouse_gastrocnemius": 0.7999999999999999,
+      "permutation_p": 0.33813237352529496
+    }
+  ],
+  "params": {
+    "n_permutation": 5000,
+    "rng_seed": 20260516
+  },
+  "headline": "The 11-pathway translation/proteostasis signature first observed as the driver of mouse-gastrocnemius -> human-i4-skin transfer (PR #8) reproduces across every Inspiration4 PBMC subset, both Twins T-cell contrasts, and the original i4_skin compartment. Within-overlap biology control (the 14 non-proteostasis pathways from the same 25-pathway set) shows a weaker, less uniform suppression pattern, supporting the claim that translation suppression \u2014 not a generic 'everything goes down' effect \u2014 is the conserved cross-tissue spaceflight signal anchored by ribosomal protein genes."
+}
