@@ -1,0 +1,96 @@
+{
+  "baseline": {
+    "baseline_id": "organoid_nearest_centroid",
+    "claim_boundary": "donor_diagnostic_only_not_leaderboard",
+    "fold_family": "geo_donor_or_line_diagnostic_folds",
+    "positive_label": "LEO_or_ISS",
+    "release_status": "draft_not_frozen",
+    "scaling": "zscore",
+    "score_column": "flight_probability",
+    "top_variable_genes": 2000,
+    "transform": "log1p"
+  },
+  "folds": [
+    {
+      "fold_id": "holdout_donor_or_line_subject1",
+      "heldout_factor": "donor_or_line_id",
+      "heldout_value": "Subject1",
+      "n_features": 2000,
+      "n_test": 11,
+      "n_train": 31
+    },
+    {
+      "fold_id": "holdout_donor_or_line_subject2",
+      "heldout_factor": "donor_or_line_id",
+      "heldout_value": "Subject2",
+      "n_features": 2000,
+      "n_test": 8,
+      "n_train": 34
+    },
+    {
+      "fold_id": "holdout_donor_or_line_subject3",
+      "heldout_factor": "donor_or_line_id",
+      "heldout_value": "Subject3",
+      "n_features": 2000,
+      "n_test": 10,
+      "n_train": 32
+    },
+    {
+      "fold_id": "holdout_donor_or_line_subject4",
+      "heldout_factor": "donor_or_line_id",
+      "heldout_value": "Subject4",
+      "n_features": 2000,
+      "n_test": 13,
+      "n_train": 29
+    }
+  ],
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.6954545454545454
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5318181818181817
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.028088520892857162
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.5138888888888888
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "status": "evaluated",
+  "submission_path": "v9/human_organoid/reports/donor_diagnostics/draft_human_organoid_spaceflight/predictions.csv",
+  "task_id": "draft_human_organoid_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 42,
+    "ok": true,
+    "submission_path": "v9/human_organoid/reports/donor_diagnostics/draft_human_organoid_spaceflight/predictions.csv",
+    "task_id": "draft_human_organoid_spaceflight",
+    "warnings": []
+  }
+}

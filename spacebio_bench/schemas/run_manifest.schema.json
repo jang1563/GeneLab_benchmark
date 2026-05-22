@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genelab-benchmark.local/spacebio_bench/run_manifest.schema.json",
+  "title": "SpaceBio-Bench evaluation run manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_type",
+    "generated_at",
+    "spacebio_bench_version",
+    "task_id",
+    "task_family",
+    "status",
+    "command",
+    "input_files",
+    "metrics",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "run_type": {
+      "const": "spacebio_bench_evaluation"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "spacebio_bench_version": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "task_family": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "input_files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "validation": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

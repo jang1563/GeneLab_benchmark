@@ -1,0 +1,416 @@
+{
+  "assay_modality": "bulk_rna_seq",
+  "biospecimen_type": "neural_organoid",
+  "donor_or_strain_block": "donor_block_required",
+  "feature_namespace": "human_gene",
+  "ground_control_type": "matched_ground_control",
+  "limitations": [
+    "Draft task manifest only; no baseline results are claimed.",
+    "Payload checksum audit is pending for OSD-863/OSD-871.",
+    "Any organoid baseline output is draft-only and not a frozen leaderboard claim.",
+    "single-mission organoid data cannot support leave-one-mission-out claims.",
+    "GEO-derived Subject/iPSC-line metadata are available, but donor, source, organoid fate, and disease context are not independently crossed; donor generalization remains pilot-only.",
+    "DE/signature metrics remain non-primary until public OSDR DE references are pinned to a frozen contrast subset."
+  ],
+  "material_type": "cells_cultured",
+  "metrics": [
+    {
+      "interpretation": "Class-balance-aware LEO/ISS versus Ground score.",
+      "metric_id": "balanced_accuracy",
+      "profile": "genelab_organoid_pilot"
+    },
+    {
+      "interpretation": "Ranking quality for binary LEO/ISS probability outputs.",
+      "metric_id": "auroc",
+      "profile": "genelab_organoid_pilot"
+    },
+    {
+      "interpretation": "Probability calibration check for small-sample predictions.",
+      "metric_id": "calibration_error",
+      "profile": "genelab_organoid_pilot"
+    },
+    {
+      "interpretation": "Direction agreement for response genes after public OSDR DE tables are pinned to a frozen contrast subset.",
+      "metric_id": "de_direction_match",
+      "profile": "genelab_organoid_pilot"
+    },
+    {
+      "interpretation": "Rank correlation between predicted and observed organoid response signatures after log2 fold-change orientation is frozen.",
+      "metric_id": "signature_rank_correlation",
+      "profile": "genelab_organoid_pilot"
+    },
+    {
+      "interpretation": "Representation diagnostic; not a mission-held-out claim for this single-mission pilot.",
+      "metric_id": "mission_discrimination",
+      "profile": "genelab_organoid_pilot"
+    }
+  ],
+  "model_system": "human_iPSC_neural_organoid",
+  "organism": "Homo sapiens",
+  "orthology_strategy": "not_applicable_within_human_task",
+  "output": {
+    "label_domain": [
+      "Ground",
+      "LEO_or_ISS"
+    ],
+    "optional_columns": [
+      "leo_probability",
+      "flight_probability",
+      "response_signature_score",
+      "embedding_*"
+    ],
+    "positive_label": "LEO_or_ISS",
+    "prediction_format": "csv",
+    "primary_artifacts": [
+      "predictions.csv",
+      "metrics.json"
+    ],
+    "required_columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label"
+    ]
+  },
+  "platform": "Illumina_RNA_seq",
+  "provenance": {
+    "derived_from": "v9/human_organoid/source_inventory.draft.json",
+    "donor_or_line_status": "parsed_from_geo_series_matrix",
+    "expression_matrix_audit": "v9/human_organoid/expression_matrix_audit.draft.csv",
+    "expression_matrix_status": "matrix_downloaded_sample_aligned",
+    "geo_sample_metadata": "v9/human_organoid/geo_sample_metadata.draft.csv",
+    "publication_urls": "https://academic.oup.com/stcltm/article/13/12/1186/7833382",
+    "sample_factor_status": "condition_factors_and_geo_donor_line_metadata_parsed",
+    "sample_table_audit": "v9/human_organoid/sample_table_audit.draft.csv",
+    "sample_table_status": "sample_table_parsed",
+    "signature_metric_policy": "keep_classification_primary_enable_de_signature_after_frozen_contrast_subset",
+    "signature_reference_audit": "v9/human_organoid/signature_reference_audit.draft.csv",
+    "signature_reference_status": "public_osdr_de_reference_tables_available_pending_contrast_freeze",
+    "source_checksum_audit": "v9/human_organoid/source_checksum_audit.draft.csv",
+    "source_checksum_status": "checksum_manifests_parsed_payloads_not_hashed",
+    "source_inventory_status": "draft_not_frozen",
+    "source_payload_status": "not_downloaded_or_payload_hashed"
+  },
+  "reference_signatures": {
+    "signature_metric_policy": "keep_classification_primary_enable_de_signature_after_frozen_contrast_subset",
+    "signature_reference_audit": "v9/human_organoid/signature_reference_audit.draft.csv",
+    "signature_reference_limitations": "DE/signature metrics are reference-backed at the file-audit level, but leaderboard scoring still requires a frozen contrast subset and explicit log2 fold-change orientation.",
+    "signature_reference_sources": {
+      "OSD-863": {
+        "contrast_files": "GLDS-716_rna_seq_contrasts_GLbulkRNAseq.csv",
+        "contrast_pair_count": "56",
+        "de_reference_file_sizes": "141741746;141841931",
+        "de_reference_files": "GLDS-716_rna_seq_differential_expression_GLbulkRNAseq.csv;GLDS-716_rna_seq_differential_expression_rRNArm_GLbulkRNAseq.csv",
+        "direct_spaceflight_contrast_count": "4",
+        "metric_reference_status": "public_osdr_de_reference_tables_available_pending_contrast_freeze",
+        "reversed_spaceflight_contrast_count": "4"
+      },
+      "OSD-871": {
+        "contrast_files": "GLDS-720_rna_seq_contrasts_GLbulkRNAseq.csv",
+        "contrast_pair_count": "56",
+        "de_reference_file_sizes": "143916213;143992071",
+        "de_reference_files": "GLDS-720_rna_seq_differential_expression_GLbulkRNAseq.csv;GLDS-720_rna_seq_differential_expression_rRNArm_GLbulkRNAseq.csv",
+        "direct_spaceflight_contrast_count": "4",
+        "metric_reference_status": "public_osdr_de_reference_tables_available_pending_contrast_freeze",
+        "reversed_spaceflight_contrast_count": "4"
+      }
+    },
+    "signature_reference_status": "public_osdr_de_reference_tables_available_pending_contrast_freeze"
+  },
+  "release_status": "draft_not_frozen",
+  "schema_version": "0.1.0",
+  "source_records": [
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "cortical_neural_organoid",
+      "checksum_status": "checksum_manifests_parsed_payloads_not_hashed",
+      "culture_hardware": "ISS_culture_hardware_pending_manifest_detail",
+      "differentiation_protocol": "published_iPSC_neural_organoid_protocol",
+      "disease_context": "none_reported_for_primary_RNA_seq_pilot",
+      "donor_or_strain_block": "donor_block_required",
+      "external_accessions": "GSE259421",
+      "feature_namespace": "human_gene",
+      "glds_prefix": "GLDS-716",
+      "ground_control_type": "matched_ground_control",
+      "integration_status": "draft_source_inventory_only",
+      "material_type": "cells_cultured",
+      "microglia_condition": "with_and_without_iPSC_derived_microglia",
+      "mission": "SpaceX-19",
+      "model_system": "human_iPSC_neural_organoid",
+      "notes": "Cortical human iPSC-derived neural organoid RNA-seq; keep separate from mouse bulk LOMO.",
+      "organism": "Homo sapiens",
+      "organoid_type": "cortical_neural_organoid",
+      "orthology_strategy": "not_applicable_within_human_task",
+      "platform": "Illumina_RNA_seq",
+      "privacy_class": "public",
+      "processed_file_status": "OSDR_raw_and_processed_checksum_manifests_parsed",
+      "publication_urls": "https://academic.oup.com/stcltm/article/13/12/1186/7833382",
+      "source_id": "OSD-863",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-863",
+      "spaceflight_environment": "LEO_ISS",
+      "species_common_name": "human",
+      "taxon_id": "9606",
+      "url_or_accession": "OSD-863"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "dopaminergic_neural_organoid",
+      "checksum_status": "checksum_manifests_parsed_payloads_not_hashed",
+      "culture_hardware": "ISS_culture_hardware_pending_manifest_detail",
+      "differentiation_protocol": "published_iPSC_neural_organoid_protocol",
+      "disease_context": "none_reported_for_primary_RNA_seq_pilot",
+      "donor_or_strain_block": "donor_block_required",
+      "external_accessions": "GSE259421",
+      "feature_namespace": "human_gene",
+      "glds_prefix": "GLDS-720",
+      "ground_control_type": "matched_ground_control",
+      "integration_status": "draft_source_inventory_only",
+      "material_type": "cells_cultured",
+      "microglia_condition": "with_and_without_iPSC_derived_microglia",
+      "mission": "SpaceX-19",
+      "model_system": "human_iPSC_neural_organoid",
+      "notes": "Dopaminergic human iPSC-derived neural organoid RNA-seq; pair with OSD-863 only through explicit blocking.",
+      "organism": "Homo sapiens",
+      "organoid_type": "dopaminergic_neural_organoid",
+      "orthology_strategy": "not_applicable_within_human_task",
+      "platform": "Illumina_RNA_seq",
+      "privacy_class": "public",
+      "processed_file_status": "OSDR_raw_and_processed_checksum_manifests_parsed",
+      "publication_urls": "https://academic.oup.com/stcltm/article/13/12/1186/7833382",
+      "source_id": "OSD-871",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-871",
+      "spaceflight_environment": "LEO_ISS",
+      "species_common_name": "human",
+      "taxon_id": "9606",
+      "url_or_accession": "OSD-871"
+    }
+  ],
+  "spaceflight_environment": "LEO_ISS",
+  "species_common_name": "human",
+  "split": {
+    "blocking_factors": [
+      "donor_subject",
+      "organoid_type",
+      "microglia_condition"
+    ],
+    "candidate_folds": [
+      {
+        "fold_id": "holdout_organoid_type_cortical_neural_organoid",
+        "heldout_factor": "organoid_type",
+        "heldout_value": "cortical_neural_organoid",
+        "n_test": 19,
+        "n_train": 23,
+        "status": "sample_count_backed_draft",
+        "test_label_distribution": {
+          "Ground": 10,
+          "LEO_or_ISS": 9
+        },
+        "train_label_distribution": {
+          "Ground": 12,
+          "LEO_or_ISS": 11
+        }
+      },
+      {
+        "fold_id": "holdout_organoid_type_dopaminergic_neural_organoid",
+        "heldout_factor": "organoid_type",
+        "heldout_value": "dopaminergic_neural_organoid",
+        "n_test": 23,
+        "n_train": 19,
+        "status": "sample_count_backed_draft",
+        "test_label_distribution": {
+          "Ground": 12,
+          "LEO_or_ISS": 11
+        },
+        "train_label_distribution": {
+          "Ground": 10,
+          "LEO_or_ISS": 9
+        }
+      },
+      {
+        "fold_id": "holdout_microglia_condition_with_microglia",
+        "heldout_factor": "microglia_condition",
+        "heldout_value": "with_microglia",
+        "n_test": 20,
+        "n_train": 22,
+        "status": "sample_count_backed_draft",
+        "test_label_distribution": {
+          "Ground": 11,
+          "LEO_or_ISS": 9
+        },
+        "train_label_distribution": {
+          "Ground": 11,
+          "LEO_or_ISS": 11
+        }
+      },
+      {
+        "fold_id": "holdout_microglia_condition_without_microglia",
+        "heldout_factor": "microglia_condition",
+        "heldout_value": "without_microglia",
+        "n_test": 22,
+        "n_train": 20,
+        "status": "sample_count_backed_draft",
+        "test_label_distribution": {
+          "Ground": 11,
+          "LEO_or_ISS": 11
+        },
+        "train_label_distribution": {
+          "Ground": 11,
+          "LEO_or_ISS": 9
+        }
+      }
+    ],
+    "disease_context_distribution": {
+      "no_known_diseases": 21,
+      "primary_progressive_multiple_sclerosis": 8,
+      "sporadic_parkinson_disease": 13
+    },
+    "donor_blocking_status": "available_as_metadata_but_not_default_fold_due_source_organoid_disease_confounding",
+    "donor_diagnostic_folds": [
+      {
+        "confounding_note": "Donor/iPSC-line identifiers are parsed, but donor is not independently crossed with source, organoid fate, or disease context.",
+        "fold_id": "holdout_donor_or_line_subject1",
+        "heldout_factor": "donor_or_line_id",
+        "heldout_value": "Subject1",
+        "n_test": 11,
+        "n_train": 31,
+        "status": "metadata_backed_pilot_only_not_default",
+        "test_label_distribution": {
+          "Ground": 6,
+          "LEO_or_ISS": 5
+        },
+        "train_label_distribution": {
+          "Ground": 16,
+          "LEO_or_ISS": 15
+        }
+      },
+      {
+        "confounding_note": "Donor/iPSC-line identifiers are parsed, but donor is not independently crossed with source, organoid fate, or disease context.",
+        "fold_id": "holdout_donor_or_line_subject2",
+        "heldout_factor": "donor_or_line_id",
+        "heldout_value": "Subject2",
+        "n_test": 8,
+        "n_train": 34,
+        "status": "metadata_backed_pilot_only_not_default",
+        "test_label_distribution": {
+          "Ground": 4,
+          "LEO_or_ISS": 4
+        },
+        "train_label_distribution": {
+          "Ground": 18,
+          "LEO_or_ISS": 16
+        }
+      },
+      {
+        "confounding_note": "Donor/iPSC-line identifiers are parsed, but donor is not independently crossed with source, organoid fate, or disease context.",
+        "fold_id": "holdout_donor_or_line_subject3",
+        "heldout_factor": "donor_or_line_id",
+        "heldout_value": "Subject3",
+        "n_test": 10,
+        "n_train": 32,
+        "status": "metadata_backed_pilot_only_not_default",
+        "test_label_distribution": {
+          "Ground": 5,
+          "LEO_or_ISS": 5
+        },
+        "train_label_distribution": {
+          "Ground": 17,
+          "LEO_or_ISS": 15
+        }
+      },
+      {
+        "confounding_note": "Donor/iPSC-line identifiers are parsed, but donor is not independently crossed with source, organoid fate, or disease context.",
+        "fold_id": "holdout_donor_or_line_subject4",
+        "heldout_factor": "donor_or_line_id",
+        "heldout_value": "Subject4",
+        "n_test": 13,
+        "n_train": 29,
+        "status": "metadata_backed_pilot_only_not_default",
+        "test_label_distribution": {
+          "Ground": 7,
+          "LEO_or_ISS": 6
+        },
+        "train_label_distribution": {
+          "Ground": 15,
+          "LEO_or_ISS": 14
+        }
+      }
+    ],
+    "donor_metadata_status": "parsed_from_geo_series_matrix",
+    "donor_or_line_distribution": {
+      "Subject1": 11,
+      "Subject2": 8,
+      "Subject3": 10,
+      "Subject4": 13
+    },
+    "expression_matrix_audit": "v9/human_organoid/expression_matrix_audit.draft.csv",
+    "expression_matrix_sources": {
+      "OSD-863": {
+        "local_matrix_path": "v9/human_organoid/matrices/GLDS-716_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "matching_sample_count": 19,
+        "matrix_file": "GLDS-716_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "n_feature_rows": 30408,
+        "n_sample_columns": 19,
+        "sha256": "448569ef5247b81c0d063c69f09a44962088a7615b25c5f511e72635adca93e2"
+      },
+      "OSD-871": {
+        "local_matrix_path": "v9/human_organoid/matrices/GLDS-720_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "matching_sample_count": 23,
+        "matrix_file": "GLDS-720_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "n_feature_rows": 30269,
+        "n_sample_columns": 23,
+        "sha256": "88a8989db05166ea92dd19e6675b6a19b7dfaa875ab0425e5659831da8dbd7a5"
+      }
+    },
+    "expression_matrix_status": "matrix_downloaded_sample_aligned",
+    "external_accessions": "GSE259421",
+    "ipsc_line_distribution": {
+      "051121-01-MR-017": 11,
+      "AK003-01-MR-008": 8,
+      "HDF410iPS504": 13,
+      "UEC741iPS517": 10
+    },
+    "label_distribution": {
+      "Ground": 22,
+      "LEO_or_ISS": 20
+    },
+    "microglia_condition_distribution": {
+      "with_microglia": 20,
+      "without_microglia": 22
+    },
+    "microglia_conditions": "with_iPSC_derived_microglia;without_iPSC_derived_microglia",
+    "n_samples": 42,
+    "n_sources": 2,
+    "name": "blocked_leo_vs_ground_pilot",
+    "organoid_type_distribution": {
+      "cortical_neural_organoid": 19,
+      "dopaminergic_neural_organoid": 23
+    },
+    "organoid_types": "cortical_neural_organoid;dopaminergic_neural_organoid",
+    "reported_public_geo_sample_count": 42,
+    "sample_factor_status": "condition_factors_and_geo_donor_line_metadata_parsed",
+    "sample_factor_table": "v9/human_organoid/sample_factors.draft.csv",
+    "sample_table_audit": "v9/human_organoid/sample_table_audit.draft.csv",
+    "sample_table_audit_status": "sample_table_parsed",
+    "single_mission_limitation": "OSD-863/OSD-871 derive from one ISS mission context, so this draft is not a leave-one-mission-out benchmark.",
+    "source_accessions": [
+      "OSD-863",
+      "OSD-871"
+    ],
+    "source_sample_rows": {
+      "OSD-863": 19,
+      "OSD-871": 23
+    },
+    "status": "draft_sample_count_backed_pending_baseline",
+    "strategy": "Classify LEO/ISS versus matched ground-control organoid samples with donor, organoid type, and microglia condition handled as blocking or stratification factors.",
+    "target_labels": [
+      "LEO_or_ISS",
+      "Ground"
+    ],
+    "unit": "organoid_sample"
+  },
+  "task_family": "human_organoid_spaceflight",
+  "task_id": "draft_human_organoid_spaceflight",
+  "taxon_id": "9606",
+  "title": "Human iPSC neural organoid LEO vs ground draft task"
+}

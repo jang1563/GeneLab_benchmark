@@ -1,0 +1,40 @@
+[
+  {
+    "api_response_sha256": "6aac60b752edcc818711f035751a3af5dd185221f75492738810e63277ca468b",
+    "api_status": "ok",
+    "api_url": "https://visualization.osdr.nasa.gov/biodata/api/v2/dataset/OSD-863/files/",
+    "audit_status": "sample_table_parsed",
+    "candidate_condition_columns": "condition",
+    "condition_value_summary": "condition=no.known.diseases...Ground.Control...with.microglia/no.known.diseases...Ground.Control...without.microglia/no.known.diseases...Space.Flight...with.microglia/no.known.diseases...Space.Flight...without.microglia/primary.progressive.multiple.sclerosis...Ground.Control...with.microglia/primary.progressive.multiple.sclerosis...Ground.Control...without.microglia/primary.progressive.multiple.sclerosis...Space.Flight...with.microglia/primary.progressive.multiple.sclerosis...Space.Flight...without.microglia",
+    "fetched_sample_table_count": "1",
+    "glds_prefix": "GLDS-716",
+    "n_files": "338",
+    "pending_reason": "Sample table parsed; manual factor mapping is still required before final fold generation.",
+    "sample_rows": "19",
+    "sample_table_columns": "condition",
+    "sample_table_file_count": "1",
+    "sample_table_files": "GLDS-716_rna_seq_SampleTable_GLbulkRNAseq.csv",
+    "sample_table_urls": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-863/download?source=datamanager&file=GLDS-716_rna_seq_SampleTable_GLbulkRNAseq.csv",
+    "source_id": "OSD-863",
+    "task_ids": "draft_human_organoid_spaceflight"
+  },
+  {
+    "api_response_sha256": "450d85a7eb8b77362d1c15e515ea0d40c0b4f5a56616bf73aa6f719748730e76",
+    "api_status": "ok",
+    "api_url": "https://visualization.osdr.nasa.gov/biodata/api/v2/dataset/OSD-871/files/",
+    "audit_status": "sample_table_parsed",
+    "candidate_condition_columns": "condition",
+    "condition_value_summary": "condition=Sporadic.Parkinson.disease...Ground.Control...with.microglia/Sporadic.Parkinson.disease...Ground.Control...without.microglia/Sporadic.Parkinson.disease...Space.Flight...with.microglia/Sporadic.Parkinson.disease...Space.Flight...without.microglia/no.known.diseases...Ground.Control...with.microglia/no.known.diseases...Ground.Control...without.microglia/no.known.diseases...Space.Flight...with.microglia/no.known.diseases...Space.Flight...without.microglia",
+    "fetched_sample_table_count": "1",
+    "glds_prefix": "GLDS-720",
+    "n_files": "402",
+    "pending_reason": "Sample table parsed; manual factor mapping is still required before final fold generation.",
+    "sample_rows": "23",
+    "sample_table_columns": "condition",
+    "sample_table_file_count": "1",
+    "sample_table_files": "GLDS-720_rna_seq_SampleTable_GLbulkRNAseq.csv",
+    "sample_table_urls": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-871/download?source=datamanager&file=GLDS-720_rna_seq_SampleTable_GLbulkRNAseq.csv",
+    "source_id": "OSD-871",
+    "task_ids": "draft_human_organoid_spaceflight"
+  }
+]

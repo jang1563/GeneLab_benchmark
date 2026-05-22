@@ -1,0 +1,65 @@
+{
+  "command": [
+    "scripts/run_v9_human_organoid_sensitivity.py"
+  ],
+  "generated_at": "2026-05-22T01:01:48.551962+00:00",
+  "input_files": [
+    {
+      "path": "v9/human_organoid/reports/sensitivity/tvg100_log1p_none/draft_human_organoid_spaceflight/predictions.csv",
+      "role": "submission",
+      "sha256": "fc6624a5266a12826ef23c9d578b1e5409020985fb630920bdc25ad4f09f197e"
+    },
+    {
+      "path": "v9/human_organoid/task_manifests/draft_human_organoid_spaceflight.json",
+      "role": "task_manifest",
+      "sha256": "18d2cfad88dd5347c90426ee4aa31db65dce6e08a3fa32a609d49b273618d557"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.5835227272727272
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5897727272727273
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.07231152302023809
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.5868055555555556
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "human_organoid_spaceflight",
+  "task_id": "draft_human_organoid_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 84,
+    "ok": true,
+    "submission_path": "v9/human_organoid/reports/sensitivity/tvg100_log1p_none/draft_human_organoid_spaceflight/predictions.csv",
+    "task_id": "draft_human_organoid_spaceflight",
+    "warnings": []
+  }
+}

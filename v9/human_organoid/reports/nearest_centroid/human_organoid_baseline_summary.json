@@ -1,0 +1,25 @@
+[
+  {
+    "auroc": "0.6147727273",
+    "balanced_accuracy": "0.5295454545",
+    "baseline_id": "organoid_nearest_centroid",
+    "calibration_error": "0.02537185971",
+    "claim_boundary": "pilot_baseline_only_not_leaderboard",
+    "fold_family": "default_sample_count_backed_folds",
+    "macro_f1": "0.5194508009",
+    "metrics": "v9/human_organoid/reports/nearest_centroid/draft_human_organoid_spaceflight/metrics.json",
+    "mission_discrimination": "",
+    "n_predictions": "84",
+    "output_dir": "v9/human_organoid/reports/nearest_centroid/draft_human_organoid_spaceflight",
+    "predictions": "v9/human_organoid/reports/nearest_centroid/draft_human_organoid_spaceflight/predictions.csv",
+    "release_status": "draft_not_frozen",
+    "run_manifest": "v9/human_organoid/reports/nearest_centroid/draft_human_organoid_spaceflight/run_manifest.json",
+    "scaling": "zscore",
+    "status": "evaluated",
+    "task_id": "draft_human_organoid_spaceflight",
+    "top_variable_genes": "2000",
+    "transform": "log1p",
+    "validation_ok": "True",
+    "variant_id": "tvg2000_log1p_zscore"
+  }
+]

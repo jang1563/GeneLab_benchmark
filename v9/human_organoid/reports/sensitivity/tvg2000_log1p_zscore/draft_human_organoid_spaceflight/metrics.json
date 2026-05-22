@@ -1,0 +1,96 @@
+{
+  "baseline": {
+    "baseline_id": "organoid_nearest_centroid",
+    "claim_boundary": "pilot_baseline_only_not_leaderboard",
+    "fold_family": "default_sample_count_backed_folds",
+    "positive_label": "LEO_or_ISS",
+    "release_status": "draft_not_frozen",
+    "scaling": "zscore",
+    "score_column": "flight_probability",
+    "top_variable_genes": 2000,
+    "transform": "log1p"
+  },
+  "folds": [
+    {
+      "fold_id": "holdout_organoid_type_cortical_neural_organoid",
+      "heldout_factor": "organoid_type",
+      "heldout_value": "cortical_neural_organoid",
+      "n_features": 2000,
+      "n_test": 19,
+      "n_train": 23
+    },
+    {
+      "fold_id": "holdout_organoid_type_dopaminergic_neural_organoid",
+      "heldout_factor": "organoid_type",
+      "heldout_value": "dopaminergic_neural_organoid",
+      "n_features": 2000,
+      "n_test": 23,
+      "n_train": 19
+    },
+    {
+      "fold_id": "holdout_microglia_condition_with_microglia",
+      "heldout_factor": "microglia_condition",
+      "heldout_value": "with_microglia",
+      "n_features": 2000,
+      "n_test": 20,
+      "n_train": 22
+    },
+    {
+      "fold_id": "holdout_microglia_condition_without_microglia",
+      "heldout_factor": "microglia_condition",
+      "heldout_value": "without_microglia",
+      "n_features": 2000,
+      "n_test": 22,
+      "n_train": 20
+    }
+  ],
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.6147727272727272
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5295454545454545
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.025371859708333347
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.5194508009153318
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "status": "evaluated",
+  "submission_path": "v9/human_organoid/reports/sensitivity/tvg2000_log1p_zscore/draft_human_organoid_spaceflight/predictions.csv",
+  "task_id": "draft_human_organoid_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 84,
+    "ok": true,
+    "submission_path": "v9/human_organoid/reports/sensitivity/tvg2000_log1p_zscore/draft_human_organoid_spaceflight/predictions.csv",
+    "task_id": "draft_human_organoid_spaceflight",
+    "warnings": []
+  }
+}

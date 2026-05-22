@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genelab-benchmark.local/spacebio_bench/task_manifest.schema.json",
+  "title": "SpaceBio-Bench task manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "task_id",
+    "task_family",
+    "title",
+    "source_records",
+    "split",
+    "metrics",
+    "output"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "task_family": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "organism": {
+      "type": "string"
+    },
+    "taxon_id": {
+      "type": "string"
+    },
+    "species_common_name": {
+      "type": "string"
+    },
+    "material_type": {
+      "type": "string"
+    },
+    "model_system": {
+      "type": "string"
+    },
+    "biospecimen_type": {
+      "type": "string"
+    },
+    "assay_modality": {
+      "type": "string"
+    },
+    "feature_namespace": {
+      "type": "string"
+    },
+    "source_records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "url_or_accession",
+          "access_status",
+          "checksum_status"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "url_or_accession": {
+            "type": "string"
+          },
+          "access_status": {
+            "type": "string"
+          },
+          "checksum_status": {
+            "type": "string"
+          },
+          "privacy_class": {
+            "type": "string"
+          },
+          "organism": {
+            "type": "string"
+          },
+          "taxon_id": {
+            "type": "string"
+          },
+          "species_common_name": {
+            "type": "string"
+          },
+          "material_type": {
+            "type": "string"
+          },
+          "model_system": {
+            "type": "string"
+          },
+          "biospecimen_type": {
+            "type": "string"
+          },
+          "assay_modality": {
+            "type": "string"
+          },
+          "feature_namespace": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "split": {
+      "type": "object",
+      "required": [
+        "name",
+        "unit",
+        "strategy"
+      ],
+      "additionalProperties": true
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "metric_id",
+          "profile",
+          "interpretation"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "prediction_format",
+        "primary_artifacts"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

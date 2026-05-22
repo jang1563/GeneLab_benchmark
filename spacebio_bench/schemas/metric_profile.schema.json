@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genelab-benchmark.local/spacebio_bench/metric_profile.schema.json",
+  "title": "SpaceBio-Bench metric profile",
+  "type": "object",
+  "required": [
+    "description",
+    "metrics"
+  ],
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

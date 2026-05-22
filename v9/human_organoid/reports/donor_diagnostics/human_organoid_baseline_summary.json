@@ -1,0 +1,25 @@
+[
+  {
+    "auroc": "0.6954545455",
+    "balanced_accuracy": "0.5318181818",
+    "baseline_id": "organoid_nearest_centroid",
+    "calibration_error": "0.02808852089",
+    "claim_boundary": "donor_diagnostic_only_not_leaderboard",
+    "fold_family": "geo_donor_or_line_diagnostic_folds",
+    "macro_f1": "0.5138888889",
+    "metrics": "v9/human_organoid/reports/donor_diagnostics/draft_human_organoid_spaceflight/metrics.json",
+    "mission_discrimination": "",
+    "n_predictions": "42",
+    "output_dir": "v9/human_organoid/reports/donor_diagnostics/draft_human_organoid_spaceflight",
+    "predictions": "v9/human_organoid/reports/donor_diagnostics/draft_human_organoid_spaceflight/predictions.csv",
+    "release_status": "draft_not_frozen",
+    "run_manifest": "v9/human_organoid/reports/donor_diagnostics/draft_human_organoid_spaceflight/run_manifest.json",
+    "scaling": "zscore",
+    "status": "evaluated",
+    "task_id": "draft_human_organoid_spaceflight",
+    "top_variable_genes": "2000",
+    "transform": "log1p",
+    "validation_ok": "True",
+    "variant_id": "tvg2000_log1p_zscore"
+  }
+]

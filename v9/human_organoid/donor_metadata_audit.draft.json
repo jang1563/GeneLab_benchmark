@@ -1,0 +1,28 @@
+[
+  {
+    "blocking_status": "available_but_confounded_pilot_only",
+    "donor_field_status": "recovered_from_geo_series_matrix",
+    "donor_or_line_count": "2",
+    "donor_or_line_ids": "Subject1;Subject2",
+    "glds_prefix": "GLDS-716",
+    "ipsc_line_ids": "051121-01-MR-017;AK003-01-MR-008",
+    "pending_reason": "GEO series matrix provides Subject-level and iPSC-line identifiers; donor holdout remains a pilot-only diagnostic because donor, source, organoid fate, and disease context are not independently crossed.",
+    "sample_rows": "19",
+    "sample_table_columns": "condition",
+    "sample_table_file": "GLDS-716_rna_seq_SampleTable_GLbulkRNAseq.csv",
+    "source_id": "OSD-863"
+  },
+  {
+    "blocking_status": "available_but_confounded_pilot_only",
+    "donor_field_status": "recovered_from_geo_series_matrix",
+    "donor_or_line_count": "2",
+    "donor_or_line_ids": "Subject3;Subject4",
+    "glds_prefix": "GLDS-720",
+    "ipsc_line_ids": "HDF410iPS504;UEC741iPS517",
+    "pending_reason": "GEO series matrix provides Subject-level and iPSC-line identifiers; donor holdout remains a pilot-only diagnostic because donor, source, organoid fate, and disease context are not independently crossed.",
+    "sample_rows": "23",
+    "sample_table_columns": "condition",
+    "sample_table_file": "GLDS-720_rna_seq_SampleTable_GLbulkRNAseq.csv",
+    "source_id": "OSD-871"
+  }
+]
