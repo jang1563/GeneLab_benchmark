@@ -243,17 +243,27 @@ Stop and checkpoint only when one of these is true:
 
 ## Next Active Block
 
-`V9-ORG-014: Human organoid frozen DE contrast extraction and signature metric
-contract` is the next active implementation block. It should start from
-`v9/human_organoid/signature_reference_audit.draft.csv`,
-`v9/human_organoid/reports/ORGANOID_SIGNATURE_METRIC_REFERENCE_DECISION.md`,
-`v9/human_organoid/task_manifests/draft_human_organoid_spaceflight.json`, and
-the OSDR DE/contrast files for OSD-863 and OSD-871. V9-ORG-013 established that
-public OSDR DE tables and contrast definitions exist. The next block should
-derive a compact, checksummed DE reference table, normalize log2 fold-change
-orientation to `LEO_or_ISS - Ground`, define a `response_signature.csv`
-submission artifact, and keep DE/signature metrics skip-aware until that
-artifact is supplied.
+`V9-BULK-ALPHA-002: metadata-only alpha snapshot decision` is the next active
+implementation block. It should start from
+`v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_summary.csv`,
+`v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_matrix.csv`,
+`v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv`,
+`v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_claim_boundary.csv`,
+`v9/reports/public_bulk_alpha_gap_matrix/package_update_plan.csv`, and
+`docs/V9_PUBLIC_BULK_ALPHA_FREEZE_GAP_MATRIX_REVIEW.md`.
+The block should decide whether a metadata-only public bulk alpha snapshot is
+acceptable with explicit payload-hash blockers, or whether payload mirroring and
+local hash verification must precede any alpha wording.
+
+Purpose-drift guard:
+
+- The current OSD-120 metadata branch is closed unless owner-supplied release
+  metadata appears.
+- Do not create another archive-release, citation, DOI, license, or
+  creator/publisher gate for OSD-120 during V9-BULK-ALPHA-002.
+- Keep public bulk core separate from organoid and multispecies draft tracks.
+- Do not promote a frozen public release while public bulk payload hashes remain
+  unverified.
 
 `V9-THEN-005: RO-Crate Export Design` remains the next packaging/release block
 when the active lane returns to release metadata. It should start from

@@ -1,0 +1,98 @@
+{
+  "command": [
+    "scripts/run_v9_multispecies_sensitivity.py"
+  ],
+  "generated_at": "2026-05-23T04:24:09.971575+00:00",
+  "input_files": [
+    {
+      "path": "v9/multispecies/reports/sensitivity/tvg5000_log1p_none/draft_osd37_arabidopsis_seedling_spaceflight/predictions.csv",
+      "role": "submission",
+      "sha256": "a2b52150d95e23c96229995d732d751c152481b5bdf76152444317d46cddc263"
+    },
+    {
+      "path": "v9/multispecies/task_manifests/draft_osd37_arabidopsis_seedling_spaceflight.json",
+      "role": "task_manifest",
+      "sha256": "066feff3cfa112075feaf39d4d2b3db77b688d1eef32ec947082463725b54f15"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.9081632653061225
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.8035714285714286
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.28833987008928574
+    },
+    "condition_stratum_holdout_delta": {
+      "details": {
+        "holdout_condition_stratum_col_0": {
+          "balanced_accuracy": 0.75,
+          "heldout_value": "Col.0",
+          "n_test": 16
+        },
+        "holdout_condition_stratum_cvi_0": {
+          "balanced_accuracy": 0.8333333333333333,
+          "heldout_value": "Cvi.0",
+          "n_test": 12
+        },
+        "holdout_condition_stratum_ler_0": {
+          "balanced_accuracy": 0.75,
+          "heldout_value": "Ler.0",
+          "n_test": 12
+        },
+        "holdout_condition_stratum_ws_2": {
+          "balanced_accuracy": 0.875,
+          "heldout_value": "Ws.2",
+          "n_test": 16
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across held-out condition strata",
+      "status": "computed",
+      "value": 0.125
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.8035087719298246
+    },
+    "mission_discrimination": {
+      "reason": "mission_discrimination requires at least two missions",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "multispecies_species_native_spaceflight",
+  "task_id": "draft_osd37_arabidopsis_seedling_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "true_label",
+      "predicted_label",
+      "flight_probability",
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 56,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/sensitivity/tvg5000_log1p_none/draft_osd37_arabidopsis_seedling_spaceflight/predictions.csv",
+    "task_id": "draft_osd37_arabidopsis_seedling_spaceflight",
+    "warnings": []
+  }
+}

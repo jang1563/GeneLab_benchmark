@@ -1,0 +1,6 @@
+reference_id,topic,url,checked_date,metadata_implication
+datacite_schema_4_7,DataCite metadata for citable research outputs,https://schema.datacite.org/,2026-05-26,"Use DataCite 4.7-oriented fields for future DOI/citation metadata, but keep identifier and creator fields pending until a real release target exists."
+ro_crate_1_2,RO-Crate JSON-LD package structure,https://www.researchobject.org/ro-crate/specification/1.2/metadata.html,2026-05-26,"Model the package as a root Dataset with file Data Entities, contextual organizations, and workflow provenance."
+huggingface_dataset_cards,Dataset card README metadata,https://huggingface.co/docs/hub/datasets-cards,2026-05-26,"Keep README YAML metadata, tags, task category, intended use, limitations, and license state explicit."
+nasa_osdr_faq_citation,OSDR dataset citation and credit,https://science.nasa.gov/reference/osdr-faq/,2026-05-26,Credit NASA OSDR/GeneLab and defer dataset-specific BibTeX/RIS to the OSDR study citation path.
+nasa_osdr_repository,OSDR repository source scope,https://science.nasa.gov/biological-physical/data/osdr/,2026-05-26,Keep upstream OSDR source identifiers and access boundaries as primary public-source anchors.

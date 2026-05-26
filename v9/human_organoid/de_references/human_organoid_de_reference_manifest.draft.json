@@ -1,0 +1,206 @@
+{
+  "artifact_type": "human_organoid_de_reference",
+  "build_policy": "v9-org-014-freeze-direct-non-rRNArm-de-contrasts",
+  "canonical_de_file_rule": "Select *_rna_seq_differential_expression_GLbulkRNAseq.csv and exclude rRNArm.",
+  "contrast_rule": "Use direct matched Ground Control versus Space Flight contrasts with the same disease context and microglia condition.",
+  "feature_key_contract": {
+    "fallback_keys": [
+      "ensembl_id",
+      "entrez_id"
+    ],
+    "feature_namespace": "human_gene",
+    "primary_key": "gene_symbol"
+  },
+  "log2fc_orientation_contract": {
+    "benchmark_orientation": "LEO_or_ISS_minus_Ground",
+    "note": "OSDR direct contrast labels are Ground Control v Space Flight. The derived table negates source Log2fc values so positive values mean higher in LEO/ISS than matched ground control.",
+    "source_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header",
+    "transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground"
+  },
+  "release_status": "draft_not_frozen",
+  "reference_manifest": "v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json",
+  "reference_table": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz",
+  "response_signature_contract": {
+    "artifact": "response_signature.csv",
+    "fallback_join_keys": [
+      "source_id",
+      "contrast_id",
+      "ensembl_id"
+    ],
+    "join_keys": [
+      "source_id",
+      "contrast_id",
+      "gene_symbol"
+    ],
+    "predicted_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+    "required_columns": [
+      "task_id",
+      "source_id",
+      "contrast_id",
+      "gene_symbol",
+      "ensembl_id",
+      "predicted_log2fc_leo_or_iss_minus_ground"
+    ]
+  },
+  "schema_version": "0.1.0",
+  "sources": [
+    {
+      "contrasts": [
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(no known diseases & Ground Control & with microglia)v(no known diseases & Space Flight & with microglia)",
+          "disease_context": "no known diseases",
+          "microglia_condition": "with microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "no known diseases & Ground Control & with microglia",
+          "source_group_b": "no known diseases & Space Flight & with microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        },
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(no known diseases & Ground Control & without microglia)v(no known diseases & Space Flight & without microglia)",
+          "disease_context": "no known diseases",
+          "microglia_condition": "without microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "no known diseases & Ground Control & without microglia",
+          "source_group_b": "no known diseases & Space Flight & without microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        },
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(primary progressive multiple sclerosis & Ground Control & with microglia)v(primary progressive multiple sclerosis & Space Flight & with microglia)",
+          "disease_context": "primary progressive multiple sclerosis",
+          "microglia_condition": "with microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "primary progressive multiple sclerosis & Ground Control & with microglia",
+          "source_group_b": "primary progressive multiple sclerosis & Space Flight & with microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        },
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(primary progressive multiple sclerosis & Ground Control & without microglia)v(primary progressive multiple sclerosis & Space Flight & without microglia)",
+          "disease_context": "primary progressive multiple sclerosis",
+          "microglia_condition": "without microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "primary progressive multiple sclerosis & Ground Control & without microglia",
+          "source_group_b": "primary progressive multiple sclerosis & Space Flight & without microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        }
+      ],
+      "direct_spaceflight_contrasts": [
+        "(no known diseases & Ground Control & with microglia)v(no known diseases & Space Flight & with microglia)",
+        "(no known diseases & Ground Control & without microglia)v(no known diseases & Space Flight & without microglia)",
+        "(primary progressive multiple sclerosis & Ground Control & with microglia)v(primary progressive multiple sclerosis & Space Flight & with microglia)",
+        "(primary progressive multiple sclerosis & Ground Control & without microglia)v(primary progressive multiple sclerosis & Space Flight & without microglia)"
+      ],
+      "glds_prefix": "GLDS-716",
+      "n_contrasts": 4,
+      "n_rows": 121632,
+      "n_significant_fdr_0_05": 379,
+      "rows_by_contrast": {
+        "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": 30408,
+        "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": 30408,
+        "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground": 30408,
+        "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground": 30408
+      },
+      "significant_fdr_0_05_by_contrast": {
+        "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": 98,
+        "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": 164,
+        "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground": 17,
+        "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground": 100
+      },
+      "source_de_data_type": "differential expression table",
+      "source_de_file": "GLDS-716_rna_seq_differential_expression_GLbulkRNAseq.csv",
+      "source_de_file_size": "141741746",
+      "source_de_sha256": "5f7bbdffccdd74cf542457e99ef11ca27c69811942995fec1f4fabf0284b6436",
+      "source_de_url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-863/download?source=datamanager&file=GLDS-716_rna_seq_differential_expression_GLbulkRNAseq.csv",
+      "source_id": "OSD-863"
+    },
+    {
+      "contrasts": [
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(Sporadic Parkinson disease & Ground Control & with microglia)v(Sporadic Parkinson disease & Space Flight & with microglia)",
+          "disease_context": "Sporadic Parkinson disease",
+          "microglia_condition": "with microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "Sporadic Parkinson disease & Ground Control & with microglia",
+          "source_group_b": "Sporadic Parkinson disease & Space Flight & with microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        },
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(Sporadic Parkinson disease & Ground Control & without microglia)v(Sporadic Parkinson disease & Space Flight & without microglia)",
+          "disease_context": "Sporadic Parkinson disease",
+          "microglia_condition": "without microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "Sporadic Parkinson disease & Ground Control & without microglia",
+          "source_group_b": "Sporadic Parkinson disease & Space Flight & without microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        },
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(no known diseases & Ground Control & with microglia)v(no known diseases & Space Flight & with microglia)",
+          "disease_context": "no known diseases",
+          "microglia_condition": "with microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "no known diseases & Ground Control & with microglia",
+          "source_group_b": "no known diseases & Space Flight & with microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        },
+        {
+          "benchmark_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+          "contrast_id": "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground",
+          "contrast_label": "(no known diseases & Ground Control & without microglia)v(no known diseases & Space Flight & without microglia)",
+          "disease_context": "no known diseases",
+          "microglia_condition": "without microglia",
+          "orientation_transform": "negated_ground_control_v_space_flight_to_leo_or_iss_minus_ground",
+          "source_group_a": "no known diseases & Ground Control & without microglia",
+          "source_group_b": "no known diseases & Space Flight & without microglia",
+          "source_log2fc_orientation": "group_a_minus_group_b_assumed_from_Log2fc_A_v_B_header"
+        }
+      ],
+      "direct_spaceflight_contrasts": [
+        "(Sporadic Parkinson disease & Ground Control & with microglia)v(Sporadic Parkinson disease & Space Flight & with microglia)",
+        "(Sporadic Parkinson disease & Ground Control & without microglia)v(Sporadic Parkinson disease & Space Flight & without microglia)",
+        "(no known diseases & Ground Control & with microglia)v(no known diseases & Space Flight & with microglia)",
+        "(no known diseases & Ground Control & without microglia)v(no known diseases & Space Flight & without microglia)"
+      ],
+      "glds_prefix": "GLDS-720",
+      "n_contrasts": 4,
+      "n_rows": 121076,
+      "n_significant_fdr_0_05": 1989,
+      "rows_by_contrast": {
+        "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": 30269,
+        "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": 30269,
+        "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground": 30269,
+        "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground": 30269
+      },
+      "significant_fdr_0_05_by_contrast": {
+        "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": 38,
+        "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": 222,
+        "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground": 261,
+        "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground": 1468
+      },
+      "source_de_data_type": "differential expression table",
+      "source_de_file": "GLDS-720_rna_seq_differential_expression_GLbulkRNAseq.csv",
+      "source_de_file_size": "143916213",
+      "source_de_sha256": "ab811c7e0830212810c5d848ed3018f2f0a85e3a3c7a3ef4236ebce2c8b07272",
+      "source_de_url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-871/download?source=datamanager&file=GLDS-720_rna_seq_differential_expression_GLbulkRNAseq.csv",
+      "source_id": "OSD-871"
+    }
+  ],
+  "totals": {
+    "n_contrasts": 8,
+    "n_rows": 242708,
+    "n_significant_fdr_0_05": 2368,
+    "n_sources": 2
+  }
+}

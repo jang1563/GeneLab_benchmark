@@ -1,0 +1,44 @@
+[
+  {
+    "reference_id": "nasa_osdr_repository",
+    "release_readiness_implication": "Use OSDR source identifiers, metadata, and access boundaries as primary public-source anchors.",
+    "topic": "OSDR repository scope and curated metadata",
+    "url": "https://science.nasa.gov/biological-physical/data/osdr/"
+  },
+  {
+    "reference_id": "nasa_osdr_faq_citation",
+    "release_readiness_implication": "Public cards and release notes should credit OSDR/GeneLab explicitly and keep public and controlled data separated.",
+    "topic": "OSDR access and credit language",
+    "url": "https://science.nasa.gov/reference/osdr-faq/"
+  },
+  {
+    "reference_id": "fair_principles",
+    "release_readiness_implication": "A release needs findable identifiers, access metadata, interoperable schemas, and reuse constraints beyond local files.",
+    "topic": "FAIR machine-actionable metadata",
+    "url": "https://www.go-fair.org/fair-principles"
+  },
+  {
+    "reference_id": "ro_crate_1_2",
+    "release_readiness_implication": "Future packaging should connect data entities, scripts, workflow runs, provenance, authorship, licensing, and outputs.",
+    "topic": "Research object packaging",
+    "url": "https://www.researchobject.org/ro-crate/specification.html"
+  },
+  {
+    "reference_id": "datacite_schema",
+    "release_readiness_implication": "Versioned public releases should expose creators, title, version, identifiers, related identifiers, and resource type.",
+    "topic": "DOI-oriented dataset metadata",
+    "url": "https://schema.datacite.org/"
+  },
+  {
+    "reference_id": "huggingface_dataset_cards",
+    "release_readiness_implication": "A public dataset artifact should include a rendered README/card with scope, structure, intended use, limitations, and metadata.",
+    "topic": "Dataset card documentation",
+    "url": "https://huggingface.co/docs/hub/datasets-cards"
+  },
+  {
+    "reference_id": "github_zenodo_doi",
+    "release_readiness_implication": "A release candidate should plan a versioned archive path if it will be cited as a stable public artifact.",
+    "topic": "Versioned repository archive DOI",
+    "url": "https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content"
+  }
+]

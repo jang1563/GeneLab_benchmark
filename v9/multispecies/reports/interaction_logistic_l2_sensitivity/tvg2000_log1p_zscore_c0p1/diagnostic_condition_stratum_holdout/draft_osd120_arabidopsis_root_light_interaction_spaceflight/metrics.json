@@ -1,0 +1,233 @@
+{
+  "baseline": {
+    "baseline_id": "multispecies_interaction_logistic_regression_l2",
+    "c": 0.1,
+    "claim_boundary": "draft_interaction_logistic_only_not_leaderboard",
+    "class_weight": "balanced",
+    "fold_family": "diagnostic_condition_stratum_holdout",
+    "framework": "sklearn",
+    "max_iter": 5000,
+    "penalty": "l2",
+    "positive_label": "LEO_or_ISS",
+    "random_state": 42,
+    "release_status": "draft_not_frozen",
+    "scaling": "zscore",
+    "score_column": "flight_probability",
+    "solver": "liblinear",
+    "top_variable_genes": 2000,
+    "transform": "log1p"
+  },
+  "folds": [
+    {
+      "fit_details": {
+        "c": 0.1,
+        "class_weight": "balanced",
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l2",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.011625
+      },
+      "fold_id": "holdout_condition_stratum_col_0_phyd_dark_treatment",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Col.0.PhyD|Dark.Treatment",
+      "n_features": 2000,
+      "n_test": 6,
+      "n_train": 30,
+      "train_time_s": 0.011625
+    },
+    {
+      "fit_details": {
+        "c": 0.1,
+        "class_weight": "balanced",
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l2",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.015349
+      },
+      "fold_id": "holdout_condition_stratum_col_0_phyd_light_treatment",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Col.0.PhyD|Light.Treatment",
+      "n_features": 2000,
+      "n_test": 6,
+      "n_train": 30,
+      "train_time_s": 0.015349
+    },
+    {
+      "fit_details": {
+        "c": 0.1,
+        "class_weight": "balanced",
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l2",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.016247
+      },
+      "fold_id": "holdout_condition_stratum_col_0_dark_treatment",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Col.0|Dark.Treatment",
+      "n_features": 2000,
+      "n_test": 6,
+      "n_train": 30,
+      "train_time_s": 0.016247
+    },
+    {
+      "fit_details": {
+        "c": 0.1,
+        "class_weight": "balanced",
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l2",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.012604
+      },
+      "fold_id": "holdout_condition_stratum_col_0_light_treatment",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Col.0|Light.Treatment",
+      "n_features": 2000,
+      "n_test": 6,
+      "n_train": 30,
+      "train_time_s": 0.012604
+    },
+    {
+      "fit_details": {
+        "c": 0.1,
+        "class_weight": "balanced",
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l2",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.013864
+      },
+      "fold_id": "holdout_condition_stratum_wassilewskija_ecotype_dark_treatment",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Wassilewskija.ecotype|Dark.Treatment",
+      "n_features": 2000,
+      "n_test": 6,
+      "n_train": 30,
+      "train_time_s": 0.013864
+    },
+    {
+      "fit_details": {
+        "c": 0.1,
+        "class_weight": "balanced",
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l2",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.013764
+      },
+      "fold_id": "holdout_condition_stratum_wassilewskija_ecotype_light_treatment",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Wassilewskija.ecotype|Light.Treatment",
+      "n_features": 2000,
+      "n_test": 6,
+      "n_train": 30,
+      "train_time_s": 0.013764
+    }
+  ],
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.8981481481481481
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.8611111111111112
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.11828419398394444
+    },
+    "condition_stratum_holdout_delta": {
+      "details": {
+        "holdout_condition_stratum_col_0_dark_treatment": {
+          "balanced_accuracy": 0.8333333333333333,
+          "heldout_value": "Col.0|Dark.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_col_0_light_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Col.0|Light.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_col_0_phyd_dark_treatment": {
+          "balanced_accuracy": 0.3333333333333333,
+          "heldout_value": "Col.0.PhyD|Dark.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_col_0_phyd_light_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Col.0.PhyD|Light.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_wassilewskija_ecotype_dark_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Wassilewskija.ecotype|Dark.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_wassilewskija_ecotype_light_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Wassilewskija.ecotype|Light.Treatment",
+          "n_test": 6
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across diagnostic_condition_stratum_holdout folds",
+      "status": "computed",
+      "value": 0.6666666666666667
+    },
+    "genotype_holdout_delta": {
+      "reason": "not applicable to fold_family=diagnostic_condition_stratum_holdout",
+      "status": "skipped"
+    },
+    "light_treatment_holdout_delta": {
+      "reason": "not applicable to fold_family=diagnostic_condition_stratum_holdout",
+      "status": "skipped"
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.8610038610038611
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "status": "evaluated",
+  "submission_path": "v9/multispecies/reports/interaction_logistic_l2_sensitivity/tvg2000_log1p_zscore_c0p1/diagnostic_condition_stratum_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "genotype_or_ecotype",
+      "light_treatment",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 36,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/interaction_logistic_l2_sensitivity/tvg2000_log1p_zscore_c0p1/diagnostic_condition_stratum_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "warnings": []
+  }
+}

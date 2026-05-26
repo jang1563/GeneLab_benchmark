@@ -1,0 +1,44 @@
+[
+  {
+    "checked_date": "2026-05-26",
+    "decision_implication": "A Zenodo DOI path requires a public repository, repository-owner access, a GitHub release, and an explicit license.",
+    "reference_id": "github_zenodo_doi",
+    "topic": "GitHub repository DOI via Zenodo",
+    "url": "https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "decision_implication": "Zenodo/GitHub integration is an archive option for software records, but it does not replace local creator/license decisions.",
+    "reference_id": "zenodo_github_integration",
+    "topic": "Zenodo GitHub/software archive flow",
+    "url": "https://help.zenodo.org/docs/github/"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "decision_implication": "CITATION.cff can describe software or dataset citation metadata, but requires authors, version, DOI or URL, and release date.",
+    "reference_id": "github_citation_cff",
+    "topic": "GitHub CITATION.cff citation metadata",
+    "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "decision_implication": "Use the OSDR study citation button/BibTeX/RIS for upstream data citation and keep NASA OSDR/GeneLab credit visible.",
+    "reference_id": "osdr_dataset_citation",
+    "topic": "NASA OSDR study citation and credit",
+    "url": "https://science.nasa.gov/reference/osdr-faq/"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "decision_implication": "Citable metadata needs identifier, creator, title, publisher, publication year, and resource type; placeholder identifier and creator fields block a DOI-ready package.",
+    "reference_id": "datacite_4_7_mandatory_metadata",
+    "topic": "DataCite 4.7 mandatory citation metadata",
+    "url": "https://datacite-metadata-schema.readthedocs.io/en/4.7/properties/"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "decision_implication": "When a local license is selected, use a standard SPDX identifier or explicit custom-license label instead of ambiguous text.",
+    "reference_id": "spdx_license_identifiers",
+    "topic": "Machine-readable license identifiers",
+    "url": "https://spdx.dev/learn/handling-license-info/"
+  }
+]

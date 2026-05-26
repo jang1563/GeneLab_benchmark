@@ -1,0 +1,100 @@
+{
+  "command": [
+    "scripts/run_v9_osd120_interaction_logistic_sensitivity.py",
+    "--repo-root",
+    "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark"
+  ],
+  "generated_at": "2026-05-25T15:56:19.987534+00:00",
+  "input_files": [
+    {
+      "path": "v9/multispecies/reports/interaction_logistic_l2_sensitivity/tvg500_log1p_zscore_c0p1/primary_genotype_or_ecotype_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+      "role": "submission",
+      "sha256": "7b1cf80229651137a3c0f6882b0994f332a6533a7f88ea93791ec616bea37f3f"
+    },
+    {
+      "path": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json",
+      "role": "task_manifest",
+      "sha256": "4f61d0dc755d634b5a5b0b47c67841e9e4de5b7c6e17bbe051293533430860b5"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.8703703703703703
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.8333333333333333
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.1511200555272222
+    },
+    "condition_stratum_holdout_delta": {
+      "reason": "not applicable to fold_family=primary_genotype_or_ecotype_holdout",
+      "status": "skipped"
+    },
+    "genotype_holdout_delta": {
+      "details": {
+        "holdout_genotype_or_ecotype_col_0": {
+          "balanced_accuracy": 0.9166666666666667,
+          "heldout_value": "Col.0",
+          "n_test": 12
+        },
+        "holdout_genotype_or_ecotype_col_0_phyd": {
+          "balanced_accuracy": 0.6666666666666666,
+          "heldout_value": "Col.0.PhyD",
+          "n_test": 12
+        },
+        "holdout_genotype_or_ecotype_wassilewskija_ecotype": {
+          "balanced_accuracy": 0.9166666666666667,
+          "heldout_value": "Wassilewskija.ecotype",
+          "n_test": 12
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across primary_genotype_or_ecotype_holdout folds",
+      "status": "computed",
+      "value": 0.2500000000000001
+    },
+    "light_treatment_holdout_delta": {
+      "reason": "not applicable to fold_family=primary_genotype_or_ecotype_holdout",
+      "status": "skipped"
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.8328173374613003
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "multispecies_light_interaction_spaceflight",
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "genotype_or_ecotype",
+      "light_treatment",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 36,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/interaction_logistic_l2_sensitivity/tvg500_log1p_zscore_c0p1/primary_genotype_or_ecotype_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "warnings": []
+  }
+}

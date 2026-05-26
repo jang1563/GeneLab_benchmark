@@ -1,0 +1,31 @@
+{
+  "allowed_next_descriptor_action": "none_defer_archive_release",
+  "blocked_fields": [
+    "future_archive_identifier",
+    "release_version_string",
+    "release_date",
+    "publication_year",
+    "local_package_creators",
+    "local_package_contributors",
+    "publisher_maintainer_identity",
+    "local_code_license",
+    "local_metadata_tables_license",
+    "upstream_osdr_dataset_citation",
+    "repository_url",
+    "citation_cff_type"
+  ],
+  "claim_boundary": "archive_release_deferred_diagnostic_metadata_only_no_descriptor_mutation",
+  "descriptor_mutation_allowed": false,
+  "fill_id": "osd120_release_owner_citation_metadata_fill",
+  "guard_id": "osd120_archive_release_deferral_application_guard",
+  "mutates_citation_cff": false,
+  "mutates_datapackage": false,
+  "mutates_ro_crate": false,
+  "owner_supplied_fields": [],
+  "retained_current_draft_fields": [
+    "current_archive_path_decision",
+    "package_title",
+    "upstream_osdr_acknowledgement_text",
+    "payload_mirror_rights_review"
+  ]
+}

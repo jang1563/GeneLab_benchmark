@@ -1,0 +1,52 @@
+[
+  {
+    "claim_id": "draft_candidate_boundary",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "sparse_l1_c1 is a draft transparent diagnostic candidate, not a frozen leaderboard baseline.",
+    "external_source_urls": "",
+    "limitations": "within-source OSD-120 task; no leave-one-mission-out claim",
+    "local_evidence_artifacts": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json|v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_summary.csv",
+    "local_evidence_columns": "release_status|claim_boundary|candidate_decision",
+    "package_id": "osd120_sparse_l1_c1_draft_candidate"
+  },
+  {
+    "claim_id": "nearest_centroid_fold_comparison",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "The candidate improves 9 of 11 nearest-centroid fold rows, ties 2, and worsens 0.",
+    "external_source_urls": "",
+    "limitations": "fold counts are from the current draft OSD-120 split only",
+    "local_evidence_artifacts": "v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_summary.csv",
+    "local_evidence_columns": "nearest_improved_count|nearest_tied_count|nearest_worse_count",
+    "package_id": "osd120_sparse_l1_c1_draft_candidate"
+  },
+  {
+    "claim_id": "fragile_focus_recovery",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "The candidate recovers all three predefined fragile focus folds relative to nearest centroid.",
+    "external_source_urls": "",
+    "limitations": "focus folds are diagnostic sentinels, not independent tasks",
+    "local_evidence_artifacts": "v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_focus_folds.csv",
+    "local_evidence_columns": "heldout_value|nearest_centroid_balanced_accuracy|candidate_balanced_accuracy|delta_candidate_minus_nearest_centroid",
+    "package_id": "osd120_sparse_l1_c1_draft_candidate"
+  },
+  {
+    "claim_id": "feature_stability_evidence",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "Nineteen candidate features are selected in at least 50% of balanced train-fold subsamples across the three focus folds.",
+    "external_source_urls": "",
+    "limitations": "subsampling stability is small-n diagnostic evidence",
+    "local_evidence_artifacts": "v9/multispecies/reports/interaction_logistic_sparse_l1_stability/stability_summary.csv|v9/multispecies/reports/interaction_logistic_sparse_l1_stability/stability_feature_frequency.csv",
+    "local_evidence_columns": "stable_feature_count_ge_0_5|selection_frequency|sign_consistency",
+    "package_id": "osd120_sparse_l1_c1_draft_candidate"
+  },
+  {
+    "claim_id": "external_light_genotype_context",
+    "claim_status": "supported_external_context",
+    "claim_text": "OSD-120 is an Arabidopsis CARA root-tip RNA-seq study where genotype/ecotype and lighting context are core design factors.",
+    "external_source_urls": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-120|https://doi.org/10.1371/journal.pone.0180186|https://www.nature.com/articles/s41526-024-00417-0",
+    "limitations": "external literature supports scope, not benchmark performance",
+    "local_evidence_artifacts": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json",
+    "local_evidence_columns": "organism|biospecimen_type|blocking_factors|source_records",
+    "package_id": "osd120_sparse_l1_c1_draft_candidate"
+  }
+]

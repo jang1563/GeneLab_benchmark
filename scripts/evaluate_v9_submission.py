@@ -19,6 +19,16 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--task-manifest", required=True, help="v9 task manifest JSON.")
     parser.add_argument("--submission", required=True, help="Prediction CSV to evaluate.")
+    parser.add_argument(
+        "--response-signature",
+        default=None,
+        help="Optional response_signature.csv artifact for DE/signature metrics.",
+    )
+    parser.add_argument(
+        "--reference-signature-table",
+        default=None,
+        help="Optional DE reference CSV/CSV.GZ override for response-signature metrics.",
+    )
     parser.add_argument("--output-dir", required=True, help="Directory for evaluation outputs.")
     return parser.parse_args()
 
@@ -26,7 +36,12 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     task_manifest = load_task_manifest(args.task_manifest)
-    result = evaluate_submission(task_manifest, args.submission)
+    result = evaluate_submission(
+        task_manifest,
+        args.submission,
+        response_signature_path=args.response_signature,
+        reference_signature_path=args.reference_signature_table,
+    )
     outputs = write_evaluation_report(
         evaluation_result=result,
         task_manifest=task_manifest,

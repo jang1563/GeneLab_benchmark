@@ -1,0 +1,113 @@
+{
+  "baseline": {
+    "baseline_id": "multispecies_interaction_nearest_centroid",
+    "claim_boundary": "draft_interaction_sensitivity_only_not_leaderboard",
+    "fold_family": "secondary_light_treatment_holdout",
+    "positive_label": "LEO_or_ISS",
+    "release_status": "draft_not_frozen",
+    "scaling": "none",
+    "score_column": "flight_probability",
+    "top_variable_genes": 500,
+    "transform": "none"
+  },
+  "folds": [
+    {
+      "fold_id": "holdout_light_treatment_dark_treatment",
+      "heldout_factor": "light_treatment",
+      "heldout_value": "Dark.Treatment",
+      "n_features": 500,
+      "n_test": 18,
+      "n_train": 18
+    },
+    {
+      "fold_id": "holdout_light_treatment_light_treatment",
+      "heldout_factor": "light_treatment",
+      "heldout_value": "Light.Treatment",
+      "n_features": 500,
+      "n_test": 18,
+      "n_train": 18
+    }
+  ],
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.5771604938271605
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.6111111111111112
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.08370968196666673
+    },
+    "condition_stratum_holdout_delta": {
+      "reason": "not applicable to fold_family=secondary_light_treatment_holdout",
+      "status": "skipped"
+    },
+    "genotype_holdout_delta": {
+      "reason": "not applicable to fold_family=secondary_light_treatment_holdout",
+      "status": "skipped"
+    },
+    "light_treatment_holdout_delta": {
+      "details": {
+        "holdout_light_treatment_dark_treatment": {
+          "balanced_accuracy": 0.6666666666666666,
+          "heldout_value": "Dark.Treatment",
+          "n_test": 18
+        },
+        "holdout_light_treatment_light_treatment": {
+          "balanced_accuracy": 0.5555555555555556,
+          "heldout_value": "Light.Treatment",
+          "n_test": 18
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across secondary_light_treatment_holdout folds",
+      "status": "computed",
+      "value": 0.11111111111111105
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.609907120743034
+    },
+    "mission_discrimination": {
+      "reason": "mission_discrimination requires at least two missions",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "status": "evaluated",
+  "submission_path": "v9/multispecies/reports/interaction_sensitivity/tvg500_none_none/secondary_light_treatment_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "genotype_or_ecotype",
+      "light_treatment",
+      "true_label",
+      "predicted_label",
+      "flight_probability",
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 36,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/interaction_sensitivity/tvg500_none_none/secondary_light_treatment_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "warnings": []
+  }
+}

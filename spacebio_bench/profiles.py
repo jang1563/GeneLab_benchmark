@@ -54,6 +54,26 @@ METRIC_PROFILES: dict[str, dict[str, Any]] = {
             "mission_discrimination",
         ],
     },
+    "genelab_multispecies_pilot": {
+        "description": "Draft profile for species-native non-mouse spaceflight pilots.",
+        "metrics": [
+            "balanced_accuracy",
+            "auroc",
+            "calibration_error",
+            "condition_stratum_holdout_delta",
+        ],
+    },
+    "genelab_multispecies_interaction_pilot": {
+        "description": "Draft profile for non-mouse interaction-design spaceflight pilots.",
+        "metrics": [
+            "balanced_accuracy",
+            "auroc",
+            "calibration_error",
+            "genotype_holdout_delta",
+            "light_treatment_holdout_delta",
+            "condition_stratum_holdout_delta",
+        ],
+    },
     "stressor_regime": {
         "description": "Radiation-quality and nonlinear-stressor regime profile.",
         "metrics": [

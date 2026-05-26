@@ -7,6 +7,11 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from .metrics import mission_discrimination_score
+from .signature_metrics import (
+    RESPONSE_SIGNATURE_REQUIRED_COLUMNS,
+    SIGNATURE_METRIC_IDS,
+    compute_response_signature_metrics,
+)
 from .submissions import validate_submission
 
 
@@ -159,9 +164,67 @@ def _metric_skip(reason: str) -> dict[str, Any]:
     return {"status": "skipped", "reason": reason}
 
 
+def _declared_metric_ids(manifest: Mapping[str, Any]) -> list[str]:
+    metrics = manifest.get("metrics", [])
+    if not isinstance(metrics, Sequence) or isinstance(metrics, (str, bytes)):
+        return []
+    metric_ids: list[str] = []
+    for metric in metrics:
+        if isinstance(metric, Mapping) and metric.get("metric_id"):
+            metric_ids.append(str(metric["metric_id"]))
+    return metric_ids
+
+
+def _signature_metric_skip_reason(response_signature_path: str | Path | None) -> str:
+    columns = ", ".join(RESPONSE_SIGNATURE_REQUIRED_COLUMNS)
+    if response_signature_path is None:
+        return (
+            "response_signature.csv artifact missing; DE/signature metrics require "
+            f"a gene-level artifact with columns: {columns}"
+        )
+    path = Path(response_signature_path)
+    if not path.exists():
+        return f"response_signature.csv artifact not found: {path}"
+    return (
+        "response_signature.csv artifact supplied, but DE/signature scoring is "
+        "pending the frozen scorer implementation after V9-ORG-014"
+    )
+
+
+def _add_declared_signature_metric_statuses(
+    result: dict[str, Any],
+    manifest: Mapping[str, Any],
+    *,
+    response_signature_path: str | Path | None,
+    reference_signature_path: str | Path | None,
+) -> None:
+    declared = set(_declared_metric_ids(manifest))
+    declared_signature_metrics = SIGNATURE_METRIC_IDS & declared
+    if not declared_signature_metrics:
+        return
+    if response_signature_path is not None and Path(response_signature_path).exists():
+        signature_result = compute_response_signature_metrics(
+            manifest=manifest,
+            response_signature_path=response_signature_path,
+            reference_signature_path=reference_signature_path,
+        )
+        result["response_signature_validation"] = signature_result["validation"]
+        for metric_id in sorted(declared_signature_metrics):
+            result["metrics"][metric_id] = signature_result["metrics"][metric_id]
+        return
+    for metric_id in sorted(declared_signature_metrics):
+        if metric_id not in result["metrics"]:
+            result["metrics"][metric_id] = _metric_skip(
+                _signature_metric_skip_reason(response_signature_path)
+            )
+
+
 def evaluate_submission(
     manifest: Mapping[str, Any],
     submission_path: str | Path,
+    *,
+    response_signature_path: str | Path | None = None,
+    reference_signature_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Validate and evaluate a prediction CSV for a task manifest."""
 
@@ -172,6 +235,10 @@ def evaluate_submission(
         "validation": validation.to_dict(),
         "metrics": {},
     }
+    if response_signature_path is not None:
+        result["response_signature_path"] = Path(response_signature_path).as_posix()
+    if reference_signature_path is not None:
+        result["reference_signature_path"] = Path(reference_signature_path).as_posix()
     if not validation.ok:
         result["status"] = "invalid"
         return result
@@ -235,4 +302,10 @@ def evaluate_submission(
             "embedding_* columns missing"
         )
 
+    _add_declared_signature_metric_statuses(
+        result,
+        manifest,
+        response_signature_path=response_signature_path,
+        reference_signature_path=reference_signature_path,
+    )
     return result

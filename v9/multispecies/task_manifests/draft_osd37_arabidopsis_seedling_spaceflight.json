@@ -1,0 +1,254 @@
+{
+  "assay_modality": "bulk_rna_seq",
+  "biospecimen_type": "seedling_pool",
+  "donor_or_strain_block": "ecotype_block_required",
+  "feature_namespace": "species_gene_ids_pending",
+  "ground_control_type": "ground_control",
+  "limitations": [
+    "Draft task manifest only; no baseline results are claimed.",
+    "This is a species-native task and must not be compared as a raw-gene cross-species task.",
+    "The split is within-source and cannot support leave-one-mission-out claims.",
+    "Full OSDR payload freeze remains broader than the six local scaffold files hash-checked here.",
+    "OSD-120 remains deferred to a separate light/genotype interaction-task design."
+  ],
+  "material_type": "plant_tissue",
+  "metrics": [
+    {
+      "interpretation": "Class-balance-aware LEO/spaceflight versus Ground score.",
+      "metric_id": "balanced_accuracy",
+      "profile": "genelab_multispecies_pilot"
+    },
+    {
+      "interpretation": "Ranking quality for binary spaceflight probability outputs.",
+      "metric_id": "auroc",
+      "profile": "genelab_multispecies_pilot"
+    },
+    {
+      "interpretation": "Probability calibration check for small-sample predictions.",
+      "metric_id": "calibration_error",
+      "profile": "genelab_multispecies_pilot"
+    },
+    {
+      "interpretation": "Secondary robustness diagnostic across genotype/ecotype condition-stratum candidate folds.",
+      "metric_id": "condition_stratum_holdout_delta",
+      "profile": "genelab_multispecies_pilot"
+    }
+  ],
+  "model_system": "arabidopsis_spaceflight",
+  "organism": "Arabidopsis thaliana",
+  "orthology_strategy": "not_applicable_species_native_raw_gene_task",
+  "output": {
+    "label_domain": [
+      "Ground",
+      "LEO_or_ISS"
+    ],
+    "optional_columns": [
+      "leo_probability",
+      "flight_probability",
+      "condition_stratum",
+      "embedding_*"
+    ],
+    "positive_label": "LEO_or_ISS",
+    "prediction_format": "csv",
+    "primary_artifacts": [
+      "predictions.csv",
+      "metrics.json"
+    ],
+    "required_columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label"
+    ]
+  },
+  "platform": "GLbulkRNAseq_processed_counts",
+  "provenance": {
+    "derived_from": "v9/multispecies/source_inventory.draft.json",
+    "design_review": "v9/multispecies/reports/MULTISPECIES_CHECKSUM_AND_LOCAL_PAYLOAD_AUDIT.md",
+    "expression_matrix_audit": "v9/multispecies/expression_matrix_audit.draft.csv",
+    "expression_matrix_status": "matrix_local_sample_aligned",
+    "local_payload_status": "local_sample_table_and_matrix_md5_matched",
+    "sample_factor_status": "condition_factors_parsed",
+    "sample_factor_table": "v9/multispecies/sample_factors.draft.csv",
+    "source_checksum_audit": "v9/multispecies/source_checksum_audit.draft.csv",
+    "source_checksum_sources": {
+      "OSD-37": {
+        "api_status": "ok",
+        "checksum_manifest_count": 2,
+        "checksum_payload_matches": 926,
+        "freeze_ready": "false",
+        "n_files": 986,
+        "parsed_checksum_entries": 927
+      }
+    },
+    "source_checksum_status": "checksum_manifest_parsed",
+    "source_inventory_status": "draft_not_frozen"
+  },
+  "release_status": "draft_not_frozen",
+  "schema_version": "0.1.0",
+  "source_records": [
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "seedling_pool",
+      "checksum_status": "checksum_manifest_parsed",
+      "culture_hardware": "",
+      "differentiation_protocol": "",
+      "disease_context": "",
+      "donor_or_strain_block": "ecotype_block_required",
+      "external_accessions": "",
+      "feature_namespace": "species_gene_ids_pending",
+      "glds_prefix": "GLDS-37",
+      "ground_control_type": "ground_control",
+      "integration_status": "draft_source_inventory_only",
+      "local_payload_status": "local_sample_table_and_matrix_md5_matched",
+      "material_type": "plant_tissue",
+      "microglia_condition": "",
+      "mission": "spaceflight_vs_ground_control",
+      "model_system": "arabidopsis_spaceflight",
+      "notes": "Existing local pilot files under data/multispecies/arabidopsis.",
+      "organism": "Arabidopsis thaliana",
+      "organoid_type": "",
+      "orthology_strategy": "pending_ortholog_or_pathway_namespace",
+      "platform": "GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "processed_file_status": "local_processed_counts_and_sample_table_present",
+      "publication_urls": "",
+      "source_id": "OSD-37",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-37",
+      "spaceflight_environment": "spaceflight",
+      "species_common_name": "thale_cress",
+      "taxon_id": "3702",
+      "url_or_accession": "OSD-37"
+    }
+  ],
+  "spaceflight_environment": "spaceflight",
+  "species_common_name": "thale_cress",
+  "split": {
+    "blocking_factors": [
+      "genotype_or_ecotype",
+      "condition_stratum"
+    ],
+    "candidate_folds": [
+      {
+        "fold_id": "holdout_condition_stratum_col_0",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "Col.0",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 16,
+        "n_train": 40,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 8,
+          "LEO_or_ISS": 8
+        },
+        "train_label_distribution": {
+          "Ground": 20,
+          "LEO_or_ISS": 20
+        }
+      },
+      {
+        "fold_id": "holdout_condition_stratum_cvi_0",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "Cvi.0",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 12,
+        "n_train": 44,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 6,
+          "LEO_or_ISS": 6
+        },
+        "train_label_distribution": {
+          "Ground": 22,
+          "LEO_or_ISS": 22
+        }
+      },
+      {
+        "fold_id": "holdout_condition_stratum_ler_0",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "Ler.0",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 12,
+        "n_train": 44,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 6,
+          "LEO_or_ISS": 6
+        },
+        "train_label_distribution": {
+          "Ground": 22,
+          "LEO_or_ISS": 22
+        }
+      },
+      {
+        "fold_id": "holdout_condition_stratum_ws_2",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "Ws.2",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 16,
+        "n_train": 40,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 8,
+          "LEO_or_ISS": 8
+        },
+        "train_label_distribution": {
+          "Ground": 20,
+          "LEO_or_ISS": 20
+        }
+      }
+    ],
+    "condition_stratum_distribution": {
+      "Col.0": 16,
+      "Cvi.0": 12,
+      "Ler.0": 12,
+      "Ws.2": 16
+    },
+    "expression_matrix_audit": "v9/multispecies/expression_matrix_audit.draft.csv",
+    "expression_matrix_sources": {
+      "OSD-37": {
+        "local_matrix_path": "data/multispecies/arabidopsis/GLDS-37_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "matrix_columns_match_sample_factors": "True",
+        "n_feature_rows": 28067,
+        "n_matching_sample_columns": 56,
+        "n_sample_columns": 56
+      }
+    },
+    "expression_matrix_status": "matrix_local_sample_aligned",
+    "genotype_or_ecotype_distribution": {
+      "Col.0": 16,
+      "Cvi.0": 12,
+      "Ler.0": 12,
+      "Ws.2": 16
+    },
+    "label_distribution": {
+      "Ground": 28,
+      "LEO_or_ISS": 28
+    },
+    "light_treatment_distribution": {},
+    "n_samples": 56,
+    "n_sources": 1,
+    "name": "arabidopsis_ecotype_blocked_leo_vs_ground_pilot",
+    "sample_factor_status": "condition_factors_parsed",
+    "sample_factor_table": "v9/multispecies/sample_factors.draft.csv",
+    "single_source_limitation": "This draft is a species-native within-source task, not a leave-one-mission-out or cross-species generalization benchmark.",
+    "source_accessions": [
+      "OSD-37"
+    ],
+    "source_sample_rows": {
+      "OSD-37": 56
+    },
+    "status": "draft_sample_matrix_checksum_backed_pending_baseline",
+    "strategy": "Classify LEO/spaceflight versus ground-control samples within one non-mouse OSDR source, with species-native features and explicit genotype/ecotype condition strata.",
+    "target_labels": [
+      "LEO_or_ISS",
+      "Ground"
+    ],
+    "unit": "sample"
+  },
+  "task_family": "multispecies_species_native_spaceflight",
+  "task_id": "draft_osd37_arabidopsis_seedling_spaceflight",
+  "taxon_id": "3702",
+  "title": "Arabidopsis seedling-pool species-native LEO vs ground draft task",
+  "variant": "arabidopsis_seedling_pool"
+}

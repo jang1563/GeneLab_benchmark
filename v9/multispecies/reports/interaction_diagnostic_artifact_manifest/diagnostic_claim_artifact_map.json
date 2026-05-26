@@ -1,0 +1,86 @@
+[
+  {
+    "artifact_ids": "osd120_task_manifest|osd120_task_manifest_index|sparse_l1_summary|baseline_ladder_summary|candidate_package_summary|candidate_claim_map|candidate_package_review|baseline_ladder_review|v9_test_source",
+    "artifact_paths": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json|v9/multispecies/interaction_task_manifest_index.draft.csv|v9/multispecies/reports/interaction_logistic_sparse_l1/multispecies_baseline_summary.csv|v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_summary.csv|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_package_summary.csv|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_claim_map.csv|v9/multispecies/reports/OSD120_INTERACTION_DIAGNOSTIC_CANDIDATE_PACKAGE_REVIEW.md|v9/multispecies/reports/OSD120_INTERACTION_BASELINE_LADDER_REVIEW.md|tests/test_v9_spacebio_bench.py",
+    "claim_id": "draft_candidate_boundary",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "sparse_l1_c1 is a draft transparent diagnostic candidate, not a frozen leaderboard baseline.",
+    "external_source_urls": "",
+    "limitations": "within-source OSD-120 task; no leave-one-mission-out claim",
+    "manifest_id": "osd120_diagnostic_artifact_manifest",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "validation_tests": "test_generated_v9_osd120_baseline_ladder_outputs_validate|test_generated_v9_osd120_diagnostic_candidate_package_outputs_validate|test_generated_v9_osd120_figure_table_package_outputs_validate|test_generated_v9_osd120_paired_comparator_table_outputs_validate|/usr/local/bin/python3 -m unittest discover -s tests"
+  },
+  {
+    "artifact_ids": "sparse_l1_fold_comparison|baseline_ladder_summary|candidate_claim_map|v9_test_source",
+    "artifact_paths": "v9/multispecies/reports/interaction_logistic_sparse_l1/fold_detail_comparison_vs_nearest_centroid.csv|v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_summary.csv|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_claim_map.csv|tests/test_v9_spacebio_bench.py",
+    "claim_id": "nearest_centroid_fold_comparison",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "The candidate improves 9 of 11 nearest-centroid fold rows, ties 2, and worsens 0.",
+    "external_source_urls": "",
+    "limitations": "fold counts are from the current draft OSD-120 split only",
+    "manifest_id": "osd120_diagnostic_artifact_manifest",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "validation_tests": "test_generated_v9_osd120_baseline_ladder_outputs_validate|test_generated_v9_osd120_diagnostic_candidate_package_outputs_validate|test_generated_v9_osd120_figure_table_package_outputs_validate|test_generated_v9_osd120_paired_comparator_table_outputs_validate|/usr/local/bin/python3 -m unittest discover -s tests"
+  },
+  {
+    "artifact_ids": "sparse_l1_fold_comparison|baseline_ladder_focus_folds|candidate_focus_evidence|candidate_claim_map|figure_main_focus_table|v9_test_source",
+    "artifact_paths": "v9/multispecies/reports/interaction_logistic_sparse_l1/fold_detail_comparison_vs_nearest_centroid.csv|v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_focus_folds.csv|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_focus_evidence.csv|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_claim_map.csv|v9/multispecies/reports/interaction_figure_table_package/figure_main_focus_table.csv|tests/test_v9_spacebio_bench.py",
+    "claim_id": "fragile_focus_recovery",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "The candidate recovers all three predefined fragile focus folds relative to nearest centroid.",
+    "external_source_urls": "",
+    "limitations": "focus folds are diagnostic sentinels, not independent tasks",
+    "manifest_id": "osd120_diagnostic_artifact_manifest",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "validation_tests": "test_generated_v9_osd120_baseline_ladder_outputs_validate|test_generated_v9_osd120_diagnostic_candidate_package_outputs_validate|test_generated_v9_osd120_figure_table_package_outputs_validate|test_generated_v9_osd120_paired_comparator_table_outputs_validate|/usr/local/bin/python3 -m unittest discover -s tests"
+  },
+  {
+    "artifact_ids": "sparse_l1_feature_set_audit|sparse_l1_stability_summary|sparse_l1_stability_features|candidate_stable_feature_evidence|candidate_claim_map|figure_stable_feature_appendix|v9_test_source",
+    "artifact_paths": "v9/multispecies/reports/interaction_logistic_sparse_l1/feature_set_audit_summary.csv|v9/multispecies/reports/interaction_logistic_sparse_l1_stability/stability_summary.csv|v9/multispecies/reports/interaction_logistic_sparse_l1_stability/stability_feature_frequency.csv|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_stable_feature_evidence.csv|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_claim_map.csv|v9/multispecies/reports/interaction_figure_table_package/figure_stable_feature_appendix.csv|tests/test_v9_spacebio_bench.py",
+    "claim_id": "feature_stability_evidence",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "Nineteen candidate features are selected in at least 50% of balanced train-fold subsamples across the three focus folds.",
+    "external_source_urls": "",
+    "limitations": "subsampling stability is small-n diagnostic evidence",
+    "manifest_id": "osd120_diagnostic_artifact_manifest",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "validation_tests": "test_generated_v9_osd120_baseline_ladder_outputs_validate|test_generated_v9_osd120_diagnostic_candidate_package_outputs_validate|test_generated_v9_osd120_figure_table_package_outputs_validate|test_generated_v9_osd120_paired_comparator_table_outputs_validate|/usr/local/bin/python3 -m unittest discover -s tests"
+  },
+  {
+    "artifact_ids": "osd120_task_manifest|osd120_task_design_review|candidate_claim_map",
+    "artifact_paths": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json|v9/multispecies/reports/OSD120_INTERACTION_TASK_DESIGN.md|v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_claim_map.csv",
+    "claim_id": "external_light_genotype_context",
+    "claim_status": "supported_external_context",
+    "claim_text": "OSD-120 is an Arabidopsis CARA root-tip RNA-seq study where genotype/ecotype and lighting context are core design factors.",
+    "external_source_urls": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-120|https://doi.org/10.1371/journal.pone.0180186|https://www.nature.com/articles/s41526-024-00417-0",
+    "limitations": "external literature supports scope, not benchmark performance",
+    "manifest_id": "osd120_diagnostic_artifact_manifest",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "validation_tests": "test_generated_v9_osd120_baseline_ladder_outputs_validate|test_generated_v9_osd120_diagnostic_candidate_package_outputs_validate|test_generated_v9_osd120_figure_table_package_outputs_validate|test_generated_v9_osd120_paired_comparator_table_outputs_validate|/usr/local/bin/python3 -m unittest discover -s tests"
+  },
+  {
+    "artifact_ids": "figure_main_focus_table|figure_stable_feature_appendix|figure_caption|figure_claim_boundary_box|figure_table_review|v9_test_source",
+    "artifact_paths": "v9/multispecies/reports/interaction_figure_table_package/figure_main_focus_table.csv|v9/multispecies/reports/interaction_figure_table_package/figure_stable_feature_appendix.csv|v9/multispecies/reports/interaction_figure_table_package/figure_caption.md|v9/multispecies/reports/interaction_figure_table_package/figure_claim_boundary_box.md|v9/multispecies/reports/OSD120_INTERACTION_FIGURE_TABLE_DRAFT_REVIEW.md|tests/test_v9_spacebio_bench.py",
+    "claim_id": "figure_table_claim_boundary",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "The figure/table package is a draft within-source diagnostic surface with explicit disallowed claims.",
+    "external_source_urls": "",
+    "limitations": "figure text is for draft/poster use, not release freeze",
+    "manifest_id": "osd120_diagnostic_artifact_manifest",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "validation_tests": "test_generated_v9_osd120_baseline_ladder_outputs_validate|test_generated_v9_osd120_diagnostic_candidate_package_outputs_validate|test_generated_v9_osd120_figure_table_package_outputs_validate|test_generated_v9_osd120_paired_comparator_table_outputs_validate|/usr/local/bin/python3 -m unittest discover -s tests"
+  },
+  {
+    "artifact_ids": "paired_comparator_summary|paired_focus_comparator_table|paired_comparator_decision|paired_comparator_review|v9_test_source",
+    "artifact_paths": "v9/multispecies/reports/interaction_paired_comparator_table/paired_comparator_summary.csv|v9/multispecies/reports/interaction_paired_comparator_table/paired_focus_comparator_table.csv|v9/multispecies/reports/interaction_paired_comparator_table/paired_comparator_decision.md|v9/multispecies/reports/OSD120_INTERACTION_PAIRED_COMPARATOR_REVIEW.md|tests/test_v9_spacebio_bench.py",
+    "claim_id": "paired_comparator_decision",
+    "claim_status": "supported_local_artifact",
+    "claim_text": "sparse_l1_c0p3 remains an appendix/supplement comparator rather than a second primary figure panel.",
+    "external_source_urls": "",
+    "limitations": "paired comparator explains compactness tradeoff only",
+    "manifest_id": "osd120_diagnostic_artifact_manifest",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "validation_tests": "test_generated_v9_osd120_baseline_ladder_outputs_validate|test_generated_v9_osd120_diagnostic_candidate_package_outputs_validate|test_generated_v9_osd120_figure_table_package_outputs_validate|test_generated_v9_osd120_paired_comparator_table_outputs_validate|/usr/local/bin/python3 -m unittest discover -s tests"
+  }
+]

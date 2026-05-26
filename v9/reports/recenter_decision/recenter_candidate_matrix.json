@@ -1,0 +1,28 @@
+[
+  {
+    "blocking_gaps": "0/22 sources freeze_ready=true|payload files are indexed but not locally hash-verified for release|public bulk release claim language still needs a final alpha boundary",
+    "candidate_id": "public_bulk_alpha",
+    "decision": "selected_next",
+    "evidence_items": "8 public bulk task manifests indexed|33 fold definitions across public bulk tasks|22 public OSDR source rows|22/22 source rows API-ok|22/22 checksum-manifest parsed|24 evaluated baseline rows|draft Data Package present|dataset card present",
+    "external_method_anchor": "OSDR/API checksum evidence and Data Package-style metadata are already represented locally",
+    "lane_label": "Public bulk alpha readiness",
+    "next_block_if_selected": "V9-BULK-ALPHA-001: public bulk alpha freeze-gap matrix",
+    "rationale": "This lane is closer to a coherent v9-alpha platform checkpoint because task manifests, source rows, baselines, package draft, and dataset-card draft already exist.",
+    "readiness_score": "90",
+    "readiness_status": "platform_spine_ready_freeze_gap_incomplete",
+    "recenter_id": "v9_refocus_001_post_osd120_recenter"
+  },
+  {
+    "blocking_gaps": "0 local h5ad/loom/mtx files found in repo scan|0 v9 sc_spaceflight task manifests found|RRRM assets need inventory before AnnData task-card promotion|single-cell evaluator and loader are not yet implemented",
+    "candidate_id": "single_cell_flagship",
+    "decision": "defer_until_after_bulk_alpha_gap_matrix",
+    "evidence_items": "54 legacy RRRM/single-cell-related files found|genelab_sc metric profile exists|cell-eval/OpenProblems alignment notes exist",
+    "external_method_anchor": "AnnData/cell-eval/OpenProblems imply that a v9 single-cell lane needs explicit AnnData, obs/var metadata, and task API contracts",
+    "lane_label": "First single-cell flagship inventory",
+    "next_block_if_selected": "V9-SC-001: RRRM asset inventory",
+    "rationale": "The lane remains strategically important, but current local evidence is inventory-level rather than v9 task-manifest-ready.",
+    "readiness_score": "35",
+    "readiness_status": "legacy_assets_present_no_v9_manifest_or_h5ad_inventory",
+    "recenter_id": "v9_refocus_001_post_osd120_recenter"
+  }
+]

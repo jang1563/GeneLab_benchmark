@@ -1,0 +1,484 @@
+{
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.050000000000000024
+    },
+    "de_direction_match": {
+      "details": {
+        "aggregate": {
+          "n_direction_matches": 24,
+          "n_direction_scored": 24,
+          "n_joined_rows": 40,
+          "n_significant_reference_rows": 24,
+          "reference_filter": "significant_fdr_0_05"
+        },
+        "join": {
+          "n_duplicate_response_keys": 0,
+          "n_fallback_join_rows": 0,
+          "n_joined_rows": 40,
+          "n_non_numeric_reference_rows": 0,
+          "n_primary_join_rows": 40,
+          "n_response_rows": 40,
+          "n_unmatched_rows": 0
+        },
+        "per_contrast": {
+          "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          }
+        },
+        "reference": {
+          "duplicate_fallback_keys": 0,
+          "duplicate_primary_keys": 70104,
+          "n_fallback_keys": 242708,
+          "n_primary_keys": 172604,
+          "n_reference_rows": 242708,
+          "reference_columns": [
+            "source_id",
+            "glds_prefix",
+            "task_id",
+            "organoid_type",
+            "disease_context",
+            "microglia_condition",
+            "contrast_id",
+            "ensembl_id",
+            "gene_symbol",
+            "entrez_id",
+            "log2fc_leo_or_iss_minus_ground",
+            "source_log2fc_value",
+            "stat",
+            "p_value",
+            "adj_p_value",
+            "significant_fdr_0_05",
+            "source_de_file"
+          ],
+          "reference_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz"
+        },
+        "validation": {
+          "columns": [
+            "task_id",
+            "source_id",
+            "contrast_id",
+            "gene_symbol",
+            "ensembl_id",
+            "predicted_log2fc_leo_or_iss_minus_ground"
+          ],
+          "errors": [],
+          "n_rows": 40,
+          "ok": true,
+          "path": "v9/human_organoid/reports/response_signature_smoke/response_signature.csv",
+          "warnings": []
+        }
+      },
+      "status": "computed",
+      "value": 1.0
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    },
+    "signature_rank_correlation": {
+      "details": {
+        "aggregate": {
+          "correlation": "spearman",
+          "n_joined_rows": 40,
+          "n_rank_scored": 40,
+          "reference_filter": "all_joined_rows"
+        },
+        "join": {
+          "n_duplicate_response_keys": 0,
+          "n_fallback_join_rows": 0,
+          "n_joined_rows": 40,
+          "n_non_numeric_reference_rows": 0,
+          "n_primary_join_rows": 40,
+          "n_response_rows": 40,
+          "n_unmatched_rows": 0
+        },
+        "per_contrast": {
+          "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 1.0,
+            "de_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 3,
+              "n_joined_rows": 5,
+              "n_significant_reference_rows": 3,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 5,
+            "signature_rank_correlation": 1.0,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 5,
+              "n_rank_scored": 5,
+              "reference_filter": "all_joined_rows"
+            }
+          }
+        },
+        "reference": {
+          "duplicate_fallback_keys": 0,
+          "duplicate_primary_keys": 70104,
+          "n_fallback_keys": 242708,
+          "n_primary_keys": 172604,
+          "n_reference_rows": 242708,
+          "reference_columns": [
+            "source_id",
+            "glds_prefix",
+            "task_id",
+            "organoid_type",
+            "disease_context",
+            "microglia_condition",
+            "contrast_id",
+            "ensembl_id",
+            "gene_symbol",
+            "entrez_id",
+            "log2fc_leo_or_iss_minus_ground",
+            "source_log2fc_value",
+            "stat",
+            "p_value",
+            "adj_p_value",
+            "significant_fdr_0_05",
+            "source_de_file"
+          ],
+          "reference_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz"
+        },
+        "validation": {
+          "columns": [
+            "task_id",
+            "source_id",
+            "contrast_id",
+            "gene_symbol",
+            "ensembl_id",
+            "predicted_log2fc_leo_or_iss_minus_ground"
+          ],
+          "errors": [],
+          "n_rows": 40,
+          "ok": true,
+          "path": "v9/human_organoid/reports/response_signature_smoke/response_signature.csv",
+          "warnings": []
+        }
+      },
+      "status": "computed",
+      "value": 1.0
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "reference_signature_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz",
+  "response_signature_path": "v9/human_organoid/reports/response_signature_smoke/response_signature.csv",
+  "response_signature_validation": {
+    "columns": [
+      "task_id",
+      "source_id",
+      "contrast_id",
+      "gene_symbol",
+      "ensembl_id",
+      "predicted_log2fc_leo_or_iss_minus_ground"
+    ],
+    "errors": [],
+    "n_rows": 40,
+    "ok": true,
+    "path": "v9/human_organoid/reports/response_signature_smoke/response_signature.csv",
+    "warnings": []
+  },
+  "status": "evaluated",
+  "submission_path": "v9/human_organoid/reports/response_signature_smoke/predictions.csv",
+  "task_id": "draft_human_organoid_spaceflight",
+  "validation": {
+    "columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 2,
+    "ok": true,
+    "submission_path": "v9/human_organoid/reports/response_signature_smoke/predictions.csv",
+    "task_id": "draft_human_organoid_spaceflight",
+    "warnings": []
+  }
+}

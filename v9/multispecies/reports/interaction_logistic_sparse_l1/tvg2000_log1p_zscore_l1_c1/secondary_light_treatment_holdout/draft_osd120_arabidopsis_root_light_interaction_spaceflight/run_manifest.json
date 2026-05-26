@@ -1,0 +1,95 @@
+{
+  "command": [
+    "scripts/run_v9_osd120_interaction_sparse_l1.py",
+    "--repo-root",
+    "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark"
+  ],
+  "generated_at": "2026-05-25T18:38:57.564859+00:00",
+  "input_files": [
+    {
+      "path": "v9/multispecies/reports/interaction_logistic_sparse_l1/tvg2000_log1p_zscore_l1_c1/secondary_light_treatment_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+      "role": "submission",
+      "sha256": "0b9fea2d22e4b05f93130a84d4bd2c8bec344b5808c75e09cb6b94a2421607e9"
+    },
+    {
+      "path": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json",
+      "role": "task_manifest",
+      "sha256": "4f61d0dc755d634b5a5b0b47c67841e9e4de5b7c6e17bbe051293533430860b5"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.8611111111111112
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.8333333333333333
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.17819725527194444
+    },
+    "condition_stratum_holdout_delta": {
+      "reason": "not applicable to fold_family=secondary_light_treatment_holdout",
+      "status": "skipped"
+    },
+    "genotype_holdout_delta": {
+      "reason": "not applicable to fold_family=secondary_light_treatment_holdout",
+      "status": "skipped"
+    },
+    "light_treatment_holdout_delta": {
+      "details": {
+        "holdout_light_treatment_dark_treatment": {
+          "balanced_accuracy": 0.8333333333333333,
+          "heldout_value": "Dark.Treatment",
+          "n_test": 18
+        },
+        "holdout_light_treatment_light_treatment": {
+          "balanced_accuracy": 0.8333333333333333,
+          "heldout_value": "Light.Treatment",
+          "n_test": 18
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across secondary_light_treatment_holdout folds",
+      "status": "computed",
+      "value": 0.0
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.8328173374613003
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "multispecies_light_interaction_spaceflight",
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "genotype_or_ecotype",
+      "light_treatment",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 36,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/interaction_logistic_sparse_l1/tvg2000_log1p_zscore_l1_c1/secondary_light_treatment_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "warnings": []
+  }
+}

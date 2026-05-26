@@ -1,0 +1,80 @@
+[
+  {
+    "claim_category": "allowed",
+    "claim_id": "current_surface_is_diagnostic_metadata",
+    "guard_id": "osd120_archive_release_deferral_application_guard",
+    "next_allowed_action": "refer to diagnostic metadata note and artifact paths",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "prohibited_language": "released benchmark snapshot",
+    "public_note_status": "allowed_current_note",
+    "release_note_id": "osd120_diagnostic_metadata_release_note_closeout",
+    "statement": "The OSD-120 package is available as diagnostic metadata and traceability evidence.",
+    "supporting_evidence": "v9/multispecies/reports/interaction_archive_release_deferral_guard/archive_release_deferral_summary.csv|v9/multispecies/reports/interaction_public_metadata_package/public_metadata_summary.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "claim_category": "allowed",
+    "claim_id": "diagnostic_payload_scope_is_narrow",
+    "guard_id": "osd120_archive_release_deferral_application_guard",
+    "next_allowed_action": "keep full mirror language out of release note",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "prohibited_language": "complete OSDR payload archive",
+    "public_note_status": "allowed_current_note",
+    "release_note_id": "osd120_diagnostic_metadata_release_note_closeout",
+    "statement": "The diagnostic-required OSD-120 payload scope is narrow and does not claim a full OSDR processed payload mirror.",
+    "supporting_evidence": "v9/multispecies/reports/interaction_public_alpha_card/public_alpha_card_summary.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "claim_category": "allowed",
+    "claim_id": "draft_ro_crate_is_scaffold_only",
+    "guard_id": "osd120_archive_release_deferral_application_guard",
+    "next_allowed_action": "describe as draft scaffold only",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "prohibited_language": "archive-ready RO-Crate",
+    "public_note_status": "allowed_current_note",
+    "release_note_id": "osd120_diagnostic_metadata_release_note_closeout",
+    "statement": "Draft RO-Crate and Data Package descriptors are inspectable scaffolds with release blockers.",
+    "supporting_evidence": "v9/multispecies/reports/interaction_ro_crate_citation_scaffold/ro_crate_export_summary.csv|v9/multispecies/reports/interaction_archive_release_deferral_guard/owner_metadata_application_guard.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "claim_category": "prohibited",
+    "claim_id": "no_doi_or_archive_identifier",
+    "guard_id": "osd120_archive_release_deferral_application_guard",
+    "next_allowed_action": "retry only after owner archive-route metadata is supplied",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "prohibited_language": "DOI, Zenodo archive, citable release",
+    "public_note_status": "not_allowed_current_note",
+    "release_note_id": "osd120_diagnostic_metadata_release_note_closeout",
+    "statement": "No DOI or local archive identifier is claimed.",
+    "supporting_evidence": "v9/multispecies/reports/interaction_archive_release_deferral_guard/owner_metadata_application_guard.csv|v9/multispecies/reports/interaction_archive_release_deferral_guard/descriptor_mutation_guard.json",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "claim_category": "prohibited",
+    "claim_id": "no_license_or_creator_metadata",
+    "guard_id": "osd120_archive_release_deferral_application_guard",
+    "next_allowed_action": "retry only after owner metadata file is supplied",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "prohibited_language": "licensed release, official author list, publisher",
+    "public_note_status": "not_allowed_current_note",
+    "release_note_id": "osd120_diagnostic_metadata_release_note_closeout",
+    "statement": "No local license, creator list, contributor list, publisher, or release version is claimed.",
+    "supporting_evidence": "v9/multispecies/reports/interaction_archive_release_deferral_guard/owner_metadata_application_guard.csv|v9/multispecies/reports/interaction_archive_release_deferral_guard/archive_release_deferral_actions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "claim_category": "prohibited",
+    "claim_id": "no_leaderboard_or_benchmark_promotion",
+    "guard_id": "osd120_archive_release_deferral_application_guard",
+    "next_allowed_action": "recenter before any benchmark-core promotion",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "prohibited_language": "v9-alpha leaderboard task",
+    "public_note_status": "not_allowed_current_note",
+    "release_note_id": "osd120_diagnostic_metadata_release_note_closeout",
+    "statement": "OSD-120 remains a draft diagnostic/provenance case study, not a promoted v9-alpha benchmark core or leaderboard task.",
+    "supporting_evidence": "docs/V9_PURPOSE_DRIFT_AUDIT_2026_05_26.md",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  }
+]

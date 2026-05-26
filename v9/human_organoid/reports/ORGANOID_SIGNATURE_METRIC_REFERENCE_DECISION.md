@@ -1,6 +1,6 @@
 # Human Organoid DE/Signature Metric Reference Decision
 
-Status: draft reference-policy decision
+Status: draft reference-policy decision; V9-ORG-015 diagnostic scorer added
 Date: 2026-05-21
 Task: `draft_human_organoid_spaceflight`
 
@@ -21,7 +21,9 @@ For now:
 
 - Classification metrics remain primary for the current draft pilot.
 - `de_direction_match` and `signature_rank_correlation` are declared as
-  reference-backed but pending a frozen contrast/signature contract.
+  reference-backed and now have a draft contrast/signature input contract plus
+  diagnostic scorer. They still remain non-primary until response-signature
+  artifacts are produced by real model adapters and reviewed.
 - Baseline outputs under `v9/human_organoid/reports/nearest_centroid/`,
   `sensitivity/`, and `donor_diagnostics/` should not claim DE/signature
   performance yet.
@@ -32,8 +34,13 @@ Local audit artifacts:
 
 - `v9/human_organoid/signature_reference_audit.draft.csv`
 - `v9/human_organoid/signature_reference_audit.draft.json`
+- `v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz`
+- `v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json`
 - `spacebio_bench/organoid_signature_audit.py`
+- `spacebio_bench/organoid_de_reference.py`
+- `spacebio_bench/signature_metrics.py`
 - `scripts/audit_v9_human_organoid_signature_references.py`
+- `scripts/build_v9_human_organoid_de_reference.py`
 
 External sources checked:
 
@@ -102,14 +109,14 @@ Use the following policy in v9:
    `genelab_organoid_pilot` metric profile.
 3. Mark their reference state as
    `public_osdr_de_reference_tables_available_pending_contrast_freeze`.
-4. Do not score DE/signature metrics until V9-ORG-014 defines:
-   - canonical DE table choice, likely non-rRNArm `*_differential_expression_GLbulkRNAseq.csv`;
-   - frozen direct contrast subset;
+4. Use the V9-ORG-014/V9-ORG-015 contract for diagnostic scorer implementation:
+   - canonical non-rRNArm `*_differential_expression_GLbulkRNAseq.csv` tables;
+   - eight direct matched source-specific Ground Control versus Space Flight
+     contrasts;
    - log2 fold-change orientation normalized to `LEO_or_ISS - Ground`;
-   - feature key, likely human gene symbol plus Ensembl fallback;
-   - minimum reference-gene and significance thresholds;
-   - submission artifact format, likely a separate `response_signature.csv`
-     rather than trying to infer gene-level signatures from `predictions.csv`.
+   - human gene symbol as the primary feature key with Ensembl fallback;
+   - `response_signature.csv` as a separate gene-level artifact rather than
+     trying to infer response signatures from `predictions.csv`.
 
 ## Candidate Frozen Contrasts
 
@@ -120,8 +127,55 @@ For each source, the audit found four direct matched spaceflight contrasts:
 - disease context, with microglia: Ground Control versus Space Flight;
 - disease context, without microglia: Ground Control versus Space Flight.
 
-The contrast table also contains reversed versions. V9-ORG-014 must define a
-single sign convention and invert log2 fold-change values when needed.
+The contrast table also contains reversed versions. V9-ORG-014 uses only the
+direct Ground Control versus Space Flight labels and negates source log2FC
+values so the benchmark orientation is `LEO_or_ISS - Ground`.
+
+## V9-ORG-014 Output
+
+The frozen-input draft reference now exists at
+`v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz`.
+Its manifest records two public DE source files, eight direct contrasts, 242,708
+gene/contrast rows, and 2,368 rows with `adj_p_value <= 0.05`. The contract note
+is `v9/human_organoid/reports/ORGANOID_DE_REFERENCE_CONTRACT.md`.
+
+## V9-ORG-015 Output
+
+The evaluator now computes diagnostic `de_direction_match` and
+`signature_rank_correlation` when a valid `response_signature.csv` is supplied.
+It validates required columns, joins to the DE reference by
+`source_id + contrast_id + gene_symbol` with Ensembl fallback, reports aggregate
+and per-contrast details, and still emits precise skip reasons when the artifact
+is missing or invalid. The scorer note is
+`v9/human_organoid/reports/ORGANOID_RESPONSE_SIGNATURE_SCORER.md`.
+
+## V9-ORG-016 Output
+
+The response-signature smoke report now exists at
+`v9/human_organoid/reports/response_signature_smoke/`. It uses the real derived
+DE reference table and a small mirrored fixture to verify that response
+validation, reference joining, run-manifest provenance, and diagnostic metric
+calculation work end to end. Because the response signature is derived from the
+reference itself, this report is explicitly not a model-performance claim.
+
+## V9-ORG-017 Output
+
+The first model-produced adapter path is specified in
+`v9/human_organoid/reports/ORGANOID_RESPONSE_SIGNATURE_ADAPTER_DESIGN.md`. The
+recommended baseline is a source-transfer empirical response signature: predict
+all OSD-863 target contrasts from OSD-871 training samples and all OSD-871
+target contrasts from OSD-863 training samples, without using target-source
+expression or DE references during signature generation.
+
+## V9-ORG-018 Output
+
+The source-transfer adapter report now exists at
+`v9/human_organoid/reports/source_transfer_signature/`. It emits compressed
+`response_signature.csv.gz`, uses `reference_not_used_for_signature_generation`,
+and computes diagnostic signature metrics against the derived DE reference. The
+draft diagnostic scores are `de_direction_match=0.7706734867860188` and
+`signature_rank_correlation=0.1760078660242601`; these are source-transfer
+diagnostics only, not leaderboard claims.
 
 ## Risk Boundary
 
@@ -139,7 +193,7 @@ to claim a stable benchmark score without another freeze step. Main risks:
 
 ## Next Step
 
-Open V9-ORG-014 as `Human organoid frozen DE contrast extraction and signature
-metric contract`. It should generate a small derived reference table from the
-public OSDR DE references, define the submission schema for gene-level response
-signatures, and add skip-aware evaluator plumbing.
+Open V9-ORG-019 as `Human organoid source-transfer diagnostic review`. It
+should interpret the source-transfer signature report, inspect per-contrast
+details, and decide whether to keep this adapter as the first real diagnostic
+baseline.

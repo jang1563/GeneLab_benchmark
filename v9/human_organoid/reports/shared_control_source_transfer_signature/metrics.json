@@ -1,0 +1,396 @@
+{
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.050000000000000024
+    },
+    "de_direction_match": {
+      "details": {
+        "aggregate": {
+          "n_direction_matches": 305,
+          "n_direction_scored": 517,
+          "n_joined_rows": 111944,
+          "n_significant_reference_rows": 520,
+          "reference_filter": "significant_fdr_0_05"
+        },
+        "join": {
+          "n_duplicate_response_keys": 0,
+          "n_fallback_join_rows": 111944,
+          "n_joined_rows": 111944,
+          "n_non_numeric_reference_rows": 0,
+          "n_primary_join_rows": 0,
+          "n_response_rows": 111944,
+          "n_unmatched_rows": 0
+        },
+        "per_contrast": {
+          "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.5773195876288659,
+            "de_direction_match_details": {
+              "n_direction_matches": 56,
+              "n_direction_scored": 97,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 98,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.04501929398688672,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.5950920245398773,
+            "de_direction_match_details": {
+              "n_direction_matches": 97,
+              "n_direction_scored": 163,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 163,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.03306817764881355,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.6052631578947368,
+            "de_direction_match_details": {
+              "n_direction_matches": 23,
+              "n_direction_scored": 38,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 38,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.04223602233387437,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.589041095890411,
+            "de_direction_match_details": {
+              "n_direction_matches": 129,
+              "n_direction_scored": 219,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 221,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.037081662425860924,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          }
+        },
+        "reference": {
+          "duplicate_fallback_keys": 0,
+          "duplicate_primary_keys": 70104,
+          "n_fallback_keys": 242708,
+          "n_primary_keys": 172604,
+          "n_reference_rows": 242708,
+          "reference_columns": [
+            "source_id",
+            "glds_prefix",
+            "task_id",
+            "organoid_type",
+            "disease_context",
+            "microglia_condition",
+            "contrast_id",
+            "ensembl_id",
+            "gene_symbol",
+            "entrez_id",
+            "log2fc_leo_or_iss_minus_ground",
+            "source_log2fc_value",
+            "stat",
+            "p_value",
+            "adj_p_value",
+            "significant_fdr_0_05",
+            "source_de_file"
+          ],
+          "reference_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz"
+        },
+        "validation": {
+          "columns": [
+            "task_id",
+            "source_id",
+            "contrast_id",
+            "gene_symbol",
+            "ensembl_id",
+            "predicted_log2fc_leo_or_iss_minus_ground",
+            "fold_id",
+            "signature_model_id",
+            "training_source_id",
+            "target_source_id",
+            "training_scope",
+            "conditioning_strategy",
+            "conditioning_factor",
+            "conditioning_value",
+            "target_disease_context",
+            "target_microglia_condition",
+            "n_train_ground",
+            "n_train_leo_or_iss",
+            "n_condition_train_ground",
+            "n_condition_train_leo_or_iss",
+            "signature_generation_method",
+            "reference_usage_policy"
+          ],
+          "errors": [],
+          "n_rows": 111944,
+          "ok": true,
+          "path": "v9/human_organoid/reports/shared_control_source_transfer_signature/response_signature.csv.gz",
+          "warnings": []
+        }
+      },
+      "status": "computed",
+      "value": 0.5899419729206963
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    },
+    "signature_rank_correlation": {
+      "details": {
+        "aggregate": {
+          "correlation": "spearman",
+          "n_joined_rows": 111944,
+          "n_rank_scored": 111944,
+          "reference_filter": "all_joined_rows"
+        },
+        "join": {
+          "n_duplicate_response_keys": 0,
+          "n_fallback_join_rows": 111944,
+          "n_joined_rows": 111944,
+          "n_non_numeric_reference_rows": 0,
+          "n_primary_join_rows": 0,
+          "n_response_rows": 111944,
+          "n_unmatched_rows": 0
+        },
+        "per_contrast": {
+          "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.5773195876288659,
+            "de_direction_match_details": {
+              "n_direction_matches": 56,
+              "n_direction_scored": 97,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 98,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.04501929398688672,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.5950920245398773,
+            "de_direction_match_details": {
+              "n_direction_matches": 97,
+              "n_direction_scored": 163,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 163,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.03306817764881355,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.6052631578947368,
+            "de_direction_match_details": {
+              "n_direction_matches": 23,
+              "n_direction_scored": 38,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 38,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.04223602233387437,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          },
+          "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "de_direction_match": 0.589041095890411,
+            "de_direction_match_details": {
+              "n_direction_matches": 129,
+              "n_direction_scored": 219,
+              "n_joined_rows": 27986,
+              "n_significant_reference_rows": 221,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "n_joined_rows": 27986,
+            "signature_rank_correlation": 0.037081662425860924,
+            "signature_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 27986,
+              "n_rank_scored": 27986,
+              "reference_filter": "all_joined_rows"
+            }
+          }
+        },
+        "reference": {
+          "duplicate_fallback_keys": 0,
+          "duplicate_primary_keys": 70104,
+          "n_fallback_keys": 242708,
+          "n_primary_keys": 172604,
+          "n_reference_rows": 242708,
+          "reference_columns": [
+            "source_id",
+            "glds_prefix",
+            "task_id",
+            "organoid_type",
+            "disease_context",
+            "microglia_condition",
+            "contrast_id",
+            "ensembl_id",
+            "gene_symbol",
+            "entrez_id",
+            "log2fc_leo_or_iss_minus_ground",
+            "source_log2fc_value",
+            "stat",
+            "p_value",
+            "adj_p_value",
+            "significant_fdr_0_05",
+            "source_de_file"
+          ],
+          "reference_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz"
+        },
+        "validation": {
+          "columns": [
+            "task_id",
+            "source_id",
+            "contrast_id",
+            "gene_symbol",
+            "ensembl_id",
+            "predicted_log2fc_leo_or_iss_minus_ground",
+            "fold_id",
+            "signature_model_id",
+            "training_source_id",
+            "target_source_id",
+            "training_scope",
+            "conditioning_strategy",
+            "conditioning_factor",
+            "conditioning_value",
+            "target_disease_context",
+            "target_microglia_condition",
+            "n_train_ground",
+            "n_train_leo_or_iss",
+            "n_condition_train_ground",
+            "n_condition_train_leo_or_iss",
+            "signature_generation_method",
+            "reference_usage_policy"
+          ],
+          "errors": [],
+          "n_rows": 111944,
+          "ok": true,
+          "path": "v9/human_organoid/reports/shared_control_source_transfer_signature/response_signature.csv.gz",
+          "warnings": []
+        }
+      },
+      "status": "computed",
+      "value": 0.03566701395309356
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "reference_signature_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz",
+  "response_signature_baseline": {
+    "claim_boundary": "diagnostic_only_not_leaderboard",
+    "conditioning_strategy": "shared_control_disease_microglia_source_transfer",
+    "metadata_path": "v9/human_organoid/reports/shared_control_source_transfer_signature/response_signature_metadata.json",
+    "partial_coverage": true,
+    "reference_usage_policy": "reference_not_used_for_signature_generation",
+    "signature_model_id": "organoid_shared_control_disease_microglia_source_transfer_empirical_signature"
+  },
+  "response_signature_path": "v9/human_organoid/reports/shared_control_source_transfer_signature/response_signature.csv.gz",
+  "response_signature_validation": {
+    "columns": [
+      "task_id",
+      "source_id",
+      "contrast_id",
+      "gene_symbol",
+      "ensembl_id",
+      "predicted_log2fc_leo_or_iss_minus_ground",
+      "fold_id",
+      "signature_model_id",
+      "training_source_id",
+      "target_source_id",
+      "training_scope",
+      "conditioning_strategy",
+      "conditioning_factor",
+      "conditioning_value",
+      "target_disease_context",
+      "target_microglia_condition",
+      "n_train_ground",
+      "n_train_leo_or_iss",
+      "n_condition_train_ground",
+      "n_condition_train_leo_or_iss",
+      "signature_generation_method",
+      "reference_usage_policy"
+    ],
+    "errors": [],
+    "n_rows": 111944,
+    "ok": true,
+    "path": "v9/human_organoid/reports/shared_control_source_transfer_signature/response_signature.csv.gz",
+    "warnings": []
+  },
+  "status": "evaluated",
+  "submission_path": "v9/human_organoid/reports/shared_control_source_transfer_signature/predictions.csv",
+  "task_id": "draft_human_organoid_spaceflight",
+  "validation": {
+    "columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 2,
+    "ok": true,
+    "submission_path": "v9/human_organoid/reports/shared_control_source_transfer_signature/predictions.csv",
+    "task_id": "draft_human_organoid_spaceflight",
+    "warnings": []
+  }
+}

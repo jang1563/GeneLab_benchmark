@@ -1,0 +1,37 @@
+[
+  {
+    "checked_date": "2026-05-26",
+    "metadata_implication": "Use DataCite 4.7-oriented fields for future DOI/citation metadata, but keep identifier and creator fields pending until a real release target exists.",
+    "reference_id": "datacite_schema_4_7",
+    "topic": "DataCite metadata for citable research outputs",
+    "url": "https://schema.datacite.org/"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "metadata_implication": "Model the package as a root Dataset with file Data Entities, contextual organizations, and workflow provenance.",
+    "reference_id": "ro_crate_1_2",
+    "topic": "RO-Crate JSON-LD package structure",
+    "url": "https://www.researchobject.org/ro-crate/specification/1.2/metadata.html"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "metadata_implication": "Keep README YAML metadata, tags, task category, intended use, limitations, and license state explicit.",
+    "reference_id": "huggingface_dataset_cards",
+    "topic": "Dataset card README metadata",
+    "url": "https://huggingface.co/docs/hub/datasets-cards"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "metadata_implication": "Credit NASA OSDR/GeneLab and defer dataset-specific BibTeX/RIS to the OSDR study citation path.",
+    "reference_id": "nasa_osdr_faq_citation",
+    "topic": "OSDR dataset citation and credit",
+    "url": "https://science.nasa.gov/reference/osdr-faq/"
+  },
+  {
+    "checked_date": "2026-05-26",
+    "metadata_implication": "Keep upstream OSDR source identifiers and access boundaries as primary public-source anchors.",
+    "reference_id": "nasa_osdr_repository",
+    "topic": "OSDR repository source scope",
+    "url": "https://science.nasa.gov/biological-physical/data/osdr/"
+  }
+]

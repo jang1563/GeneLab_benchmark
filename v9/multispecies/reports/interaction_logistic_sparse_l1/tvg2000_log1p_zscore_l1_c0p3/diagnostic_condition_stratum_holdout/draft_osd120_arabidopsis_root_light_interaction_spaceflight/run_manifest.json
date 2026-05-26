@@ -1,0 +1,115 @@
+{
+  "command": [
+    "scripts/run_v9_osd120_interaction_sparse_l1.py",
+    "--repo-root",
+    "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark"
+  ],
+  "generated_at": "2026-05-25T18:38:55.680573+00:00",
+  "input_files": [
+    {
+      "path": "v9/multispecies/reports/interaction_logistic_sparse_l1/tvg2000_log1p_zscore_l1_c0p3/diagnostic_condition_stratum_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+      "role": "submission",
+      "sha256": "4d6c00eb8582b27d3429280b99942a8b553b06856b4ca93f097ac8cdf613c2ae"
+    },
+    {
+      "path": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json",
+      "role": "task_manifest",
+      "sha256": "4f61d0dc755d634b5a5b0b47c67841e9e4de5b7c6e17bbe051293533430860b5"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.9506172839506173
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.9166666666666666
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.16727394094666667
+    },
+    "condition_stratum_holdout_delta": {
+      "details": {
+        "holdout_condition_stratum_col_0_dark_treatment": {
+          "balanced_accuracy": 0.8333333333333333,
+          "heldout_value": "Col.0|Dark.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_col_0_light_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Col.0|Light.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_col_0_phyd_dark_treatment": {
+          "balanced_accuracy": 0.6666666666666666,
+          "heldout_value": "Col.0.PhyD|Dark.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_col_0_phyd_light_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Col.0.PhyD|Light.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_wassilewskija_ecotype_dark_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Wassilewskija.ecotype|Dark.Treatment",
+          "n_test": 6
+        },
+        "holdout_condition_stratum_wassilewskija_ecotype_light_treatment": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Wassilewskija.ecotype|Light.Treatment",
+          "n_test": 6
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across diagnostic_condition_stratum_holdout folds",
+      "status": "computed",
+      "value": 0.33333333333333337
+    },
+    "genotype_holdout_delta": {
+      "reason": "not applicable to fold_family=diagnostic_condition_stratum_holdout",
+      "status": "skipped"
+    },
+    "light_treatment_holdout_delta": {
+      "reason": "not applicable to fold_family=diagnostic_condition_stratum_holdout",
+      "status": "skipped"
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.9166023166023166
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "multispecies_light_interaction_spaceflight",
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "genotype_or_ecotype",
+      "light_treatment",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 36,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/interaction_logistic_sparse_l1/tvg2000_log1p_zscore_l1_c0p3/diagnostic_condition_stratum_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "warnings": []
+  }
+}

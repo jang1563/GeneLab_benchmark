@@ -1,0 +1,62 @@
+{
+  "artifact_type": "human_organoid_feature_effect",
+  "claim_boundary": "diagnostic_only_not_leaderboard",
+  "classifier_model_id": "organoid_l2_logistic_gene_space_feature_effect",
+  "fold_summaries": [
+    {
+      "classifier_model_id": "organoid_l2_logistic_gene_space_feature_effect",
+      "classifier_solver": "liblinear",
+      "feature_selection": "train_top_2000_variable_genes",
+      "fold_id": "holdout_organoid_type_cortical_neural_organoid",
+      "heldout_factor": "organoid_type",
+      "heldout_value": "cortical_neural_organoid",
+      "n_features_model_input": 2000,
+      "n_target_contrasts": 4,
+      "n_train_ground": 12,
+      "n_train_leo_or_iss": 11,
+      "reference_usage_policy": "reference_not_used_for_effect_generation",
+      "regularization": "l2",
+      "scaling": "train_zscore",
+      "target_source_id": "OSD-863",
+      "training_source_id": "OSD-871",
+      "transform": "log1p"
+    },
+    {
+      "classifier_model_id": "organoid_l2_logistic_gene_space_feature_effect",
+      "classifier_solver": "liblinear",
+      "feature_selection": "train_top_2000_variable_genes",
+      "fold_id": "holdout_organoid_type_dopaminergic_neural_organoid",
+      "heldout_factor": "organoid_type",
+      "heldout_value": "dopaminergic_neural_organoid",
+      "n_features_model_input": 2000,
+      "n_target_contrasts": 4,
+      "n_train_ground": 10,
+      "n_train_leo_or_iss": 9,
+      "reference_usage_policy": "reference_not_used_for_effect_generation",
+      "regularization": "l2",
+      "scaling": "train_zscore",
+      "target_source_id": "OSD-871",
+      "training_source_id": "OSD-863",
+      "transform": "log1p"
+    }
+  ],
+  "n_effect_rows": 16000,
+  "notes": "Feature effects are discriminative classifier coefficients, not log2FC response signatures. The DE reference is not used during feature-effect generation and should be used only for post hoc diagnostic scoring.",
+  "reference_usage_policy": "reference_not_used_for_effect_generation",
+  "release_status": "draft_not_frozen",
+  "schema_version": "0.1.0",
+  "target_contrasts_by_source": {
+    "OSD-863": [
+      "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground",
+      "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground",
+      "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground",
+      "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground"
+    ],
+    "OSD-871": [
+      "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground",
+      "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground",
+      "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground",
+      "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground"
+    ]
+  }
+}

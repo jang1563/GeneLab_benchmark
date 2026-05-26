@@ -1,0 +1,54 @@
+[
+  {
+    "allowed_claims": "draft_candidate_boundary|nearest_centroid_fold_comparison|fragile_focus_recovery|feature_stability_evidence|external_light_genotype_context|figure_table_claim_boundary|paired_comparator_decision",
+    "blocking_gaps": "",
+    "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+    "next_action": "Use as a diagnostic alpha metadata surface with all limitations visible.",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "public_now": "True",
+    "release_surface": "public_reader_metadata_and_card_draft",
+    "required_evidence_artifacts": "v9/multispecies/reports/interaction_public_alpha_card/public_alpha_card_summary.csv|v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_summary.csv|v9/multispecies/reports/interaction_rebuild_gate/rebuild_gate_summary.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_artifact_manifest.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_claim_artifact_map.csv",
+    "target_id": "diagnostic_alpha_metadata_draft",
+    "target_status": "ready_now_with_draft_limitations",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "allowed_claims": "draft_candidate_boundary|nearest_centroid_fold_comparison|fragile_focus_recovery|feature_stability_evidence|external_light_genotype_context|figure_table_claim_boundary|paired_comparator_decision",
+    "blocking_gaps": "source_inventory_release_target|formal_license_and_creator_metadata|versioned_archive_plan",
+    "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+    "next_action": "Decide release target, formal creators/license, and version identifier before calling this a public alpha package.",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "public_now": "False",
+    "release_surface": "versioned_source_specific_alpha_package",
+    "required_evidence_artifacts": "v9/multispecies/reports/interaction_public_alpha_card/public_alpha_card_summary.csv|v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_summary.csv|v9/multispecies/reports/interaction_rebuild_gate/rebuild_gate_summary.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_artifact_manifest.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_claim_artifact_map.csv",
+    "target_id": "source_specific_public_alpha_package",
+    "target_status": "partially_ready_source_release_target_pending",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "allowed_claims": "",
+    "blocking_gaps": "full_osdr_payload_freeze",
+    "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+    "next_action": "Download or explicitly exclude every OSDR processed payload before claiming a full mirror.",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "public_now": "False",
+    "release_surface": "complete_local_osdr_processed_payload_mirror",
+    "required_evidence_artifacts": "v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_manifest.csv",
+    "target_id": "full_osdr_payload_mirror_release",
+    "target_status": "blocked_full_payload_freeze_missing",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  },
+  {
+    "allowed_claims": "",
+    "blocking_gaps": "versioned_archive_plan|full_osdr_payload_freeze|cross_source_or_lomo_validation_missing",
+    "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+    "next_action": "Reserve frozen benchmark language for a versioned release with archive identifiers and broader validation scope.",
+    "package_id": "osd120_diagnostic_public_metadata_package",
+    "public_now": "False",
+    "release_surface": "citable_frozen_benchmark_or_leaderboard_release",
+    "required_evidence_artifacts": "v9/multispecies/reports/interaction_public_alpha_card/public_alpha_card_summary.csv|v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_summary.csv|v9/multispecies/reports/interaction_rebuild_gate/rebuild_gate_summary.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_artifact_manifest.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_claim_artifact_map.csv",
+    "target_id": "frozen_v9_benchmark_release",
+    "target_status": "blocked_version_doi_and_broader_validation_missing",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  }
+]

@@ -12,6 +12,7 @@ Companion docs:
 - `docs/V9_PUBLIC_BULK_PACKAGE_DESIGN.md`
 - `docs/V9_ORGANOID_AND_SPECIES_EXTENSION_REVIEW_2026_05_21.md`
 - `docs/V9_MULTISPECIES_FEATURE_STRATEGY.md`
+- `docs/V9_PURPOSE_DRIFT_AUDIT_2026_05_26.md`
 - `docs/v9_hf_dataset_card.md`
 - `v9/OPERATING_BACKLOG.md`
 
@@ -134,8 +135,318 @@ Completed v9 scaffold:
   has 56 parsed contrast pairs, including four direct matched Ground Control
   versus Space Flight contrasts and four reversed matches. The decision note at
   `v9/human_organoid/reports/ORGANOID_SIGNATURE_METRIC_REFERENCE_DECISION.md`
-  keeps DE/signature metrics reference-backed but non-primary until a frozen
-  contrast/signature contract is added.
+  keeps DE/signature metrics reference-backed but non-primary until a
+  response-signature scorer is promoted.
+- `v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz`
+  and its manifest provide the V9-ORG-014 derived DE reference contract: two
+  public organoid sources, eight direct Ground Control versus Space Flight
+  contrasts, 242,708 gene/contrast rows, 2,368 FDR<=0.05 rows, and log2FC
+  normalized to `LEO_or_ISS - Ground`. The evaluator now records
+  `de_direction_match` and `signature_rank_correlation` as skipped with a clear
+  reason when `response_signature.csv` is missing.
+- `spacebio_bench/signature_metrics.py` implements the V9-ORG-015 diagnostic
+  response-signature scorer. When a valid `response_signature.csv` is supplied,
+  it validates required columns, joins to the derived DE reference by
+  `source_id`, `contrast_id`, and gene key, computes `de_direction_match` on
+  significant reference genes, and computes `signature_rank_correlation` over
+  joined all-gene signatures. These metrics remain non-primary.
+- `v9/human_organoid/reports/response_signature_smoke/` contains the V9-ORG-016
+  end-to-end scorer smoke report. It uses the real derived DE reference and a
+  40-row mirrored fixture, records response/reference input hashes in the run
+  manifest, and states that the resulting perfect signature metrics are only a
+  plumbing check, not model-performance evidence.
+- `v9/human_organoid/reports/ORGANOID_RESPONSE_SIGNATURE_ADAPTER_DESIGN.md`
+  records the V9-ORG-017 adapter decision. The first real response-signature
+  baseline should be source-transfer and train-fold-only: OSD-863 target
+  contrasts predicted from OSD-871 training samples, and OSD-871 target
+  contrasts predicted from OSD-863 training samples. Target-source expression
+  and DE references must not be used during signature generation.
+- `v9/human_organoid/reports/source_transfer_signature/` contains the V9-ORG-018
+  source-transfer response-signature baseline. It writes compressed
+  `response_signature.csv.gz`, records
+  `reference_not_used_for_signature_generation`, joins 223,888 response rows to
+  the derived DE reference for post hoc scoring, and reports diagnostic
+  `de_direction_match=0.7706734867860188` plus
+  `signature_rank_correlation=0.1760078660242601`.
+- `v9/human_organoid/reports/ORGANOID_SOURCE_TRANSFER_SIGNATURE_REVIEW.md`
+  contains the V9-ORG-019 diagnostic review. The review keeps the
+  source-transfer baseline as the first conservative response-signature
+  diagnostic, shows that the direction score exceeds trivial sign baselines,
+  and selects a per-condition source-transfer adapter design as the next
+  organoid signature block.
+- `v9/human_organoid/reports/ORGANOID_PER_CONDITION_SIGNATURE_ADAPTER_DESIGN.md`
+  contains the V9-ORG-020 adapter design. It selects a microglia-matched
+  source-transfer empirical signature as the next comparative diagnostic
+  because microglia condition is crossed in both sources, while disease context
+  is only partially shared.
+- `v9/human_organoid/reports/microglia_source_transfer_signature/` contains the
+  V9-ORG-021 microglia-matched source-transfer report. It keeps the same
+  reference-not-used leakage boundary, emits 223,888 response-signature rows,
+  reports `de_direction_match=0.7889125799573561` and
+  `signature_rank_correlation=0.1500722829461316`, and shows a mixed comparison
+  with the global source-transfer diagnostic: direction improves by 0.018239
+  while rank correlation decreases by 0.025936.
+- `v9/human_organoid/reports/ORGANOID_SOURCE_TRANSFER_ADAPTER_COMPARISON_REVIEW.md`
+  contains the V9-ORG-022 comparison review. It keeps the global source-transfer
+  adapter as the first conservative diagnostic, keeps the microglia-matched
+  adapter as a secondary condition-sensitivity diagnostic, and selects a partial
+  shared-control disease+microglia adapter design as the next block.
+- `v9/human_organoid/reports/ORGANOID_SHARED_CONTROL_SIGNATURE_ADAPTER_DESIGN.md`
+  contains the V9-ORG-023 design. It limits disease+microglia matching to the
+  four shared `no_known_diseases` target contrasts and requires explicit
+  skipped-contrast metadata for PPMS and sporadic Parkinson disease contrasts.
+- `v9/human_organoid/reports/shared_control_source_transfer_signature/` contains
+  the V9-ORG-024 partial shared-control source-transfer report. It emits 111,944
+  response-signature rows for four shared-control contrasts, skips four
+  disease-specific contrasts, and reports partial-coverage
+  `de_direction_match=0.5899419729206963` plus
+  `signature_rank_correlation=0.03566701395309356`. The result argues against
+  further empirical disease+microglia stratification as a stronger diagnostic.
+- `v9/human_organoid/reports/ORGANOID_CLASSIFIER_FEATURE_EFFECT_CONTRACT.md`
+  contains the V9-ORG-025 contract. It separates classifier-derived feature
+  effects from log2FC `response_signature.csv` artifacts and selects an L2
+  logistic gene-space feature-effect pilot as the next implementation path.
+- `v9/human_organoid/reports/logistic_feature_effect/` contains the V9-ORG-026
+  L2 logistic feature-effect pilot. It emits 16,000 source-transfer
+  feature-effect rows, keeps response-signature DE metrics skipped, and reports
+  diagnostic `feature_effect_direction_match=0.6078431372549019` plus
+  `feature_effect_rank_correlation=0.08672800238082004`, with low top-k DE
+  overlap.
+- `v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_DIAGNOSTIC_REVIEW.md`
+  contains the V9-ORG-027 review. It keeps `feature_effect.csv` as an optional
+  secondary diagnostic, notes modest top-k enrichment but weak absolute overlap,
+  and selects feature-effect top-k/null calibration as the next block before
+  any PCA-LR reconstructed-weight work.
+- `v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md`
+  contains the V9-ORG-028 review. The feature-effect scorer now reports
+  expected overlap, enrichment, and exact hypergeometric upper-tail p-values for
+  `feature_effect_top_k_de_overlap`. The regenerated L2 logistic report shows
+  aggregate top-k enrichment at K=100, K=250, and K=500, but heterogeneous
+  per-contrast behavior, so feature effects remain secondary diagnostics.
+- `v9/human_organoid/reports/ORGANOID_PCA_LR_FEATURE_EFFECT_DESIGN.md`
+  contains the V9-ORG-029 design. It maps PCA-LR PC-space coefficients back to
+  standardized gene space with `pca.components_.T @ logistic.coef_[0]`, keeps
+  the same source-transfer leakage boundary and `feature_effect.csv` separation,
+  and approves one constrained PCA-LR feature-effect pilot as the next block.
+- `v9/human_organoid/reports/pca_lr_feature_effect/` and
+  `v9/human_organoid/reports/ORGANOID_PCA_LR_FEATURE_EFFECT_REVIEW.md` contain
+  the V9-ORG-030 pilot and review. The PCA-LR reconstruction emits 16,000
+  feature-effect rows, matches L2 logistic aggregate top-k enrichment exactly,
+  and is slightly weaker in direction/rank, so it remains an optional negative
+  comparison rather than a promoted diagnostic.
+- `v9/human_organoid/reports/ORGANOID_DIAGNOSTIC_CONSOLIDATION_AND_RELEASE_BOUNDARY.md`
+  contains the V9-ORG-031 consolidation note. It marks source/task/provenance,
+  the derived DE reference, global source-transfer response signatures, and
+  calibrated L2 logistic feature effects as the main draft-alpha organoid
+  surface, keeps the remaining organoid diagnostics exploratory or secondary,
+  and returns the active scientific lane to multispecies expansion.
+- `v9/multispecies/reports/MULTISPECIES_CANDIDATE_SOURCE_DEEP_AUDIT.md`
+  contains the V9-MULTI-003 audit. OSD-37 is the first plant go-after-source
+  audit candidate, OSD-207 is the first fly go-after-source-audit candidate, and
+  OSD-120 is deferred to a later Arabidopsis light/genotype interaction task.
+- `v9/multispecies/sample_factors.draft.csv` and
+  `v9/multispecies/expression_matrix_audit.draft.csv` contain the V9-MULTI-004
+  local input audit. The audit parses 124 samples across OSD-207, OSD-37, and
+  OSD-120, records source-specific genotype/ecotype and light-treatment strata,
+  and confirms all local normalized-count matrix sample columns align with the
+  parsed sample factors.
+- `v9/multispecies/source_checksum_audit.draft.csv` and
+  `v9/multispecies/reports/MULTISPECIES_CHECKSUM_AND_LOCAL_PAYLOAD_AUDIT.md`
+  contain the V9-MULTI-005 checksum review. All three multispecies candidates
+  have API-ok and checksum-manifest-parsed OSDR evidence, and the six local
+  SampleTable/normalized-count files used by the scaffold match OSDR processed
+  MD5 manifest entries.
+- `v9/multispecies/task_manifests/`,
+  `v9/multispecies/task_manifest_index.draft.csv`, and
+  `v9/multispecies/reports/MULTISPECIES_SPECIES_NATIVE_TASK_MANIFEST_DESIGN.md`
+  contain the V9-MULTI-006 species-native task-manifest design. OSD-37
+  Arabidopsis and OSD-207 Drosophila are promoted to draft species-native
+  manifest status, while OSD-120 remains deferred to a separate
+  light/genotype interaction-task design.
+- `v9/multispecies/reports/nearest_centroid/` and
+  `v9/multispecies/reports/MULTISPECIES_BASELINE_FEASIBILITY_REVIEW.md`
+  contain the V9-MULTI-007 baseline feasibility checkpoint. The read-only
+  multispecies loader aligns audited local matrices to OSD-37 and OSD-207 task
+  manifests, and the draft nearest-centroid baseline shows OSD-37 as the
+  cleaner first plant feasibility example while OSD-207 is more
+  condition-stratum heterogeneous.
+- `v9/multispecies/reports/sensitivity/` and
+  `v9/multispecies/reports/MULTISPECIES_BASELINE_SENSITIVITY_REVIEW.md`
+  contain the V9-MULTI-008 sensitivity checkpoint. The grid keeps the
+  conservative default baseline at `log1p`, train-fold `zscore`, and top 2,000
+  train-fold variable genes; it also confirms OSD-207's `w1118_KCNQ370` stratum
+  as repeatedly fragile.
+- `v9/multispecies/reports/OSD120_INTERACTION_TASK_DESIGN.md` contains the
+  V9-MULTI-009 OSD-120 design checkpoint. OSD-120 has balanced genotype/ecotype
+  by light-treatment by label structure and should become a separate
+  `multispecies_light_interaction_spaceflight` task family, not a third
+  species-native plant manifest.
+- `v9/multispecies/interaction_task_manifests/` and
+  `v9/multispecies/interaction_task_manifest_index.draft.csv` contain the
+  V9-MULTI-010 OSD-120 interaction-manifest checkpoint. The draft manifest keeps
+  genotype/ecotype holdouts primary, light-treatment holdouts secondary, and
+  genotype/ecotype by light-treatment condition-stratum holdouts diagnostic.
+- `v9/multispecies/reports/interaction_nearest_centroid/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_BASELINE_FEASIBILITY_REVIEW.md`
+  contain the V9-MULTI-011 OSD-120 interaction-baseline checkpoint. The baseline
+  runs separately for the three fold families, remains draft-only, and shows
+  fold-level fragility that should be checked by a sensitivity grid next.
+- `v9/multispecies/reports/interaction_sensitivity/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_SENSITIVITY_REVIEW.md` contain
+  the V9-MULTI-012 OSD-120 interaction sensitivity checkpoint. The grid covers
+  60 evaluated rows and confirms repeated fragile light/genotype condition
+  strata while keeping the conservative default preprocessing setting.
+- `v9/multispecies/reports/interaction_sensitivity/fold_detail_summary.csv`
+  and `.json` contain the V9-MULTI-013 fold-detail aggregation checkpoint. They
+  expose 220 fold-level rows for machine-readable fragile-stratum analysis.
+- `v9/multispecies/reports/interaction_logistic_l2/`,
+  `v9/multispecies/reports/OSD120_INTERACTION_LOGISTIC_BASELINE_DESIGN.md`, and
+  `v9/multispecies/reports/OSD120_INTERACTION_LOGISTIC_BASELINE_REVIEW.md`
+  contain the V9-MULTI-014 L2 logistic checkpoint. Logistic improves aggregate
+  OSD-120 scores but increases diagnostic condition-stratum spread, so it
+  remains a draft diagnostic rather than a promoted benchmark claim.
+- `v9/multispecies/reports/interaction_logistic_l2/fold_detail_summary.csv`
+  and `fold_detail_comparison_vs_nearest_centroid.csv` contain the
+  V9-MULTI-015 logistic fold-detail comparison checkpoint. Logistic improves
+  8/11 held-out folds versus the default nearest-centroid setting, ties 2/11,
+  and worsens `Col.0.PhyD|Dark.Treatment`, which becomes the next sensitivity
+  target.
+- `v9/multispecies/reports/interaction_logistic_l2_sensitivity/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_LOGISTIC_SENSITIVITY_REVIEW.md`
+  contain the V9-MULTI-016 logistic sensitivity checkpoint. The six-variant
+  grid shows that `C` has little effect, top 500 genes restores
+  `Col.0.PhyD|Dark.Treatment`, and top 2,000 genes better preserves
+  `Light.Treatment`, making feature-set audit the next diagnostic target.
+- `v9/multispecies/reports/interaction_logistic_feature_audit/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_LOGISTIC_FEATURE_SET_AUDIT_REVIEW.md`
+  contain the V9-MULTI-017 feature-set audit checkpoint. The top-500 feature set
+  is nested inside top 2,000, but top-10 coefficient overlap is only 1/10 to
+  3/10 across focus folds, so the next branch should be designed around sparse
+  or feature-stability gates rather than more `C` tuning.
+- `v9/multispecies/reports/OSD120_INTERACTION_SPARSE_BRANCH_DESIGN.md` contains
+  the V9-MULTI-018 branch design checkpoint. It selects a draft-only L1 logistic
+  pilot over top 2,000 genes and explicit fragile-fold gates before elastic-net,
+  stability selection, or opaque models.
+- `v9/multispecies/reports/interaction_logistic_sparse_l1/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_SPARSE_L1_REVIEW.md` contain the
+  V9-MULTI-019 sparse L1 checkpoint. `tvg2000_log1p_zscore_l1_c1` is the first
+  transparent OSD-120 diagnostic candidate to clear the fragile-fold gates while
+  worsening zero default nearest-centroid fold rows.
+- `v9/multispecies/reports/interaction_logistic_sparse_l1_stability/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_SPARSE_L1_STABILITY_REVIEW.md`
+  contain the V9-MULTI-020 stability checkpoint. Sparse L1 `C=1.0` remains the
+  performance-leading transparent candidate, while `C=0.3` remains the compact
+  light-treatment stability comparator.
+- `v9/multispecies/reports/interaction_baseline_ladder/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_BASELINE_LADDER_REVIEW.md`
+  contain the V9-MULTI-021 ladder checkpoint. It consolidates nearest centroid,
+  dense L2, top-500 L2, sparse L1 `C=0.3`, and sparse L1 `C=1.0`; the ladder
+  advances `sparse_l1_c1` as the primary draft transparent OSD-120 diagnostic
+  candidate and keeps `sparse_l1_c0p3` as the compact stability comparator.
+- `v9/multispecies/reports/interaction_diagnostic_candidate_package/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_DIAGNOSTIC_CANDIDATE_PACKAGE_REVIEW.md`
+  contain the V9-MULTI-022 candidate-package checkpoint. It emits one summary
+  row, three fragile-focus evidence rows, 19 stable-feature evidence rows, and
+  five claim-map rows for the packaged `sparse_l1_c1` draft diagnostic.
+- `v9/multispecies/reports/interaction_figure_table_package/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_FIGURE_TABLE_DRAFT_REVIEW.md`
+  contain the V9-MULTI-023 figure/table checkpoint. The main focus table has
+  three display-ready fragile-focus rows, and the appendix keeps 19 stable
+  sparse-feature rows clearly labeled as model evidence rather than validated
+  biomarkers.
+- `v9/multispecies/reports/interaction_paired_comparator_table/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_PAIRED_COMPARATOR_REVIEW.md`
+  contain the V9-MULTI-024 compact comparator checkpoint. Sparse L1 `C=0.3`
+  ties `C=1.0` on the three focus-fold BAs with fewer nonzero coefficients, but
+  remains appendix/supplement only because `C=1.0` has stronger full-ladder
+  behavior and no nearest-centroid-worse fold.
+- `v9/multispecies/reports/interaction_diagnostic_artifact_manifest/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_DIAGNOSTIC_ARTIFACT_MANIFEST_REVIEW.md`
+  contain the V9-MULTI-025 artifact-manifest checkpoint. The manifest indexes
+  26 OSD-120 diagnostic artifacts and seven claim-to-artifact rows with hashes,
+  row counts, validation tests, limitations, and external context URLs where
+  relevant.
+- `v9/multispecies/reports/interaction_release_readiness_gap_audit/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_RELEASE_READINESS_GAP_AUDIT.md`
+  contain the V9-MULTI-026 release-readiness checkpoint. The audit concludes
+  that OSD-120 is internally traceable but not public-alpha ready; the three
+  public-alpha blockers are full OSDR payload freeze, source release-target
+  promotion, and an OSD-120-specific public card/citation draft.
+- `v9/multispecies/reports/interaction_payload_freeze_manifest/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_PAYLOAD_FREEZE_MANIFEST_REVIEW.md`
+  contain the V9-MULTI-027 payload-freeze checkpoint. The audit parses 533
+  OSDR processed MD5 entries, confirms the two diagnostic-required payloads are
+  locally MD5 matched, and keeps the remaining 531 processed payloads outside
+  the current diagnostic freeze scope.
+- `v9/multispecies/reports/interaction_public_alpha_card/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_PUBLIC_ALPHA_CARD_REVIEW.md`
+  contain the V9-MULTI-028 card checkpoint. The card records OSD-120 source
+  scope, the narrow payload-freeze boundary, diagnostic result surface, allowed
+  and disallowed claims, inspectable files, external context links, and
+  remaining release work.
+- `v9/multispecies/reports/interaction_rebuild_gate/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_REBUILD_GATE_REVIEW.md` contain
+  the V9-MULTI-029 rebuild-gate checkpoint. The gate records the single
+  preflight command, 8 script-backed packaging steps, 40 hashed outputs, and
+  runtime/package context while avoiding model-grid reruns and frozen-release
+  claims.
+- `v9/multispecies/reports/interaction_public_metadata_package/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_PUBLIC_METADATA_PACKAGE_REVIEW.md`
+  contain the V9-MULTI-030 public-metadata checkpoint. The package separates
+  one public-now diagnostic metadata draft from three not-public-now release
+  targets, records 20 metadata fields, and keeps DOI/creator/license-style
+  placeholders unresolved by design.
+- `v9/multispecies/reports/interaction_ro_crate_citation_scaffold/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_RO_CRATE_CITATION_SCAFFOLD_REVIEW.md`
+  contain the V9-MULTI-031 export-scaffold checkpoint. The scaffold emits draft
+  RO-Crate and Data Package descriptors, 13 validation checks, and 11
+  citation-freeze checklist items while keeping archive blockers explicit.
+- `v9/multispecies/reports/interaction_archive_decision_gate/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_ARCHIVE_IDENTIFIER_LICENSE_DECISION_REVIEW.md`
+  contain the V9-MULTI-032 archive decision checkpoint. The gate selects no
+  local archive identifier for the current diagnostic draft, keeps OSDR source
+  citation as upstream credit, defers Zenodo/GitHub DOI and CITATION.cff until
+  owner-supplied release metadata exists, and blocks creator/contributor,
+  version, publisher, and local license fields rather than inventing them.
+- `v9/multispecies/reports/interaction_citation_metadata_fill/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_CITATION_METADATA_FILL_REVIEW.md`
+  contain the V9-MULTI-033 owner-metadata fill checkpoint. The scaffold emits a
+  16-field owner intake template, fill-status table, and descriptor patch
+  preview; because no owner metadata was supplied, it mutates neither RO-Crate
+  nor Data Package descriptors and leaves 12 release blockers explicit.
+- `v9/multispecies/reports/interaction_archive_release_deferral_guard/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_ARCHIVE_RELEASE_DEFERRAL_GUARD_REVIEW.md`
+  contain the V9-MULTI-034 deferral/application guard checkpoint. It records 11
+  guard checks, blocks archive release on nine missing owner/release metadata
+  conditions, confirms descriptor mutation is prevented, and keeps the current
+  public surface diagnostic metadata only.
+- `v9/multispecies/reports/interaction_diagnostic_metadata_release_note/` and
+  `v9/multispecies/reports/OSD120_INTERACTION_DIAGNOSTIC_METADATA_RELEASE_NOTE_REVIEW.md`
+  contain the V9-MULTI-035 closeout checkpoint. The note keeps the current
+  OSD-120 public surface to diagnostic metadata only, records 3 allowed
+  diagnostic claims, 3 prohibited release claims, and 6 owner metadata retry
+  items, and hands off to V9-REFOCUS-001 instead of another archive-release
+  gate.
+- `docs/V9_PURPOSE_DRIFT_AUDIT_2026_05_26.md` contains the first explicit
+  purpose-drift audit. It concludes that the recent OSD-120 work is aligned
+  with provenance and claim discipline, but creates a moderate sequencing risk
+  if it keeps displacing public bulk alpha or the first single-cell flagship.
+  V9-MULTI-035 now closes that OSD-120 metadata branch unless owner-supplied
+  release metadata appears.
+- `v9/reports/recenter_decision/` and
+  `docs/V9_REFOCUS_001_POST_OSD120_RECENTER_DECISION.md` contain the
+  V9-REFOCUS-001 checkpoint. It selects public bulk alpha readiness as the next
+  active lane because the public bulk scaffold has 8 task manifests, 33 folds,
+  22 source rows, 22/22 API-ok and checksum-manifest-parsed source rows, 24
+  evaluated baseline rows, a draft Data Package, and a dataset-card draft,
+  while the single-cell lane still needs RRRM asset inventory, h5ad/obs/var
+  evidence, and v9 `sc_spaceflight` task manifests.
+- `v9/reports/public_bulk_alpha_gap_matrix/` and
+  `docs/V9_PUBLIC_BULK_ALPHA_FREEZE_GAP_MATRIX_REVIEW.md` contain the
+  V9-BULK-ALPHA-001 checkpoint. It records 6 pass rows, 2 blockers, and 2
+  needs-update rows; the decisive release blocker is that 22/22 public bulk
+  sources have checksum-manifest evidence but 0/22 have local payload-hash
+  verification.
 - `docs/V9_MULTISPECIES_FEATURE_STRATEGY.md` fixes the initial rule that
   species-native tasks may use species-local gene ids, while cross-species
   bridge tasks should start with pathway/NES-style feature spaces.
@@ -147,6 +458,11 @@ Important boundary:
 - Current v9 manifests are alpha scaffolds, not frozen benchmark release
   claims. They preserve legacy source identity with
   `checksum_status=legacy_task_source_unfrozen`.
+- The OSD-120 metadata/release chain is closed after V9-MULTI-035 unless
+  owner-supplied release metadata arrives. V9-REFOCUS-001 selected
+  public bulk alpha as the active lane. V9-BULK-ALPHA-001 completed the
+  freeze-gap matrix; the active next step is V9-BULK-ALPHA-002: decide
+  metadata-only alpha wording versus payload-mirror-first.
 
 ## Guiding principles
 
@@ -533,6 +849,11 @@ Near-term tasks:
   first nearest-centroid pilot baseline, and sensitivity review as draft-only
   extension artifacts, while keeping payload freeze and leaderboard language out
   of scope.
+- Treat OSD-37 and OSD-207 species-native manifests/baselines separately from
+  the OSD-120 interaction manifest, baseline, sensitivity grid, and fold-detail
+  aggregation. The next multispecies implementation should compare logistic and
+  nearest-centroid fold-detail behavior before considering more complex models
+  or claim language.
 - Keep organoid RNA-seq, organoid proteomics, species-specific flight/ground,
   and cross-species transfer as separate task families.
 

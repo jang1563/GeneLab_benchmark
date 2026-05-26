@@ -1,0 +1,98 @@
+{
+  "command": [
+    "scripts/run_v9_multispecies_sensitivity.py"
+  ],
+  "generated_at": "2026-05-23T04:23:57.201364+00:00",
+  "input_files": [
+    {
+      "path": "v9/multispecies/reports/sensitivity/tvg5000_none_zscore/draft_osd207_drosophila_whole_body_spaceflight/predictions.csv",
+      "role": "submission",
+      "sha256": "a4c53af59bf824a79e9f8fcf3879347a797f3a8f64983a04b4c2fd94301e03a9"
+    },
+    {
+      "path": "v9/multispecies/task_manifests/draft_osd207_drosophila_whole_body_spaceflight.json",
+      "role": "task_manifest",
+      "sha256": "657e900f423374d3481f1d8034a2a2a21ff75de5b5050c8b6f07d726475f8f6f"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.93359375
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.875
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.3232617855593751
+    },
+    "condition_stratum_holdout_delta": {
+      "details": {
+        "holdout_condition_stratum_canton_s_sei_ts1": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Canton.S_Sei.ts1",
+          "n_test": 8
+        },
+        "holdout_condition_stratum_canton_s_wild_type": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "Canton.S_Wild.Type",
+          "n_test": 8
+        },
+        "holdout_condition_stratum_w1118_kcnq370": {
+          "balanced_accuracy": 0.625,
+          "heldout_value": "w1118_KCNQ370",
+          "n_test": 8
+        },
+        "holdout_condition_stratum_w1118_wild_type": {
+          "balanced_accuracy": 0.875,
+          "heldout_value": "w1118_Wild.Type",
+          "n_test": 8
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across held-out condition strata",
+      "status": "computed",
+      "value": 0.375
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.873015873015873
+    },
+    "mission_discrimination": {
+      "reason": "mission_discrimination requires at least two missions",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "multispecies_species_native_spaceflight",
+  "task_id": "draft_osd207_drosophila_whole_body_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "true_label",
+      "predicted_label",
+      "flight_probability",
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 32,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/sensitivity/tvg5000_none_zscore/draft_osd207_drosophila_whole_body_spaceflight/predictions.csv",
+    "task_id": "draft_osd207_drosophila_whole_body_spaceflight",
+    "warnings": []
+  }
+}

@@ -70,6 +70,17 @@ def _required_columns(manifest: Mapping[str, Any]) -> list[str]:
     return [str(column) for column in output.get("required_columns", [])]
 
 
+def _optional_columns(manifest: Mapping[str, Any]) -> set[str]:
+    output = manifest.get("output", {})
+    if not isinstance(output, Mapping):
+        return set()
+    return {
+        str(column)
+        for column in output.get("optional_columns", [])
+        if str(column) != "embedding_*"
+    }
+
+
 def validate_submission(
     manifest: Mapping[str, Any],
     submission_path: str | Path,
@@ -132,7 +143,13 @@ def validate_submission(
                 )
 
     embedding_columns = [column for column in columns if column.startswith("embedding_")]
-    allowed_optional = {"task_id", "fold_id", "mission", "flight_probability"}
+    allowed_optional = {
+        "task_id",
+        "fold_id",
+        "mission",
+        "flight_probability",
+        *_optional_columns(manifest),
+    }
     extra_columns = [
         column
         for column in columns

@@ -1,0 +1,42 @@
+[
+  {
+    "action_id": "bulk_alpha_gap_matrix",
+    "block_id": "V9-BULK-ALPHA-001",
+    "done_when": "Every current public bulk release blocker has an owner, evidence file, and next action.",
+    "expected_files": "v9/reports/public_bulk_alpha_gap_matrix/",
+    "expected_tests": "tests for row counts, blocker classes, and claim boundary",
+    "lane_id": "public_bulk_alpha",
+    "objective": "Create a machine-readable pass/blocker matrix for the public bulk alpha scaffold.",
+    "recenter_id": "v9_refocus_001_post_osd120_recenter"
+  },
+  {
+    "action_id": "payload_hash_boundary",
+    "block_id": "V9-BULK-ALPHA-001",
+    "done_when": "Dataset-card language can explain what is verified now and what remains pending.",
+    "expected_files": "v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv",
+    "expected_tests": "tests confirm freeze_ready=false is not promoted to release_ready",
+    "lane_id": "public_bulk_alpha",
+    "objective": "Separate checksum-manifest evidence from locally verified payload hash evidence.",
+    "recenter_id": "v9_refocus_001_post_osd120_recenter"
+  },
+  {
+    "action_id": "minimal_alpha_snapshot_decision",
+    "block_id": "V9-BULK-ALPHA-001",
+    "done_when": "The next user-facing phrase is bounded and not a frozen data release claim.",
+    "expected_files": "docs/V9_PUBLIC_BULK_ALPHA_SNAPSHOT_DECISION.md",
+    "expected_tests": "tests cover allowed and disallowed alpha claims",
+    "lane_id": "public_bulk_alpha",
+    "objective": "Decide whether a metadata-only alpha snapshot is acceptable before full payload mirroring.",
+    "recenter_id": "v9_refocus_001_post_osd120_recenter"
+  },
+  {
+    "action_id": "bulk_package_update_plan",
+    "block_id": "V9-BULK-ALPHA-001",
+    "done_when": "Public bulk core, organoid draft, and multispecies draft tracks remain separated.",
+    "expected_files": "v9/reports/public_bulk_alpha_gap_matrix/package_update_plan.csv",
+    "expected_tests": "tests assert no OSD-120 or organoid draft surfaces are pulled into public bulk core",
+    "lane_id": "public_bulk_alpha",
+    "objective": "Name the package/card fields that need updates after the gap matrix.",
+    "recenter_id": "v9_refocus_001_post_osd120_recenter"
+  }
+]

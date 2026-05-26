@@ -1,0 +1,253 @@
+{
+  "assay_modality": "bulk_rna_seq",
+  "biospecimen_type": "female_whole_body",
+  "donor_or_strain_block": "genotype_block_required",
+  "feature_namespace": "species_gene_ids_pending",
+  "ground_control_type": "ground_control",
+  "limitations": [
+    "Draft task manifest only; no baseline results are claimed.",
+    "This is a species-native task and must not be compared as a raw-gene cross-species task.",
+    "The split is within-source and cannot support leave-one-mission-out claims.",
+    "Full OSDR payload freeze remains broader than the six local scaffold files hash-checked here.",
+    "OSD-120 remains deferred to a separate light/genotype interaction-task design."
+  ],
+  "material_type": "whole_organism_or_tissue",
+  "metrics": [
+    {
+      "interpretation": "Class-balance-aware LEO/spaceflight versus Ground score.",
+      "metric_id": "balanced_accuracy",
+      "profile": "genelab_multispecies_pilot"
+    },
+    {
+      "interpretation": "Ranking quality for binary spaceflight probability outputs.",
+      "metric_id": "auroc",
+      "profile": "genelab_multispecies_pilot"
+    },
+    {
+      "interpretation": "Probability calibration check for small-sample predictions.",
+      "metric_id": "calibration_error",
+      "profile": "genelab_multispecies_pilot"
+    },
+    {
+      "interpretation": "Secondary robustness diagnostic across genotype/ecotype condition-stratum candidate folds.",
+      "metric_id": "condition_stratum_holdout_delta",
+      "profile": "genelab_multispecies_pilot"
+    }
+  ],
+  "model_system": "drosophila_spaceflight",
+  "organism": "Drosophila melanogaster",
+  "orthology_strategy": "not_applicable_species_native_raw_gene_task",
+  "output": {
+    "label_domain": [
+      "Ground",
+      "LEO_or_ISS"
+    ],
+    "optional_columns": [
+      "leo_probability",
+      "flight_probability",
+      "condition_stratum",
+      "embedding_*"
+    ],
+    "positive_label": "LEO_or_ISS",
+    "prediction_format": "csv",
+    "primary_artifacts": [
+      "predictions.csv",
+      "metrics.json"
+    ],
+    "required_columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label"
+    ]
+  },
+  "platform": "GLbulkRNAseq_processed_counts",
+  "provenance": {
+    "derived_from": "v9/multispecies/source_inventory.draft.json",
+    "design_review": "v9/multispecies/reports/MULTISPECIES_CHECKSUM_AND_LOCAL_PAYLOAD_AUDIT.md",
+    "expression_matrix_audit": "v9/multispecies/expression_matrix_audit.draft.csv",
+    "expression_matrix_status": "matrix_local_sample_aligned",
+    "local_payload_status": "local_sample_table_and_matrix_md5_matched",
+    "sample_factor_status": "condition_factors_parsed",
+    "sample_factor_table": "v9/multispecies/sample_factors.draft.csv",
+    "source_checksum_audit": "v9/multispecies/source_checksum_audit.draft.csv",
+    "source_checksum_sources": {
+      "OSD-207": {
+        "api_status": "ok",
+        "checksum_manifest_count": 1,
+        "checksum_payload_matches": 366,
+        "freeze_ready": "false",
+        "n_files": 534,
+        "parsed_checksum_entries": 370
+      }
+    },
+    "source_checksum_status": "checksum_manifest_parsed",
+    "source_inventory_status": "draft_not_frozen"
+  },
+  "release_status": "draft_not_frozen",
+  "schema_version": "0.1.0",
+  "source_records": [
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "female_whole_body",
+      "checksum_status": "checksum_manifest_parsed",
+      "culture_hardware": "",
+      "differentiation_protocol": "",
+      "disease_context": "",
+      "donor_or_strain_block": "genotype_block_required",
+      "external_accessions": "",
+      "feature_namespace": "species_gene_ids_pending",
+      "glds_prefix": "GLDS-207",
+      "ground_control_type": "ground_control",
+      "integration_status": "draft_source_inventory_only",
+      "local_payload_status": "local_sample_table_and_matrix_md5_matched",
+      "material_type": "whole_organism_or_tissue",
+      "microglia_condition": "",
+      "mission": "spaceflight_vs_ground_control",
+      "model_system": "drosophila_spaceflight",
+      "notes": "Existing local pilot files under data/multispecies/drosophila; do not mix with mouse raw-gene leaderboard.",
+      "organism": "Drosophila melanogaster",
+      "organoid_type": "",
+      "orthology_strategy": "pending_ortholog_or_pathway_namespace",
+      "platform": "GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "processed_file_status": "local_processed_counts_and_sample_table_present",
+      "publication_urls": "",
+      "source_id": "OSD-207",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-207",
+      "spaceflight_environment": "spaceflight",
+      "species_common_name": "fruit_fly",
+      "taxon_id": "7227",
+      "url_or_accession": "OSD-207"
+    }
+  ],
+  "spaceflight_environment": "spaceflight",
+  "species_common_name": "fruit_fly",
+  "split": {
+    "blocking_factors": [
+      "condition_stratum"
+    ],
+    "candidate_folds": [
+      {
+        "fold_id": "holdout_condition_stratum_canton_s_sei_ts1",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "Canton.S_Sei.ts1",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 8,
+        "n_train": 24,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 4,
+          "LEO_or_ISS": 4
+        },
+        "train_label_distribution": {
+          "Ground": 12,
+          "LEO_or_ISS": 12
+        }
+      },
+      {
+        "fold_id": "holdout_condition_stratum_canton_s_wild_type",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "Canton.S_Wild.Type",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 8,
+        "n_train": 24,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 4,
+          "LEO_or_ISS": 4
+        },
+        "train_label_distribution": {
+          "Ground": 12,
+          "LEO_or_ISS": 12
+        }
+      },
+      {
+        "fold_id": "holdout_condition_stratum_w1118_kcnq370",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "w1118_KCNQ370",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 8,
+        "n_train": 24,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 4,
+          "LEO_or_ISS": 4
+        },
+        "train_label_distribution": {
+          "Ground": 12,
+          "LEO_or_ISS": 12
+        }
+      },
+      {
+        "fold_id": "holdout_condition_stratum_w1118_wild_type",
+        "heldout_factor": "condition_stratum",
+        "heldout_value": "w1118_Wild.Type",
+        "interpretation": "Condition-stratum holdout checks robustness across genotype/ecotype context, not mission-held-out generalization.",
+        "n_test": 8,
+        "n_train": 24,
+        "status": "sample_count_backed_candidate_not_default",
+        "test_label_distribution": {
+          "Ground": 4,
+          "LEO_or_ISS": 4
+        },
+        "train_label_distribution": {
+          "Ground": 12,
+          "LEO_or_ISS": 12
+        }
+      }
+    ],
+    "condition_stratum_distribution": {
+      "Canton.S_Sei.ts1": 8,
+      "Canton.S_Wild.Type": 8,
+      "w1118_KCNQ370": 8,
+      "w1118_Wild.Type": 8
+    },
+    "expression_matrix_audit": "v9/multispecies/expression_matrix_audit.draft.csv",
+    "expression_matrix_sources": {
+      "OSD-207": {
+        "local_matrix_path": "data/multispecies/drosophila/GLDS-207_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+        "matrix_columns_match_sample_factors": "True",
+        "n_feature_rows": 15999,
+        "n_matching_sample_columns": 32,
+        "n_sample_columns": 32
+      }
+    },
+    "expression_matrix_status": "matrix_local_sample_aligned",
+    "genotype_or_ecotype_distribution": {
+      "Canton.S_Sei.ts1": 8,
+      "Canton.S_Wild.Type": 8,
+      "w1118_KCNQ370": 8,
+      "w1118_Wild.Type": 8
+    },
+    "label_distribution": {
+      "Ground": 16,
+      "LEO_or_ISS": 16
+    },
+    "light_treatment_distribution": {},
+    "n_samples": 32,
+    "n_sources": 1,
+    "name": "drosophila_background_variant_blocked_leo_vs_ground_pilot",
+    "sample_factor_status": "condition_factors_parsed",
+    "sample_factor_table": "v9/multispecies/sample_factors.draft.csv",
+    "single_source_limitation": "This draft is a species-native within-source task, not a leave-one-mission-out or cross-species generalization benchmark.",
+    "source_accessions": [
+      "OSD-207"
+    ],
+    "source_sample_rows": {
+      "OSD-207": 32
+    },
+    "status": "draft_sample_matrix_checksum_backed_pending_baseline",
+    "strategy": "Classify LEO/spaceflight versus ground-control samples within one non-mouse OSDR source, with species-native features and explicit genotype/ecotype condition strata.",
+    "target_labels": [
+      "LEO_or_ISS",
+      "Ground"
+    ],
+    "unit": "sample"
+  },
+  "task_family": "multispecies_species_native_spaceflight",
+  "task_id": "draft_osd207_drosophila_whole_body_spaceflight",
+  "taxon_id": "7227",
+  "title": "Drosophila whole-body species-native LEO vs ground draft task",
+  "variant": "drosophila_whole_body"
+}

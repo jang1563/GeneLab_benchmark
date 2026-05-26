@@ -1,0 +1,22 @@
+[
+  {
+    "claim_boundary": "diagnostic_packaging_preflight_only_not_model_retraining_or_frozen_release",
+    "environment_package_count": "5",
+    "gate_id": "osd120_diagnostic_packaging_rebuild_gate",
+    "gate_status": "ready_existing_outputs_present",
+    "generated_at_utc": "2026-05-26T18:08:07Z",
+    "hashed_output_count": "40",
+    "missing_output_count": "0",
+    "mode": "preflight_existing_outputs",
+    "next_required_block": "V9-MULTI-032: archive identifier and license decision gate",
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "python_version": "3.9.6",
+    "ready_step_count": "8",
+    "rebuild_command": "python3 scripts/rebuild_v9_osd120_diagnostic_package.py --repo-root . --mode preflight",
+    "repo_root": ".",
+    "reports_root": "v9/multispecies/reports",
+    "script_missing_count": "0",
+    "step_count": "8",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+  }
+]

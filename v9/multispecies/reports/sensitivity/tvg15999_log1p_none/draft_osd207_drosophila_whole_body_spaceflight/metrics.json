@@ -1,0 +1,129 @@
+{
+  "baseline": {
+    "baseline_id": "multispecies_nearest_centroid",
+    "claim_boundary": "draft_feasibility_only_not_leaderboard",
+    "fold_family": "condition_stratum_candidate_folds",
+    "positive_label": "LEO_or_ISS",
+    "release_status": "draft_not_frozen",
+    "scaling": "none",
+    "score_column": "flight_probability",
+    "top_variable_genes": 15999,
+    "transform": "log1p"
+  },
+  "folds": [
+    {
+      "fold_id": "holdout_condition_stratum_canton_s_sei_ts1",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Canton.S_Sei.ts1",
+      "n_features": 15999,
+      "n_test": 8,
+      "n_train": 24
+    },
+    {
+      "fold_id": "holdout_condition_stratum_canton_s_wild_type",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "Canton.S_Wild.Type",
+      "n_features": 15999,
+      "n_test": 8,
+      "n_train": 24
+    },
+    {
+      "fold_id": "holdout_condition_stratum_w1118_kcnq370",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "w1118_KCNQ370",
+      "n_features": 15999,
+      "n_test": 8,
+      "n_train": 24
+    },
+    {
+      "fold_id": "holdout_condition_stratum_w1118_wild_type",
+      "heldout_factor": "condition_stratum",
+      "heldout_value": "w1118_Wild.Type",
+      "n_features": 15999,
+      "n_test": 8,
+      "n_train": 24
+    }
+  ],
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.9140625
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.84375
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.306684256421875
+    },
+    "condition_stratum_holdout_delta": {
+      "details": {
+        "holdout_condition_stratum_canton_s_sei_ts1": {
+          "balanced_accuracy": 0.875,
+          "heldout_value": "Canton.S_Sei.ts1",
+          "n_test": 8
+        },
+        "holdout_condition_stratum_canton_s_wild_type": {
+          "balanced_accuracy": 0.875,
+          "heldout_value": "Canton.S_Wild.Type",
+          "n_test": 8
+        },
+        "holdout_condition_stratum_w1118_kcnq370": {
+          "balanced_accuracy": 0.625,
+          "heldout_value": "w1118_KCNQ370",
+          "n_test": 8
+        },
+        "holdout_condition_stratum_w1118_wild_type": {
+          "balanced_accuracy": 1.0,
+          "heldout_value": "w1118_Wild.Type",
+          "n_test": 8
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across held-out condition strata",
+      "status": "computed",
+      "value": 0.375
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.8423645320197044
+    },
+    "mission_discrimination": {
+      "reason": "mission_discrimination requires at least two missions",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "status": "evaluated",
+  "submission_path": "v9/multispecies/reports/sensitivity/tvg15999_log1p_none/draft_osd207_drosophila_whole_body_spaceflight/predictions.csv",
+  "task_id": "draft_osd207_drosophila_whole_body_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "true_label",
+      "predicted_label",
+      "flight_probability",
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 32,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/sensitivity/tvg15999_log1p_none/draft_osd207_drosophila_whole_body_spaceflight/predictions.csv",
+    "task_id": "draft_osd207_drosophila_whole_body_spaceflight",
+    "warnings": []
+  }
+}

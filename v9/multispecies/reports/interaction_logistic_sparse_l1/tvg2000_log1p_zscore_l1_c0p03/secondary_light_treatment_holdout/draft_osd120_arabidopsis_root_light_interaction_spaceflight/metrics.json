@@ -1,0 +1,140 @@
+{
+  "baseline": {
+    "baseline_id": "multispecies_interaction_logistic_regression_l2",
+    "c": 0.03,
+    "claim_boundary": "draft_interaction_logistic_only_not_leaderboard",
+    "class_weight": "balanced",
+    "fold_family": "secondary_light_treatment_holdout",
+    "framework": "sklearn",
+    "l1_ratio": null,
+    "max_iter": 5000,
+    "penalty": "l1",
+    "positive_label": "LEO_or_ISS",
+    "random_state": 42,
+    "release_status": "draft_not_frozen",
+    "scaling": "zscore",
+    "score_column": "flight_probability",
+    "solver": "liblinear",
+    "top_variable_genes": 2000,
+    "transform": "log1p"
+  },
+  "folds": [
+    {
+      "fit_details": {
+        "c": 0.03,
+        "class_weight": "balanced",
+        "l1_ratio": null,
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l1",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.003775
+      },
+      "fold_id": "holdout_light_treatment_dark_treatment",
+      "heldout_factor": "light_treatment",
+      "heldout_value": "Dark.Treatment",
+      "n_features": 2000,
+      "n_test": 18,
+      "n_train": 18,
+      "train_time_s": 0.003775
+    },
+    {
+      "fit_details": {
+        "c": 0.03,
+        "class_weight": "balanced",
+        "l1_ratio": null,
+        "max_iter": 5000,
+        "model_type": "multispecies_interaction_logistic_regression_l2",
+        "penalty": "l1",
+        "random_state": 42,
+        "solver": "liblinear",
+        "train_time_s": 0.010213
+      },
+      "fold_id": "holdout_light_treatment_light_treatment",
+      "heldout_factor": "light_treatment",
+      "heldout_value": "Light.Treatment",
+      "n_features": 2000,
+      "n_test": 18,
+      "n_train": 18,
+      "train_time_s": 0.010213
+    }
+  ],
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.5
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.0
+    },
+    "condition_stratum_holdout_delta": {
+      "reason": "not applicable to fold_family=secondary_light_treatment_holdout",
+      "status": "skipped"
+    },
+    "genotype_holdout_delta": {
+      "reason": "not applicable to fold_family=secondary_light_treatment_holdout",
+      "status": "skipped"
+    },
+    "light_treatment_holdout_delta": {
+      "details": {
+        "holdout_light_treatment_dark_treatment": {
+          "balanced_accuracy": 0.5,
+          "heldout_value": "Dark.Treatment",
+          "n_test": 18
+        },
+        "holdout_light_treatment_light_treatment": {
+          "balanced_accuracy": 0.5,
+          "heldout_value": "Light.Treatment",
+          "n_test": 18
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across secondary_light_treatment_holdout folds",
+      "status": "computed",
+      "value": 0.0
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.3333333333333333
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "status": "evaluated",
+  "submission_path": "v9/multispecies/reports/interaction_logistic_sparse_l1/tvg2000_log1p_zscore_l1_c0p03/secondary_light_treatment_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "genotype_or_ecotype",
+      "light_treatment",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 36,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/interaction_logistic_sparse_l1/tvg2000_log1p_zscore_l1_c0p03/secondary_light_treatment_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "warnings": []
+  }
+}

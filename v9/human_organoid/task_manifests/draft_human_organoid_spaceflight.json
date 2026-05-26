@@ -10,7 +10,7 @@
     "Any organoid baseline output is draft-only and not a frozen leaderboard claim.",
     "single-mission organoid data cannot support leave-one-mission-out claims.",
     "GEO-derived Subject/iPSC-line metadata are available, but donor, source, organoid fate, and disease context are not independently crossed; donor generalization remains pilot-only.",
-    "DE/signature metrics remain non-primary until public OSDR DE references are pinned to a frozen contrast subset."
+    "DE/signature metrics are diagnostic-only and non-primary even when a response_signature artifact is supplied."
   ],
   "material_type": "cells_cultured",
   "metrics": [
@@ -30,12 +30,12 @@
       "profile": "genelab_organoid_pilot"
     },
     {
-      "interpretation": "Direction agreement for response genes after public OSDR DE tables are pinned to a frozen contrast subset.",
+      "interpretation": "Diagnostic direction agreement for response genes when a valid response_signature artifact is supplied.",
       "metric_id": "de_direction_match",
       "profile": "genelab_organoid_pilot"
     },
     {
-      "interpretation": "Rank correlation between predicted and observed organoid response signatures after log2 fold-change orientation is frozen.",
+      "interpretation": "Diagnostic rank correlation between predicted and observed organoid response signatures.",
       "metric_id": "signature_rank_correlation",
       "profile": "genelab_organoid_pilot"
     },
@@ -91,9 +91,24 @@
     "source_payload_status": "not_downloaded_or_payload_hashed"
   },
   "reference_signatures": {
+    "de_reference_manifest": "v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json",
+    "de_reference_table": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz",
+    "response_signature_contract": {
+      "artifact": "response_signature.csv",
+      "predicted_log2fc_orientation": "LEO_or_ISS_minus_Ground",
+      "required_columns": [
+        "task_id",
+        "source_id",
+        "contrast_id",
+        "gene_symbol",
+        "ensembl_id",
+        "predicted_log2fc_leo_or_iss_minus_ground"
+      ],
+      "status": "diagnostic_scorer_available_non_primary"
+    },
     "signature_metric_policy": "keep_classification_primary_enable_de_signature_after_frozen_contrast_subset",
     "signature_reference_audit": "v9/human_organoid/signature_reference_audit.draft.csv",
-    "signature_reference_limitations": "DE/signature metrics are reference-backed at the file-audit level, but leaderboard scoring still requires a frozen contrast subset and explicit log2 fold-change orientation.",
+    "signature_reference_limitations": "DE/signature metrics are reference-backed at the file-audit level, and diagnostic scoring is available when a valid response_signature.csv artifact is supplied. They remain non-primary for leaderboard claims.",
     "signature_reference_sources": {
       "OSD-863": {
         "contrast_files": "GLDS-716_rna_seq_contrasts_GLbulkRNAseq.csv",

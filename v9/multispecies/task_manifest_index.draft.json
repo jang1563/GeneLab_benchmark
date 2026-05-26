@@ -1,0 +1,40 @@
+[
+  {
+    "assay_modality": "bulk_rna_seq",
+    "feature_namespace": "species_gene_ids_pending",
+    "legacy_task_id": "",
+    "manifest_schema_version": "0.1.0",
+    "material_type": "whole_organism_or_tissue",
+    "metric_ids": "balanced_accuracy;auroc;calibration_error;condition_stratum_holdout_delta",
+    "missions": "",
+    "model_system": "drosophila_spaceflight",
+    "n_folds": "",
+    "n_missions": "",
+    "n_sources": "1",
+    "organism": "Drosophila melanogaster",
+    "source_ids": "OSD-207",
+    "task_family": "multispecies_species_native_spaceflight",
+    "task_id": "draft_osd207_drosophila_whole_body_spaceflight",
+    "tissue": "",
+    "variant": "drosophila_whole_body"
+  },
+  {
+    "assay_modality": "bulk_rna_seq",
+    "feature_namespace": "species_gene_ids_pending",
+    "legacy_task_id": "",
+    "manifest_schema_version": "0.1.0",
+    "material_type": "plant_tissue",
+    "metric_ids": "balanced_accuracy;auroc;calibration_error;condition_stratum_holdout_delta",
+    "missions": "",
+    "model_system": "arabidopsis_spaceflight",
+    "n_folds": "",
+    "n_missions": "",
+    "n_sources": "1",
+    "organism": "Arabidopsis thaliana",
+    "source_ids": "OSD-37",
+    "task_family": "multispecies_species_native_spaceflight",
+    "task_id": "draft_osd37_arabidopsis_seedling_spaceflight",
+    "tissue": "",
+    "variant": "arabidopsis_seedling_pool"
+  }
+]

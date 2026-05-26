@@ -21,6 +21,18 @@ def file_sha256(path: str | Path) -> str:
     return digest.hexdigest()
 
 
+def _input_file(role: str, path: str | Path) -> dict[str, str]:
+    parsed = Path(path)
+    record = {
+        "role": role,
+        "path": parsed.as_posix(),
+        "sha256": "",
+    }
+    if parsed.exists():
+        record["sha256"] = file_sha256(parsed)
+    return record
+
+
 def build_run_manifest(
     *,
     task_manifest: Mapping[str, Any],
@@ -31,20 +43,29 @@ def build_run_manifest(
 ) -> dict[str, Any]:
     """Build a provenance record for one evaluation run."""
 
-    input_files: list[dict[str, str]] = [
-        {
-            "role": "submission",
-            "path": Path(submission_path).as_posix(),
-            "sha256": file_sha256(submission_path),
-        }
-    ]
+    input_files: list[dict[str, str]] = [_input_file("submission", submission_path)]
     if task_manifest_path is not None:
+        input_files.append(_input_file("task_manifest", task_manifest_path))
+    if evaluation_result.get("response_signature_path"):
         input_files.append(
-            {
-                "role": "task_manifest",
-                "path": Path(task_manifest_path).as_posix(),
-                "sha256": file_sha256(task_manifest_path),
-            }
+            _input_file(
+                "response_signature",
+                str(evaluation_result["response_signature_path"]),
+            )
+        )
+    if evaluation_result.get("feature_effect_path"):
+        input_files.append(
+            _input_file(
+                "feature_effect",
+                str(evaluation_result["feature_effect_path"]),
+            )
+        )
+    if evaluation_result.get("reference_signature_path"):
+        input_files.append(
+            _input_file(
+                "reference_signature_table",
+                str(evaluation_result["reference_signature_path"]),
+            )
         )
 
     return {

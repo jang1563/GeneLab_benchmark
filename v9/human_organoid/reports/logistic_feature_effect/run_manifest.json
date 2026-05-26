@@ -1,0 +1,1973 @@
+{
+  "command": [
+    "scripts/run_v9_human_organoid_logistic_feature_effect.py"
+  ],
+  "generated_at": "2026-05-23T03:06:18.915351+00:00",
+  "input_files": [
+    {
+      "path": "v9/human_organoid/reports/logistic_feature_effect/predictions.csv",
+      "role": "submission",
+      "sha256": "1aca1d355c133884eb6c8c2fd8b208011f29be5e9cde178ddc767c81e08d6729"
+    },
+    {
+      "path": "v9/human_organoid/task_manifests/draft_human_organoid_spaceflight.json",
+      "role": "task_manifest",
+      "sha256": "a7e1e1e83ce118ed7b122d6c32b37b03ab58ab947f9a9ce698e6a99372bce1b3"
+    },
+    {
+      "path": "v9/human_organoid/reports/logistic_feature_effect/feature_effect.csv.gz",
+      "role": "feature_effect",
+      "sha256": "c8eb5520aae82fa4cf1b14f3078ad3b21a5327edf69aa2e82bec7869eb8c3555"
+    },
+    {
+      "path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz",
+      "role": "reference_signature_table",
+      "sha256": "60755beef1e02a12820922388294693f7e3dd52ed5770a48f36e3da9ec5e778c"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.050000000000000024
+    },
+    "de_direction_match": {
+      "reason": "response_signature.csv artifact missing; DE/signature metrics require a gene-level artifact with columns: task_id, source_id, contrast_id, gene_symbol, ensembl_id, predicted_log2fc_leo_or_iss_minus_ground",
+      "status": "skipped"
+    },
+    "feature_effect_direction_match": {
+      "details": {
+        "aggregate": {
+          "n_direction_matches": 124,
+          "n_direction_scored": 204,
+          "n_joined_rows": 16000,
+          "n_significant_reference_rows": 204,
+          "reference_filter": "significant_fdr_0_05"
+        },
+        "join": {
+          "n_duplicate_effect_keys": 0,
+          "n_effect_rows": 16000,
+          "n_fallback_join_rows": 16000,
+          "n_joined_rows": 16000,
+          "n_non_numeric_effect_rows": 0,
+          "n_non_numeric_reference_rows": 0,
+          "n_primary_join_rows": 0,
+          "n_unmatched_rows": 0
+        },
+        "per_contrast": {
+          "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6363636363636364,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 7,
+              "n_direction_scored": 11,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 11,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.07521609985415932,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 1.8181818181818181,
+                "expected_overlap": 0.55,
+                "hypergeometric_p_value_greater_equal": 0.4320255404444042,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 100,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.01
+              },
+              "250": {
+                "enrichment": 1.4545454545454546,
+                "expected_overlap": 1.375,
+                "hypergeometric_p_value_greater_equal": 0.40833879472082923,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 3.6363636363636362,
+                "expected_overlap": 0.275,
+                "hypergeometric_p_value_greater_equal": 0.24361405636290057,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.1818181818181817,
+                "expected_overlap": 2.75,
+                "hypergeometric_p_value_greater_equal": 0.03392585958069072,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 500,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.012
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.8571428571428571,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 12,
+              "n_direction_scored": 14,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 14,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.13702872936602373,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 2.857142857142857,
+                "expected_overlap": 0.7,
+                "hypergeometric_p_value_greater_equal": 0.15255127886444672,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 100,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "250": {
+                "enrichment": 1.1428571428571428,
+                "expected_overlap": 1.75,
+                "hypergeometric_p_value_greater_equal": 0.5380883680309145,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 2.857142857142857,
+                "expected_overlap": 0.35,
+                "hypergeometric_p_value_greater_equal": 0.2992620767586178,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 1.1428571428571428,
+                "expected_overlap": 3.5,
+                "hypergeometric_p_value_greater_equal": 0.4788808982997336,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 4,
+                "n_selected": 500,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 1,
+              "n_direction_scored": 2,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 2,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.08266528369528546,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 10.0,
+                "expected_overlap": 0.1,
+                "hypergeometric_p_value_greater_equal": 0.09752376188110325,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 100,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.01
+              },
+              "250": {
+                "enrichment": 4.0,
+                "expected_overlap": 0.25,
+                "hypergeometric_p_value_greater_equal": 0.23442971485754158,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 250,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              },
+              "50": {
+                "enrichment": 20.0,
+                "expected_overlap": 0.05,
+                "hypergeometric_p_value_greater_equal": 0.04938719359689328,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.0,
+                "expected_overlap": 0.5,
+                "hypergeometric_p_value_greater_equal": 0.4375937968985477,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 500,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.002
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6666666666666666,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 4,
+              "n_direction_scored": 6,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 6,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.1122937498413694,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 6.666666666666667,
+                "expected_overlap": 0.3,
+                "hypergeometric_p_value_greater_equal": 0.03254402287191901,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 100,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "250": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 0.16631621153333032,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 6.666666666666667,
+                "expected_overlap": 0.15,
+                "hypergeometric_p_value_greater_equal": 0.14109719587058528,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.0,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 0.16913630227332002,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 3,
+                "n_selected": 500,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.006
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 6,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 6,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": -0.01811385350176111,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.3,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 100,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "250": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 250,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "50": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.15,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 50,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "500": {
+                "enrichment": 0.0,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 500,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6296296296296297,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 17,
+              "n_direction_scored": 27,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 27,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.08416701989758116,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 0.0,
+                "expected_overlap": 1.35,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 100,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "250": {
+                "enrichment": 0.2962962962962963,
+                "expected_overlap": 3.375,
+                "hypergeometric_p_value_greater_equal": 0.9735012805813528,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 250,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              },
+              "50": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.675,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 50,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "500": {
+                "enrichment": 0.2962962962962963,
+                "expected_overlap": 6.75,
+                "hypergeometric_p_value_greater_equal": 0.9959465640900378,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 500,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 15,
+              "n_direction_scored": 30,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 30,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.1275983000208717,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 0.05935988757153151,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 4,
+                "n_selected": 100,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.04
+              },
+              "250": {
+                "enrichment": 1.3333333333333333,
+                "expected_overlap": 3.75,
+                "hypergeometric_p_value_greater_equal": 0.3182098929310932,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 5,
+                "n_selected": 250,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "50": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 0.1714518385581623,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 50,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.04
+              },
+              "500": {
+                "enrichment": 0.8,
+                "expected_overlap": 7.5,
+                "hypergeometric_p_value_greater_equal": 0.7993795871619671,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 500,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.012
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6018518518518519,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 65,
+              "n_direction_scored": 108,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 108,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.13304765775375682,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 1.4814814814814814,
+                "expected_overlap": 5.4,
+                "hypergeometric_p_value_greater_equal": 0.1677429085406621,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 8,
+                "n_selected": 100,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.08
+              },
+              "250": {
+                "enrichment": 1.1851851851851851,
+                "expected_overlap": 13.5,
+                "hypergeometric_p_value_greater_equal": 0.2677689032310381,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 16,
+                "n_selected": 250,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.064
+              },
+              "50": {
+                "enrichment": 2.222222222222222,
+                "expected_overlap": 2.7,
+                "hypergeometric_p_value_greater_equal": 0.049353802449548886,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 50,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.12
+              },
+              "500": {
+                "enrichment": 1.0740740740740742,
+                "expected_overlap": 27.0,
+                "hypergeometric_p_value_greater_equal": 0.36035765310446854,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 29,
+                "n_selected": 500,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.058
+              }
+            },
+            "n_joined_rows": 2000
+          }
+        },
+        "reference": {
+          "duplicate_fallback_keys": 0,
+          "duplicate_primary_keys": 70104,
+          "n_fallback_keys": 242708,
+          "n_primary_keys": 172604,
+          "n_reference_rows": 242708,
+          "reference_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz"
+        },
+        "validation": {
+          "columns": [
+            "task_id",
+            "fold_id",
+            "source_id",
+            "contrast_id",
+            "feature_namespace",
+            "gene_symbol",
+            "ensembl_id",
+            "feature_id",
+            "effect_value",
+            "effect_direction_positive_class",
+            "effect_scale",
+            "model_space",
+            "classifier_model_id",
+            "training_scope",
+            "target_scope",
+            "positive_label",
+            "reference_usage_policy",
+            "training_source_id",
+            "target_source_id",
+            "transform",
+            "scaling",
+            "feature_selection",
+            "n_train_ground",
+            "n_train_leo_or_iss",
+            "n_features_model_input",
+            "n_features_emitted",
+            "regularization",
+            "classifier_solver",
+            "random_state",
+            "artifact_claim_boundary"
+          ],
+          "errors": [],
+          "n_rows": 16000,
+          "ok": true,
+          "path": "v9/human_organoid/reports/logistic_feature_effect/feature_effect.csv.gz",
+          "warnings": []
+        }
+      },
+      "status": "computed",
+      "value": 0.6078431372549019
+    },
+    "feature_effect_rank_correlation": {
+      "details": {
+        "aggregate": {
+          "correlation": "spearman",
+          "n_joined_rows": 16000,
+          "n_rank_scored": 16000,
+          "reference_filter": "all_joined_rows"
+        },
+        "join": {
+          "n_duplicate_effect_keys": 0,
+          "n_effect_rows": 16000,
+          "n_fallback_join_rows": 16000,
+          "n_joined_rows": 16000,
+          "n_non_numeric_effect_rows": 0,
+          "n_non_numeric_reference_rows": 0,
+          "n_primary_join_rows": 0,
+          "n_unmatched_rows": 0
+        },
+        "per_contrast": {
+          "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6363636363636364,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 7,
+              "n_direction_scored": 11,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 11,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.07521609985415932,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 1.8181818181818181,
+                "expected_overlap": 0.55,
+                "hypergeometric_p_value_greater_equal": 0.4320255404444042,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 100,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.01
+              },
+              "250": {
+                "enrichment": 1.4545454545454546,
+                "expected_overlap": 1.375,
+                "hypergeometric_p_value_greater_equal": 0.40833879472082923,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 3.6363636363636362,
+                "expected_overlap": 0.275,
+                "hypergeometric_p_value_greater_equal": 0.24361405636290057,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.1818181818181817,
+                "expected_overlap": 2.75,
+                "hypergeometric_p_value_greater_equal": 0.03392585958069072,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 500,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.012
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.8571428571428571,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 12,
+              "n_direction_scored": 14,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 14,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.13702872936602373,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 2.857142857142857,
+                "expected_overlap": 0.7,
+                "hypergeometric_p_value_greater_equal": 0.15255127886444672,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 100,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "250": {
+                "enrichment": 1.1428571428571428,
+                "expected_overlap": 1.75,
+                "hypergeometric_p_value_greater_equal": 0.5380883680309145,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 2.857142857142857,
+                "expected_overlap": 0.35,
+                "hypergeometric_p_value_greater_equal": 0.2992620767586178,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 1.1428571428571428,
+                "expected_overlap": 3.5,
+                "hypergeometric_p_value_greater_equal": 0.4788808982997336,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 4,
+                "n_selected": 500,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 1,
+              "n_direction_scored": 2,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 2,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.08266528369528546,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 10.0,
+                "expected_overlap": 0.1,
+                "hypergeometric_p_value_greater_equal": 0.09752376188110325,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 100,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.01
+              },
+              "250": {
+                "enrichment": 4.0,
+                "expected_overlap": 0.25,
+                "hypergeometric_p_value_greater_equal": 0.23442971485754158,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 250,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              },
+              "50": {
+                "enrichment": 20.0,
+                "expected_overlap": 0.05,
+                "hypergeometric_p_value_greater_equal": 0.04938719359689328,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.0,
+                "expected_overlap": 0.5,
+                "hypergeometric_p_value_greater_equal": 0.4375937968985477,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 500,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.002
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6666666666666666,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 4,
+              "n_direction_scored": 6,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 6,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.1122937498413694,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 6.666666666666667,
+                "expected_overlap": 0.3,
+                "hypergeometric_p_value_greater_equal": 0.03254402287191901,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 100,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "250": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 0.16631621153333032,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 6.666666666666667,
+                "expected_overlap": 0.15,
+                "hypergeometric_p_value_greater_equal": 0.14109719587058528,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.0,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 0.16913630227332002,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 3,
+                "n_selected": 500,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.006
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 6,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 6,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": -0.01811385350176111,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.3,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 100,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "250": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 250,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "50": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.15,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 50,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "500": {
+                "enrichment": 0.0,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 500,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6296296296296297,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 17,
+              "n_direction_scored": 27,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 27,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.08416701989758116,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 0.0,
+                "expected_overlap": 1.35,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 100,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "250": {
+                "enrichment": 0.2962962962962963,
+                "expected_overlap": 3.375,
+                "hypergeometric_p_value_greater_equal": 0.9735012805813528,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 250,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              },
+              "50": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.675,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 50,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "500": {
+                "enrichment": 0.2962962962962963,
+                "expected_overlap": 6.75,
+                "hypergeometric_p_value_greater_equal": 0.9959465640900378,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 500,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 15,
+              "n_direction_scored": 30,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 30,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.1275983000208717,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 0.05935988757153151,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 4,
+                "n_selected": 100,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.04
+              },
+              "250": {
+                "enrichment": 1.3333333333333333,
+                "expected_overlap": 3.75,
+                "hypergeometric_p_value_greater_equal": 0.3182098929310932,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 5,
+                "n_selected": 250,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "50": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 0.1714518385581623,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 50,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.04
+              },
+              "500": {
+                "enrichment": 0.8,
+                "expected_overlap": 7.5,
+                "hypergeometric_p_value_greater_equal": 0.7993795871619671,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 500,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.012
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6018518518518519,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 65,
+              "n_direction_scored": 108,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 108,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.13304765775375682,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 1.4814814814814814,
+                "expected_overlap": 5.4,
+                "hypergeometric_p_value_greater_equal": 0.1677429085406621,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 8,
+                "n_selected": 100,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.08
+              },
+              "250": {
+                "enrichment": 1.1851851851851851,
+                "expected_overlap": 13.5,
+                "hypergeometric_p_value_greater_equal": 0.2677689032310381,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 16,
+                "n_selected": 250,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.064
+              },
+              "50": {
+                "enrichment": 2.222222222222222,
+                "expected_overlap": 2.7,
+                "hypergeometric_p_value_greater_equal": 0.049353802449548886,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 50,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.12
+              },
+              "500": {
+                "enrichment": 1.0740740740740742,
+                "expected_overlap": 27.0,
+                "hypergeometric_p_value_greater_equal": 0.36035765310446854,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 29,
+                "n_selected": 500,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.058
+              }
+            },
+            "n_joined_rows": 2000
+          }
+        },
+        "reference": {
+          "duplicate_fallback_keys": 0,
+          "duplicate_primary_keys": 70104,
+          "n_fallback_keys": 242708,
+          "n_primary_keys": 172604,
+          "n_reference_rows": 242708,
+          "reference_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz"
+        },
+        "validation": {
+          "columns": [
+            "task_id",
+            "fold_id",
+            "source_id",
+            "contrast_id",
+            "feature_namespace",
+            "gene_symbol",
+            "ensembl_id",
+            "feature_id",
+            "effect_value",
+            "effect_direction_positive_class",
+            "effect_scale",
+            "model_space",
+            "classifier_model_id",
+            "training_scope",
+            "target_scope",
+            "positive_label",
+            "reference_usage_policy",
+            "training_source_id",
+            "target_source_id",
+            "transform",
+            "scaling",
+            "feature_selection",
+            "n_train_ground",
+            "n_train_leo_or_iss",
+            "n_features_model_input",
+            "n_features_emitted",
+            "regularization",
+            "classifier_solver",
+            "random_state",
+            "artifact_claim_boundary"
+          ],
+          "errors": [],
+          "n_rows": 16000,
+          "ok": true,
+          "path": "v9/human_organoid/reports/logistic_feature_effect/feature_effect.csv.gz",
+          "warnings": []
+        }
+      },
+      "status": "computed",
+      "value": 0.08672800238082004
+    },
+    "feature_effect_top_k_de_overlap": {
+      "details": {
+        "aggregate": {
+          "n_joined_rows": 16000,
+          "reference_filter": "significant_fdr_0_05"
+        },
+        "join": {
+          "n_duplicate_effect_keys": 0,
+          "n_effect_rows": 16000,
+          "n_fallback_join_rows": 16000,
+          "n_joined_rows": 16000,
+          "n_non_numeric_effect_rows": 0,
+          "n_non_numeric_reference_rows": 0,
+          "n_primary_join_rows": 0,
+          "n_unmatched_rows": 0
+        },
+        "per_contrast": {
+          "osd_863_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6363636363636364,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 7,
+              "n_direction_scored": 11,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 11,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.07521609985415932,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 1.8181818181818181,
+                "expected_overlap": 0.55,
+                "hypergeometric_p_value_greater_equal": 0.4320255404444042,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 100,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.01
+              },
+              "250": {
+                "enrichment": 1.4545454545454546,
+                "expected_overlap": 1.375,
+                "hypergeometric_p_value_greater_equal": 0.40833879472082923,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 3.6363636363636362,
+                "expected_overlap": 0.275,
+                "hypergeometric_p_value_greater_equal": 0.24361405636290057,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.1818181818181817,
+                "expected_overlap": 2.75,
+                "hypergeometric_p_value_greater_equal": 0.03392585958069072,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 500,
+                "n_significant_reference_rows": 11,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.012
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.8571428571428571,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 12,
+              "n_direction_scored": 14,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 14,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.13702872936602373,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 2.857142857142857,
+                "expected_overlap": 0.7,
+                "hypergeometric_p_value_greater_equal": 0.15255127886444672,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 100,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "250": {
+                "enrichment": 1.1428571428571428,
+                "expected_overlap": 1.75,
+                "hypergeometric_p_value_greater_equal": 0.5380883680309145,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 2.857142857142857,
+                "expected_overlap": 0.35,
+                "hypergeometric_p_value_greater_equal": 0.2992620767586178,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 1.1428571428571428,
+                "expected_overlap": 3.5,
+                "hypergeometric_p_value_greater_equal": 0.4788808982997336,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 4,
+                "n_selected": 500,
+                "n_significant_reference_rows": 14,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 1,
+              "n_direction_scored": 2,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 2,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.08266528369528546,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 10.0,
+                "expected_overlap": 0.1,
+                "hypergeometric_p_value_greater_equal": 0.09752376188110325,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 100,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.01
+              },
+              "250": {
+                "enrichment": 4.0,
+                "expected_overlap": 0.25,
+                "hypergeometric_p_value_greater_equal": 0.23442971485754158,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 250,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              },
+              "50": {
+                "enrichment": 20.0,
+                "expected_overlap": 0.05,
+                "hypergeometric_p_value_greater_equal": 0.04938719359689328,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.0,
+                "expected_overlap": 0.5,
+                "hypergeometric_p_value_greater_equal": 0.4375937968985477,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 500,
+                "n_significant_reference_rows": 2,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.002
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_863_primary_progressive_multiple_sclerosis_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6666666666666666,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 4,
+              "n_direction_scored": 6,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 6,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.1122937498413694,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 6.666666666666667,
+                "expected_overlap": 0.3,
+                "hypergeometric_p_value_greater_equal": 0.03254402287191901,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 100,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "250": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 0.16631621153333032,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 250,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.008
+              },
+              "50": {
+                "enrichment": 6.666666666666667,
+                "expected_overlap": 0.15,
+                "hypergeometric_p_value_greater_equal": 0.14109719587058528,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 50,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "500": {
+                "enrichment": 2.0,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 0.16913630227332002,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 3,
+                "n_selected": 500,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.006
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_no_known_diseases_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 3,
+              "n_direction_scored": 6,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 6,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": -0.01811385350176111,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.3,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 100,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "250": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 250,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "50": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.15,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 50,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "500": {
+                "enrichment": 0.0,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 500,
+                "n_significant_reference_rows": 6,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_no_known_diseases_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6296296296296297,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 17,
+              "n_direction_scored": 27,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 27,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.08416701989758116,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 0.0,
+                "expected_overlap": 1.35,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 100,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "250": {
+                "enrichment": 0.2962962962962963,
+                "expected_overlap": 3.375,
+                "hypergeometric_p_value_greater_equal": 0.9735012805813528,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 1,
+                "n_selected": 250,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              },
+              "50": {
+                "enrichment": 0.0,
+                "expected_overlap": 0.675,
+                "hypergeometric_p_value_greater_equal": 1.0,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 0,
+                "n_selected": 50,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.0
+              },
+              "500": {
+                "enrichment": 0.2962962962962963,
+                "expected_overlap": 6.75,
+                "hypergeometric_p_value_greater_equal": 0.9959465640900378,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 500,
+                "n_significant_reference_rows": 27,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.004
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_sporadic_parkinson_disease_with_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.5,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 15,
+              "n_direction_scored": 30,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 30,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.1275983000208717,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 1.5,
+                "hypergeometric_p_value_greater_equal": 0.05935988757153151,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 4,
+                "n_selected": 100,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.04
+              },
+              "250": {
+                "enrichment": 1.3333333333333333,
+                "expected_overlap": 3.75,
+                "hypergeometric_p_value_greater_equal": 0.3182098929310932,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 5,
+                "n_selected": 250,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.02
+              },
+              "50": {
+                "enrichment": 2.6666666666666665,
+                "expected_overlap": 0.75,
+                "hypergeometric_p_value_greater_equal": 0.1714518385581623,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 2,
+                "n_selected": 50,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.04
+              },
+              "500": {
+                "enrichment": 0.8,
+                "expected_overlap": 7.5,
+                "hypergeometric_p_value_greater_equal": 0.7993795871619671,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 500,
+                "n_significant_reference_rows": 30,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.012
+              }
+            },
+            "n_joined_rows": 2000
+          },
+          "osd_871_sporadic_parkinson_disease_without_microglia_leo_or_iss_vs_ground": {
+            "feature_effect_direction_match": 0.6018518518518519,
+            "feature_effect_direction_match_details": {
+              "n_direction_matches": 65,
+              "n_direction_scored": 108,
+              "n_joined_rows": 2000,
+              "n_significant_reference_rows": 108,
+              "reference_filter": "significant_fdr_0_05"
+            },
+            "feature_effect_rank_correlation": 0.13304765775375682,
+            "feature_effect_rank_correlation_details": {
+              "correlation": "spearman",
+              "n_joined_rows": 2000,
+              "n_rank_scored": 2000,
+              "reference_filter": "all_joined_rows"
+            },
+            "feature_effect_top_k_de_overlap": {
+              "100": {
+                "enrichment": 1.4814814814814814,
+                "expected_overlap": 5.4,
+                "hypergeometric_p_value_greater_equal": 0.1677429085406621,
+                "k": 100,
+                "n_feature_universe": 2000,
+                "n_overlap": 8,
+                "n_selected": 100,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.08
+              },
+              "250": {
+                "enrichment": 1.1851851851851851,
+                "expected_overlap": 13.5,
+                "hypergeometric_p_value_greater_equal": 0.2677689032310381,
+                "k": 250,
+                "n_feature_universe": 2000,
+                "n_overlap": 16,
+                "n_selected": 250,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.064
+              },
+              "50": {
+                "enrichment": 2.222222222222222,
+                "expected_overlap": 2.7,
+                "hypergeometric_p_value_greater_equal": 0.049353802449548886,
+                "k": 50,
+                "n_feature_universe": 2000,
+                "n_overlap": 6,
+                "n_selected": 50,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.12
+              },
+              "500": {
+                "enrichment": 1.0740740740740742,
+                "expected_overlap": 27.0,
+                "hypergeometric_p_value_greater_equal": 0.36035765310446854,
+                "k": 500,
+                "n_feature_universe": 2000,
+                "n_overlap": 29,
+                "n_selected": 500,
+                "n_significant_reference_rows": 108,
+                "null_model": "hypergeometric_random_top_k_without_replacement",
+                "overlap_fraction": 0.058
+              }
+            },
+            "n_joined_rows": 2000
+          }
+        },
+        "reference": {
+          "duplicate_fallback_keys": 0,
+          "duplicate_primary_keys": 70104,
+          "n_fallback_keys": 242708,
+          "n_primary_keys": 172604,
+          "n_reference_rows": 242708,
+          "reference_path": "v9/human_organoid/de_references/human_organoid_de_reference.draft.csv.gz"
+        },
+        "validation": {
+          "columns": [
+            "task_id",
+            "fold_id",
+            "source_id",
+            "contrast_id",
+            "feature_namespace",
+            "gene_symbol",
+            "ensembl_id",
+            "feature_id",
+            "effect_value",
+            "effect_direction_positive_class",
+            "effect_scale",
+            "model_space",
+            "classifier_model_id",
+            "training_scope",
+            "target_scope",
+            "positive_label",
+            "reference_usage_policy",
+            "training_source_id",
+            "target_source_id",
+            "transform",
+            "scaling",
+            "feature_selection",
+            "n_train_ground",
+            "n_train_leo_or_iss",
+            "n_features_model_input",
+            "n_features_emitted",
+            "regularization",
+            "classifier_solver",
+            "random_state",
+            "artifact_claim_boundary"
+          ],
+          "errors": [],
+          "n_rows": 16000,
+          "ok": true,
+          "path": "v9/human_organoid/reports/logistic_feature_effect/feature_effect.csv.gz",
+          "warnings": []
+        }
+      },
+      "status": "computed",
+      "value": {
+        "100": {
+          "enrichment": 3.9215686274509807,
+          "expected_overlap": 1.275,
+          "hypergeometric_p_value_greater_equal": 0.009090082933691913,
+          "k": 100,
+          "n_feature_universe": 16000,
+          "n_overlap": 5,
+          "n_selected": 100,
+          "n_significant_reference_rows": 204,
+          "null_model": "hypergeometric_random_top_k_without_replacement",
+          "overlap_fraction": 0.05
+        },
+        "250": {
+          "enrichment": 3.1372549019607843,
+          "expected_overlap": 3.1875,
+          "hypergeometric_p_value_greater_equal": 0.0014141356279164757,
+          "k": 250,
+          "n_feature_universe": 16000,
+          "n_overlap": 10,
+          "n_selected": 250,
+          "n_significant_reference_rows": 204,
+          "null_model": "hypergeometric_random_top_k_without_replacement",
+          "overlap_fraction": 0.04
+        },
+        "50": {
+          "enrichment": 1.5686274509803924,
+          "expected_overlap": 0.6375,
+          "hypergeometric_p_value_greater_equal": 0.474071378951963,
+          "k": 50,
+          "n_feature_universe": 16000,
+          "n_overlap": 1,
+          "n_selected": 50,
+          "n_significant_reference_rows": 204,
+          "null_model": "hypergeometric_random_top_k_without_replacement",
+          "overlap_fraction": 0.02
+        },
+        "500": {
+          "enrichment": 2.196078431372549,
+          "expected_overlap": 6.375,
+          "hypergeometric_p_value_greater_equal": 0.0049662493285786095,
+          "k": 500,
+          "n_feature_universe": 16000,
+          "n_overlap": 14,
+          "n_selected": 500,
+          "n_significant_reference_rows": 204,
+          "null_model": "hypergeometric_random_top_k_without_replacement",
+          "overlap_fraction": 0.028
+        }
+      }
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 1.0
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    },
+    "signature_rank_correlation": {
+      "reason": "response_signature.csv artifact missing; DE/signature metrics require a gene-level artifact with columns: task_id, source_id, contrast_id, gene_symbol, ensembl_id, predicted_log2fc_leo_or_iss_minus_ground",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "human_organoid_spaceflight",
+  "task_id": "draft_human_organoid_spaceflight",
+  "validation": {
+    "columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 2,
+    "ok": true,
+    "submission_path": "v9/human_organoid/reports/logistic_feature_effect/predictions.csv",
+    "task_id": "draft_human_organoid_spaceflight",
+    "warnings": []
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "baseline": {
+    "baseline_id": "multispecies_interaction_nearest_centroid",
+    "claim_boundary": "draft_interaction_sensitivity_only_not_leaderboard",
+    "fold_family": "primary_genotype_or_ecotype_holdout",
+    "positive_label": "LEO_or_ISS",
+    "release_status": "draft_not_frozen",
+    "scaling": "zscore",
+    "score_column": "flight_probability",
+    "top_variable_genes": 100,
+    "transform": "log1p"
+  },
+  "folds": [
+    {
+      "fold_id": "holdout_genotype_or_ecotype_col_0",
+      "heldout_factor": "genotype_or_ecotype",
+      "heldout_value": "Col.0",
+      "n_features": 100,
+      "n_test": 12,
+      "n_train": 24
+    },
+    {
+      "fold_id": "holdout_genotype_or_ecotype_col_0_phyd",
+      "heldout_factor": "genotype_or_ecotype",
+      "heldout_value": "Col.0.PhyD",
+      "n_features": 100,
+      "n_test": 12,
+      "n_train": 24
+    },
+    {
+      "fold_id": "holdout_genotype_or_ecotype_wassilewskija_ecotype",
+      "heldout_factor": "genotype_or_ecotype",
+      "heldout_value": "Wassilewskija.ecotype",
+      "n_features": 100,
+      "n_test": 12,
+      "n_train": 24
+    }
+  ],
+  "label_domain": [
+    "Ground",
+    "LEO_or_ISS"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.7777777777777778
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.8055555555555556
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.2924779470055555
+    },
+    "condition_stratum_holdout_delta": {
+      "reason": "not applicable to fold_family=primary_genotype_or_ecotype_holdout",
+      "status": "skipped"
+    },
+    "genotype_holdout_delta": {
+      "details": {
+        "holdout_genotype_or_ecotype_col_0": {
+          "balanced_accuracy": 0.8333333333333333,
+          "heldout_value": "Col.0",
+          "n_test": 12
+        },
+        "holdout_genotype_or_ecotype_col_0_phyd": {
+          "balanced_accuracy": 0.8333333333333334,
+          "heldout_value": "Col.0.PhyD",
+          "n_test": 12
+        },
+        "holdout_genotype_or_ecotype_wassilewskija_ecotype": {
+          "balanced_accuracy": 0.75,
+          "heldout_value": "Wassilewskija.ecotype",
+          "n_test": 12
+        }
+      },
+      "interpretation": "range of fold-level balanced_accuracy across primary_genotype_or_ecotype_holdout folds",
+      "status": "computed",
+      "value": 0.08333333333333337
+    },
+    "light_treatment_holdout_delta": {
+      "reason": "not applicable to fold_family=primary_genotype_or_ecotype_holdout",
+      "status": "skipped"
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.8017309205350118
+    },
+    "mission_discrimination": {
+      "reason": "mission_discrimination requires at least two missions",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "LEO_or_ISS",
+  "status": "evaluated",
+  "submission_path": "v9/multispecies/reports/interaction_sensitivity/tvg100_log1p_zscore/primary_genotype_or_ecotype_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "condition_stratum",
+      "genotype_or_ecotype",
+      "light_treatment",
+      "true_label",
+      "predicted_label",
+      "flight_probability",
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 36,
+    "ok": true,
+    "submission_path": "v9/multispecies/reports/interaction_sensitivity/tvg100_log1p_zscore/primary_genotype_or_ecotype_holdout/draft_osd120_arabidopsis_root_light_interaction_spaceflight/predictions.csv",
+    "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight",
+    "warnings": []
+  }
+}

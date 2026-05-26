@@ -1,0 +1,298 @@
+{
+  "contributors": [
+    {
+      "path": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-120",
+      "role": "upstream-data-source",
+      "title": "NASA OSDR/GeneLab"
+    },
+    {
+      "role": "metadata-packager",
+      "title": "SpaceBio-Bench draft package"
+    }
+  ],
+  "custom": {
+    "claim_boundary": "diagnostic_ro_crate_scaffold_only_not_citable_archive",
+    "full_osdr_payload_freeze_ready": "False",
+    "release_targets": [
+      {
+        "allowed_claims": "draft_candidate_boundary|nearest_centroid_fold_comparison|fragile_focus_recovery|feature_stability_evidence|external_light_genotype_context|figure_table_claim_boundary|paired_comparator_decision",
+        "blocking_gaps": "",
+        "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+        "next_action": "Use as a diagnostic alpha metadata surface with all limitations visible.",
+        "package_id": "osd120_diagnostic_public_metadata_package",
+        "public_now": "True",
+        "release_surface": "public_reader_metadata_and_card_draft",
+        "required_evidence_artifacts": "v9/multispecies/reports/interaction_public_alpha_card/public_alpha_card_summary.csv|v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_summary.csv|v9/multispecies/reports/interaction_rebuild_gate/rebuild_gate_summary.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_artifact_manifest.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_claim_artifact_map.csv",
+        "target_id": "diagnostic_alpha_metadata_draft",
+        "target_status": "ready_now_with_draft_limitations",
+        "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+      },
+      {
+        "allowed_claims": "draft_candidate_boundary|nearest_centroid_fold_comparison|fragile_focus_recovery|feature_stability_evidence|external_light_genotype_context|figure_table_claim_boundary|paired_comparator_decision",
+        "blocking_gaps": "source_inventory_release_target|formal_license_and_creator_metadata|versioned_archive_plan",
+        "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+        "next_action": "Decide release target, formal creators/license, and version identifier before calling this a public alpha package.",
+        "package_id": "osd120_diagnostic_public_metadata_package",
+        "public_now": "False",
+        "release_surface": "versioned_source_specific_alpha_package",
+        "required_evidence_artifacts": "v9/multispecies/reports/interaction_public_alpha_card/public_alpha_card_summary.csv|v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_summary.csv|v9/multispecies/reports/interaction_rebuild_gate/rebuild_gate_summary.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_artifact_manifest.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_claim_artifact_map.csv",
+        "target_id": "source_specific_public_alpha_package",
+        "target_status": "partially_ready_source_release_target_pending",
+        "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+      },
+      {
+        "allowed_claims": "",
+        "blocking_gaps": "full_osdr_payload_freeze",
+        "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+        "next_action": "Download or explicitly exclude every OSDR processed payload before claiming a full mirror.",
+        "package_id": "osd120_diagnostic_public_metadata_package",
+        "public_now": "False",
+        "release_surface": "complete_local_osdr_processed_payload_mirror",
+        "required_evidence_artifacts": "v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_manifest.csv",
+        "target_id": "full_osdr_payload_mirror_release",
+        "target_status": "blocked_full_payload_freeze_missing",
+        "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+      },
+      {
+        "allowed_claims": "",
+        "blocking_gaps": "versioned_archive_plan|full_osdr_payload_freeze|cross_source_or_lomo_validation_missing",
+        "disallowed_claims": "no_frozen_v9_benchmark_baseline|no_leave_one_mission_out_or_cross_study_generalization|no_validated_biomarker_claim|no_operational_plant_growth_recommendation|no_full_local_osdr_payload_mirror",
+        "next_action": "Reserve frozen benchmark language for a versioned release with archive identifiers and broader validation scope.",
+        "package_id": "osd120_diagnostic_public_metadata_package",
+        "public_now": "False",
+        "release_surface": "citable_frozen_benchmark_or_leaderboard_release",
+        "required_evidence_artifacts": "v9/multispecies/reports/interaction_public_alpha_card/public_alpha_card_summary.csv|v9/multispecies/reports/interaction_payload_freeze_manifest/payload_freeze_summary.csv|v9/multispecies/reports/interaction_rebuild_gate/rebuild_gate_summary.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_artifact_manifest.csv|v9/multispecies/reports/interaction_diagnostic_artifact_manifest/diagnostic_claim_artifact_map.csv",
+        "target_id": "frozen_v9_benchmark_release",
+        "target_status": "blocked_version_doi_and_broader_validation_missing",
+        "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+      }
+    ]
+  },
+  "description": "Draft RO-Crate/Data Package export scaffold for the OSD-120 diagnostic metadata package. This scaffold is not a citable frozen release.",
+  "licenses": [
+    {
+      "name": "pending-local-release-license-review",
+      "title": "Pending local release license review"
+    }
+  ],
+  "name": "osd120-diagnostic-public-metadata-package",
+  "profile": "data-package",
+  "resources": [
+    {
+      "bytes": 17078,
+      "description": "task_manifest",
+      "format": "json",
+      "hash": "4f61d0dc755d634b5a5b0b47c67841e9e4de5b7c6e17bbe051293533430860b5",
+      "name": "osd120_task_manifest",
+      "path": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json"
+    },
+    {
+      "bytes": 587,
+      "description": "task_manifest_index",
+      "format": "csv",
+      "hash": "a7daa05cff4ecb3413886de2b71275cc0bae6dd13f1a2ed459dbec15d25c5808",
+      "name": "osd120_task_manifest_index",
+      "path": "v9/multispecies/interaction_task_manifest_index.draft.csv"
+    },
+    {
+      "bytes": 5023,
+      "description": "design_review",
+      "format": "md",
+      "hash": "d50a5e7e561d3b5b483916b9d41dec1aaafafc169df929ca8ac4f1e89fcc121d",
+      "name": "osd120_task_design_review",
+      "path": "v9/multispecies/reports/OSD120_INTERACTION_TASK_DESIGN.md"
+    },
+    {
+      "bytes": 16653,
+      "description": "model_summary",
+      "format": "csv",
+      "hash": "8ef54721e93ba151547498001bc67646024996ab5c16f8e072984274d6ff6696",
+      "name": "sparse_l1_summary",
+      "path": "v9/multispecies/reports/interaction_logistic_sparse_l1/multispecies_baseline_summary.csv"
+    },
+    {
+      "bytes": 42605,
+      "description": "fold_comparison",
+      "format": "csv",
+      "hash": "5c3d598977d68bfbbac7fbc40522b26f558d1a329f52e2139386e96f9f4f4cb7",
+      "name": "sparse_l1_fold_comparison",
+      "path": "v9/multispecies/reports/interaction_logistic_sparse_l1/fold_detail_comparison_vs_nearest_centroid.csv"
+    },
+    {
+      "bytes": 11075,
+      "description": "feature_audit",
+      "format": "csv",
+      "hash": "88d6ddb1fff2a4a142c5162bff365b4c7f34e55dc833667d0f6059e9667d4050",
+      "name": "sparse_l1_feature_set_audit",
+      "path": "v9/multispecies/reports/interaction_logistic_sparse_l1/feature_set_audit_summary.csv"
+    },
+    {
+      "bytes": 2885,
+      "description": "stability_summary",
+      "format": "csv",
+      "hash": "d16614cd42dad517c0ec829c404b4901d1c71b549ca480bc89e09fab70fa18ec",
+      "name": "sparse_l1_stability_summary",
+      "path": "v9/multispecies/reports/interaction_logistic_sparse_l1_stability/stability_summary.csv"
+    },
+    {
+      "bytes": 2916255,
+      "description": "stability_feature_frequency",
+      "format": "csv",
+      "hash": "f90108e091f232e53ac46dd6cc07f24d528b14b485d5fa438fc9489feccd3ac6",
+      "name": "sparse_l1_stability_features",
+      "path": "v9/multispecies/reports/interaction_logistic_sparse_l1_stability/stability_feature_frequency.csv"
+    },
+    {
+      "bytes": 5508,
+      "description": "ladder_summary",
+      "format": "csv",
+      "hash": "babffb68c9fdfeae204b90df6ac2df651e3e4c6bdee5c75773e988bc991bc393",
+      "name": "baseline_ladder_summary",
+      "path": "v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_summary.csv"
+    },
+    {
+      "bytes": 12502,
+      "description": "ladder_focus_folds",
+      "format": "csv",
+      "hash": "6448fb0efda329a92d87d13b57011b906bc253d9151e1a72561a59ff896e178a",
+      "name": "baseline_ladder_focus_folds",
+      "path": "v9/multispecies/reports/interaction_baseline_ladder/baseline_ladder_focus_folds.csv"
+    },
+    {
+      "bytes": 1944,
+      "description": "candidate_package_summary",
+      "format": "csv",
+      "hash": "37c5e4fd3091b15f1414c810e6a1f7adc31b2db272926029c4c86a78cc003037",
+      "name": "candidate_package_summary",
+      "path": "v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_package_summary.csv"
+    },
+    {
+      "bytes": 2184,
+      "description": "candidate_focus_evidence",
+      "format": "csv",
+      "hash": "91020631e0fd2d74e18e82dd5f2e328f491a546b233bfc265875aa6f803a2cf9",
+      "name": "candidate_focus_evidence",
+      "path": "v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_focus_evidence.csv"
+    },
+    {
+      "bytes": 5042,
+      "description": "candidate_stable_feature_evidence",
+      "format": "csv",
+      "hash": "7a483409cdb37a52d16e9dc3d700173f010a7d220dabeb9ddd3c9b069bce36af",
+      "name": "candidate_stable_feature_evidence",
+      "path": "v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_stable_feature_evidence.csv"
+    },
+    {
+      "bytes": 2537,
+      "description": "claim_map_source",
+      "format": "csv",
+      "hash": "4cca8da4c98825eedcbd1d21b1b0c907e64196b5f4b04e327e6eabf946a56000",
+      "name": "candidate_claim_map",
+      "path": "v9/multispecies/reports/interaction_diagnostic_candidate_package/candidate_claim_map.csv"
+    },
+    {
+      "bytes": 1275,
+      "description": "figure_table",
+      "format": "csv",
+      "hash": "c6987d0353e41e2a84ca8cce916c31008f900f206cda5438ff8c4d20e79a8570",
+      "name": "figure_main_focus_table",
+      "path": "v9/multispecies/reports/interaction_figure_table_package/figure_main_focus_table.csv"
+    },
+    {
+      "bytes": 5789,
+      "description": "figure_appendix",
+      "format": "csv",
+      "hash": "bcb1e20cbee6758b89edd69b4b8bfc09d013e879abefe95e5c6ea07595a3cde2",
+      "name": "figure_stable_feature_appendix",
+      "path": "v9/multispecies/reports/interaction_figure_table_package/figure_stable_feature_appendix.csv"
+    },
+    {
+      "bytes": 1103,
+      "description": "caption",
+      "format": "md",
+      "hash": "780e12cbfada87370aa2c33eae8f1a9d2eb72b8f682afb1414a80d06d299f82b",
+      "name": "figure_caption",
+      "path": "v9/multispecies/reports/interaction_figure_table_package/figure_caption.md"
+    },
+    {
+      "bytes": 542,
+      "description": "claim_boundary",
+      "format": "md",
+      "hash": "022d97ae2b4588adfc2c989ff523577a051db62f80200f498a77e31b3390e66b",
+      "name": "figure_claim_boundary_box",
+      "path": "v9/multispecies/reports/interaction_figure_table_package/figure_claim_boundary_box.md"
+    },
+    {
+      "bytes": 1599,
+      "description": "paired_comparator_summary",
+      "format": "csv",
+      "hash": "e4ff2c21fc865f731097191d6ab58ee8ef7bb379c6d08d7b4d2b9bc7b3a7dcbf",
+      "name": "paired_comparator_summary",
+      "path": "v9/multispecies/reports/interaction_paired_comparator_table/paired_comparator_summary.csv"
+    },
+    {
+      "bytes": 1385,
+      "description": "paired_focus_table",
+      "format": "csv",
+      "hash": "2d240fe1ce86aaf6a025f672e81bdbca4d8bc275a68909e0f4ed0c6b47f7901a",
+      "name": "paired_focus_comparator_table",
+      "path": "v9/multispecies/reports/interaction_paired_comparator_table/paired_focus_comparator_table.csv"
+    },
+    {
+      "bytes": 740,
+      "description": "paired_decision_note",
+      "format": "md",
+      "hash": "c7c32f46407e5c7cd696ccc7b2e29ae9913e71ee27ba44c3e299dfef19865e84",
+      "name": "paired_comparator_decision",
+      "path": "v9/multispecies/reports/interaction_paired_comparator_table/paired_comparator_decision.md"
+    },
+    {
+      "bytes": 2448,
+      "description": "review_note",
+      "format": "md",
+      "hash": "f468ea86022bb6b2726d1fa51c7fb575f055b0fa372f65ffb730f87cbce5ebb7",
+      "name": "paired_comparator_review",
+      "path": "v9/multispecies/reports/OSD120_INTERACTION_PAIRED_COMPARATOR_REVIEW.md"
+    },
+    {
+      "bytes": 2825,
+      "description": "review_note",
+      "format": "md",
+      "hash": "a5a3a06465e5fe1965ca858b3256a4c240e432a47eb142f8b1ab207e4442f4a3",
+      "name": "figure_table_review",
+      "path": "v9/multispecies/reports/OSD120_INTERACTION_FIGURE_TABLE_DRAFT_REVIEW.md"
+    },
+    {
+      "bytes": 4481,
+      "description": "review_note",
+      "format": "md",
+      "hash": "cdd5e6cb78594b04c8c0d2e42d7a2195186c24a61e33000844d3cc01f2310f60",
+      "name": "candidate_package_review",
+      "path": "v9/multispecies/reports/OSD120_INTERACTION_DIAGNOSTIC_CANDIDATE_PACKAGE_REVIEW.md"
+    },
+    {
+      "bytes": 3280,
+      "description": "review_note",
+      "format": "md",
+      "hash": "af0bc1832b5c36b68f3d88a2ee44cc40f6a5220a525b6961df6c651de0879222",
+      "name": "baseline_ladder_review",
+      "path": "v9/multispecies/reports/OSD120_INTERACTION_BASELINE_LADDER_REVIEW.md"
+    },
+    {
+      "bytes": 239550,
+      "description": "validation_test_source",
+      "format": "py",
+      "hash": "659fa960e9fbea3e2d9f817214f1bce162fde12d03383fb8e36625d1d9388a1e",
+      "name": "v9_test_source",
+      "path": "tests/test_v9_spacebio_bench.py"
+    }
+  ],
+  "sources": [
+    {
+      "path": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-120",
+      "title": "OSD-120 / GLDS-120"
+    }
+  ],
+  "title": "OSD-120 Arabidopsis Root Light Interaction Diagnostic Draft",
+  "version": "draft-v9-osd120-diagnostic-alpha-unreleased"
+}

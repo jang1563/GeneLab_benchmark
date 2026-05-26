@@ -1,0 +1,31 @@
+{
+  "blocked_fields": [
+    "future_archive_identifier",
+    "release_version_string",
+    "release_date",
+    "publication_year",
+    "local_package_creators",
+    "local_package_contributors",
+    "publisher_maintainer_identity",
+    "local_code_license",
+    "local_metadata_tables_license",
+    "upstream_osdr_dataset_citation",
+    "repository_url",
+    "citation_cff_type"
+  ],
+  "claim_boundary": "owner_metadata_intake_only_no_descriptor_mutation",
+  "decision_id": "osd120_archive_identifier_license_decision_gate",
+  "descriptor_patch_status": "no_owner_supplied_values_no_descriptor_patch",
+  "fill_id": "osd120_release_owner_citation_metadata_fill",
+  "mutates_datapackage": false,
+  "mutates_ro_crate": false,
+  "owner_supplied_patch_preview": [],
+  "package_id": "osd120_diagnostic_public_metadata_package",
+  "release_ready_after_fill": false,
+  "safe_current_draft_values": {
+    "archive_path_decision": "no_archive_identifier_for_current_draft",
+    "package_title": "OSD-120 Arabidopsis Root Light Interaction Diagnostic Draft",
+    "payload_mirror_scope": "full_osdr_payload_mirror_not_claimed"
+  },
+  "task_id": "draft_osd120_arabidopsis_root_light_interaction_spaceflight"
+}
