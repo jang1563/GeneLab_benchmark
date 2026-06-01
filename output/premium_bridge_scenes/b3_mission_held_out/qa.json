@@ -1,6 +1,6 @@
 {
   "slide_id": "b3_mission_held_out",
-  "stage": "pre_render",
+  "stage": "post_render",
   "created": "2026-06-01",
   "pre_render_gate": {
     "content_brief_declared": true,
@@ -13,10 +13,17 @@
     "overlay_spec_declared": true,
     "manifest_declared": true
   },
-  "manual_review_pending": [
-    "full_size_render_inspection",
-    "thumbnail_contact_sheet_inspection",
-    "text_overlap_check",
-    "caveat_visibility_check"
-  ]
+  "manual_review_pending": [],
+  "post_render_gate": {
+    "rendered_outputs": {
+      "scene_plate": "output/premium_bridge_scenes/b3_mission_held_out/scene_plate.png",
+      "rendered_preview_png": "output/premium_bridge_scenes/b3_mission_held_out/rendered_preview.png",
+      "rendered_preview_pdf": "output/premium_bridge_scenes/b3_mission_held_out/rendered_preview.pdf"
+    },
+    "manual_full_size_inspection": "pass: opened rendered_preview.png at high detail after render",
+    "manual_thumbnail_inspection": "pass: scaled preview preserves headline, mission split, and caveat",
+    "text_overlap_check": "pass: adjusted overlay coordinates after initial overlap with mission nodes",
+    "caveat_visibility_check": "pass: caveat visible at lower-left without dominating the slide",
+    "visual_verdict": "draft bridge-slide candidate; ready for B4 style matching, not final deck export"
+  }
 }
