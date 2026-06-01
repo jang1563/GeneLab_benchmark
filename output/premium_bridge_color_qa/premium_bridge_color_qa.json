@@ -1,0 +1,163 @@
+{
+  "created": "2026-06-01",
+  "scope": "B1 evaluation-layer slide plus B1-B4 bridge-family contact sheet",
+  "source_images": {
+    "b1_evaluation_layer": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png",
+    "b1_b4_family_contact_sheet": "output/premium_bridge_family_review/b1_b4_premium_family_contact_sheet.png"
+  },
+  "outputs": {
+    "b1_modes": {
+      "original": "output/premium_bridge_color_qa/b1_evaluation_layer_color_modes_original.png",
+      "grayscale": "output/premium_bridge_color_qa/b1_evaluation_layer_color_modes_grayscale.png",
+      "protanopia": "output/premium_bridge_color_qa/b1_evaluation_layer_color_modes_protanopia.png",
+      "deuteranopia": "output/premium_bridge_color_qa/b1_evaluation_layer_color_modes_deuteranopia.png",
+      "tritanopia": "output/premium_bridge_color_qa/b1_evaluation_layer_color_modes_tritanopia.png",
+      "sheet": "output/premium_bridge_color_qa/b1_evaluation_layer_color_modes.png"
+    },
+    "family_modes": {
+      "original": "output/premium_bridge_color_qa/b1_b4_family_color_modes_original.png",
+      "grayscale": "output/premium_bridge_color_qa/b1_b4_family_color_modes_grayscale.png",
+      "protanopia": "output/premium_bridge_color_qa/b1_b4_family_color_modes_protanopia.png",
+      "deuteranopia": "output/premium_bridge_color_qa/b1_b4_family_color_modes_deuteranopia.png",
+      "tritanopia": "output/premium_bridge_color_qa/b1_b4_family_color_modes_tritanopia.png",
+      "sheet": "output/premium_bridge_color_qa/b1_b4_family_color_modes.png"
+    },
+    "palette_sheet": "output/premium_bridge_color_qa/semantic_palette_color_qa.png",
+    "metrics_json": "output/premium_bridge_color_qa/semantic_palette_color_metrics.json",
+    "qa_json": "output/premium_bridge_color_qa/premium_bridge_color_qa.json"
+  },
+  "automatic_checks": {
+    "source_images_exist": true,
+    "semantic_color_records": 8,
+    "text_color_contrast_warnings_vs_paper": [
+      {
+        "name": "label_amber",
+        "hex": "#C4861B",
+        "luminance": 0.2887,
+        "contrast_vs_paper": 2.97,
+        "contrast_vs_canvas_warm": 2.73,
+        "contrast_vs_canvas_cool": 2.77,
+        "simulated_hex": {
+          "grayscale": "#4A4A4A",
+          "protanopia": "#9C8900",
+          "deuteranopia": "#AB9820",
+          "tritanopia": "#D67673"
+        }
+      }
+    ],
+    "pairwise_colorblind_distance_warnings": [
+      {
+        "pair": [
+          "source_blue",
+          "bio_green"
+        ],
+        "distances": {
+          "original": 76.9,
+          "grayscale": 10.2,
+          "protanopia": 87.3,
+          "deuteranopia": 83.7,
+          "tritanopia": 12.2
+        },
+        "min_colorblind_distance": 12.2,
+        "flag": "warn"
+      },
+      {
+        "pair": [
+          "source_blue",
+          "assay_teal"
+        ],
+        "distances": {
+          "original": 55.5,
+          "grayscale": 47.5,
+          "protanopia": 76.5,
+          "deuteranopia": 75.4,
+          "tritanopia": 38.6
+        },
+        "min_colorblind_distance": 38.6,
+        "flag": "warn"
+      },
+      {
+        "pair": [
+          "source_blue",
+          "muted"
+        ],
+        "distances": {
+          "original": 70.4,
+          "grayscale": 2.5,
+          "protanopia": 50.6,
+          "deuteranopia": 54.6,
+          "tritanopia": 89.7
+        },
+        "min_colorblind_distance": 50.6,
+        "flag": "warn"
+      },
+      {
+        "pair": [
+          "bio_green",
+          "assay_teal"
+        ],
+        "distances": {
+          "original": 50.6,
+          "grayscale": 37.3,
+          "protanopia": 55.7,
+          "deuteranopia": 51.4,
+          "tritanopia": 40.7
+        },
+        "min_colorblind_distance": 40.7,
+        "flag": "warn"
+      },
+      {
+        "pair": [
+          "bio_green",
+          "muted"
+        ],
+        "distances": {
+          "original": 80.2,
+          "grayscale": 12.7,
+          "protanopia": 41.3,
+          "deuteranopia": 29.5,
+          "tritanopia": 89.0
+        },
+        "min_colorblind_distance": 29.5,
+        "flag": "warn"
+      },
+      {
+        "pair": [
+          "assay_teal",
+          "muted"
+        ],
+        "distances": {
+          "original": 88.9,
+          "grayscale": 50.0,
+          "protanopia": 63.0,
+          "deuteranopia": 48.6,
+          "tritanopia": 106.4
+        },
+        "min_colorblind_distance": 48.6,
+        "flag": "warn"
+      },
+      {
+        "pair": [
+          "model_purple",
+          "muted"
+        ],
+        "distances": {
+          "original": 109.1,
+          "grayscale": 8.7,
+          "protanopia": 143.4,
+          "deuteranopia": 136.9,
+          "tritanopia": 31.6
+        },
+        "min_colorblind_distance": 31.6,
+        "flag": "warn"
+      }
+    ]
+  },
+  "manual_review": {
+    "b1_color_distinction": "pass: original B1 separates source, alignment, task, and score zones clearly through position, object type, and color",
+    "b1_grayscale_distinction": "conditional pass: the left-to-right structure survives, but blue/green/teal/amber become similar gray values; do not rely on node color alone",
+    "b1_colorblind_distinction": "conditional pass: protanopia/deuteranopia preserve task and score distinction; tritanopia collapses blue/green/teal more strongly, but labels and spatial grouping keep the story readable",
+    "family_color_consistency": "conditional pass: the family reads as one premium light-methods system; B1 is denser and more colorful than B2-B4, which is acceptable as an opening bridge but should be normalized during final deck polish",
+    "premium_palette_verdict": "conditional pass: restrained scientific palette, good headline contrast, and no one-note hue problem; recommended polish is to darken label_amber for text use and slightly calm model_purple if it becomes a recurring headline/callout color"
+  }
+}

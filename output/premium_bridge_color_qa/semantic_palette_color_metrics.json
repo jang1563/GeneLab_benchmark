@@ -1,0 +1,538 @@
+{
+  "records": [
+    {
+      "name": "source_blue",
+      "hex": "#286EA6",
+      "luminance": 0.1436,
+      "contrast_vs_paper": 5.19,
+      "contrast_vs_canvas_warm": 4.77,
+      "contrast_vs_canvas_cool": 4.85,
+      "simulated_hex": {
+        "grayscale": "#252525",
+        "protanopia": "#5470A8",
+        "deuteranopia": "#4265A5",
+        "tritanopia": "#007B82"
+      }
+    },
+    {
+      "name": "bio_green",
+      "hex": "#15815E",
+      "luminance": 0.1667,
+      "contrast_vs_paper": 4.64,
+      "contrast_vs_canvas_warm": 4.26,
+      "contrast_vs_canvas_cool": 4.33,
+      "simulated_hex": {
+        "grayscale": "#2B2B2B",
+        "protanopia": "#7E775C",
+        "deuteranopia": "#716E60",
+        "tritanopia": "#008177"
+      }
+    },
+    {
+      "name": "assay_teal",
+      "hex": "#159A8A",
+      "luminance": 0.2511,
+      "contrast_vs_paper": 3.34,
+      "contrast_vs_canvas_warm": 3.07,
+      "contrast_vs_canvas_cool": 3.12,
+      "simulated_hex": {
+        "grayscale": "#404040",
+        "protanopia": "#929089",
+        "deuteranopia": "#82848B",
+        "tritanopia": "#009D95"
+      }
+    },
+    {
+      "name": "label_amber",
+      "hex": "#C4861B",
+      "luminance": 0.2887,
+      "contrast_vs_paper": 2.97,
+      "contrast_vs_canvas_warm": 2.73,
+      "contrast_vs_canvas_cool": 2.77,
+      "simulated_hex": {
+        "grayscale": "#4A4A4A",
+        "protanopia": "#9C8900",
+        "deuteranopia": "#AB9820",
+        "tritanopia": "#D67673"
+      }
+    },
+    {
+      "name": "test_red",
+      "hex": "#B91C1C",
+      "luminance": 0.1123,
+      "contrast_vs_paper": 6.19,
+      "contrast_vs_canvas_warm": 5.69,
+      "contrast_vs_canvas_cool": 5.78,
+      "simulated_hex": {
+        "grayscale": "#1D1D1D",
+        "protanopia": "#524919",
+        "deuteranopia": "#776A12",
+        "tritanopia": "#CC001F"
+      }
+    },
+    {
+      "name": "model_purple",
+      "hex": "#6D3EDB",
+      "luminance": 0.1181,
+      "contrast_vs_paper": 5.98,
+      "contrast_vs_canvas_warm": 5.5,
+      "contrast_vs_canvas_cool": 5.58,
+      "simulated_hex": {
+        "grayscale": "#1E1E1E",
+        "protanopia": "#0063E0",
+        "deuteranopia": "#005DD8",
+        "tritanopia": "#466889"
+      }
+    },
+    {
+      "name": "muted",
+      "hex": "#5D6978",
+      "luminance": 0.1379,
+      "contrast_vs_paper": 5.35,
+      "contrast_vs_canvas_warm": 4.92,
+      "contrast_vs_canvas_cool": 5.0,
+      "simulated_hex": {
+        "grayscale": "#232323",
+        "protanopia": "#646979",
+        "deuteranopia": "#616778",
+        "tritanopia": "#566C6E"
+      }
+    },
+    {
+      "name": "rule",
+      "hex": "#AEB8C5",
+      "luminance": 0.4731,
+      "contrast_vs_paper": 1.92,
+      "contrast_vs_canvas_warm": 1.77,
+      "contrast_vs_canvas_cool": 1.79,
+      "simulated_hex": {
+        "grayscale": "#797979",
+        "protanopia": "#B4B8C6",
+        "deuteranopia": "#B1B6C5",
+        "tritanopia": "#A9BBBC"
+      }
+    }
+  ],
+  "pairwise": [
+    {
+      "pair": [
+        "source_blue",
+        "bio_green"
+      ],
+      "distances": {
+        "original": 76.9,
+        "grayscale": 10.2,
+        "protanopia": 87.3,
+        "deuteranopia": 83.7,
+        "tritanopia": 12.2
+      },
+      "min_colorblind_distance": 12.2,
+      "flag": "warn"
+    },
+    {
+      "pair": [
+        "source_blue",
+        "assay_teal"
+      ],
+      "distances": {
+        "original": 55.5,
+        "grayscale": 47.5,
+        "protanopia": 76.5,
+        "deuteranopia": 75.4,
+        "tritanopia": 38.6
+      },
+      "min_colorblind_distance": 38.6,
+      "flag": "warn"
+    },
+    {
+      "pair": [
+        "source_blue",
+        "label_amber"
+      ],
+      "distances": {
+        "original": 210.3,
+        "grayscale": 64.1,
+        "protanopia": 184.8,
+        "deuteranopia": 176.8,
+        "tritanopia": 214.7
+      },
+      "min_colorblind_distance": 176.8,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "source_blue",
+        "test_red"
+      ],
+      "distances": {
+        "original": 216.3,
+        "grayscale": 13.8,
+        "protanopia": 148.7,
+        "deuteranopia": 156.4,
+        "tritanopia": 258.5
+      },
+      "min_colorblind_distance": 148.7,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "source_blue",
+        "model_purple"
+      ],
+      "distances": {
+        "original": 99.4,
+        "grayscale": 11.2,
+        "protanopia": 101.6,
+        "deuteranopia": 84.1,
+        "tritanopia": 73.3
+      },
+      "min_colorblind_distance": 73.3,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "source_blue",
+        "muted"
+      ],
+      "distances": {
+        "original": 70.4,
+        "grayscale": 2.5,
+        "protanopia": 50.6,
+        "deuteranopia": 54.6,
+        "tritanopia": 89.7
+      },
+      "min_colorblind_distance": 50.6,
+      "flag": "warn"
+    },
+    {
+      "pair": [
+        "source_blue",
+        "rule"
+      ],
+      "distances": {
+        "original": 156.2,
+        "grayscale": 145.6,
+        "protanopia": 123.1,
+        "deuteranopia": 141.1,
+        "tritanopia": 189.2
+      },
+      "min_colorblind_distance": 123.1,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "bio_green",
+        "assay_teal"
+      ],
+      "distances": {
+        "original": 50.6,
+        "grayscale": 37.3,
+        "protanopia": 55.7,
+        "deuteranopia": 51.4,
+        "tritanopia": 40.7
+      },
+      "min_colorblind_distance": 40.7,
+      "flag": "warn"
+    },
+    {
+      "pair": [
+        "bio_green",
+        "label_amber"
+      ],
+      "distances": {
+        "original": 187.5,
+        "grayscale": 53.9,
+        "protanopia": 98.5,
+        "deuteranopia": 96.2,
+        "tritanopia": 214.4
+      },
+      "min_colorblind_distance": 96.2,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "bio_green",
+        "test_red"
+      ],
+      "distances": {
+        "original": 203.6,
+        "grayscale": 24.0,
+        "protanopia": 92.9,
+        "deuteranopia": 78.7,
+        "tritanopia": 257.4
+      },
+      "min_colorblind_distance": 78.7,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "bio_green",
+        "model_purple"
+      ],
+      "distances": {
+        "original": 166.9,
+        "grayscale": 21.5,
+        "protanopia": 183.3,
+        "deuteranopia": 165.7,
+        "tritanopia": 76.7
+      },
+      "min_colorblind_distance": 76.7,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "bio_green",
+        "muted"
+      ],
+      "distances": {
+        "original": 80.2,
+        "grayscale": 12.7,
+        "protanopia": 41.3,
+        "deuteranopia": 29.5,
+        "tritanopia": 89.0
+      },
+      "min_colorblind_distance": 29.5,
+      "flag": "warn"
+    },
+    {
+      "pair": [
+        "bio_green",
+        "rule"
+      ],
+      "distances": {
+        "original": 192.5,
+        "grayscale": 135.3,
+        "protanopia": 135.2,
+        "deuteranopia": 139.2,
+        "tritanopia": 190.9
+      },
+      "min_colorblind_distance": 135.2,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "assay_teal",
+        "label_amber"
+      ],
+      "distances": {
+        "original": 208.2,
+        "grayscale": 16.6,
+        "protanopia": 137.9,
+        "deuteranopia": 116.8,
+        "tritanopia": 220.3
+      },
+      "min_colorblind_distance": 116.8,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "assay_teal",
+        "test_red"
+      ],
+      "distances": {
+        "original": 234.2,
+        "grayscale": 61.3,
+        "protanopia": 148.2,
+        "deuteranopia": 124.8,
+        "tritanopia": 283.4
+      },
+      "min_colorblind_distance": 124.8,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "assay_teal",
+        "model_purple"
+      ],
+      "distances": {
+        "original": 150.9,
+        "grayscale": 58.7,
+        "protanopia": 175.7,
+        "deuteranopia": 155.9,
+        "tritanopia": 89.1
+      },
+      "min_colorblind_distance": 89.1,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "assay_teal",
+        "muted"
+      ],
+      "distances": {
+        "original": 88.9,
+        "grayscale": 50.0,
+        "protanopia": 63.0,
+        "deuteranopia": 48.6,
+        "tritanopia": 106.4
+      },
+      "min_colorblind_distance": 48.6,
+      "flag": "warn"
+    },
+    {
+      "pair": [
+        "assay_teal",
+        "rule"
+      ],
+      "distances": {
+        "original": 166.7,
+        "grayscale": 98.1,
+        "protanopia": 79.6,
+        "deuteranopia": 89.4,
+        "tritanopia": 175.6
+      },
+      "min_colorblind_distance": 79.6,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "label_amber",
+        "test_red"
+      ],
+      "distances": {
+        "original": 106.6,
+        "grayscale": 77.9,
+        "protanopia": 101.8,
+        "deuteranopia": 70.5,
+        "tritanopia": 144.7
+      },
+      "min_colorblind_distance": 70.5,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "label_amber",
+        "model_purple"
+      ],
+      "distances": {
+        "original": 222.7,
+        "grayscale": 75.3,
+        "protanopia": 275.3,
+        "deuteranopia": 258.0,
+        "tritanopia": 146.2
+      },
+      "min_colorblind_distance": 146.2,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "label_amber",
+        "muted"
+      ],
+      "distances": {
+        "original": 141.8,
+        "grayscale": 66.6,
+        "protanopia": 137.0,
+        "deuteranopia": 125.1,
+        "tritanopia": 128.5
+      },
+      "min_colorblind_distance": 125.1,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "label_amber",
+        "rule"
+      ],
+      "distances": {
+        "original": 178.6,
+        "grayscale": 81.5,
+        "protanopia": 204.5,
+        "deuteranopia": 167.6,
+        "tritanopia": 110.4
+      },
+      "min_colorblind_distance": 110.4,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "test_red",
+        "model_purple"
+      ],
+      "distances": {
+        "original": 208.4,
+        "grayscale": 2.6,
+        "protanopia": 216.3,
+        "deuteranopia": 231.6,
+        "tritanopia": 199.7
+      },
+      "min_colorblind_distance": 199.7,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "test_red",
+        "muted"
+      ],
+      "distances": {
+        "original": 151.2,
+        "grayscale": 11.3,
+        "protanopia": 102.7,
+        "deuteranopia": 104.3,
+        "tritanopia": 178.6
+      },
+      "min_colorblind_distance": 102.7,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "test_red",
+        "rule"
+      ],
+      "distances": {
+        "original": 230.3,
+        "grayscale": 159.4,
+        "protanopia": 227.7,
+        "deuteranopia": 202.7,
+        "tritanopia": 246.5
+      },
+      "min_colorblind_distance": 202.7,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "model_purple",
+        "muted"
+      ],
+      "distances": {
+        "original": 109.1,
+        "grayscale": 8.7,
+        "protanopia": 143.4,
+        "deuteranopia": 136.9,
+        "tritanopia": 31.6
+      },
+      "min_colorblind_distance": 31.6,
+      "flag": "warn"
+    },
+    {
+      "pair": [
+        "model_purple",
+        "rule"
+      ],
+      "distances": {
+        "original": 140.0,
+        "grayscale": 156.8,
+        "protanopia": 200.4,
+        "deuteranopia": 199.3,
+        "tritanopia": 138.6
+      },
+      "min_colorblind_distance": 138.6,
+      "flag": "pass"
+    },
+    {
+      "pair": [
+        "muted",
+        "rule"
+      ],
+      "distances": {
+        "original": 136.9,
+        "grayscale": 148.1,
+        "protanopia": 136.1,
+        "deuteranopia": 136.7,
+        "tritanopia": 138.3
+      },
+      "min_colorblind_distance": 136.1,
+      "flag": "pass"
+    }
+  ]
+}
