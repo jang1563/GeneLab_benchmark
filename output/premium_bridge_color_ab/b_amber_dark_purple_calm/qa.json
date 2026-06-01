@@ -1,0 +1,81 @@
+{
+  "created": "2026-06-01",
+  "slide_id": "b1_evaluation_layer",
+  "variant_id": "b_amber_dark_purple_calm",
+  "description": "darken amber and calm purple for a more editorial task accent",
+  "overrides": {
+    "label_amber": "#A36F13",
+    "model_purple": "#5D4BA8"
+  },
+  "outputs": {
+    "rendered_preview_png": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview.png",
+    "rendered_preview_pdf": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview.pdf",
+    "grayscale_png": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview_grayscale.png",
+    "tritanopia_png": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview_tritanopia.png",
+    "manifest": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/manifest.json",
+    "qa": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/qa.json"
+  },
+  "image_dimensions": [
+    3840,
+    2160
+  ],
+  "expected_dimensions_match": true,
+  "token_metrics": {
+    "records": {
+      "source_blue": {
+        "hex": "#286EA6",
+        "contrast_vs_paper": 5.19,
+        "tritanopia_hex": "#007B82"
+      },
+      "bio_green": {
+        "hex": "#15815E",
+        "contrast_vs_paper": 4.64,
+        "tritanopia_hex": "#008177"
+      },
+      "assay_teal": {
+        "hex": "#159A8A",
+        "contrast_vs_paper": 3.34,
+        "tritanopia_hex": "#009D95"
+      },
+      "label_amber": {
+        "hex": "#A36F13",
+        "contrast_vs_paper": 4.15,
+        "tritanopia_hex": "#B2615F"
+      },
+      "model_purple": {
+        "hex": "#5D4BA8",
+        "contrast_vs_paper": 6.62,
+        "tritanopia_hex": "#465F72"
+      },
+      "muted": {
+        "hex": "#5D6978",
+        "contrast_vs_paper": 5.35,
+        "tritanopia_hex": "#566C6E"
+      }
+    },
+    "pairwise": {
+      "source_blue__bio_green": {
+        "original_distance": 76.9,
+        "tritanopia_distance": 12.2
+      },
+      "source_blue__assay_teal": {
+        "original_distance": 55.5,
+        "tritanopia_distance": 38.6
+      },
+      "bio_green__assay_teal": {
+        "original_distance": 50.6,
+        "tritanopia_distance": 40.7
+      },
+      "model_purple__muted": {
+        "original_distance": 56.6,
+        "tritanopia_distance": 20.8
+      }
+    }
+  },
+  "manual_review": {
+    "original_readability": "pending",
+    "grayscale_readability": "pending",
+    "tritanopia_readability": "pending",
+    "premium_verdict": "pending"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "created": "2026-06-01",
+  "slide_id": "b1_evaluation_layer",
+  "purpose": "A/B comparison for final-polish color token candidates",
+  "variants": [
+    {
+      "variant_id": "baseline_current",
+      "label": "baseline",
+      "description": "current visual-identity v0.1 color tokens",
+      "overrides": {}
+    },
+    {
+      "variant_id": "a_amber_dark",
+      "label": "A",
+      "description": "darken amber only for better small-text contrast",
+      "overrides": {
+        "label_amber": "#A36F13"
+      }
+    },
+    {
+      "variant_id": "b_amber_dark_purple_calm",
+      "label": "B",
+      "description": "darken amber and calm purple for a more editorial task accent",
+      "overrides": {
+        "label_amber": "#A36F13",
+        "model_purple": "#5D4BA8"
+      }
+    }
+  ],
+  "comparison_sheets": {
+    "original_comparison": "output/premium_bridge_color_ab/b1_color_token_ab_original.png",
+    "grayscale_comparison": "output/premium_bridge_color_ab/b1_color_token_ab_grayscale.png",
+    "tritanopia_comparison": "output/premium_bridge_color_ab/b1_color_token_ab_tritanopia.png",
+    "palette_delta": "output/premium_bridge_color_ab/b1_color_token_ab_palette_delta.png",
+    "manifest": "output/premium_bridge_color_ab/manifest.json",
+    "qa": "output/premium_bridge_color_ab/qa.json"
+  },
+  "generator": "scripts/build_b1_color_token_ab.py"
+}

@@ -1,0 +1,23 @@
+{
+  "created": "2026-06-01",
+  "slide_id": "b1_evaluation_layer",
+  "variant_id": "a_amber_dark",
+  "description": "darken amber only for better small-text contrast",
+  "base_token_version": "0.1",
+  "overrides": {
+    "label_amber": "#A36F13"
+  },
+  "generator": "scripts/build_b1_color_token_ab.py",
+  "outputs": {
+    "rendered_preview_png": "output/premium_bridge_color_ab/a_amber_dark/rendered_preview.png",
+    "rendered_preview_pdf": "output/premium_bridge_color_ab/a_amber_dark/rendered_preview.pdf",
+    "grayscale_png": "output/premium_bridge_color_ab/a_amber_dark/rendered_preview_grayscale.png",
+    "tritanopia_png": "output/premium_bridge_color_ab/a_amber_dark/rendered_preview_tritanopia.png",
+    "manifest": "output/premium_bridge_color_ab/a_amber_dark/manifest.json",
+    "qa": "output/premium_bridge_color_ab/a_amber_dark/qa.json"
+  },
+  "qa": {
+    "rendered": true,
+    "manual_review_required": true
+  }
+}

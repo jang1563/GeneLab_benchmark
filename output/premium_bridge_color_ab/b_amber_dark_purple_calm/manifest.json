@@ -1,0 +1,24 @@
+{
+  "created": "2026-06-01",
+  "slide_id": "b1_evaluation_layer",
+  "variant_id": "b_amber_dark_purple_calm",
+  "description": "darken amber and calm purple for a more editorial task accent",
+  "base_token_version": "0.1",
+  "overrides": {
+    "label_amber": "#A36F13",
+    "model_purple": "#5D4BA8"
+  },
+  "generator": "scripts/build_b1_color_token_ab.py",
+  "outputs": {
+    "rendered_preview_png": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview.png",
+    "rendered_preview_pdf": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview.pdf",
+    "grayscale_png": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview_grayscale.png",
+    "tritanopia_png": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/rendered_preview_tritanopia.png",
+    "manifest": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/manifest.json",
+    "qa": "output/premium_bridge_color_ab/b_amber_dark_purple_calm/qa.json"
+  },
+  "qa": {
+    "rendered": true,
+    "manual_review_required": true
+  }
+}
