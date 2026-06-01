@@ -35,7 +35,7 @@ COLORS = {
     "rule": "#AEB8C5",
     "blue": "#286EA6",
     "green": "#15815E",
-    "amber": "#C4861B",
+    "amber": "#A36F13",
     "red": "#B91C1C",
     "teal": "#159A8A",
     "purple": "#6D3EDB",

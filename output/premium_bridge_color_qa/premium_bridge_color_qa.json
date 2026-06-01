@@ -29,22 +29,7 @@
   "automatic_checks": {
     "source_images_exist": true,
     "semantic_color_records": 8,
-    "text_color_contrast_warnings_vs_paper": [
-      {
-        "name": "label_amber",
-        "hex": "#C4861B",
-        "luminance": 0.2887,
-        "contrast_vs_paper": 2.97,
-        "contrast_vs_canvas_warm": 2.73,
-        "contrast_vs_canvas_cool": 2.77,
-        "simulated_hex": {
-          "grayscale": "#4A4A4A",
-          "protanopia": "#9C8900",
-          "deuteranopia": "#AB9820",
-          "tritanopia": "#D67673"
-        }
-      }
-    ],
+    "text_color_contrast_warnings_vs_paper": [],
     "pairwise_colorblind_distance_warnings": [
       {
         "pair": [
@@ -138,6 +123,21 @@
       },
       {
         "pair": [
+          "label_amber",
+          "test_red"
+        ],
+        "distances": {
+          "original": 86.3,
+          "grayscale": 35.2,
+          "protanopia": 68.0,
+          "deuteranopia": 30.8,
+          "tritanopia": 119.0
+        },
+        "min_colorblind_distance": 30.8,
+        "flag": "warn"
+      },
+      {
+        "pair": [
           "model_purple",
           "muted"
         ],
@@ -154,10 +154,10 @@
     ]
   },
   "manual_review": {
-    "b1_color_distinction": "pass: original B1 separates source, alignment, task, and score zones clearly through position, object type, and color",
-    "b1_grayscale_distinction": "conditional pass: the left-to-right structure survives, but blue/green/teal/amber become similar gray values; do not rely on node color alone",
-    "b1_colorblind_distinction": "conditional pass: protanopia/deuteranopia preserve task and score distinction; tritanopia collapses blue/green/teal more strongly, but labels and spatial grouping keep the story readable",
-    "family_color_consistency": "conditional pass: the family reads as one premium light-methods system; B1 is denser and more colorful than B2-B4, which is acceptable as an opening bridge but should be normalized during final deck polish",
-    "premium_palette_verdict": "conditional pass: restrained scientific palette, good headline contrast, and no one-note hue problem; recommended polish is to darken label_amber for text use and slightly calm model_purple if it becomes a recurring headline/callout color"
+    "b1_color_distinction": "pass: amber-dark improves the label tick and task-dot maturity while preserving zone separation",
+    "b1_grayscale_distinction": "conditional pass: structure survives through position, object type, rail direction, and labels; blue/green/teal remain close in grayscale",
+    "b1_colorblind_distinction": "conditional pass: tritanopia still compresses blue/green/teal, but labels and spatial grouping preserve readability; amber/test-red warning is not blocking because their roles and positions are separated",
+    "family_color_consistency": "pass for deck assembly: B1-B4 read as one light methods/provenance family after amber-dark update",
+    "premium_palette_verdict": "pass with caveat: amber contrast warning is resolved; retain the rule that color may classify but structure must explain"
   }
 }

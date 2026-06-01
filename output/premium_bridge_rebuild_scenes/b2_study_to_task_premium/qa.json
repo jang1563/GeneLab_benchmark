@@ -13,17 +13,22 @@
     "overlay_spec_declared": true,
     "manifest_declared": true
   },
-  "manual_review_pending": [],
+  "manual_review_pending": [
+    "full_size_render_inspection",
+    "thumbnail_contact_sheet_inspection",
+    "text_overlap_check",
+    "premium_quality_gate"
+  ],
   "post_render_gate": {
     "rendered_outputs": {
       "scene_plate": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/scene_plate.png",
       "rendered_preview_png": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png",
       "rendered_preview_pdf": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.pdf"
     },
-    "manual_full_size_inspection": "pass: opened rendered_preview.png at high detail after premium rebuild",
-    "manual_thumbnail_inspection": "pass: source-to-contract movement remains visible in the premium rebuild contact sheet",
-    "text_overlap_check": "pass: label row, task contract, and transformation path are separated after right-side spacing fix",
-    "premium_quality_gate": "conditional pass: materially stronger than the original wireframe, with larger evidence surface and reduced cardbox framing; still a candidate, not final deck art",
-    "visual_verdict": "premium rebuild candidate; usable for deck assembly mockup, pending final deck-wide style pass"
+    "manual_full_size_inspection": "pass: opened regenerated B2 in the B1-B4 family sheet; amber-dark label contrast is improved",
+    "manual_thumbnail_inspection": "pass: source-to-task transformation remains legible after amber token update",
+    "text_overlap_check": "pass: no label or task-contract overlap observed in the regenerated render",
+    "premium_quality_gate": "pass: amber-dark improves maturity without adding visual noise",
+    "visual_verdict": "premium bridge candidate with amber-dark token applied; suitable for deck assembly"
   }
 }

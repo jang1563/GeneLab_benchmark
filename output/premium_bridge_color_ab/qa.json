@@ -4,8 +4,10 @@
   "variants": [
     {
       "variant_id": "baseline_current",
-      "description": "current visual-identity v0.1 color tokens",
-      "overrides": {},
+      "description": "pre-polish visual-identity v0.1 color tokens",
+      "overrides": {
+        "label_amber": "#C4861B"
+      },
       "outputs": {
         "rendered_preview_png": "output/premium_bridge_color_ab/baseline_current/rendered_preview.png",
         "rendered_preview_pdf": "output/premium_bridge_color_ab/baseline_current/rendered_preview.pdf",
@@ -212,10 +214,10 @@
     "qa": "output/premium_bridge_color_ab/qa.json"
   },
   "manual_review": {
-    "original_preference": "A: amber-dark keeps the current premium balance while improving amber contrast; B feels calmer but makes the task accent less distinct",
-    "grayscale_preference": "A: all variants are structurally readable in grayscale, but A improves the amber node without changing the rest of the grayscale hierarchy",
-    "tritanopia_preference": "A: tritanopia already compresses blue/green/teal; B further reduces purple-vs-muted separation, so keeping the current purple is safer",
-    "premium_preference": "A: darkened amber looks more editorial and less decorative while preserving the benchmark-task emphasis",
-    "recommended_token_change": "adopt label_amber #A36F13 in the final-polish token set; do not change model_purple globally yet"
+    "original_preference": "A remains preferred: amber-dark preserves the premium balance while improving contrast",
+    "grayscale_preference": "A remains preferred: it improves amber without changing the grayscale hierarchy",
+    "tritanopia_preference": "A remains preferred: B weakens purple-vs-muted separation under tritanopia",
+    "premium_preference": "A remains preferred: it is more editorial than baseline without dulling the task accent",
+    "recommended_token_change": "implemented: label_amber #A36F13; model_purple remains unchanged"
   }
 }

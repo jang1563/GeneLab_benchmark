@@ -49,8 +49,8 @@ VARIANTS = [
     {
         "variant_id": "baseline_current",
         "label": "baseline",
-        "description": "current visual-identity v0.1 color tokens",
-        "overrides": {},
+        "description": "pre-polish visual-identity v0.1 color tokens",
+        "overrides": {"label_amber": "#C4861B"},
     },
     {
         "variant_id": "a_amber_dark",

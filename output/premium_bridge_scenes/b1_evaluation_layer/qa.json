@@ -36,13 +36,13 @@
       ]
     },
     "expected_dimensions_match": true,
-    "manual_full_size_inspection": "pass: opened rendered_preview.png at high detail; headline, support line, four callouts, and status label are readable with no visible clipping",
-    "manual_zoom_inspection": "pass: inspected evaluation-surface and status/score crops; source field, alignment rail, task surface, and score ledger remain legible",
-    "manual_thumbnail_inspection": "pass: inspection sheet preserves the left-to-right fragmentation-to-evaluation movement at small scale",
-    "text_overlap_check": "pass: no headline, callout, status, or source-note overlap observed in the full slide or zoom crops",
-    "jargon_check": "conditional pass: visible terms are mostly plain; source-traceable should be defined in speaker notes for first-time viewers",
+    "manual_full_size_inspection": "pass: opened amber-dark rendered_preview.png at high detail; headline, support line, callouts, and status label remain readable",
+    "manual_zoom_inspection": "pass: evaluation-surface and status/score crops preserve the source-to-benchmark movement after amber-dark token application",
+    "manual_thumbnail_inspection": "pass: B1 remains legible in the regenerated B1-B4 family contact sheet",
+    "text_overlap_check": "pass: no clipping or overlap observed after rerender",
+    "jargon_check": "conditional pass: source-traceable still needs a speaker-note definition for first-time viewers",
     "internal_language_check": "pass: no visible planning language, local paths, package names, release-status terms, or forbidden terms observed",
-    "premium_quality_gate": "conditional pass: stronger than prior bridge wireframes and consistent with the hybrid brand direction; still needs family QA beside B2-B4 before final deck promotion",
-    "visual_verdict": "premium B1 brand stress-test candidate; suitable for deck assembly mockup, pending B1-B4 family pass"
+    "premium_quality_gate": "pass: amber-dark improves maturity and contrast without changing the established hierarchy",
+    "visual_verdict": "premium B1 candidate with amber-dark token applied; suitable for deck assembly and final family polish"
   }
 }

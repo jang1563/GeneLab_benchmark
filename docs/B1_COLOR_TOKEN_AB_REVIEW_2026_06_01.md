@@ -113,14 +113,24 @@ Reason:
 
 ## Implementation Recommendation
 
-Do not mutate the committed visual identity config in this pass.
+Initial recommendation before implementation:
 
-Next implementation pass should:
+- do not mutate the committed visual identity config until the A/B comparison
+  was rendered and reviewed.
 
-1. update the visual identity token file with `label_amber = #A36F13`;
-2. update any hardcoded legacy bridge-script amber values to match;
-3. rerender B1-B4 together;
-4. repeat color QA on the full family.
+Implementation status:
 
-This keeps the current A/B comparison auditable and avoids silently changing the
-meaning of previously committed figures.
+- completed in the subsequent color-token application pass;
+- `label_amber = #A36F13` was applied to the visual identity token file and the
+  B2-B4 premium bridge renderer;
+- `model_purple` remains unchanged.
+
+The completed implementation pass:
+
+1. updated the visual identity token file with `label_amber = #A36F13`;
+2. updated the B2-B4 premium bridge renderer amber value to match;
+3. rerendered B1-B4 together;
+4. repeated color QA on the full family.
+
+The A/B script now pins the pre-polish baseline amber value so the comparison
+remains auditable after the global token change.

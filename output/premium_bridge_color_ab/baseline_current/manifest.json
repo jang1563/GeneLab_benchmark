@@ -2,9 +2,11 @@
   "created": "2026-06-01",
   "slide_id": "b1_evaluation_layer",
   "variant_id": "baseline_current",
-  "description": "current visual-identity v0.1 color tokens",
+  "description": "pre-polish visual-identity v0.1 color tokens",
   "base_token_version": "0.1",
-  "overrides": {},
+  "overrides": {
+    "label_amber": "#C4861B"
+  },
   "generator": "scripts/build_b1_color_token_ab.py",
   "outputs": {
     "rendered_preview_png": "output/premium_bridge_color_ab/baseline_current/rendered_preview.png",
