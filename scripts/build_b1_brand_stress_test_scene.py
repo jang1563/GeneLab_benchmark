@@ -93,7 +93,7 @@ OVERLAY_TEXT = [
     {
         "id": "support",
         "role": "supporting_claim",
-        "content": "SpaceBio-Bench organizes public studies into traceable tasks and audited scores.",
+        "content": "SpaceBio-Bench organizes public studies into benchmark tasks and audited scores.",
         "x": 0.066,
         "y": 0.190,
         "font_pt": 11.2,

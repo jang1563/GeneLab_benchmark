@@ -154,10 +154,10 @@
     ]
   },
   "manual_review": {
-    "b1_color_distinction": "pass: status/source normalization does not affect color distinction; amber-dark remains mature and readable",
-    "b1_grayscale_distinction": "conditional pass: structure survives and the normalized status layer remains readable; blue/green/teal stay close in grayscale",
-    "b1_colorblind_distinction": "conditional pass: existing pairwise warnings remain non-blocking because the bridge slides rely on labels, position, and shape rather than color alone",
-    "family_color_consistency": "pass: B1-B4 remain coherent after moving B1 status/source into the shared bottom-left layer",
-    "premium_palette_verdict": "pass with caveat: no new color issue from the status/source pass; keep blue/green/teal and amber/red separated or text-labeled in future tiny legends"
+    "b1_color_distinction": "pass: wording changes do not affect color distinction; B1 remains readable and mature",
+    "b1_grayscale_distinction": "conditional pass: structure survives in grayscale; blue/green/teal remain close but are text-labeled",
+    "b1_colorblind_distinction": "conditional pass: existing pairwise warnings remain non-blocking because slides rely on labels, position, and shape rather than color alone",
+    "family_color_consistency": "pass: B1-B4 remain coherent after the first-time-viewer wording pass",
+    "premium_palette_verdict": "pass with caveat: no new color issue from the wording pass; keep blue/green/teal and amber/red separated or text-labeled in future tiny legends"
   }
 }

@@ -266,28 +266,28 @@ DRAWERS = {
 SLIDES: list[dict[str, Any]] = [
     {
         "slide_id": "b2_study_to_task_premium",
-        "decision_headline": "A task is a traceable contract, not a loose matrix",
+        "decision_headline": "A benchmark task preserves source context",
         "audience_question": "What is the unit of the benchmark?",
-        "claim_boundary": "a task contract ties public source records to mission context, samples, labels, tissue, assay, and evaluation scope",
-        "visual_move": "source evidence consolidates into one task contract surface",
+        "claim_boundary": "a benchmark task ties public source records to mission context, samples, labels, tissue, assay, and evaluation scope",
+        "visual_move": "source evidence consolidates into one benchmark task surface",
         "content_brief": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
         "technical_preflight": "docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md",
         "evidence_sources": [
             {"path": "docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md", "role": "premium rebuild criteria"},
             {"path": "v9/source_inventory.csv", "role": "public source inventory"},
-            {"path": "v9/task_manifest_index.csv", "role": "task contract index"},
+            {"path": "v9/task_manifest_index.csv", "role": "benchmark task index"},
             {"path": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md", "role": "B2 brief"},
         ],
         "forbidden_visible_terms": ["raw accession", "payload", "artifact", "RRRM", "alpha", "LOMO", "/Users/", "function", "class"],
         "overlay": {
             "text": [
-                {"id": "headline", "role": "decision_headline", "content": "A task is a traceable contract, not a loose matrix", "x": 0.065, "y": 0.128, "font_pt": 26, "color": "ink", "z": "Z3"},
+                {"id": "headline", "role": "decision_headline", "content": "A benchmark task preserves source context", "x": 0.065, "y": 0.128, "font_pt": 26, "color": "ink", "z": "Z3"},
                 {"id": "source", "role": "primary_callout", "content": "public source", "x": 0.108, "y": 0.338, "font_pt": 9.5, "color": "muted", "z": "Z3"},
                 {"id": "mission", "role": "primary_callout", "content": "mission context", "x": 0.282, "y": 0.338, "font_pt": 9.5, "color": "green", "z": "Z3"},
                 {"id": "samples", "role": "primary_callout", "content": "sample set", "x": 0.448, "y": 0.338, "font_pt": 9.5, "color": "blue", "z": "Z3"},
                 {"id": "labels", "role": "primary_callout", "content": "label contrast", "x": 0.590, "y": 0.338, "font_pt": 9.5, "color": "amber", "z": "Z3"},
                 {"id": "tissue_assay", "role": "primary_callout", "content": "tissue + assay", "x": 0.715, "y": 0.338, "font_pt": 9.5, "color": "teal", "z": "Z3"},
-                {"id": "contract", "role": "primary_callout", "content": "task contract", "x": 0.832, "y": 0.338, "font_pt": 9.5, "color": "purple", "z": "Z3"},
+                {"id": "contract", "role": "primary_callout", "content": "benchmark task", "x": 0.832, "y": 0.338, "font_pt": 9.5, "color": "purple", "z": "Z3"},
             ],
             "status_labels": [
                 {"id": "scope", "role": "claim_boundary", "content": "task record; source rows remain auditable", "x": 0.065, "y": 0.865, "font_pt": 7.8, "color": "muted", "z": "Z4"},

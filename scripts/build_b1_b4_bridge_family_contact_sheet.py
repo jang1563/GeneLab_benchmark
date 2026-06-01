@@ -43,8 +43,8 @@ SLIDES = [
     {
         "slide_id": "b2_study_to_task_premium",
         "panel": "B2",
-        "title": "Task contract",
-        "claim": "A task is a traceable contract.",
+        "title": "Benchmark task",
+        "claim": "Source context stays attached.",
         "source": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png",
         "qa": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/qa.json",
         "overlay": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/overlay_spec.json",

@@ -30,7 +30,7 @@ B1 evaluation layer:
   `public data; source records remain auditable`;
 - preserved the source note as the second line.
 
-B2 task contract:
+B2 benchmark task:
 
 - changed the status line to `task record; source rows remain auditable`;
 - changed the caveat to `Exact rows stay in source tables.`
@@ -85,7 +85,8 @@ Manual visual review:
 
 Pass for first deck assembly.
 
-The status/source layer is no longer a blocker. Remaining polish should focus
-on B1 density versus B2-B4 pacing, B2's `traceable contract` metaphor,
-deck-wide purple usage, and the final caption/speaker-note bridge that explains
-the data collection, processing, and analysis workflow for first-time viewers.
+The status/source layer is no longer a blocker. A follow-up first-time-viewer
+wording pass resolved B2's `traceable contract` metaphor. Remaining polish
+should focus on B1 density versus B2-B4 pacing, deck-wide purple usage, and the
+final caption/speaker-note bridge that explains the data collection,
+processing, and analysis workflow for first-time viewers.

@@ -36,13 +36,13 @@
       ]
     },
     "expected_dimensions_match": true,
-    "manual_full_size_inspection": "pass: status/source layer moved to the shared bottom-left position without crowding the evidence surface",
-    "manual_zoom_inspection": "pass: normalized source/status wording remains readable at zoom scale",
-    "manual_thumbnail_inspection": "pass: B1 still reads as one left-to-right movement rather than a card-box layout",
-    "text_overlap_check": "pass: bottom-left source/status stack does not collide with the source field, audit path, or score surface",
-    "jargon_check": "pass: visible source-traceable jargon was replaced with the plainer source records remain auditable wording",
+    "manual_full_size_inspection": "pass: support line now uses benchmark tasks instead of traceable tasks, with no layout crowding",
+    "manual_zoom_inspection": "pass: normalized source/status wording and benchmark-task support line remain readable at zoom scale",
+    "manual_thumbnail_inspection": "pass: B1 still reads as one left-to-right movement from public studies to audited scores",
+    "text_overlap_check": "pass: no overlap introduced by the wording pass",
+    "jargon_check": "pass: visible traceability jargon was removed from the support line and status layer",
     "internal_language_check": "pass: no visible planning language, local paths, package names, release-status terms, or forbidden terms observed",
-    "premium_quality_gate": "pass: B1 is suitable as the opening bridge candidate after status/source normalization",
-    "visual_verdict": "premium B1 candidate with normalized bottom-left status/source layer; suitable for deck assembly"
+    "premium_quality_gate": "pass: B1 is suitable as the opening bridge candidate after first-time-viewer wording polish",
+    "visual_verdict": "premium B1 candidate with clearer benchmark-task wording; suitable for deck assembly"
   }
 }

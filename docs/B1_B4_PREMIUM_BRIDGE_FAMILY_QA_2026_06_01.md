@@ -18,7 +18,7 @@ premium B2-B4 bridge-method rebuilds as a coherent deck family.
 Slides reviewed:
 
 - B1: evaluation layer;
-- B2: task contract;
+- B2: benchmark task;
 - B3: held-out mission;
 - B4: train-only guard.
 
@@ -64,10 +64,9 @@ B1 previously had one potentially sticky visible term: `source-traceable`.
 The follow-up pass removed that visible jargon and now says the source records
 remain auditable.
 
-B2-B4 visible text is mostly operational and concrete. B1 now uses plain
-auditable source-record wording. B2 still uses the `traceable contract`
-metaphor, so that headline should be reviewed in the next first-time-viewer
-wording pass.
+B2-B4 visible text is mostly operational and concrete. Follow-up wording polish
+removed B1's `traceable tasks` phrase and B2's `traceable contract` metaphor.
+B2 now frames the unit as a benchmark task that preserves source context.
 
 ## Verdict
 
@@ -80,6 +79,10 @@ remaining polish items:
 - evidence-field depth;
 - rail weight;
 - B1 density versus B2-B4 pacing.
+
+Follow-up record:
+
+- see `docs/PREMIUM_BRIDGE_FIRST_TIME_VIEWER_WORDING_REVIEW_2026_06_02.md`.
 
 Recommended next step:
 
