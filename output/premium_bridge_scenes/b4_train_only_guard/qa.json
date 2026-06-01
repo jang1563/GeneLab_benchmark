@@ -1,6 +1,6 @@
 {
   "slide_id": "b4_train_only_guard",
-  "stage": "pre_render",
+  "stage": "post_render",
   "created": "2026-06-01",
   "pre_render_gate": {
     "content_brief_declared": true,
@@ -13,10 +13,17 @@
     "overlay_spec_declared": true,
     "manifest_declared": true
   },
-  "manual_review_pending": [
-    "full_size_render_inspection",
-    "thumbnail_contact_sheet_inspection",
-    "text_overlap_check",
-    "caveat_visibility_check"
-  ]
+  "manual_review_pending": [],
+  "post_render_gate": {
+    "rendered_outputs": {
+      "scene_plate": "output/premium_bridge_scenes/b4_train_only_guard/scene_plate.png",
+      "rendered_preview_png": "output/premium_bridge_scenes/b4_train_only_guard/rendered_preview.png",
+      "rendered_preview_pdf": "output/premium_bridge_scenes/b4_train_only_guard/rendered_preview.pdf"
+    },
+    "manual_full_size_inspection": "pass: opened rendered_preview.png at high detail after render",
+    "manual_thumbnail_inspection": "pass: core train/test lane structure remains legible at reduced scale",
+    "text_overlap_check": "pass: operation labels and mission nodes are separated",
+    "caveat_visibility_check": "pass: caveat visible at lower-left without dominating the process schematic",
+    "visual_verdict": "draft bridge-slide candidate; ready for B3/B4 family contact-sheet review, not final deck export"
+  }
 }

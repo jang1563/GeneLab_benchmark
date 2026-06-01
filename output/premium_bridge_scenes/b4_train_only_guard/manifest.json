@@ -1,7 +1,7 @@
 {
   "slide_id": "b4_train_only_guard",
   "created": "2026-06-01",
-  "stage": "pre_render",
+  "stage": "post_render",
   "content_brief": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
   "technical_preflight": "docs/VISUAL_BRIDGE_TECHNICAL_PREFLIGHT_B3_B4_2026_06_01.md",
   "audience_question": "How does the benchmark avoid learning from the mission it is supposed to test?",
@@ -41,8 +41,10 @@
     "qa": "output/premium_bridge_scenes/b4_train_only_guard/qa.json"
   },
   "qa": {
-    "stage": "pre_render",
+    "stage": "post_render",
     "pre_render_gate_expected": true,
-    "post_render_required_before_use": true
-  }
+    "post_render_required_before_use": true,
+    "render_outputs_exist": true
+  },
+  "renderer": "scripts/build_bridge_method_scenes.py"
 }
