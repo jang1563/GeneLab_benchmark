@@ -7,13 +7,13 @@
     "technical_preflight_declared": true,
     "evidence_sources_declared": true,
     "claim_boundary_declared": true,
-    "visible_text_word_count": 29,
+    "visible_text_word_count": 28,
     "visible_text_budget": 45,
     "output_paths_declared": true,
     "overlay_spec_declared": true,
     "manifest_declared": true
   },
-  "manual_review_pending": [
+  "manual_review_required": [
     "full_size_render_inspection",
     "thumbnail_contact_sheet_inspection",
     "text_overlap_check",
@@ -25,10 +25,10 @@
       "rendered_preview_png": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png",
       "rendered_preview_pdf": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.pdf"
     },
-    "manual_full_size_inspection": "pass: regenerated B4 remains clear in family review after shared renderer update",
-    "manual_thumbnail_inspection": "pass: train-only guard and hidden-mission bypass remain legible at contact-sheet scale",
-    "text_overlap_check": "pass: operation labels, guard, and score cue remain separated",
-    "premium_quality_gate": "pass: process-control slide remains restrained and premium",
-    "visual_verdict": "premium bridge candidate; unchanged semantically by amber-dark update"
+    "manual_full_size_inspection": "pass: regenerated B4 preserves the train-only guard and matches the shared bottom-left status/caveat placement",
+    "manual_thumbnail_inspection": "pass: hidden-mission bypass and caveat remain legible in the B1-B4 contact sheet",
+    "text_overlap_check": "pass: status/caveat pair does not collide with the process lanes or guard boundary",
+    "premium_quality_gate": "pass: wording is shorter and more polished after normalization",
+    "visual_verdict": "premium B4 candidate with normalized status/caveat layer; suitable for deck assembly"
   }
 }

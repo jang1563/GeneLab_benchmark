@@ -49,40 +49,37 @@ Evidence-surface scale:
 
 Status/source layer:
 
-- needs pass-through: B1 uses a bottom-right source-traceability label and a
-  bottom-left source note; B2-B4 use related but not identical source/caveat
-  patterns;
-- recommendation: normalize status/caveat placement and wording during deck
-  assembly.
+- addressed in follow-up: B1-B4 now use a coherent bottom-left
+  status/source or status/caveat layer;
+- B1 visible wording was simplified from `source-traceable` to source records
+  remaining auditable, which is clearer for first-time viewers.
+
+Follow-up record:
+
+- see `docs/PREMIUM_BRIDGE_STATUS_SOURCE_LAYER_REVIEW_2026_06_02.md`.
 
 ## Jargon And First-Time Viewer Review
 
-B1 is the only slide with a potentially sticky term: `source-traceable`.
+B1 previously had one potentially sticky visible term: `source-traceable`.
+The follow-up pass removed that visible jargon and now says the source records
+remain auditable.
 
-Recommendation:
-
-- keep it visible because it is part of the project promise;
-- define it in speaker notes as: every task can be followed back to source
-  records and project inventories;
-- avoid adding a definition inside the figure, because that would turn the
-  slide into a text explanation instead of a visual bridge.
-
-B2-B4 visible text is mostly operational and concrete. The only family-level
-risk is that B2's `traceable contract` and B1's `source-traceable` should sound
-like the same idea in narration.
+B2-B4 visible text is mostly operational and concrete. B1 now uses plain
+auditable source-record wording. B2 still uses the `traceable contract`
+metaphor, so that headline should be reviewed in the next first-time-viewer
+wording pass.
 
 ## Verdict
 
-Conditional pass.
+Pass for deck assembly, with remaining visual polish.
 
 B1-B4 can enter deck assembly as premium bridge candidates. The family is not
-yet final deck art; one last polish should normalize:
+yet final deck art; the resolved status/source pass leaves the following
+remaining polish items:
 
-- status/caveat location;
-- source-note wording;
 - evidence-field depth;
 - rail weight;
-- B1-to-B2 terminology continuity.
+- B1 density versus B2-B4 pacing.
 
 Recommended next step:
 

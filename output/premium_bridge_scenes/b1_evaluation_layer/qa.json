@@ -9,7 +9,7 @@
     "evidence_sources_declared": true,
     "all_evidence_sources_exist": true,
     "claim_boundary_declared": true,
-    "visible_text_word_count": 36,
+    "visible_text_word_count": 39,
     "visible_text_budget": 45,
     "forbidden_visible_terms_absent": true,
     "forbidden_visible_term_hits": [],
@@ -36,13 +36,13 @@
       ]
     },
     "expected_dimensions_match": true,
-    "manual_full_size_inspection": "pass: opened amber-dark rendered_preview.png at high detail; headline, support line, callouts, and status label remain readable",
-    "manual_zoom_inspection": "pass: evaluation-surface and status/score crops preserve the source-to-benchmark movement after amber-dark token application",
-    "manual_thumbnail_inspection": "pass: B1 remains legible in the regenerated B1-B4 family contact sheet",
-    "text_overlap_check": "pass: no clipping or overlap observed after rerender",
-    "jargon_check": "conditional pass: source-traceable still needs a speaker-note definition for first-time viewers",
+    "manual_full_size_inspection": "pass: status/source layer moved to the shared bottom-left position without crowding the evidence surface",
+    "manual_zoom_inspection": "pass: normalized source/status wording remains readable at zoom scale",
+    "manual_thumbnail_inspection": "pass: B1 still reads as one left-to-right movement rather than a card-box layout",
+    "text_overlap_check": "pass: bottom-left source/status stack does not collide with the source field, audit path, or score surface",
+    "jargon_check": "pass: visible source-traceable jargon was replaced with the plainer source records remain auditable wording",
     "internal_language_check": "pass: no visible planning language, local paths, package names, release-status terms, or forbidden terms observed",
-    "premium_quality_gate": "pass: amber-dark improves maturity and contrast without changing the established hierarchy",
-    "visual_verdict": "premium B1 candidate with amber-dark token applied; suitable for deck assembly and final family polish"
+    "premium_quality_gate": "pass: B1 is suitable as the opening bridge candidate after status/source normalization",
+    "visual_verdict": "premium B1 candidate with normalized bottom-left status/source layer; suitable for deck assembly"
   }
 }

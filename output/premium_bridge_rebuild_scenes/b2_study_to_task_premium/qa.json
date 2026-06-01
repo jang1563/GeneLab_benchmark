@@ -7,13 +7,13 @@
     "technical_preflight_declared": true,
     "evidence_sources_declared": true,
     "claim_boundary_declared": true,
-    "visible_text_word_count": 33,
+    "visible_text_word_count": 35,
     "visible_text_budget": 45,
     "output_paths_declared": true,
     "overlay_spec_declared": true,
     "manifest_declared": true
   },
-  "manual_review_pending": [
+  "manual_review_required": [
     "full_size_render_inspection",
     "thumbnail_contact_sheet_inspection",
     "text_overlap_check",
@@ -25,10 +25,10 @@
       "rendered_preview_png": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png",
       "rendered_preview_pdf": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.pdf"
     },
-    "manual_full_size_inspection": "pass: opened regenerated B2 in the B1-B4 family sheet; amber-dark label contrast is improved",
-    "manual_thumbnail_inspection": "pass: source-to-task transformation remains legible after amber token update",
-    "text_overlap_check": "pass: no label or task-contract overlap observed in the regenerated render",
-    "premium_quality_gate": "pass: amber-dark improves maturity without adding visual noise",
-    "visual_verdict": "premium bridge candidate with amber-dark token applied; suitable for deck assembly"
+    "manual_full_size_inspection": "pass: regenerated B2 uses the same bottom-left status/source layer as B1-B4 and removes figure-internal wording",
+    "manual_thumbnail_inspection": "pass: source-to-task transformation remains legible in the B1-B4 contact sheet",
+    "text_overlap_check": "pass: status/source pair sits below the evidence field without overlap",
+    "premium_quality_gate": "pass: wording is more source-table oriented and less like an internal figure note",
+    "visual_verdict": "premium B2 candidate with normalized status/source layer; suitable for deck assembly"
   }
 }

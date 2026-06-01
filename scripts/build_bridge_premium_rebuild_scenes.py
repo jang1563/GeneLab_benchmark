@@ -290,8 +290,8 @@ SLIDES: list[dict[str, Any]] = [
                 {"id": "contract", "role": "primary_callout", "content": "task contract", "x": 0.832, "y": 0.338, "font_pt": 9.5, "color": "purple", "z": "Z3"},
             ],
             "status_labels": [
-                {"id": "scope", "role": "claim_boundary", "content": "source rows remain auditable", "x": 0.065, "y": 0.865, "font_pt": 7.8, "color": "muted", "z": "Z4"},
-                {"id": "caveat", "role": "trust_caveat", "content": "Exact rows live outside this figure.", "x": 0.065, "y": 0.900, "font_pt": 7.4, "color": "muted", "z": "Z4"},
+                {"id": "scope", "role": "claim_boundary", "content": "task record; source rows remain auditable", "x": 0.065, "y": 0.865, "font_pt": 7.8, "color": "muted", "z": "Z4"},
+                {"id": "caveat", "role": "trust_caveat", "content": "Exact rows stay in source tables.", "x": 0.065, "y": 0.900, "font_pt": 7.4, "color": "muted", "z": "Z4"},
             ],
             "focus_marks": [{"id": "contract_path", "role": "flow_path", "shape": "evidence_rail", "x0": 0.105, "x1": 0.865, "y": 0.500, "color": "muted", "z": "Z5"}],
         },
@@ -320,7 +320,7 @@ SLIDES: list[dict[str, Any]] = [
             ],
             "status_labels": [
                 {"id": "scope", "role": "claim_boundary", "content": "mission-held-out evaluation", "x": 0.065, "y": 0.865, "font_pt": 7.8, "color": "muted", "z": "Z4"},
-                {"id": "caveat", "role": "trust_caveat", "content": "Hidden-mission samples stay outside training.", "x": 0.065, "y": 0.900, "font_pt": 7.4, "color": "muted", "z": "Z4"},
+                {"id": "caveat", "role": "trust_caveat", "content": "Hidden mission samples stay outside training.", "x": 0.065, "y": 0.900, "font_pt": 7.4, "color": "muted", "z": "Z4"},
             ],
             "focus_marks": [{"id": "boundary", "role": "boundary", "shape": "vertical_rule", "x": 0.670, "y0": 0.285, "y1": 0.720, "color": "red", "z": "Z5"}],
         },
@@ -351,7 +351,7 @@ SLIDES: list[dict[str, Any]] = [
             ],
             "status_labels": [
                 {"id": "scope", "role": "claim_boundary", "content": "train-only processing", "x": 0.065, "y": 0.865, "font_pt": 7.8, "color": "muted", "z": "Z4"},
-                {"id": "caveat", "role": "trust_caveat", "content": "No hidden mission data shapes the feature space.", "x": 0.065, "y": 0.900, "font_pt": 7.4, "color": "muted", "z": "Z4"},
+                {"id": "caveat", "role": "trust_caveat", "content": "Hidden mission data does not shape features.", "x": 0.065, "y": 0.900, "font_pt": 7.4, "color": "muted", "z": "Z4"},
             ],
             "focus_marks": [{"id": "guard", "role": "guard", "shape": "vertical_rule", "x": 0.742, "y0": 0.330, "y1": 0.700, "color": "red", "z": "Z5"}],
         },
@@ -414,7 +414,7 @@ def build_contract(slide: dict[str, Any]) -> dict[str, Any]:
             "overlay_spec_declared": True,
             "manifest_declared": True,
         },
-        "manual_review_pending": [
+        "manual_review_required": [
             "full_size_render_inspection",
             "thumbnail_contact_sheet_inspection",
             "text_overlap_check",

@@ -154,10 +154,10 @@
     ]
   },
   "manual_review": {
-    "b1_color_distinction": "pass: amber-dark improves the label tick and task-dot maturity while preserving zone separation",
-    "b1_grayscale_distinction": "conditional pass: structure survives through position, object type, rail direction, and labels; blue/green/teal remain close in grayscale",
-    "b1_colorblind_distinction": "conditional pass: tritanopia still compresses blue/green/teal, but labels and spatial grouping preserve readability; amber/test-red warning is not blocking because their roles and positions are separated",
-    "family_color_consistency": "pass for deck assembly: B1-B4 read as one light methods/provenance family after amber-dark update",
-    "premium_palette_verdict": "pass with caveat: amber contrast warning is resolved; retain the rule that color may classify but structure must explain"
+    "b1_color_distinction": "pass: status/source normalization does not affect color distinction; amber-dark remains mature and readable",
+    "b1_grayscale_distinction": "conditional pass: structure survives and the normalized status layer remains readable; blue/green/teal stay close in grayscale",
+    "b1_colorblind_distinction": "conditional pass: existing pairwise warnings remain non-blocking because the bridge slides rely on labels, position, and shape rather than color alone",
+    "family_color_consistency": "pass: B1-B4 remain coherent after moving B1 status/source into the shared bottom-left layer",
+    "premium_palette_verdict": "pass with caveat: no new color issue from the status/source pass; keep blue/green/teal and amber/red separated or text-labeled in future tiny legends"
   }
 }

@@ -95,7 +95,8 @@ Carry-forward rule:
 
 Before final deck export:
 
-- normalize status/source note placement across B1-B4;
+- status/source note placement was normalized in the 2026-06-02 follow-up pass:
+  `docs/PREMIUM_BRIDGE_STATUS_SOURCE_LAYER_REVIEW_2026_06_02.md`;
 - decide whether B1's richer source field should remain as opening-bridge
   pacing or be quieted to match B2-B4;
 - keep purple as a secondary task/model accent until a wider deck-wide color

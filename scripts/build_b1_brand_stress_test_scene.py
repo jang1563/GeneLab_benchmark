@@ -147,8 +147,8 @@ STATUS_LABELS = [
     {
         "id": "trace_status",
         "role": "claim_boundary",
-        "content": "public-data resource; source-traceable",
-        "x": 0.707,
+        "content": "public data; source records remain auditable",
+        "x": 0.065,
         "y": 0.866,
         "font_pt": 7.8,
         "color": "muted",
@@ -571,7 +571,7 @@ def build_inspection_sheet(tokens: dict[str, Any], paths: dict[str, str]) -> Non
     fig.text(
         0.025,
         0.880,
-        "Gate: one movement, source-traceable status, no internal terms, no card-box layout.",
+        "Gate: one movement, auditable source status, no internal terms, no card-box layout.",
         fontsize=8.0,
         color=color(tokens, "muted"),
         ha="left",
