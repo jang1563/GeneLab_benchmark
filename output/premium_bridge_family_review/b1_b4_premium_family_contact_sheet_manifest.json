@@ -1,0 +1,80 @@
+{
+  "created": "2026-06-01",
+  "contact_sheet": "output/premium_bridge_family_review/b1_b4_premium_family_contact_sheet.png",
+  "purpose": "family QA for premium B1-B4 bridge candidates",
+  "slides": [
+    {
+      "slide_id": "b1_evaluation_layer",
+      "panel": "B1",
+      "title": "Evaluation layer",
+      "claim": "Public studies become evaluable.",
+      "source": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png",
+      "qa": "output/premium_bridge_scenes/b1_evaluation_layer/qa.json",
+      "overlay": "output/premium_bridge_scenes/b1_evaluation_layer/overlay_spec.json",
+      "source_exists": true,
+      "qa_exists": true,
+      "overlay_exists": true,
+      "image_dimensions": [
+        3840,
+        2160
+      ],
+      "visible_word_count": 36,
+      "visual_verdict": "premium B1 brand stress-test candidate; suitable for deck assembly mockup, pending B1-B4 family pass"
+    },
+    {
+      "slide_id": "b2_study_to_task_premium",
+      "panel": "B2",
+      "title": "Task contract",
+      "claim": "A task is a traceable contract.",
+      "source": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png",
+      "qa": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/qa.json",
+      "overlay": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/overlay_spec.json",
+      "source_exists": true,
+      "qa_exists": true,
+      "overlay_exists": true,
+      "image_dimensions": [
+        3840,
+        2160
+      ],
+      "visible_word_count": 33,
+      "visual_verdict": "premium rebuild candidate; usable for deck assembly mockup, pending final deck-wide style pass"
+    },
+    {
+      "slide_id": "b3_mission_held_out_premium",
+      "panel": "B3",
+      "title": "Held-out mission",
+      "claim": "The test set is an entire mission.",
+      "source": "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png",
+      "qa": "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/qa.json",
+      "overlay": "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/overlay_spec.json",
+      "source_exists": true,
+      "qa_exists": true,
+      "overlay_exists": true,
+      "image_dimensions": [
+        3840,
+        2160
+      ],
+      "visible_word_count": 26,
+      "visual_verdict": "premium rebuild candidate; suitable as the current grammar anchor for B2-B4"
+    },
+    {
+      "slide_id": "b4_train_only_guard_premium",
+      "panel": "B4",
+      "title": "Train-only guard",
+      "claim": "Training choices stop before the hidden mission.",
+      "source": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png",
+      "qa": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/qa.json",
+      "overlay": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/overlay_spec.json",
+      "source_exists": true,
+      "qa_exists": true,
+      "overlay_exists": true,
+      "image_dimensions": [
+        3840,
+        2160
+      ],
+      "visible_word_count": 29,
+      "visual_verdict": "premium rebuild candidate; ready for deck assembly mockup, pending final deck-wide style pass"
+    }
+  ],
+  "generator": "scripts/build_b1_b4_bridge_family_contact_sheet.py"
+}

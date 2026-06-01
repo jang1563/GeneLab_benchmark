@@ -1,0 +1,38 @@
+{
+  "created": "2026-06-01",
+  "contact_sheet": "output/premium_bridge_family_review/b1_b4_premium_family_contact_sheet.png",
+  "all_sources_exist": true,
+  "all_overlay_specs_exist": true,
+  "all_qa_files_exist": true,
+  "source_dimensions": {
+    "b1_evaluation_layer": [
+      3840,
+      2160
+    ],
+    "b2_study_to_task_premium": [
+      3840,
+      2160
+    ],
+    "b3_mission_held_out_premium": [
+      3840,
+      2160
+    ],
+    "b4_train_only_guard_premium": [
+      3840,
+      2160
+    ]
+  },
+  "visible_word_counts": {
+    "b1_evaluation_layer": 36,
+    "b2_study_to_task_premium": 33,
+    "b3_mission_held_out_premium": 26,
+    "b4_train_only_guard_premium": 29
+  },
+  "manual_family_review": {
+    "claim_readability": "pass: all four slide claims are legible at contact-sheet scale and answer sequential first-time-viewer questions",
+    "rail_grammar_consistency": "conditional pass: B1-B2 use the clearest left-to-right rail grammar; B3-B4 use the same field but are more restrained and should remain methods-trust slides",
+    "evidence_surface_scale": "conditional pass: all four use one central evidence field; B1 is intentionally denser as an opening bridge, while B2-B4 are calmer proof stages",
+    "status_source_layer_consistency": "needs pass-through: status/source text is present but not identical across B1-B4; normalize placement and wording during deck assembly",
+    "promotion_verdict": "conditional pass: B1-B4 can enter deck assembly as premium candidates; do a final family polish after deciding whether B1 remains an opening bridge or becomes visually quieter"
+  }
+}

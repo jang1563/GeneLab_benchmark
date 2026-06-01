@@ -1,0 +1,124 @@
+{
+  "slide_id": "b1_evaluation_layer",
+  "stage": "post_render",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1_from_top_left",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "Public space omics needs an evaluation layer.",
+      "x": 0.065,
+      "y": 0.118,
+      "font_pt": 27,
+      "color": "ink",
+      "max_lines": 1,
+      "z": "Z4"
+    },
+    {
+      "id": "support",
+      "role": "supporting_claim",
+      "content": "SpaceBio-Bench organizes public studies into traceable tasks and audited scores.",
+      "x": 0.066,
+      "y": 0.19,
+      "font_pt": 11.2,
+      "color": "muted",
+      "max_lines": 1,
+      "z": "Z4"
+    },
+    {
+      "id": "public_studies",
+      "role": "primary_callout",
+      "content": "Public studies",
+      "x": 0.104,
+      "y": 0.337,
+      "font_pt": 10.5,
+      "color": "source_blue",
+      "z": "Z4"
+    },
+    {
+      "id": "alignment_layer",
+      "role": "primary_callout",
+      "content": "Missions, tissues, samples, labels",
+      "x": 0.366,
+      "y": 0.337,
+      "font_pt": 10.0,
+      "color": "bio_green",
+      "z": "Z4"
+    },
+    {
+      "id": "benchmark_tasks",
+      "role": "primary_callout",
+      "content": "Benchmark tasks",
+      "x": 0.716,
+      "y": 0.337,
+      "font_pt": 10.5,
+      "color": "model_purple",
+      "z": "Z4"
+    },
+    {
+      "id": "audited_scores",
+      "role": "primary_callout",
+      "content": "Audited scores",
+      "x": 0.858,
+      "y": 0.337,
+      "font_pt": 10.5,
+      "color": "assay_teal",
+      "z": "Z4"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "trace_status",
+      "role": "claim_boundary",
+      "content": "public-data resource; source-traceable",
+      "x": 0.707,
+      "y": 0.866,
+      "font_pt": 7.8,
+      "color": "muted",
+      "z": "Z6"
+    },
+    {
+      "id": "source_note",
+      "role": "source_note",
+      "content": "Source: project inventories and source records.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.2,
+      "color": "muted",
+      "z": "Z6"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "source_to_benchmark_path",
+      "role": "dominant_motion",
+      "shape": "converging_transfer_path",
+      "x0": 0.145,
+      "x1": 0.9,
+      "y": 0.51,
+      "color": "source_blue",
+      "z": "Z7"
+    }
+  ],
+  "visible_word_count": 36,
+  "visible_word_budget": 45,
+  "forbidden_visible_terms": [
+    "payload",
+    "RRRM",
+    "alpha",
+    "LOMO",
+    "macro-F1",
+    "artifact",
+    "wireframe",
+    "micro-plan",
+    "/Users/",
+    "sklearn",
+    "function",
+    "class"
+  ]
+}

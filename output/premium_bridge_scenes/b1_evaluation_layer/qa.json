@@ -1,0 +1,48 @@
+{
+  "slide_id": "b1_evaluation_layer",
+  "stage": "post_render",
+  "created": "2026-06-01",
+  "pre_render_gate": {
+    "content_brief_declared": true,
+    "technical_preflight_declared": true,
+    "technical_protocol_declared": true,
+    "evidence_sources_declared": true,
+    "all_evidence_sources_exist": true,
+    "claim_boundary_declared": true,
+    "visible_text_word_count": 36,
+    "visible_text_budget": 45,
+    "forbidden_visible_terms_absent": true,
+    "forbidden_visible_term_hits": [],
+    "output_paths_declared": true,
+    "overlay_spec_declared": true,
+    "manifest_declared": true,
+    "dominant_visual_move_declared": true
+  },
+  "post_render_gate": {
+    "rendered_outputs": {
+      "scene_plate": "output/premium_bridge_scenes/b1_evaluation_layer/scene_plate.png",
+      "rendered_preview_png": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png",
+      "rendered_preview_pdf": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.pdf",
+      "inspection_sheet": "output/premium_bridge_scenes/b1_evaluation_layer_inspection_sheet.png"
+    },
+    "image_dimensions": {
+      "rendered_preview_png": [
+        3840,
+        2160
+      ],
+      "expected": [
+        3840,
+        2160
+      ]
+    },
+    "expected_dimensions_match": true,
+    "manual_full_size_inspection": "pass: opened rendered_preview.png at high detail; headline, support line, four callouts, and status label are readable with no visible clipping",
+    "manual_zoom_inspection": "pass: inspected evaluation-surface and status/score crops; source field, alignment rail, task surface, and score ledger remain legible",
+    "manual_thumbnail_inspection": "pass: inspection sheet preserves the left-to-right fragmentation-to-evaluation movement at small scale",
+    "text_overlap_check": "pass: no headline, callout, status, or source-note overlap observed in the full slide or zoom crops",
+    "jargon_check": "conditional pass: visible terms are mostly plain; source-traceable should be defined in speaker notes for first-time viewers",
+    "internal_language_check": "pass: no visible planning language, local paths, package names, release-status terms, or forbidden terms observed",
+    "premium_quality_gate": "conditional pass: stronger than prior bridge wireframes and consistent with the hybrid brand direction; still needs family QA beside B2-B4 before final deck promotion",
+    "visual_verdict": "premium B1 brand stress-test candidate; suitable for deck assembly mockup, pending B1-B4 family pass"
+  }
+}
