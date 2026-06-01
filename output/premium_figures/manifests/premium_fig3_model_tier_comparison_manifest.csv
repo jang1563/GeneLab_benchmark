@@ -1,0 +1,21 @@
+delta,family,model,panel,score,source,surface,tissue
+,Classical ML,PCA-LR,model_tier_means,0.758,docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot,6-tissue v1 mean,
+,Single-cell foundation model,scGPT,model_tier_means,0.666,docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot,6-tissue v1 mean,
+,Single-cell foundation model,Mouse-Geneformer,model_tier_means,0.476,docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot,6-tissue v1 mean,
+,Text LLM,DeepSeek-V3,model_tier_means,0.471,evaluation/RESULTS_SUMMARY.md:Tier 3 LLM Zero-Shot Classification,"zero-shot, 6 tasks",
+,Text LLM,Llama-3.3-70B,model_tier_means,0.484,evaluation/RESULTS_SUMMARY.md:Tier 3 LLM Zero-Shot Classification,"zero-shot, 6 tasks",
+,Text LLM,Gemini-2.5-Flash,model_tier_means,0.505,evaluation/RESULTS_SUMMARY.md:Tier 3 LLM Zero-Shot Classification,"zero-shot, 6 tasks",
+0.04,,scGPT,model_tier_deltas,,,,liver
+-0.222,,scGPT,model_tier_deltas,,,,gastrocnemius
+0.035,,scGPT,model_tier_deltas,,,,kidney
+-0.141,,scGPT,model_tier_deltas,,,,thymus
+-0.13,,scGPT,model_tier_deltas,,,,skin
+-0.139,,scGPT,model_tier_deltas,,,,eye
+-0.102,,Mouse-Geneformer,model_tier_deltas,,,,liver
+-0.525,,Mouse-Geneformer,model_tier_deltas,,,,gastrocnemius
+-0.069,,Mouse-Geneformer,model_tier_deltas,,,,kidney
+-0.428,,Mouse-Geneformer,model_tier_deltas,,,,thymus
+-0.264,,Mouse-Geneformer,model_tier_deltas,,,,skin
+-0.305,,Mouse-Geneformer,model_tier_deltas,,,,eye
+,,scFoundation,model_extension_rows,0.635,docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot,best single-tissue extension row,
+,,UCE,model_extension_rows,0.632,docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot,best single-tissue extension row,

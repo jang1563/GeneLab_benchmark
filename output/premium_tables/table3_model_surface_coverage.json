@@ -1,0 +1,20 @@
+[
+  {
+    "surface": "shared_6_task_mean",
+    "models": "PCA-LR; scGPT; Mouse-Geneformer",
+    "interpretation": "main like-for-like comparison",
+    "source": "docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot"
+  },
+  {
+    "surface": "text_only_zero_shot_tasks",
+    "models": "DeepSeek-V3; Llama-3.3-70B; Gemini-2.5-Flash",
+    "interpretation": "separate zero-shot text task surface",
+    "source": "evaluation/RESULTS_SUMMARY.md:Tier 3 LLM Zero-Shot Classification"
+  },
+  {
+    "surface": "best_single_tissue_extension_rows",
+    "models": "scFoundation; UCE",
+    "interpretation": "reported separately; not a shared leaderboard row",
+    "source": "docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot"
+  }
+]

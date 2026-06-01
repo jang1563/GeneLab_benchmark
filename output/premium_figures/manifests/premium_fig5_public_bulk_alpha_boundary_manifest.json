@@ -1,0 +1,117 @@
+[
+  {
+    "gate": "Task table registry",
+    "status": "pass",
+    "detail": "8 task tables / 33 folds indexed",
+    "source": "v9/task_manifest_index.csv",
+    "panel": "bulk_alpha_gates"
+  },
+  {
+    "gate": "Source inventory scope",
+    "status": "pass",
+    "detail": "22 public mouse-bulk source rows",
+    "source": "v9/source_inventory.csv",
+    "panel": "bulk_alpha_gates"
+  },
+  {
+    "gate": "Checksum evidence",
+    "status": "pass",
+    "detail": "22/22 sources have parsed OSDR checksum-manifest evidence",
+    "source": "v9/source_checksum_audit.csv",
+    "panel": "bulk_alpha_gates"
+  },
+  {
+    "gate": "Baseline output evidence",
+    "status": "pass",
+    "detail": "24/24 simple baseline rows evaluated",
+    "source": "v9/reports/bulk_lomo_baseline_summary.csv",
+    "panel": "bulk_alpha_gates"
+  },
+  {
+    "gate": "Data Package boundary",
+    "status": "needs update",
+    "detail": "metadata and data-file evidence need linked descriptors",
+    "source": "v9/datapackage.draft.json",
+    "panel": "bulk_alpha_gates"
+  },
+  {
+    "gate": "Dataset description",
+    "status": "needs update",
+    "detail": "description should separate indexed metadata from data files",
+    "source": "docs/v9_hf_dataset_card.md",
+    "panel": "bulk_alpha_gates"
+  },
+  {
+    "gate": "Data-file hash verification",
+    "status": "pending",
+    "detail": "0/22 sources have local data-file hash evidence",
+    "source": "v9/source_checksum_audit.csv",
+    "panel": "bulk_alpha_gates"
+  },
+  {
+    "path": "Metadata records",
+    "status": "available",
+    "detail": "source, task, fold, checksum, and baseline metadata indexed",
+    "kind": "ready",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv",
+    "panel": "bulk_alpha_decisions"
+  },
+  {
+    "path": "Data-file mirror",
+    "status": "pending",
+    "detail": "local file copy and hash verification still separate",
+    "kind": "diagnostic",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv",
+    "panel": "bulk_alpha_decisions"
+  },
+  {
+    "path": "Integrated package",
+    "status": "future",
+    "detail": "metadata and data-file evidence can be joined after verification",
+    "kind": "diagnostic",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv",
+    "panel": "bulk_alpha_decisions"
+  },
+  {
+    "side": "Metadata evidence",
+    "text": "v9 public bulk metadata records",
+    "kind": "ready",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv",
+    "panel": "bulk_alpha_language"
+  },
+  {
+    "side": "Metadata evidence",
+    "text": "Task/source/checksum/baseline metadata",
+    "kind": "ready",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv",
+    "panel": "bulk_alpha_language"
+  },
+  {
+    "side": "Metadata evidence",
+    "text": "Baseline outputs as reproducibility checks",
+    "kind": "ready",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv",
+    "panel": "bulk_alpha_language"
+  },
+  {
+    "side": "Data-file evidence",
+    "text": "Local data-file mirror",
+    "kind": "diagnostic",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv",
+    "panel": "bulk_alpha_language"
+  },
+  {
+    "side": "Data-file evidence",
+    "text": "Local hash-verified data bundle",
+    "kind": "diagnostic",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv",
+    "panel": "bulk_alpha_language"
+  },
+  {
+    "side": "Data-file evidence",
+    "text": "Complete public benchmark package",
+    "kind": "diagnostic",
+    "source": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv",
+    "panel": "bulk_alpha_language"
+  }
+]

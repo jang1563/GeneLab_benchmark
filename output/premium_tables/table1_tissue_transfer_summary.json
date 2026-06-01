@@ -1,0 +1,47 @@
+[
+  {
+    "observation": "highest_transfer",
+    "tissue": "thymus",
+    "auroc": 0.86,
+    "ci_low": 0.763,
+    "ci_high": 0.953,
+    "display": "Thymus 0.860 AUROC",
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B"
+  },
+  {
+    "observation": "strong_transfer",
+    "tissue": "gastrocnemius",
+    "auroc": 0.801,
+    "ci_low": 0.653,
+    "ci_high": 0.944,
+    "display": "Gastrocnemius 0.801 AUROC",
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B"
+  },
+  {
+    "observation": "mid_range_transfer",
+    "tissue": "skin_eye",
+    "auroc": "0.772 / 0.754",
+    "ci_low": "0.691 / 0.688",
+    "ci_high": "0.834 / 0.838",
+    "display": "Skin / eye 0.772 / 0.754",
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B"
+  },
+  {
+    "observation": "near_chance_transfer",
+    "tissue": "liver_kidney",
+    "auroc": "0.577 / 0.555",
+    "ci_low": "0.492 / 0.397",
+    "ci_high": "0.666 / 0.681",
+    "display": "Liver / kidney 0.577 / 0.555",
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B"
+  },
+  {
+    "observation": "lead_difference",
+    "tissue": "thymus_minus_liver",
+    "auroc": 0.283,
+    "ci_low": "",
+    "ci_high": "",
+    "display": "Thymus - liver +0.283 AUROC, p=0.001",
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B"
+  }
+]

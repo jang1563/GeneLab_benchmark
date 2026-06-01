@@ -1,0 +1,74 @@
+[
+  {
+    "group": "Bulk",
+    "metric": "public source rows",
+    "value": 22,
+    "display": "22",
+    "kind": "ready",
+    "source": "v9/source_inventory.csv"
+  },
+  {
+    "group": "Bulk",
+    "metric": "held-out mission folds",
+    "value": 33,
+    "display": "33",
+    "kind": "ready",
+    "source": "v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_summary.csv"
+  },
+  {
+    "group": "Bulk",
+    "metric": "baseline rows",
+    "value": 24,
+    "display": "24",
+    "kind": "ready",
+    "source": "v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_summary.csv"
+  },
+  {
+    "group": "Organoid",
+    "metric": "public samples",
+    "value": 42,
+    "display": "42",
+    "kind": "draft",
+    "source": "v9/human_organoid/sample_factors.draft.csv"
+  },
+  {
+    "group": "Organoid",
+    "metric": "gene contrasts",
+    "value": 8,
+    "display": "8",
+    "kind": "draft",
+    "source": "v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json"
+  },
+  {
+    "group": "Organoid",
+    "metric": "gene reference rows",
+    "value": 242708,
+    "display": "242.7k",
+    "kind": "draft",
+    "source": "v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json"
+  },
+  {
+    "group": "Multispecies",
+    "metric": "public samples",
+    "value": 124,
+    "display": "124",
+    "kind": "draft",
+    "source": "v9/multispecies/sample_factors.draft.csv"
+  },
+  {
+    "group": "Single-cell",
+    "metric": "legacy assets indexed",
+    "value": 54,
+    "display": "54",
+    "kind": "diagnostic",
+    "source": "v9/sc_spaceflight/asset_inventory_summary.csv"
+  },
+  {
+    "group": "Single-cell",
+    "metric": "data blockers",
+    "value": 17,
+    "display": "17",
+    "kind": "blocked",
+    "source": "v9/sc_spaceflight/obs_var_audit_summary.csv"
+  }
+]

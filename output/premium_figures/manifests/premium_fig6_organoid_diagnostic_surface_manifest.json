@@ -1,0 +1,146 @@
+[
+  {
+    "metric": "public sources",
+    "value": 2,
+    "display": "2",
+    "detail": "OSD-863 / OSD-871",
+    "kind": "draft",
+    "source": "v9/human_organoid/source_inventory.draft.csv",
+    "panel": "organoid_footprint"
+  },
+  {
+    "metric": "samples",
+    "value": 42,
+    "display": "42",
+    "detail": "public neural organoid RNA-seq",
+    "kind": "draft",
+    "source": "v9/human_organoid/sample_factors.draft.csv",
+    "panel": "organoid_footprint"
+  },
+  {
+    "metric": "flight-ground gene contrasts",
+    "value": 8,
+    "display": "8",
+    "detail": "Ground vs LEO/ISS",
+    "kind": "diagnostic",
+    "source": "v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json",
+    "panel": "organoid_footprint"
+  },
+  {
+    "metric": "gene reference rows",
+    "value": 242708,
+    "display": "242.7k",
+    "detail": "gene/contrast rows",
+    "kind": "diagnostic",
+    "source": "v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json",
+    "panel": "organoid_footprint"
+  },
+  {
+    "metric": "significant gene rows",
+    "value": 2368,
+    "display": "2,368",
+    "detail": "significant reference rows",
+    "kind": "diagnostic",
+    "source": "v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json",
+    "panel": "organoid_footprint"
+  },
+  {
+    "metric": "pilot status",
+    "value": 0,
+    "display": "draft",
+    "detail": "not frozen; diagnostics only",
+    "kind": "blocked",
+    "source": "v9/human_organoid/reports/ORGANOID_DIAGNOSTIC_CONSOLIDATION_AND_RELEASE_BOUNDARY.md",
+    "panel": "organoid_footprint"
+  },
+  {
+    "family": "Primary task",
+    "metric": "AUROC",
+    "value": 0.6147727273,
+    "role": "prediction",
+    "kind": "ready",
+    "source": "v9/human_organoid/reports/nearest_centroid/human_organoid_baseline_summary.csv",
+    "panel": "organoid_metrics"
+  },
+  {
+    "family": "Primary task",
+    "metric": "Macro-F1",
+    "value": 0.5194508009,
+    "role": "prediction",
+    "kind": "ready",
+    "source": "v9/human_organoid/reports/nearest_centroid/human_organoid_baseline_summary.csv",
+    "panel": "organoid_metrics"
+  },
+  {
+    "family": "Flight-response pattern",
+    "metric": "Direction match",
+    "value": 0.7706734868,
+    "role": "biology check",
+    "kind": "diagnostic",
+    "source": "v9/human_organoid/reports/source_transfer_signature/metrics.json",
+    "panel": "organoid_metrics"
+  },
+  {
+    "family": "Flight-response pattern",
+    "metric": "Rank correlation",
+    "value": 0.176007866,
+    "role": "biology check",
+    "kind": "diagnostic",
+    "source": "v9/human_organoid/reports/source_transfer_signature/metrics.json",
+    "panel": "organoid_metrics"
+  },
+  {
+    "family": "Model gene effects",
+    "metric": "Direction match",
+    "value": 0.6078431373,
+    "role": "secondary check",
+    "kind": "draft",
+    "source": "v9/human_organoid/reports/logistic_feature_effect/metrics.json",
+    "panel": "organoid_metrics"
+  },
+  {
+    "family": "Model gene effects",
+    "metric": "Rank correlation",
+    "value": 0.0867280024,
+    "role": "secondary check",
+    "kind": "draft",
+    "source": "v9/human_organoid/reports/logistic_feature_effect/metrics.json",
+    "panel": "organoid_metrics"
+  },
+  {
+    "k": 50,
+    "observed": 1,
+    "expected": 0.6375,
+    "enrichment": 1.5686,
+    "p_value": 0.474071,
+    "source": "v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md",
+    "panel": "organoid_topk"
+  },
+  {
+    "k": 100,
+    "observed": 5,
+    "expected": 1.275,
+    "enrichment": 3.9216,
+    "p_value": 0.00909,
+    "source": "v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md",
+    "panel": "organoid_topk"
+  },
+  {
+    "k": 250,
+    "observed": 10,
+    "expected": 3.1875,
+    "enrichment": 3.1373,
+    "p_value": 0.001414,
+    "source": "v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md",
+    "panel": "organoid_topk"
+  },
+  {
+    "k": 500,
+    "observed": 14,
+    "expected": 6.375,
+    "enrichment": 2.1961,
+    "p_value": 0.004966,
+    "source": "v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md",
+    "panel": "organoid_topk"
+  }
+]

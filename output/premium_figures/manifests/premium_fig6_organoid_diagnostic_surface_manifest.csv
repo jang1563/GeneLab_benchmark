@@ -1,0 +1,17 @@
+detail,display,enrichment,expected,family,k,kind,metric,observed,p_value,panel,role,source,value
+OSD-863 / OSD-871,2,,,,,draft,public sources,,,organoid_footprint,,v9/human_organoid/source_inventory.draft.csv,2
+public neural organoid RNA-seq,42,,,,,draft,samples,,,organoid_footprint,,v9/human_organoid/sample_factors.draft.csv,42
+Ground vs LEO/ISS,8,,,,,diagnostic,flight-ground gene contrasts,,,organoid_footprint,,v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json,8
+gene/contrast rows,242.7k,,,,,diagnostic,gene reference rows,,,organoid_footprint,,v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json,242708
+significant reference rows,"2,368",,,,,diagnostic,significant gene rows,,,organoid_footprint,,v9/human_organoid/de_references/human_organoid_de_reference_manifest.draft.json,2368
+not frozen; diagnostics only,draft,,,,,blocked,pilot status,,,organoid_footprint,,v9/human_organoid/reports/ORGANOID_DIAGNOSTIC_CONSOLIDATION_AND_RELEASE_BOUNDARY.md,0
+,,,,Primary task,,ready,AUROC,,,organoid_metrics,prediction,v9/human_organoid/reports/nearest_centroid/human_organoid_baseline_summary.csv,0.6147727273
+,,,,Primary task,,ready,Macro-F1,,,organoid_metrics,prediction,v9/human_organoid/reports/nearest_centroid/human_organoid_baseline_summary.csv,0.5194508009
+,,,,Flight-response pattern,,diagnostic,Direction match,,,organoid_metrics,biology check,v9/human_organoid/reports/source_transfer_signature/metrics.json,0.7706734868
+,,,,Flight-response pattern,,diagnostic,Rank correlation,,,organoid_metrics,biology check,v9/human_organoid/reports/source_transfer_signature/metrics.json,0.176007866
+,,,,Model gene effects,,draft,Direction match,,,organoid_metrics,secondary check,v9/human_organoid/reports/logistic_feature_effect/metrics.json,0.6078431373
+,,,,Model gene effects,,draft,Rank correlation,,,organoid_metrics,secondary check,v9/human_organoid/reports/logistic_feature_effect/metrics.json,0.0867280024
+,,1.5686,0.6375,,50,,,1,0.474071,organoid_topk,,v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md,
+,,3.9216,1.275,,100,,,5,0.00909,organoid_topk,,v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md,
+,,3.1373,3.1875,,250,,,10,0.001414,organoid_topk,,v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md,
+,,2.1961,6.375,,500,,,14,0.004966,organoid_topk,,v9/human_organoid/reports/ORGANOID_FEATURE_EFFECT_NULL_CALIBRATION_REVIEW.md,

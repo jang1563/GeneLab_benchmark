@@ -1,0 +1,44 @@
+[
+  {
+    "gate": "Task table registry",
+    "status": "pass",
+    "detail": "8 task tables / 33 folds indexed",
+    "source": "v9/task_manifest_index.csv"
+  },
+  {
+    "gate": "Source inventory scope",
+    "status": "pass",
+    "detail": "22 public mouse-bulk source rows",
+    "source": "v9/source_inventory.csv"
+  },
+  {
+    "gate": "Checksum evidence",
+    "status": "pass",
+    "detail": "22/22 sources have parsed OSDR checksum-manifest evidence",
+    "source": "v9/source_checksum_audit.csv"
+  },
+  {
+    "gate": "Baseline output evidence",
+    "status": "pass",
+    "detail": "24/24 simple baseline rows evaluated",
+    "source": "v9/reports/bulk_lomo_baseline_summary.csv"
+  },
+  {
+    "gate": "Data Package boundary",
+    "status": "needs update",
+    "detail": "metadata and data-file evidence need linked descriptors",
+    "source": "v9/datapackage.draft.json"
+  },
+  {
+    "gate": "Dataset description",
+    "status": "needs update",
+    "detail": "description should separate indexed metadata from data files",
+    "source": "docs/v9_hf_dataset_card.md"
+  },
+  {
+    "gate": "Data-file hash verification",
+    "status": "pending",
+    "detail": "0/22 sources have local data-file hash evidence",
+    "source": "v9/source_checksum_audit.csv"
+  }
+]

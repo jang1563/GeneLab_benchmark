@@ -1,0 +1,47 @@
+{
+  "slide_id": "fig6_organoid_layered_scene_pilot",
+  "created": "2026-06-01",
+  "design_rule": "Layered PNG scene + editable scientific interpretation",
+  "source_proof_object": "output/premium_figures/manuscript_variants/premium_fig6_organoid_biology_check_manuscript.png",
+  "source_manifest": "output/premium_figures/manifests/premium_fig6_organoid_biology_check_manuscript_manifest.json",
+  "numeric_audit": "output/premium_audit/premium_visual_numeric_audit.csv",
+  "layers": [
+    {
+      "layer": "Z0",
+      "name": "canvas_atmosphere",
+      "implementation": "procedural dark cellular texture"
+    },
+    {
+      "layer": "Z1",
+      "name": "measurement_layer",
+      "implementation": "quiet source/sample/gene-check lane"
+    },
+    {
+      "layer": "Z2",
+      "name": "evidence_surface",
+      "implementation": "source-derived Fig6 footprint and biology-check crops with backplates"
+    },
+    {
+      "layer": "Z3",
+      "name": "interpretation_layer",
+      "implementation": "editable-equivalent title, callout, and corner focus windows"
+    },
+    {
+      "layer": "Z4",
+      "name": "trust_status_layer",
+      "implementation": "draft-extension caution label; no raw paths in visible slide"
+    },
+    {
+      "layer": "Z5",
+      "name": "motion_focus_layer",
+      "implementation": "single transition from source footprint to biology checks"
+    }
+  ],
+  "claim_boundary": "Human organoid evidence is a small draft diagnostic extension; source, disease, donor, and microglia factors remain coupled.",
+  "outputs": {
+    "scene_plate_png": "output/premium_slide_scenes/fig6_organoid_scene_plate.png",
+    "final_composite_png": "output/premium_slide_scenes/fig6_organoid_layered_scene.png",
+    "final_composite_pdf": "output/premium_slide_scenes/fig6_organoid_layered_scene.pdf",
+    "editable_overlay_spec": "output/premium_slide_scenes/fig6_organoid_editable_overlay_spec.json"
+  }
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "family": "Task definition",
+    "artifact": "sample table and source metadata",
+    "decision": "pilot task",
+    "kind": "draft",
+    "source": "v9/human_organoid/reports/ORGANOID_DIAGNOSTIC_CONSOLIDATION_AND_RELEASE_BOUNDARY.md"
+  },
+  {
+    "family": "Flight-response pattern",
+    "artifact": "cross-source response genes",
+    "decision": "show by default",
+    "kind": "ready",
+    "source": "v9/human_organoid/reports/source_transfer_signature/metrics.json"
+  },
+  {
+    "family": "Model gene effects",
+    "artifact": "model gene-weight check",
+    "decision": "show as secondary",
+    "kind": "draft",
+    "source": "v9/human_organoid/reports/logistic_feature_effect/metrics.json"
+  },
+  {
+    "family": "Microglia-matched pattern",
+    "artifact": "microglia-aware source check",
+    "decision": "keep secondary",
+    "kind": "diagnostic",
+    "source": "v9/human_organoid/reports/microglia_source_transfer_signature/metrics.json"
+  },
+  {
+    "family": "Shared-control subset",
+    "artifact": "partial disease and microglia match",
+    "decision": "partial/negative",
+    "kind": "blocked",
+    "source": "v9/human_organoid/reports/shared_control_source_transfer_signature/metrics.json"
+  },
+  {
+    "family": "PCA-LR gene effects",
+    "artifact": "reconstructed gene weights",
+    "decision": "negative comparison",
+    "kind": "blocked",
+    "source": "v9/human_organoid/reports/pca_lr_feature_effect/metrics.json"
+  }
+]

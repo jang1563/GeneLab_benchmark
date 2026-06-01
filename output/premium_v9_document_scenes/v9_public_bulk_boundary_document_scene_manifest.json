@@ -1,0 +1,47 @@
+{
+  "slide_id": "v9_public_bulk_boundary_document_scene",
+  "created": "2026-06-01",
+  "design_rule": "Light provenance-document scene + editable release-boundary interpretation",
+  "source_proof_object": "output/premium_figures/premium_fig5_public_bulk_release_boundary_schematic.png",
+  "source_manifest": "output/premium_figures/manifests/premium_fig5_public_bulk_alpha_boundary_manifest.json",
+  "numeric_audit": "output/premium_audit/premium_visual_numeric_audit.csv",
+  "layers": [
+    {
+      "layer": "Z0",
+      "name": "canvas_document",
+      "implementation": "off-white evidence-paper texture"
+    },
+    {
+      "layer": "Z1",
+      "name": "provenance_measurement",
+      "implementation": "thin provenance rail and document rules"
+    },
+    {
+      "layer": "Z2",
+      "name": "evidence_surface",
+      "implementation": "source-derived proof crops on paper evidence plates"
+    },
+    {
+      "layer": "Z3",
+      "name": "interpretation_layer",
+      "implementation": "editable-equivalent title, callout, and focus windows"
+    },
+    {
+      "layer": "Z4",
+      "name": "trust_status_layer",
+      "implementation": "short release-boundary label"
+    },
+    {
+      "layer": "Z5",
+      "name": "motion_focus_layer",
+      "implementation": "single provenance or release-boundary arrow"
+    }
+  ],
+  "claim_boundary": "Public-bulk v9 is metadata-preview ready; local data-file mirroring and hash verification remain separate gates.",
+  "outputs": {
+    "scene_plate_png": "output/premium_v9_document_scenes/v9_public_bulk_boundary_document_scene_plate.png",
+    "final_composite_png": "output/premium_v9_document_scenes/v9_public_bulk_boundary_document_scene.png",
+    "final_composite_pdf": "output/premium_v9_document_scenes/v9_public_bulk_boundary_document_scene.pdf",
+    "editable_overlay_spec": "output/premium_v9_document_scenes/v9_public_bulk_boundary_document_overlay_spec.json"
+  }
+}

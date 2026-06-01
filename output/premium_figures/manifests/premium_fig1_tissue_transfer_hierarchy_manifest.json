@@ -1,0 +1,62 @@
+[
+  {
+    "tissue": "thymus",
+    "auroc": 0.86,
+    "ci_low": 0.763,
+    "ci_high": 0.953,
+    "tier": 1,
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B",
+    "panel": "held_out_mission_tissue_transfer"
+  },
+  {
+    "tissue": "gastrocnemius",
+    "auroc": 0.801,
+    "ci_low": 0.653,
+    "ci_high": 0.944,
+    "tier": 1,
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B",
+    "panel": "held_out_mission_tissue_transfer"
+  },
+  {
+    "tissue": "skin",
+    "auroc": 0.772,
+    "ci_low": 0.691,
+    "ci_high": 0.834,
+    "tier": 2,
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B",
+    "panel": "held_out_mission_tissue_transfer"
+  },
+  {
+    "tissue": "eye",
+    "auroc": 0.754,
+    "ci_low": 0.688,
+    "ci_high": 0.838,
+    "tier": 2,
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B",
+    "panel": "held_out_mission_tissue_transfer"
+  },
+  {
+    "tissue": "liver",
+    "auroc": 0.577,
+    "ci_low": 0.492,
+    "ci_high": 0.666,
+    "tier": 3,
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B",
+    "panel": "held_out_mission_tissue_transfer"
+  },
+  {
+    "tissue": "kidney",
+    "auroc": 0.555,
+    "ci_low": 0.397,
+    "ci_high": 0.681,
+    "tier": 3,
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B",
+    "panel": "held_out_mission_tissue_transfer"
+  },
+  {
+    "panel": "claim_boundary",
+    "claim": "transfer_is_tissue_specific",
+    "scope": "mouse_bulk_rna_seq_six_tissue_tasks",
+    "source": "evaluation/RESULTS_SUMMARY.md:Category B"
+  }
+]

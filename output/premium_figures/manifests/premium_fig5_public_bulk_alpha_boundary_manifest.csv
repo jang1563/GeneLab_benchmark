@@ -1,0 +1,17 @@
+detail,gate,kind,panel,path,side,source,status,text
+8 task tables / 33 folds indexed,Task table registry,,bulk_alpha_gates,,,v9/task_manifest_index.csv,pass,
+22 public mouse-bulk source rows,Source inventory scope,,bulk_alpha_gates,,,v9/source_inventory.csv,pass,
+22/22 sources have parsed OSDR checksum-manifest evidence,Checksum evidence,,bulk_alpha_gates,,,v9/source_checksum_audit.csv,pass,
+24/24 simple baseline rows evaluated,Baseline output evidence,,bulk_alpha_gates,,,v9/reports/bulk_lomo_baseline_summary.csv,pass,
+metadata and data-file evidence need linked descriptors,Data Package boundary,,bulk_alpha_gates,,,v9/datapackage.draft.json,needs update,
+description should separate indexed metadata from data files,Dataset description,,bulk_alpha_gates,,,docs/v9_hf_dataset_card.md,needs update,
+0/22 sources have local data-file hash evidence,Data-file hash verification,,bulk_alpha_gates,,,v9/source_checksum_audit.csv,pending,
+"source, task, fold, checksum, and baseline metadata indexed",,ready,bulk_alpha_decisions,Metadata records,,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv,available,
+local file copy and hash verification still separate,,diagnostic,bulk_alpha_decisions,Data-file mirror,,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv,pending,
+metadata and data-file evidence can be joined after verification,,diagnostic,bulk_alpha_decisions,Integrated package,,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv,future,
+,,ready,bulk_alpha_language,,Metadata evidence,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv,,v9 public bulk metadata records
+,,ready,bulk_alpha_language,,Metadata evidence,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv,,Task/source/checksum/baseline metadata
+,,ready,bulk_alpha_language,,Metadata evidence,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv,,Baseline outputs as reproducibility checks
+,,diagnostic,bulk_alpha_language,,Data-file evidence,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv,,Local data-file mirror
+,,diagnostic,bulk_alpha_language,,Data-file evidence,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv,,Local hash-verified data bundle
+,,diagnostic,bulk_alpha_language,,Data-file evidence,v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv,,Complete public benchmark package

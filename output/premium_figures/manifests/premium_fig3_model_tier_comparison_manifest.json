@@ -1,0 +1,136 @@
+[
+  {
+    "model": "PCA-LR",
+    "score": 0.758,
+    "family": "Classical ML",
+    "surface": "6-tissue v1 mean",
+    "source": "docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot",
+    "panel": "model_tier_means"
+  },
+  {
+    "model": "scGPT",
+    "score": 0.666,
+    "family": "Single-cell foundation model",
+    "surface": "6-tissue v1 mean",
+    "source": "docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot",
+    "panel": "model_tier_means"
+  },
+  {
+    "model": "Mouse-Geneformer",
+    "score": 0.476,
+    "family": "Single-cell foundation model",
+    "surface": "6-tissue v1 mean",
+    "source": "docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot",
+    "panel": "model_tier_means"
+  },
+  {
+    "model": "DeepSeek-V3",
+    "score": 0.471,
+    "family": "Text LLM",
+    "surface": "zero-shot, 6 tasks",
+    "source": "evaluation/RESULTS_SUMMARY.md:Tier 3 LLM Zero-Shot Classification",
+    "panel": "model_tier_means"
+  },
+  {
+    "model": "Llama-3.3-70B",
+    "score": 0.484,
+    "family": "Text LLM",
+    "surface": "zero-shot, 6 tasks",
+    "source": "evaluation/RESULTS_SUMMARY.md:Tier 3 LLM Zero-Shot Classification",
+    "panel": "model_tier_means"
+  },
+  {
+    "model": "Gemini-2.5-Flash",
+    "score": 0.505,
+    "family": "Text LLM",
+    "surface": "zero-shot, 6 tasks",
+    "source": "evaluation/RESULTS_SUMMARY.md:Tier 3 LLM Zero-Shot Classification",
+    "panel": "model_tier_means"
+  },
+  {
+    "tissue": "liver",
+    "model": "scGPT",
+    "delta": 0.04,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "gastrocnemius",
+    "model": "scGPT",
+    "delta": -0.222,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "kidney",
+    "model": "scGPT",
+    "delta": 0.035,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "thymus",
+    "model": "scGPT",
+    "delta": -0.141,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "skin",
+    "model": "scGPT",
+    "delta": -0.13,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "eye",
+    "model": "scGPT",
+    "delta": -0.139,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "liver",
+    "model": "Mouse-Geneformer",
+    "delta": -0.102,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "gastrocnemius",
+    "model": "Mouse-Geneformer",
+    "delta": -0.525,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "kidney",
+    "model": "Mouse-Geneformer",
+    "delta": -0.069,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "thymus",
+    "model": "Mouse-Geneformer",
+    "delta": -0.428,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "skin",
+    "model": "Mouse-Geneformer",
+    "delta": -0.264,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "tissue": "eye",
+    "model": "Mouse-Geneformer",
+    "delta": -0.305,
+    "panel": "model_tier_deltas"
+  },
+  {
+    "model": "scFoundation",
+    "score": 0.635,
+    "surface": "best single-tissue extension row",
+    "source": "docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot",
+    "panel": "model_extension_rows"
+  },
+  {
+    "model": "UCE",
+    "score": 0.632,
+    "surface": "best single-tissue extension row",
+    "source": "docs/CANONICAL_RESULTS_V7_1.md:Canonical FM / LLM Snapshot",
+    "panel": "model_extension_rows"
+  }
+]

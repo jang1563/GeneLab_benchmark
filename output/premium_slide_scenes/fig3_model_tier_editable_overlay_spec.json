@@ -1,0 +1,39 @@
+{
+  "slide_id": "fig3_model_tier_layered_scene_pilot",
+  "editable_overlay_elements": [
+    {
+      "layer": "Z3",
+      "type": "title",
+      "text": "Scale alone does not transfer",
+      "purpose": "main interpretive claim"
+    },
+    {
+      "layer": "Z3",
+      "type": "callout",
+      "text": "On shared tasks, PCA-LR remains highest; model gains are local and tissue-specific.",
+      "purpose": "plain-language guide"
+    },
+    {
+      "layer": "Z3",
+      "type": "focus_window",
+      "targets": [
+        "shared-task PCA-LR row",
+        "single-cell rows",
+        "negative tissue deltas"
+      ],
+      "purpose": "direct attention to comparison boundary and tissue-specific failures"
+    },
+    {
+      "layer": "Z4",
+      "type": "scope_label",
+      "text": "Shared 6-task rows are direct comparisons",
+      "purpose": "trust and scope boundary"
+    },
+    {
+      "layer": "Z5",
+      "type": "trajectory",
+      "text": "aggregate shared-task comparison to tissue deltas",
+      "purpose": "single visual movement"
+    }
+  ]
+}

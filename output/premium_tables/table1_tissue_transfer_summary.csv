@@ -1,0 +1,6 @@
+auroc,ci_high,ci_low,display,observation,source,tissue
+0.86,0.953,0.763,Thymus 0.860 AUROC,highest_transfer,evaluation/RESULTS_SUMMARY.md:Category B,thymus
+0.801,0.944,0.653,Gastrocnemius 0.801 AUROC,strong_transfer,evaluation/RESULTS_SUMMARY.md:Category B,gastrocnemius
+0.772 / 0.754,0.834 / 0.838,0.691 / 0.688,Skin / eye 0.772 / 0.754,mid_range_transfer,evaluation/RESULTS_SUMMARY.md:Category B,skin_eye
+0.577 / 0.555,0.666 / 0.681,0.492 / 0.397,Liver / kidney 0.577 / 0.555,near_chance_transfer,evaluation/RESULTS_SUMMARY.md:Category B,liver_kidney
+0.283,,,"Thymus - liver +0.283 AUROC, p=0.001",lead_difference,evaluation/RESULTS_SUMMARY.md:Category B,thymus_minus_liver
