@@ -1,0 +1,243 @@
+{
+  "version": "0.1",
+  "created": "2026-06-01",
+  "brand_territory": {
+    "name": "Mission-grade scientific benchmark system",
+    "positioning": "NASA/mission-systems seriousness, high-profile scientific editorial restraint, and premium strategy-deck clarity without copying NASA marks or using decorative space wallpaper.",
+    "personality": [
+      "precise",
+      "source-traceable",
+      "mission-aware",
+      "calm but not weak",
+      "technical without becoming software UI",
+      "premium through restraint, spacing, and evidence"
+    ]
+  },
+  "colors": {
+    "ink": "#17212B",
+    "mission_navy": "#112B3C",
+    "paper": "#FBFAF6",
+    "canvas_warm": "#F4F0E8",
+    "canvas_cool": "#EEF3F5",
+    "muted": "#5D6978",
+    "rule": "#AEB8C5",
+    "source_blue": "#286EA6",
+    "bio_green": "#15815E",
+    "assay_teal": "#159A8A",
+    "label_amber": "#C4861B",
+    "test_red": "#B91C1C",
+    "model_purple": "#6D3EDB",
+    "shadow": "#9C9487"
+  },
+  "color_rules": {
+    "test_red": "Use only for held-out/test/trust boundary semantics.",
+    "model_purple": "Use as a secondary model/fit operation color, never as the dominant deck hue.",
+    "paper": "Use for evidence surfaces, not decorative cards.",
+    "grayscale_rule": "Color must be supported by position, shape, line style, or labels."
+  },
+  "typography": {
+    "headline": {
+      "role": "decision headline",
+      "font_family_preferred": "Inter or similar geometric sans",
+      "font_family_fallback": "DejaVu Sans",
+      "weight": "bold",
+      "size_pt_range": [24, 31],
+      "max_lines": 2
+    },
+    "callout": {
+      "role": "editable interpretation label",
+      "font_family_preferred": "Inter or similar clean sans",
+      "font_family_fallback": "DejaVu Sans",
+      "weight": "bold",
+      "size_pt_range": [8, 12]
+    },
+    "status": {
+      "role": "claim boundary or caveat",
+      "font_family_preferred": "Inter or similar clean sans",
+      "font_family_fallback": "DejaVu Sans",
+      "weight": "regular",
+      "size_pt_range": [7, 8]
+    },
+    "source_tick": {
+      "role": "provenance or data tick",
+      "font_family_preferred": "DM Mono or similar mono",
+      "font_family_fallback": "DejaVu Sans Mono",
+      "weight": "regular",
+      "size_pt_range": [5.5, 7]
+    }
+  },
+  "layout": {
+    "canvas": {
+      "aspect_ratio": "16:9",
+      "width_px": 3840,
+      "height_px": 2160,
+      "dpi": 240
+    },
+    "safe_area": {
+      "x_min": 0.055,
+      "x_max": 0.945,
+      "y_min": 0.075,
+      "y_max": 0.900
+    },
+    "headline_zone": {
+      "x_min": 0.060,
+      "x_max": 0.760,
+      "y_min": 0.090,
+      "y_max": 0.230
+    },
+    "evidence_zone": {
+      "x_min": 0.060,
+      "x_max": 0.940,
+      "y_min": 0.285,
+      "y_max": 0.760
+    },
+    "status_zone": {
+      "x_min": 0.060,
+      "x_max": 0.940,
+      "y_min": 0.845,
+      "y_max": 0.905
+    }
+  },
+  "z_layers": [
+    {
+      "id": "Z0",
+      "name": "canvas_atmosphere",
+      "meaning": "project environment, not evidence",
+      "implementation": "subtle warm/cool field, faint grain, no wallpaper"
+    },
+    {
+      "id": "Z1",
+      "name": "measurement_infrastructure",
+      "meaning": "rails, ticks, lanes, fold arcs",
+      "implementation": "thin rules, low alpha, never dominant"
+    },
+    {
+      "id": "Z2",
+      "name": "evidence_surface",
+      "meaning": "source-derived or source-like object",
+      "implementation": "large band, plate, or crop with minimal border"
+    },
+    {
+      "id": "Z3",
+      "name": "proof_objects",
+      "meaning": "task record, mission nodes, result crop, document strip",
+      "implementation": "slightly elevated objects with semantic color"
+    },
+    {
+      "id": "Z4",
+      "name": "interpretation_overlay",
+      "meaning": "headline, callouts, focus labels",
+      "implementation": "editable text, no paragraph blocks"
+    },
+    {
+      "id": "Z5",
+      "name": "trust_boundary",
+      "meaning": "held-out mission, train-only guard, claim boundary",
+      "implementation": "restrained red line, gate, or focus window"
+    },
+    {
+      "id": "Z6",
+      "name": "status_caveat",
+      "meaning": "source-traceability, release boundary, overclaim guard",
+      "implementation": "compact low-emphasis text"
+    },
+    {
+      "id": "Z7",
+      "name": "motion_focus",
+      "meaning": "one directional path or focus transition",
+      "implementation": "single trajectory, crop window, or transfer line"
+    }
+  ],
+  "depth_tokens": {
+    "flat": {
+      "semantic_use": "measurement layer and background rules",
+      "shadow_alpha": 0.0,
+      "offset": [0.0, 0.0]
+    },
+    "recessed_band": {
+      "semantic_use": "evidence field or lane",
+      "shadow_alpha": 0.0,
+      "material_alpha": 0.35
+    },
+    "proof_object": {
+      "semantic_use": "source-derived proof, task record, mission document",
+      "shadow_alpha": 0.10,
+      "offset": [0.006, -0.008]
+    },
+    "dominant_evidence": {
+      "semantic_use": "one central evidence object per slide",
+      "shadow_alpha": 0.14,
+      "offset": [0.010, -0.012]
+    },
+    "focus_boundary": {
+      "semantic_use": "trust boundary or held-out split",
+      "shadow_alpha": 0.0,
+      "line_width": 1.3
+    }
+  },
+  "slide_type_contracts": {
+    "thesis": {
+      "primary_object": "fragmented source field compressing into evaluation surface",
+      "required_layers": ["Z0", "Z1", "Z2", "Z3", "Z4", "Z6", "Z7"],
+      "avoid": ["agenda layout", "logo-like branding", "database screenshot"]
+    },
+    "method_bridge": {
+      "primary_object": "one operating-model scene",
+      "required_layers": ["Z0", "Z1", "Z2", "Z3", "Z4", "Z5", "Z6"],
+      "avoid": ["generic workflow", "software architecture", "card boxes"]
+    },
+    "result": {
+      "primary_object": "source-derived proof object",
+      "required_layers": ["Z0", "Z1", "Z2", "Z3", "Z4", "Z6"],
+      "avoid": ["decorative process diagrams", "leaderboard badges", "uncited numbers"]
+    },
+    "provenance": {
+      "primary_object": "document or evidence surface",
+      "required_layers": ["Z0", "Z1", "Z2", "Z3", "Z4", "Z5", "Z6"],
+      "avoid": ["release hype", "payload claims without caveat"]
+    },
+    "manuscript": {
+      "primary_object": "data figure",
+      "required_layers": ["Z1", "Z2", "Z3", "Z4"],
+      "avoid": ["atmospheric texture", "slide-only headlines", "large shadows"]
+    }
+  },
+  "anti_patterns": [
+    "large bordered panels that read as card boxes",
+    "dashboard tiles",
+    "nested cards",
+    "decorative space wallpaper",
+    "NASA logo or patch imitation",
+    "dense tables inside figures",
+    "raw local paths in visible text",
+    "red used as a generic highlight",
+    "purple as the dominant palette",
+    "text shadows",
+    "multiple competing motion paths"
+  ],
+  "export_modes": {
+    "deck": {
+      "atmosphere": true,
+      "depth": true,
+      "headline_style": "assertion-evidence",
+      "output_formats": ["png", "pdf"]
+    },
+    "manuscript": {
+      "atmosphere": false,
+      "depth": "minimal",
+      "headline_style": "caption-compatible",
+      "output_formats": ["png", "pdf"]
+    }
+  },
+  "qa_required": [
+    "visible_thesis_at_contact_sheet_scale",
+    "one_dominant_visual_movement",
+    "no_card_box_layout",
+    "z_layers_declared",
+    "depth_used_for_semantic_hierarchy",
+    "visible_text_under_budget",
+    "forbidden_terms_absent",
+    "full_size_visual_inspection",
+    "thumbnail_contact_sheet_inspection"
+  ]
+}

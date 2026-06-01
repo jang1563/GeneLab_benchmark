@@ -33,6 +33,36 @@ That means:
 4. the exported slide is visually inspected at full size and thumbnail size;
 5. the visible caveat prevents the most likely overclaim.
 
+## Visual Identity Gate
+
+Do not treat the current light methods/provenance grammar as the brand.
+
+Before producing more final-looking bridge slides, use:
+
+- `docs/VISUAL_IDENTITY_RESEARCH_AND_DEPTH_STRATEGY_2026_06_01.md`
+- `config/visual_identity/spacebio_bench_visual_identity_v0_1.json`
+
+The selected direction is:
+
+> Mission-grade scientific benchmark system
+
+This is not NASA imitation. It is a disciplined hybrid of mission-system
+seriousness, high-profile scientific editorial restraint, and premium
+strategy-deck clarity.
+
+Each new renderer should declare:
+
+- slide type: `thesis`, `method_bridge`, `result`, `provenance`, or
+  `manuscript`;
+- visual identity token version;
+- semantic color roles used;
+- z-layers used;
+- depth tokens used;
+- anti-pattern checks, especially `no_card_box_layout`.
+
+If a slide does not pass the visual identity gate, it can remain a logic
+wireframe, but it should not be promoted as a premium deck candidate.
+
 ## Required File Contract
 
 Each production slide should have a stable `slide_id`, for example:
