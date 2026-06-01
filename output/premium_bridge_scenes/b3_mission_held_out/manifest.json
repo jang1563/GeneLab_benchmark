@@ -1,0 +1,48 @@
+{
+  "slide_id": "b3_mission_held_out",
+  "created": "2026-06-01",
+  "stage": "pre_render",
+  "content_brief": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+  "technical_preflight": "docs/VISUAL_BRIDGE_TECHNICAL_PREFLIGHT_B3_B4_2026_06_01.md",
+  "audience_question": "Why is mission-held-out evaluation central to this benchmark?",
+  "decision_headline": "The test set is a mission, not a random sample",
+  "visual_move": "one mission moves behind a clean boundary while remaining missions feed training",
+  "claim_boundary": "held-out mission evaluation; not random sample cross-validation",
+  "evidence_sources": [
+    {
+      "path": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+      "role": "B3 content brief and production gate"
+    },
+    {
+      "path": "docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md",
+      "role": "viewer confusion map for held-out mission evaluation"
+    },
+    {
+      "path": "docs/VISUAL_METHODS_STORYBOARD_2026_06_01.md",
+      "role": "methods section sequence and bridge role"
+    },
+    {
+      "path": "docs/V1_V9_PRESENTATION_AND_MANUSCRIPT_MASTER_OUTLINE_2026_05_31.md",
+      "role": "overall manuscript/deck narrative spine"
+    },
+    {
+      "path": "docs/PROJECT_SLIDE_CONTENT_INVENTORY_V1_TO_V9_2026_05_31.md",
+      "role": "project-level mission-held-out benchmark framing"
+    }
+  ],
+  "generator": "scripts/build_visual_bridge_scene_contracts.py",
+  "planned_renderer": "scripts/build_bridge_method_scenes.py",
+  "outputs": {
+    "scene_plate": "output/premium_bridge_scenes/b3_mission_held_out/scene_plate.png",
+    "rendered_preview_png": "output/premium_bridge_scenes/b3_mission_held_out/rendered_preview.png",
+    "rendered_preview_pdf": "output/premium_bridge_scenes/b3_mission_held_out/rendered_preview.pdf",
+    "overlay_spec": "output/premium_bridge_scenes/b3_mission_held_out/overlay_spec.json",
+    "manifest": "output/premium_bridge_scenes/b3_mission_held_out/manifest.json",
+    "qa": "output/premium_bridge_scenes/b3_mission_held_out/qa.json"
+  },
+  "qa": {
+    "stage": "pre_render",
+    "pre_render_gate_expected": true,
+    "post_render_required_before_use": true
+  }
+}

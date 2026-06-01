@@ -1,0 +1,103 @@
+{
+  "slide_id": "b3_mission_held_out",
+  "stage": "pre_render",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "The test set is a mission, not a random sample",
+      "x": 0.065,
+      "y": 0.135,
+      "font_pt": 27,
+      "color": "ink",
+      "max_lines": 2,
+      "z": "Z3"
+    },
+    {
+      "id": "train_label",
+      "role": "primary_callout",
+      "content": "train on prior missions",
+      "x": 0.205,
+      "y": 0.545,
+      "font_pt": 11,
+      "color": "muted",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "hidden_label",
+      "role": "primary_callout",
+      "content": "hide one mission",
+      "x": 0.705,
+      "y": 0.545,
+      "font_pt": 12,
+      "color": "red",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "score_label",
+      "role": "secondary_label",
+      "content": "score after training",
+      "x": 0.755,
+      "y": 0.71,
+      "font_pt": 8.5,
+      "color": "muted",
+      "max_lines": 1,
+      "z": "Z3"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "scope",
+      "role": "claim_boundary",
+      "content": "held-out mission evaluation",
+      "x": 0.065,
+      "y": 0.865,
+      "font_pt": 7.8,
+      "color": "muted",
+      "z": "Z4"
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "No hidden-mission samples are used for training.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.4,
+      "color": "muted",
+      "z": "Z4"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "test_boundary",
+      "role": "boundary",
+      "shape": "vertical_rule",
+      "x": 0.64,
+      "y0": 0.32,
+      "y1": 0.725,
+      "color": "red",
+      "z": "Z5"
+    }
+  ],
+  "visible_word_count": 30,
+  "visible_word_budget": 45,
+  "forbidden_visible_terms": [
+    "LOMO",
+    "random CV",
+    "cross-validation",
+    "payload",
+    "RRRM",
+    "alpha",
+    "NES",
+    "macro-F1",
+    "/Users/"
+  ]
+}

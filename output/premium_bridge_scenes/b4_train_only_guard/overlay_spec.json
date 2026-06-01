@@ -1,0 +1,113 @@
+{
+  "slide_id": "b4_train_only_guard",
+  "stage": "pre_render",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "Feature processing stays on the training side",
+      "x": 0.065,
+      "y": 0.135,
+      "font_pt": 27,
+      "color": "ink",
+      "max_lines": 2,
+      "z": "Z3"
+    },
+    {
+      "id": "choose_features",
+      "role": "process_verb",
+      "content": "choose features",
+      "x": 0.355,
+      "y": 0.47,
+      "font_pt": 9.0,
+      "color": "blue",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "scale",
+      "role": "process_verb",
+      "content": "scale",
+      "x": 0.505,
+      "y": 0.47,
+      "font_pt": 9.0,
+      "color": "teal",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "fit_model",
+      "role": "process_verb",
+      "content": "fit model",
+      "x": 0.65,
+      "y": 0.47,
+      "font_pt": 9.0,
+      "color": "purple",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "score_hidden",
+      "role": "process_verb",
+      "content": "score hidden mission",
+      "x": 0.805,
+      "y": 0.61,
+      "font_pt": 9.0,
+      "color": "red",
+      "max_lines": 1,
+      "z": "Z3"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "scope",
+      "role": "claim_boundary",
+      "content": "train-only processing",
+      "x": 0.065,
+      "y": 0.865,
+      "font_pt": 7.8,
+      "color": "muted",
+      "z": "Z4"
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "Feature choices are learned before scoring.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.4,
+      "color": "muted",
+      "z": "Z4"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "train_test_guard",
+      "role": "guard",
+      "shape": "vertical_rule",
+      "x": 0.73,
+      "y0": 0.335,
+      "y1": 0.705,
+      "color": "red",
+      "z": "Z5"
+    }
+  ],
+  "visible_word_count": 23,
+  "visible_word_budget": 45,
+  "forbidden_visible_terms": [
+    "LOMO",
+    "payload",
+    "artifact",
+    "macro-F1",
+    "/Users/",
+    "sklearn",
+    "StandardScaler",
+    "fit_transform"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "slide_id": "b4_train_only_guard",
+  "created": "2026-06-01",
+  "stage": "pre_render",
+  "content_brief": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+  "technical_preflight": "docs/VISUAL_BRIDGE_TECHNICAL_PREFLIGHT_B3_B4_2026_06_01.md",
+  "audience_question": "How does the benchmark avoid learning from the mission it is supposed to test?",
+  "decision_headline": "Feature processing stays on the training side",
+  "visual_move": "two lanes move in parallel until the hidden mission joins only at scoring",
+  "claim_boundary": "feature selection, scaling, and model fitting are learned from training missions only",
+  "evidence_sources": [
+    {
+      "path": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+      "role": "B4 content brief and production gate"
+    },
+    {
+      "path": "docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md",
+      "role": "viewer confusion map for leakage prevention"
+    },
+    {
+      "path": "docs/VISUAL_METHODS_STORYBOARD_2026_06_01.md",
+      "role": "methods sequence and bridge role"
+    },
+    {
+      "path": "docs/VISUAL_METHODS_EXPLAINER_PILOT_2026_06_01.md",
+      "role": "first methods explainer review and text simplification record"
+    },
+    {
+      "path": "output/premium_methods_scenes/methods_data_to_evaluation_overview_manifest.json",
+      "role": "current methods overview artifact manifest"
+    }
+  ],
+  "generator": "scripts/build_visual_bridge_scene_contracts.py",
+  "planned_renderer": "scripts/build_bridge_method_scenes.py",
+  "outputs": {
+    "scene_plate": "output/premium_bridge_scenes/b4_train_only_guard/scene_plate.png",
+    "rendered_preview_png": "output/premium_bridge_scenes/b4_train_only_guard/rendered_preview.png",
+    "rendered_preview_pdf": "output/premium_bridge_scenes/b4_train_only_guard/rendered_preview.pdf",
+    "overlay_spec": "output/premium_bridge_scenes/b4_train_only_guard/overlay_spec.json",
+    "manifest": "output/premium_bridge_scenes/b4_train_only_guard/manifest.json",
+    "qa": "output/premium_bridge_scenes/b4_train_only_guard/qa.json"
+  },
+  "qa": {
+    "stage": "pre_render",
+    "pre_render_gate_expected": true,
+    "post_render_required_before_use": true
+  }
+}
