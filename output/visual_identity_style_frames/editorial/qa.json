@@ -1,0 +1,38 @@
+{
+  "slide_id": "editorial",
+  "stage": "post_render",
+  "created": "2026-06-01",
+  "depth_audit": {
+    "used_z_layers": [
+      "Z1",
+      "Z2",
+      "Z3",
+      "Z4",
+      "Z5",
+      "Z6",
+      "Z7"
+    ],
+    "used_depth_tokens": [
+      "flat",
+      "proof_object",
+      "focus_boundary"
+    ],
+    "depth_semantics": "depth separates canvas, measurement, evidence, proof objects, interpretation, trust boundary, and caveat",
+    "dominant_depth_event": "one central source-to-task evidence scene",
+    "card_box_risk": "low"
+  },
+  "style_scores": {
+    "scientific_trust": 5,
+    "premium_impression": 3,
+    "thumbnail_recognizability": 3,
+    "manuscript_portability": 5,
+    "technical_reproducibility": 5
+  },
+  "manual_review_pending": [],
+  "manual_review": {
+    "full_size_render_inspection": "pass: clean and manuscript-portable",
+    "thumbnail_contact_sheet_inspection": "conditional pass: readable but visually underpowered for an opening deck system",
+    "direction_selection": "not selected as primary deck identity",
+    "reason": "highest manuscript portability, but insufficient premium/mission presence for 2026 ISGP-style bridge slides"
+  }
+}

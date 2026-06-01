@@ -1,0 +1,40 @@
+{
+  "slide_id": "mission_system",
+  "stage": "post_render",
+  "created": "2026-06-01",
+  "depth_audit": {
+    "used_z_layers": [
+      "Z0",
+      "Z1",
+      "Z2",
+      "Z3",
+      "Z4",
+      "Z5",
+      "Z6",
+      "Z7"
+    ],
+    "used_depth_tokens": [
+      "recessed_band",
+      "proof_object",
+      "dominant_evidence",
+      "focus_boundary"
+    ],
+    "depth_semantics": "depth separates canvas, measurement, evidence, proof objects, interpretation, trust boundary, and caveat",
+    "dominant_depth_event": "one central source-to-task evidence scene",
+    "card_box_risk": "medium: dark surface can read as interface if overused"
+  },
+  "style_scores": {
+    "scientific_trust": 3,
+    "premium_impression": 5,
+    "thumbnail_recognizability": 5,
+    "manuscript_portability": 2,
+    "technical_reproducibility": 4
+  },
+  "manual_review_pending": [],
+  "manual_review": {
+    "full_size_render_inspection": "pass: strongest immediate visual identity and depth",
+    "thumbnail_contact_sheet_inspection": "pass: most recognizable at small scale",
+    "direction_selection": "not selected as primary deck identity",
+    "reason": "too dark and interface-like for the whole deck; useful as an accent grammar for mission/control moments only"
+  }
+}

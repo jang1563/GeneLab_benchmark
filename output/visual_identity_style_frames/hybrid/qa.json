@@ -1,0 +1,41 @@
+{
+  "slide_id": "hybrid",
+  "stage": "post_render",
+  "created": "2026-06-01",
+  "depth_audit": {
+    "used_z_layers": [
+      "Z0",
+      "Z1",
+      "Z2",
+      "Z3",
+      "Z4",
+      "Z5",
+      "Z6",
+      "Z7"
+    ],
+    "used_depth_tokens": [
+      "recessed_band",
+      "proof_object",
+      "dominant_evidence",
+      "focus_boundary"
+    ],
+    "depth_semantics": "depth separates canvas, measurement, evidence, proof objects, interpretation, trust boundary, and caveat",
+    "dominant_depth_event": "one central source-to-task evidence scene",
+    "card_box_risk": "low"
+  },
+  "style_scores": {
+    "scientific_trust": 5,
+    "premium_impression": 5,
+    "thumbnail_recognizability": 4,
+    "manuscript_portability": 4,
+    "technical_reproducibility": 5
+  },
+  "manual_review_pending": [],
+  "manual_review": {
+    "full_size_render_inspection": "pass: best balance of scientific restraint, mission-grade depth, and deck readability",
+    "thumbnail_contact_sheet_inspection": "pass: source-to-task-to-boundary thesis is visible at contact-sheet scale",
+    "direction_selection": "selected as primary deck identity direction",
+    "reason": "retains manuscript-adjacent trust while adding enough depth and hierarchy for premium deck use",
+    "implementation_condition": "when applying to B1-B4, keep right-side held-out/test objects farther inside the safe area than this style-frame prototype"
+  }
+}

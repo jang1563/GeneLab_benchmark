@@ -1,0 +1,44 @@
+{
+  "contact_sheet": "output/visual_identity_style_frames/visual_identity_style_frame_contact_sheet.png",
+  "visual_identity_token": "config/visual_identity/spacebio_bench_visual_identity_v0_1.json",
+  "frames": [
+    {
+      "style_frame_id": "editorial",
+      "title": "Scientific editorial",
+      "source": "output/visual_identity_style_frames/editorial/rendered_preview.png",
+      "scores": {
+        "scientific_trust": 5,
+        "premium_impression": 3,
+        "thumbnail_recognizability": 3,
+        "manuscript_portability": 5,
+        "technical_reproducibility": 5
+      }
+    },
+    {
+      "style_frame_id": "mission_system",
+      "title": "Mission system",
+      "source": "output/visual_identity_style_frames/mission_system/rendered_preview.png",
+      "scores": {
+        "scientific_trust": 3,
+        "premium_impression": 5,
+        "thumbnail_recognizability": 5,
+        "manuscript_portability": 2,
+        "technical_reproducibility": 4
+      }
+    },
+    {
+      "style_frame_id": "hybrid",
+      "title": "Mission-grade editorial hybrid",
+      "source": "output/visual_identity_style_frames/hybrid/rendered_preview.png",
+      "scores": {
+        "scientific_trust": 5,
+        "premium_impression": 5,
+        "thumbnail_recognizability": 4,
+        "manuscript_portability": 4,
+        "technical_reproducibility": 5
+      }
+    }
+  ],
+  "recommended_direction": "hybrid",
+  "recommendation_reason": "best balance of scientific trust, premium impression, thumbnail recognizability, manuscript portability, and reproducibility"
+}

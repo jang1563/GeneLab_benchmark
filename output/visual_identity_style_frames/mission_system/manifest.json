@@ -1,0 +1,57 @@
+{
+  "slide_id": "mission_system",
+  "created": "2026-06-01",
+  "stage": "post_render",
+  "visual_identity_token": "config/visual_identity/spacebio_bench_visual_identity_v0_1.json",
+  "style_direction": "Mission system",
+  "slide_type": "thesis",
+  "content_brief": "docs/VISUAL_IDENTITY_RESEARCH_AND_DEPTH_STRATEGY_2026_06_01.md",
+  "technical_preflight": "docs/VISUAL_TECHNICAL_PRODUCTION_PROTOCOL_2026_06_01.md",
+  "evidence_sources": [
+    {
+      "path": "docs/VISUAL_IDENTITY_RESEARCH_AND_DEPTH_STRATEGY_2026_06_01.md",
+      "role": "identity and z-depth strategy"
+    },
+    {
+      "path": "config/visual_identity/spacebio_bench_visual_identity_v0_1.json",
+      "role": "visual identity tokens"
+    },
+    {
+      "path": "docs/VISUAL_METHODS_BRIDGE_AND_CONSULTING_BRIEF_2026_06_01.md",
+      "role": "bridge narrative spine"
+    }
+  ],
+  "claim_boundary": "style-frame only; not a final science slide",
+  "used_z_layers": [
+    "Z0",
+    "Z1",
+    "Z2",
+    "Z3",
+    "Z4",
+    "Z5",
+    "Z6",
+    "Z7"
+  ],
+  "used_depth_tokens": [
+    "recessed_band",
+    "proof_object",
+    "dominant_evidence",
+    "focus_boundary"
+  ],
+  "anti_pattern_checks": {
+    "no_card_box_layout": true,
+    "no_nasa_logo_imitation": true,
+    "no_decorative_space_wallpaper": true,
+    "no_dense_table_inside_figure": true,
+    "red_only_for_trust_boundary": true
+  },
+  "generator": "scripts/build_visual_identity_style_frames.py",
+  "outputs": {
+    "scene_plate": "output/visual_identity_style_frames/mission_system/scene_plate.png",
+    "rendered_preview_png": "output/visual_identity_style_frames/mission_system/rendered_preview.png",
+    "rendered_preview_pdf": "output/visual_identity_style_frames/mission_system/rendered_preview.pdf",
+    "overlay_spec": "output/visual_identity_style_frames/mission_system/overlay_spec.json",
+    "manifest": "output/visual_identity_style_frames/mission_system/manifest.json",
+    "qa": "output/visual_identity_style_frames/mission_system/qa.json"
+  }
+}

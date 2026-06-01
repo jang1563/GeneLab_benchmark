@@ -1,0 +1,80 @@
+{
+  "slide_id": "editorial",
+  "stage": "post_render",
+  "canvas": {
+    "aspect_ratio": "16:9",
+    "width_px": 3840,
+    "height_px": 2160,
+    "dpi": 240
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "headline",
+      "content": "Public studies become auditable benchmark tasks",
+      "x": 0.065,
+      "y": 0.135,
+      "font_pt": 26,
+      "color": "ink"
+    },
+    {
+      "id": "source",
+      "role": "callout",
+      "content": "source records",
+      "x": 0.108,
+      "y": 0.35,
+      "font_pt": 9.2,
+      "color": "source_blue"
+    },
+    {
+      "id": "task",
+      "role": "callout",
+      "content": "task contract",
+      "x": 0.745,
+      "y": 0.35,
+      "font_pt": 9.2,
+      "color": "model_purple"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "scope",
+      "role": "status_strong",
+      "content": "editorial: manuscript-portable, lowest atmosphere",
+      "x": 0.065,
+      "y": 0.86,
+      "font_pt": 7.8,
+      "color": "muted"
+    },
+    {
+      "id": "caveat",
+      "role": "status",
+      "content": "Best for paper figures; may feel underpowered for opening deck slides.",
+      "x": 0.065,
+      "y": 0.895,
+      "font_pt": 7.4,
+      "color": "muted"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "mission_grade_path",
+      "role": "motion_focus",
+      "shape": "source_to_task_to_boundary",
+      "z": "Z7"
+    }
+  ],
+  "visible_word_count": 25,
+  "visible_word_budget": 55,
+  "forbidden_visible_terms": [
+    "NASA logo",
+    "patch",
+    "dashboard",
+    "card box",
+    "payload",
+    "RRRM",
+    "alpha",
+    "/Users/"
+  ]
+}
