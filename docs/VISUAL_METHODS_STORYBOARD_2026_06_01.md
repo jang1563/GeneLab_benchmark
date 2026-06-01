@@ -19,6 +19,10 @@ The viewer should be able to say:
 
 | Slide | Working Title | One-Sentence Claim | Visual Form | Notes |
 |---:|---|---|---|---|
+| B1 | Why a benchmark layer is needed | Public space omics needs an auditable evaluation layer | scattered sources compressed into benchmark surface | Content brief required before build |
+| B2 | Studies become tasks | A task is a source-traceable sample/label contract | source -> mission -> samples -> labels -> task record | Content brief required before build |
+| B3 | The test set is a mission | The benchmark hides an entire mission, not random samples | mission field with one mission behind boundary | Build before result slides |
+| B4 | Train-only guard | Feature processing is learned from training missions only | two-lane process-control schematic | Build before feature/result slides |
 | M1 | From public studies to held-out tasks | Public studies become auditable benchmark tasks | process rail with source, sample table, hidden mission, features, models, audit | Build first |
 | M2 | One mission stays hidden | Mission is the independence unit | train/test split diagram with one mission behind a wall | Needed before Fig1 |
 | M3 | Features are built inside each fold | Train-only processing prevents leakage | two-lane leakage guard schematic | Critical for methods trust |
@@ -90,3 +94,30 @@ Created as visual prototype:
 
 This is the first methods explainer candidate. It should be followed by a
 dedicated `one mission stays hidden` slide before final deck production.
+
+## Production Gate
+
+Do not render additional polished methods slides until the slide has a content
+brief covering:
+
+- audience question;
+- decision headline;
+- evidence object;
+- visual move;
+- bridge role;
+- visible caveat;
+- terms allowed on the slide;
+- terms pushed to notes;
+- premium constraint.
+
+Bridge/content planning files:
+
+- `docs/VISUAL_METHODS_BRIDGE_AND_CONSULTING_BRIEF_2026_06_01.md`
+- `docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md`
+
+Recommended next production order:
+
+1. B3 `The test set is a mission, not a random sample`.
+2. B4 `Feature processing must stay on the training side`.
+3. B2 `Studies become tasks through missions, samples, and labels`.
+4. B1 `Public space omics needs an evaluation layer`.
