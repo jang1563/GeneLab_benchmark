@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 from typing import Any
@@ -27,6 +28,166 @@ def word_count(items: list[dict[str, Any]]) -> int:
 
 
 SLIDES: list[dict[str, Any]] = [
+    {
+        "slide_id": "b2_study_to_task",
+        "stage": "pre_render",
+        "decision_headline": "A benchmark task is a source-traceable sample/label contract",
+        "audience_question": "What is the unit of the benchmark, and how does a public study become a task?",
+        "claim_boundary": "task records define source, mission context, samples, labels, tissue, assay, and evaluation scope",
+        "content_brief": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+        "technical_preflight": "docs/VISUAL_BRIDGE_TECHNICAL_PREFLIGHT_B1_B2_2026_06_01.md",
+        "visual_move": "public source opens into mission context, samples, labels, tissue/assay, and a task record",
+        "evidence_sources": [
+            {
+                "path": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+                "role": "B2 content brief and production gate",
+            },
+            {
+                "path": "docs/PROJECT_RESULTS_LOCATION_INVENTORY_2026_05_31.md",
+                "role": "project-level result and artifact location map",
+            },
+            {
+                "path": "docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md",
+                "role": "visual asset inventory for deck assembly",
+            },
+            {
+                "path": "v9/source_inventory.csv",
+                "role": "source inventory table used to ground the source-traceability claim",
+            },
+            {
+                "path": "v9/task_manifest_index.csv",
+                "role": "task manifest index used to ground the task-record claim",
+            },
+        ],
+        "forbidden_visible_terms": [
+            "raw accession",
+            "accession soup",
+            "payload",
+            "artifact",
+            "RRRM",
+            "alpha",
+            "LOMO",
+            "/Users/",
+            "function",
+            "class",
+            "manifest index",
+        ],
+        "overlay": {
+            "text": [
+                {
+                    "id": "headline",
+                    "role": "decision_headline",
+                    "content": "Tasks are source-traceable sample/label contracts",
+                    "x": 0.065,
+                    "y": 0.135,
+                    "font_pt": 26,
+                    "color": "ink",
+                    "max_lines": 2,
+                    "z": "Z3",
+                },
+                {
+                    "id": "public_source",
+                    "role": "primary_callout",
+                    "content": "Public source",
+                    "x": 0.120,
+                    "y": 0.365,
+                    "font_pt": 8.8,
+                    "color": "muted",
+                    "max_lines": 1,
+                    "z": "Z3",
+                },
+                {
+                    "id": "mission_context",
+                    "role": "primary_callout",
+                    "content": "Mission context",
+                    "x": 0.278,
+                    "y": 0.365,
+                    "font_pt": 8.8,
+                    "color": "green",
+                    "max_lines": 1,
+                    "z": "Z3",
+                },
+                {
+                    "id": "samples",
+                    "role": "primary_callout",
+                    "content": "Samples",
+                    "x": 0.414,
+                    "y": 0.365,
+                    "font_pt": 8.8,
+                    "color": "blue",
+                    "max_lines": 1,
+                    "z": "Z3",
+                },
+                {
+                    "id": "labels",
+                    "role": "primary_callout",
+                    "content": "Labels",
+                    "x": 0.535,
+                    "y": 0.365,
+                    "font_pt": 8.8,
+                    "color": "amber",
+                    "max_lines": 1,
+                    "z": "Z3",
+                },
+                {
+                    "id": "tissue_assay",
+                    "role": "primary_callout",
+                    "content": "Tissue / assay",
+                    "x": 0.635,
+                    "y": 0.365,
+                    "font_pt": 8.8,
+                    "color": "teal",
+                    "max_lines": 1,
+                    "z": "Z3",
+                },
+                {
+                    "id": "task_record",
+                    "role": "primary_callout",
+                    "content": "Task record",
+                    "x": 0.780,
+                    "y": 0.365,
+                    "font_pt": 8.8,
+                    "color": "purple",
+                    "max_lines": 1,
+                    "z": "Z3",
+                },
+            ],
+            "status_labels": [
+                {
+                    "id": "scope",
+                    "role": "claim_boundary",
+                    "content": "source-traceable task record",
+                    "x": 0.065,
+                    "y": 0.865,
+                    "font_pt": 7.8,
+                    "color": "muted",
+                    "z": "Z4",
+                },
+                {
+                    "id": "caveat",
+                    "role": "trust_caveat",
+                    "content": "Exact rows stay in source tables.",
+                    "x": 0.065,
+                    "y": 0.900,
+                    "font_pt": 7.4,
+                    "color": "muted",
+                    "z": "Z4",
+                },
+            ],
+            "focus_marks": [
+                {
+                    "id": "task_build_path",
+                    "role": "flow_path",
+                    "shape": "horizontal_path",
+                    "x0": 0.230,
+                    "x1": 0.755,
+                    "y": 0.505,
+                    "color": "muted",
+                    "z": "Z5",
+                }
+            ],
+        },
+    },
     {
         "slide_id": "b3_mission_held_out",
         "stage": "pre_render",
@@ -375,12 +536,49 @@ def build_slide_contract(slide: dict[str, Any]) -> dict[str, Path]:
     return paths
 
 
-def main() -> None:
-    built = {}
+def selected_slides(slide_id: str) -> list[dict[str, Any]]:
+    if slide_id == "all":
+        return SLIDES
     for slide in SLIDES:
+        if slide["slide_id"] == slide_id:
+            return [slide]
+    known = ", ".join(slide["slide_id"] for slide in SLIDES)
+    raise SystemExit(f"Unknown slide_id {slide_id!r}. Known slide IDs: {known}")
+
+
+def existing_stage(slide_id: str) -> str | None:
+    manifest_path = OUT_ROOT / slide_id / "manifest.json"
+    if not manifest_path.exists():
+        return None
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+    stage = manifest.get("stage")
+    return str(stage) if stage else None
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--slide", default="all", help="Slide ID to build, or 'all'.")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Overwrite existing post-render contracts. Use only when intentionally invalidating visual QA.",
+    )
+    args = parser.parse_args()
+
+    built = {}
+    skipped = {}
+    for slide in selected_slides(args.slide):
+        slide_id = slide["slide_id"]
+        stage = existing_stage(slide_id)
+        if stage == "post_render" and not args.force:
+            skipped[slide_id] = "existing post_render contract preserved"
+            continue
         paths = build_slide_contract(slide)
-        built[slide["slide_id"]] = {key: rel(path) for key, path in paths.items()}
-    print(json.dumps({"built": built}, indent=2))
+        built[slide_id] = {key: rel(path) for key, path in paths.items()}
+    print(json.dumps({"built": built, "skipped": skipped}, indent=2))
 
 
 if __name__ == "__main__":

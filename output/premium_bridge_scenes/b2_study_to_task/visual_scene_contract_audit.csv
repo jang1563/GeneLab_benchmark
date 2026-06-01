@@ -1,0 +1,100 @@
+slide_id,check,status,severity,detail
+b2_study_to_task,manifest_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/manifest.json
+b2_study_to_task,overlay_spec_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/overlay_spec.json
+b2_study_to_task,qa_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/qa.json
+b2_study_to_task,manifest_field_slide_id,PASS,error,'b2_study_to_task'
+b2_study_to_task,manifest_field_created,PASS,error,'2026-06-01'
+b2_study_to_task,manifest_field_stage,PASS,error,'post_render'
+b2_study_to_task,manifest_field_content_brief,PASS,error,'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md'
+b2_study_to_task,manifest_field_evidence_sources,PASS,error,"[{'path': 'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md', 'role': 'B2 content brief and production gate'}, {'path': 'docs/PROJECT_RESULTS_LOCATION_INVENTORY_2026_05_31.md', 'role': 'project-level result and artifact location map'}, {'path': 'docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md', 'role': 'visual asset inventory for deck assembly'}, {'path': 'v9/source_inventory.csv', 'role': 'source inventory table used to ground the source-traceability claim'}, {'path': 'v9/task_manifest_index.csv', 'role': 'task manifest index used to ground the task-record claim'}]"
+b2_study_to_task,manifest_field_claim_boundary,PASS,error,"'task records define source, mission context, samples, labels, tissue, assay, and evaluation scope'"
+b2_study_to_task,manifest_field_generator,PASS,error,'scripts/build_visual_bridge_scene_contracts.py'
+b2_study_to_task,manifest_field_outputs,PASS,error,"{'scene_plate': 'output/premium_bridge_scenes/b2_study_to_task/scene_plate.png', 'rendered_preview_png': 'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png', 'rendered_preview_pdf': 'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf', 'overlay_spec': 'output/premium_bridge_scenes/b2_study_to_task/overlay_spec.json', 'manifest': 'output/premium_bridge_scenes/b2_study_to_task/manifest.json', 'qa': 'output/premium_bridge_scenes/b2_study_to_task/qa.json'}"
+b2_study_to_task,overlay_field_slide_id,PASS,error,'b2_study_to_task'
+b2_study_to_task,overlay_field_canvas,PASS,error,"{'width_px': 3840, 'height_px': 2160, 'aspect_ratio': '16:9'}"
+b2_study_to_task,overlay_field_coordinate_system,PASS,error,'normalized_0_1'
+b2_study_to_task,overlay_field_text,PASS,error,"[{'id': 'headline', 'role': 'decision_headline', 'content': 'Tasks are source-traceable sample/label contracts', 'x': 0.065, 'y': 0.135, 'font_pt': 26, 'color': 'ink', 'max_lines': 2, 'z': 'Z3'}, {'id': 'public_source', 'role': 'primary_callout', 'content': 'Public source', 'x': 0.12, 'y': 0.365, 'font_pt': 8.8, 'color': 'muted', 'max_lines': 1, 'z': 'Z3'}, {'id': 'mission_context', 'role': 'primary_callout', 'content': 'Mission context', 'x': 0.278, 'y': 0.365, 'font_pt': 8.8, 'color': 'green', 'max_lines': 1, 'z': 'Z3'}, {'id': 'samples', 'role': 'primary_callout', 'content': 'Samples', 'x': 0.414, 'y': 0.365, 'font_pt': 8.8, 'color': 'blue', 'max_lines': 1, 'z': 'Z3'}, {'id': 'labels', 'role': 'primary_callout', 'content': 'Labels', 'x': 0.535, 'y': 0.365, 'font_pt': 8.8, 'color': 'amber', 'max_lines': 1, 'z': 'Z3'}, {'id': 'tissue_assay', 'role': 'primary_callout', 'content': 'Tissue / assay', 'x': 0.635, 'y': 0.365, 'font_pt': 8.8, 'color': 'teal', 'max_lines': 1, 'z': 'Z3'}, {'id': 'task_record', 'role': 'primary_callout', 'content': 'Task record', 'x': 0.78, 'y': 0.365, 'font_pt': 8.8, 'color': 'purple', 'max_lines': 1, 'z': 'Z3'}]"
+b2_study_to_task,overlay_field_status_labels,PASS,error,"[{'id': 'scope', 'role': 'claim_boundary', 'content': 'source-traceable task record', 'x': 0.065, 'y': 0.865, 'font_pt': 7.8, 'color': 'muted', 'z': 'Z4'}, {'id': 'caveat', 'role': 'trust_caveat', 'content': 'Exact rows stay in source tables.', 'x': 0.065, 'y': 0.9, 'font_pt': 7.4, 'color': 'muted', 'z': 'Z4'}]"
+b2_study_to_task,overlay_field_focus_marks,PASS,error,"[{'id': 'task_build_path', 'role': 'flow_path', 'shape': 'horizontal_path', 'x0': 0.23, 'x1': 0.755, 'y': 0.505, 'color': 'muted', 'z': 'Z5'}]"
+b2_study_to_task,overlay_field_forbidden_visible_terms,PASS,error,"['raw accession', 'accession soup', 'payload', 'artifact', 'RRRM', 'alpha', 'LOMO', '/Users/', 'function', 'class', 'manifest index']"
+b2_study_to_task,slide_id_match_overlay,PASS,error,b2_study_to_task vs b2_study_to_task
+b2_study_to_task,slide_id_match_qa,PASS,error,b2_study_to_task vs b2_study_to_task
+b2_study_to_task,stage_match_qa,PASS,error,post_render vs post_render
+b2_study_to_task,canvas_width,PASS,error,3840
+b2_study_to_task,canvas_height,PASS,error,2160
+b2_study_to_task,canvas_aspect,PASS,error,16:9
+b2_study_to_task,coordinate_system,PASS,error,normalized_0_1
+b2_study_to_task,path_exists_content_brief,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b2_study_to_task,path_exists_technical_preflight,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_TECHNICAL_PREFLIGHT_B1_B2_2026_06_01.md
+b2_study_to_task,path_exists_generator,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/scripts/build_visual_bridge_scene_contracts.py
+b2_study_to_task,evidence_source_0_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b2_study_to_task,evidence_source_1_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/PROJECT_RESULTS_LOCATION_INVENTORY_2026_05_31.md
+b2_study_to_task,evidence_source_2_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md
+b2_study_to_task,evidence_source_3_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/source_inventory.csv
+b2_study_to_task,evidence_source_4_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/task_manifest_index.csv
+b2_study_to_task,output_path_declared_scene_plate,PASS,error,'output/premium_bridge_scenes/b2_study_to_task/scene_plate.png'
+b2_study_to_task,output_path_declared_rendered_preview_png,PASS,error,'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png'
+b2_study_to_task,output_path_declared_rendered_preview_pdf,PASS,error,'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf'
+b2_study_to_task,output_path_declared_overlay_spec,PASS,error,'output/premium_bridge_scenes/b2_study_to_task/overlay_spec.json'
+b2_study_to_task,output_path_declared_manifest,PASS,error,'output/premium_bridge_scenes/b2_study_to_task/manifest.json'
+b2_study_to_task,output_path_declared_qa,PASS,error,'output/premium_bridge_scenes/b2_study_to_task/qa.json'
+b2_study_to_task,render_output_exists_scene_plate,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/scene_plate.png
+b2_study_to_task,render_output_exists_rendered_preview_png,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png
+b2_study_to_task,render_output_exists_rendered_preview_pdf,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf
+b2_study_to_task,visible_word_budget,PASS,error,25/45
+b2_study_to_task,forbidden_term_absent_raw accession,PASS,error,raw accession
+b2_study_to_task,forbidden_term_absent_accession soup,PASS,error,accession soup
+b2_study_to_task,forbidden_term_absent_payload,PASS,error,payload
+b2_study_to_task,forbidden_term_absent_artifact,PASS,error,artifact
+b2_study_to_task,forbidden_term_absent_RRRM,PASS,error,RRRM
+b2_study_to_task,forbidden_term_absent_alpha,PASS,error,alpha
+b2_study_to_task,forbidden_term_absent_LOMO,PASS,error,LOMO
+b2_study_to_task,forbidden_term_absent_/Users/,PASS,error,/Users/
+b2_study_to_task,forbidden_term_absent_function,PASS,error,function
+b2_study_to_task,forbidden_term_absent_class,PASS,error,class
+b2_study_to_task,forbidden_term_absent_manifest index,PASS,error,manifest index
+b2_study_to_task,no_absolute_local_path_in_visible_text,PASS,error,Tasks are source-traceable sample/label contracts Public source Mission context Samples Labels Tissue / assay Task record source-traceable task record Exact rows stay in source tables.
+b2_study_to_task,text_headline_coord_normalized,PASS,error,"x=0.065, y=0.135"
+b2_study_to_task,text_headline_coord_safe_area,PASS,warn,"x=0.065, y=0.135"
+b2_study_to_task,text_headline_font_min,PASS,error,font_pt=26
+b2_study_to_task,text_headline_line_length,PASS,warn,max_line_chars=49
+b2_study_to_task,text_public_source_coord_normalized,PASS,error,"x=0.12, y=0.365"
+b2_study_to_task,text_public_source_coord_safe_area,PASS,warn,"x=0.12, y=0.365"
+b2_study_to_task,text_public_source_font_min,PASS,error,font_pt=8.8
+b2_study_to_task,text_public_source_line_length,PASS,warn,max_line_chars=13
+b2_study_to_task,text_mission_context_coord_normalized,PASS,error,"x=0.278, y=0.365"
+b2_study_to_task,text_mission_context_coord_safe_area,PASS,warn,"x=0.278, y=0.365"
+b2_study_to_task,text_mission_context_font_min,PASS,error,font_pt=8.8
+b2_study_to_task,text_mission_context_line_length,PASS,warn,max_line_chars=15
+b2_study_to_task,text_samples_coord_normalized,PASS,error,"x=0.414, y=0.365"
+b2_study_to_task,text_samples_coord_safe_area,PASS,warn,"x=0.414, y=0.365"
+b2_study_to_task,text_samples_font_min,PASS,error,font_pt=8.8
+b2_study_to_task,text_samples_line_length,PASS,warn,max_line_chars=7
+b2_study_to_task,text_labels_coord_normalized,PASS,error,"x=0.535, y=0.365"
+b2_study_to_task,text_labels_coord_safe_area,PASS,warn,"x=0.535, y=0.365"
+b2_study_to_task,text_labels_font_min,PASS,error,font_pt=8.8
+b2_study_to_task,text_labels_line_length,PASS,warn,max_line_chars=6
+b2_study_to_task,text_tissue_assay_coord_normalized,PASS,error,"x=0.635, y=0.365"
+b2_study_to_task,text_tissue_assay_coord_safe_area,PASS,warn,"x=0.635, y=0.365"
+b2_study_to_task,text_tissue_assay_font_min,PASS,error,font_pt=8.8
+b2_study_to_task,text_tissue_assay_line_length,PASS,warn,max_line_chars=14
+b2_study_to_task,text_task_record_coord_normalized,PASS,error,"x=0.78, y=0.365"
+b2_study_to_task,text_task_record_coord_safe_area,PASS,warn,"x=0.78, y=0.365"
+b2_study_to_task,text_task_record_font_min,PASS,error,font_pt=8.8
+b2_study_to_task,text_task_record_line_length,PASS,warn,max_line_chars=11
+b2_study_to_task,status_labels_scope_coord_normalized,PASS,error,"x=0.065, y=0.865"
+b2_study_to_task,status_labels_scope_coord_safe_area,PASS,warn,"x=0.065, y=0.865"
+b2_study_to_task,status_labels_scope_font_min,PASS,error,font_pt=7.8
+b2_study_to_task,status_labels_scope_line_length,PASS,warn,max_line_chars=28
+b2_study_to_task,status_labels_caveat_coord_normalized,PASS,error,"x=0.065, y=0.9"
+b2_study_to_task,status_labels_caveat_coord_safe_area,PASS,warn,"x=0.065, y=0.9"
+b2_study_to_task,status_labels_caveat_font_min,PASS,error,font_pt=7.4
+b2_study_to_task,status_labels_caveat_line_length,PASS,warn,max_line_chars=33
+b2_study_to_task,focus_task_build_path_coords_normalized,PASS,error,"[('y', 0.505), ('x0', 0.23), ('x1', 0.755)]"
+b2_study_to_task,pre_render_gate_content_brief_declared,PASS,error,True
+b2_study_to_task,pre_render_gate_technical_preflight_declared,PASS,error,True
+b2_study_to_task,pre_render_gate_evidence_sources_declared,PASS,error,True
+b2_study_to_task,pre_render_gate_claim_boundary_declared,PASS,error,True
+b2_study_to_task,pre_render_gate_output_paths_declared,PASS,error,True
+b2_study_to_task,pre_render_gate_overlay_spec_declared,PASS,error,True
+b2_study_to_task,pre_render_gate_manifest_declared,PASS,error,True

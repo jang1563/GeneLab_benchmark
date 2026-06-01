@@ -1,0 +1,29 @@
+{
+  "slide_id": "b2_study_to_task",
+  "stage": "post_render",
+  "created": "2026-06-01",
+  "pre_render_gate": {
+    "content_brief_declared": true,
+    "technical_preflight_declared": true,
+    "evidence_sources_declared": true,
+    "claim_boundary_declared": true,
+    "visible_text_word_count": 25,
+    "visible_text_budget": 45,
+    "output_paths_declared": true,
+    "overlay_spec_declared": true,
+    "manifest_declared": true
+  },
+  "manual_review_pending": [],
+  "post_render_gate": {
+    "rendered_outputs": {
+      "scene_plate": "output/premium_bridge_scenes/b2_study_to_task/scene_plate.png",
+      "rendered_preview_png": "output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png",
+      "rendered_preview_pdf": "output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf"
+    },
+    "manual_full_size_inspection": "pass: opened rendered_preview.png at high detail after render",
+    "manual_thumbnail_inspection": "pass: B2/B3/B4 contact sheet preserves the source-to-task movement",
+    "text_overlap_check": "pass: headline, step labels, chips, and task-record strip are separated",
+    "caveat_visibility_check": "pass: caveat visible at lower-left without competing with the transformation path",
+    "visual_verdict": "draft bridge-slide candidate; ready for B2/B3/B4 family contact-sheet review, not final deck export"
+  }
+}

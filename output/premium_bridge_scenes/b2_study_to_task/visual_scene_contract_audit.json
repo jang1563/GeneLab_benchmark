@@ -1,0 +1,695 @@
+[
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/manifest.json"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_spec_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/overlay_spec.json"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "qa_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/qa.json"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_slide_id",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'b2_study_to_task'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_created",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'2026-06-01'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_stage",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'post_render'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_content_brief",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_evidence_sources",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "[{'path': 'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md', 'role': 'B2 content brief and production gate'}, {'path': 'docs/PROJECT_RESULTS_LOCATION_INVENTORY_2026_05_31.md', 'role': 'project-level result and artifact location map'}, {'path': 'docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md', 'role': 'visual asset inventory for deck assembly'}, {'path': 'v9/source_inventory.csv', 'role': 'source inventory table used to ground the source-traceability claim'}, {'path': 'v9/task_manifest_index.csv', 'role': 'task manifest index used to ground the task-record claim'}]"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_claim_boundary",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'task records define source, mission context, samples, labels, tissue, assay, and evaluation scope'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_generator",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'scripts/build_visual_bridge_scene_contracts.py'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "manifest_field_outputs",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "{'scene_plate': 'output/premium_bridge_scenes/b2_study_to_task/scene_plate.png', 'rendered_preview_png': 'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png', 'rendered_preview_pdf': 'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf', 'overlay_spec': 'output/premium_bridge_scenes/b2_study_to_task/overlay_spec.json', 'manifest': 'output/premium_bridge_scenes/b2_study_to_task/manifest.json', 'qa': 'output/premium_bridge_scenes/b2_study_to_task/qa.json'}"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_field_slide_id",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'b2_study_to_task'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_field_canvas",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "{'width_px': 3840, 'height_px': 2160, 'aspect_ratio': '16:9'}"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_field_coordinate_system",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'normalized_0_1'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_field_text",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "[{'id': 'headline', 'role': 'decision_headline', 'content': 'Tasks are source-traceable sample/label contracts', 'x': 0.065, 'y': 0.135, 'font_pt': 26, 'color': 'ink', 'max_lines': 2, 'z': 'Z3'}, {'id': 'public_source', 'role': 'primary_callout', 'content': 'Public source', 'x': 0.12, 'y': 0.365, 'font_pt': 8.8, 'color': 'muted', 'max_lines': 1, 'z': 'Z3'}, {'id': 'mission_context', 'role': 'primary_callout', 'content': 'Mission context', 'x': 0.278, 'y': 0.365, 'font_pt': 8.8, 'color': 'green', 'max_lines': 1, 'z': 'Z3'}, {'id': 'samples', 'role': 'primary_callout', 'content': 'Samples', 'x': 0.414, 'y': 0.365, 'font_pt': 8.8, 'color': 'blue', 'max_lines': 1, 'z': 'Z3'}, {'id': 'labels', 'role': 'primary_callout', 'content': 'Labels', 'x': 0.535, 'y': 0.365, 'font_pt': 8.8, 'color': 'amber', 'max_lines': 1, 'z': 'Z3'}, {'id': 'tissue_assay', 'role': 'primary_callout', 'content': 'Tissue / assay', 'x': 0.635, 'y': 0.365, 'font_pt': 8.8, 'color': 'teal', 'max_lines': 1, 'z': 'Z3'}, {'id': 'task_record', 'role': 'primary_callout', 'content': 'Task record', 'x': 0.78, 'y': 0.365, 'font_pt': 8.8, 'color': 'purple', 'max_lines': 1, 'z': 'Z3'}]"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_field_status_labels",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "[{'id': 'scope', 'role': 'claim_boundary', 'content': 'source-traceable task record', 'x': 0.065, 'y': 0.865, 'font_pt': 7.8, 'color': 'muted', 'z': 'Z4'}, {'id': 'caveat', 'role': 'trust_caveat', 'content': 'Exact rows stay in source tables.', 'x': 0.065, 'y': 0.9, 'font_pt': 7.4, 'color': 'muted', 'z': 'Z4'}]"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_field_focus_marks",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "[{'id': 'task_build_path', 'role': 'flow_path', 'shape': 'horizontal_path', 'x0': 0.23, 'x1': 0.755, 'y': 0.505, 'color': 'muted', 'z': 'Z5'}]"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "overlay_field_forbidden_visible_terms",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "['raw accession', 'accession soup', 'payload', 'artifact', 'RRRM', 'alpha', 'LOMO', '/Users/', 'function', 'class', 'manifest index']"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "slide_id_match_overlay",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "b2_study_to_task vs b2_study_to_task"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "slide_id_match_qa",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "b2_study_to_task vs b2_study_to_task"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "stage_match_qa",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "post_render vs post_render"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "canvas_width",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "3840"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "canvas_height",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "2160"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "canvas_aspect",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "16:9"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "coordinate_system",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "normalized_0_1"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "path_exists_content_brief",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "path_exists_technical_preflight",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_TECHNICAL_PREFLIGHT_B1_B2_2026_06_01.md"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "path_exists_generator",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/scripts/build_visual_bridge_scene_contracts.py"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "evidence_source_0_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "evidence_source_1_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/PROJECT_RESULTS_LOCATION_INVENTORY_2026_05_31.md"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "evidence_source_2_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "evidence_source_3_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/source_inventory.csv"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "evidence_source_4_exists",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/task_manifest_index.csv"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "output_path_declared_scene_plate",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'output/premium_bridge_scenes/b2_study_to_task/scene_plate.png'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "output_path_declared_rendered_preview_png",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "output_path_declared_rendered_preview_pdf",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "output_path_declared_overlay_spec",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'output/premium_bridge_scenes/b2_study_to_task/overlay_spec.json'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "output_path_declared_manifest",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'output/premium_bridge_scenes/b2_study_to_task/manifest.json'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "output_path_declared_qa",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "'output/premium_bridge_scenes/b2_study_to_task/qa.json'"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "render_output_exists_scene_plate",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/scene_plate.png"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "render_output_exists_rendered_preview_png",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "render_output_exists_rendered_preview_pdf",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "visible_word_budget",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "25/45"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_raw accession",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "raw accession"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_accession soup",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "accession soup"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_payload",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "payload"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_artifact",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "artifact"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_RRRM",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "RRRM"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_alpha",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "alpha"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_LOMO",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "LOMO"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_/Users/",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "/Users/"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_function",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "function"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_class",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "class"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "forbidden_term_absent_manifest index",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "manifest index"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "no_absolute_local_path_in_visible_text",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "Tasks are source-traceable sample/label contracts Public source Mission context Samples Labels Tissue / assay Task record source-traceable task record Exact rows stay in source tables."
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_headline_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.065, y=0.135"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_headline_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.065, y=0.135"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_headline_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=26"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_headline_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=49"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_public_source_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.12, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_public_source_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.12, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_public_source_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=8.8"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_public_source_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=13"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_mission_context_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.278, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_mission_context_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.278, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_mission_context_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=8.8"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_mission_context_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=15"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_samples_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.414, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_samples_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.414, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_samples_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=8.8"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_samples_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=7"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_labels_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.535, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_labels_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.535, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_labels_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=8.8"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_labels_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=6"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_tissue_assay_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.635, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_tissue_assay_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.635, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_tissue_assay_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=8.8"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_tissue_assay_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=14"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_task_record_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.78, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_task_record_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.78, y=0.365"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_task_record_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=8.8"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "text_task_record_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=11"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_scope_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.065, y=0.865"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_scope_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.065, y=0.865"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_scope_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=7.8"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_scope_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=28"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_caveat_coord_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "x=0.065, y=0.9"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_caveat_coord_safe_area",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "x=0.065, y=0.9"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_caveat_font_min",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "font_pt=7.4"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "status_labels_caveat_line_length",
+    "status": "PASS",
+    "severity": "warn",
+    "detail": "max_line_chars=33"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "focus_task_build_path_coords_normalized",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "[('y', 0.505), ('x0', 0.23), ('x1', 0.755)]"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "pre_render_gate_content_brief_declared",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "True"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "pre_render_gate_technical_preflight_declared",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "True"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "pre_render_gate_evidence_sources_declared",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "True"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "pre_render_gate_claim_boundary_declared",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "True"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "pre_render_gate_output_paths_declared",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "True"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "pre_render_gate_overlay_spec_declared",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "True"
+  },
+  {
+    "slide_id": "b2_study_to_task",
+    "check": "pre_render_gate_manifest_declared",
+    "status": "PASS",
+    "severity": "error",
+    "detail": "True"
+  }
+]

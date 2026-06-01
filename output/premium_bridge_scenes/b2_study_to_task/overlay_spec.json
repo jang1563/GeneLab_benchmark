@@ -1,0 +1,138 @@
+{
+  "slide_id": "b2_study_to_task",
+  "stage": "post_render",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "Tasks are source-traceable sample/label contracts",
+      "x": 0.065,
+      "y": 0.135,
+      "font_pt": 26,
+      "color": "ink",
+      "max_lines": 2,
+      "z": "Z3"
+    },
+    {
+      "id": "public_source",
+      "role": "primary_callout",
+      "content": "Public source",
+      "x": 0.12,
+      "y": 0.365,
+      "font_pt": 8.8,
+      "color": "muted",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "mission_context",
+      "role": "primary_callout",
+      "content": "Mission context",
+      "x": 0.278,
+      "y": 0.365,
+      "font_pt": 8.8,
+      "color": "green",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "samples",
+      "role": "primary_callout",
+      "content": "Samples",
+      "x": 0.414,
+      "y": 0.365,
+      "font_pt": 8.8,
+      "color": "blue",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "labels",
+      "role": "primary_callout",
+      "content": "Labels",
+      "x": 0.535,
+      "y": 0.365,
+      "font_pt": 8.8,
+      "color": "amber",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "tissue_assay",
+      "role": "primary_callout",
+      "content": "Tissue / assay",
+      "x": 0.635,
+      "y": 0.365,
+      "font_pt": 8.8,
+      "color": "teal",
+      "max_lines": 1,
+      "z": "Z3"
+    },
+    {
+      "id": "task_record",
+      "role": "primary_callout",
+      "content": "Task record",
+      "x": 0.78,
+      "y": 0.365,
+      "font_pt": 8.8,
+      "color": "purple",
+      "max_lines": 1,
+      "z": "Z3"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "scope",
+      "role": "claim_boundary",
+      "content": "source-traceable task record",
+      "x": 0.065,
+      "y": 0.865,
+      "font_pt": 7.8,
+      "color": "muted",
+      "z": "Z4"
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "Exact rows stay in source tables.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.4,
+      "color": "muted",
+      "z": "Z4"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "task_build_path",
+      "role": "flow_path",
+      "shape": "horizontal_path",
+      "x0": 0.23,
+      "x1": 0.755,
+      "y": 0.505,
+      "color": "muted",
+      "z": "Z5"
+    }
+  ],
+  "visible_word_count": 25,
+  "visible_word_budget": 45,
+  "forbidden_visible_terms": [
+    "raw accession",
+    "accession soup",
+    "payload",
+    "artifact",
+    "RRRM",
+    "alpha",
+    "LOMO",
+    "/Users/",
+    "function",
+    "class",
+    "manifest index"
+  ]
+}

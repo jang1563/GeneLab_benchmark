@@ -1,0 +1,50 @@
+{
+  "slide_id": "b2_study_to_task",
+  "created": "2026-06-01",
+  "stage": "post_render",
+  "content_brief": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+  "technical_preflight": "docs/VISUAL_BRIDGE_TECHNICAL_PREFLIGHT_B1_B2_2026_06_01.md",
+  "audience_question": "What is the unit of the benchmark, and how does a public study become a task?",
+  "decision_headline": "A benchmark task is a source-traceable sample/label contract",
+  "visual_move": "public source opens into mission context, samples, labels, tissue/assay, and a task record",
+  "claim_boundary": "task records define source, mission context, samples, labels, tissue, assay, and evaluation scope",
+  "evidence_sources": [
+    {
+      "path": "docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md",
+      "role": "B2 content brief and production gate"
+    },
+    {
+      "path": "docs/PROJECT_RESULTS_LOCATION_INVENTORY_2026_05_31.md",
+      "role": "project-level result and artifact location map"
+    },
+    {
+      "path": "docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md",
+      "role": "visual asset inventory for deck assembly"
+    },
+    {
+      "path": "v9/source_inventory.csv",
+      "role": "source inventory table used to ground the source-traceability claim"
+    },
+    {
+      "path": "v9/task_manifest_index.csv",
+      "role": "task manifest index used to ground the task-record claim"
+    }
+  ],
+  "generator": "scripts/build_visual_bridge_scene_contracts.py",
+  "planned_renderer": "scripts/build_bridge_method_scenes.py",
+  "outputs": {
+    "scene_plate": "output/premium_bridge_scenes/b2_study_to_task/scene_plate.png",
+    "rendered_preview_png": "output/premium_bridge_scenes/b2_study_to_task/rendered_preview.png",
+    "rendered_preview_pdf": "output/premium_bridge_scenes/b2_study_to_task/rendered_preview.pdf",
+    "overlay_spec": "output/premium_bridge_scenes/b2_study_to_task/overlay_spec.json",
+    "manifest": "output/premium_bridge_scenes/b2_study_to_task/manifest.json",
+    "qa": "output/premium_bridge_scenes/b2_study_to_task/qa.json"
+  },
+  "qa": {
+    "stage": "post_render",
+    "pre_render_gate_expected": true,
+    "post_render_required_before_use": true,
+    "render_outputs_exist": true
+  },
+  "renderer": "scripts/build_bridge_method_scenes.py"
+}

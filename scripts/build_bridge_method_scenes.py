@@ -147,12 +147,91 @@ def draw_operation_tick(ax: plt.Axes, x: float, y: float, color: str, *, zorder:
 
 def draw_scene_base(slide_id: str, ax: plt.Axes, focus_marks: list[dict[str, Any]]) -> None:
     draw_canvas(ax)
-    if slide_id == "b3_mission_held_out":
+    if slide_id == "b2_study_to_task":
+        draw_b2_base(ax, focus_marks)
+    elif slide_id == "b3_mission_held_out":
         draw_b3_base(ax, focus_marks)
     elif slide_id == "b4_train_only_guard":
         draw_b4_base(ax, focus_marks)
     else:
         raise ValueError(f"Unsupported slide_id: {slide_id}")
+
+
+def draw_b2_base(ax: plt.Axes, focus_marks: list[dict[str, Any]]) -> None:
+    path = focus_marks[0] if focus_marks else {}
+    flow_y = y_from_slide(float(path.get("y", 0.505)))
+    x0 = float(path.get("x0", 0.230))
+    x1 = float(path.get("x1", 0.755))
+
+    ax.add_patch(
+        Rectangle((0.090, 0.335), 0.190, 0.300, transform=ax.transAxes, facecolor=COLORS["paper"], edgecolor="none", alpha=0.48, zorder=2)
+    )
+    ax.add_patch(
+        Rectangle((0.752, 0.315), 0.155, 0.340, transform=ax.transAxes, facecolor=COLORS["shadow"], edgecolor="none", alpha=0.13, zorder=2)
+    )
+    ax.add_patch(
+        Rectangle((0.744, 0.326), 0.155, 0.340, transform=ax.transAxes, facecolor=COLORS["paper"], edgecolor=COLORS["rule"], linewidth=0.75, alpha=0.96, zorder=3)
+    )
+
+    for idx, (dx, dy, alpha) in enumerate([(0.000, 0.000, 0.80), (0.014, 0.014, 0.48), (0.028, 0.028, 0.30)]):
+        ax.add_patch(
+            Rectangle(
+                (0.126 + dx, 0.410 + dy),
+                0.102,
+                0.152,
+                transform=ax.transAxes,
+                facecolor=COLORS["paper"],
+                edgecolor=COLORS["rule"],
+                linewidth=0.65,
+                alpha=alpha,
+                zorder=4 - idx * 0.1,
+            )
+        )
+    for y in [0.522, 0.495, 0.468]:
+        ax.plot([0.143, 0.208], [y, y], color=COLORS["rule"], alpha=0.72, linewidth=0.8, zorder=5, transform=ax.transAxes)
+    ax.add_patch(Circle((0.214, 0.430), 0.010, transform=ax.transAxes, facecolor=COLORS["muted"], edgecolor="none", alpha=0.45, zorder=5))
+
+    ax.add_patch(
+        Circle((0.315, flow_y), 0.052, transform=ax.transAxes, facecolor="#FAFBFA", edgecolor=COLORS["green"], linewidth=1.05, alpha=0.92, zorder=4)
+    )
+    ax.add_patch(
+        Circle((0.315, flow_y), 0.031, transform=ax.transAxes, facecolor="none", edgecolor=COLORS["green"], linewidth=0.85, alpha=0.42, zorder=5)
+    )
+    for angle in np.linspace(0.2, 5.5, 5):
+        x = 0.315 + np.cos(angle) * 0.053
+        y = flow_y + np.sin(angle) * 0.033
+        ax.plot([0.315, x], [flow_y, y], color=COLORS["green"], alpha=0.18, linewidth=0.6, zorder=3, transform=ax.transAxes)
+
+    sample_coords = [(0.410, flow_y + 0.037), (0.438, flow_y + 0.030), (0.424, flow_y), (0.458, flow_y - 0.002), (0.409, flow_y - 0.035), (0.443, flow_y - 0.038)]
+    for idx, (x, y) in enumerate(sample_coords):
+        color = "blue" if idx % 2 == 0 else "teal"
+        ax.add_patch(Circle((x, y), 0.010, transform=ax.transAxes, facecolor=COLORS["paper"], edgecolor=COLORS[color], linewidth=0.9, alpha=0.95, zorder=5))
+    for x, y in sample_coords:
+        ax.plot([0.315, x], [flow_y, y], color=COLORS["rule"], alpha=0.18, linewidth=0.6, zorder=3, transform=ax.transAxes)
+
+    for y, label, edge in [(flow_y + 0.027, "flight", "amber"), (flow_y - 0.027, "ground", "muted")]:
+        ax.add_patch(
+            Rectangle((0.520, y - 0.017), 0.072, 0.034, transform=ax.transAxes, facecolor=COLORS["paper"], edgecolor=COLORS[edge], linewidth=0.8, alpha=0.92, zorder=5)
+        )
+        ax.text(0.556, y, label, color=COLORS[edge], fontsize=5.8, ha="center", va="center", transform=ax.transAxes, zorder=6)
+
+    ax.add_patch(
+        Rectangle((0.630, flow_y - 0.040), 0.090, 0.080, transform=ax.transAxes, facecolor=COLORS["paper"], edgecolor=COLORS["teal"], linewidth=0.85, alpha=0.90, zorder=5)
+    )
+    ax.plot([0.645, 0.705], [flow_y + 0.014, flow_y + 0.014], color=COLORS["teal"], alpha=0.55, linewidth=0.8, zorder=6, transform=ax.transAxes)
+    ax.plot([0.645, 0.692], [flow_y - 0.010, flow_y - 0.010], color=COLORS["teal"], alpha=0.34, linewidth=0.8, zorder=6, transform=ax.transAxes)
+
+    draw_arrow(ax, (x0, flow_y), (0.292, flow_y), "muted", alpha=0.38, width=0.9)
+    draw_arrow(ax, (0.368, flow_y), (0.396, flow_y), "muted", alpha=0.46, width=0.9)
+    draw_arrow(ax, (0.468, flow_y), (0.512, flow_y), "muted", alpha=0.46, width=0.9)
+    draw_arrow(ax, (0.596, flow_y), (0.625, flow_y), "muted", alpha=0.46, width=0.9)
+    draw_arrow(ax, (0.722, flow_y), (x1, flow_y), "muted", alpha=0.56, width=0.95)
+
+    for y in [0.606, 0.568, 0.530, 0.492, 0.454, 0.416, 0.378]:
+        x_end = 0.876 if y in [0.606, 0.530, 0.454] else 0.858
+        ax.plot([0.768, x_end], [y, y], color=COLORS["rule"], alpha=0.64, linewidth=0.70, zorder=6, transform=ax.transAxes)
+    for x, color in [(0.782, "green"), (0.806, "blue"), (0.830, "amber"), (0.854, "teal")]:
+        ax.add_patch(Circle((x, 0.360), 0.0065, transform=ax.transAxes, facecolor=COLORS[color], edgecolor="none", alpha=0.72, zorder=6))
 
 
 def draw_b3_base(ax: plt.Axes, focus_marks: list[dict[str, Any]]) -> None:
@@ -303,17 +382,37 @@ def render_slide(slide_id: str) -> dict[str, str]:
     return {key: rel(path) for key, path in outputs.items()}
 
 
+def existing_stage(slide_id: str) -> str | None:
+    manifest_path = SCENE_ROOT / slide_id / "manifest.json"
+    if not manifest_path.exists():
+        return None
+    manifest = load_json(manifest_path)
+    stage = manifest.get("stage")
+    return str(stage) if stage else None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--slide", default="b3_mission_held_out", help="Slide ID to render, or 'all'.")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="When rendering all slides, also re-render existing post-render slides and invalidate manual QA.",
+    )
     args = parser.parse_args()
 
     if args.slide == "all":
-        slide_ids = ["b3_mission_held_out", "b4_train_only_guard"]
+        slide_ids = ["b2_study_to_task", "b3_mission_held_out", "b4_train_only_guard"]
     else:
         slide_ids = [args.slide]
-    rendered = {slide_id: render_slide(slide_id) for slide_id in slide_ids}
-    print(json.dumps({"rendered": rendered}, indent=2))
+    rendered = {}
+    skipped = {}
+    for slide_id in slide_ids:
+        if args.slide == "all" and existing_stage(slide_id) == "post_render" and not args.force:
+            skipped[slide_id] = "existing post_render render preserved"
+            continue
+        rendered[slide_id] = render_slide(slide_id)
+    print(json.dumps({"rendered": rendered, "skipped": skipped}, indent=2))
 
 
 if __name__ == "__main__":
