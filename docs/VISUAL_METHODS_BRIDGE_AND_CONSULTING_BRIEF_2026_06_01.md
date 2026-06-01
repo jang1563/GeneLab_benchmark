@@ -481,7 +481,9 @@ Next work item:
 
 1. Write content briefs for B1-B4.
 2. Decide which existing figures/tables support each bridge.
-3. Only then prototype one slide, starting with B3 or B4 because these are the
+3. Apply the technical production protocol:
+   `docs/VISUAL_TECHNICAL_PRODUCTION_PROTOCOL_2026_06_01.md`.
+4. Only then prototype one slide, starting with B3 or B4 because these are the
    highest-risk methods misunderstandings.
 
 Recommended first prototype after briefing:

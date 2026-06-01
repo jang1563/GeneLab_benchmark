@@ -12,6 +12,7 @@ Companion:
 - `docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md`
 - `docs/VISUAL_METHODS_STORYBOARD_2026_06_01.md`
 - `docs/V1_V9_PRESENTATION_AND_MANUSCRIPT_MASTER_OUTLINE_2026_05_31.md`
+- `docs/VISUAL_TECHNICAL_PRODUCTION_PROTOCOL_2026_06_01.md`
 
 ## Shared Design Rule For B1-B4
 
@@ -362,6 +363,8 @@ Before rendering any of B1-B4:
 5. Identify one caveat/status label.
 6. Check that no internal language appears in visible slide text.
 7. Sketch thumbnail structure before producing a full-resolution scene.
+8. Declare output paths, manifest path, overlay spec path, and QA expectations.
+9. Confirm the technical production protocol has no unmet pre-render gate.
 
 ## Recommended Production Order
 

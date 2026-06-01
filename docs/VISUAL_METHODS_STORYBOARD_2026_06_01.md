@@ -114,6 +114,16 @@ Bridge/content planning files:
 
 - `docs/VISUAL_METHODS_BRIDGE_AND_CONSULTING_BRIEF_2026_06_01.md`
 - `docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md`
+- `docs/VISUAL_TECHNICAL_PRODUCTION_PROTOCOL_2026_06_01.md`
+
+Technical gate:
+
+- choose a stable `slide_id`;
+- declare evidence sources before rendering;
+- write `scene_plate.png`, `rendered_preview.png`, `rendered_preview.pdf`,
+  `overlay_spec.json`, `manifest.json`, and `qa.json` or equivalent files;
+- inspect the rendered PNG at full size and thumbnail size;
+- record forbidden-term and visible-overlap checks.
 
 Recommended next production order:
 
