@@ -41,6 +41,7 @@ Before producing more final-looking bridge slides, use:
 
 - `docs/VISUAL_IDENTITY_RESEARCH_AND_DEPTH_STRATEGY_2026_06_01.md`
 - `config/visual_identity/spacebio_bench_visual_identity_v0_1.json`
+- `docs/VISUAL_PRIOR_PREMIUM_DECKS_AND_AGENTIC_WORKFLOW_REVIEW_2026_06_01.md`
 
 The selected direction is:
 
@@ -62,6 +63,35 @@ Each new renderer should declare:
 
 If a slide does not pass the visual identity gate, it can remain a logic
 wireframe, but it should not be promoted as a premium deck candidate.
+
+## Reference Deck Calibration Gate
+
+Before a new SpaceBio-Bench slide is treated as a premium candidate, assign its
+reference role. Do not copy an old deck style wholesale.
+
+| New Slide Role | Primary Reference Calibration | Blocking Question |
+|---|---|---|
+| live thesis / section bridge | ISGP 2026 | Does the slide move the audience through one spine without restarting the talk? |
+| method bridge | KMU proof-stage pattern + PBS concept slide | Can a first-time viewer see the data collection/processing/analysis logic before reading details? |
+| compact scientific proof | K562/Perturb-seq UMAP premium | Does one large scientific object carry the claim? |
+| sponsor/share/release boundary | AWG/Otsuka z-stack v6 | Are claim tier, source strip, and internal-text cleanup strong enough for controlled sharing? |
+| ecosystem/future-work | Trivedi/BioAstra placement lessons | Is this late context, not a substitute for method evidence? |
+| manuscript variant | high-profile scientific editorial fallback | Can the figure survive without atmospheric slide-only depth? |
+
+Every manifest should record `reference_calibration_role` with one of:
+
+- `isgp_live_rhythm`
+- `kmu_proof_stage`
+- `awg_share_safety_zstack`
+- `k562_compact_proof_object`
+- `pbs_benchmark_concept`
+- `trivedi_ecosystem_context`
+- `manuscript_editorial`
+
+The gate fails if a slide uses a reference deck's superficial look while
+ignoring its job. Examples: dark ISGP atmosphere without a mission/test
+boundary, AWG sponsor density in an introductory method bridge, or K562 UMAP
+minimalism on a slide that still needs collection/processing explanation.
 
 ## Required File Contract
 

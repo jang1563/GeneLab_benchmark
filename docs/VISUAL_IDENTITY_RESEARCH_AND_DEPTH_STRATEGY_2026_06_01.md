@@ -28,6 +28,38 @@ This means:
 - explicit z-depth so viewers can distinguish source evidence, measurement,
   interpretation, and caveat layers.
 
+## Prior Premium Deck Calibration
+
+This decision has now been checked against JK's prior premium slide-deck work:
+
+- ISGP 2026 plenary: use as the live-talk rhythm and mission-measurement
+  benchmark. It validates dark thesis/media/proof-object alternation, but also
+  warns against dense technical blocks and timing overload.
+- Korea Medical University space-biology deck: use as the proof-stage
+  benchmark. It validates the rule that premium science slides start from a
+  real source/proof object and add a disciplined interpretation layer.
+- AWG/Otsuka sponsor z-stack decks: use as the share-safety and sponsor-grade
+  evidence packaging benchmark. It validates clean-room visible text, quiet
+  source strips, claim boundaries, and uniform proof-object hierarchy.
+- K562/Perturb-seq UMAP premium deck: use as the compact scientific
+  proof-object benchmark. It validates large visual evidence, sparse labels,
+  and explicit caveats over card-heavy scaffolding.
+- PBS/NullAtlas/Anthropic proof slides: use as the abstract benchmark-concept
+  benchmark. It validates open canvases, metric ledgers, evidence fields, and
+  rails instead of repeated card boxes.
+- Trivedi/BioAstra materials: use only for late ecosystem/collaboration
+  placement. They should not become the core method visual grammar.
+
+Full review:
+
+- `docs/VISUAL_PRIOR_PREMIUM_DECKS_AND_AGENTIC_WORKFLOW_REVIEW_2026_06_01.md`
+
+The key implication is that SpaceBio-Bench should not merge all prior deck
+styles. It should borrow each deck's strongest role-specific discipline:
+ISGP for audience rhythm, KMU for proof staging, AWG for clean-room packaging,
+K562 for compact proof-object clarity, PBS for intuitive benchmark concepts,
+and Trivedi only for ecosystem context.
+
 ## What Went Wrong
 
 The style became what it is because negative constraints arrived before

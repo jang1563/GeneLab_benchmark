@@ -141,10 +141,12 @@ Next renderer work should:
 
 1. load `config/visual_identity/spacebio_bench_visual_identity_v0_1.json`;
 2. set `style_direction = hybrid`;
-3. output z-layer/depth-token metadata in each manifest;
-4. reject card-box panel framing;
-5. create B1 first as the actual brand stress test;
-6. then rebuild B2-B4 to match B1, instead of treating previous bridge renders
+3. declare `reference_calibration_role` in each manifest, using
+   `docs/VISUAL_PRIOR_PREMIUM_DECKS_AND_AGENTIC_WORKFLOW_REVIEW_2026_06_01.md`;
+4. output z-layer/depth-token metadata in each manifest;
+5. reject card-box panel framing;
+6. create B1 first as the actual brand stress test;
+7. then rebuild B2-B4 to match B1, instead of treating previous bridge renders
    as final.
 
 ## Current Asset Status
