@@ -1,0 +1,128 @@
+{
+  "slide_id": "b4_train_only_guard_premium",
+  "stage": "post_render",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "Training choices stop before the hidden mission",
+      "x": 0.065,
+      "y": 0.128,
+      "font_pt": 27,
+      "color": "ink",
+      "z": "Z3"
+    },
+    {
+      "id": "train",
+      "role": "primary_callout",
+      "content": "training missions only",
+      "x": 0.125,
+      "y": 0.345,
+      "font_pt": 9.5,
+      "color": "green",
+      "z": "Z3"
+    },
+    {
+      "id": "features",
+      "role": "process_verb",
+      "content": "choose features",
+      "x": 0.325,
+      "y": 0.365,
+      "font_pt": 9.0,
+      "color": "blue",
+      "z": "Z3"
+    },
+    {
+      "id": "scale",
+      "role": "process_verb",
+      "content": "scale",
+      "x": 0.498,
+      "y": 0.365,
+      "font_pt": 9.0,
+      "color": "teal",
+      "z": "Z3"
+    },
+    {
+      "id": "fit",
+      "role": "process_verb",
+      "content": "fit model",
+      "x": 0.64,
+      "y": 0.365,
+      "font_pt": 9.0,
+      "color": "purple",
+      "z": "Z3"
+    },
+    {
+      "id": "hidden",
+      "role": "primary_callout",
+      "content": "hidden mission bypass",
+      "x": 0.205,
+      "y": 0.655,
+      "font_pt": 8.8,
+      "color": "red",
+      "z": "Z3"
+    },
+    {
+      "id": "score",
+      "role": "process_verb",
+      "content": "score",
+      "x": 0.823,
+      "y": 0.54,
+      "font_pt": 9.0,
+      "color": "red",
+      "z": "Z3"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "scope",
+      "role": "claim_boundary",
+      "content": "train-only processing",
+      "x": 0.065,
+      "y": 0.865,
+      "font_pt": 7.8,
+      "color": "muted",
+      "z": "Z4"
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "No hidden mission data shapes the feature space.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.4,
+      "color": "muted",
+      "z": "Z4"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "guard",
+      "role": "guard",
+      "shape": "vertical_rule",
+      "x": 0.742,
+      "y0": 0.33,
+      "y1": 0.7,
+      "color": "red",
+      "z": "Z5"
+    }
+  ],
+  "visible_word_count": 29,
+  "visible_word_budget": 45,
+  "forbidden_visible_terms": [
+    "LOMO",
+    "payload",
+    "artifact",
+    "macro-F1",
+    "/Users/",
+    "sklearn",
+    "StandardScaler",
+    "fit_transform"
+  ]
+}

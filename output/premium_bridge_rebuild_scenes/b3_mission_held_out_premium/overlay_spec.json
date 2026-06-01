@@ -1,0 +1,109 @@
+{
+  "slide_id": "b3_mission_held_out_premium",
+  "stage": "post_render",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "The test set is an entire mission",
+      "x": 0.065,
+      "y": 0.128,
+      "font_pt": 27,
+      "color": "ink",
+      "z": "Z3"
+    },
+    {
+      "id": "train",
+      "role": "primary_callout",
+      "content": "training missions",
+      "x": 0.145,
+      "y": 0.338,
+      "font_pt": 10.2,
+      "color": "green",
+      "z": "Z3"
+    },
+    {
+      "id": "model",
+      "role": "primary_callout",
+      "content": "fit before the boundary",
+      "x": 0.535,
+      "y": 0.338,
+      "font_pt": 9.5,
+      "color": "muted",
+      "z": "Z3"
+    },
+    {
+      "id": "hidden",
+      "role": "primary_callout",
+      "content": "held-out mission",
+      "x": 0.725,
+      "y": 0.338,
+      "font_pt": 10.2,
+      "color": "red",
+      "z": "Z3"
+    },
+    {
+      "id": "score",
+      "role": "secondary_label",
+      "content": "score only after training",
+      "x": 0.805,
+      "y": 0.285,
+      "font_pt": 8.4,
+      "color": "red",
+      "z": "Z3"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "scope",
+      "role": "claim_boundary",
+      "content": "mission-held-out evaluation",
+      "x": 0.065,
+      "y": 0.865,
+      "font_pt": 7.8,
+      "color": "muted",
+      "z": "Z4"
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "Hidden-mission samples stay outside training.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.4,
+      "color": "muted",
+      "z": "Z4"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "boundary",
+      "role": "boundary",
+      "shape": "vertical_rule",
+      "x": 0.67,
+      "y0": 0.285,
+      "y1": 0.72,
+      "color": "red",
+      "z": "Z5"
+    }
+  ],
+  "visible_word_count": 26,
+  "visible_word_budget": 45,
+  "forbidden_visible_terms": [
+    "LOMO",
+    "random CV",
+    "cross-validation",
+    "payload",
+    "RRRM",
+    "alpha",
+    "NES",
+    "macro-F1",
+    "/Users/"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "slide_id": "b4_train_only_guard_premium",
+  "stage": "post_render",
+  "created": "2026-06-01",
+  "pre_render_gate": {
+    "content_brief_declared": true,
+    "technical_preflight_declared": true,
+    "evidence_sources_declared": true,
+    "claim_boundary_declared": true,
+    "visible_text_word_count": 29,
+    "visible_text_budget": 45,
+    "output_paths_declared": true,
+    "overlay_spec_declared": true,
+    "manifest_declared": true
+  },
+  "manual_review_pending": [],
+  "post_render_gate": {
+    "rendered_outputs": {
+      "scene_plate": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/scene_plate.png",
+      "rendered_preview_png": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png",
+      "rendered_preview_pdf": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.pdf"
+    },
+    "manual_full_size_inspection": "pass: opened rendered_preview.png at high detail after hidden-lane and label-spacing fixes",
+    "manual_thumbnail_inspection": "pass: train-only lane and hidden-mission bypass remain visible in the premium rebuild contact sheet",
+    "text_overlap_check": "pass: moved hidden-mission bypass label away from M4 and separated the lower bypass lane from the training lane",
+    "premium_quality_gate": "conditional pass: much stronger than the original wireframe; keep directly after B3 because it remains a procedural control slide",
+    "visual_verdict": "premium rebuild candidate; ready for deck assembly mockup, pending final deck-wide style pass"
+  }
+}

@@ -1,0 +1,278 @@
+slide_id,check,status,severity,detail
+b2_study_to_task_premium,manifest_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/manifest.json
+b2_study_to_task_premium,overlay_spec_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/overlay_spec.json
+b2_study_to_task_premium,qa_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/qa.json
+b2_study_to_task_premium,manifest_field_slide_id,PASS,error,'b2_study_to_task_premium'
+b2_study_to_task_premium,manifest_field_created,PASS,error,'2026-06-01'
+b2_study_to_task_premium,manifest_field_stage,PASS,error,'post_render'
+b2_study_to_task_premium,manifest_field_content_brief,PASS,error,'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md'
+b2_study_to_task_premium,manifest_field_evidence_sources,PASS,error,"[{'path': 'docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md', 'role': 'premium rebuild criteria'}, {'path': 'v9/source_inventory.csv', 'role': 'public source inventory'}, {'path': 'v9/task_manifest_index.csv', 'role': 'task contract index'}, {'path': 'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md', 'role': 'B2 brief'}]"
+b2_study_to_task_premium,manifest_field_claim_boundary,PASS,error,"'a task contract ties public source records to mission context, samples, labels, tissue, assay, and evaluation scope'"
+b2_study_to_task_premium,manifest_field_generator,PASS,error,'scripts/build_bridge_premium_rebuild_scenes.py'
+b2_study_to_task_premium,manifest_field_outputs,PASS,error,"{'scene_plate': 'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/scene_plate.png', 'rendered_preview_png': 'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png', 'rendered_preview_pdf': 'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.pdf', 'overlay_spec': 'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/overlay_spec.json', 'manifest': 'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/manifest.json', 'qa': 'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/qa.json'}"
+b2_study_to_task_premium,overlay_field_slide_id,PASS,error,'b2_study_to_task_premium'
+b2_study_to_task_premium,overlay_field_canvas,PASS,error,"{'width_px': 3840, 'height_px': 2160, 'aspect_ratio': '16:9'}"
+b2_study_to_task_premium,overlay_field_coordinate_system,PASS,error,'normalized_0_1'
+b2_study_to_task_premium,overlay_field_text,PASS,error,"[{'id': 'headline', 'role': 'decision_headline', 'content': 'A task is a traceable contract, not a loose matrix', 'x': 0.065, 'y': 0.128, 'font_pt': 26, 'color': 'ink', 'z': 'Z3'}, {'id': 'source', 'role': 'primary_callout', 'content': 'public source', 'x': 0.108, 'y': 0.338, 'font_pt': 9.5, 'color': 'muted', 'z': 'Z3'}, {'id': 'mission', 'role': 'primary_callout', 'content': 'mission context', 'x': 0.282, 'y': 0.338, 'font_pt': 9.5, 'color': 'green', 'z': 'Z3'}, {'id': 'samples', 'role': 'primary_callout', 'content': 'sample set', 'x': 0.448, 'y': 0.338, 'font_pt': 9.5, 'color': 'blue', 'z': 'Z3'}, {'id': 'labels', 'role': 'primary_callout', 'content': 'label contrast', 'x': 0.59, 'y': 0.338, 'font_pt': 9.5, 'color': 'amber', 'z': 'Z3'}, {'id': 'tissue_assay', 'role': 'primary_callout', 'content': 'tissue + assay', 'x': 0.715, 'y': 0.338, 'font_pt': 9.5, 'color': 'teal', 'z': 'Z3'}, {'id': 'contract', 'role': 'primary_callout', 'content': 'task contract', 'x': 0.832, 'y': 0.338, 'font_pt': 9.5, 'color': 'purple', 'z': 'Z3'}]"
+b2_study_to_task_premium,overlay_field_status_labels,PASS,error,"[{'id': 'scope', 'role': 'claim_boundary', 'content': 'source rows remain auditable', 'x': 0.065, 'y': 0.865, 'font_pt': 7.8, 'color': 'muted', 'z': 'Z4'}, {'id': 'caveat', 'role': 'trust_caveat', 'content': 'Exact rows live outside this figure.', 'x': 0.065, 'y': 0.9, 'font_pt': 7.4, 'color': 'muted', 'z': 'Z4'}]"
+b2_study_to_task_premium,overlay_field_focus_marks,PASS,error,"[{'id': 'contract_path', 'role': 'flow_path', 'shape': 'evidence_rail', 'x0': 0.105, 'x1': 0.865, 'y': 0.5, 'color': 'muted', 'z': 'Z5'}]"
+b2_study_to_task_premium,overlay_field_forbidden_visible_terms,PASS,error,"['raw accession', 'payload', 'artifact', 'RRRM', 'alpha', 'LOMO', '/Users/', 'function', 'class']"
+b2_study_to_task_premium,slide_id_match_overlay,PASS,error,b2_study_to_task_premium vs b2_study_to_task_premium
+b2_study_to_task_premium,slide_id_match_qa,PASS,error,b2_study_to_task_premium vs b2_study_to_task_premium
+b2_study_to_task_premium,stage_match_qa,PASS,error,post_render vs post_render
+b2_study_to_task_premium,canvas_width,PASS,error,3840
+b2_study_to_task_premium,canvas_height,PASS,error,2160
+b2_study_to_task_premium,canvas_aspect,PASS,error,16:9
+b2_study_to_task_premium,coordinate_system,PASS,error,normalized_0_1
+b2_study_to_task_premium,path_exists_content_brief,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b2_study_to_task_premium,path_exists_technical_preflight,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md
+b2_study_to_task_premium,path_exists_generator,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/scripts/build_bridge_premium_rebuild_scenes.py
+b2_study_to_task_premium,evidence_source_0_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md
+b2_study_to_task_premium,evidence_source_1_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/source_inventory.csv
+b2_study_to_task_premium,evidence_source_2_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/v9/task_manifest_index.csv
+b2_study_to_task_premium,evidence_source_3_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b2_study_to_task_premium,output_path_declared_scene_plate,PASS,error,'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/scene_plate.png'
+b2_study_to_task_premium,output_path_declared_rendered_preview_png,PASS,error,'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png'
+b2_study_to_task_premium,output_path_declared_rendered_preview_pdf,PASS,error,'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.pdf'
+b2_study_to_task_premium,output_path_declared_overlay_spec,PASS,error,'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/overlay_spec.json'
+b2_study_to_task_premium,output_path_declared_manifest,PASS,error,'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/manifest.json'
+b2_study_to_task_premium,output_path_declared_qa,PASS,error,'output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/qa.json'
+b2_study_to_task_premium,render_output_exists_scene_plate,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/scene_plate.png
+b2_study_to_task_premium,render_output_exists_rendered_preview_png,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png
+b2_study_to_task_premium,render_output_exists_rendered_preview_pdf,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.pdf
+b2_study_to_task_premium,visible_word_budget,PASS,error,32/45
+b2_study_to_task_premium,forbidden_term_absent_raw accession,PASS,error,raw accession
+b2_study_to_task_premium,forbidden_term_absent_payload,PASS,error,payload
+b2_study_to_task_premium,forbidden_term_absent_artifact,PASS,error,artifact
+b2_study_to_task_premium,forbidden_term_absent_RRRM,PASS,error,RRRM
+b2_study_to_task_premium,forbidden_term_absent_alpha,PASS,error,alpha
+b2_study_to_task_premium,forbidden_term_absent_LOMO,PASS,error,LOMO
+b2_study_to_task_premium,forbidden_term_absent_/Users/,PASS,error,/Users/
+b2_study_to_task_premium,forbidden_term_absent_function,PASS,error,function
+b2_study_to_task_premium,forbidden_term_absent_class,PASS,error,class
+b2_study_to_task_premium,no_absolute_local_path_in_visible_text,PASS,error,"A task is a traceable contract, not a loose matrix public source mission context sample set label contrast tissue + assay task contract source rows remain auditable Exact rows live outside this figure."
+b2_study_to_task_premium,text_headline_coord_normalized,PASS,error,"x=0.065, y=0.128"
+b2_study_to_task_premium,text_headline_coord_safe_area,PASS,warn,"x=0.065, y=0.128"
+b2_study_to_task_premium,text_headline_font_min,PASS,error,font_pt=26
+b2_study_to_task_premium,text_headline_line_length,PASS,warn,max_line_chars=50
+b2_study_to_task_premium,text_source_coord_normalized,PASS,error,"x=0.108, y=0.338"
+b2_study_to_task_premium,text_source_coord_safe_area,PASS,warn,"x=0.108, y=0.338"
+b2_study_to_task_premium,text_source_font_min,PASS,error,font_pt=9.5
+b2_study_to_task_premium,text_source_line_length,PASS,warn,max_line_chars=13
+b2_study_to_task_premium,text_mission_coord_normalized,PASS,error,"x=0.282, y=0.338"
+b2_study_to_task_premium,text_mission_coord_safe_area,PASS,warn,"x=0.282, y=0.338"
+b2_study_to_task_premium,text_mission_font_min,PASS,error,font_pt=9.5
+b2_study_to_task_premium,text_mission_line_length,PASS,warn,max_line_chars=15
+b2_study_to_task_premium,text_samples_coord_normalized,PASS,error,"x=0.448, y=0.338"
+b2_study_to_task_premium,text_samples_coord_safe_area,PASS,warn,"x=0.448, y=0.338"
+b2_study_to_task_premium,text_samples_font_min,PASS,error,font_pt=9.5
+b2_study_to_task_premium,text_samples_line_length,PASS,warn,max_line_chars=10
+b2_study_to_task_premium,text_labels_coord_normalized,PASS,error,"x=0.59, y=0.338"
+b2_study_to_task_premium,text_labels_coord_safe_area,PASS,warn,"x=0.59, y=0.338"
+b2_study_to_task_premium,text_labels_font_min,PASS,error,font_pt=9.5
+b2_study_to_task_premium,text_labels_line_length,PASS,warn,max_line_chars=14
+b2_study_to_task_premium,text_tissue_assay_coord_normalized,PASS,error,"x=0.715, y=0.338"
+b2_study_to_task_premium,text_tissue_assay_coord_safe_area,PASS,warn,"x=0.715, y=0.338"
+b2_study_to_task_premium,text_tissue_assay_font_min,PASS,error,font_pt=9.5
+b2_study_to_task_premium,text_tissue_assay_line_length,PASS,warn,max_line_chars=14
+b2_study_to_task_premium,text_contract_coord_normalized,PASS,error,"x=0.832, y=0.338"
+b2_study_to_task_premium,text_contract_coord_safe_area,PASS,warn,"x=0.832, y=0.338"
+b2_study_to_task_premium,text_contract_font_min,PASS,error,font_pt=9.5
+b2_study_to_task_premium,text_contract_line_length,PASS,warn,max_line_chars=13
+b2_study_to_task_premium,status_labels_scope_coord_normalized,PASS,error,"x=0.065, y=0.865"
+b2_study_to_task_premium,status_labels_scope_coord_safe_area,PASS,warn,"x=0.065, y=0.865"
+b2_study_to_task_premium,status_labels_scope_font_min,PASS,error,font_pt=7.8
+b2_study_to_task_premium,status_labels_scope_line_length,PASS,warn,max_line_chars=28
+b2_study_to_task_premium,status_labels_caveat_coord_normalized,PASS,error,"x=0.065, y=0.9"
+b2_study_to_task_premium,status_labels_caveat_coord_safe_area,PASS,warn,"x=0.065, y=0.9"
+b2_study_to_task_premium,status_labels_caveat_font_min,PASS,error,font_pt=7.4
+b2_study_to_task_premium,status_labels_caveat_line_length,PASS,warn,max_line_chars=36
+b2_study_to_task_premium,focus_contract_path_coords_normalized,PASS,error,"[('y', 0.5), ('x0', 0.105), ('x1', 0.865)]"
+b2_study_to_task_premium,pre_render_gate_content_brief_declared,PASS,error,True
+b2_study_to_task_premium,pre_render_gate_technical_preflight_declared,PASS,error,True
+b2_study_to_task_premium,pre_render_gate_evidence_sources_declared,PASS,error,True
+b2_study_to_task_premium,pre_render_gate_claim_boundary_declared,PASS,error,True
+b2_study_to_task_premium,pre_render_gate_output_paths_declared,PASS,error,True
+b2_study_to_task_premium,pre_render_gate_overlay_spec_declared,PASS,error,True
+b2_study_to_task_premium,pre_render_gate_manifest_declared,PASS,error,True
+b3_mission_held_out_premium,manifest_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/manifest.json
+b3_mission_held_out_premium,overlay_spec_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/overlay_spec.json
+b3_mission_held_out_premium,qa_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/qa.json
+b3_mission_held_out_premium,manifest_field_slide_id,PASS,error,'b3_mission_held_out_premium'
+b3_mission_held_out_premium,manifest_field_created,PASS,error,'2026-06-01'
+b3_mission_held_out_premium,manifest_field_stage,PASS,error,'post_render'
+b3_mission_held_out_premium,manifest_field_content_brief,PASS,error,'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md'
+b3_mission_held_out_premium,manifest_field_evidence_sources,PASS,error,"[{'path': 'docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md', 'role': 'premium rebuild criteria'}, {'path': 'docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md', 'role': 'held-out mission explanation gap'}, {'path': 'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md', 'role': 'B3 brief'}]"
+b3_mission_held_out_premium,manifest_field_claim_boundary,PASS,error,'evaluation hides a mission-level group rather than a random sample'
+b3_mission_held_out_premium,manifest_field_generator,PASS,error,'scripts/build_bridge_premium_rebuild_scenes.py'
+b3_mission_held_out_premium,manifest_field_outputs,PASS,error,"{'scene_plate': 'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/scene_plate.png', 'rendered_preview_png': 'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png', 'rendered_preview_pdf': 'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.pdf', 'overlay_spec': 'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/overlay_spec.json', 'manifest': 'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/manifest.json', 'qa': 'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/qa.json'}"
+b3_mission_held_out_premium,overlay_field_slide_id,PASS,error,'b3_mission_held_out_premium'
+b3_mission_held_out_premium,overlay_field_canvas,PASS,error,"{'width_px': 3840, 'height_px': 2160, 'aspect_ratio': '16:9'}"
+b3_mission_held_out_premium,overlay_field_coordinate_system,PASS,error,'normalized_0_1'
+b3_mission_held_out_premium,overlay_field_text,PASS,error,"[{'id': 'headline', 'role': 'decision_headline', 'content': 'The test set is an entire mission', 'x': 0.065, 'y': 0.128, 'font_pt': 27, 'color': 'ink', 'z': 'Z3'}, {'id': 'train', 'role': 'primary_callout', 'content': 'training missions', 'x': 0.145, 'y': 0.338, 'font_pt': 10.2, 'color': 'green', 'z': 'Z3'}, {'id': 'model', 'role': 'primary_callout', 'content': 'fit before the boundary', 'x': 0.535, 'y': 0.338, 'font_pt': 9.5, 'color': 'muted', 'z': 'Z3'}, {'id': 'hidden', 'role': 'primary_callout', 'content': 'held-out mission', 'x': 0.725, 'y': 0.338, 'font_pt': 10.2, 'color': 'red', 'z': 'Z3'}, {'id': 'score', 'role': 'secondary_label', 'content': 'score only after training', 'x': 0.805, 'y': 0.285, 'font_pt': 8.4, 'color': 'red', 'z': 'Z3'}]"
+b3_mission_held_out_premium,overlay_field_status_labels,PASS,error,"[{'id': 'scope', 'role': 'claim_boundary', 'content': 'mission-held-out evaluation', 'x': 0.065, 'y': 0.865, 'font_pt': 7.8, 'color': 'muted', 'z': 'Z4'}, {'id': 'caveat', 'role': 'trust_caveat', 'content': 'Hidden-mission samples stay outside training.', 'x': 0.065, 'y': 0.9, 'font_pt': 7.4, 'color': 'muted', 'z': 'Z4'}]"
+b3_mission_held_out_premium,overlay_field_focus_marks,PASS,error,"[{'id': 'boundary', 'role': 'boundary', 'shape': 'vertical_rule', 'x': 0.67, 'y0': 0.285, 'y1': 0.72, 'color': 'red', 'z': 'Z5'}]"
+b3_mission_held_out_premium,overlay_field_forbidden_visible_terms,PASS,error,"['LOMO', 'random CV', 'cross-validation', 'payload', 'RRRM', 'alpha', 'NES', 'macro-F1', '/Users/']"
+b3_mission_held_out_premium,slide_id_match_overlay,PASS,error,b3_mission_held_out_premium vs b3_mission_held_out_premium
+b3_mission_held_out_premium,slide_id_match_qa,PASS,error,b3_mission_held_out_premium vs b3_mission_held_out_premium
+b3_mission_held_out_premium,stage_match_qa,PASS,error,post_render vs post_render
+b3_mission_held_out_premium,canvas_width,PASS,error,3840
+b3_mission_held_out_premium,canvas_height,PASS,error,2160
+b3_mission_held_out_premium,canvas_aspect,PASS,error,16:9
+b3_mission_held_out_premium,coordinate_system,PASS,error,normalized_0_1
+b3_mission_held_out_premium,path_exists_content_brief,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b3_mission_held_out_premium,path_exists_technical_preflight,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md
+b3_mission_held_out_premium,path_exists_generator,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/scripts/build_bridge_premium_rebuild_scenes.py
+b3_mission_held_out_premium,evidence_source_0_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md
+b3_mission_held_out_premium,evidence_source_1_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md
+b3_mission_held_out_premium,evidence_source_2_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b3_mission_held_out_premium,output_path_declared_scene_plate,PASS,error,'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/scene_plate.png'
+b3_mission_held_out_premium,output_path_declared_rendered_preview_png,PASS,error,'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png'
+b3_mission_held_out_premium,output_path_declared_rendered_preview_pdf,PASS,error,'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.pdf'
+b3_mission_held_out_premium,output_path_declared_overlay_spec,PASS,error,'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/overlay_spec.json'
+b3_mission_held_out_premium,output_path_declared_manifest,PASS,error,'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/manifest.json'
+b3_mission_held_out_premium,output_path_declared_qa,PASS,error,'output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/qa.json'
+b3_mission_held_out_premium,render_output_exists_scene_plate,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/scene_plate.png
+b3_mission_held_out_premium,render_output_exists_rendered_preview_png,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png
+b3_mission_held_out_premium,render_output_exists_rendered_preview_pdf,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.pdf
+b3_mission_held_out_premium,visible_word_budget,PASS,error,27/45
+b3_mission_held_out_premium,forbidden_term_absent_LOMO,PASS,error,LOMO
+b3_mission_held_out_premium,forbidden_term_absent_random CV,PASS,error,random CV
+b3_mission_held_out_premium,forbidden_term_absent_cross-validation,PASS,error,cross-validation
+b3_mission_held_out_premium,forbidden_term_absent_payload,PASS,error,payload
+b3_mission_held_out_premium,forbidden_term_absent_RRRM,PASS,error,RRRM
+b3_mission_held_out_premium,forbidden_term_absent_alpha,PASS,error,alpha
+b3_mission_held_out_premium,forbidden_term_absent_NES,PASS,error,NES
+b3_mission_held_out_premium,forbidden_term_absent_macro-F1,PASS,error,macro-F1
+b3_mission_held_out_premium,forbidden_term_absent_/Users/,PASS,error,/Users/
+b3_mission_held_out_premium,no_absolute_local_path_in_visible_text,PASS,error,The test set is an entire mission training missions fit before the boundary held-out mission score only after training mission-held-out evaluation Hidden-mission samples stay outside training.
+b3_mission_held_out_premium,text_headline_coord_normalized,PASS,error,"x=0.065, y=0.128"
+b3_mission_held_out_premium,text_headline_coord_safe_area,PASS,warn,"x=0.065, y=0.128"
+b3_mission_held_out_premium,text_headline_font_min,PASS,error,font_pt=27
+b3_mission_held_out_premium,text_headline_line_length,PASS,warn,max_line_chars=33
+b3_mission_held_out_premium,text_train_coord_normalized,PASS,error,"x=0.145, y=0.338"
+b3_mission_held_out_premium,text_train_coord_safe_area,PASS,warn,"x=0.145, y=0.338"
+b3_mission_held_out_premium,text_train_font_min,PASS,error,font_pt=10.2
+b3_mission_held_out_premium,text_train_line_length,PASS,warn,max_line_chars=17
+b3_mission_held_out_premium,text_model_coord_normalized,PASS,error,"x=0.535, y=0.338"
+b3_mission_held_out_premium,text_model_coord_safe_area,PASS,warn,"x=0.535, y=0.338"
+b3_mission_held_out_premium,text_model_font_min,PASS,error,font_pt=9.5
+b3_mission_held_out_premium,text_model_line_length,PASS,warn,max_line_chars=23
+b3_mission_held_out_premium,text_hidden_coord_normalized,PASS,error,"x=0.725, y=0.338"
+b3_mission_held_out_premium,text_hidden_coord_safe_area,PASS,warn,"x=0.725, y=0.338"
+b3_mission_held_out_premium,text_hidden_font_min,PASS,error,font_pt=10.2
+b3_mission_held_out_premium,text_hidden_line_length,PASS,warn,max_line_chars=16
+b3_mission_held_out_premium,text_score_coord_normalized,PASS,error,"x=0.805, y=0.285"
+b3_mission_held_out_premium,text_score_coord_safe_area,PASS,warn,"x=0.805, y=0.285"
+b3_mission_held_out_premium,text_score_font_min,PASS,error,font_pt=8.4
+b3_mission_held_out_premium,text_score_line_length,PASS,warn,max_line_chars=25
+b3_mission_held_out_premium,status_labels_scope_coord_normalized,PASS,error,"x=0.065, y=0.865"
+b3_mission_held_out_premium,status_labels_scope_coord_safe_area,PASS,warn,"x=0.065, y=0.865"
+b3_mission_held_out_premium,status_labels_scope_font_min,PASS,error,font_pt=7.8
+b3_mission_held_out_premium,status_labels_scope_line_length,PASS,warn,max_line_chars=27
+b3_mission_held_out_premium,status_labels_caveat_coord_normalized,PASS,error,"x=0.065, y=0.9"
+b3_mission_held_out_premium,status_labels_caveat_coord_safe_area,PASS,warn,"x=0.065, y=0.9"
+b3_mission_held_out_premium,status_labels_caveat_font_min,PASS,error,font_pt=7.4
+b3_mission_held_out_premium,status_labels_caveat_line_length,PASS,warn,max_line_chars=45
+b3_mission_held_out_premium,focus_boundary_coords_normalized,PASS,error,"[('x', 0.67), ('y0', 0.285), ('y1', 0.72)]"
+b3_mission_held_out_premium,pre_render_gate_content_brief_declared,PASS,error,True
+b3_mission_held_out_premium,pre_render_gate_technical_preflight_declared,PASS,error,True
+b3_mission_held_out_premium,pre_render_gate_evidence_sources_declared,PASS,error,True
+b3_mission_held_out_premium,pre_render_gate_claim_boundary_declared,PASS,error,True
+b3_mission_held_out_premium,pre_render_gate_output_paths_declared,PASS,error,True
+b3_mission_held_out_premium,pre_render_gate_overlay_spec_declared,PASS,error,True
+b3_mission_held_out_premium,pre_render_gate_manifest_declared,PASS,error,True
+b4_train_only_guard_premium,manifest_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/manifest.json
+b4_train_only_guard_premium,overlay_spec_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/overlay_spec.json
+b4_train_only_guard_premium,qa_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/qa.json
+b4_train_only_guard_premium,manifest_field_slide_id,PASS,error,'b4_train_only_guard_premium'
+b4_train_only_guard_premium,manifest_field_created,PASS,error,'2026-06-01'
+b4_train_only_guard_premium,manifest_field_stage,PASS,error,'post_render'
+b4_train_only_guard_premium,manifest_field_content_brief,PASS,error,'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md'
+b4_train_only_guard_premium,manifest_field_evidence_sources,PASS,error,"[{'path': 'docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md', 'role': 'premium rebuild criteria'}, {'path': 'docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md', 'role': 'leakage prevention explanation gap'}, {'path': 'docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md', 'role': 'B4 brief'}]"
+b4_train_only_guard_premium,manifest_field_claim_boundary,PASS,error,"'feature selection, scaling, and model fitting are learned from training missions only'"
+b4_train_only_guard_premium,manifest_field_generator,PASS,error,'scripts/build_bridge_premium_rebuild_scenes.py'
+b4_train_only_guard_premium,manifest_field_outputs,PASS,error,"{'scene_plate': 'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/scene_plate.png', 'rendered_preview_png': 'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png', 'rendered_preview_pdf': 'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.pdf', 'overlay_spec': 'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/overlay_spec.json', 'manifest': 'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/manifest.json', 'qa': 'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/qa.json'}"
+b4_train_only_guard_premium,overlay_field_slide_id,PASS,error,'b4_train_only_guard_premium'
+b4_train_only_guard_premium,overlay_field_canvas,PASS,error,"{'width_px': 3840, 'height_px': 2160, 'aspect_ratio': '16:9'}"
+b4_train_only_guard_premium,overlay_field_coordinate_system,PASS,error,'normalized_0_1'
+b4_train_only_guard_premium,overlay_field_text,PASS,error,"[{'id': 'headline', 'role': 'decision_headline', 'content': 'Training choices stop before the hidden mission', 'x': 0.065, 'y': 0.128, 'font_pt': 27, 'color': 'ink', 'z': 'Z3'}, {'id': 'train', 'role': 'primary_callout', 'content': 'training missions only', 'x': 0.125, 'y': 0.345, 'font_pt': 9.5, 'color': 'green', 'z': 'Z3'}, {'id': 'features', 'role': 'process_verb', 'content': 'choose features', 'x': 0.325, 'y': 0.365, 'font_pt': 9.0, 'color': 'blue', 'z': 'Z3'}, {'id': 'scale', 'role': 'process_verb', 'content': 'scale', 'x': 0.498, 'y': 0.365, 'font_pt': 9.0, 'color': 'teal', 'z': 'Z3'}, {'id': 'fit', 'role': 'process_verb', 'content': 'fit model', 'x': 0.64, 'y': 0.365, 'font_pt': 9.0, 'color': 'purple', 'z': 'Z3'}, {'id': 'hidden', 'role': 'primary_callout', 'content': 'hidden mission bypass', 'x': 0.205, 'y': 0.655, 'font_pt': 8.8, 'color': 'red', 'z': 'Z3'}, {'id': 'score', 'role': 'process_verb', 'content': 'score', 'x': 0.823, 'y': 0.54, 'font_pt': 9.0, 'color': 'red', 'z': 'Z3'}]"
+b4_train_only_guard_premium,overlay_field_status_labels,PASS,error,"[{'id': 'scope', 'role': 'claim_boundary', 'content': 'train-only processing', 'x': 0.065, 'y': 0.865, 'font_pt': 7.8, 'color': 'muted', 'z': 'Z4'}, {'id': 'caveat', 'role': 'trust_caveat', 'content': 'No hidden mission data shapes the feature space.', 'x': 0.065, 'y': 0.9, 'font_pt': 7.4, 'color': 'muted', 'z': 'Z4'}]"
+b4_train_only_guard_premium,overlay_field_focus_marks,PASS,error,"[{'id': 'guard', 'role': 'guard', 'shape': 'vertical_rule', 'x': 0.742, 'y0': 0.33, 'y1': 0.7, 'color': 'red', 'z': 'Z5'}]"
+b4_train_only_guard_premium,overlay_field_forbidden_visible_terms,PASS,error,"['LOMO', 'payload', 'artifact', 'macro-F1', '/Users/', 'sklearn', 'StandardScaler', 'fit_transform']"
+b4_train_only_guard_premium,slide_id_match_overlay,PASS,error,b4_train_only_guard_premium vs b4_train_only_guard_premium
+b4_train_only_guard_premium,slide_id_match_qa,PASS,error,b4_train_only_guard_premium vs b4_train_only_guard_premium
+b4_train_only_guard_premium,stage_match_qa,PASS,error,post_render vs post_render
+b4_train_only_guard_premium,canvas_width,PASS,error,3840
+b4_train_only_guard_premium,canvas_height,PASS,error,2160
+b4_train_only_guard_premium,canvas_aspect,PASS,error,16:9
+b4_train_only_guard_premium,coordinate_system,PASS,error,normalized_0_1
+b4_train_only_guard_premium,path_exists_content_brief,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b4_train_only_guard_premium,path_exists_technical_preflight,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md
+b4_train_only_guard_premium,path_exists_generator,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/scripts/build_bridge_premium_rebuild_scenes.py
+b4_train_only_guard_premium,evidence_source_0_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_PREMIUM_REBUILD_CRITIQUE_2026_06_01.md
+b4_train_only_guard_premium,evidence_source_1_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md
+b4_train_only_guard_premium,evidence_source_2_exists,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/docs/VISUAL_BRIDGE_CONTENT_BRIEFS_B1_B4_2026_06_01.md
+b4_train_only_guard_premium,output_path_declared_scene_plate,PASS,error,'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/scene_plate.png'
+b4_train_only_guard_premium,output_path_declared_rendered_preview_png,PASS,error,'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png'
+b4_train_only_guard_premium,output_path_declared_rendered_preview_pdf,PASS,error,'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.pdf'
+b4_train_only_guard_premium,output_path_declared_overlay_spec,PASS,error,'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/overlay_spec.json'
+b4_train_only_guard_premium,output_path_declared_manifest,PASS,error,'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/manifest.json'
+b4_train_only_guard_premium,output_path_declared_qa,PASS,error,'output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/qa.json'
+b4_train_only_guard_premium,render_output_exists_scene_plate,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/scene_plate.png
+b4_train_only_guard_premium,render_output_exists_rendered_preview_png,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png
+b4_train_only_guard_premium,render_output_exists_rendered_preview_pdf,PASS,error,/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.pdf
+b4_train_only_guard_premium,visible_word_budget,PASS,error,29/45
+b4_train_only_guard_premium,forbidden_term_absent_LOMO,PASS,error,LOMO
+b4_train_only_guard_premium,forbidden_term_absent_payload,PASS,error,payload
+b4_train_only_guard_premium,forbidden_term_absent_artifact,PASS,error,artifact
+b4_train_only_guard_premium,forbidden_term_absent_macro-F1,PASS,error,macro-F1
+b4_train_only_guard_premium,forbidden_term_absent_/Users/,PASS,error,/Users/
+b4_train_only_guard_premium,forbidden_term_absent_sklearn,PASS,error,sklearn
+b4_train_only_guard_premium,forbidden_term_absent_StandardScaler,PASS,error,StandardScaler
+b4_train_only_guard_premium,forbidden_term_absent_fit_transform,PASS,error,fit_transform
+b4_train_only_guard_premium,no_absolute_local_path_in_visible_text,PASS,error,Training choices stop before the hidden mission training missions only choose features scale fit model hidden mission bypass score train-only processing No hidden mission data shapes the feature space.
+b4_train_only_guard_premium,text_headline_coord_normalized,PASS,error,"x=0.065, y=0.128"
+b4_train_only_guard_premium,text_headline_coord_safe_area,PASS,warn,"x=0.065, y=0.128"
+b4_train_only_guard_premium,text_headline_font_min,PASS,error,font_pt=27
+b4_train_only_guard_premium,text_headline_line_length,PASS,warn,max_line_chars=47
+b4_train_only_guard_premium,text_train_coord_normalized,PASS,error,"x=0.125, y=0.345"
+b4_train_only_guard_premium,text_train_coord_safe_area,PASS,warn,"x=0.125, y=0.345"
+b4_train_only_guard_premium,text_train_font_min,PASS,error,font_pt=9.5
+b4_train_only_guard_premium,text_train_line_length,PASS,warn,max_line_chars=22
+b4_train_only_guard_premium,text_features_coord_normalized,PASS,error,"x=0.325, y=0.365"
+b4_train_only_guard_premium,text_features_coord_safe_area,PASS,warn,"x=0.325, y=0.365"
+b4_train_only_guard_premium,text_features_font_min,PASS,error,font_pt=9.0
+b4_train_only_guard_premium,text_features_line_length,PASS,warn,max_line_chars=15
+b4_train_only_guard_premium,text_scale_coord_normalized,PASS,error,"x=0.498, y=0.365"
+b4_train_only_guard_premium,text_scale_coord_safe_area,PASS,warn,"x=0.498, y=0.365"
+b4_train_only_guard_premium,text_scale_font_min,PASS,error,font_pt=9.0
+b4_train_only_guard_premium,text_scale_line_length,PASS,warn,max_line_chars=5
+b4_train_only_guard_premium,text_fit_coord_normalized,PASS,error,"x=0.64, y=0.365"
+b4_train_only_guard_premium,text_fit_coord_safe_area,PASS,warn,"x=0.64, y=0.365"
+b4_train_only_guard_premium,text_fit_font_min,PASS,error,font_pt=9.0
+b4_train_only_guard_premium,text_fit_line_length,PASS,warn,max_line_chars=9
+b4_train_only_guard_premium,text_hidden_coord_normalized,PASS,error,"x=0.205, y=0.655"
+b4_train_only_guard_premium,text_hidden_coord_safe_area,PASS,warn,"x=0.205, y=0.655"
+b4_train_only_guard_premium,text_hidden_font_min,PASS,error,font_pt=8.8
+b4_train_only_guard_premium,text_hidden_line_length,PASS,warn,max_line_chars=21
+b4_train_only_guard_premium,text_score_coord_normalized,PASS,error,"x=0.823, y=0.54"
+b4_train_only_guard_premium,text_score_coord_safe_area,PASS,warn,"x=0.823, y=0.54"
+b4_train_only_guard_premium,text_score_font_min,PASS,error,font_pt=9.0
+b4_train_only_guard_premium,text_score_line_length,PASS,warn,max_line_chars=5
+b4_train_only_guard_premium,status_labels_scope_coord_normalized,PASS,error,"x=0.065, y=0.865"
+b4_train_only_guard_premium,status_labels_scope_coord_safe_area,PASS,warn,"x=0.065, y=0.865"
+b4_train_only_guard_premium,status_labels_scope_font_min,PASS,error,font_pt=7.8
+b4_train_only_guard_premium,status_labels_scope_line_length,PASS,warn,max_line_chars=21
+b4_train_only_guard_premium,status_labels_caveat_coord_normalized,PASS,error,"x=0.065, y=0.9"
+b4_train_only_guard_premium,status_labels_caveat_coord_safe_area,PASS,warn,"x=0.065, y=0.9"
+b4_train_only_guard_premium,status_labels_caveat_font_min,PASS,error,font_pt=7.4
+b4_train_only_guard_premium,status_labels_caveat_line_length,PASS,warn,max_line_chars=48
+b4_train_only_guard_premium,focus_guard_coords_normalized,PASS,error,"[('x', 0.742), ('y0', 0.33), ('y1', 0.7)]"
+b4_train_only_guard_premium,pre_render_gate_content_brief_declared,PASS,error,True
+b4_train_only_guard_premium,pre_render_gate_technical_preflight_declared,PASS,error,True
+b4_train_only_guard_premium,pre_render_gate_evidence_sources_declared,PASS,error,True
+b4_train_only_guard_premium,pre_render_gate_claim_boundary_declared,PASS,error,True
+b4_train_only_guard_premium,pre_render_gate_output_paths_declared,PASS,error,True
+b4_train_only_guard_premium,pre_render_gate_overlay_spec_declared,PASS,error,True
+b4_train_only_guard_premium,pre_render_gate_manifest_declared,PASS,error,True

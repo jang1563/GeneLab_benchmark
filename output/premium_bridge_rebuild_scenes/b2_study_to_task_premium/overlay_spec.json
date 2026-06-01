@@ -1,0 +1,129 @@
+{
+  "slide_id": "b2_study_to_task_premium",
+  "stage": "post_render",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "A task is a traceable contract, not a loose matrix",
+      "x": 0.065,
+      "y": 0.128,
+      "font_pt": 26,
+      "color": "ink",
+      "z": "Z3"
+    },
+    {
+      "id": "source",
+      "role": "primary_callout",
+      "content": "public source",
+      "x": 0.108,
+      "y": 0.338,
+      "font_pt": 9.5,
+      "color": "muted",
+      "z": "Z3"
+    },
+    {
+      "id": "mission",
+      "role": "primary_callout",
+      "content": "mission context",
+      "x": 0.282,
+      "y": 0.338,
+      "font_pt": 9.5,
+      "color": "green",
+      "z": "Z3"
+    },
+    {
+      "id": "samples",
+      "role": "primary_callout",
+      "content": "sample set",
+      "x": 0.448,
+      "y": 0.338,
+      "font_pt": 9.5,
+      "color": "blue",
+      "z": "Z3"
+    },
+    {
+      "id": "labels",
+      "role": "primary_callout",
+      "content": "label contrast",
+      "x": 0.59,
+      "y": 0.338,
+      "font_pt": 9.5,
+      "color": "amber",
+      "z": "Z3"
+    },
+    {
+      "id": "tissue_assay",
+      "role": "primary_callout",
+      "content": "tissue + assay",
+      "x": 0.715,
+      "y": 0.338,
+      "font_pt": 9.5,
+      "color": "teal",
+      "z": "Z3"
+    },
+    {
+      "id": "contract",
+      "role": "primary_callout",
+      "content": "task contract",
+      "x": 0.832,
+      "y": 0.338,
+      "font_pt": 9.5,
+      "color": "purple",
+      "z": "Z3"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "scope",
+      "role": "claim_boundary",
+      "content": "source rows remain auditable",
+      "x": 0.065,
+      "y": 0.865,
+      "font_pt": 7.8,
+      "color": "muted",
+      "z": "Z4"
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "Exact rows live outside this figure.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.4,
+      "color": "muted",
+      "z": "Z4"
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "contract_path",
+      "role": "flow_path",
+      "shape": "evidence_rail",
+      "x0": 0.105,
+      "x1": 0.865,
+      "y": 0.5,
+      "color": "muted",
+      "z": "Z5"
+    }
+  ],
+  "visible_word_count": 33,
+  "visible_word_budget": 45,
+  "forbidden_visible_terms": [
+    "raw accession",
+    "payload",
+    "artifact",
+    "RRRM",
+    "alpha",
+    "LOMO",
+    "/Users/",
+    "function",
+    "class"
+  ]
+}
