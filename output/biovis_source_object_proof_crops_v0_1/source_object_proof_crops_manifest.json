@@ -1,0 +1,25 @@
+{
+  "created": "2026-06-02",
+  "scope": "Real source-object proof crops for v0.4 placeholder replacement.",
+  "source_inputs": {
+    "organoid_task_manifest": "v9/human_organoid/task_manifests/draft_human_organoid_spaceflight.json",
+    "organoid_matrices": [
+      "v9/human_organoid/matrices/GLDS-716_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+      "v9/human_organoid/matrices/GLDS-720_rna_seq_Normalized_Counts_GLbulkRNAseq.csv"
+    ],
+    "osd120_task_manifest": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json"
+  },
+  "outputs": {
+    "proof_crops": [
+      "output/biovis_source_object_proof_crops_v0_1/proof_crops/organoid_matrix_audit_proof.png",
+      "output/biovis_source_object_proof_crops_v0_1/proof_crops/osd120_interaction_split_proof.png",
+      "output/biovis_source_object_proof_crops_v0_1/proof_crops/organoid_blocked_split_proof.png"
+    ],
+    "production_mocks": [
+      "output/biovis_source_object_proof_crops_v0_1/production_mocks/01_dark_organoid_matrix_proof_replacement.png",
+      "output/biovis_source_object_proof_crops_v0_1/production_mocks/02_dark_osd120_split_proof_replacement.png",
+      "output/biovis_source_object_proof_crops_v0_1/production_mocks/03_proof_crop_contact_sheet.png"
+    ]
+  },
+  "claim_boundary": "Generated crops prove local evidence presence and manifest-derived split geometry; they are not final validated manuscript result figures."
+}
