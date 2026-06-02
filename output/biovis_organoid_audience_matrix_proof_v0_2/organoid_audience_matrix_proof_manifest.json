@@ -1,0 +1,67 @@
+{
+  "created": "2026-06-02",
+  "source_manifest": "v9/human_organoid/task_manifests/draft_human_organoid_spaceflight.json",
+  "source_records": {
+    "OSD-863": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-863",
+    "OSD-871": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-871"
+  },
+  "outputs": {
+    "proof": "output/biovis_organoid_audience_matrix_proof_v0_2/proof/human_organoid_downloaded_matrix_proof.png",
+    "panel": "output/biovis_organoid_audience_matrix_proof_v0_2/panels/01_dark_organoid_clean_source_to_matrix.png",
+    "grayscale_qa": [
+      "output/biovis_organoid_audience_matrix_proof_v0_2/qa/human_organoid_downloaded_matrix_proof_grayscale.png",
+      "output/biovis_organoid_audience_matrix_proof_v0_2/qa/01_dark_organoid_clean_source_to_matrix_grayscale.png"
+    ]
+  },
+  "sample_counts": {
+    "n_samples": 42,
+    "label_distribution": {
+      "Ground": 22,
+      "LEO_or_ISS": 20
+    },
+    "organoid_type_distribution": {
+      "cortical_neural_organoid": 19,
+      "dopaminergic_neural_organoid": 23
+    },
+    "microglia_condition_distribution": {
+      "with_microglia": 20,
+      "without_microglia": 22
+    },
+    "source_sample_rows": {
+      "OSD-863": 19,
+      "OSD-871": 23
+    }
+  },
+  "matrix_sources": {
+    "OSD-863": {
+      "matrix_file": "GLDS-716_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+      "n_feature_rows": 30408,
+      "n_sample_columns": 19,
+      "sha256": "448569ef5247b81c0d063c69f09a44962088a7615b25c5f511e72635adca93e2"
+    },
+    "OSD-871": {
+      "matrix_file": "GLDS-720_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+      "n_feature_rows": 30269,
+      "n_sample_columns": 23,
+      "sha256": "88a8989db05166ea92dd19e6675b6a19b7dfaa875ab0425e5659831da8dbd7a5"
+    }
+  },
+  "visible_text_policy": {
+    "preferred_terms": [
+      "Human organoid matrix proof",
+      "Official OSDR pages",
+      "Downloaded expression matrices",
+      "Cortical organoids",
+      "Dopaminergic organoids",
+      "42 samples",
+      "Draft pilot",
+      "Not mission-held-out"
+    ],
+    "blocked_internal_terms_absent_from_new_visible_text": {
+      "payloads not hashed": true,
+      "diagnostic scorer": true,
+      "single-mission": true
+    }
+  },
+  "claim_boundary": "Downloaded matrix and sample-alignment proof only; not final benchmark performance or mission-held-out evidence."
+}
