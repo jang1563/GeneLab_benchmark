@@ -1,0 +1,97 @@
+{
+  "slide_id": "feature_layer_bridge",
+  "stage": "post_render",
+  "created": "2026-06-02",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "Gene signals become pathway summaries",
+      "x": 0.065,
+      "y": 0.122,
+      "font_pt": 26.5,
+      "color": "ink"
+    },
+    {
+      "id": "support",
+      "role": "supporting_claim",
+      "content": "Both layers use the same hidden-mission split.",
+      "x": 0.066,
+      "y": 0.198,
+      "font_pt": 11.3,
+      "color": "muted"
+    },
+    {
+      "id": "matrix",
+      "role": "primary_callout",
+      "content": "Samples x genes",
+      "x": 0.16,
+      "y": 0.353,
+      "font_pt": 10.2,
+      "color": "blue"
+    },
+    {
+      "id": "rna",
+      "role": "primary_callout",
+      "content": "Gene activity",
+      "x": 0.398,
+      "y": 0.353,
+      "font_pt": 10.2,
+      "color": "teal"
+    },
+    {
+      "id": "pathway",
+      "role": "primary_callout",
+      "content": "Pathway summary",
+      "x": 0.642,
+      "y": 0.353,
+      "font_pt": 10.2,
+      "color": "green"
+    },
+    {
+      "id": "score",
+      "role": "primary_callout",
+      "content": "Hidden mission score",
+      "x": 0.826,
+      "y": 0.353,
+      "font_pt": 10.2,
+      "color": "red"
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "status",
+      "role": "claim_boundary",
+      "content": "fit on training missions; score on hidden missions",
+      "x": 0.065,
+      "y": 0.866,
+      "font_pt": 7.8,
+      "color": "muted"
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "Pathways summarize biology; not every task improves.",
+      "x": 0.065,
+      "y": 0.9,
+      "font_pt": 7.3,
+      "color": "muted"
+    }
+  ],
+  "internal_visible_text": [
+    "same split",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "summarize"
+  ],
+  "visible_word_count": 44,
+  "visible_word_budget": 48,
+  "motif_assets": [
+    "assets/biovis_motif_pack_v0_2/png/sample_to_matrix_assay.png",
+    "assets/biovis_motif_pack_v0_2/png/rna_expression_trace.png",
+    "assets/biovis_motif_pack_v0_2/png/pathway_program_field.png",
+    "assets/biovis_motif_pack_v0_2/png/protein_complex_field.png"
+  ]
+}

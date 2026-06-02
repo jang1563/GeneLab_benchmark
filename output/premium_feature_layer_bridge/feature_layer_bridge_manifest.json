@@ -1,0 +1,20 @@
+{
+  "slide_id": "feature_layer_bridge",
+  "created": "2026-06-02",
+  "purpose": "First-time-viewer bridge explaining gene/RNA versus pathway feature layers under the same mission-held-out evaluation rule.",
+  "audience_question": "What does gene versus pathway mean in this benchmark?",
+  "visual_move": "sample-by-gene measurement and gene activity compress into a pathway summary, then flow to a hidden mission score under the same split",
+  "claim_boundary": "Pathway summaries are train-only feature summaries, not a separate dataset or guaranteed universal improvement.",
+  "outputs": {
+    "scene_plate": "output/premium_feature_layer_bridge/feature_layer_bridge_scene_plate.png",
+    "rendered_preview_png": "output/premium_feature_layer_bridge/feature_layer_bridge_scene.png",
+    "rendered_preview_pdf": "output/premium_feature_layer_bridge/feature_layer_bridge_scene.pdf",
+    "overlay_spec": "output/premium_feature_layer_bridge/feature_layer_bridge_overlay_spec.json",
+    "qa": "output/premium_feature_layer_bridge/feature_layer_bridge_qa.json"
+  },
+  "evidence_sources": [
+    "docs/VISUAL_METHODS_EXPLANATION_GAP_MAP_2026_06_01.md",
+    "docs/BIOVIS_MOTIF_ASSET_PACK_V0_2_REVIEW_2026_06_02.md",
+    "assets/biovis_motif_pack_v0_2/manifest.json"
+  ]
+}
