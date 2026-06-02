@@ -1,0 +1,34 @@
+{
+  "created": "2026-06-02",
+  "purpose": "Review contact sheet for classifying methods-bridge visual assets before slide-deck assembly.",
+  "outputs": {
+    "contact_sheet": "output/biovis_methods_bridge_shortlist_v0_1/contact_sheet/methods_bridge_shortlist_contact_sheet.png",
+    "grayscale_qa": "output/biovis_methods_bridge_shortlist_v0_1/qa/methods_bridge_shortlist_contact_sheet_grayscale.png",
+    "classification_json": "output/biovis_methods_bridge_shortlist_v0_1/methods_bridge_slide_classification.json",
+    "classification_csv": "output/biovis_methods_bridge_shortlist_v0_1/methods_bridge_slide_classification.csv"
+  },
+  "candidate_count": 6,
+  "main_deck_candidate_count": 2,
+  "appendix_or_reviewer_candidate_count": 2,
+  "superseded_candidate_count": 2,
+  "visible_text_policy": {
+    "preferred_terms": [
+      "Methods-bridge shortlist",
+      "Main deck",
+      "Appendix",
+      "Superseded",
+      "Evidence layers only",
+      "Keep v1-v7 results first",
+      "Draft pilot only",
+      "Same-study only"
+    ],
+    "blocked_internal_terms_absent_from_new_visible_text": {
+      "diagnostic scorer": true,
+      "hidden": true,
+      "within-source": true,
+      "payloads not hashed": true,
+      "single-mission": true
+    }
+  },
+  "claim_boundary": "This contact sheet supports deck placement decisions only; it is not a benchmark result figure."
+}

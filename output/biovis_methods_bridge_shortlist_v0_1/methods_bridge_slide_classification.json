@@ -1,0 +1,73 @@
+{
+  "created": "2026-06-02",
+  "verdict": "Use only two main-deck bridge candidates; keep appendix and superseded assets out of the core result spine.",
+  "deck_rule": "At most one human organoid bridge and at most one OSD-120/multispecies bridge; v1-v7 benchmark result slides remain the core.",
+  "candidates": [
+    {
+      "id": "organoid_source_to_matrix",
+      "title": "Human organoid source-to-matrix",
+      "source_image": "output/biovis_organoid_audience_matrix_proof_v0_2/panels/01_dark_organoid_clean_source_to_matrix.png",
+      "proposed_use": "Main deck",
+      "deck_slot": "Methods bridge: extension readiness",
+      "status": "keep-main-candidate",
+      "rationale": "Shows official OSDR pages becoming downloaded expression matrices. Good first-view explanation for how organoid data enters v9.",
+      "guardrail": "Draft pilot only; not mission-held-out and not a final benchmark result.",
+      "rank": 1
+    },
+    {
+      "id": "osd120_source_to_task",
+      "title": "OSD-120 source-to-task",
+      "source_image": "output/biovis_osd120_audience_split_proof_v0_2/panels/01_dark_osd120_clean_source_to_task.png",
+      "proposed_use": "Main deck",
+      "deck_slot": "Methods bridge: same-study task check",
+      "status": "keep-main-candidate",
+      "rationale": "Explains how one OSDR study becomes a constrained task check with held-out groups and visible sample balance.",
+      "guardrail": "Same-study only; not mission-held-out and not cross-species generalization.",
+      "rank": 2
+    },
+    {
+      "id": "osdr_source_contact_sheet",
+      "title": "OSDR source-record contact sheet",
+      "source_image": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/01_osdr_source_record_contact_sheet.png",
+      "proposed_use": "Appendix",
+      "deck_slot": "Reviewer provenance receipt",
+      "status": "appendix-reviewer-backup",
+      "rationale": "Efficient proof that OSD-863, OSD-871, OSD-120, and OSD-918 official source records were captured.",
+      "guardrail": "Use as receipt material; do not turn it into a main-story methods slide.",
+      "rank": 3
+    },
+    {
+      "id": "extension_source_lanes",
+      "title": "Extension source lanes",
+      "source_image": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/04_dark_extension_source_lanes.png",
+      "proposed_use": "Appendix",
+      "deck_slot": "Extension map backup",
+      "status": "appendix-reviewer-backup",
+      "rationale": "Useful for showing organoid, plant, and single-cell lanes as possible extensions around the v9 provenance layer.",
+      "guardrail": "Keep behind the core deck unless extension scope is explicitly discussed.",
+      "rank": 4
+    },
+    {
+      "id": "organoid_source_record_proof_old",
+      "title": "Earlier organoid source proof",
+      "source_image": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/02_dark_organoid_source_record_proof.png",
+      "proposed_use": "Superseded",
+      "deck_slot": "Replace with v0.2 matrix proof",
+      "status": "superseded",
+      "rationale": "The newer organoid panel explains the local matrix step more clearly and uses cleaner audience-facing text.",
+      "guardrail": "Do not use in main deck unless the v0.2 panel fails slide-level QA.",
+      "rank": 5
+    },
+    {
+      "id": "osd120_source_record_proof_old",
+      "title": "Earlier OSD-120 source proof",
+      "source_image": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/03_dark_osd120_source_record_proof.png",
+      "proposed_use": "Superseded",
+      "deck_slot": "Replace with v0.2 task proof",
+      "status": "superseded",
+      "rationale": "The newer OSD-120 panel better explains the held-out task and avoids overly internal wording.",
+      "guardrail": "Keep only as provenance backup, not as a slide candidate.",
+      "rank": 6
+    }
+  ]
+}
