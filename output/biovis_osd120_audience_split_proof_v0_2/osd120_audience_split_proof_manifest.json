@@ -1,0 +1,47 @@
+{
+  "created": "2026-06-02",
+  "source_manifest": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json",
+  "source_record": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-120",
+  "outputs": {
+    "proof": "output/biovis_osd120_audience_split_proof_v0_2/proof/osd120_same_study_task_check_proof.png",
+    "panel": "output/biovis_osd120_audience_split_proof_v0_2/panels/01_dark_osd120_clean_source_to_task.png",
+    "grayscale_qa": [
+      "output/biovis_osd120_audience_split_proof_v0_2/qa/osd120_same_study_task_check_proof_grayscale.png",
+      "output/biovis_osd120_audience_split_proof_v0_2/qa/01_dark_osd120_clean_source_to_task_grayscale.png"
+    ]
+  },
+  "sample_counts": {
+    "n_samples": 36,
+    "label_distribution": {
+      "Ground": 18,
+      "LEO_or_ISS": 18
+    },
+    "genotype_or_ecotype_distribution": {
+      "Col.0": 12,
+      "Col.0.PhyD": 12,
+      "Wassilewskija.ecotype": 12
+    },
+    "light_treatment_distribution": {
+      "Dark.Treatment": 18,
+      "Light.Treatment": 18
+    }
+  },
+  "visible_text_policy": {
+    "preferred_terms": [
+      "OSD-120 same-study task check",
+      "Arabidopsis root RNA-seq",
+      "Hold out one genotype",
+      "Training samples",
+      "Held-out samples",
+      "Same OSDR study",
+      "Not mission-held-out",
+      "Not cross-species"
+    ],
+    "blocked_terms_absent_from_new_visible_text": {
+      "within-source": true,
+      "hidden": true,
+      "interaction split": true
+    }
+  },
+  "claim_boundary": "Same-study OSD-120 task check only; not mission-held-out and not cross-species generalization."
+}

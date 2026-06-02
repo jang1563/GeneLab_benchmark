@@ -1,0 +1,18 @@
+{
+  "created": "2026-06-02",
+  "contrast_checks": {
+    "ink_on_deep": 17.49,
+    "soft_on_deep": 10.69,
+    "ink_on_void": 18.31
+  },
+  "visual_checks": [
+    "Audience-facing proof removes internal terms from visible labels.",
+    "Train/test separation remains sample-count-backed from the task manifest.",
+    "Claim boundary is visible in both the proof crop and slide-scale panel.",
+    "Color is reinforced by text labels and grayscale QA outputs."
+  ],
+  "review_required": [
+    "Final deck should use editable text for callouts, with this PNG as the evidence surface.",
+    "Do not use as final result or generalization evidence."
+  ]
+}
