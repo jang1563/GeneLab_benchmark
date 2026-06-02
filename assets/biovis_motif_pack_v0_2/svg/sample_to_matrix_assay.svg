@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-label="Sample to matrix assay">
+  <metadata>SpaceBio-Bench original premium biological motif asset v0.2; motif_id=sample_to_matrix_assay; category=assay; license=repository MIT license.</metadata>
+
+  <defs>
+    <filter id="soft_shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="12" dy="16" stdDeviation="14" flood-color="#9C9487" flood-opacity="0.16"/>
+    </filter>
+    <radialGradient id="bio_glow" cx="46%" cy="42%" r="64%">
+      <stop offset="0%" stop-color="#286EA6" stop-opacity="0.18"/>
+      <stop offset="58%" stop-color="#159A8A" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FBFAF6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="surface_fade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBFAF6" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#FBFAF6" stop-opacity="0.16"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" fill="none"/>
+  <ellipse cx="482" cy="322" rx="356" ry="218" fill="url(#bio_glow)" opacity="0.92"/>
+  <path d="M104 318 H856" stroke="#AEB8C5" stroke-width="1.8" opacity="0.18"/>
+  <path d="M188 168 V510 M480 114 V546 M774 178 V498" stroke="#AEB8C5" stroke-width="1.4" opacity="0.12"/>
+  <path d="M154 426 C305 358, 607 356, 812 432" fill="none" stroke="#286EA6" stroke-width="2.0" opacity="0.12" stroke-linecap="round"/>
+  <path d="M158 230 C330 292, 620 290, 800 218" fill="none" stroke="#159A8A" stroke-width="1.8" opacity="0.10" stroke-linecap="round"/>
+  <g filter="url(#soft_shadow)">
+  <path d="M246 158 H356 M276 158 V410 C276 486, 326 502, 382 466 C412 446, 416 420, 416 380 V158" fill="#FBFAF6" stroke="#286EA6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M282 346 C324 320, 362 384, 410 346 V424 C410 478, 282 478, 282 424 Z" fill="#159A8A" opacity="0.55"/>
+  <path d="M458 320 H540" stroke="#AEB8C5" stroke-width="6" opacity="0.62" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M520 260 L566 320 L520 380" fill="none" stroke="#AEB8C5" stroke-width="6" opacity="0.62" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="590" y="210" width="180" height="220" fill="#FBFAF6" stroke="#5D6978" stroke-width="7" opacity="0.92"/>
+  <path d="M626 210 V430" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <path d="M662 210 V430" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <path d="M698 210 V430" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <path d="M734 210 V430" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <path d="M590 254 H770" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <path d="M590 298 H770" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <path d="M590 342 H770" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <path d="M590 386 H770" stroke="#AEB8C5" stroke-width="3" opacity="0.45"/>
+  <rect x="615" y="243" width="22" height="22" rx="4" fill="#6D3EDB" opacity="0.62"/>
+  <rect x="687" y="287" width="22" height="22" rx="4" fill="#6D3EDB" opacity="0.62"/>
+  <rect x="723" y="331" width="22" height="22" rx="4" fill="#6D3EDB" opacity="0.62"/>
+  <rect x="651" y="375" width="22" height="22" rx="4" fill="#6D3EDB" opacity="0.62"/>
+  </g>
+</svg>

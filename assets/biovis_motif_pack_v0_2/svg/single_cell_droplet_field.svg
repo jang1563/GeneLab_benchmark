@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-label="Single-cell droplet field">
+  <metadata>SpaceBio-Bench original premium biological motif asset v0.2; motif_id=single_cell_droplet_field; category=cellular; license=repository MIT license.</metadata>
+
+  <defs>
+    <filter id="soft_shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="12" dy="16" stdDeviation="14" flood-color="#9C9487" flood-opacity="0.16"/>
+    </filter>
+    <radialGradient id="bio_glow" cx="46%" cy="42%" r="64%">
+      <stop offset="0%" stop-color="#286EA6" stop-opacity="0.18"/>
+      <stop offset="58%" stop-color="#159A8A" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FBFAF6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="surface_fade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBFAF6" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#FBFAF6" stop-opacity="0.16"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" fill="none"/>
+  <ellipse cx="482" cy="322" rx="356" ry="218" fill="url(#bio_glow)" opacity="0.92"/>
+  <path d="M104 318 H856" stroke="#AEB8C5" stroke-width="1.8" opacity="0.18"/>
+  <path d="M188 168 V510 M480 114 V546 M774 178 V498" stroke="#AEB8C5" stroke-width="1.4" opacity="0.12"/>
+  <path d="M154 426 C305 358, 607 356, 812 432" fill="none" stroke="#286EA6" stroke-width="2.0" opacity="0.12" stroke-linecap="round"/>
+  <path d="M158 230 C330 292, 620 290, 800 218" fill="none" stroke="#159A8A" stroke-width="1.8" opacity="0.10" stroke-linecap="round"/>
+  <g filter="url(#soft_shadow)">
+  <circle cx="322" cy="260" r="39" fill="#FBFAF6" opacity="0.86" stroke="#286EA6" stroke-width="6"/>
+  <circle cx="315" cy="263" r="12" fill="#286EA6" opacity="0.55"/>
+  <circle cx="410" cy="220" r="39" fill="#FBFAF6" opacity="0.86" stroke="#159A8A" stroke-width="6"/>
+  <circle cx="403" cy="223" r="12" fill="#159A8A" opacity="0.55"/>
+  <circle cx="505" cy="250" r="39" fill="#FBFAF6" opacity="0.86" stroke="#286EA6" stroke-width="6"/>
+  <circle cx="498" cy="253" r="12" fill="#286EA6" opacity="0.55"/>
+  <circle cx="598" cy="218" r="39" fill="#FBFAF6" opacity="0.86" stroke="#159A8A" stroke-width="6"/>
+  <circle cx="591" cy="221" r="12" fill="#159A8A" opacity="0.55"/>
+  <circle cx="638" cy="314" r="39" fill="#FBFAF6" opacity="0.86" stroke="#286EA6" stroke-width="6"/>
+  <circle cx="631" cy="317" r="12" fill="#286EA6" opacity="0.55"/>
+  <circle cx="546" cy="370" r="39" fill="#FBFAF6" opacity="0.86" stroke="#159A8A" stroke-width="6"/>
+  <circle cx="539" cy="373" r="12" fill="#159A8A" opacity="0.55"/>
+  <circle cx="438" cy="356" r="39" fill="#FBFAF6" opacity="0.86" stroke="#286EA6" stroke-width="6"/>
+  <circle cx="431" cy="359" r="12" fill="#286EA6" opacity="0.55"/>
+  <circle cx="348" cy="330" r="39" fill="#FBFAF6" opacity="0.86" stroke="#159A8A" stroke-width="6"/>
+  <circle cx="341" cy="333" r="12" fill="#159A8A" opacity="0.55"/>
+  <path d="M280 422 C405 456, 584 456, 704 412" fill="none" stroke="#AEB8C5" stroke-width="5" opacity="0.32" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
