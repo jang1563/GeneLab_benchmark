@@ -1,0 +1,13 @@
+{
+  "created": "2026-06-02",
+  "purpose": "PPTX smoke test for SVG embedding of biological symbol/module assets.",
+  "pptx": "output/biovis_symbol_module_bridge_application/pptx_smoke/biovis_symbol_module_svg_editability_smoke.pptx",
+  "representative_assets": [
+    "assets/biovis_symbol_module_pack_v0_3/modules/svg/sample_to_feature_stack.svg",
+    "assets/biovis_symbol_module_pack_v0_3/modules_dark/svg/space_bio_assay_lane.svg",
+    "assets/biovis_symbol_module_pack_v0_3/modules/svg/claim_boundary_bar.svg",
+    "assets/biovis_symbol_module_pack_v0_3/symbols/svg/organoid_rosette.svg",
+    "assets/biovis_symbol_module_pack_v0_3/badges/svg/source_proof.svg"
+  ],
+  "expected_media_type": "SVG media should remain in ppt/media when embedded by pptxgenjs."
+}

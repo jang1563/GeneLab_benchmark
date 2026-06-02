@@ -1,0 +1,17 @@
+{
+  "created": "2026-06-02",
+  "automatic_checks": {
+    "light_png_exists": true,
+    "dark_png_exists": true,
+    "contact_sheet_exists": true
+  },
+  "manual_review": {
+    "initial_verdict": "pass with conditions",
+    "review_focus": "method comprehension, dark/light contrast, badge density, and claim-boundary clarity",
+    "light_bridge": "conditional pass - sample-to-feature module clarifies the method, but the lower half has excess open space and should be tightened in a final slide.",
+    "dark_bridge": "pass - dark modules preserve contrast and read as the stronger premium bridge direction.",
+    "badge_density": "pass - three badges are acceptable near proof slots; avoid adding more without a claim reason.",
+    "claim_boundary": "pass - schematic, source, processed, and validated states are visually separated.",
+    "next_step": "build source-proof placeholder modules for real screenshots, plots, and source-derived plates."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "created": "2026-06-02",
+  "purpose": "Stress-test the biological symbol module v0.3 pack in real bridge-style layouts.",
+  "inputs": {
+    "symbol_module_pack": "assets/biovis_symbol_module_pack_v0_3",
+    "motif_pack": "assets/biovis_motif_pack_v0_3"
+  },
+  "outputs": {
+    "light_bridge": "output/biovis_symbol_module_bridge_application/01_light_bridge_application.png",
+    "dark_bridge": "output/biovis_symbol_module_bridge_application/02_dark_bridge_application.png",
+    "contact_sheet": "output/biovis_symbol_module_bridge_application/03_light_dark_ab_contact_sheet.png"
+  },
+  "claim_boundary": "Generated motif plates and symbols are context/status assets, not source proof."
+}

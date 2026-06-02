@@ -1,0 +1,16 @@
+{
+  "created": "2026-06-02",
+  "automatic_checks": {
+    "pptx_created": true,
+    "representative_svg_assets_embedded": true,
+    "pptx_media_contains_svg": true,
+    "libreoffice_pdf_export_passed": true,
+    "pdf_created": true,
+    "pdf_to_png_render_passed": true
+  },
+  "manual_review": {
+    "rendered_png_visual_check": "pass - light module, dark module, claim boundary module, organoid symbol, and source badge are visible after PPTX to PDF to PNG render.",
+    "editability_boundary": "conditional - SVG media are preserved in the PPTX package, but path-level editing inside PowerPoint/Keynote still needs app-level manual confirmation.",
+    "production_note": "artifact-tool import was blocked by local macOS native-library code signing; pptxgenjs was used only as a smoke-test fallback, not as the production deck workflow."
+  }
+}
