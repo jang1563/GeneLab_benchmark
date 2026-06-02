@@ -1,0 +1,212 @@
+{
+  "created": "2026-06-02",
+  "purpose": "24-slide v1-v9 deck-spine planning contact sheet before deck assembly.",
+  "outputs": {
+    "contact_sheet": "output/v1_v9_deck_spine_contact_sheet_v0_1/v1_v9_deck_spine_contact_sheet.png",
+    "grayscale_qa": "output/v1_v9_deck_spine_contact_sheet_v0_1/qa/v1_v9_deck_spine_contact_sheet_grayscale.png",
+    "slide_order_csv": "output/v1_v9_deck_spine_contact_sheet_v0_1/v1_v9_deck_spine_order.csv"
+  },
+  "slide_count": 24,
+  "spine_decision": "B1-B4 compressed into two early methods slides for a 24-slide full-talk version; expand to 26 slides only if methods explanation becomes the talk focus.",
+  "extension_guardrail": "Organoid and OSD-120 bridge assets appear only in the v9 extension section, slides 20 and 21.",
+  "source_docs": [
+    "docs/V1_V9_DECK_SPINE_METHODS_BRIDGE_PLACEMENT_2026_06_02.md",
+    "docs/V1_V9_PRESENTATION_AND_MANUSCRIPT_MASTER_OUTLINE_2026_05_31.md",
+    "docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md",
+    "docs/PREMIUM_BRIDGE_METHODS_NARRATION_PACK_B1_B4_2026_06_02.md"
+  ],
+  "slides": [
+    {
+      "slide_number": 1,
+      "title": "SpaceBio-Bench",
+      "section": "Opening",
+      "claim": "Mission-held-out benchmark platform thesis.",
+      "asset_status": "new title visual",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 2,
+      "title": "External gap",
+      "section": "Opening",
+      "claim": "Distinct niche without claiming first AI benchmark.",
+      "asset_status": "new positioning matrix",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 3,
+      "title": "Project evolution",
+      "section": "Opening",
+      "claim": "v1-v9 timeline from analysis to platform.",
+      "asset_status": "new timeline",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 4,
+      "title": "Evaluation layer",
+      "section": "Core methods",
+      "claim": "Public studies become auditable tasks.",
+      "asset_status": "B1/B2 compressed",
+      "source_asset": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png"
+    },
+    {
+      "slide_number": 5,
+      "title": "Mission-held-out guard",
+      "section": "Core methods",
+      "claim": "A whole mission is held out; processing stays train-only.",
+      "asset_status": "B3/B4 compressed",
+      "source_asset": "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png"
+    },
+    {
+      "slide_number": 6,
+      "title": "Feature layers",
+      "section": "Core methods",
+      "claim": "Genes versus pathway summaries before results.",
+      "asset_status": "needed bridge",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 7,
+      "title": "Tissue hierarchy",
+      "section": "v1-v7 results",
+      "claim": "Cross-mission transfer is tissue-specific.",
+      "asset_status": "existing premium scene",
+      "source_asset": "output/premium_slide_scenes/fig1_tissue_transfer_layered_scene.png"
+    },
+    {
+      "slide_number": 8,
+      "title": "Pathway rescue",
+      "section": "v1-v7 results",
+      "claim": "Pathway abstraction can rescue selected weak tasks.",
+      "asset_status": "existing premium scene",
+      "source_asset": "output/premium_slide_scenes/fig2_pathway_layered_scene.png"
+    },
+    {
+      "slide_number": 9,
+      "title": "Model comparison",
+      "section": "v1-v7 results",
+      "claim": "Scale alone does not solve transfer.",
+      "asset_status": "existing premium scene",
+      "source_asset": "output/premium_slide_scenes/fig3_model_tier_layered_scene.png"
+    },
+    {
+      "slide_number": 10,
+      "title": "v4 hardening",
+      "section": "v1-v7 results",
+      "claim": "Broader tissue/method grid reduces cherry-pick risk.",
+      "asset_status": "needs static export",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 11,
+      "title": "Temporal and RRRM lessons",
+      "section": "v1-v7 results",
+      "claim": "Recovery, preservation, and single-cell lessons.",
+      "asset_status": "needs static export",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 12,
+      "title": "Negative results",
+      "section": "v1-v7 results",
+      "claim": "Failure modes are part of benchmark value.",
+      "asset_status": "needs static export",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 13,
+      "title": "Biological interpretation",
+      "section": "v1-v7 results",
+      "claim": "Immune, TF, metabolism, and biomarker interpretation.",
+      "asset_status": "needs panel selection",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 14,
+      "title": "Human translation",
+      "section": "v1-v7 results",
+      "claim": "Pathway/target evidence, not clean gene transfer.",
+      "asset_status": "needs static export",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 15,
+      "title": "v7.1 boundary",
+      "section": "v1-v7 results",
+      "claim": "Canonical public-safe counts and claim discipline.",
+      "asset_status": "release-boundary slide",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 16,
+      "title": "v8 SpaceMed",
+      "section": "v8 incubator",
+      "claim": "Translation is hypothesis generation only.",
+      "asset_status": "existing PNG",
+      "source_asset": "v8/figures/Figure1_Species_Transfer.png"
+    },
+    {
+      "slide_number": 17,
+      "title": "v8 claim boundary",
+      "section": "v8 incubator",
+      "claim": "No countermeasure recommendation or Mars point claim.",
+      "asset_status": "boundary overlay needed",
+      "source_asset": "v8/figures/Figure2_Stressor_Decomposition.png"
+    },
+    {
+      "slide_number": 18,
+      "title": "v9 platform",
+      "section": "v9 platform",
+      "claim": "Package, manifests, evaluator, and run records.",
+      "asset_status": "existing document scene",
+      "source_asset": "output/premium_v9_document_scenes/v9_platform_provenance_document_scene.png"
+    },
+    {
+      "slide_number": 19,
+      "title": "Public bulk alpha",
+      "section": "v9 platform",
+      "claim": "Metadata-ready, payload hashes blocked.",
+      "asset_status": "existing document scene",
+      "source_asset": "output/premium_v9_document_scenes/v9_public_bulk_boundary_document_scene.png"
+    },
+    {
+      "slide_number": 20,
+      "title": "Organoid extension",
+      "section": "v9 extension",
+      "claim": "Source records become local expression matrices.",
+      "asset_status": "selected bridge",
+      "source_asset": "output/biovis_organoid_audience_matrix_proof_v0_2/panels/01_dark_organoid_clean_source_to_matrix.png"
+    },
+    {
+      "slide_number": 21,
+      "title": "Multispecies task check",
+      "section": "v9 extension",
+      "claim": "OSD-120 is same-study, not mission-held-out.",
+      "asset_status": "selected bridge",
+      "source_asset": "output/biovis_osd120_audience_split_proof_v0_2/panels/01_dark_osd120_clean_source_to_task.png"
+    },
+    {
+      "slide_number": 22,
+      "title": "Single-cell extension",
+      "section": "v9 extension",
+      "claim": "Inventory and metric spec exist; payload blocker remains.",
+      "asset_status": "needs blocker visual",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 23,
+      "title": "Claim boundary",
+      "section": "Close",
+      "claim": "Separate completed results from draft tracks.",
+      "asset_status": "needed matrix",
+      "source_asset": ""
+    },
+    {
+      "slide_number": 24,
+      "title": "Roadmap",
+      "section": "Close",
+      "claim": "Payload freeze, QA, release, and manuscript plan.",
+      "asset_status": "needed roadmap",
+      "source_asset": ""
+    }
+  ]
+}
