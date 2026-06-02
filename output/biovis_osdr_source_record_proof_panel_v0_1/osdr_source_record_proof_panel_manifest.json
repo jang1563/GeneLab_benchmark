@@ -1,0 +1,57 @@
+{
+  "created": "2026-06-02",
+  "input_manifest": "output/biovis_osdr_source_record_captures_v0_1/osdr_source_record_capture_manifest.json",
+  "source_urls": {
+    "OSD-863": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-863",
+    "OSD-871": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-871",
+    "OSD-120": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-120",
+    "OSD-918": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-918"
+  },
+  "source_crops": {
+    "OSD-863": "output/biovis_osdr_source_record_proof_panel_v0_1/crops/osd_863_source_record_content_crop.png",
+    "OSD-871": "output/biovis_osdr_source_record_proof_panel_v0_1/crops/osd_871_source_record_content_crop.png",
+    "OSD-120": "output/biovis_osdr_source_record_proof_panel_v0_1/crops/osd_120_source_record_content_crop.png",
+    "OSD-918": "output/biovis_osdr_source_record_proof_panel_v0_1/crops/osd_918_source_record_content_crop.png"
+  },
+  "panels": [
+    {
+      "path": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/01_osdr_source_record_contact_sheet.png",
+      "resolution": [
+        3200,
+        2050
+      ],
+      "role": "review-board/contact-sheet"
+    },
+    {
+      "path": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/02_dark_organoid_source_record_proof.png",
+      "resolution": [
+        3840,
+        2160
+      ],
+      "role": "main-deck candidate for organoid source-to-matrix bridge"
+    },
+    {
+      "path": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/03_dark_osd120_source_record_proof.png",
+      "resolution": [
+        3840,
+        2160
+      ],
+      "role": "main-deck candidate for OSD-120 source-to-split bridge"
+    },
+    {
+      "path": "output/biovis_osdr_source_record_proof_panel_v0_1/panels/04_dark_extension_source_lanes.png",
+      "resolution": [
+        3840,
+        2160
+      ],
+      "role": "appendix or extension-map candidate"
+    }
+  ],
+  "grayscale_qa": [
+    "output/biovis_osdr_source_record_proof_panel_v0_1/qa/01_osdr_source_record_contact_sheet_grayscale.png",
+    "output/biovis_osdr_source_record_proof_panel_v0_1/qa/02_dark_organoid_source_record_proof_grayscale.png",
+    "output/biovis_osdr_source_record_proof_panel_v0_1/qa/03_dark_osd120_source_record_proof_grayscale.png",
+    "output/biovis_osdr_source_record_proof_panel_v0_1/qa/04_dark_extension_source_lanes_grayscale.png"
+  ],
+  "claim_boundary": "Panels prove source-record availability and local proof-object continuity only; they do not validate final benchmark claims."
+}
