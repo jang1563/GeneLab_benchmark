@@ -1,0 +1,77 @@
+{
+  "created": "2026-06-02",
+  "verdict": "No deck-spine drift if organoid and OSD-120 bridge assets stay in the v9 extension section.",
+  "sources_reviewed": [
+    "docs/V1_V9_PRESENTATION_AND_MANUSCRIPT_MASTER_OUTLINE_2026_05_31.md",
+    "docs/V1_V9_SLIDE_ASSET_MANIFEST_2026_05_31.md",
+    "docs/VISUAL_TECHNICAL_PRODUCTION_PROTOCOL_2026_06_01.md",
+    "docs/PREMIUM_BRIDGE_METHODS_NARRATION_PACK_B1_B4_2026_06_02.md",
+    "docs/BIOVIS_METHODS_BRIDGE_SHORTLIST_REVIEW_2026_06_02.md"
+  ],
+  "deck_rule": "B1-B4 remain the core methods bridge before results. Organoid and OSD-120 bridge assets are v9 extension evidence scenes only.",
+  "segments": [
+    {
+      "segment": "opening_and_core_methods",
+      "current_slide_range": "1-5",
+      "action": "Use B1-B4 to explain evaluation layer, task construction, mission-held-out testing, and train-only processing before results.",
+      "organoid_osd120_policy": "Do not insert as standalone slides here."
+    },
+    {
+      "segment": "v1_v7_benchmark_core",
+      "current_slide_range": "6-15",
+      "action": "Keep tissue hierarchy, pathway rescue, model comparison, hardening, negative results, biology interpretation, human translation, and v7.1 boundary as the center of gravity.",
+      "organoid_osd120_policy": "Do not use as result evidence."
+    },
+    {
+      "segment": "v8_incubator",
+      "current_slide_range": "16-17",
+      "action": "Keep v8 hypothesis-only and no-countermeasure-recommendation boundaries visible.",
+      "organoid_osd120_policy": "Do not use to imply validation."
+    },
+    {
+      "segment": "v9_platform_and_extensions",
+      "current_slide_range": "18-22",
+      "action": "Place v9 platform architecture and public bulk alpha first, then optional organoid and OSD-120 extension bridge slides.",
+      "organoid_osd120_policy": "Use at most one organoid bridge and at most one OSD-120 bridge."
+    },
+    {
+      "segment": "claims_and_roadmap",
+      "current_slide_range": "23-24",
+      "action": "Restate claimed/not-claimed boundaries and move receipts to appendix.",
+      "organoid_osd120_policy": "Use as backup only."
+    }
+  ],
+  "selected_assets": [
+    {
+      "id": "organoid_source_to_matrix",
+      "asset": "output/biovis_organoid_audience_matrix_proof_v0_2/panels/01_dark_organoid_clean_source_to_matrix.png",
+      "long_talk_slide": 20,
+      "short_talk_policy": "Optional single extension-track proof object if human relevance is needed.",
+      "manuscript_policy": "Supplementary methods/provenance unless v9 organoid extension becomes a formal result section.",
+      "claim_boundary": "Draft pilot source-to-matrix readiness only; not mission-held-out benchmark evidence."
+    },
+    {
+      "id": "osd120_source_to_task",
+      "asset": "output/biovis_osd120_audience_split_proof_v0_2/panels/01_dark_osd120_clean_source_to_task.png",
+      "long_talk_slide": 21,
+      "short_talk_policy": "Optional single task-construction proof object if methods rigor is needed.",
+      "manuscript_policy": "Supplementary methods/provenance unless v9 multispecies extension becomes a formal result section.",
+      "claim_boundary": "Same-study task check only; not mission-held-out and not cross-species generalization."
+    }
+  ],
+  "appendix_assets": [
+    "output/biovis_osdr_source_record_proof_panel_v0_1/panels/01_osdr_source_record_contact_sheet.png",
+    "output/biovis_osdr_source_record_proof_panel_v0_1/panels/04_dark_extension_source_lanes.png",
+    "output/biovis_osdr_source_record_captures_v0_1/"
+  ],
+  "superseded_assets": [
+    "output/biovis_osdr_source_record_proof_panel_v0_1/panels/02_dark_organoid_source_record_proof.png",
+    "output/biovis_osdr_source_record_proof_panel_v0_1/panels/03_dark_osd120_source_record_proof.png"
+  ],
+  "next_work": [
+    "Build full v1-v9 slide-order contact sheet.",
+    "Create feature-layer bridge for genes versus pathway summaries.",
+    "Create model/metric caption bridge for shared-row comparisons.",
+    "Perform slide-level insertion QA for selected bridge assets."
+  ]
+}
