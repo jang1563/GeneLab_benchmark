@@ -1,0 +1,24 @@
+{
+  "created": "2026-06-02",
+  "automatic_checks": {
+    "expected_asset_count": 58,
+    "svg_asset_count": 58,
+    "png_preview_count": 58,
+    "rsvg_conversion_available": true,
+    "all_svg_assets_created": true,
+    "all_png_previews_created": true,
+    "manifest_json_exists": true,
+    "manifest_csv_exists": true,
+    "grayscale_previews_created": true,
+    "dark_module_contact_sheet_exists": true,
+    "micro_symbol_qa_exists": true
+  },
+  "manual_review_template": {
+    "symbol_readability": "inspect at 64px, 128px, and contact-sheet scale",
+    "micro_symbol_readability": "inspect 32px, 48px, and 64px icon samples before footer use",
+    "module_readability": "inspect labels and arrows at slide-footer and half-width module scale",
+    "dark_module_readability": "inspect on deep canvas; use dark modules only on dark-field slides",
+    "claim_boundary": "symbols and badges are semantic signposts, not proof images",
+    "design_risk": "avoid badge clutter and avoid turning modules into dense mini-slides"
+  }
+}
