@@ -1,0 +1,24 @@
+{
+  "created": "2026-06-02",
+  "record_count": 7,
+  "automatic_checks": {
+    "json_exists": true,
+    "csv_exists": true,
+    "contact_sheet_exists": true,
+    "all_records_have_claim_boundary": true,
+    "all_records_have_next_capture_action": true
+  },
+  "manual_review": {
+    "initial_verdict": "inventory ready for source-object replacement sprint",
+    "main_slide_candidates": [
+      "organoid_osdr_source_records",
+      "osd120_interaction_split"
+    ],
+    "appendix_candidates": [
+      "organoid_expression_matrix_qc",
+      "organoid_diagnostic_result_claim",
+      "multispecies_source_matrix_inventory"
+    ],
+    "blocked_candidate": "rrrm1_blood_sc_source_contract remains source-record only until local AnnData payload exists"
+  }
+}

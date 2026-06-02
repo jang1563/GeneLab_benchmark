@@ -1,0 +1,103 @@
+{
+  "created": "2026-06-02",
+  "records": [
+    {
+      "proof_id": "organoid_osdr_source_records",
+      "priority": "P0",
+      "lane": "human_organoid",
+      "source_ids": "OSD-863;OSD-871",
+      "module": "source_dataset_record_plate",
+      "replacement_object": "official OSDR record screenshots for OSD-863 and OSD-871",
+      "local_evidence": "v9/human_organoid/source_inventory.draft.json; v9/human_organoid/task_manifests/draft_human_organoid_spaceflight.json",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-863; https://osdr.nasa.gov/bio/repo/data/studies/OSD-871",
+      "evidence_summary": "OSD-863/871 are public human iPSC neural organoid RNA-seq sources; OSD-863 lists GLDS-716, DOI, GSE259421, and related OSD-871.",
+      "claim_boundary": "source record proof only; does not by itself validate benchmark performance",
+      "next_capture_action": "capture OSDR header and metadata tabs; include source date and URL footer",
+      "recommended_slide_role": "main bridge source proof or appendix source inventory"
+    },
+    {
+      "proof_id": "organoid_expression_matrix_qc",
+      "priority": "P0",
+      "lane": "human_organoid",
+      "source_ids": "OSD-863;OSD-871",
+      "module": "expression_matrix_proof_plate",
+      "replacement_object": "matrix audit table plus compact matrix/QC crop",
+      "local_evidence": "v9/human_organoid/expression_matrix_audit.draft.json",
+      "source_url": "https://osdr.nasa.gov/geode-py/ws/studies/OSD-863/download?source=datamanager&file=GLDS-716_rna_seq_Normalized_Counts_GLbulkRNAseq.csv; https://osdr.nasa.gov/geode-py/ws/studies/OSD-871/download?source=datamanager&file=GLDS-720_rna_seq_Normalized_Counts_GLbulkRNAseq.csv",
+      "evidence_summary": "OSD-863: 30408 genes x 19 samples, sha256 448569ef52...adca93e2; OSD-871: 30269 genes x 23 samples, sha256 88a8989db0...a8dbd7a5",
+      "claim_boundary": "matrix downloaded and sample-aligned; source payload hash/freeze remains draft",
+      "next_capture_action": "render matrix audit proof crop with sample counts, sha256, and matching sample columns",
+      "recommended_slide_role": "appendix proof or methods bridge"
+    },
+    {
+      "proof_id": "organoid_blocked_split",
+      "priority": "P0",
+      "lane": "human_organoid",
+      "source_ids": "OSD-863;OSD-871",
+      "module": "held_out_task_proof_plate",
+      "replacement_object": "blocked fold manifest visual for organoid type and microglia condition",
+      "local_evidence": "v9/human_organoid/task_manifests/draft_human_organoid_spaceflight.json",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-863",
+      "evidence_summary": "organoid_type=cortical_neural_organoid train 23 test 19; organoid_type=dopaminergic_neural_organoid train 19 test 23; microglia_condition=with_microglia train 22 test 20; microglia_condition=without_microglia train 20 test 22",
+      "claim_boundary": "single ISS mission pilot; not a mission-held-out benchmark",
+      "next_capture_action": "draw fold lanes directly from manifest and label draft/sample-count-backed status",
+      "recommended_slide_role": "methods explainer"
+    },
+    {
+      "proof_id": "organoid_diagnostic_result_claim",
+      "priority": "P1",
+      "lane": "human_organoid",
+      "source_ids": "OSD-863;OSD-871",
+      "module": "result_claim_plate",
+      "replacement_object": "diagnostic result surface with explicit non-leaderboard caveat",
+      "local_evidence": "v9/human_organoid/reports/source_transfer_signature/metrics.json",
+      "source_url": "v9/human_organoid/reports/source_transfer_signature/metrics.json",
+      "evidence_summary": "source-transfer signature: AUROC 1.000, balanced accuracy 1.000, DE direction match 0.771; diagnostic only",
+      "claim_boundary": "diagnostic-only; no frozen leaderboard or broad organoid benchmark claim",
+      "next_capture_action": "show metrics only if the caveat footer is visible",
+      "recommended_slide_role": "appendix result proof"
+    },
+    {
+      "proof_id": "multispecies_source_matrix_inventory",
+      "priority": "P0",
+      "lane": "multispecies",
+      "source_ids": "OSD-37;OSD-207;OSD-120",
+      "module": "source_dataset_record_plate;expression_matrix_proof_plate",
+      "replacement_object": "OSDR record screenshot plus matrix audit rows for plant/fly extension",
+      "local_evidence": "v9/multispecies/source_inventory.draft.json; v9/multispecies/expression_matrix_audit.draft.json",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-37; https://osdr.nasa.gov/bio/repo/data/studies/OSD-207; https://osdr.nasa.gov/bio/repo/data/studies/OSD-120",
+      "evidence_summary": "OSD-37: 28067 genes x 56 samples; OSD-207: 15999 genes x 32 samples; OSD-120: 24740 genes x 36 samples",
+      "claim_boundary": "species-native within-source pilots; do not present as raw-gene cross-species benchmark",
+      "next_capture_action": "capture OSDR source headers and local matrix audit rows",
+      "recommended_slide_role": "appendix inventory or species-extension bridge"
+    },
+    {
+      "proof_id": "osd120_interaction_split",
+      "priority": "P0",
+      "lane": "multispecies",
+      "source_ids": "OSD-120",
+      "module": "held_out_task_proof_plate",
+      "replacement_object": "genotype-by-light split manifest visual",
+      "local_evidence": "v9/multispecies/interaction_task_manifests/draft_osd120_arabidopsis_root_light_interaction_spaceflight.json",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-120",
+      "evidence_summary": "Col.0 train 24 test 12; Col.0.PhyD train 24 test 12; Wassilewskija.ecotype train 24 test 12",
+      "claim_boundary": "within-source interaction diagnostic; not leave-one-mission-out",
+      "next_capture_action": "draw primary genotype holdouts and secondary light-treatment holdouts as separate lanes",
+      "recommended_slide_role": "main methods explainer candidate"
+    },
+    {
+      "proof_id": "rrrm1_blood_sc_source_contract",
+      "priority": "P1",
+      "lane": "single_cell",
+      "source_ids": "OSD-918",
+      "module": "source_dataset_record_plate;single_cell_embedding_proof_plate",
+      "replacement_object": "OSDR source record plus AnnData contract blocker panel",
+      "local_evidence": "v9/sc_spaceflight/task_manifests/draft_rrrm1_blood_single_cell_spaceflight.json",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-918",
+      "evidence_summary": "4395 cells, 19064 genes, 8 animal samples; payload status missing",
+      "claim_boundary": "anndata_manifest_contract_only_no_local_payload_or_score_claim",
+      "next_capture_action": "capture OSDR-918 source record; do not render embedding until local h5ad exists",
+      "recommended_slide_role": "future single-cell lane proof with blocker badge"
+    }
+  ]
+}
