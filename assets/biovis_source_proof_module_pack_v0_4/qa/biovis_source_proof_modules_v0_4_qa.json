@@ -1,0 +1,21 @@
+{
+  "created": "2026-06-02",
+  "automatic_checks": {
+    "expected_svg_count": 12,
+    "svg_count": 12,
+    "png_count": 12,
+    "rsvg_conversion_available": true,
+    "manifest_json_exists": true,
+    "manifest_csv_exists": true,
+    "contact_sheets_exist": true,
+    "grayscale_qa_exists": true
+  },
+  "manual_review": {
+    "initial_verdict": "pass with conditions",
+    "proof_slot": "pass: each module reserves a visible source/result/proof-object area before final evidence is inserted",
+    "claim_boundary": "pass: status badges, source requirements, and caveat language remain attached to the proof surface",
+    "density": "conditional pass: one large proof module is appropriate for main slides; multiple proof modules should be review-board or appendix material",
+    "visual_notes": "dark variants feel more premium and presentation-ready; light variants are clear but read more like review or appendix boards",
+    "next_step": "replace placeholders with actual OSDR/GeneLab/GEO record screenshots, matrix/QC outputs, embeddings, split manifests, and result plots"
+  }
+}
