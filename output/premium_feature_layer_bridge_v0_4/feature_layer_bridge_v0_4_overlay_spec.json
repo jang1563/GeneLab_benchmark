@@ -1,0 +1,148 @@
+{
+  "slide_id": "slide06_feature_layer_bridge_v0_4",
+  "created": "2026-06-03",
+  "canvas": {
+    "width_px": 3840,
+    "height_px": 2160,
+    "aspect_ratio": "16:9"
+  },
+  "coordinate_system": "normalized_0_1",
+  "text": [
+    {
+      "id": "headline",
+      "role": "decision_headline",
+      "content": "What the model sees can change",
+      "x": 0.06,
+      "y": 0.1,
+      "font_pt": 33,
+      "color": "ink",
+      "max_lines": 1
+    },
+    {
+      "id": "support",
+      "role": "supporting_claim",
+      "content": "Same samples, two views: genes or pathways, then one held-out score.",
+      "x": 0.061,
+      "y": 0.171,
+      "font_pt": 15,
+      "color": "soft",
+      "max_lines": 2
+    },
+    {
+      "id": "label_gene_table",
+      "role": "plate_label",
+      "content": "Gene table",
+      "x": 0.109,
+      "y": 0.353,
+      "font_pt": 13,
+      "color": "sky",
+      "max_lines": 1
+    },
+    {
+      "id": "label_gene_model",
+      "role": "plate_label",
+      "content": "Gene-level view",
+      "x": 0.327,
+      "y": 0.353,
+      "font_pt": 13,
+      "color": "teal",
+      "max_lines": 1
+    },
+    {
+      "id": "label_pathway_model",
+      "role": "plate_label",
+      "content": "Pathway summaries",
+      "x": 0.558,
+      "y": 0.353,
+      "font_pt": 13,
+      "color": "green",
+      "max_lines": 1
+    },
+    {
+      "id": "label_score",
+      "role": "plate_label",
+      "content": "Score",
+      "x": 0.8,
+      "y": 0.353,
+      "font_pt": 13,
+      "color": "rose",
+      "max_lines": 1
+    },
+    {
+      "id": "status",
+      "role": "claim_boundary",
+      "content": "Fit choices on training missions; score the held-out mission.",
+      "x": 0.061,
+      "y": 0.862,
+      "font_pt": 10,
+      "color": "soft",
+      "max_lines": 1
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "Pathways help some tasks, not all.",
+      "x": 0.061,
+      "y": 0.9,
+      "font_pt": 9,
+      "color": "muted",
+      "max_lines": 1
+    }
+  ],
+  "status_labels": [
+    {
+      "id": "status",
+      "role": "claim_boundary",
+      "content": "Fit choices on training missions; score the held-out mission.",
+      "x": 0.061,
+      "y": 0.862,
+      "font_pt": 10,
+      "color": "soft",
+      "max_lines": 1
+    },
+    {
+      "id": "caveat",
+      "role": "trust_caveat",
+      "content": "Pathways help some tasks, not all.",
+      "x": 0.061,
+      "y": 0.9,
+      "font_pt": 9,
+      "color": "muted",
+      "max_lines": 1
+    }
+  ],
+  "focus_marks": [
+    {
+      "id": "gene_to_pathway_arrow",
+      "role": "transfer_path",
+      "from": [
+        0.458,
+        0.514
+      ],
+      "to": [
+        0.487,
+        0.514
+      ],
+      "color": "teal"
+    },
+    {
+      "id": "heldout_guard",
+      "role": "trust_boundary",
+      "x": 0.617,
+      "y": 0.194,
+      "w": 0.271,
+      "h": 0.054
+    }
+  ],
+  "forbidden_visible_terms": [
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "same split",
+    "v0.3",
+    "replacement test",
+    "generated schematic texture",
+    "not source evidence"
+  ]
+}

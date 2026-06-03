@@ -1,0 +1,51 @@
+{
+  "slide_id": "slide06_feature_layer_bridge_v0_4",
+  "created": "2026-06-03",
+  "slide_role": "method_bridge",
+  "reference_calibration_role": "kmu_proof_stage",
+  "content_brief": "Slide 6 bridge between B1-B4 task construction and v1-v7 result figures.",
+  "evidence_sources": [
+    "assets/biovis_motif_pack_v0_3/png/omics_matrix_texture_field.png",
+    "assets/biovis_motif_pack_v0_3/png/pathway_network_summary_field.png",
+    "assets/biovis_symbol_module_pack_v0_3/symbols/png/gene_locus.png",
+    "assets/biovis_symbol_module_pack_v0_3/symbols/png/pathway_network.png"
+  ],
+  "claim_boundary": "Schematic methods bridge explaining feature views; not a quantitative result figure.",
+  "outputs": {
+    "scene_plate": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_scene_plate.png",
+    "rendered_preview": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_rendered_preview.png",
+    "grayscale_qa": "output/premium_feature_layer_bridge_v0_4/qa/feature_layer_bridge_v0_4_rendered_preview_grayscale.png",
+    "overlay_spec": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_overlay_spec.json",
+    "qa": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_qa.json"
+  },
+  "visible_text_policy": {
+    "word_count": 39,
+    "word_count_budget": 45,
+    "preferred_terms": [
+      "What the model sees can change",
+      "Gene table",
+      "Gene-level view",
+      "Pathway summaries",
+      "Score",
+      "held-out mission"
+    ],
+    "blocked_internal_terms_absent_from_new_visible_text": {
+      "M1": true,
+      "M2": true,
+      "M3": true,
+      "M4": true,
+      "same split": true,
+      "v0.3": true,
+      "replacement test": true,
+      "generated schematic texture": true,
+      "not source evidence": true
+    }
+  },
+  "z_layers": {
+    "Z0": "dark scientific canvas with grid and orbit arcs",
+    "Z1": "source-to-score measurement rail",
+    "Z2": "matrix, gene-view, pathway-summary, and score-report evidence surfaces",
+    "Z3": "editable headline, labels, and arrows",
+    "Z4": "held-out mission guard and caveat"
+  }
+}
