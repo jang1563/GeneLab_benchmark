@@ -1,0 +1,33 @@
+{
+  "created": "2026-06-03",
+  "z_stack_rule": "Layered PNG scene plate plus editable scientific interpretation.",
+  "global_overlay_rules": [
+    "Use PNG proof scenes as Z2 evidence plates, not as all-in-one final slides.",
+    "Rebuild headline, bridge line, source, caveat, and any presenter text as editable objects.",
+    "Keep source and caveat text visible but subordinate.",
+    "Do not put table-like panels inside figure cards; tables move to backup or manuscript tables.",
+    "Avoid adding organoid/OSD-120 extension visuals before slide 20."
+  ],
+  "slide_specific": [
+    {
+      "slides": "1-3",
+      "rule": "Build original opening visuals; do not use result thumbnails as decorative background."
+    },
+    {
+      "slides": "4-5",
+      "rule": "Visible slide can be compressed, but speaker notes must carry task-unit and train-only guard definitions."
+    },
+    {
+      "slide": 6,
+      "rule": "Use feature-layer bridge to define gene and pathway views before score surfaces."
+    },
+    {
+      "slides": "7-9",
+      "rule": "Use early result scenes to establish tissue, pathway, and model-comparison logic before hardening."
+    },
+    {
+      "slides": "10-14",
+      "rule": "Use core-result caption pack and keep each slide's claim boundary line intact."
+    }
+  ]
+}

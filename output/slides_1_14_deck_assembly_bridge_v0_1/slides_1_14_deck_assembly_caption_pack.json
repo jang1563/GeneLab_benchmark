@@ -1,0 +1,184 @@
+{
+  "created": "2026-06-03",
+  "role": "slides 1-14 assembly narration and production brief",
+  "family_bridge": "The first 14 slides move from why the benchmark is needed, to how public studies become mission-held-out tasks, to what feature layers the models see, and finally to the completed result spine with robustness, guardrails, limitations, biological hypotheses, and translation boundaries.",
+  "compression_decision": {
+    "default_14_slide_path": "Use B1 as slide 4 with B2 in notes; use B3 as slide 5 with B4 in notes; use feature-layer bridge as slide 6.",
+    "expanded_methods_option": "If the talk focus is methodology, split B2 and B4 into visible slides and shift the result spine later.",
+    "risk": "Over-expanding methods can delay the first result; over-compressing methods can make AUROC slides feel unearned."
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "section": "Opening",
+      "title": "SpaceBio-Bench",
+      "headline": "Testing biological AI under spaceflight domain shift",
+      "role": "thesis",
+      "status": "needs title visual",
+      "caption": "Open with the platform thesis and the mission-held-out problem before any model score appears.",
+      "claim_boundary": "Do not claim first AI benchmark for space biology.",
+      "asset": null,
+      "backup_assets": []
+    },
+    {
+      "slide": 2,
+      "section": "Opening",
+      "title": "External gap",
+      "headline": "Distinct niche, not a firstness claim",
+      "role": "positioning",
+      "status": "needs positioning matrix",
+      "caption": "Show the external landscape while keeping the claim to a distinct mission-held-out GeneLab/OSDR benchmark niche.",
+      "claim_boundary": "Do not overstate novelty against NASA BPS, GLARE, OpenProblems, or cell-eval.",
+      "asset": null,
+      "backup_assets": []
+    },
+    {
+      "slide": 3,
+      "section": "Opening",
+      "title": "Project evolution",
+      "headline": "v1-v9 moves from benchmark results to platform",
+      "role": "timeline",
+      "status": "needs timeline visual",
+      "caption": "Orient the audience: v1-v7 are completed benchmark results, v8 is hypothesis-only translation, and v9 is platformization.",
+      "claim_boundary": "Do not present all v1-v9 outputs as equal-strength scientific discoveries.",
+      "asset": null,
+      "backup_assets": []
+    },
+    {
+      "slide": 4,
+      "section": "Core methods",
+      "title": "Evaluation layer",
+      "headline": "Public studies become auditable tasks",
+      "role": "method bridge",
+      "status": "asset ready; B2 in notes",
+      "caption": "B1 carries the visible slide; B2 supplies the task-unit explanation in speaker notes or backup.",
+      "claim_boundary": "Conceptual bridge, not quantitative result evidence.",
+      "asset": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png",
+      "backup_assets": [
+        "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png"
+      ]
+    },
+    {
+      "slide": 5,
+      "section": "Core methods",
+      "title": "Mission-held-out guard",
+      "headline": "The hidden test set is an entire mission",
+      "role": "method bridge",
+      "status": "asset ready; B4 in notes",
+      "caption": "B3 carries the visible split; B4 supplies the train-only guardrail in speaker notes or backup.",
+      "claim_boundary": "Do not call this random cross-validation or unqualified independent validation.",
+      "asset": "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png",
+      "backup_assets": [
+        "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png"
+      ]
+    },
+    {
+      "slide": 6,
+      "section": "Core methods",
+      "title": "Feature layers",
+      "headline": "What the model sees can change",
+      "role": "method-to-result bridge",
+      "status": "asset ready",
+      "caption": "Explain gene-level and pathway-summary views before tissue and model score results.",
+      "claim_boundary": "Schematic methods bridge, not a quantitative result figure.",
+      "asset": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_rendered_preview.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 7,
+      "section": "v1-v7 results",
+      "title": "Tissue hierarchy",
+      "headline": "Cross-mission transfer is tissue-specific",
+      "role": "early result",
+      "status": "asset ready",
+      "caption": "Start the result core with the main tissue-dependence finding.",
+      "claim_boundary": "Do not imply one tissue result generalizes to all tissues.",
+      "asset": "output/premium_slide_scenes/fig1_tissue_transfer_layered_scene.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 8,
+      "section": "v1-v7 results",
+      "title": "Pathway rescue",
+      "headline": "Pathway summaries can rescue selected weak tasks",
+      "role": "early result",
+      "status": "asset ready",
+      "caption": "Use this after tissue hierarchy so feature abstraction has a visible payoff.",
+      "claim_boundary": "Do not claim pathway features always outperform gene-level models.",
+      "asset": "output/premium_slide_scenes/fig2_pathway_layered_scene.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 9,
+      "section": "v1-v7 results",
+      "title": "Model comparison",
+      "headline": "Scale alone does not solve transfer",
+      "role": "early result",
+      "status": "asset ready",
+      "caption": "Place model comparison after task and feature logic are clear.",
+      "claim_boundary": "Do not universalize foundation-model failure beyond tested settings.",
+      "asset": "output/premium_slide_scenes/fig3_model_tier_layered_scene.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 10,
+      "section": "core result spine",
+      "title": "v4 hardening",
+      "headline": "Broader grid reduces cherry-pick risk",
+      "role": "core result",
+      "status": "asset ready",
+      "caption": "This is the first hardened result after early tissue/pathway/model findings.",
+      "claim_boundary": "Hardening and coverage evidence only; not a new leaderboard.",
+      "asset": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/slide10_v4_hardening_rendered_preview.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 11,
+      "section": "core result spine",
+      "title": "Temporal and RRRM",
+      "headline": "Timepoint labels need guardrails",
+      "role": "core result",
+      "status": "asset ready",
+      "caption": "Adds preservation, recovery, and single-cell pilot guardrails before interpretation.",
+      "claim_boundary": "Recovery projection is descriptive; RRRM composition is underpowered.",
+      "asset": "output/premium_core_result_slides/slide11_temporal_rrrm_guardrails_v0_1/slide11_temporal_rrrm_guardrails_rendered_preview.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 12,
+      "section": "core result spine",
+      "title": "Negative boundary",
+      "headline": "Negative results set boundaries",
+      "role": "core result",
+      "status": "asset ready",
+      "caption": "Make failure modes part of benchmark value before moving into biology.",
+      "claim_boundary": "No universal absence-of-biology or universal model-failure claim.",
+      "asset": "output/premium_core_result_slides/slide12_negative_boundary_v0_1/slide12_negative_boundary_rendered_preview.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 13,
+      "section": "core result spine",
+      "title": "Biological interpretation",
+      "headline": "Hits become hypotheses",
+      "role": "core result",
+      "status": "asset ready",
+      "caption": "Interpret bounded signals as immune, metabolic, and biomarker hypotheses.",
+      "claim_boundary": "Interpretation and target triage only; no treatment or mechanism proof.",
+      "asset": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_rendered_preview.png",
+      "backup_assets": []
+    },
+    {
+      "slide": 14,
+      "section": "core result spine",
+      "title": "Human translation",
+      "headline": "Translation is partial, not direct",
+      "role": "core result",
+      "status": "asset ready",
+      "caption": "Close the completed result core with a boundary-aware human-alignment slide.",
+      "claim_boundary": "No direct gene-transfer, clinical, or countermeasure claim.",
+      "asset": "output/premium_core_result_slides/slide14_human_translation_ladder_v0_1/slide14_human_translation_ladder_rendered_preview.png",
+      "backup_assets": []
+    }
+  ]
+}
