@@ -1,0 +1,128 @@
+{
+  "spatial": {
+    "dataset": "OSD-352",
+    "mission": "RR-3",
+    "tissue": "brain",
+    "n_animals": 6,
+    "n_sections": 12,
+    "section_auroc": 0.139,
+    "section_p_exact": 0.9,
+    "animal_auroc": 0.444,
+    "animal_p_exact": 0.4,
+    "bulk_auroc": 0.0,
+    "svg_jaccard": 0.805,
+    "svg_flt_specific": 139,
+    "svg_gc_specific": 6
+  },
+  "fm": {
+    "uce": {
+      "family": "UCE",
+      "mean_multi_mission": 0.542,
+      "n_tissues": 7,
+      "n_multi_mission": 5,
+      "n_significant": 1,
+      "significant": [
+        {
+          "tissue": "thymus",
+          "auroc": 0.632,
+          "p": 0.030596940305969402
+        }
+      ],
+      "rows": [
+        {
+          "tissue": "liver",
+          "auroc": 0.459,
+          "n_missions": 6
+        },
+        {
+          "tissue": "kidney",
+          "auroc": 0.489,
+          "n_missions": 3
+        },
+        {
+          "tissue": "thymus",
+          "auroc": 0.632,
+          "n_missions": 4
+        },
+        {
+          "tissue": "gastrocnemius",
+          "auroc": 0.578,
+          "n_missions": 3
+        },
+        {
+          "tissue": "eye",
+          "auroc": 0.55,
+          "n_missions": 3
+        },
+        {
+          "tissue": "lung",
+          "auroc": 0.555,
+          "n_missions": 1
+        },
+        {
+          "tissue": "colon",
+          "auroc": 0.449,
+          "n_missions": 1
+        }
+      ]
+    },
+    "scfoundation": {
+      "family": "scFoundation",
+      "mean_multi_mission": 0.584,
+      "n_tissues": 7,
+      "n_multi_mission": 5,
+      "n_significant": 2,
+      "significant": [
+        {
+          "tissue": "liver",
+          "auroc": 0.635,
+          "p": 0.0010998900109989002
+        },
+        {
+          "tissue": "gastrocnemius",
+          "auroc": 0.691,
+          "p": 0.034996500349965
+        }
+      ],
+      "rows": [
+        {
+          "tissue": "liver",
+          "auroc": 0.635,
+          "n_missions": 6
+        },
+        {
+          "tissue": "kidney",
+          "auroc": 0.541,
+          "n_missions": 3
+        },
+        {
+          "tissue": "thymus",
+          "auroc": 0.487,
+          "n_missions": 4
+        },
+        {
+          "tissue": "gastrocnemius",
+          "auroc": 0.691,
+          "n_missions": 3
+        },
+        {
+          "tissue": "eye",
+          "auroc": 0.563,
+          "n_missions": 3
+        },
+        {
+          "tissue": "lung",
+          "auroc": 0.389,
+          "n_missions": 1
+        },
+        {
+          "tissue": "colon",
+          "auroc": 0.755,
+          "n_missions": 1
+        }
+      ]
+    },
+    "pca_lr_reference_mean": 0.758,
+    "pca_lr_reference_source": "v3/README.md foundation-model section"
+  }
+}

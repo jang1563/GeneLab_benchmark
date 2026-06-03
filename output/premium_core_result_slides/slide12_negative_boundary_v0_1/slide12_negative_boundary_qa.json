@@ -1,0 +1,22 @@
+{
+  "created": "2026-06-03",
+  "automatic_checks": {
+    "rendered_outputs_exist": true,
+    "image_dimensions": {
+      "width_px": 3840,
+      "height_px": 2160
+    },
+    "visible_text_word_count": 40,
+    "visible_text_budget": 50,
+    "section_auroc": 0.139,
+    "animal_auroc": 0.444,
+    "uce_mean": 0.542,
+    "scfoundation_mean": 0.584
+  },
+  "manual_review": {
+    "visual_review_status": "pass: rendered preview and grayscale QA inspected after corridor/text revision",
+    "claim_boundary": "benchmark boundary, not universal biological/model impossibility",
+    "readability": "left spatial null and right FM control are separated by a restrained boundary corridor",
+    "notes": "subtitle shortened and corridor reduced after first render"
+  }
+}
