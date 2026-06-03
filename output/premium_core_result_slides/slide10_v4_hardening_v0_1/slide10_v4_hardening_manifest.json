@@ -1,0 +1,78 @@
+{
+  "slide_id": "slide10_v4_hardening_v0_1",
+  "created": "2026-06-03",
+  "slide_role": "result_hardening",
+  "reference_calibration_role": "k562_compact_proof_object",
+  "source_documents": [
+    "docs/CANONICAL_RESULTS_V7_1.md",
+    "v4/evaluation/M1_summary.json"
+  ],
+  "visible_value_source": "docs/CANONICAL_RESULTS_V7_1.md",
+  "claim_boundary": "Hardening/coverage evidence only; do not imply every best-row tissue is significant.",
+  "outputs": {
+    "scene_plate": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/slide10_v4_hardening_scene_plate.png",
+    "rendered_preview": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/slide10_v4_hardening_rendered_preview.png",
+    "grayscale_qa": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/qa/slide10_v4_hardening_rendered_preview_grayscale.png",
+    "qa": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/slide10_v4_hardening_qa.json"
+  },
+  "canonical_rows": [
+    {
+      "tissue": "Thymus",
+      "auroc": 0.948,
+      "method": "PCA-LR",
+      "feature": "KEGG",
+      "sig": "p<0.05"
+    },
+    {
+      "tissue": "Colon",
+      "auroc": 0.921,
+      "method": "PCA-LR",
+      "feature": "KEGG",
+      "sig": "p<0.05"
+    },
+    {
+      "tissue": "Lung",
+      "auroc": 0.901,
+      "method": "PCA-LR",
+      "feature": "Gene",
+      "sig": "p<0.05"
+    },
+    {
+      "tissue": "Kidney",
+      "auroc": 0.829,
+      "method": "ElasticNet-LR",
+      "feature": "Hallmark",
+      "sig": "p<0.01"
+    },
+    {
+      "tissue": "Eye",
+      "auroc": 0.823,
+      "method": "PCA-LR",
+      "feature": "Hallmark",
+      "sig": "best row NS"
+    },
+    {
+      "tissue": "Skin",
+      "auroc": 0.819,
+      "method": "PCA-LR",
+      "feature": "Gene",
+      "sig": "best row NS"
+    },
+    {
+      "tissue": "Gastrocnemius",
+      "auroc": 0.776,
+      "method": "PCA-LR",
+      "feature": "Gene",
+      "sig": "best row NS"
+    },
+    {
+      "tissue": "Liver",
+      "auroc": 0.67,
+      "method": "PCA-LR",
+      "feature": "Gene",
+      "sig": "best row NS"
+    }
+  ],
+  "visible_text_word_count": 44,
+  "visible_text_budget": 45
+}
