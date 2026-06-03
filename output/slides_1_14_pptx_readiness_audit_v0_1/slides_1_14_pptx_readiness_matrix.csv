@@ -1,0 +1,15 @@
+slide,section,title,role,asset_exists,scene_plate_exists,grayscale_qa_exists,editable_overlay_ready,claim_boundary_present,source_or_scope_present,visible_text_word_count,forbidden_visible_hits,pre_slide_20_extension_hits,viewer_language_watch_hits,speaker_notes_required,pptx_status
+1,Opening,SpaceBio-Bench,thesis,True,True,True,True,True,True,43,,,GeneLab; OSDR; held-out,,ready_with_required_overlay_rebuild
+2,Opening,External gap,positioning,True,True,True,True,True,True,50,,,held-out; v1-v9,,ready_with_required_overlay_rebuild
+3,Opening,Project evolution,timeline,True,True,True,True,True,True,44,,,v1-v9; v8/v9,,ready_with_required_overlay_rebuild
+4,Core methods,Evaluation layer,method bridge,True,True,True,True,True,True,36,,,,Define the task unit: one source study becomes auditable benchmark tasks with source context retained.; Explain that B2 is intentionally kept in notes/backup to avoid a dense implementation diagram.,ready_with_required_overlay_rebuild
+5,Core methods,Mission-held-out guard,method bridge,True,True,True,True,True,True,46,,,held-out,"Define mission-held-out: the hidden test set is an entire mission, not random sample validation.; State that train-only choices must be fixed before the held-out mission is scored.",ready_with_required_overlay_rebuild
+6,Core methods,Feature layers,method-to-result bridge,True,True,True,True,True,True,39,,,held-out,Bridge gene-level views to pathway-summary views before showing tissue and model comparisons.,ready_with_required_overlay_rebuild
+7,v1-v7 results,Tissue hierarchy,early result,True,True,True,True,True,True,28,,,AUROC; held-out,,ready_with_required_overlay_rebuild
+8,v1-v7 results,Pathway rescue,early result,True,True,True,True,True,True,34,,,,,ready_with_required_overlay_rebuild
+9,v1-v7 results,Model comparison,early result,True,True,True,True,True,True,37,,,PCA-LR; foundation-model,,ready_with_required_overlay_rebuild
+10,core result spine,v4 hardening,core result,True,True,True,True,True,True,34,,,,"Clarify that hardening means coverage and robustness, not a new leaderboard.",ready_with_required_overlay_rebuild
+11,core result spine,Temporal and RRRM,core result,True,True,True,True,True,True,35,,,RRRM,"Clarify preservation, descriptive recovery projection, and underpowered RRRM composition testing.",ready_with_required_overlay_rebuild
+12,core result spine,Negative boundary,core result,True,True,True,True,True,True,36,,,foundation-model,"Clarify that negative results define current task limits, not absence of biology.",ready_with_required_overlay_rebuild
+13,core result spine,Biological interpretation,core result,True,True,True,True,True,True,31,,,,"Clarify that hits become follow-up hypotheses, not mechanisms, treatments, or countermeasures.",ready_with_required_overlay_rebuild
+14,core result spine,Human translation,core result,True,True,True,True,True,True,32,,,,Clarify partial pathway/target-tier alignment and weak direct gene transfer.,ready_with_required_overlay_rebuild

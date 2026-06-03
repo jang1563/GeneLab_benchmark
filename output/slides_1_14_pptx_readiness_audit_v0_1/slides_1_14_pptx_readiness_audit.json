@@ -1,0 +1,782 @@
+{
+  "created": "2026-06-03",
+  "scope": "slides 1-14 PPTX production-readiness audit",
+  "decision": "ready for PPTX assembly as a production draft if every slide is rebuilt as layered PNG scene plus editable scientific interpretation",
+  "inputs": {
+    "assembly_manifest": "output/slides_1_14_deck_assembly_bridge_v0_1/slides_1_14_deck_assembly_manifest.json",
+    "assembly_qa": "output/slides_1_14_deck_assembly_bridge_v0_1/slides_1_14_deck_assembly_qa.json",
+    "assembly_overlay_rules": "output/slides_1_14_deck_assembly_bridge_v0_1/slides_1_14_deck_overlay_rules.json",
+    "opening_overlay": "output/premium_opening_slides_1_3_v0_1/opening_slides_1_3_overlay_spec.json",
+    "methods_overlay": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_overlay_spec.json",
+    "feature_overlay": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_overlay_spec.json",
+    "early_result_overlays": {
+      "7": "output/premium_slide_scenes/fig1_tissue_transfer_editable_overlay_spec.json",
+      "8": "output/premium_slide_scenes/fig2_pathway_editable_overlay_spec.json",
+      "9": "output/premium_slide_scenes/fig3_model_tier_editable_overlay_spec.json"
+    },
+    "core_caption_pack": "output/premium_core_result_slides/core_result_set_qa_v0_1/core_result_slides_10_14_caption_pack.json",
+    "core_manifests": {
+      "10": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/slide10_v4_hardening_manifest.json",
+      "11": "output/premium_core_result_slides/slide11_temporal_rrrm_guardrails_v0_1/slide11_temporal_rrrm_guardrails_manifest.json",
+      "12": "output/premium_core_result_slides/slide12_negative_boundary_v0_1/slide12_negative_boundary_manifest.json",
+      "13": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_manifest.json",
+      "14": "output/premium_core_result_slides/slide14_human_translation_ladder_v0_1/slide14_human_translation_ladder_manifest.json"
+    }
+  },
+  "automatic_summary": {
+    "slides_audited": 14,
+    "slides_ready": 14,
+    "slides_blocked": 0,
+    "slides_with_speaker_note_requirements": 8,
+    "slides_with_viewer_language_watch_hits": 9,
+    "all_assets_exist": true,
+    "all_scene_plates_exist": true,
+    "all_overlay_sources_exist": true,
+    "all_grayscale_qa_exist": true,
+    "forbidden_visible_terms_pass": true,
+    "pre_slide_20_extension_terms_pass": true
+  },
+  "required_actions_before_final_export": [
+    "Do not paste rendered previews as final all-in-one slides; use scene plates as Z0-Z2 proof surfaces and rebuild text as editable PPTX objects.",
+    "Insert speaker notes for slides 4, 5, 6, and 10-14 before presenter rehearsal.",
+    "Keep B2 and B4 mechanics in notes or backup unless the methods section is expanded.",
+    "Keep organoid and OSD-120 extension visuals out of slides 1-14; introduce them only after the completed v1-v7 result spine.",
+    "Move table-like evidence to backup/manuscript tables, not main-figure cards."
+  ],
+  "blockers": [],
+  "warnings": [
+    {
+      "slide": 1,
+      "title": "SpaceBio-Bench",
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 2,
+      "title": "External gap",
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 3,
+      "title": "Project evolution",
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 4,
+      "title": "Evaluation layer",
+      "warnings": [
+        "speaker notes required"
+      ]
+    },
+    {
+      "slide": 5,
+      "title": "Mission-held-out guard",
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 6,
+      "title": "Feature layers",
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 7,
+      "title": "Tissue hierarchy",
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 9,
+      "title": "Model comparison",
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 10,
+      "title": "v4 hardening",
+      "warnings": [
+        "speaker notes required"
+      ]
+    },
+    {
+      "slide": 11,
+      "title": "Temporal and RRRM",
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 12,
+      "title": "Negative boundary",
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ]
+    },
+    {
+      "slide": 13,
+      "title": "Biological interpretation",
+      "warnings": [
+        "speaker notes required"
+      ]
+    },
+    {
+      "slide": 14,
+      "title": "Human translation",
+      "warnings": [
+        "speaker notes required"
+      ]
+    }
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "section": "Opening",
+      "title": "SpaceBio-Bench",
+      "role": "thesis",
+      "headline": "Testing biological AI under spaceflight domain shift",
+      "asset": "output/premium_opening_slides_1_3_v0_1/slide01_spacebiobench_title_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_opening_slides_1_3_v0_1/slide01_spacebiobench_title_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_opening_slides_1_3_v0_1/qa/slide01_spacebiobench_title_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_opening_slides_1_3_v0_1/opening_slides_1_3_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Do not claim first AI benchmark for space biology.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 43,
+      "visible_text_sample": [
+        "SPACEBIO-BENCH",
+        "Testing biological AI under spaceflight domain shift",
+        "A mission-held-out benchmark built from public space omics studies.",
+        "Can a model trained on known missions survive a new mission?",
+        "Benchmark framing; not a clinical or countermeasure claim.",
+        "public GeneLab/OSDR study records + v1-v7 benchmark core"
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "GeneLab",
+        "OSDR",
+        "held-out"
+      ],
+      "speaker_notes_required": [],
+      "pptx_instruction": "Use the scene plate as atmospheric Z0-Z2; rebuild title, subtitle, bridge, caveat, and source as editable text.",
+      "blockers": [],
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 2,
+      "section": "Opening",
+      "title": "External gap",
+      "role": "positioning",
+      "headline": "Distinct niche, not a firstness claim",
+      "asset": "output/premium_opening_slides_1_3_v0_1/slide02_external_gap_positioning_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_opening_slides_1_3_v0_1/slide02_external_gap_positioning_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_opening_slides_1_3_v0_1/qa/slide02_external_gap_positioning_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_opening_slides_1_3_v0_1/opening_slides_1_3_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Do not overstate novelty against NASA BPS, GLARE, OpenProblems, or cell-eval.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 50,
+      "visible_text_sample": [
+        "EXTERNAL GAP",
+        "A distinct niche, not a firstness claim",
+        "Existing resources organize data, biology, or ML tasks; this deck asks what transfers across missions.",
+        "The novelty is the evaluation unit: a whole held-out mission.",
+        "Positioning map only; it does not rank external platforms.",
+        "external landscape scan + local v1-v9 positioning notes"
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "held-out",
+        "v1-v9"
+      ],
+      "speaker_notes_required": [],
+      "pptx_instruction": "Keep the external map as positioning only; avoid ranking or firstness language.",
+      "blockers": [],
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 3,
+      "section": "Opening",
+      "title": "Project evolution",
+      "role": "timeline",
+      "headline": "v1-v9 moves from benchmark results to platform",
+      "asset": "output/premium_opening_slides_1_3_v0_1/slide03_project_evolution_timeline_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_opening_slides_1_3_v0_1/slide03_project_evolution_timeline_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_opening_slides_1_3_v0_1/qa/slide03_project_evolution_timeline_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_opening_slides_1_3_v0_1/opening_slides_1_3_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Do not present all v1-v9 outputs as equal-strength scientific discoveries.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 44,
+      "visible_text_sample": [
+        "PROJECT EVOLUTION",
+        "v1-v9 moves from benchmark results to platform",
+        "The deck separates completed benchmark evidence, hypothesis-only translation, and platformization.",
+        "Do not mix evidence levels: results first, extensions later.",
+        "v8/v9 are extension and platform layers, not equal-strength discoveries.",
+        "V1_V9 master outline + deck assembly bridge review"
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "v1-v9",
+        "v8/v9"
+      ],
+      "speaker_notes_required": [],
+      "pptx_instruction": "Preserve evidence-level separation between completed results and v8/v9 extensions.",
+      "blockers": [],
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 4,
+      "section": "Core methods",
+      "title": "Evaluation layer",
+      "role": "method bridge",
+      "headline": "Public studies become auditable tasks",
+      "asset": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_methods_dark_variants_slides_4_5_v0_1/qa/slide04_evaluation_layer_dark_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Conceptual bridge, not quantitative result evidence.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [
+        "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png",
+        "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png"
+      ],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 36,
+      "visible_text_sample": [
+        "METHODS BRIDGE",
+        "Public studies become auditable tasks",
+        "Source context stays attached as studies become benchmark tasks and score records.",
+        "What exactly is being tested?",
+        "Conceptual methods bridge; not quantitative result evidence.",
+        "B1/B2 narration pack + source/task inventory"
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [],
+      "speaker_notes_required": [
+        "Define the task unit: one source study becomes auditable benchmark tasks with source context retained.",
+        "Explain that B2 is intentionally kept in notes/backup to avoid a dense implementation diagram."
+      ],
+      "pptx_instruction": "Use dark methods scene as main slide; put the task-unit definition in notes or backup.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 5,
+      "section": "Core methods",
+      "title": "Mission-held-out guard",
+      "role": "method bridge",
+      "headline": "The hidden test set is an entire mission",
+      "asset": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_methods_dark_variants_slides_4_5_v0_1/qa/slide05_mission_heldout_dark_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Do not call this random cross-validation or unqualified independent validation.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [
+        "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png",
+        "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png"
+      ],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 46,
+      "visible_text_sample": [
+        "METHODS GUARD",
+        "The hidden test set is an entire mission",
+        "Models fit on training missions, then score the held-out mission after the boundary.",
+        "Does the model transfer to a mission it did not learn from?",
+        "Mission-held-out evaluation; not random-sample validation.",
+        "B3/B4 narration pack + mission-held-out split rule"
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "held-out"
+      ],
+      "speaker_notes_required": [
+        "Define mission-held-out: the hidden test set is an entire mission, not random sample validation.",
+        "State that train-only choices must be fixed before the held-out mission is scored."
+      ],
+      "pptx_instruction": "Use dark methods scene as main slide; put train-only guardrail mechanics in notes or backup.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 6,
+      "section": "Core methods",
+      "title": "Feature layers",
+      "role": "method-to-result bridge",
+      "headline": "What the model sees can change",
+      "asset": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_feature_layer_bridge_v0_4/qa/feature_layer_bridge_v0_4_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_feature_layer_bridge_v0_4/feature_layer_bridge_v0_4_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Schematic methods bridge, not a quantitative result figure.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 39,
+      "visible_text_sample": [
+        "What the model sees can change",
+        "Same samples, two views: genes or pathways, then one held-out score.",
+        "Gene table",
+        "Gene-level view",
+        "Pathway summaries",
+        "Score",
+        "Fit choices on training missions; score the held-out mission.",
+        "Pathways help some tasks, not all."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "held-out"
+      ],
+      "speaker_notes_required": [
+        "Bridge gene-level views to pathway-summary views before showing tissue and model comparisons."
+      ],
+      "pptx_instruction": "Use the feature bridge to define what the model sees before any score surfaces.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 7,
+      "section": "v1-v7 results",
+      "title": "Tissue hierarchy",
+      "role": "early result",
+      "headline": "Cross-mission transfer is tissue-specific",
+      "asset": "output/premium_slide_scenes/fig1_tissue_transfer_layered_scene.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_slide_scenes/fig1_tissue_transfer_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/slides_1_14_pptx_readiness_audit_v0_1/qa/slide07_tissue_hierarchy_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_slide_scenes/fig1_tissue_transfer_editable_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Do not imply one tissue result generalizes to all tissues.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 28,
+      "visible_text_sample": [
+        "Some tissues transfer",
+        "Held-out missions reveal strong vs near-chance transfer.",
+        "Mouse bulk RNA-seq | one-mission-held-out AUROC",
+        "one transfer-break arrow",
+        "Do not imply one tissue result generalizes to all tissues."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "AUROC",
+        "held-out"
+      ],
+      "speaker_notes_required": [],
+      "pptx_instruction": "Keep tissue-specific transfer as the first result; do not generalize across all tissues.",
+      "blockers": [],
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 8,
+      "section": "v1-v7 results",
+      "title": "Pathway rescue",
+      "role": "early result",
+      "headline": "Pathway summaries can rescue selected weak tasks",
+      "asset": "output/premium_slide_scenes/fig2_pathway_layered_scene.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_slide_scenes/fig2_pathway_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/slides_1_14_pptx_readiness_audit_v0_1/qa/slide08_pathway_rescue_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_slide_scenes/fig2_pathway_editable_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Do not claim pathway features always outperform gene-level models.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 34,
+      "visible_text_sample": [
+        "Pathways suppress unwanted labels",
+        "Mission, hardware, and gravity labels become weaker after pathway summarization.",
+        "Diagnostic check: mission, hardware, gravity labels",
+        "gene-level labels to pathway summary",
+        "Do not claim pathway features always outperform gene-level models."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [],
+      "speaker_notes_required": [],
+      "pptx_instruction": "Frame pathway summaries as selected-task rescue, not universal superiority.",
+      "blockers": [],
+      "warnings": [],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 9,
+      "section": "v1-v7 results",
+      "title": "Model comparison",
+      "role": "early result",
+      "headline": "Scale alone does not solve transfer",
+      "asset": "output/premium_slide_scenes/fig3_model_tier_layered_scene.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_slide_scenes/fig3_model_tier_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/slides_1_14_pptx_readiness_audit_v0_1/qa/slide09_model_comparison_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_slide_scenes/fig3_model_tier_editable_overlay_spec.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Do not universalize foundation-model failure beyond tested settings.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 37,
+      "visible_text_sample": [
+        "Scale alone does not transfer",
+        "On shared tasks, PCA-LR remains highest; model gains are local and tissue-specific.",
+        "Shared 6-task rows are direct comparisons",
+        "aggregate shared-task comparison to tissue deltas",
+        "Do not universalize foundation-model failure beyond tested settings."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "PCA-LR",
+        "foundation-model"
+      ],
+      "speaker_notes_required": [],
+      "pptx_instruction": "Frame model comparison as tested-setting evidence; do not universalize foundation-model failure.",
+      "blockers": [],
+      "warnings": [
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 10,
+      "section": "core result spine",
+      "title": "v4 hardening",
+      "role": "core result",
+      "headline": "Broader grid reduces cherry-pick risk",
+      "asset": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/slide10_v4_hardening_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/slide10_v4_hardening_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_core_result_slides/slide10_v4_hardening_v0_1/qa/slide10_v4_hardening_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_core_result_slides/core_result_set_qa_v0_1/core_result_slides_10_14_caption_pack.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Hardening and coverage evidence only; not a new leaderboard.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 34,
+      "visible_text_sample": [
+        "Broader grid reduces cherry-pick risk",
+        "v4 expands the benchmark across 8 tissues, 8 classifiers, and 4 feature views, while keeping significance boundaries visible.",
+        "Hardening/coverage evidence only; do not imply every best-row tissue is significant."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [],
+      "speaker_notes_required": [
+        "Clarify that hardening means coverage and robustness, not a new leaderboard."
+      ],
+      "pptx_instruction": "Keep the hardening claim as coverage/robustness evidence, not leaderboard rank.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 11,
+      "section": "core result spine",
+      "title": "Temporal and RRRM",
+      "role": "core result",
+      "headline": "Timepoint labels need guardrails",
+      "asset": "output/premium_core_result_slides/slide11_temporal_rrrm_guardrails_v0_1/slide11_temporal_rrrm_guardrails_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_core_result_slides/slide11_temporal_rrrm_guardrails_v0_1/slide11_temporal_rrrm_guardrails_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_core_result_slides/slide11_temporal_rrrm_guardrails_v0_1/qa/slide11_temporal_rrrm_guardrails_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_core_result_slides/core_result_set_qa_v0_1/core_result_slides_10_14_caption_pack.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Recovery projection is descriptive; RRRM composition is underpowered.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 35,
+      "visible_text_sample": [
+        "Timepoint labels need guardrails",
+        "v2 separates preservation effects, descriptive recovery projections, and an underpowered RRRM single-cell pilot before interpretation.",
+        "Preservation and recovery are guardrail lessons; recovery projection is descriptive and RRRM composition tests are underpowered."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "RRRM"
+      ],
+      "speaker_notes_required": [
+        "Clarify preservation, descriptive recovery projection, and underpowered RRRM composition testing."
+      ],
+      "pptx_instruction": "Keep temporal/RRRM statements as guardrails; do not over-read recovery or composition.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 12,
+      "section": "core result spine",
+      "title": "Negative boundary",
+      "role": "core result",
+      "headline": "Negative results set boundaries",
+      "asset": "output/premium_core_result_slides/slide12_negative_boundary_v0_1/slide12_negative_boundary_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_core_result_slides/slide12_negative_boundary_v0_1/slide12_negative_boundary_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_core_result_slides/slide12_negative_boundary_v0_1/qa/slide12_negative_boundary_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_core_result_slides/core_result_set_qa_v0_1/core_result_slides_10_14_caption_pack.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "No universal absence-of-biology or universal model-failure claim.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 36,
+      "visible_text_sample": [
+        "Negative results set boundaries",
+        "v3 makes null and weak-signal settings explicit, including spatial brain and pretrained embedding controls.",
+        "Negative result defines current task limits; do not claim universal absence of brain biology or universal foundation-model failure."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [
+        "foundation-model"
+      ],
+      "speaker_notes_required": [
+        "Clarify that negative results define current task limits, not absence of biology."
+      ],
+      "pptx_instruction": "Keep the negative boundary as task-limit evidence, not universal biological absence.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required",
+        "viewer-language bridge needed for jargon"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 13,
+      "section": "core result spine",
+      "title": "Biological interpretation",
+      "role": "core result",
+      "headline": "Hits become hypotheses",
+      "asset": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/qa/slide13_biological_interpretation_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_core_result_slides/core_result_set_qa_v0_1/core_result_slides_10_14_caption_pack.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "Interpretation and target triage only; no treatment or mechanism proof.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 31,
+      "visible_text_sample": [
+        "Hits become hypotheses",
+        "v5 connects immune shifts, metabolic context, and biomarker triage without making treatment claims.",
+        "Biological interpretation and target triage only; no causal mechanism, validated countermeasure, or treatment recommendation claim."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [],
+      "speaker_notes_required": [
+        "Clarify that hits become follow-up hypotheses, not mechanisms, treatments, or countermeasures."
+      ],
+      "pptx_instruction": "Keep biological interpretation as hypotheses and target triage only.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    },
+    {
+      "slide": 14,
+      "section": "core result spine",
+      "title": "Human translation",
+      "role": "core result",
+      "headline": "Translation is partial, not direct",
+      "asset": "output/premium_core_result_slides/slide14_human_translation_ladder_v0_1/slide14_human_translation_ladder_rendered_preview.png",
+      "asset_exists": true,
+      "asset_size_px": [
+        3840,
+        2160
+      ],
+      "scene_plate": "output/premium_core_result_slides/slide14_human_translation_ladder_v0_1/slide14_human_translation_ladder_scene_plate.png",
+      "scene_plate_exists": true,
+      "grayscale_qa": "output/premium_core_result_slides/slide14_human_translation_ladder_v0_1/qa/slide14_human_translation_ladder_rendered_preview_grayscale.png",
+      "grayscale_qa_exists": true,
+      "editable_overlay_source": "output/premium_core_result_slides/core_result_set_qa_v0_1/core_result_slides_10_14_caption_pack.json",
+      "editable_overlay_ready": true,
+      "claim_boundary": "No direct gene-transfer, clinical, or countermeasure claim.",
+      "claim_boundary_present": true,
+      "source_or_scope_present": true,
+      "backup_assets_existing": [],
+      "backup_assets_missing": [],
+      "visible_text_word_count": 32,
+      "visible_text_sample": [
+        "Translation is partial, not direct",
+        "v6 shows partial pathway and target-tier alignment while direct gene-level transfer remains weak.",
+        "Partial pathway and target-tier human alignment only; no direct gene-transfer, clinical, or countermeasure claim."
+      ],
+      "forbidden_visible_hits": [],
+      "pre_slide_20_extension_hits": [],
+      "viewer_language_watch_hits": [],
+      "speaker_notes_required": [
+        "Clarify partial pathway/target-tier alignment and weak direct gene transfer."
+      ],
+      "pptx_instruction": "Keep human translation as partial alignment only; no clinical or countermeasure implication.",
+      "blockers": [],
+      "warnings": [
+        "speaker notes required"
+      ],
+      "pptx_status": "ready_with_required_overlay_rebuild"
+    }
+  ]
+}
