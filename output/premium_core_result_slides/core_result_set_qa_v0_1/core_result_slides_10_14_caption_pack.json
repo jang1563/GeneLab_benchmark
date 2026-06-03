@@ -1,0 +1,110 @@
+{
+  "created": "2026-06-03",
+  "caption_pack_role": "Slide 10-14 presenter/manuscript caption source for the premium deck spine.",
+  "family_caption": "Slides 10-14 form the core result spine: v4 hardening establishes robustness, v2 temporal/RRRM lessons add guardrails, v3 negative results define task limits, v5 biological interpretation turns hits into hypotheses, and v6 human translation keeps translational claims boundary-aware.",
+  "slides": [
+    {
+      "slide": 10,
+      "title": "v4 hardening",
+      "headline": "Broader grid reduces cherry-pick risk",
+      "plain_caption": "v4 expands the benchmark across 8 tissues, 8 classifiers, and 4 feature views, while keeping significance boundaries visible.",
+      "caption": "The v4 hardening layer broadens the benchmark to 256 evaluations across tissue, classifier, and feature-view combinations. It should be read as robustness and coverage evidence, not as a new leaderboard or a claim that every displayed best-row tissue is significant.",
+      "claim_boundary": "Hardening/coverage evidence only; do not imply every best-row tissue is significant.",
+      "do_not_say": "Do not imply every best-row tissue is statistically significant.",
+      "source_documents": [
+        "docs/CANONICAL_RESULTS_V7_1.md",
+        "v4/evaluation/M1_summary.json"
+      ],
+      "review_document": "docs/SLIDE10_V4_HARDENING_SCENE_V0_1_REVIEW_2026_06_03.md",
+      "visible_text_word_count": 44,
+      "visible_text_budget": 45,
+      "qa_status": "pass: rendered preview, scene plate, and grayscale QA inspected"
+    },
+    {
+      "slide": 11,
+      "title": "Temporal and RRRM guardrails",
+      "headline": "Timepoint labels need guardrails",
+      "plain_caption": "v2 separates preservation effects, descriptive recovery projections, and an underpowered RRRM single-cell pilot before interpretation.",
+      "caption": "The temporal/RRRM layer shows why timepoint and pilot single-cell labels cannot be over-read: preservation can dominate ISS-T/LAR separation, recovery projections are descriptive, and RRRM composition testing remains underpowered despite benchmark-ready data.",
+      "claim_boundary": "Preservation and recovery are guardrail lessons; recovery projection is descriptive and RRRM composition tests are underpowered.",
+      "do_not_say": "Do not present LAR recovery as held-out validation or RRRM composition as mature mechanism.",
+      "source_documents": [
+        "v2/evaluation/T_temporal_summary.json",
+        "v2/evaluation/V2_RESULTS_SUMMARY.md",
+        "v2/evaluation/F2A_composition.json",
+        "v2/docs/RRRM1_BENCHMARK_READY_MANIFEST_2026-03-12.csv",
+        "v2/docs/RRRM1_BROAD_ANNOTATION_SUMMARY_2026-03-12.md"
+      ],
+      "review_document": "docs/SLIDE11_TEMPORAL_RRRM_GUARDRAILS_V0_1_REVIEW_2026_06_03.md",
+      "visible_text_word_count": 49,
+      "visible_text_budget": 52,
+      "qa_status": "pass: rendered preview and grayscale QA inspected"
+    },
+    {
+      "slide": 12,
+      "title": "Negative boundary",
+      "headline": "Negative results set boundaries",
+      "plain_caption": "v3 makes null and weak-signal settings explicit, including spatial brain and pretrained embedding controls.",
+      "caption": "The negative-boundary layer frames spatial brain and foundation-model results as useful task limits. The slide supports careful follow-up design, not a universal claim that brain biology is absent or that future spatial or foundation-model analyses must fail.",
+      "claim_boundary": "Negative result defines current task limits; do not claim universal absence of brain biology or universal foundation-model failure.",
+      "do_not_say": "Do not claim universal absence of brain spaceflight biology or universal FM failure.",
+      "source_documents": [
+        "v3/evaluation/F3a_visium_classification.json",
+        "v3/evaluation/F3b_visium_svg.json",
+        "v3/evaluation/F3d_visium_cross_resolution.json",
+        "v3/evaluation/FM_uce.json",
+        "v3/evaluation/FM_scfoundation.json",
+        "v3/README.md"
+      ],
+      "review_document": "docs/SLIDE12_NEGATIVE_BOUNDARY_V0_1_REVIEW_2026_06_03.md",
+      "visible_text_word_count": 40,
+      "visible_text_budget": 50,
+      "qa_status": "pass: rendered preview and grayscale QA inspected after corridor/text revision"
+    },
+    {
+      "slide": 13,
+      "title": "Biological interpretation",
+      "headline": "Hits become hypotheses",
+      "plain_caption": "v5 connects immune shifts, metabolic context, and biomarker triage without making treatment claims.",
+      "caption": "The biological interpretation layer converts benchmark signals into follow-up hypotheses across immune context, pathway-level metabolism, and target-linked biomarker triage. It is an interpretation layer only, not causal mechanism, clinical validation, or countermeasure recommendation.",
+      "claim_boundary": "Biological interpretation and target triage only; no causal mechanism, validated countermeasure, or treatment recommendation claim.",
+      "do_not_say": "Do not call target links treatment recommendations or validated mechanisms.",
+      "source_documents": [
+        "v5/evaluation/immune_deconv_*.json",
+        "v5/evaluation/cross_organ_signaling.json",
+        "v5/evaluation/metabolic_flux_*.json",
+        "v5/evaluation/consensus_biomarker_panel.json",
+        "v5/evaluation/drug_targets.json",
+        "v5/figures/html/Fig7_immune_signaling.html",
+        "v5/figures/html/Fig8_metabolism_drugs.html",
+        "v5/figures/html/Fig9_consensus_panel.html"
+      ],
+      "review_document": "docs/SLIDE13_BIOLOGICAL_INTERPRETATION_V0_1_REVIEW_2026_06_03.md",
+      "visible_text_word_count": 50,
+      "visible_text_budget": 58,
+      "qa_status": "pass: rendered preview and grayscale QA inspected after bubble/path/text revision"
+    },
+    {
+      "slide": 14,
+      "title": "Human translation boundary",
+      "headline": "Translation is partial, not direct",
+      "plain_caption": "v6 shows partial pathway and target-tier alignment while direct gene-level transfer remains weak.",
+      "caption": "The human-translation layer closes the v1-v7 result core by showing that mouse signals partly carry over at pathway and target-tier levels, while direct gene transfer and TF conservation remain weak. Use it as human-alignment evidence, not clinical proof.",
+      "claim_boundary": "Partial pathway and target-tier human alignment only; no direct gene-transfer, clinical, or countermeasure claim.",
+      "do_not_say": "Do not imply clinical validation, direct gene-transfer reliability, or countermeasure actionability.",
+      "source_documents": [
+        "v6/evaluation/V6_A_gene_conservation.json",
+        "v6/evaluation/V6_B_pathway_conservation.json",
+        "v6/evaluation/V6_C_cross_species_transfer.json",
+        "v6/evaluation/V6_D_biomarker_validation.json",
+        "v6/evaluation/V6_E_tf_conservation.json",
+        "v6/evaluation/V6_F_drug_target_validation.json",
+        "docs/PROJECT_RESULTS_LOCATION_INVENTORY_2026_05_31.md"
+      ],
+      "review_document": "docs/SLIDE14_HUMAN_TRANSLATION_LADDER_V0_1_REVIEW_2026_06_03.md",
+      "visible_text_word_count": 45,
+      "visible_text_budget": 50,
+      "qa_status": "pass: rendered preview and grayscale QA inspected after corridor revision"
+    }
+  ]
+}

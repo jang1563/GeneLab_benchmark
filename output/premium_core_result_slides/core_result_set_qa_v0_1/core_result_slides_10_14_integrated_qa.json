@@ -1,0 +1,94 @@
+{
+  "created": "2026-06-03",
+  "automatic_checks": {
+    "n_slides": 5,
+    "all_source_images_exist": true,
+    "all_text_counts_within_budget": true,
+    "word_counts": {
+      "10": {
+        "count": 44,
+        "budget": 45,
+        "within_budget": true
+      },
+      "11": {
+        "count": 49,
+        "budget": 52,
+        "within_budget": true
+      },
+      "12": {
+        "count": 40,
+        "budget": 50,
+        "within_budget": true
+      },
+      "13": {
+        "count": 50,
+        "budget": 58,
+        "within_budget": true
+      },
+      "14": {
+        "count": 45,
+        "budget": 50,
+        "within_budget": true
+      }
+    },
+    "source_image_dimensions": {
+      "10": [
+        3840,
+        2160
+      ],
+      "11": [
+        3840,
+        2160
+      ],
+      "12": [
+        3840,
+        2160
+      ],
+      "13": [
+        3840,
+        2160
+      ],
+      "14": [
+        3840,
+        2160
+      ]
+    },
+    "variant_outputs": 25,
+    "variant_types": [
+      "deuteranopia",
+      "grayscale",
+      "original",
+      "protanopia",
+      "tritanopia"
+    ],
+    "review_flags": [
+      {
+        "file": "v5/figures/html/Fig7_immune_signaling.html",
+        "issue": "HTML narrative says 62 active L-R pairs; current JSON source has 1 active edge and 1 active pair.",
+        "slide13_resolution": "Use current JSON values; keep the HTML sentence out of the figure."
+      },
+      {
+        "file": "v5/figures/html/Fig9_consensus_panel.html",
+        "issue": "HTML narrative says every panel gene has known drug interactions, while JSON has 10/20 panel genes with drug links.",
+        "slide13_resolution": "Use 10/20 drug-linked and avoid enumerating drug names in the main figure."
+      }
+    ]
+  },
+  "manual_review": {
+    "visual_review_status": "pass: integrated contact sheet and color-QA sheet inspected after footer-overlap revision",
+    "family_read_order": "hardening -> guardrails -> limits -> hypotheses -> translation",
+    "claim_boundary": "No clinical, treatment, universal-failure, or direct-transfer overclaim across the five-slide set.",
+    "qa_statuses": {
+      "10": "pass: rendered preview, scene plate, and grayscale QA inspected",
+      "11": "pass: rendered preview and grayscale QA inspected",
+      "12": "pass: rendered preview and grayscale QA inspected after corridor/text revision",
+      "13": "pass: rendered preview and grayscale QA inspected after bubble/path/text revision",
+      "14": "pass: rendered preview and grayscale QA inspected after corridor revision"
+    },
+    "cautions": [
+      "Slide 10 has a tight 44/45-word budget; keep final PPTX labels editable and controlled.",
+      "Slide 13 intentionally follows current JSON over legacy HTML narrative statements.",
+      "Final deck assembly should rebuild title, source, and caveat text as editable overlays over scene plates."
+    ]
+  }
+}
