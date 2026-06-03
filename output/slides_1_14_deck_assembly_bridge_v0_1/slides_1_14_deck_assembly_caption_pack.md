@@ -24,7 +24,7 @@ Caption: Open with the platform thesis and the mission-held-out problem before a
 
 Claim boundary: Do not claim first AI benchmark for space biology.
 
-Asset: production brief needed
+Asset: output/premium_opening_slides_1_3_v0_1/slide01_spacebiobench_title_rendered_preview.png
 
 ### Slide 2: External gap
 
@@ -34,7 +34,7 @@ Caption: Show the external landscape while keeping the claim to a distinct missi
 
 Claim boundary: Do not overstate novelty against NASA BPS, GLARE, OpenProblems, or cell-eval.
 
-Asset: production brief needed
+Asset: output/premium_opening_slides_1_3_v0_1/slide02_external_gap_positioning_rendered_preview.png
 
 ### Slide 3: Project evolution
 
@@ -44,7 +44,7 @@ Caption: Orient the audience: v1-v7 are completed benchmark results, v8 is hypot
 
 Claim boundary: Do not present all v1-v9 outputs as equal-strength scientific discoveries.
 
-Asset: production brief needed
+Asset: output/premium_opening_slides_1_3_v0_1/slide03_project_evolution_timeline_rendered_preview.png
 
 ### Slide 4: Evaluation layer
 

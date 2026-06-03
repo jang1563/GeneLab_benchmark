@@ -1,0 +1,52 @@
+{
+  "created": "2026-06-03",
+  "automatic_checks": {
+    "n_slides": 3,
+    "all_previews_exist": true,
+    "all_scene_plates_exist": true,
+    "all_grayscale_outputs_exist": true,
+    "contact_sheet_exists": true,
+    "grayscale_contact_sheet_exists": true,
+    "caption_pack_exists": true,
+    "overlay_spec_exists": true,
+    "metrics": [
+      {
+        "path": "output/premium_opening_slides_1_3_v0_1/slide01_spacebiobench_title_rendered_preview.png",
+        "width_px": 3840,
+        "height_px": 2160,
+        "luma_mean": 22.36,
+        "luma_stddev": 22.5,
+        "edge_mean": 8.11,
+        "nonblank_pass": true
+      },
+      {
+        "path": "output/premium_opening_slides_1_3_v0_1/slide02_external_gap_positioning_rendered_preview.png",
+        "width_px": 3840,
+        "height_px": 2160,
+        "luma_mean": 25.77,
+        "luma_stddev": 19.41,
+        "edge_mean": 6.32,
+        "nonblank_pass": true
+      },
+      {
+        "path": "output/premium_opening_slides_1_3_v0_1/slide03_project_evolution_timeline_rendered_preview.png",
+        "width_px": 3840,
+        "height_px": 2160,
+        "luma_mean": 21.86,
+        "luma_stddev": 21.02,
+        "edge_mean": 8.2,
+        "nonblank_pass": true
+      }
+    ],
+    "nonblank_pass": true
+  },
+  "manual_review": {
+    "visual_review_status": "pass: contact sheet and grayscale QA inspected; slide 2 contrast tuned after automatic dark-scene warning",
+    "premium_reference": "ISGP opening block: conceptual depth, hierarchy, rhythm, and restraint.",
+    "known_watchpoints": [
+      "avoid decorative-only space background",
+      "avoid jargon shock in slide 2 landscape labels",
+      "keep v8/v9 evidence level separated from completed results"
+    ]
+  }
+}

@@ -3,11 +3,7 @@
   "automatic_checks": {
     "n_slides": 14,
     "required_assets_missing": [],
-    "opening_production_brief_slides": [
-      1,
-      2,
-      3
-    ],
+    "opening_production_brief_slides": [],
     "assembly_board_exists": true,
     "grayscale_qa_exists": true,
     "image_dimensions": {
@@ -18,10 +14,10 @@
     "overlay_rules_exist": true
   },
   "manual_review": {
-    "visual_review_status": "pass: assembly board and grayscale QA inspected after opening-card text wrap revision",
+    "visual_review_status": "pass: assembly board and grayscale QA inspected with opening slide 1-3 visual candidates integrated",
     "read_order": "opening -> methods bridge -> feature view -> early results -> core result spine",
     "claim_boundary": "slides 1-14 keep v1-v7 results central; v8/v9 extension assets do not enter this opening/core block",
-    "production_decision": "slides 1-3 need new visuals; slides 4-14 can proceed from existing premium assets",
+    "production_decision": "slides 1-14 now have production candidate assets; final PPTX should rebuild text as editable overlays",
     "style_caution": "slides 4-5 are light proof-stage scenes; final PPTX should either treat them as intentional methods-proof contrast or rebuild dark variants for tighter deck continuity"
   }
 }

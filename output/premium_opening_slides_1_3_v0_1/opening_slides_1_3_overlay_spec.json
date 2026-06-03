@@ -1,0 +1,62 @@
+{
+  "created": "2026-06-03",
+  "z_stack_rule": "Layered PNG scene plus editable scientific interpretation.",
+  "global_rules": [
+    "Use scene plates as Z0-Z2 visual scaffolds, not as final all-in-one PPTX slides.",
+    "Rebuild eyebrow, title, subtitle, bridge, caveat, source, and positioning labels as editable text.",
+    "Keep the opening restrained: one question per slide, no dense proof-object table.",
+    "Avoid firstness claims; slide 2 is a positioning map, not a ranking.",
+    "Do not introduce organoid or v8/v9 extension evidence before the completed result spine."
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "id": "slide01_spacebiobench_title",
+      "scene_plate": "output/premium_opening_slides_1_3_v0_1/slide01_spacebiobench_title_scene_plate.png",
+      "rendered_preview": "output/premium_opening_slides_1_3_v0_1/slide01_spacebiobench_title_rendered_preview.png",
+      "editable_text": {
+        "eyebrow": "SPACEBIO-BENCH",
+        "title": "Testing biological AI under spaceflight domain shift",
+        "subtitle": "A mission-held-out benchmark built from public space omics studies.",
+        "bridge": "Can a model trained on known missions survive a new mission?",
+        "caveat": "Benchmark framing; not a clinical or countermeasure claim.",
+        "source": "public GeneLab/OSDR study records + v1-v7 benchmark core"
+      }
+    },
+    {
+      "slide": 2,
+      "id": "slide02_external_gap_positioning",
+      "scene_plate": "output/premium_opening_slides_1_3_v0_1/slide02_external_gap_positioning_scene_plate.png",
+      "rendered_preview": "output/premium_opening_slides_1_3_v0_1/slide02_external_gap_positioning_rendered_preview.png",
+      "editable_text": {
+        "eyebrow": "EXTERNAL GAP",
+        "title": "A distinct niche, not a firstness claim",
+        "subtitle": "Existing resources organize data, biology, or ML tasks; this deck asks what transfers across missions.",
+        "bridge": "The novelty is the evaluation unit: a whole held-out mission.",
+        "caveat": "Positioning map only; it does not rank external platforms.",
+        "source": "external landscape scan + local v1-v9 positioning notes"
+      }
+    },
+    {
+      "slide": 3,
+      "id": "slide03_project_evolution_timeline",
+      "scene_plate": "output/premium_opening_slides_1_3_v0_1/slide03_project_evolution_timeline_scene_plate.png",
+      "rendered_preview": "output/premium_opening_slides_1_3_v0_1/slide03_project_evolution_timeline_rendered_preview.png",
+      "editable_text": {
+        "eyebrow": "PROJECT EVOLUTION",
+        "title": "v1-v9 moves from benchmark results to platform",
+        "subtitle": "The deck separates completed benchmark evidence, hypothesis-only translation, and platformization.",
+        "bridge": "Do not mix evidence levels: results first, extensions later.",
+        "caveat": "v8/v9 are extension and platform layers, not equal-strength discoveries.",
+        "source": "V1_V9 master outline + deck assembly bridge review"
+      }
+    }
+  ],
+  "layer_notes": {
+    "Z0": "dark field, subtle cellular texture, and restrained mission atmosphere",
+    "Z1": "measurement grid, orbit arcs, axes, and timeline ticks",
+    "Z2": "source/task/mission plates, landscape matrix, and evolution nodes",
+    "Z3": "editable interpretation text and highlight paths",
+    "Z4": "claim boundary and source/caveat line"
+  }
+}
