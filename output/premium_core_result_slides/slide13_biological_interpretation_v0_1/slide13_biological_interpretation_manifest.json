@@ -1,0 +1,37 @@
+{
+  "slide_id": "slide13_biological_interpretation_v0_1",
+  "created": "2026-06-03",
+  "slide_role": "biological_interpretation_triad",
+  "source_documents": [
+    "v5/evaluation/immune_deconv_*.json",
+    "v5/evaluation/cross_organ_signaling.json",
+    "v5/evaluation/metabolic_flux_*.json",
+    "v5/evaluation/consensus_biomarker_panel.json",
+    "v5/evaluation/drug_targets.json",
+    "v5/figures/html/Fig7_immune_signaling.html",
+    "v5/figures/html/Fig8_metabolism_drugs.html",
+    "v5/figures/html/Fig9_consensus_panel.html"
+  ],
+  "claim_boundary": "Biological interpretation and target triage only; no causal mechanism, validated countermeasure, or treatment recommendation claim.",
+  "outputs": {
+    "scene_plate": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_scene_plate.png",
+    "rendered_preview": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_rendered_preview.png",
+    "grayscale_qa": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/qa/slide13_biological_interpretation_rendered_preview_grayscale.png",
+    "source_summary": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_source_summary.json",
+    "qa": "output/premium_core_result_slides/slide13_biological_interpretation_v0_1/slide13_biological_interpretation_qa.json"
+  },
+  "visible_text_word_count": 50,
+  "visible_text_budget": 58,
+  "source_review_flags": [
+    {
+      "file": "v5/figures/html/Fig7_immune_signaling.html",
+      "issue": "HTML narrative says 62 active L-R pairs; current JSON source has 1 active edge and 1 active pair.",
+      "slide13_resolution": "Use current JSON values; keep the HTML sentence out of the figure."
+    },
+    {
+      "file": "v5/figures/html/Fig9_consensus_panel.html",
+      "issue": "HTML narrative says every panel gene has known drug interactions, while JSON has 10/20 panel genes with drug links.",
+      "slide13_resolution": "Use 10/20 drug-linked and avoid enumerating drug names in the main figure."
+    }
+  ]
+}

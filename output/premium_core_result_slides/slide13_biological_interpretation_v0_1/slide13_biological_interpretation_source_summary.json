@@ -1,0 +1,471 @@
+{
+  "immune": {
+    "n_tissues": 8,
+    "n_cell_type_tests": 114,
+    "n_significant_fdr05": 10,
+    "tissue_rows": [
+      {
+        "tissue": "skin",
+        "label": "Skin",
+        "n_samples": 118,
+        "n_cell_types": 14,
+        "n_significant_fdr05": 6
+      },
+      {
+        "tissue": "kidney",
+        "label": "Kidney",
+        "n_samples": 142,
+        "n_cell_types": 14,
+        "n_significant_fdr05": 2
+      },
+      {
+        "tissue": "thymus",
+        "label": "Thymus",
+        "n_samples": 86,
+        "n_cell_types": 16,
+        "n_significant_fdr05": 2
+      },
+      {
+        "tissue": "colon",
+        "label": "Colon",
+        "n_samples": 54,
+        "n_cell_types": 16,
+        "n_significant_fdr05": 0
+      },
+      {
+        "tissue": "eye",
+        "label": "Eye",
+        "n_samples": 41,
+        "n_cell_types": 13,
+        "n_significant_fdr05": 0
+      },
+      {
+        "tissue": "gastrocnemius",
+        "label": "Gastroc.",
+        "n_samples": 32,
+        "n_cell_types": 11,
+        "n_significant_fdr05": 0
+      },
+      {
+        "tissue": "liver",
+        "label": "Liver",
+        "n_samples": 261,
+        "n_cell_types": 14,
+        "n_significant_fdr05": 0
+      },
+      {
+        "tissue": "lung",
+        "label": "Lung",
+        "n_samples": 58,
+        "n_cell_types": 16,
+        "n_significant_fdr05": 0
+      }
+    ],
+    "top_changes": [
+      {
+        "tissue": "thymus",
+        "label": "Thymus CD8 T cells",
+        "cell_type": "CD8 T cells",
+        "cliffs_delta": -0.4957,
+        "fdr_p": 0.00192,
+        "direction": "down_in_flight"
+      },
+      {
+        "tissue": "skin",
+        "label": "Skin Vessels",
+        "cell_type": "Vessels",
+        "cliffs_delta": 0.4625,
+        "fdr_p": 0.000644,
+        "direction": "up_in_flight"
+      },
+      {
+        "tissue": "skin",
+        "label": "Skin Basophils",
+        "cell_type": "Basophils",
+        "cliffs_delta": -0.4145,
+        "fdr_p": 0.001339,
+        "direction": "down_in_flight"
+      },
+      {
+        "tissue": "kidney",
+        "label": "Kidney B derived",
+        "cell_type": "B derived",
+        "cliffs_delta": 0.4136,
+        "fdr_p": 0.005348,
+        "direction": "up_in_flight"
+      },
+      {
+        "tissue": "skin",
+        "label": "Skin Endothelial cells",
+        "cell_type": "Endothelial cells",
+        "cliffs_delta": 0.4119,
+        "fdr_p": 0.001339,
+        "direction": "up_in_flight"
+      },
+      {
+        "tissue": "thymus",
+        "label": "Thymus T cells",
+        "cell_type": "T cells",
+        "cliffs_delta": -0.3951,
+        "fdr_p": 0.017488,
+        "direction": "down_in_flight"
+      }
+    ],
+    "signaling": {
+      "n_lr_pairs_database": 111,
+      "n_tissue_pairs": 56,
+      "n_active_edges": 1,
+      "n_active_pairs": 1,
+      "active_edges": [
+        {
+          "key": "thymus_to_colon",
+          "source": "thymus",
+          "target": "colon",
+          "n_active_pairs": 1,
+          "active_pairs": [
+            {
+              "ligand": "F12",
+              "receptor": "Gp9"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "metabolism": {
+    "n_tissues": 6,
+    "mean_gene_coverage_pct": 89.8,
+    "min_gene_coverage_pct": 84.6,
+    "n_subsystems": 103,
+    "max_abs_objective_diff": 999.807,
+    "rows": [
+      {
+        "tissue": "thymus",
+        "label": "Thymus",
+        "gene_coverage_pct": 92.9,
+        "fba_objective_diff": 999.807318,
+        "n_subsystems": 103
+      },
+      {
+        "tissue": "liver",
+        "label": "Liver",
+        "gene_coverage_pct": 88.2,
+        "fba_objective_diff": 400.695098,
+        "n_subsystems": 103
+      },
+      {
+        "tissue": "kidney",
+        "label": "Kidney",
+        "gene_coverage_pct": 92.1,
+        "fba_objective_diff": -217.057978,
+        "n_subsystems": 103
+      },
+      {
+        "tissue": "skin",
+        "label": "Skin",
+        "gene_coverage_pct": 89.6,
+        "fba_objective_diff": -111.681237,
+        "n_subsystems": 103
+      },
+      {
+        "tissue": "eye",
+        "label": "Eye",
+        "gene_coverage_pct": 91.4,
+        "fba_objective_diff": 64.307326,
+        "n_subsystems": 103
+      },
+      {
+        "tissue": "gastrocnemius",
+        "label": "Gastroc.",
+        "gene_coverage_pct": 84.6,
+        "fba_objective_diff": -62.119253,
+        "n_subsystems": 103
+      }
+    ],
+    "top_subsystems": [
+      {
+        "tissue": "liver",
+        "label": "NAD metabolism",
+        "visible_label": "NAD pathway",
+        "mean_flux_diff": 0.0,
+        "abs_mean_diff": 3.001176,
+        "n_reactions": 27
+      },
+      {
+        "tissue": "skin",
+        "label": "NAD metabolism",
+        "visible_label": "NAD pathway",
+        "mean_flux_diff": 0.0,
+        "abs_mean_diff": 2.531604,
+        "n_reactions": 27
+      },
+      {
+        "tissue": "kidney",
+        "label": "Valine, leucine, and isoleucine metabolism",
+        "visible_label": "BCAA metabolism",
+        "mean_flux_diff": -1.195633,
+        "abs_mean_diff": 2.406555,
+        "n_reactions": 45
+      },
+      {
+        "tissue": "thymus",
+        "label": "Nucleotide interconversion",
+        "visible_label": "nucleotide use",
+        "mean_flux_diff": -0.317183,
+        "abs_mean_diff": 2.315845,
+        "n_reactions": 165
+      },
+      {
+        "tissue": "thymus",
+        "label": "ROS detoxification",
+        "visible_label": "ROS detox",
+        "mean_flux_diff": 1.990775,
+        "abs_mean_diff": 2.311533,
+        "n_reactions": 7
+      },
+      {
+        "tissue": "gastrocnemius",
+        "label": "Pyrimidine synthesis",
+        "visible_label": "Pyrimidine synthesis",
+        "mean_flux_diff": 0.519642,
+        "abs_mean_diff": 2.15008,
+        "n_reactions": 21
+      },
+      {
+        "tissue": "gastrocnemius",
+        "label": "NAD metabolism",
+        "visible_label": "NAD pathway",
+        "mean_flux_diff": -0.0,
+        "abs_mean_diff": 2.007217,
+        "n_reactions": 27
+      },
+      {
+        "tissue": "kidney",
+        "label": "Nucleotide interconversion",
+        "visible_label": "nucleotide use",
+        "mean_flux_diff": 0.212311,
+        "abs_mean_diff": 1.771272,
+        "n_reactions": 165
+      }
+    ]
+  },
+  "targets": {
+    "panel_size": 20,
+    "n_candidates_scored": 1919,
+    "max_possible_score": 12,
+    "top_score": 5,
+    "mean_panel_auroc": 0.682,
+    "best_panel_auroc": 0.806,
+    "best_panel_tissue": "Gastroc.",
+    "validation_rows": [
+      {
+        "tissue": "gastrocnemius",
+        "label": "Gastroc.",
+        "auroc": 0.8056,
+        "n_folds": 3,
+        "n_panel_genes_found": 14
+      },
+      {
+        "tissue": "liver",
+        "label": "Liver",
+        "auroc": 0.7544,
+        "n_folds": 6,
+        "n_panel_genes_found": 16
+      },
+      {
+        "tissue": "eye",
+        "label": "Eye",
+        "auroc": 0.7276,
+        "n_folds": 3,
+        "n_panel_genes_found": 14
+      },
+      {
+        "tissue": "kidney",
+        "label": "Kidney",
+        "auroc": 0.704,
+        "n_folds": 3,
+        "n_panel_genes_found": 15
+      },
+      {
+        "tissue": "thymus",
+        "label": "Thymus",
+        "auroc": 0.6532,
+        "n_folds": 4,
+        "n_panel_genes_found": 15
+      },
+      {
+        "tissue": "skin",
+        "label": "Skin",
+        "auroc": 0.6502,
+        "n_folds": 3,
+        "n_panel_genes_found": 14
+      },
+      {
+        "tissue": "lung",
+        "label": "Lung",
+        "auroc": 0.5955,
+        "n_folds": 5,
+        "n_panel_genes_found": 15
+      },
+      {
+        "tissue": "colon",
+        "label": "Colon",
+        "auroc": 0.5619,
+        "n_folds": 5,
+        "n_panel_genes_found": 15
+      }
+    ],
+    "panel_drug_linked": 10,
+    "top_panel": [
+      {
+        "rank": 1,
+        "gene": "MUP22",
+        "score": 5,
+        "n_tissues": 4,
+        "drug_linked": false
+      },
+      {
+        "rank": 2,
+        "gene": "THRSP",
+        "score": 5,
+        "n_tissues": 4,
+        "drug_linked": true
+      },
+      {
+        "rank": 3,
+        "gene": "APOA1",
+        "score": 5,
+        "n_tissues": 4,
+        "drug_linked": true
+      },
+      {
+        "rank": 4,
+        "gene": "THRSP",
+        "score": 5,
+        "n_tissues": 3,
+        "drug_linked": true
+      },
+      {
+        "rank": 5,
+        "gene": "TOP2A",
+        "score": 5,
+        "n_tissues": 3,
+        "drug_linked": true
+      },
+      {
+        "rank": 6,
+        "gene": "SERPINA6",
+        "score": 5,
+        "n_tissues": 2,
+        "drug_linked": true
+      },
+      {
+        "rank": 7,
+        "gene": "TNNC1",
+        "score": 5,
+        "n_tissues": 2,
+        "drug_linked": true
+      },
+      {
+        "rank": 8,
+        "gene": "MYH7",
+        "score": 5,
+        "n_tissues": 2,
+        "drug_linked": true
+      },
+      {
+        "rank": 9,
+        "gene": "DDIT4",
+        "score": 5,
+        "n_tissues": 1,
+        "drug_linked": true
+      },
+      {
+        "rank": 10,
+        "gene": "H4C8",
+        "score": 4,
+        "n_tissues": 4,
+        "drug_linked": false
+      }
+    ],
+    "n_mapped_to_human": 834,
+    "n_genes_with_dgidb_interactions": 271,
+    "n_total_dgidb_interactions": 3154,
+    "n_chembl_targets": 26,
+    "tier_counts": {
+      "tier1_approved": 1284,
+      "tier2_clinical": 0,
+      "tier3_preclinical": 200
+    },
+    "tissue_druggability": [
+      {
+        "tissue": "thymus",
+        "label": "Thymus",
+        "pct_druggable": 24.8,
+        "druggable": 77,
+        "total": 310
+      },
+      {
+        "tissue": "kidney",
+        "label": "Kidney",
+        "pct_druggable": 21.5,
+        "druggable": 64,
+        "total": 298
+      },
+      {
+        "tissue": "eye",
+        "label": "Eye",
+        "pct_druggable": 14.8,
+        "druggable": 38,
+        "total": 256
+      },
+      {
+        "tissue": "gastrocnemius",
+        "label": "Gastroc.",
+        "pct_druggable": 14.0,
+        "druggable": 52,
+        "total": 372
+      },
+      {
+        "tissue": "colon",
+        "label": "Colon",
+        "pct_druggable": 13.8,
+        "druggable": 27,
+        "total": 196
+      },
+      {
+        "tissue": "skin",
+        "label": "Skin",
+        "pct_druggable": 9.9,
+        "druggable": 24,
+        "total": 243
+      },
+      {
+        "tissue": "liver",
+        "label": "Liver",
+        "pct_druggable": 9.0,
+        "druggable": 22,
+        "total": 245
+      },
+      {
+        "tissue": "lung",
+        "label": "Lung",
+        "pct_druggable": 7.3,
+        "druggable": 13,
+        "total": 179
+      }
+    ]
+  },
+  "source_review_flags": [
+    {
+      "file": "v5/figures/html/Fig7_immune_signaling.html",
+      "issue": "HTML narrative says 62 active L-R pairs; current JSON source has 1 active edge and 1 active pair.",
+      "slide13_resolution": "Use current JSON values; keep the HTML sentence out of the figure."
+    },
+    {
+      "file": "v5/figures/html/Fig9_consensus_panel.html",
+      "issue": "HTML narrative says every panel gene has known drug interactions, while JSON has 10/20 panel genes with drug links.",
+      "slide13_resolution": "Use 10/20 drug-linked and avoid enumerating drug names in the main figure."
+    }
+  ]
+}

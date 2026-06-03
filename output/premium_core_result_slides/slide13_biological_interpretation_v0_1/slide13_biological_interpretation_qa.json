@@ -1,0 +1,27 @@
+{
+  "created": "2026-06-03",
+  "automatic_checks": {
+    "rendered_outputs_exist": true,
+    "image_dimensions": {
+      "width_px": 3840,
+      "height_px": 2160
+    },
+    "visible_text_word_count": 50,
+    "visible_text_budget": 58,
+    "immune_significant_cell_type_shifts": 10,
+    "active_lr_edges": 1,
+    "active_lr_pairs": 1,
+    "metabolic_mean_gene_coverage_pct": 89.8,
+    "metabolic_n_subsystems": 103,
+    "panel_mean_auroc": 0.682,
+    "panel_drug_linked": 10,
+    "tier1_approved_links": 1284,
+    "tier3_preclinical_links": 200
+  },
+  "manual_review": {
+    "visual_review_status": "pass: rendered preview and grayscale QA inspected after bubble/path/text revision",
+    "claim_boundary": "hypothesis layer only; no treatment/countermeasure recommendation",
+    "readability": "avoids table-like layouts; visible headline carries plain-language interpretation",
+    "source_consistency": "current JSON values override legacy HTML narrative sentences flagged in manifest"
+  }
+}
