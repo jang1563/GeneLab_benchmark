@@ -1,0 +1,22 @@
+{
+  "created": "2026-06-03",
+  "automatic_checks": {
+    "rendered_outputs_exist": true,
+    "image_dimensions": {
+      "width_px": 3840,
+      "height_px": 2160
+    },
+    "visible_text_word_count": 49,
+    "visible_text_budget": 52,
+    "rr8_gc_gt_flt": true,
+    "rrrm_tissues": 4,
+    "rrrm_cells": 38081,
+    "composition_fdr_hits": 0
+  },
+  "manual_review": {
+    "visual_review_status": "pass: rendered preview and grayscale QA inspected",
+    "claim_boundary": "guardrail lesson, not proof of recovery or mature cell-type mechanism",
+    "readability": "three-lane layout separates confound, projection, and RRRM readiness",
+    "notes": "subtitle shortened after first render to keep visible text within budget"
+  }
+}

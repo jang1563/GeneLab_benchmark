@@ -1,0 +1,74 @@
+{
+  "preservation": {
+    "rr8_flt_gene": 0.9299999999999999,
+    "rr8_gc_gene": 0.9733333333333333,
+    "rr8_bsl_gene": 0.9833795013850415,
+    "rr8_excess_signal": -0.043333333333333335,
+    "rr6_flt_gene": 1.0,
+    "rr6_gc_gene": 0.9222222222222223,
+    "rr6_bsl_gene": 1.0,
+    "rr6_excess_signal": 0.07777777777777772
+  },
+  "recovery": {
+    "RR-6": {
+      "pca_ratio": 0.8424829971117566,
+      "pathway_mean": -0.05461394816987494,
+      "n_recovering": 12,
+      "n_total": 26,
+      "iss_t_prob": 0.9995417646917482,
+      "lar_prob": 0.18544688340153154,
+      "caveat": "FLT_ISS-T probabilities are in-sample training-set scores; use as descriptive reference, not held-out validation evidence"
+    },
+    "RR-8": {
+      "pca_ratio": 0.6517026295340288,
+      "pathway_mean": 1.2356235789546746,
+      "n_recovering": 25,
+      "n_total": 27,
+      "iss_t_prob": 0.9996929605912325,
+      "lar_prob": 0.40407467499915906,
+      "caveat": "FLT_ISS-T probabilities are in-sample training-set scores; use as descriptive reference, not held-out validation evidence"
+    }
+  },
+  "rrrm": {
+    "tissues": [
+      "blood",
+      "eye",
+      "muscle",
+      "skin"
+    ],
+    "n_tissues": 4,
+    "total_cells": 38081,
+    "raw_fastq_gb": 308.0,
+    "cell_inventory": {
+      "blood": 4377,
+      "eye": 2197,
+      "muscle": 15669,
+      "skin": 15838
+    },
+    "f2a_summary": {
+      "blood": {
+        "cell_types": 8,
+        "lowest_padj": 0.0883116883116883,
+        "n_significant_05": 0
+      },
+      "eye": {
+        "cell_types": 9,
+        "lowest_padj": 0.0883116883116883,
+        "n_significant_05": 0
+      },
+      "muscle": {
+        "cell_types": 8,
+        "lowest_padj": 0.21587301587301586,
+        "n_significant_05": 0
+      },
+      "skin": {
+        "cell_types": 9,
+        "lowest_padj": 0.0883116883116883,
+        "n_significant_05": 0
+      }
+    },
+    "f2a_total_significant_05": 0,
+    "f2a_lowest_padj": 0.0883116883116883,
+    "status": "benchmark-ready subset"
+  }
+}
