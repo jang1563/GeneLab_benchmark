@@ -1,0 +1,27 @@
+{
+  "created": "2026-06-03",
+  "automatic_checks": {
+    "rendered_outputs_exist": true,
+    "image_dimensions": {
+      "width_px": 3840,
+      "height_px": 2160
+    },
+    "visible_text_word_count": 45,
+    "visible_text_budget": 50,
+    "source_mean_pathway_rho": 0.285,
+    "source_mean_tf_rho": 0.0298,
+    "source_transfer_significant_tests": 0,
+    "source_tier_counts": {
+      "A": 3,
+      "B": 7,
+      "C": 186,
+      "D": 11
+    }
+  },
+  "manual_review": {
+    "visual_review_status": "pass: rendered preview and grayscale QA inspected after corridor revision",
+    "claim_boundary": "human-alignment evidence, not clinical proof",
+    "readability": "headline carries the plain-language message; rho/AUROC/tier values remain evidence labels",
+    "notes": "central outer card was removed to reduce nested card-box reading"
+  }
+}

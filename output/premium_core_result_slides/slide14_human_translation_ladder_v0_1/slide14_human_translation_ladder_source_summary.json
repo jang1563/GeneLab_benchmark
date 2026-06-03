@@ -1,0 +1,136 @@
+{
+  "gene": {
+    "max_fold_enrichment": 0.979,
+    "significant_gene_sets": 0,
+    "biomarker_panel_overlap": 0
+  },
+  "pathway": {
+    "mean_rho": 0.285,
+    "n_tissues_analyzed": 5,
+    "positive_significant_tissues": 3,
+    "negative_significant_tissues": 1,
+    "rows": [
+      {
+        "tissue": "Eye",
+        "rho": 0.5001,
+        "p": 0.00021713088742759352,
+        "significant": true
+      },
+      {
+        "tissue": "Thymus",
+        "rho": 0.4984,
+        "p": 0.00023014369694997533,
+        "significant": true
+      },
+      {
+        "tissue": "Kidney",
+        "rho": 0.4517,
+        "p": 0.0009916750650358877,
+        "significant": true
+      },
+      {
+        "tissue": "Skin",
+        "rho": 0.2775,
+        "p": 0.051042665255096493,
+        "significant": false
+      },
+      {
+        "tissue": "Liver",
+        "rho": -0.3026,
+        "p": 0.03270289661586049,
+        "significant": true
+      }
+    ]
+  },
+  "transfer": {
+    "n_tests": 8,
+    "n_significant": 0,
+    "median_auroc": 0.5,
+    "max_auroc": 0.609,
+    "rows": [
+      {
+        "tissue": "Liver",
+        "auroc": 0.5,
+        "perm_p": 0.6986,
+        "significant": false
+      },
+      {
+        "tissue": "Gastroc.",
+        "auroc": 0.6094,
+        "perm_p": 0.2116,
+        "significant": false
+      },
+      {
+        "tissue": "Kidney",
+        "auroc": 0.1406,
+        "perm_p": 0.8942,
+        "significant": false
+      },
+      {
+        "tissue": "Thymus",
+        "auroc": 0.5,
+        "perm_p": 0.6347,
+        "significant": false
+      },
+      {
+        "tissue": "Eye",
+        "auroc": 0.5156,
+        "perm_p": 0.2076,
+        "significant": false
+      },
+      {
+        "tissue": "Skin",
+        "auroc": 0.5,
+        "perm_p": 0.7325,
+        "significant": false
+      },
+      {
+        "tissue": "Lung",
+        "auroc": 0.5,
+        "perm_p": 0.6966,
+        "significant": false
+      },
+      {
+        "tissue": "Colon",
+        "auroc": 0.5,
+        "perm_p": 0.7066,
+        "significant": false
+      }
+    ]
+  },
+  "biomarker": {
+    "panel_size": 20,
+    "n_detected_in_cfrna": 15,
+    "n_de_fdr05": 0,
+    "n_drr": 0
+  },
+  "tf": {
+    "mean_rho": 0.0298,
+    "n_tissues_analyzed": 8,
+    "n_significant_tissues": 3
+  },
+  "targets": {
+    "tier_counts": {
+      "A": 3,
+      "B": 7,
+      "C": 186,
+      "D": 11
+    },
+    "tier_a_genes": [
+      "GRIN3B",
+      "SLC4A1",
+      "KIF1A"
+    ],
+    "tier_b_genes": [
+      "PTHLH",
+      "MYH6",
+      "ADCY1",
+      "NPHS1",
+      "CSPG4",
+      "GRM1",
+      "ACTA1"
+    ],
+    "n_drug_target_genes": 207,
+    "n_in_cfrna": 196
+  }
+}
