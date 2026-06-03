@@ -1,0 +1,41 @@
+{
+  "created": "2026-06-03",
+  "artifact_role": "dark methods variants for slides 4-5",
+  "outputs": {
+    "contact_sheet": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_contact_sheet.png",
+    "grayscale_contact_sheet": "output/premium_methods_dark_variants_slides_4_5_v0_1/qa/slides_4_5_dark_methods_contact_sheet_grayscale.png",
+    "caption_pack_json": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_caption_pack.json",
+    "caption_pack_markdown": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_caption_pack.md",
+    "overlay_spec": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_overlay_spec.json",
+    "qa": "output/premium_methods_dark_variants_slides_4_5_v0_1/slides_4_5_dark_methods_qa.json"
+  },
+  "slides": [
+    {
+      "slide": 4,
+      "id": "slide04_evaluation_layer_dark",
+      "scene_plate": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_scene_plate.png",
+      "rendered_preview": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_rendered_preview.png",
+      "grayscale_qa": "output/premium_methods_dark_variants_slides_4_5_v0_1/qa/slide04_evaluation_layer_dark_rendered_preview_grayscale.png",
+      "claim_boundary": "evaluation-layer schematic only",
+      "backup_light_asset": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png",
+      "backup_note_asset": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png"
+    },
+    {
+      "slide": 5,
+      "id": "slide05_mission_heldout_dark",
+      "scene_plate": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_scene_plate.png",
+      "rendered_preview": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_rendered_preview.png",
+      "grayscale_qa": "output/premium_methods_dark_variants_slides_4_5_v0_1/qa/slide05_mission_heldout_dark_rendered_preview_grayscale.png",
+      "claim_boundary": "held-out mission schematic only",
+      "backup_light_asset": "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png",
+      "backup_note_asset": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png"
+    }
+  ],
+  "source_documents": [
+    "docs/PREMIUM_BRIDGE_METHODS_NARRATION_PACK_B1_B4_2026_06_02.md",
+    "docs/SLIDES_1_3_OPENING_VISUAL_SYSTEM_REVIEW_2026_06_03.md",
+    "docs/SLIDES_1_14_DECK_ASSEMBLY_BRIDGE_REVIEW_2026_06_03.md",
+    "output/premium_bridge_scenes/b1_evaluation_layer/overlay_spec.json",
+    "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/overlay_spec.json"
+  ]
+}

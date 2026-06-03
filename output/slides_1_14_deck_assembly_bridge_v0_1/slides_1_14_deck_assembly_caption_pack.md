@@ -54,7 +54,7 @@ Caption: B1 carries the visible slide; B2 supplies the task-unit explanation in 
 
 Claim boundary: Conceptual bridge, not quantitative result evidence.
 
-Asset: output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png
+Asset: output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_rendered_preview.png
 
 ### Slide 5: Mission-held-out guard
 
@@ -64,7 +64,7 @@ Caption: B3 carries the visible split; B4 supplies the train-only guardrail in s
 
 Claim boundary: Do not call this random cross-validation or unqualified independent validation.
 
-Asset: output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png
+Asset: output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_rendered_preview.png
 
 ### Slide 6: Feature layers
 

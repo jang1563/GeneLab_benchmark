@@ -1,0 +1,52 @@
+{
+  "created": "2026-06-03",
+  "z_stack_rule": "Dark layered methods scene plus editable scientific interpretation.",
+  "global_rules": [
+    "Use dark scene plates as main-deck visual scaffolds for slides 4-5.",
+    "Keep existing light proof-stage slides as backup/source-proof assets.",
+    "Rebuild titles, labels, bridge lines, caveats, and source lines as editable PPTX text.",
+    "Keep B2 and B4 definitions in notes or backup; do not overload slides 4-5.",
+    "Avoid table-like panels and internal implementation terms."
+  ],
+  "slides": [
+    {
+      "slide": 4,
+      "id": "slide04_evaluation_layer_dark",
+      "scene_plate": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_scene_plate.png",
+      "rendered_preview": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_rendered_preview.png",
+      "editable_text": {
+        "eyebrow": "METHODS BRIDGE",
+        "title": "Public studies become auditable tasks",
+        "subtitle": "Source context stays attached as studies become benchmark tasks and score records.",
+        "bridge": "What exactly is being tested?",
+        "caveat": "Conceptual methods bridge; not quantitative result evidence.",
+        "source": "B1/B2 narration pack + source/task inventory"
+      },
+      "backup_light_asset": "output/premium_bridge_scenes/b1_evaluation_layer/rendered_preview.png",
+      "backup_note_asset": "output/premium_bridge_rebuild_scenes/b2_study_to_task_premium/rendered_preview.png"
+    },
+    {
+      "slide": 5,
+      "id": "slide05_mission_heldout_dark",
+      "scene_plate": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_scene_plate.png",
+      "rendered_preview": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_rendered_preview.png",
+      "editable_text": {
+        "eyebrow": "METHODS GUARD",
+        "title": "The hidden test set is an entire mission",
+        "subtitle": "Models fit on training missions, then score the held-out mission after the boundary.",
+        "bridge": "Does the model transfer to a mission it did not learn from?",
+        "caveat": "Mission-held-out evaluation; not random-sample validation.",
+        "source": "B3/B4 narration pack + mission-held-out split rule"
+      },
+      "backup_light_asset": "output/premium_bridge_rebuild_scenes/b3_mission_held_out_premium/rendered_preview.png",
+      "backup_note_asset": "output/premium_bridge_rebuild_scenes/b4_train_only_guard_premium/rendered_preview.png"
+    }
+  ],
+  "layer_notes": {
+    "Z0": "dark field and molecular texture",
+    "Z1": "grid, orbit arcs, task lanes, and split boundary",
+    "Z2": "source/task/score plates and mission nodes",
+    "Z3": "editable labels, arrows, and focus text",
+    "Z4": "claim boundary and source/caveat line"
+  }
+}

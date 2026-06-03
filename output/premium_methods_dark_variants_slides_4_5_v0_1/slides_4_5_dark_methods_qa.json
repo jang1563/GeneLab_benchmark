@@ -1,0 +1,48 @@
+{
+  "created": "2026-06-03",
+  "automatic_checks": {
+    "n_slides": 2,
+    "all_previews_exist": true,
+    "all_scene_plates_exist": true,
+    "all_grayscale_outputs_exist": true,
+    "contact_sheet_exists": true,
+    "grayscale_contact_sheet_exists": true,
+    "caption_pack_exists": true,
+    "overlay_spec_exists": true,
+    "metrics": [
+      {
+        "path": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide04_evaluation_layer_dark_rendered_preview.png",
+        "width_px": 3840,
+        "height_px": 2160,
+        "luma_mean": 21.76,
+        "luma_stddev": 19.15,
+        "edge_mean": 6.21,
+        "nonblank_pass": true
+      },
+      {
+        "path": "output/premium_methods_dark_variants_slides_4_5_v0_1/slide05_mission_heldout_dark_rendered_preview.png",
+        "width_px": 3840,
+        "height_px": 2160,
+        "luma_mean": 23.53,
+        "luma_stddev": 18.52,
+        "edge_mean": 6.16,
+        "nonblank_pass": true
+      }
+    ],
+    "nonblank_pass": true,
+    "forbidden_visible_term_hits": {
+      "slide04_evaluation_layer_dark": [],
+      "slide05_mission_heldout_dark": []
+    },
+    "forbidden_visible_terms_pass": true
+  },
+  "manual_review": {
+    "visual_review_status": "pass: contact sheet, individual previews, and grayscale QA inspected after slide 5 zone-color revision",
+    "production_decision": "candidate replacement for slides 4-5 main deck; light proof scenes remain backup",
+    "known_watchpoints": [
+      "slide 4 should not become a dense implementation diagram",
+      "slide 5 must not read as random-sample validation",
+      "final PPTX should rebuild text as editable overlay"
+    ]
+  }
+}

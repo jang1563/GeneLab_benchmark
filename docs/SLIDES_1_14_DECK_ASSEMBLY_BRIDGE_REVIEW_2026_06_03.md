@@ -36,6 +36,8 @@ Slides 10-14 can serve as the hardened core result family: v4 hardening, tempora
 
 Slides 4-5 are light proof-stage scenes, while slide 6 onward uses a darker result grammar. This can work if the final deck treats the contrast as intentional: methods proof on a light paper-like surface, then results on dark analytical canvases. If tighter continuity is preferred, slides 4-5 should be rebuilt as dark variants before PPTX assembly.
 
+Update after opening/methods hardening: dark variants for slides 4-5 were built in `output/premium_methods_dark_variants_slides_4_5_v0_1/` and integrated into the 1-14 assembly board. The original light scenes should now be treated as backup/source-proof assets rather than the default main-deck path.
+
 ## Overlay Rules
 
 Use the existing rendered PNGs as Z2 evidence plates only. The final deck should rebuild the slide title, headline, bridge line, source, caveat, and presenter-facing text as editable objects above the scene.
