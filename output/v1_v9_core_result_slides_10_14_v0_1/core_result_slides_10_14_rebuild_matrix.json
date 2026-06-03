@@ -1,0 +1,86 @@
+{
+  "created": "2026-06-03",
+  "purpose": "Export/rebuild planning matrix for v1-v9 deck slides 10-14.",
+  "verdict": "Do not paste old HTML figures directly into the final deck; rebuild or static-export them into the premium visual system.",
+  "slides": [
+    {
+      "slide_number": 10,
+      "title": "v4 Hardening",
+      "priority": "P0",
+      "recommended_action": "premium_rebuild",
+      "source_assets": [
+        "v4/figures/html/Fig1_benchmark.html",
+        "v4/figures/html/Fig2_ablation.html",
+        "v4/figures/html/Fig5_generalize.html",
+        "v4/evaluation/M1_summary.json",
+        "docs/CANONICAL_RESULTS_V7_1.md"
+      ],
+      "visual_job": "Compact 8-tissue hardening surface with canonical callouts.",
+      "safe_claim": "v4 covers 8 tissues x 8 classifiers x 4 feature types and reduces cherry-pick risk.",
+      "claim_boundary": "Do not imply every best-row tissue is significant."
+    },
+    {
+      "slide_number": 11,
+      "title": "Temporal And RRRM Lessons",
+      "priority": "P1",
+      "recommended_action": "static_export_then_rebuild_if_needed",
+      "source_assets": [
+        "v2/figures/Fig1_temporal.html",
+        "v2/figures/Fig4_scrna_summary.html",
+        "v2/evaluation/V2_RESULTS_SUMMARY.md"
+      ],
+      "visual_job": "Two-lane temporal confound/recovery plus RRRM single-cell lesson.",
+      "safe_claim": "Temporal and single-cell analyses expose confounds, recovery patterns, and cell-type lessons.",
+      "claim_boundary": "Recovery projection is descriptive, not held-out validation evidence."
+    },
+    {
+      "slide_number": 12,
+      "title": "Negative Results",
+      "priority": "P1",
+      "recommended_action": "premium_rebuild",
+      "source_assets": [
+        "v3/figures/v3_Fig2_spatial_overview.html",
+        "v3/figures/v3_Fig5_fm_comparison.html",
+        "v3/README.md"
+      ],
+      "visual_job": "Failure-mode slide pairing spatial/brain negative and foundation-model negative/control evidence.",
+      "safe_claim": "Negative results define benchmark boundaries and failure modes.",
+      "claim_boundary": "Do not claim universal brain biology absence or universal FM failure."
+    },
+    {
+      "slide_number": 13,
+      "title": "Biological Interpretation",
+      "priority": "P1",
+      "recommended_action": "premium_rebuild",
+      "source_assets": [
+        "v5/figures/html/Fig7_immune_signaling.html",
+        "v5/figures/html/Fig8_metabolism_drugs.html",
+        "v5/figures/html/Fig9_consensus_panel.html",
+        "v5/evaluation/consensus_biomarker_panel.json",
+        "v5/evaluation/cross_organ_signaling.json",
+        "v5/evaluation/drug_targets.json"
+      ],
+      "visual_job": "Biology interpretation triad: immune/signaling, metabolism/drug-target, consensus marker panel.",
+      "safe_claim": "Benchmark scores can be connected to biological interpretation layers.",
+      "claim_boundary": "Interpretation only; no causal proof or treatment recommendation."
+    },
+    {
+      "slide_number": 14,
+      "title": "Human Translation",
+      "priority": "P0",
+      "recommended_action": "premium_rebuild",
+      "source_assets": [
+        "v6/figures/html/v6_Fig10_human_translation.html",
+        "v6/figures/html/v6_FigS8_translation_detail.html",
+        "v6/evaluation/V6_B_pathway_conservation.json",
+        "v6/evaluation/V6_C_cross_species_transfer.json",
+        "v6/evaluation/V6_E_tf_conservation.json",
+        "v6/evaluation/V6_F_drug_target_validation.json"
+      ],
+      "visual_job": "Translation ladder: pathway partial conservation, weak gene/TF transfer, target evidence tiers.",
+      "safe_claim": "Pathway and target evidence support partial translation potential.",
+      "claim_boundary": "Not clean gene-level transfer and not a clinical or countermeasure recommendation."
+    }
+  ],
+  "next_implementation_step": "Build a slides 10-14 contact sheet, then rebuild slide 10 first."
+}
