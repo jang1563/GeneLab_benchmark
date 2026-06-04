@@ -1,5 +1,5 @@
 ---
-pretty_name: SpaceBio-Bench v9 Public Bulk Draft
+pretty_name: SpaceBio-Bench v9 Public Bulk Metadata Alpha
 license: other
 task_categories:
 - tabular-classification
@@ -14,23 +14,42 @@ tags:
 - draft
 ---
 
-# SpaceBio-Bench v9 Public Bulk Draft
+# SpaceBio-Bench v9 Public Bulk Metadata Alpha
 
-This is a draft Hugging Face-style dataset card for the public bulk RNA-seq
-portion of SpaceBio-Bench v9.
+This is a Hugging Face-style dataset card for the metadata-only alpha snapshot
+of the public bulk RNA-seq portion of SpaceBio-Bench v9.
 
-Release status: draft, not frozen.
+Release status: metadata-only alpha snapshot, not frozen.
 
-This card describes the current local benchmark scaffold and should not yet be
-used as final release language. The package has task manifests, source
-inventory, OSDR checksum-manifest evidence, baseline outputs, and a draft
-Frictionless Data Package descriptor. It does not yet have payload-level hash verification
-for every distributed fold matrix.
+This card describes the current local benchmark scaffold and should not be used
+as frozen release language. The package has task manifests, source inventory,
+OSDR checksum-manifest evidence, alpha-boundary decision tables, baseline
+outputs, and a draft Frictionless Data Package descriptor.
+
+Current boundary: this is not a frozen release, not a frozen payload release,
+and not a locally hash-verified payload bundle. Payload-level hash verification
+for every distributed fold matrix remains pending.
+
+## Transparency And Release Boundary
+
+SpaceBio-Bench keeps result, evaluation, and release-readiness claims in a
+separate transparency card pack. The canonical copies live in the GitHub
+repository under:
+
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_SYSTEM_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_EVALUATION_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
+
+Use these companion documents to check whether a claim belongs to the v1-v7
+canonical result surface, the v8 translational extension, the v9 public bulk
+metadata alpha, or a draft v9 extension lane.
 
 ## Dataset Summary
 
-SpaceBio-Bench v9 is a provenance-first benchmark scaffold for testing
-biological AI under spaceflight mission shift.
+SpaceBio-Bench v9 is a mission-held-out transcriptomics benchmark scaffold for
+public space-biology data.
 
 The current public bulk draft contains leave-one-mission-out classification
 tasks built from public mouse bulk RNA-seq studies in NASA's Open Science Data
@@ -45,7 +64,7 @@ Current scope:
 - 22 deduplicated public OSDR source rows.
 - 33 fold definitions.
 - 24 baseline runs across 3 simple baseline families.
-- 11 resources in `v9/datapackage.draft.json`.
+- 21 metadata/provenance/output resources in `v9/datapackage.draft.json`.
 
 Out of scope for this draft:
 
@@ -55,6 +74,7 @@ Out of scope for this draft:
 - Mars-regime point predictions
 - foundation-model ranking claims
 - frozen release or DOI claims
+- frozen payload mirror or locally hash-verified payload-bundle claims
 
 ## Intended Uses
 
@@ -86,7 +106,7 @@ Out-of-scope uses:
 
 ## Dataset Structure
 
-The current draft is organized around four artifact classes.
+The current draft is organized around five artifact classes.
 
 ### Metadata Spine
 
@@ -98,6 +118,24 @@ Small Git-friendly files that define the benchmark:
 - `v9/source_inventory.csv`
 - `v9/source_checksum_audit.csv`
 - `v9/datapackage.draft.json`
+
+### Metadata Alpha Boundary Resources
+
+Small tables that define the current alpha claim boundary:
+
+- `v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_summary.csv`
+- `v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_matrix.csv`
+- `v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv`
+- `v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_claim_boundary.csv`
+- `v9/reports/public_bulk_alpha_gap_matrix/package_update_plan.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_language_snippets.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_next_actions.csv`
+
+These are metadata resources. They do not add upstream OSDR payload files as
+locally bundled resources.
 
 ### Public Bulk Payload Bundle
 
@@ -112,7 +150,8 @@ Large fold-level benchmark inputs referenced by `v9/task_data_index.csv`:
 - `selected_genes.txt`
 - `fold_info.json`
 
-These files are currently indexed but not payload-hash frozen.
+These files are currently indexed in the local scaffold but are not a frozen
+payload mirror and are not payload-hash frozen.
 
 ### Benchmark Output Bundle
 
@@ -130,6 +169,7 @@ Generated baseline outputs:
 Not part of the current public bulk draft:
 
 - raw OSDR sequencing payload mirrors
+- locally hash-verified payload bundle
 - gated or controlled human data
 - local caches or virtual environments
 - user `submissions/`
@@ -190,6 +230,14 @@ Current provenance evidence:
 - 8,275 parsed entries matched OSDR file-list payload names by exact,
   basename, or suffix matching.
 
+Metadata alpha decision:
+
+- Selected path: `metadata_only_alpha_snapshot`.
+- Deferred path: `payload_mirror_first`.
+- Claim boundary: `metadata_only_public_bulk_alpha_no_payload_release`.
+- Payload release allowed: `false`.
+- Next blocked release claim: local payload mirroring and hash verification.
+
 Integrity status:
 
 - `freeze_ready=false` for all current source rows.
@@ -201,7 +249,10 @@ Integrity status:
 
 Draft Data Package status:
 
-- `spacebio_bench:release_status = draft_not_frozen`
+- `spacebio_bench:release_status = metadata_alpha_not_frozen`
+- `spacebio_bench:alpha_snapshot_status = metadata_only_alpha_snapshot`
+- `spacebio_bench:claim_boundary = metadata_only_public_bulk_alpha_no_payload_release`
+- `spacebio_bench:payload_release_allowed = false`
 - `spacebio_bench:payload_verification_status = checksum_manifests_parsed_payloads_not_hashed`
 
 ## Baseline Results
@@ -263,7 +314,10 @@ Dataset limitations:
 - Some tasks include analog or special mission labels such as MHU-2 or OSD-397.
 - Bulk RNA-seq tasks do not evaluate cell-type-specific effects.
 - Legacy processed fold matrices may reflect earlier preprocessing choices.
-- The current package descriptor is draft-only.
+- The current package descriptor is a metadata-only alpha draft.
+- The current evidence boundary is OSDR API file-list and checksum-manifest
+  parsing; local payload mirroring and payload hash verification remain future
+  work before any frozen data release wording.
 
 Benchmark risks:
 
@@ -273,6 +327,8 @@ Benchmark risks:
   documentation are finalized.
 - Countermeasure, intervention, and crew-health language is not supported by
   this draft.
+- This card does not support claims of a frozen payload release, a complete
+  release Data Package, or a locally hash-verified data bundle.
 
 ## Licensing And Citation
 
@@ -304,9 +360,11 @@ https://doi.org/10.1093/nar/gkae1116
 
 Before public release:
 
-- replace draft package status with release status
+- replace metadata-alpha package status with release status
 - add payload-level SHA-256 manifest for distributed fold files
 - verify distributed payload hashes
+- create a local payload mirror only after upstream source/citation/reuse
+  boundaries are finalized
 - finalize license field
 - add dataset-specific OSDR citations
 - decide whether to publish through Hugging Face, Zenodo, or both
@@ -316,12 +374,14 @@ Before public release:
 
 - Hugging Face Dataset Cards:
   https://huggingface.co/docs/hub/datasets-cards
+- Frictionless Data Package:
+  https://specs.frictionlessdata.io/data-package/
+- NASA OSDR Biological Data API:
+  https://visualization.osdr.nasa.gov/biodata/api/
 - NASA OSDR FAQ:
   https://science.nasa.gov/reference/osdr-faq/
 - NASA OSDR Terms and Conditions:
   https://science.nasa.gov/reference/osdr-help-terms-and-conditions/
-- Frictionless Data Package:
-  https://specs.frictionlessdata.io/data-package/
 - v9 public package design:
   `docs/V9_PUBLIC_BULK_PACKAGE_DESIGN.md`
 - v9 draft Data Package descriptor:
