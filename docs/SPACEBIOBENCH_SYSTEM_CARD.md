@@ -1,7 +1,7 @@
 ---
 title: SpaceBio-Bench System Card
 page_type: system_card
-status: draft
+status: public_review_ready
 last_reviewed: 2026-06-04
 claim_boundary: benchmark_system_card_draft_no_new_release_claim
 ---
@@ -18,6 +18,10 @@ This card does not replace the Hugging Face dataset cards, task manifests,
 release manifests, or model-specific documentation. Individual trained models
 or adapters should receive separate model cards when they become release
 artifacts.
+
+Branch note: on the default `main` branch, v9-specific evidence paths such as
+`v9/...` and `docs/V9_*` refer to artifacts maintained on the canonical `v3`
+branch.
 
 ## System Summary
 
