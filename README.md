@@ -11,6 +11,11 @@ Transparency card pack: [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SP
 
 Portfolio brief: [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) summarizes the project contribution for portfolio and external-review contexts.
 
+Release archive pack: [`docs/RELEASE_ARCHIVE_CARD.md`](docs/RELEASE_ARCHIVE_CARD.md)
+defines paper-archive scope. [`docs/RELEASE_ARCHIVE_MANIFEST.md`](docs/RELEASE_ARCHIVE_MANIFEST.md)
+and [`docs/RELEASE_ARCHIVE_CHECKLIST.md`](docs/RELEASE_ARCHIVE_CHECKLIST.md)
+track Zenodo metadata readiness and final DOI/tag gates.
+
 Branch note: `main` is the default public entry point. Detailed v9
 metadata-alpha evidence files are maintained on the canonical
 [`v3`](https://github.com/jang1563/GeneLab_benchmark/tree/v3) branch.
