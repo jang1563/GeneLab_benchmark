@@ -1,7 +1,7 @@
 ---
 title: SpaceBio-Bench Transparency Card Pack
 page_type: transparency_card_pack
-status: draft_public_ready
+status: public_review_ready
 last_reviewed: 2026-06-04
 claim_boundary: transparency_card_pack_no_new_release_claim
 ---
@@ -14,6 +14,10 @@ reader understand what the benchmark currently supports before relying on a
 headline score or release label.
 
 This pack does not introduce new benchmark results or approve a new release.
+
+Branch note: `v3` is the canonical evidence branch for detailed v9
+metadata-alpha artifacts. The default `main` branch mirrors the portfolio-facing
+card surface for first-time readers.
 
 ## Current Public Summary
 
@@ -49,6 +53,7 @@ For GitHub:
 - Link this pack from the root README and v9 README.
 - Keep the four cards in `docs/`.
 - Present the pack as transparency documentation, not as a new release.
+- Keep `v3` as the canonical branch for detailed v9 metadata-alpha evidence.
 
 For Hugging Face:
 
