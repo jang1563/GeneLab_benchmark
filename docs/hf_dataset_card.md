@@ -62,15 +62,15 @@ system scope, evaluation protocol, release-readiness gates, and claim boundaries
 can be reviewed together:
 
 - Transparency card pack:
-  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
 - System card:
-  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_SYSTEM_CARD.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_SYSTEM_CARD.md
 - Evaluation card:
-  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_EVALUATION_CARD.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_EVALUATION_CARD.md
 - Release readiness card:
-  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
 - Claim register:
-  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
 
 Current release wording: v1-v7 are the canonical historical benchmark and
 reviewer-facing feature-matrix surface; v8 and v9 are documented as extension or
