@@ -11,6 +11,10 @@ Transparency card pack: [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SP
 
 Portfolio brief: [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) summarizes the project contribution for portfolio and external-review contexts.
 
+Branch note: `v3` is the canonical evidence branch for detailed v9
+metadata-alpha artifacts. The default `main` branch mirrors the portfolio-facing
+card surface for first-time readers.
+
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 

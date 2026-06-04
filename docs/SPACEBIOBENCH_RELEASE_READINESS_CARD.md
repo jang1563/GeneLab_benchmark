@@ -1,7 +1,7 @@
 ---
 title: SpaceBio-Bench Release Readiness Card
 page_type: release_readiness_card
-status: draft
+status: public_review_ready
 last_reviewed: 2026-06-04
 claim_boundary: benchmark_release_readiness_card_draft_no_release_approval
 ---
@@ -18,6 +18,10 @@ the evidence supports.
 
 This card does not approve a new release. It records the conditions a surface
 must satisfy before its public wording can become stronger.
+
+Branch note: `v3` is the canonical evidence branch for detailed v9
+metadata-alpha artifacts. Paths beginning with `v9/...` and `docs/V9_*` resolve
+within this branch.
 
 ## Release Tiers
 

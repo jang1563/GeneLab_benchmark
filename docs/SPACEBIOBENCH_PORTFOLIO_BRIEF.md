@@ -1,7 +1,7 @@
 ---
 title: SpaceBio-Bench Portfolio Brief
 page_type: portfolio_brief
-status: draft_public_ready
+status: public_review_ready
 last_reviewed: 2026-06-04
 claim_boundary: portfolio_brief_no_new_release_claim
 ---
@@ -14,6 +14,10 @@ SpaceBio-Bench is a mission-held-out transcriptomics benchmark and transparency
 package for public NASA OSDR space-biology data, designed to evaluate model
 generalization under mission shift while keeping provenance, evaluation scope,
 release readiness, and claim boundaries explicit.
+
+Public branch note: `v3` is the canonical evidence branch for detailed v9
+metadata-alpha artifacts. The default `main` branch mirrors the portfolio-facing
+card surface for first-time readers.
 
 ## What I Built
 
