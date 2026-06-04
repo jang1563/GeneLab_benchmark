@@ -54,6 +54,29 @@ GeneLab Benchmark provides standardized train/test splits for evaluating how wel
 
 The GitHub repository contains the full v1-v7 benchmark surface. This Hugging Face dataset card exposes the public feature-matrix package and reviewer-facing result summary; counts below separate full-release scope from specific analysis subsets.
 
+## Transparency and Release Boundary
+
+This Hugging Face card is the concise public card for the v1-v7 feature-matrix
+package. Project-level transparency documentation is maintained in GitHub so the
+system scope, evaluation protocol, release-readiness gates, and claim boundaries
+can be reviewed together:
+
+- Transparency card pack:
+  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
+- System card:
+  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_SYSTEM_CARD.md
+- Evaluation card:
+  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_EVALUATION_CARD.md
+- Release readiness card:
+  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
+- Claim register:
+  https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
+
+Current release wording: v1-v7 are the canonical historical benchmark and
+reviewer-facing feature-matrix surface; v8 and v9 are documented as extension or
+metadata-alpha surfaces and should not be described as frozen public benchmark
+payload releases.
+
 ## Dataset Structure
 
 This HuggingFace repository contains **feature matrices** (train_X.csv, test_X.csv) for 4 benchmark tasks that passed significance thresholds. Labels and metadata are in the [GitHub repository](https://github.com/jang1563/GeneLab_benchmark).
