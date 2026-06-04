@@ -11,6 +11,11 @@ Transparency card pack: [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SP
 
 Portfolio brief: [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) summarizes the project contribution for portfolio and external-review contexts.
 
+Release archive pack: [`docs/RELEASE_ARCHIVE_CARD.md`](docs/RELEASE_ARCHIVE_CARD.md)
+defines paper-archive scope. [`docs/RELEASE_ARCHIVE_MANIFEST.md`](docs/RELEASE_ARCHIVE_MANIFEST.md)
+and [`docs/RELEASE_ARCHIVE_CHECKLIST.md`](docs/RELEASE_ARCHIVE_CHECKLIST.md)
+track Zenodo metadata readiness and final DOI/tag gates.
+
 Branch note: `v3` is the canonical evidence branch for detailed v9
 metadata-alpha artifacts. The default `main` branch mirrors the portfolio-facing
 card surface for first-time readers.
