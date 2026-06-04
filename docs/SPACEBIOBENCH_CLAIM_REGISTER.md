@@ -1,7 +1,7 @@
 ---
 title: SpaceBio-Bench Claim Register
 page_type: evidence_register
-status: draft
+status: public_review_ready
 last_reviewed: 2026-06-04
 claim_boundary: benchmark_claim_register_draft_no_new_release_claim
 ---
@@ -16,6 +16,10 @@ mixed-surface claims across v1-v7, v8, and v9.
 
 The register is a documentation control, not a new release artifact and not a
 source of new benchmark results.
+
+Branch note: `v3` is the canonical evidence branch for detailed v9
+metadata-alpha artifacts. Paths beginning with `v9/...` and `docs/V9_*` resolve
+within this branch.
 
 ## Evidence Vocabulary
 
@@ -40,49 +44,295 @@ The current public-safe summary is:
 - Clinical, crew-health, intervention, countermeasure, and Mars-regime claims
   are out of scope for the current evidence boundary.
 
-## Current Supported Claims
+## Current Supported Claim Cards
 
-| ID | Claim | Support | Primary source | Confidence | Allowed wording | Blocked wording |
-|---|---|---|---|---|---|---|
-| SBB-C001 | v1-v7 GeneLab Benchmark evaluates cross-mission generalization of mouse spaceflight transcriptomic signatures. | primary | `docs/CANONICAL_RESULTS_V7_1.md`; `docs/hf_dataset_card.md` | high | "cross-mission mouse spaceflight transcriptomics benchmark" | "clinical astronaut health predictor" |
-| SBB-C002 | v7.1 is a documentation consistency patch, not a new result-generation release. | primary | `docs/CANONICAL_RESULTS_V7_1.md` | high | "v7.1 documentation patch; no new benchmark result generation" | "v7.1 adds new benchmark results" |
-| SBB-C003 | The v4 multi-method surface covers 8 tissues, 8 classifiers, and 4 feature types for 256 evaluations. | primary | `docs/CANONICAL_RESULTS_V7_1.md` | high | "v4 multi-method evaluation: 8 tissues x 8 classifiers x 4 feature types" | "all methods were evaluated on every later v8/v9 task" |
-| SBB-C004 | Foundation-model and text-LLM rows are mixed-surface snapshots and should not be described as a single uniform 8-tissue FM leaderboard. | primary | `docs/CANONICAL_RESULTS_V7_1.md` | high | "benchmark-surface summary with subset notes" | "single uniform 8-tissue foundation-model leaderboard" |
-| SBB-C005 | Current gene-expression FMs in the canonical v7.1 snapshot do not automatically outperform tuned classical baselines under small-n bulk RNA-seq shift. | primary | `docs/CANONICAL_RESULTS_V7_1.md` | high | "do not automatically outperform tuned classical baselines" | "foundation models fail at space biology" |
-| SBB-C006 | v8 SpaceMed is an incubating translational extension and should not be mixed into v7.1 benchmark claims. | primary | `docs/CANONICAL_RESULTS_V7_1.md`; `docs/V8_BETA_RELEASE_PLAN_2026_05_10.md` | high | "incubating translational extension" | "v8 proves countermeasure efficacy" |
-| SBB-C007 | v9 public bulk is a metadata-only alpha snapshot, not a frozen payload release. | primary | `docs/v9_hf_dataset_card.md`; `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`; `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md` | high | "SpaceBio-Bench v9 public bulk metadata alpha" | "frozen v9 public benchmark release" |
-| SBB-C008 | v9 public bulk currently includes 8 generated public bulk LOMO task manifests, 6 tissue contexts, 22 deduplicated public OSDR source rows, 33 fold definitions, 24 baseline runs, and 21 draft Data Package resources. | primary | `docs/v9_hf_dataset_card.md`; `v9/datapackage.draft.json` | high | Use counts with "current public bulk draft" qualifier | Use counts as a frozen DOI release inventory |
-| SBB-C009 | OSDR API and checksum-manifest evidence has been parsed for all 22 public bulk source rows, but local payload-level hash verification is still pending. | primary | `docs/v9_hf_dataset_card.md`; `v9/source_checksum_audit.csv`; `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md` | high | "checksum-manifest evidence parsed; payload hashing pending" | "locally hash-verified payload bundle" |
-| SBB-C010 | v9 public bulk baselines validate the scaffold workflow and provide anchors, but are not tuned leaderboard endpoints. | primary | `docs/v9_hf_dataset_card.md`; `v9/reports/bulk_lomo_baseline_summary.csv` | high | "scaffold baselines" | "final model rankings" |
-| SBB-C011 | Per-task and per-fold reporting should accompany pooled summaries because pooled averages can hide mission or tissue failures. | primary/project-synthesis | `docs/v9_hf_dataset_card.md`; `docs/CANONICAL_RESULTS_V7_1.md` | high | "report per-task results, not only pooled averages" | "single pooled score fully characterizes the method" |
-| SBB-C012 | Mission labels can conflate biological spaceflight signal with vehicle, hardware, protocol, tissue handling, time, and processing effects. | primary/project-synthesis | `docs/v9_hf_dataset_card.md`; `docs/SPACEBIOBENCH_SYSTEM_CARD.md` | medium-high | "mission-shift benchmark with known confounding risks" | "pure microgravity effect estimator" |
-| SBB-C013 | Public bulk tasks do not support clinical, crew-health, countermeasure, intervention, or Mars-regime claims. | primary | `docs/v9_hf_dataset_card.md`; `docs/CANONICAL_RESULTS_V7_1.md` | high | "benchmark evidence, not biological mechanism or operational recommendation" | "astronaut health-risk or countermeasure recommendation" |
-| SBB-C014 | OSDR and individual OSDR datasets should be credited and cited for downstream analyses. | primary | `docs/v9_hf_dataset_card.md`; NASA OSDR FAQ | high | "Data are courtesy of the NASA Open Science Data Repository" plus dataset-specific citations | Hand-written substitute citations without checking OSDR study pages |
-| SBB-C015 | Dataset cards should document contents, context, intended use, creation, responsible use, and limitations. | primary | Hugging Face dataset-card docs; Datasheets for Datasets | high | "dataset card as human-facing responsible-use surface" | "README with only download commands is sufficient" |
-| SBB-C016 | Model cards are appropriate for individual trained models or adapters, but SpaceBio-Bench itself should be documented as a benchmark/system card. | primary/inference | Model Cards paper; Hugging Face model-card docs; `docs/SPACEBIOBENCH_SYSTEM_CARD.md` | high | "benchmark/system card for the project; model cards for individual baselines" | "the full benchmark is a model card" |
+### SBB-C001 - Cross-Mission Benchmark Surface
 
-## Release Readiness And Future Claims
+- Claim: v1-v7 GeneLab Benchmark evaluates cross-mission generalization of
+  mouse spaceflight transcriptomic signatures.
+- Support: primary.
+- Sources: `docs/CANONICAL_RESULTS_V7_1.md`; `docs/hf_dataset_card.md`.
+- Confidence: high.
+- Use: "cross-mission mouse spaceflight transcriptomics benchmark".
+- Avoid: "clinical astronaut health predictor".
 
-| ID | Claim | Support | Primary source | Confidence | Allowed wording | Blocked wording |
-|---|---|---|---|---|---|---|
-| SBB-C017 | A future frozen payload release should add machine-readable payload manifests and verification reports. | primary/inference | BagIt RFC 8493; `docs/v9_hf_dataset_card.md`; `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md` | high | "payload-level SHA-256 manifest before frozen payload language" | "payload freeze without payload-level hashes" |
-| SBB-C018 | A future citable research-object release should add RO-Crate or equivalent provenance metadata. | primary/inference | RO-Crate technical overview; `docs/V9_LONG_RUN_OPERATING_PROTOCOL.md`; `docs/v9_hf_dataset_card.md` | medium-high | "future RO-Crate export for research-object provenance" | "current v9 alpha is already a complete citable RO-Crate release" |
-| SBB-C019 | DataCite-style metadata is useful for future DOI-oriented release planning. | primary/inference | DataCite Metadata Schema; `docs/V9_LONG_RUN_OPERATING_PROTOCOL.md` | medium-high | "align release metadata with DataCite fields before DOI/archive release" | "DOI release ready without creator, version, related identifier, license, and resource type review" |
-| SBB-C020 | NIST AI RMF can inform documentation structure, but SpaceBio-Bench is not a deployed AI product. | primary/inference | NIST AI RMF; `docs/SPACEBIOBENCH_SYSTEM_CARD.md` | medium | "use Govern/Map/Measure/Manage as documentation lenses" | "NIST compliance claim" |
-| SBB-C021 | Evaluation should be interpreted through task, fold, source, payload-boundary, and run-manifest evidence before pooled summaries. | primary/project-synthesis | `docs/SPACEBIOBENCH_EVALUATION_CARD.md`; `docs/v9_hf_dataset_card.md`; `v9/task_data_index.csv` | high | "read per-task and per-fold metrics before pooled means" | "single pooled mean fully establishes benchmark performance" |
-| SBB-C022 | v9 public bulk currently satisfies a metadata-alpha tier, not a frozen-payload or DOI/archive tier. | primary | `docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md`; `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md`; `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv` | high | "metadata alpha with explicit payload blockers" | "frozen-payload or archive-ready release" |
+### SBB-C002 - v7.1 Patch Boundary
+
+- Claim: v7.1 is a documentation consistency patch, not a new result-generation
+  release.
+- Support: primary.
+- Sources: `docs/CANONICAL_RESULTS_V7_1.md`.
+- Confidence: high.
+- Use: "v7.1 documentation patch; no new benchmark result generation".
+- Avoid: "v7.1 adds new benchmark results".
+
+### SBB-C003 - v4 Multi-Method Scope
+
+- Claim: the v4 multi-method surface covers 8 tissues, 8 classifiers, and 4
+  feature types for 256 evaluations.
+- Support: primary.
+- Sources: `docs/CANONICAL_RESULTS_V7_1.md`.
+- Confidence: high.
+- Use: "v4 multi-method evaluation: 8 tissues x 8 classifiers x 4 feature
+  types".
+- Avoid: "all methods were evaluated on every later v8/v9 task".
+
+### SBB-C004 - Foundation-Model Snapshot Boundary
+
+- Claim: foundation-model and text-LLM rows are mixed-surface snapshots, not a
+  single uniform 8-tissue FM leaderboard.
+- Support: primary.
+- Sources: `docs/CANONICAL_RESULTS_V7_1.md`.
+- Confidence: high.
+- Use: "benchmark-surface summary with subset notes".
+- Avoid: "single uniform 8-tissue foundation-model leaderboard".
+
+### SBB-C005 - Classical Baseline Comparison
+
+- Claim: current gene-expression FMs in the canonical v7.1 snapshot do not
+  automatically outperform tuned classical baselines under small-n bulk RNA-seq
+  shift.
+- Support: primary.
+- Sources: `docs/CANONICAL_RESULTS_V7_1.md`.
+- Confidence: high.
+- Use: "do not automatically outperform tuned classical baselines".
+- Avoid: "foundation models fail at space biology".
+
+### SBB-C006 - v8 Boundary
+
+- Claim: v8 SpaceMed is an incubating translational extension and should not be
+  mixed into v7.1 benchmark claims.
+- Support: primary.
+- Sources: `docs/CANONICAL_RESULTS_V7_1.md`;
+  `docs/V8_BETA_RELEASE_PLAN_2026_05_10.md`.
+- Confidence: high.
+- Use: "incubating translational extension".
+- Avoid: "v8 proves countermeasure efficacy".
+
+### SBB-C007 - v9 Metadata-Alpha Boundary
+
+- Claim: v9 public bulk is a metadata-only alpha snapshot, not a frozen payload
+  release.
+- Support: primary.
+- Sources: `docs/v9_hf_dataset_card.md`;
+  `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`;
+  `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md`.
+- Confidence: high.
+- Use: "SpaceBio-Bench v9 public bulk metadata alpha".
+- Avoid: "frozen v9 public benchmark release".
+
+### SBB-C008 - v9 Public Bulk Inventory
+
+- Claim: v9 public bulk currently includes 8 generated public bulk LOMO task
+  manifests, 6 tissue contexts, 22 deduplicated public OSDR source rows, 33
+  fold definitions, 24 baseline runs, and 21 draft Data Package resources.
+- Support: primary.
+- Sources: `docs/v9_hf_dataset_card.md`; `v9/datapackage.draft.json`.
+- Confidence: high.
+- Use: counts with a "current public bulk draft" qualifier.
+- Avoid: using counts as a frozen DOI release inventory.
+
+### SBB-C009 - Checksum Evidence Boundary
+
+- Claim: OSDR API and checksum-manifest evidence has been parsed for all 22
+  public bulk source rows, but local payload-level hash verification is still
+  pending.
+- Support: primary.
+- Sources: `docs/v9_hf_dataset_card.md`; `v9/source_checksum_audit.csv`;
+  `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`.
+- Confidence: high.
+- Use: "checksum-manifest evidence parsed; payload hashing pending".
+- Avoid: "locally hash-verified payload bundle".
+
+### SBB-C010 - Baseline Status
+
+- Claim: v9 public bulk baselines validate the scaffold workflow and provide
+  anchors, but are not tuned leaderboard endpoints.
+- Support: primary.
+- Sources: `docs/v9_hf_dataset_card.md`;
+  `v9/reports/bulk_lomo_baseline_summary.csv`.
+- Confidence: high.
+- Use: "scaffold baselines".
+- Avoid: "final model rankings".
+
+### SBB-C011 - Per-Task Reporting
+
+- Claim: per-task and per-fold reporting should accompany pooled summaries
+  because pooled averages can hide mission or tissue failures.
+- Support: primary/project-synthesis.
+- Sources: `docs/v9_hf_dataset_card.md`; `docs/CANONICAL_RESULTS_V7_1.md`.
+- Confidence: high.
+- Use: "report per-task results, not only pooled averages".
+- Avoid: "single pooled score fully characterizes the method".
+
+### SBB-C012 - Mission Confounding
+
+- Claim: mission labels can conflate biological spaceflight signal with
+  vehicle, hardware, protocol, tissue handling, time, and processing effects.
+- Support: primary/project-synthesis.
+- Sources: `docs/v9_hf_dataset_card.md`; `docs/SPACEBIOBENCH_SYSTEM_CARD.md`.
+- Confidence: medium-high.
+- Use: "mission-shift benchmark with known confounding risks".
+- Avoid: "pure microgravity effect estimator".
+
+### SBB-C013 - Unsupported Operational Claims
+
+- Claim: public bulk tasks do not support clinical, crew-health,
+  countermeasure, intervention, or Mars-regime claims.
+- Support: primary.
+- Sources: `docs/v9_hf_dataset_card.md`; `docs/CANONICAL_RESULTS_V7_1.md`.
+- Confidence: high.
+- Use: "benchmark evidence, not biological mechanism or operational
+  recommendation".
+- Avoid: "astronaut health-risk or countermeasure recommendation".
+
+### SBB-C014 - OSDR Credit
+
+- Claim: OSDR and individual OSDR datasets should be credited and cited for
+  downstream analyses.
+- Support: primary.
+- Sources: `docs/v9_hf_dataset_card.md`; NASA OSDR FAQ.
+- Confidence: high.
+- Use: "Data are courtesy of the NASA Open Science Data Repository" plus
+  dataset-specific citations.
+- Avoid: hand-written substitute citations without checking OSDR study pages.
+
+### SBB-C015 - Dataset-Card Role
+
+- Claim: dataset cards should document contents, context, intended use,
+  creation, responsible use, and limitations.
+- Support: primary.
+- Sources: Hugging Face dataset-card docs; Datasheets for Datasets.
+- Confidence: high.
+- Use: "dataset card as human-facing responsible-use surface".
+- Avoid: "README with only download commands is sufficient".
+
+### SBB-C016 - System Card Versus Model Card
+
+- Claim: model cards are appropriate for individual trained models or adapters,
+  but SpaceBio-Bench itself should be documented as a benchmark/system card.
+- Support: primary/inference.
+- Sources: Model Cards paper; Hugging Face model-card docs;
+  `docs/SPACEBIOBENCH_SYSTEM_CARD.md`.
+- Confidence: high.
+- Use: "benchmark/system card for the project; model cards for individual
+  baselines".
+- Avoid: "the full benchmark is a model card".
+
+## Release Readiness And Future Claim Cards
+
+### SBB-C017 - Frozen Payload Requirements
+
+- Claim: a future frozen payload release should add machine-readable payload
+  manifests and verification reports.
+- Support: primary/inference.
+- Sources: BagIt RFC 8493; `docs/v9_hf_dataset_card.md`;
+  `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`.
+- Confidence: high.
+- Use: "payload-level SHA-256 manifest before frozen payload language".
+- Avoid: "payload freeze without payload-level hashes".
+
+### SBB-C018 - Research-Object Provenance
+
+- Claim: a future citable research-object release should add RO-Crate or
+  equivalent provenance metadata.
+- Support: primary/inference.
+- Sources: RO-Crate technical overview; `docs/V9_LONG_RUN_OPERATING_PROTOCOL.md`;
+  `docs/v9_hf_dataset_card.md`.
+- Confidence: medium-high.
+- Use: "future RO-Crate export for research-object provenance".
+- Avoid: "current v9 alpha is already a complete citable RO-Crate release".
+
+### SBB-C019 - DOI-Oriented Metadata
+
+- Claim: DataCite-style metadata is useful for future DOI-oriented release
+  planning.
+- Support: primary/inference.
+- Sources: DataCite Metadata Schema; `docs/V9_LONG_RUN_OPERATING_PROTOCOL.md`.
+- Confidence: medium-high.
+- Use: "align release metadata with DataCite fields before DOI/archive release".
+- Avoid: "DOI release ready without creator, version, related identifier,
+  license, and resource type review".
+
+### SBB-C020 - NIST AI RMF Lens
+
+- Claim: NIST AI RMF can inform documentation structure, but SpaceBio-Bench is
+  not a deployed AI product.
+- Support: primary/inference.
+- Sources: NIST AI RMF; `docs/SPACEBIOBENCH_SYSTEM_CARD.md`.
+- Confidence: medium.
+- Use: "use Govern/Map/Measure/Manage as documentation lenses".
+- Avoid: "NIST compliance claim".
+
+### SBB-C021 - Evaluation Reading Order
+
+- Claim: evaluation should be interpreted through task, fold, source,
+  payload-boundary, and run-manifest evidence before pooled summaries.
+- Support: primary/project-synthesis.
+- Sources: `docs/SPACEBIOBENCH_EVALUATION_CARD.md`;
+  `docs/v9_hf_dataset_card.md`; `v9/task_data_index.csv`.
+- Confidence: high.
+- Use: "read per-task and per-fold metrics before pooled means".
+- Avoid: "single pooled mean fully establishes benchmark performance".
+
+### SBB-C022 - v9 Release Tier
+
+- Claim: v9 public bulk currently satisfies a metadata-alpha tier, not a
+  frozen-payload or DOI/archive tier.
+- Support: primary.
+- Sources: `docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md`;
+  `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md`;
+  `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv`.
+- Confidence: high.
+- Use: "metadata alpha with explicit payload blockers".
+- Avoid: "frozen-payload or archive-ready release".
 
 ## Blocked Or Future Claims
 
-| Future claim | Current blocker | Evidence needed |
-|---|---|---|
-| Frozen v9 public bulk payload release | Payload mirroring and payload-level hash verification pending | Local payload mirror, SHA-256 manifest, verification report, release `datapackage.json` |
-| DOI or archive-ready release | Metadata alpha status and license/citation review pending | DataCite-aligned metadata, final license, dataset-specific OSDR citations, archive manifest |
-| Complete RO-Crate research object | RO-Crate export not yet created | `ro-crate-metadata.json`, entity graph, workflow and provenance links |
-| Foundation-model leaderboard | Adapter validation and matched surfaces incomplete | Matched task inputs, adapter cards, run manifests, per-task metrics, leakage checks |
-| Biological mechanism proof | Benchmark scores are not mechanistic validation | Independent biological validation, mechanistic assays, matched causal analysis |
-| Countermeasure or intervention recommendation | v8/v9 diagnostic claims do not validate interventions | Controlled intervention evidence, safety review, translational validation |
-| Crew-health or clinical decision support | Public benchmark scope excludes clinical recommendations | Controlled human-data review, clinical validation, institutional review |
+### Frozen v9 Public Bulk Payload Release
+
+- Current blocker: payload mirroring and payload-level hash verification are
+  pending.
+- Evidence needed: local payload mirror, SHA-256 manifest, verification report,
+  and release `datapackage.json`.
+
+### DOI Or Archive-Ready Release
+
+- Current blocker: metadata alpha status and license/citation review are
+  pending.
+- Evidence needed: DataCite-aligned metadata, final license, dataset-specific
+  OSDR citations, and archive manifest.
+
+### Complete RO-Crate Research Object
+
+- Current blocker: RO-Crate export has not yet been created.
+- Evidence needed: `ro-crate-metadata.json`, entity graph, workflow links, and
+  provenance links.
+
+### Foundation-Model Leaderboard
+
+- Current blocker: adapter validation and matched evaluation surfaces are
+  incomplete.
+- Evidence needed: matched task inputs, adapter cards, run manifests, per-task
+  metrics, and leakage checks.
+
+### Biological Mechanism Proof
+
+- Current blocker: benchmark scores are not mechanistic validation.
+- Evidence needed: independent biological validation, mechanistic assays, and
+  matched causal analysis.
+
+### Countermeasure Or Intervention Recommendation
+
+- Current blocker: v8/v9 diagnostic claims do not validate interventions.
+- Evidence needed: controlled intervention evidence, safety review, and
+  translational validation.
+
+### Crew-Health Or Clinical Decision Support
+
+- Current blocker: public benchmark scope excludes clinical recommendations.
+- Evidence needed: controlled human-data review, clinical validation, and
+  institutional review.
 
 ## Maintenance Rules
 

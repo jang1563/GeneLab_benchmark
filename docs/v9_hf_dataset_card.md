@@ -30,6 +30,9 @@ Current boundary: this is not a frozen release, not a frozen payload release,
 and not a locally hash-verified payload bundle. Payload-level hash verification
 for every distributed fold matrix remains pending.
 
+Branch note: `v3` is the canonical evidence branch for this metadata-alpha
+card. Paths beginning with `v9/...` and `docs/V9_*` resolve within this branch.
+
 ## Transparency And Release Boundary
 
 SpaceBio-Bench keeps result, evaluation, and release-readiness claims in a
