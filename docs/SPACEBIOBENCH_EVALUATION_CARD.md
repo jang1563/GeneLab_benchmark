@@ -1,7 +1,7 @@
 ---
 title: SpaceBio-Bench Evaluation Card
 page_type: evaluation_card
-status: draft
+status: public_review_ready
 last_reviewed: 2026-06-04
 claim_boundary: benchmark_evaluation_card_draft_no_new_result_claim
 ---
@@ -18,6 +18,10 @@ mechanism, translational readiness, or model superiority claims.
 This card does not introduce new results. It summarizes evaluation evidence
 already recorded in the v7.1 canonical result surface and the v9 public bulk
 metadata-alpha scaffold.
+
+Branch note: `v3` is the canonical evidence branch for detailed v9
+metadata-alpha artifacts. Paths beginning with `v9/...` and `docs/V9_*` resolve
+within this branch.
 
 ## Evaluation Surfaces
 
