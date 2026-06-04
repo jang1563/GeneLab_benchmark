@@ -36,11 +36,11 @@ SpaceBio-Bench keeps result, evaluation, and release-readiness claims in a
 separate transparency card pack. The canonical copies live in the GitHub
 repository under:
 
-- https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_SYSTEM_CARD.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_EVALUATION_CARD.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/codex/spacebiobench-card-pack-publish/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_SYSTEM_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_EVALUATION_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
 
 Use these companion documents to check whether a claim belongs to the v1-v7
 canonical result surface, the v8 translational extension, the v9 public bulk
