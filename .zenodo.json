@@ -1,0 +1,44 @@
+{
+  "title": "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models",
+  "upload_type": "software",
+  "version": "7.1.0",
+  "description": "GeneLab Benchmark provides standardized mission-held-out benchmark tasks for evaluating machine learning and foundation-model behavior on public NASA OSDR mouse spaceflight transcriptomics data. This archive metadata describes the v7.1 public documentation and release-candidate surface. v7.1 is a documentation and public metadata consistency patch and does not introduce new benchmark result generation.",
+  "creators": [
+    {
+      "name": "Kang, Jaeyoung",
+      "affiliation": "Cornell University"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "keywords": [
+    "spaceflight",
+    "transcriptomics",
+    "RNA-seq",
+    "benchmark",
+    "machine learning",
+    "foundation models",
+    "NASA OSDR",
+    "GeneLab",
+    "leave-one-mission-out",
+    "bioinformatics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/jang1563/GeneLab_benchmark",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://huggingface.co/datasets/jang1563/genelab-benchmark",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://osdr.nasa.gov",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    }
+  ],
+  "notes": "Source biological data are derived from NASA OSDR public datasets and should be cited at the individual OSDR study level where applicable. This repository archive is not a clinical, crew-health, countermeasure, or intervention recommendation artifact. Final DOI publication should confirm author order, manuscript title, release tag, and upstream dataset citation metadata before deposition."
+}

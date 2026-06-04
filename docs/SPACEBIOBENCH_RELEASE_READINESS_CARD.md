@@ -47,6 +47,7 @@ branch.
 | Baseline output evidence | Pass for metadata alpha | `v9/reports/bulk_lomo_baseline_summary.csv` |
 | Dataset-card alpha boundary | Applied | `docs/v9_hf_dataset_card.md`; `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md` |
 | Draft Data Package alpha boundary | Applied | `v9/datapackage.draft.json`; `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md` |
+| Paper archive metadata | Release-candidate ready | `CITATION.cff`; `.zenodo.json`; `docs/RELEASE_ARCHIVE_CARD.md`; `docs/RELEASE_ARCHIVE_MANIFEST.md` |
 
 ## Metadata Alpha Requirements
 
@@ -157,6 +158,9 @@ If a release-facing artifact overstates the current boundary:
 - `docs/SPACEBIOBENCH_SYSTEM_CARD.md`
 - `docs/SPACEBIOBENCH_EVALUATION_CARD.md`
 - `docs/SPACEBIOBENCH_CLAIM_REGISTER.md`
+- `docs/RELEASE_ARCHIVE_CARD.md`
+- `docs/RELEASE_ARCHIVE_MANIFEST.md`
+- `docs/RELEASE_ARCHIVE_CHECKLIST.md`
 - `docs/CANONICAL_RESULTS_V7_1.md`
 - `docs/v9_hf_dataset_card.md`
 - `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`
