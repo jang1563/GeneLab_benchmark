@@ -11,6 +11,10 @@ Transparency card pack: [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SP
 
 Portfolio brief: [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) summarizes the project contribution for portfolio and external-review contexts.
 
+Branch note: `main` is the default public entry point. Detailed v9
+metadata-alpha evidence files are maintained on the canonical
+[`v3`](https://github.com/jang1563/GeneLab_benchmark/tree/v3) branch.
+
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
