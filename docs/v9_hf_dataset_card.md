@@ -30,6 +30,10 @@ Current boundary: this is not a frozen release, not a frozen payload release,
 and not a locally hash-verified payload bundle. Payload-level hash verification
 for every distributed fold matrix remains pending.
 
+Branch note: when this card is viewed from the default `main` branch, artifact
+paths beginning with `v9/...` and `docs/V9_*` refer to canonical evidence files
+maintained on the `v3` branch.
+
 ## Transparency And Release Boundary
 
 SpaceBio-Bench keeps result, evaluation, and release-readiness claims in a
