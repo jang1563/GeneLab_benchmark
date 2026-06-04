@@ -43,6 +43,9 @@ surface. Detailed v9 metadata-alpha evidence paths such as `v9/...` and
 | Evaluation Card | How should task, fold, baseline, metric, and pooled results be interpreted? | `docs/SPACEBIOBENCH_EVALUATION_CARD.md` |
 | Release Readiness Card | Which release tier is each surface in, and what gates block stronger wording? | `docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md` |
 | Claim Register | Which claims are supported, blocked, or future-only? | `docs/SPACEBIOBENCH_CLAIM_REGISTER.md` |
+| Release Archive Card | What would be included in a paper-supporting archive and what remains blocked? | `docs/RELEASE_ARCHIVE_CARD.md` |
+| Release Archive Manifest | Which files and metadata surfaces form the archive candidate? | `docs/RELEASE_ARCHIVE_MANIFEST.md` |
+| Release Archive Checklist | Which final DOI, tag, citation, and checksum gates remain? | `docs/RELEASE_ARCHIVE_CHECKLIST.md` |
 | v9 HF Dataset Card Draft | What does the v9 public bulk metadata alpha contain? | `docs/v9_hf_dataset_card.md` |
 | v7.1 Canonical Results | What is the locked public result and scope source for v1-v7? | `docs/CANONICAL_RESULTS_V7_1.md` |
 
@@ -80,6 +83,8 @@ For Hugging Face:
 - v9 Hugging Face-style dataset card has a concise transparency section.
 - `SPACEBIOBENCH_RELEASE_READINESS_CARD.md` is used as the release-readiness
   surface.
+- `RELEASE_ARCHIVE_CARD.md`, `RELEASE_ARCHIVE_MANIFEST.md`, and
+  `RELEASE_ARCHIVE_CHECKLIST.md` are used before DOI/tag deposition.
 - No public-facing text claims a frozen v9 payload release, DOI/archive release,
   state-of-the-art leaderboard, clinical use, crew-health guidance,
   countermeasure recommendation, or Mars-regime prediction.
