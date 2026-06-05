@@ -1,12 +1,12 @@
 {
   "title": "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models",
   "upload_type": "software",
-  "version": "7.1.0",
-  "description": "GeneLab Benchmark provides standardized mission-held-out benchmark tasks for evaluating machine learning and foundation-model behavior on public NASA OSDR mouse spaceflight transcriptomics data. This archive metadata describes the v7.1 public documentation and release-candidate surface. v7.1 is a documentation and public metadata consistency patch and does not introduce new benchmark result generation.",
+  "version": "7.1.1",
+  "description": "GeneLab Benchmark provides standardized mission-held-out benchmark tasks for evaluating machine learning and foundation-model behavior on public NASA OSDR mouse spaceflight transcriptomics data. This archive metadata describes the current public documentation, card-pack, and release-candidate surface. v7.1.1 is a documentation, public-card, and metadata consistency patch and does not introduce new benchmark result generation.",
   "creators": [
     {
-      "name": "Kang, Jaeyoung",
-      "affiliation": "Cornell University"
+      "name": "Kim, Jihoon",
+      "affiliation": "Weill Cornell Medicine"
     }
   ],
   "access_right": "open",
@@ -40,5 +40,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "Source biological data are derived from NASA OSDR public datasets and should be cited at the individual OSDR study level where applicable. This repository archive is not a clinical, crew-health, countermeasure, or intervention recommendation artifact. Final DOI publication should confirm author order, manuscript title, release tag, and upstream dataset citation metadata before deposition."
+  "notes": "Source biological data are derived from NASA OSDR public datasets and should be cited at the individual OSDR study level where applicable. This repository archive is not a clinical, crew-health, countermeasure, or intervention recommendation artifact. Final DOI publication should confirm the final manuscript author list, manuscript title, release tag, archive checksum, and upstream dataset citation metadata before deposition."
 }
