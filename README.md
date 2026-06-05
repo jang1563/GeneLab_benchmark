@@ -16,6 +16,11 @@ defines paper-archive scope. [`docs/RELEASE_ARCHIVE_MANIFEST.md`](docs/RELEASE_A
 and [`docs/RELEASE_ARCHIVE_CHECKLIST.md`](docs/RELEASE_ARCHIVE_CHECKLIST.md)
 track Zenodo metadata readiness and final DOI/tag gates.
 
+Archive note: the existing `v7.1` GitHub release predates this public card and
+archive-metadata polish. Use `v3` for the current detailed evidence surface and
+`main` for the portfolio-facing entry point until the next DOI-oriented patch
+tag is minted.
+
 Branch note: `v3` is the canonical evidence branch for detailed v9
 metadata-alpha artifacts. The default `main` branch mirrors the portfolio-facing
 card surface for first-time readers.
@@ -415,10 +420,10 @@ Key methodological choices underpinning this benchmark:
 ```bibtex
 @dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
-  author  = {Kim, JangKeun},
+  author  = {Kim, Jihoon},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
+  note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}
 }
 ```
 

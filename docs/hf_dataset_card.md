@@ -62,15 +62,18 @@ system scope, evaluation protocol, release-readiness gates, and claim boundaries
 can be reviewed together:
 
 - Transparency card pack:
-  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
 - System card:
-  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_SYSTEM_CARD.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_SYSTEM_CARD.md
 - Evaluation card:
-  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_EVALUATION_CARD.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_EVALUATION_CARD.md
 - Release readiness card:
-  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
 - Claim register:
-  https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
+  https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
+
+For DOI-oriented citation, use the final GitHub release tag and archive DOI
+recorded in the release archive manifest once minted.
 
 Current release wording: v1-v7 are the canonical historical benchmark and
 reviewer-facing feature-matrix surface; v8 and v9 are documented as extension or
@@ -291,13 +294,13 @@ Lung and Colon additionally include Basal Control samples treated as ground cont
 *(Manuscript in preparation)*
 
 ```bibtex
-@dataset{kang2026genelab,
+@dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics
              Benchmark for AI/ML Models},
-  author  = {Kang, Jaeyoung},
+  author  = {Kim, Jihoon},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
+  note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}
 }
 ```
 
