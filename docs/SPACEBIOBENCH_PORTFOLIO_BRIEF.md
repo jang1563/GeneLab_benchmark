@@ -19,6 +19,14 @@ Public branch note: `main` gives the portfolio-facing entry point and includes
 a curated v9 public bulk metadata-alpha evidence subset under `v9/`. Payload
 matrices and draft extension lanes are outside this public-review path.
 
+## Public Artifact Links
+
+| Artifact | Link | Review purpose |
+|---|---|---|
+| GitHub repository | [jang1563/GeneLab_benchmark](https://github.com/jang1563/GeneLab_benchmark) | Source tree, transparency cards, tests, release history |
+| Hugging Face dataset | [jang1563/genelab-benchmark](https://huggingface.co/datasets/jang1563/genelab-benchmark) | Live dataset card, feature-matrix package, and public metadata |
+| Transparency card pack | [SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md](SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) | System, evaluation, release-readiness, and claim-boundary navigation |
+
 ## What I Built
 
 - A cross-mission benchmark surface for public space-biology transcriptomics,
@@ -29,8 +37,9 @@ matrices and draft extension lanes are outside this public-review path.
   baseline runs, and a draft Frictionless Data Package descriptor.
 - A transparency card pack that separates system scope, evaluation
   interpretation, release readiness, and allowed/blocked claims.
-- A Hugging Face-style dataset card that states the current metadata-alpha
-  boundary without implying a frozen payload release.
+- A live Hugging Face dataset card for the public feature-matrix package, plus
+  a companion v9 metadata-alpha card that keeps payload-release boundaries
+  explicit.
 - A claim register that prevents mixed-surface overclaiming across v1-v7
   results, the v8 translational extension, and v9 draft surfaces.
 
@@ -54,7 +63,7 @@ public release language.
 | Bioinformatics scope | Public OSDR-derived mouse bulk RNA-seq task scaffold |
 | Evaluation engineering | Baseline predictions, metrics, run manifests, and pooled-summary caveats |
 | Provenance | Source inventory plus OSDR API and checksum-manifest evidence |
-| Packaging | Draft Data Package descriptor and Hugging Face-style dataset card |
+| Packaging | Live Hugging Face dataset card, companion v9 metadata-alpha card, and draft Data Package descriptor |
 | Release discipline | Metadata-alpha boundary, payload blocker tracking, and readiness tiers |
 | Scientific communication | System card, evaluation card, release readiness card, and claim register |
 
@@ -92,8 +101,9 @@ For a quick review, read these in order:
 3. [Evaluation Card](SPACEBIOBENCH_EVALUATION_CARD.md)
 4. [Release Readiness Card](SPACEBIOBENCH_RELEASE_READINESS_CARD.md)
 5. [Claim Register](SPACEBIOBENCH_CLAIM_REGISTER.md)
-6. [v9 HF Dataset Card Draft](v9_hf_dataset_card.md)
+6. [v9 Metadata-Alpha Dataset Card](v9_hf_dataset_card.md)
 7. [Canonical v7.1 Results](CANONICAL_RESULTS_V7_1.md)
+8. [Live Hugging Face Dataset](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 
 For model-card or system-card writing roles, the strongest signal is the
 combination of the system card, evaluation card, release readiness card, and
@@ -105,7 +115,7 @@ scope, readiness tier, and allowed versus blocked language.
 Built SpaceBio-Bench, a mission-held-out space-biology transcriptomics benchmark
 and transparency package using public NASA OSDR data. The project defines
 task/fold manifests, scaffold baselines, provenance and checksum evidence,
-Hugging Face-style dataset documentation, release-readiness tiers, and a claim
+Hugging Face dataset-card documentation, release-readiness tiers, and a claim
 register to prevent unsupported model, clinical, or payload-release claims.
 
 ## Cover-Letter Variant

@@ -65,7 +65,7 @@ scaffolds, and unsupported translational claims into one headline.
 | Release Archive Card | What would be included in a paper-supporting archive and what remains blocked? | [docs/RELEASE_ARCHIVE_CARD.md](RELEASE_ARCHIVE_CARD.md) |
 | Release Archive Manifest | Which files and metadata surfaces form the archive candidate? | [docs/RELEASE_ARCHIVE_MANIFEST.md](RELEASE_ARCHIVE_MANIFEST.md) |
 | Release Archive Checklist | Which final DOI, tag, citation, and checksum gates remain? | [docs/RELEASE_ARCHIVE_CHECKLIST.md](RELEASE_ARCHIVE_CHECKLIST.md) |
-| v9 HF Dataset Card Draft | What does the v9 public bulk metadata alpha contain? | [docs/v9_hf_dataset_card.md](v9_hf_dataset_card.md) |
+| v9 Metadata-Alpha Dataset Card | What does the v9 public bulk metadata alpha contain? | [docs/v9_hf_dataset_card.md](v9_hf_dataset_card.md) |
 | v7.1 Canonical Results | What is the locked public result and scope source for v1-v7? | [docs/CANONICAL_RESULTS_V7_1.md](CANONICAL_RESULTS_V7_1.md) |
 
 ## Publication Surface Guidance
