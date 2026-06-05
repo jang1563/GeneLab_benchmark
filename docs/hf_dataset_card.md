@@ -16,10 +16,11 @@ tags:
   - single-cell
   - spatial-transcriptomics
 size_categories:
-  - 1GB<n<10GB
+  - 100M<n<1GB
 language:
   - en
 pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
+viewer: false
 ---
 
 # GeneLab Spaceflight Transcriptomics Benchmark
@@ -27,6 +28,12 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 **A comprehensive benchmark for evaluating ML models and foundation models on NASA spaceflight transcriptomics data.**
 
 Version: v7.0 with v7.1 documentation consistency patch | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
+
+Maintainer / citation author: Jihoon Kim, Weill Cornell Medicine.
+
+![GeneLab Benchmark at a glance](assets/hf_benchmark_summary.png)
+
+**Curation note:** this public dataset package is maintained and cited as Jihoon Kim, Weill Cornell Medicine; the repository URL is hosted under the `jang1563` Hugging Face namespace.
 
 ---
 
@@ -43,7 +50,7 @@ GeneLab Benchmark provides standardized train/test splits for evaluating how wel
 | Dimension | Coverage |
 |---|---|
 | Tissues | 8 (Liver, Gastrocnemius, Kidney, Thymus, Skin, Eye, Lung, Colon) |
-| Core ISS mission labels | 9 named labels in the public task package (RR-1, RR-3, RR-5, RR-6, RR-7, RR-8, RR-9, MHU-1, MHU-2) |
+| Core ISS mission labels | 9 named labels in the public task package (RR-1, RR-3, RR-5, RR-6, RR-7, RR-8, RR-9, MHU-1, MHU-2), plus RR-23 held-out validation |
 | OSD Studies | 24+ source accessions across release layers |
 | Samples | 600+ binary/control samples across the processed release layers |
 | Classifiers | 8 (PCA-LR, ElasticNet-LR, RF, XGBoost, SVM-Linear, SVM-RBF, TabNet, LightGBM) |
@@ -52,33 +59,47 @@ GeneLab Benchmark provides standardized train/test splits for evaluating how wel
 
 ---
 
-The GitHub repository contains the full v1-v7 benchmark surface. This Hugging Face dataset card exposes the public feature-matrix package and reviewer-facing result summary; counts below separate full-release scope from specific analysis subsets.
+The GitHub repository contains the full v1-v7 benchmark surface. This Hugging Face dataset card exposes the public fold package and reviewer-facing result summary; counts below separate full-release scope from specific analysis subsets.
 
 ## Dataset Structure
 
-This HuggingFace repository contains **feature matrices** (train_X.csv, test_X.csv) for 4 benchmark tasks that passed significance thresholds. Labels and metadata are in the [GitHub repository](https://github.com/jang1563/GeneLab_benchmark).
+This Hugging Face repository contains the self-contained public fold package for 4 reviewer-facing GO tasks. Each fold includes feature matrices, binary labels, sample metadata, fold provenance, and the training-only selected gene list.
+
+The web Dataset Viewer is intentionally disabled (`viewer: false`) because these are high-dimensional sample-by-gene matrices plus heterogeneous JSON result artifacts. Use the direct download examples below for deterministic access.
 
 ```
 genelab-benchmark/
 ├── A2_gastrocnemius_lomo/        <- 3 missions, 32 samples
+│   ├── task_info.json
 │   ├── fold_RR-1_test/
 │   │   ├── train_X.csv           <- Training features (samples x genes)
-│   │   └── test_X.csv            <- Test features
+│   │   ├── train_y.csv           <- Training labels (1=Flight, 0=Ground)
+│   │   ├── train_meta.csv        <- Training sample metadata
+│   │   ├── test_X.csv            <- Test features
+│   │   ├── test_y.csv            <- Test labels
+│   │   ├── test_meta.csv         <- Test sample metadata
+│   │   ├── fold_info.json        <- Held-out mission and fold provenance
+│   │   └── selected_genes.txt    <- Training-only variance-selected genes
 │   ├── fold_RR-5_test/
 │   └── fold_RR-9_test/
 │
-├── A4_thymus_lomo/               <- 4 missions, 67 samples
+├── A4_thymus_lomo/               <- 4 LOMO missions, 67 samples
+│   ├── task_info.json
 │   ├── fold_MHU-1_test/
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
-│   └── fold_RR-9_test/
+│   ├── fold_RR-9_test/
+│   └── fold_RR-23_holdout/       <- Independent held-out validation
 │
-├── A5_skin_lomo/                 <- 3 missions, 102 samples
+├── A5_skin_lomo/                 <- 3 LOMO missions, 102 samples
+│   ├── task_info.json
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
-│   └── fold_RR-7_test/
+│   ├── fold_RR-7_test/
+│   └── fold_RR-7_holdout/        <- Independent held-out validation
 │
 ├── A6_eye_lomo/                  <- 3 missions, 37 samples
+│   ├── task_info.json
 │   ├── fold_RR-1_test/
 │   ├── fold_RR-3_test/
 │   └── fold_OSD-397_test/        <- stable public label for OSD-397
@@ -89,6 +110,8 @@ genelab-benchmark/
 ```
 
 Each fold holds out one mission as the test set and trains on the remaining missions. This **Leave-One-Mission-Out (LOMO)** cross-validation evaluates true cross-mission generalization.
+
+Path integrity note: A6's third public fold is `fold_OSD-397_test`; any older `fold_TBD_test` path is stale and should not be used.
 
 ---
 
@@ -102,12 +125,18 @@ Each fold holds out one mission as the test set and trains on the remaining miss
 - **Gene selection**: Top 75th percentile variance, computed on **training missions only** (no test leakage)
 - **Typical shape**: ~20,000 genes per sample
 
-### Labels (in GitHub repo)
+### Labels (train_y.csv, test_y.csv)
 
 | Value | Meaning |
 |-------|---------|
 | `1` | Flight (spaceflight / microgravity) |
 | `0` | Ground Control (vivarium / ground control) |
+
+### Metadata and provenance
+
+- `train_meta.csv`, `test_meta.csv`: sample-level source metadata used for auditing fold composition.
+- `fold_info.json`: held-out mission, train missions, sample counts, label balance, gene-filter counts, and excluded control accounting.
+- `selected_genes.txt`: fold-specific genes selected from training missions only.
 
 ---
 
@@ -160,19 +189,26 @@ scGPT and Mouse-Geneformer report 6-tissue v1 means; scFoundation and UCE rows s
 from huggingface_hub import hf_hub_download
 import pandas as pd
 
-# Download one fold's feature matrix
-train_X = pd.read_csv(
-    hf_hub_download(
-        repo_id="jang1563/genelab-benchmark",
-        filename="A5_skin_lomo/fold_RR-7_test/train_X.csv",
-        repo_type="dataset",
-    ),
-    index_col=0
-)
-print(train_X.shape)  # (72, 20110)
+# Download one self-contained fold package
+repo_id = "jang1563/genelab-benchmark"
+fold = "A5_skin_lomo/fold_RR-7_test"
+
+def hf_csv(name):
+    return pd.read_csv(
+        hf_hub_download(repo_id=repo_id, filename=f"{fold}/{name}", repo_type="dataset"),
+        index_col=0,
+    )
+
+train_X = hf_csv("train_X.csv")
+train_y = hf_csv("train_y.csv").iloc[:, 0]
+test_X = hf_csv("test_X.csv")
+test_y = hf_csv("test_y.csv").iloc[:, 0]
+train_meta = hf_csv("train_meta.csv")
+
+print(train_X.shape, train_y.shape, test_X.shape, test_y.shape)  # (72, 20110) (72,) (30, 20110) (30,)
 ```
 
-### Option B: Download full task
+### Option B: Download full task package
 
 ```python
 from huggingface_hub import snapshot_download
@@ -204,7 +240,7 @@ submission = {
     }
 }
 
-# Run evaluation (requires cloning GitHub repo for labels)
+# Run evaluation with the GitHub evaluation script
 # python scripts/evaluate_submission.py --submission my_submission.json --task A5
 ```
 
@@ -268,10 +304,10 @@ Lung and Colon additionally include Basal Control samples treated as ground cont
 *(Manuscript in preparation)*
 
 ```bibtex
-@dataset{kang2026genelab,
+@dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics
              Benchmark for AI/ML Models},
-  author  = {Kang, Jaeyoung},
+  author  = {Kim, Jihoon},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
   note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
