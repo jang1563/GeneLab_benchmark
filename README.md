@@ -5,25 +5,13 @@
 Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01
 Status: **v1–v7 Complete**
 
+Maintainer / citation author: Jihoon Kim, Weill Cornell Medicine.
+
 Canonical v7.1 documentation source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
 
 Transparency card pack: [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) maps the system card, evaluation card, release readiness card, and claim register for v1-v7 results plus v8/v9 draft-surface boundaries.
 
 Portfolio brief: [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) summarizes the project contribution for portfolio and external-review contexts.
-
-Release archive pack: [`docs/RELEASE_ARCHIVE_CARD.md`](docs/RELEASE_ARCHIVE_CARD.md)
-defines paper-archive scope. [`docs/RELEASE_ARCHIVE_MANIFEST.md`](docs/RELEASE_ARCHIVE_MANIFEST.md)
-and [`docs/RELEASE_ARCHIVE_CHECKLIST.md`](docs/RELEASE_ARCHIVE_CHECKLIST.md)
-track Zenodo metadata readiness and final DOI/tag gates.
-
-Archive note: the existing `v7.1` GitHub release predates this public card and
-archive-metadata polish. Use `v3` for the current detailed evidence surface and
-`main` for the portfolio-facing entry point until the next DOI-oriented patch
-tag is minted.
-
-Branch note: `v3` is the canonical evidence branch for detailed v9
-metadata-alpha artifacts. The default `main` branch mirrors the portfolio-facing
-card surface for first-time readers.
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -264,8 +252,9 @@ GeneLab_benchmark/
 
 ## Getting Started
 
-Feature matrices (train_X.csv, test_X.csv) are hosted on HuggingFace due to size (~2 GB).
-Labels, metadata, and fold structure are in this repository.
+Self-contained public fold packages are hosted on HuggingFace. Each fold includes
+`train_X.csv`, `test_X.csv`, labels, sample metadata, `fold_info.json`, and
+`selected_genes.txt`.
 
 ### Option A -- Load from HuggingFace (recommended)
 
@@ -277,16 +266,21 @@ pip install -r requirements.txt huggingface_hub
 from huggingface_hub import hf_hub_download
 import pandas as pd
 
-train_X = pd.read_csv(
-    hf_hub_download(
-        repo_id="jang1563/genelab-benchmark",
-        filename="A5_skin_lomo/fold_RR-7_test/train_X.csv",
-        repo_type="dataset",
-    ),
-    index_col=0,
-)
-train_y = pd.read_csv("tasks/A5_skin_lomo/fold_RR-7_test/train_y.csv", index_col=0)
-print(f"Train: {train_X.shape}")  # (72, 20110)
+repo_id = "jang1563/genelab-benchmark"
+fold = "A5_skin_lomo/fold_RR-7_test"
+
+def hf_csv(name):
+    return pd.read_csv(
+        hf_hub_download(repo_id=repo_id, filename=f"{fold}/{name}", repo_type="dataset"),
+        index_col=0,
+    )
+
+train_X = hf_csv("train_X.csv")
+train_y = hf_csv("train_y.csv").iloc[:, 0]
+test_X = hf_csv("test_X.csv")
+test_y = hf_csv("test_y.csv").iloc[:, 0]
+
+print(f"Train: {train_X.shape}, Test: {test_X.shape}")  # (72, 20110), (30, 20110)
 ```
 
 ### Option B -- Reproduce from OSDR raw data
@@ -420,10 +414,10 @@ Key methodological choices underpinning this benchmark:
 ```bibtex
 @dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
-  author  = {Kim, JangKeun},
+  author  = {Kim, Jihoon},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}
+  note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
 }
 ```
 

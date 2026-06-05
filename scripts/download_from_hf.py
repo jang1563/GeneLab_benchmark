@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-download_from_hf.py — Download GeneLab benchmark feature matrices from HuggingFace
+download_from_hf.py — Download GeneLab benchmark fold packages from HuggingFace
 
-Downloads train_X.csv and test_X.csv for GO tasks from the HuggingFace Dataset
-repo into the local tasks/ directory, matching the layout expected by
-evaluate_submission.py and run_baselines.py.
+Downloads self-contained GO task folds from the HuggingFace Dataset repo into
+the local tasks/ directory, matching the layout expected by evaluate_submission.py
+and run_baselines.py.
 
 HuggingFace repo: jang1563/genelab-benchmark
 
@@ -35,27 +35,42 @@ GO_TASKS = [
     "A6_eye_lomo",
 ]
 
-DOWNLOAD_FILES = ["train_X.csv", "test_X.csv"]
+FOLD_PACKAGE_FILES = {
+    "train_X.csv",
+    "test_X.csv",
+    "train_y.csv",
+    "test_y.csv",
+    "train_meta.csv",
+    "test_meta.csv",
+    "fold_info.json",
+    "selected_genes.txt",
+}
+TASK_ROOT_FILES = {"task_info.json"}
+STALE_REMOTE_DIRS = {"A6_eye_lomo/fold_TBD_test"}
 
 
-def download_task(task_name: str, token: str = None, dry_run: bool = False) -> int:
-    """Download all fold feature matrices for one task. Returns file count."""
+def download_task(task_name: str, repo_id: str, token: str = None, dry_run: bool = False) -> int:
+    """Download all public fold package files for one task. Returns file count."""
     from huggingface_hub import hf_hub_download, list_repo_files
 
-    task_dir = TASKS_DIR / task_name
-    if not task_dir.exists():
-        print(f"  [WARN] Local task directory not found: {task_dir}")
-        print(f"         Clone the GitHub repo first: git clone https://github.com/jang1563/GeneLab_benchmark")
-        return 0
-
-    # List available fold directories from HF
+    # List available task package files from HF.
     try:
-        all_files = list(list_repo_files(HF_REPO_ID, repo_type="dataset", token=token))
+        all_files = list(list_repo_files(repo_id, repo_type="dataset", token=token))
     except Exception as e:
         print(f"  [ERROR] Failed to list HF repo files: {e}")
         return 0
 
-    task_files = [f for f in all_files if f.startswith(f"{task_name}/fold_")]
+    task_files = []
+    for hf_path in all_files:
+        if not hf_path.startswith(f"{task_name}/"):
+            continue
+        if any(hf_path.startswith(f"{stale}/") for stale in STALE_REMOTE_DIRS):
+            continue
+        parts = hf_path.split("/")
+        if len(parts) == 2 and parts[1] in TASK_ROOT_FILES:
+            task_files.append(hf_path)
+        elif len(parts) == 3 and parts[1].startswith("fold_") and parts[2] in FOLD_PACKAGE_FILES:
+            task_files.append(hf_path)
 
     if not task_files:
         print(f"  [SKIP] No files found in HF repo for {task_name}")
@@ -63,13 +78,7 @@ def download_task(task_name: str, token: str = None, dry_run: bool = False) -> i
 
     n_downloaded = 0
     for hf_path in sorted(task_files):
-        # hf_path: "A5_skin_lomo/fold_MHU-2_test/train_X.csv"
-        parts = hf_path.split("/")
-        if len(parts) != 3 or parts[2] not in DOWNLOAD_FILES:
-            continue
-
-        _, fold_name, fname = parts
-        local_path = task_dir / fold_name / fname
+        local_path = TASKS_DIR / hf_path
 
         if local_path.exists():
             print(f"  [SKIP] Already exists: {local_path.relative_to(BASE_DIR)}")
@@ -81,17 +90,13 @@ def download_task(task_name: str, token: str = None, dry_run: bool = False) -> i
 
         if not dry_run:
             local_path.parent.mkdir(parents=True, exist_ok=True)
-            downloaded = hf_hub_download(
-                repo_id=HF_REPO_ID,
+            hf_hub_download(
+                repo_id=repo_id,
                 filename=hf_path,
                 repo_type="dataset",
                 token=token,
-                local_dir=str(BASE_DIR),
+                local_dir=str(TASKS_DIR),
             )
-            # hf_hub_download saves to local_dir/filename; rename if needed
-            expected = BASE_DIR / hf_path
-            if expected != local_path and expected.exists():
-                expected.rename(local_path)
 
         n_downloaded += 1
 
@@ -100,7 +105,7 @@ def download_task(task_name: str, token: str = None, dry_run: bool = False) -> i
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Download GeneLab benchmark feature matrices from HuggingFace"
+        description="Download GeneLab benchmark self-contained fold packages from HuggingFace"
     )
     parser.add_argument(
         "--task",
@@ -115,6 +120,11 @@ def main():
         "--dry-run",
         action="store_true",
         help="Print files that would be downloaded without downloading",
+    )
+    parser.add_argument(
+        "--repo",
+        default=HF_REPO_ID,
+        help=f"HuggingFace dataset repo ID (default: {HF_REPO_ID})",
     )
     args = parser.parse_args()
 
@@ -149,10 +159,11 @@ def main():
     token = os.environ.get("HF_TOKEN")  # Optional for public repo
 
     total = 0
+    repo_id = args.repo
     for task in tasks:
-        print(f"\nDownloading {task} ← {HF_REPO_ID}")
+        print(f"\nDownloading {task} ← {repo_id}")
         print("-" * 50)
-        n = download_task(task, token=token, dry_run=args.dry_run)
+        n = download_task(task, repo_id, token=token, dry_run=args.dry_run)
         total += n
         print(f"  → {n} files")
 
