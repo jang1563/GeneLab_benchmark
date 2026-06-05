@@ -298,8 +298,11 @@ class ReviewFixTests(unittest.TestCase):
     def test_root_readme_includes_v7_in_status_structure_and_changelog(self):
         readme = self.read_repo_text("README.md")
 
-        self.assertIn("Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01", readme)
-        self.assertIn("Status: **v1–v7 Complete**", readme)
+        self.assertIn("Version: v7.1.1 public-card/metadata patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
+        self.assertIn("Status: **v1-v7 Complete; public-review card pack ready**", readme)
+        self.assertIn("## Reviewer Fast Path", readme)
+        self.assertIn("docs/SPACEBIOBENCH_SYSTEM_CARD.md", readme)
+        self.assertIn("docs/SPACEBIOBENCH_CLAIM_REGISTER.md", readme)
         self.assertIn("| **v7.0** | Unified/foundation-model benchmarking: scPRINT2, GNN/WGCNA graph baselines, cross-method synthesis, and signal hierarchy analysis | **Complete** | `v7/` |", readme)
         self.assertIn("├── v7/                             <- Unified/foundation-model benchmarking", readme)
         self.assertIn("| v7.0 | 2026-04-12 | Unified benchmark layer complete:", readme)
@@ -310,11 +313,11 @@ class ReviewFixTests(unittest.TestCase):
         hf_card = self.read_repo_text("docs/hf_dataset_card.md")
         citation = self.read_repo_text("CITATION.cff")
 
-        self.assertIn("Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01", readme)
+        self.assertIn("Version: v7.1.1 public-card/metadata patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
         self.assertIn("Canonical v7.1 documentation source:", readme)
-        self.assertIn("note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}", readme)
-        self.assertIn("Version: v7.0 with v7.1 documentation consistency patch | Dataset freeze: 2026-03-01", hf_card)
-        self.assertIn("note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}", hf_card)
+        self.assertIn("note    = {v7.1.1 documentation, public-card, and metadata consistency patch over canonical v7.1 results; data freeze 2026-03-01}", readme)
+        self.assertIn("Version: v7.1.1 public-card/metadata patch | Canonical results: v7.1 | Dataset freeze: 2026-03-01", hf_card)
+        self.assertIn("note    = {v7.1.1 documentation, public-card, and metadata consistency patch over canonical v7.1 results; data freeze 2026-03-01}", hf_card)
         self.assertIn('version: "7.1.1"', citation)
         self.assertIn('date-released: "2026-06-05"', citation)
         self.assertIn('notes: "Manuscript in preparation; v7.1.1 documentation, public-card, and metadata consistency patch."', citation)
@@ -328,6 +331,19 @@ class ReviewFixTests(unittest.TestCase):
         self.assertNotIn("blob/v3/docs/SPACEBIOBENCH", hf_card)
         self.assertNotIn('version: "5.0.0"', citation)
         self.assertNotIn("Target journal:", citation)
+
+    def test_public_card_pack_includes_visual_review_path(self):
+        card_pack = self.read_repo_text("docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md")
+        system_card = self.read_repo_text("docs/SPACEBIOBENCH_SYSTEM_CARD.md")
+        evaluation_card = self.read_repo_text("docs/SPACEBIOBENCH_EVALUATION_CARD.md")
+
+        self.assertIn("## Three-Minute Review Map", card_pack)
+        self.assertIn("```mermaid", card_pack)
+        self.assertIn("[docs/SPACEBIOBENCH_SYSTEM_CARD.md](SPACEBIOBENCH_SYSTEM_CARD.md)", card_pack)
+        self.assertIn("## System Boundary Map", system_card)
+        self.assertIn("Blocked clinical, crew-health, countermeasure, and Mars-regime claims", system_card)
+        self.assertIn("## Evaluation Flow", evaluation_card)
+        self.assertIn("Claim register language", evaluation_card)
 
     def test_v2_rrrm1_wrapper_rebuilds_merged_input_and_uses_tissue_scoped_steps(self):
         wrapper = self.read_repo_text("v2/scripts/rrrm1_f2_pipeline_wrapper.sh")

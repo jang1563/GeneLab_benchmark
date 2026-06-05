@@ -20,13 +20,13 @@ It does not create a DOI, approve a new result release, or freeze v9 payloads.
 
 | Field | Current value |
 |---|---|
-| Release candidate | Current `main` public documentation and card-pack surface |
+| Release candidate | `v7.1.1` documentation, public-card, and metadata patch on current `main` |
 | Repository branch | `main` as public entry point; `v3` as detailed v9 evidence branch |
 | Current result boundary | v1-v7 canonical historical benchmark surface |
 | Documentation patch | v7.1.1 metadata/card consistency patch, no new result generation |
 | Dataset payload boundary | HF feature-matrix package plus GitHub task/evaluation metadata |
 | DOI status | Not minted in this card |
-| Archive status | Release-candidate metadata ready; next DOI-oriented tag, checksum, and DOI still pending |
+| Archive status | GitHub release-ready metadata; DOI deposition and source-archive checksum still pending |
 
 ## Archive Contents
 
@@ -59,9 +59,8 @@ Before a DOI-oriented release:
 
 - Confirm the final manuscript author list, affiliations, and manuscript title
   in `CITATION.cff` and `.zenodo.json`.
-- Create an annotated GitHub release tag from a final commit that includes the
-  public card and release-archive metadata polish. The existing `v7.1` tag
-  predates these files.
+- Create or confirm an annotated GitHub release tag, `v7.1.1`, from a final
+  commit that includes the public card and release-archive metadata polish.
 - Generate and store a checksum for the release source archive.
 - Confirm the Hugging Face dataset card links to the intended canonical branch
   and release tag.
@@ -83,7 +82,7 @@ Before a DOI-oriented release:
 | HF dataset card | Pass | Links transparency cards on current public `main` |
 | Claim-boundary cards | Pass | System, evaluation, readiness, and claim cards are public-review ready |
 | Release archive manifest | Pass | `docs/RELEASE_ARCHIVE_MANIFEST.md` added |
-| Source archive checksum | Pending final tag | Generate after final GitHub release tag |
+| Source archive checksum | Pending DOI archive | Generate after final GitHub release archive is selected |
 | DOI | Pending | Mint through Zenodo or equivalent archive after metadata review |
 | v9 frozen payload | Blocked | Payload-level hash verification remains pending |
 
