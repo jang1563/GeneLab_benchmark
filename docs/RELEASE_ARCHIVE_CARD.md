@@ -2,7 +2,7 @@
 title: GeneLab Benchmark Release Archive Card
 page_type: release_archive_card
 status: release_candidate_metadata_ready
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: archive_metadata_no_new_result_or_payload_claim
 ---
 
@@ -20,13 +20,13 @@ It does not create a DOI, approve a new result release, or freeze v9 payloads.
 
 | Field | Current value |
 |---|---|
-| Release candidate | v7.1 public documentation and card-pack surface |
+| Release candidate | Current `main` public documentation and card-pack surface |
 | Repository branch | `main` as public entry point; `v3` as detailed v9 evidence branch |
 | Current result boundary | v1-v7 canonical historical benchmark surface |
-| Documentation patch | v7.1 consistency patch, no new result generation |
+| Documentation patch | v7.1.1 metadata/card consistency patch, no new result generation |
 | Dataset payload boundary | HF feature-matrix package plus GitHub task/evaluation metadata |
 | DOI status | Not minted in this card |
-| Archive status | Release-candidate metadata ready; final tag/DOI still pending |
+| Archive status | Release-candidate metadata ready; next DOI-oriented tag, checksum, and DOI still pending |
 
 ## Archive Contents
 
@@ -57,9 +57,11 @@ The archive candidate should not claim to include:
 
 Before a DOI-oriented release:
 
-- Confirm author order, affiliations, and manuscript title in `CITATION.cff`
-  and `.zenodo.json`.
-- Create an annotated GitHub release tag from the final commit.
+- Confirm the final manuscript author list, affiliations, and manuscript title
+  in `CITATION.cff` and `.zenodo.json`.
+- Create an annotated GitHub release tag from a final commit that includes the
+  public card and release-archive metadata polish. The existing `v7.1` tag
+  predates these files.
 - Generate and store a checksum for the release source archive.
 - Confirm the Hugging Face dataset card links to the intended canonical branch
   and release tag.
@@ -75,10 +77,10 @@ Before a DOI-oriented release:
 | Gate | Status | Note |
 |---|---|---|
 | Public README entry point | Pass | Links card pack and portfolio brief |
-| Citation metadata | Partial pass | `CITATION.cff` exists; author/title review still needed |
+| Citation metadata | Pass for current public identity | `CITATION.cff` exists; final manuscript author list/title review still needed |
 | Zenodo metadata | Candidate ready | `.zenodo.json` added for DOI deposition |
 | License | Pass for code | MIT license present |
-| HF dataset card | Pass | Links transparency cards on canonical `v3` |
+| HF dataset card | Pass | Links transparency cards on current public `main` |
 | Claim-boundary cards | Pass | System, evaluation, readiness, and claim cards are public-review ready |
 | Release archive manifest | Pass | `docs/RELEASE_ARCHIVE_MANIFEST.md` added |
 | Source archive checksum | Pending final tag | Generate after final GitHub release tag |
