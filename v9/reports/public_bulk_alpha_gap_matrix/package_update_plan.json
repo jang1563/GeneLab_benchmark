@@ -1,0 +1,29 @@
+[
+  {
+    "blocked_by": "V9-BULK-ALPHA-001 review completion",
+    "evidence_paths": "v9/reports/public_bulk_alpha_gap_matrix/",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "required_change": "add public bulk alpha gap-matrix resources after review",
+    "target_artifact": "v9/datapackage.draft.json",
+    "update_id": "add_gap_matrix_to_datapackage",
+    "update_status": "pending_after_gap_matrix"
+  },
+  {
+    "blocked_by": "V9-BULK-ALPHA-002 metadata-only alpha decision",
+    "evidence_paths": "v9/source_checksum_audit.csv",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "required_change": "state checksum-manifest evidence versus local payload hash verification explicitly",
+    "target_artifact": "docs/v9_hf_dataset_card.md",
+    "update_id": "add_payload_boundary_to_dataset_card",
+    "update_status": "pending_after_gap_matrix"
+  },
+  {
+    "blocked_by": "",
+    "evidence_paths": "v9/human_organoid/|v9/multispecies/",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "required_change": "do not merge organoid or multispecies draft sources into public bulk inventory",
+    "target_artifact": "v9/source_inventory.csv",
+    "update_id": "keep_extension_tracks_out_of_bulk_alpha",
+    "update_status": "guarded_no_change"
+  }
+]

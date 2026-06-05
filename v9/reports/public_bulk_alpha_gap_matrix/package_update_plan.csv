@@ -1,0 +1,4 @@
+gap_matrix_id,update_id,target_artifact,update_status,required_change,evidence_paths,blocked_by
+v9_public_bulk_alpha_freeze_gap_matrix,add_gap_matrix_to_datapackage,v9/datapackage.draft.json,pending_after_gap_matrix,add public bulk alpha gap-matrix resources after review,v9/reports/public_bulk_alpha_gap_matrix/,V9-BULK-ALPHA-001 review completion
+v9_public_bulk_alpha_freeze_gap_matrix,add_payload_boundary_to_dataset_card,docs/v9_hf_dataset_card.md,pending_after_gap_matrix,state checksum-manifest evidence versus local payload hash verification explicitly,v9/source_checksum_audit.csv,V9-BULK-ALPHA-002 metadata-only alpha decision
+v9_public_bulk_alpha_freeze_gap_matrix,keep_extension_tracks_out_of_bulk_alpha,v9/source_inventory.csv,guarded_no_change,do not merge organoid or multispecies draft sources into public bulk inventory,v9/human_organoid/|v9/multispecies/,

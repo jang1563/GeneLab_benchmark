@@ -1,0 +1,42 @@
+[
+  {
+    "action_id": "update_dataset_card_alpha_boundary",
+    "action_status": "pending_next_block",
+    "blocked_by": "",
+    "evidence_paths": "v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_summary.csv|v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_matrix.csv|v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv|v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_claim_boundary.csv|v9/reports/public_bulk_alpha_gap_matrix/package_update_plan.csv|docs/V9_PUBLIC_BULK_ALPHA_FREEZE_GAP_MATRIX_REVIEW.md",
+    "required_change": "add metadata-only alpha status paragraph and explicit payload hash limitation wording",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "target_artifact": "docs/v9_hf_dataset_card.md",
+    "unblocks": "V9-BULK-ALPHA-003: dataset card and Data Package alpha boundary update"
+  },
+  {
+    "action_id": "update_datapackage_snapshot_resources",
+    "action_status": "pending_next_block",
+    "blocked_by": "",
+    "evidence_paths": "v9/reports/public_bulk_alpha_gap_matrix/|v9/reports/public_bulk_alpha_snapshot_decision/",
+    "required_change": "add public bulk gap-matrix and snapshot-decision tables as metadata resources",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "target_artifact": "v9/datapackage.draft.json",
+    "unblocks": "V9-BULK-ALPHA-003: dataset card and Data Package alpha boundary update"
+  },
+  {
+    "action_id": "defer_payload_mirror_freeze",
+    "action_status": "deferred_after_metadata_alpha",
+    "blocked_by": "metadata alpha boundary should be recorded first",
+    "evidence_paths": "v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv",
+    "required_change": "mirror upstream payloads and compare local file hashes before any payload release claim",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "target_artifact": "future payload mirror manifest",
+    "unblocks": "future payload-freeze release candidate"
+  },
+  {
+    "action_id": "keep_extension_tracks_separate",
+    "action_status": "guarded_no_change",
+    "blocked_by": "",
+    "evidence_paths": "v9/human_organoid/|v9/multispecies/",
+    "required_change": "do not merge organoid or multispecies draft sources into the public bulk alpha core",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "target_artifact": "v9/source_inventory.csv",
+    "unblocks": "purpose-drift guard"
+  }
+]

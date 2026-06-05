@@ -1,0 +1,102 @@
+{
+  "baseline": {
+    "baseline_id": "logistic_regression_l2",
+    "c": 1.0,
+    "embedding_columns": [],
+    "embedding_interpretation": "No embedding columns are emitted for plain L2 logistic regression.",
+    "framework": "sklearn",
+    "max_iter": 5000,
+    "random_state": 42,
+    "score_column": "flight_probability"
+  },
+  "folds": [
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 20110,
+        "train_time_s": 0.153891
+      },
+      "fold_id": "fold_MHU-2_test",
+      "n_features": 20110,
+      "n_test": 35,
+      "n_train": 67,
+      "test_mission": "MHU-2",
+      "train_time_s": 0.153891
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 20110,
+        "train_time_s": 0.162773
+      },
+      "fold_id": "fold_RR-6_test",
+      "n_features": 20110,
+      "n_test": 37,
+      "n_train": 65,
+      "test_mission": "RR-6",
+      "train_time_s": 0.162773
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 20110,
+        "train_time_s": 0.205666
+      },
+      "fold_id": "fold_RR-7_test",
+      "n_features": 20110,
+      "n_test": 30,
+      "n_train": 72,
+      "test_mission": "RR-7",
+      "train_time_s": 0.205666
+    }
+  ],
+  "label_domain": [
+    "Flight",
+    "Ground"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.7846967846967847
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.7326007326007327
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.2599541095540566
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.7048611111111112
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "Flight",
+  "status": "evaluated",
+  "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/predictions.csv",
+  "task_id": "A5_skin_bulk_lomo",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 102,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/predictions.csv",
+    "task_id": "A5_skin_bulk_lomo",
+    "warnings": []
+  }
+}

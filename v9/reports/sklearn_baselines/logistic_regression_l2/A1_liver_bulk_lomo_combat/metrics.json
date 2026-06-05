@@ -1,0 +1,141 @@
+{
+  "baseline": {
+    "baseline_id": "logistic_regression_l2",
+    "c": 1.0,
+    "embedding_columns": [],
+    "embedding_interpretation": "No embedding columns are emitted for plain L2 logistic regression.",
+    "framework": "sklearn",
+    "max_iter": 5000,
+    "random_state": 42,
+    "score_column": "flight_probability"
+  },
+  "folds": [
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 39689,
+        "train_time_s": 1.042157
+      },
+      "fold_id": "fold_MHU-2_test",
+      "n_features": 39689,
+      "n_test": 6,
+      "n_train": 187,
+      "test_mission": "MHU-2",
+      "train_time_s": 1.042157
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 51929,
+        "train_time_s": 1.017044
+      },
+      "fold_id": "fold_RR-1_test",
+      "n_features": 51929,
+      "n_test": 14,
+      "n_train": 179,
+      "test_mission": "RR-1",
+      "train_time_s": 1.017044
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 39191,
+        "train_time_s": 1.225499
+      },
+      "fold_id": "fold_RR-3_test",
+      "n_features": 39191,
+      "n_test": 12,
+      "n_train": 181,
+      "test_mission": "RR-3",
+      "train_time_s": 1.225499
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 51929,
+        "train_time_s": 0.883786
+      },
+      "fold_id": "fold_RR-6_test",
+      "n_features": 51929,
+      "n_test": 39,
+      "n_train": 154,
+      "test_mission": "RR-6",
+      "train_time_s": 0.883786
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 51929,
+        "train_time_s": 0.381919
+      },
+      "fold_id": "fold_RR-8_test",
+      "n_features": 51929,
+      "n_test": 103,
+      "n_train": 90,
+      "test_mission": "RR-8",
+      "train_time_s": 0.381919
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 51929,
+        "train_time_s": 0.927335
+      },
+      "fold_id": "fold_RR-9_test",
+      "n_features": 51929,
+      "n_test": 19,
+      "n_train": 174,
+      "test_mission": "RR-9",
+      "train_time_s": 0.927335
+    }
+  ],
+  "label_domain": [
+    "Flight",
+    "Ground"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.6235942420152947
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.6027327935222673
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.24079951095570423
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.602958996759194
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "Flight",
+  "status": "evaluated",
+  "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/predictions.csv",
+  "task_id": "A1_liver_bulk_lomo_combat",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 193,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/predictions.csv",
+    "task_id": "A1_liver_bulk_lomo_combat",
+    "warnings": []
+  }
+}

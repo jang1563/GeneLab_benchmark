@@ -15,17 +15,18 @@ package for public NASA OSDR space-biology data, designed to evaluate model
 generalization under mission shift while keeping provenance, evaluation scope,
 release readiness, and claim boundaries explicit.
 
-Public branch note: `main` gives the portfolio-facing entry point; detailed v9
-metadata-alpha evidence files are maintained on the canonical `v3` branch.
+Public branch note: `main` gives the portfolio-facing entry point and includes
+a curated v9 public bulk metadata-alpha evidence subset under `v9/`. Payload
+matrices and draft extension lanes are outside this public-review path.
 
 ## What I Built
 
 - A cross-mission benchmark surface for public space-biology transcriptomics,
-  with canonical v1-v7 result documentation and a v7.1.1 public-card/metadata
-  patch over the v7.1 result surface.
-- A v9 public bulk metadata-alpha scaffold with 8 task manifests, 33 fold
-  definitions, 22 public OSDR source rows, 24 scaffold baseline runs, and a
-  draft Frictionless Data Package descriptor.
+  with canonical v1-v7 result documentation and a v7.1.2
+  public-card/metadata/evidence-visibility patch over the v7.1 result surface.
+- A curated v9 public bulk metadata-alpha evidence subset with 8 task
+  manifests, 33 fold definitions, 22 public OSDR source rows, 24 scaffold
+  baseline runs, and a draft Frictionless Data Package descriptor.
 - A transparency card pack that separates system scope, evaluation
   interpretation, release readiness, and allowed/blocked claims.
 - A Hugging Face-style dataset card that states the current metadata-alpha

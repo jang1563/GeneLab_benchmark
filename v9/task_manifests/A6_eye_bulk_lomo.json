@@ -1,0 +1,214 @@
+{
+  "assay_modality": "bulk_rna_seq",
+  "biospecimen_type": "eye",
+  "feature_namespace": "mouse_gene",
+  "ground_control_type": "matched_ground_control",
+  "legacy_task_dir": "tasks/A6_eye_lomo",
+  "legacy_task_id": "A6",
+  "material_type": "animal_tissue",
+  "metrics": [
+    {
+      "interpretation": "Primary class-balance-aware Flight vs Ground classification score.",
+      "metric_id": "macro_f1",
+      "profile": "genelab_minimal"
+    },
+    {
+      "interpretation": "Mean recall across Flight and Ground labels.",
+      "metric_id": "balanced_accuracy",
+      "profile": "genelab_minimal"
+    },
+    {
+      "interpretation": "Ranking quality for binary Flight vs Ground probabilities.",
+      "metric_id": "auroc",
+      "profile": "genelab_minimal"
+    },
+    {
+      "interpretation": "Ranks whether representations are nearest to their own mission centroid.",
+      "metric_id": "mission_discrimination",
+      "profile": "genelab_minimal"
+    }
+  ],
+  "model_system": "rodent_spaceflight",
+  "organism": "Mus musculus",
+  "orthology_strategy": "not_applicable_within_mouse_task",
+  "output": {
+    "optional_columns": [
+      "flight_probability",
+      "embedding_*"
+    ],
+    "prediction_format": "csv",
+    "primary_artifacts": [
+      "predictions.csv",
+      "metrics.json"
+    ],
+    "required_columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label"
+    ]
+  },
+  "platform": "OSDR_GLbulkRNAseq_processed_counts",
+  "provenance": {
+    "derived_from": "tasks/A6_eye_lomo/task_info.json",
+    "dry_run": false,
+    "legacy_generated_at": "2026-02-28T16:02:29.922641",
+    "legacy_split": "LOMO"
+  },
+  "schema_version": "0.1.0",
+  "source_records": [
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "eye",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-100",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "RR-1",
+      "model_system": "rodent_spaceflight",
+      "notes": "",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-100",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-100",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-100"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "eye",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-194",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "RR-3",
+      "model_system": "rodent_spaceflight",
+      "notes": "",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-194",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-194",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-194"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "eye",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-397",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "OSD-397",
+      "model_system": "rodent_spaceflight",
+      "notes": "Stable public mission label OSD-397. Legacy processed files may still use TBD.",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-397",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-397",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-397"
+    }
+  ],
+  "spaceflight_environment": "LEO_or_ISS_spaceflight",
+  "species_common_name": "mouse",
+  "split": {
+    "folds": [
+      {
+        "excluded_bc_ag_samples": 4,
+        "n_genes_after_var_filter": 20294,
+        "n_genes_before_var_filter": 27059,
+        "n_test": 12,
+        "n_train": 25,
+        "test_label_distribution": {
+          "Flight": 6,
+          "Ground": 6
+        },
+        "test_mission": "RR-1",
+        "train_label_distribution": {
+          "Flight": 14,
+          "Ground": 11
+        },
+        "train_missions": [
+          "RR-3",
+          "OSD-397"
+        ],
+        "var_percentile_cutoff": 0.25
+      },
+      {
+        "excluded_bc_ag_samples": 4,
+        "n_genes_after_var_filter": 20294,
+        "n_genes_before_var_filter": 27059,
+        "n_test": 9,
+        "n_train": 28,
+        "test_label_distribution": {
+          "Flight": 5,
+          "Ground": 4
+        },
+        "test_mission": "RR-3",
+        "train_label_distribution": {
+          "Flight": 15,
+          "Ground": 13
+        },
+        "train_missions": [
+          "RR-1",
+          "OSD-397"
+        ],
+        "var_percentile_cutoff": 0.25
+      },
+      {
+        "excluded_bc_ag_samples": 4,
+        "n_genes_after_var_filter": 20294,
+        "n_genes_before_var_filter": 27059,
+        "n_test": 16,
+        "n_train": 21,
+        "test_label_distribution": {
+          "Flight": 9,
+          "Ground": 7
+        },
+        "test_mission": "OSD-397",
+        "train_label_distribution": {
+          "Flight": 11,
+          "Ground": 10
+        },
+        "train_missions": [
+          "RR-1",
+          "RR-3"
+        ],
+        "var_percentile_cutoff": 0.25
+      }
+    ],
+    "missions": [
+      "OSD-397",
+      "RR-1",
+      "RR-3"
+    ],
+    "n_folds": 3,
+    "n_missions": 3,
+    "name": "leave_one_mission_out",
+    "strategy": "train on all missions except the held-out mission",
+    "unit": "mission"
+  },
+  "task_family": "bulk_lomo",
+  "task_id": "A6_eye_bulk_lomo",
+  "taxon_id": "10090",
+  "tissue": "eye",
+  "title": "GeneLab A6 eye bulk leave-one-mission-out",
+  "variant": "canonical"
+}
