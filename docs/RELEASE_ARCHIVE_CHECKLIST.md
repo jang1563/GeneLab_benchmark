@@ -41,7 +41,7 @@ must wait until the final manuscript, tag, and DOI are available.
 
 ## Needs Final Release Action
 
-- Create or confirm annotated Git tag `v7.1.1` from the final
+- Create or confirm annotated Git tag `v7.1.2` from the final
   public-card/archive-metadata commit.
 - Create GitHub release from the tag.
 - Verify Zenodo deposition metadata.

@@ -20,10 +20,10 @@ It does not create a DOI, approve a new result release, or freeze v9 payloads.
 
 | Field | Current value |
 |---|---|
-| Release candidate | `v7.1.1` documentation, public-card, and metadata patch on current `main` |
-| Repository branch | `main` as public entry point; `v3` as detailed v9 evidence branch |
+| Release candidate | `v7.1.2` documentation, public-card, metadata, and evidence-visibility patch on current `main` |
+| Repository branch | `main` as public entry point with curated v9 metadata-alpha evidence subset |
 | Current result boundary | v1-v7 canonical historical benchmark surface |
-| Documentation patch | v7.1.1 metadata/card consistency patch, no new result generation |
+| Documentation patch | v7.1.2 metadata/card/evidence-visibility patch, no new result generation |
 | Dataset payload boundary | HF feature-matrix package plus GitHub task/evaluation metadata |
 | DOI status | Not minted in this card |
 | Archive status | GitHub release-ready metadata; DOI deposition and source-archive checksum still pending |
@@ -41,6 +41,8 @@ The archive candidate should include:
 - Release metadata in `.zenodo.json`.
 - Hugging Face dataset card text in `docs/hf_dataset_card.md`.
 - SpaceBio-Bench transparency cards in `docs/SPACEBIOBENCH_*.md`.
+- Curated v9 public bulk metadata-alpha evidence in `v9/` and
+  `docs/V9_PUBLIC_BULK_ALPHA_*.md`.
 
 ## Excluded From The Archive Claim
 
@@ -59,7 +61,7 @@ Before a DOI-oriented release:
 
 - Confirm the final manuscript author list, affiliations, and manuscript title
   in `CITATION.cff` and `.zenodo.json`.
-- Create or confirm an annotated GitHub release tag, `v7.1.1`, from a final
+- Create or confirm an annotated GitHub release tag, `v7.1.2`, from a final
   commit that includes the public card and release-archive metadata polish.
 - Generate and store a checksum for the release source archive.
 - Confirm the Hugging Face dataset card links to the intended canonical branch

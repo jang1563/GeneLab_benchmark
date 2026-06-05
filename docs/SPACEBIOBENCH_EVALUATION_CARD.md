@@ -20,8 +20,9 @@ already recorded in the v7.1 canonical result surface and the v9 public bulk
 metadata-alpha scaffold.
 
 Branch note: on the default `main` branch, v9-specific evidence paths such as
-`v9/...` and `docs/V9_*` refer to artifacts maintained on the canonical `v3`
-branch.
+`v9/...` and `docs/V9_*` refer to the curated public bulk metadata-alpha subset
+included in this repository. Payload matrices and draft extension lanes are
+excluded from the current public-review path.
 
 ## Evaluation Surfaces
 

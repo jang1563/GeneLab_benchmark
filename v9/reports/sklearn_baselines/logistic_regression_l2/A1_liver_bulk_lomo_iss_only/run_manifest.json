@@ -1,0 +1,67 @@
+{
+  "command": [
+    "scripts/run_v9_sklearn_baselines.py",
+    "--output-dir",
+    "v9/reports/sklearn_baselines"
+  ],
+  "generated_at": "2026-05-21T06:08:17.214471+00:00",
+  "input_files": [
+    {
+      "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/predictions.csv",
+      "role": "submission",
+      "sha256": "499ef67f3b64d350db4cb0cf930a22a1a54059176ca824305f2e861648b83fef"
+    },
+    {
+      "path": "v9/task_manifests/A1_liver_bulk_lomo_iss_only.json",
+      "role": "task_manifest",
+      "sha256": "0d2374a9f726719d1e2822d44ed21b1302efbe1b8c60bdfeeaa0f344b20d8940"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.6558519586637828
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5404950732996876
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.38691576233500713
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.5291253986906161
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "bulk_lomo",
+  "task_id": "A1_liver_bulk_lomo_iss_only",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 187,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/predictions.csv",
+    "task_id": "A1_liver_bulk_lomo_iss_only",
+    "warnings": []
+  }
+}

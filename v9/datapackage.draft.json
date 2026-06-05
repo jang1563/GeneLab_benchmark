@@ -1,0 +1,1962 @@
+{
+  "created": "2026-05-21",
+  "description": "Draft machine-readable package descriptor for the SpaceBio-Bench v9 public bulk metadata-only alpha snapshot. This descriptor covers metadata, provenance evidence, alpha-boundary tables, and baseline outputs; it is not a frozen payload release.",
+  "keywords": [
+    "space-biology",
+    "benchmark",
+    "gene-expression",
+    "mission-held-out",
+    "OSDR"
+  ],
+  "licenses": [
+    {
+      "name": "not-yet-finalized",
+      "title": "Draft: OSDR source reuse and benchmark artifact license pending release review"
+    }
+  ],
+  "name": "spacebio-bench-v9-public-bulk-draft",
+  "profile": "data-package",
+  "resources": [
+    {
+      "bytes": 2169,
+      "description": "Compact index of generated v9 bulk LOMO task manifests.",
+      "format": "csv",
+      "hash": "da05fdbcba3ad284b3180b114db4c302e16132539c34fc1ab7b440e80d621258",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "task_manifest_index",
+      "path": "v9/task_manifest_index.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "task_id",
+            "type": "string"
+          },
+          {
+            "name": "legacy_task_id",
+            "type": "string"
+          },
+          {
+            "name": "task_family",
+            "type": "string"
+          },
+          {
+            "name": "tissue",
+            "type": "string"
+          },
+          {
+            "name": "organism",
+            "type": "string"
+          },
+          {
+            "name": "material_type",
+            "type": "string"
+          },
+          {
+            "name": "model_system",
+            "type": "string"
+          },
+          {
+            "name": "assay_modality",
+            "type": "string"
+          },
+          {
+            "name": "feature_namespace",
+            "type": "string"
+          },
+          {
+            "name": "variant",
+            "type": "string"
+          },
+          {
+            "name": "n_missions",
+            "type": "integer"
+          },
+          {
+            "name": "n_folds",
+            "type": "integer"
+          },
+          {
+            "name": "missions",
+            "type": "string"
+          },
+          {
+            "name": "n_sources",
+            "type": "integer"
+          },
+          {
+            "name": "source_ids",
+            "type": "string"
+          },
+          {
+            "name": "metric_ids",
+            "type": "string"
+          },
+          {
+            "name": "manifest_schema_version",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "task_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "metadata_spine",
+      "title": "Task Manifest Index"
+    },
+    {
+      "bytes": 7373,
+      "description": "Fold-level index of legacy processed matrices used by the current public bulk LOMO scaffold.",
+      "format": "csv",
+      "hash": "527fe1cecf932b992121f56a1af5c28e21f18cd57b18e432dd9e5fbb75b9a822",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "task_data_index",
+      "path": "v9/task_data_index.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "task_id",
+            "type": "string"
+          },
+          {
+            "name": "fold_id",
+            "type": "string"
+          },
+          {
+            "name": "test_mission",
+            "type": "string"
+          },
+          {
+            "name": "train_missions",
+            "type": "string"
+          },
+          {
+            "name": "n_train",
+            "type": "integer"
+          },
+          {
+            "name": "n_test",
+            "type": "integer"
+          },
+          {
+            "name": "train_y_rows",
+            "type": "integer"
+          },
+          {
+            "name": "test_y_rows",
+            "type": "integer"
+          },
+          {
+            "name": "selected_gene_count",
+            "type": "integer"
+          },
+          {
+            "name": "fold_dir",
+            "type": "string"
+          },
+          {
+            "name": "train_X",
+            "type": "string"
+          },
+          {
+            "name": "test_X",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "task_id",
+          "fold_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "data_index",
+      "title": "Task Data Index"
+    },
+    {
+      "bytes": 9956,
+      "description": "Deduplicated OSDR source inventory for generated public bulk tasks.",
+      "format": "csv",
+      "hash": "c71ea18d8e063502c9ed720df703c20c2dca428f96a85b243b8965c0af37277c",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "source_inventory",
+      "path": "v9/source_inventory.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "source_id",
+            "type": "string"
+          },
+          {
+            "name": "glds_prefix",
+            "type": "string"
+          },
+          {
+            "name": "osd_url",
+            "type": "string"
+          },
+          {
+            "name": "url_or_accession",
+            "type": "string"
+          },
+          {
+            "name": "mission",
+            "type": "string"
+          },
+          {
+            "name": "tissue",
+            "type": "string"
+          },
+          {
+            "name": "organism",
+            "type": "string"
+          },
+          {
+            "name": "taxon_id",
+            "type": "integer"
+          },
+          {
+            "name": "species_common_name",
+            "type": "string"
+          },
+          {
+            "name": "material_type",
+            "type": "string"
+          },
+          {
+            "name": "model_system",
+            "type": "string"
+          },
+          {
+            "name": "biospecimen_type",
+            "type": "string"
+          },
+          {
+            "name": "assay_modality",
+            "type": "string"
+          },
+          {
+            "name": "platform",
+            "type": "string"
+          },
+          {
+            "name": "spaceflight_environment",
+            "type": "string"
+          },
+          {
+            "name": "ground_control_type",
+            "type": "string"
+          },
+          {
+            "name": "donor_or_strain_block",
+            "type": "string"
+          },
+          {
+            "name": "orthology_strategy",
+            "type": "string"
+          },
+          {
+            "name": "feature_namespace",
+            "type": "string"
+          },
+          {
+            "name": "task_ids",
+            "type": "string"
+          },
+          {
+            "name": "task_families",
+            "type": "string"
+          },
+          {
+            "name": "variants",
+            "type": "string"
+          },
+          {
+            "name": "access_status",
+            "type": "string"
+          },
+          {
+            "name": "privacy_class",
+            "type": "string"
+          },
+          {
+            "name": "checksum_status",
+            "type": "string"
+          },
+          {
+            "name": "release_target",
+            "type": "string"
+          },
+          {
+            "name": "notes",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "source_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "metadata_spine",
+      "title": "Source Inventory"
+    },
+    {
+      "bytes": 17645,
+      "description": "OSDR API and checksum-manifest evidence for source inventory rows.",
+      "format": "csv",
+      "hash": "a2774a0ce5435eac6c75514b3593398b5e80596870befeaa1adc7ffac571b8d7",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "source_checksum_audit",
+      "path": "v9/source_checksum_audit.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "source_id",
+            "type": "string"
+          },
+          {
+            "name": "glds_prefix",
+            "type": "string"
+          },
+          {
+            "name": "mission",
+            "type": "string"
+          },
+          {
+            "name": "tissue",
+            "type": "string"
+          },
+          {
+            "name": "task_ids",
+            "type": "string"
+          },
+          {
+            "name": "api_url",
+            "type": "string"
+          },
+          {
+            "name": "api_status",
+            "type": "string"
+          },
+          {
+            "name": "api_response_sha256",
+            "type": "string"
+          },
+          {
+            "name": "n_files",
+            "type": "integer"
+          },
+          {
+            "name": "checksum_manifest_count",
+            "type": "integer"
+          },
+          {
+            "name": "checksum_manifest_files",
+            "type": "string"
+          },
+          {
+            "name": "checksum_manifest_urls",
+            "type": "string"
+          },
+          {
+            "name": "parsed_checksum_entries",
+            "type": "integer"
+          },
+          {
+            "name": "checksum_algorithms",
+            "type": "string"
+          },
+          {
+            "name": "checksum_payload_matches",
+            "type": "integer"
+          },
+          {
+            "name": "checksum_manifest_content_sha256",
+            "type": "string"
+          },
+          {
+            "name": "audit_status",
+            "type": "string"
+          },
+          {
+            "name": "freeze_ready",
+            "type": "boolean"
+          },
+          {
+            "name": "pending_reason",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "source_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "provenance_evidence",
+      "title": "Source Checksum Audit"
+    },
+    {
+      "bytes": 10579,
+      "description": "Cross-baseline summary for all current public bulk LOMO tasks.",
+      "format": "csv",
+      "hash": "8580e9b1c61dc07efd268fc1a6b02f42927b55df8db58591a1818af1f4ddbb41",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "bulk_lomo_baseline_summary",
+      "path": "v9/reports/bulk_lomo_baseline_summary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "baseline_id",
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "validation_ok",
+            "type": "boolean"
+          },
+          {
+            "name": "n_predictions",
+            "type": "integer"
+          },
+          {
+            "name": "macro_f1",
+            "type": "number"
+          },
+          {
+            "name": "balanced_accuracy",
+            "type": "number"
+          },
+          {
+            "name": "auroc",
+            "type": "number"
+          },
+          {
+            "name": "calibration_error",
+            "type": "number"
+          },
+          {
+            "name": "mission_discrimination",
+            "type": "number"
+          },
+          {
+            "name": "output_dir",
+            "type": "string"
+          },
+          {
+            "name": "predictions",
+            "type": "string"
+          },
+          {
+            "name": "metrics",
+            "type": "string"
+          },
+          {
+            "name": "run_manifest",
+            "type": "string"
+          },
+          {
+            "name": "error",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "baseline_id",
+          "task_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "benchmark_outputs",
+      "title": "Bulk LOMO Baseline Summary"
+    },
+    {
+      "bytes": 2967,
+      "description": "Nearest-centroid per-task summary table.",
+      "format": "csv",
+      "hash": "bd5c43b7b72bfe6ec46ffc3fb36ce3637b8b0a85c141663e63010906bd4e74ce",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "nearest_centroid_summary",
+      "path": "v9/reports/nearest_centroid/bulk_lomo_summary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "task_id",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "validation_ok",
+            "type": "boolean"
+          },
+          {
+            "name": "n_predictions",
+            "type": "integer"
+          },
+          {
+            "name": "macro_f1",
+            "type": "number"
+          },
+          {
+            "name": "balanced_accuracy",
+            "type": "number"
+          },
+          {
+            "name": "auroc",
+            "type": "number"
+          },
+          {
+            "name": "calibration_error",
+            "type": "number"
+          },
+          {
+            "name": "mission_discrimination",
+            "type": "number"
+          },
+          {
+            "name": "output_dir",
+            "type": "string"
+          },
+          {
+            "name": "predictions",
+            "type": "string"
+          },
+          {
+            "name": "metrics",
+            "type": "string"
+          },
+          {
+            "name": "run_manifest",
+            "type": "string"
+          },
+          {
+            "name": "error",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "task_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "benchmark_outputs",
+      "title": "Nearest-Centroid Summary"
+    },
+    {
+      "bytes": 7644,
+      "description": "PCA-LR and L2 logistic-regression per-task summary table.",
+      "format": "csv",
+      "hash": "caa6bf627c20485a461023848b5824c1c4a1fd8afb96c820d456bb081fcaa8d7",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "sklearn_baseline_summary",
+      "path": "v9/reports/sklearn_baselines/bulk_lomo_summary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "baseline_id",
+            "type": "string"
+          },
+          {
+            "name": "task_id",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "validation_ok",
+            "type": "boolean"
+          },
+          {
+            "name": "n_predictions",
+            "type": "integer"
+          },
+          {
+            "name": "macro_f1",
+            "type": "number"
+          },
+          {
+            "name": "balanced_accuracy",
+            "type": "number"
+          },
+          {
+            "name": "auroc",
+            "type": "number"
+          },
+          {
+            "name": "calibration_error",
+            "type": "number"
+          },
+          {
+            "name": "mission_discrimination",
+            "type": "number"
+          },
+          {
+            "name": "output_dir",
+            "type": "string"
+          },
+          {
+            "name": "predictions",
+            "type": "string"
+          },
+          {
+            "name": "metrics",
+            "type": "string"
+          },
+          {
+            "name": "run_manifest",
+            "type": "string"
+          },
+          {
+            "name": "error",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "baseline_id",
+          "task_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "benchmark_outputs",
+      "title": "Sklearn Baseline Summary"
+    },
+    {
+      "bytes": 502,
+      "description": "V9-BULK-ALPHA-001 readiness summary separating metadata evidence from payload-release blockers.",
+      "format": "csv",
+      "hash": "00e769e3fb65f939f6f3c265f3cff28108b94a4332547dbd2b954dc101eaad3c",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_gap_summary",
+      "path": "v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_summary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "gap_matrix_id",
+            "type": "string"
+          },
+          {
+            "name": "decision_status",
+            "type": "string"
+          },
+          {
+            "name": "bulk_task_count",
+            "type": "integer"
+          },
+          {
+            "name": "bulk_fold_count",
+            "type": "integer"
+          },
+          {
+            "name": "bulk_source_count",
+            "type": "integer"
+          },
+          {
+            "name": "checksum_parsed_source_count",
+            "type": "integer"
+          },
+          {
+            "name": "freeze_ready_source_count",
+            "type": "integer"
+          },
+          {
+            "name": "baseline_row_count",
+            "type": "integer"
+          },
+          {
+            "name": "pass_count",
+            "type": "integer"
+          },
+          {
+            "name": "blocker_count",
+            "type": "integer"
+          },
+          {
+            "name": "needs_update_count",
+            "type": "integer"
+          },
+          {
+            "name": "allowed_claim_count",
+            "type": "integer"
+          },
+          {
+            "name": "prohibited_claim_count",
+            "type": "integer"
+          },
+          {
+            "name": "next_required_block",
+            "type": "string"
+          },
+          {
+            "name": "claim_boundary",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "gap_matrix_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Gap Summary"
+    },
+    {
+      "bytes": 3413,
+      "description": "Pass, blocker, and needs-update rows for the public bulk metadata alpha scaffold.",
+      "format": "csv",
+      "hash": "4c1b5563bb05690999c57617ddc69fffeeaef52ddced85d5acae5fcac32cee7e",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_gap_matrix",
+      "path": "v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_matrix.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "gap_matrix_id",
+            "type": "string"
+          },
+          {
+            "name": "gap_id",
+            "type": "string"
+          },
+          {
+            "name": "gap_category",
+            "type": "string"
+          },
+          {
+            "name": "readiness_status",
+            "type": "string"
+          },
+          {
+            "name": "severity",
+            "type": "string"
+          },
+          {
+            "name": "evidence_paths",
+            "type": "string"
+          },
+          {
+            "name": "evidence_summary",
+            "type": "string"
+          },
+          {
+            "name": "owner_action",
+            "type": "string"
+          },
+          {
+            "name": "allowed_current_claim",
+            "type": "string"
+          },
+          {
+            "name": "prohibited_release_claim",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "gap_matrix_id",
+          "gap_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Gap Matrix"
+    },
+    {
+      "bytes": 3767,
+      "description": "Checksum-manifest evidence versus local payload-hash verification status for public bulk source rows.",
+      "format": "csv",
+      "hash": "3503f32d3ae8115a1fcb61c8883ad4243ec59715235d35bc96e2579944f5bad7",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_payload_hash_boundary",
+      "path": "v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "gap_matrix_id",
+            "type": "string"
+          },
+          {
+            "name": "source_id",
+            "type": "string"
+          },
+          {
+            "name": "api_status",
+            "type": "string"
+          },
+          {
+            "name": "audit_status",
+            "type": "string"
+          },
+          {
+            "name": "checksum_manifest_count",
+            "type": "integer"
+          },
+          {
+            "name": "parsed_checksum_entries",
+            "type": "integer"
+          },
+          {
+            "name": "checksum_payload_matches",
+            "type": "integer"
+          },
+          {
+            "name": "freeze_ready",
+            "type": "boolean"
+          },
+          {
+            "name": "current_boundary",
+            "type": "string"
+          },
+          {
+            "name": "release_blocker",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "gap_matrix_id",
+          "source_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Payload Hash Boundary"
+    },
+    {
+      "bytes": 1919,
+      "description": "Allowed current alpha claims and prohibited release claims from the public bulk gap matrix.",
+      "format": "csv",
+      "hash": "06cfe7c5cf30b71f753605459c7a31df87c6c10c89a5781915376353f072dc0c",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_claim_boundary",
+      "path": "v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_claim_boundary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "gap_matrix_id",
+            "type": "string"
+          },
+          {
+            "name": "claim_id",
+            "type": "string"
+          },
+          {
+            "name": "claim_status",
+            "type": "string"
+          },
+          {
+            "name": "statement",
+            "type": "string"
+          },
+          {
+            "name": "supporting_evidence",
+            "type": "string"
+          },
+          {
+            "name": "disallowed_language",
+            "type": "string"
+          },
+          {
+            "name": "next_allowed_action",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "gap_matrix_id",
+          "claim_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Claim Boundary"
+    },
+    {
+      "bytes": 877,
+      "description": "Package and dataset-card update requirements generated by the public bulk gap matrix.",
+      "format": "csv",
+      "hash": "464f2e8aa3062a8cd942b0a625b9f057a221961e8093ef4a6d0833a96d5edea9",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_package_update_plan",
+      "path": "v9/reports/public_bulk_alpha_gap_matrix/package_update_plan.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "gap_matrix_id",
+            "type": "string"
+          },
+          {
+            "name": "update_id",
+            "type": "string"
+          },
+          {
+            "name": "target_artifact",
+            "type": "string"
+          },
+          {
+            "name": "update_status",
+            "type": "string"
+          },
+          {
+            "name": "required_change",
+            "type": "string"
+          },
+          {
+            "name": "evidence_paths",
+            "type": "string"
+          },
+          {
+            "name": "blocked_by",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "gap_matrix_id",
+          "update_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Package Update Plan"
+    },
+    {
+      "bytes": 665,
+      "description": "V9-BULK-ALPHA-002 decision selecting a metadata-only alpha snapshot and deferring payload-mirror-first to a later freeze block.",
+      "format": "csv",
+      "hash": "f5f220c188c182d41d95ae7d2b6ab0c2c8c23193271d9b1efdc7d646c9da6459",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_snapshot_decision_summary",
+      "path": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_decision_id",
+            "type": "string"
+          },
+          {
+            "name": "decision_status",
+            "type": "string"
+          },
+          {
+            "name": "selected_path",
+            "type": "string"
+          },
+          {
+            "name": "deferred_path",
+            "type": "string"
+          },
+          {
+            "name": "bulk_task_count",
+            "type": "integer"
+          },
+          {
+            "name": "bulk_fold_count",
+            "type": "integer"
+          },
+          {
+            "name": "bulk_source_count",
+            "type": "integer"
+          },
+          {
+            "name": "checksum_parsed_source_count",
+            "type": "integer"
+          },
+          {
+            "name": "freeze_ready_source_count",
+            "type": "integer"
+          },
+          {
+            "name": "baseline_row_count",
+            "type": "integer"
+          },
+          {
+            "name": "gap_blocker_count",
+            "type": "integer"
+          },
+          {
+            "name": "metadata_only_allowed",
+            "type": "boolean"
+          },
+          {
+            "name": "payload_release_allowed",
+            "type": "boolean"
+          },
+          {
+            "name": "dataset_card_update_required",
+            "type": "boolean"
+          },
+          {
+            "name": "datapackage_update_required",
+            "type": "boolean"
+          },
+          {
+            "name": "next_required_block",
+            "type": "string"
+          },
+          {
+            "name": "claim_boundary",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "snapshot_decision_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Snapshot Decision Summary"
+    },
+    {
+      "bytes": 1710,
+      "description": "Comparison of metadata-only alpha, payload-mirror-first, and no-alpha-until-frozen paths.",
+      "format": "csv",
+      "hash": "9805a2c4edfa1a53f779012980e5eda204b14ac4cfd4a415bc378406e3c087ed",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_snapshot_option_matrix",
+      "path": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_decision_id",
+            "type": "string"
+          },
+          {
+            "name": "path_id",
+            "type": "string"
+          },
+          {
+            "name": "decision",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": "string"
+          },
+          {
+            "name": "rationale",
+            "type": "string"
+          },
+          {
+            "name": "required_wording",
+            "type": "string"
+          },
+          {
+            "name": "remaining_blockers",
+            "type": "string"
+          },
+          {
+            "name": "next_action",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "snapshot_decision_id",
+          "path_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Snapshot Option Matrix"
+    },
+    {
+      "bytes": 3465,
+      "description": "Allowed metadata-alpha language and prohibited payload-release language for the current public bulk snapshot.",
+      "format": "csv",
+      "hash": "1b84f7005ab80e8623bfc80ec4df579d8e786fe5c024ebf2497c1186aaf96fad",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_snapshot_claim_boundary",
+      "path": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_decision_id",
+            "type": "string"
+          },
+          {
+            "name": "claim_id",
+            "type": "string"
+          },
+          {
+            "name": "claim_status",
+            "type": "string"
+          },
+          {
+            "name": "allowed_language",
+            "type": "string"
+          },
+          {
+            "name": "disallowed_language",
+            "type": "string"
+          },
+          {
+            "name": "supporting_evidence",
+            "type": "string"
+          },
+          {
+            "name": "next_action",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "snapshot_decision_id",
+          "claim_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Snapshot Claim Boundary"
+    },
+    {
+      "bytes": 1462,
+      "description": "Approved dataset-card and Data Package wording for the metadata-only alpha boundary.",
+      "format": "csv",
+      "hash": "6050b42979c61ae4b913d276ddb844a15041730c54735b91ee01aaf6266caa3c",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_snapshot_language_snippets",
+      "path": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_language_snippets.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_decision_id",
+            "type": "string"
+          },
+          {
+            "name": "snippet_id",
+            "type": "string"
+          },
+          {
+            "name": "target_artifact",
+            "type": "string"
+          },
+          {
+            "name": "section_hint",
+            "type": "string"
+          },
+          {
+            "name": "language_status",
+            "type": "string"
+          },
+          {
+            "name": "snippet_text",
+            "type": "string"
+          },
+          {
+            "name": "must_not_imply",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "snapshot_decision_id",
+          "snippet_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Snapshot Language Snippets"
+    },
+    {
+      "bytes": 1824,
+      "description": "Follow-up actions after selecting the public bulk metadata-only alpha snapshot.",
+      "format": "csv",
+      "hash": "b4fd2ee295be0a147293caa3798c4da73870be30ceef052a863ae43d51c4a299",
+      "hash_algorithm": "sha256",
+      "mediatype": "text/csv",
+      "name": "public_bulk_alpha_snapshot_next_actions",
+      "path": "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_next_actions.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_decision_id",
+            "type": "string"
+          },
+          {
+            "name": "action_id",
+            "type": "string"
+          },
+          {
+            "name": "action_status",
+            "type": "string"
+          },
+          {
+            "name": "target_artifact",
+            "type": "string"
+          },
+          {
+            "name": "required_change",
+            "type": "string"
+          },
+          {
+            "name": "evidence_paths",
+            "type": "string"
+          },
+          {
+            "name": "blocked_by",
+            "type": "string"
+          },
+          {
+            "name": "unblocks",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          ""
+        ],
+        "primaryKey": [
+          "snapshot_decision_id",
+          "action_id"
+        ]
+      },
+      "spacebio_bench:bundle_part": "alpha_boundary_metadata",
+      "title": "Public Bulk Alpha Snapshot Next Actions"
+    },
+    {
+      "bytes": 65380,
+      "description": "Generated v9 bulk LOMO task manifest JSON files.",
+      "mediatype": "application/json",
+      "name": "task_manifests",
+      "path": [
+        "v9/task_manifests/A1_liver_bulk_lomo.json",
+        "v9/task_manifests/A1_liver_bulk_lomo_combat.json",
+        "v9/task_manifests/A1_liver_bulk_lomo_iss_only.json",
+        "v9/task_manifests/A2_gastrocnemius_bulk_lomo.json",
+        "v9/task_manifests/A3_kidney_bulk_lomo.json",
+        "v9/task_manifests/A4_thymus_bulk_lomo.json",
+        "v9/task_manifests/A5_skin_bulk_lomo.json",
+        "v9/task_manifests/A6_eye_bulk_lomo.json"
+      ],
+      "spacebio_bench:bundle_part": "metadata_spine",
+      "spacebio_bench:file_count": 8,
+      "spacebio_bench:files": [
+        {
+          "bytes": 11135,
+          "hash": "69791a440974a553d86df1ff77c033860ea262ccadf4703cc7c25b18a24c098e",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A1_liver_bulk_lomo.json"
+        },
+        {
+          "bytes": 11153,
+          "hash": "e60f815e9bf8a1ebff5e82167b898b46290a0a0a0c4761142b17313319cdd144",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A1_liver_bulk_lomo_combat.json"
+        },
+        {
+          "bytes": 8962,
+          "hash": "89d69690e6c4ddfd9cd1fb26409c808bfaa5c9e6d64dc2d63ee2d86472722c22",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A1_liver_bulk_lomo_iss_only.json"
+        },
+        {
+          "bytes": 6542,
+          "hash": "a80cc34e00d339879ff00736798b5af351a507f5804cc38748303bbdaf098efc",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A2_gastrocnemius_bulk_lomo.json"
+        },
+        {
+          "bytes": 6487,
+          "hash": "85556385aebbe0e630beb61ff8d3e5206a234114eeafd2eb848e190a86ecab1e",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A3_kidney_bulk_lomo.json"
+        },
+        {
+          "bytes": 7102,
+          "hash": "ba4be85b5820b1e51eaf4384d77a9fe3cea96d8a17fd75a0853c649ba214aeb9",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A4_thymus_bulk_lomo.json"
+        },
+        {
+          "bytes": 7454,
+          "hash": "1b5d24477eb578e8633b948e8e7ae3a9e54cb536fd32f29b93ecd0382433bb3e",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A5_skin_bulk_lomo.json"
+        },
+        {
+          "bytes": 6545,
+          "hash": "d117c5e1164c1d440aa75295b9678b8e0eea82dbdb44258423b38401acfabbd5",
+          "hash_algorithm": "sha256",
+          "path": "v9/task_manifests/A6_eye_bulk_lomo.json"
+        }
+      ],
+      "title": "Task Manifests"
+    },
+    {
+      "bytes": 327350,
+      "description": "Per-task baseline prediction CSV outputs.",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "name": "baseline_predictions",
+      "path": [
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo/predictions.csv",
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo_combat/predictions.csv",
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo_iss_only/predictions.csv",
+        "v9/reports/nearest_centroid/A2_gastrocnemius_bulk_lomo/predictions.csv",
+        "v9/reports/nearest_centroid/A3_kidney_bulk_lomo/predictions.csv",
+        "v9/reports/nearest_centroid/A4_thymus_bulk_lomo/predictions.csv",
+        "v9/reports/nearest_centroid/A5_skin_bulk_lomo/predictions.csv",
+        "v9/reports/nearest_centroid/A6_eye_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A4_thymus_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A6_eye_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_combat/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A3_kidney_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A4_thymus_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A5_skin_bulk_lomo/predictions.csv",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A6_eye_bulk_lomo/predictions.csv"
+      ],
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "task_id",
+            "type": "string"
+          },
+          {
+            "name": "fold_id",
+            "type": "string"
+          },
+          {
+            "name": "sample_id",
+            "type": "string"
+          },
+          {
+            "name": "mission",
+            "type": "string"
+          },
+          {
+            "name": "true_label",
+            "type": "string"
+          },
+          {
+            "name": "predicted_label",
+            "type": "string"
+          },
+          {
+            "name": "flight_probability",
+            "type": "number"
+          },
+          {
+            "name": "embedding_0",
+            "type": "number"
+          },
+          {
+            "name": "embedding_1",
+            "type": "number"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      },
+      "spacebio_bench:bundle_part": "benchmark_outputs",
+      "spacebio_bench:file_count": 24,
+      "spacebio_bench:files": [
+        {
+          "bytes": 22941,
+          "hash": "03618b0bf8773b6ac16073c7e2c51f6925937302faa15b2d3515ac025b89cf35",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 24277,
+          "hash": "9125ddf648c8340012e306c4d9a97c3004b8634b3118de147c585f8bc7570bd5",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo_combat/predictions.csv"
+        },
+        {
+          "bytes": 23979,
+          "hash": "1b3bad7c5e3c0ba2ea9ff803a3e29ca1b71000507be387f4def49a80b4bd9249",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo_iss_only/predictions.csv"
+        },
+        {
+          "bytes": 3989,
+          "hash": "9162cdfaee28f00fb791a91606428ad462cfa7ef662ba530279156973739bfaf",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A2_gastrocnemius_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 15068,
+          "hash": "43fb4cf62081c0604cc83b669c600a93e2672b62ec1e410295b666cacd2cd688",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A3_kidney_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 8097,
+          "hash": "6306e9cb6dfe80ece00915b74c5a66918189ab5d0eda6d0a2ef1533e8a0e4f52",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A4_thymus_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 12903,
+          "hash": "d77b97f0713eb74d5254356037c378803017bab33268bae596e6254b7e694b40",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A5_skin_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 4152,
+          "hash": "2baf2f92ab882743052d70ee71c93fd62b45674396bcf59b685985afe103d050",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A6_eye_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 18554,
+          "hash": "ad33fb04926b134f7d10d7a373aa31d3bebebbb48546f556244030fb370f4d09",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 19788,
+          "hash": "922e68dab2bb16cf9aa17b81e1bce262fbbf703e12d9bc6020f673d14221ee71",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/predictions.csv"
+        },
+        {
+          "bytes": 19814,
+          "hash": "499ef67f3b64d350db4cb0cf930a22a1a54059176ca824305f2e861648b83fef",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/predictions.csv"
+        },
+        {
+          "bytes": 3261,
+          "hash": "2b18277e2430d3195ae7661c5d5c9efe8b66d31a68ec80c3972a7b35216ce5c6",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 12421,
+          "hash": "ffc371c5ce9e1d9dabb9b99d1bc54ae07fdc697d8b8432885889e78b3a506080",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 6544,
+          "hash": "7f720d4ab15a66012a8dd6e5a7b1182caf4122b305e38805068ebb525d9bf3c8",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A4_thymus_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 10516,
+          "hash": "ccf21a68e788a91cd3209175bec5651769cf0db05d0ed8a410baf46dd5b88148",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 3262,
+          "hash": "a4aa366ee2e9cf45470c5c045c65c305ed5ff6f16795f4876595e09c692815c1",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A6_eye_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 23515,
+          "hash": "f21529f7f4145f51cd0d44cc02c322212f399eafd7e006299f87556bc1f094d6",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 24773,
+          "hash": "14623c37edd964a24ec424dfb30b2580beec93f637712a22c854e3aeef0d5e24",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_combat/predictions.csv"
+        },
+        {
+          "bytes": 24373,
+          "hash": "5f01e8a926ab172e32d10a8c02e9d40eca14054c4ff5aaf99f0ee6362d980044",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/predictions.csv"
+        },
+        {
+          "bytes": 4091,
+          "hash": "9c548bf13112302b6926d08bed82ff40409553cea4eff30ba08e4267935a8b35",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 15438,
+          "hash": "9efee987b3473b3c50c8e4415f87dd8cdead6560c5271f02dde5a13a3d86f5b8",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A3_kidney_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 8301,
+          "hash": "980ecd43300c576365f02ed05fba5418b6c589d943ba04ad0fb63ff692229f76",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A4_thymus_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 13099,
+          "hash": "f80e0e1e09ef8ebe85f25cb5942b9ef54d8a0b2bcc8778f1e88243123b725517",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A5_skin_bulk_lomo/predictions.csv"
+        },
+        {
+          "bytes": 4194,
+          "hash": "b1d48527a4c6d1d8ac34b0c2ec71c4e85a86f305f6cd3001347999be04dfa8aa",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A6_eye_bulk_lomo/predictions.csv"
+        }
+      ],
+      "title": "Baseline Predictions"
+    },
+    {
+      "bytes": 592044,
+      "description": "Per-task baseline metrics JSON outputs.",
+      "mediatype": "application/json",
+      "name": "baseline_metrics",
+      "path": [
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo/metrics.json",
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo_combat/metrics.json",
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo_iss_only/metrics.json",
+        "v9/reports/nearest_centroid/A2_gastrocnemius_bulk_lomo/metrics.json",
+        "v9/reports/nearest_centroid/A3_kidney_bulk_lomo/metrics.json",
+        "v9/reports/nearest_centroid/A4_thymus_bulk_lomo/metrics.json",
+        "v9/reports/nearest_centroid/A5_skin_bulk_lomo/metrics.json",
+        "v9/reports/nearest_centroid/A6_eye_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A4_thymus_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A6_eye_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_combat/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A3_kidney_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A4_thymus_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A5_skin_bulk_lomo/metrics.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A6_eye_bulk_lomo/metrics.json"
+      ],
+      "spacebio_bench:bundle_part": "benchmark_outputs",
+      "spacebio_bench:file_count": 24,
+      "spacebio_bench:files": [
+        {
+          "bytes": 56600,
+          "hash": "1a25ed3f2e1030ac3da4d3fd59b23f4e4c6085be9fe06584b25271805e2ad957",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 56644,
+          "hash": "ae5a21bca0bdbc5d66589975433c6fa7c34454ac30a34b68d48619bc69aea282",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo_combat/metrics.json"
+        },
+        {
+          "bytes": 54969,
+          "hash": "55a194bfcc2ab4340689a592ec39a223fe0b72c31dd0105a44e1d0c9fbe91176",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo_iss_only/metrics.json"
+        },
+        {
+          "bytes": 10899,
+          "hash": "805050c45bf5f07e024baa11dfdfdfd587098339ff39c46ae25f1b5ef68a8830",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A2_gastrocnemius_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 36063,
+          "hash": "a94e8d2d75e223d949ef15f13a5532b09dabb5b3edbf022a1ca9ba10d405fc16",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A3_kidney_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 21012,
+          "hash": "31e3fa588018392bb0e1634c2a8ba7cee0c8a54354fc62e696c101167573e56a",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A4_thymus_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 31487,
+          "hash": "4e5e9c2f8cf926e50eb948241b74b1fb76ea1566d3fffade22204bd250718028",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A5_skin_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 12146,
+          "hash": "f58961c9b2ea8b90e42d1c3af4f343343468552ab52e27a04e61b1b9350008ea",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A6_eye_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 3480,
+          "hash": "3c035cb570c9b57919bc8f9d06fdf9f6e9213b082d676a85e09583d552bf6f45",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 3507,
+          "hash": "892871ddd4b0de58b6c9380e6a50fdb56ae74ab80cb0f8c0dba481ebd1810079",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/metrics.json"
+        },
+        {
+          "bytes": 3195,
+          "hash": "3cf464b6ebf05b7e0a1a1107ab8622b77e08d4bcdc8984f15978c5e1d474adb5",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/metrics.json"
+        },
+        {
+          "bytes": 2522,
+          "hash": "dc28dd7e67582b5d08a60f04f48b5a0216c7b46854f07da95ef90eb72cb34f33",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 2522,
+          "hash": "0170a7a01d3c37510ea012a2ab3320c6753bfcddd983d18916ee8ef296335768",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 2839,
+          "hash": "e1e2f24d024e50a0036f845305101ee039ff431b09b344b1cf7b6bad4fb70c89",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A4_thymus_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 2513,
+          "hash": "eae25a413fb7735fa885b16da7caa1c31c03b6af7b853c8c3df3e4c25733f4e8",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 2509,
+          "hash": "8d59cca62d0b79df79b6126f0bedfddde667602932c01c71e02f6d5e7fc22ef6",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A6_eye_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 58159,
+          "hash": "4e5ef4e19b4047511a4dc61f9bce8c49aaabb98283810d58f98933fe5b3d963c",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 58247,
+          "hash": "2d2b8846555f54e7b58a7f1a676b38e31320d656169d0d0d39fd039c35971af5",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_combat/metrics.json"
+        },
+        {
+          "bytes": 56257,
+          "hash": "370794ff15e06e0afaa2edd9758152aff46a835d6546b7fe45c2f6a20431c79c",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/metrics.json"
+        },
+        {
+          "bytes": 11768,
+          "hash": "d56c554b5d20180c96d3d27741f294d40fbd3773cce6c12ead7a921cba93311d",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 36925,
+          "hash": "bb96963755c59d19bcd747cf90d4301bc2f3b5e3cc2703653970a54146593eaf",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A3_kidney_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 22453,
+          "hash": "88420d3259c840f884ab8ed4da24213da6a5c79a6b347645c682846528437cc5",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A4_thymus_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 32331,
+          "hash": "40afba1251b2f5f60fb9c0ce8033c816dcf31573ff58fb948d17c35dc050beec",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A5_skin_bulk_lomo/metrics.json"
+        },
+        {
+          "bytes": 12997,
+          "hash": "8339d5f55c874f6d9247b67e8c9413ed0a3f4d6be1ee01871f60fa82a3eaf285",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A6_eye_bulk_lomo/metrics.json"
+        }
+      ],
+      "title": "Baseline Metrics"
+    },
+    {
+      "bytes": 571013,
+      "description": "Per-task baseline run provenance JSON outputs.",
+      "mediatype": "application/json",
+      "name": "baseline_run_manifests",
+      "path": [
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo/run_manifest.json",
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo_combat/run_manifest.json",
+        "v9/reports/nearest_centroid/A1_liver_bulk_lomo_iss_only/run_manifest.json",
+        "v9/reports/nearest_centroid/A2_gastrocnemius_bulk_lomo/run_manifest.json",
+        "v9/reports/nearest_centroid/A3_kidney_bulk_lomo/run_manifest.json",
+        "v9/reports/nearest_centroid/A4_thymus_bulk_lomo/run_manifest.json",
+        "v9/reports/nearest_centroid/A5_skin_bulk_lomo/run_manifest.json",
+        "v9/reports/nearest_centroid/A6_eye_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A4_thymus_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/logistic_regression_l2/A6_eye_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_combat/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A3_kidney_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A4_thymus_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A5_skin_bulk_lomo/run_manifest.json",
+        "v9/reports/sklearn_baselines/pca_logistic_regression/A6_eye_bulk_lomo/run_manifest.json"
+      ],
+      "spacebio_bench:bundle_part": "benchmark_outputs",
+      "spacebio_bench:file_count": 24,
+      "spacebio_bench:files": [
+        {
+          "bytes": 56141,
+          "hash": "a5b4f0402f6a351904f4d0413e48d66c5c75b8470b685e384b35ef967df296ed",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 56192,
+          "hash": "c74186dde70b55fa2fbdf37b00e052f7a9240f4ccc6a31c9f7d2503c38ec0d78",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo_combat/run_manifest.json"
+        },
+        {
+          "bytes": 54639,
+          "hash": "71aff8e5a2686cea3e2dde0497cb4db3fb5a1411f014d3a936c123b55c5c659e",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A1_liver_bulk_lomo_iss_only/run_manifest.json"
+        },
+        {
+          "bytes": 10810,
+          "hash": "9aeb9b3d876bf7d1cc1442422a8218fb9c75f6f1b70fbaa157bf7262f61498ef",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A2_gastrocnemius_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 35964,
+          "hash": "ecaf4944b82740f092780dffc9941125ca4044e8bbbb4ccb3bd49ce97d906dea",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A3_kidney_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 20795,
+          "hash": "d8edaa9d84520bd5e24e9c61518285f1f9382d5d1b59dd01a9af38adcc9147a1",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A4_thymus_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 31386,
+          "hash": "9787aed62034dab7ecf9b80672f1f84c503a3041028dd31b5a499eba5f952330",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A5_skin_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 12041,
+          "hash": "0292b6bc9fb38a68c8ffaaab4e283a50e668a21bdb8af22d42a0b359faf1c53e",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/nearest_centroid/A6_eye_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 1777,
+          "hash": "a53e361934a5123501d0b37177777bebcfe368a5ec1d4a425b08a5e697656f4a",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 1811,
+          "hash": "574e31d6c1db8c99a8a4a7da20828fab9f2ca6b265eae2bd5b34620bd739b133",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_combat/run_manifest.json"
+        },
+        {
+          "bytes": 1822,
+          "hash": "14025837e41f72e7099464db61142040591485bea4f8849c4e08d3be874b4455",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A1_liver_bulk_lomo_iss_only/run_manifest.json"
+        },
+        {
+          "bytes": 1792,
+          "hash": "c6308cd4699c5fdf0064f6d02fbc13272bb19c7328620375374b388aacfbe363",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 1782,
+          "hash": "0b5a2a1280f68f29493e36dc7295f6682807c1c801d3102814c1ffbe5ab97aac",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 1780,
+          "hash": "f863cf8cbf43fe85f2834ec20307960283c34279f108d3165c5a01e05079ca6c",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A4_thymus_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 1771,
+          "hash": "92528ec9e78e7ed604fd8186151afebea5731fe174c9e759679c3d8f5b1f19b5",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A5_skin_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 1763,
+          "hash": "f28566e0cd1f63c370ee716b127c2b7ee070b44b3cf83cabb1c8e7f9d6b7605e",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A6_eye_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 56197,
+          "hash": "d8b45c37c41cd712381578bd0e73054ee11c41585b2647f0f72b7a9246ef608f",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 56294,
+          "hash": "8070f293d372b9237711230440391ddcb868d6d7e0198414fa1d25f06561f418",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_combat/run_manifest.json"
+        },
+        {
+          "bytes": 54658,
+          "hash": "21d45797cf66454bc56a3eaa75271a9c3eac38cf438afa43ebded4eb4a3a0e05",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/run_manifest.json"
+        },
+        {
+          "bytes": 10872,
+          "hash": "5140e0b7ee4d83e65cef1bb7435380bf9cfb16f8eb279e816cc1a42f5efd2cd5",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 36019,
+          "hash": "da93062d8228a4e40e8f26bcc5d414d4943744bad7719b76e87a8d2c0b6310bd",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A3_kidney_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 21199,
+          "hash": "371fe82474ce063da9b100aa1d0d4f617cb3ec1bc451755cfaebc5e26fd2d159",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A4_thymus_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 31423,
+          "hash": "8aad95a7f6cc232c746fc2d4aadc9b43ae8ffbd73a03fcaf7f7508f8033603bb",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A5_skin_bulk_lomo/run_manifest.json"
+        },
+        {
+          "bytes": 12085,
+          "hash": "167412a2e34a9a8c14b7166ade62b245c7374c45d683434d11691891f7c0326f",
+          "hash_algorithm": "sha256",
+          "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A6_eye_bulk_lomo/run_manifest.json"
+        }
+      ],
+      "title": "Baseline Run Manifests"
+    }
+  ],
+  "sources": [
+    {
+      "path": "https://visualization.osdr.nasa.gov/biodata/api/",
+      "title": "NASA Open Science Data Repository Biological Data API"
+    },
+    {
+      "path": "v9/source_inventory.csv",
+      "title": "SpaceBio-Bench v9 source inventory"
+    },
+    {
+      "path": "v9/source_checksum_audit.csv",
+      "title": "SpaceBio-Bench v9 source checksum audit"
+    }
+  ],
+  "spacebio_bench:alpha_snapshot_status": "metadata_only_alpha_snapshot",
+  "spacebio_bench:claim_boundary": "metadata_only_public_bulk_alpha_no_payload_release",
+  "spacebio_bench:payload_release_allowed": false,
+  "spacebio_bench:payload_verification_status": "checksum_manifests_parsed_payloads_not_hashed",
+  "spacebio_bench:public_core_only": true,
+  "spacebio_bench:release_status": "metadata_alpha_not_frozen",
+  "title": "SpaceBio-Bench v9 Public Bulk Metadata Alpha Draft Package",
+  "version": "0.1.0-draft"
+}
