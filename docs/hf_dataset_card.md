@@ -26,7 +26,7 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 
 **A comprehensive benchmark for evaluating ML models and foundation models on NASA spaceflight transcriptomics data.**
 
-Version: v7.0 with v7.1 documentation consistency patch | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
+Version: v7.1.1 public-card/metadata patch | Canonical results: v7.1 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
 ---
 
@@ -300,7 +300,7 @@ Lung and Colon additionally include Basal Control samples treated as ground cont
   author  = {Kim, JangKeun},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}
+  note    = {v7.1.1 documentation, public-card, and metadata consistency patch over canonical v7.1 results; data freeze 2026-03-01}
 }
 ```
 

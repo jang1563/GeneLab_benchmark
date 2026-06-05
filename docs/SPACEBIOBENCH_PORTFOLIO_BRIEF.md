@@ -21,7 +21,8 @@ metadata-alpha evidence files are maintained on the canonical `v3` branch.
 ## What I Built
 
 - A cross-mission benchmark surface for public space-biology transcriptomics,
-  with canonical v1-v7 result documentation and a v7.1 consistency patch.
+  with canonical v1-v7 result documentation and a v7.1.1 public-card/metadata
+  patch over the v7.1 result surface.
 - A v9 public bulk metadata-alpha scaffold with 8 task manifests, 33 fold
   definitions, 22 public OSDR source rows, 24 scaffold baseline runs, and a
   draft Frictionless Data Package descriptor.
@@ -85,13 +86,18 @@ This project is most directly relevant to roles involving:
 
 For a quick review, read these in order:
 
-1. `docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`
-2. `docs/SPACEBIOBENCH_SYSTEM_CARD.md`
-3. `docs/SPACEBIOBENCH_EVALUATION_CARD.md`
-4. `docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md`
-5. `docs/SPACEBIOBENCH_CLAIM_REGISTER.md`
-6. `docs/v9_hf_dataset_card.md`
-7. `docs/CANONICAL_RESULTS_V7_1.md`
+1. [Transparency Card Pack](SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md)
+2. [System Card](SPACEBIOBENCH_SYSTEM_CARD.md)
+3. [Evaluation Card](SPACEBIOBENCH_EVALUATION_CARD.md)
+4. [Release Readiness Card](SPACEBIOBENCH_RELEASE_READINESS_CARD.md)
+5. [Claim Register](SPACEBIOBENCH_CLAIM_REGISTER.md)
+6. [v9 HF Dataset Card Draft](v9_hf_dataset_card.md)
+7. [Canonical v7.1 Results](CANONICAL_RESULTS_V7_1.md)
+
+For model-card or system-card writing roles, the strongest signal is the
+combination of the system card, evaluation card, release readiness card, and
+claim register: they show how the project separates intended use, evaluation
+scope, readiness tier, and allowed versus blocked language.
 
 ## Resume-Ready Summary
 

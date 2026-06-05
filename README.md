@@ -2,23 +2,29 @@
 
 **A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01
-Status: **v1–v7 Complete**
+Version: v7.1.1 public-card/metadata patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01
+Status: **v1-v7 Complete; public-review card pack ready**
 
 Canonical v7.1 documentation source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
 
-Transparency card pack: [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) maps the system card, evaluation card, release readiness card, and claim register for v1-v7 results plus v8/v9 draft-surface boundaries.
+## Reviewer Fast Path
 
-Portfolio brief: [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) summarizes the project contribution for portfolio and external-review contexts.
+For portfolio, job-application, or external-review contexts, start here:
+
+1. [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) - concise project contribution and role-relevant signal.
+2. [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) - map of the system card, evaluation card, release readiness card, and claim register.
+3. [`docs/SPACEBIOBENCH_SYSTEM_CARD.md`](docs/SPACEBIOBENCH_SYSTEM_CARD.md) - benchmark/system boundary, intended use, out-of-scope claims, and provenance controls.
+4. [`docs/SPACEBIOBENCH_EVALUATION_CARD.md`](docs/SPACEBIOBENCH_EVALUATION_CARD.md) - task/fold/metric interpretation and leakage/confounding controls.
+5. [`docs/SPACEBIOBENCH_CLAIM_REGISTER.md`](docs/SPACEBIOBENCH_CLAIM_REGISTER.md) - supported, blocked, and future-only claim language.
 
 Release archive pack: [`docs/RELEASE_ARCHIVE_CARD.md`](docs/RELEASE_ARCHIVE_CARD.md)
 defines paper-archive scope. [`docs/RELEASE_ARCHIVE_MANIFEST.md`](docs/RELEASE_ARCHIVE_MANIFEST.md)
 and [`docs/RELEASE_ARCHIVE_CHECKLIST.md`](docs/RELEASE_ARCHIVE_CHECKLIST.md)
 track Zenodo metadata readiness and final DOI/tag gates.
 
-Archive note: the existing `v7.1` GitHub release predates this public card and
-archive-metadata polish. Use `main` for the current public-review surface until
-the next DOI-oriented patch tag is minted.
+Release note: `v7.1.1` is a documentation, public-card, and metadata
+consistency patch on top of the canonical v7.1 result surface. It does not
+introduce new benchmark result generation. DOI deposition remains pending.
 
 Branch note: `main` is the default public entry point. Detailed v9
 metadata-alpha evidence files are maintained on the canonical
@@ -422,7 +428,7 @@ Key methodological choices underpinning this benchmark:
   author  = {Kim, JangKeun},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}
+  note    = {v7.1.1 documentation, public-card, and metadata consistency patch over canonical v7.1 results; data freeze 2026-03-01}
 }
 ```
 
