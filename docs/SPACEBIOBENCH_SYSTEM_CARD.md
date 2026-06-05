@@ -43,16 +43,13 @@ The project currently has multiple surfaces with different maturity levels:
 
 ## System Boundary Map
 
-```mermaid
-flowchart LR
-  A["Public NASA OSDR sources"] --> B["Task manifests and fold definitions"]
-  B --> C["Baseline runs and result summaries"]
-  C --> D["System, evaluation, release, and claim cards"]
-  D --> E["Allowed benchmark claims"]
-  D --> F["Blocked clinical, crew-health, countermeasure, and Mars-regime claims"]
-  B --> G["v9 metadata-alpha scaffold"]
-  G --> H["Payload hashing pending"]
-```
+| Boundary layer | Evidence entering the layer | What the current card allows | What remains blocked |
+|---|---|---|---|
+| Source layer | Public NASA OSDR sources, source inventory rows, OSDR API evidence, checksum-manifest evidence | Public source/provenance claims with accession-level traceability | Claims about private, controlled, or non-public human sequence data |
+| Task layer | Task manifests, fold definitions, held-out mission labels, feature namespaces | Mission-held-out benchmark task claims when task and fold ids are named | Treating mission labels as pure biology or operational readiness evidence |
+| Result layer | Baseline runs, metric files, prediction rows, v7.1 canonical result summaries | Benchmark and workflow-evidence claims tied to the correct release surface | Mixed-surface leaderboard, model-superiority, or biological mechanism claims |
+| Transparency layer | System card, evaluation card, release readiness card, and claim register | Allowed benchmark claims with explicit scope and caveats | Blocked clinical, crew-health, countermeasure, and Mars-regime claims |
+| v9 metadata-alpha layer | Public bulk task/source/provenance scaffold and baseline anchors | Metadata-alpha and scaffold-baseline language | Frozen payload release claims until payload hashing and release gates pass |
 
 This map shows the boundary the cards enforce: benchmark evidence can support
 task, fold, metric, provenance, and release-readiness claims, but it cannot

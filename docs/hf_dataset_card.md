@@ -16,7 +16,7 @@ tags:
   - single-cell
   - spatial-transcriptomics
 size_categories:
-  - 1GB<n<10GB
+  - 100M<n<1GB
 language:
   - en
 pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
