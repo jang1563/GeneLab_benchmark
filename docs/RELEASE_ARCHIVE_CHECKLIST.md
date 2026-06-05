@@ -2,7 +2,7 @@
 title: GeneLab Benchmark Release Archive Checklist
 page_type: release_archive_checklist
 status: release_candidate_checklist
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: checklist_no_new_release_or_doi_claim
 ---
 
@@ -17,8 +17,10 @@ must wait until the final manuscript, tag, and DOI are available.
 
 - Root `README.md` presents the project, canonical result doc, transparency
   card pack, portfolio brief, and HF dataset link.
-- `CITATION.cff` exists and is machine-readable citation metadata.
-- `.zenodo.json` exists as candidate Zenodo metadata.
+- `CITATION.cff` exists and is machine-readable citation metadata using the
+  current public repository identity.
+- `.zenodo.json` exists as candidate Zenodo metadata using the current public
+  repository identity.
 - `LICENSE` is present and declares MIT for code.
 - `docs/hf_dataset_card.md` is synchronized with the public HF card surface.
 - SpaceBio-Bench system, evaluation, readiness, claim, and transparency cards
@@ -30,8 +32,8 @@ must wait until the final manuscript, tag, and DOI are available.
 
 ## Needs Final Author Or Manuscript Review
 
-- Confirm author order and affiliations in `CITATION.cff`.
-- Confirm creator metadata in `.zenodo.json`.
+- Confirm final manuscript author list and affiliations in `CITATION.cff`.
+- Confirm final creator metadata in `.zenodo.json`.
 - Confirm final paper title and whether the archive title should match exactly.
 - Confirm final version string and release date.
 - Add DOI after Zenodo or the selected archive mints it.
@@ -39,7 +41,8 @@ must wait until the final manuscript, tag, and DOI are available.
 
 ## Needs Final Release Action
 
-- Create annotated Git tag.
+- Create annotated Git tag from the final public-card/archive-metadata commit
+  (recommended next patch tag: `v7.1.1`).
 - Create GitHub release from the tag.
 - Verify Zenodo deposition metadata.
 - Download source archive and record SHA-256 checksum.
