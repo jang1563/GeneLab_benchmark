@@ -3,8 +3,8 @@ message: "If you use this benchmark in your research, please cite as below."
 type: software
 
 title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
-version: "7.1.0"
-date-released: "2026-05-09"
+version: "7.1.1"
+date-released: "2026-06-05"
 
 abstract: >
   GeneLab Benchmark is a comprehensive benchmark for evaluating AI and machine learning
@@ -17,14 +17,14 @@ abstract: >
   (mouse, Drosophila), spatial transcriptomics (Visium), and single-cell RNA-seq
   (RRRM-1, RRRM-2). The v7 release also includes unified scPRINT2 and graph
   neural network benchmarking, plus cross-method synthesis across classical,
-  foundation-model, and graph-based approaches. The v7.1 release is a
-  documentation and public metadata consistency patch; it does not introduce
-  new benchmark result generation.
+  foundation-model, and graph-based approaches. The v7.1.1 release is a
+  documentation, public-card, and metadata consistency patch; it does not
+  introduce new benchmark result generation.
 
 authors:
-  - family-names: "Kang"
-    given-names: "Jaeyoung"
-    affiliation: "Cornell University"
+  - family-names: "Kim"
+    given-names: "Jihoon"
+    affiliation: "Weill Cornell Medicine"
 
 repository-code: "https://github.com/jang1563/GeneLab_benchmark"
 url: "https://github.com/jang1563/GeneLab_benchmark"
@@ -67,9 +67,9 @@ preferred-citation:
   type: article
   title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
   authors:
-    - family-names: "Kang"
-      given-names: "Jaeyoung"
-      affiliation: "Cornell University"
+    - family-names: "Kim"
+      given-names: "Jihoon"
+      affiliation: "Weill Cornell Medicine"
   status: "in-preparation"
   year: 2026
-  notes: "Manuscript in preparation; v7.1 documentation consistency patch."
+  notes: "Manuscript in preparation; v7.1.1 documentation, public-card, and metadata consistency patch."
