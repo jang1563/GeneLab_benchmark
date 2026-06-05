@@ -297,7 +297,7 @@ Lung and Colon additionally include Basal Control samples treated as ground cont
 @dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics
              Benchmark for AI/ML Models},
-  author  = {Kim, Jihoon},
+  author  = {Kim, JangKeun},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
   note    = {v7.0 with v7.1.1 documentation, public-card, and metadata consistency patch; data freeze 2026-03-01}
