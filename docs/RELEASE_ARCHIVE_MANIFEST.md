@@ -20,8 +20,8 @@ not a frozen v9 payload manifest.
 
 | Field | Value |
 |---|---:|
-| Tracked files on audited `main` worktree | 1,434 |
-| Approximate checkout size | 208 MB |
+| Audited repository scope | Default `main` release tree plus curated v9 metadata-alpha subset |
+| Curated v9 subset size | ~2 MB; metadata/provenance/baseline evidence only |
 | Root citation file | `CITATION.cff` |
 | Zenodo metadata file | `.zenodo.json` |
 | License | `LICENSE` |
@@ -40,6 +40,7 @@ not a frozen v9 payload manifest.
 | System/evaluation cards | `docs/SPACEBIOBENCH_SYSTEM_CARD.md`; `docs/SPACEBIOBENCH_EVALUATION_CARD.md` |
 | Readiness/claim cards | `docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md`; `docs/SPACEBIOBENCH_CLAIM_REGISTER.md` |
 | Archive controls | `docs/RELEASE_ARCHIVE_CARD.md`; `docs/RELEASE_ARCHIVE_MANIFEST.md`; `docs/RELEASE_ARCHIVE_CHECKLIST.md` |
+| v9 metadata-alpha evidence | `v9/`; `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`; `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md` |
 | Reproducibility scripts | `scripts/`; `.github/workflows/` |
 | Public task metadata | `tasks/` |
 | Evaluation outputs | `evaluation/`; `v2/`; `v3/`; `v4/`; `v5/`; `v6/`; `v7/` |
@@ -54,16 +55,16 @@ study pages.
 Hugging Face hosts the public feature-matrix package for selected benchmark
 tasks. The HF dataset card should remain synchronized with `docs/hf_dataset_card.md`.
 
-The v9 public bulk surface remains metadata-alpha only. It should not be cited
-as a frozen payload archive until payload-level hashes and release manifests are
-complete.
+The curated v9 public bulk surface remains metadata-alpha only. It should not
+be cited as a frozen payload archive until payload-level hashes and release
+manifests are complete.
 
 ## Suggested Final Archive Procedure
 
 1. Confirm final manuscript title, final author list, affiliations, and release
    version.
 2. Update `CITATION.cff` and `.zenodo.json` with final metadata.
-3. Create or confirm annotated Git tag `v7.1.1` from the final
+3. Create or confirm annotated Git tag `v7.1.2` from the final
    public-card/archive-metadata commit. The older `v7.1` GitHub release
    predates the card-pack and archive-metadata files.
 4. Create a GitHub release from that tag.
@@ -79,9 +80,9 @@ complete.
 Use these commands after the final release tag exists:
 
 ```bash
-git archive --format=tar.gz --prefix=GeneLab_benchmark-v7.1.1/ \
-  -o GeneLab_benchmark-v7.1.1.tar.gz v7.1.1
-shasum -a 256 GeneLab_benchmark-v7.1.1.tar.gz
+git archive --format=tar.gz --prefix=GeneLab_benchmark-v7.1.2/ \
+  -o GeneLab_benchmark-v7.1.2.tar.gz v7.1.2
+shasum -a 256 GeneLab_benchmark-v7.1.2.tar.gz
 ```
 
 For a source checkout:
@@ -97,7 +98,7 @@ du -sh .
 
 - The paper archive DOI has not yet been minted.
 - The older `v7.1` GitHub release predates the current card-pack and
-  archive-metadata polish; cite `v7.1.1` or a successor tag for this card
+  archive-metadata polish; cite `v7.1.2` or a successor tag for this card
   surface once minted.
 - Final manuscript author-list metadata should be reviewed before final
   deposition.

@@ -298,7 +298,7 @@ class ReviewFixTests(unittest.TestCase):
     def test_root_readme_includes_v7_in_status_structure_and_changelog(self):
         readme = self.read_repo_text("README.md")
 
-        self.assertIn("Version: v7.1.1 public-card/metadata patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
+        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
         self.assertIn("Status: **v1-v7 Complete; public-review card pack ready**", readme)
         self.assertIn("## Reviewer Fast Path", readme)
         self.assertIn("docs/SPACEBIOBENCH_SYSTEM_CARD.md", readme)
@@ -313,15 +313,15 @@ class ReviewFixTests(unittest.TestCase):
         hf_card = self.read_repo_text("docs/hf_dataset_card.md")
         citation = self.read_repo_text("CITATION.cff")
 
-        self.assertIn("Version: v7.1.1 public-card/metadata patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
+        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
         self.assertIn("Canonical v7.1 documentation source:", readme)
-        self.assertIn("note    = {v7.1.1 documentation, public-card, and metadata consistency patch over canonical v7.1 results; data freeze 2026-03-01}", readme)
-        self.assertIn("Version: v7.1.1 public-card/metadata patch | Canonical results: v7.1 | Dataset freeze: 2026-03-01", hf_card)
-        self.assertIn("note    = {v7.1.1 documentation, public-card, and metadata consistency patch over canonical v7.1 results; data freeze 2026-03-01}", hf_card)
-        self.assertIn('version: "7.1.1"', citation)
+        self.assertIn("note    = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}", readme)
+        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch | Canonical results: v7.1 | Dataset freeze: 2026-03-01", hf_card)
+        self.assertIn("note    = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}", hf_card)
+        self.assertIn('version: "7.1.2"', citation)
         self.assertIn('date-released: "2026-06-05"', citation)
-        self.assertIn('notes: "Manuscript in preparation; v7.1.1 documentation, public-card, and metadata consistency patch."', citation)
-        self.assertIn("documentation, public-card, and metadata consistency patch", citation)
+        self.assertIn('notes: "Manuscript in preparation; v7.1.2 documentation, public-card, metadata, and evidence-visibility patch."', citation)
+        self.assertIn("documentation, public-card, metadata, and evidence-visibility patch", citation)
         self.assertIn('family-names: "Kim"', citation)
         self.assertIn('given-names: "JangKeun"', citation)
         self.assertIn('affiliation: "Weill Cornell Medicine"', citation)
@@ -344,6 +344,46 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("Blocked clinical, crew-health, countermeasure, and Mars-regime claims", system_card)
         self.assertIn("## Evaluation Flow", evaluation_card)
         self.assertIn("Claim register language", evaluation_card)
+
+    def test_public_v9_metadata_alpha_subset_is_inspectable(self):
+        readme = self.read_repo_text("README.md")
+        v9_readme = self.read_repo_text("v9/README.md")
+        claim_register = self.read_repo_text("docs/SPACEBIOBENCH_CLAIM_REGISTER.md")
+        release_card = self.read_repo_text("docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md")
+        v9_card = self.read_repo_text("docs/v9_hf_dataset_card.md")
+
+        expected_paths = [
+            "v9/task_manifest_index.csv",
+            "v9/task_data_index.csv",
+            "v9/source_inventory.csv",
+            "v9/source_checksum_audit.csv",
+            "v9/datapackage.draft.json",
+            "v9/task_manifests/A1_liver_bulk_lomo.json",
+            "v9/reports/bulk_lomo_baseline_summary.csv",
+            "v9/reports/nearest_centroid/bulk_lomo_summary.csv",
+            "v9/reports/sklearn_baselines/bulk_lomo_summary.csv",
+            "v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv",
+            "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv",
+            "docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md",
+            "docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md",
+        ]
+        for relative_path in expected_paths:
+            self.assertTrue((REPO_ROOT / relative_path).exists(), relative_path)
+
+        datapackage = json.loads(self.read_repo_text("v9/datapackage.draft.json"))
+        for resource in datapackage["resources"]:
+            resource_paths = resource.get("path", [])
+            if isinstance(resource_paths, str):
+                resource_paths = [resource_paths]
+            for relative_path in resource_paths:
+                self.assertTrue((REPO_ROOT / relative_path).exists(), relative_path)
+
+        self.assertIn("curated metadata-only public bulk evidence subset", readme)
+        self.assertIn("without publishing payload matrices or draft extension", v9_readme)
+        self.assertIn("v7.1.2 is a documentation, public-card, metadata, and evidence-visibility patch", claim_register)
+        self.assertIn("v7.1.2 documentation/card/evidence-visibility patch", release_card)
+        self.assertNotIn("canonical `v3` branch", readme + claim_register + release_card + v9_card)
+        self.assertNotIn("blob/v3/docs/SPACEBIOBENCH", v9_card)
 
     def test_v2_rrrm1_wrapper_rebuilds_merged_input_and_uses_tissue_scoped_steps(self):
         wrapper = self.read_repo_text("v2/scripts/rrrm1_f2_pipeline_wrapper.sh")

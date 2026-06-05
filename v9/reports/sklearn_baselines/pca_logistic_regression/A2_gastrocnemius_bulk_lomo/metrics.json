@@ -1,0 +1,411 @@
+{
+  "baseline": {
+    "baseline_id": "pca_logistic_regression",
+    "c": 1.0,
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_interpretation": "Train-fitted PCA coordinates before logistic regression.",
+    "framework": "sklearn",
+    "max_iter": 5000,
+    "random_state": 42,
+    "requested_pca_components": 50,
+    "score_column": "flight_probability"
+  },
+  "folds": [
+    {
+      "fit_details": {
+        "model_type": "pca_logistic_regression",
+        "n_features": 15760,
+        "pca_components": 19,
+        "train_time_s": 0.008707
+      },
+      "fold_id": "fold_RR-1_test",
+      "n_features": 15760,
+      "n_test": 12,
+      "n_train": 20,
+      "test_mission": "RR-1",
+      "train_time_s": 0.008707
+    },
+    {
+      "fit_details": {
+        "model_type": "pca_logistic_regression",
+        "n_features": 15760,
+        "pca_components": 19,
+        "train_time_s": 0.008652
+      },
+      "fold_id": "fold_RR-5_test",
+      "n_features": 15760,
+      "n_test": 12,
+      "n_train": 20,
+      "test_mission": "RR-5",
+      "train_time_s": 0.008652
+    },
+    {
+      "fit_details": {
+        "model_type": "pca_logistic_regression",
+        "n_features": 15760,
+        "pca_components": 23,
+        "train_time_s": 0.009362
+      },
+      "fold_id": "fold_RR-9_test",
+      "n_features": 15760,
+      "n_test": 8,
+      "n_train": 24,
+      "test_mission": "RR-9",
+      "train_time_s": 0.009362
+    }
+  ],
+  "label_domain": [
+    "Flight",
+    "Ground"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.7734375
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.4747331022501056
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.3333333333333333
+    },
+    "mission_discrimination": {
+      "details": {
+        "distance": "euclidean",
+        "metric_id": "mission_discrimination",
+        "n_scored": 32,
+        "n_skipped": 0,
+        "per_sample": [
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 1.3968341398196256,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_GC_Rep1_M33",
+            "sample_index": 0,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 3.398551359190381,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_GC_Rep2_M34",
+            "sample_index": 1,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 1.9832548887818624,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_GC_Rep3_M35",
+            "sample_index": 2,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 7.627443362317948,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_GC_Rep4_M36",
+            "sample_index": 3,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 5.563323782702337,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_GC_Rep5_M37",
+            "sample_index": 4,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 3.1151458810068475,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_GC_Rep6_M38",
+            "sample_index": 5,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 1.790524244017785,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_FLT_Rep1_M23",
+            "sample_index": 6,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 1.1019620459360329,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_FLT_Rep2_M24",
+            "sample_index": 7,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 11.934969640349442,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_FLT_Rep3_M25",
+            "sample_index": 8,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 7.4744385277566945,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_FLT_Rep4_M26",
+            "sample_index": 9,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 2.927520936696813,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_FLT_Rep5_M27",
+            "sample_index": 10,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 3,
+            "own_distance": 2.7895895305044367,
+            "rank": 1.0,
+            "sample_id": "RR-1.Mmus_C57-6J_GST_FLT_Rep6_M28",
+            "sample_index": 11,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 4.111229373562747,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398358",
+            "sample_index": 12,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 4.015298762412299,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398359",
+            "sample_index": 13,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 2.3641990547704643,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398360",
+            "sample_index": 14,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 4.633268982051852,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398361",
+            "sample_index": 15,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 6.807239927150781,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398362",
+            "sample_index": 16,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 6.95137193454156,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398363",
+            "sample_index": 17,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 3.3986313434312567,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398364",
+            "sample_index": 18,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 2.5960822070562353,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398365",
+            "sample_index": 19,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 17.872953518614636,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398366",
+            "sample_index": 20,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 4.407709637045045,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398367",
+            "sample_index": 21,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 3.483930642939129,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398368",
+            "sample_index": 22,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-5",
+            "n_candidate_missions": 3,
+            "own_distance": 0.7827245630221068,
+            "rank": 1.0,
+            "sample_id": "RR-5.GSM5398369",
+            "sample_index": 23,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 28.75590295501091,
+            "rank": 1.0,
+            "sample_id": "RR-9.SRR11148753",
+            "sample_index": 24,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 5.410788114823987,
+            "rank": 1.0,
+            "sample_id": "RR-9.SRR11148754",
+            "sample_index": 25,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 31.967778789559677,
+            "rank": 2.0,
+            "sample_id": "RR-9.SRR11148755",
+            "sample_index": 26,
+            "score": 0.5
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 5.251220829427333,
+            "rank": 1.0,
+            "sample_id": "RR-9.SRR11148756",
+            "sample_index": 27,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 45.18975298911559,
+            "rank": 1.0,
+            "sample_id": "RR-9.SRR11148757",
+            "sample_index": 28,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 6.258823719759006,
+            "rank": 1.0,
+            "sample_id": "RR-9.SRR11148758",
+            "sample_index": 29,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 69.33227039226426,
+            "rank": 1.0,
+            "sample_id": "RR-9.SRR11148759",
+            "sample_index": 30,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 3,
+            "own_distance": 55.70383691255515,
+            "rank": 3.0,
+            "sample_id": "RR-9.SRR11148760",
+            "sample_index": 31,
+            "score": 0.0
+          }
+        ],
+        "score": 0.953125
+      },
+      "status": "computed",
+      "value": 0.953125
+    }
+  },
+  "positive_label": "Flight",
+  "status": "evaluated",
+  "submission_path": "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/predictions.csv",
+  "task_id": "A2_gastrocnemius_bulk_lomo",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability",
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 32,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/pca_logistic_regression/A2_gastrocnemius_bulk_lomo/predictions.csv",
+    "task_id": "A2_gastrocnemius_bulk_lomo",
+    "warnings": []
+  }
+}

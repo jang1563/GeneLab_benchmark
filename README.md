@@ -2,7 +2,7 @@
 
 **A comprehensive benchmark for evaluating AI/ML and Foundation Models on NASA OSDR spaceflight transcriptomics data.**
 
-Version: v7.1.1 public-card/metadata patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01
+Version: v7.1.2 public-card/metadata/evidence-visibility patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01
 Status: **v1-v7 Complete; public-review card pack ready**
 
 Canonical v7.1 documentation source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
@@ -22,13 +22,14 @@ defines paper-archive scope. [`docs/RELEASE_ARCHIVE_MANIFEST.md`](docs/RELEASE_A
 and [`docs/RELEASE_ARCHIVE_CHECKLIST.md`](docs/RELEASE_ARCHIVE_CHECKLIST.md)
 track Zenodo metadata readiness and final DOI/tag gates.
 
-Release note: `v7.1.1` is a documentation, public-card, and metadata
-consistency patch on top of the canonical v7.1 result surface. It does not
-introduce new benchmark result generation. DOI deposition remains pending.
+Release note: `v7.1.2` is a documentation, public-card, metadata, and
+evidence-visibility patch on top of the canonical v7.1 result surface. It does
+not introduce new benchmark result generation. DOI deposition remains pending.
 
-Branch note: `main` is the default public entry point. Detailed v9
-metadata-alpha evidence files are maintained on the canonical
-[`v3`](https://github.com/jang1563/GeneLab_benchmark/tree/v3) branch.
+v9 note: `main` includes a curated metadata-only public bulk evidence subset
+under [`v9/`](v9/) for task/source/checksum registries, the draft Data Package,
+alpha-boundary reports, and baseline summaries. It excludes payload matrices
+and draft extension lanes.
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -38,6 +39,10 @@ metadata-alpha evidence files are maintained on the canonical
 ## What Is This?
 
 GeneLab Benchmark provides standardized tasks for evaluating how well machine learning models — from classical baselines to gene expression foundation models (Geneformer, scGPT, UCE, scFoundation) and text-based LLMs (GPT-4o, Claude, Llama) — generalize **spaceflight transcriptomic signatures across missions**.
+
+The reviewer-facing transparency layer is documented as **SpaceBio-Bench**:
+system, evaluation, release-readiness, and claim-boundary cards for the public
+benchmark surface.
 
 **Core challenge**: Train a model on one spaceflight mission's RNA-seq data. Can it classify samples from a different mission it has never seen?
 
@@ -158,6 +163,11 @@ Canonical v7.1 result source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_
 
 ## Key Scientific Findings
 
+Interpretation boundary: the findings below are benchmark and synthesis
+evidence from the documented result surfaces. They should not be read as
+biological mechanism proof, clinical guidance, crew-health prediction, or
+countermeasure evidence without additional validation.
+
 ### Pre-registered Hypotheses
 
 | Hypothesis | Statement | Verdict | Key Evidence |
@@ -257,6 +267,11 @@ GeneLab_benchmark/
 │   ├── unified/                    <- scPRINT2, GNN/WGCNA, and synthesis drivers
 │   ├── evaluation/                 <- v7 result JSONs
 │   └── figures/html/               <- v7 interactive HTML figures
+│
+├── v9/                             <- Public bulk metadata-alpha evidence subset
+│   ├── task_manifests/             <- 8 public bulk LOMO task manifests
+│   ├── reports/                    <- scaffold baseline and alpha-boundary summaries
+│   └── datapackage.draft.json      <- metadata-only draft package descriptor
 │
 └── processed/                      <- Intermediate analysis outputs
     ├── A_detection/                <- Per-tissue LOMO data
@@ -428,7 +443,7 @@ Key methodological choices underpinning this benchmark:
   author  = {Kim, JangKeun},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note    = {v7.1.1 documentation, public-card, and metadata consistency patch over canonical v7.1 results; data freeze 2026-03-01}
+  note    = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}
 }
 ```
 

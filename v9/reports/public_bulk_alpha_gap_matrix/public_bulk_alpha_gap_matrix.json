@@ -1,0 +1,122 @@
+[
+  {
+    "allowed_current_claim": "public bulk task manifests are indexed",
+    "evidence_paths": "v9/task_manifest_index.csv",
+    "evidence_summary": "8 public bulk task manifests and 33 folds indexed.",
+    "gap_category": "task_registry",
+    "gap_id": "task_manifest_registry",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "keep generated task index in alpha package",
+    "prohibited_release_claim": "frozen benchmark release",
+    "readiness_status": "pass",
+    "severity": "P0"
+  },
+  {
+    "allowed_current_claim": "public mouse bulk source inventory exists",
+    "evidence_paths": "v9/source_inventory.csv",
+    "evidence_summary": "22 public bulk source rows scoped to mouse bulk LOMO.",
+    "gap_category": "source_inventory",
+    "gap_id": "source_inventory_scope",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "keep organoid and multispecies draft tracks out of public bulk core",
+    "prohibited_release_claim": "all v9 draft tracks are in alpha core",
+    "readiness_status": "pass",
+    "severity": "P0"
+  },
+  {
+    "allowed_current_claim": "checksum manifests were parsed for public bulk sources",
+    "evidence_paths": "v9/source_checksum_audit.csv",
+    "evidence_summary": "22/22 sources have parsed checksum-manifest evidence.",
+    "gap_category": "source_integrity",
+    "gap_id": "checksum_manifest_evidence",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "retain API/checksum-manifest evidence in alpha package",
+    "prohibited_release_claim": "payload files are locally hash-verified",
+    "readiness_status": "pass",
+    "severity": "P0"
+  },
+  {
+    "allowed_current_claim": "payload hash verification remains pending",
+    "evidence_paths": "v9/source_checksum_audit.csv",
+    "evidence_summary": "0/22 sources are freeze_ready=true.",
+    "gap_category": "source_integrity",
+    "gap_id": "payload_hash_verification",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "choose payload-mirror hash plan or metadata-only alpha wording",
+    "prohibited_release_claim": "frozen payload mirror",
+    "readiness_status": "blocker",
+    "severity": "P0"
+  },
+  {
+    "allowed_current_claim": "simple public bulk baselines are reproduced",
+    "evidence_paths": "v9/reports/bulk_lomo_baseline_summary.csv",
+    "evidence_summary": "24/24 public bulk baseline rows are evaluated.",
+    "gap_category": "baseline_outputs",
+    "gap_id": "baseline_output_evidence",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "keep baseline outputs linked through run manifests",
+    "prohibited_release_claim": "state-of-the-art leaderboard",
+    "readiness_status": "pass",
+    "severity": "P1"
+  },
+  {
+    "allowed_current_claim": "draft Data Package descriptor exists",
+    "evidence_paths": "v9/datapackage.draft.json",
+    "evidence_summary": "draft Data Package has 11 resources.",
+    "gap_category": "package_metadata",
+    "gap_id": "datapackage_descriptor",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "add alpha gap-matrix resources and payload-hash boundary after this block",
+    "prohibited_release_claim": "complete release metadata descriptor",
+    "readiness_status": "needs_update",
+    "severity": "P1"
+  },
+  {
+    "allowed_current_claim": "dataset-card draft exists",
+    "evidence_paths": "docs/v9_hf_dataset_card.md",
+    "evidence_summary": "dataset card declares draft status",
+    "gap_category": "release_language",
+    "gap_id": "dataset_card_language",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "add explicit alpha gap and payload-boundary wording",
+    "prohibited_release_claim": "frozen public release card",
+    "readiness_status": "needs_update",
+    "severity": "P1"
+  },
+  {
+    "allowed_current_claim": "public bulk alpha is mouse bulk LOMO scoped",
+    "evidence_paths": "v9/human_organoid/|v9/multispecies/|v9/source_inventory.csv",
+    "evidence_summary": "public bulk core remains separate from draft organoid and multispecies tracks.",
+    "gap_category": "scope_boundary",
+    "gap_id": "track_scope_separation",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "do not pull draft extension artifacts into the public bulk alpha core",
+    "prohibited_release_claim": "organoid or multispecies draft tasks are alpha leaderboard tasks",
+    "readiness_status": "pass",
+    "severity": "P1"
+  },
+  {
+    "allowed_current_claim": "program has recentered on public bulk alpha readiness",
+    "evidence_paths": "v9/reports/recenter_decision/recenter_decision_summary.csv",
+    "evidence_summary": "V9-REFOCUS-001 selected public bulk alpha as the next active lane.",
+    "gap_category": "program_sequence",
+    "gap_id": "recenter_alignment",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "continue V9-BULK-ALPHA blocks before V9-SC-001",
+    "prohibited_release_claim": "single-cell flagship has started",
+    "readiness_status": "pass",
+    "severity": "P1"
+  },
+  {
+    "allowed_current_claim": "alpha decision is pending",
+    "evidence_paths": "v9/task_manifest_index.csv|v9/source_inventory.csv|v9/source_checksum_audit.csv|v9/reports/bulk_lomo_baseline_summary.csv|v9/datapackage.draft.json|docs/v9_hf_dataset_card.md",
+    "evidence_summary": "metadata-only alpha snapshot decision is not yet recorded.",
+    "gap_category": "release_decision",
+    "gap_id": "minimal_alpha_snapshot_decision",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "owner_action": "decide metadata-only alpha versus payload-mirror prerequisite",
+    "prohibited_release_claim": "alpha release approved",
+    "readiness_status": "blocker",
+    "severity": "P0"
+  }
+]

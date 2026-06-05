@@ -1,0 +1,56 @@
+[
+  {
+    "claim_id": "public_bulk_metadata_scaffold_exists",
+    "claim_status": "allowed_current_alpha_gap",
+    "disallowed_language": "frozen public benchmark release",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "next_allowed_action": "describe as alpha scaffold with explicit blockers",
+    "statement": "The public bulk scaffold has task, source, package, and baseline metadata.",
+    "supporting_evidence": "v9/task_manifest_index.csv|v9/source_inventory.csv|v9/source_checksum_audit.csv|v9/reports/bulk_lomo_baseline_summary.csv|v9/datapackage.draft.json|docs/v9_hf_dataset_card.md"
+  },
+  {
+    "claim_id": "checksum_manifests_parsed",
+    "claim_status": "allowed_current_alpha_gap",
+    "disallowed_language": "payload hash verified",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "next_allowed_action": "separate manifest parsing from local payload hashing",
+    "statement": "OSDR checksum manifests have been parsed for all public bulk sources.",
+    "supporting_evidence": "v9/source_checksum_audit.csv"
+  },
+  {
+    "claim_id": "baseline_outputs_reproduced",
+    "claim_status": "allowed_current_alpha_gap",
+    "disallowed_language": "leaderboard or model superiority claim",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "next_allowed_action": "use as reproducibility evidence only",
+    "statement": "Simple baseline outputs are present for the public bulk task set.",
+    "supporting_evidence": "v9/reports/bulk_lomo_baseline_summary.csv"
+  },
+  {
+    "claim_id": "no_payload_freeze_claim",
+    "claim_status": "prohibited_current_alpha_gap",
+    "disallowed_language": "frozen payload mirror",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "next_allowed_action": "add payload hash plan or metadata-only alpha decision",
+    "statement": "The current package must not claim local payload hash freeze.",
+    "supporting_evidence": "v9/source_checksum_audit.csv"
+  },
+  {
+    "claim_id": "no_extension_track_promotion",
+    "claim_status": "prohibited_current_alpha_gap",
+    "disallowed_language": "all v9 draft tracks are public alpha leaderboard tasks",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "next_allowed_action": "keep extension tracks in separate draft lanes",
+    "statement": "Draft organoid and multispecies outputs are not public bulk alpha core tasks.",
+    "supporting_evidence": "v9/human_organoid/|v9/multispecies/"
+  },
+  {
+    "claim_id": "no_alpha_release_approval",
+    "claim_status": "prohibited_current_alpha_gap",
+    "disallowed_language": "release approved",
+    "gap_matrix_id": "v9_public_bulk_alpha_freeze_gap_matrix",
+    "next_allowed_action": "run V9-BULK-ALPHA-002 decision block",
+    "statement": "A public alpha release approval is not recorded by this gap matrix.",
+    "supporting_evidence": "v9/reports/public_bulk_alpha_gap_matrix/"
+  }
+]

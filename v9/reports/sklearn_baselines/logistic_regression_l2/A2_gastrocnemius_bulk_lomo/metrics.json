@@ -1,0 +1,102 @@
+{
+  "baseline": {
+    "baseline_id": "logistic_regression_l2",
+    "c": 1.0,
+    "embedding_columns": [],
+    "embedding_interpretation": "No embedding columns are emitted for plain L2 logistic regression.",
+    "framework": "sklearn",
+    "max_iter": 5000,
+    "random_state": 42,
+    "score_column": "flight_probability"
+  },
+  "folds": [
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 15760,
+        "train_time_s": 0.026394
+      },
+      "fold_id": "fold_RR-1_test",
+      "n_features": 15760,
+      "n_test": 12,
+      "n_train": 20,
+      "test_mission": "RR-1",
+      "train_time_s": 0.026394
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 15760,
+        "train_time_s": 0.025856
+      },
+      "fold_id": "fold_RR-5_test",
+      "n_features": 15760,
+      "n_test": 12,
+      "n_train": 20,
+      "test_mission": "RR-5",
+      "train_time_s": 0.025856
+    },
+    {
+      "fit_details": {
+        "model_type": "logistic_regression_l2",
+        "n_features": 15760,
+        "train_time_s": 0.028769
+      },
+      "fold_id": "fold_RR-9_test",
+      "n_features": 15760,
+      "n_test": 8,
+      "n_train": 24,
+      "test_mission": "RR-9",
+      "train_time_s": 0.028769
+    }
+  ],
+  "label_domain": [
+    "Flight",
+    "Ground"
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.77734375
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.4747578856139306
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.3333333333333333
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "positive_label": "Flight",
+  "status": "evaluated",
+  "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/predictions.csv",
+  "task_id": "A2_gastrocnemius_bulk_lomo",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 32,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/predictions.csv",
+    "task_id": "A2_gastrocnemius_bulk_lomo",
+    "warnings": []
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "language_status": "allowed",
+    "must_not_imply": "frozen payload release",
+    "section_hint": "title/status",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "snippet_id": "short_label",
+    "snippet_text": "SpaceBio-Bench v9 public bulk metadata alpha",
+    "target_artifact": "docs/v9_hf_dataset_card.md"
+  },
+  {
+    "language_status": "allowed",
+    "must_not_imply": "payload files are bundled or hash verified",
+    "section_hint": "Dataset Status",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "snippet_id": "status_paragraph",
+    "snippet_text": "This metadata-only alpha snapshot documents task manifests, source inventory, checksum-manifest evidence, baseline summaries, and provenance reports for the public mouse bulk LOMO scaffold. It is not a frozen payload release and does not include a local payload mirror or local payload-hash verification.",
+    "target_artifact": "docs/v9_hf_dataset_card.md"
+  },
+  {
+    "language_status": "required",
+    "must_not_imply": "release-ready benchmark payload",
+    "section_hint": "Limitations",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "snippet_id": "limitations_payload_boundary",
+    "snippet_text": "The current evidence boundary is OSDR API file-list and checksum-manifest parsing. Local payload mirroring and payload hash verification remain future work before any frozen data release wording.",
+    "target_artifact": "docs/v9_hf_dataset_card.md"
+  },
+  {
+    "language_status": "required",
+    "must_not_imply": "complete Data Package release descriptor",
+    "section_hint": "resources/descriptions",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "snippet_id": "datapackage_resource_boundary",
+    "snippet_text": "Add gap-matrix and snapshot-decision resources as metadata resources; do not add upstream payload files as locally bundled resources until a payload mirror and hash manifest exist.",
+    "target_artifact": "v9/datapackage.draft.json"
+  }
+]

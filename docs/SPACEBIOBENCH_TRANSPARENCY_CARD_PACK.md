@@ -16,14 +16,15 @@ headline score or release label.
 This pack does not introduce new benchmark results or approve a new release.
 
 Branch note: on the default `main` branch, this pack is the public entry
-surface. Detailed v9 metadata-alpha evidence paths such as `v9/...` and
-`docs/V9_*` live on the canonical `v3` branch.
+surface. The repository includes a curated v9 public bulk metadata-alpha
+evidence subset under `v9/` and `docs/V9_*`. Payload matrices and draft
+extension lanes remain outside this public-review path.
 
 ## Current Public Summary
 
 - v1-v7 / v7.1 is the canonical historical result surface for the original
   GeneLab Benchmark.
-- v7.1.1 is the public-card and metadata consistency patch over that canonical
+- v7.1.2 is the public-card, metadata, and evidence-visibility patch over that canonical
   result surface. It does not introduce new result generation.
 - v8 is an incubating translational extension and should not be mixed into
   v7.1 benchmark claims.
@@ -76,7 +77,8 @@ For GitHub:
 - Link this pack from the root README and v9 README.
 - Keep the four cards in `docs/`.
 - Present the pack as transparency documentation, not as a new release.
-- On `main`, treat v9-specific evidence paths as canonical `v3` references.
+- On `main`, treat v9-specific evidence paths as the curated public bulk
+  metadata-alpha subset only; do not infer payload or extension-lane release.
 
 For Hugging Face:
 
