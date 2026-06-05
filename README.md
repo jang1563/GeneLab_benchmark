@@ -422,6 +422,7 @@ Key methodological choices underpinning this benchmark:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v7.1.2 | 2026-06-05 | Public-card, metadata, and evidence-visibility patch: reviewer fast path, transparency card pack, v9 metadata-alpha evidence subset, release archive gates, and synchronized citation metadata. No new benchmark result generation. |
 | v7.0 | 2026-04-12 | Unified benchmark layer complete: scPRINT2 baseline, GNN/WGCNA graph comparisons across 6 tissues, portable checkpoint/result artifacts, and v7 methods/signal-hierarchy synthesis. |
 | v6.0 | 2026-03-30 | Cross-species validation complete: gene conservation, pathway conservation, cross-species transfer, TF conservation, biomarker validation, drug target validation (6 result JSONs). |
 | v5.0 | 2026-03-29 | Biological interpretation complete: immune deconvolution (mMCP-counter, 8 tissues), cross-organ signaling (OmniPath, 111 L–R pairs), metabolic flux (iMM1865 E-Flux + pFBA), drug targets (DGIdb + ChEMBL, 1,284 FDA interactions), consensus 20-gene biomarker panel (gastro AUROC 0.806). 5 integration figures. |

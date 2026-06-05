@@ -2,7 +2,7 @@
 title: SpaceBio-Bench Portfolio Brief
 page_type: portfolio_brief
 status: public_review_ready
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: portfolio_brief_no_new_release_claim
 ---
 
