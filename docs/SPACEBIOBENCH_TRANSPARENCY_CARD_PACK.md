@@ -2,7 +2,7 @@
 title: SpaceBio-Bench Transparency Card Pack
 page_type: transparency_card_pack
 status: public_review_ready
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: transparency_card_pack_no_new_release_claim
 ---
 

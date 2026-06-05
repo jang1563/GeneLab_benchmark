@@ -2,7 +2,7 @@
 title: SpaceBio-Bench Release Readiness Card
 page_type: release_readiness_card
 status: public_review_ready
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: benchmark_release_readiness_card_draft_no_release_approval
 ---
 
