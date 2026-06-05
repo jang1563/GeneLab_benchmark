@@ -1,0 +1,367 @@
+{
+  "assay_modality": "bulk_rna_seq",
+  "biospecimen_type": "liver",
+  "feature_namespace": "mouse_gene",
+  "ground_control_type": "matched_ground_control",
+  "legacy_task_dir": "tasks/A1_liver_lomo",
+  "legacy_task_id": "A1",
+  "material_type": "animal_tissue",
+  "metrics": [
+    {
+      "interpretation": "Primary class-balance-aware Flight vs Ground classification score.",
+      "metric_id": "macro_f1",
+      "profile": "genelab_minimal"
+    },
+    {
+      "interpretation": "Mean recall across Flight and Ground labels.",
+      "metric_id": "balanced_accuracy",
+      "profile": "genelab_minimal"
+    },
+    {
+      "interpretation": "Ranking quality for binary Flight vs Ground probabilities.",
+      "metric_id": "auroc",
+      "profile": "genelab_minimal"
+    },
+    {
+      "interpretation": "Ranks whether representations are nearest to their own mission centroid.",
+      "metric_id": "mission_discrimination",
+      "profile": "genelab_minimal"
+    }
+  ],
+  "model_system": "rodent_spaceflight",
+  "organism": "Mus musculus",
+  "orthology_strategy": "not_applicable_within_mouse_task",
+  "output": {
+    "optional_columns": [
+      "flight_probability",
+      "embedding_*"
+    ],
+    "prediction_format": "csv",
+    "primary_artifacts": [
+      "predictions.csv",
+      "metrics.json"
+    ],
+    "required_columns": [
+      "sample_id",
+      "true_label",
+      "predicted_label"
+    ]
+  },
+  "platform": "OSDR_GLbulkRNAseq_processed_counts",
+  "provenance": {
+    "derived_from": "tasks/A1_liver_lomo/task_info.json",
+    "dry_run": false,
+    "legacy_generated_at": "2026-02-28T15:52:48.402168",
+    "legacy_split": "LOMO"
+  },
+  "schema_version": "0.1.0",
+  "source_records": [
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "liver",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-137",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "RR-3",
+      "model_system": "rodent_spaceflight",
+      "notes": "",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-137",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-137",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-137"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "liver",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-242",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "RR-9",
+      "model_system": "rodent_spaceflight",
+      "notes": "",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-242",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-242",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-242"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "liver",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-245",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "RR-6",
+      "model_system": "rodent_spaceflight",
+      "notes": "",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-245",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-245",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-245"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "liver",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-379",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "RR-8",
+      "model_system": "rodent_spaceflight",
+      "notes": "",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-379",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-379",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-379"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "liver",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-48",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "RR-1",
+      "model_system": "rodent_spaceflight",
+      "notes": "",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-48",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-48",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-48"
+    },
+    {
+      "access_status": "public",
+      "assay_modality": "bulk_rna_seq",
+      "biospecimen_type": "liver",
+      "checksum_status": "legacy_task_source_unfrozen",
+      "feature_namespace": "mouse_gene",
+      "glds_prefix": "GLDS-617",
+      "ground_control_type": "matched_ground_control",
+      "material_type": "animal_tissue",
+      "mission": "MHU-2",
+      "model_system": "rodent_spaceflight",
+      "notes": "GLDS-617 RNA-seq files. Has 3 groups: uG, 1G-centrifuge, GC",
+      "organism": "Mus musculus",
+      "orthology_strategy": "not_applicable_within_mouse_task",
+      "platform": "OSDR_GLbulkRNAseq_processed_counts",
+      "privacy_class": "public",
+      "source_id": "OSD-686",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-686",
+      "spaceflight_environment": "LEO_or_ISS_spaceflight",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-686"
+    }
+  ],
+  "spaceflight_environment": "LEO_or_ISS_spaceflight",
+  "species_common_name": "mouse",
+  "split": {
+    "folds": [
+      {
+        "excluded_bc_ag_samples": 71,
+        "n_genes_after_var_filter": 17240,
+        "n_genes_before_var_filter": 22987,
+        "n_test": 6,
+        "n_train": 187,
+        "test_label_distribution": {
+          "Flight": 3,
+          "Ground": 3
+        },
+        "test_mission": "MHU-2",
+        "train_label_distribution": {
+          "Flight": 73,
+          "Ground": 114
+        },
+        "train_missions": [
+          "RR-1",
+          "RR-3",
+          "RR-6",
+          "RR-8",
+          "RR-9"
+        ],
+        "var_percentile_cutoff": 0.25
+      },
+      {
+        "excluded_bc_ag_samples": 71,
+        "n_genes_after_var_filter": 17240,
+        "n_genes_before_var_filter": 22987,
+        "n_test": 14,
+        "n_train": 179,
+        "test_label_distribution": {
+          "Flight": 7,
+          "Ground": 7
+        },
+        "test_mission": "RR-1",
+        "train_label_distribution": {
+          "Flight": 69,
+          "Ground": 110
+        },
+        "train_missions": [
+          "MHU-2",
+          "RR-3",
+          "RR-6",
+          "RR-8",
+          "RR-9"
+        ],
+        "var_percentile_cutoff": 0.25
+      },
+      {
+        "excluded_bc_ag_samples": 71,
+        "n_genes_after_var_filter": 17240,
+        "n_genes_before_var_filter": 22987,
+        "n_test": 12,
+        "n_train": 181,
+        "test_label_distribution": {
+          "Flight": 6,
+          "Ground": 6
+        },
+        "test_mission": "RR-3",
+        "train_label_distribution": {
+          "Flight": 70,
+          "Ground": 111
+        },
+        "train_missions": [
+          "MHU-2",
+          "RR-1",
+          "RR-6",
+          "RR-8",
+          "RR-9"
+        ],
+        "var_percentile_cutoff": 0.25
+      },
+      {
+        "excluded_bc_ag_samples": 71,
+        "n_genes_after_var_filter": 17240,
+        "n_genes_before_var_filter": 22987,
+        "n_test": 39,
+        "n_train": 154,
+        "test_label_distribution": {
+          "Flight": 20,
+          "Ground": 19
+        },
+        "test_mission": "RR-6",
+        "train_label_distribution": {
+          "Flight": 56,
+          "Ground": 98
+        },
+        "train_missions": [
+          "MHU-2",
+          "RR-1",
+          "RR-3",
+          "RR-8",
+          "RR-9"
+        ],
+        "var_percentile_cutoff": 0.25
+      },
+      {
+        "excluded_bc_ag_samples": 71,
+        "n_genes_after_var_filter": 17240,
+        "n_genes_before_var_filter": 22987,
+        "n_test": 103,
+        "n_train": 90,
+        "test_label_distribution": {
+          "Flight": 35,
+          "Ground": 68
+        },
+        "test_mission": "RR-8",
+        "train_label_distribution": {
+          "Flight": 41,
+          "Ground": 49
+        },
+        "train_missions": [
+          "MHU-2",
+          "RR-1",
+          "RR-3",
+          "RR-6",
+          "RR-9"
+        ],
+        "var_percentile_cutoff": 0.25
+      },
+      {
+        "excluded_bc_ag_samples": 71,
+        "n_genes_after_var_filter": 17240,
+        "n_genes_before_var_filter": 22987,
+        "n_test": 19,
+        "n_train": 174,
+        "test_label_distribution": {
+          "Flight": 5,
+          "Ground": 14
+        },
+        "test_mission": "RR-9",
+        "train_label_distribution": {
+          "Flight": 71,
+          "Ground": 103
+        },
+        "train_missions": [
+          "MHU-2",
+          "RR-1",
+          "RR-3",
+          "RR-6",
+          "RR-8"
+        ],
+        "var_percentile_cutoff": 0.25
+      }
+    ],
+    "missions": [
+      "MHU-2",
+      "RR-1",
+      "RR-3",
+      "RR-6",
+      "RR-8",
+      "RR-9"
+    ],
+    "n_folds": 6,
+    "n_missions": 6,
+    "name": "leave_one_mission_out",
+    "strategy": "train on all missions except the held-out mission",
+    "unit": "mission"
+  },
+  "task_family": "bulk_lomo",
+  "task_id": "A1_liver_bulk_lomo",
+  "taxon_id": "10090",
+  "tissue": "liver",
+  "title": "GeneLab A1 liver bulk leave-one-mission-out",
+  "variant": "canonical"
+}

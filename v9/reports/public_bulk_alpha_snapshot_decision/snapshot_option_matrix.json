@@ -1,0 +1,32 @@
+[
+  {
+    "decision": "selected",
+    "next_action": "update dataset-card and Data Package boundary language",
+    "path_id": "metadata_only_alpha_snapshot",
+    "rationale": "The public bulk task, source, checksum-manifest, baseline, and package metadata spine is indexed, while payload hashes remain clearly blocked rather than silently implied.",
+    "remaining_blockers": "dataset-card alpha-boundary wording|Data Package decision resources|payload release still requires local hash verification",
+    "required_wording": "metadata-only alpha snapshot; checksum-manifest evidence parsed; no local payload mirror; no frozen payload hash verification",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "status": "allowed_with_explicit_blockers"
+  },
+  {
+    "decision": "deferred",
+    "next_action": "keep as a later payload-freeze block after metadata alpha",
+    "path_id": "payload_mirror_first",
+    "rationale": "Payload mirroring is the right prerequisite for a frozen payload release, but it is not required to publish a transparent metadata alpha that says the payload hashes are not locally verified.",
+    "remaining_blockers": "mirror upstream payloads|compare local hashes for 22 public bulk sources|record citation/license/version boundary",
+    "required_wording": "use only for a future frozen payload release after local mirroring and hash comparison are complete",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "status": "valid_but_not_required_before_metadata_alpha"
+  },
+  {
+    "decision": "rejected_for_current_sequence",
+    "next_action": "do not use this as the active v9 sequence",
+    "path_id": "no_alpha_until_payload_frozen",
+    "rationale": "This would stall the v9 alpha spine even though the current artifact can be bounded as metadata only and can help reviewers inspect task/source/provenance decisions.",
+    "remaining_blockers": "would defer all alpha wording until payload freeze",
+    "required_wording": "not selected",
+    "snapshot_decision_id": "v9_public_bulk_alpha_metadata_snapshot_decision",
+    "status": "too_conservative_for_metadata_scaffold"
+  }
+]

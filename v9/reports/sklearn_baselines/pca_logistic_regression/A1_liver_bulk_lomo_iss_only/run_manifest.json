@@ -1,0 +1,1764 @@
+{
+  "command": [
+    "scripts/run_v9_sklearn_baselines.py",
+    "--output-dir",
+    "v9/reports/sklearn_baselines"
+  ],
+  "generated_at": "2026-05-21T06:07:32.912753+00:00",
+  "input_files": [
+    {
+      "path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/predictions.csv",
+      "role": "submission",
+      "sha256": "5f01e8a926ab172e32d10a8c02e9d40eca14054c4ff5aaf99f0ee6362d980044"
+    },
+    {
+      "path": "v9/task_manifests/A1_liver_bulk_lomo_iss_only.json",
+      "role": "task_manifest",
+      "sha256": "0d2374a9f726719d1e2822d44ed21b1302efbe1b8c60bdfeeaa0f344b20d8940"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.5586998317712089
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5111751982696467
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.4163566260280388
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.49527665317139
+    },
+    "mission_discrimination": {
+      "details": {
+        "distance": "euclidean",
+        "metric_id": "mission_discrimination",
+        "n_scored": 187,
+        "n_skipped": 0,
+        "per_sample": [
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 15.601603065598923,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_I_Rep1_M21",
+            "sample_index": 0,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 14.086750950817967,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_I_Rep2_M22",
+            "sample_index": 1,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 8.175198526175715,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C_Rep1_M25",
+            "sample_index": 2,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 7.134292095466387,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C_Rep2_M26",
+            "sample_index": 3,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 4.04376770808385,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C_Rep3_M27",
+            "sample_index": 4,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 3.8857511784560548,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C_Rep4_M28",
+            "sample_index": 5,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 7.83928349582693,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C_Rep5_M30",
+            "sample_index": 6,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 15.078430435032585,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_I_Rep1_M31",
+            "sample_index": 7,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 17.679970830839643,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_I_Rep2_M32",
+            "sample_index": 8,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 6.955823897955287,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C_Rep1_M36",
+            "sample_index": 9,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 8.980647953970704,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C_Rep2_M37",
+            "sample_index": 10,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 4.993695459262941,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C_Rep3_M38",
+            "sample_index": 11,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 5.921451249565278,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C_Rep4_M39",
+            "sample_index": 12,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-1",
+            "n_candidate_missions": 5,
+            "own_distance": 12.92176612594098,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C_Rep5_M40",
+            "sample_index": 13,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 1.0695163252478577,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_GC_Rep1_G1",
+            "sample_index": 14,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 3.515948431040434,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_GC_Rep2_G2",
+            "sample_index": 15,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 18.099035241691524,
+            "rank": 2.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_GC_Rep3_G3",
+            "sample_index": 16,
+            "score": 0.75
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 3.602982282301284,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_GC_Rep4_G5",
+            "sample_index": 17,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 1.6583093422816013,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_GC_Rep5_G6",
+            "sample_index": 18,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 6.132536533347228,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_GC_Rep6_G7",
+            "sample_index": 19,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 7.114588777074248,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_FLT_Rep1_F1",
+            "sample_index": 20,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 4.017193276815633,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_FLT_Rep2_F2",
+            "sample_index": 21,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 4.775128376303947,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_FLT_Rep3_F3",
+            "sample_index": 22,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 7.276461738748409,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_FLT_Rep4_F4",
+            "sample_index": 23,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 5.865704111146958,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_FLT_Rep5_F5",
+            "sample_index": 24,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-3",
+            "n_candidate_missions": 5,
+            "own_distance": 17.012466730642153,
+            "rank": 1.0,
+            "sample_id": "Mmus_BAL-TAL_LVR_FLT_Rep6_F6",
+            "sample_index": 25,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 15.585143199338061,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep1_G6",
+            "sample_index": 26,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 17.577952564735206,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep2_G4",
+            "sample_index": 27,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 17.86088136741745,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep3_G10",
+            "sample_index": 28,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 29.859222761686638,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep4_G5",
+            "sample_index": 29,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 12.97920536105738,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep5_G7",
+            "sample_index": 30,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 13.943098784300263,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep6_G8",
+            "sample_index": 31,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 16.316027089726976,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep7_G9",
+            "sample_index": 32,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 34.011753252797995,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep8_G2",
+            "sample_index": 33,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 29.796388405456522,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_LAR_Rep9_G3",
+            "sample_index": 34,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 17.90823286819587,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep1_F1",
+            "sample_index": 35,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 20.94111617985287,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep2_F2",
+            "sample_index": 36,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 18.14025806315667,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep3_F3",
+            "sample_index": 37,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 19.606494403277107,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep4_F6",
+            "sample_index": 38,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 16.704738066428778,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep5_F7",
+            "sample_index": 39,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 22.880554275648347,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep6_F10",
+            "sample_index": 40,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 27.925396374354168,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep7_F8",
+            "sample_index": 41,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 13.4038641063868,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep8_F9",
+            "sample_index": 42,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 30.45862994617876,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep9_F4",
+            "sample_index": 43,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 53.44707881048398,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_LAR_Rep10_F5",
+            "sample_index": 44,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 22.636099676825136,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep1_G4",
+            "sample_index": 45,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 11.491718993457615,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep2_G9",
+            "sample_index": 46,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 20.91251021164007,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep3_G10",
+            "sample_index": 47,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 4.341660950356391,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep4_G7",
+            "sample_index": 48,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 17.5997642315863,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep5_G8",
+            "sample_index": 49,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 32.15207819310409,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep6_G1",
+            "sample_index": 50,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 25.04556439159401,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep7_G2",
+            "sample_index": 51,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 25.795783201734576,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep8_G3",
+            "sample_index": 52,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 30.28937488270218,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep9_G5",
+            "sample_index": 53,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 31.109610580724,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_GC_ISS-T_Rep10_G6",
+            "sample_index": 54,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 19.45949353230444,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep1_F5",
+            "sample_index": 55,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 20.79145410274135,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep2_F8",
+            "sample_index": 56,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 14.172279386738452,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep3_F9",
+            "sample_index": 57,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 21.234798834280237,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep4_F10",
+            "sample_index": 58,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 25.974223800436036,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep5_F7",
+            "sample_index": 59,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 24.81893964705762,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep6_F1",
+            "sample_index": 60,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 22.66976649625839,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep7_F2",
+            "sample_index": 61,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 31.311263778661928,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep8_F3",
+            "sample_index": 62,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 18.505184886013893,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep9_F4",
+            "sample_index": 63,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-6",
+            "n_candidate_missions": 5,
+            "own_distance": 36.837246443610496,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6T_LVR_FLT_ISS-T_Rep10_F6",
+            "sample_index": 64,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.947332588844723,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI1",
+            "sample_index": 65,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 21.277120536909912,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI2",
+            "sample_index": 66,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.13241366427816,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI3",
+            "sample_index": 67,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 19.86217952411407,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI4",
+            "sample_index": 68,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 46.762100159727964,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI5",
+            "sample_index": 69,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 16.39524521313259,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI6",
+            "sample_index": 70,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 22.54736596753972,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI7",
+            "sample_index": 71,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 28.08695474099438,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI8",
+            "sample_index": 72,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 22.32097774297444,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI9",
+            "sample_index": 73,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 8.129154745553805,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_YNG_FI10",
+            "sample_index": 74,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 5.435591607889951,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI11",
+            "sample_index": 75,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 7.086818360734301,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI12",
+            "sample_index": 76,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 20.958668147362992,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI13",
+            "sample_index": 77,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 10.60785766009917,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI14",
+            "sample_index": 78,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 20.750974894938878,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI15",
+            "sample_index": 79,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 19.89151119526055,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI16",
+            "sample_index": 80,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 29.680502387460397,
+            "rank": 2.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI17",
+            "sample_index": 81,
+            "score": 0.75
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 10.699529557453397,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI18",
+            "sample_index": 82,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 31.040499626340004,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI19",
+            "sample_index": 83,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 13.230323186786661,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_ISS-T_OLD_FI20",
+            "sample_index": 84,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 26.48713303676603,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL1",
+            "sample_index": 85,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 21.28038188308195,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL2",
+            "sample_index": 86,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 23.9888206826182,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_OLD_FL3",
+            "sample_index": 87,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 1.592537307976253,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_OLD_FL4",
+            "sample_index": 88,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 7.315589170837988,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL5",
+            "sample_index": 89,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 3.68111216473041,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL6",
+            "sample_index": 90,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 8.066972799070568,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_OLD_FL7",
+            "sample_index": 91,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 25.61489479928444,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_OLD_FL8",
+            "sample_index": 92,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.50747001566691,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_OLD_FL11",
+            "sample_index": 93,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 23.329454314861955,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL13",
+            "sample_index": 94,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 19.89853172174994,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL14",
+            "sample_index": 95,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 25.608076094788885,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_OLD_FL15",
+            "sample_index": 96,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 5.610070070960682,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_OLD_FL16",
+            "sample_index": 97,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 10.359227316442203,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL17",
+            "sample_index": 98,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 8.400574817234657,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_FLT_LAR_YNG_FL18",
+            "sample_index": 99,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 2.7960183662057974,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI1",
+            "sample_index": 100,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 22.990052290728315,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI2",
+            "sample_index": 101,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 13.736295580407033,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI3",
+            "sample_index": 102,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 6.999599848498532,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI4",
+            "sample_index": 103,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 11.894669515351051,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI5",
+            "sample_index": 104,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 16.323787806696597,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI6",
+            "sample_index": 105,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 8.705548099799257,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI7",
+            "sample_index": 106,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 20.13018109040706,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI8",
+            "sample_index": 107,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 8.029591635157447,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI9",
+            "sample_index": 108,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 5.67687598905898,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_YNG_GI10",
+            "sample_index": 109,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.745016795490507,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI11",
+            "sample_index": 110,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 15.004431065654279,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI12",
+            "sample_index": 111,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 41.653287320657114,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI13",
+            "sample_index": 112,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 23.19462144078298,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI14",
+            "sample_index": 113,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 6.5454441303417905,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI15",
+            "sample_index": 114,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 6.177869851397212,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI16",
+            "sample_index": 115,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 3.0152899849476027,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI17",
+            "sample_index": 116,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 2.2544035700796887,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI18",
+            "sample_index": 117,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 18.786013883601775,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI19",
+            "sample_index": 118,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 10.275012275772545,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_ISS-T_OLD_GI20",
+            "sample_index": 119,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 15.052398571796518,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL1",
+            "sample_index": 120,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 1.7559233155194653,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL2",
+            "sample_index": 121,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 36.39772637795136,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_OLD_GL3",
+            "sample_index": 122,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 18.965302280628542,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_OLD_GL4",
+            "sample_index": 123,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 35.68937016793625,
+            "rank": 2.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL5",
+            "sample_index": 124,
+            "score": 0.75
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 6.265387716431679,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL6",
+            "sample_index": 125,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 12.993901990038859,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_OLD_GL7",
+            "sample_index": 126,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 20.950917149298835,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_OLD_GL8",
+            "sample_index": 127,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.841131742155506,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_OLD_GL11",
+            "sample_index": 128,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 10.54774154356552,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_OLD_GL12",
+            "sample_index": 129,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 21.357893438122915,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL13",
+            "sample_index": 130,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 18.230415459750272,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL14",
+            "sample_index": 131,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 17.11725251932355,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_OLD_GL15",
+            "sample_index": 132,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 25.546042211964217,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL17",
+            "sample_index": 133,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 6.201749502624977,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_GC_LAR_YNG_GL18",
+            "sample_index": 134,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 5.1841093704291525,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI1",
+            "sample_index": 135,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 32.331160359931964,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI2",
+            "sample_index": 136,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.50683912055832,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI3",
+            "sample_index": 137,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 9.028376510563744,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI4",
+            "sample_index": 138,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 11.716902267000936,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI5",
+            "sample_index": 139,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 21.206134777415357,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI6",
+            "sample_index": 140,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 13.679286700815204,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI7",
+            "sample_index": 141,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 13.556925171990363,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI8",
+            "sample_index": 142,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 7.8469701515891455,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_YNG_VI10",
+            "sample_index": 143,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 21.41294096623082,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI11",
+            "sample_index": 144,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 9.30170707055238,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI12",
+            "sample_index": 145,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 24.278827038819504,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI13",
+            "sample_index": 146,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 28.1348484191497,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI14",
+            "sample_index": 147,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.145018369732288,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI16",
+            "sample_index": 148,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 8.624522926525776,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI17",
+            "sample_index": 149,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 17.008340717918006,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI18",
+            "sample_index": 150,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 15.523173458180155,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_ISS-T_OLD_VI19",
+            "sample_index": 151,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 27.798953360716652,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL1",
+            "sample_index": 152,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 22.043483131903557,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL2",
+            "sample_index": 153,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 5.2886752386153635,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL4",
+            "sample_index": 154,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 18.026005274276727,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL5",
+            "sample_index": 155,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.144462287199987,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL7",
+            "sample_index": 156,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 4.588871332816965,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL8",
+            "sample_index": 157,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 20.6176114844718,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL9",
+            "sample_index": 158,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 9.166266394782012,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL10",
+            "sample_index": 159,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 24.894445607175083,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL11",
+            "sample_index": 160,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 14.49630614983254,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL12",
+            "sample_index": 161,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 13.419282426510751,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL14",
+            "sample_index": 162,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 4.610576315170742,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL15",
+            "sample_index": 163,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 15.877050489143226,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL16",
+            "sample_index": 164,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 9.770559092158814,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL17",
+            "sample_index": 165,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 17.291480329195476,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_YNG_VL18",
+            "sample_index": 166,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-8",
+            "n_candidate_missions": 5,
+            "own_distance": 50.144678886568094,
+            "rank": 1.0,
+            "sample_id": "RR8_LVR_VIV_LAR_OLD_VL20",
+            "sample_index": 167,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 4.881319465448038,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C1_Rep1_C1-1",
+            "sample_index": 168,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 16.660203436633044,
+            "rank": 2.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C1_Rep2_C1-2",
+            "sample_index": 169,
+            "score": 0.75
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 12.22487708649794,
+            "rank": 2.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C1_Rep3_C1-3",
+            "sample_index": 170,
+            "score": 0.75
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 10.595088945567309,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C1_Rep4_C1-4",
+            "sample_index": 171,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 8.248837167972292,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C1_Rep5_C1-5",
+            "sample_index": 172,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 12.483194076245566,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C2_Rep1_C2-1",
+            "sample_index": 173,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 13.337860801150477,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C2_Rep2_C2-2",
+            "sample_index": 174,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 19.582934778349387,
+            "rank": 2.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C2_Rep3_C2-3",
+            "sample_index": 175,
+            "score": 0.75
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 8.311365289668034,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_CC_C2_Rep4_C2-4",
+            "sample_index": 176,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 13.609535163255721,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C1_Rep1_F1",
+            "sample_index": 177,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 6.808403227970419,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C1_Rep2_F2",
+            "sample_index": 178,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 8.759583340945365,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C1_Rep3_F3",
+            "sample_index": 179,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 18.55704326523847,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C1_Rep4_F4",
+            "sample_index": 180,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 14.140672372017388,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_FLT_C1_Rep5_F5",
+            "sample_index": 181,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 13.093733531501615,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C2_Rep1_G1",
+            "sample_index": 182,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 6.586560043136825,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C2_Rep2_G3",
+            "sample_index": 183,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 4.996449283992085,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C2_Rep3_G4",
+            "sample_index": 184,
+            "score": 1.0
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 16.55843396143576,
+            "rank": 2.0,
+            "sample_id": "Mmus_C57-6J_LVR_GC_C2_Rep4_G5",
+            "sample_index": 185,
+            "score": 0.75
+          },
+          {
+            "mission": "RR-9",
+            "n_candidate_missions": 5,
+            "own_distance": 12.556725971117986,
+            "rank": 1.0,
+            "sample_id": "Mmus_C57-6J_LVR_VIV_C2_Rep1_V3",
+            "sample_index": 186,
+            "score": 1.0
+          }
+        ],
+        "score": 0.9906417112299465
+      },
+      "status": "computed",
+      "value": 0.9906417112299465
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "bulk_lomo",
+  "task_id": "A1_liver_bulk_lomo_iss_only",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability",
+      "embedding_0",
+      "embedding_1"
+    ],
+    "embedding_columns": [
+      "embedding_0",
+      "embedding_1"
+    ],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 187,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/pca_logistic_regression/A1_liver_bulk_lomo_iss_only/predictions.csv",
+    "task_id": "A1_liver_bulk_lomo_iss_only",
+    "warnings": []
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "command": [
+    "scripts/run_v9_sklearn_baselines.py",
+    "--output-dir",
+    "v9/reports/sklearn_baselines"
+  ],
+  "generated_at": "2026-05-21T06:08:20.517190+00:00",
+  "input_files": [
+    {
+      "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/predictions.csv",
+      "role": "submission",
+      "sha256": "ffc371c5ce9e1d9dabb9b99d1bc54ae07fdc697d8b8432885889e78b3a506080"
+    },
+    {
+      "path": "v9/task_manifests/A3_kidney_bulk_lomo.json",
+      "role": "task_manifest",
+      "sha256": "25023d023cb0b847fa5103f33ca793ac0e0bdf8d13b9cba007ce44e60e4d006f"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.6722383720930233
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.6293604651162791
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.24167845666358967
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.6398046398046398
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "bulk_lomo",
+  "task_id": "A3_kidney_bulk_lomo",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 118,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A3_kidney_bulk_lomo/predictions.csv",
+    "task_id": "A3_kidney_bulk_lomo",
+    "warnings": []
+  }
+}

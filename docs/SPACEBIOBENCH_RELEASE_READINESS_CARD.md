@@ -20,14 +20,15 @@ This card does not approve a new release. It records the conditions a surface
 must satisfy before its public wording can become stronger.
 
 Branch note: on the default `main` branch, v9-specific evidence paths such as
-`v9/...` and `docs/V9_*` refer to artifacts maintained on the canonical `v3`
-branch.
+`v9/...` and `docs/V9_*` refer to the curated public bulk metadata-alpha subset
+included in this repository. Payload matrices and draft extension lanes are
+excluded from the current public-review path.
 
 ## Release Tiers
 
 | Tier | Meaning | Current examples | Public claim status |
 |---|---|---|---|
-| `historical_result_surface` | Existing result surface with canonical documentation | v1-v7 GeneLab Benchmark; v7.1 documentation patch | Allowed when using canonical v7.1 language |
+| `historical_result_surface` | Existing result surface with canonical documentation | v1-v7 GeneLab Benchmark; v7.1 canonical result surface; v7.1.2 documentation/card/evidence-visibility patch | Allowed when using canonical v7.1 result language and v7.1.2 patch qualifiers |
 | `metadata_alpha` | Public metadata, provenance, task, and baseline scaffold without frozen payload mirror | v9 public bulk alpha | Allowed only with metadata-only and no-payload qualifiers |
 | `diagnostic_alpha` | Draft lane used for feasibility, metric, payload, or asset diagnostics | v9 single-cell, organoid, multispecies draft lanes | Draft-only; no public leaderboard or frozen release claim |
 | `frozen_payload_release` | Future payload bundle with local mirror and verified payload hashes | Not yet active for v9 public bulk | Blocked until payload gates pass |

@@ -18,8 +18,9 @@ The register is a documentation control, not a new release artifact and not a
 source of new benchmark results.
 
 Branch note: on the default `main` branch, v9-specific evidence paths such as
-`v9/...` and `docs/V9_*` refer to artifacts maintained on the canonical `v3`
-branch.
+`v9/...` and `docs/V9_*` refer to the curated public bulk metadata-alpha subset
+included in this repository. Payload matrices and draft extension lanes are
+excluded from the current public-review path.
 
 ## Evidence Vocabulary
 
@@ -36,7 +37,8 @@ branch.
 The current public-safe summary is:
 
 - v1-v7 is the canonical historical benchmark result surface.
-- v7.1 is a documentation consistency patch, not a new result release.
+- v7.1.2 is a documentation, public-card, metadata, and evidence-visibility patch over
+  the canonical v7.1 result surface, not a new result release.
 - v8 is an incubating translational extension and should not be mixed into
   v7.1 claims.
 - v9 public bulk is a metadata-only alpha with explicit payload blockers.
@@ -56,15 +58,17 @@ The current public-safe summary is:
 - Use: "cross-mission mouse spaceflight transcriptomics benchmark".
 - Avoid: "clinical astronaut health predictor".
 
-### SBB-C002 - v7.1 Patch Boundary
+### SBB-C002 - v7.1.2 Patch Boundary
 
-- Claim: v7.1 is a documentation consistency patch, not a new result-generation
-  release.
+- Claim: v7.1.2 is a documentation, public-card, metadata, and evidence-visibility patch
+  over the canonical v7.1 result surface, not a new result-generation release.
 - Support: primary.
-- Sources: `docs/CANONICAL_RESULTS_V7_1.md`.
+- Sources: `README.md`; `docs/CANONICAL_RESULTS_V7_1.md`;
+  `docs/hf_dataset_card.md`.
 - Confidence: high.
-- Use: "v7.1 documentation patch; no new benchmark result generation".
-- Avoid: "v7.1 adds new benchmark results".
+- Use: "v7.1.2 documentation/card/metadata/evidence-visibility patch; no new benchmark result
+  generation".
+- Avoid: "v7.1.2 adds new benchmark results".
 
 ### SBB-C003 - v4 Multi-Method Scope
 

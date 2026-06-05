@@ -31,20 +31,21 @@ and not a locally hash-verified payload bundle. Payload-level hash verification
 for every distributed fold matrix remains pending.
 
 Branch note: when this card is viewed from the default `main` branch, artifact
-paths beginning with `v9/...` and `docs/V9_*` refer to canonical evidence files
-maintained on the `v3` branch.
+paths beginning with `v9/...` and `docs/V9_*` refer to the curated public bulk
+metadata-alpha evidence subset included in this repository. Payload matrices
+and draft extension lanes are outside this public-review path.
 
 ## Transparency And Release Boundary
 
 SpaceBio-Bench keeps result, evaluation, and release-readiness claims in a
-separate transparency card pack. The canonical copies live in the GitHub
-repository under:
+separate transparency card pack. The canonical public-review copies live in the
+GitHub repository under:
 
-- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_SYSTEM_CARD.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_EVALUATION_CARD.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
-- https://github.com/jang1563/GeneLab_benchmark/blob/v3/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_SYSTEM_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_EVALUATION_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md
+- https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/SPACEBIOBENCH_CLAIM_REGISTER.md
 
 Use these companion documents to check whether a claim belongs to the v1-v7
 canonical result surface, the v8 translational extension, the v9 public bulk

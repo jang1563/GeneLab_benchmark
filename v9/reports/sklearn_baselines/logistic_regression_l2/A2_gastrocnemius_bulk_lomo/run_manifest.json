@@ -1,0 +1,67 @@
+{
+  "command": [
+    "scripts/run_v9_sklearn_baselines.py",
+    "--output-dir",
+    "v9/reports/sklearn_baselines"
+  ],
+  "generated_at": "2026-05-21T06:08:18.036651+00:00",
+  "input_files": [
+    {
+      "path": "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/predictions.csv",
+      "role": "submission",
+      "sha256": "2b18277e2430d3195ae7661c5d5c9efe8b66d31a68ec80c3972a7b35216ce5c6"
+    },
+    {
+      "path": "v9/task_manifests/A2_gastrocnemius_bulk_lomo.json",
+      "role": "task_manifest",
+      "sha256": "51bca918cf9ce5a0ed7028252fb3ba8f7df4a92a089b4faf39d3e92bbb0e3770"
+    }
+  ],
+  "metrics": {
+    "auroc": {
+      "status": "computed",
+      "value": 0.77734375
+    },
+    "balanced_accuracy": {
+      "status": "computed",
+      "value": 0.5
+    },
+    "calibration_error": {
+      "status": "computed",
+      "value": 0.4747578856139306
+    },
+    "macro_f1": {
+      "status": "computed",
+      "value": 0.3333333333333333
+    },
+    "mission_discrimination": {
+      "reason": "embedding_* columns missing",
+      "status": "skipped"
+    }
+  },
+  "run_type": "spacebio_bench_evaluation",
+  "schema_version": "0.1.0",
+  "spacebio_bench_version": "0.1.0-alpha",
+  "status": "evaluated",
+  "task_family": "bulk_lomo",
+  "task_id": "A2_gastrocnemius_bulk_lomo",
+  "validation": {
+    "columns": [
+      "task_id",
+      "fold_id",
+      "sample_id",
+      "mission",
+      "true_label",
+      "predicted_label",
+      "flight_probability"
+    ],
+    "embedding_columns": [],
+    "errors": [],
+    "extra_columns": [],
+    "n_rows": 32,
+    "ok": true,
+    "submission_path": "v9/reports/sklearn_baselines/logistic_regression_l2/A2_gastrocnemius_bulk_lomo/predictions.csv",
+    "task_id": "A2_gastrocnemius_bulk_lomo",
+    "warnings": []
+  }
+}
