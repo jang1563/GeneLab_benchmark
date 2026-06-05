@@ -63,9 +63,9 @@ complete.
 1. Confirm final manuscript title, final author list, affiliations, and release
    version.
 2. Update `CITATION.cff` and `.zenodo.json` with final metadata.
-3. Create an annotated Git tag from the final public-card/archive-metadata
-   commit, for example `v7.1.1`. The existing `v7.1` GitHub release predates
-   the card-pack and archive-metadata files.
+3. Create or confirm annotated Git tag `v7.1.1` from the final
+   public-card/archive-metadata commit. The older `v7.1` GitHub release
+   predates the card-pack and archive-metadata files.
 4. Create a GitHub release from that tag.
 5. Let Zenodo mint the DOI from the GitHub release, or deposit manually with
    `.zenodo.json` metadata.
@@ -96,8 +96,9 @@ du -sh .
 ## Known Archive Caveats
 
 - The paper archive DOI has not yet been minted.
-- The existing `v7.1` GitHub release predates the current card-pack and
-  archive-metadata polish; cite a successor tag once minted.
+- The older `v7.1` GitHub release predates the current card-pack and
+  archive-metadata polish; cite `v7.1.1` or a successor tag for this card
+  surface once minted.
 - Final manuscript author-list metadata should be reviewed before final
   deposition.
 - NASA OSDR source datasets need dataset-specific citation review for the

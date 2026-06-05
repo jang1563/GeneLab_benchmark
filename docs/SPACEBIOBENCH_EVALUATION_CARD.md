@@ -31,6 +31,23 @@ branch.
 | v9 public bulk alpha | Metadata-only alpha scaffold | Task manifest, LOMO fold, baseline run, prediction row, run manifest | Workflow and provenance evidence, not leaderboard ranking |
 | v9 draft extension lanes | Diagnostic or feasibility scaffolds | Asset inventory, metric spec, payload audit, draft task manifest, or diagnostic run | Draft-only; no public benchmark score claim |
 
+## Evaluation Flow
+
+```mermaid
+flowchart LR
+  A["Source inventory"] --> B["Task manifest"]
+  B --> C["Held-out mission fold"]
+  C --> D["Baseline or submitted predictions"]
+  D --> E["Metrics with task/fold ids"]
+  E --> F["Per-task interpretation"]
+  F --> G["Pooled summary with caveats"]
+  G --> H["Claim register language"]
+```
+
+The evaluation flow is intentionally claim-aware. A score is first interpreted
+at the task and fold level, then summarized only with caveats about mission,
+tissue, payload, baseline, and release-surface boundaries.
+
 ## Current v9 Public Bulk Evaluation Unit
 
 The current v9 public bulk lane evaluates mission-held-out classification tasks

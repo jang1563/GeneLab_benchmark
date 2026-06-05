@@ -35,10 +35,28 @@ The project currently has multiple surfaces with different maturity levels:
 | Surface | Current status | Primary boundary |
 |---|---|---|
 | v1-v7 GeneLab Benchmark | Canonical historical result surface | Cross-mission mouse transcriptomics benchmark and result synthesis |
-| v7.1 documentation patch | Documentation consistency patch | No new benchmark result generation |
+| v7.1.1 documentation/card patch | Documentation, public-card, and metadata consistency patch over v7.1 | No new benchmark result generation |
 | v8 SpaceMed | Incubating translational extension | Hypothesis and diagnostic work only; do not mix into v7.1 claims |
 | v9 public bulk | Metadata-only alpha snapshot | Task/source/provenance scaffold; not a frozen payload release |
 | v9 single-cell, organoid, multispecies | Draft diagnostic lanes | Asset, payload, metric, or feasibility scaffolds depending on lane |
+
+## System Boundary Map
+
+```mermaid
+flowchart LR
+  A["Public NASA OSDR sources"] --> B["Task manifests and fold definitions"]
+  B --> C["Baseline runs and result summaries"]
+  C --> D["System, evaluation, release, and claim cards"]
+  D --> E["Allowed benchmark claims"]
+  D --> F["Blocked clinical, crew-health, countermeasure, and Mars-regime claims"]
+  B --> G["v9 metadata-alpha scaffold"]
+  G --> H["Payload hashing pending"]
+```
+
+This map shows the boundary the cards enforce: benchmark evidence can support
+task, fold, metric, provenance, and release-readiness claims, but it cannot
+support clinical, crew-health, countermeasure, intervention, or Mars-regime
+claims under the current release.
 
 ## Intended Uses
 

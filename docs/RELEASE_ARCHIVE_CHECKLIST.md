@@ -41,8 +41,8 @@ must wait until the final manuscript, tag, and DOI are available.
 
 ## Needs Final Release Action
 
-- Create annotated Git tag from the final public-card/archive-metadata commit
-  (recommended next patch tag: `v7.1.1`).
+- Create or confirm annotated Git tag `v7.1.1` from the final
+  public-card/archive-metadata commit.
 - Create GitHub release from the tag.
 - Verify Zenodo deposition metadata.
 - Download source archive and record SHA-256 checksum.

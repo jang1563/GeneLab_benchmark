@@ -23,6 +23,8 @@ surface. Detailed v9 metadata-alpha evidence paths such as `v9/...` and
 
 - v1-v7 / v7.1 is the canonical historical result surface for the original
   GeneLab Benchmark.
+- v7.1.1 is the public-card and metadata consistency patch over that canonical
+  result surface. It does not introduce new result generation.
 - v8 is an incubating translational extension and should not be mixed into
   v7.1 benchmark claims.
 - v9 public bulk is a metadata-only alpha: task/source/provenance metadata and
@@ -34,20 +36,38 @@ surface. Detailed v9 metadata-alpha evidence paths such as `v9/...` and
   proof, clinical guidance, countermeasure evidence, or mission-readiness
   evidence.
 
+## Three-Minute Review Map
+
+```mermaid
+flowchart LR
+  A["Portfolio brief"] --> B["System card"]
+  B --> C["Evaluation card"]
+  C --> D["Release readiness card"]
+  D --> E["Claim register"]
+  B --> F["Data and provenance boundary"]
+  C --> G["Task, fold, metric, and baseline interpretation"]
+  E --> H["Allowed, blocked, and future-only language"]
+```
+
+The intended reading order is portfolio brief first, then the system card,
+evaluation card, release readiness card, and claim register. This keeps the
+project understandable without collapsing benchmark results, metadata-alpha
+scaffolds, and unsupported translational claims into one headline.
+
 ## Card Index
 
 | Card | What it answers | File |
 |---|---|---|
-| Portfolio Brief | Why does this project matter as a research and portfolio artifact? | `docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md` |
-| System Card | What is SpaceBio-Bench, what surfaces exist, and what is out of scope? | `docs/SPACEBIOBENCH_SYSTEM_CARD.md` |
-| Evaluation Card | How should task, fold, baseline, metric, and pooled results be interpreted? | `docs/SPACEBIOBENCH_EVALUATION_CARD.md` |
-| Release Readiness Card | Which release tier is each surface in, and what gates block stronger wording? | `docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md` |
-| Claim Register | Which claims are supported, blocked, or future-only? | `docs/SPACEBIOBENCH_CLAIM_REGISTER.md` |
-| Release Archive Card | What would be included in a paper-supporting archive and what remains blocked? | `docs/RELEASE_ARCHIVE_CARD.md` |
-| Release Archive Manifest | Which files and metadata surfaces form the archive candidate? | `docs/RELEASE_ARCHIVE_MANIFEST.md` |
-| Release Archive Checklist | Which final DOI, tag, citation, and checksum gates remain? | `docs/RELEASE_ARCHIVE_CHECKLIST.md` |
-| v9 HF Dataset Card Draft | What does the v9 public bulk metadata alpha contain? | `docs/v9_hf_dataset_card.md` |
-| v7.1 Canonical Results | What is the locked public result and scope source for v1-v7? | `docs/CANONICAL_RESULTS_V7_1.md` |
+| Portfolio Brief | Why does this project matter as a research and portfolio artifact? | [docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md](SPACEBIOBENCH_PORTFOLIO_BRIEF.md) |
+| System Card | What is SpaceBio-Bench, what surfaces exist, and what is out of scope? | [docs/SPACEBIOBENCH_SYSTEM_CARD.md](SPACEBIOBENCH_SYSTEM_CARD.md) |
+| Evaluation Card | How should task, fold, baseline, metric, and pooled results be interpreted? | [docs/SPACEBIOBENCH_EVALUATION_CARD.md](SPACEBIOBENCH_EVALUATION_CARD.md) |
+| Release Readiness Card | Which release tier is each surface in, and what gates block stronger wording? | [docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md](SPACEBIOBENCH_RELEASE_READINESS_CARD.md) |
+| Claim Register | Which claims are supported, blocked, or future-only? | [docs/SPACEBIOBENCH_CLAIM_REGISTER.md](SPACEBIOBENCH_CLAIM_REGISTER.md) |
+| Release Archive Card | What would be included in a paper-supporting archive and what remains blocked? | [docs/RELEASE_ARCHIVE_CARD.md](RELEASE_ARCHIVE_CARD.md) |
+| Release Archive Manifest | Which files and metadata surfaces form the archive candidate? | [docs/RELEASE_ARCHIVE_MANIFEST.md](RELEASE_ARCHIVE_MANIFEST.md) |
+| Release Archive Checklist | Which final DOI, tag, citation, and checksum gates remain? | [docs/RELEASE_ARCHIVE_CHECKLIST.md](RELEASE_ARCHIVE_CHECKLIST.md) |
+| v9 HF Dataset Card Draft | What does the v9 public bulk metadata alpha contain? | [docs/v9_hf_dataset_card.md](v9_hf_dataset_card.md) |
+| v7.1 Canonical Results | What is the locked public result and scope source for v1-v7? | [docs/CANONICAL_RESULTS_V7_1.md](CANONICAL_RESULTS_V7_1.md) |
 
 ## Publication Surface Guidance
 
