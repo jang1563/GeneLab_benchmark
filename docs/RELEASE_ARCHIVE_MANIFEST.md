@@ -2,7 +2,7 @@
 title: GeneLab Benchmark Release Archive Manifest
 page_type: release_archive_manifest
 status: release_candidate_manifest
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: manifest_no_new_release_or_payload_claim
 ---
 
@@ -60,10 +60,12 @@ complete.
 
 ## Suggested Final Archive Procedure
 
-1. Confirm final manuscript title, author order, affiliations, and release
+1. Confirm final manuscript title, final author list, affiliations, and release
    version.
 2. Update `CITATION.cff` and `.zenodo.json` with final metadata.
-3. Create an annotated Git tag, for example `v7.1.0`.
+3. Create an annotated Git tag from the final public-card/archive-metadata
+   commit, for example `v7.1.1`. The existing `v7.1` GitHub release predates
+   the card-pack and archive-metadata files.
 4. Create a GitHub release from that tag.
 5. Let Zenodo mint the DOI from the GitHub release, or deposit manually with
    `.zenodo.json` metadata.
@@ -77,9 +79,9 @@ complete.
 Use these commands after the final release tag exists:
 
 ```bash
-git archive --format=tar.gz --prefix=GeneLab_benchmark-v7.1.0/ \
-  -o GeneLab_benchmark-v7.1.0.tar.gz v7.1.0
-shasum -a 256 GeneLab_benchmark-v7.1.0.tar.gz
+git archive --format=tar.gz --prefix=GeneLab_benchmark-v7.1.1/ \
+  -o GeneLab_benchmark-v7.1.1.tar.gz v7.1.1
+shasum -a 256 GeneLab_benchmark-v7.1.1.tar.gz
 ```
 
 For a source checkout:
@@ -94,7 +96,10 @@ du -sh .
 ## Known Archive Caveats
 
 - The paper archive DOI has not yet been minted.
-- Author metadata should be reviewed before final deposition.
+- The existing `v7.1` GitHub release predates the current card-pack and
+  archive-metadata polish; cite a successor tag once minted.
+- Final manuscript author-list metadata should be reviewed before final
+  deposition.
 - NASA OSDR source datasets need dataset-specific citation review for the
   manuscript subset.
 - v9 metadata-alpha evidence should remain separate from v1-v7 final result
