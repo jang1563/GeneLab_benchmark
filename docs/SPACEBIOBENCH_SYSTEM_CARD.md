@@ -2,7 +2,7 @@
 title: SpaceBio-Bench System Card
 page_type: system_card
 status: public_review_ready
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: benchmark_system_card_draft_no_new_release_claim
 ---
 
