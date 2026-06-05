@@ -34,16 +34,15 @@ excluded from the current public-review path.
 
 ## Evaluation Flow
 
-```mermaid
-flowchart LR
-  A["Source inventory"] --> B["Task manifest"]
-  B --> C["Held-out mission fold"]
-  C --> D["Baseline or submitted predictions"]
-  D --> E["Metrics with task/fold ids"]
-  E --> F["Per-task interpretation"]
-  F --> G["Pooled summary with caveats"]
-  G --> H["Claim register language"]
-```
+| Stage | Evidence to inspect | Interpretation control |
+|---|---|---|
+| 1. Source inventory | OSDR accessions, tissue labels, mission labels, access status, and checksum-manifest evidence | Confirms the public data source before interpreting any score |
+| 2. Task manifest | Task id, tissue, feature namespace, source ids, label map, and metric ids | Defines what the evaluation is actually testing |
+| 3. Held-out mission fold | Train/test mission split, row counts, and selected-gene counts | Keeps mission-held-out validation separate from random-split performance |
+| 4. Prediction and metric files | Baseline or submitted predictions, task/fold ids, AUROC, macro-F1, balanced accuracy, calibration | Ties every metric to a concrete task and fold surface |
+| 5. Per-task interpretation | Tissue-specific and fold-specific behavior | Prevents pooled means from hiding failures or confounding |
+| 6. Pooled summary | Aggregate result only after task/fold checks | Allows navigation-level summaries with mission, tissue, baseline, and payload caveats |
+| 7. Claim register language | Allowed, blocked, and future-only wording | Converts evaluation evidence into release-safe public claims |
 
 The evaluation flow is intentionally claim-aware. A score is first interpreted
 at the task and fold level, then summarized only with caveats about mission,

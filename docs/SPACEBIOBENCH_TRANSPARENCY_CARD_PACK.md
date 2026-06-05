@@ -39,16 +39,14 @@ extension lanes remain outside this public-review path.
 
 ## Three-Minute Review Map
 
-```mermaid
-flowchart LR
-  A["Portfolio brief"] --> B["System card"]
-  B --> C["Evaluation card"]
-  C --> D["Release readiness card"]
-  D --> E["Claim register"]
-  B --> F["Data and provenance boundary"]
-  C --> G["Task, fold, metric, and baseline interpretation"]
-  E --> H["Allowed, blocked, and future-only language"]
-```
+| Review step | Open this | What to verify |
+|---|---|---|
+| 1 | [Portfolio brief](SPACEBIOBENCH_PORTFOLIO_BRIEF.md) | Project contribution, role-relevant signal, and concise application summary |
+| 2 | [System card](SPACEBIOBENCH_SYSTEM_CARD.md) | Benchmark scope, data surfaces, provenance boundary, and out-of-scope claims |
+| 3 | [Evaluation card](SPACEBIOBENCH_EVALUATION_CARD.md) | Task, fold, metric, baseline, and pooled-summary interpretation |
+| 4 | [Release readiness card](SPACEBIOBENCH_RELEASE_READINESS_CARD.md) | Release tier, evidence gates, and blockers for stronger public wording |
+| 5 | [Claim register](SPACEBIOBENCH_CLAIM_REGISTER.md) | Allowed wording, blocked wording, support level, and future-only claims |
+| Cross-check | [Canonical v7.1 results](CANONICAL_RESULTS_V7_1.md) and [v9 dataset card draft](v9_hf_dataset_card.md) | Whether a statement belongs to the canonical result surface, metadata-alpha scaffold, or a future release lane |
 
 The intended reading order is portfolio brief first, then the system card,
 evaluation card, release readiness card, and claim register. This keeps the

@@ -318,6 +318,7 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("note    = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}", readme)
         self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch | Canonical results: v7.1 | Dataset freeze: 2026-03-01", hf_card)
         self.assertIn("note    = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}", hf_card)
+        self.assertIn("  - 100M<n<1GB", hf_card)
         self.assertIn('version: "7.1.2"', citation)
         self.assertIn('date-released: "2026-06-05"', citation)
         self.assertIn('notes: "Manuscript in preparation; v7.1.2 documentation, public-card, metadata, and evidence-visibility patch."', citation)
@@ -328,6 +329,7 @@ class ReviewFixTests(unittest.TestCase):
         self.assertNotIn("Kang", citation)
         self.assertNotIn("Jaeyoung", citation)
         self.assertNotIn("Jihoon", readme + hf_card + citation)
+        self.assertNotIn("1GB<n<10GB", hf_card)
         self.assertNotIn("blob/v3/docs/SPACEBIOBENCH", hf_card)
         self.assertNotIn('version: "5.0.0"', citation)
         self.assertNotIn("Target journal:", citation)
@@ -338,12 +340,15 @@ class ReviewFixTests(unittest.TestCase):
         evaluation_card = self.read_repo_text("docs/SPACEBIOBENCH_EVALUATION_CARD.md")
 
         self.assertIn("## Three-Minute Review Map", card_pack)
-        self.assertIn("```mermaid", card_pack)
+        self.assertIn("| Review step | Open this | What to verify |", card_pack)
         self.assertIn("[docs/SPACEBIOBENCH_SYSTEM_CARD.md](SPACEBIOBENCH_SYSTEM_CARD.md)", card_pack)
         self.assertIn("## System Boundary Map", system_card)
+        self.assertIn("| Boundary layer | Evidence entering the layer | What the current card allows | What remains blocked |", system_card)
         self.assertIn("Blocked clinical, crew-health, countermeasure, and Mars-regime claims", system_card)
         self.assertIn("## Evaluation Flow", evaluation_card)
+        self.assertIn("| Stage | Evidence to inspect | Interpretation control |", evaluation_card)
         self.assertIn("Claim register language", evaluation_card)
+        self.assertNotIn("```mermaid", card_pack + system_card + evaluation_card)
 
     def test_public_v9_metadata_alpha_subset_is_inspectable(self):
         readme = self.read_repo_text("README.md")
