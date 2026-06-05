@@ -7,6 +7,8 @@ Status: **v1-v7 Complete; public-review card pack ready**
 
 Canonical v7.1 documentation source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
 
+Live dataset card: [Hugging Face / `jang1563/genelab-benchmark`](https://huggingface.co/datasets/jang1563/genelab-benchmark)
+
 ## Reviewer Fast Path
 
 For portfolio, job-application, or external-review contexts, start here:
@@ -16,6 +18,7 @@ For portfolio, job-application, or external-review contexts, start here:
 3. [`docs/SPACEBIOBENCH_SYSTEM_CARD.md`](docs/SPACEBIOBENCH_SYSTEM_CARD.md) - benchmark/system boundary, intended use, out-of-scope claims, and provenance controls.
 4. [`docs/SPACEBIOBENCH_EVALUATION_CARD.md`](docs/SPACEBIOBENCH_EVALUATION_CARD.md) - task/fold/metric interpretation and leakage/confounding controls.
 5. [`docs/SPACEBIOBENCH_CLAIM_REGISTER.md`](docs/SPACEBIOBENCH_CLAIM_REGISTER.md) - supported, blocked, and future-only claim language.
+6. [Hugging Face dataset card](https://huggingface.co/datasets/jang1563/genelab-benchmark) - live public dataset card and feature-matrix package.
 
 Release archive pack: [`docs/RELEASE_ARCHIVE_CARD.md`](docs/RELEASE_ARCHIVE_CARD.md)
 defines paper-archive scope. [`docs/RELEASE_ARCHIVE_MANIFEST.md`](docs/RELEASE_ARCHIVE_MANIFEST.md)

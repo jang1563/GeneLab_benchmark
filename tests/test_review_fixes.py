@@ -688,6 +688,22 @@ class ReviewFixTests(unittest.TestCase):
             self.assertIn("last_reviewed: 2026-06-05", text)
             self.assertNotIn("last_reviewed: 2026-06-04", text)
 
+    def test_portfolio_brief_exposes_application_artifact_links(self):
+        readme = self.read_repo_text("README.md")
+        portfolio = self.read_repo_text("docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md")
+        card_pack = self.read_repo_text("docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md")
+
+        hf_url = "https://huggingface.co/datasets/jang1563/genelab-benchmark"
+        gh_url = "https://github.com/jang1563/GeneLab_benchmark"
+
+        self.assertIn(hf_url, readme)
+        self.assertIn("## Public Artifact Links", portfolio)
+        self.assertIn(gh_url, portfolio)
+        self.assertIn(hf_url, portfolio)
+        self.assertIn("v9 Metadata-Alpha Dataset Card", portfolio)
+        self.assertIn("v9 Metadata-Alpha Dataset Card", card_pack)
+        self.assertNotIn("v9 HF Dataset Card Draft", portfolio + card_pack)
+
     def test_root_changelog_includes_v712_patch(self):
         readme = self.read_repo_text("README.md")
 
