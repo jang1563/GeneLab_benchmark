@@ -642,6 +642,53 @@ class ReviewFixTests(unittest.TestCase):
         ]
         self.assertEqual(offenders, [])
 
+    def test_hf_card_uses_current_public_release_metadata(self):
+        hf_card = self.read_repo_text("docs/hf_dataset_card.md")
+
+        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch", hf_card)
+        self.assertIn("Maintainer / citation author: JangKeun Kim", hf_card)
+        self.assertIn("![GeneLab Benchmark at a glance](assets/hf_benchmark_summary.png)", hf_card)
+        self.assertIn("viewer: false", hf_card)
+        self.assertIn("author  = {Kim, JangKeun}", hf_card)
+        self.assertNotIn("Maintainer / citation author: Jihoon Kim", hf_card)
+        self.assertNotIn("Version: v7.0 with v7.1 documentation consistency patch", hf_card)
+
+    def test_hf_visual_asset_script_uses_current_author_and_version(self):
+        script = self.read_repo_text("scripts/generate_hf_visual_assets.py")
+
+        self.assertIn("Version: v7.1.2", script)
+        self.assertIn("Maintainer/citation: JangKeun Kim", script)
+        self.assertIn("docs\" / \"assets\"", script)
+        self.assertNotIn("Maintainer/citation: Jihoon Kim", script)
+
+    def test_hf_upload_card_only_includes_card_assets(self):
+        upload_script = self.read_repo_text("scripts/upload_to_hf.py")
+
+        self.assertIn("CARD_ASSETS", upload_script)
+        self.assertIn("assets/hf_benchmark_summary.png", upload_script)
+        self.assertIn("upload_card_assets(api, repo_id", upload_script)
+
+    def test_public_review_cards_use_v712_review_date(self):
+        card_paths = [
+            "docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md",
+            "docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md",
+            "docs/SPACEBIOBENCH_EVALUATION_CARD.md",
+            "docs/SPACEBIOBENCH_SYSTEM_CARD.md",
+            "docs/SPACEBIOBENCH_CLAIM_REGISTER.md",
+            "docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md",
+        ]
+
+        for path in card_paths:
+            text = self.read_repo_text(path)
+            self.assertIn("last_reviewed: 2026-06-05", text)
+            self.assertNotIn("last_reviewed: 2026-06-04", text)
+
+    def test_root_changelog_includes_v712_patch(self):
+        readme = self.read_repo_text("README.md")
+
+        self.assertIn("| v7.1.2 | 2026-06-05 | Public-card, metadata, and evidence-visibility patch", readme)
+        self.assertIn("No new benchmark result generation", readme)
+
 
 if __name__ == "__main__":
     unittest.main()

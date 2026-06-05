@@ -20,6 +20,7 @@ size_categories:
 language:
   - en
 pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
+viewer: false
 ---
 
 # GeneLab Spaceflight Transcriptomics Benchmark
@@ -27,6 +28,10 @@ pretty_name: "GeneLab Spaceflight Transcriptomics Benchmark"
 **A comprehensive benchmark for evaluating ML models and foundation models on NASA spaceflight transcriptomics data.**
 
 Version: v7.1.2 public-card/metadata/evidence-visibility patch | Canonical results: v7.1 | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
+
+Maintainer / citation author: JangKeun Kim, Weill Cornell Medicine.
+
+![GeneLab Benchmark at a glance](assets/hf_benchmark_summary.png)
 
 ---
 

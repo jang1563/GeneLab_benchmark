@@ -2,7 +2,7 @@
 title: SpaceBio-Bench Claim Register
 page_type: evidence_register
 status: public_review_ready
-last_reviewed: 2026-06-04
+last_reviewed: 2026-06-05
 claim_boundary: benchmark_claim_register_draft_no_new_release_claim
 ---
 

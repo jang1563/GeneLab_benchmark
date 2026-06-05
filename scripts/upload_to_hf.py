@@ -39,9 +39,12 @@ GO_TASKS = [
 
 UPLOAD_FILES = ["train_X.csv", "test_X.csv"]
 CARD_SRC = BASE_DIR / "docs" / "hf_dataset_card.md"
+CARD_ASSETS = [
+    (BASE_DIR / "docs" / "assets" / "hf_benchmark_summary.png", "assets/hf_benchmark_summary.png"),
+]
 
 
-def upload_card(api, dry_run: bool = False) -> None:
+def upload_card(api, repo_id: str, dry_run: bool = False) -> None:
     """Upload docs/hf_dataset_card.md as README.md to the HF dataset repo."""
     if not CARD_SRC.exists():
         print(f"  [SKIP] Dataset card not found: {CARD_SRC}")
@@ -52,12 +55,33 @@ def upload_card(api, dry_run: bool = False) -> None:
         api.upload_file(
             path_or_fileobj=str(CARD_SRC),
             path_in_repo="README.md",
-            repo_id=HF_REPO_ID,
+            repo_id=repo_id,
             repo_type="dataset",
         )
 
 
-def upload_task(api, task_name: str, dry_run: bool = False) -> int:
+def upload_card_assets(api, repo_id: str, dry_run: bool = False) -> int:
+    """Upload static assets referenced by the Hugging Face dataset card."""
+    n_uploaded = 0
+    for src, hf_path in CARD_ASSETS:
+        if not src.exists():
+            print(f"  [SKIP] Card asset not found: {src}")
+            continue
+        size_kb = src.stat().st_size // 1024
+        tag = "[DRY-RUN] " if dry_run else ""
+        print(f"  {tag}Upload: {hf_path} (card asset, {size_kb} KB)")
+        if not dry_run:
+            api.upload_file(
+                path_or_fileobj=str(src),
+                path_in_repo=hf_path,
+                repo_id=repo_id,
+                repo_type="dataset",
+            )
+        n_uploaded += 1
+    return n_uploaded
+
+
+def upload_task(api, repo_id: str, task_name: str, dry_run: bool = False) -> int:
     """Upload all fold feature matrices for one task. Returns file count."""
     task_dir = TASKS_DIR / task_name
     if not task_dir.exists():
@@ -79,7 +103,7 @@ def upload_task(api, task_name: str, dry_run: bool = False) -> int:
                 api.upload_file(
                     path_or_fileobj=str(fpath),
                     path_in_repo=hf_path,
-                    repo_id=HF_REPO_ID,
+                    repo_id=repo_id,
                     repo_type="dataset",
                 )
             n_uploaded += 1
@@ -121,6 +145,7 @@ def main():
         help="Skip dataset card upload (default: card is uploaded with --task all)",
     )
     args = parser.parse_args()
+    repo_id = args.repo
 
     if args.dry_run:
         print("=== DRY-RUN MODE (no files will be uploaded) ===\n")
@@ -143,9 +168,10 @@ def main():
             print("[ERROR] No HuggingFace token found. export HF_TOKEN='hf_...' or huggingface-cli login")
             sys.exit(1)
         api = HfApi(token=token) if not args.dry_run else None
-        print(f"\nUploading dataset card → {args.repo}")
+        print(f"\nUploading dataset card -> {repo_id}")
         print("-" * 50)
-        upload_card(api, dry_run=args.dry_run)
+        upload_card(api, repo_id, dry_run=args.dry_run)
+        upload_card_assets(api, repo_id, dry_run=args.dry_run)
         return
 
     # Resolve task list
@@ -191,25 +217,24 @@ def main():
         sys.exit(1)
 
     api = HfApi(token=token) if not args.dry_run else None
-    repo_id = args.repo
-
     # Ensure repo exists (create if needed)
     if not args.dry_run:
         api.create_repo(repo_id=repo_id, repo_type="dataset", private=True, exist_ok=True)
 
     total = 0
     for task in tasks:
-        print(f"\nUploading {task} → {repo_id}")
+        print(f"\nUploading {task} -> {repo_id}")
         print("-" * 50)
-        n = upload_task(api, task, dry_run=args.dry_run)
+        n = upload_task(api, repo_id, task, dry_run=args.dry_run)
         total += n
-        print(f"  → {n} files")
+        print(f"  -> {n} files")
 
     # Upload dataset card with full uploads (unless skipped)
     if not args.skip_card:
-        print(f"\nUploading dataset card → {repo_id}")
+        print(f"\nUploading dataset card -> {repo_id}")
         print("-" * 50)
-        upload_card(api, dry_run=args.dry_run)
+        upload_card(api, repo_id, dry_run=args.dry_run)
+        upload_card_assets(api, repo_id, dry_run=args.dry_run)
 
     print(f"\nTotal: {total} feature files {'(dry-run)' if args.dry_run else 'uploaded'}.")
 
