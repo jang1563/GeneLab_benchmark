@@ -29,11 +29,11 @@ viewer: false
 
 Version: v7.0 with v7.1 documentation consistency patch | Dataset freeze: 2026-03-01 | Code: [GitHub](https://github.com/jang1563/GeneLab_benchmark)
 
-Maintainer / citation author: Jihoon Kim, Weill Cornell Medicine.
+Maintainer / citation author: JangKeun Kim, Weill Cornell Medicine.
 
 ![GeneLab Benchmark at a glance](assets/hf_benchmark_summary.png)
 
-**Curation note:** this public dataset package is maintained and cited as Jihoon Kim, Weill Cornell Medicine; the repository URL is hosted under the `jang1563` Hugging Face namespace.
+**Curation note:** this public dataset package is maintained and cited as JangKeun Kim, Weill Cornell Medicine; the repository URL is hosted under the `jang1563` Hugging Face namespace.
 
 ---
 
@@ -307,7 +307,7 @@ Lung and Colon additionally include Basal Control samples treated as ground cont
 @dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics
              Benchmark for AI/ML Models},
-  author  = {Kim, Jihoon},
+  author  = {Kim, JangKeun},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
   note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}

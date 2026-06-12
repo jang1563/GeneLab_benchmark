@@ -154,7 +154,7 @@ def draw_figure():
     ax.text(
         0.055,
         0.842,
-        "Dataset freeze: 2026-03-01 | Maintainer/citation: Jihoon Kim, Weill Cornell Medicine",
+        "Dataset freeze: 2026-03-01 | Maintainer/citation: JangKeun Kim, Weill Cornell Medicine",
         transform=ax.transAxes,
         fontsize=12,
         color="#687789",

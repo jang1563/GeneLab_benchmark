@@ -5,7 +5,7 @@
 Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01
 Status: **v1–v7 Complete**
 
-Maintainer / citation author: Jihoon Kim, Weill Cornell Medicine.
+Maintainer / citation author: JangKeun Kim, Weill Cornell Medicine.
 
 Canonical v7.1 documentation source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
 
@@ -414,7 +414,7 @@ Key methodological choices underpinning this benchmark:
 ```bibtex
 @dataset{kim2026genelab,
   title   = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
-  author  = {Kim, Jihoon},
+  author  = {Kim, JangKeun},
   year    = {2026},
   url     = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
   note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}
