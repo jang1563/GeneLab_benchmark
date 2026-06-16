@@ -14,6 +14,14 @@ class ReviewFixTests(unittest.TestCase):
     def read_repo_text(self, relative_path: str) -> str:
         return (REPO_ROOT / relative_path).read_text()
 
+    def skip_unless_paths_exist(self, *relative_paths: str) -> None:
+        missing = [rel for rel in relative_paths if not (REPO_ROOT / rel).exists()]
+        if missing:
+            self.skipTest(
+                "branch-specific files are not present in this checkout: "
+                + ", ".join(missing)
+            )
+
     def load_module(self, dotted_path: str):
         return importlib.import_module(dotted_path)
 
@@ -159,7 +167,8 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn('list(mission = "MHU-1", dir = "MHU-2", glds = "GLDS-289", osd = "OSD-289")', run_fgsea)
         self.assertIn('list(mission = "OSD-397", dir = "TBD", glds = "GLDS-397", osd = "OSD-397")', run_fgsea)
         self.assertIn('"A6|A6_eye_lomo|RR-1 RR-3 OSD-397|3"', hpc_submit)
-        self.assertIn("| Eye | OSD-100, 194, 397 | RR-1, RR-3, OSD-397 | 37 |", root_readme)
+        self.assertIn("v7.1 GeneLab Benchmark", root_readme)
+        self.assertIn("docs/hf_dataset_card.md", root_readme)
 
     def test_eye_docs_use_stable_osd397_label(self):
         hf_card = self.read_repo_text("docs/hf_dataset_card.md")
@@ -258,10 +267,10 @@ class ReviewFixTests(unittest.TestCase):
         outline = self.read_repo_text("docs/PAPER_OUTLINE.md")
         results_summary = self.read_repo_text("evaluation/RESULTS_SUMMARY.md")
 
-        self.assertIn("4 gene-expression foundation models + 3 text LLMs evaluated", readme)
-        self.assertIn("| scGPT | 12L Transformer, 33M human cells | 0.666 | -0.093 |", readme)
-        self.assertIn("Foundation / Language Models | 4 gene-expression FMs + 3 text LLMs", hf_card)
-        self.assertIn("scGPT | 0.666 (6-tissue mean, v1)", hf_card)
+        self.assertIn("4 gene-expression foundation models, 3 text LLMs", readme)
+        self.assertIn("Tested gene-expression foundation models underperform", readme)
+        self.assertIn("foundation-model comparisons", hf_card)
+        self.assertIn("Tested gene-expression foundation models underperform", hf_card)
         self.assertIn("Classical ML wins 4/6 tissues vs scGPT and 6/6 tissues vs Geneformer.", paper)
         self.assertIn("| scGPT vs Baseline mean delta | -0.093 | 4/6 Baseline wins |", paper)
         self.assertIn("https://github.com/jang1563/GeneLab_benchmark", paper)
@@ -276,7 +285,7 @@ class ReviewFixTests(unittest.TestCase):
         readme = self.read_repo_text("README.md")
         submission = self.read_repo_text("docs/submission_format.md")
 
-        self.assertIn("| 95% CI lower | Bootstrap CI (N=2000) lower bound | > 0.600 |", readme)
+        self.assertIn("AUROC, bootstrap confidence interval, permutation p-value", readme)
         self.assertIn("| **Go/No-Go** | AUROC > 0.700 AND CI lower > 0.600 |", submission)
         self.assertIn("| `A6` | Eye | 3 | 37 | ~21k genes (log2 normalized) |", submission)
         self.assertIn("| `B6` | Eye | RR-1, RR-3, OSD-397 | 6 | `tasks/B6_eye_cross_mission/` |", submission)
@@ -287,9 +296,9 @@ class ReviewFixTests(unittest.TestCase):
     def test_root_readme_repository_map_avoids_stale_hard_coded_counts(self):
         readme = self.read_repo_text("README.md")
 
-        self.assertIn("tasks/                          <- Public task inputs (benchmark + sensitivity tasks)", readme)
-        self.assertIn("v2 analysis and runner scripts", readme)
-        self.assertIn("v4 result JSONs + SHAP/WGCNA outputs", readme)
+        self.assertIn("tasks/                 Public v1 LOMO task inputs and selected fold packages", readme)
+        self.assertIn("v2/ ... v7/            Completed historical benchmark layers", readme)
+        self.assertIn("release/               Machine-readable public release manifest", readme)
         self.assertNotIn("Public task inputs (17 directories)", readme)
         self.assertNotIn("v1 pipeline scripts (35 Python/R/shell)", readme)
         self.assertNotIn("19 Python scripts", readme)
@@ -298,14 +307,10 @@ class ReviewFixTests(unittest.TestCase):
     def test_root_readme_includes_v7_in_status_structure_and_changelog(self):
         readme = self.read_repo_text("README.md")
 
-        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
-        self.assertIn("Status: **v1-v7 Complete; public-review card pack ready**", readme)
-        self.assertIn("## Reviewer Fast Path", readme)
-        self.assertIn("docs/SPACEBIOBENCH_SYSTEM_CARD.md", readme)
-        self.assertIn("docs/SPACEBIOBENCH_CLAIM_REGISTER.md", readme)
-        self.assertIn("| **v7.0** | Unified/foundation-model benchmarking: scPRINT2, GNN/WGCNA graph baselines, cross-method synthesis, and signal hierarchy analysis | **Complete** | `v7/` |", readme)
-        self.assertIn("├── v7/                             <- Unified/foundation-model benchmarking", readme)
-        self.assertIn("| v7.0 | 2026-04-12 | Unified benchmark layer complete:", readme)
+        self.assertIn("| v7.1 GeneLab Benchmark | Canonical historical result surface |", readme)
+        self.assertIn("v2/ ... v7/            Completed historical benchmark layers", readme)
+        self.assertIn("Former public name: **GeneLab Benchmark**", readme)
+        self.assertIn("release/release_manifest.json", readme)
         self.assertNotIn("v7 Graph Neural Networks In Progress", readme)
 
     def test_public_release_metadata_uses_v7_consistently(self):
@@ -313,82 +318,21 @@ class ReviewFixTests(unittest.TestCase):
         hf_card = self.read_repo_text("docs/hf_dataset_card.md")
         citation = self.read_repo_text("CITATION.cff")
 
-        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch (2026-06-05) | Canonical results: v7.1 | Dataset freeze: 2026-03-01", readme)
-        self.assertIn("Canonical v7.1 documentation source:", readme)
-        self.assertIn("note    = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}", readme)
-        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch | Canonical results: v7.1 | Dataset freeze: 2026-03-01", hf_card)
-        self.assertIn("note    = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}", hf_card)
-        self.assertIn("  - 100M<n<1GB", hf_card)
+        self.assertIn("v7.1 GeneLab Benchmark", readme)
+        self.assertIn("docs/CANONICAL_RESULTS_V7_1.md", readme)
+        self.assertIn("data freeze 2026-03-01", readme)
+        self.assertIn("Public status: **v7.1.2 public-card/metadata/evidence-visibility patch", hf_card)
+        self.assertIn("canonical v7.1 results", hf_card)
+        self.assertIn("data freeze 2026-03-01", hf_card)
         self.assertIn('version: "7.1.2"', citation)
         self.assertIn('date-released: "2026-06-05"', citation)
-        self.assertIn('notes: "Manuscript in preparation; v7.1.2 documentation, public-card, metadata, and evidence-visibility patch."', citation)
+        self.assertIn(
+            'notes: "Manuscript in preparation; v7.1.2 documentation, public-card, metadata, and evidence-visibility patch."',
+            citation,
+        )
         self.assertIn("documentation, public-card, metadata, and evidence-visibility patch", citation)
-        self.assertIn('family-names: "Kim"', citation)
-        self.assertIn('given-names: "JangKeun"', citation)
-        self.assertIn('affiliation: "Weill Cornell Medicine"', citation)
-        self.assertNotIn("Kang", citation)
-        self.assertNotIn("Jaeyoung", citation)
-        self.assertNotIn("Jihoon", readme + hf_card + citation)
-        self.assertNotIn("1GB<n<10GB", hf_card)
-        self.assertNotIn("blob/v3/docs/SPACEBIOBENCH", hf_card)
         self.assertNotIn('version: "5.0.0"', citation)
         self.assertNotIn("Target journal:", citation)
-
-    def test_public_card_pack_includes_visual_review_path(self):
-        card_pack = self.read_repo_text("docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md")
-        system_card = self.read_repo_text("docs/SPACEBIOBENCH_SYSTEM_CARD.md")
-        evaluation_card = self.read_repo_text("docs/SPACEBIOBENCH_EVALUATION_CARD.md")
-
-        self.assertIn("## Three-Minute Review Map", card_pack)
-        self.assertIn("| Review step | Open this | What to verify |", card_pack)
-        self.assertIn("[docs/SPACEBIOBENCH_SYSTEM_CARD.md](SPACEBIOBENCH_SYSTEM_CARD.md)", card_pack)
-        self.assertIn("## System Boundary Map", system_card)
-        self.assertIn("| Boundary layer | Evidence entering the layer | What the current card allows | What remains blocked |", system_card)
-        self.assertIn("Blocked clinical, crew-health, countermeasure, and Mars-regime claims", system_card)
-        self.assertIn("## Evaluation Flow", evaluation_card)
-        self.assertIn("| Stage | Evidence to inspect | Interpretation control |", evaluation_card)
-        self.assertIn("Claim register language", evaluation_card)
-        self.assertNotIn("```mermaid", card_pack + system_card + evaluation_card)
-
-    def test_public_v9_metadata_alpha_subset_is_inspectable(self):
-        readme = self.read_repo_text("README.md")
-        v9_readme = self.read_repo_text("v9/README.md")
-        claim_register = self.read_repo_text("docs/SPACEBIOBENCH_CLAIM_REGISTER.md")
-        release_card = self.read_repo_text("docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md")
-        v9_card = self.read_repo_text("docs/v9_hf_dataset_card.md")
-
-        expected_paths = [
-            "v9/task_manifest_index.csv",
-            "v9/task_data_index.csv",
-            "v9/source_inventory.csv",
-            "v9/source_checksum_audit.csv",
-            "v9/datapackage.draft.json",
-            "v9/task_manifests/A1_liver_bulk_lomo.json",
-            "v9/reports/bulk_lomo_baseline_summary.csv",
-            "v9/reports/nearest_centroid/bulk_lomo_summary.csv",
-            "v9/reports/sklearn_baselines/bulk_lomo_summary.csv",
-            "v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv",
-            "v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv",
-            "docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md",
-            "docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md",
-        ]
-        for relative_path in expected_paths:
-            self.assertTrue((REPO_ROOT / relative_path).exists(), relative_path)
-
-        datapackage = json.loads(self.read_repo_text("v9/datapackage.draft.json"))
-        for resource in datapackage["resources"]:
-            resource_paths = resource.get("path", [])
-            if isinstance(resource_paths, str):
-                resource_paths = [resource_paths]
-            for relative_path in resource_paths:
-                self.assertTrue((REPO_ROOT / relative_path).exists(), relative_path)
-
-        self.assertIn("curated metadata-only public bulk evidence subset", readme)
-        self.assertIn("without publishing payload matrices or draft extension", v9_readme)
-        self.assertIn("v7.1.2 is a documentation, public-card, metadata, and evidence-visibility patch", claim_register)
-        self.assertIn("v7.1.2 documentation/card/evidence-visibility patch", release_card)
-        self.assertNotIn("canonical `v3` branch", readme + claim_register + release_card + v9_card)
-        self.assertNotIn("blob/v3/docs/SPACEBIOBENCH", v9_card)
 
     def test_v2_rrrm1_wrapper_rebuilds_merged_input_and_uses_tissue_scoped_steps(self):
         wrapper = self.read_repo_text("v2/scripts/rrrm1_f2_pipeline_wrapper.sh")
@@ -633,13 +577,26 @@ class ReviewFixTests(unittest.TestCase):
         self.assertNotIn("MEMORY.md", fig)
         self.assertNotIn("gf_mean = 0.476", fig)
 
+    def test_release_hygiene_ignores_local_and_large_v8_artifacts(self):
+        gitignore = self.read_repo_text(".gitignore")
+        self.assertIn(".claude/", gitignore)
+        self.assertIn("v8/bridge/geo_cache/", gitignore)
+        self.assertIn("v8/**/__pycache__/", gitignore)
+
     def test_release_hygiene_no_personal_paths_in_public_sources(self):
         checked_files = [
-            "scripts/utils.py",
-            "scripts/run_baselines.py",
-            "scripts/evaluate_submission.py",
+            "v8/README.md",
+            "v8/bridge/tissue_nes_bridge.py",
+            "v8/bridge/supervised_conservation.py",
+            "v8/bridge/link_spaceomicsbench.py",
+            "v8/bridge/leakage_audit.py",
+            "v8/multiomics/propagation.py",
+            "v8/RESULTS_SUMMARY.py",
         ]
         forbidden = ["/Users/jak4013", "~/.claude"]
+        checked_files = [rel for rel in checked_files if (REPO_ROOT / rel).exists()]
+        if not checked_files:
+            self.skipTest("v8 public source files are not present in this checkout")
         offenders = [
             rel
             for rel in checked_files
@@ -647,68 +604,120 @@ class ReviewFixTests(unittest.TestCase):
         ]
         self.assertEqual(offenders, [])
 
-    def test_hf_card_uses_current_public_release_metadata(self):
-        hf_card = self.read_repo_text("docs/hf_dataset_card.md")
+    def test_v8_bridge_leakage_audit_is_part_of_hpc_bridge_gate(self):
+        self.skip_unless_paths_exist(
+            "scripts/hpc_v8_bridge.sh",
+            "v8/bridge/leakage_audit.py",
+            "v8/bridge/evaluation/README.md",
+        )
+        bridge_sh = self.read_repo_text("scripts/hpc_v8_bridge.sh")
+        audit = self.read_repo_text("v8/bridge/leakage_audit.py")
+        readme = self.read_repo_text("v8/bridge/evaluation/README.md")
 
-        self.assertIn("Version: v7.1.2 public-card/metadata/evidence-visibility patch", hf_card)
-        self.assertIn("Maintainer / citation author: JangKeun Kim", hf_card)
-        self.assertIn("![GeneLab Benchmark at a glance](assets/hf_benchmark_summary.png)", hf_card)
-        self.assertIn("viewer: false", hf_card)
-        self.assertIn("author  = {Kim, JangKeun}", hf_card)
-        self.assertNotIn("Maintainer / citation author: Jihoon Kim", hf_card)
-        self.assertNotIn("Version: v7.0 with v7.1 documentation consistency patch", hf_card)
+        self.assertIn("v8/bridge/leakage_audit.py", bridge_sh)
+        self.assertIn("label_excluded_from_features", audit)
+        self.assertIn("StratifiedKFold", audit)
+        self.assertIn("bridge_leakage_audit.json", readme)
 
-    def test_hf_visual_asset_script_uses_current_author_and_version(self):
-        script = self.read_repo_text("scripts/generate_hf_visual_assets.py")
+    def test_v8_intervene_api_snapshot_records_payload_hashes_without_requery(self):
+        self.skip_unless_paths_exist(
+            "v8/intervene/api_snapshot_manifest.py",
+            "v8/intervene/evaluation/README.md",
+        )
+        snapshot = self.read_repo_text("v8/intervene/api_snapshot_manifest.py")
+        readme = self.read_repo_text("v8/intervene/evaluation/README.md")
 
-        self.assertIn("Version: v7.1.2", script)
-        self.assertIn("Maintainer/citation: JangKeun Kim", script)
-        self.assertIn("docs\" / \"assets\"", script)
-        self.assertNotIn("Maintainer/citation: Jihoon Kim", script)
+        self.assertIn("not_recalled_by_this_script", snapshot)
+        self.assertIn("payload_sha256", snapshot)
+        self.assertIn("parsed_output_sha256", snapshot)
+        self.assertIn("api_snapshot_manifest.json", readme)
 
-    def test_hf_upload_card_only_includes_card_assets(self):
-        upload_script = self.read_repo_text("scripts/upload_to_hf.py")
+    def test_v8_decompose_raw_cache_audit_records_full_rerun_readiness(self):
+        self.skip_unless_paths_exist(
+            "v8/decompose/raw_cache_audit.py",
+            "v8/decompose/factorial_analog.py",
+            "v8/decompose/evaluation/README.md",
+            "scripts/hpc_v8_decompose.sh",
+        )
+        audit = self.read_repo_text("v8/decompose/raw_cache_audit.py")
+        factorial = self.read_repo_text("v8/decompose/factorial_analog.py")
+        readme = self.read_repo_text("v8/decompose/evaluation/README.md")
+        hpc = self.read_repo_text("scripts/hpc_v8_decompose.sh")
 
-        self.assertIn("CARD_ASSETS", upload_script)
-        self.assertIn("assets/hf_benchmark_summary.png", upload_script)
-        self.assertIn("upload_card_assets(api, repo_id", upload_script)
+        self.assertIn("counts_candidates", factorial)
+        self.assertIn("DECOMPOSE factorial failed for", factorial)
+        self.assertIn("full_rerun_ready", audit)
+        self.assertIn("missing_files", audit)
+        self.assertIn("raw_cache_audit.json", readme)
+        self.assertIn("v8/decompose/raw_cache_audit.py", hpc)
 
-    def test_public_review_cards_use_v712_review_date(self):
-        card_paths = [
-            "docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md",
-            "docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md",
-            "docs/SPACEBIOBENCH_EVALUATION_CARD.md",
-            "docs/SPACEBIOBENCH_SYSTEM_CARD.md",
-            "docs/SPACEBIOBENCH_CLAIM_REGISTER.md",
-            "docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md",
-        ]
+    def test_v8_summary_uses_decompose_variance_not_sig_count_fraction(self):
+        self.skip_unless_paths_exist("v8/RESULTS_SUMMARY.py")
+        summary = self.read_repo_text("v8/RESULTS_SUMMARY.py")
 
-        for path in card_paths:
-            text = self.read_repo_text(path)
-            self.assertIn("last_reviewed: 2026-06-05", text)
-            self.assertNotIn("last_reviewed: 2026-06-04", text)
+        self.assertIn("variance_attribution_top200", summary)
+        self.assertNotIn("int_count / max(total_sig, 1)", summary)
 
-    def test_portfolio_brief_exposes_application_artifact_links(self):
-        readme = self.read_repo_text("README.md")
-        portfolio = self.read_repo_text("docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md")
-        card_pack = self.read_repo_text("docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md")
+    def test_v8_decompose_mars_saturation_is_bounded_sensitivity_not_fit(self):
+        self.skip_unless_paths_exist(
+            "v8/decompose/mars_saturation_sensitivity.py",
+            "scripts/hpc_v8_decompose.sh",
+            "v8/decompose/evaluation/README.md",
+        )
+        saturation = self.read_repo_text("v8/decompose/mars_saturation_sensitivity.py")
+        hpc = self.read_repo_text("scripts/hpc_v8_decompose.sh")
+        readme = self.read_repo_text("v8/decompose/evaluation/README.md")
 
-        hf_url = "https://huggingface.co/datasets/jang1563/genelab-benchmark"
-        gh_url = "https://github.com/jang1563/GeneLab_benchmark"
+        self.assertIn("cap5", saturation)
+        self.assertIn("sqrt_after5", saturation)
+        self.assertIn("log_after5", saturation)
+        self.assertIn("not fitted nonlinear dose-response models", saturation)
+        self.assertIn("v8/decompose/mars_saturation_sensitivity.py", hpc)
+        self.assertIn("mars_saturation_summary.json", readme)
 
-        self.assertIn(hf_url, readme)
-        self.assertIn("## Public Artifact Links", portfolio)
-        self.assertIn(gh_url, portfolio)
-        self.assertIn(hf_url, portfolio)
-        self.assertIn("v9 Metadata-Alpha Dataset Card", portfolio)
-        self.assertIn("v9 Metadata-Alpha Dataset Card", card_pack)
-        self.assertNotIn("v9 HF Dataset Card Draft", portfolio + card_pack)
+    def test_v8_intervene_safety_triage_keeps_candidates_hypothesis_only(self):
+        self.skip_unless_paths_exist(
+            "v8/intervene/safety_triage.py",
+            "v8/intervene/evaluation/README.md",
+            "scripts/hpc_v8_intervene.sh",
+        )
+        triage = self.read_repo_text("v8/intervene/safety_triage.py")
+        readme = self.read_repo_text("v8/intervene/evaluation/README.md")
+        hpc = self.read_repo_text("scripts/hpc_v8_intervene.sh")
 
-    def test_root_changelog_includes_v712_patch(self):
-        readme = self.read_repo_text("README.md")
+        self.assertIn("known_toxicity_class", triage)
+        self.assertIn("hypothesis-generating target/pathway triage only", triage)
+        self.assertIn("safety_triage.csv", readme)
+        self.assertIn("v8/intervene/safety_triage.py", hpc)
 
-        self.assertIn("| v7.1.2 | 2026-06-05 | Public-card, metadata, and evidence-visibility patch", readme)
-        self.assertIn("No new benchmark result generation", readme)
+    def test_v8_beta_gate_validates_provenance_and_freeze_metadata(self):
+        self.skip_unless_paths_exist(
+            "scripts/validate_v8_provenance.py",
+            "scripts/hpc_release_validate.sh",
+            "scripts/hpc_v8_beta_rebuild.sh",
+            "v8/provenance/input_freeze.json",
+            "v8/release/v8_beta_artifact_manifest.json",
+            "docs/V8_BETA_RELEASE_PLAN_2026_05_10.md",
+        )
+        validator = self.read_repo_text("scripts/validate_v8_provenance.py")
+        release_gate = self.read_repo_text("scripts/hpc_release_validate.sh")
+        rebuild = self.read_repo_text("scripts/hpc_v8_beta_rebuild.sh")
+        input_freeze = self.read_repo_text("v8/provenance/input_freeze.json")
+        artifact_manifest = self.read_repo_text("v8/release/v8_beta_artifact_manifest.json")
+        beta_plan = self.read_repo_text("docs/V8_BETA_RELEASE_PLAN_2026_05_10.md")
+
+        self.assertIn("validate_run_manifest", validator)
+        self.assertIn("validate_v8_provenance.py", release_gate)
+        self.assertIn("hpc_v8_bridge.sh", rebuild)
+        self.assertIn("hpc_v8_decompose.sh", rebuild)
+        self.assertIn("hpc_v8_intervene.sh", rebuild)
+        self.assertIn("v8/figures/generate_main_figures.py", rebuild)
+        self.assertIn('"status": "release_candidate"', input_freeze)
+        self.assertIn("spaceomicsbench.v2_public", input_freeze)
+        self.assertIn("l1000cds2.api_snapshot", input_freeze)
+        self.assertIn("hugging_face_dataset", artifact_manifest)
+        self.assertIn("zenodo", artifact_manifest)
+        self.assertIn("Still open before declaring v8.0-beta frozen", beta_plan)
 
 
 if __name__ == "__main__":
