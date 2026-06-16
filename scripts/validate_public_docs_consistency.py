@@ -14,6 +14,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 README = REPO_ROOT / "README.md"
 HF_CARD = REPO_ROOT / "docs" / "hf_dataset_card.md"
+V9_HF_CARD = REPO_ROOT / "docs" / "v9_hf_dataset_card.md"
+V9_README = REPO_ROOT / "v9" / "README.md"
+V9_REPORTS_README = REPO_ROOT / "v9" / "reports" / "README.md"
 CITATION = REPO_ROOT / "CITATION.cff"
 ZENODO = REPO_ROOT / ".zenodo.json"
 RELEASE_MANIFEST = REPO_ROOT / "release" / "release_manifest.json"
@@ -61,9 +64,13 @@ def validate_public_docs() -> list[str]:
     manifest = load_json(RELEASE_MANIFEST)
     readme = README.read_text()
     hf_card = HF_CARD.read_text()
+    v9_hf_card = V9_HF_CARD.read_text()
+    v9_readme = V9_README.read_text()
+    v9_reports_readme = V9_REPORTS_README.read_text()
     citation = CITATION.read_text()
     zenodo = load_json(ZENODO)
     hf_front_matter = parse_front_matter(hf_card)
+    v9_front_matter = parse_front_matter(v9_hf_card)
 
     lanes = {lane["lane_id"]: lane for lane in manifest["release_lanes"]}
     v7 = lanes.get("v7.1", {})
@@ -109,6 +116,60 @@ def validate_public_docs() -> list[str]:
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Dataset freeze: **2026-03-01**")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "repo_id = \"jang1563/genelab-benchmark\"")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out")
+    require_absent(
+        errors,
+        "docs/hf_dataset_card.md",
+        hf_card,
+        "Held-out mission, train missions, sample counts, and provenance",
+    )
+
+    expected_v9_pretty_name = "SpaceBio-Bench v9 Public Bulk Metadata Catalog"
+    if v9_front_matter.get("pretty_name") != expected_v9_pretty_name:
+        errors.append(
+            "docs/v9_hf_dataset_card.md: pretty_name does not match expected "
+            f"{expected_v9_pretty_name!r}"
+        )
+    require_contains(
+        errors,
+        "docs/v9_hf_dataset_card.md",
+        v9_hf_card,
+        "# SpaceBio-Bench v9 Public Bulk Metadata Catalog",
+    )
+    require_contains(
+        errors,
+        "docs/v9_hf_dataset_card.md",
+        v9_hf_card,
+        "Current catalog scope:",
+    )
+    require_contains(
+        errors,
+        "v9/README.md",
+        v9_readme,
+        "# SpaceBio-Bench v9 Public Bulk Metadata Catalog",
+    )
+    require_contains(
+        errors,
+        "v9/reports/README.md",
+        v9_reports_readme,
+        "# v9 Public Bulk Reports",
+    )
+    v9_public_text = "\n".join([v9_hf_card, v9_readme, v9_reports_readme])
+    for forbidden in (
+        "Public Bulk Metadata Alpha",
+        "metadata-alpha",
+        "alpha snapshot",
+        "alpha-boundary",
+        "claim boundary",
+        "snapshot_decision",
+        "allowed language",
+        "blocked language",
+        "Maintenance Notes",
+        "Provenance And Integrity",
+        "not frozen",
+        "should not be used",
+        "release-readiness blockers",
+    ):
+        require_absent(errors, "v9 public docs", v9_public_text, forbidden)
 
     zenodo_text = json.dumps(zenodo, sort_keys=True)
     require_contains(errors, ".zenodo.json", zenodo.get("title", ""), "SpaceBio-Bench")
