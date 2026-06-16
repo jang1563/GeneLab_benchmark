@@ -21,6 +21,9 @@ SYSTEM_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_SYSTEM_CARD.md"
 EVALUATION_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_EVALUATION_CARD.md"
 RELEASE_STATUS_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_RELEASE_READINESS_CARD.md"
 STATEMENT_GUIDE = REPO_ROOT / "docs" / "SPACEBIOBENCH_CLAIM_REGISTER.md"
+ARCHIVE_STATUS = REPO_ROOT / "docs" / "RELEASE_ARCHIVE_CARD.md"
+ARCHIVE_MANIFEST = REPO_ROOT / "docs" / "RELEASE_ARCHIVE_MANIFEST.md"
+ARCHIVE_CHECKLIST = REPO_ROOT / "docs" / "RELEASE_ARCHIVE_CHECKLIST.md"
 V9_README = REPO_ROOT / "v9" / "README.md"
 V9_REPORTS_README = REPO_ROOT / "v9" / "reports" / "README.md"
 CITATION = REPO_ROOT / "CITATION.cff"
@@ -77,6 +80,9 @@ def validate_public_docs() -> list[str]:
     evaluation_card = EVALUATION_CARD.read_text()
     release_status_card = RELEASE_STATUS_CARD.read_text()
     statement_guide = STATEMENT_GUIDE.read_text()
+    archive_status = ARCHIVE_STATUS.read_text()
+    archive_manifest = ARCHIVE_MANIFEST.read_text()
+    archive_checklist = ARCHIVE_CHECKLIST.read_text()
     v9_readme = V9_README.read_text()
     v9_reports_readme = V9_REPORTS_README.read_text()
     citation = CITATION.read_text()
@@ -239,6 +245,41 @@ def validate_public_docs() -> list[str]:
         "not a frozen",
     ):
         require_absent(errors, "linked public cards", public_card_text, forbidden)
+
+    archive_text = "\n".join([archive_status, archive_manifest, archive_checklist])
+    for label, text, expected in (
+        (
+            "docs/RELEASE_ARCHIVE_CARD.md",
+            archive_status,
+            "# SpaceBio-Bench Release Archive Status",
+        ),
+        (
+            "docs/RELEASE_ARCHIVE_MANIFEST.md",
+            archive_manifest,
+            "# SpaceBio-Bench Release Archive Manifest",
+        ),
+        (
+            "docs/RELEASE_ARCHIVE_CHECKLIST.md",
+            archive_checklist,
+            "# SpaceBio-Bench Release Archive Checklist",
+        ),
+    ):
+        require_contains(errors, label, text, expected)
+    for forbidden in (
+        "metadata-alpha",
+        "metadata alpha",
+        "claim-boundary",
+        "claim boundary",
+        "release_candidate",
+        "release-candidate",
+        "public_review_ready",
+        "blocked",
+        "not a frozen",
+        "should not",
+        "/Users/",
+        "~/.claude",
+    ):
+        require_absent(errors, "release archive docs", archive_text, forbidden)
 
     zenodo_text = json.dumps(zenodo, sort_keys=True)
     require_contains(errors, ".zenodo.json", zenodo.get("title", ""), "SpaceBio-Bench")

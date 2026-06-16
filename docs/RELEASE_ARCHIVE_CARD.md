@@ -1,94 +1,78 @@
 ---
-title: GeneLab Benchmark Release Archive Card
-page_type: release_archive_card
-status: release_candidate_metadata_ready
-last_reviewed: 2026-06-05
-claim_boundary: archive_metadata_no_new_result_or_payload_claim
+title: SpaceBio-Bench Release Archive Status
+page_type: release_archive_status
+status: public_ready
+last_reviewed: 2026-06-16
 ---
 
-# GeneLab Benchmark Release Archive Card
+# SpaceBio-Bench Release Archive Status
 
-## Card Purpose
+## Purpose
 
-This card defines what would be archived for a paper-supporting release of
-GeneLab Benchmark, what is intentionally excluded, and which gates remain before
-minting a final DOI or claiming a frozen research-object release.
+This card summarizes the repository materials that support a paper or archive
+release for SpaceBio-Bench / GeneLab Benchmark. It is a planning aid for
+repository packaging, citation metadata, and dataset links.
 
-It does not create a DOI, approve a new result release, or freeze v9 payloads.
-
-## Archive Candidate Summary
+## Current Archive Scope
 
 | Field | Current value |
 |---|---|
-| Release candidate | `v7.1.2` documentation, public-card, and metadata patch on current `main` |
-| Repository branch | `main` as public entry point with curated v9 metadata-alpha evidence subset |
-| Current result boundary | v1-v7 canonical historical benchmark surface |
-| Documentation patch | v7.1.2 metadata/card patch, no new result generation |
-| Dataset payload boundary | HF feature-matrix package plus GitHub task/evaluation metadata |
-| DOI status | Not minted in this card |
-| Archive status | GitHub release-ready metadata; DOI deposition and source-archive checksum still pending |
+| Public release line | `v7.1.2` documentation, public-card, citation, and metadata patch |
+| Result surface | v7.1 canonical historical benchmark results |
+| Repository entry point | `main` branch and `v7.1.2` tag |
+| Dataset access | Hugging Face public fold package plus GitHub task metadata |
+| v9 public bulk | Metadata catalog for task/source/fold/audit/baseline records |
+| DOI status | Ready for final metadata review before archive deposition |
 
 ## Archive Contents
 
-The archive candidate should include:
+The repository archive should include:
 
-- Source code and evaluation scripts in `scripts/`.
-- Public task metadata, labels, and fold definitions in `tasks/`.
-- Public result JSON and summary artifacts in `evaluation/` and versioned
-  evaluation directories.
-- Human-facing release documentation in `README.md`, `docs/`, and
-  `CITATION.cff`.
-- Release metadata in `.zenodo.json`.
-- Hugging Face dataset card text in `docs/hf_dataset_card.md`.
-- SpaceBio-Bench transparency cards in `docs/SPACEBIOBENCH_*.md`.
-- Curated v9 public bulk metadata-alpha evidence in `v9/` and
-  `docs/V9_PUBLIC_BULK_ALPHA_*.md`.
+- source code and evaluation scripts in `scripts/`;
+- public task metadata, labels, and fold definitions in `tasks/`;
+- result JSON and summary artifacts in `evaluation/` and versioned evaluation
+  directories;
+- public documentation in `README.md`, `docs/`, and `CITATION.cff`;
+- release metadata in `.zenodo.json`;
+- Hugging Face dataset card source in `docs/hf_dataset_card.md`;
+- SpaceBio-Bench public cards in `docs/SPACEBIOBENCH_*.md`;
+- v9 public bulk metadata catalog files under `v9/`.
 
-## Excluded From The Archive Claim
+## Scope Notes
 
-The archive candidate should not claim to include:
+The repository archive does not bundle raw NASA OSDR source payloads or
+controlled-access human sequence data. Source biological data remain governed
+by NASA OSDR and the individual OSDR study pages.
 
-- Raw NASA OSDR source payloads.
-- Controlled-access human sequence data.
-- Frozen v9 public bulk payload files.
-- Locally hash-verified v9 payload bundle.
-- DOI-ready RO-Crate research object.
-- Clinical, crew-health, countermeasure, intervention, or Mars-regime guidance.
+The v9 public bulk surface is documented as a metadata catalog. Larger payload
+bundles, DOI-specific archive records, or research-object packaging can be
+added as separate release work when the relevant metadata and checks are ready.
 
-## Required Before DOI Or Final Release Tag
+## Before DOI Deposition
 
-Before a DOI-oriented release:
+- Confirm manuscript title, author list, affiliations, and release date.
+- Review `CITATION.cff` and `.zenodo.json` against the final manuscript.
+- Confirm the intended GitHub tag and release URL.
+- Confirm the Hugging Face dataset card links to the intended repository tag.
+- Record dataset-specific OSDR citations for the manuscript subset.
+- Generate a source archive checksum after selecting the final release archive.
 
-- Confirm the final manuscript author list, affiliations, and manuscript title
-  in `CITATION.cff` and `.zenodo.json`.
-- Create or confirm an annotated GitHub release tag, `v7.1.2`, from a final
-  commit that includes the public card and release-archive metadata polish.
-- Generate and store a checksum for the release source archive.
-- Confirm the Hugging Face dataset card links to the intended canonical branch
-  and release tag.
-- Record individual OSDR dataset citations for any analysis subset used in the
-  manuscript.
-- Decide whether v9 metadata-alpha artifacts are cited as future work, a
-  supplemental surface, or excluded from the paper archive.
-- If claiming research-object completeness, add RO-Crate or equivalent
-  provenance metadata.
+## Current Status
 
-## Current Readiness
-
-| Gate | Status | Note |
+| Area | Status | Public file |
 |---|---|---|
-| Public README entry point | Pass | Links card pack and portfolio brief |
-| Citation metadata | Pass for current public identity | `CITATION.cff` exists; final manuscript author list/title review still needed |
-| Zenodo metadata | Candidate ready | `.zenodo.json` added for DOI deposition |
-| License | Pass for code | MIT license present |
-| HF dataset card | Pass | Links transparency cards on current public `main` |
-| Claim-boundary cards | Pass | System, evaluation, readiness, and claim cards are public-review ready |
-| Release archive manifest | Pass | `docs/RELEASE_ARCHIVE_MANIFEST.md` added |
-| Source archive checksum | Pending DOI archive | Generate after final GitHub release archive is selected |
-| DOI | Pending | Mint through Zenodo or equivalent archive after metadata review |
-| v9 frozen payload | Blocked | Payload-level hash verification remains pending |
+| README entry point | Ready | `README.md` |
+| Citation metadata | Ready for final manuscript review | `CITATION.cff` |
+| Zenodo metadata | Ready for final manuscript review | `.zenodo.json` |
+| Code license | Ready | `LICENSE` |
+| HF dataset card | Ready | `docs/hf_dataset_card.md` |
+| Public documentation map | Ready | `docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md` |
+| Release manifest | Ready | `release/release_manifest.json` |
+| Archive manifest | Ready | `docs/RELEASE_ARCHIVE_MANIFEST.md` |
+| Source archive checksum | To be generated after archive selection | release-specific checksum record |
+| DOI | To be minted by Zenodo or the selected archive service | archive record |
 
-## External Standards Used
+## References
 
 - GitHub citation files:
   https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files
@@ -96,7 +80,7 @@ Before a DOI-oriented release:
   https://citation-file-format.github.io/
 - Zenodo GitHub integration:
   https://help.zenodo.org/docs/deposit/github/
-- DataCite Metadata Schema 4.7:
-  https://schema.datacite.org/meta/kernel-4.7/
+- DataCite Metadata Schema:
+  https://schema.datacite.org/
 - RO-Crate:
-  https://www.researchobject.org/ro-crate/1.2/
+  https://www.researchobject.org/ro-crate/
