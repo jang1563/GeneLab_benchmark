@@ -1,0 +1,36 @@
+name: Data or documentation issue
+description: Report a broken path, unclear public documentation, or release-surface inconsistency.
+title: "[Data/docs]: "
+labels:
+  - documentation
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: Location
+      description: Link to the file, section, dataset path, or release asset.
+      placeholder: README.md, docs/hf_dataset_card.md, A5_skin_lomo/fold_RR-7_test/train_X.csv
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong or unclear?
+      description: Describe the observed issue and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction command or access path
+      description: Include a command, URL, or short sequence that reproduces the issue.
+      render: bash
+    validations:
+      required: false
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Python version, package manager, or browser if relevant.
+    validations:
+      required: false

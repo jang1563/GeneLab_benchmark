@@ -1,0 +1,44 @@
+name: Benchmark submission discussion
+description: Propose or discuss a model submission for the public benchmark folds.
+title: "[Submission]: "
+labels:
+  - benchmark
+body:
+  - type: input
+    id: task_id
+    attributes:
+      label: Task ID or fold package
+      placeholder: A5_skin_lomo / fold_RR-7_test
+    validations:
+      required: true
+  - type: input
+    id: model_name
+    attributes:
+      label: Model name
+      placeholder: PCA-LR, Geneformer adapter, custom baseline
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Method summary
+      description: Describe preprocessing, feature representation, training split, and prediction output.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation command
+      description: Include the command used to validate or evaluate the JSON submission.
+      render: bash
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I followed docs/submission_format.md.
+          required: true
+        - label: I did not use held-out test labels during model training or feature selection.
+          required: true

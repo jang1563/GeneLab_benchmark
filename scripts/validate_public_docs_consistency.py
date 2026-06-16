@@ -84,6 +84,8 @@ def validate_public_docs() -> list[str]:
     require_contains(errors, "README.md", readme, "release/release_manifest.json")
     require_contains(errors, "README.md", readme, "https://huggingface.co/datasets/jang1563/genelab-benchmark")
     require_contains(errors, "README.md", readme, "docs/assets/hf_benchmark_summary.png")
+    require_contains(errors, "README.md", readme, "CONTRIBUTING.md")
+    require_contains(errors, "README.md", readme, "docs/submission_format.md")
     require_absent(errors, "README.md", readme, "Version: v7.0 (2026-04-12)")
     require_absent(errors, "README.md", readme, "Status: **v1–v7 Complete**")
 

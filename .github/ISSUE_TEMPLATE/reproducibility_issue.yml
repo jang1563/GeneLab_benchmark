@@ -1,0 +1,36 @@
+name: Reproducibility issue
+description: Report a command, dependency, or release QA problem.
+title: "[Repro]: "
+labels:
+  - reproducibility
+body:
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: Paste the command or workflow step that failed.
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: Include the relevant error or unexpected output.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe what you expected the command to produce.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Python version, package versions, and whether data came from GitHub or Hugging Face.
+    validations:
+      required: false
