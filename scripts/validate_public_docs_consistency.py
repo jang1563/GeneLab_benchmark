@@ -15,6 +15,12 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 README = REPO_ROOT / "README.md"
 HF_CARD = REPO_ROOT / "docs" / "hf_dataset_card.md"
 V9_HF_CARD = REPO_ROOT / "docs" / "v9_hf_dataset_card.md"
+DOC_MAP = REPO_ROOT / "docs" / "SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md"
+PORTFOLIO_BRIEF = REPO_ROOT / "docs" / "SPACEBIOBENCH_PORTFOLIO_BRIEF.md"
+SYSTEM_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_SYSTEM_CARD.md"
+EVALUATION_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_EVALUATION_CARD.md"
+RELEASE_STATUS_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_RELEASE_READINESS_CARD.md"
+STATEMENT_GUIDE = REPO_ROOT / "docs" / "SPACEBIOBENCH_CLAIM_REGISTER.md"
 V9_README = REPO_ROOT / "v9" / "README.md"
 V9_REPORTS_README = REPO_ROOT / "v9" / "reports" / "README.md"
 CITATION = REPO_ROOT / "CITATION.cff"
@@ -65,6 +71,12 @@ def validate_public_docs() -> list[str]:
     readme = README.read_text()
     hf_card = HF_CARD.read_text()
     v9_hf_card = V9_HF_CARD.read_text()
+    doc_map = DOC_MAP.read_text()
+    portfolio_brief = PORTFOLIO_BRIEF.read_text()
+    system_card = SYSTEM_CARD.read_text()
+    evaluation_card = EVALUATION_CARD.read_text()
+    release_status_card = RELEASE_STATUS_CARD.read_text()
+    statement_guide = STATEMENT_GUIDE.read_text()
     v9_readme = V9_README.read_text()
     v9_reports_readme = V9_REPORTS_README.read_text()
     citation = CITATION.read_text()
@@ -97,6 +109,9 @@ def validate_public_docs() -> list[str]:
     require_contains(errors, "README.md", readme, "CONTRIBUTING.md")
     require_contains(errors, "README.md", readme, "docs/submission_format.md")
     require_contains(errors, "README.md", readme, "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out")
+    require_contains(errors, "README.md", readme, "public documentation map")
+    require_contains(errors, "README.md", readme, "Release status")
+    require_contains(errors, "README.md", readme, "Public statement guide")
     require_absent(errors, "README.md", readme, "Version: v7.0 (2026-04-12)")
     require_absent(errors, "README.md", readme, "Status: **v1–v7 Complete**")
 
@@ -170,6 +185,60 @@ def validate_public_docs() -> list[str]:
         "release-readiness blockers",
     ):
         require_absent(errors, "v9 public docs", v9_public_text, forbidden)
+
+    public_card_text = "\n".join(
+        [
+            doc_map,
+            portfolio_brief,
+            system_card,
+            evaluation_card,
+            release_status_card,
+            statement_guide,
+        ]
+    )
+    for label, text, expected in (
+        (
+            "docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md",
+            doc_map,
+            "# SpaceBio-Bench Public Documentation Map",
+        ),
+        (
+            "docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md",
+            portfolio_brief,
+            "# SpaceBio-Bench Portfolio Brief",
+        ),
+        ("docs/SPACEBIOBENCH_SYSTEM_CARD.md", system_card, "# SpaceBio-Bench System Card"),
+        (
+            "docs/SPACEBIOBENCH_EVALUATION_CARD.md",
+            evaluation_card,
+            "# SpaceBio-Bench Evaluation Card",
+        ),
+        (
+            "docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md",
+            release_status_card,
+            "# SpaceBio-Bench Release Status Card",
+        ),
+        (
+            "docs/SPACEBIOBENCH_CLAIM_REGISTER.md",
+            statement_guide,
+            "# SpaceBio-Bench Public Statement Guide",
+        ),
+    ):
+        require_contains(errors, label, text, expected)
+    for forbidden in (
+        "metadata-alpha",
+        "metadata alpha",
+        "Public Bulk Metadata Alpha",
+        "claim boundary",
+        "blocked wording",
+        "future-only",
+        "provenance boundary",
+        "Provenance And Integrity",
+        "release-readiness blockers",
+        "should not be used",
+        "not a frozen",
+    ):
+        require_absent(errors, "linked public cards", public_card_text, forbidden)
 
     zenodo_text = json.dumps(zenodo, sort_keys=True)
     require_contains(errors, ".zenodo.json", zenodo.get("title", ""), "SpaceBio-Bench")

@@ -40,8 +40,8 @@ mission-held-out validation, and transparent release boundaries.
 | Hugging Face dataset | Public processed fold package | Download selected LOMO feature matrices and result artifacts | [HF dataset card](docs/hf_dataset_card.md) |
 | v9 public bulk | Metadata catalog | Task catalog, source inventory, and baseline summaries | [v9 HF-style card](docs/v9_hf_dataset_card.md) |
 
-For linked methods, evaluation, and release cards, start with the
-[SpaceBio-Bench card pack](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md).
+For linked methods, evaluation, and release-status notes, start with the
+[SpaceBio-Bench public documentation map](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md).
 For machine-readable release status, see
 [release/release_manifest.json](release/release_manifest.json).
 
@@ -159,10 +159,11 @@ scripts/               Data, evaluation, upload, validation, and figure scripts
 | Need | Document |
 |---|---|
 | Public result source | [docs/CANONICAL_RESULTS_V7_1.md](docs/CANONICAL_RESULTS_V7_1.md) |
-| Methods, evaluation, and release cards | [docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) |
+| Public documentation map | [docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) |
 | System scope | [docs/SPACEBIOBENCH_SYSTEM_CARD.md](docs/SPACEBIOBENCH_SYSTEM_CARD.md) |
 | Evaluation interpretation | [docs/SPACEBIOBENCH_EVALUATION_CARD.md](docs/SPACEBIOBENCH_EVALUATION_CARD.md) |
-| Release readiness | [docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md](docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md) |
+| Release status | [docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md](docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md) |
+| Public statement guide | [docs/SPACEBIOBENCH_CLAIM_REGISTER.md](docs/SPACEBIOBENCH_CLAIM_REGISTER.md) |
 | Hugging Face dataset card source | [docs/hf_dataset_card.md](docs/hf_dataset_card.md) |
 | v9 metadata catalog card source | [docs/v9_hf_dataset_card.md](docs/v9_hf_dataset_card.md) |
 | Contributing and submissions | [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/submission_format.md](docs/submission_format.md) |
