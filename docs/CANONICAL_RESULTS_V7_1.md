@@ -18,10 +18,9 @@ Use the following boundaries in public text:
   multi-method evaluation, foundation-model comparisons, and result synthesis.
 - **v7.1 documentation patch**: public metadata and result-surface consistency;
   no new benchmark result generation.
-- **v7.1.2 public-card/metadata/evidence-visibility patch**: reviewer-facing card pack, release
-  archive metadata, author metadata, and curated v9 metadata-alpha evidence
-  visibility over the canonical v7.1 result surface; no new benchmark result
-  generation.
+- **v7.1.2 public-card/metadata patch**: reviewer-facing card pack,
+  release metadata, author metadata, and access documentation for the canonical
+  v7.1 result surface; no new benchmark result generation.
 - **v8 SpaceMed**: incubating translational extension. Do not mix v8
   intervention, countermeasure, or Mars-extrapolation claims into the v7.1
   benchmark paper.

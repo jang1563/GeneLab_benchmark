@@ -26,7 +26,7 @@ LANE_STATUSES = {
     "diagnostic_or_draft_lane",
 }
 CHECKSUM_STATUSES = {"not_recorded", "recorded", "external", "pending"}
-GATE_STATUSES = {"planned", "implemented", "partial", "blocked"}
+GATE_STATUSES = {"implemented", "partial", "blocked"}
 
 
 def load_json(path: Path) -> Any:
@@ -93,17 +93,15 @@ def validate_release_manifest(data: Any) -> list[str]:
             "schema_version",
             "generated_at",
             "project",
-            "source_control",
             "release_lanes",
             "artifacts",
             "schemas",
             "quality_gates",
-            "open_decisions",
         ),
     )
 
-    if data.get("schema_version") != "0.1.0":
-        errors.append("manifest.schema_version: expected 0.1.0")
+    if data.get("schema_version") != "0.1.1":
+        errors.append("manifest.schema_version: expected 0.1.1")
 
     project = data.get("project")
     if require_mapping(errors, "project", project):
@@ -121,7 +119,7 @@ def validate_release_manifest(data: Any) -> list[str]:
             errors.append("project.huggingface_dataset: expected Hugging Face dataset URL")
 
     source_control = data.get("source_control")
-    if require_mapping(errors, "source_control", source_control):
+    if source_control is not None and require_mapping(errors, "source_control", source_control):
         commit = source_control.get("git_commit_at_manifest_creation")
         if not isinstance(commit, str) or not HEX40.match(commit):
             errors.append("source_control.git_commit_at_manifest_creation: expected 40-char git SHA")
@@ -208,19 +206,6 @@ def validate_release_manifest(data: Any) -> list[str]:
             require_fields(errors, where, gate, ("gate_id", "status", "description"))
             if gate.get("status") not in GATE_STATUSES:
                 errors.append(f"{where}.status: unsupported value {gate.get('status')!r}")
-
-    decisions = data.get("open_decisions")
-    if require_list(errors, "open_decisions", decisions):
-        for index, decision in enumerate(decisions):
-            where = f"open_decisions[{index}]"
-            if not require_mapping(errors, where, decision):
-                continue
-            require_fields(
-                errors,
-                where,
-                decision,
-                ("decision_id", "question", "recommended_default"),
-            )
 
     return errors
 

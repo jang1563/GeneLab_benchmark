@@ -321,16 +321,16 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("v7.1 GeneLab Benchmark", readme)
         self.assertIn("docs/CANONICAL_RESULTS_V7_1.md", readme)
         self.assertIn("data freeze 2026-03-01", readme)
-        self.assertIn("Public status: **v7.1.2 public-card/metadata/evidence-visibility patch", hf_card)
+        self.assertIn("Public status: **v7.1.2 public-card/metadata patch", hf_card)
         self.assertIn("canonical v7.1 results", hf_card)
         self.assertIn("data freeze 2026-03-01", hf_card)
         self.assertIn('version: "7.1.2"', citation)
         self.assertIn('date-released: "2026-06-05"', citation)
         self.assertIn(
-            'notes: "Manuscript in preparation; v7.1.2 documentation, public-card, metadata, and evidence-visibility patch."',
+            'notes: "Manuscript in preparation; v7.1.2 documentation, public-card, and metadata patch."',
             citation,
         )
-        self.assertIn("documentation, public-card, metadata, and evidence-visibility patch", citation)
+        self.assertIn("documentation, public-card, and metadata patch", citation)
         self.assertNotIn('version: "5.0.0"', citation)
         self.assertNotIn("Target journal:", citation)
 

@@ -30,13 +30,12 @@ viewer: false
 machine-learning and foundation-model methods generalize spaceflight biological
 signatures across missions.**
 
-Public status: **v7.1.2 public-card/metadata/evidence-visibility patch over
-canonical v7.1 results**
+Public status: **v7.1.2 public-card/metadata patch over canonical v7.1 results**
 
 Dataset freeze: **2026-03-01**
 
-Patch scope: documentation, public metadata, and evidence visibility. It does
-not introduce new benchmark result generation.
+Patch scope: documentation, public metadata, and access guidance. It does not
+introduce new benchmark result generation.
 
 Code and full documentation: <https://github.com/jang1563/GeneLab_benchmark>
 
@@ -163,7 +162,7 @@ snapshot_download(
 | Expression values | Log2(DESeq2 size-factor normalized counts + 1) |
 | Gene selection | Top 75th percentile variance, computed on training missions only |
 | Labels | Binary Flight/Ground labels |
-| Metadata | Sample and fold provenance for auditability |
+| Metadata | Sample and fold metadata for auditability |
 
 The fold design prevents test-mission leakage by applying variance filtering
 inside each training split.
@@ -199,15 +198,10 @@ manifest.
 | Surface | Public label |
 |---|---|
 | v7.1 GeneLab Benchmark | Canonical historical result surface and citation target |
-| v7.1.2 public-card patch | Documentation, metadata, and evidence-visibility patch over v7.1 results |
-| v8 extension | Incubating translational extension |
-| v9 public bulk | Metadata-only public bulk alpha |
-| v9 extension lanes | Diagnostic or draft lanes |
+| v7.1.2 public-card patch | Documentation and metadata patch over v7.1 results |
 
 This HF dataset card describes the v7.1 public fold package with the v7.1.2
-public-card patch. The v9 public bulk metadata-alpha card is maintained
-separately in the GitHub repository as
-`docs/v9_hf_dataset_card.md`.
+public-card patch.
 
 ## Citation
 
@@ -219,7 +213,7 @@ Please cite the software and benchmark using the GitHub `CITATION.cff` metadata.
   author = {Kim, JangKeun},
   year = {2026},
   url = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}
+  note = {v7.1.2 documentation, public-card, and metadata patch over canonical v7.1 results; data freeze 2026-03-01}
 }
 ```
 

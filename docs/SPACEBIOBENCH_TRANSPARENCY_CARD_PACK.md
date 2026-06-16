@@ -24,7 +24,7 @@ extension lanes remain outside this public-review path.
 
 - v1-v7 / v7.1 is the canonical historical result surface for the original
   GeneLab Benchmark.
-- v7.1.2 is the public-card, metadata, and evidence-visibility patch over that canonical
+- v7.1.2 is the public-card, metadata, and metadata patch over that canonical
   result surface. It does not introduce new result generation.
 - v8 is an incubating translational extension and should not be mixed into
   v7.1 benchmark claims.

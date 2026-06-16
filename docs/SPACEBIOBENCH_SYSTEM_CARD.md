@@ -36,7 +36,7 @@ The project currently has multiple surfaces with different maturity levels:
 | Surface | Current status | Primary boundary |
 |---|---|---|
 | v1-v7 GeneLab Benchmark | Canonical historical result surface | Cross-mission mouse transcriptomics benchmark and result synthesis |
-| v7.1.2 documentation/card/evidence-visibility patch | Documentation, public-card, metadata, and evidence-visibility patch over v7.1 | No new benchmark result generation |
+| v7.1.2 documentation/card/metadata patch | Documentation, public-card, and metadata patch over v7.1 | No new benchmark result generation |
 | v8 SpaceMed | Incubating translational extension | Hypothesis and diagnostic work only; do not mix into v7.1 claims |
 | v9 public bulk | Metadata-only alpha snapshot | Task/source/provenance scaffold; not a frozen payload release |
 | v9 single-cell, organoid, multispecies | Draft diagnostic lanes | Asset, payload, metric, or feasibility scaffolds depending on lane |

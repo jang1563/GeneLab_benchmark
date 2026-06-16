@@ -1,6 +1,6 @@
 {
   "$schema": "release_manifest.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.1.1",
   "generated_at": "2026-06-15",
   "project": {
     "name": "SpaceBio-Bench",
@@ -9,10 +9,6 @@
     "huggingface_dataset": "https://huggingface.co/datasets/jang1563/genelab-benchmark",
     "maintainer": "JangKeun Kim, Weill Cornell Medicine"
   },
-  "source_control": {
-    "git_commit_at_manifest_creation": "24c5594165d5f662435ae00a9b09476d1905f30b",
-    "working_tree_status": "main_based_public_polish_branch"
-  },
   "release_lanes": [
     {
       "lane_id": "v7.1",
@@ -20,7 +16,7 @@
       "status": "canonical_historical_result_surface",
       "version": "7.1.2",
       "date_released": "2026-06-05",
-      "summary": "The v1-v7 canonical benchmark result surface plus the v7.1.2 documentation, public-card, metadata, and evidence-visibility patch. The patch does not introduce new benchmark result generation.",
+      "summary": "The v1-v7 canonical benchmark result surface plus the v7.1.2 documentation, public-card, and metadata patch. The patch does not introduce new benchmark result generation.",
       "canonical_surfaces": [
         "README.md",
         "docs/CANONICAL_RESULTS_V7_1.md",
@@ -41,9 +37,9 @@
     },
     {
       "lane_id": "v9_public_bulk",
-      "public_label": "metadata-only public bulk alpha",
+      "public_label": "metadata catalog",
       "status": "metadata_only_public_bulk_alpha",
-      "summary": "The v9 public bulk lane has metadata indices, source inventory, checksum audit, baseline summaries, and a draft data package; it is not a frozen payload release.",
+      "summary": "The v9 public bulk lane publishes task indices, source inventory, checksum audit, and baseline summaries as a metadata catalog.",
       "canonical_surfaces": [
         "docs/v9_hf_dataset_card.md",
         "docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md",
@@ -57,10 +53,10 @@
       "huggingface": {
         "repo_id": "recommended_separate_v9_repo_when_distribution_expands",
         "dataset_card_path": "docs/v9_hf_dataset_card.md",
-        "revision_status": "not_uploaded_as_frozen_release"
+        "revision_status": "github_metadata_catalog"
       },
       "citation": {
-        "status": "alpha_not_cited_as_frozen_release"
+        "status": "metadata_catalog_not_primary_citation_target"
       }
     }
   ],
@@ -108,7 +104,7 @@
     {
       "artifact_id": "v9_hf_dataset_card",
       "lane_id": "v9_public_bulk",
-      "role": "v9_public_bulk_alpha_dataset_card_source",
+      "role": "v9_public_bulk_metadata_catalog_card_source",
       "path": "docs/v9_hf_dataset_card.md",
       "kind": "markdown",
       "checksum_status": "not_recorded"
@@ -116,7 +112,7 @@
     {
       "artifact_id": "v9_datapackage_draft",
       "lane_id": "v9_public_bulk",
-      "role": "draft_frictionless_data_package",
+      "role": "frictionless_data_package_descriptor",
       "path": "v9/datapackage.draft.json",
       "kind": "json",
       "checksum_status": "not_recorded"
@@ -127,14 +123,6 @@
       "role": "task_manifest_index",
       "path": "v9/task_manifest_index.csv",
       "kind": "csv",
-      "checksum_status": "not_recorded"
-    },
-    {
-      "artifact_id": "premium_upgrade_plan",
-      "lane_id": "v9_public_bulk",
-      "role": "github_hf_public_surface_upgrade_plan",
-      "path": "docs/GITHUB_HF_PREMIUM_UPGRADE_PLAN_2026_06_15.md",
-      "kind": "markdown",
       "checksum_status": "not_recorded"
     },
     {
@@ -191,11 +179,6 @@
       "description": "After upload, download representative files from the HF repo and validate manifest paths."
     },
     {
-      "gate_id": "status_language_lint",
-      "status": "planned",
-      "description": "Flag public text that labels alpha or draft lanes as frozen releases."
-    },
-    {
       "gate_id": "make_release_qa",
       "status": "implemented",
       "description": "Run public release manifest, public-docs consistency, HF upload workflow, and Python compile checks through Makefile."
@@ -204,23 +187,6 @@
       "gate_id": "hpc_public_release_gate",
       "status": "implemented",
       "description": "Run the public-surface slice of the HPC release gate with scripts/hpc_release_validate.sh --public-only."
-    }
-  ],
-  "open_decisions": [
-    {
-      "decision_id": "public_name_transition",
-      "question": "Should the public project name shift from GeneLab Benchmark to SpaceBio-Bench while preserving the legacy name for v1-v7?",
-      "recommended_default": "Use SpaceBio-Bench as the forward-looking platform name and GeneLab Benchmark as the historical v1-v7 alias."
-    },
-    {
-      "decision_id": "hf_repo_split",
-      "question": "Should v9 public bulk alpha share the existing Hugging Face dataset repo or move to a separate repo?",
-      "recommended_default": "Keep the existing repo for v7 public folds and create a separate v9 repo when public distribution expands beyond metadata indices."
-    },
-    {
-      "decision_id": "python_package_identity",
-      "question": "Should this repository become an installable Python package with public CLI entrypoints?",
-      "recommended_default": "Add packaging only after the release manifest and validation commands stabilize."
     }
   ]
 }
