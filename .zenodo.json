@@ -1,8 +1,8 @@
 {
-  "title": "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models",
+  "title": "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out Spaceflight Transcriptomics Benchmark",
   "upload_type": "software",
   "version": "7.1.2",
-  "description": "GeneLab Benchmark provides standardized mission-held-out benchmark tasks for evaluating machine learning and foundation-model behavior on public NASA OSDR mouse spaceflight transcriptomics data. This archive metadata describes the current public documentation, card-pack, and release-candidate surface. v7.1.2 is a documentation, public-card, metadata, and evidence-visibility patch and does not introduce new benchmark result generation.",
+  "description": "SpaceBio-Bench / GeneLab Benchmark provides standardized mission-held-out benchmark tasks for evaluating machine-learning and foundation-model generalization on public NASA OSDR mouse spaceflight transcriptomics data. The v7.1.2 archive records the public-card and metadata patch over the canonical v7.1 result surface; it does not introduce new benchmark result generation.",
   "creators": [
     {
       "name": "Kim, JangKeun",
@@ -21,7 +21,10 @@
     "NASA OSDR",
     "GeneLab",
     "leave-one-mission-out",
-    "bioinformatics"
+    "bioinformatics",
+    "SpaceBio-Bench",
+    "space biology",
+    "mission-held-out"
   ],
   "related_identifiers": [
     {
@@ -40,5 +43,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "Source biological data are derived from NASA OSDR public datasets and should be cited at the individual OSDR study level where applicable. This repository archive is not a clinical, crew-health, countermeasure, or intervention recommendation artifact. Final DOI publication should confirm the final manuscript author list, manuscript title, release tag, archive checksum, and upstream dataset citation metadata before deposition."
+  "notes": "Source biological data are derived from NASA OSDR public datasets and should be cited at the individual OSDR study level where applicable. Processed public fold packages are available from the linked Hugging Face dataset repository."
 }
