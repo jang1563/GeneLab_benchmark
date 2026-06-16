@@ -165,6 +165,7 @@ scripts/               Data, evaluation, upload, validation, and figure scripts
 | Release readiness | [docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md](docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md) |
 | Hugging Face dataset card source | [docs/hf_dataset_card.md](docs/hf_dataset_card.md) |
 | v9 metadata catalog card source | [docs/v9_hf_dataset_card.md](docs/v9_hf_dataset_card.md) |
+| Contributing and submissions | [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/submission_format.md](docs/submission_format.md) |
 | Machine-readable release state | [release/release_manifest.json](release/release_manifest.json) |
 
 ## Data And Release Notes
@@ -178,6 +179,12 @@ Release labels are intentionally separated:
 
 - **v7.1**: canonical historical result surface and citation target.
 - **v9 public bulk**: metadata catalog and baseline-summary surface.
+
+## Contributing
+
+Use [CONTRIBUTING.md](CONTRIBUTING.md) for documentation fixes, data-access
+reports, reproducibility issues, and public benchmark submissions. Prediction
+submissions should follow [docs/submission_format.md](docs/submission_format.md).
 
 ## Citation
 
