@@ -2,23 +2,24 @@ cff-version: 1.2.0
 message: "If you use this benchmark in your research, please cite as below."
 type: software
 
-title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
+title: "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out Spaceflight Transcriptomics Benchmark"
 version: "7.1.2"
 date-released: "2026-06-05"
 
 abstract: >
-  GeneLab Benchmark is a comprehensive benchmark for evaluating AI and machine learning
-  models on NASA OSDR (Open Science Data Repository) mouse spaceflight transcriptomics
-  data. It provides standardized Leave-One-Mission-Out (LOMO) cross-validation splits,
-  multi-method evaluation (8 classifiers x 4 feature types), foundation model comparisons
-  (Geneformer, scGPT, UCE, scFoundation), and an evaluation framework for multi-tissue
-  spaceflight detection across 8 tissues (liver, gastrocnemius, kidney, thymus, skin, eye,
-  lung, colon), cross-mission transfer, cross-tissue transfer, multi-species analysis
-  (mouse, Drosophila), spatial transcriptomics (Visium), and single-cell RNA-seq
-  (RRRM-1, RRRM-2). The v7 release also includes unified scPRINT2 and graph
-  neural network benchmarking, plus cross-method synthesis across classical,
-  foundation-model, and graph-based approaches. The v7.1.2 release is a
-  documentation, public-card, and metadata patch; it does
+  SpaceBio-Bench / GeneLab Benchmark is a comprehensive benchmark for evaluating
+  AI and machine learning models on NASA OSDR (Open Science Data Repository)
+  mouse spaceflight transcriptomics data. It provides standardized
+  Leave-One-Mission-Out (LOMO) cross-validation splits, multi-method evaluation
+  (8 classifiers x 4 feature types), foundation model comparisons (Geneformer,
+  scGPT, UCE, scFoundation), and an evaluation framework for multi-tissue
+  spaceflight detection across 8 tissues (liver, gastrocnemius, kidney, thymus,
+  skin, eye, lung, colon), cross-mission transfer, cross-tissue transfer,
+  multi-species analysis (mouse, Drosophila), spatial transcriptomics (Visium),
+  and single-cell RNA-seq (RRRM-1, RRRM-2). The v7 release also includes
+  unified scPRINT2 and graph neural network benchmarking, plus cross-method
+  synthesis across classical, foundation-model, and graph-based approaches. The
+  v7.1.2 release is a documentation, public-card, and metadata patch; it does
   not introduce new benchmark result generation.
 
 authors:
@@ -37,6 +38,7 @@ keywords:
   - machine learning
   - NASA OSDR
   - GeneLab
+  - SpaceBio-Bench
   - LOMO
   - cross-mission transfer
   - foundation model
@@ -65,7 +67,7 @@ references:
 
 preferred-citation:
   type: article
-  title: "GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models"
+  title: "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out Spaceflight Transcriptomics Benchmark"
   authors:
     - family-names: "Kim"
       given-names: "JangKeun"
