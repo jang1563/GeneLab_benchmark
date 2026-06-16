@@ -209,7 +209,7 @@ Please cite the software and benchmark using the GitHub `CITATION.cff` metadata.
 
 ```bibtex
 @dataset{kim2026genelab,
-  title = {GeneLab Benchmark: A Multi-Tissue Spaceflight Transcriptomics Benchmark for AI/ML Models},
+  title = {SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out Spaceflight Transcriptomics Benchmark},
   author = {Kim, JangKeun},
   year = {2026},
   url = {https://huggingface.co/datasets/jang1563/genelab-benchmark},

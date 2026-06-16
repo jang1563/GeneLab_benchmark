@@ -327,10 +327,22 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn('version: "7.1.2"', citation)
         self.assertIn('date-released: "2026-06-05"', citation)
         self.assertIn(
+            'title: "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out Spaceflight Transcriptomics Benchmark"',
+            citation,
+        )
+        self.assertIn(
             'notes: "Manuscript in preparation; v7.1.2 documentation, public-card, and metadata patch."',
             citation,
         )
         self.assertIn("documentation, public-card, and metadata patch", citation)
+        self.assertIn(
+            "title = {SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out Spaceflight Transcriptomics Benchmark}",
+            readme,
+        )
+        self.assertIn(
+            "title = {SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out Spaceflight Transcriptomics Benchmark}",
+            hf_card,
+        )
         self.assertNotIn('version: "5.0.0"', citation)
         self.assertNotIn("Target journal:", citation)
 

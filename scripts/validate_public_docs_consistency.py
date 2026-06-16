@@ -77,6 +77,9 @@ def validate_public_docs() -> list[str]:
                 f"CITATION.cff: version {actual_version!r} does not match "
                 f"release manifest citation_version {citation_version!r}"
             )
+    citation_title = parse_cff_scalar(citation, "title")
+    if citation_title and "SpaceBio-Bench / GeneLab Benchmark" not in citation_title:
+        errors.append("CITATION.cff: title should include SpaceBio-Bench / GeneLab Benchmark")
 
     require_contains(errors, "README.md", readme, "# SpaceBio-Bench")
     require_contains(errors, "README.md", readme, "Former public name: **GeneLab Benchmark**")
@@ -86,6 +89,7 @@ def validate_public_docs() -> list[str]:
     require_contains(errors, "README.md", readme, "docs/assets/hf_benchmark_summary.png")
     require_contains(errors, "README.md", readme, "CONTRIBUTING.md")
     require_contains(errors, "README.md", readme, "docs/submission_format.md")
+    require_contains(errors, "README.md", readme, "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out")
     require_absent(errors, "README.md", readme, "Version: v7.0 (2026-04-12)")
     require_absent(errors, "README.md", readme, "Status: **v1–v7 Complete**")
 
@@ -104,6 +108,7 @@ def validate_public_docs() -> list[str]:
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Public status: **v7.1.2 public-card/metadata patch")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Dataset freeze: **2026-03-01**")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "repo_id = \"jang1563/genelab-benchmark\"")
+    require_contains(errors, "docs/hf_dataset_card.md", hf_card, "SpaceBio-Bench / GeneLab Benchmark: Mission-Held-Out")
 
     zenodo_text = json.dumps(zenodo, sort_keys=True)
     require_contains(errors, ".zenodo.json", zenodo.get("title", ""), "SpaceBio-Bench")
