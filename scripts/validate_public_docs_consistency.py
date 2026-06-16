@@ -15,6 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 README = REPO_ROOT / "README.md"
 HF_CARD = REPO_ROOT / "docs" / "hf_dataset_card.md"
 CITATION = REPO_ROOT / "CITATION.cff"
+ZENODO = REPO_ROOT / ".zenodo.json"
 RELEASE_MANIFEST = REPO_ROOT / "release" / "release_manifest.json"
 
 
@@ -61,6 +62,7 @@ def validate_public_docs() -> list[str]:
     readme = README.read_text()
     hf_card = HF_CARD.read_text()
     citation = CITATION.read_text()
+    zenodo = load_json(ZENODO)
     hf_front_matter = parse_front_matter(hf_card)
 
     lanes = {lane["lane_id"]: lane for lane in manifest["release_lanes"]}
@@ -99,6 +101,13 @@ def validate_public_docs() -> list[str]:
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Public status: **v7.1.2 public-card/metadata patch")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Dataset freeze: **2026-03-01**")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "repo_id = \"jang1563/genelab-benchmark\"")
+
+    zenodo_text = json.dumps(zenodo, sort_keys=True)
+    require_contains(errors, ".zenodo.json", zenodo.get("title", ""), "SpaceBio-Bench")
+    require_contains(errors, ".zenodo.json", zenodo.get("version", ""), "7.1.2")
+    require_contains(errors, ".zenodo.json", zenodo.get("description", ""), "public-card and metadata patch")
+    for forbidden in ("evidence-visibility", "release-candidate surface", "hiring-manager"):
+        require_absent(errors, ".zenodo.json", zenodo_text, forbidden)
     if v7.get("public_label"):
         require_contains(errors, "README.md", readme.lower(), v7["public_label"].lower())
         require_contains(errors, "docs/hf_dataset_card.md", hf_card.lower(), v7["public_label"].lower())
