@@ -1,0 +1,295 @@
+{
+  "$schema": "release_manifest.schema.json",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-15",
+  "project": {
+    "name": "SpaceBio-Bench",
+    "legacy_name": "GeneLab Benchmark",
+    "repository": "https://github.com/jang1563/GeneLab_benchmark",
+    "huggingface_dataset": "https://huggingface.co/datasets/jang1563/genelab-benchmark",
+    "maintainer": "JangKeun Kim, Weill Cornell Medicine"
+  },
+  "source_control": {
+    "git_commit_at_manifest_creation": "85bbcdc27265873f1cb6a5fb34ad69e7f59872f2",
+    "working_tree_status": "created_from_local_worktree_with_uncommitted_changes"
+  },
+  "release_lanes": [
+    {
+      "lane_id": "v7.1",
+      "public_label": "canonical historical result surface",
+      "status": "canonical_historical_result_surface",
+      "version": "7.1.2",
+      "date_released": "2026-06-05",
+      "summary": "The v1-v7 canonical benchmark result surface plus the v7.1.2 documentation, public-card, metadata, and evidence-visibility patch. The patch does not introduce new benchmark result generation.",
+      "canonical_surfaces": [
+        "README.md",
+        "docs/CANONICAL_RESULTS_V7_1.md",
+        "docs/hf_dataset_card.md",
+        "docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md",
+        "CITATION.cff"
+      ],
+      "huggingface": {
+        "repo_id": "jang1563/genelab-benchmark",
+        "dataset_card_path": "docs/hf_dataset_card.md",
+        "revision_status": "remote_current_v7_1_2_public_card_patch"
+      },
+      "citation": {
+        "cff_path": "CITATION.cff",
+        "citation_version": "7.1.2",
+        "status": "software_citation_available"
+      }
+    },
+    {
+      "lane_id": "v8",
+      "public_label": "incubating translational extension",
+      "status": "incubating_translational_extension",
+      "summary": "The v8 extension adds release machinery and translational analysis surfaces while keeping intervention and countermeasure language out of frozen benchmark claims.",
+      "canonical_surfaces": [
+        "docs/V8_BETA_RELEASE_PLAN_2026_05_10.md",
+        "v8/README.md",
+        "v8/ARTIFACTS.md",
+        "v8/release/v8_beta_artifact_manifest.json"
+      ],
+      "huggingface": {
+        "repo_id": "pending_or_not_recorded",
+        "revision_status": "not_recorded_in_manifest_yet"
+      },
+      "citation": {
+        "status": "not_separate_from_v7_citation_yet"
+      }
+    },
+    {
+      "lane_id": "v9_public_bulk",
+      "public_label": "metadata-only public bulk alpha",
+      "status": "metadata_only_public_bulk_alpha",
+      "summary": "The v9 public bulk lane has task/source/provenance metadata, baseline summaries, and a draft data package, but is not a frozen payload release.",
+      "canonical_surfaces": [
+        "docs/v9_hf_dataset_card.md",
+        "docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md",
+        "v9/README.md",
+        "v9/datapackage.draft.json",
+        "v9/task_manifest_index.csv",
+        "v9/task_data_index.csv",
+        "v9/source_inventory.csv",
+        "v9/source_checksum_audit.csv"
+      ],
+      "huggingface": {
+        "repo_id": "recommended_separate_v9_repo_when_distribution_expands",
+        "dataset_card_path": "docs/v9_hf_dataset_card.md",
+        "revision_status": "not_uploaded_as_frozen_release"
+      },
+      "citation": {
+        "status": "alpha_not_cited_as_frozen_release"
+      }
+    },
+    {
+      "lane_id": "v9_extension_lanes",
+      "public_label": "diagnostic or draft lanes",
+      "status": "diagnostic_or_draft_lane",
+      "summary": "Single-cell, organoid, multispecies, and stressor tracks are diagnostic or draft lanes until a lane-specific release boundary promotes them.",
+      "canonical_surfaces": [
+        "v9/README.md",
+        "docs/V9_LONG_HORIZON_EXECUTION_PLAN.md",
+        "v9/human_organoid/reports/ORGANOID_BASELINE_ROBUSTNESS_REVIEW.md",
+        "docs/V9_SC_METRIC_SPEC.md",
+        "docs/V9_SC_PAYLOAD_STAGING_PLAN.md"
+      ],
+      "huggingface": {
+        "repo_id": "not_ready_for_public_distribution_manifest"
+      },
+      "citation": {
+        "status": "not_promoted"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "root_readme",
+      "lane_id": "v7.1",
+      "role": "github_landing_page_current",
+      "path": "README.md",
+      "kind": "markdown",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "v7_hf_dataset_card",
+      "lane_id": "v7.1",
+      "role": "huggingface_dataset_card_source",
+      "path": "docs/hf_dataset_card.md",
+      "kind": "markdown",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "v7_hf_dataset_card_longform_archive",
+      "lane_id": "v7.1",
+      "role": "preserved_longform_huggingface_dataset_card_before_distribution_focused_rewrite",
+      "path": "docs/hf_dataset_card_longform_v7_1_archive_2026_06_15.md",
+      "kind": "markdown",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "v7_citation",
+      "lane_id": "v7.1",
+      "role": "software_citation",
+      "path": "CITATION.cff",
+      "kind": "cff",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "transparency_card_pack",
+      "lane_id": "v7.1",
+      "role": "public_scope_and_release_boundary_map",
+      "path": "docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md",
+      "kind": "markdown",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "v8_beta_artifact_manifest",
+      "lane_id": "v8",
+      "role": "v8_artifact_split_manifest",
+      "path": "v8/release/v8_beta_artifact_manifest.json",
+      "kind": "json",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "v9_hf_dataset_card",
+      "lane_id": "v9_public_bulk",
+      "role": "v9_public_bulk_alpha_dataset_card_source",
+      "path": "docs/v9_hf_dataset_card.md",
+      "kind": "markdown",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "v9_datapackage_draft",
+      "lane_id": "v9_public_bulk",
+      "role": "draft_frictionless_data_package",
+      "path": "v9/datapackage.draft.json",
+      "kind": "json",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "v9_task_manifest_index",
+      "lane_id": "v9_public_bulk",
+      "role": "task_manifest_index",
+      "path": "v9/task_manifest_index.csv",
+      "kind": "csv",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "premium_upgrade_plan",
+      "lane_id": "v9_public_bulk",
+      "role": "github_hf_public_surface_upgrade_plan",
+      "path": "docs/GITHUB_HF_PREMIUM_UPGRADE_PLAN_2026_06_15.md",
+      "kind": "markdown",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "release_makefile",
+      "lane_id": "v7.1",
+      "role": "public_release_helper_targets",
+      "path": "Makefile",
+      "kind": "makefile",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "hf_upload_workflow",
+      "lane_id": "v7.1",
+      "role": "huggingface_upload_plan_and_smoke_validation",
+      "path": "scripts/upload_to_hf.py",
+      "kind": "python",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "hpc_release_gate",
+      "lane_id": "v8",
+      "role": "hpc_release_validation_entrypoint",
+      "path": "scripts/hpc_release_validate.sh",
+      "kind": "shell",
+      "checksum_status": "not_recorded"
+    },
+    {
+      "artifact_id": "readme_longform_v7_1_archive",
+      "lane_id": "v7.1",
+      "role": "preserved_longform_root_readme_before_premium_landing_page",
+      "path": "docs/README_LONGFORM_V7_1_ARCHIVE_2026_06_15.md",
+      "kind": "markdown",
+      "checksum_status": "not_recorded"
+    }
+  ],
+  "schemas": [
+    {
+      "schema_id": "release_manifest",
+      "path": "release/release_manifest.schema.json",
+      "applies_to": "release/release_manifest.json"
+    },
+    {
+      "schema_id": "task_manifest",
+      "path": "spacebio_bench/schemas/task_manifest.schema.json",
+      "applies_to": "v9/task_manifests/*.json"
+    },
+    {
+      "schema_id": "run_manifest",
+      "path": "spacebio_bench/schemas/run_manifest.schema.json",
+      "applies_to": "v9/reports/**/run_manifest.json"
+    },
+    {
+      "schema_id": "metric_profile",
+      "path": "spacebio_bench/schemas/metric_profile.schema.json",
+      "applies_to": "spacebio_bench/profiles.py"
+    }
+  ],
+  "quality_gates": [
+    {
+      "gate_id": "release_manifest_local_path_check",
+      "status": "implemented",
+      "description": "Validate that local canonical surfaces, artifacts, and schema paths referenced by this manifest exist."
+    },
+    {
+      "gate_id": "readme_hf_citation_consistency",
+      "status": "implemented",
+      "description": "Check that README, Hugging Face cards, and CITATION.cff report compatible version and status labels."
+    },
+    {
+      "gate_id": "hf_dry_run_diff",
+      "status": "implemented",
+      "description": "Generate a Hugging Face upload diff before modifying the remote dataset repository."
+    },
+    {
+      "gate_id": "hf_remote_smoke_download",
+      "status": "implemented",
+      "description": "After upload, download representative files from the HF repo and validate manifest paths."
+    },
+    {
+      "gate_id": "status_language_lint",
+      "status": "planned",
+      "description": "Flag public text that labels alpha or draft lanes as frozen releases."
+    },
+    {
+      "gate_id": "make_release_qa",
+      "status": "implemented",
+      "description": "Run public release manifest, public-docs consistency, HF upload workflow, and Python compile checks through Makefile."
+    },
+    {
+      "gate_id": "hpc_public_release_gate",
+      "status": "implemented",
+      "description": "Run the public-surface slice of the HPC release gate with scripts/hpc_release_validate.sh --public-only."
+    }
+  ],
+  "open_decisions": [
+    {
+      "decision_id": "public_name_transition",
+      "question": "Should the public project name shift from GeneLab Benchmark to SpaceBio-Bench while preserving the legacy name for v1-v7?",
+      "recommended_default": "Use SpaceBio-Bench as the forward-looking platform name and GeneLab Benchmark as the historical v1-v7 alias."
+    },
+    {
+      "decision_id": "hf_repo_split",
+      "question": "Should v9 public bulk alpha share the existing Hugging Face dataset repo or move to a separate repo?",
+      "recommended_default": "Keep the existing repo for v7 public folds and create a separate v9 repo when public distribution expands beyond metadata indices."
+    },
+    {
+      "decision_id": "python_package_identity",
+      "question": "Should this repository become an installable Python package with public CLI entrypoints?",
+      "recommended_default": "Add packaging only after the release manifest and validation commands stabilize."
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.1.0",
+  "audit_id": "v8.external_sources.spaceomicsbench_processed",
+  "status": "release_candidate",
+  "generated_at": "2026-05-20T00:00:00Z",
+  "source_id": "spaceomicsbench.v2_public",
+  "root_hint": "$SPACEOMICS_ROOT or ../SpaceOmicsBench",
+  "git": {
+    "available": false,
+    "notes": "No .git metadata found; source identity is the processed-file bundle checksum."
+  },
+  "bundle": {
+    "kind": "processed_file_set",
+    "sha256": "fce14de513a6c10587c8b03d21e0f510ea8081afb99573f0067ed5983abaa774",
+    "n_files": 8,
+    "digest_algorithm": "sha256(relpath + NUL + file_sha256 + LF, declared file order)"
+  },
+  "files": [
+    {
+      "path": "v2_public/data/processed/gt_conserved_pathways_GeneLab.csv",
+      "sha256": "92a288c5a0a57b66840fced013ca045beb00c9e0d3a3268845a40fd4899729fd",
+      "bytes": 35912,
+      "required_for": [
+        "bridge.species_transfer_nes"
+      ]
+    },
+    {
+      "path": "v2_public/data/processed/gt_conserved_pathways_i4_pbmc.csv",
+      "sha256": "57fe866b6f89fd4ea4c0cdd8213f996616c1146f21ce2a998811dc5c5668f831",
+      "bytes": 379968,
+      "required_for": [
+        "bridge.species_transfer_nes",
+        "bridge.tissue_nes_spearman"
+      ]
+    },
+    {
+      "path": "v2_public/data/processed/gt_conserved_pathways_NASA_Twins.csv",
+      "sha256": "efba82f4cd8c54a2e25c46a4f2f403c3c07a001dddaa6e6b8a6ae6e145baba1c",
+      "bytes": 301139,
+      "required_for": [
+        "bridge.species_transfer_nes",
+        "bridge.tissue_nes_spearman"
+      ]
+    },
+    {
+      "path": "v2_public/data/processed/cross_mission_pathway_features.csv",
+      "sha256": "50662a152287f4cbb0493a66d3ccea711f580e867597b4cbc477f7b63e8ad017",
+      "bytes": 56262,
+      "required_for": [
+        "bridge.supervised_conservation",
+        "bridge.leakage_audit"
+      ]
+    },
+    {
+      "path": "v2_public/data/processed/conserved_pbmc_to_skin.csv",
+      "sha256": "38a5ff2f2ccbf8c0aac570f44be1554150da1039494ee435df3421bde49b6515",
+      "bytes": 86318,
+      "required_for": [
+        "future.bridge.pbmc_skin_gene_mapping"
+      ]
+    },
+    {
+      "path": "v2_public/data/processed/proteomics_plasma_matrix.csv",
+      "sha256": "0493ece6fb0229019e96faf042b87de0e020f091acdec66c5c85ed4d06ef9055",
+      "bytes": 449830,
+      "required_for": [
+        "future.multiomics.propagation"
+      ]
+    },
+    {
+      "path": "v2_public/data/processed/metabolomics_anppos_matrix.csv",
+      "sha256": "ec6a3da61bbbe578042c7f09a827dc9772a6f141fc962f4cd5cfc7049ed85896",
+      "bytes": 151693,
+      "required_for": [
+        "future.multiomics.propagation"
+      ]
+    },
+    {
+      "path": "v2_public/data/processed/clinical_merged_serum.csv",
+      "sha256": "e950901a094b18ad86e2ce8c0fe7f42a08d75a39d3ed887b7a4efd63ef2a4faa",
+      "bytes": 23272,
+      "required_for": [
+        "future.multiomics.propagation"
+      ]
+    }
+  ],
+  "evidence_checks": [
+    {
+      "name": "bridge_leakage_audit_i2_features_sha256",
+      "path": "v2_public/data/processed/cross_mission_pathway_features.csv",
+      "expected_sha256": "50662a152287f4cbb0493a66d3ccea711f580e867597b4cbc477f7b63e8ad017",
+      "actual_sha256": "50662a152287f4cbb0493a66d3ccea711f580e867597b4cbc477f7b63e8ad017",
+      "status": "pass"
+    }
+  ],
+  "limitations": [
+    "This audit identifies the processed SpaceOmicsBench inputs used by v8; it does not archive raw SOMA/OSDR/API payloads.",
+    "If a future SpaceOmicsBench checkout has Git metadata, record its commit or release tag in addition to this bundle checksum."
+  ]
+}

@@ -32,7 +32,7 @@ TISSUE_RESULTS = [
 ]
 
 METRICS = [
-    ("4", "public GO tasks"),
+    ("4", "public LOMO tasks"),
     ("15", "fold packages"),
     ("8", "tissues"),
     ("600+", "processed samples"),
@@ -91,41 +91,40 @@ def draw_right_panel(ax):
     ax.text(
         0.665,
         0.535,
-        "Review-ready package boundary",
+        "Self-contained fold package",
         transform=ax.transAxes,
-        fontsize=17,
+        fontsize=17.8,
         fontweight="bold",
         color="#14202e",
     )
 
     bullets = [
-        ("Direct HF folds", "features, labels, metadata, fold_info, selected_genes"),
-        ("Leakage guard", "gene selection is recomputed on training missions only"),
-        ("Held-out validation", "RR-23 thymus AUROC 0.905; RR-7 skin AUROC 0.885"),
-        ("Viewer disabled", "high-dimensional matrices are accessed via downloads"),
-        ("Stable A6 path", "fold_OSD-397_test replaces stale fold_TBD_test"),
+        ("Direct HF folds", "X/y matrices, metadata, fold_info, selected genes"),
+        ("Mission-held-out split", "held-out mission is excluded from feature selection"),
+        ("Public task families", "A2 muscle, A4 thymus, A5 skin, A6 eye"),
+        ("A6 eye holdout", "fold_OSD-397_test is the public third A6 fold"),
     ]
-    y = 0.48
+    y = 0.475
     for title, body in bullets:
         ax.text(
             0.665,
             y,
             title,
             transform=ax.transAxes,
-            fontsize=12.8,
+            fontsize=13.8,
             fontweight="bold",
             color="#245b73",
         )
         ax.text(
             0.665,
-            y - 0.033,
+            y - 0.04,
             body,
             transform=ax.transAxes,
-            fontsize=11.3,
+            fontsize=12.5,
             color="#465465",
             wrap=True,
         )
-        y -= 0.081
+        y -= 0.105
 
 
 def draw_figure():
@@ -137,34 +136,34 @@ def draw_figure():
     ax.text(
         0.055,
         0.93,
-        "GeneLab Spaceflight Transcriptomics Benchmark",
+        "SpaceBio-Bench",
         transform=ax.transAxes,
-        fontsize=29,
+        fontsize=34,
         fontweight="bold",
         color="#101820",
     )
     ax.text(
         0.055,
         0.89,
-        "Cross-mission detection of spaceflight transcriptomic signatures from public NASA OSDR mouse RNA-seq.",
+        "Mission-held-out transcriptomics benchmark for public NASA OSDR mouse RNA-seq.",
         transform=ax.transAxes,
-        fontsize=14.5,
+        fontsize=15.5,
         color="#465465",
     )
     ax.text(
         0.055,
         0.842,
-        "Dataset freeze: 2026-03-01 | Maintainer/citation: JangKeun Kim, Weill Cornell Medicine",
+        "v7.1.2 public fold package | Dataset freeze: 2026-03-01",
         transform=ax.transAxes,
-        fontsize=12,
+        fontsize=12.8,
         color="#687789",
     )
     ax.text(
         0.055,
         0.812,
-        "Public fold package: self-contained features, labels, metadata, and provenance",
+        "Former public name: GeneLab Benchmark | features, labels, metadata, fold_info, selected genes",
         transform=ax.transAxes,
-        fontsize=12,
+        fontsize=12.8,
         color="#687789",
     )
 

@@ -159,7 +159,8 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn('list(mission = "MHU-1", dir = "MHU-2", glds = "GLDS-289", osd = "OSD-289")', run_fgsea)
         self.assertIn('list(mission = "OSD-397", dir = "TBD", glds = "GLDS-397", osd = "OSD-397")', run_fgsea)
         self.assertIn('"A6|A6_eye_lomo|RR-1 RR-3 OSD-397|3"', hpc_submit)
-        self.assertIn("| Eye | OSD-100, 194, 397 | RR-1, RR-3, OSD-397 | 37 |", root_readme)
+        self.assertIn("v7.1 GeneLab Benchmark", root_readme)
+        self.assertIn("docs/hf_dataset_card.md", root_readme)
 
     def test_eye_docs_use_stable_osd397_label(self):
         hf_card = self.read_repo_text("docs/hf_dataset_card.md")
@@ -258,10 +259,10 @@ class ReviewFixTests(unittest.TestCase):
         outline = self.read_repo_text("docs/PAPER_OUTLINE.md")
         results_summary = self.read_repo_text("evaluation/RESULTS_SUMMARY.md")
 
-        self.assertIn("4 gene-expression foundation models + 3 text LLMs evaluated", readme)
-        self.assertIn("| scGPT | 12L Transformer, 33M human cells | 0.666 | -0.093 |", readme)
-        self.assertIn("Foundation / Language Models | 4 gene-expression FMs + 3 text LLMs", hf_card)
-        self.assertIn("scGPT | 0.666 (6-tissue mean, v1)", hf_card)
+        self.assertIn("4 gene-expression foundation models, 3 text LLMs", readme)
+        self.assertIn("Tested gene-expression foundation models underperform", readme)
+        self.assertIn("foundation-model comparisons", hf_card)
+        self.assertIn("Tested gene-expression foundation models underperform", hf_card)
         self.assertIn("Classical ML wins 4/6 tissues vs scGPT and 6/6 tissues vs Geneformer.", paper)
         self.assertIn("| scGPT vs Baseline mean delta | -0.093 | 4/6 Baseline wins |", paper)
         self.assertIn("https://github.com/jang1563/GeneLab_benchmark", paper)
@@ -276,7 +277,7 @@ class ReviewFixTests(unittest.TestCase):
         readme = self.read_repo_text("README.md")
         submission = self.read_repo_text("docs/submission_format.md")
 
-        self.assertIn("| 95% CI lower | Bootstrap CI (N=2000) lower bound | > 0.600 |", readme)
+        self.assertIn("AUROC, bootstrap confidence interval, permutation p-value", readme)
         self.assertIn("| **Go/No-Go** | AUROC > 0.700 AND CI lower > 0.600 |", submission)
         self.assertIn("| `A6` | Eye | 3 | 37 | ~21k genes (log2 normalized) |", submission)
         self.assertIn("| `B6` | Eye | RR-1, RR-3, OSD-397 | 6 | `tasks/B6_eye_cross_mission/` |", submission)
@@ -287,9 +288,9 @@ class ReviewFixTests(unittest.TestCase):
     def test_root_readme_repository_map_avoids_stale_hard_coded_counts(self):
         readme = self.read_repo_text("README.md")
 
-        self.assertIn("tasks/                          <- Public task inputs (benchmark + sensitivity tasks)", readme)
-        self.assertIn("v2 analysis and runner scripts", readme)
-        self.assertIn("v4 result JSONs + SHAP/WGCNA outputs", readme)
+        self.assertIn("tasks/                 Public v1 LOMO task inputs and selected fold packages", readme)
+        self.assertIn("v2/ ... v7/            Completed historical benchmark layers", readme)
+        self.assertIn("release/               Machine-readable public release manifest", readme)
         self.assertNotIn("Public task inputs (17 directories)", readme)
         self.assertNotIn("v1 pipeline scripts (35 Python/R/shell)", readme)
         self.assertNotIn("19 Python scripts", readme)
@@ -298,11 +299,10 @@ class ReviewFixTests(unittest.TestCase):
     def test_root_readme_includes_v7_in_status_structure_and_changelog(self):
         readme = self.read_repo_text("README.md")
 
-        self.assertIn("Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01", readme)
-        self.assertIn("Status: **v1–v7 Complete**", readme)
-        self.assertIn("| **v7.0** | Unified/foundation-model benchmarking: scPRINT2, GNN/WGCNA graph baselines, cross-method synthesis, and signal hierarchy analysis | **Complete** | `v7/` |", readme)
-        self.assertIn("├── v7/                             <- Unified/foundation-model benchmarking", readme)
-        self.assertIn("| v7.0 | 2026-04-12 | Unified benchmark layer complete:", readme)
+        self.assertIn("| v7.1 GeneLab Benchmark | Canonical historical result surface |", readme)
+        self.assertIn("v2/ ... v7/            Completed historical benchmark layers", readme)
+        self.assertIn("Former public name: **GeneLab Benchmark**", readme)
+        self.assertIn("release/release_manifest.json", readme)
         self.assertNotIn("v7 Graph Neural Networks In Progress", readme)
 
     def test_public_release_metadata_uses_v7_consistently(self):
@@ -310,15 +310,19 @@ class ReviewFixTests(unittest.TestCase):
         hf_card = self.read_repo_text("docs/hf_dataset_card.md")
         citation = self.read_repo_text("CITATION.cff")
 
-        self.assertIn("Version: v7.0 (2026-04-12) | Dataset freeze: 2026-03-01", readme)
-        self.assertIn("Canonical v7.1 documentation source:", readme)
-        self.assertIn("note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}", readme)
-        self.assertIn("Version: v7.0 with v7.1 documentation consistency patch | Dataset freeze: 2026-03-01", hf_card)
-        self.assertIn("note    = {v7.0 with v7.1 documentation consistency patch; data freeze 2026-03-01}", hf_card)
-        self.assertIn('version: "7.1.0"', citation)
-        self.assertIn('date-released: "2026-05-09"', citation)
-        self.assertIn('notes: "Manuscript in preparation; v7.1 documentation consistency patch."', citation)
-        self.assertIn("documentation and public metadata consistency patch", citation)
+        self.assertIn("v7.1 GeneLab Benchmark", readme)
+        self.assertIn("docs/CANONICAL_RESULTS_V7_1.md", readme)
+        self.assertIn("data freeze 2026-03-01", readme)
+        self.assertIn("Public status: **v7.1.2 public-card/metadata/evidence-visibility patch", hf_card)
+        self.assertIn("canonical v7.1 results", hf_card)
+        self.assertIn("data freeze 2026-03-01", hf_card)
+        self.assertIn('version: "7.1.2"', citation)
+        self.assertIn('date-released: "2026-06-05"', citation)
+        self.assertIn(
+            'notes: "Manuscript in preparation; v7.1.2 documentation, public-card, metadata, and evidence-visibility patch."',
+            citation,
+        )
+        self.assertIn("documentation, public-card, metadata, and evidence-visibility patch", citation)
         self.assertNotIn('version: "5.0.0"', citation)
         self.assertNotIn("Target journal:", citation)
 
