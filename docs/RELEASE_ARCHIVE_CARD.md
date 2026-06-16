@@ -20,10 +20,10 @@ It does not create a DOI, approve a new result release, or freeze v9 payloads.
 
 | Field | Current value |
 |---|---|
-| Release candidate | `v7.1.2` documentation, public-card, metadata, and evidence-visibility patch on current `main` |
+| Release candidate | `v7.1.2` documentation, public-card, and metadata patch on current `main` |
 | Repository branch | `main` as public entry point with curated v9 metadata-alpha evidence subset |
 | Current result boundary | v1-v7 canonical historical benchmark surface |
-| Documentation patch | v7.1.2 metadata/card/evidence-visibility patch, no new result generation |
+| Documentation patch | v7.1.2 metadata/card patch, no new result generation |
 | Dataset payload boundary | HF feature-matrix package plus GitHub task/evaluation metadata |
 | DOI status | Not minted in this card |
 | Archive status | GitHub release-ready metadata; DOI deposition and source-archive checksum still pending |

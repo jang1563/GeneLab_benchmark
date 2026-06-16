@@ -12,10 +12,10 @@ surface keeps that name; SpaceBio-Bench is the forward-looking platform name.
 
 Maintainer / citation author: JangKeun Kim, Weill Cornell Medicine.
 
-Current public release note: **v7.1.2 public-card/metadata/evidence-visibility
-patch** over canonical v7.1 results. The patch updates documentation, public
-metadata, and evidence visibility; it does not introduce new benchmark result
-generation. Dataset freeze: **2026-03-01**.
+Current public release note: **v7.1.2 public-card/metadata patch** over
+canonical v7.1 results. The patch updates documentation, public metadata, and
+access guidance; it does not introduce new benchmark result generation. Dataset
+freeze: **2026-03-01**.
 
 ## What This Is
 
@@ -34,7 +34,7 @@ mission-held-out validation, and transparent release boundaries.
 |---|---|---|---|
 | v7.1 GeneLab Benchmark | Canonical historical result surface | v1-v7 results, public fold package, citation | [Canonical results](docs/CANONICAL_RESULTS_V7_1.md) |
 | Hugging Face dataset | Public processed fold package | Download selected LOMO feature matrices and result artifacts | [HF dataset card](docs/hf_dataset_card.md) |
-| v9 public bulk | Metadata-only public bulk alpha | Task catalog, source inventory, and baseline summaries | [v9 HF-style card](docs/v9_hf_dataset_card.md) |
+| v9 public bulk | Metadata catalog | Task catalog, source inventory, and baseline summaries | [v9 HF-style card](docs/v9_hf_dataset_card.md) |
 
 For linked methods, evaluation, and release cards, start with the
 [SpaceBio-Bench card pack](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md).
@@ -144,7 +144,7 @@ See [docs/r_dependencies.md](docs/r_dependencies.md) and the scripts under
 tasks/                 Public v1 LOMO task inputs and selected fold packages
 evaluation/            Historical v1 result JSON and summaries
 v2/ ... v7/            Completed historical benchmark layers
-v9/                    Public-bulk alpha scaffold plus extension-lane drafts
+v9/                    Public bulk metadata catalog and extension workspaces
 docs/                  Cards, canonical results, methods, plans, and release notes
 release/               Machine-readable public release manifest
 scripts/               Data, evaluation, upload, validation, and figure scripts
@@ -160,8 +160,7 @@ scripts/               Data, evaluation, upload, validation, and figure scripts
 | Evaluation interpretation | [docs/SPACEBIOBENCH_EVALUATION_CARD.md](docs/SPACEBIOBENCH_EVALUATION_CARD.md) |
 | Release readiness | [docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md](docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md) |
 | Hugging Face dataset card source | [docs/hf_dataset_card.md](docs/hf_dataset_card.md) |
-| v9 metadata-alpha card source | [docs/v9_hf_dataset_card.md](docs/v9_hf_dataset_card.md) |
-| GitHub/HF upgrade roadmap | [docs/GITHUB_HF_PREMIUM_UPGRADE_PLAN_2026_06_15.md](docs/GITHUB_HF_PREMIUM_UPGRADE_PLAN_2026_06_15.md) |
+| v9 metadata catalog card source | [docs/v9_hf_dataset_card.md](docs/v9_hf_dataset_card.md) |
 | Machine-readable release state | [release/release_manifest.json](release/release_manifest.json) |
 
 ## Data And Release Notes
@@ -174,7 +173,7 @@ used under their individual terms.
 Release labels are intentionally separated:
 
 - **v7.1**: canonical historical result surface and citation target.
-- **v9 public bulk**: metadata-only public bulk alpha.
+- **v9 public bulk**: metadata catalog and baseline-summary surface.
 
 ## Citation
 
@@ -187,6 +186,6 @@ same citation metadata in the repository citation panel.
   author = {Kim, JangKeun},
   year = {2026},
   url = {https://huggingface.co/datasets/jang1563/genelab-benchmark},
-  note = {v7.1.2 documentation, public-card, metadata, and evidence-visibility patch over canonical v7.1 results; data freeze 2026-03-01}
+  note = {v7.1.2 documentation, public-card, and metadata patch over canonical v7.1 results; data freeze 2026-03-01}
 }
 ```

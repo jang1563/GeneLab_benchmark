@@ -31,7 +31,7 @@ matrices and draft extension lanes are outside this public-review path.
 
 - A cross-mission benchmark surface for public space-biology transcriptomics,
   with canonical v1-v7 result documentation and a v7.1.2
-  public-card/metadata/evidence-visibility patch over the v7.1 result surface.
+  public-card/metadata patch over the v7.1 result surface.
 - A curated v9 public bulk metadata-alpha evidence subset with 8 task
   manifests, 33 fold definitions, 22 public OSDR source rows, 24 scaffold
   baseline runs, and a draft Frictionless Data Package descriptor.
