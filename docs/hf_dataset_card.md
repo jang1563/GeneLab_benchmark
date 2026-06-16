@@ -55,7 +55,7 @@ the held-out mission.
 | `train_X.csv`, `test_X.csv` | Sample-by-gene expression matrices |
 | `train_y.csv`, `test_y.csv` | Binary labels: `1 = Flight`, `0 = Ground` |
 | `train_meta.csv`, `test_meta.csv` | Sample-level metadata used for fold auditing |
-| `fold_info.json` | Held-out mission, train missions, sample counts, and provenance |
+| `fold_info.json` | Held-out mission, train missions, and sample-count audit metadata |
 | `selected_genes.txt` | Fold-specific genes selected from training missions only |
 | `task_info.json` | Task-level metadata and source summary |
 

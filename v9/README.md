@@ -1,47 +1,42 @@
-# SpaceBio-Bench v9 Public Bulk Metadata Alpha
+# SpaceBio-Bench v9 Public Bulk Metadata Catalog
 
-Status: metadata-only alpha subset, not a frozen payload release.
+This directory contains the public metadata catalog for the SpaceBio-Bench v9
+bulk RNA-seq task surface. It is organized for direct review of task manifests,
+fold indexes, public OSDR source coverage, checksum-audit summaries, and
+reference baseline outputs.
 
-This directory contains the small public evidence subset referenced by the
-SpaceBio-Bench system, evaluation, release-readiness, and claim-boundary cards.
-It is intended to make the public bulk metadata-alpha claims inspectable from
-the default GitHub branch without publishing payload matrices or draft extension
-lanes.
+For the reader-facing card, see
+[`docs/v9_hf_dataset_card.md`](../docs/v9_hf_dataset_card.md).
 
 ## Included
 
 - `task_manifests/*.json`: eight public bulk LOMO task manifests.
 - `task_manifest_index.csv` and `.json`: task registry summary.
 - `task_data_index.csv` and `.json`: fold-level row-count and path registry.
-- `source_inventory.csv` and `.json`: 22 public OSDR source rows.
+- `source_inventory.csv` and `.json`: public OSDR source rows.
 - `source_checksum_audit.csv` and `.json`: OSDR API and checksum-manifest
-  evidence for the public bulk source rows.
-- `datapackage.draft.json`: draft Frictionless Data Package descriptor for the
-  metadata-only alpha subset.
+  summary rows.
+- `datapackage.draft.json`: Frictionless Data Package descriptor for the
+  metadata catalog.
 - `reports/bulk_lomo_baseline_summary.csv` and `.json`: normalized summary of
-  scaffold baselines.
-- `reports/nearest_centroid/bulk_lomo_summary.csv` and `.json`: nearest-centroid
-  scaffold baseline summary.
+  reference baselines.
+- `reports/nearest_centroid/bulk_lomo_summary.csv` and `.json`:
+  nearest-centroid baseline summary.
 - `reports/sklearn_baselines/bulk_lomo_summary.csv` and `.json`: PCA-LR and
-  L2 logistic-regression scaffold baseline summary.
-- Per-task scaffold baseline `predictions.csv`, `metrics.json`, and
-  `run_manifest.json` files referenced by `datapackage.draft.json`.
-- `reports/public_bulk_alpha_gap_matrix/`: alpha-boundary gap and payload-hash
-  blocker tables.
-- `reports/public_bulk_alpha_snapshot_decision/`: metadata-alpha decision,
-  allowed language, blocked language, and next-action tables.
+  L2 logistic-regression baseline summary.
+- Per-task baseline `predictions.csv`, `metrics.json`, and `run_manifest.json`
+  files referenced by `datapackage.draft.json`.
 
-## Excluded
+## Scope Notes
 
-- Fold-level payload matrices such as `train_X.csv` and `test_X.csv`.
-- Local payload mirrors and payload-level SHA-256 manifests.
-- Single-cell, organoid, multispecies, and other draft extension-lane outputs.
-- Any DOI/archive-ready payload bundle.
-- Any state-of-the-art leaderboard or clinical, crew-health, intervention, or
-  countermeasure claim.
+- The v9 metadata catalog is separate from archived fold-matrix payload
+  bundles.
+- Controlled-access human sequence data is not part of this public bulk catalog.
+- Clinical, crew-health, intervention, countermeasure, operational-readiness,
+  and state-of-the-art leaderboard claims are outside the catalog scope.
 
 ## Interpretation
 
-The files here support claims about task/source/provenance metadata, scaffold
-baseline plumbing, and release-readiness blockers. They do not support frozen
-payload, biological mechanism, translational, or operational-readiness claims.
+The files here support review of task definitions, source coverage, fold
+indexes, checksum-audit summaries, and baseline workflow outputs. They are best
+read as a public metadata catalog for method-development and release review.
