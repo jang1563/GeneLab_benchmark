@@ -1,66 +1,51 @@
-# V9-BULK-ALPHA-002 Metadata-Only Alpha Snapshot Decision
+# SpaceBio-Bench v9 Public Bulk Metadata Catalog Note
 
-Status: `metadata_only_alpha_snapshot_allowed_with_payload_blockers`
+Status: `public_ready`
 
-Selected path: `metadata_only_alpha_snapshot`
+## Purpose
 
-Deferred path: `payload_mirror_first`
+This note records the public v9 bulk metadata catalog scope. The catalog helps
+readers inspect task manifests, source rows, fold indexes, checksum-audit
+summaries, reference baselines, and package metadata from the GitHub
+repository.
 
-Claim boundary: `metadata_only_public_bulk_alpha_no_payload_release`
+## Catalog Scope
 
-## Decision
+| Area | Current public record |
+|---|---|
+| Task manifests | 8 public bulk LOMO task manifests |
+| Fold definitions | 33 fold rows |
+| Source records | 22 public NASA OSDR source rows |
+| Checksum audit | 22 source rows with parsed OSDR API/checksum-manifest records |
+| Baseline outputs | 24 reference baseline rows across 3 baseline families |
+| Data package descriptor | `v9/datapackage.draft.json` |
+| Reader-facing card | `docs/v9_hf_dataset_card.md` |
 
-Proceed with a metadata-only alpha snapshot for the public bulk lane, with
-explicit payload-hash blockers. This is not a frozen payload release. It is a
-bounded review surface for task manifests, source inventory, OSDR API and
-checksum-manifest evidence, baseline summaries, and provenance reports.
+## Public Description
 
-The payload-release path remains blocked because `0/22`
-public bulk sources are locally payload-hash verified, while
-`22/22` sources have parsed checksum-manifest
-evidence.
+Use this description for the v9 public bulk surface:
 
-## Option Comparison
+> SpaceBio-Bench v9 public bulk is a metadata catalog for public mouse bulk
+> RNA-seq mission-held-out tasks. It records task definitions, OSDR source
+> coverage, fold indexes, checksum-audit summaries, and reference baseline
+> outputs.
 
-| Path | Decision | Status |
-| --- | --- | --- |
-| metadata-only alpha snapshot | selected | allowed with explicit blockers |
-| payload mirror first | deferred | valid for future payload release, not required before metadata alpha |
-| no alpha until payload frozen | rejected | too conservative for metadata scaffold |
+## Source And Dataset Notes
 
-## Allowed Language
+- NASA OSDR remains the upstream source for biological data.
+- The GitHub catalog records metadata, audit summaries, and baseline outputs.
+- The Hugging Face dataset card remains the entry point for processed public
+  fold downloads in the v7.1 public package.
+- Larger v9 payload bundles can be handled as separate release work when the
+  package metadata and verification records are ready.
 
-- `SpaceBio-Bench v9 public bulk metadata alpha`
-- The snapshot documents public mouse bulk LOMO task/source/provenance metadata.
-- OSDR file-list and checksum-manifest evidence has been parsed for all 22
-  public bulk source rows.
-- Payload mirroring and local payload-hash verification remain pending.
+## Related Files
 
-## Prohibited Language
-
-- Frozen public benchmark release.
-- Frozen payload mirror.
-- Locally hash-verified data bundle.
-- DOI/archive release, complete release Data Package, or leaderboard claim.
-- Organoid or multispecies draft tracks as public bulk alpha core tasks.
-
-## External Guidance Anchors
-
-- Hugging Face dataset cards are README/metadata surfaces meant to help users
-  understand dataset contents, context, and responsible use:
-  https://huggingface.co/docs/hub/datasets-cards
-- Frictionless Data Package descriptors separate package metadata from resource
-  entries and can describe metadata resources without implying a local payload
-  mirror:
-  https://specs.frictionlessdata.io/data-package/
-- OSDR API file-list and metadata endpoints support source/file traceability,
-  while local benchmark payload hashing remains a separate project claim:
-  https://visualization.osdr.nasa.gov/biodata/api/
-- NASA OSDR should remain the credited upstream source for space biology data:
-  https://science.nasa.gov/reference/osdr-faq/
-
-## Next Block
-
-Run `V9-BULK-ALPHA-003: dataset card and Data Package alpha boundary update`. That block should update
-`docs/v9_hf_dataset_card.md` and `v9/datapackage.draft.json` using the claim
-boundary in this decision package.
+- `docs/v9_hf_dataset_card.md`
+- `v9/README.md`
+- `v9/task_manifest_index.csv`
+- `v9/task_data_index.csv`
+- `v9/source_inventory.csv`
+- `v9/source_checksum_audit.csv`
+- `v9/reports/bulk_lomo_baseline_summary.csv`
+- `v9/datapackage.draft.json`
