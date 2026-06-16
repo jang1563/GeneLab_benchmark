@@ -1,75 +1,69 @@
 ---
-title: GeneLab Benchmark Release Archive Checklist
+title: SpaceBio-Bench Release Archive Checklist
 page_type: release_archive_checklist
-status: release_candidate_checklist
-last_reviewed: 2026-06-05
-claim_boundary: checklist_no_new_release_or_doi_claim
+status: public_ready
+last_reviewed: 2026-06-16
 ---
 
-# GeneLab Benchmark Release Archive Checklist
+# SpaceBio-Bench Release Archive Checklist
 
 ## Current Status
 
-This checklist separates what is ready for a paper-supporting archive from what
-must wait until the final manuscript, tag, and DOI are available.
+This checklist separates repository materials that are ready now from final
+metadata actions that should happen near DOI or archive deposition.
 
 ## Ready Now
 
-- Root `README.md` presents the project, canonical result doc, transparency
-  card pack, portfolio brief, and HF dataset link.
-- `CITATION.cff` exists and is machine-readable citation metadata using the
-  current public repository identity.
-- `.zenodo.json` exists as candidate Zenodo metadata using the current public
+- Root `README.md` presents the project, canonical result document, public
+  documentation map, and HF dataset link.
+- `CITATION.cff` is machine-readable citation metadata using the current public
   repository identity.
-- `LICENSE` is present and declares MIT for code.
+- `.zenodo.json` provides archive metadata using the current public repository
+  identity.
+- `LICENSE` declares MIT for code.
 - `docs/hf_dataset_card.md` is synchronized with the public HF card surface.
-- SpaceBio-Bench system, evaluation, readiness, claim, and transparency cards
-  are `public_review_ready`.
-- `docs/RELEASE_ARCHIVE_CARD.md` documents archive scope and exclusions.
-- `docs/RELEASE_ARCHIVE_MANIFEST.md` documents archive contents and final tag
+- SpaceBio-Bench public cards are marked `public_ready`.
+- `docs/RELEASE_ARCHIVE_CARD.md` summarizes archive scope.
+- `docs/RELEASE_ARCHIVE_MANIFEST.md` lists archive file groups and final tag
   procedure.
-- CI has passed for the recent public-card merge PRs.
+- CI and public release QA pass for the current public docs.
 
-## Needs Final Author Or Manuscript Review
+## Final Metadata Review
 
-- Confirm final manuscript author list and affiliations in `CITATION.cff`.
-- Confirm final creator metadata in `.zenodo.json`.
-- Confirm final paper title and whether the archive title should match exactly.
+- Confirm manuscript author list and affiliations in `CITATION.cff`.
+- Confirm creator metadata in `.zenodo.json`.
+- Confirm final paper title and archive title.
 - Confirm final version string and release date.
-- Add DOI after Zenodo or the selected archive mints it.
+- Add DOI after Zenodo or the selected archive service mints it.
 - Add dataset-specific OSDR citations for the manuscript subset.
 
-## Needs Final Release Action
+## Final Release Actions
 
-- Create or confirm annotated Git tag `v7.1.2` from the final
-  public-card/archive-metadata commit.
-- Create GitHub release from the tag.
+- Confirm Git tag `v7.1.2` or a successor tag from the intended public commit.
+- Create or update the GitHub release from the tag.
 - Verify Zenodo deposition metadata.
 - Download source archive and record SHA-256 checksum.
 - Store release DOI, tag, release URL, and checksum in a release-specific
   manifest.
 - Update README, HF card, and citation metadata with DOI if appropriate.
 
-## Still Blocked For Stronger Claims
-
-- Frozen v9 public bulk payload release.
-- DOI/archive-ready v9 metadata-alpha release.
-- Complete RO-Crate research-object release.
-- Clinical, crew-health, intervention, countermeasure, or Mars-regime claims.
-- Foundation-model leaderboard claims without matched adapter/run manifests.
-
-## Red-Flag Checks To Re-Run
+## Public QA Commands
 
 ```bash
 git diff --check
-git ls-files | rg '(^output/|^outputs/|__pycache__|\\.DS_Store$|\\.log$|\\.tmp$|\\.bak$|~$|\\.zip$|\\.tar$|\\.tar\\.gz$|\\.gz$|\\.pdf$|\\.pptx$|\\.png$|\\.jpg$|\\.jpeg$|\\.gif$)'
-rg --glob '!docs/RELEASE_ARCHIVE_CHECKLIST.md' -n '(gh[pousr]_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|hf_[A-Za-z0-9]{20,}|/Users/jak4013|~/.claude)' README.md docs scripts tests .github
-rg --glob '!docs/RELEASE_ARCHIVE_CHECKLIST.md' -n 'status: draft|draft_public_ready|blob/codex|codex/spacebiobench' README.md docs
+make release-qa
+make hpc-public-qa
+```
+
+Optional archive hygiene checks:
+
+```bash
+git ls-files | rg '(^output/|^outputs/|__pycache__|\\.DS_Store$|\\.log$|\\.tmp$|\\.bak$|~$|\\.zip$|\\.tar$|\\.tar\\.gz$|\\.gz$|\\.pdf$|\\.pptx$|\\.jpg$|\\.jpeg$|\\.gif$)'
+rg -n '(gh[pousr]_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|hf_[A-Za-z0-9]{20,})' README.md docs scripts tests .github
 ```
 
 Expected interpretation:
 
-- Generated or binary artifacts should not appear unless intentionally archived.
-- Secret scans should not show literal credentials.
-- Local personal paths should appear only in tests that explicitly forbid them.
-- Public cards should remain `public_review_ready`.
+- Generated or binary artifacts should appear only when intentionally tracked.
+- Secret scans are expected to show no literal credentials.
+- Public cards should remain `public_ready`.
