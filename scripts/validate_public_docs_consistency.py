@@ -24,6 +24,8 @@ STATEMENT_GUIDE = REPO_ROOT / "docs" / "SPACEBIOBENCH_CLAIM_REGISTER.md"
 ARCHIVE_STATUS = REPO_ROOT / "docs" / "RELEASE_ARCHIVE_CARD.md"
 ARCHIVE_MANIFEST = REPO_ROOT / "docs" / "RELEASE_ARCHIVE_MANIFEST.md"
 ARCHIVE_CHECKLIST = REPO_ROOT / "docs" / "RELEASE_ARCHIVE_CHECKLIST.md"
+V9_CATALOG_NOTE = REPO_ROOT / "docs" / "V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md"
+V9_CARD_PACKAGE_NOTE = REPO_ROOT / "docs" / "V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md"
 V9_README = REPO_ROOT / "v9" / "README.md"
 V9_REPORTS_README = REPO_ROOT / "v9" / "reports" / "README.md"
 CITATION = REPO_ROOT / "CITATION.cff"
@@ -83,6 +85,8 @@ def validate_public_docs() -> list[str]:
     archive_status = ARCHIVE_STATUS.read_text()
     archive_manifest = ARCHIVE_MANIFEST.read_text()
     archive_checklist = ARCHIVE_CHECKLIST.read_text()
+    v9_catalog_note = V9_CATALOG_NOTE.read_text()
+    v9_card_package_note = V9_CARD_PACKAGE_NOTE.read_text()
     v9_readme = V9_README.read_text()
     v9_reports_readme = V9_REPORTS_README.read_text()
     citation = CITATION.read_text()
@@ -280,6 +284,38 @@ def validate_public_docs() -> list[str]:
         "~/.claude",
     ):
         require_absent(errors, "release archive docs", archive_text, forbidden)
+
+    v9_note_text = "\n".join([v9_catalog_note, v9_card_package_note])
+    for label, text, expected in (
+        (
+            "docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md",
+            v9_catalog_note,
+            "# SpaceBio-Bench v9 Public Bulk Metadata Catalog Note",
+        ),
+        (
+            "docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md",
+            v9_card_package_note,
+            "# SpaceBio-Bench v9 Dataset Card And Data Package Note",
+        ),
+    ):
+        require_contains(errors, label, text, expected)
+    for forbidden in (
+        "Metadata-Only Alpha Snapshot Decision",
+        "metadata-only alpha",
+        "metadata alpha",
+        "Public Bulk Metadata Alpha",
+        "Claim boundary",
+        "claim boundary",
+        "Allowed Language",
+        "Prohibited Language",
+        "payload blockers",
+        "blocked",
+        "deferred",
+        "not frozen",
+        "not a frozen",
+        "decision package",
+    ):
+        require_absent(errors, "v9 implementation notes", v9_note_text, forbidden)
 
     zenodo_text = json.dumps(zenodo, sort_keys=True)
     require_contains(errors, ".zenodo.json", zenodo.get("title", ""), "SpaceBio-Bench")
