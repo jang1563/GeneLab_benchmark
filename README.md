@@ -10,6 +10,10 @@ surface keeps that name; SpaceBio-Bench is the forward-looking platform name.
 [![Dataset on Hugging Face](https://img.shields.io/badge/Hugging%20Face-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+<p align="center">
+  <img src="docs/assets/hf_benchmark_summary.png" alt="SpaceBio-Bench benchmark summary showing public LOMO tasks, fold packages, tissues, processed samples, ML evaluations, best AUROC by tissue, and public fold package contents">
+</p>
+
 Maintainer / citation author: JangKeun Kim, Weill Cornell Medicine.
 
 Current public release note: **v7.1.2 public-card/metadata patch** over
