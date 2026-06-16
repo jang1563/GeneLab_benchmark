@@ -7,12 +7,10 @@
     "schema_version",
     "generated_at",
     "project",
-    "source_control",
     "release_lanes",
     "artifacts",
     "schemas",
-    "quality_gates",
-    "open_decisions"
+    "quality_gates"
   ],
   "properties": {
     "schema_version": {
@@ -40,22 +38,6 @@
           "type": "string"
         },
         "huggingface_dataset": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": true
-    },
-    "source_control": {
-      "type": "object",
-      "required": [
-        "git_commit_at_manifest_creation",
-        "working_tree_status"
-      ],
-      "properties": {
-        "git_commit_at_manifest_creation": {
-          "type": "string"
-        },
-        "working_tree_status": {
           "type": "string"
         }
       },
@@ -196,36 +178,12 @@
           },
           "status": {
             "enum": [
-              "planned",
               "implemented",
               "partial",
               "blocked"
             ]
           },
           "description": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": true
-      }
-    },
-    "open_decisions": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "decision_id",
-          "question",
-          "recommended_default"
-        ],
-        "properties": {
-          "decision_id": {
-            "type": "string"
-          },
-          "question": {
-            "type": "string"
-          },
-          "recommended_default": {
             "type": "string"
           }
         },

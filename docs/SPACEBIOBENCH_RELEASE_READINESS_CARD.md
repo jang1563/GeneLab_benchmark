@@ -28,7 +28,7 @@ excluded from the current public-review path.
 
 | Tier | Meaning | Current examples | Public claim status |
 |---|---|---|---|
-| `historical_result_surface` | Existing result surface with canonical documentation | v1-v7 GeneLab Benchmark; v7.1 canonical result surface; v7.1.2 documentation/card/evidence-visibility patch | Allowed when using canonical v7.1 result language and v7.1.2 patch qualifiers |
+| `historical_result_surface` | Existing result surface with canonical documentation | v1-v7 GeneLab Benchmark; v7.1 canonical result surface; v7.1.2 documentation/card/metadata patch | Allowed when using canonical v7.1 result language and v7.1.2 patch qualifiers |
 | `metadata_alpha` | Public metadata, provenance, task, and baseline scaffold without frozen payload mirror | v9 public bulk alpha | Allowed only with metadata-only and no-payload qualifiers |
 | `diagnostic_alpha` | Draft lane used for feasibility, metric, payload, or asset diagnostics | v9 single-cell, organoid, multispecies draft lanes | Draft-only; no public leaderboard or frozen release claim |
 | `frozen_payload_release` | Future payload bundle with local mirror and verified payload hashes | Not yet active for v9 public bulk | Blocked until payload gates pass |

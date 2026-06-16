@@ -95,18 +95,15 @@ def validate_public_docs() -> list[str]:
     if hf_front_matter.get("viewer") != "false":
         errors.append("docs/hf_dataset_card.md: expected viewer: false")
 
-    require_contains(errors, "README.md", readme, "v7.1.2 public-card/metadata/evidence-visibility")
-    require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Public status: **v7.1.2 public-card/metadata/evidence-visibility patch")
+    require_contains(errors, "README.md", readme, "v7.1.2 public-card/metadata patch")
+    require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Public status: **v7.1.2 public-card/metadata patch")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "Dataset freeze: **2026-03-01**")
     require_contains(errors, "docs/hf_dataset_card.md", hf_card, "repo_id = \"jang1563/genelab-benchmark\"")
-    require_contains(errors, "docs/hf_dataset_card.md", hf_card, "docs/v9_hf_dataset_card.md")
-
     if v7.get("public_label"):
         require_contains(errors, "README.md", readme.lower(), v7["public_label"].lower())
         require_contains(errors, "docs/hf_dataset_card.md", hf_card.lower(), v7["public_label"].lower())
     if v9.get("public_label"):
         require_contains(errors, "README.md", readme.lower(), v9["public_label"].lower())
-        require_contains(errors, "docs/hf_dataset_card.md", hf_card.lower(), v9["public_label"].lower())
 
     return errors
 

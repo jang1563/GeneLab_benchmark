@@ -37,7 +37,7 @@ excluded from the current public-review path.
 The current public-safe summary is:
 
 - v1-v7 is the canonical historical benchmark result surface.
-- v7.1.2 is a documentation, public-card, metadata, and evidence-visibility patch over
+- v7.1.2 is a documentation, public-card, and metadata patch over
   the canonical v7.1 result surface, not a new result release.
 - v8 is an incubating translational extension and should not be mixed into
   v7.1 claims.
@@ -60,13 +60,13 @@ The current public-safe summary is:
 
 ### SBB-C002 - v7.1.2 Patch Boundary
 
-- Claim: v7.1.2 is a documentation, public-card, metadata, and evidence-visibility patch
+- Claim: v7.1.2 is a documentation, public-card, and metadata patch
   over the canonical v7.1 result surface, not a new result-generation release.
 - Support: primary.
 - Sources: `README.md`; `docs/CANONICAL_RESULTS_V7_1.md`;
   `docs/hf_dataset_card.md`.
 - Confidence: high.
-- Use: "v7.1.2 documentation/card/metadata/evidence-visibility patch; no new benchmark result
+- Use: "v7.1.2 documentation/card/metadata patch; no new benchmark result
   generation".
 - Avoid: "v7.1.2 adds new benchmark results".
 
