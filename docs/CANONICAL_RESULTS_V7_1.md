@@ -85,11 +85,15 @@ Required caption language:
 > the classical baseline. The comparison is a benchmark-surface summary, not a
 > single uniform 8-tissue FM leaderboard.
 
-## Held-Out Validation
+## Retrospective Open Validation
+
+The historical `_holdout` fold names record mission exclusion from training.
+Their `test_y.csv` labels are now public, so these values are reproducibility
+results rather than blind holdout estimates. See `docs/BENCHMARK_INTEGRITY.md`.
 
 | Tissue | Mission | AUROC | 95% CI | p-value | n_test |
 |---|---|---:|---|---:|---:|
-| Thymus | RR-23 | 0.905 | [0.672, 1.000] | 0.005 | 18 |
+| Thymus | RR-23 | 0.905 | [0.672, 1.000] | 0.005 | 16 |
 | Skin | RR-7 | 0.885 | [0.745, 0.986] | <0.001 | 30 |
 
 ## License and Citation Notes
@@ -102,10 +106,7 @@ Use separate license statements:
 - Source data: NASA OSDR public data; cite OSDR and follow individual dataset
   licenses where applicable.
 
-If a target venue is double blind, do not rely on named public GitHub/Hugging
-Face URLs in the anonymized review PDF unless the venue policy permits it.
-
-## Submission-Safe Claim Set
+## Supported Claim Set
 
 Safe headline:
 

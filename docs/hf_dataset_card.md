@@ -78,13 +78,13 @@ genelab-benchmark/
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
 │   ├── fold_RR-9_test/
-│   └── fold_RR-23_holdout/
+│   └── fold_RR-23_holdout/      # retrospective open validation; labels public
 ├── A5_skin_lomo/
 │   ├── task_info.json
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
 │   ├── fold_RR-7_test/
-│   └── fold_RR-7_holdout/
+│   └── fold_RR-7_holdout/       # retrospective open validation; labels public
 ├── A6_eye_lomo/
 │   ├── task_info.json
 │   ├── fold_RR-1_test/
@@ -96,6 +96,10 @@ genelab-benchmark/
 ```
 
 `fold_OSD-397_test` is the stable public label for the third A6 eye fold.
+
+The two historical `_holdout` directories also contain public `test_y.csv`
+files. They support retrospective reproducibility, not blind evaluation. See
+the [benchmark integrity note](https://github.com/jang1563/GeneLab_benchmark/blob/main/docs/BENCHMARK_INTEGRITY.md).
 
 ## Scope
 
@@ -179,7 +183,7 @@ repository.
 | Cross-mission transfer | Thymus and gastrocnemius show the strongest mission-transfer signal; liver and kidney are harder. |
 | Pathway features | Pathway representations rescue some weaker gene-level tissues, especially kidney and eye. |
 | Foundation models | Tested gene-expression foundation models underperform tuned classical baselines on small-n bulk RNA-seq mission shift. |
-| Held-out validation | Thymus RR-23 AUROC 0.905; skin RR-7 AUROC 0.885. |
+| Retrospective open validation | Thymus RR-23 AUROC 0.905; skin RR-7 AUROC 0.885; labels are public. |
 
 ## Intended Use
 

@@ -1,5 +1,6 @@
 import importlib
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -411,7 +412,7 @@ class ReviewFixTests(unittest.TestCase):
         self.assertNotIn("rrrm1_benchmark.py", readme)
         self.assertNotIn("v3/evaluation", readme)
         self.assertNotIn("RRRM1_SC_BENCHMARK_PLAN_V3", readme)
-        self.assertIn("RRRM1_DOWNSTREAM_PLAN_2026-03-11.md", readme)
+        self.assertNotIn("_PLAN_", readme)
 
         self.assertNotIn("v2/processed/E_crossspecies/", summary)
         self.assertIn("v2/evaluation/E1_crossspecies_nes.json", summary)
@@ -559,7 +560,7 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("medium-v1.5.ckpt", hpc_setup)
         self.assertIn('parser.add_argument("--ckpt-path", default="medium-v1.5.ckpt"', scprint)
         self.assertIn('add_candidate(model_dir / "medium-v1.5_fixed.ckpt")', scprint)
-        self.assertNotIn("/home/fs01/jak4013/Dropbox", hpc_scprint)
+        self.assertNotRegex(hpc_scprint, r"/home/[^/]+/Dropbox")
 
     def test_v7_scprint_artifacts_store_portable_checkpoint_paths(self):
         scprint = self.read_repo_text("v7/unified/scprint2_benchmark.py")
@@ -570,8 +571,8 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn('return str(Path(*parts[v7_idx:]).with_name(canonical_name))', scprint)
         self.assertIn('"ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt"', eval_json)
         self.assertIn('"ckpt_path": "v7/models/scprint2/medium-v1.5.ckpt"', fig_html)
-        self.assertNotIn("/home/fs01/jak4013/Dropbox", eval_json)
-        self.assertNotIn("/home/fs01/jak4013/Dropbox", fig_html)
+        self.assertNotRegex(eval_json, r"/home/[^/]+/Dropbox")
+        self.assertNotRegex(fig_html, r"/home/[^/]+/Dropbox")
 
     def test_v7_signal_hierarchy_uses_real_fm_outputs_and_explicit_spaceomics_path(self):
         signal_hierarchy = self.read_repo_text("v7/unified/signal_hierarchy.py")
@@ -605,14 +606,14 @@ class ReviewFixTests(unittest.TestCase):
             "v8/multiomics/propagation.py",
             "v8/RESULTS_SUMMARY.py",
         ]
-        forbidden = ["/Users/jak4013", "~/.claude"]
+        forbidden = [re.compile(r"/Users/[^/]+"), re.compile(r"~/.claude")]
         checked_files = [rel for rel in checked_files if (REPO_ROOT / rel).exists()]
         if not checked_files:
             self.skipTest("v8 public source files are not present in this checkout")
         offenders = [
             rel
             for rel in checked_files
-            if any(token in self.read_repo_text(rel) for token in forbidden)
+            if any(pattern.search(self.read_repo_text(rel)) for pattern in forbidden)
         ]
         self.assertEqual(offenders, [])
 

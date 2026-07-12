@@ -80,7 +80,12 @@ The v7.1 canonical result source is
 | Cross-mission transfer | Thymus and gastrocnemius show the strongest mission-transfer signal; liver and kidney are harder. |
 | Pathway features | Pathway representations rescue some weaker gene-level tissues, especially kidney and eye. |
 | Foundation models | Tested gene-expression foundation models underperform tuned classical baselines on small-n bulk RNA-seq mission shift. |
-| Held-out validation | Thymus RR-23 AUROC 0.905; skin RR-7 AUROC 0.885. |
+| Retrospective open validation | Thymus RR-23 AUROC 0.905; skin RR-7 AUROC 0.885. Labels for both released folds are public, so these are reproducibility results rather than blind holdout scores. |
+
+The directories ending in `_holdout` retain historical names, but their
+`test_y.csv` files are tracked and public. See the
+[benchmark integrity note](docs/BENCHMARK_INTEGRITY.md) before comparing new
+methods on those folds.
 
 The original long-form README content is preserved at
 [docs/README_LONGFORM_V7_1_ARCHIVE_2026_06_15.md](docs/README_LONGFORM_V7_1_ARCHIVE_2026_06_15.md).
@@ -149,7 +154,7 @@ tasks/                 Public v1 LOMO task inputs and selected fold packages
 evaluation/            Historical v1 result JSON and summaries
 v2/ ... v7/            Completed historical benchmark layers
 v9/                    Public bulk metadata catalog and extension workspaces
-docs/                  Cards, canonical results, methods, plans, and release notes
+docs/                  Cards, canonical results, methods, and release notes
 release/               Machine-readable public release manifest
 scripts/               Data, evaluation, upload, validation, and figure scripts
 ```
@@ -162,6 +167,7 @@ scripts/               Data, evaluation, upload, validation, and figure scripts
 | Public documentation map | [docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) |
 | System scope | [docs/SPACEBIOBENCH_SYSTEM_CARD.md](docs/SPACEBIOBENCH_SYSTEM_CARD.md) |
 | Evaluation interpretation | [docs/SPACEBIOBENCH_EVALUATION_CARD.md](docs/SPACEBIOBENCH_EVALUATION_CARD.md) |
+| Benchmark integrity and label visibility | [docs/BENCHMARK_INTEGRITY.md](docs/BENCHMARK_INTEGRITY.md) |
 | Release status | [docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md](docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md) |
 | Public statement guide | [docs/SPACEBIOBENCH_CLAIM_REGISTER.md](docs/SPACEBIOBENCH_CLAIM_REGISTER.md) |
 | Hugging Face dataset card source | [docs/hf_dataset_card.md](docs/hf_dataset_card.md) |

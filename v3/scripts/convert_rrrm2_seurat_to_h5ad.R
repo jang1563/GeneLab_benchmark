@@ -18,8 +18,10 @@ if (length(args) < 1) {
 }
 glds <- args[1]
 
-BASE_DIR <- Sys.getenv("RRRM2_SEURAT_DIR",
-  "/athena/masonlab/scratch/projects/GeneLab/ISS_single_cell/ISS_mouse_single_cell/result/GEX/2022_08_06_Seurat_object")
+BASE_DIR <- Sys.getenv("RRRM2_SEURAT_DIR")
+if (!nzchar(BASE_DIR)) {
+  stop("Set RRRM2_SEURAT_DIR to the directory containing GLDS-* Seurat objects")
+}
 OUT_DIR <- file.path(Sys.getenv("SCRATCH_DIR", Sys.getenv("HOME")),
   "huggingface/benchmark/GeneLab_benchmark/v3/data/rrrm2")
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)

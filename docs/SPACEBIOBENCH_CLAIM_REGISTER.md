@@ -25,7 +25,7 @@ abstracts, talks, or issue responses.
 | v9 public bulk | Public bulk metadata catalog | Use for task manifests, source records, fold indexes, audit summaries, and reference baselines |
 | Foundation-model result summary | Tested gene-expression foundation models underperform tuned classical baselines on small-n bulk RNA-seq mission shift | Keep tied to the documented v7.1 result surface |
 | Classical baseline summary | PCA-LR is the strongest 8-tissue gene-level baseline in v4, with mean AUROC 0.776 | Use with v7.1 canonical result context |
-| Held-out validation | Thymus RR-23 AUROC 0.905; skin RR-7 AUROC 0.885 | Use with the v7.1 held-out validation context |
+| Retrospective open validation | Thymus RR-23 AUROC 0.905; skin RR-7 AUROC 0.885 | Labels and historical results are public; do not describe these as blind holdouts |
 | OSDR source data | Source data are derived from public NASA OSDR studies | Cite the relevant OSDR study pages |
 
 ## Result Interpretation

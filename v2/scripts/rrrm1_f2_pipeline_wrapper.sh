@@ -4,7 +4,7 @@
 # Submit the full F2 downstream pipeline as a SLURM dependency chain.
 #
 # Prerequisites:
-#   - Per-SRX STARsolo job 2703854 is running (or already complete)
+#   - A per-SRX STARsolo job is running (or already complete)
 #   - rrrm1_merge_per_srx.py, rrrm1_merge_h5ad.py, rrrm1_initial_scanpy.py, rrrm1_broad_annotate.py,
 #     rrrm1_singlecell_hardening.py, rrrm1_f2a_composition.py,
 #     rrrm1_f2b_pseudobulk_fgsea.py, rrrm1_f2c_loao_classifier.py
@@ -12,17 +12,21 @@
 #
 # Usage:
 #   bash rrrm1_f2_pipeline_wrapper.sh [STARSOLO_JOB_ID]
-#   # Default STARSOLO_JOB_ID = 2703854 (the running per-SRX job)
+#   # Or set STARSOLO_JOB_ID in the environment.
 #
 # Submit via:
 #   /opt/ohpc/pub/software/slurm/24.05.2/bin/sbatch rrrm1_f2_pipeline_wrapper.sh
 
 set -euo pipefail
 
-SBATCH=/opt/ohpc/pub/software/slurm/24.05.2/bin/sbatch
-SQUEUE=/opt/ohpc/pub/software/slurm/24.05.2/bin/squeue
+SBATCH="${SBATCH_BIN:-sbatch}"
+SQUEUE="${SQUEUE_BIN:-squeue}"
 
-STARSOLO_JOB="${1:-2703854}"
+STARSOLO_JOB="${1:-${STARSOLO_JOB_ID:-}}"
+if [[ -z "${STARSOLO_JOB}" ]]; then
+    echo "ERROR: pass STARSOLO_JOB_ID as the first argument or environment variable" >&2
+    exit 2
+fi
 SCRATCH="${SCRATCH_DIR:?Set SCRATCH_DIR}/rrrm1_scrna"
 HOME_DIR="${HOME}/rrrm1_scrna"
 CONDA_ACTIVATE="source ${CONDA_PREFIX:-$HOME/miniconda3}/etc/profile.d/conda.sh && conda activate scgpt_env_new"

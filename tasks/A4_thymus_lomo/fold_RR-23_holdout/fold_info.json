@@ -1,5 +1,5 @@
 {
-  "fold_type": "held_out",
+  "fold_type": "retrospective_open_validation",
   "test_mission": "RR-23",
   "test_osd": "OSD-515",
   "train_missions": [
@@ -17,6 +17,6 @@
   "n_genes_test_only": 2341,
   "normalization": "OSD-515: OSDR per-dataset DESeq2 (log2+1) \u2014 no joint normalization",
   "label_public": true,
-  "note": "held-out test set for external benchmark evaluation",
+  "note": "Historical _holdout path retained for compatibility. Labels are public; use as retrospective open validation, not blind evaluation.",
   "generated_at": "2026-03-01T01:52:57.331373"
 }
