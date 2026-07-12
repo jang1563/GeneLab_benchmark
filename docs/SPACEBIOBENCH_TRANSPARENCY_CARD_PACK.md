@@ -30,9 +30,9 @@ wording. It is a navigation layer, not a new benchmark result surface.
 
 | Step | Open this | What it gives you |
 |---|---|---|
-| 1 | [Portfolio brief](SPACEBIOBENCH_PORTFOLIO_BRIEF.md) | One-page project framing and contribution summary |
-| 2 | [System card](SPACEBIOBENCH_SYSTEM_CARD.md) | Benchmark surfaces, components, intended use, and scope notes |
-| 3 | [Evaluation card](SPACEBIOBENCH_EVALUATION_CARD.md) | How to read tasks, folds, metrics, baselines, and pooled summaries |
+| 1 | [System card](SPACEBIOBENCH_SYSTEM_CARD.md) | Benchmark surfaces, components, intended use, and scope notes |
+| 2 | [Evaluation card](SPACEBIOBENCH_EVALUATION_CARD.md) | How to read tasks, folds, metrics, baselines, and pooled summaries |
+| 3 | [Benchmark integrity note](BENCHMARK_INTEGRITY.md) | Which labels are public and what can or cannot be called blind evaluation |
 | 4 | [Release status card](SPACEBIOBENCH_RELEASE_READINESS_CARD.md) | Current public status for v7.1, v7.1.2, HF, and v9 catalog surfaces |
 | 5 | [Public statement guide](SPACEBIOBENCH_CLAIM_REGISTER.md) | Preferred wording for common public statements |
 | Cross-check | [Canonical v7.1 results](CANONICAL_RESULTS_V7_1.md), [v7.1 HF card](hf_dataset_card.md), and [v9 metadata catalog card](v9_hf_dataset_card.md) | The source document for a result, dataset, or catalog statement |
@@ -41,9 +41,9 @@ wording. It is a navigation layer, not a new benchmark result surface.
 
 | Card | Question | File |
 |---|---|---|
-| Portfolio Brief | Why does this project matter as a research and portfolio artifact? | [docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md](SPACEBIOBENCH_PORTFOLIO_BRIEF.md) |
 | System Card | What is SpaceBio-Bench and what surfaces exist? | [docs/SPACEBIOBENCH_SYSTEM_CARD.md](SPACEBIOBENCH_SYSTEM_CARD.md) |
 | Evaluation Card | How should task, fold, baseline, metric, and pooled results be interpreted? | [docs/SPACEBIOBENCH_EVALUATION_CARD.md](SPACEBIOBENCH_EVALUATION_CARD.md) |
+| Benchmark Integrity | Which evaluation labels are public, and what validation claims are supported? | [docs/BENCHMARK_INTEGRITY.md](BENCHMARK_INTEGRITY.md) |
 | Release Status Card | What is active now, and what would be needed for a larger release? | [docs/SPACEBIOBENCH_RELEASE_READINESS_CARD.md](SPACEBIOBENCH_RELEASE_READINESS_CARD.md) |
 | Public Statement Guide | What wording should be used for public descriptions? | [docs/SPACEBIOBENCH_CLAIM_REGISTER.md](SPACEBIOBENCH_CLAIM_REGISTER.md) |
 | v7.1 Canonical Results | What is the locked public result and scope source for v1-v7? | [docs/CANONICAL_RESULTS_V7_1.md](CANONICAL_RESULTS_V7_1.md) |

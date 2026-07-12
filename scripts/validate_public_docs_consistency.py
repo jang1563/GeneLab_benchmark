@@ -16,7 +16,7 @@ README = REPO_ROOT / "README.md"
 HF_CARD = REPO_ROOT / "docs" / "hf_dataset_card.md"
 V9_HF_CARD = REPO_ROOT / "docs" / "v9_hf_dataset_card.md"
 DOC_MAP = REPO_ROOT / "docs" / "SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md"
-PORTFOLIO_BRIEF = REPO_ROOT / "docs" / "SPACEBIOBENCH_PORTFOLIO_BRIEF.md"
+INTEGRITY_NOTE = REPO_ROOT / "docs" / "BENCHMARK_INTEGRITY.md"
 SYSTEM_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_SYSTEM_CARD.md"
 EVALUATION_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_EVALUATION_CARD.md"
 RELEASE_STATUS_CARD = REPO_ROOT / "docs" / "SPACEBIOBENCH_RELEASE_READINESS_CARD.md"
@@ -31,6 +31,10 @@ V9_REPORTS_README = REPO_ROOT / "v9" / "reports" / "README.md"
 CITATION = REPO_ROOT / "CITATION.cff"
 ZENODO = REPO_ROOT / ".zenodo.json"
 RELEASE_MANIFEST = REPO_ROOT / "release" / "release_manifest.json"
+OPEN_VALIDATION_FOLDS = (
+    REPO_ROOT / "tasks" / "A4_thymus_lomo" / "fold_RR-23_holdout",
+    REPO_ROOT / "tasks" / "A5_skin_lomo" / "fold_RR-7_holdout",
+)
 
 
 def load_json(path: Path) -> Any:
@@ -77,7 +81,7 @@ def validate_public_docs() -> list[str]:
     hf_card = HF_CARD.read_text()
     v9_hf_card = V9_HF_CARD.read_text()
     doc_map = DOC_MAP.read_text()
-    portfolio_brief = PORTFOLIO_BRIEF.read_text()
+    integrity_note = INTEGRITY_NOTE.read_text()
     system_card = SYSTEM_CARD.read_text()
     evaluation_card = EVALUATION_CARD.read_text()
     release_status_card = RELEASE_STATUS_CARD.read_text()
@@ -199,7 +203,7 @@ def validate_public_docs() -> list[str]:
     public_card_text = "\n".join(
         [
             doc_map,
-            portfolio_brief,
+            integrity_note,
             system_card,
             evaluation_card,
             release_status_card,
@@ -212,11 +216,7 @@ def validate_public_docs() -> list[str]:
             doc_map,
             "# SpaceBio-Bench Public Documentation Map",
         ),
-        (
-            "docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md",
-            portfolio_brief,
-            "# SpaceBio-Bench Portfolio Brief",
-        ),
+        ("docs/BENCHMARK_INTEGRITY.md", integrity_note, "# Benchmark Integrity And Label Visibility"),
         ("docs/SPACEBIOBENCH_SYSTEM_CARD.md", system_card, "# SpaceBio-Bench System Card"),
         (
             "docs/SPACEBIOBENCH_EVALUATION_CARD.md",
@@ -249,6 +249,60 @@ def validate_public_docs() -> list[str]:
         "not a frozen",
     ):
         require_absent(errors, "linked public cards", public_card_text, forbidden)
+
+    require_contains(
+        errors,
+        "docs/BENCHMARK_INTEGRITY.md",
+        integrity_note,
+        "retrospective open-validation results",
+    )
+    require_contains(
+        errors,
+        "docs/BENCHMARK_INTEGRITY.md",
+        integrity_note,
+        "A future blind evaluation requires a rotated evaluation set",
+    )
+    for fold_dir in OPEN_VALIDATION_FOLDS:
+        fold_info_path = fold_dir / "fold_info.json"
+        test_y_path = fold_dir / "test_y.csv"
+        if not test_y_path.exists():
+            errors.append(f"{test_y_path.relative_to(REPO_ROOT)}: public label file missing")
+            continue
+        fold_info = load_json(fold_info_path)
+        public_label_rows = max(0, len(test_y_path.read_text().splitlines()) - 1)
+        if fold_info.get("n_test") != public_label_rows:
+            errors.append(
+                f"{fold_info_path.relative_to(REPO_ROOT)}: n_test "
+                f"{fold_info.get('n_test')!r} does not match {public_label_rows} public labels"
+            )
+        if fold_info.get("label_public") is not True:
+            errors.append(
+                f"{fold_info_path.relative_to(REPO_ROOT)}: label_public must be true"
+            )
+        if fold_info.get("fold_type") != "retrospective_open_validation":
+            errors.append(
+                f"{fold_info_path.relative_to(REPO_ROOT)}: fold_type must be "
+                "'retrospective_open_validation'"
+            )
+
+    label_visibility_text = "\n".join(
+        [
+            readme,
+            hf_card,
+            integrity_note,
+            (REPO_ROOT / "tasks" / "README.md").read_text(),
+            (REPO_ROOT / "docs" / "submission_format.md").read_text(),
+            (REPO_ROOT / "evaluation" / "RESULTS_SUMMARY.md").read_text(),
+        ]
+    ).lower()
+    for forbidden in (
+        "labels are private",
+        "labels private",
+        "test_y.csv absent",
+        "not for public eval",
+        "independent held-out validation",
+    ):
+        require_absent(errors, "public label-visibility docs", label_visibility_text, forbidden)
 
     archive_text = "\n".join([archive_status, archive_manifest, archive_checklist])
     for label, text, expected in (
@@ -321,7 +375,7 @@ def validate_public_docs() -> list[str]:
     require_contains(errors, ".zenodo.json", zenodo.get("title", ""), "SpaceBio-Bench")
     require_contains(errors, ".zenodo.json", zenodo.get("version", ""), "7.1.2")
     require_contains(errors, ".zenodo.json", zenodo.get("description", ""), "public-card and metadata patch")
-    for forbidden in ("evidence-visibility", "release-candidate surface", "hiring-manager"):
+    for forbidden in ("evidence-visibility", "release-candidate surface"):
         require_absent(errors, ".zenodo.json", zenodo_text, forbidden)
     if v7.get("public_label"):
         require_contains(errors, "README.md", readme.lower(), v7["public_label"].lower())

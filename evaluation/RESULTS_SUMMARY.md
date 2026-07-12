@@ -237,9 +237,9 @@ scGPT-whole_human (12L Transformer, 512d hidden, 8 heads, pretrained on 33M huma
 
 ---
 
-## Held-Out Evaluation: A4 Thymus (OSD-515 / RR-23)
+## Retrospective Open Validation: A4 Thymus (OSD-515 / RR-23)
 
-Reserved held-out test set for external benchmark evaluation. Train on 4 missions (MHU-1, MHU-2, RR-6, RR-9; n=67), test on RR-23 (n=16: 7 Flight, 9 GC). 27,541 common genes.
+Historical mission-separated validation fold. Train on 4 missions (MHU-1, MHU-2, RR-6, RR-9; n=67), test on RR-23 (n=16: 7 Flight, 9 GC). 27,541 common genes. The fold labels and recorded results are public, so this section documents retrospective reproducibility rather than blind evaluation.
 
 | Model | AUROC | 95% CI | p-value |
 |-------|-------|--------|---------|
@@ -248,7 +248,7 @@ Reserved held-out test set for external benchmark evaluation. Train on 4 mission
 | PCA-50 + LogReg | 0.873 | [0.609, 1.000] | 0.011 |
 | Geneformer (Mouse-GF) | 0.556 | [0.265, 0.850] | — |
 
-**Interpretation**: Classical baselines achieve strong held-out performance (AUROC ~0.90, p<0.01), confirming thymus cross-mission generalization beyond LOMO. Geneformer remains near chance on held-out data, consistent with LOMO results (0.495). The held-out confirms thymus as the most robust tissue for spaceflight detection.
+**Interpretation**: The recorded classical baselines reproduce strong mission-separated performance (AUROC ~0.90, p<0.01), while Geneformer remains near chance. Because labels are public, these values support reproduction of the released analysis but are not an untouched estimate for newly developed models.
 
 ---
 
@@ -350,9 +350,9 @@ RR-8 shows strong recovery with overshoot past baseline (MYC targets V1 +2.49, P
 
 ---
 
-## Held-Out Evaluation: A5 Skin (OSD-254 / RR-7)
+## Retrospective Open Validation: A5 Skin (OSD-254 / RR-7)
 
-Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 (n=30: 10 Flight, 20 GC). 20,110 common genes. RR-7 is a 75-day mission (longest in skin dataset).
+Second historical mission-separated validation fold. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 (n=30: 10 Flight, 20 GC). 20,110 common genes. RR-7 is a 75-day mission (longest in skin dataset). Labels are public.
 
 | Model | AUROC | 95% CI | p-value |
 |-------|-------|--------|---------|
@@ -360,14 +360,14 @@ Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 
 | PCA-50 + LogReg | 0.840 | [0.679, 0.963] | 0.001 |
 | Random Forest | 0.777 | [0.583, 0.929] | 0.007 |
 
-**Cross-Tissue Held-Out Comparison**:
+**Cross-Tissue Retrospective Open-Validation Comparison**:
 
 | Tissue | Mission | Duration | Best AUROC | n_test |
 |--------|---------|----------|------------|--------|
 | Thymus | RR-23 | 30 days | 0.905 (LR) | 16 |
 | Skin | RR-7 | 75 days | 0.885 (LR) | 30 |
 
-**Interpretation**: Skin held-out confirms strong generalization (AUROC 0.885, p<0.001), exceeding the LOMO mean (0.821). Both held-out tissues achieve AUROC > 0.85, validating cross-mission spaceflight detection beyond leave-one-out evaluation.
+**Interpretation**: The released skin analysis records AUROC 0.885 (p<0.001), above the historical LOMO mean (0.821). Both open validation folds exceed AUROC 0.85 in the recorded analysis; new-model claims must disclose that these labels were public.
 
 ---
 
@@ -389,7 +389,7 @@ Second held-out test set. Train on 2 missions (RR-6, MHU-2; n=72), test on RR-7 
 | Geneformer | 6 tissues, 22 LOMO folds (Mouse-GF) | Complete |
 | scGPT | 6 tissues, 21 LOMO folds (whole_human), mean AUROC=0.666 | Complete |
 | LLM Zero-Shot | 3 providers × 6 tasks (18 evals) | Complete |
-| Held-Out | A4 Thymus (RR-23) + A5 Skin (RR-7) | Complete |
+| Retrospective open validation | A4 Thymus (RR-23) + A5 Skin (RR-7) | Complete; labels public |
 | T1-T3 Temporal | ISS-T/LAR, Recovery, Age×Spaceflight | Complete |
 | J2 DGE Pipeline | 9 missions × 3 pipelines (DESeq2/edgeR/limma-voom) | Complete |
 | **v1 Figures** | **4 main + 4 supplementary (HTML/SVG)** | **Complete** |

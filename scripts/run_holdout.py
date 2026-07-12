@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """
-run_holdout.py — GeneLab_benchmark: Held-Out Evaluation
+run_holdout.py — GeneLab_benchmark: Retrospective Open Validation
 
-Runs baseline classifiers on held-out test sets and reports AUROC with
+Runs baseline classifiers on mission-separated public test sets and reports AUROC with
 Bootstrap 95% CI and permutation p-values.
+
+The `_holdout` directory suffix is historical. Labels are public, so these
+results are reproducibility checks rather than blind holdout estimates.
 
 Reuses model definitions and evaluation logic from run_baselines.py.
 
@@ -33,7 +36,7 @@ from run_baselines import (
     build_lr, build_rf, build_pca_lr,
 )
 
-# ── Holdout configurations ────────────────────────────────────────────────────
+# ── Historical open-validation configurations ────────────────────────────────
 HOLDOUTS = {
     "thymus_RR-23": {
         "tissue": "thymus",
@@ -71,7 +74,7 @@ class _NumpyEncoder(json.JSONEncoder):
 
 
 def run_holdout(config, n_bootstrap=2000, n_perm=10000):
-    """Run all models on a held-out fold."""
+    """Run all models on a retrospective open-validation fold."""
     fold_dir = config["fold_dir"]
     tissue = config["tissue"]
     mission = config["mission"]
@@ -81,7 +84,7 @@ def run_holdout(config, n_bootstrap=2000, n_perm=10000):
         return None
 
     print(f"\n{'='*50}")
-    print(f"Held-Out: {tissue} / {mission}")
+    print(f"Retrospective open validation: {tissue} / {mission}")
     print(f"Fold: {fold_dir}")
     print(f"{'='*50}")
 
@@ -142,7 +145,7 @@ def main():
     # Print comparison table if multiple holdouts
     if len(all_results) > 1:
         print(f"\n{'='*60}")
-        print("Cross-Tissue Held-Out Comparison")
+        print("Cross-Tissue Retrospective Open-Validation Comparison")
         print(f"{'='*60}")
         print(f"{'Holdout':<20} {'Model':<10} {'AUROC':<8} {'CI':<20} {'n_test':<8}")
         for key, results in all_results.items():

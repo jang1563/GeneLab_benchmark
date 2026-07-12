@@ -37,6 +37,10 @@ summaries so readers can understand what a score means.
 The v9 public bulk catalog organizes mission-held-out classification tasks for
 public mouse bulk RNA-seq sources.
 
+For the historical RR-23 and RR-7 `_holdout` directories, `test_y.csv` is
+public. Those two rows are retrospective open validation, not blind evaluation;
+see [BENCHMARK_INTEGRITY.md](BENCHMARK_INTEGRITY.md).
+
 | Unit | Meaning | Public files |
 |---|---|---|
 | Task | Tissue-specific bulk LOMO task with missions, labels, feature namespace, and metric IDs | `v9/task_manifest_index.csv`; `v9/task_manifests/*.json` |

@@ -30,14 +30,14 @@ Alternative titles:
 - Evaluated across 7 categories: spaceflight detection (A), cross-mission transfer (B), cross-tissue transfer (C), confounder prediction (D), gene-vs-pathway comparison (J5), negative controls (NC), and external validation.
 - Compared 3 model tiers: classical ML (LR, RF, PCA-LR), gene expression foundation models (Mouse-Geneformer + scGPT), and text LLMs (zero-shot).
 - DGE pipeline robustness evaluated: DESeq2 vs edgeR vs limma-voom across 9 missions (J2).
-- Two independent held-out test sets: thymus RR-23 and skin RR-7.
+- Two retrospective open-validation folds: thymus RR-23 and skin RR-7. Their labels are public.
 
 ### Key Results (for abstract)
 - Thymus (AUROC=0.860) significantly outperforms liver (0.577, p=0.001) in cross-mission spaceflight detection — refuting the liver-centric assumption (H1 REFUTED).
 - Pathway-level NES conservation across missions predicts cross-mission transfer AUROC (Spearman r=0.9 for 5 tissues) — a previously unreported quantitative relationship.
 - Gene-level features achieve F1=1.0 for mission identity prediction while pathway features achieve F1=0.056, quantifying a 17.8× batch resistance factor for pathways.
 - Two FM tiers evaluated: scGPT (12L Transformer, human-pretrained, AUROC=0.666) and Mouse-Geneformer (6L BERT, mouse-pretrained, AUROC=0.476) both underperform classical ML (AUROC=0.758), establishing that scRNA-pretrained FMs do not transfer to small-n bulk transcriptomics. Notably, scale (scGPT, 33M cells) outperforms species alignment (GF, mouse-specific) despite cross-species mapping.
-- Two independent held-out evaluations confirm generalization: thymus RR-23 (AUROC=0.905, p=0.005, 30-day mission) and skin RR-7 (AUROC=0.885, p<0.001, 75-day mission).
+- Two released mission-separated analyses record strong performance: thymus RR-23 (AUROC=0.905, p=0.005, 30-day mission) and skin RR-7 (AUROC=0.885, p<0.001, 75-day mission). These are retrospective open-validation results, not blind estimates.
 - DGE pipeline choice (DESeq2 vs edgeR vs limma-voom) has minimal effect on Log2FC rankings (Spearman ρ=0.926) but substantially affects DEG list overlap (Jaccard=0.600, FDR<0.05).
 
 ---
@@ -181,7 +181,7 @@ Pairwise comparisons per mission:
 - DEG Jaccard (FDR<0.05, both pipelines combined).
 - Sanity check: DESeq2 replication vs GeneLab original DGE (target Jaccard > 0.90).
 
-### 4.7 Skin Held-Out Evaluation (A5)
+### 4.7 Skin Retrospective Open Validation (A5)
 
 Skin (RR-7) selected as second held-out tissue:
 - Rationale: Only skin has 3 missions (MHU-2, RR-6, RR-7), which allows leaving one out while retaining n≥2 training missions.
@@ -318,7 +318,7 @@ Two FMs fine-tuned across 6 tissues: Mouse-Geneformer (22 folds) and scGPT (21 f
 - Consistent with literature: FMs pretrained on single-cell data do not automatically transfer to small-sample (n=30-100) bulk transcriptomics. The transfer gap is smaller for scGPT's larger pretraining dataset but not eliminated.
 - First systematic comparison of two FM architectures (BERT vs Transformer) across spaceflight bulk RNA-seq.
 
-### 5.8 Held-Out Evaluation (Two Tissues)
+### 5.8 Retrospective Open Validation (Two Tissues)
 
 **Thymus RR-23** (primary): OSD-515, n=16 (7 Flight, 9 GC). Train on 4 missions (n=67).
 
@@ -329,7 +329,7 @@ Two FMs fine-tuned across 6 tissues: Mouse-Geneformer (22 folds) and scGPT (21 f
 | PCA-50 + LogReg | 0.873 | [0.609, 1.000] | 0.011 |
 | Geneformer (Mouse-GF) | 0.556 | [0.265, 0.850] | — |
 
-**Skin RR-7** (independent second held-out): n=30 (10 FLT, 20 GC). Train on 2 missions (n=72). RR-7 = 75-day mission (longest in skin cohort).
+**Skin RR-7** (second open-validation fold): n=30 (10 FLT, 20 GC). Train on 2 missions (n=72). RR-7 = 75-day mission (longest in skin cohort).
 
 | Model | AUROC | 95% CI | p-value |
 |-------|-------|--------|---------|
@@ -442,7 +442,7 @@ All 6 tissues produce biologically plausible enrichment patterns:
 - Neither FM surpasses classical baseline. First multi-tissue systematic two-FM benchmark on spaceflight bulk RNA-seq.
 - Implication: For small-n bulk transcriptomics, pretraining scale matters more than species alignment, but both FMs require further bulk-specific adaptation.
 
-**Finding 7: Second Independent Held-Out Confirms Generalization (Skin RR-7)**
+**Finding 7: Second Retrospective Open Validation (Skin RR-7)**
 - Skin LR held-out AUROC = 0.885 (CI=[0.745, 0.986], p<0.001), n=30.
 - RR-7 = 75-day mission, longest in the benchmark — generalization to extreme flight duration.
 - Together with thymus RR-23 (0.905), two tissues × two missions × two flight durations all exceed AUROC=0.88.
@@ -501,13 +501,13 @@ Both FMs fail to match classical ML for small-n bulk transcriptomics, but the co
 - This suggests that, for transfer learning to bulk RNA-seq, pretraining at scale (>30M cells, diverse cell types) is more important than species matching.
 - However, neither FM produces practically useful predictions — the delta from classical baseline remains large (scGPT: -0.093, GF: -0.283).
 
-### 7.5 Two Independent Held-Out Validations
+### 7.5 Two Retrospective Open-Validation Folds
 
-The benchmark reports two completely independent held-out evaluations:
-- **Thymus RR-23** (30-day, n=16): AUROC=0.905, confirming that thymus cross-mission generalization is not a LOMO artifact.
+The benchmark reports two mission-separated retrospective evaluations whose labels and historical results are public:
+- **Thymus RR-23** (30-day, n=16): recorded AUROC=0.905, consistent with the thymus LOMO result on a separate mission.
 - **Skin RR-7** (75-day, n=30): AUROC=0.885, extending validation to the longest mission in the dataset.
 
-Together these demonstrate that: (1) the benchmark results are not LOMO-specific, (2) the approach generalizes to missions not seen during any training phase, and (3) long-duration flight (75 days) does not break the spaceflight transcriptomic signature in skin. The concordance between two tissues (0.905, 0.885) strengthens confidence that AUROC>0.85 is achievable on truly held-out data for reactive tissues.
+Together the released analyses show strong recorded performance on missions excluded from training, including a 75-day skin mission. Because the labels are public, these values support reproducibility of the historical analysis but do not establish expected performance on a new blind holdout.
 
 ### 7.6 Limitations
 - **Sample size**: Most missions have n=6-20 per group, limiting statistical power.
@@ -624,5 +624,5 @@ All data is derived from publicly available NASA OSDR datasets. Processed benchm
 - [x] Geneformer configuration fully specified (architecture, hyperparameters, hardware)
 - [x] scGPT configuration documented (DD-21: architecture, ortholog mapping, fine-tuning)
 - [x] DGE pipeline comparison (J2): 3 pipelines × 9 missions, Spearman ρ + Jaccard
-- [x] Second held-out validation (Skin RR-7): completely independent from LOMO
+- [x] Second retrospective open validation (Skin RR-7): mission-separated, with public labels
 - [x] 21 design decisions documented (DD-01 through DD-21)

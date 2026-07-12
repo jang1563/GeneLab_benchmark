@@ -50,11 +50,15 @@ A4_thymus_lomo/
     geneformer_tokens/     ← Tokenized inputs for Geneformer (Tier 2)
   fold_MHU-1_test/
     ...
-  fold_RR-23_holdout/      ← Held-out fold: labels PRIVATE (not for public eval)
+  fold_RR-23_holdout/      ← Retrospective open validation; historical path name
     train_X.csv
     test_X.csv
-    (test_y.csv absent — private)
+    test_y.csv             ← Labels are public; this is not a blind holdout
 ```
+
+The analogous `A5_skin_lomo/fold_RR-7_holdout/` directory is also an open
+retrospective validation fold with public labels. See
+[`docs/BENCHMARK_INTEGRITY.md`](../docs/BENCHMARK_INTEGRITY.md).
 
 ### Available A Tasks
 
@@ -67,7 +71,7 @@ A4_thymus_lomo/
 | `A1` | Liver | 6 | 193 | ✗ NO-GO | Pipeline heterogeneity |
 | `A3` | Kidney | 3 | 118 | ✗ NO-GO | Low AUROC (0.593); pathway also fails |
 
-†MHU-1 = Track 2b (GC strain = C57BL/6CR, not C57BL/6J). See [PHASE1_RESULTS.md](../docs/development_history/PHASE1_RESULTS.md).
+†MHU-1 = Track 2b (GC strain = C57BL/6CR, not C57BL/6J). See the [canonical result and scope note](../docs/CANONICAL_RESULTS_V7_1.md).
 §MHU-2 = OSD-238 (dorsal) + OSD-239 (femoral) merged; RR-7 = OSD-254 C57BL/6J non-BSL subset (n=30).
 
 > **A1 variants (sensitivity analysis only, not in primary benchmark):**

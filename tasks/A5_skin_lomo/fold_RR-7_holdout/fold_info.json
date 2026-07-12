@@ -1,5 +1,5 @@
 {
-  "fold_type": "held_out",
+  "fold_type": "retrospective_open_validation",
   "test_mission": "RR-7",
   "test_osd": "OSD-254",
   "train_missions": [
@@ -24,6 +24,6 @@
   "excluded_bc_ag_samples": 28,
   "normalization": "per-dataset DESeq2 (log2+1) — no joint normalization",
   "label_public": true,
-  "note": "held-out test set. RR-7: 75-day mission (longest flight duration). Variance-filtered (top 75%).",
+  "note": "Historical _holdout path retained for compatibility. Labels are public; use as retrospective open validation, not blind evaluation. RR-7 is a 75-day mission; variance-filtered (top 75%).",
   "generated_at": "2026-03-09T00:00:00"
 }

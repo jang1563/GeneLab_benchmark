@@ -220,7 +220,7 @@ function panelLabel(g, letter, x, y) {
 }
 
 // ============================================================
-// PANEL (b) — Independent held-out validation (Thymus + Skin)
+// PANEL (b) — Retrospective open validation (Thymus + Skin)
 // ============================================================
 {
   const g = svg.append('g').attr('transform',`translate(${pX[1]},${margin.top})`);
@@ -233,7 +233,7 @@ function panelLabel(g, letter, x, y) {
   // Title
   g.append('text').attr('x', pW[1]/2).attr('y', -1)
     .attr('text-anchor','middle').attr('font-size',FS.title).attr('font-weight','600')
-    .text('Independent held-out validation (two tissues)');
+    .text('Retrospective open validation (two tissues; labels public)');
 
   const xScale = d3.scaleLinear().domain([0.3, 1.08]).range([pad.left, pad.left + plotW]);
   const midY_thy  = pad.top + plotH * 0.27;

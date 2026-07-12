@@ -163,7 +163,8 @@ def validate_submission(submission: dict, task_id: str,
     fold_prefix = "pair_" if task_id.startswith("B") else "fold_"
     all_folds = sorted([d.name for d in task_dir.iterdir()
                         if d.is_dir() and d.name.startswith(fold_prefix)])
-    # Holdout folds are optional (labels are private; Tier 1 = LOMO only)
+    # Historical _holdout folds have public labels. They remain optional only
+    # for backward compatibility with the original core LOMO submission track.
     expected_folds = [f for f in all_folds if "holdout" not in f]
     optional_folds = [f for f in all_folds if "holdout" in f]
 
@@ -265,7 +266,8 @@ def evaluate_submission_full(submission: dict, task_id: str,
                               task_dir_name=None) -> dict:
     """Run full evaluation. Returns results dict."""
     task_dir = get_task_dir(task_id, task_dir_name=task_dir_name)
-    # Support Category A (fold_) and Category B (pair_); holdout folds excluded
+    # Support Category A (fold_) and Category B (pair_). Historical `_holdout`
+    # folds are excluded from the default aggregate for track compatibility.
     fold_prefix = "pair_" if task_id.startswith("B") else "fold_"
     fold_dirs = sorted([d for d in task_dir.iterdir()
                         if d.is_dir() and d.name.startswith(fold_prefix)
