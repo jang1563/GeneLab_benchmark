@@ -49,7 +49,10 @@ If a task ID maps to multiple task directories (for example `A1`), pass `--task-
 - **sample_id**: Must match the row index in `test_X.csv` exactly (from the corresponding directory)
 - **flight_probability**: Float in `[0.0, 1.0]` — probability of being a Flight sample
 
-> **Held-out folds** (`fold_*_holdout`): Labels are private. These are *optional* in Tier 1 submissions — the evaluator will note if holdout predictions are present/absent but does not require them.
+> **Historical `_holdout` folds**: their labels are public. They remain optional
+> in submissions for backward compatibility with the original Tier 1 track,
+> but scores on them are retrospective open validation, not blind evaluation.
+> See [`BENCHMARK_INTEGRITY.md`](BENCHMARK_INTEGRITY.md).
 
 ---
 
@@ -177,7 +180,7 @@ tasks/
       train_y.csv                     ← training labels (1=Flight, 0=Ground)
       train_meta.csv                  ← training sample metadata
       test_X.csv                      ← test features (PUBLIC)
-      test_y.csv                      ← test labels (PUBLIC for LOMO; PRIVATE for held-out)
+      test_y.csv                      ← test labels (PUBLIC for all released folds)
       test_meta.csv                   ← test sample metadata
       selected_genes.txt              ← gene list (top 75th percentile variance)
     fold_MHU-2_test/

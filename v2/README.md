@@ -118,7 +118,6 @@ v2/
 │   ├── V2_PAPER_CONTENT.md         ← v2 manuscript draft
 │   ├── DATA_CATALOG_V2.md          ← v2 data sources (JAXA, I4, RRRM-1)
 │   ├── V2_SUPPLEMENT_TABLES.md     ← Supplementary tables
-│   ├── RRRM1_DOWNSTREAM_PLAN_2026-03-11.md ← F2 benchmark task definitions
 │   ├── RRRM1_SRX_CONDITION_MAP.csv ← SRX → FLT/GC mapping (32 samples)
 │   ├── RRRM1_BROAD_ANNOTATION_SUMMARY_2026-03-12.md
 │   └── RRRM1_TISSUE_MARKERS_2026-03-12.md

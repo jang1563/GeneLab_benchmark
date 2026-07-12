@@ -7,14 +7,12 @@ Status: **v1–v7 Complete**
 
 Maintainer / citation author: JangKeun Kim, Weill Cornell Medicine.
 
-Canonical v7.1 documentation source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
+Canonical v7.1 documentation source: [`CANONICAL_RESULTS_V7_1.md`](CANONICAL_RESULTS_V7_1.md) records the locked scope accounting, headline result table, and v8 boundary notes for public release text.
 
-Transparency card pack: [`docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](docs/SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) maps the system card, evaluation card, release readiness card, and claim register for v1-v7 results plus v8/v9 draft-surface boundaries.
-
-Portfolio brief: [`docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md`](docs/SPACEBIOBENCH_PORTFOLIO_BRIEF.md) summarizes the project contribution for portfolio and external-review contexts.
+Transparency card pack: [`SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md`](SPACEBIOBENCH_TRANSPARENCY_CARD_PACK.md) maps the system card, evaluation card, release readiness card, and claim register for v1-v7 results plus v8/v9 draft-surface boundaries.
 
 [![Dataset on HuggingFace](https://img.shields.io/badge/HuggingFace-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](../LICENSE)
 
 ---
 
@@ -59,7 +57,7 @@ GeneLab Benchmark provides standardized tasks for evaluating how well machine le
 
 **Best overall classifier**: PCA-LR (gene mean AUROC 0.776), ElasticNet-LR 2nd (0.762)
 
-Canonical v7.1 result source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_RESULTS_V7_1.md). Keep README, Hugging Face card, and paper outline synchronized with that table.
+Canonical v7.1 result source: [`CANONICAL_RESULTS_V7_1.md`](CANONICAL_RESULTS_V7_1.md). Keep README, Hugging Face card, and paper outline synchronized with that table.
 
 | Tissue | Best AUROC | Best Method | Best Feature | Significant (p<0.05) |
 |--------|-----------|-------------|-------------|---------------------|
@@ -130,11 +128,15 @@ Canonical v7.1 result source: [`docs/CANONICAL_RESULTS_V7_1.md`](docs/CANONICAL_
 
 **FM verdict**: All foundation models underperform classical ML. The scGPT and Mouse-Geneformer rows report 6-tissue v1 means against the 0.758 PCA-LR baseline; the scFoundation and UCE rows show their best single-tissue v3 results, and their full cross-tissue means also remain below baseline. †Best single-tissue AUROC shown; cross-tissue means are lower.
 
-### Independent Held-Out Validation
+### Retrospective Open Validation
+
+The historical `_holdout` directories include public test labels. These rows
+reproduce mission-separated analyses but are not blind evaluations; see
+`docs/BENCHMARK_INTEGRITY.md`.
 
 | Tissue | Mission | AUROC | 95% CI | p-value | Duration | n_test |
 |--------|---------|-------|--------|---------|---------|--------|
-| Thymus | RR-23 | **0.905** | [0.672, 1.000] | 0.005 | 30 days | 18 |
+| Thymus | RR-23 | **0.905** | [0.672, 1.000] | 0.005 | 30 days | 16 |
 | Skin | RR-7 | **0.885** | [0.745, 0.986] | <0.001 | 75 days | 30 |
 
 ---
@@ -285,7 +287,7 @@ print(f"Train: {train_X.shape}, Test: {test_X.shape}")  # (72, 20110), (30, 2011
 
 ### Option B -- Reproduce from OSDR raw data
 
-Requires R 4.2+ with Bioconductor. See [docs/r_dependencies.md](docs/r_dependencies.md).
+Requires R 4.2+ with Bioconductor. See [r_dependencies.md](r_dependencies.md).
 
 ```bash
 # 1. Download raw data from NASA OSDR
@@ -317,7 +319,7 @@ All three conditions must pass for a GO decision.
 
 ### Submission Format
 
-Prepare a JSON file (see [docs/submission_format.md](docs/submission_format.md)):
+Prepare a JSON file (see [submission_format.md](submission_format.md)):
 
 ```json
 {

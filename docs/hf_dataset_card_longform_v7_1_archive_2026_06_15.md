@@ -89,14 +89,14 @@ genelab-benchmark/
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
 │   ├── fold_RR-9_test/
-│   └── fold_RR-23_holdout/       <- Independent held-out validation
+│   └── fold_RR-23_holdout/       <- Retrospective open validation; labels public
 │
 ├── A5_skin_lomo/                 <- 3 LOMO missions, 102 samples
 │   ├── task_info.json
 │   ├── fold_MHU-2_test/
 │   ├── fold_RR-6_test/
 │   ├── fold_RR-7_test/
-│   └── fold_RR-7_holdout/        <- Independent held-out validation
+│   └── fold_RR-7_holdout/        <- Retrospective open validation; labels public
 │
 ├── A6_eye_lomo/                  <- 3 missions, 37 samples
 │   ├── task_info.json
@@ -177,7 +177,7 @@ scGPT and Mouse-Geneformer report 6-tissue v1 means; scFoundation and UCE rows s
 
 - Permutation control: AUROC = 0.50 +/- 0.03 (label shuffling)
 - Housekeeping gene control: AUROC = 0.49-0.55 (non-informative features)
-- Held-out validation: Thymus RR-23 (0.905), Skin RR-7 (0.885)
+- Retrospective open validation: Thymus RR-23 (0.905), Skin RR-7 (0.885); labels are public, so these are not blind holdouts.
 
 ---
 

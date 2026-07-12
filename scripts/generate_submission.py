@@ -173,7 +173,8 @@ def generate_a_submission(task_id: str, tissue_suffix: str,
     """
     LOMO: train PCA-LR on each fold_*_test.
     Returns ({fold_key: {sample: prob}}, resolved_task_dir).
-    Only _test folds are included (holdout folds without test_y are skipped).
+    Only the core `_test` folds are included. Historical `_holdout` directories
+    are omitted from the default track even though their labels are now public.
     """
     task_dir = resolve_a_task_dir(task_id, tissue_suffix, task_dir_name=task_dir_name)
     fold_dirs = resolve_a_fold_dirs(task_dir, fold_name=fold_name)
