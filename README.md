@@ -7,6 +7,7 @@ tissues, and model systems.**
 Former public name: **GeneLab Benchmark**. The v1-v7 historical benchmark
 surface keeps that name; SpaceBio-Bench is the forward-looking platform name.
 
+[![CI](https://github.com/jang1563/GeneLab_benchmark/actions/workflows/regression-tests.yml/badge.svg?branch=main)](https://github.com/jang1563/GeneLab_benchmark/actions/workflows/regression-tests.yml)
 [![Dataset on Hugging Face](https://img.shields.io/badge/Hugging%20Face-Dataset-yellow)](https://huggingface.co/datasets/jang1563/genelab-benchmark)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
