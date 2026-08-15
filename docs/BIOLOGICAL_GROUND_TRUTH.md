@@ -14,13 +14,20 @@ External validation of GeneLab_benchmark results against published spaceflight b
 
 ## Overall Validation Metrics
 
+> **Revised 2026-08-14.** The precomputed fGSEA NES files used the inverted
+> (ground-control-first) sign convention until 2026-08-14; direction
+> concordance computed from them was exactly complementary to the true value
+> (previously reported 71.7% = 1 − 28.3%). The table below uses the corrected
+> flight-positive files (see `processed/fgsea/README.md`). Gene-overlap
+> metrics are direction-free and unchanged.
+
 | Metric | Value | Interpretation |
 |---|---|---|
-| Pathway direction concordance | 71.7% (5 tissues) | STRONG agreement |
+| Pathway direction concordance | 28.3% (5 tissues) | WEAK agreement — GeneLab mission NES directions frequently oppose Cell 2020 expectations |
 | Gene SHAP top-50 overlap | 10.7% (3 tissues with SHAP) | 47x above chance |
-| Tissues with 100% pathway concordance | 2/5 (thymus, gastrocnemius) | |
-| Tissues with partial concordance | 2/5 (liver 67%, eye 67%) | |
-| Tissues with poor concordance | 1/5 (kidney 25%) | Mission-specific variation |
+| Tissues with high concordance | 1/5 (kidney 75%) | |
+| Tissues with partial concordance | 2/5 (liver 33%, eye 33%) | e.g., liver FAO/OXPHOS up in flight matches, but immune pathways are activated, not suppressed |
+| Tissues with poor concordance | 2/5 (thymus 0%, gastrocnemius 0%) | Mission-specific variation; consistent with near-random cross-mission gene direction agreement |
 
 ---
 

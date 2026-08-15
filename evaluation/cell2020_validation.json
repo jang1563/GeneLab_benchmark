@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-01T15:57:44.322607",
+  "timestamp": "2026-08-14T23:17:52.798950",
   "description": "External validation against published spaceflight biology",
   "references": [
     "Beheshti et al., Cell 2020 (PMID: 33242417)",
@@ -11,9 +11,9 @@
       "status": "VALIDATED",
       "n_expected": 9,
       "n_found": 9,
-      "concordant": 6,
-      "discordant": 3,
-      "concordance_rate": 0.667,
+      "concordant": 3,
+      "discordant": 6,
+      "concordance_rate": 0.333,
       "expected_in_top5": 0,
       "expected_in_top10": 0,
       "top5_pathways": [
@@ -21,62 +21,62 @@
         "UNFOLDED_PROTEIN_RESPONSE",
         "ANGIOGENESIS",
         "COAGULATION",
-        "ALLOGRAFT_REJECTION"
+        "COMPLEMENT"
       ],
       "details": [
         {
           "pathway": "OXIDATIVE_PHOSPHORYLATION",
           "expected": "UP",
-          "observed_nes": 0.615,
-          "concordant": true
+          "observed_nes": -0.623,
+          "concordant": false
         },
         {
           "pathway": "FATTY_ACID_METABOLISM",
           "expected": "UP",
-          "observed_nes": 0.288,
-          "concordant": true
+          "observed_nes": -0.296,
+          "concordant": false
         },
         {
           "pathway": "ADIPOGENESIS",
           "expected": "UP",
-          "observed_nes": 0.341,
-          "concordant": true
+          "observed_nes": -0.347,
+          "concordant": false
         },
         {
           "pathway": "BILE_ACID_METABOLISM",
           "expected": "UP",
-          "observed_nes": 0.735,
-          "concordant": true
+          "observed_nes": -0.742,
+          "concordant": false
         },
         {
           "pathway": "CHOLESTEROL_HOMEOSTASIS",
           "expected": "UP",
-          "observed_nes": -0.124,
-          "concordant": false
+          "observed_nes": 0.117,
+          "concordant": true
         },
         {
           "pathway": "XENOBIOTIC_METABOLISM",
           "expected": "UP",
-          "observed_nes": 0.093,
-          "concordant": true
+          "observed_nes": -0.092,
+          "concordant": false
         },
         {
           "pathway": "PEROXISOME",
           "expected": "UP",
-          "observed_nes": 0.687,
-          "concordant": true
+          "observed_nes": -0.697,
+          "concordant": false
         },
         {
           "pathway": "INFLAMMATORY_RESPONSE",
           "expected": "DOWN",
-          "observed_nes": 0.778,
-          "concordant": false
+          "observed_nes": -0.775,
+          "concordant": true
         },
         {
           "pathway": "INTERFERON_GAMMA_RESPONSE",
           "expected": "DOWN",
-          "observed_nes": 0.72,
-          "concordant": false
+          "observed_nes": -0.716,
+          "concordant": true
         }
       ],
       "source": "Cell 2020 (Beheshti et al.), GLDS liver analyses"
@@ -85,9 +85,9 @@
       "status": "VALIDATED",
       "n_expected": 7,
       "n_found": 7,
-      "concordant": 7,
-      "discordant": 0,
-      "concordance_rate": 1.0,
+      "concordant": 0,
+      "discordant": 7,
+      "concordance_rate": 0.0,
       "expected_in_top5": 4,
       "expected_in_top10": 5,
       "top5_pathways": [
@@ -101,44 +101,44 @@
         {
           "pathway": "E2F_TARGETS",
           "expected": "UP",
-          "observed_nes": 3.201,
-          "concordant": true
+          "observed_nes": -3.208,
+          "concordant": false
         },
         {
           "pathway": "G2M_CHECKPOINT",
           "expected": "UP",
-          "observed_nes": 3.069,
-          "concordant": true
+          "observed_nes": -3.075,
+          "concordant": false
         },
         {
           "pathway": "MITOTIC_SPINDLE",
           "expected": "UP",
-          "observed_nes": 1.948,
-          "concordant": true
+          "observed_nes": -1.955,
+          "concordant": false
         },
         {
           "pathway": "MYC_TARGETS_V1",
           "expected": "UP",
-          "observed_nes": 2.598,
-          "concordant": true
+          "observed_nes": -2.589,
+          "concordant": false
         },
         {
           "pathway": "INTERFERON_GAMMA_RESPONSE",
           "expected": "DOWN",
-          "observed_nes": -2.217,
-          "concordant": true
+          "observed_nes": 2.39,
+          "concordant": false
         },
         {
           "pathway": "INTERFERON_ALPHA_RESPONSE",
           "expected": "DOWN",
-          "observed_nes": -2.198,
-          "concordant": true
+          "observed_nes": 2.293,
+          "concordant": false
         },
         {
           "pathway": "ALLOGRAFT_REJECTION",
           "expected": "DOWN",
-          "observed_nes": -1.311,
-          "concordant": true
+          "observed_nes": 1.409,
+          "concordant": false
         }
       ],
       "source": "Cell 2020, GLDS thymus analyses (thymocyte proliferation/involution)"
@@ -147,9 +147,9 @@
       "status": "VALIDATED",
       "n_expected": 4,
       "n_found": 4,
-      "concordant": 4,
-      "discordant": 0,
-      "concordance_rate": 1.0,
+      "concordant": 0,
+      "discordant": 4,
+      "concordance_rate": 0.0,
       "expected_in_top5": 0,
       "expected_in_top10": 1,
       "top5_pathways": [
@@ -163,26 +163,26 @@
         {
           "pathway": "OXIDATIVE_PHOSPHORYLATION",
           "expected": "UP",
-          "observed_nes": 0.169,
-          "concordant": true
+          "observed_nes": -0.166,
+          "concordant": false
         },
         {
           "pathway": "MYOGENESIS",
           "expected": "UP",
-          "observed_nes": 0.123,
-          "concordant": true
+          "observed_nes": -0.114,
+          "concordant": false
         },
         {
           "pathway": "MTORC1_SIGNALING",
           "expected": "DOWN",
-          "observed_nes": -0.174,
-          "concordant": true
+          "observed_nes": 0.182,
+          "concordant": false
         },
         {
           "pathway": "PI3K_AKT_MTOR_SIGNALING",
           "expected": "DOWN",
-          "observed_nes": -1.212,
-          "concordant": true
+          "observed_nes": 1.223,
+          "concordant": false
         }
       ],
       "source": "Cell 2020, muscle atrophy literature (MuRF1, MAFbx pathway)"
@@ -191,42 +191,42 @@
       "status": "VALIDATED",
       "n_expected": 4,
       "n_found": 4,
-      "concordant": 1,
-      "discordant": 3,
-      "concordance_rate": 0.25,
+      "concordant": 3,
+      "discordant": 1,
+      "concordance_rate": 0.75,
       "expected_in_top5": 2,
       "expected_in_top10": 2,
       "top5_pathways": [
         "MITOTIC_SPINDLE",
         "APICAL_JUNCTION",
-        "CHOLESTEROL_HOMEOSTASIS",
         "ESTROGEN_RESPONSE_EARLY",
+        "CHOLESTEROL_HOMEOSTASIS",
         "MTORC1_SIGNALING"
       ],
       "details": [
         {
           "pathway": "MTORC1_SIGNALING",
           "expected": "UP",
-          "observed_nes": -0.958,
-          "concordant": false
+          "observed_nes": 0.966,
+          "concordant": true
         },
         {
           "pathway": "CHOLESTEROL_HOMEOSTASIS",
           "expected": "UP",
-          "observed_nes": -1.442,
-          "concordant": false
+          "observed_nes": 1.445,
+          "concordant": true
         },
         {
           "pathway": "REACTIVE_OXYGEN_SPECIES_PATHWAY",
           "expected": "UP",
-          "observed_nes": 0.175,
-          "concordant": true
+          "observed_nes": -0.183,
+          "concordant": false
         },
         {
           "pathway": "INTERFERON_GAMMA_RESPONSE",
           "expected": "DOWN",
-          "observed_nes": 0.344,
-          "concordant": false
+          "observed_nes": -0.34,
+          "concordant": true
         }
       ],
       "source": "Cell 2020, OSD-253 kidney analysis (NRF2 pathway)"
@@ -235,9 +235,9 @@
       "status": "VALIDATED",
       "n_expected": 3,
       "n_found": 3,
-      "concordant": 2,
-      "discordant": 1,
-      "concordance_rate": 0.667,
+      "concordant": 1,
+      "discordant": 2,
+      "concordance_rate": 0.333,
       "expected_in_top5": 1,
       "expected_in_top10": 2,
       "top5_pathways": [
@@ -251,20 +251,20 @@
         {
           "pathway": "OXIDATIVE_PHOSPHORYLATION",
           "expected": "UP",
-          "observed_nes": 2.905,
-          "concordant": true
+          "observed_nes": -2.882,
+          "concordant": false
         },
         {
           "pathway": "REACTIVE_OXYGEN_SPECIES_PATHWAY",
           "expected": "UP",
-          "observed_nes": 1.599,
-          "concordant": true
+          "observed_nes": -1.617,
+          "concordant": false
         },
         {
           "pathway": "ANGIOGENESIS",
           "expected": "DOWN",
-          "observed_nes": 1.197,
-          "concordant": false
+          "observed_nes": -1.21,
+          "concordant": true
         }
       ],
       "source": "Cell 2020, retina OXPHOS dominance across missions"
@@ -467,18 +467,18 @@
     },
     "kidney": {
       "status": "NO_SHAP_DATA",
-      "file": "evaluation/A3_shap_rf.json"
+      "file": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/evaluation/A3_shap_rf.json"
     },
     "eye": {
       "status": "NO_SHAP_DATA",
-      "file": "evaluation/A6_shap_rf.json"
+      "file": "/Users/jak4013/Dropbox/Bioinformatics/Claude/GeneLab_benchmark/evaluation/A6_shap_rf.json"
     }
   },
   "summary": {
-    "pathway_mean_concordance": 0.717,
+    "pathway_mean_concordance": 0.283,
     "pathway_n_tissues": 5,
-    "pathway_verdict": "STRONG",
-    "pathway_interpretation": "Mean direction concordance 71.7%: Our fGSEA results strongly agree with published spaceflight pathway biology.",
+    "pathway_verdict": "WEAK",
+    "pathway_interpretation": "Mean direction concordance 28.3%: Limited agreement. May reflect different analysis methods or datasets.",
     "gene_mean_overlap": 0.107,
     "gene_n_tissues": 3,
     "gene_interpretation": "Mean overlap rate 10.7% vs chance expectation ~0.2%. Enrichment ratio: 47.1x."

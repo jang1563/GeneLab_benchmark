@@ -7,20 +7,20 @@
       "n_pathways": 192,
       "nes_pairs": {
         "MHU-2_RR-1": -0.016,
-        "MHU-2_RR-3": 0.069,
-        "MHU-2_RR-6": 0.147,
-        "MHU-2_RR-8": 0.287,
-        "MHU-2_RR-9": 0.416,
-        "RR-1_RR-3": 0.393,
-        "RR-1_RR-6": -0.226,
-        "RR-1_RR-8": -0.041,
-        "RR-1_RR-9": 0.22,
+        "MHU-2_RR-3": 0.07,
+        "MHU-2_RR-6": 0.148,
+        "MHU-2_RR-8": 0.288,
+        "MHU-2_RR-9": 0.419,
+        "RR-1_RR-3": 0.39,
+        "RR-1_RR-6": -0.222,
+        "RR-1_RR-8": -0.039,
+        "RR-1_RR-9": 0.223,
         "RR-3_RR-6": -0.258,
-        "RR-3_RR-8": 0.227,
-        "RR-3_RR-9": 0.073,
-        "RR-6_RR-8": 0.455,
-        "RR-6_RR-9": 0.076,
-        "RR-8_RR-9": 0.07
+        "RR-3_RR-8": 0.235,
+        "RR-3_RR-9": 0.071,
+        "RR-6_RR-8": 0.45,
+        "RR-6_RR-9": 0.068,
+        "RR-8_RR-9": 0.065
       },
       "transfer_auroc": 0.577,
       "transfer_ci": [
@@ -30,11 +30,11 @@
       "n_missions_transfer": 6
     },
     "gastrocnemius": {
-      "nes_mean_r": -0.206,
+      "nes_mean_r": -0.204,
       "n_missions_nes": 2,
       "n_pathways": 215,
       "nes_pairs": {
-        "RR-1_RR-9": -0.206
+        "RR-1_RR-9": -0.204
       },
       "transfer_auroc": 0.801,
       "transfer_ci": [
@@ -49,9 +49,9 @@
       "n_missions_nes": 3,
       "n_pathways": 218,
       "nes_pairs": {
-        "RR-1_RR-3": 0.021,
+        "RR-1_RR-3": 0.017,
         "RR-1_RR-7": 0.106,
-        "RR-3_RR-7": 0.44
+        "RR-3_RR-7": 0.444
       },
       "transfer_auroc": 0.555,
       "transfer_ci": [
@@ -61,13 +61,16 @@
       "n_missions_transfer": 3
     },
     "thymus": {
-      "nes_mean_r": 0.532,
-      "n_missions_nes": 3,
+      "nes_mean_r": 0.62,
+      "n_missions_nes": 4,
       "n_pathways": 214,
       "nes_pairs": {
-        "MHU-2_RR-6": 0.395,
-        "MHU-2_RR-9": 0.732,
-        "RR-6_RR-9": 0.469
+        "MHU-1_MHU-2": 1.0,
+        "MHU-1_RR-6": 0.395,
+        "MHU-1_RR-9": 0.733,
+        "MHU-2_RR-6": 0.393,
+        "MHU-2_RR-9": 0.733,
+        "RR-6_RR-9": 0.467
       },
       "transfer_auroc": 0.86,
       "transfer_ci": [
@@ -77,13 +80,13 @@
       "n_missions_transfer": 4
     },
     "eye": {
-      "nes_mean_r": 0.315,
+      "nes_mean_r": 0.314,
       "n_missions_nes": 3,
-      "n_pathways": 222,
+      "n_pathways": 221,
       "nes_pairs": {
-        "RR-1_RR-3": 0.072,
-        "RR-1_OSD-397": 0.5,
-        "RR-3_OSD-397": 0.373
+        "OSD-397_RR-1": 0.5,
+        "OSD-397_RR-3": 0.367,
+        "RR-1_RR-3": 0.074
       },
       "transfer_auroc": 0.754,
       "transfer_ci": [
@@ -97,9 +100,9 @@
       "n_missions_nes": 3,
       "n_pathways": 222,
       "nes_pairs": {
-        "MHU-2_dorsal_MHU-2_femoral": 0.496,
+        "MHU-2_dorsal_MHU-2_femoral": 0.497,
         "MHU-2_dorsal_RR-6": -0.147,
-        "MHU-2_femoral_RR-6": 0.424
+        "MHU-2_femoral_RR-6": 0.423
       },
       "transfer_auroc": 0.7718,
       "transfer_ci": [
@@ -120,12 +123,12 @@
       "gastrocnemius"
     ],
     "nes_values": [
-      0.532,
-      0.315,
+      0.62,
+      0.314,
       0.258,
       0.189,
       0.126,
-      -0.206
+      -0.204
     ],
     "auroc_values": [
       0.86,
@@ -137,5 +140,5 @@
     ],
     "note": "Gastrocnemius outlier: only 2 fGSEA missions (RR-5 no DGE). Excluding gastrocnemius and skin outliers where applicable: rank-order correlation between NES conservation and transfer AUROC remains strong (see key_finding)."
   },
-  "timestamp": "2026-03-08T16:57:23.613445"
+  "timestamp": "2026-08-14T23:16:16.060122"
 }

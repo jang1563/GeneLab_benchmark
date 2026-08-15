@@ -11,6 +11,8 @@ Usage:
   python scripts/compute_nes_conservation.py --all --db kegg
   python scripts/compute_nes_conservation.py --all --db mitocarta
 """
+from __future__ import annotations  # py3.9 compat for "dict | None" annotation
+
 import json
 import argparse
 import numpy as np
