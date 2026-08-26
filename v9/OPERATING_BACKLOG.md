@@ -354,6 +354,59 @@ Done:
   `docs/V9_PUBLIC_BULK_ALPHA_FREEZE_GAP_MATRIX_REVIEW.md`. It records 6 pass
   rows, 2 blockers, 2 needs-update rows, 3 allowed current claims, and 3
   prohibited release claims.
+- Public bulk metadata snapshot decision generated under
+  `v9/reports/public_bulk_alpha_snapshot_decision/` and
+  `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`. It selects a
+  metadata-only alpha snapshot with explicit payload blockers, defers
+  payload-mirror-first to a later freeze block, and sets the claim boundary to
+  `metadata_only_public_bulk_alpha_no_payload_release`.
+- Public bulk dataset-card/Data Package alpha boundary applied in
+  `docs/v9_hf_dataset_card.md`, `v9/datapackage.draft.json`, and
+  `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md`. The draft
+  descriptor now has 21 resources, including 10 alpha-boundary metadata tables,
+  and records `spacebio_bench:release_status = metadata_alpha_not_frozen`.
+- V9-SC-001 RRRM single-cell asset inventory generated under
+  `v9/sc_spaceflight/`. It records 54 legacy RRRM/single-cell asset paths, 41
+  RRRM-1 paths, 13 RRRM-2 paths, 0 local `.h5ad`/`.loom`/`.mtx` payload files,
+  0 v9 `sc_spaceflight` manifests, and keeps legacy scores as reference-only.
+- V9-SC-002 AnnData task manifest draft generated under
+  `v9/sc_spaceflight/`. It selects OSD-918 RRRM-1 blood as the first
+  non-runnable `sc_spaceflight` contract, records 8 samples, 4 Flight, 4
+  Ground, 4,395 QC cells, 19,064 genes, 0 local h5ad payloads, and the claim
+  boundary `anndata_manifest_contract_only_no_local_payload_or_score_claim`.
+- V9-SC-003 `genelab_sc` metric specification generated under
+  `v9/sc_spaceflight/` and `docs/V9_SC_METRIC_SPEC.md`. It fixes six metric
+  formulas, seven required-input contracts, six skip-policy rows, and the claim
+  boundary `genelab_sc_metric_spec_only_no_evaluator_or_score_claim`.
+- V9-SC-004 AnnData payload staging and obs/var audit plan generated under
+  `v9/sc_spaceflight/` and `docs/V9_SC_PAYLOAD_STAGING_PLAN.md`. It selects
+  `v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad` as
+  the canonical future payload target, records 4 candidate routes, 27
+  obs/var/uns/matrix audit requirements, 7 staging gates, and keeps the claim
+  boundary `payload_staging_plan_only_no_local_payload_or_score_claim`.
+- V9-SC-005 AnnData obs/var audit implementation generated under
+  `v9/sc_spaceflight/` and `docs/V9_SC_OBS_VAR_AUDIT.md`. It implements the
+  h5ad reader/auditor gate and currently emits a clean
+  `obs_var_audit_skipped_no_local_payload` report: 27 skipped requirement rows,
+  17 blocker rows, missing canonical payload, no checksum, and no score claim.
+- V9-SC-006 payload staging execution generated under `v9/sc_spaceflight/` and
+  `docs/V9_SC_PAYLOAD_STAGING_EXECUTION.md`. It records that the canonical
+  RRRM-1 blood h5ad is still absent, no legacy h5ad was staged, the existing
+  obs/var audit remains skip-only, and the selected route is STARsolo per-SRX
+  regeneration or annotated h5ad restaging with the claim boundary
+  `payload_staging_execution_no_payload_or_score_claim`.
+- V9-SC-006b external payload availability generated under
+  `v9/sc_spaceflight/` and `docs/V9_SC_EXTERNAL_PAYLOAD_AVAILABILITY.md`. It
+  checked two external base scopes and found no annotated h5ad, labeled h5ad,
+  or complete OSD-918 blood STARsolo matrix bundles.
+- V9-SC-006c OSDR processed-payload discovery generated under
+  `v9/sc_spaceflight/` and `docs/V9_SC_OSDR_PROCESSED_PAYLOAD_DISCOVERY.md`.
+  The official OSD-918 file list records 19 files: 1 metadata file, 1 raw
+  checksum manifest, 1 raw MultiQC report, and 16 raw FASTQ files covering 8/8
+  expected blood SRX pairs, but no processed h5ad, processed STARsolo matrix
+  bundle, or processed checksum manifest. Canonical copy and regeneration
+  remain blocked; owner scratch path intake or raw FASTQ regeneration
+  feasibility is the next single-cell block.
 - Purpose-drift audit written at
   `docs/V9_PURPOSE_DRIFT_AUDIT_2026_05_26.md`. It concludes that v9 remains on
   mission but has a moderate sequencing risk: OSD-120 is aligned as a
@@ -368,9 +421,9 @@ Current test baseline:
 python -m unittest discover -s tests
 ```
 
-Expected status after V9-BULK-ALPHA-001 public bulk alpha freeze-gap matrix:
+Expected status after V9-SC-006 payload staging execution:
 
-- 220 tests passing.
+- 242 tests passing.
 
 Known boundary:
 
@@ -455,15 +508,29 @@ Done when:
 ## Active next task
 
 Continue with
-`V9-BULK-ALPHA-002: metadata-only alpha snapshot decision`.
+`V9-SC-006d: owner scratch path intake or raw FASTQ regeneration feasibility decision`.
 Treat the OSD-120 metadata branch as closed unless explicit owner-supplied
-release metadata appears. The next block should decide whether a metadata-only
-public bulk alpha snapshot is acceptable with explicit payload-hash blockers,
-or whether payload mirroring and local hash verification must precede any alpha
-wording.
+release metadata appears. The public bulk metadata alpha boundary is now
+explicit, V9-SC-001 has inventoried the legacy RRRM assets, and V9-SC-002 has
+drafted the first non-runnable AnnData task contract. V9-SC-003 has fixed the
+`genelab_sc` formulas, required inputs, and skip policy. V9-SC-004 has fixed
+the canonical future h5ad target plus the obs/var/uns audit gate without
+claiming local payload availability. V9-SC-005 implemented the audit gate and
+confirmed the current state as a skip-only report because the canonical h5ad is
+missing. V9-SC-006 checked the staging decision, found no canonical/legacy
+h5ad staged in the current repo context, and fixed the regeneration gate.
+V9-SC-006b checked two external base scopes and found no annotated h5ad, labeled
+h5ad, or complete OSD-918 blood STARsolo matrix bundles. V9-SC-006c queried
+the official OSDR OSD-918 file-list endpoint and found 19 files: 1 metadata
+file, 1 raw checksum manifest, 1 raw MultiQC report, and 16 raw FASTQ files
+covering 8/8 expected blood SRX pairs, but no processed h5ad, no processed
+STARsolo matrix bundle, and no processed checksum manifest. The next block
+should either intake an owner-supplied annotated h5ad or all-eight-SRX STARsolo
+path, or make a separate raw FASTQ regeneration feasibility decision before
+copying or regenerating anything into the canonical v9 payload path.
 `V9-THEN-005: RO-Crate export design` remains open for the release-packaging
-lane, but the active scientific lane now returns to multispecies expansion
-because the organoid diagnostic family has a coherent draft-alpha boundary.
+lane, and the deferred public bulk payload-mirror-first lane remains a future
+freeze/release block.
 
 ## Next: public bulk benchmark alpha
 
@@ -661,9 +728,14 @@ Actual output:
 
 - Draft package boundary separates metadata spine, public bulk payload bundle,
   benchmark output bundle, and deferred/excluded artifacts.
-- `v9/datapackage.draft.json` describes 11 resources.
+- `v9/datapackage.draft.json` describes 21 resources after
+  V9-BULK-ALPHA-003, including 10 alpha-boundary metadata resources.
 - The descriptor includes 8 task manifests, 24 prediction CSVs, 24 metrics JSON
   files, and 24 run-manifest JSON files as file collections.
+- The descriptor records `spacebio_bench:release_status =
+  metadata_alpha_not_frozen` and
+  `spacebio_bench:claim_boundary =
+  metadata_only_public_bulk_alpha_no_payload_release`.
 - Large public bulk fold payload files remain indexed by `v9/task_data_index.csv`
   but are not payload-hashed yet.
 
@@ -757,6 +829,8 @@ Done when:
 
 ### V9-SC-001: RRRM asset inventory
 
+Status: complete as of 2026-05-27.
+
 Goal:
 
 Find every RRRM-1/RRRM-2 scRNA-seq input, script, result, and doc in the repo.
@@ -764,8 +838,25 @@ Find every RRRM-1/RRRM-2 scRNA-seq input, script, result, and doc in the repo.
 Output:
 
 - `v9/sc_spaceflight/asset_inventory.md`
+- `v9/sc_spaceflight/asset_inventory_summary.csv`
+- `v9/sc_spaceflight/asset_inventory.csv`
+- `v9/sc_spaceflight/local_payload_scan.csv`
+
+Result:
+
+- 54 legacy RRRM/single-cell asset paths indexed.
+- 41 RRRM-1 asset paths and 13 RRRM-2 asset paths.
+- 8 documentation rows, 31 script rows, 5 evaluation/config rows, 2 figure
+  rows, 2 processed-summary rows, and 6 generated-cache rows.
+- 0 local `.h5ad`, `.loom`, or `.mtx` payload files found.
+- 0 v9 `sc_spaceflight` task manifests found.
+- `genelab_sc` metric profile is present.
+- Claim boundary:
+  `single_cell_asset_inventory_only_no_v9_sc_task_or_payload_claim`.
 
 ### V9-SC-002: AnnData task manifest draft
+
+Status: complete as of 2026-05-27.
 
 Goal:
 
@@ -774,8 +865,28 @@ Draft one `sc_spaceflight` manifest without requiring full evaluator support.
 Output:
 
 - `v9/sc_spaceflight/task_manifests/*.json`
+- `v9/sc_spaceflight/anndata_manifest_draft_summary.csv`
+- `v9/sc_spaceflight/anndata_manifest_blockers.csv`
+- `v9/sc_spaceflight/ANNDATA_MANIFEST_DRAFT_REVIEW.md`
+
+Result:
+
+- Draft task id: `draft_rrrm1_blood_single_cell_spaceflight`.
+- Selected source: OSD-918 RRRM-1 blood.
+- Manifest status: `draft_non_runnable_contract`.
+- Runnable status: `blocked_no_local_anndata_payload`.
+- Candidate split: leave-one-source-name/sample out across 8 RRRM-1 blood
+  samples.
+- Label distribution: 4 Flight and 4 Ground samples.
+- QC evidence: 4,395 cells and 19,064 genes.
+- Blockers: local AnnData payload absent, obs/var contract unverified,
+  `genelab_sc` formulas pending, and legacy scores reference-only.
+- Claim boundary:
+  `anndata_manifest_contract_only_no_local_payload_or_score_claim`.
 
 ### V9-SC-003: `genelab_sc` metric specification
+
+Status: complete as of 2026-05-27.
 
 Goal:
 
@@ -784,6 +895,217 @@ Write formulas and required inputs before code.
 Output:
 
 - `docs/V9_SC_METRIC_SPEC.md`
+- `v9/sc_spaceflight/metric_spec_summary.csv`
+- `v9/sc_spaceflight/metric_spec_metrics.csv`
+- `v9/sc_spaceflight/metric_spec_required_inputs.csv`
+- `v9/sc_spaceflight/metric_spec_skip_policy.csv`
+
+Result:
+
+- Profile: `genelab_sc`.
+- Metrics specified: 6.
+- Primary-after-payload-freeze metrics: `state_label_auroc`,
+  `state_label_auprc`.
+- Diagnostic metrics: `mission_discrimination`, `de_overlap_at_n`,
+  `de_direction_match`.
+- Optional metric: `expression_mae_when_applicable`.
+- Required-input contracts: 7.
+- Skip-policy rows: 6, all reporting `NA` plus a machine-readable reason.
+- Claim boundary: `genelab_sc_metric_spec_only_no_evaluator_or_score_claim`.
+- Next required block:
+  `V9-SC-004: AnnData payload staging and obs/var audit plan`.
+
+### V9-SC-004: AnnData payload staging and obs/var audit plan
+
+Status: complete as of 2026-05-27.
+
+Goal:
+
+Plan how to stage or regenerate the RRRM-1 blood AnnData payload and audit the
+required `obs`, `var`, and `uns` fields before any `genelab_sc` evaluator
+implementation.
+
+Output:
+
+- `docs/V9_SC_PAYLOAD_STAGING_PLAN.md`
+- `v9/sc_spaceflight/payload_staging_plan_summary.csv`
+- `v9/sc_spaceflight/payload_staging_candidates.csv`
+- `v9/sc_spaceflight/obs_var_audit_requirements.csv`
+- `v9/sc_spaceflight/payload_staging_actions.csv`
+
+Result:
+
+- Canonical future payload target:
+  `v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad`.
+- Local payload present: `false`.
+- Candidate routes: canonical v9 target, legacy annotated h5ad, legacy labeled
+  h5ad, and STARsolo per-SRX regeneration.
+- Audit requirements: 27 rows spanning required/recommended `obs`, `var`,
+  `uns`, matrix, layer, and raw object checks.
+- Staging gates: 7 ordered actions from payload staging through runnable
+  candidate promotion.
+- Claim boundary:
+  `payload_staging_plan_only_no_local_payload_or_score_claim`.
+- Next required block:
+  `V9-SC-005: AnnData obs/var audit implementation`.
+
+### V9-SC-005: AnnData obs/var audit implementation
+
+Status: complete as of 2026-05-27.
+
+Goal:
+
+Implement the actual h5ad audit script/API against the V9-SC-004 requirement
+table. It should skip cleanly while the canonical payload is absent and report
+machine-readable pass/fail/blocker rows once a local payload exists.
+
+Output:
+
+- `v9/sc_spaceflight/obs_var_audit_summary.csv`
+- `v9/sc_spaceflight/obs_var_audit_results.csv`
+- `v9/sc_spaceflight/payload_manifest.csv`
+- `docs/V9_SC_OBS_VAR_AUDIT.md`
+
+Result:
+
+- Audit status: `obs_var_audit_skipped_no_local_payload`.
+- Canonical payload path status: `missing`.
+- Requirement rows: 27.
+- Skipped rows: 27.
+- Blocker rows: 17.
+- Payload manifest records no checksum and no shape while the canonical h5ad is
+  absent.
+- Claim boundary: `obs_var_audit_skip_only_no_payload_or_score_claim`.
+- Next required block:
+  `V9-SC-006: canonical payload staging or RRRM-1 h5ad regeneration`.
+
+### V9-SC-006: canonical payload staging or RRRM-1 h5ad regeneration
+
+Status: complete as of 2026-06-03.
+
+Goal:
+
+Stage the annotated legacy RRRM-1 blood h5ad into the canonical v9 path if it
+exists locally, or prepare an explicit regeneration route from STARsolo per-SRX
+outputs and the RRRM-1 condition map. This block may require user/HPC approval
+if the payload is outside the repository or must be copied from scratch storage.
+
+Output:
+
+- `v9/sc_spaceflight/payload_staging_execution_summary.csv`
+- `v9/sc_spaceflight/payload_staging_execution_candidates.csv`
+- `v9/sc_spaceflight/payload_regeneration_steps.csv`
+- `docs/V9_SC_PAYLOAD_STAGING_EXECUTION.md`
+
+Result:
+
+- Decision status: `payload_staging_execution_blocked_no_candidate_payload`.
+- Canonical payload status: `planned_repo_path_absent`.
+- Existing payload manifest status: `missing`.
+- Existing obs/var audit status: `obs_var_audit_skipped_no_local_payload`.
+- Selected route: `prepare_regeneration_from_starsolo_per_srx`.
+- Candidate routes audited: 4.
+- Regeneration gates fixed: 5.
+- Claim boundary: `payload_staging_execution_no_payload_or_score_claim`.
+- Next required block:
+  `V9-SC-006b: locate STARsolo per-SRX matrices or restage annotated h5ad`.
+
+### V9-SC-006b: locate STARsolo per-SRX matrices or restage annotated h5ad
+
+Status: complete as of 2026-06-03.
+
+Goal:
+
+Find the missing RRRM-1 blood source payload outside the repo. Prefer restaging
+the annotated legacy h5ad. If it is unavailable, locate per-SRX STARsolo
+matrices for OSD-918 and regenerate the labeled and annotated h5ad before any
+canonical v9 copy.
+
+Output:
+
+- `v9/sc_spaceflight/external_payload_availability_summary.csv`
+- `v9/sc_spaceflight/external_payload_candidates.csv`
+- `v9/sc_spaceflight/external_starsolo_matrix_availability.csv`
+- `v9/sc_spaceflight/canonical_payload_copy_decision.csv`
+- `docs/V9_SC_EXTERNAL_PAYLOAD_AVAILABILITY.md`
+
+Result:
+
+- Decision status:
+  `external_payload_availability_blocked_no_h5ad_or_starsolo_matrices`.
+- Checked bases: 2.
+- Expected OSD-918 blood SRX rows: 8.
+- Matrix availability rows: 16.
+- Annotated h5ad found: `false`.
+- Labeled h5ad found: `false`.
+- Complete STARsolo SRX bundles: 0/8.
+- Canonical copy allowed: `false`.
+- Regeneration allowed: `false`.
+- Claim boundary: `external_payload_availability_no_payload_or_score_claim`.
+- Next required block:
+  `V9-SC-006c: OSDR processed payload discovery or owner scratch path request`.
+
+### V9-SC-006c: OSDR processed payload discovery or owner scratch path request
+
+Status: complete as of 2026-06-03.
+
+Goal:
+
+Resolve the missing RRRM-1 blood source-payload path without inferring payload
+availability. First check whether OSDR exposes a processed h5ad or STARsolo
+bundle for OSD-918 blood. If not, request or record an owner-supplied scratch
+path for the annotated h5ad or all eight per-SRX STARsolo matrix bundles.
+
+Output:
+
+- `v9/sc_spaceflight/osdr_processed_payload_discovery_summary.csv`
+- `v9/sc_spaceflight/osdr_file_discovery.csv`
+- `v9/sc_spaceflight/osdr_expected_srx_coverage.csv`
+- `v9/sc_spaceflight/owner_scratch_request.csv`
+- `v9/sc_spaceflight/processed_payload_deferral_decision.csv`
+- `docs/V9_SC_OSDR_PROCESSED_PAYLOAD_DISCOVERY.md`
+
+Result:
+
+- Decision status:
+  `osdr_processed_payload_unavailable_owner_scratch_request_required`.
+- OSDR file-list endpoint status: `ok`.
+- OSDR files listed: 19.
+- Metadata files: 1.
+- Raw checksum manifests: 1.
+- Raw MultiQC reports: 1.
+- Raw FASTQ files: 16.
+- Processed h5ad files: 0.
+- Processed STARsolo matrix rows: 0.
+- Processed checksum manifests: 0.
+- Expected OSD-918 blood SRX rows: 8.
+- Complete raw FASTQ pairs listed: 8/8.
+- Canonical copy allowed: `false`.
+- Regeneration allowed: `false`.
+- Owner scratch request required: `true`.
+- Claim boundary:
+  `osdr_processed_payload_discovery_only_no_payload_copy_or_score_claim`.
+- Next required block:
+  `V9-SC-006d: owner scratch path intake or raw FASTQ regeneration feasibility decision`.
+
+### V9-SC-006d: owner scratch path intake or raw FASTQ regeneration feasibility decision
+
+Status: active next.
+
+Goal:
+
+Intake a verified owner-supplied RRRM-1 blood annotated h5ad path or all eight
+per-SRX STARsolo matrix-bundle paths. If neither exists, decide whether raw
+FASTQ-to-STARsolo regeneration is feasible as a separate HPC block before any
+canonical v9 h5ad copy or evaluator work.
+
+Output:
+
+- owner scratch path intake result or explicit absence record
+- source payload hash/shape if a h5ad is supplied
+- all-eight-SRX STARsolo path manifest if matrix bundles are supplied
+- raw FASTQ regeneration feasibility decision if no processed payload exists
+- rerun `scripts/audit_v9_sc_obs_var.py` only after a payload exists
 
 ## Flagship branch B: radiation/stressor track
 
@@ -3455,7 +3777,7 @@ Result:
 
 ### V9-BULK-ALPHA-002: metadata-only alpha snapshot decision
 
-Status: active next.
+Status: complete as of 2026-05-27.
 
 Goal:
 
@@ -3478,6 +3800,78 @@ Done when:
 
 - The backlog and user-facing draft language name either metadata-only alpha
   with blockers or payload-mirror-first as the next path.
+
+Outputs:
+
+- `scripts/build_v9_public_bulk_alpha_snapshot_decision.py`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_option_matrix.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_claim_boundary.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_language_snippets.csv`
+- `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_next_actions.csv`
+- `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`
+
+Result:
+
+- Selected path: `metadata_only_alpha_snapshot`.
+- Deferred path: `payload_mirror_first`.
+- Metadata-only alpha is allowed because the scaffold has task/source/baseline
+  and checksum-manifest evidence, while the payload hash blocker is explicit.
+- Payload release is not allowed: 0/22 public bulk sources are locally
+  payload-hash verified.
+- Claim boundary: `metadata_only_public_bulk_alpha_no_payload_release`.
+- Next required block:
+  `V9-BULK-ALPHA-003: dataset card and Data Package alpha boundary update`.
+
+### V9-BULK-ALPHA-003: dataset card and Data Package alpha boundary update
+
+Status: complete as of 2026-05-27.
+
+Goal:
+
+Update the public bulk user-facing metadata so the selected metadata-only alpha
+snapshot is visible in `docs/v9_hf_dataset_card.md` and
+`v9/datapackage.draft.json` without implying a frozen payload release.
+
+Likely work:
+
+- Start from
+  `v9/reports/public_bulk_alpha_snapshot_decision/snapshot_decision_summary.csv`,
+  `snapshot_claim_boundary.csv`, `snapshot_language_snippets.csv`,
+  `snapshot_next_actions.csv`, and
+  `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md`.
+- Add the gap-matrix and snapshot-decision tables as metadata resources in the
+  draft Data Package.
+- Add dataset-card wording that distinguishes OSDR API/checksum-manifest
+  evidence from local payload-hash verification.
+- Keep payload mirroring, DOI/archive language, leaderboard language, and
+  extension tracks out of the public bulk alpha core.
+
+Done when:
+
+- Dataset-card and Data Package language both say metadata-only alpha snapshot.
+- They both say this is not a frozen payload release or locally hash-verified
+  payload bundle.
+- Tests validate the claim boundary and generated resources.
+
+Outputs:
+
+- `docs/v9_hf_dataset_card.md`
+- `v9/datapackage.draft.json`
+- `spacebio_bench/datapackage.py`
+- `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md`
+
+Result:
+
+- Dataset card label: `SpaceBio-Bench v9 Public Bulk Metadata Alpha`.
+- Data Package release status: `metadata_alpha_not_frozen`.
+- Data Package alpha status: `metadata_only_alpha_snapshot`.
+- Claim boundary: `metadata_only_public_bulk_alpha_no_payload_release`.
+- Payload release allowed: `false`.
+- Resource count: 21 total resources, including 10
+  `alpha_boundary_metadata` resources.
+- Follow-on scientific block:
+  `V9-SC-001: RRRM asset inventory` (now complete).
 
 ## Manuscript and community layer
 

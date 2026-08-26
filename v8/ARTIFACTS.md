@@ -58,8 +58,16 @@ should block promotion of exploratory results into manuscript claims.
 - `scripts/hpc_v8_beta_rebuild.sh` is the one-command HPC orchestrator for a
   beta rebuild: pillar recomputation, figures, summary regeneration, provenance
   validation, and final release hygiene.
+- `v8/provenance/external_source_audit.json` records the current
+  SpaceOmicsBench processed-input bundle checksum and file-level SHA-256s. The
+  local/HPC source bundle has no git metadata, so this checksum is the current
+  release-candidate identity for those processed inputs.
+- `v8/provenance/api_raw_archive_audit.json` records checksums for the current
+  L1000CDS2 and Enrichr raw API response archive. The raw JSON payloads remain
+  outside Git and must be copied to durable external storage before a frozen
+  beta.
 - `v8/provenance/input_freeze.json` is currently `release_candidate`, not
-  `frozen`, because SpaceOmicsBench and L1000CDS2 still need exact external
-  version pins or archived raw payloads.
+  `frozen`, because the final external artifact uploads and fresh clean-checkout
+  rebuild are not yet recorded.
 - `v8/release/v8_beta_artifact_manifest.json` defines the release split across
   GitHub, Hugging Face, Zenodo, and HPC/object storage.

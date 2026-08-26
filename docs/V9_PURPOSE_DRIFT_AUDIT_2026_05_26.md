@@ -135,9 +135,33 @@ Preferred next path:
 
 - V9-REFOCUS-001 selected public bulk alpha readiness first.
 - V9-BULK-ALPHA-001 produced the public bulk alpha freeze-gap matrix.
-- Run V9-BULK-ALPHA-002 to decide metadata-only alpha wording versus
-  payload-mirror-first.
-- Return to V9-SC-001 after the bulk alpha claim/payload boundary is explicit.
+- V9-BULK-ALPHA-002 selected metadata-only alpha wording with explicit payload
+  blockers and deferred payload-mirror-first to a later freeze block.
+- V9-BULK-ALPHA-003 updated the dataset card and Data Package alpha boundary.
+- V9-SC-001 inventoried legacy RRRM/single-cell assets and confirmed that no
+  local AnnData/loom/MTX payload or v9 `sc_spaceflight` manifest is present.
+- V9-SC-002 drafted one AnnData-style `sc_spaceflight` manifest with explicit
+  payload and obs/var blockers before evaluator work.
+- V9-SC-003 specified `genelab_sc` metric formulas, required inputs, and skip
+  policy before evaluator implementation.
+- V9-SC-004 planned RRRM-1 blood AnnData payload staging and obs/var audit,
+  selecting a canonical future h5ad target while still claiming no local
+  payload, checksum, audit pass, evaluator, or score.
+- V9-SC-005 implemented the AnnData obs/var auditor with clean skip behavior,
+  recording 27 skipped requirement rows and 17 blockers while the canonical
+  payload remains absent.
+- V9-SC-006 recorded that no canonical or legacy RRRM-1 blood h5ad was staged
+  in the current repo context and fixed the controlled STARsolo regeneration
+  route.
+- V9-SC-006b checked two external base scopes and found no annotated h5ad,
+  labeled h5ad, or complete OSD-918 blood STARsolo matrix bundles.
+- V9-SC-006c checked the official OSDR OSD-918 file-list endpoint and found 19
+  files: 1 metadata file, 1 raw checksum manifest, 1 raw MultiQC report, and
+  16 raw FASTQ files covering 8/8 expected blood SRX pairs, but no processed
+  h5ad, processed STARsolo matrix bundle, or processed checksum manifest.
+- Run V9-SC-006d to intake an owner-supplied scratch path or make a separate
+  raw FASTQ regeneration feasibility decision before any canonical v9 payload
+  copy.
 
 ## Hard Guardrails From This Audit
 

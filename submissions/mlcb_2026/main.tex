@@ -1,0 +1,247 @@
+\documentclass[11pt]{article}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{microtype}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+
+\newcommand{\draftnote}[1]{\textbf{[Draft note: #1]}}
+\newcommand{\placeholderfigure}[2]{%
+  \begin{figure}[t]
+    \centering
+    \fbox{\parbox{0.92\linewidth}{\vspace{0.35in}\centering #2\vspace{0.35in}}}
+    \caption{#1}
+  \end{figure}
+}
+
+\title{GeneLab Benchmark: Cross-Mission Evaluation of Foundation Models and Classical Baselines for Spaceflight Transcriptomics}
+
+\author{
+  Jaeyoung Kang\\
+  \textit{TODO: affiliation}\\
+  \texttt{TODO: email}
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Spaceflight transcriptomics is an extreme small-sample domain-shift setting:
+models must generalize across missions, hardware, duration, and tissue
+contexts. We introduce GeneLab Benchmark, a mission-held-out evaluation suite
+for NASA Open Science Data Repository mouse spaceflight RNA-seq, and compare
+classical baselines, gene-expression foundation models, and text LLMs. Across
+the v7.1 public benchmark surface, tuned classical methods remain the strongest
+baselines: PCA-LR has the best 8-tissue gene-level mean AUROC, while
+gene-expression foundation models and text LLMs fail to consistently outperform
+the classical benchmark surface. Pathway-level features reduce mission and
+batch separability and help explain tissue-specific transfer, with thymus
+generalizing more strongly than liver under cross-mission evaluation. The
+benchmark provides reproducible tasks, processed feature matrices, and result
+artifacts for evaluating future biological foundation models under real
+distribution shift.
+\end{abstract}
+
+\section{Introduction}
+
+Space biology has rapidly accumulated public transcriptomic data, but the
+field still lacks standardized benchmarks for whether learned spaceflight
+signatures generalize across missions. Random sample splits are especially
+misleading in this setting because mission identity can couple biological
+state, hardware, duration, strain, preprocessing, and cohort structure. A useful
+benchmark must therefore test whether a model trained on one set of missions
+can classify flight versus ground control in missions it has not seen.
+
+This question is also timely for biological foundation models. Models trained
+on large single-cell corpora are often expected to transfer broadly, yet
+small-sample bulk RNA-seq under mission shift has different statistical
+failure modes than same-distribution cell-level benchmarks. GeneLab Benchmark
+tests this setting directly using NASA Open Science Data Repository data
+\citep{nasa_osdr}, processed feature matrices, and standardized evaluation
+code \citep{genelab_benchmark_repo,genelab_benchmark_hf}.
+
+We make four contributions:
+
+\begin{enumerate}
+  \item We define a mission-held-out benchmark for mouse spaceflight
+  transcriptomics, with fold construction and feature selection designed to
+  reduce cross-mission leakage.
+  \item We compare classical machine-learning methods across the v4
+  multi-method surface: 8 tissues, 8 classifiers, and 4 feature types.
+  \item We summarize gene-expression foundation model and text LLM performance
+  against the classical benchmark surface.
+  \item We connect prediction performance to pathway-level biology, showing
+  that pathway features reduce confounder separability and explain when
+  transfer succeeds.
+\end{enumerate}
+
+\draftnote{Replace TODO citations for Geneformer, scGPT, UCE, and
+scFoundation once the bibliography is finalized. Keep v8 translational claims
+out of this submission.}
+
+\section{Benchmark Design}
+
+GeneLab Benchmark focuses on flight-versus-ground classification under
+mission shift. The full v1-v7 release spans 8 tissues: liver, gastrocnemius,
+kidney, thymus, skin, eye, lung, and colon. The public OSDR source catalog
+contains 24+ accessions, including excluded and track-specific rows documented
+in the repository data catalog. The processed release layers contain 600+
+binary/control samples.
+
+The central evaluation unit is the mission. In leave-one-mission-out (LOMO)
+tasks, one mission is held out for testing and all feature selection is
+performed using training missions only. Lung and colon are single-mission
+extensions and are evaluated as part of the broader v4 multi-method benchmark,
+but LOMO and foundation-model summary rows must be labeled by their relevant
+analysis subset.
+
+\placeholderfigure{Benchmark schematic. The final figure should show OSDR
+source data, tissue-specific task construction, mission-held-out folds,
+feature surfaces, and model families.}{Figure 1 placeholder: OSDR source data
+$\rightarrow$ task construction $\rightarrow$ mission-held-out evaluation.}
+
+\subsection{Feature Surfaces and Models}
+
+The benchmark evaluates gene-level log-normalized expression and pathway-level
+features derived from Hallmark, KEGG, and combined pathway sets. The v4
+multi-method surface compares PCA-LR, ElasticNet-LR, random forest, XGBoost,
+SVM-linear, SVM-RBF, TabNet, and LightGBM. The foundation-model snapshot
+includes Mouse-Geneformer, scGPT, UCE, and scFoundation
+\citep{geneformer_todo,scgpt_todo,uce_todo,scfoundation_todo}, plus text LLM
+zero-shot gene-list reasoning.
+
+\section{Results}
+
+\subsection{Classical Baselines Remain Strong Under Mission Shift}
+
+Across the v4 multi-method evaluation, PCA-LR is the strongest overall
+gene-level classifier, with an 8-tissue mean AUROC of 0.776; ElasticNet-LR is
+second at 0.762. Table~\ref{tab:headline} gives the canonical public-facing
+best-row tissue summary for v7.1.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Canonical v7.1 v4 multi-method headline table. Significance notes
+refer to best-row permutation results where available; 40 of 256 individual
+evaluations are significant at $p<0.05$, and 6 of 8 tissues have at least one
+significant configuration.}
+\label{tab:headline}
+\begin{tabular}{lclll}
+\toprule
+Tissue & Best AUROC & Method & Feature & Significance note \\
+\midrule
+Thymus & 0.948 & PCA-LR & KEGG & $p<0.05$ \\
+Colon & 0.921 & PCA-LR & KEGG & $p<0.05$ \\
+Lung & 0.901 & PCA-LR & Gene & $p<0.05$ \\
+Kidney & 0.829 & ElasticNet-LR & Hallmark & $p<0.01$ \\
+Eye & 0.823 & PCA-LR & Hallmark & not significant \\
+Skin & 0.819 & PCA-LR & Gene & not significant \\
+Gastrocnemius & 0.776 & PCA-LR & Gene & not significant \\
+Liver & 0.670 & PCA-LR & Gene & not significant \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The tissue hierarchy is scientifically important. Thymus and colon lead the
+best-row table, while liver is not the strongest generalizer. In the original
+cross-mission transfer analysis, thymus substantially outperforms liver
+(0.860 versus 0.577, permutation $p=0.001$), challenging liver-centric
+assumptions about conserved spaceflight transcriptomic response.
+
+\placeholderfigure{v4 multi-method results. The final figure should combine a
+method-by-tissue heatmap with the best-row tissue summary and highlight the
+PCA-LR and ElasticNet-LR baselines.}{Figure 2 placeholder: multi-method AUROC
+heatmap and best-row tissue hierarchy.}
+
+\subsection{Pathway Features Explain Tissue-Specific Transfer}
+
+Gene-level features can strongly separate mission and hardware contexts,
+whereas pathway features reduce this confounder separability. In the mission
+identity task for liver, gene-level features reach macro-F1 of 1.000, while
+pathway-level features fall near 0.056. This 17.8-fold contrast motivates the
+central interpretation: pathway aggregation can suppress mission-specific
+technical or cohort structure while retaining biological response signal.
+
+This does not mean pathway features always outperform gene features. Instead,
+they are complementary. Pathways rescue selected tissue contexts, including
+kidney and eye in the original detection analysis, and improve best-row
+performance in kidney, thymus, and eye in the v4 multi-method surface. Gene
+features remain strongest for skin and lung.
+
+\placeholderfigure{Gene-vs-pathway explanation. The final figure should show
+confounder F1 for gene versus pathway features and selected kidney/eye pathway
+rescue examples.}{Figure 3 placeholder: pathway features reduce mission
+separability and rescue selected tissues.}
+
+\subsection{Foundation Models Do Not Yet Beat the Classical Surface}
+
+The foundation-model snapshot should be read as a benchmark-surface summary,
+not a uniform 8-tissue leaderboard. Mouse-Geneformer and scGPT report
+6-tissue v1 means; scFoundation and UCE rows report best single-tissue v3
+results. Under these caveats, current gene-expression foundation models remain
+below the classical benchmark surface: Mouse-Geneformer has a 6-tissue mean
+AUROC of 0.476, scGPT has a 6-tissue mean of 0.666, and UCE and scFoundation
+best single-tissue rows remain below the PCA-LR surface. Text LLMs operating on
+gene-list prompts perform near chance (0.47--0.51).
+
+Held-out validation supports the biological signal beyond the original LOMO
+folds. Thymus RR-23 reaches AUROC 0.905 with $p=0.005$, and skin RR-7 reaches
+AUROC 0.885 with $p<0.001$.
+
+\placeholderfigure{Foundation model comparison and validation. The final figure
+should show classical baselines versus FM/LLM rows with explicit subset labels,
+plus held-out thymus and skin validation insets.}{Figure 4 placeholder:
+classical baselines, FM/LLM comparison, and held-out validation.}
+
+\section{Discussion}
+
+GeneLab Benchmark highlights a practical gap between biological foundation
+model ambition and current performance in small-sample bulk transcriptomics.
+The strongest baseline is not a large pretrained model, but a carefully tuned
+classical pipeline evaluated under mission-held-out splits. This does not imply
+that biological foundation models are unpromising. It identifies the stress
+test they must pass: robust generalization across real mission, tissue, and
+batch structure.
+
+The pathway results suggest a route forward. Generalization is not only a model
+capacity problem; it is also a representation problem. Gene-level expression
+captures discriminative signal but can also capture mission-specific structure.
+Pathway-level aggregation can reduce confounder separability and preserve
+biological response patterns that transfer across missions.
+
+Several limitations remain. The benchmark is mouse-centered, mission folds are
+small, and several foundation-model rows use different subset surfaces. The
+current v7.1 submission should therefore avoid overclaiming a uniform
+foundation-model leaderboard. Future work can extend the benchmark to larger
+human and multi-omics settings, but translational v8 SpaceMed intervention,
+countermeasure, and Mars-extrapolation claims are outside the scope of this
+paper.
+
+\paragraph{Availability.}
+Source datasets are available from NASA OSDR \citep{nasa_osdr}. Code and task
+definitions are available in the GeneLab Benchmark repository
+\citep{genelab_benchmark_repo}. Processed feature matrices are available from
+the public Hugging Face dataset card \citep{genelab_benchmark_hf}.
+
+\paragraph{Submission status.}
+This manuscript is prepared as an MLCB 2026 8-page paper. MLCB currently uses
+single-blind review, asks for 11 pt font and 1 inch margins, and permits
+optional PMLR publication for 8-page papers \citep{mlcb_submit_2026}. The
+authors should decide whether to opt into PMLR before final submission.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

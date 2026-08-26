@@ -1,0 +1,50 @@
+[
+  {
+    "metric_id": "state_label_auroc",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "reported_reason": "state_label_auroc_skipped",
+    "reported_value": "NA",
+    "skip_conditions": "missing flight_probability|nonfinite scores|only one true label class in evaluated fold",
+    "skip_policy_id": "skip_state_label_auc_if_single_class_or_no_probability"
+  },
+  {
+    "metric_id": "state_label_auprc",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "reported_reason": "state_label_auprc_skipped",
+    "reported_value": "NA",
+    "skip_conditions": "missing flight_probability|nonfinite scores|no Flight positives in evaluated fold",
+    "skip_policy_id": "skip_state_label_auprc_if_no_positive_or_probability"
+  },
+  {
+    "metric_id": "mission_discrimination",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "reported_reason": "mission_discrimination_skipped",
+    "reported_value": "NA",
+    "skip_conditions": "no embedding_* columns|fewer than two labels|no train centroid for a label",
+    "skip_policy_id": "skip_mission_discrimination_if_no_embeddings_or_two_labels"
+  },
+  {
+    "metric_id": "de_overlap_at_n",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "reported_reason": "de_overlap_at_n_skipped",
+    "reported_value": "NA",
+    "skip_conditions": "missing response_signature.csv|missing DE reference|fewer than N overlapping genes",
+    "skip_policy_id": "skip_de_overlap_if_no_reference_or_insufficient_gene_overlap"
+  },
+  {
+    "metric_id": "de_direction_match",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "reported_reason": "de_direction_match_skipped",
+    "reported_value": "NA",
+    "skip_conditions": "missing response_signature.csv|missing DE reference|no nonzero signed overlapping genes",
+    "skip_policy_id": "skip_de_direction_if_no_signed_overlap"
+  },
+  {
+    "metric_id": "expression_mae_when_applicable",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "reported_reason": "expression_mae_when_applicable_skipped",
+    "reported_value": "NA",
+    "skip_conditions": "no expression prediction artifact|no declared normalization layer|no aligned cells or genes",
+    "skip_policy_id": "skip_expression_mae_unless_reconstruction_artifact_declared"
+  }
+]

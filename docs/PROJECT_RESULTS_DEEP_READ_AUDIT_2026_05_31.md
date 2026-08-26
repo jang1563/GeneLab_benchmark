@@ -394,8 +394,12 @@ Single-cell:
 - `v9/sc_spaceflight/obs_var_audit_summary.json` records a skip-only audit:
   27 skipped requirements, 17 blockers, missing canonical h5ad payload, no
   checksum, and no score claim.
-- Active next block remains canonical payload staging or RRRM-1 h5ad
-  regeneration.
+- `v9/sc_spaceflight/osdr_processed_payload_discovery_summary.json` records
+  19 official OSD-918 files, including 16 raw FASTQ files covering 8/8 expected
+  blood SRX pairs, but no processed h5ad, STARsolo bundle, or processed
+  checksum manifest.
+- Active next block is V9-SC-006d owner scratch path intake or raw FASTQ
+  regeneration feasibility.
 
 ## What Is Still Not Fully Reviewed
 
@@ -419,4 +423,3 @@ For the first slide deck draft:
 - Use v9 as platformization and alpha scaffold, not a frozen benchmark release.
 - Keep organoid/multispecies/single-cell as future-facing or diagnostic tracks
   unless a later pass promotes them.
-

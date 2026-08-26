@@ -38,6 +38,17 @@ Passed/ready:
   checksums.
 - `input_freeze.json` records the current OSDR, SpaceOmicsBench, processed
   fGSEA, L1000CDS2, and Enrichr/CRISPR input surfaces.
+- `v8/provenance/external_source_audit.json` records the current
+  SpaceOmicsBench processed-input bundle checksum
+  (`fce14de513a6c10587c8b03d21e0f510ea8081afb99573f0067ed5983abaa774`) and
+  file-level SHA-256s. The local source bundle has no git metadata, so this
+  checksum is the release-candidate identity until an upstream tag or archived
+  source bundle supersedes it.
+- `v8/provenance/api_raw_archive_audit.json` records the current INTERVENE raw
+  API-response archive checksum
+  (`31327597a42184cb6bafb8058dd611725f888876ac5f010fad7ee11f3118fefd`) for
+  30 L1000CDS2/Enrichr JSON response files. Re-parsing the archive produced
+  byte-identical INTERVENE parsed outputs against the tracked CSV/JSON files.
 - `v8_beta_artifact_manifest.json` records the GitHub, Hugging Face, Zenodo,
   and HPC/object-storage release split.
 - `hpc_release_validate.sh` now runs provenance validation before summary
@@ -45,14 +56,13 @@ Passed/ready:
 
 Still open before declaring v8.0-beta frozen:
 
-1. Replace the SpaceOmicsBench pending marker with an exact upstream commit,
-   release tag, or archived source checksum.
-2. Pin a concrete L1000CDS2 db-version if the API exposes one, or archive raw
-   response payloads externally with checksums.
-3. Run `scripts/hpc_v8_beta_rebuild.sh` from a fresh clean checkout after the
+1. Copy the release-candidate raw API archive and other raw external inputs to
+   durable Hugging Face, Zenodo, or object-storage targets and update the
+   recorded archive root hints.
+2. Run `scripts/hpc_v8_beta_rebuild.sh` from a fresh clean checkout after the
    input freeze is promoted.
-4. Upload/record the Hugging Face dataset bundle revision.
-5. Mint or reserve the Zenodo DOI and record it in the artifact manifest.
+3. Upload/record the Hugging Face dataset bundle revision.
+4. Mint or reserve the Zenodo DOI and record it in the artifact manifest.
 
 ## Artifact Split
 

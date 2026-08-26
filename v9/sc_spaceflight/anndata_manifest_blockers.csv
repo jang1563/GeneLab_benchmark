@@ -1,0 +1,5 @@
+manifest_draft_id,blocker_id,blocker_status,required_before_runnable,evidence_path,owner_action
+v9_sc_002_rrrm1_blood_anndata_manifest_draft,local_anndata_payload_absent,blocking_runnable_task,stage or regenerate the selected RRRM-1 blood AnnData object locally,v9/sc_spaceflight/local_payload_scan.csv,do not claim runnable sc_spaceflight task until payload exists
+v9_sc_002_rrrm1_blood_anndata_manifest_draft,obs_var_contract_unverified,blocking_evaluator,inspect AnnData obs/var/uns fields against the manifest contract,v2/docs/RRRM1_BENCHMARK_READY_MANIFEST_2026-03-12.csv,verify required obs/var fields after local payload staging
+v9_sc_002_rrrm1_blood_anndata_manifest_draft,metric_formula_spec_pending,blocking_leaderboard,write V9-SC-003 metric formulas and skip policy,spacebio_bench/profiles.py,define genelab_sc metrics before evaluator implementation
+v9_sc_002_rrrm1_blood_anndata_manifest_draft,legacy_scores_reference_only,claim_guard,regenerate any scores from a v9 task manifest and run manifest,v3/evaluation/,do not promote legacy RRRM score surfaces as v9 benchmark results

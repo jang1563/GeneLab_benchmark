@@ -29,10 +29,12 @@ Outputs
 """
 from __future__ import annotations
 
+import argparse
 import io
 import json
 import time
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 import requests
@@ -61,26 +63,93 @@ DRUG_TARGETS = {
 }
 
 
-def upload_list(genes: list[str], description: str) -> int | None:
+def _safe_name(value: str) -> str:
+    return "".join(c if c.isalnum() or c in {"-", "_"} else "_" for c in value)
+
+
+def _write_raw_record(raw_dir: Path | None, name: str, record: dict[str, Any]) -> None:
+    if raw_dir is None:
+        return
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    (raw_dir / f"{_safe_name(name)}.json").write_text(json.dumps(record, indent=2, sort_keys=True))
+
+
+def upload_list(
+    genes: list[str],
+    description: str,
+    raw_dir: Path | None = None,
+    raw_name: str | None = None,
+) -> int | None:
     payload = {"list": (None, "\n".join(genes)), "description": (None, description)}
     try:
         r = requests.post(ENRICHR_ADD, files=payload, timeout=30)
         r.raise_for_status()
-        return r.json()["userListId"]
+        data = r.json()
+        _write_raw_record(
+            raw_dir,
+            raw_name or f"enrichr_{description}_addList",
+            {
+                "endpoint": ENRICHR_ADD,
+                "request": {"description": description, "genes": genes},
+                "response_status_code": r.status_code,
+                "response_headers": {
+                    key: value
+                    for key, value in r.headers.items()
+                    if key.lower() in {"content-type", "date", "server"}
+                },
+                "response_json": data,
+            },
+        )
+        return data["userListId"]
     except Exception as e:
         print(f"  Enrichr addList failed: {e}")
+        _write_raw_record(
+            raw_dir,
+            raw_name or f"enrichr_{description}_addList",
+            {"endpoint": ENRICHR_ADD, "request": {"description": description, "genes": genes}, "error": str(e)},
+        )
         return None
 
 
-def enrich(user_list_id: int, library: str) -> list[list]:
+def enrich(
+    user_list_id: int,
+    library: str,
+    raw_dir: Path | None = None,
+    raw_name: str | None = None,
+) -> list[list]:
     try:
         r = requests.get(ENRICHR_ENRICH,
                          params={"userListId": user_list_id, "backgroundType": library},
                          timeout=60)
         r.raise_for_status()
-        return r.json().get(library, [])
+        data = r.json()
+        _write_raw_record(
+            raw_dir,
+            raw_name or f"enrichr_{user_list_id}_{library}",
+            {
+                "endpoint": ENRICHR_ENRICH,
+                "request_params": {"userListId": user_list_id, "backgroundType": library},
+                "response_status_code": r.status_code,
+                "response_headers": {
+                    key: value
+                    for key, value in r.headers.items()
+                    if key.lower() in {"content-type", "date", "server"}
+                },
+                "response_json": data,
+            },
+        )
+        return data.get(library, [])
     except Exception as e:
         print(f"  Enrichr enrich failed: {e}")
+        _write_raw_record(
+            raw_dir,
+            raw_name or f"enrichr_{user_list_id}_{library}",
+            {
+                "endpoint": ENRICHR_ENRICH,
+                "request_params": {"userListId": user_list_id, "backgroundType": library},
+                "error": str(e),
+            },
+        )
         return []
 
 
@@ -136,7 +205,14 @@ def check_drug_validation(crispr_hits: dict[str, pd.DataFrame], tissue: str) -> 
 
 
 def main() -> None:
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out-dir", default=str(OUT_DIR), help="Directory for parsed CSV/JSON outputs.")
+    parser.add_argument("--raw-dir", default=None, help="Optional directory for raw API response archives.")
+    args = parser.parse_args()
+
+    out_dir = Path(args.out_dir)
+    raw_dir = Path(args.raw_dir) if args.raw_dir else None
+    out_dir.mkdir(parents=True, exist_ok=True)
     summary: dict = {"library": LIBRARY, "tissues": {}}
     all_hits: dict[str, pd.DataFrame] = {}
 
@@ -149,14 +225,24 @@ def main() -> None:
         print(f"\n[{tissue}]  up={len(up_genes)}  dn={len(dn_genes)}")
 
         # Upload UP list → find KO signatures with "Down" direction (= reversers)
-        ulid_up = upload_list(up_genes, f"{tissue}_up_v8")
+        ulid_up = upload_list(
+            up_genes,
+            f"{tissue}_up_v8",
+            raw_dir=raw_dir,
+            raw_name=f"enrichr_{tissue}_up_addList",
+        )
         if ulid_up:
             time.sleep(1)
-            raw_up = enrich(ulid_up, LIBRARY)
+            raw_up = enrich(
+                ulid_up,
+                LIBRARY,
+                raw_dir=raw_dir,
+                raw_name=f"enrichr_{tissue}_up_enrich",
+            )
             df_up = parse_hits(raw_up)
             # Keep only "Down" direction for UP genes (reversal)
             df_up_rev = df_up[df_up["ko_direction"] == "Down"].head(50)
-            df_up_rev.to_csv(OUT_DIR / f"crispr_orthog_{tissue}_up.csv", index=False)
+            df_up_rev.to_csv(out_dir / f"crispr_orthog_{tissue}_up.csv", index=False)
             all_hits[f"{tissue}_up"] = df_up_rev
             top3 = df_up_rev.head(3)["target"].tolist()
             print(f"  UP reversers (KO→Down): {top3}")
@@ -164,13 +250,23 @@ def main() -> None:
         time.sleep(2)
 
         # Upload DN list → find KO signatures with "Up" direction (= reversers)
-        ulid_dn = upload_list(dn_genes, f"{tissue}_dn_v8")
+        ulid_dn = upload_list(
+            dn_genes,
+            f"{tissue}_dn_v8",
+            raw_dir=raw_dir,
+            raw_name=f"enrichr_{tissue}_dn_addList",
+        )
         if ulid_dn:
             time.sleep(1)
-            raw_dn = enrich(ulid_dn, LIBRARY)
+            raw_dn = enrich(
+                ulid_dn,
+                LIBRARY,
+                raw_dir=raw_dir,
+                raw_name=f"enrichr_{tissue}_dn_enrich",
+            )
             df_dn = parse_hits(raw_dn)
             df_dn_rev = df_dn[df_dn["ko_direction"] == "Up"].head(50)
-            df_dn_rev.to_csv(OUT_DIR / f"crispr_orthog_{tissue}_dn.csv", index=False)
+            df_dn_rev.to_csv(out_dir / f"crispr_orthog_{tissue}_dn.csv", index=False)
             all_hits[f"{tissue}_dn"] = df_dn_rev
             top3 = df_dn_rev.head(3)["target"].tolist()
             print(f"  DN reversers (KO→Up):   {top3}")
@@ -187,8 +283,8 @@ def main() -> None:
         if validated:
             print(f"  ✓ Validated drugs via CRISPR: {list(validated.keys())}")
 
-    (OUT_DIR / "crispr_orthog_summary.json").write_text(json.dumps(summary, indent=2, default=str))
-    print(f"\nWrote {OUT_DIR}/crispr_orthog_summary.json")
+    (out_dir / "crispr_orthog_summary.json").write_text(json.dumps(summary, indent=2, default=str))
+    print(f"\nWrote {out_dir}/crispr_orthog_summary.json")
 
 
 if __name__ == "__main__":

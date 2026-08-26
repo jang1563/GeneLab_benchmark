@@ -13,6 +13,41 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 
+def write_osd918_osdr_file_listing_fixture(path: Path) -> None:
+    srxs = [
+        "SRX28491856",
+        "SRX28491916",
+        "SRX28491975",
+        "SRX28491923",
+        "SRX28491934",
+        "SRX28491993",
+        "SRX28491866",
+        "SRX28491877",
+    ]
+    filenames = [
+        "OSD-918_metadata_OSD-918-ISA.zip",
+        "GLDS-746_scRNA-Seq_raw_md5sum_GLscRNAseq.txt",
+        "GLDS-746_scRNA_Seq_raw_multiqc_GLscRNAseq_report.zip",
+    ]
+    for srx in srxs:
+        filenames.append(f"GLDS-746_scRNA-Seq_{srx}_R1_raw.fastq.gz")
+        filenames.append(f"GLDS-746_scRNA-Seq_{srx}_R2_raw.fastq.gz")
+    files = {
+        filename: {
+            "REST_URL": (
+                "https://osdr.nasa.gov/geode-py/ws/studies/OSD-918/download?"
+                f"source=datamanager&file={filename}"
+            ),
+            "URL": (
+                "https://visualization.osdr.nasa.gov/biodata/files/OSD-918/"
+                f"{filename}"
+            ),
+        }
+        for filename in filenames
+    }
+    path.write_text(json.dumps({"OSD-918": {"files": files}}, indent=2) + "\n")
+
+
 class V9SpaceBioBenchTests(unittest.TestCase):
     def test_mission_discrimination_scores_perfect_cluster_layout(self):
         from spacebio_bench.metrics import mission_discrimination_score
@@ -5317,6 +5352,1135 @@ class V9SpaceBioBenchTests(unittest.TestCase):
         )
         self.assertIn("not ready for frozen release language", review)
 
+    def test_v9_public_bulk_alpha_snapshot_decision_api(self):
+        from spacebio_bench import write_public_bulk_alpha_snapshot_decision
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "public_bulk_alpha_snapshot_decision"
+            outputs = write_public_bulk_alpha_snapshot_decision(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            option_rows = json.loads(outputs["option_json"].read_text())
+            claim_rows = json.loads(outputs["claim_json"].read_text())
+            language_rows = json.loads(outputs["language_json"].read_text())
+            action_rows = json.loads(outputs["action_json"].read_text())
+            review = outputs["review_md"].read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "metadata_only_alpha_snapshot_allowed_with_payload_blockers",
+        )
+        self.assertEqual(summary["selected_path"], "metadata_only_alpha_snapshot")
+        self.assertEqual(summary["deferred_path"], "payload_mirror_first")
+        self.assertEqual(summary["metadata_only_allowed"], "true")
+        self.assertEqual(summary["payload_release_allowed"], "false")
+        self.assertEqual(summary["bulk_source_count"], "22")
+        self.assertEqual(summary["freeze_ready_source_count"], "0")
+        self.assertEqual(summary["gap_blocker_count"], "2")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-BULK-ALPHA-003: dataset card and Data Package alpha boundary update",
+        )
+        self.assertEqual(
+            summary["claim_boundary"],
+            "metadata_only_public_bulk_alpha_no_payload_release",
+        )
+        self.assertEqual(
+            {row["decision"] for row in option_rows},
+            {"selected", "deferred", "rejected_for_current_sequence"},
+        )
+        self.assertEqual(
+            {row["claim_status"] for row in claim_rows},
+            {"allowed_metadata_alpha", "prohibited_payload_release"},
+        )
+        self.assertTrue(
+            any("metadata-only alpha snapshot" in row["snippet_text"] for row in language_rows)
+        )
+        self.assertEqual(len(action_rows), 4)
+        self.assertIn("not a frozen payload release", review)
+
+    def test_build_v9_public_bulk_alpha_snapshot_decision_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "public_bulk_alpha_snapshot_decision"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(
+                        REPO_ROOT
+                        / "scripts"
+                        / "build_v9_public_bulk_alpha_snapshot_decision.py"
+                    ),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "snapshot_decision_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "snapshot_option_matrix.csv").open(
+                newline=""
+            ) as handle:
+                option_rows = list(csv.DictReader(handle))
+
+        self.assertIn("snapshot_decision_summary.csv", result.stdout)
+        self.assertIn(
+            "V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md",
+            result.stdout,
+        )
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(len(option_rows), 3)
+
+    def test_generated_v9_public_bulk_alpha_snapshot_decision_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "reports" / "public_bulk_alpha_snapshot_decision"
+        with (output_dir / "snapshot_decision_summary.csv").open(
+            newline=""
+        ) as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "snapshot_option_matrix.csv").open(
+            newline=""
+        ) as handle:
+            option_rows = list(csv.DictReader(handle))
+        with (output_dir / "snapshot_claim_boundary.csv").open(
+            newline=""
+        ) as handle:
+            claim_rows = list(csv.DictReader(handle))
+        with (output_dir / "snapshot_next_actions.csv").open(
+            newline=""
+        ) as handle:
+            action_rows = list(csv.DictReader(handle))
+        review = (
+            REPO_ROOT
+            / "docs"
+            / "V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md"
+        ).read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(summary["selected_path"], "metadata_only_alpha_snapshot")
+        self.assertEqual(summary["metadata_only_allowed"], "true")
+        self.assertEqual(summary["payload_release_allowed"], "false")
+        self.assertEqual(
+            {row["status"] for row in option_rows},
+            {
+                "allowed_with_explicit_blockers",
+                "valid_but_not_required_before_metadata_alpha",
+                "too_conservative_for_metadata_scaffold",
+            },
+        )
+        self.assertEqual(
+            sum(1 for row in claim_rows if row["claim_status"] == "allowed_metadata_alpha"),
+            4,
+        )
+        self.assertEqual(
+            sum(1 for row in claim_rows if row["claim_status"] == "prohibited_payload_release"),
+            4,
+        )
+        self.assertEqual(
+            {row["action_status"] for row in action_rows},
+            {"pending_next_block", "deferred_after_metadata_alpha", "guarded_no_change"},
+        )
+        self.assertIn("metadata-only alpha snapshot", review)
+        self.assertIn("not a frozen payload release", review)
+
+    def test_v9_single_cell_asset_inventory_api(self):
+        from spacebio_bench import write_single_cell_asset_inventory
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            outputs = write_single_cell_asset_inventory(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            asset_rows = json.loads(outputs["asset_json"].read_text())
+            payload_rows = json.loads(outputs["payload_json"].read_text())
+            review = outputs["review_md"].read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "legacy_rrrm_assets_indexed_no_local_anndata_payload",
+        )
+        self.assertEqual(summary["total_asset_count"], "54")
+        self.assertEqual(summary["rrrm1_asset_count"], "41")
+        self.assertEqual(summary["rrrm2_asset_count"], "13")
+        self.assertEqual(summary["documentation_count"], "8")
+        self.assertEqual(summary["script_count"], "31")
+        self.assertEqual(summary["generated_cache_count"], "6")
+        self.assertEqual(summary["local_anndata_payload_count"], "0")
+        current_sc_manifest_count = len(
+            list((REPO_ROOT / "v9" / "sc_spaceflight" / "task_manifests").glob("*.json"))
+        )
+        self.assertEqual(summary["v9_sc_manifest_count"], str(current_sc_manifest_count))
+        self.assertEqual(summary["metric_profile_status"], "genelab_sc_profile_present")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-SC-002: AnnData task manifest draft",
+        )
+        self.assertEqual(
+            summary["claim_boundary"],
+            "single_cell_asset_inventory_only_no_v9_sc_task_or_payload_claim",
+        )
+        paths = {row["asset_path"] for row in asset_rows}
+        self.assertIn("v2/docs/RRRM1_SAMPLE_MANIFEST_2026-03-12.csv", paths)
+        self.assertIn("v3/evaluation/F5C_rrrm2_loao.json", paths)
+        self.assertIn("exclude_from_v9", {row["promotion_status"] for row in asset_rows})
+        self.assertEqual(payload_rows, [])
+        self.assertIn("does not claim local AnnData payload availability", review)
+
+    def test_build_v9_sc_rrrm_asset_inventory_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts" / "build_v9_sc_rrrm_asset_inventory.py"),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "asset_inventory_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "asset_inventory.csv").open(newline="") as handle:
+                asset_rows = list(csv.DictReader(handle))
+
+        self.assertIn("asset_inventory_summary.csv", result.stdout)
+        self.assertIn("asset_inventory.md", result.stdout)
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(summary_rows[0]["total_asset_count"], "54")
+        self.assertEqual(len(asset_rows), 54)
+
+    def test_generated_v9_single_cell_asset_inventory_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        with (output_dir / "asset_inventory_summary.csv").open(
+            newline=""
+        ) as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "asset_inventory.csv").open(newline="") as handle:
+            asset_rows = list(csv.DictReader(handle))
+        payload_rows = json.loads((output_dir / "local_payload_scan.json").read_text())
+        review = (output_dir / "asset_inventory.md").read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(summary["total_asset_count"], "54")
+        self.assertEqual(summary["local_h5ad_count"], "0")
+        self.assertEqual(summary["local_loom_count"], "0")
+        self.assertEqual(summary["local_mtx_count"], "0")
+        self.assertEqual(summary["v9_sc_manifest_count"], "0")
+        self.assertEqual(
+            {row["asset_family"] for row in asset_rows},
+            {"RRRM-1", "RRRM-2"},
+        )
+        self.assertEqual(payload_rows, [])
+        self.assertIn("V9-SC-002: AnnData task manifest draft", review)
+        self.assertIn("promote legacy RRRM scores as v9 benchmark results", review)
+
+    def test_v9_sc_anndata_manifest_draft_api(self):
+        from spacebio_bench import (
+            load_task_manifest,
+            write_sc_anndata_manifest_draft,
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            outputs = write_sc_anndata_manifest_draft(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            manifest = load_task_manifest(outputs["manifest_json"])
+            blockers = json.loads(outputs["blockers_json"].read_text())
+            review = outputs["review_md"].read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "draft_anndata_manifest_contract_ready_payload_blocked",
+        )
+        self.assertEqual(summary["task_id"], "draft_rrrm1_blood_single_cell_spaceflight")
+        self.assertEqual(summary["selected_source_id"], "OSD-918")
+        self.assertEqual(summary["selected_tissue"], "blood")
+        self.assertEqual(summary["sample_count"], "8")
+        self.assertEqual(summary["flight_sample_count"], "4")
+        self.assertEqual(summary["ground_sample_count"], "4")
+        self.assertEqual(summary["qc_cell_count"], "4395")
+        self.assertEqual(summary["local_h5ad_count"], "0")
+        self.assertEqual(summary["local_payload_status"], "blocked_no_local_anndata_payload")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-SC-003: genelab_sc metric specification",
+        )
+        self.assertEqual(manifest["task_family"], "sc_spaceflight")
+        self.assertEqual(manifest["runnable_status"], "blocked_no_local_anndata_payload")
+        self.assertEqual(manifest["metrics"][0]["profile"], "genelab_sc")
+        self.assertIn("broad_celltype", manifest["anndata_contract"]["required_obs_fields"])
+        fold_ids = [fold["fold_id"] for fold in manifest["split"]["candidate_folds"]]
+        self.assertEqual(len(fold_ids), 8)
+        self.assertEqual(len(set(fold_ids)), 8)
+        self.assertEqual(
+            {row["blocker_status"] for row in blockers},
+            {"blocking_runnable_task", "blocking_evaluator", "blocking_leaderboard", "claim_guard"},
+        )
+        self.assertIn("not a runnable v9 single-cell benchmark task", review)
+
+    def test_build_v9_sc_anndata_manifest_draft_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts" / "build_v9_sc_anndata_manifest_draft.py"),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "anndata_manifest_draft_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            manifest_path = (
+                output_dir
+                / "task_manifests"
+                / "draft_rrrm1_blood_single_cell_spaceflight.json"
+            )
+            manifest = json.loads(manifest_path.read_text())
+
+        self.assertIn("anndata_manifest_draft_summary.csv", result.stdout)
+        self.assertIn("draft_rrrm1_blood_single_cell_spaceflight.json", result.stdout)
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(manifest["source_records"][0]["source_id"], "OSD-918")
+        self.assertEqual(manifest["split"]["label_distribution"], {"Flight": 4, "Ground": 4})
+
+    def test_generated_v9_sc_anndata_manifest_draft_outputs_validate(self):
+        from spacebio_bench import load_task_manifest
+
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        manifest_path = (
+            output_dir
+            / "task_manifests"
+            / "draft_rrrm1_blood_single_cell_spaceflight.json"
+        )
+        with (output_dir / "anndata_manifest_draft_summary.csv").open(
+            newline=""
+        ) as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "anndata_manifest_blockers.csv").open(
+            newline=""
+        ) as handle:
+            blocker_rows = list(csv.DictReader(handle))
+        manifest = load_task_manifest(manifest_path)
+        review = (output_dir / "ANNDATA_MANIFEST_DRAFT_REVIEW.md").read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["claim_boundary"],
+            "anndata_manifest_contract_only_no_local_payload_or_score_claim",
+        )
+        self.assertEqual(summary["v9_manifest_validation_status"], "passes_minimal_manifest_validator")
+        self.assertEqual(manifest["release_status"], "draft_non_runnable_contract")
+        self.assertEqual(
+            manifest["provenance"]["legacy_score_status"],
+            "reference_only_not_v9_benchmark_result",
+        )
+        self.assertEqual(len(manifest["split"]["candidate_folds"]), 8)
+        self.assertEqual(len(blocker_rows), 4)
+        self.assertIn("local_anndata_payload_absent", {row["blocker_id"] for row in blocker_rows})
+        self.assertIn("V9-SC-003: genelab_sc metric specification", review)
+
+    def test_v9_sc_metric_spec_api(self):
+        from spacebio_bench import build_sc_metric_spec, get_metric_profile, write_sc_metric_spec
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            outputs = write_sc_metric_spec(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            metrics = json.loads(outputs["metrics_json"].read_text())
+            inputs = json.loads(outputs["inputs_json"].read_text())
+            skip_rows = json.loads(outputs["skip_json"].read_text())
+            review = outputs["review_md"].read_text()
+
+        package = build_sc_metric_spec(repo_root=REPO_ROOT)
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "genelab_sc_metric_spec_ready_no_evaluator",
+        )
+        self.assertEqual(summary["profile"], "genelab_sc")
+        self.assertEqual(summary["profile_metric_count"], "6")
+        self.assertEqual(summary["primary_metric_count"], "2")
+        self.assertEqual(summary["diagnostic_metric_count"], "3")
+        self.assertEqual(summary["optional_metric_count"], "1")
+        self.assertEqual(summary["manifest_task_id"], "draft_rrrm1_blood_single_cell_spaceflight")
+        self.assertEqual(summary["local_payload_status"], "blocked_no_local_anndata_payload")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-SC-004: AnnData payload staging and obs/var audit plan",
+        )
+        self.assertEqual(
+            {row["metric_id"] for row in metrics},
+            set(get_metric_profile("genelab_sc")["metrics"]),
+        )
+        self.assertEqual(
+            {row["metric_role"] for row in metrics},
+            {
+                "primary_after_payload_freeze",
+                "diagnostic_representation",
+                "diagnostic_de_recovery",
+                "optional_reconstruction",
+            },
+        )
+        self.assertIn("de_reference_table", {row["input_id"] for row in inputs})
+        self.assertEqual({row["reported_value"] for row in skip_rows}, {"NA"})
+        self.assertEqual(len(package["metrics"]), 6)
+        self.assertIn("No evaluator", review)
+
+    def test_build_v9_sc_metric_spec_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts" / "build_v9_sc_metric_spec.py"),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "metric_spec_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "metric_spec_metrics.csv").open(newline="") as handle:
+                metric_rows = list(csv.DictReader(handle))
+
+        self.assertIn("metric_spec_summary.csv", result.stdout)
+        self.assertIn("V9_SC_METRIC_SPEC.md", result.stdout)
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(len(metric_rows), 6)
+        self.assertEqual(
+            {row["metric_id"] for row in metric_rows},
+            {
+                "de_overlap_at_n",
+                "de_direction_match",
+                "mission_discrimination",
+                "state_label_auroc",
+                "state_label_auprc",
+                "expression_mae_when_applicable",
+            },
+        )
+
+    def test_generated_v9_sc_metric_spec_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        with (output_dir / "metric_spec_summary.csv").open(newline="") as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "metric_spec_metrics.csv").open(newline="") as handle:
+            metric_rows = list(csv.DictReader(handle))
+        with (output_dir / "metric_spec_required_inputs.csv").open(
+            newline=""
+        ) as handle:
+            input_rows = list(csv.DictReader(handle))
+        with (output_dir / "metric_spec_skip_policy.csv").open(newline="") as handle:
+            skip_rows = list(csv.DictReader(handle))
+        review = (REPO_ROOT / "docs" / "V9_SC_METRIC_SPEC.md").read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["claim_boundary"],
+            "genelab_sc_metric_spec_only_no_evaluator_or_score_claim",
+        )
+        self.assertEqual(summary["profile_metric_count"], "6")
+        self.assertEqual(len(metric_rows), 6)
+        self.assertEqual(len(input_rows), 7)
+        self.assertEqual(len(skip_rows), 6)
+        by_metric = {row["metric_id"]: row for row in metric_rows}
+        self.assertEqual(
+            by_metric["state_label_auroc"]["metric_role"],
+            "primary_after_payload_freeze",
+        )
+        self.assertEqual(
+            by_metric["de_overlap_at_n"]["claim_status"],
+            "diagnostic_only_until_de_reference_frozen",
+        )
+        self.assertIn("flight_probability", review)
+        self.assertIn("V9-SC-004: AnnData payload staging and obs/var audit plan", review)
+
+    def test_v9_sc_payload_staging_plan_api(self):
+        from spacebio_bench import build_sc_payload_staging_plan, write_sc_payload_staging_plan
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            outputs = write_sc_payload_staging_plan(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            candidates = json.loads(outputs["candidates_json"].read_text())
+            requirements = json.loads(outputs["audit_json"].read_text())
+            actions = json.loads(outputs["actions_json"].read_text())
+            review = outputs["review_md"].read_text()
+
+        package = build_sc_payload_staging_plan(repo_root=REPO_ROOT)
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "payload_staging_plan_ready_no_local_payload",
+        )
+        self.assertEqual(summary["task_id"], "draft_rrrm1_blood_single_cell_spaceflight")
+        self.assertEqual(summary["selected_source_id"], "OSD-918")
+        self.assertEqual(summary["selected_tissue"], "blood")
+        self.assertEqual(summary["local_payload_present"], "false")
+        self.assertEqual(summary["required_obs_field_count"], "9")
+        self.assertEqual(summary["required_var_field_count"], "2")
+        self.assertEqual(summary["required_uns_field_count"], "4")
+        self.assertEqual(summary["staging_action_count"], "7")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-SC-005: AnnData obs/var audit implementation",
+        )
+        self.assertIn("canonical_v9_payload_target", {row["candidate_id"] for row in candidates})
+        self.assertIn("legacy_annotated_h5ad", {row["candidate_id"] for row in candidates})
+        self.assertIn("broad_celltype", {row["field_id"] for row in requirements})
+        self.assertIn("gene_symbol", {row["field_id"] for row in requirements})
+        self.assertEqual(len(actions), 7)
+        self.assertEqual(len(package["summary"]), 1)
+        self.assertIn("No local h5ad payload is claimed", review)
+
+    def test_build_v9_sc_payload_staging_plan_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts" / "build_v9_sc_payload_staging_plan.py"),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "payload_staging_plan_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "obs_var_audit_requirements.csv").open(
+                newline=""
+            ) as handle:
+                requirement_rows = list(csv.DictReader(handle))
+
+        self.assertIn("payload_staging_plan_summary.csv", result.stdout)
+        self.assertIn("V9_SC_PAYLOAD_STAGING_PLAN.md", result.stdout)
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(summary_rows[0]["local_payload_present"], "false")
+        self.assertIn("flight_ground_label", {row["field_id"] for row in requirement_rows})
+
+    def test_generated_v9_sc_payload_staging_plan_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        with (output_dir / "payload_staging_plan_summary.csv").open(
+            newline=""
+        ) as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "payload_staging_candidates.csv").open(
+            newline=""
+        ) as handle:
+            candidate_rows = list(csv.DictReader(handle))
+        with (output_dir / "obs_var_audit_requirements.csv").open(
+            newline=""
+        ) as handle:
+            requirement_rows = list(csv.DictReader(handle))
+        with (output_dir / "payload_staging_actions.csv").open(
+            newline=""
+        ) as handle:
+            action_rows = list(csv.DictReader(handle))
+        review = (REPO_ROOT / "docs" / "V9_SC_PAYLOAD_STAGING_PLAN.md").read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["claim_boundary"],
+            "payload_staging_plan_only_no_local_payload_or_score_claim",
+        )
+        self.assertEqual(summary["canonical_payload_path"], "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad")
+        self.assertEqual(len(candidate_rows), 4)
+        self.assertEqual(len(action_rows), 7)
+        by_candidate = {row["candidate_id"]: row for row in candidate_rows}
+        self.assertEqual(
+            by_candidate["canonical_v9_payload_target"]["path_status"],
+            "planned_repo_path_absent",
+        )
+        self.assertIn(
+            "payload_not_runnable",
+            {row["blocker_if_missing"] for row in requirement_rows},
+        )
+        self.assertIn("V9-SC-005: AnnData obs/var audit implementation", review)
+
+    def test_v9_sc_obs_var_audit_api_skips_without_payload(self):
+        from spacebio_bench import build_sc_obs_var_audit, write_sc_obs_var_audit
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            outputs = write_sc_obs_var_audit(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            results = json.loads(outputs["results_json"].read_text())
+            payload_manifest = json.loads(outputs["payload_manifest_json"].read_text())
+            review = outputs["review_md"].read_text()
+
+        package = build_sc_obs_var_audit(repo_root=REPO_ROOT)
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "obs_var_audit_skipped_no_local_payload",
+        )
+        self.assertEqual(summary["task_id"], "draft_rrrm1_blood_single_cell_spaceflight")
+        self.assertEqual(summary["payload_path_status"], "missing")
+        self.assertEqual(summary["requirement_count"], "27")
+        self.assertEqual(summary["pass_count"], "0")
+        self.assertEqual(summary["fail_count"], "0")
+        self.assertEqual(summary["skip_count"], "27")
+        self.assertEqual(summary["blocker_count"], "17")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-SC-006: canonical payload staging or RRRM-1 h5ad regeneration",
+        )
+        self.assertEqual({row["audit_status"] for row in results}, {"skipped_no_local_payload"})
+        self.assertEqual(payload_manifest[0]["path_status"], "missing")
+        self.assertEqual(len(package["results"]), 27)
+        self.assertIn("machine-readable skip audit", review)
+
+    def test_audit_v9_sc_obs_var_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts" / "audit_v9_sc_obs_var.py"),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "obs_var_audit_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "payload_manifest.csv").open(newline="") as handle:
+                payload_rows = list(csv.DictReader(handle))
+
+        self.assertIn("obs_var_audit_summary.csv", result.stdout)
+        self.assertIn("V9_SC_OBS_VAR_AUDIT.md", result.stdout)
+        self.assertEqual(summary_rows[0]["payload_path_status"], "missing")
+        self.assertEqual(payload_rows[0]["h5ad_read_status"], "not_attempted_no_local_payload")
+
+    def test_generated_v9_sc_obs_var_audit_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        with (output_dir / "obs_var_audit_summary.csv").open(newline="") as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "obs_var_audit_results.csv").open(newline="") as handle:
+            result_rows = list(csv.DictReader(handle))
+        with (output_dir / "payload_manifest.csv").open(newline="") as handle:
+            payload_rows = list(csv.DictReader(handle))
+        review = (REPO_ROOT / "docs" / "V9_SC_OBS_VAR_AUDIT.md").read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["claim_boundary"],
+            "obs_var_audit_skip_only_no_payload_or_score_claim",
+        )
+        self.assertEqual(summary["payload_sha256"], "NA")
+        self.assertEqual(summary["n_obs"], "NA")
+        self.assertEqual(len(result_rows), 27)
+        self.assertEqual({row["audit_status"] for row in result_rows}, {"skipped_no_local_payload"})
+        self.assertEqual(payload_rows[0]["path_status"], "missing")
+        self.assertIn("No obs/var pass is claimed", review)
+
+    def test_v9_sc_payload_staging_execution_api_blocks_without_candidate_payload(self):
+        from spacebio_bench import (
+            build_sc_payload_staging_execution,
+            write_sc_payload_staging_execution,
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            outputs = write_sc_payload_staging_execution(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            candidates = json.loads(outputs["candidates_json"].read_text())
+            regeneration_steps = json.loads(outputs["regeneration_json"].read_text())
+            review = outputs["review_md"].read_text()
+
+        package = build_sc_payload_staging_execution(repo_root=REPO_ROOT)
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "payload_staging_execution_blocked_no_candidate_payload",
+        )
+        self.assertEqual(summary["task_id"], "draft_rrrm1_blood_single_cell_spaceflight")
+        self.assertEqual(summary["canonical_payload_status"], "planned_repo_path_absent")
+        self.assertEqual(summary["selected_route"], "prepare_regeneration_from_starsolo_per_srx")
+        self.assertEqual(summary["payload_manifest_status"], "missing")
+        self.assertEqual(summary["obs_var_audit_status"], "obs_var_audit_skipped_no_local_payload")
+        self.assertEqual(summary["local_payload_staged"], "false")
+        self.assertEqual(summary["candidate_count"], "4")
+        self.assertEqual(summary["regeneration_step_count"], "5")
+        self.assertEqual(
+            summary["claim_boundary"],
+            "payload_staging_execution_no_payload_or_score_claim",
+        )
+        by_candidate = {row["candidate_id"]: row for row in candidates}
+        self.assertEqual(
+            by_candidate["legacy_annotated_h5ad"]["action_decision"],
+            "preferred_route_blocked",
+        )
+        self.assertEqual(
+            by_candidate["starsolo_per_srx_regeneration"]["action_decision"],
+            "regeneration_route_requires_per_srx_matrices",
+        )
+        self.assertIn("confirm_per_srx_starsolo_matrices", {row["step_id"] for row in regeneration_steps})
+        self.assertEqual(len(package["regeneration_steps"]), 5)
+        self.assertIn("No local h5ad payload is claimed", review)
+
+    def test_build_v9_sc_payload_staging_execution_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts" / "build_v9_sc_payload_staging_execution.py"),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "payload_staging_execution_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "payload_regeneration_steps.csv").open(
+                newline=""
+            ) as handle:
+                regeneration_rows = list(csv.DictReader(handle))
+
+        self.assertIn("payload_staging_execution_summary.csv", result.stdout)
+        self.assertIn("V9_SC_PAYLOAD_STAGING_EXECUTION.md", result.stdout)
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(summary_rows[0]["local_payload_staged"], "false")
+        self.assertEqual(len(regeneration_rows), 5)
+
+    def test_generated_v9_sc_payload_staging_execution_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        with (output_dir / "payload_staging_execution_summary.csv").open(
+            newline=""
+        ) as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "payload_staging_execution_candidates.csv").open(
+            newline=""
+        ) as handle:
+            candidate_rows = list(csv.DictReader(handle))
+        with (output_dir / "payload_regeneration_steps.csv").open(
+            newline=""
+        ) as handle:
+            regeneration_rows = list(csv.DictReader(handle))
+        review = (REPO_ROOT / "docs" / "V9_SC_PAYLOAD_STAGING_EXECUTION.md").read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["claim_boundary"],
+            "payload_staging_execution_no_payload_or_score_claim",
+        )
+        self.assertEqual(summary["canonical_payload_status"], "planned_repo_path_absent")
+        self.assertEqual(summary["payload_manifest_status"], "missing")
+        self.assertEqual(summary["obs_var_audit_status"], "obs_var_audit_skipped_no_local_payload")
+        self.assertEqual(len(candidate_rows), 4)
+        self.assertEqual(len(regeneration_rows), 5)
+        self.assertIn(
+            "blocked_until_external_payload_available",
+            {row["gate_status"] for row in regeneration_rows},
+        )
+        self.assertIn("No evaluator, leaderboard result, or legacy RRRM score promotion is claimed", review)
+
+    def test_v9_sc_external_payload_availability_api_blocks_without_source_payload(self):
+        from spacebio_bench import (
+            build_sc_external_payload_availability,
+            write_sc_external_payload_availability,
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            checked_bases = [
+                str(Path(tmpdir) / "checked_base_a"),
+                str(Path(tmpdir) / "checked_base_b"),
+            ]
+            outputs = write_sc_external_payload_availability(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+                checked_bases=checked_bases,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            candidates = json.loads(outputs["candidates_json"].read_text())
+            matrix_rows = json.loads(outputs["matrix_json"].read_text())
+            copy_decision = json.loads(outputs["copy_decision_json"].read_text())
+            review = outputs["review_md"].read_text()
+            package = build_sc_external_payload_availability(
+                repo_root=REPO_ROOT,
+                checked_bases=checked_bases,
+            )
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "external_payload_availability_blocked_no_h5ad_or_starsolo_matrices",
+        )
+        self.assertEqual(summary["task_id"], "draft_rrrm1_blood_single_cell_spaceflight")
+        self.assertEqual(summary["source_id"], "OSD-918")
+        self.assertEqual(summary["tissue"], "blood")
+        self.assertEqual(summary["checked_base_count"], "2")
+        self.assertEqual(summary["expected_blood_srx_count"], "8")
+        self.assertEqual(summary["checked_matrix_row_count"], "16")
+        self.assertEqual(summary["annotated_h5ad_found"], "false")
+        self.assertEqual(summary["labeled_h5ad_found"], "false")
+        self.assertEqual(summary["complete_starsolo_srx_count"], "0")
+        self.assertEqual(summary["canonical_copy_allowed"], "false")
+        self.assertEqual(summary["regeneration_allowed"], "false")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-SC-006c: OSDR processed payload discovery or owner scratch path request",
+        )
+        self.assertEqual(
+            summary["claim_boundary"],
+            "external_payload_availability_no_payload_or_score_claim",
+        )
+        self.assertEqual(len(candidates), 5)
+        self.assertEqual(
+            {row["candidate_type"] for row in candidates},
+            {"canonical_target", "preferred_annotated_h5ad", "metadata_labeled_h5ad"},
+        )
+        self.assertEqual(len(matrix_rows), 16)
+        self.assertEqual({row["complete_matrix_bundle"] for row in matrix_rows}, {"false"})
+        self.assertEqual(len({row["srx"] for row in matrix_rows}), 8)
+        self.assertEqual(copy_decision[0]["source_payload_status"], "no_source_payload_found")
+        self.assertEqual(copy_decision[0]["copy_allowed"], "false")
+        self.assertEqual(len(package["matrix_availability"]), 16)
+        self.assertIn("No canonical or external RRRM-1 blood source payload", review)
+
+    def test_build_v9_sc_external_payload_availability_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir) / "sc_spaceflight"
+            checked_bases = [
+                str(Path(tmpdir) / "checked_base_a"),
+                str(Path(tmpdir) / "checked_base_b"),
+            ]
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts" / "build_v9_sc_external_payload_availability.py"),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                    "--checked-base",
+                    checked_bases[0],
+                    "--checked-base",
+                    checked_bases[1],
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "external_payload_availability_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "external_payload_candidates.csv").open(
+                newline=""
+            ) as handle:
+                candidate_rows = list(csv.DictReader(handle))
+            with (output_dir / "external_starsolo_matrix_availability.csv").open(
+                newline=""
+            ) as handle:
+                matrix_rows = list(csv.DictReader(handle))
+
+        self.assertIn("external_payload_availability_summary.csv", result.stdout)
+        self.assertIn("V9_SC_EXTERNAL_PAYLOAD_AVAILABILITY.md", result.stdout)
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(summary_rows[0]["checked_matrix_row_count"], "16")
+        self.assertEqual(summary_rows[0]["canonical_copy_allowed"], "false")
+        self.assertEqual(len(candidate_rows), 5)
+        self.assertEqual(len(matrix_rows), 16)
+
+    def test_generated_v9_sc_external_payload_availability_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        with (output_dir / "external_payload_availability_summary.csv").open(
+            newline=""
+        ) as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "external_payload_candidates.csv").open(
+            newline=""
+        ) as handle:
+            candidate_rows = list(csv.DictReader(handle))
+        with (output_dir / "external_starsolo_matrix_availability.csv").open(
+            newline=""
+        ) as handle:
+            matrix_rows = list(csv.DictReader(handle))
+        with (output_dir / "canonical_payload_copy_decision.csv").open(
+            newline=""
+        ) as handle:
+            copy_rows = list(csv.DictReader(handle))
+        review = (REPO_ROOT / "docs" / "V9_SC_EXTERNAL_PAYLOAD_AVAILABILITY.md").read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "external_payload_availability_blocked_no_h5ad_or_starsolo_matrices",
+        )
+        self.assertEqual(
+            summary["claim_boundary"],
+            "external_payload_availability_no_payload_or_score_claim",
+        )
+        self.assertEqual(summary["expected_blood_srx_count"], "8")
+        self.assertEqual(summary["checked_matrix_row_count"], "16")
+        self.assertEqual(summary["canonical_copy_allowed"], "false")
+        self.assertEqual(summary["regeneration_allowed"], "false")
+        self.assertEqual(len(candidate_rows), 5)
+        self.assertEqual(len(matrix_rows), 16)
+        self.assertEqual({row["complete_matrix_bundle"] for row in matrix_rows}, {"false"})
+        self.assertEqual(copy_rows[0]["copy_allowed"], "false")
+        self.assertIn("No h5ad was copied into the canonical v9 payload path", review)
+
+    def test_v9_sc_processed_payload_discovery_api_blocks_without_processed_payload(self):
+        from spacebio_bench import (
+            build_sc_processed_payload_discovery,
+            write_sc_processed_payload_discovery,
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            fixture = tmp / "osd918_files.json"
+            write_osd918_osdr_file_listing_fixture(fixture)
+            output_dir = tmp / "sc_spaceflight"
+            outputs = write_sc_processed_payload_discovery(
+                repo_root=REPO_ROOT,
+                output_dir=output_dir,
+                api_listing_json=fixture,
+            )
+            with outputs["summary_csv"].open(newline="") as handle:
+                summary_rows = list(csv.DictReader(handle))
+            files = json.loads(outputs["files_json"].read_text())
+            coverage = json.loads(outputs["coverage_json"].read_text())
+            owner_requests = json.loads(outputs["owner_request_json"].read_text())
+            deferral = json.loads(outputs["deferral_json"].read_text())
+            review = outputs["review_md"].read_text()
+            package = build_sc_processed_payload_discovery(
+                repo_root=REPO_ROOT,
+                api_listing_json=fixture,
+            )
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "osdr_processed_payload_unavailable_owner_scratch_request_required",
+        )
+        self.assertEqual(summary["task_id"], "draft_rrrm1_blood_single_cell_spaceflight")
+        self.assertEqual(summary["source_id"], "OSD-918")
+        self.assertEqual(summary["glds_prefix"], "GLDS-746")
+        self.assertEqual(summary["tissue"], "blood")
+        self.assertEqual(summary["api_status"], "ok")
+        self.assertEqual(summary["osdr_file_count"], "19")
+        self.assertEqual(summary["metadata_file_count"], "1")
+        self.assertEqual(summary["raw_fastq_count"], "16")
+        self.assertEqual(summary["raw_checksum_count"], "1")
+        self.assertEqual(summary["raw_multiqc_count"], "1")
+        self.assertEqual(summary["processed_h5ad_count"], "0")
+        self.assertEqual(summary["processed_starsolo_count"], "0")
+        self.assertEqual(summary["processed_checksum_manifest_count"], "0")
+        self.assertEqual(summary["expected_blood_srx_count"], "8")
+        self.assertEqual(summary["complete_expected_fastq_pair_count"], "8")
+        self.assertEqual(summary["missing_expected_fastq_pair_count"], "0")
+        self.assertEqual(summary["canonical_copy_allowed"], "false")
+        self.assertEqual(summary["regeneration_allowed"], "false")
+        self.assertEqual(summary["owner_scratch_request_required"], "true")
+        self.assertEqual(
+            summary["next_required_block"],
+            "V9-SC-006d: owner scratch path intake or raw FASTQ regeneration feasibility decision",
+        )
+        self.assertEqual(
+            summary["claim_boundary"],
+            "osdr_processed_payload_discovery_only_no_payload_copy_or_score_claim",
+        )
+        self.assertEqual(len(files), 19)
+        self.assertEqual(len(coverage), 8)
+        self.assertEqual({row["fastq_pair_complete"] for row in coverage}, {"true"})
+        self.assertEqual(
+            {row["processed_matrix_status"] for row in coverage},
+            {"not_listed_in_osdr_file_api"},
+        )
+        self.assertEqual(len(owner_requests), 3)
+        self.assertEqual(len(deferral), 1)
+        self.assertEqual(deferral[0]["copy_allowed"], "false")
+        self.assertEqual(len(package["files"]), 19)
+        self.assertIn("No OSDR payload was downloaded", review)
+
+    def test_build_v9_sc_osdr_processed_payload_discovery_cli(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            fixture = tmp / "osd918_files.json"
+            write_osd918_osdr_file_listing_fixture(fixture)
+            output_dir = tmp / "sc_spaceflight"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(
+                        REPO_ROOT
+                        / "scripts"
+                        / "build_v9_sc_osdr_processed_payload_discovery.py"
+                    ),
+                    "--repo-root",
+                    str(REPO_ROOT),
+                    "--output-dir",
+                    str(output_dir),
+                    "--api-listing-json",
+                    str(fixture),
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            with (output_dir / "osdr_processed_payload_discovery_summary.csv").open(
+                newline=""
+            ) as handle:
+                summary_rows = list(csv.DictReader(handle))
+            with (output_dir / "osdr_file_discovery.csv").open(newline="") as handle:
+                file_rows = list(csv.DictReader(handle))
+            with (output_dir / "owner_scratch_request.csv").open(newline="") as handle:
+                request_rows = list(csv.DictReader(handle))
+
+        self.assertIn("osdr_processed_payload_discovery_summary.csv", result.stdout)
+        self.assertIn("V9_SC_OSDR_PROCESSED_PAYLOAD_DISCOVERY.md", result.stdout)
+        self.assertEqual(len(summary_rows), 1)
+        self.assertEqual(summary_rows[0]["osdr_file_count"], "19")
+        self.assertEqual(summary_rows[0]["owner_scratch_request_required"], "true")
+        self.assertEqual(len(file_rows), 19)
+        self.assertEqual(len(request_rows), 3)
+
+    def test_generated_v9_sc_osdr_processed_payload_discovery_outputs_validate(self):
+        output_dir = REPO_ROOT / "v9" / "sc_spaceflight"
+        with (output_dir / "osdr_processed_payload_discovery_summary.csv").open(
+            newline=""
+        ) as handle:
+            summary_rows = list(csv.DictReader(handle))
+        with (output_dir / "osdr_file_discovery.csv").open(newline="") as handle:
+            file_rows = list(csv.DictReader(handle))
+        with (output_dir / "osdr_expected_srx_coverage.csv").open(newline="") as handle:
+            coverage_rows = list(csv.DictReader(handle))
+        with (output_dir / "owner_scratch_request.csv").open(newline="") as handle:
+            request_rows = list(csv.DictReader(handle))
+        with (output_dir / "processed_payload_deferral_decision.csv").open(
+            newline=""
+        ) as handle:
+            deferral_rows = list(csv.DictReader(handle))
+        review = (
+            REPO_ROOT / "docs" / "V9_SC_OSDR_PROCESSED_PAYLOAD_DISCOVERY.md"
+        ).read_text()
+
+        self.assertEqual(len(summary_rows), 1)
+        summary = summary_rows[0]
+        self.assertEqual(
+            summary["decision_status"],
+            "osdr_processed_payload_unavailable_owner_scratch_request_required",
+        )
+        self.assertEqual(summary["osdr_file_count"], "19")
+        self.assertEqual(summary["raw_fastq_count"], "16")
+        self.assertEqual(summary["processed_h5ad_count"], "0")
+        self.assertEqual(summary["processed_starsolo_count"], "0")
+        self.assertEqual(summary["complete_expected_fastq_pair_count"], "8")
+        self.assertEqual(summary["canonical_copy_allowed"], "false")
+        self.assertEqual(summary["regeneration_allowed"], "false")
+        self.assertEqual(summary["owner_scratch_request_required"], "true")
+        self.assertEqual(
+            summary["claim_boundary"],
+            "osdr_processed_payload_discovery_only_no_payload_copy_or_score_claim",
+        )
+        self.assertEqual(len(file_rows), 19)
+        self.assertEqual(len(coverage_rows), 8)
+        self.assertEqual(len(request_rows), 3)
+        self.assertEqual(len(deferral_rows), 1)
+        self.assertEqual(deferral_rows[0]["copy_allowed"], "false")
+        self.assertIn("Complete expected raw FASTQ pairs listed by OSDR: 8/8", review)
+
     def test_generated_v9_multispecies_task_manifests_validate(self):
         from spacebio_bench import TaskRegistry, load_task_manifest
 
@@ -6760,11 +7924,33 @@ class V9SpaceBioBenchTests(unittest.TestCase):
         resources = {resource["name"]: resource for resource in package["resources"]}
 
         self.assertEqual(package["profile"], "data-package")
-        self.assertEqual(package["spacebio_bench:release_status"], "draft_not_frozen")
+        self.assertEqual(
+            package["spacebio_bench:release_status"],
+            "metadata_alpha_not_frozen",
+        )
+        self.assertEqual(
+            package["spacebio_bench:alpha_snapshot_status"],
+            "metadata_only_alpha_snapshot",
+        )
+        self.assertEqual(
+            package["spacebio_bench:claim_boundary"],
+            "metadata_only_public_bulk_alpha_no_payload_release",
+        )
+        self.assertFalse(package["spacebio_bench:payload_release_allowed"])
         self.assertIn("source_checksum_audit", resources)
         self.assertIn("baseline_predictions", resources)
+        self.assertIn("public_bulk_alpha_gap_matrix", resources)
+        self.assertIn("public_bulk_alpha_snapshot_claim_boundary", resources)
         self.assertEqual(resources["task_manifests"]["spacebio_bench:file_count"], 8)
         self.assertEqual(resources["baseline_predictions"]["spacebio_bench:file_count"], 24)
+        self.assertEqual(
+            resources["public_bulk_alpha_gap_matrix"]["spacebio_bench:bundle_part"],
+            "alpha_boundary_metadata",
+        )
+        self.assertEqual(
+            resources["public_bulk_alpha_snapshot_claim_boundary"]["schema"]["primaryKey"],
+            ["snapshot_decision_id", "claim_id"],
+        )
         self.assertEqual(
             resources["source_checksum_audit"]["schema"]["primaryKey"],
             ["source_id"],
@@ -6798,17 +7984,66 @@ class V9SpaceBioBenchTests(unittest.TestCase):
 
         self.assertIn("datapackage.draft.json", result.stdout)
         self.assertEqual(payload["name"], "spacebio-bench-v9-public-bulk-draft")
-        self.assertEqual(len(payload["resources"]), 11)
+        self.assertEqual(len(payload["resources"]), 21)
+        self.assertEqual(
+            payload["spacebio_bench:claim_boundary"],
+            "metadata_only_public_bulk_alpha_no_payload_release",
+        )
+
+    def test_generated_v9_datapackage_draft_records_metadata_alpha_boundary(self):
+        payload = json.loads((REPO_ROOT / "v9" / "datapackage.draft.json").read_text())
+        resources = {resource["name"]: resource for resource in payload["resources"]}
+
+        self.assertEqual(len(resources), 21)
+        self.assertEqual(
+            payload["spacebio_bench:release_status"],
+            "metadata_alpha_not_frozen",
+        )
+        self.assertEqual(
+            payload["spacebio_bench:alpha_snapshot_status"],
+            "metadata_only_alpha_snapshot",
+        )
+        self.assertFalse(payload["spacebio_bench:payload_release_allowed"])
+        self.assertEqual(
+            payload["spacebio_bench:payload_verification_status"],
+            "checksum_manifests_parsed_payloads_not_hashed",
+        )
+        alpha_resources = {
+            name
+            for name, resource in resources.items()
+            if resource.get("spacebio_bench:bundle_part") == "alpha_boundary_metadata"
+        }
+        self.assertEqual(
+            alpha_resources,
+            {
+                "public_bulk_alpha_gap_summary",
+                "public_bulk_alpha_gap_matrix",
+                "public_bulk_alpha_payload_hash_boundary",
+                "public_bulk_alpha_claim_boundary",
+                "public_bulk_alpha_package_update_plan",
+                "public_bulk_alpha_snapshot_decision_summary",
+                "public_bulk_alpha_snapshot_option_matrix",
+                "public_bulk_alpha_snapshot_claim_boundary",
+                "public_bulk_alpha_snapshot_language_snippets",
+                "public_bulk_alpha_snapshot_next_actions",
+            },
+        )
+        self.assertNotIn("payload_mirror", resources)
 
     def test_v9_hf_dataset_card_records_draft_boundaries(self):
         card = (REPO_ROOT / "docs" / "v9_hf_dataset_card.md").read_text()
 
         required_phrases = [
-            "Release status: draft, not frozen.",
+            "Release status: metadata-only alpha snapshot, not frozen.",
+            "metadata-only alpha snapshot",
+            "not a frozen payload release",
+            "does not include a local payload mirror",
             "payload-level hash verification",
             "22 deduplicated public OSDR source rows",
             "8 generated public bulk LOMO task manifests",
-            "draft_not_frozen",
+            "metadata_alpha_not_frozen",
+            "metadata_only_public_bulk_alpha_no_payload_release",
+            "payload_release_allowed = false",
             "checksum_manifests_parsed_payloads_not_hashed",
             "controlled-access human sequence data",
             "NASA Open Science Data Repository",

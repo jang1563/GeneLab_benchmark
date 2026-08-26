@@ -6,6 +6,7 @@ set -euo pipefail
 RUN_SIGNATURE_EXPORT=0
 RUN_API=0
 TOP_N=150
+API_RAW_DIR=""
 
 for arg in "$@"; do
   case "$arg" in
@@ -18,8 +19,11 @@ for arg in "$@"; do
     --top-n=*)
       TOP_N="${arg#*=}"
       ;;
+    --api-raw-dir=*)
+      API_RAW_DIR="${arg#*=}"
+      ;;
     -h|--help)
-      echo "Usage: bash scripts/hpc_v8_intervene.sh [--refresh-signatures] [--with-api] [--top-n=150]"
+      echo "Usage: bash scripts/hpc_v8_intervene.sh [--refresh-signatures] [--with-api] [--top-n=150] [--api-raw-dir=PATH]"
       exit 0
       ;;
     *)
@@ -45,14 +49,19 @@ else
 fi
 
 if [[ "$RUN_API" -eq 1 ]]; then
+  API_RAW_ARGS=()
+  if [[ -n "$API_RAW_DIR" ]]; then
+    API_RAW_ARGS+=("--raw-dir" "$API_RAW_DIR")
+  fi
+
   echo "[v8 INTERVENE 2/6] L1000CDS2 chemical reversal query"
-  "$PYTHON_BIN" v8/intervene/lincs_query.py
+  "$PYTHON_BIN" v8/intervene/lincs_query.py "${API_RAW_ARGS[@]}"
 
   echo "[v8 INTERVENE 3/6] Multi-tissue Pareto scoring"
   "$PYTHON_BIN" v8/intervene/pareto_multi_tissue.py
 
   echo "[v8 INTERVENE 4/6] Enrichr CRISPR KO orthogonal query"
-  "$PYTHON_BIN" v8/intervene/perturb_seq_orthog.py
+  "$PYTHON_BIN" v8/intervene/perturb_seq_orthog.py "${API_RAW_ARGS[@]}"
 else
   echo "[v8 INTERVENE 2/6] Skipping L1000CDS2 query; pass --with-api to run"
   echo "[v8 INTERVENE 3/6] Skipping Pareto refresh; requires fresh L1000CDS2 outputs"

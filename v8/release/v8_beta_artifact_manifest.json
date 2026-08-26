@@ -36,7 +36,7 @@
       "target": "github",
       "tracked_in_git": true,
       "required_for_beta": true,
-      "sha256": "376f34ee3f857b0f2415a376aeea2b90fe0974186e973b272738ef048f4fded6"
+      "sha256": "0861fafd8581dcbd1eb74a42bace1e9cd0e8aba1489f12e635a5d7c8eb82ad68"
     },
     {
       "path": "v8/MANUSCRIPT_DRAFT.md",
@@ -71,7 +71,21 @@
       "target": "github+hugging_face_dataset+zenodo",
       "tracked_in_git": true,
       "required_for_beta": true,
-      "sha256": "b04d447c59a401de7da02a9b7269029b1a481d3b5b8b9a86c04054ce5949bf23"
+      "sha256": "fd83176bece1b4d8680d0c23ce4ff444fb7bd272dd8da9e7ed2e17b17de5feb8"
+    },
+    {
+      "path": "v8/provenance/external_source_audit.json",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "374b19a39ff8cc07dd194ada236124532e16322b829d8864285dab467d2480a5"
+    },
+    {
+      "path": "v8/provenance/api_raw_archive_audit.json",
+      "target": "github+hugging_face_dataset+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "72b525359ecd5c1e4c32663c61ba1a60e62a2eb4283783f38d23eb26f2faa260"
     },
     {
       "path": "v8/provenance/runs/*.json",
@@ -163,6 +177,41 @@
       "tracked_in_git": true,
       "required_for_beta": true,
       "sha256": "e934600fa5c9cfc442a8c4caf748ee3c8c4ab96706213271342535483c742ad0"
+    },
+    {
+      "path": "scripts/hpc_v8_intervene.sh",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "97c32221d0cfb52dd4a36ccbe7b7d2ca4b1a3c2cf9db87734f148488ee56959a"
+    },
+    {
+      "path": "scripts/audit_v8_external_sources.py",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "42922e816458b3cfb37ff3f717da8cffd96d6a2b7f7b855926b8c59ff9a3600b"
+    },
+    {
+      "path": "scripts/audit_v8_api_archive.py",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "481a6f13b803044000590cca5d01160e3d9903697c60e5094b76678fcc1f0592"
+    },
+    {
+      "path": "v8/intervene/lincs_query.py",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "77be4860f627197e2fd0fc8ccb0f5bb5e9dda012eec2cbfb9db22de746c3ddcb"
+    },
+    {
+      "path": "v8/intervene/perturb_seq_orthog.py",
+      "target": "github+zenodo",
+      "tracked_in_git": true,
+      "required_for_beta": true,
+      "sha256": "07717ecf7a19b1012cef9d112ec0a49d82374609a37ad3b23c64bcb7cdbe7aac"
     }
   ],
   "release_blockers": [

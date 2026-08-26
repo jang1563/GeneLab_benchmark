@@ -154,9 +154,12 @@ Actual result:
   payload bundle, benchmark output bundle, and deferred/excluded artifacts.
 - `scripts/build_v9_datapackage_draft.py` generates
   `v9/datapackage.draft.json`.
-- The draft descriptor has 11 resources, including task/source/provenance
-  tables, eight task manifests, 24 baseline prediction CSVs, 24 metrics JSON
-  files, and 24 run-manifest JSON files.
+- The draft descriptor has 21 resources after V9-BULK-ALPHA-003, including
+  task/source/provenance tables, 10 alpha-boundary metadata tables, eight task
+  manifests, 24 baseline prediction CSVs, 24 metrics JSON files, and 24
+  run-manifest JSON files.
+- The draft descriptor records `metadata_alpha_not_frozen` and
+  `metadata_only_public_bulk_alpha_no_payload_release`.
 - Large fold payload files are indexed by `v9/task_data_index.csv` but remain
   outside payload-level hash freeze.
 
@@ -243,27 +246,61 @@ Stop and checkpoint only when one of these is true:
 
 ## Next Active Block
 
-`V9-BULK-ALPHA-002: metadata-only alpha snapshot decision` is the next active
-implementation block. It should start from
-`v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_summary.csv`,
-`v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_gap_matrix.csv`,
-`v9/reports/public_bulk_alpha_gap_matrix/payload_hash_boundary.csv`,
-`v9/reports/public_bulk_alpha_gap_matrix/public_bulk_alpha_claim_boundary.csv`,
-`v9/reports/public_bulk_alpha_gap_matrix/package_update_plan.csv`, and
-`docs/V9_PUBLIC_BULK_ALPHA_FREEZE_GAP_MATRIX_REVIEW.md`.
-The block should decide whether a metadata-only public bulk alpha snapshot is
-acceptable with explicit payload-hash blockers, or whether payload mirroring and
-local hash verification must precede any alpha wording.
+`V9-SC-006d: owner scratch path intake or raw FASTQ regeneration feasibility decision` is the next
+active implementation block. It should start from
+`v9/sc_spaceflight/osdr_processed_payload_discovery_summary.csv`,
+`v9/sc_spaceflight/osdr_file_discovery.csv`,
+`v9/sc_spaceflight/osdr_expected_srx_coverage.csv`,
+`v9/sc_spaceflight/owner_scratch_request.csv`,
+`v9/sc_spaceflight/processed_payload_deferral_decision.csv`,
+`docs/V9_SC_OSDR_PROCESSED_PAYLOAD_DISCOVERY.md`,
+`v9/sc_spaceflight/external_payload_availability_summary.csv`,
+`v9/sc_spaceflight/external_payload_candidates.csv`,
+`v9/sc_spaceflight/external_starsolo_matrix_availability.csv`,
+`v9/sc_spaceflight/canonical_payload_copy_decision.csv`,
+`docs/V9_SC_EXTERNAL_PAYLOAD_AVAILABILITY.md`,
+`v9/sc_spaceflight/payload_staging_execution_summary.csv`,
+`v9/sc_spaceflight/payload_staging_execution_candidates.csv`,
+`v9/sc_spaceflight/payload_regeneration_steps.csv`,
+`docs/V9_SC_PAYLOAD_STAGING_EXECUTION.md`,
+`v9/sc_spaceflight/obs_var_audit_summary.csv`,
+`v9/sc_spaceflight/obs_var_audit_results.csv`,
+`v9/sc_spaceflight/payload_manifest.csv`,
+`docs/V9_SC_OBS_VAR_AUDIT.md`,
+`v9/sc_spaceflight/payload_staging_plan_summary.csv`,
+`v9/sc_spaceflight/payload_staging_candidates.csv`,
+`v9/sc_spaceflight/obs_var_audit_requirements.csv`,
+`v9/sc_spaceflight/payload_staging_actions.csv`,
+`docs/V9_SC_PAYLOAD_STAGING_PLAN.md`,
+`v9/sc_spaceflight/metric_spec_summary.csv`,
+`v9/sc_spaceflight/metric_spec_required_inputs.csv`,
+`v9/sc_spaceflight/metric_spec_skip_policy.csv`,
+`docs/V9_SC_METRIC_SPEC.md`, and
+`v9/sc_spaceflight/task_manifests/draft_rrrm1_blood_single_cell_spaceflight.json`.
+V9-SC-004 fixed the canonical future RRRM-1 blood h5ad target, candidate
+staging routes, and required `obs`, `var`, `uns`, matrix, layer, and raw-object
+audit contract without claiming a local payload. V9-SC-005 implemented the
+skip-aware AnnData auditor and confirmed that the canonical payload is still
+missing. V9-SC-006 found no staged canonical or legacy h5ad, V9-SC-006b found
+no external annotated h5ad, labeled h5ad, or complete STARsolo bundle in the
+checked base scopes, and V9-SC-006c found no OSDR processed h5ad, STARsolo
+bundle, or processed checksum manifest. The next block should intake an
+owner-supplied annotated h5ad path or all-eight-SRX STARsolo matrix path, or
+record a separate raw FASTQ regeneration feasibility decision before any
+canonical copy or regeneration.
 
 Purpose-drift guard:
 
 - The current OSD-120 metadata branch is closed unless owner-supplied release
   metadata appears.
 - Do not create another archive-release, citation, DOI, license, or
-  creator/publisher gate for OSD-120 during V9-BULK-ALPHA-002.
+  creator/publisher gate for OSD-120 during V9-SC-006d.
 - Keep public bulk core separate from organoid and multispecies draft tracks.
 - Do not promote a frozen public release while public bulk payload hashes remain
   unverified.
+- Do not promote legacy RRRM scores, scripts, or figures as v9 single-cell
+  benchmark results before a local payload passes the v9 audit and metrics are
+  regenerated from a v9 manifest plus run manifest.
 
 `V9-THEN-005: RO-Crate Export Design` remains the next packaging/release block
 when the active lane returns to release metadata. It should start from

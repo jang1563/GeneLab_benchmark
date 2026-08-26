@@ -1,0 +1,42 @@
+[
+  {
+    "candidate_id": "canonical_v9_payload_target",
+    "candidate_path": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "candidate_role": "target_payload_path",
+    "notes": "Canonical location for the first runnable RRRM-1 blood v9 payload.",
+    "path_status": "planned_repo_path_absent",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "promotion_status": "target_blocked_until_payload_staged_and_audited",
+    "required_evidence": "local h5ad exists|sha256 recorded|obs_var_audit_passed"
+  },
+  {
+    "candidate_id": "legacy_annotated_h5ad",
+    "candidate_path": "$SCRATCH_DIR/rrrm1_scrna/downstream_initial/annotations/objects/RRRM1_blood_annotated.h5ad",
+    "candidate_role": "preferred_source_if_available",
+    "notes": "Preferred because the legacy annotation summary names broad cell-type labels.",
+    "path_status": "unresolved_external_path",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "promotion_status": "usable_only_after_local_copy_hash_and_contract_audit",
+    "required_evidence": "copy provenance|sha256|broad_celltype present|cell barcode stability"
+  },
+  {
+    "candidate_id": "legacy_labeled_h5ad",
+    "candidate_path": "$SCRATCH_DIR/rrrm1_scrna/OSD-918/OSD-918_blood_labeled.h5ad",
+    "candidate_role": "metadata_source_if_annotation_missing",
+    "notes": "Useful fallback for sample metadata but not enough for cell-type diagnostics.",
+    "path_status": "unresolved_external_path",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "promotion_status": "insufficient_without_broad_celltype_annotation",
+    "required_evidence": "condition labels|animal_id|age_months|annotation join plan"
+  },
+  {
+    "candidate_id": "starsolo_per_srx_regeneration",
+    "candidate_path": "$SCRATCH_DIR/rrrm1_scrna/OSD-918/starsolo_per_srx/",
+    "candidate_role": "regeneration_source",
+    "notes": "Regenerate with the legacy per-SRX merge script, then normalize to the v9 contract.",
+    "path_status": "unresolved_external_path",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "promotion_status": "valid_regeneration_route_if_raw_or_starsolo_outputs_available",
+    "required_evidence": "per-SRX matrix files|condition map|script version|output hash"
+  }
+]

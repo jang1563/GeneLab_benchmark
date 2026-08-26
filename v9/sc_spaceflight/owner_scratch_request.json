@@ -1,0 +1,32 @@
+[
+  {
+    "discovery_id": "v9_sc_006c_osd918_processed_payload_discovery",
+    "reason": "Preferred route to canonical v9 payload without re-running raw FASTQ processing.",
+    "recipient_role": "dataset_owner_or_local_pipeline_operator",
+    "request_id": "preferred_annotated_h5ad_owner_path",
+    "request_status": "required",
+    "required_evidence": "absolute_path|sha256|n_obs|n_vars|annotation_source",
+    "required_path_or_artifact": "RRRM1_blood_annotated.h5ad or exact scratch path to that object",
+    "unblock_step": "canonical h5ad copy and obs/var audit rerun"
+  },
+  {
+    "discovery_id": "v9_sc_006c_osd918_processed_payload_discovery",
+    "reason": "Required to regenerate the labeled h5ad from existing STARsolo output.",
+    "recipient_role": "dataset_owner_or_local_pipeline_operator",
+    "request_id": "all_eight_starsolo_matrix_bundles",
+    "request_status": "required_if_annotated_h5ad_absent",
+    "required_evidence": "matrix.mtx(.gz)|features.tsv(.gz)|barcodes.tsv(.gz)|per_srx_paths",
+    "required_path_or_artifact": "OSD-918/starsolo_per_srx/<SRX>/Solo.out/GeneFull/filtered for all 8 blood SRX",
+    "unblock_step": "RRRM-1 blood h5ad regeneration"
+  },
+  {
+    "discovery_id": "v9_sc_006c_osd918_processed_payload_discovery",
+    "reason": "OSDR lists raw inputs, but regeneration from raw FASTQ is a separate HPC block.",
+    "recipient_role": "hpc_pipeline_operator",
+    "request_id": "raw_fastq_regeneration_feasibility",
+    "request_status": "deferred_planning_only",
+    "required_evidence": "OSDR raw FASTQ listing|raw md5 manifest|HPC storage and compute plan",
+    "required_path_or_artifact": "raw FASTQ pairs for 8 OSD-918 blood SRX",
+    "unblock_step": "raw FASTQ to STARsolo regeneration feasibility decision"
+  }
+]

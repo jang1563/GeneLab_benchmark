@@ -1,0 +1,272 @@
+[
+  {
+    "accepted_aliases": "obs_names|barcode|cell_barcode",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "cell_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "unique non-empty cell identifiers; if absent derive from obs_names"
+  },
+  {
+    "accepted_aliases": "srx|gsm|source_name",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "sample_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "maps each cell to exactly one SRX/GSM sample"
+  },
+  {
+    "accepted_aliases": "osd|study_accession",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "source_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "constant OSD-918 for this first payload"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "tissue",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "constant blood and matches manifest biospecimen_type"
+  },
+  {
+    "accepted_aliases": "FLT/GC|flight_ground_label",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "condition",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "domain must be FLT or GC before label normalization"
+  },
+  {
+    "accepted_aliases": "condition|exp",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "flight_ground_label",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "domain must be Flight or Ground after normalization"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "animal_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "exactly eight animal/source_name groups for RRRM-1 blood"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "age_months",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "numeric values expected from the condition map"
+  },
+  {
+    "accepted_aliases": "predicted.id|celltype|cell_type",
+    "axis": "obs",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "broad_celltype",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "folds|state_label_metrics|cell_alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "non-empty broad label per cell for cell-type diagnostics"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "warn_not_block_unless_needed_by_metric",
+    "field_id": "srx",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|provenance",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence, completeness, and value domain"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "warn_not_block_unless_needed_by_metric",
+    "field_id": "gsm",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|provenance",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence, completeness, and value domain"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "warn_not_block_unless_needed_by_metric",
+    "field_id": "cluster_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|provenance",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence, completeness, and value domain"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "warn_not_block_unless_needed_by_metric",
+    "field_id": "n_genes_by_counts",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|provenance",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence, completeness, and value domain"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "warn_not_block_unless_needed_by_metric",
+    "field_id": "total_counts",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|provenance",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence, completeness, and value domain"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "obs",
+    "blocker_if_missing": "warn_not_block_unless_needed_by_metric",
+    "field_id": "pct_counts_mt",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|provenance",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence, completeness, and value domain"
+  },
+  {
+    "accepted_aliases": "var_names|gene_ids|gene_symbols",
+    "axis": "var",
+    "blocker_if_missing": "gene_metrics_not_runnable",
+    "field_id": "gene_symbol",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "DE recovery|expression alignment",
+    "requirement_status": "required_before_gene_metrics",
+    "validation_rule": "non-empty gene identifiers with stable namespace and duplicate report"
+  },
+  {
+    "accepted_aliases": "var_names|gene_ids|gene_symbols",
+    "axis": "var",
+    "blocker_if_missing": "gene_metrics_not_runnable",
+    "field_id": "feature_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "DE recovery|expression alignment",
+    "requirement_status": "required_before_gene_metrics",
+    "validation_rule": "non-empty gene identifiers with stable namespace and duplicate report"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "var",
+    "blocker_if_missing": "warn_not_block",
+    "field_id": "ensembl_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|feature namespace review",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence and completeness"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "var",
+    "blocker_if_missing": "warn_not_block",
+    "field_id": "highly_variable",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|feature namespace review",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence and completeness"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "var",
+    "blocker_if_missing": "warn_not_block",
+    "field_id": "mitochondrial",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics|feature namespace review",
+    "requirement_status": "recommended_audit_field",
+    "validation_rule": "record presence and completeness"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "uns",
+    "blocker_if_missing": "payload_not_releasable",
+    "field_id": "spacebio_bench_source_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "provenance|release_boundary",
+    "requirement_status": "required_before_release",
+    "validation_rule": "must record v9 task/source/preprocessing/annotation provenance"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "uns",
+    "blocker_if_missing": "payload_not_releasable",
+    "field_id": "spacebio_bench_task_id",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "provenance|release_boundary",
+    "requirement_status": "required_before_release",
+    "validation_rule": "must record v9 task/source/preprocessing/annotation provenance"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "uns",
+    "blocker_if_missing": "payload_not_releasable",
+    "field_id": "preprocessing_summary",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "provenance|release_boundary",
+    "requirement_status": "required_before_release",
+    "validation_rule": "must record v9 task/source/preprocessing/annotation provenance"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "uns",
+    "blocker_if_missing": "payload_not_releasable",
+    "field_id": "annotation_source",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "provenance|release_boundary",
+    "requirement_status": "required_before_release",
+    "validation_rule": "must record v9 task/source/preprocessing/annotation provenance"
+  },
+  {
+    "accepted_aliases": "raw.X|layers['counts']",
+    "axis": "matrix",
+    "blocker_if_missing": "payload_not_runnable",
+    "field_id": "X",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "model input|feature alignment",
+    "requirement_status": "required_before_runnable",
+    "validation_rule": "matrix shape matches n_obs x n_vars and finite numeric values"
+  },
+  {
+    "accepted_aliases": "raw counts|GeneFull filtered counts",
+    "axis": "layers",
+    "blocker_if_missing": "release_requires_explicit_matrix_policy",
+    "field_id": "layers.counts",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "preprocessing reproducibility",
+    "requirement_status": "preferred_before_release",
+    "validation_rule": "record whether integer count layer exists and which layer evaluators use"
+  },
+  {
+    "accepted_aliases": "",
+    "axis": "raw",
+    "blocker_if_missing": "no_blocker",
+    "field_id": "raw",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "required_for": "diagnostics",
+    "requirement_status": "optional_audit_field",
+    "validation_rule": "record presence, shape, and feature namespace if available"
+  }
+]

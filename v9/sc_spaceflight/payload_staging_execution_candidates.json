@@ -1,0 +1,42 @@
+[
+  {
+    "action_decision": "blocked_until_source_payload_available",
+    "candidate_id": "canonical_v9_payload_target",
+    "candidate_path": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "check_scope": "repo_resolved_path_or_unresolved_external_path",
+    "evidence_status": "no_local_payload",
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "notes": "Canonical location for the first runnable RRRM-1 blood v9 payload.",
+    "path_status": "planned_repo_path_absent"
+  },
+  {
+    "action_decision": "preferred_route_blocked",
+    "candidate_id": "legacy_annotated_h5ad",
+    "candidate_path": "$SCRATCH_DIR/rrrm1_scrna/downstream_initial/annotations/objects/RRRM1_blood_annotated.h5ad",
+    "check_scope": "repo_resolved_path_or_unresolved_external_path",
+    "evidence_status": "preferred_source_not_available_in_repo_context",
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "notes": "Preferred because the legacy annotation summary names broad cell-type labels. External probe note: Manual probe 2026-06-03: local repo/home and cayuga-login1 /home/fs01/jak4013/{rrrm1_scrna,scratch} had no exact RRRM1_blood_annotated.h5ad or OSD-918_blood_labeled.h5ad.",
+    "path_status": "external_path_unresolved"
+  },
+  {
+    "action_decision": "fallback_route_blocked",
+    "candidate_id": "legacy_labeled_h5ad",
+    "candidate_path": "$SCRATCH_DIR/rrrm1_scrna/OSD-918/OSD-918_blood_labeled.h5ad",
+    "check_scope": "repo_resolved_path_or_unresolved_external_path",
+    "evidence_status": "metadata_source_not_available_in_repo_context",
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "notes": "Useful fallback for sample metadata but not enough for cell-type diagnostics. External probe note: Manual probe 2026-06-03: local repo/home and cayuga-login1 /home/fs01/jak4013/{rrrm1_scrna,scratch} had no exact RRRM1_blood_annotated.h5ad or OSD-918_blood_labeled.h5ad.",
+    "path_status": "external_path_unresolved"
+  },
+  {
+    "action_decision": "regeneration_route_requires_per_srx_matrices",
+    "candidate_id": "starsolo_per_srx_regeneration",
+    "candidate_path": "$SCRATCH_DIR/rrrm1_scrna/OSD-918/starsolo_per_srx/",
+    "check_scope": "repo_resolved_path_or_unresolved_external_path",
+    "evidence_status": "not_executed_in_this_block",
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "notes": "Regenerate with the legacy per-SRX merge script, then normalize to the v9 contract. External probe note: Manual probe 2026-06-03: local repo/home and cayuga-login1 /home/fs01/jak4013/{rrrm1_scrna,scratch} had no exact RRRM1_blood_annotated.h5ad or OSD-918_blood_labeled.h5ad.",
+    "path_status": "external_path_unresolved"
+  }
+]

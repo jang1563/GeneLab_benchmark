@@ -1,0 +1,68 @@
+[
+  {
+    "aggregation": "macro mean across eligible folds; also report per-fold values",
+    "claim_status": "formula_spec_only_no_score_claim",
+    "formula": "AUROC(true_flight_label_binary, flight_probability) computed within each eligible fold or stratum.",
+    "metric_id": "state_label_auroc",
+    "metric_role": "primary_after_payload_freeze",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "minimum_requirements": "at least one Flight and one Ground observation with finite flight_probability",
+    "required_inputs": "predictions_csv_cell_labels",
+    "skip_policy_id": "skip_state_label_auc_if_single_class_or_no_probability"
+  },
+  {
+    "aggregation": "macro mean across eligible folds; also report per-fold values",
+    "claim_status": "formula_spec_only_no_score_claim",
+    "formula": "Average precision with Flight as the positive class using flight_probability.",
+    "metric_id": "state_label_auprc",
+    "metric_role": "primary_after_payload_freeze",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "minimum_requirements": "at least one positive Flight observation and finite flight_probability",
+    "required_inputs": "predictions_csv_cell_labels",
+    "skip_policy_id": "skip_state_label_auprc_if_no_positive_or_probability"
+  },
+  {
+    "aggregation": "macro mean across eligible folds; report label-level confusion where possible",
+    "claim_status": "diagnostic_only_no_biological_mechanism_claim",
+    "formula": "Nearest-centroid retrieval accuracy from embedding_* columns: each test cell is assigned to the closest train centroid by flight_ground_label.",
+    "metric_id": "mission_discrimination",
+    "metric_role": "diagnostic_representation",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "minimum_requirements": "embedding_* columns and at least two labels with train/test cells",
+    "required_inputs": "embedding_columns",
+    "skip_policy_id": "skip_mission_discrimination_if_no_embeddings_or_two_labels"
+  },
+  {
+    "aggregation": "report each N and macro mean across eligible strata",
+    "claim_status": "diagnostic_only_until_de_reference_frozen",
+    "formula": "For N in {50,100,200}, compute |topN_predicted_genes intersect topN_reference_genes| / N within each frozen cell-type/contrast stratum.",
+    "metric_id": "de_overlap_at_n",
+    "metric_role": "diagnostic_de_recovery",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "minimum_requirements": "same contrast and at least N overlapping gene identifiers",
+    "required_inputs": "response_signature_csv|de_reference_table",
+    "skip_policy_id": "skip_de_overlap_if_no_reference_or_insufficient_gene_overlap"
+  },
+  {
+    "aggregation": "macro mean across eligible cell-type/contrast strata",
+    "claim_status": "diagnostic_only_until_de_reference_frozen",
+    "formula": "Mean indicator sign(predicted_log2fc_flight_minus_ground) equals sign(reference_log2fc_flight_minus_ground) over nonzero overlapping genes.",
+    "metric_id": "de_direction_match",
+    "metric_role": "diagnostic_de_recovery",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "minimum_requirements": "at least one overlapping gene with nonzero predicted and reference signs",
+    "required_inputs": "response_signature_csv|de_reference_table",
+    "skip_policy_id": "skip_de_direction_if_no_signed_overlap"
+  },
+  {
+    "aggregation": "mean across aligned values; report per-cell-type or per-group when available",
+    "claim_status": "optional_only_not_required_for_classifier_tasks",
+    "formula": "Mean absolute error between predicted and reference expression values after aligning cells or pseudobulk groups and genes in the declared normalized layer.",
+    "metric_id": "expression_mae_when_applicable",
+    "metric_role": "optional_reconstruction",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "minimum_requirements": "matching cells or groups, matching genes, and declared normalization layer",
+    "required_inputs": "expression_prediction_layer|anndata_obs_contract|anndata_var_contract",
+    "skip_policy_id": "skip_expression_mae_unless_reconstruction_artifact_declared"
+  }
+]

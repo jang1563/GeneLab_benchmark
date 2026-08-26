@@ -1,0 +1,316 @@
+{
+  "anndata_contract": {
+    "input_format": "h5ad",
+    "recommended_obs_fields": [
+      "srx",
+      "gsm",
+      "cluster_id",
+      "n_genes_by_counts",
+      "total_counts",
+      "pct_counts_mt"
+    ],
+    "recommended_var_fields": [
+      "ensembl_id",
+      "highly_variable",
+      "mitochondrial"
+    ],
+    "required_matrix": "X or raw counts; exact normalized/count layer must be frozen in V9-SC-003",
+    "required_obs_fields": [
+      "cell_id",
+      "sample_id",
+      "source_id",
+      "tissue",
+      "condition",
+      "flight_ground_label",
+      "animal_id",
+      "age_months",
+      "broad_celltype"
+    ],
+    "required_uns_fields": [
+      "spacebio_bench_source_id",
+      "spacebio_bench_task_id",
+      "preprocessing_summary",
+      "annotation_source"
+    ],
+    "required_var_fields": [
+      "gene_symbol",
+      "feature_id"
+    ],
+    "status": "contract_only_payload_not_local"
+  },
+  "assay_modality": "single_cell_rna_seq",
+  "biospecimen_type": "blood",
+  "claim_boundary": "anndata_manifest_contract_only_no_local_payload_or_score_claim",
+  "feature_namespace": "mouse_gene",
+  "ground_control_type": "matched_ground_control",
+  "limitations": [
+    "Draft manifest contract only; no v9 single-cell benchmark result is claimed.",
+    "No local .h5ad, .loom, or .mtx payload is present in this repository scan.",
+    "Legacy h5ad paths point to scratch locations and are not distributable package resources.",
+    "AnnData obs/var/uns fields have not been verified locally.",
+    "Metric formulas and DE-reference policy must be finalized in V9-SC-003.",
+    "Legacy RRRM figures, scripts, and evaluation outputs remain reference-only."
+  ],
+  "material_type": "single_cells",
+  "metrics": [
+    {
+      "interpretation": "Flight versus Ground ranking within the held-out animal; formula must be finalized in V9-SC-003.",
+      "metric_id": "state_label_auroc",
+      "profile": "genelab_sc"
+    },
+    {
+      "interpretation": "Class-imbalance-aware Flight versus Ground ranking; non-primary until labels and folds are frozen.",
+      "metric_id": "state_label_auprc",
+      "profile": "genelab_sc"
+    },
+    {
+      "interpretation": "Representation diagnostic for mission/state separation, not a biological mechanism claim.",
+      "metric_id": "mission_discrimination",
+      "profile": "genelab_sc"
+    },
+    {
+      "interpretation": "Cell-type-specific DE recovery metric; blocked until DE reference and cell-type strata are frozen.",
+      "metric_id": "de_overlap_at_n",
+      "profile": "genelab_sc"
+    },
+    {
+      "interpretation": "Direction agreement for response genes; diagnostic-only until V9-SC-003 metric specification.",
+      "metric_id": "de_direction_match",
+      "profile": "genelab_sc"
+    }
+  ],
+  "model_system": "RRRM-1_mouse_spaceflight",
+  "organism": "Mus musculus",
+  "output": {
+    "label_domain": [
+      "Ground",
+      "Flight"
+    ],
+    "optional_columns": [
+      "flight_probability",
+      "ground_probability",
+      "predicted_broad_celltype",
+      "embedding_*"
+    ],
+    "positive_label": "Flight",
+    "prediction_format": "csv_or_h5ad_contract",
+    "primary_artifacts": [
+      "predictions.csv",
+      "metrics.json",
+      "run_manifest.json",
+      "response_signature.csv"
+    ],
+    "required_columns": [
+      "cell_id",
+      "sample_id",
+      "true_label",
+      "predicted_label"
+    ]
+  },
+  "platform": "10x_3prime_v3_STARsolo_legacy",
+  "provenance": {
+    "annotation_summary": "v2/docs/RRRM1_BROAD_ANNOTATION_SUMMARY_2026-03-12.md",
+    "asset_inventory": "v9/sc_spaceflight/asset_inventory.csv",
+    "asset_inventory_summary": "v9/sc_spaceflight/asset_inventory_summary.csv",
+    "benchmark_ready_manifest": "v2/docs/RRRM1_BENCHMARK_READY_MANIFEST_2026-03-12.csv",
+    "condition_map": "v2/docs/RRRM1_SRX_CONDITION_MAP.csv",
+    "legacy_score_status": "reference_only_not_v9_benchmark_result",
+    "local_payload_scan": "v9/sc_spaceflight/local_payload_scan.csv",
+    "local_payload_status": "blocked_no_local_anndata_payload",
+    "manifest_status": "draft_contract_only",
+    "sample_qc_summary": "v2/docs/RRRM1_SAMPLE_QC_SUMMARY_2026-03-12.csv"
+  },
+  "release_status": "draft_non_runnable_contract",
+  "runnable_status": "blocked_no_local_anndata_payload",
+  "sample_qc": {
+    "median_n_genes_by_counts": 273.0,
+    "median_pct_counts_mt": 0.442375,
+    "median_total_counts": 8960.0,
+    "n_cells": 4395,
+    "n_genes": 19064
+  },
+  "schema_version": "0.1.0",
+  "source_records": [
+    {
+      "access_status": "public_processed_reference_pending_review",
+      "assay_modality": "single_cell_rna_seq",
+      "benchmark_readiness": "ready_for_benchmark",
+      "biospecimen_type": "blood",
+      "checksum_status": "legacy_rrrm_inventory_only_no_local_payload_hash",
+      "legacy_h5ad_path": "$SCRATCH_DIR/rrrm1_scrna/downstream_initial/annotations/objects/RRRM1_blood_annotated.h5ad",
+      "legacy_h5ad_status": "completed",
+      "local_payload_status": "blocked_no_local_anndata_payload",
+      "material_type": "single_cells",
+      "mission": "RRRM-1",
+      "notes": "Selected as first v9 sc_spaceflight manifest contract because RRRM-1 blood has compact sample/QC/annotation evidence.",
+      "organism": "Mus musculus",
+      "platform": "10x_3prime_v3",
+      "privacy_class": "public",
+      "source_id": "OSD-918",
+      "source_url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-918",
+      "species_common_name": "mouse",
+      "taxon_id": "10090",
+      "url_or_accession": "OSD-918"
+    }
+  ],
+  "spaceflight_environment": "LEO_or_ISS_spaceflight",
+  "species_common_name": "mouse",
+  "split": {
+    "blocking_factors": [
+      "animal_id",
+      "age_months",
+      "broad_celltype",
+      "library_or_sample_id"
+    ],
+    "candidate_folds": [
+      {
+        "fold_id": "holdout_HC_LAR_09",
+        "heldout_animal_id": "HC_LAR_09",
+        "heldout_label": "Ground",
+        "heldout_sample_id": "GSM8947776",
+        "heldout_srx": "SRX28491856",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Ground": 1
+        },
+        "train_label_distribution": {
+          "Flight": 4,
+          "Ground": 3
+        }
+      },
+      {
+        "fold_id": "holdout_HC_LAR_19",
+        "heldout_animal_id": "HC_LAR_19",
+        "heldout_label": "Ground",
+        "heldout_sample_id": "GSM8947777",
+        "heldout_srx": "SRX28491916",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Ground": 1
+        },
+        "train_label_distribution": {
+          "Flight": 4,
+          "Ground": 3
+        }
+      },
+      {
+        "fold_id": "holdout_HC_LAR_10",
+        "heldout_animal_id": "HC_LAR_10",
+        "heldout_label": "Ground",
+        "heldout_sample_id": "GSM8947778",
+        "heldout_srx": "SRX28491975",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Ground": 1
+        },
+        "train_label_distribution": {
+          "Flight": 4,
+          "Ground": 3
+        }
+      },
+      {
+        "fold_id": "holdout_HC_LAR_20",
+        "heldout_animal_id": "HC_LAR_20",
+        "heldout_label": "Ground",
+        "heldout_sample_id": "GSM8947779",
+        "heldout_srx": "SRX28491923",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Ground": 1
+        },
+        "train_label_distribution": {
+          "Flight": 4,
+          "Ground": 3
+        }
+      },
+      {
+        "fold_id": "holdout_FL_LAR_09",
+        "heldout_animal_id": "FL_LAR_09",
+        "heldout_label": "Flight",
+        "heldout_sample_id": "GSM8947780",
+        "heldout_srx": "SRX28491934",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Flight": 1
+        },
+        "train_label_distribution": {
+          "Flight": 3,
+          "Ground": 4
+        }
+      },
+      {
+        "fold_id": "holdout_FL_LAR_19",
+        "heldout_animal_id": "FL_LAR_19",
+        "heldout_label": "Flight",
+        "heldout_sample_id": "GSM8947781",
+        "heldout_srx": "SRX28491993",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Flight": 1
+        },
+        "train_label_distribution": {
+          "Flight": 3,
+          "Ground": 4
+        }
+      },
+      {
+        "fold_id": "holdout_FL_LAR_10",
+        "heldout_animal_id": "FL_LAR_10",
+        "heldout_label": "Flight",
+        "heldout_sample_id": "GSM8947782",
+        "heldout_srx": "SRX28491866",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Flight": 1
+        },
+        "train_label_distribution": {
+          "Flight": 3,
+          "Ground": 4
+        }
+      },
+      {
+        "fold_id": "holdout_FL_LAR_20",
+        "heldout_animal_id": "FL_LAR_20",
+        "heldout_label": "Flight",
+        "heldout_sample_id": "GSM8947783",
+        "heldout_srx": "SRX28491877",
+        "n_test_samples": 1,
+        "n_train_samples": 7,
+        "status": "draft_blocked_pending_local_anndata_payload",
+        "test_label_distribution": {
+          "Flight": 1
+        },
+        "train_label_distribution": {
+          "Flight": 3,
+          "Ground": 4
+        }
+      }
+    ],
+    "label_distribution": {
+      "Flight": 4,
+      "Ground": 4
+    },
+    "name": "rrrm1_blood_leave_animal_out_draft",
+    "sample_count": 8,
+    "status": "draft_blocked_pending_local_anndata_payload",
+    "strategy": "leave_one_animal_out_within_rrrm1_blood",
+    "unit": "animal_id"
+  },
+  "task_family": "sc_spaceflight",
+  "task_id": "draft_rrrm1_blood_single_cell_spaceflight",
+  "title": "Draft RRRM-1 blood single-cell Flight vs Ground AnnData task"
+}

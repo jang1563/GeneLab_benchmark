@@ -1,0 +1,72 @@
+[
+  {
+    "artifact": "task h5ad obs",
+    "input_id": "anndata_obs_contract",
+    "input_status": "required_before_runnable",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "notes": "Must be verified after local AnnData payload staging.",
+    "required_fields": "cell_id|sample_id|source_id|tissue|condition|flight_ground_label|animal_id|age_months|broad_celltype",
+    "skip_if_missing": "all metrics skip because cells cannot be aligned to labels and folds",
+    "used_by_metrics": "all cell-level metrics"
+  },
+  {
+    "artifact": "task h5ad var",
+    "input_id": "anndata_var_contract",
+    "input_status": "required_for_gene_metrics",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "notes": "Gene id namespace must be frozen before DE metrics run.",
+    "required_fields": "gene_symbol|feature_id",
+    "skip_if_missing": "gene-level metrics skip because gene ids cannot be aligned",
+    "used_by_metrics": "de_overlap_at_n|de_direction_match|expression_mae_when_applicable"
+  },
+  {
+    "artifact": "predictions.csv",
+    "input_id": "predictions_csv_cell_labels",
+    "input_status": "required_for_state_label_metrics",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "notes": "true_label must use the manifest label domain Ground/Flight.",
+    "required_fields": "cell_id|sample_id|true_label|predicted_label|flight_probability",
+    "skip_if_missing": "state label ranking metrics skip",
+    "used_by_metrics": "state_label_auroc|state_label_auprc"
+  },
+  {
+    "artifact": "predictions.csv",
+    "input_id": "embedding_columns",
+    "input_status": "optional_diagnostic",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "notes": "Embeddings are diagnostic and must not be required for classifiers.",
+    "required_fields": "embedding_*",
+    "skip_if_missing": "mission_discrimination skip with reason no_embedding_columns",
+    "used_by_metrics": "mission_discrimination"
+  },
+  {
+    "artifact": "response_signature.csv",
+    "input_id": "response_signature_csv",
+    "input_status": "optional_diagnostic_pending_reference",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "notes": "Only score after the reference contrast and cell-type strata are frozen.",
+    "required_fields": "task_id|source_id|fold_id|cell_type|gene_symbol|predicted_log2fc_flight_minus_ground|predicted_rank",
+    "skip_if_missing": "DE recovery metrics skip",
+    "used_by_metrics": "de_overlap_at_n|de_direction_match"
+  },
+  {
+    "artifact": "future v9/sc_spaceflight/de_reference/*.csv",
+    "input_id": "de_reference_table",
+    "input_status": "blocked_pending_v9_sc_reference_freeze",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "notes": "Do not infer reference from legacy figures; freeze a table first.",
+    "required_fields": "source_id|contrast_id|cell_type|gene_symbol|reference_log2fc_flight_minus_ground|reference_rank",
+    "skip_if_missing": "DE recovery metrics skip with reason de_reference_missing",
+    "used_by_metrics": "de_overlap_at_n|de_direction_match"
+  },
+  {
+    "artifact": "predicted h5ad layer or aligned expression table",
+    "input_id": "expression_prediction_layer",
+    "input_status": "optional_only",
+    "metric_spec_id": "v9_sc_003_genelab_sc_metric_spec",
+    "notes": "Not required for the RRRM-1 blood classifier contract.",
+    "required_fields": "cell_or_group_id|gene_symbol|predicted_expression|reference_expression",
+    "skip_if_missing": "expression_mae_when_applicable skip",
+    "used_by_metrics": "expression_mae_when_applicable"
+  }
+]

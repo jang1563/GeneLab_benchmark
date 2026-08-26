@@ -24,7 +24,7 @@ local h5ad/loom/mtx files found by the current repo scan.
 | Lane | Score | Decision | Main gap |
 |---|---:|---|---|
 | Public bulk alpha | 90 | selected next | payload hash/release claim boundary |
-| Single-cell flagship | 35 | deferred | RRRM asset inventory before AnnData task cards |
+| Single-cell flagship | 45 | deferred | RRRM asset inventory before AnnData task cards |
 
 ## Selected Next Block
 

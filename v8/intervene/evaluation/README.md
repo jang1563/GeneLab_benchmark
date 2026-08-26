@@ -8,15 +8,15 @@ pre-clinical validation?
 | Claim | Primary output | Script | Status |
 |---|---|---|---|
 | Tissue-level flight signatures can be exported as LINCS-ready up/down gene sets. | `signatures/signatures_manifest.json`, `signatures/*_{up,dn}.txt`, `signatures/*_ranked.csv` | `v8/intervene/export_signatures.py` | hpc_validated; manifest recorded |
-| L1000CDS2 returns tissue-specific chemical reversal hypotheses. | `lincs_summary.json`, `lincs_*_top50.csv` | `v8/intervene/lincs_query.py` | hpc_validated snapshot; API payload archive still required before beta freeze |
+| L1000CDS2 returns tissue-specific chemical reversal hypotheses. | `lincs_summary.json`, `lincs_*_top50.csv` | `v8/intervene/lincs_query.py` | hpc_validated snapshot; raw API archive audited for beta RC |
 | Multi-tissue Pareto filtering prioritizes candidates with broader signature reversal. | `pareto_front.csv`, `multi_tissue_drug_matrix.csv`, `multi_tissue_drug_scores.json` | `v8/intervene/pareto_multi_tissue.py` | hpc_validated snapshot; exploratory |
 | Safety triage keeps target class, broad toxicity liability, tissue count, min reversal, and orthogonal support visible. | `safety_triage.csv`, `safety_triage_summary.json` | `v8/intervene/safety_triage.py` | hpc_validated; pathway hypotheses only |
-| Enrichr CRISPR KO signatures provide orthogonal target plausibility checks. | `crispr_orthog_summary.json`, `crispr_orthog_*_{up,dn}.csv` | `v8/intervene/perturb_seq_orthog.py` | hpc_validated snapshot; API payload archive still required before beta freeze |
-| Current L1000CDS2 and Enrichr snapshots have deterministic query-payload and parsed-output hashes. | `api_snapshot_manifest.json` | `v8/intervene/api_snapshot_manifest.py` | hpc_validated snapshot; raw API dumps still outside Git |
+| Enrichr CRISPR KO signatures provide orthogonal target plausibility checks. | `crispr_orthog_summary.json`, `crispr_orthog_*_{up,dn}.csv` | `v8/intervene/perturb_seq_orthog.py` | hpc_validated snapshot; raw API archive audited for beta RC |
+| Current L1000CDS2 and Enrichr snapshots have deterministic query-payload, raw-response, and parsed-output hashes. | `api_snapshot_manifest.json`, `../../provenance/api_raw_archive_audit.json` | `v8/intervene/api_snapshot_manifest.py`, `scripts/audit_v8_api_archive.py` | hpc_validated snapshot; raw API dumps remain outside Git |
 | Offline DGIdb reversal scoring is a lightweight internal sanity check only. | `offline_reversal_summary.json`, `offline_reversal_*.csv` | `v8/intervene/offline_reversal_scorer.py` | exploratory |
 
 ## Promotion Requirements
 
-- Manifest must record query timestamp, query payload hash, API endpoint, `db-version`, top-N gene list size, and gene-symbol normalization.
+- Manifest must record query timestamp, query payload hash, raw-response archive hash, API endpoint, `db-version`, top-N gene list size, and gene-symbol normalization.
 - Drug language must remain hypothesis-generating until independent safety and efficacy validation.
 - Raw API dumps should stay outside Git unless compact and explicitly needed for reproducibility.

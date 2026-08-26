@@ -1,0 +1,57 @@
+[
+  {
+    "action_decision": "do_not_audit_until_source_payload_exists",
+    "availability_id": "v9_sc_006b_rrrm1_blood_external_payload_availability",
+    "candidate_id": "canonical_v9_payload_target",
+    "candidate_type": "canonical_target",
+    "checked_scope": "repo",
+    "expected_path": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "notes": "Canonical v9 target remains the only allowed local payload path.",
+    "path_status": "not_found_in_checked_scope",
+    "required_evidence_status": "missing_local_payload"
+  },
+  {
+    "action_decision": "blocked_not_found",
+    "availability_id": "v9_sc_006b_rrrm1_blood_external_payload_availability",
+    "candidate_id": "legacy_annotated_h5ad_checked_base_1",
+    "candidate_type": "preferred_annotated_h5ad",
+    "checked_scope": "/home/fs01/jak4013/rrrm1_scrna",
+    "expected_path": "/home/fs01/jak4013/rrrm1_scrna/downstream_initial/annotations/objects/RRRM1_blood_annotated.h5ad",
+    "notes": "Manual probe 2026-06-03: exact OSD-918 h5ad and 8 SRX STARsolo paths were absent in the checked local/remote scopes.",
+    "path_status": "not_found_in_checked_scope",
+    "required_evidence_status": "source_payload_not_found"
+  },
+  {
+    "action_decision": "blocked_not_found",
+    "availability_id": "v9_sc_006b_rrrm1_blood_external_payload_availability",
+    "candidate_id": "legacy_labeled_h5ad_checked_base_1",
+    "candidate_type": "metadata_labeled_h5ad",
+    "checked_scope": "/home/fs01/jak4013/rrrm1_scrna",
+    "expected_path": "/home/fs01/jak4013/rrrm1_scrna/OSD-918/OSD-918_blood_labeled.h5ad",
+    "notes": "Manual probe 2026-06-03: exact OSD-918 h5ad and 8 SRX STARsolo paths were absent in the checked local/remote scopes.",
+    "path_status": "not_found_in_checked_scope",
+    "required_evidence_status": "source_payload_not_found"
+  },
+  {
+    "action_decision": "blocked_not_found",
+    "availability_id": "v9_sc_006b_rrrm1_blood_external_payload_availability",
+    "candidate_id": "legacy_annotated_h5ad_checked_base_2",
+    "candidate_type": "preferred_annotated_h5ad",
+    "checked_scope": "/home/fs01/jak4013/scratch/rrrm1_scrna",
+    "expected_path": "/home/fs01/jak4013/scratch/rrrm1_scrna/downstream_initial/annotations/objects/RRRM1_blood_annotated.h5ad",
+    "notes": "Manual probe 2026-06-03: exact OSD-918 h5ad and 8 SRX STARsolo paths were absent in the checked local/remote scopes.",
+    "path_status": "not_found_in_checked_scope",
+    "required_evidence_status": "source_payload_not_found"
+  },
+  {
+    "action_decision": "blocked_not_found",
+    "availability_id": "v9_sc_006b_rrrm1_blood_external_payload_availability",
+    "candidate_id": "legacy_labeled_h5ad_checked_base_2",
+    "candidate_type": "metadata_labeled_h5ad",
+    "checked_scope": "/home/fs01/jak4013/scratch/rrrm1_scrna",
+    "expected_path": "/home/fs01/jak4013/scratch/rrrm1_scrna/OSD-918/OSD-918_blood_labeled.h5ad",
+    "notes": "Manual probe 2026-06-03: exact OSD-918 h5ad and 8 SRX STARsolo paths were absent in the checked local/remote scopes.",
+    "path_status": "not_found_in_checked_scope",
+    "required_evidence_status": "source_payload_not_found"
+  }
+]

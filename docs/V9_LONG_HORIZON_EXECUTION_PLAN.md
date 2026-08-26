@@ -69,11 +69,11 @@ Completed v9 scaffold:
   sources, 39 checksum manifests, 8,439 parsed MD5 entries, and 8,275 payload
   name matches against OSDR listings.
 - `v9/datapackage.draft.json` contains a draft Frictionless Data Package
-  descriptor for current v9 public bulk metadata, provenance evidence, and
-  baseline outputs.
-- `docs/v9_hf_dataset_card.md` contains draft Hugging Face-style
-  release-facing language with explicit not-frozen and not-payload-verified
-  status.
+  descriptor for the current v9 public bulk metadata-only alpha snapshot,
+  including provenance evidence, alpha-boundary tables, and baseline outputs.
+- `docs/v9_hf_dataset_card.md` contains Hugging Face-style metadata-alpha
+  language with explicit not-frozen, no-local-payload-mirror, and
+  not-payload-verified status.
 - `docs/V9_ORGANOID_AND_SPECIES_EXTENSION_REVIEW_2026_05_21.md` confirms public
   human neural organoid RNA-seq and non-mouse GeneLab/OSDR resources as credible
   v9 extension candidates, with separate task-family boundaries from current
@@ -447,6 +447,69 @@ Completed v9 scaffold:
   needs-update rows; the decisive release blocker is that 22/22 public bulk
   sources have checksum-manifest evidence but 0/22 have local payload-hash
   verification.
+- `v9/reports/public_bulk_alpha_snapshot_decision/` and
+  `docs/V9_PUBLIC_BULK_ALPHA_METADATA_SNAPSHOT_DECISION.md` contain the
+  V9-BULK-ALPHA-002 checkpoint. It selects a metadata-only public bulk alpha
+  snapshot with explicit payload blockers, defers payload-mirror-first to a
+  later freeze block, and sets the current claim boundary to
+  `metadata_only_public_bulk_alpha_no_payload_release`.
+- `docs/V9_PUBLIC_BULK_ALPHA_CARD_DATAPACKAGE_BOUNDARY_UPDATE.md`,
+  `docs/v9_hf_dataset_card.md`, and `v9/datapackage.draft.json` contain the
+  V9-BULK-ALPHA-003 checkpoint. The dataset card and draft Data Package now
+  apply the metadata-only alpha boundary, with 21 Data Package resources and 10
+  `alpha_boundary_metadata` resources.
+- `v9/sc_spaceflight/asset_inventory.md`,
+  `v9/sc_spaceflight/asset_inventory_summary.csv`, and
+  `v9/sc_spaceflight/asset_inventory.csv` contain the V9-SC-001 checkpoint. It
+  indexes 54 legacy RRRM/single-cell assets, confirms 0 local AnnData/loom/MTX
+  payload files and 0 v9 `sc_spaceflight` manifests, and leaves legacy scores
+  as reference-only.
+- `v9/sc_spaceflight/task_manifests/draft_rrrm1_blood_single_cell_spaceflight.json`
+  and `v9/sc_spaceflight/ANNDATA_MANIFEST_DRAFT_REVIEW.md` contain the
+  V9-SC-002 checkpoint. It drafts a non-runnable RRRM-1 blood AnnData task
+  contract with 8 samples, 4 Flight, 4 Ground, 4,395 QC cells, no local h5ad
+  payload, and explicit obs/var, metric, and legacy-score blockers.
+- `docs/V9_SC_METRIC_SPEC.md` and `v9/sc_spaceflight/metric_spec_*.csv`
+  contain the V9-SC-003 checkpoint. It defines six `genelab_sc` formulas,
+  seven input contracts, and six skip-policy rows without evaluator or score
+  claims.
+- `docs/V9_SC_PAYLOAD_STAGING_PLAN.md` and
+  `v9/sc_spaceflight/payload_staging_*.csv`,
+  `v9/sc_spaceflight/obs_var_audit_requirements.csv` contain the V9-SC-004
+  checkpoint. It selects
+  `v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad` as
+  the canonical future h5ad target, records 4 candidate routes, 27 audit
+  requirements, and 7 staging gates, while still claiming no local payload,
+  checksum, obs/var pass, evaluator, or benchmark score.
+- `docs/V9_SC_OBS_VAR_AUDIT.md`,
+  `v9/sc_spaceflight/obs_var_audit_summary.csv`,
+  `v9/sc_spaceflight/obs_var_audit_results.csv`, and
+  `v9/sc_spaceflight/payload_manifest.csv` contain the V9-SC-005 checkpoint. It
+  implements the skip-aware AnnData auditor and records the current canonical
+  payload state as missing, with 27 skipped requirement rows, 17 blocker rows,
+  no checksum, no obs/var pass, and no score claim.
+- `docs/V9_SC_PAYLOAD_STAGING_EXECUTION.md` and
+  `v9/sc_spaceflight/payload_staging_execution_*.csv` contain the V9-SC-006
+  checkpoint. It records no staged canonical or legacy RRRM-1 blood h5ad and
+  keeps regeneration blocked until a source h5ad or STARsolo matrix bundle is
+  available.
+- `docs/V9_SC_EXTERNAL_PAYLOAD_AVAILABILITY.md` and
+  `v9/sc_spaceflight/external_payload_*`,
+  `v9/sc_spaceflight/external_starsolo_matrix_availability.*`, and
+  `v9/sc_spaceflight/canonical_payload_copy_decision.*` contain the V9-SC-006b
+  checkpoint. It records no annotated h5ad, labeled h5ad, or complete
+  OSD-918 blood STARsolo matrix bundles in the two checked external base
+  scopes.
+- `docs/V9_SC_OSDR_PROCESSED_PAYLOAD_DISCOVERY.md`,
+  `v9/sc_spaceflight/osdr_processed_payload_discovery_summary.*`,
+  `v9/sc_spaceflight/osdr_file_discovery.*`,
+  `v9/sc_spaceflight/osdr_expected_srx_coverage.*`,
+  `v9/sc_spaceflight/owner_scratch_request.*`, and
+  `v9/sc_spaceflight/processed_payload_deferral_decision.*` contain the
+  V9-SC-006c checkpoint. The official OSD-918 file list records metadata, raw
+  checksum, raw MultiQC, and 16 raw FASTQ files covering 8/8 expected blood SRX
+  pairs, but no processed h5ad, processed STARsolo matrix bundle, or processed
+  checksum manifest.
 - `docs/V9_MULTISPECIES_FEATURE_STRATEGY.md` fixes the initial rule that
   species-native tasks may use species-local gene ids, while cross-species
   bridge tasks should start with pathway/NES-style feature spaces.
@@ -461,8 +524,15 @@ Important boundary:
 - The OSD-120 metadata/release chain is closed after V9-MULTI-035 unless
   owner-supplied release metadata arrives. V9-REFOCUS-001 selected
   public bulk alpha as the active lane. V9-BULK-ALPHA-001 completed the
-  freeze-gap matrix; the active next step is V9-BULK-ALPHA-002: decide
-  metadata-only alpha wording versus payload-mirror-first.
+  freeze-gap matrix, and V9-BULK-ALPHA-002 selected metadata-only alpha
+  wording. V9-BULK-ALPHA-003 applied that wording to the dataset card and Data
+  Package. V9-SC-001 inventoried RRRM assets, V9-SC-002 drafted the first
+  non-runnable AnnData task contract, V9-SC-003 specified `genelab_sc` metrics,
+  V9-SC-004 fixed the payload staging/audit gate, V9-SC-005 implemented the
+  skip-aware auditor, V9-SC-006/006b found no staged local or external source
+  h5ad/STARsolo payload, and V9-SC-006c found no OSDR processed payload. The
+  active next step is V9-SC-006d: owner scratch path intake or raw FASTQ
+  regeneration feasibility decision.
 
 ## Guiding principles
 

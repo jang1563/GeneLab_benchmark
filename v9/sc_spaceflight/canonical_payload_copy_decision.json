@@ -1,0 +1,11 @@
+[
+  {
+    "availability_id": "v9_sc_006b_rrrm1_blood_external_payload_availability",
+    "canonical_payload_path": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "copy_allowed": "false",
+    "decision_id": "canonical_copy_gate",
+    "reason": "Only a hashable annotated h5ad can be copied directly to the canonical path.",
+    "required_before_copy": "source h5ad exists|sha256 recorded|n_obs/n_vars recorded|obs_var_audit rerun planned",
+    "source_payload_status": "no_source_payload_found"
+  }
+]

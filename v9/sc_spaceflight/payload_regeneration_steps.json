@@ -1,0 +1,52 @@
+[
+  {
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "gate_status": "blocked_until_external_payload_available",
+    "input_status": "unverified_external_payload",
+    "notes": "Required before regenerating the labeled blood AnnData object.",
+    "output": "per-SRX matrix availability table",
+    "required_input": "$SCRATCH_DIR/rrrm1_scrna/OSD-918/starsolo_per_srx/*/Solo.out/GeneFull/filtered",
+    "step_id": "confirm_per_srx_starsolo_matrices",
+    "step_order": "1"
+  },
+  {
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "gate_status": "blocked_until_step_1_passes",
+    "input_status": "repo_script_and_condition_map_available",
+    "notes": "Legacy script can recover condition, animal, age, SRX, OSD, and tissue metadata.",
+    "output": "$SCRATCH_DIR/rrrm1_scrna/OSD-918/OSD-918_blood_labeled.h5ad",
+    "required_input": "v2/scripts/rrrm1_merge_per_srx.py|v2/docs/RRRM1_SRX_CONDITION_MAP.csv",
+    "step_id": "merge_per_srx_h5ad",
+    "step_order": "2"
+  },
+  {
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "gate_status": "blocked_until_labeled_or_processed_h5ad_available",
+    "input_status": "repo_script_available_payload_missing",
+    "notes": "Preferred output because the v9 contract requires broad_celltype before runnable status.",
+    "output": "$SCRATCH_DIR/rrrm1_scrna/downstream_initial/annotations/objects/RRRM1_blood_annotated.h5ad",
+    "required_input": "v2/scripts/rrrm1_broad_annotate.py|marker sets|processed h5ad",
+    "step_id": "apply_broad_celltype_annotation",
+    "step_order": "3"
+  },
+  {
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "gate_status": "blocked_until_step_3_passes",
+    "input_status": "blocked_no_annotated_h5ad",
+    "notes": "Add v9 obs aliases, gene_symbol/feature_id var columns, and spacebio_bench_* uns provenance keys.",
+    "output": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "required_input": "annotated h5ad|v9 obs/var/uns contract",
+    "step_id": "normalize_v9_contract_and_copy",
+    "step_order": "4"
+  },
+  {
+    "execution_id": "v9_sc_006_rrrm1_blood_payload_staging_execution",
+    "gate_status": "blocked_until_canonical_payload_exists",
+    "input_status": "blocked_no_canonical_payload",
+    "notes": "Only this step can move the task from skip-only audit to pass/blocker audit.",
+    "output": "v9/sc_spaceflight/obs_var_audit_summary.csv",
+    "required_input": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "step_id": "rerun_obs_var_audit",
+    "step_order": "5"
+  }
+]

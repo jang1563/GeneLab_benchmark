@@ -1,0 +1,34 @@
+[
+  {
+    "blocker_id": "local_anndata_payload_absent",
+    "blocker_status": "blocking_runnable_task",
+    "evidence_path": "v9/sc_spaceflight/local_payload_scan.csv",
+    "manifest_draft_id": "v9_sc_002_rrrm1_blood_anndata_manifest_draft",
+    "owner_action": "do not claim runnable sc_spaceflight task until payload exists",
+    "required_before_runnable": "stage or regenerate the selected RRRM-1 blood AnnData object locally"
+  },
+  {
+    "blocker_id": "obs_var_contract_unverified",
+    "blocker_status": "blocking_evaluator",
+    "evidence_path": "v2/docs/RRRM1_BENCHMARK_READY_MANIFEST_2026-03-12.csv",
+    "manifest_draft_id": "v9_sc_002_rrrm1_blood_anndata_manifest_draft",
+    "owner_action": "verify required obs/var fields after local payload staging",
+    "required_before_runnable": "inspect AnnData obs/var/uns fields against the manifest contract"
+  },
+  {
+    "blocker_id": "metric_formula_spec_pending",
+    "blocker_status": "blocking_leaderboard",
+    "evidence_path": "spacebio_bench/profiles.py",
+    "manifest_draft_id": "v9_sc_002_rrrm1_blood_anndata_manifest_draft",
+    "owner_action": "define genelab_sc metrics before evaluator implementation",
+    "required_before_runnable": "write V9-SC-003 metric formulas and skip policy"
+  },
+  {
+    "blocker_id": "legacy_scores_reference_only",
+    "blocker_status": "claim_guard",
+    "evidence_path": "v3/evaluation/",
+    "manifest_draft_id": "v9_sc_002_rrrm1_blood_anndata_manifest_draft",
+    "owner_action": "do not promote legacy RRRM score surfaces as v9 benchmark results",
+    "required_before_runnable": "regenerate any scores from a v9 task manifest and run manifest"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "averaging_unit_for_macro_aurocs": "tissue",
+  "mouse_geneformer": {
+    "covered_folds": 22,
+    "covered_profiles": 549,
+    "epoch10_macro_auroc": 0.4579604854332114,
+    "initial_macro_auroc": 0.475895530264541
+  },
+  "n_tissues": 6,
+  "pca_logistic_regression": {
+    "macro_auroc": 0.7297152100922557,
+    "thymus_mean_mission_auroc": 0.923202614379085,
+    "thymus_pooled_oof_auroc": 0.6310160427807486
+  },
+  "scheduled_profiles": 549,
+  "scheduled_task_folds": 22,
+  "scgpt": {
+    "covered_folds": 21,
+    "covered_profiles": 533,
+    "epoch10_macro_auroc": 0.5987166666666667,
+    "initial_macro_auroc": 0.6655333333333333
+  }
+}

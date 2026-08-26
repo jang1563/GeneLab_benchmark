@@ -1,0 +1,72 @@
+[
+  {
+    "action_id": "locate_or_regenerate_rrrm1_blood_h5ad",
+    "action_order": "1",
+    "action_type": "payload_staging",
+    "gate_status": "blocked_until_payload_available",
+    "inputs": "legacy annotated h5ad or STARsolo per-SRX matrices",
+    "outputs": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "success_criteria": "local h5ad exists at canonical path"
+  },
+  {
+    "action_id": "normalize_obs_contract",
+    "action_order": "2",
+    "action_type": "metadata_normalization",
+    "gate_status": "pending_payload",
+    "inputs": "AnnData.obs|RRRM1_SRX_CONDITION_MAP.csv",
+    "outputs": "required obs fields with Flight/Ground labels",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "success_criteria": "all required obs fields present and complete"
+  },
+  {
+    "action_id": "normalize_var_contract",
+    "action_order": "3",
+    "action_type": "feature_namespace_normalization",
+    "gate_status": "pending_payload",
+    "inputs": "AnnData.var|var_names",
+    "outputs": "gene_symbol and feature_id columns",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "success_criteria": "gene namespace and duplicate policy are recorded"
+  },
+  {
+    "action_id": "write_uns_provenance",
+    "action_order": "4",
+    "action_type": "provenance_embedding",
+    "gate_status": "pending_payload",
+    "inputs": "task manifest|metric spec|preprocessing notes",
+    "outputs": "spacebio_bench_* uns keys",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "success_criteria": "uns provenance keys match manifest contract"
+  },
+  {
+    "action_id": "compute_payload_hash_and_shape_manifest",
+    "action_order": "5",
+    "action_type": "integrity_audit",
+    "gate_status": "pending_payload",
+    "inputs": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "outputs": "future payload_manifest.csv",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "success_criteria": "sha256, n_obs, n_vars, and file size recorded"
+  },
+  {
+    "action_id": "run_obs_var_audit",
+    "action_order": "6",
+    "action_type": "contract_audit",
+    "gate_status": "pending_payload",
+    "inputs": "v9/sc_spaceflight/payloads/rrrm1_blood/OSD-918_blood_rrrm1_bench.h5ad",
+    "outputs": "future obs_var_audit.csv",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "success_criteria": "required fields pass or emit machine-readable blockers"
+  },
+  {
+    "action_id": "promote_manifest_to_runnable_candidate",
+    "action_order": "7",
+    "action_type": "manifest_gate",
+    "gate_status": "blocked_until_actions_1_to_6_pass",
+    "inputs": "payload manifest|obs_var_audit|metric spec",
+    "outputs": "updated runnable-status decision",
+    "payload_plan_id": "v9_sc_004_rrrm1_blood_payload_staging_plan",
+    "success_criteria": "no score claim; only runnable candidate status changes"
+  }
+]

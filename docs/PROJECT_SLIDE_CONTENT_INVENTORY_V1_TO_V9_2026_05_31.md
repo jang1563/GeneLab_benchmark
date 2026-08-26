@@ -350,7 +350,17 @@ Single-cell flagship scaffold:
   obs/var/uns/matrix audit requirements.
 - V9-SC-005: skip-aware AnnData auditor records the canonical h5ad as missing,
   with 27 skipped requirement rows and 17 blockers.
-- Next block: V9-SC-006 canonical payload staging or RRRM-1 h5ad regeneration.
+- V9-SC-006: payload staging execution records no canonical/legacy RRRM-1 blood
+  h5ad staged and fixes the STARsolo regeneration gate.
+- V9-SC-006b: external payload availability check records no annotated h5ad,
+  labeled h5ad, or complete OSD-918 blood STARsolo matrix bundles across two
+  checked base scopes.
+- V9-SC-006c: OSDR processed-payload discovery records 19 official OSD-918
+  files: metadata, raw checksum, raw MultiQC, and 16 raw FASTQ files covering
+  8/8 expected blood SRX pairs, with no processed h5ad, STARsolo bundle, or
+  processed checksum manifest listed.
+- Next block: V9-SC-006d intake an owner scratch path or decide raw FASTQ
+  regeneration feasibility.
 
 Slide angle:
 
